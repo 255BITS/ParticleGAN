@@ -108,11 +108,15 @@ What the evidence does and does not show today:
   | Prior | Toy tests passed (15 graded in all arms) | Ring16 high-quality fraction | CIFAR-10 DDGAN FID50k ↓ |
   | --- | ---: | ---: | ---: |
   | Learned particle table (default) | 7 | 0.95 | 79.7 |
-  | Frozen table | 5 | 0.61 | 108.5 |
+  | Frozen table | 5 | 0.61 | 108.5* |
   | Fresh N(0, I) latent | 5 | 0.53 | 82.7 |
 
-  On the toy suite the learned table buys sample precision: it alone passes
-  `ring16_acquisition` and `mode_hold`. The fixed priors cover the 100-mode grids
+  \* Final checkpoint only; the same run scored 80.8 FID5k at step 7500, so this
+  is most likely a bad excursion. All FIDs are single point estimates.
+
+  On the toy suite the learned table buys sample precision at seed 0: it alone
+  passes `ring16_acquisition` and `mode_hold` (2 of the 15 matched tests, both at
+  a +0.00 margin with no recorded noise floor). The fixed priors cover the 100-mode grids
   more evenly but less precisely, and every arm fails those grids. On CIFAR the
   gaps are inside the run's own checkpoint-to-checkpoint and rerun noise
   (up to 9.4 FID5k between same-config reruns), so no image-scale prior effect is

@@ -30,6 +30,9 @@ ARMS = [
 # trained object rather than ablating a latent prior.
 NON_LATENT = {"two_pole", "unused_token_hold", "unipolar", "mid_scale_identity", "trajectory",
               "residual_student", "cover_leftover", "five_word_joint_smoke", "five_word_joint_hold"}
+# Ordinary qualification view whose roles (counted, held, diagnostic) are shown
+# per test. The fixed denominator counts held tests regardless.
+ORDINARY_VIEW = Path("configs/forge/views/discriminator_stability.json")
 START, END = "<!-- prior-ablation tables: start -->", "<!-- prior-ablation tables: end -->"
 CIFAR_START, CIFAR_END = "<!-- prior-ablation cifar: start -->", "<!-- prior-ablation cifar: end -->"
 # CIFAR-10 particle DDGAN arms (configs/prior_ablation_cifar/*.yaml): (tag, run, label).
@@ -120,6 +123,11 @@ def collect(queue_root: Path, report: Path) -> dict:
                 if found is None and test == "ring_extension":
                     found = completed.get((name, "ring_hold"))
                 event = found or event
+            if test in blockers.get(tag, {}) and found is None:
+                # ``found`` is the last study's completion. The arm's final plan
+                # blocks this task, so an earlier superseded request's (crashed)
+                # attempt must not mask BLOCKED as INCOMPLETE.
+                event = None
             cell = {"status": "NOT_MEASURED", "applicability": "non_latent_table" if test in NON_LATENT else "latent"}
             if event is not None and test in (event.get("verdicts") or {}):
                 attempt = queue_root / CAMPAIGN / event["attempt"]
@@ -157,7 +165,13 @@ def collect(queue_root: Path, report: Path) -> dict:
                      "source_digest": (request.get("source") or {}).get("digest"),
                      "counts": counts, "cells": cells,
                      "wall_seconds": round(sum(c.get("wall_seconds", 0.) for c in cells.values()), 1)}
+    view = json.loads(ORDINARY_VIEW.read_text())
+    roles = {item["task"]: item.get("importance") for item in view.get("assignments", [])}
+    for arm in arms.values():
+        for test, cell in arm["cells"].items():
+            cell["ordinary_view_role"] = roles.get(test, "not in view")
     return {"schema": "prior_ablation_receipts_v1", "campaign": CAMPAIGN, "fixed_list": str(FIXED_LIST),
+            "ordinary_view": {"id": view.get("id"), "revision": view.get("revision")},
             "fixed_list_sha256": hashlib.sha256(FIXED_LIST.read_bytes()).hexdigest(), "arms": arms}
 
 
@@ -234,6 +248,7 @@ def _short(status):
 
 def render(receipts: dict) -> str:
     arms = receipts["arms"]
+    view = receipts["ordinary_view"]
     tags = list(arms)
     lines = [START, "", "### Leaderboard (fixed denominator: 49 tests)", "",
              "| Arm | Declared delta | PASS | FAIL | Blocked | Not measured | Incomplete | GPU seconds |",
@@ -262,8 +277,14 @@ def render(receipts: dict) -> str:
     lines += ["", "### Per-test outcomes and final-state margins", "",
               "Margin: the smallest relative signed distance to a declared threshold at the graded final state "
               "(negative = that gate fails there). Tasks graded on confirmed earlier passes can PASS with a negative "
-              "final margin. σ: the vector oracle noise-floor margin of that gate in oracle-std units, where recorded.",
-              "", "| Test | Prior role | " + " | ".join(tags) + " |", "| --- | --- | " + " | ".join("---" for _ in tags) + " |"]
+              "final margin. σ: the vector oracle noise-floor margin of that gate in oracle-std units, where recorded. "
+              "Only the `vector_*` gates record a noise floor; the other margins, including the +0.00 mode-count "
+              "margins of `ring16_acquisition` and `mode_hold`, have none.",
+              "", f"Ordinary view: the test's role in `{view['id']}` revision {view['revision']}. A *held* test is "
+              "excluded from qualification totals there but still counts in this fixed denominator; a held FAIL "
+              "is still a FAIL here.",
+              "", "| Test | Prior role | Ordinary view | " + " | ".join(tags) + " |",
+              "| --- | --- | --- | " + " | ".join("---" for _ in tags) + " |"]
     for test in arms[tags[0]]["cells"]:
         row = []
         for tag in tags:
@@ -280,7 +301,9 @@ def render(receipts: dict) -> str:
             row.append(text)
         role = "table is the trained object" if arms[tags[0]]["cells"][test]["applicability"] == "non_latent_table" \
             else "sampled latent"
-        lines.append(f"| `{test}` | {role} | " + " | ".join(row) + " |")
+        view_role = arms[tags[0]]["cells"][test].get("ordinary_view_role")
+        view_role = {"required": "counted"}.get(view_role, view_role)
+        lines.append(f"| `{test}` | {role} | {view_role} | " + " | ".join(row) + " |")
     lines += ["", END]
     return "\n".join(lines)
 

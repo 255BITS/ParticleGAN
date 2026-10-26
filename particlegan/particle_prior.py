@@ -46,9 +46,13 @@ class ParticlePrior(nn.Module):
     ``code_law`` selects what ``sample`` returns. The default ``"table"`` reads
     table rows (the behaviour above). ``"fresh_gaussian"`` is the matched
     fixed-Gaussian latent control: ``sample`` still draws the same uniform row
-    indices from ``generator`` (so index-stream consumption is unchanged), then
-    returns fresh codes ``init_std * N(0, I)`` of the same dimension instead of
-    table rows. Set it only through :meth:`set_code_law` on a frozen table
+    indices from ``generator``, then returns fresh codes ``init_std * N(0, I)``
+    of the same dimension instead of table rows. The plain table has no
+    separate noise stream, so those codes are also drawn from ``generator``:
+    the first call's indices match the table law, but every later index draw
+    sits at a different stream position. Only :class:`MoGParticlePrior` with a
+    separate ``noise_generator`` (or with ``sigma > 0``, where the table law
+    also draws kernel noise from ``generator``) keeps index draws aligned. Set it only through :meth:`set_code_law` on a frozen table
     (normally via ``Recipe.prior_code_law``); table reads through ``forward``
     then raise, so hosts that enumerate rows cannot silently mix the two laws.
     It is plain module configuration, not checkpoint state: the owning recipe
@@ -384,7 +388,10 @@ class MoGParticlePrior(ParticlePrior):
         """
         if self.code_law != "table":
             # Same index draws as the table law, then fresh codes from the same
-            # Gaussian stream the MoG kernel noise would use.
+            # Gaussian stream the MoG kernel noise would use. Later index draws
+            # stay aligned with the table law only when that stream is separate
+            # (noise_generator) or sigma > 0; at sigma = 0 with one generator the
+            # table law draws no noise, so the code draws shift later indices.
             idx = self._sample_rows(batch_size, generator, fixed_first_n=fixed_first_n, offset=offset)
             return self._fresh_codes(len(idx), generator if noise_generator is None else noise_generator,
                                      eps), idx

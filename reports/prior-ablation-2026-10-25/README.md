@@ -1,10 +1,14 @@
 # Matched prior ablation and BISPF re-qualification (2026-10-25)
 
-**Result.** On the tests where all three prior arms can run, the learned particle
-table is better than both controls: **7/15 PASS learned, 5/15 frozen table,
-5/15 fresh N(0, I)**. The learned table wins `ring16_acquisition` and
-`mode_hold` (and therefore `ring_extension`), plus `ae_gan_hold` over the frozen
-table. No control passes a test that the learned table fails. The two controls
+**Result.** At seed 0, on the 15 tests where all three prior arms produced a
+grade, the learned particle table passes 2 more tests than either control:
+**7/15 PASS learned, 5/15 frozen table, 5/15 fresh N(0, I)**. The difference is
+exactly two tests, `ring16_acquisition` and `mode_hold` (plus the dependent
+`ring_extension`, and `ae_gan_hold` over the frozen table, outside the matched
+15). Both decisive learned PASSes sit at a +0.00 mode-count margin, and neither
+test has a recorded noise floor (floors exist only for the `vector_*` gates), so
+this is a one-draw ordering on 2 of 15 tests, not an established superiority.
+No control passes a test that the learned table fails. The two controls
 pass exactly the same tests. The advantage is sample **precision**: on the
 16-mode ring the share of high-quality samples is 0.95 learned, 0.61 frozen and
 0.53 fresh. On the 100-mode grids the controls cover modes *more evenly* (lower
@@ -15,7 +19,7 @@ The re-qualification of the default reproduces every one of its 29 recorded
 PASS/FAIL verdicts (18 PASS, 11 FAIL) on the current develop source. It also adds
 `clockfree_audit` PASS, and FAIL for `target_shift_recovery` and four
 newly measured API model toys. Turning off the BISPF shape/step gates (A4) loses
-6 passes. Arm 5 (`ot_target_column_normalize`) cannot be measured: the option
+4 graded passes (6 counting a five-word wall-clock INCOMPLETE and its dependent). Arm 5 (`ot_target_column_normalize`) cannot be measured: the option
 exists only on the standalone `BISPFEngine`, which no recipe uses.
 
 On CIFAR-10 (particle DDGAN host, 10k updates, FID50k at the final EMA
@@ -23,8 +27,10 @@ checkpoint) the final FIDs are **79.7 learned, 108.5 frozen, 82.7 fresh N(0, I)*
 The evaluation noise is small (std ≤ 0.21 FID). Run-to-run training noise is much
 larger: FID5k moves by up to 36 points between successive checkpoints of one run, and
 same-config reruns differ by up to 9.4 FID5k. The final ranking is therefore
-**not resolved** at one seed. The learned table is not worse than the controls,
-but this run does not establish that it is better.
+**not resolved** at one seed: these are single point estimates, and this run
+establishes neither that the learned table is better nor that it is not worse.
+The frozen arm's 108.5 is most likely a bad final-checkpoint excursion (its FID5k
+was 80.8 at step 7500).
 
 These are one-seed diagnostic results (protocol seed 0, a single fixed draw).
 They grant no qualification or default-adoption credit.
@@ -65,12 +71,16 @@ They grant no qualification or default-adoption credit.
 - Same latent dimension.
 - Same number of latent draws per update and per evaluation.
 - Same marginal scale as the task's initial table.
-- The uniform row indices are still drawn from the latent-index stream, so
-  index-stream consumption is unchanged.
+- The uniform row indices are still drawn from the latent-index stream.
 - Codes come from the task's existing prior-noise stream (else the latent
   stream). For MoG tables this is the same stream position the kernel noise
   used, so the A3 code equals the A2 code minus its table centre, divided by σ
   (tested).
+- Index draws after the first stay aligned with the table law only when the
+  prior-noise stream is separate, or for a MoG table with σ > 0. Under the
+  latent-stream fallback (a plain table, or a MoG table with σ = 0), the code
+  draws shift every later index draw, so A3's index sequence then differs from
+  A2's after the first batch. The index *law* (uniform rows) is unchanged.
 - The only difference from A2 is unbounded support (fresh draws) instead of a
   finite table.
 - A3 is defined only where every latent is drawn through `prior.sample` from a
@@ -108,7 +118,8 @@ removes the trained object. The tables mark them *table is the trained object*.
   `gaussian1d_smoke` with every gate passing (KS 0.035). A1 passes on an
   earlier confirmed state but ends at KS 0.135. All four arms fail
   `gaussian1d_stability`; A1 is closest (final KS 0.070 vs 0.28 and 0.34).
-- **The shape/step gates matter.** A4 loses six of A1's passes:
+- **The shape/step gates matter.** A4 loses four of A1's graded passes, plus
+  two five-word cells that are not graded losses:
   - `ring16_acquisition`: every endpoint gate passes (hq 0.958), but only 2 of
     the 5 required consecutive stable checks.
   - `mode_hold`: 7 of 8 modes.
@@ -224,59 +235,61 @@ The only tests where all three prior arms produced a PASS/FAIL grade: `clockfree
 
 ### Per-test outcomes and final-state margins
 
-Margin: the smallest relative signed distance to a declared threshold at the graded final state (negative = that gate fails there). Tasks graded on confirmed earlier passes can PASS with a negative final margin. σ: the vector oracle noise-floor margin of that gate in oracle-std units, where recorded.
+Margin: the smallest relative signed distance to a declared threshold at the graded final state (negative = that gate fails there). Tasks graded on confirmed earlier passes can PASS with a negative final margin. σ: the vector oracle noise-floor margin of that gate in oracle-std units, where recorded. Only the `vector_*` gates record a noise floor; the other margins, including the +0.00 mode-count margins of `ring16_acquisition` and `mode_hold`, have none.
 
-| Test | Prior role | A1 | A2 | A3 | A4 |
-| --- | --- | --- | --- | --- | --- |
-| `ae_gan_hold` | sampled latent | PASS +0.93 `recon_mse` | **FAIL** -1.00 `recon_mse` | blocked | PASS +0.86 `recon_mse` |
-| `clockfree_audit` | sampled latent | PASS | PASS | PASS | PASS |
-| `clockfree_audit_measurement_v1` | sampled latent | PASS | PASS | PASS | PASS |
-| `cover_leftover` | table is the trained object | PASS +0.18 `u_kept` | PASS +0.16 `u_kept` | blocked | PASS +0.18 `content_kept` |
-| `five_word_joint_hold` | table is the trained object | PASS +0.00 `modes` | PASS +0.00 `modes` | blocked | not run (prereq.) |
-| `five_word_joint_smoke` | table is the trained object | PASS +0.00 `modes` | PASS +0.00 `modes` | blocked | incomplete |
-| `gaussian1d_smoke` | sampled latent | PASS -1.70 `cdf_ks` | PASS -1.19 `cdf_ks` | PASS +0.19 `std_ratio` | PASS -0.65 `cdf_ks` |
-| `gaussian1d_stability` | sampled latent | **FAIL** -0.41 `cdf_ks` | **FAIL** -4.63 `cdf_ks` | **FAIL** -5.81 `cdf_ks` | **FAIL** -0.97 `cdf_ks` |
-| `grid100` | sampled latent | **FAIL** -9.60 `radial_ks` | **FAIL** -0.95 `precision` | **FAIL** -0.95 `precision` | **FAIL** -1.13 `mass_tv` |
-| `grid100_14k` | sampled latent | not run (prereq.) | blocked | blocked | not run (prereq.) |
-| `grid100_mlp16` | sampled latent | blocked | blocked | blocked | blocked |
-| `grid100_res16_tanh` | sampled latent | blocked | blocked | blocked | blocked |
-| `img_bars4` | sampled latent | **FAIL** -0.50 `modes` | **FAIL** -0.50 `modes` | blocked | **FAIL** -0.50 `modes` |
-| `img_blobs4` | sampled latent | **FAIL** -0.25 `modes` | **FAIL** -0.31 `hq` | blocked | **FAIL** -1.00 `modes` |
-| `img_intensity2` | sampled latent | **FAIL** -0.34 `hq` | **FAIL** -0.65 `hq` | blocked | **FAIL** -1.00 `modes` |
-| `img_stripes2` | sampled latent | PASS +0.00 `modes` | PASS +0.00 `modes` | blocked | **FAIL** +0.00 `modes` |
-| `mid_scale_identity` | table is the trained object | PASS +0.14 `identity_at_mid` | PASS +0.14 `identity_at_mid` | blocked | PASS +0.16 `identity_at_mid` |
-| `misgan_block_neural_imputer` | sampled latent | blocked | blocked | blocked | blocked |
-| `misgan_block_recovery` | sampled latent | blocked | blocked | blocked | blocked |
-| `mode_hold` | sampled latent | PASS +0.00 `modes` | **FAIL** +0.00 `modes` | **FAIL** -0.45 `hq` | **FAIL** -0.12 `modes` |
-| `model_ae_ddgan_bimodal_chain` | sampled latent | not run (prereq.) | not run (prereq.) | blocked | not run (prereq.) |
-| `model_ae_ddgan_gaussian_chain` | sampled latent | **FAIL** -3.32 `t1_q0_normalized_mean` | **FAIL** -1.56 `t1_q0_normalized_mean` | blocked | **FAIL** -2.63 `t1_q0_normalized_mean` |
-| `model_ae_gan_multimodal` | sampled latent | incomplete | incomplete | blocked | incomplete |
-| `model_ae_reconstruction` | sampled latent | incomplete | incomplete | blocked | incomplete |
-| `model_ddgan_bimodal_chain` | sampled latent | not run (prereq.) | not run (prereq.) | blocked | not run (prereq.) |
-| `model_ddgan_gaussian_chain` | sampled latent | **FAIL** -6.85 `t1_q0_normalized_mean` | **FAIL** -2.85 `t1_q1_normalized_mean` | blocked | **FAIL** -4.90 `t1_q0_normalized_mean` |
-| `model_vae_categorical` | sampled latent | **FAIL** +0.00 `decoder_mean_modes` | **FAIL** +0.00 `decoder_mean_modes` | blocked | **FAIL** +0.00 `decoder_mean_modes` |
-| `model_vae_hard` | sampled latent | **FAIL** +0.00 `decoder_mean_modes` | **FAIL** +0.00 `decoder_mean_modes` | blocked | **FAIL** +0.00 `decoder_mean_modes` |
-| `residual_student` | table is the trained object | PASS +0.00 `success_rate` | incomplete | blocked | PASS +0.00 `success_rate` |
-| `ring16_acquisition` | sampled latent | PASS +0.00 `modes` | **FAIL** -5.96 `component_covariance_error` | **FAIL** -6.86 `component_covariance_error` | **FAIL** +0.00 `modes` |
-| `ring16_bigan_continuous` | sampled latent | blocked | blocked | blocked | blocked |
-| `ring_extension` | sampled latent | PASS +0.00 `modes` | not run (prereq.) | not run (prereq.) | not run (prereq.) |
-| `rotated100` | sampled latent | **FAIL** -0.86 `mass_tv` | **FAIL** -0.97 `precision` | **FAIL** -0.92 `precision` | **FAIL** -0.87 `mass_tv` |
-| `rotated100_14k` | sampled latent | not run (prereq.) | blocked | blocked | not run (prereq.) |
-| `staggered100` | sampled latent | **FAIL** -8.23 `radial_ks` | **FAIL** -1.91 `mass_tv` | **FAIL** -1.34 `mass_tv` | **FAIL** -8.32 `radial_ks` |
-| `staggered100_14k` | sampled latent | not run (prereq.) | blocked | blocked | not run (prereq.) |
-| `target_shift_recovery` | sampled latent | **FAIL** | blocked | blocked | not run (prereq.) |
-| `trajectory` | table is the trained object | PASS +0.99 `identity_mse` | incomplete | blocked | PASS +0.99 `identity_mse` |
-| `two_pole` | table is the trained object | PASS +0.12 `grad_med` | PASS +0.12 `grad_med` | blocked | PASS +0.12 `grad_med` |
-| `unipolar` | table is the trained object | PASS +0.16 `cover` | PASS +0.16 `cover` | blocked | PASS +0.17 `neu_hold` |
-| `unused_token_hold` | table is the trained object | PASS +0.14 `concept_move` | PASS +0.14 `concept_move` | blocked | PASS +0.07 `concept_move` |
-| `vector_anisotropic` | sampled latent | **FAIL** -0.19 `sw1_normalized` (-5.0σ) | **FAIL** -0.14 `mass_tv` (-5.4σ) | **FAIL** -0.71 `component_covariance_error` (-61.4σ) | **FAIL** -1.19 `mass_tv` (-44.9σ) |
-| `vector_overlap` | sampled latent | **FAIL** -0.16 `covariance_error` (-5.4σ) | **FAIL** -1.33 `mean_error` (-20.7σ) | **FAIL** +0.30 `covariance_error` (+10.1σ) | **FAIL** -1.01 `mean_error` (-15.7σ) |
-| `vector_spiral` | sampled latent | PASS +0.52 `mean_error` (+12.7σ) | PASS +0.46 `mean_error` (+11.2σ) | PASS +0.68 `mean_error` (+16.5σ) | PASS +0.66 `mean_error` (+15.9σ) |
-| `vector_two_broad` | sampled latent | PASS +0.17 `hq` (+76.3σ) | PASS +0.08 `sw1_normalized` (+2.3σ) | PASS +0.14 `hq` (+66.0σ) | PASS +0.18 `hq` (+81.2σ) |
-| `vector_unequal_mass` | sampled latent | **FAIL** -1.08 `component_covariance_error` (-45.9σ) | **FAIL** -2.05 `component_covariance_error` (-87.4σ) | **FAIL** -10.89 `component_covariance_error` (-463.2σ) | **FAIL** -0.09 `component_covariance_error` (-3.8σ) |
-| `vector_unequal_width` | sampled latent | **FAIL** -10.40 `component_covariance_error` (-808.5σ) | **FAIL** -0.55 `component_covariance_error` (-42.7σ) | **FAIL** -5.47 `component_covariance_error` (-425.1σ) | **FAIL** -35.88 `component_covariance_error` (-2790.7σ) |
-| `zero_tanh_rail_escape` | sampled latent | blocked | blocked | blocked | blocked |
-| `zero_tanh_smoke` | sampled latent | blocked | blocked | blocked | blocked |
+Ordinary view: the test's role in `discriminator_stability` revision 14. A *held* test is excluded from qualification totals there but still counts in this fixed denominator; a held FAIL is still a FAIL here.
+
+| Test | Prior role | Ordinary view | A1 | A2 | A3 | A4 |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ae_gan_hold` | sampled latent | counted | PASS +0.93 `recon_mse` | **FAIL** -1.00 `recon_mse` | blocked | PASS +0.86 `recon_mse` |
+| `clockfree_audit` | sampled latent | not in view | PASS | PASS | PASS | PASS |
+| `clockfree_audit_measurement_v1` | sampled latent | diagnostic | PASS | PASS | PASS | PASS |
+| `cover_leftover` | table is the trained object | counted | PASS +0.18 `u_kept` | PASS +0.16 `u_kept` | blocked | PASS +0.18 `content_kept` |
+| `five_word_joint_hold` | table is the trained object | counted | PASS +0.00 `modes` | PASS +0.00 `modes` | blocked | not run (prereq.) |
+| `five_word_joint_smoke` | table is the trained object | counted | PASS +0.00 `modes` | PASS +0.00 `modes` | blocked | incomplete |
+| `gaussian1d_smoke` | sampled latent | counted | PASS -1.70 `cdf_ks` | PASS -1.19 `cdf_ks` | PASS +0.19 `std_ratio` | PASS -0.65 `cdf_ks` |
+| `gaussian1d_stability` | sampled latent | counted | **FAIL** -0.41 `cdf_ks` | **FAIL** -4.63 `cdf_ks` | **FAIL** -5.81 `cdf_ks` | **FAIL** -0.97 `cdf_ks` |
+| `grid100` | sampled latent | counted | **FAIL** -9.60 `radial_ks` | **FAIL** -0.95 `precision` | **FAIL** -0.95 `precision` | **FAIL** -1.13 `mass_tv` |
+| `grid100_14k` | sampled latent | not in view | not run (prereq.) | blocked | blocked | not run (prereq.) |
+| `grid100_mlp16` | sampled latent | held | blocked | blocked | blocked | blocked |
+| `grid100_res16_tanh` | sampled latent | held | blocked | blocked | blocked | blocked |
+| `img_bars4` | sampled latent | held | **FAIL** -0.50 `modes` | **FAIL** -0.50 `modes` | blocked | **FAIL** -0.50 `modes` |
+| `img_blobs4` | sampled latent | held | **FAIL** -0.25 `modes` | **FAIL** -0.31 `hq` | blocked | **FAIL** -1.00 `modes` |
+| `img_intensity2` | sampled latent | held | **FAIL** -0.34 `hq` | **FAIL** -0.65 `hq` | blocked | **FAIL** -1.00 `modes` |
+| `img_stripes2` | sampled latent | counted | PASS +0.00 `modes` | PASS +0.00 `modes` | blocked | **FAIL** +0.00 `modes` |
+| `mid_scale_identity` | table is the trained object | counted | PASS +0.14 `identity_at_mid` | PASS +0.14 `identity_at_mid` | blocked | PASS +0.16 `identity_at_mid` |
+| `misgan_block_neural_imputer` | sampled latent | held | blocked | blocked | blocked | blocked |
+| `misgan_block_recovery` | sampled latent | held | blocked | blocked | blocked | blocked |
+| `mode_hold` | sampled latent | counted | PASS +0.00 `modes` | **FAIL** +0.00 `modes` | **FAIL** -0.45 `hq` | **FAIL** -0.12 `modes` |
+| `model_ae_ddgan_bimodal_chain` | sampled latent | counted | not run (prereq.) | not run (prereq.) | blocked | not run (prereq.) |
+| `model_ae_ddgan_gaussian_chain` | sampled latent | counted | **FAIL** -3.32 `t1_q0_normalized_mean` | **FAIL** -1.56 `t1_q0_normalized_mean` | blocked | **FAIL** -2.63 `t1_q0_normalized_mean` |
+| `model_ae_gan_multimodal` | sampled latent | counted | incomplete | incomplete | blocked | incomplete |
+| `model_ae_reconstruction` | sampled latent | counted | incomplete | incomplete | blocked | incomplete |
+| `model_ddgan_bimodal_chain` | sampled latent | counted | not run (prereq.) | not run (prereq.) | blocked | not run (prereq.) |
+| `model_ddgan_gaussian_chain` | sampled latent | counted | **FAIL** -6.85 `t1_q0_normalized_mean` | **FAIL** -2.85 `t1_q1_normalized_mean` | blocked | **FAIL** -4.90 `t1_q0_normalized_mean` |
+| `model_vae_categorical` | sampled latent | counted | **FAIL** +0.00 `decoder_mean_modes` | **FAIL** +0.00 `decoder_mean_modes` | blocked | **FAIL** +0.00 `decoder_mean_modes` |
+| `model_vae_hard` | sampled latent | counted | **FAIL** +0.00 `decoder_mean_modes` | **FAIL** +0.00 `decoder_mean_modes` | blocked | **FAIL** +0.00 `decoder_mean_modes` |
+| `residual_student` | table is the trained object | counted | PASS +0.00 `success_rate` | incomplete | blocked | PASS +0.00 `success_rate` |
+| `ring16_acquisition` | sampled latent | counted | PASS +0.00 `modes` | **FAIL** -5.96 `component_covariance_error` | **FAIL** -6.86 `component_covariance_error` | **FAIL** +0.00 `modes` |
+| `ring16_bigan_continuous` | sampled latent | held | blocked | blocked | blocked | blocked |
+| `ring_extension` | sampled latent | counted | PASS +0.00 `modes` | not run (prereq.) | not run (prereq.) | not run (prereq.) |
+| `rotated100` | sampled latent | counted | **FAIL** -0.86 `mass_tv` | **FAIL** -0.97 `precision` | **FAIL** -0.92 `precision` | **FAIL** -0.87 `mass_tv` |
+| `rotated100_14k` | sampled latent | not in view | not run (prereq.) | blocked | blocked | not run (prereq.) |
+| `staggered100` | sampled latent | counted | **FAIL** -8.23 `radial_ks` | **FAIL** -1.91 `mass_tv` | **FAIL** -1.34 `mass_tv` | **FAIL** -8.32 `radial_ks` |
+| `staggered100_14k` | sampled latent | not in view | not run (prereq.) | blocked | blocked | not run (prereq.) |
+| `target_shift_recovery` | sampled latent | not in view | **FAIL** | blocked | blocked | not run (prereq.) |
+| `trajectory` | table is the trained object | counted | PASS +0.99 `identity_mse` | incomplete | blocked | PASS +0.99 `identity_mse` |
+| `two_pole` | table is the trained object | counted | PASS +0.12 `grad_med` | PASS +0.12 `grad_med` | blocked | PASS +0.12 `grad_med` |
+| `unipolar` | table is the trained object | counted | PASS +0.16 `cover` | PASS +0.16 `cover` | blocked | PASS +0.17 `neu_hold` |
+| `unused_token_hold` | table is the trained object | counted | PASS +0.14 `concept_move` | PASS +0.14 `concept_move` | blocked | PASS +0.07 `concept_move` |
+| `vector_anisotropic` | sampled latent | held | **FAIL** -0.19 `sw1_normalized` (-5.0σ) | **FAIL** -0.14 `mass_tv` (-5.4σ) | **FAIL** -0.71 `component_covariance_error` (-61.4σ) | **FAIL** -1.19 `mass_tv` (-44.9σ) |
+| `vector_overlap` | sampled latent | held | **FAIL** -0.16 `covariance_error` (-5.4σ) | **FAIL** -1.33 `mean_error` (-20.7σ) | **FAIL** +0.30 `covariance_error` (+10.1σ) | **FAIL** -1.01 `mean_error` (-15.7σ) |
+| `vector_spiral` | sampled latent | counted | PASS +0.52 `mean_error` (+12.7σ) | PASS +0.46 `mean_error` (+11.2σ) | PASS +0.68 `mean_error` (+16.5σ) | PASS +0.66 `mean_error` (+15.9σ) |
+| `vector_two_broad` | sampled latent | counted | PASS +0.17 `hq` (+76.3σ) | PASS +0.08 `sw1_normalized` (+2.3σ) | PASS +0.14 `hq` (+66.0σ) | PASS +0.18 `hq` (+81.2σ) |
+| `vector_unequal_mass` | sampled latent | held | **FAIL** -1.08 `component_covariance_error` (-45.9σ) | **FAIL** -2.05 `component_covariance_error` (-87.4σ) | **FAIL** -10.89 `component_covariance_error` (-463.2σ) | **FAIL** -0.09 `component_covariance_error` (-3.8σ) |
+| `vector_unequal_width` | sampled latent | held | **FAIL** -10.40 `component_covariance_error` (-808.5σ) | **FAIL** -0.55 `component_covariance_error` (-42.7σ) | **FAIL** -5.47 `component_covariance_error` (-425.1σ) | **FAIL** -35.88 `component_covariance_error` (-2790.7σ) |
+| `zero_tanh_rail_escape` | sampled latent | held | blocked | blocked | blocked | blocked |
+| `zero_tanh_smoke` | sampled latent | counted | blocked | blocked | blocked | blocked |
 
 <!-- prior-ablation tables: end -->
 
@@ -327,9 +340,10 @@ Training-nondeterminism floor: interrupted same-config attempts differ from the 
   - The frozen arm's FID5k moves 71.9 → 98.1 → 80.8 → 112.7 across checkpoints.
   - At step 7500 it is better than the learned arm (80.8 vs 86.6).
   - Same-config reruns differ by up to 9.4 FID5k.
-- **Conclusion.** The learned table is not worse than the matched controls. At
-  one seed this run cannot say it is better. The 3-point gap between learned
-  and N(0, I) is inside the rerun noise. The frozen arm's last checkpoint is
+- **Conclusion.** The ordering is not established in either direction. These
+  are single point estimates at one seed. The 3-point gap between learned and
+  N(0, I) is inside the rerun noise, so this run shows neither that the learned
+  table is better nor that it is not worse. The frozen arm's last checkpoint is
   probably a bad excursion, not a stable deficit.
 - **Separate cohort.** All three arms are far from the archived DDGAN result in
   [`reports/cifar-particle-ddgan`](../cifar-particle-ddgan/LEADERBOARD.md)

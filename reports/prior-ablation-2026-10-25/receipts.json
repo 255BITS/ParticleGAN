@@ -16,6 +16,7 @@
      },
      "graded_raw_hash": "ce8237fbc0cce44e1206e8ba2f8b8563aa7f57f07f70453cf472e178621eea58",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -28,6 +29,7 @@
      "final_margin": null,
      "graded_raw_hash": "9cbac75696272e494245f153317690818858f601b110fea8e5718be3f8a7d7aa",
      "noise_floor": null,
+     "ordinary_view_role": "not in view",
      "reasons": [
       "declared state/horizon/cadence/restart comparisons agree; source audit bound"
      ],
@@ -40,6 +42,7 @@
      "final_margin": null,
      "graded_raw_hash": "7a6cf4d73882093e7e4234909660cb35ab182dd360e008c4e20efafcdf36af89",
      "noise_floor": null,
+     "ordinary_view_role": "diagnostic",
      "reasons": [
       "declared state/horizon/cadence/restart comparisons agree; source audit bound"
      ],
@@ -58,6 +61,7 @@
      },
      "graded_raw_hash": "aa3a9dda9ec7a886cf78018b90e91704a5fe86ee3f1cd5b8a597f20cb5d2dfe1",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -76,6 +80,7 @@
      },
      "graded_raw_hash": "78309d1f32ec3eb101abd3ccd55d0eb0cde5c3fafff997b47edc2ce4e20aa607",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "every joint generation/inverse check throughout the fixed continuation window"
      ],
@@ -94,6 +99,7 @@
      },
      "graded_raw_hash": "44c2f87dba43904e8e40d7dafee9057f844d71eff3f59215ea202735cd3bf408",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "any scheduled full joint pass plus independent same-state confirmation"
      ],
@@ -112,6 +118,7 @@
      },
      "graded_raw_hash": "92fe294d9ce37a09c619ac87d5fe168354c8ebebe032180dc34d4f57dd68c602",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "any scheduled full pass with independent same-state confirmation"
      ],
@@ -130,6 +137,7 @@
      },
      "graded_raw_hash": "c1f9109b5128b18c8b10f3a341f44708240670a4cf65768cca6481a3119ad62b",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "stationary hold, deadline reacquisition and shifted hold"
      ],
@@ -148,6 +156,7 @@
      },
      "graded_raw_hash": "4f0a0daf2d7a92e74187e6f30d1c7df7f470e6c8a94d92e78991b96749869565",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "coverage, sustained live accuracy, or independent holdout failed"
      ],
@@ -156,16 +165,19 @@
     },
     "grid100_14k": {
      "applicability": "latent",
+     "ordinary_view_role": "not in view",
      "reason": "prerequisite not PASS: grid100 (FAIL)",
      "status": "NOT_MEASURED"
     },
     "grid100_mlp16": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "study admission refuses this native model variant: it has no explicit native profile ('native model variants require an explicit profile'); excluded from the run view for every arm",
      "status": "BLOCKED"
     },
     "grid100_res16_tanh": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "study admission refuses this native model variant: it has no explicit native profile ('native model variants require an explicit profile'); excluded from the run view for every arm",
      "status": "BLOCKED"
     },
@@ -181,6 +193,7 @@
      },
      "graded_raw_hash": "5f2a7c192143a125534caf6ecc8f4f2963714cd6465aada8ad867ccc4ba84c5f",
      "noise_floor": null,
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -199,6 +212,7 @@
      },
      "graded_raw_hash": "f16eefd028a4488bd04a728c30020824851d07b541b0cdc65e960d1d2764c52b",
      "noise_floor": null,
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -217,6 +231,7 @@
      },
      "graded_raw_hash": "c60d706a35ca7fe2b215f841870e02f9649c50fc57e8975705db812f32b0382a",
      "noise_floor": null,
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -235,6 +250,7 @@
      },
      "graded_raw_hash": "25cad1e6a5841ec1e30ea30bcfaab8599a4dae41348702c9a9d17ca2ee2f5782",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -253,6 +269,7 @@
      },
      "graded_raw_hash": "fdbadc046e09e19a227838b238affcd7e53db0f157d115050f02da00472bb126",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -261,11 +278,13 @@
     },
     "misgan_block_neural_imputer": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "misgan_block_neural_imputer: unsupported vector target declaration",
      "status": "BLOCKED"
     },
     "misgan_block_recovery": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "misgan_block_recovery: unsupported vector target declaration",
      "status": "BLOCKED"
     },
@@ -281,6 +300,7 @@
      },
      "graded_raw_hash": "5fac5c061e4d983c362cb9b03870f582aa8d1d26e912db86f2aff4438f8246b9",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -289,6 +309,7 @@
     },
     "model_ae_ddgan_bimodal_chain": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "prerequisite not PASS: model_ae_ddgan_gaussian_chain (FAIL)",
      "status": "NOT_MEASURED"
     },
@@ -304,6 +325,7 @@
      },
      "graded_raw_hash": "2ec2f1a951f15cc3b9f370f86409795409bd269e08022f700d7a194b535c50ce",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -316,6 +338,7 @@
      "final_margin": null,
      "graded_raw_hash": null,
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "runner exited 1; inspect run.log"
      ],
@@ -328,6 +351,7 @@
      "final_margin": null,
      "graded_raw_hash": null,
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "runner exited 1; inspect run.log"
      ],
@@ -336,6 +360,7 @@
     },
     "model_ddgan_bimodal_chain": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "prerequisite not PASS: model_ddgan_gaussian_chain (FAIL)",
      "status": "NOT_MEASURED"
     },
@@ -351,6 +376,7 @@
      },
      "graded_raw_hash": "dd6547cc4de7ea5f6500169f7e93e74ed8b14d84de8186a0d6238fdf9aa45387",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -369,6 +395,7 @@
      },
      "graded_raw_hash": "1ad28a8229749fd61cd202ed75d37679f9f9d99893ab588072c3d0f0f94cb169",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -387,6 +414,7 @@
      },
      "graded_raw_hash": "f4bf39f47508e8ac20c69b37a36e1380318665614e0fed7039f5a924a8150070",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -405,6 +433,7 @@
      },
      "graded_raw_hash": "7f05099e4b701d6a98de19abe9a36b1bb6e26eddd191bf0831010f4abd0bc8c1",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -423,6 +452,7 @@
      },
      "graded_raw_hash": "8e036e9e1192526a66d6f24f87b17ac2b04dfaca55284c2199b696b98ec840ee",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -431,6 +461,7 @@
     },
     "ring16_bigan_continuous": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "ring16_bigan_continuous: unsupported vector target declaration",
      "status": "BLOCKED"
     },
@@ -446,6 +477,7 @@
      },
      "graded_raw_hash": "a91721b311cfeeb8b3b5d7c58f4b2b27adaee41846e3428b41f8a8b9494eeb12",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed every extension observation without selecting another window"
      ],
@@ -464,6 +496,7 @@
      },
      "graded_raw_hash": "5881a5e99781b36ba63e869f46d07369440b275b9d6a213ad83a58526d59e8b4",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "coverage, sustained live accuracy, or independent holdout failed"
      ],
@@ -472,6 +505,7 @@
     },
     "rotated100_14k": {
      "applicability": "latent",
+     "ordinary_view_role": "not in view",
      "reason": "prerequisite not PASS: rotated100 (FAIL)",
      "status": "NOT_MEASURED"
     },
@@ -487,6 +521,7 @@
      },
      "graded_raw_hash": "2b91d4f7d077d3f11df9c17389c7f93b3d74082dbab2b0c540ddf843bd4fcefa",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "coverage, sustained live accuracy, or independent holdout failed"
      ],
@@ -495,6 +530,7 @@
     },
     "staggered100_14k": {
      "applicability": "latent",
+     "ordinary_view_role": "not in view",
      "reason": "prerequisite not PASS: staggered100 (FAIL)",
      "status": "NOT_MEASURED"
     },
@@ -504,6 +540,7 @@
      "final_margin": null,
      "graded_raw_hash": "00208ed95b61a1c2550206598fb7c909fbbd0b127b6a0a0d52fbabb9ffa4bb5f",
      "noise_floor": null,
+     "ordinary_view_role": "not in view",
      "reasons": [
       "recomputed live recovery and matched frozen negative control"
      ],
@@ -522,6 +559,7 @@
      },
      "graded_raw_hash": "c57764b57523a76b3c6eb54a5d682a3dd894c46885dca03baca22b9ed67d8e0c",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -540,6 +578,7 @@
      },
      "graded_raw_hash": "ba2f2cf1d86c752225c10af0a8e93ea7f88c52f13b5381e20e77e63f3f8004c1",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -558,6 +597,7 @@
      },
      "graded_raw_hash": "6bece956d1e81c4801ea62c4cdaa21be176d706acfdc2b84366e72234701da80",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -576,6 +616,7 @@
      },
      "graded_raw_hash": "7f0fdbe51343625c3c35be67f73691211910e6def9166e15d23b81fe9d087451",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -642,6 +683,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -684,6 +726,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -726,6 +769,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -792,6 +836,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -864,6 +909,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -930,6 +976,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -938,6 +985,7 @@
     },
     "zero_tanh_rail_escape": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "zero_tanh_rail_escape: zero_tanh_rail_escape: unsupported tanh host zero_tanh_rail_escape; only zero_tanh_smoke is routed",
      "status": "BLOCKED"
     },
@@ -947,6 +995,7 @@
      "final_margin": null,
      "graded_raw_hash": "982b12077d4aa41b82fc25921ee2952ed9535466d545e2abe41f26bb826662b6",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "unsupported evaluator zero_tanh_smoke"
      ],
@@ -987,6 +1036,7 @@
      },
      "graded_raw_hash": "e0a709ed1dc1881d715b613418a1105d33f21bd4f51f34ba49869b7268d1a053",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -999,6 +1049,7 @@
      "final_margin": null,
      "graded_raw_hash": "dc589ce588dcfab91f6b35dd5a3fd96e378c0d3002055a32aee651e990d2d118",
      "noise_floor": null,
+     "ordinary_view_role": "not in view",
      "reasons": [
       "declared state/horizon/cadence/restart comparisons agree; source audit bound"
      ],
@@ -1011,6 +1062,7 @@
      "final_margin": null,
      "graded_raw_hash": "49ce7c0298a37920ada4ed4d62bbd631714f15ae50c9c4e41c08c52011c3e26e",
      "noise_floor": null,
+     "ordinary_view_role": "diagnostic",
      "reasons": [
       "declared state/horizon/cadence/restart comparisons agree; source audit bound"
      ],
@@ -1029,6 +1081,7 @@
      },
      "graded_raw_hash": "ad676bc2f12de6e3f65f85e154bd7a49119414241950a295c84e8c21a937e134",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1047,6 +1100,7 @@
      },
      "graded_raw_hash": "26a03f5327055266b7edf8322725ecef17a2bf493a924657072aff8e5679913f",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "every joint generation/inverse check throughout the fixed continuation window"
      ],
@@ -1065,6 +1119,7 @@
      },
      "graded_raw_hash": "e384a91d564b7a5ad1a76ef9e32fa3e6ddb1db77289469e45ac27da5d53e4403",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "any scheduled full joint pass plus independent same-state confirmation"
      ],
@@ -1083,6 +1138,7 @@
      },
      "graded_raw_hash": "b0d13e26e80592b5284a7974fbb758eea435ac4181526bb7b5d6d02a9b8db417",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "any scheduled full pass with independent same-state confirmation"
      ],
@@ -1101,6 +1157,7 @@
      },
      "graded_raw_hash": "08511c330166cf990200cb6cf960d7a399dcb431a9b805ebe21df0c1791bd474",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "stationary hold, deadline reacquisition and shifted hold"
      ],
@@ -1119,6 +1176,7 @@
      },
      "graded_raw_hash": "15541db8da1dab3849fba434912ccb98e982bb814963615cdc0a8abb90920aaf",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "coverage, sustained live accuracy, or independent holdout failed"
      ],
@@ -1127,16 +1185,19 @@
     },
     "grid100_14k": {
      "applicability": "latent",
+     "ordinary_view_role": "not in view",
      "reason": "required capability unavailable: learned_locations",
      "status": "BLOCKED"
     },
     "grid100_mlp16": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "study admission refuses this native model variant: it has no explicit native profile ('native model variants require an explicit profile'); excluded from the run view for every arm",
      "status": "BLOCKED"
     },
     "grid100_res16_tanh": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "study admission refuses this native model variant: it has no explicit native profile ('native model variants require an explicit profile'); excluded from the run view for every arm",
      "status": "BLOCKED"
     },
@@ -1152,6 +1213,7 @@
      },
      "graded_raw_hash": "fdfceed811ab9d8a1337bae709b32e2184dac5f49997dbd539eb80fdd36e1092",
      "noise_floor": null,
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1170,6 +1232,7 @@
      },
      "graded_raw_hash": "fb3a1ca2c045077ca8d9f594900fc2bfc8d1c43bc8ad8f20fcc71b85bb6c0ae5",
      "noise_floor": null,
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1188,6 +1251,7 @@
      },
      "graded_raw_hash": "62db121b87a43db7d4dada5ae8d71a3d9ba34eb43dcf7f283f8111d74fd39ebe",
      "noise_floor": null,
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1206,6 +1270,7 @@
      },
      "graded_raw_hash": "2d8a58dcd2f64cf827da8013522ea7ac9c33b9abd3e0835d6532ce2e8466799b",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1224,6 +1289,7 @@
      },
      "graded_raw_hash": "12090bb1c11d58f1258c5fc59e34208ee04af258e62c61cddae3246beddd7c5b",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1232,11 +1298,13 @@
     },
     "misgan_block_neural_imputer": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "misgan_block_neural_imputer: unsupported vector target declaration",
      "status": "BLOCKED"
     },
     "misgan_block_recovery": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "misgan_block_recovery: unsupported vector target declaration",
      "status": "BLOCKED"
     },
@@ -1252,6 +1320,7 @@
      },
      "graded_raw_hash": "0acb88370b443846c9eb4051798743c0ef5a47a8b34cd2cb2179f8510ddb4c07",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1260,6 +1329,7 @@
     },
     "model_ae_ddgan_bimodal_chain": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "prerequisite not PASS: model_ae_ddgan_gaussian_chain (FAIL)",
      "status": "NOT_MEASURED"
     },
@@ -1275,6 +1345,7 @@
      },
      "graded_raw_hash": "b5dac78579ff422b75b191ce29cfb7a460efa442643bd473f55b5022986653a4",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1287,6 +1358,7 @@
      "final_margin": null,
      "graded_raw_hash": null,
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "runner exited 1; inspect run.log"
      ],
@@ -1299,6 +1371,7 @@
      "final_margin": null,
      "graded_raw_hash": null,
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "runner exited 1; inspect run.log"
      ],
@@ -1307,6 +1380,7 @@
     },
     "model_ddgan_bimodal_chain": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "prerequisite not PASS: model_ddgan_gaussian_chain (FAIL)",
      "status": "NOT_MEASURED"
     },
@@ -1322,6 +1396,7 @@
      },
      "graded_raw_hash": "949159f930285490845879fb7dd394bd1a1cab11d175f8ade0bf49bc8e02b6f5",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1340,6 +1415,7 @@
      },
      "graded_raw_hash": "48521f2833a0e3a699a4b60b85eba90895e7b65affcc480c0bf287149807ca8c",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1358,6 +1434,7 @@
      },
      "graded_raw_hash": "48ef8d1b210bcdd476284354fbc6182a24d671536788437d0ae566010eecef7a",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1370,6 +1447,7 @@
      "final_margin": null,
      "graded_raw_hash": null,
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "runner exited 1; inspect run.log"
      ],
@@ -1388,6 +1466,7 @@
      },
      "graded_raw_hash": "a3dec5d028b8b7657a8baab3b90dbe34b164974d583b5be62eccdf17a81418b5",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1396,11 +1475,13 @@
     },
     "ring16_bigan_continuous": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "ring16_bigan_continuous: unsupported vector target declaration",
      "status": "BLOCKED"
     },
     "ring_extension": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "prerequisite not PASS: ring16_acquisition (FAIL)",
      "status": "NOT_MEASURED"
     },
@@ -1416,6 +1497,7 @@
      },
      "graded_raw_hash": "a0ded1d303689ce8f187b8943e04d5f1fcd2fb2ff64a6ed2901aa3078c4415bb",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "coverage, sustained live accuracy, or independent holdout failed"
      ],
@@ -1424,6 +1506,7 @@
     },
     "rotated100_14k": {
      "applicability": "latent",
+     "ordinary_view_role": "not in view",
      "reason": "required capability unavailable: learned_locations",
      "status": "BLOCKED"
     },
@@ -1439,6 +1522,7 @@
      },
      "graded_raw_hash": "9750fd9525bb97b7e493c1b18a751640e664f2ebe4aa926dca4be3437235804e",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "coverage, sustained live accuracy, or independent holdout failed"
      ],
@@ -1447,11 +1531,13 @@
     },
     "staggered100_14k": {
      "applicability": "latent",
+     "ordinary_view_role": "not in view",
      "reason": "required capability unavailable: learned_locations",
      "status": "BLOCKED"
     },
     "target_shift_recovery": {
      "applicability": "latent",
+     "ordinary_view_role": "not in view",
      "reason": "Recipe.prior_update conflicts with legacy task-owned learnable",
      "status": "BLOCKED"
     },
@@ -1461,6 +1547,7 @@
      "final_margin": null,
      "graded_raw_hash": null,
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "runner exited 1; inspect run.log"
      ],
@@ -1479,6 +1566,7 @@
      },
      "graded_raw_hash": "80106ce45e6edb9e10b1fdc85611d50ea950f8b99f38cdb45bf6267fdc2b639e",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1497,6 +1585,7 @@
      },
      "graded_raw_hash": "0b94a3fbde88ea17251fbd8ee8246cc38034ddf9c1b5115d25262bb9f9be39d8",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1515,6 +1604,7 @@
      },
      "graded_raw_hash": "ab4de0cb641027dab0bc6a8da62fdc01b02bbc2a3953ddc5d82aa9de8e0ef976",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1581,6 +1671,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1623,6 +1714,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1665,6 +1757,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1731,6 +1824,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1803,6 +1897,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1869,6 +1964,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -1877,6 +1973,7 @@
     },
     "zero_tanh_rail_escape": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "zero_tanh_rail_escape: zero_tanh_rail_escape: unsupported tanh host zero_tanh_rail_escape; only zero_tanh_smoke is routed",
      "status": "BLOCKED"
     },
@@ -1886,6 +1983,7 @@
      "final_margin": null,
      "graded_raw_hash": "c7d8bb4e4ee35023ea0527d370b952fc1442675dfc1a1295406698778edc59b1",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "unsupported evaluator zero_tanh_smoke"
      ],
@@ -1916,6 +2014,7 @@
    "cells": {
     "ae_gan_hold": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "ae_gan_hold: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent drawn only through prior.sample; this host reads, encodes or optimizes table rows",
      "status": "BLOCKED"
     },
@@ -1925,6 +2024,7 @@
      "final_margin": null,
      "graded_raw_hash": "7bad4b2f72114d341c8abac95736f5f31e4432217523282ea4773d45a072557b",
      "noise_floor": null,
+     "ordinary_view_role": "not in view",
      "reasons": [
       "declared state/horizon/cadence/restart comparisons agree; source audit bound"
      ],
@@ -1937,6 +2037,7 @@
      "final_margin": null,
      "graded_raw_hash": "c55d1a580e9f3a6a98eba81123ded116718afca715e299167b0840396954d782",
      "noise_floor": null,
+     "ordinary_view_role": "diagnostic",
      "reasons": [
       "declared state/horizon/cadence/restart comparisons agree; source audit bound"
      ],
@@ -1945,16 +2046,19 @@
     },
     "cover_leftover": {
      "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
      "reason": "required capability unavailable: mog_prior",
      "status": "BLOCKED"
     },
     "five_word_joint_hold": {
      "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
      "reason": "required capability unavailable: mog_prior",
      "status": "BLOCKED"
     },
     "five_word_joint_smoke": {
      "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
      "reason": "required capability unavailable: mog_prior",
      "status": "BLOCKED"
     },
@@ -1970,6 +2074,7 @@
      },
      "graded_raw_hash": "25a77d374c97ba646b2104841002a9771e8d7a920fcdc3c2bde1bf2d8796bc09",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "any scheduled full pass with independent same-state confirmation"
      ],
@@ -1988,6 +2093,7 @@
      },
      "graded_raw_hash": "886aae9fa2791b4cf8544f6d3516e9cc87a41f52f3a668a0bba0157f4ea8b47a",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "stationary hold, deadline reacquisition and shifted hold"
      ],
@@ -2006,6 +2112,7 @@
      },
      "graded_raw_hash": "8a81a0933923ed1f1e005d5d275cba7e4bec8bca91968a1040122c03fc5906bc",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "coverage, sustained live accuracy, or independent holdout failed"
      ],
@@ -2014,51 +2121,61 @@
     },
     "grid100_14k": {
      "applicability": "latent",
+     "ordinary_view_role": "not in view",
      "reason": "required capability unavailable: learned_locations",
      "status": "BLOCKED"
     },
     "grid100_mlp16": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "study admission refuses this native model variant: it has no explicit native profile ('native model variants require an explicit profile'); excluded from the run view for every arm",
      "status": "BLOCKED"
     },
     "grid100_res16_tanh": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "study admission refuses this native model variant: it has no explicit native profile ('native model variants require an explicit profile'); excluded from the run view for every arm",
      "status": "BLOCKED"
     },
     "img_bars4": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "required capability unavailable: mog_prior",
      "status": "BLOCKED"
     },
     "img_blobs4": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "required capability unavailable: mog_prior",
      "status": "BLOCKED"
     },
     "img_intensity2": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "required capability unavailable: mog_prior",
      "status": "BLOCKED"
     },
     "img_stripes2": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "required capability unavailable: mog_prior",
      "status": "BLOCKED"
     },
     "mid_scale_identity": {
      "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
      "reason": "required capability unavailable: mog_prior",
      "status": "BLOCKED"
     },
     "misgan_block_neural_imputer": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "misgan_block_neural_imputer: unsupported vector target declaration",
      "status": "BLOCKED"
     },
     "misgan_block_recovery": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "misgan_block_recovery: unsupported vector target declaration",
      "status": "BLOCKED"
     },
@@ -2074,6 +2191,7 @@
      },
      "graded_raw_hash": "8c99326a59c27158bb8a5865cfcf04efa50c76dbefd111c50881de1aad967e76",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2082,46 +2200,55 @@
     },
     "model_ae_ddgan_bimodal_chain": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "model_ae_ddgan_bimodal_chain: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent drawn only through prior.sample; this host reads, encodes or optimizes table rows",
      "status": "BLOCKED"
     },
     "model_ae_ddgan_gaussian_chain": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "model_ae_ddgan_gaussian_chain: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent drawn only through prior.sample; this host reads, encodes or optimizes table rows",
      "status": "BLOCKED"
     },
     "model_ae_gan_multimodal": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "model_ae_gan_multimodal: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent drawn only through prior.sample; this host reads, encodes or optimizes table rows",
      "status": "BLOCKED"
     },
     "model_ae_reconstruction": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "model_ae_reconstruction: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent drawn only through prior.sample; this host reads, encodes or optimizes table rows",
      "status": "BLOCKED"
     },
     "model_ddgan_bimodal_chain": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "model_ddgan_bimodal_chain: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent drawn only through prior.sample; this host reads, encodes or optimizes table rows",
      "status": "BLOCKED"
     },
     "model_ddgan_gaussian_chain": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "model_ddgan_gaussian_chain: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent drawn only through prior.sample; this host reads, encodes or optimizes table rows",
      "status": "BLOCKED"
     },
     "model_vae_categorical": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "model_vae_categorical: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent drawn only through prior.sample; this host reads, encodes or optimizes table rows",
      "status": "BLOCKED"
     },
     "model_vae_hard": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "model_vae_hard: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent drawn only through prior.sample; this host reads, encodes or optimizes table rows",
      "status": "BLOCKED"
     },
     "residual_student": {
      "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
      "reason": "required capability unavailable: mog_prior",
      "status": "BLOCKED"
     },
@@ -2137,6 +2264,7 @@
      },
      "graded_raw_hash": "ea11a786439eea6000b91b95c539a5d2bd06e504fd3dbec39223ed85151d5a4e",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2145,11 +2273,13 @@
     },
     "ring16_bigan_continuous": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "ring16_bigan_continuous: unsupported vector target declaration",
      "status": "BLOCKED"
     },
     "ring_extension": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "prerequisite not PASS: ring16_acquisition (FAIL)",
      "status": "NOT_MEASURED"
     },
@@ -2165,6 +2295,7 @@
      },
      "graded_raw_hash": "2aa29ec05f26e9cb585aaa9330d871d805b8fe2591c39d91aa2aaf0625b87044",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "coverage, sustained live accuracy, or independent holdout failed"
      ],
@@ -2173,6 +2304,7 @@
     },
     "rotated100_14k": {
      "applicability": "latent",
+     "ordinary_view_role": "not in view",
      "reason": "required capability unavailable: learned_locations",
      "status": "BLOCKED"
     },
@@ -2188,6 +2320,7 @@
      },
      "graded_raw_hash": "eeeb7057a810441bd37ce8ed91b0b505cec5901858b72c88ecdeef860de936ff",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "coverage, sustained live accuracy, or independent holdout failed"
      ],
@@ -2196,31 +2329,37 @@
     },
     "staggered100_14k": {
      "applicability": "latent",
+     "ordinary_view_role": "not in view",
      "reason": "required capability unavailable: learned_locations",
      "status": "BLOCKED"
     },
     "target_shift_recovery": {
      "applicability": "latent",
+     "ordinary_view_role": "not in view",
      "reason": "Recipe.prior_update conflicts with legacy task-owned learnable",
      "status": "BLOCKED"
     },
     "trajectory": {
      "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
      "reason": "required capability unavailable: mog_prior",
      "status": "BLOCKED"
     },
     "two_pole": {
      "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
      "reason": "required capability unavailable: mog_prior",
      "status": "BLOCKED"
     },
     "unipolar": {
      "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
      "reason": "required capability unavailable: mog_prior",
      "status": "BLOCKED"
     },
     "unused_token_hold": {
      "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
      "reason": "required capability unavailable: mog_prior",
      "status": "BLOCKED"
     },
@@ -2284,6 +2423,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2326,6 +2466,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2368,6 +2509,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2434,6 +2576,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2506,6 +2649,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2572,6 +2716,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2580,6 +2725,7 @@
     },
     "zero_tanh_rail_escape": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "zero_tanh_rail_escape: zero_tanh_rail_escape: unsupported tanh host zero_tanh_rail_escape; only zero_tanh_smoke is routed",
      "status": "BLOCKED"
     },
@@ -2589,6 +2735,7 @@
      "final_margin": null,
      "graded_raw_hash": "03c58e03eb42ceeb1ddcdfd56b0d9d14d62221fadea6bfb4ea387ba8b103569f",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "unsupported evaluator zero_tanh_smoke"
      ],
@@ -2630,6 +2777,7 @@
      },
      "graded_raw_hash": "ee6097e8875cfe46941aebade429d1f209a58d8ef8187bc74d179b26f0c64746",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2642,6 +2790,7 @@
      "final_margin": null,
      "graded_raw_hash": "91f60e21db40de685646e718e301a4b40b3c9db950be95917019f7e50cf120d9",
      "noise_floor": null,
+     "ordinary_view_role": "not in view",
      "reasons": [
       "declared state/horizon/cadence/restart comparisons agree; source audit bound"
      ],
@@ -2654,6 +2803,7 @@
      "final_margin": null,
      "graded_raw_hash": "85af54052ff2e5c4003d04b60e80b7689c9714f3de7b6707b57067b5419e9f3d",
      "noise_floor": null,
+     "ordinary_view_role": "diagnostic",
      "reasons": [
       "declared state/horizon/cadence/restart comparisons agree; source audit bound"
      ],
@@ -2672,6 +2822,7 @@
      },
      "graded_raw_hash": "696f2a2963352cac6ede366186644bbe8fb63c83519644ea65afc05dd3e32686",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2680,6 +2831,7 @@
     },
     "five_word_joint_hold": {
      "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
      "reason": "prerequisite not PASS: five_word_joint_smoke (INCOMPLETE)",
      "status": "NOT_MEASURED"
     },
@@ -2689,6 +2841,7 @@
      "final_margin": null,
      "graded_raw_hash": null,
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "task wall-time budget exhausted"
      ],
@@ -2707,6 +2860,7 @@
      },
      "graded_raw_hash": "8219be50c874b5eea5e1573fe93422d163e8077b73683457b263a524f3951df9",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "any scheduled full pass with independent same-state confirmation"
      ],
@@ -2725,6 +2879,7 @@
      },
      "graded_raw_hash": "548244a71a2b7951ab885bdb0eee3100f8c8f60d7c6b568b0e8be436a0e04ee2",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "stationary hold, deadline reacquisition and shifted hold"
      ],
@@ -2743,6 +2898,7 @@
      },
      "graded_raw_hash": "51a7749d44e83e27a6d16f601f416686ee080a07ee018d342656d26f566ee51f",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "coverage, sustained live accuracy, or independent holdout failed"
      ],
@@ -2751,16 +2907,19 @@
     },
     "grid100_14k": {
      "applicability": "latent",
+     "ordinary_view_role": "not in view",
      "reason": "prerequisite not PASS: grid100 (FAIL)",
      "status": "NOT_MEASURED"
     },
     "grid100_mlp16": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "study admission refuses this native model variant: it has no explicit native profile ('native model variants require an explicit profile'); excluded from the run view for every arm",
      "status": "BLOCKED"
     },
     "grid100_res16_tanh": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "study admission refuses this native model variant: it has no explicit native profile ('native model variants require an explicit profile'); excluded from the run view for every arm",
      "status": "BLOCKED"
     },
@@ -2776,6 +2935,7 @@
      },
      "graded_raw_hash": "f37b282a917a4b307c34adfb8478d3cae2580d4ad0714633be369a4cde0e2d51",
      "noise_floor": null,
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2794,6 +2954,7 @@
      },
      "graded_raw_hash": "f973cf41fc0a63981d2712174a6ac0b3168e107a612aa102d611d2ced1fd749c",
      "noise_floor": null,
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2812,6 +2973,7 @@
      },
      "graded_raw_hash": "48a080f89353f9d33d98281d1cfef6d45355f81f0c7445a6c3e666517aad9b0d",
      "noise_floor": null,
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2830,6 +2992,7 @@
      },
      "graded_raw_hash": "14b66ebdcfc3c2e7cfeba2c1740e9fa485aee0e1bab589280cbd039b8dd7f6c0",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2848,6 +3011,7 @@
      },
      "graded_raw_hash": "9bfb4afafec74ab3b5b769ff1713c677c8c7698b3f9f47fd92f74836c9e9d5b0",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2856,11 +3020,13 @@
     },
     "misgan_block_neural_imputer": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "misgan_block_neural_imputer: unsupported vector target declaration",
      "status": "BLOCKED"
     },
     "misgan_block_recovery": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "misgan_block_recovery: unsupported vector target declaration",
      "status": "BLOCKED"
     },
@@ -2876,6 +3042,7 @@
      },
      "graded_raw_hash": "00d5e894f3173b56bb57afa7d602331da505693940ea23d7c8097187626d5b43",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2884,6 +3051,7 @@
     },
     "model_ae_ddgan_bimodal_chain": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "prerequisite not PASS: model_ae_ddgan_gaussian_chain (FAIL)",
      "status": "NOT_MEASURED"
     },
@@ -2899,6 +3067,7 @@
      },
      "graded_raw_hash": "4bedd1858a6299d30b68b19f2d267fe8f0f43ae7e3c376b6a0d81d2d10c41c82",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2911,6 +3080,7 @@
      "final_margin": null,
      "graded_raw_hash": null,
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "runner exited 1; inspect run.log"
      ],
@@ -2923,6 +3093,7 @@
      "final_margin": null,
      "graded_raw_hash": null,
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "runner exited 1; inspect run.log"
      ],
@@ -2931,6 +3102,7 @@
     },
     "model_ddgan_bimodal_chain": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "prerequisite not PASS: model_ddgan_gaussian_chain (FAIL)",
      "status": "NOT_MEASURED"
     },
@@ -2946,6 +3118,7 @@
      },
      "graded_raw_hash": "5a48346de630a4f6cb18eb78ee2729862d97b475de6566f6a1f87af501ff10f9",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2964,6 +3137,7 @@
      },
      "graded_raw_hash": "3e5beacf5b8c5f4d7adef818453f1513e7a1613b6e7ad541fb0dd77805deb7cf",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -2982,6 +3156,7 @@
      },
      "graded_raw_hash": "9422785102330c9fba063a0e6137211d73fcd1820c540c61014f003cb906d522",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -3000,6 +3175,7 @@
      },
      "graded_raw_hash": "5474d0be3a99fefcc0f54039e4fffc4e2fb40588d4d817df3e5342a5bba29dd2",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -3018,6 +3194,7 @@
      },
      "graded_raw_hash": "94d763faf49abd025393eb1937f7f81f2d8bb560a687f824890b0088c2809d90",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -3026,11 +3203,13 @@
     },
     "ring16_bigan_continuous": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "ring16_bigan_continuous: unsupported vector target declaration",
      "status": "BLOCKED"
     },
     "ring_extension": {
      "applicability": "latent",
+     "ordinary_view_role": "required",
      "reason": "prerequisite not PASS: ring16_acquisition (FAIL)",
      "status": "NOT_MEASURED"
     },
@@ -3046,6 +3225,7 @@
      },
      "graded_raw_hash": "e3888df0fede4a87a88531dbd58fae328dd5dfe458fe301e322aa2a5b57a685a",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "coverage, sustained live accuracy, or independent holdout failed"
      ],
@@ -3054,6 +3234,7 @@
     },
     "rotated100_14k": {
      "applicability": "latent",
+     "ordinary_view_role": "not in view",
      "reason": "prerequisite not PASS: rotated100 (FAIL)",
      "status": "NOT_MEASURED"
     },
@@ -3069,6 +3250,7 @@
      },
      "graded_raw_hash": "88f7a7e4624e124886f9a29832b87660e3d72648cd5b16cbb93c312e54396ff9",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "coverage, sustained live accuracy, or independent holdout failed"
      ],
@@ -3077,11 +3259,13 @@
     },
     "staggered100_14k": {
      "applicability": "latent",
+     "ordinary_view_role": "not in view",
      "reason": "prerequisite not PASS: staggered100 (FAIL)",
      "status": "NOT_MEASURED"
     },
     "target_shift_recovery": {
      "applicability": "latent",
+     "ordinary_view_role": "not in view",
      "reason": "prerequisite not PASS: mode_hold (FAIL)",
      "status": "NOT_MEASURED"
     },
@@ -3097,6 +3281,7 @@
      },
      "graded_raw_hash": "e678daac3b9647a05de2f5014c9d7d5f6cddda930b9f919ee76a32cff68babb7",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -3115,6 +3300,7 @@
      },
      "graded_raw_hash": "66d8f9396f3a4df2230c4f701ab80c10af8c5b9e8c964948aab93bc4187f6926",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -3133,6 +3319,7 @@
      },
      "graded_raw_hash": "c1a6a6a3749ee865de4ccb093c541e7c8035c1232f0ad076ec6c038bba5b164d",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -3151,6 +3338,7 @@
      },
      "graded_raw_hash": "b50d9dfccfef04f836a0ac191abac89eaabb875cf4b8e7db496569477c20e49d",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -3217,6 +3405,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -3259,6 +3448,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -3301,6 +3491,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -3367,6 +3558,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "required",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -3439,6 +3631,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -3505,6 +3698,7 @@
       },
       "version": "oracle-noise-floor-v1"
      },
+     "ordinary_view_role": "held",
      "reasons": [
       "recomputed complete live curve and terminal suffix"
      ],
@@ -3513,6 +3707,7 @@
     },
     "zero_tanh_rail_escape": {
      "applicability": "latent",
+     "ordinary_view_role": "held",
      "reason": "zero_tanh_rail_escape: zero_tanh_rail_escape: unsupported tanh host zero_tanh_rail_escape; only zero_tanh_smoke is routed",
      "status": "BLOCKED"
     },
@@ -3522,6 +3717,7 @@
      "final_margin": null,
      "graded_raw_hash": "a52f4221662afbecce65136ddb8000d4cf7e8a2678ea0ee818dd4f91c8e0dc09",
      "noise_floor": null,
+     "ordinary_view_role": "required",
      "reasons": [
       "unsupported evaluator zero_tanh_smoke"
      ],
@@ -3711,5 +3907,9 @@
  },
  "fixed_list": "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json",
  "fixed_list_sha256": "14155fb6273af76ef248db2da6335c22ddeab2a1deb82b3eb3f0f6cd08b19c34",
+ "ordinary_view": {
+  "id": "discriminator_stability",
+  "revision": 14
+ },
  "schema": "prior_ablation_receipts_v1"
 }
