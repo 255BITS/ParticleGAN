@@ -290,27 +290,32 @@ def test_repaired_hosts_and_replay_declarations_pin_current_sources():
     assert checked == 27 and inherited == 10 + 6
 
 
+@pytest.mark.cuda
 @CUDA
 @pytest.mark.parametrize("host", cuda_host_smoke.HOSTS)
 def test_cuda_two_finite_updates_and_noise_receipt(host):
     cuda_host_smoke.two_finite_updates(host)
 
 
+@pytest.mark.cuda
 @CUDA
 def test_cuda_fresh_process_init_and_draw_match():
     cuda_host_smoke.fresh_process_reproducible()
 
 
+@pytest.mark.cuda
 @CUDA
 def test_cuda_save_restore_repeats_the_next_update():
     cuda_host_smoke.save_restore_next_update()
 
 
+@pytest.mark.cuda
 @CUDA
 def test_cuda_evaluation_leaves_the_training_rng_untouched():
     cuda_host_smoke.evaluation_leaves_training_rng()
 
 
+@pytest.mark.cuda
 @CUDA
 def test_cuda_fourier_and_unused_fixtures_keep_cpu_values():
     cuda_host_smoke.fixtures_keep_cpu_values()

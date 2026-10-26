@@ -108,6 +108,9 @@ def test_device_policy_scope_undoes_selection_and_threads():
     apply_device_policy("cpu")  # a fresh selection is allowed again
 
 
+@pytest.mark.cuda
+
+
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="needs CUDA")
 def test_device_policy_scope_undoes_cuda_policy():
     from benchmarks.toy100.device import device_policy_scope

@@ -118,6 +118,7 @@ def test_frozen_word_boundary_checks_sources_and_candidate_overrides_with_cached
         validate_request_host_profiles(current)
 
 
+@pytest.mark.cuda
 @CUDA_ONLY
 def test_joint_api_updates_encoder_and_all_roles_with_isolated_clean_sampling(tmp_path):
     frozen, task = request()
@@ -154,6 +155,7 @@ def test_joint_api_updates_encoder_and_all_roles_with_isolated_clean_sampling(tm
     assert set(raw["evidence"]["host"]["models"]) == {"generator", "discriminator", "encoder"}
 
 
+@pytest.mark.cuda
 @CUDA_ONLY
 @pytest.mark.parametrize("capture_media", [False, True])
 def test_saved_word_records_preserve_scored_views_update_state_and_rng(tmp_path, monkeypatch, capture_media):
@@ -203,6 +205,7 @@ def test_saved_word_records_preserve_scored_views_update_state_and_rng(tmp_path,
     assert not (tmp_path / "False/observed-records.pt").exists()
 
 
+@pytest.mark.cuda
 @CUDA_ONLY
 def test_standalone_word_fixture_retains_its_public_recipe_and_seed_offsets():
     # Existing published cases remain on the original constructor path.
@@ -215,6 +218,7 @@ def test_standalone_word_fixture_retains_its_public_recipe_and_seed_offsets():
     assert torch.equal(fixture.policy.latent_generator.get_state(), torch.Generator(device=DEVICE).manual_seed(24004).get_state())
 
 
+@pytest.mark.cuda
 @CUDA_ONLY
 @pytest.mark.parametrize("optimizer_family", ["formulation", "adam"])
 def test_joint_prior_optimizer_honors_distinct_prior_betas(optimizer_family):

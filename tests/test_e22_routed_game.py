@@ -15,8 +15,8 @@ from particlegan.continuous import DataDriftController
 from particlegan.ka2 import WARMUP_CALLS
 
 
-DEVICES = ["cpu", pytest.param("cuda:0", marks=pytest.mark.skipif(
-    not torch.cuda.is_available(), reason="CUDA required"))]
+DEVICES = ["cpu", pytest.param("cuda:0", marks=[pytest.mark.cuda, pytest.mark.skipif(
+    not torch.cuda.is_available(), reason="CUDA required")])]
 
 
 @pytest.fixture(scope="module")

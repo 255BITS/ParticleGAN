@@ -108,7 +108,7 @@ quality gates; the original actual-training GIFs and scientific metrics remain
 in PR #344.
 
 ```sh
-CUDA_VISIBLE_DEVICES=0 python -m pytest -q \
+CUDA_VISIBLE_DEVICES=0 python -m pytest -q -m cuda \
   tests/test_dualnorm_smoothing.py tests/test_dualnorm_default_parity.py \
   tests/test_dualnorm_optimizers.py
 python -m pytest -q tests/test_forge_dualnorm_smoothing_search.py

@@ -161,7 +161,7 @@ def test_actual_develop_checkpoint_resumes_exactly_from_saved_recipe(actual_deve
     _equal(before, current.state_dict())
 
 
-@pytest.mark.parametrize("device", ("cpu", "cuda:0"))
+@pytest.mark.parametrize("device", ("cpu", pytest.param("cuda:0", marks=pytest.mark.cuda)))
 def test_current_named_preset_replays_all_checkpointed_streams(device):
     if device.startswith("cuda") and not torch.cuda.is_available():
         pytest.skip("CUDA unavailable; CPU compatibility remains required")

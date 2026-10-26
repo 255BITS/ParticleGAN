@@ -10,8 +10,8 @@ import torch
 from particlegan.continuous import DataDriftController
 
 
-DEVICES = ["cpu", pytest.param("cuda", marks=pytest.mark.skipif(
-    not torch.cuda.is_available(), reason="CUDA required"))]
+DEVICES = ["cpu", pytest.param("cuda", marks=[pytest.mark.cuda, pytest.mark.skipif(
+    not torch.cuda.is_available(), reason="CUDA required")])]
 
 
 @pytest.fixture(autouse=True)
@@ -113,6 +113,9 @@ def test_71_site_lazy_and_eager_observation_match_gradients_resume_and_serving(a
              lazy.policy.routed_generate(context, sigma=0, perturb=False, averaged=averaged))
     same(restored.policy.served_model().routed_forward(context),
          lazy.policy.served_model().routed_forward(context))
+
+
+@pytest.mark.cuda
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA scalar readbacks required")

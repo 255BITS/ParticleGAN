@@ -137,7 +137,7 @@ repository root, choose a new ignored destination; the default is exclusive:
 
 ```sh
 CUBLAS_WORKSPACE_CONFIG=:4096:8 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-  python -m pytest -q tests/test_tier1_prior_duration.py
+  python -m pytest -m cuda -q tests/test_tier1_prior_duration.py
 CUBLAS_WORKSPACE_CONFIG=:4096:8 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
   OPENBLAS_NUM_THREADS=1 python -u -m benchmarks.toy_audit.tier1_prior_duration run \
   > runs/api/tier1-prior-duration-v1.runner.log 2>&1

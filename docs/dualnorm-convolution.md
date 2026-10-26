@@ -98,7 +98,7 @@ comparison. These checks establish software behavior; the separately declared
 Forge image runs provide scientific metrics and actual-training GIFs.
 
 ```sh
-python -m pytest -q tests/test_dualnorm_convolution.py \
+CUDA_VISIBLE_DEVICES=0 python -m pytest -q -m cuda tests/test_dualnorm_convolution.py \
   tests/test_dualnorm_optimizers.py tests/test_dualnorm_smoothing.py \
   tests/test_dualnorm_default_parity.py
 ```

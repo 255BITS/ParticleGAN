@@ -201,6 +201,9 @@ def test_checkpointed_adversarial_updates_moves_resume_and_serving_match_native(
         torch.set_num_threads(previous)
 
 
+@pytest.mark.cuda
+
+
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required")
 def test_cuda_bf16_checkpoint_replay_matches_native_and_cpu_loaded_event_resume(api):
     adversarial_replay_conformance(api, device="cuda", steps=6)
