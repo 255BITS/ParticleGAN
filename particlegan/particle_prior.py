@@ -15,6 +15,9 @@ import torch
 import torch.nn as nn
 
 
+PRIOR_CODE_LAWS = ("table", "fresh_gaussian")
+
+
 class ParticlePrior(nn.Module):
     r"""
     Learnable latent particle cloud.
@@ -39,7 +42,20 @@ class ParticlePrior(nn.Module):
         # later in the training loop
         idx = accelerator.unwrap_model(prior).sample_indices(batch_size)
         z = prior(idx)  # Keep the DDP forward path so gradients synchronize.
+
+    ``code_law`` selects what ``sample`` returns. The default ``"table"`` reads
+    table rows (the behaviour above). ``"fresh_gaussian"`` is the matched
+    fixed-Gaussian latent control: ``sample`` still draws the same uniform row
+    indices from ``generator`` (so index-stream consumption is unchanged), then
+    returns fresh codes ``init_std * N(0, I)`` of the same dimension instead of
+    table rows. Set it only through :meth:`set_code_law` on a frozen table
+    (normally via ``Recipe.prior_code_law``); table reads through ``forward``
+    then raise, so hosts that enumerate rows cannot silently mix the two laws.
+    It is plain module configuration, not checkpoint state: the owning recipe
+    re-applies it when a trainer is rebuilt.
     """
+
+    code_law = "table"
 
     def __init__(
         self,
@@ -124,6 +140,8 @@ class ParticlePrior(nn.Module):
         Returns:
             z_batch: (B, z_dim) subset of the particle cloud.
         """
+        if self.code_law != "table":
+            raise ValueError("fresh_gaussian codes are not table reads; draw codes with sample()")
         if idx.device != self.z.device:
             idx = idx.to(self.z.device)
         return self.z[idx]
@@ -154,6 +172,9 @@ class ParticlePrior(nn.Module):
             z_batch: (B, z_dim)
             idx: (B,) LongTensor of indices on the same device as `self.z`.
         """
+        if self.code_law != "table":
+            idx = self._sample_rows(batch_size, generator, fixed_first_n=fixed_first_n, offset=offset)
+            return self._fresh_codes(len(idx), generator), idx
         if batch_size <= 0:
             raise ValueError(f"batch_size must be positive, got {batch_size}")
 
@@ -177,6 +198,43 @@ class ParticlePrior(nn.Module):
                 idx = self.sample_indices(batch_size, generator=generator)
         z_batch = self.z[idx]
         return z_batch, idx
+
+    def set_code_law(self, law: str) -> None:
+        """Select table reads or fresh ``init_std * N(0, I)`` codes (see class docs).
+
+        ``"fresh_gaussian"`` requires a frozen table: its locations are never
+        sampled, so a trainable table would receive no gradient.
+        """
+        if law not in PRIOR_CODE_LAWS:
+            raise ValueError(f"code_law must be one of {PRIOR_CODE_LAWS}, got {law!r}")
+        if law != "table" and self.z.requires_grad:
+            raise ValueError("fresh_gaussian codes require a frozen location table")
+        self.code_law = law
+
+    @torch.no_grad()
+    def _sample_rows(self, batch_size, generator, *, fixed_first_n=False, offset=0):
+        """Row indices exactly as the table law draws them (same RNG consumption)."""
+        if batch_size <= 0:
+            raise ValueError(f"batch_size must be positive, got {batch_size}")
+        if fixed_first_n:
+            if offset < 0:
+                raise ValueError(f"offset must be non-negative, got {offset}")
+            if offset + batch_size > self.num_particles:
+                raise ValueError(
+                    f"Requested batch_size={batch_size} with offset={offset}, "
+                    f"but num_particles={self.num_particles}"
+                )
+            return torch.arange(offset, offset + batch_size, device=self.z.device, dtype=torch.long)
+        return self.sample_indices(batch_size, generator=generator)
+
+    def _fresh_codes(self, batch_size, generator, eps=None):
+        """Fresh ``init_std * N(0, I)`` codes for the ``fresh_gaussian`` law."""
+        shape = (batch_size, self.z_dim)
+        if eps is None:
+            eps = torch.randn(shape, device=self.z.device, dtype=self.z.dtype, generator=generator)
+        elif eps.shape != shape or eps.device != self.z.device or eps.dtype != self.z.dtype:
+            raise ValueError("eps must match sampled codes' shape, device and dtype")
+        return eps * self.init_std
 
     def manipulate(self, *manipulators: Any) -> "ManipulatedPrior":
         """Wrap this prior in a ManipulatedPrior chaining the given manipulators."""
@@ -304,6 +362,8 @@ class MoGParticlePrior(ParticlePrior):
         Explicit eps must match the output shape/device/dtype and replaces the
         Gaussian RNG draw. At sigma=0 no noise RNG is consumed.
         """
+        if self.code_law != "table":
+            raise ValueError("fresh_gaussian codes are not table reads; draw codes with sample()")
         z = self.means()[idx.to(self.z.device)]
         if self._noise_enabled:
             if eps is None:
@@ -322,6 +382,12 @@ class MoGParticlePrior(ParticlePrior):
         and noise. ``noise_generator`` optionally isolates the Gaussian draws
         from component-index draws; sigma=0 consumes neither noise stream.
         """
+        if self.code_law != "table":
+            # Same index draws as the table law, then fresh codes from the same
+            # Gaussian stream the MoG kernel noise would use.
+            idx = self._sample_rows(batch_size, generator, fixed_first_n=fixed_first_n, offset=offset)
+            return self._fresh_codes(len(idx), generator if noise_generator is None else noise_generator,
+                                     eps), idx
         # Reuse index validation and RNG consumption exactly, including r=0.
         _, idx = super().sample(batch_size, generator,
                                 fixed_first_n=fixed_first_n, offset=offset)

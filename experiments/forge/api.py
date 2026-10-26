@@ -146,6 +146,30 @@ def task_recipe_overrides(candidate, task):
     return host_recipe_overrides(bound, execution, task_recipe_resources(task))
 
 
+# Hosts whose every training and evaluation latent is drawn through the public
+# ``prior.sample`` path (GANTrainer or the locked mode_hold loop) on a MoG
+# table. Other hosts enumerate, encode against or directly optimize table rows,
+# so Recipe.prior_code_law='fresh_gaussian' has no defined meaning there.
+FRESH_GAUSSIAN_ADAPTERS = frozenset({"transfer_vector", "native100", "native100_continuation",
+                                     "clockfree_audit", "ring_endurance"})
+FRESH_GAUSSIAN_BEHAVIOR_HOSTS = frozenset({"mode_hold"})
+
+
+def fresh_gaussian_blockers(task, recipe):
+    """Explicit blockers for the opt-in fresh-Gaussian latent control."""
+    if getattr(recipe, "prior_code_law", "table") == "table":
+        return []
+    execution = task.get("execution", {})
+    prior = execution.get("prior") or {}
+    supported = (task.get("adapter") in FRESH_GAUSSIAN_ADAPTERS
+                 or (task.get("adapter") == "transfer_behavior"
+                     and execution.get("host") in FRESH_GAUSSIAN_BEHAVIOR_HOSTS))
+    if prior.get("kind") != "mog" or execution.get("prior_applicability") == "not_sampled" or not supported:
+        return [f"{task.get('id')}: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent "
+                "drawn only through prior.sample; this host reads, encodes or optimizes table rows"]
+    return []
+
+
 def task_formulation_context(candidate, task, protocol=None, *, device="cpu", root=None):
     """Resolve a task's actual public configuration without constructing models."""
     from .initialization import task_initializer
@@ -170,6 +194,7 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
     # Typed extensions receive the same ownership and policy checks as ordinary
     # overrides before a worker can reserve this task.
     blockers = task_policy_blockers(task, {"recipe_overrides": asdict(context.recipe)})
+    blockers.extend(fresh_gaussian_blockers(task, context.recipe))
     if (task["adapter"] == "transfer_behavior" and task["execution"].get("host") != "mode_hold"
             and not is_policy_task(task)):
         from .behavior_adapters import behavior_preflight

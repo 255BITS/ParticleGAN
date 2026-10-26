@@ -259,6 +259,12 @@ class Recipe:
     # {gate: value} mapping, stored as sorted pairs.
     bispf_shape_gates: bool = True
     bispf_gate_overrides: tuple = ()
+    # Latent code law, owned with prior_update. "table" (default) samples table
+    # rows. "fresh_gaussian" is the matched fixed-Gaussian latent control: it
+    # requires prior_update="frozen", keeps the task's initial table and index
+    # draws, and replaces each sampled code with init_std * N(0, I) of the same
+    # dimension (ParticlePrior.code_law). Opt-in; not part of any preset.
+    prior_code_law: str = "table"
 
     def __post_init__(self):
         if type(self.bispf_shape_gates) is not bool:
@@ -279,6 +285,10 @@ class Recipe:
             raise ValueError("training_precision must be float32 or bf16_channels_last")
         if self.prior_update not in ("learned", "frozen"):
             raise ValueError("prior_update must be learned or frozen")
+        if self.prior_code_law not in ("table", "fresh_gaussian"):
+            raise ValueError("prior_code_law must be table or fresh_gaussian")
+        if self.prior_code_law != "table" and self.prior_update != "frozen":
+            raise ValueError("prior_code_law='fresh_gaussian' requires prior_update='frozen'")
         from .coulomb_prior import CoulombPriorRegularizer
         CoulombPriorRegularizer(softening=self.prior_coulomb_softening,
                                confinement=self.prior_coulomb_confinement,
@@ -1145,6 +1155,10 @@ class Recipe:
             rows = base.z.detach()
             del base.z
             base.register_buffer("z", rows)
+        if self.prior_code_law != "table":
+            base.set_code_law(self.prior_code_law)
+        elif getattr(base, "code_law", "table") != "table":
+            raise ValueError("prior code law contradicts Recipe.prior_code_law='table'")
         if self.prior_regularizer == "coulomb" and self.prior_update == "learned" and self.prior_reg > 0:
             from .coulomb_prior import capture_coulomb_reference
             capture_coulomb_reference(base)
