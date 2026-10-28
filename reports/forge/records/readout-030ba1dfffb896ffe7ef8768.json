@@ -1,0 +1,647 @@
+{
+  "attempt_ids": [
+    "00db84a9a51c43ad8782fce53359e1b4",
+    "1ddf5a1bc91d44c493543d2724a95797",
+    "3380d9750ee64fc090b11a669630c80c",
+    "3d938a654ccf4d399016698189076c4f",
+    "4c6d3afbc1694001b23f668cf98bbad8",
+    "5ebf66a5ab0544a5b8709c65feb47a5c",
+    "711444c2a3364b71811d2d32e23b1844",
+    "a625c82551e24468a2243c5da2a7b0d7",
+    "aaa4080834594c3c94b68a796924c5e0",
+    "ba8967557e6f4e60b73c88fdf66d8602",
+    "bcdc961b3a564df0904d56d2166d7711",
+    "cad7cec0aa1f4a2aa35e7a55fecaa28b",
+    "d18df7db1dd044939bc830916faab6e3",
+    "d399babcccc34d33b76c2f2b71176141",
+    "f6003f7877ff438d96d63293d6b304b5"
+  ],
+  "candidate_id": "bispf-prior-fresh-gaussian-v1",
+  "candidate_revision": "373a307163ee384dbed023239eda5b56bdce641eef92a5e8a5f87c8d3b54019c",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "No scientific comparison; execution defect only.",
+  "conclusion": "Cancelled: every attempt crashed at prior construction (Recipe rejected fresh_gaussian during replace(prior_update=learned)); repaired and rerun as prior-ablation-a3-fresh-gaussian-r2. INCOMPLETE receipts preserved.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "00db84a9a51c43ad8782fce53359e1b4",
+        "1ddf5a1bc91d44c493543d2724a95797",
+        "3380d9750ee64fc090b11a669630c80c",
+        "3d938a654ccf4d399016698189076c4f",
+        "4c6d3afbc1694001b23f668cf98bbad8",
+        "5ebf66a5ab0544a5b8709c65feb47a5c",
+        "711444c2a3364b71811d2d32e23b1844",
+        "a625c82551e24468a2243c5da2a7b0d7",
+        "aaa4080834594c3c94b68a796924c5e0",
+        "ba8967557e6f4e60b73c88fdf66d8602",
+        "bcdc961b3a564df0904d56d2166d7711",
+        "cad7cec0aa1f4a2aa35e7a55fecaa28b",
+        "d18df7db1dd044939bc830916faab6e3",
+        "d399babcccc34d33b76c2f2b71176141",
+        "f6003f7877ff438d96d63293d6b304b5"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "dcdc497b60554f90aba6cc17c781d1ed4d8f1b865be1cdc30fe6e6981c21c1c2",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "request_missing_evidence",
+      "observed": {
+        "falsifier": {
+          "satisfied": null,
+          "value": null
+        },
+        "prediction": {
+          "satisfied": null,
+          "value": null
+        }
+      },
+      "outcome": "incomplete",
+      "provenance": [
+        {
+          "attempt_id": "00db84a9a51c43ad8782fce53359e1b4",
+          "producer_request_id": "cd10513c14e4dbc95042c478",
+          "producer_study_id": "prior-ablation-a3-fresh-gaussian",
+          "result_hash": "4074849c84855e33516dd191f4f19c9146db468289c7e376e1c58f68bd7fe029",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "1ddf5a1bc91d44c493543d2724a95797",
+          "producer_request_id": "cd10513c14e4dbc95042c478",
+          "producer_study_id": "prior-ablation-a3-fresh-gaussian",
+          "result_hash": "178032c175e1274336b59c5ae65ab7e8bfdd03101031aa2c94f7b383956f737c",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "3380d9750ee64fc090b11a669630c80c",
+          "producer_request_id": "cd10513c14e4dbc95042c478",
+          "producer_study_id": "prior-ablation-a3-fresh-gaussian",
+          "result_hash": "218c58c5a80b579e3721dfbc11e09a416cb6b97d943cfffc908ca8d670f46802",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "3d938a654ccf4d399016698189076c4f",
+          "producer_request_id": "cd10513c14e4dbc95042c478",
+          "producer_study_id": "prior-ablation-a3-fresh-gaussian",
+          "result_hash": "ed96618073fd3b2779d4789be72f81546c2b3e89739e4597c768e13ee5cf0ab8",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "4c6d3afbc1694001b23f668cf98bbad8",
+          "producer_request_id": "cd10513c14e4dbc95042c478",
+          "producer_study_id": "prior-ablation-a3-fresh-gaussian",
+          "result_hash": "caeab0aabcba1875cfe0ddfa59ba967ac410ea002195af2ac3170fb11c099ebe",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "5ebf66a5ab0544a5b8709c65feb47a5c",
+          "producer_request_id": "cd10513c14e4dbc95042c478",
+          "producer_study_id": "prior-ablation-a3-fresh-gaussian",
+          "result_hash": "ee58155277d7470819a7630636a31b97910de5f08384e6b429ef904a25dfba32",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "711444c2a3364b71811d2d32e23b1844",
+          "producer_request_id": "cd10513c14e4dbc95042c478",
+          "producer_study_id": "prior-ablation-a3-fresh-gaussian",
+          "result_hash": "14e848b7f4a6212c5a9f30bcefe9e0507ad43a6a8cdd12fb347511b5a70a0524",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "a625c82551e24468a2243c5da2a7b0d7",
+          "producer_request_id": "cd10513c14e4dbc95042c478",
+          "producer_study_id": "prior-ablation-a3-fresh-gaussian",
+          "result_hash": "b79fe6f8f166492bf821d4c0360d3142433782de6e18fb7407155979c2cc440c",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "aaa4080834594c3c94b68a796924c5e0",
+          "producer_request_id": "cd10513c14e4dbc95042c478",
+          "producer_study_id": "prior-ablation-a3-fresh-gaussian",
+          "result_hash": "3f4bf4fadb4900708c052b6344eaea746207a9616e8eef8377984fd054fd4dc5",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "ba8967557e6f4e60b73c88fdf66d8602",
+          "producer_request_id": "cd10513c14e4dbc95042c478",
+          "producer_study_id": "prior-ablation-a3-fresh-gaussian",
+          "result_hash": "412c745cc7cd413f898ab05c7da5dbbbefe0b3cf5a8dd2132078b06eadd04f4d",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "bcdc961b3a564df0904d56d2166d7711",
+          "producer_request_id": "cd10513c14e4dbc95042c478",
+          "producer_study_id": "prior-ablation-a3-fresh-gaussian",
+          "result_hash": "9d684966f9d9a42fa816b4d294eee298573575188f79c74c01386e50902c2444",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "cad7cec0aa1f4a2aa35e7a55fecaa28b",
+          "producer_request_id": "cd10513c14e4dbc95042c478",
+          "producer_study_id": "prior-ablation-a3-fresh-gaussian",
+          "result_hash": "a6776c39df9c8caf3671d45e5480b8c8a066c41e008b9878112c0acbd7993475",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "d18df7db1dd044939bc830916faab6e3",
+          "producer_request_id": "cd10513c14e4dbc95042c478",
+          "producer_study_id": "prior-ablation-a3-fresh-gaussian",
+          "result_hash": "028d06be0fcdd1e6de499208e8c273a9f897bc3563ef64212bede6763d90d73e",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "d399babcccc34d33b76c2f2b71176141",
+          "producer_request_id": "cd10513c14e4dbc95042c478",
+          "producer_study_id": "prior-ablation-a3-fresh-gaussian",
+          "result_hash": "890d4989a85beb4a4ad29626a23e700eec09ca23bb0a99b4d831237d7e54a748",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "f6003f7877ff438d96d63293d6b304b5",
+          "producer_request_id": "cd10513c14e4dbc95042c478",
+          "producer_study_id": "prior-ablation-a3-fresh-gaussian",
+          "result_hash": "e7f630b776920c676ded08225cbf46b1f0a9f7a26cfff0ea9cb6b8b7fb8ac1f8",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "635ebd0bcfc6d25e7fe263b1709c5da9d27e9a72a683abdba23810599d9f0916",
+        "contract_sha256": "dcdc497b60554f90aba6cc17c781d1ed4d8f1b865be1cdc30fe6e6981c21c1c2",
+        "control_binding_sha256": "728914ab08572b9764e4815f1cf0f1be19a32c6682ddad279a67dc9de982b06a",
+        "policy_fingerprint": "3384e302f44eeb8127ab66b76288338d5c361f6f0f73870ffb946653b8eca1bd",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "999e0532ef9b78cd48d722dc110cf79f82bd747265b1d58120ccd801b0bbabae"
+      },
+      "study_id": "prior-ablation-a3-fresh-gaussian",
+      "study_sha256": "999e0532ef9b78cd48d722dc110cf79f82bd747265b1d58120ccd801b0bbabae"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "prior-ablation-full-suite-v1",
+  "hypothesis": "Replacing table codes with fresh N(0, I) latents of the same dimension loses sampled-latent passes that the learned BISPF default holds.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Superseded by prior-ablation-a3-fresh-gaussian-r2.",
+  "prior": {
+    "kind": "mog",
+    "learnable": false,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "00db84a9a51c43ad8782fce53359e1b4",
+        "result_hash": "4074849c84855e33516dd191f4f19c9146db468289c7e376e1c58f68bd7fe029",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "1ddf5a1bc91d44c493543d2724a95797",
+        "result_hash": "178032c175e1274336b59c5ae65ab7e8bfdd03101031aa2c94f7b383956f737c",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "3380d9750ee64fc090b11a669630c80c",
+        "result_hash": "218c58c5a80b579e3721dfbc11e09a416cb6b97d943cfffc908ca8d670f46802",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "3d938a654ccf4d399016698189076c4f",
+        "result_hash": "ed96618073fd3b2779d4789be72f81546c2b3e89739e4597c768e13ee5cf0ab8",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "4c6d3afbc1694001b23f668cf98bbad8",
+        "result_hash": "caeab0aabcba1875cfe0ddfa59ba967ac410ea002195af2ac3170fb11c099ebe",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "5ebf66a5ab0544a5b8709c65feb47a5c",
+        "result_hash": "ee58155277d7470819a7630636a31b97910de5f08384e6b429ef904a25dfba32",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "711444c2a3364b71811d2d32e23b1844",
+        "result_hash": "14e848b7f4a6212c5a9f30bcefe9e0507ad43a6a8cdd12fb347511b5a70a0524",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "a625c82551e24468a2243c5da2a7b0d7",
+        "result_hash": "b79fe6f8f166492bf821d4c0360d3142433782de6e18fb7407155979c2cc440c",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "aaa4080834594c3c94b68a796924c5e0",
+        "result_hash": "3f4bf4fadb4900708c052b6344eaea746207a9616e8eef8377984fd054fd4dc5",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "ba8967557e6f4e60b73c88fdf66d8602",
+        "result_hash": "412c745cc7cd413f898ab05c7da5dbbbefe0b3cf5a8dd2132078b06eadd04f4d",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "bcdc961b3a564df0904d56d2166d7711",
+        "result_hash": "9d684966f9d9a42fa816b4d294eee298573575188f79c74c01386e50902c2444",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "cad7cec0aa1f4a2aa35e7a55fecaa28b",
+        "result_hash": "a6776c39df9c8caf3671d45e5480b8c8a066c41e008b9878112c0acbd7993475",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "d18df7db1dd044939bc830916faab6e3",
+        "result_hash": "028d06be0fcdd1e6de499208e8c273a9f897bc3563ef64212bede6763d90d73e",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "d399babcccc34d33b76c2f2b71176141",
+        "result_hash": "890d4989a85beb4a4ad29626a23e700eec09ca23bb0a99b4d831237d7e54a748",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "f6003f7877ff438d96d63293d6b304b5",
+        "result_hash": "e7f630b776920c676ded08225cbf46b1f0a9f7a26cfff0ea9cb6b8b7fb8ac1f8",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-030ba1dfffb896ffe7ef8768",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/attempts/00db84a9a51c43ad8782fce53359e1b4/result.json"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 400000,
+      "candidate_budget_seconds": 100000,
+      "id": "prior-ablation-20261025"
+    },
+    "candidate": "bispf-prior-fresh-gaussian-v1",
+    "competing_explanation": "The BISPF critic/optimizer, not the particle table, carries the measured passes; an ordinary Gaussian latent matches the learned table.",
+    "control": {
+      "candidate_id": "bispf-optimized-quintic-v1",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "hq",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "mode_hold",
+      "threshold": 0.9
+    },
+    "hypothesis": "Replacing table codes with fresh N(0, I) latents of the same dimension loses sampled-latent passes that the learned BISPF default holds.",
+    "id": "prior-ablation-a3-fresh-gaussian",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "hq",
+      "op": "<",
+      "phase": "final",
+      "task_id": "mode_hold",
+      "threshold": 0.9
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "candidate_id": "bispf-optimized-quintic-v1",
+          "candidate_revision": "8d941696e5e05607c763bccefbcbe34694996370bb6f1b03d70f514be6273def"
+        },
+        "path": "reports/forge/records/readout-10ed0ff3f18514315a760f4a.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "prior-ablation-full-suite-v1"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "prior-ablation-a3-fresh-gaussian",
+  "study_sha256": "999e0532ef9b78cd48d722dc110cf79f82bd747265b1d58120ccd801b0bbabae",
+  "task_results": [
+    {
+      "compatibility_key": "426e430be2b4ff409d67a89ea67d10bae238033a53ce193d2b08a7031ce6eb3f",
+      "cost": {
+        "adapter_seconds": 0.22899868499371223,
+        "charged_task": "vector_unequal_mass",
+        "device": "0",
+        "execution_seconds": 3.542717398988316,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 1.461858458002098,
+        "wall_seconds": 3.542717398988316
+      },
+      "evaluator_summary": {},
+      "gate_status": "INCOMPLETE",
+      "raw_status": "error",
+      "reason": "runner exited 1; inspect run.log",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "compatibility_key": "310400a2d2457dba177c236e391eca96c94a6922321c59befa35720279b3413a",
+      "cost": {
+        "adapter_seconds": 0.30112842499511316,
+        "charged_task": "grid100",
+        "device": "0",
+        "execution_seconds": 3.4410912900057156,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 1.4473445100011304,
+        "wall_seconds": 3.4410912900057156
+      },
+      "evaluator_summary": {},
+      "gate_status": "INCOMPLETE",
+      "raw_status": "error",
+      "reason": "runner exited 1; inspect run.log",
+      "task_id": "grid100"
+    },
+    {
+      "compatibility_key": "bb1b342246411b50a5e3c896fd270de0294a0ecf9f49929bdd1d0e817dd87aac",
+      "cost": {
+        "adapter_seconds": 0.2718213770131115,
+        "charged_task": "gaussian1d_smoke",
+        "device": "0",
+        "execution_seconds": 3.558093961997656,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 1.5176140390103683,
+        "wall_seconds": 3.558093961997656
+      },
+      "evaluator_summary": {},
+      "gate_status": "INCOMPLETE",
+      "raw_status": "error",
+      "reason": "runner exited 1; inspect run.log",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "compatibility_key": "05ddd1a4c4387630ec4d2febcc5164606b3960261e852a476bb778e7f768b801",
+      "cost": {
+        "adapter_seconds": 0.21196487100678496,
+        "charged_task": "vector_spiral",
+        "device": "0",
+        "execution_seconds": 3.45090619000257,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 1.452796533005312,
+        "wall_seconds": 3.45090619000257
+      },
+      "evaluator_summary": {},
+      "gate_status": "INCOMPLETE",
+      "raw_status": "error",
+      "reason": "runner exited 1; inspect run.log",
+      "task_id": "vector_spiral"
+    },
+    {
+      "compatibility_key": "a146e37fbd5d1d6486fdf03ff71e6101549f3e001801d5f6d923305ef1081486",
+      "cost": {
+        "adapter_seconds": 0.2117385599995032,
+        "charged_task": "zero_tanh_smoke",
+        "device": "0",
+        "execution_seconds": 3.2361521210114006,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 1.3992503870103974,
+        "wall_seconds": 3.2361521210114006
+      },
+      "evaluator_summary": {},
+      "gate_status": "INCOMPLETE",
+      "raw_status": "error",
+      "reason": "runner exited 1; inspect run.log",
+      "task_id": "zero_tanh_smoke"
+    },
+    {
+      "compatibility_key": "5f9d503da4e62f85c05708a191ac15cff5c3b33d62b0436adaed4ed438d1bfcd",
+      "cost": {
+        "adapter_seconds": 0.27623619299265556,
+        "charged_task": "clockfree_audit",
+        "device": "0",
+        "execution_seconds": 3.5399288119806442,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 1.4408253399888054,
+        "wall_seconds": 3.5399288119806442
+      },
+      "evaluator_summary": {},
+      "gate_status": "INCOMPLETE",
+      "raw_status": "error",
+      "reason": "runner exited 1; inspect run.log",
+      "task_id": "clockfree_audit"
+    },
+    {
+      "compatibility_key": "98c34390c2fb9d4f46d1ab40d4fbdafae01e2c1f548647219765ce8c173f5d29",
+      "cost": {
+        "adapter_seconds": 0.21028355200542137,
+        "charged_task": "vector_anisotropic",
+        "device": "0",
+        "execution_seconds": 3.4343144290032797,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 1.4310488509945571,
+        "wall_seconds": 3.4343144290032797
+      },
+      "evaluator_summary": {},
+      "gate_status": "INCOMPLETE",
+      "raw_status": "error",
+      "reason": "runner exited 1; inspect run.log",
+      "task_id": "vector_anisotropic"
+    },
+    {
+      "compatibility_key": "df4b73c758b266a1092b1a7d9e48a75bac6a03ac698acbad286f0fb3dc3e1bed",
+      "cost": {
+        "adapter_seconds": 0.29414522199658677,
+        "charged_task": "rotated100",
+        "device": "0",
+        "execution_seconds": 3.341377722012112,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 1.4053865229943767,
+        "wall_seconds": 3.341377722012112
+      },
+      "evaluator_summary": {},
+      "gate_status": "INCOMPLETE",
+      "raw_status": "error",
+      "reason": "runner exited 1; inspect run.log",
+      "task_id": "rotated100"
+    },
+    {
+      "compatibility_key": "89d37e3f813de8a38a5194a9c696d5160ffac1ad569b56eea67046e478f4836c",
+      "cost": {
+        "adapter_seconds": 0.22107756699551828,
+        "charged_task": "vector_unequal_width",
+        "device": "0",
+        "execution_seconds": 3.3456042280013207,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 1.4384617459727451,
+        "wall_seconds": 3.3456042280013207
+      },
+      "evaluator_summary": {},
+      "gate_status": "INCOMPLETE",
+      "raw_status": "error",
+      "reason": "runner exited 1; inspect run.log",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "compatibility_key": "d9d455e58b2ab165528fee060a45998b850d15bf75e0c0da0faca8b6807337ac",
+      "cost": {
+        "adapter_seconds": 0.22892968499218114,
+        "charged_task": "ring16_acquisition",
+        "device": "0",
+        "execution_seconds": 3.5470068950089626,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 1.4938554940163158,
+        "wall_seconds": 3.5470068950089626
+      },
+      "evaluator_summary": {},
+      "gate_status": "INCOMPLETE",
+      "raw_status": "error",
+      "reason": "runner exited 1; inspect run.log",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "compatibility_key": "fbda0448570190408b4b4663a3a740f3a2748093fbaa412fa358f7dc1737d4fb",
+      "cost": {
+        "adapter_seconds": 0.2978988460090477,
+        "charged_task": "staggered100",
+        "device": "0",
+        "execution_seconds": 3.3411545909766573,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 1.4203521659947,
+        "wall_seconds": 3.3411545909766573
+      },
+      "evaluator_summary": {},
+      "gate_status": "INCOMPLETE",
+      "raw_status": "error",
+      "reason": "runner exited 1; inspect run.log",
+      "task_id": "staggered100"
+    },
+    {
+      "compatibility_key": "f49c3dd86d4733b7ded8ee1616d252533ce54ff5789a1f1488b94c538febfe20",
+      "cost": {
+        "adapter_seconds": 0.2703050569980405,
+        "charged_task": "clockfree_audit_measurement_v1",
+        "device": "0",
+        "execution_seconds": 3.440776748000644,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 1.4265614330070093,
+        "wall_seconds": 3.440776748000644
+      },
+      "evaluator_summary": {},
+      "gate_status": "INCOMPLETE",
+      "raw_status": "error",
+      "reason": "runner exited 1; inspect run.log",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "compatibility_key": "5803d6b1811a71fd37cad347b4b49d8d154974b21d5394e6a62c37eff8ebc475",
+      "cost": {
+        "adapter_seconds": 0.21550486399792135,
+        "charged_task": "vector_overlap",
+        "device": "0",
+        "execution_seconds": 3.438111941999523,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 1.4433904360048473,
+        "wall_seconds": 3.438111941999523
+      },
+      "evaluator_summary": {},
+      "gate_status": "INCOMPLETE",
+      "raw_status": "error",
+      "reason": "runner exited 1; inspect run.log",
+      "task_id": "vector_overlap"
+    },
+    {
+      "compatibility_key": "342316ae10a2dcb139536698b95e3282144cd851d656ca7d70c91200c9b97bba",
+      "cost": {
+        "adapter_seconds": 0.21211764300824143,
+        "charged_task": "vector_two_broad",
+        "device": "0",
+        "execution_seconds": 3.534137936978368,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 1.4615553269977681,
+        "wall_seconds": 3.534137936978368
+      },
+      "evaluator_summary": {},
+      "gate_status": "INCOMPLETE",
+      "raw_status": "error",
+      "reason": "runner exited 1; inspect run.log",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "compatibility_key": "4fff97e8d418f58e31b18d1edd298fb078131f0f26fed2e5560782a21885bfe1",
+      "cost": {
+        "adapter_seconds": 0.1603949870041106,
+        "charged_task": "mode_hold",
+        "device": "0",
+        "execution_seconds": 3.4519778859976213,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 1.414139578002505,
+        "wall_seconds": 3.4519778859976213
+      },
+      "evaluator_summary": {},
+      "gate_status": "INCOMPLETE",
+      "raw_status": "error",
+      "reason": "runner exited 1; inspect run.log",
+      "task_id": "mode_hold"
+    }
+  ]
+}

@@ -194,6 +194,9 @@ def test_decoder_uses_supplied_mixed_code_after_policy_perturbation(api):
     torch.testing.assert_close(weights, api["route"](models, context, candidate), rtol=0, atol=0)
 
 
+@pytest.mark.cuda
+
+
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required")
 def test_cuda_bf16_host_routed_resume_replays_a_real_accepted_move_after_cpu_load(api):
     # Same device and execution order; this is a second device conformance run,

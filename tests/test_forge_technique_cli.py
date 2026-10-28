@@ -41,3 +41,15 @@ def test_inventory_compiles_boards_once_after_all_attempts(monkeypatch, tmp_path
     monkeypatch.setattr(cli, "emit", lambda result: None)
     cli.main(["--root", str(tmp_path), "inventory", "run", "--gpus", "cpu"])
     assert events == ["receipt", "receipt", "receipt", "compile"]
+
+
+def test_view_and_goal_cli_flags_are_interchangeable_and_probe_runs_without_study(capsys):
+    from experiments.forge import __main__ as cli
+    assert parser().parse_args(["board", "--view", "quality_coverage"]).goal == "quality_coverage"
+    assert parser().parse_args(["plan", "k3p", "--goal", "quality_coverage"]).view == "quality_coverage"
+    assert parser().parse_args(["recall", "--view", "discriminator_stability"]).goal == "discriminator_stability"
+    rc = cli.main(["probe", "k3p", "--task", "gaussian1d_acquisition", "--override", "lr=0.0005"])
+    assert rc == 0
+    out = capsys.readouterr().out
+    assert '"cohort": "exploratory_probe"' in out
+    assert '"training_launched": false' in out

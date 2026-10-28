@@ -1,5 +1,10 @@
 # Solvability: useful fixes, no universal winner
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../../forge/technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 **The practical failures are worth fixing.** Target and representation controls
 show that every healthy vector/ring task has jointly attainable metrics with
 the existing generator and 256 particles. The three failing image targets are

@@ -338,6 +338,9 @@ def test_checkpoint_requires_matching_parameter_freezing():
     assert_checkpoint_equal(checkpoint, restored.state_dict())
 
 
+@pytest.mark.cuda
+
+
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA is unavailable")
 def test_cuda_accepts_current_device_streams_and_restores_checkpoint():
     recipe = get_recipe(num_particles=12, z_dim=3, total_steps=3)

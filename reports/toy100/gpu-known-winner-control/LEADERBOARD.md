@@ -1,5 +1,8 @@
 # Original 22-toy winner: CUDA control
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current leaderboard for this goal: [reports/forge/technique-inventory.md](../../forge/technique-inventory.md); goal index: [reports/leaderboard-index.json](../../leaderboard-index.json). Results below are preserved as recorded.
+
 CPU recorded evidence: **22/22 PASS**, independently regraded.
 CUDA preserved-recipe control: **16/22 PASS, 6 FAIL**. All 22 were executed; no unsupported cases.
 

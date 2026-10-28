@@ -126,6 +126,9 @@ def test_noisy_game_observations_leave_accepted_moves_and_training_unchanged(api
         assert "output_mse_log" in observation["game"]["mean_delta"]
 
 
+@pytest.mark.cuda
+
+
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required")
 def test_cuda_default_128_by_4_spatial_move_recovers_exactly_with_frozen_bf16(api):
     # The benchmark's zero feature-harm default accepts a real move. No

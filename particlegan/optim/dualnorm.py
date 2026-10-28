@@ -324,6 +324,45 @@ def _batched_polar(matrices, *, smoothing):
     return ((left * weights.unsqueeze(-2)) @ right).to(dtype=dtype)
 
 
+def _solve_batched_svd(optimizer, direction_batch):
+    return _batched_polar(direction_batch, smoothing=optimizer.smoothing)
+
+
+def _solve_frobenius(optimizer, direction_batch):
+    return frobenius_direction(direction_batch, smoothing=optimizer.smoothing)
+
+
+def _solve_quintic(optimizer, direction_batch):
+    from .convolution_quintic import quintic_direction
+    return quintic_direction(direction_batch, smoothing=optimizer.smoothing)
+
+
+def _solve_quintic_graph(optimizer, direction_batch):
+    from .convolution_quintic import QuinticGraphCache
+    if getattr(optimizer, "_quintic_graphs", None) is None:
+        optimizer._quintic_graphs = QuinticGraphCache()
+    return optimizer._quintic_graphs.direction(direction_batch, smoothing=optimizer.smoothing)
+
+
+def _solve_newton_schulz(optimizer, direction_batch):
+    if getattr(optimizer, "_newton_graphs", None) is None:
+        optimizer._newton_graphs = _PolarGraphCache()
+    return _newton_schulz_polar(direction_batch, smoothing=optimizer.smoothing,
+                                cache=optimizer._newton_graphs)
+
+
+# Batched per-offset kernel solvers, keyed by NormalizedOptimizer._conv_batch_solver.
+# Each maps a [group, row, column, out, in] direction batch to its update batch;
+# graph caches are optimizer-owned, created lazily and never checkpointed.
+_CONV_BATCH_SOLVERS = {
+    "batched_svd": _solve_batched_svd,
+    "frobenius": _solve_frobenius,
+    "quintic": _solve_quintic,
+    "quintic_graph": _solve_quintic_graph,
+    "newton_schulz": _solve_newton_schulz,
+}
+
+
 class NormalizedOptimizer(Optimizer):
     """Role-aware optimizer, with native Adam only in the isolation arms.
 
@@ -525,6 +564,52 @@ class NormalizedOptimizer(Optimizer):
         """Discard an aborted update's row ownership."""
         self._sampled_rows.clear()
 
+    def _clear_pending(self):
+        """Drop wrapper-bound per-step inputs; the base optimizer binds none."""
+
+    def abort_pending(self):
+        """Discard every caller-bound input of a step that will not happen.
+
+        Clears sampled-row ownership and any wrapper-bound protected losses,
+        protected values/evaluator or finite-cap panels, so the next step can
+        be bound afresh. Parameters and optimizer state are left untouched.
+        """
+        self._clear_pending()
+        self.clear_sampled_rows()
+
+    @torch.no_grad()
+    def _propose_adjust_commit(self, propose, adjust=None, *, check=None):
+        """Shared wrapper step: check -> propose (base update) -> adjust -> commit.
+
+        ``check()`` validates bound inputs, ``propose()`` runs the base update
+        and returns the step result, and ``adjust(parameters, originals)`` may
+        rewrite the proposed tensors in place. Success clears wrapper-bound
+        pending inputs exactly as each wrapper always did. Any exception aborts
+        the step via ``abort_pending()``, so later steps and ``state_dict()``
+        work. A failing ``adjust`` restores the pre-step parameters (as the
+        wrappers always did). A failing base update is NOT rolled back: tensors
+        and optimizer state it already advanced (moments, step clocks,
+        observation records) stay as they are; only the pending inputs go.
+        """
+        parameters = [p for group in self.param_groups for p in group["params"]]
+        originals = [p.detach().clone() for p in parameters]
+        try:
+            if check is not None:
+                check()
+            result = propose()
+            if adjust is not None:
+                try:
+                    adjust(parameters, originals)
+                except BaseException:
+                    for parameter, original in zip(parameters, originals):
+                        parameter.copy_(original)
+                    raise
+        except BaseException:
+            self.abort_pending()
+            raise
+        self._clear_pending()
+        return result
+
     def sampled_rows_for(self, table):
         """Return a read-only copy of the pending step's sampled row IDs."""
         rows = self._sampled_rows.get(table)
@@ -533,6 +618,49 @@ class NormalizedOptimizer(Optimizer):
     @staticmethod
     def _player(role):
         return "prior" if role in ("prior", "table") else ("critic" if role == "critic" else "generator")
+
+    def _conv_batch_solver(self, device, largest_channel):
+        """Name the batched per-offset kernel solver for this parameter, or None.
+
+        Preserves the historical branch order exactly: small-channel batched
+        SVD first, then the nonpolar (Frobenius/quintic) hybrid rules, then
+        Newton-Schulz; every batched path is CUDA-only. ``None`` selects the
+        per-matrix loop (exact polar, or the nonpolar rules' small-kernel
+        fallback), which is also every CPU path.
+        """
+        if device.type != "cuda":
+            return None
+        if self.svd_backend == "batched" and largest_channel <= 32:
+            return "batched_svd"
+        if largest_channel <= 32:
+            return None
+        if self.convolution_rule == "frobenius":
+            return "frobenius"
+        if self.convolution_rule != "polar":
+            return "quintic_graph" if self.svd_backend == "batched" else "quintic"
+        if self.svd_backend == "newton_schulz":
+            return "newton_schulz"
+        return None
+
+    def _apply_conv_batch(self, solver, parameter, gradient, direction, metadata, *, rate, factor, eps):
+        """Apply one batched per-offset kernel update with the named solver.
+
+        A slice is skipped (left fixed) when its current gradient or direction
+        is below ``eps``. The skip uses ``torch.where`` rather than a product,
+        so a skipped slice stays fixed even when an extreme, dtype-underflowing
+        smoothing value makes its unused solver output undefined (NaN * 0 is NaN).
+        """
+        gradient_batch = _convolution_batch(gradient, metadata)
+        direction_batch = _convolution_batch(direction, metadata)
+        update = _CONV_BATCH_SOLVERS[solver](self, direction_batch)
+        active = ((gradient_batch.norm(dim=(-2, -1)) >= eps)
+                  & (direction_batch.norm(dim=(-2, -1)) >= eps))
+        update = torch.where(active[..., None, None], update, 0.)
+        if metadata["layout"] == "conv_transpose2d_in_out":
+            update = update.permute(0, 4, 3, 1, 2)
+        else:
+            update = update.permute(0, 3, 4, 1, 2)
+        parameter.add_(update.reshape_as(parameter), alpha=-rate * factor)
 
     @torch.no_grad()
     def step(self, closure=None):
@@ -611,62 +739,10 @@ class NormalizedOptimizer(Optimizer):
                         factor = math.sqrt(metadata["out_channels"] / metadata["in_channels"])
                         factor /= math.prod(metadata["kernel_size"])
                         largest_channel = max(metadata["in_channels"], metadata["out_channels"]) // metadata["groups"]
-                        if (self.svd_backend == "batched" and parameter.device.type == "cuda"
-                                and largest_channel <= 32):
-                            gradient_batch = _convolution_batch(gradient, metadata)
-                            direction_batch = _convolution_batch(direction, metadata)
-                            update = _batched_polar(direction_batch, smoothing=self.smoothing)
-                            active = ((gradient_batch.norm(dim=(-2, -1)) >= eps)
-                                      & (direction_batch.norm(dim=(-2, -1)) >= eps))
-                            update = torch.where(active[..., None, None], update, 0.)
-                            if metadata["layout"] == "conv_transpose2d_in_out":
-                                update = update.permute(0, 4, 3, 1, 2)
-                            else:
-                                update = update.permute(0, 3, 4, 1, 2)
-                            parameter.add_(update.reshape_as(parameter), alpha=-rate * factor)
-                            continue
-                        if (self.convolution_rule != "polar" and parameter.device.type == "cuda"
-                                and largest_channel > 32):
-                            gradient_batch = _convolution_batch(gradient, metadata)
-                            direction_batch = _convolution_batch(direction, metadata)
-                            if self.convolution_rule == "frobenius":
-                                update = frobenius_direction(direction_batch, smoothing=self.smoothing)
-                            else:
-                                from .convolution_quintic import QuinticGraphCache, quintic_direction
-                                if self.svd_backend == "batched":
-                                    if getattr(self, "_quintic_graphs", None) is None:
-                                        self._quintic_graphs = QuinticGraphCache()
-                                    update = self._quintic_graphs.direction(direction_batch, smoothing=self.smoothing)
-                                else:
-                                    update = quintic_direction(direction_batch, smoothing=self.smoothing)
-                            active = ((gradient_batch.norm(dim=(-2, -1)) >= eps)
-                                      & (direction_batch.norm(dim=(-2, -1)) >= eps))
-                            update = torch.where(active[..., None, None], update, 0.)
-                            if metadata["layout"] == "conv_transpose2d_in_out":
-                                update = update.permute(0, 4, 3, 1, 2)
-                            else:
-                                update = update.permute(0, 3, 4, 1, 2)
-                            parameter.add_(update.reshape_as(parameter), alpha=-rate * factor)
-                            continue
-                        if (self.svd_backend == "newton_schulz" and parameter.device.type == "cuda"
-                                and largest_channel > 32):
-                            gradient_batch = _convolution_batch(gradient, metadata)
-                            direction_batch = _convolution_batch(direction, metadata)
-                            if getattr(self, "_newton_graphs", None) is None:
-                                self._newton_graphs = _PolarGraphCache()
-                            update = _newton_schulz_polar(direction_batch, smoothing=self.smoothing,
-                                                        cache=self._newton_graphs)
-                            active = ((gradient_batch.norm(dim=(-2, -1)) >= eps)
-                                      & (direction_batch.norm(dim=(-2, -1)) >= eps))
-                            # A skipped slice must remain fixed even when an
-                            # extreme, dtype-underflowing smoothing value makes
-                            # its unused solver output undefined (NaN * 0 is NaN).
-                            update = torch.where(active[..., None, None], update, 0.)
-                            if metadata["layout"] == "conv_transpose2d_in_out":
-                                update = update.permute(0, 4, 3, 1, 2)
-                            else:
-                                update = update.permute(0, 3, 4, 1, 2)
-                            parameter.add_(update.reshape_as(parameter), alpha=-rate * factor)
+                        solver = self._conv_batch_solver(parameter.device, largest_channel)
+                        if solver is not None:
+                            self._apply_conv_batch(solver, parameter, gradient, direction, metadata,
+                                                   rate=rate, factor=factor, eps=eps)
                             continue
                         matrices = zip(_convolution_matrices(parameter, metadata),
                                        _convolution_matrices(gradient, metadata),
@@ -887,6 +963,9 @@ class NormalizedOptimizer(Optimizer):
 
 def make_normalized_optimizer(recipe, params, *, critic=None, **options):
     """Recipe factory plus the same observation-only penalty metadata as Adam."""
+    # Materialize once: a generator must survive the role probe below, and
+    # plain tensors (no group dicts) default to the generator role.
+    params = list(params)
     optimizer_class = NormalizedOptimizer
     if critic is not None and recipe.critic_step_mode == "finite_cap":
         from .critic_cap import CriticCapOptimizer
@@ -902,7 +981,8 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
         optimizer_class = DirectionBlendOptimizer
     if recipe.prior_proximal_strength and recipe.prior_update == "learned" and critic is None:
         from .prior_proximal import proximal_optimizer_class
-        if any(group.get("role", "generator") in ("prior", "table") for group in params):
+        if any(isinstance(group, dict) and group.get("role", "generator") in ("prior", "table")
+               for group in params):
             optimizer_class = proximal_optimizer_class(optimizer_class)
             options["prior_proximal_strength"] = recipe.prior_proximal_strength
     optimizer = optimizer_class(params, family=recipe.optimizer_family,

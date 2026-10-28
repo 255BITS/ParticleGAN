@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 850. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 861. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -20,7 +20,7 @@ Records: 850. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Pending readouts
 
-atlas, bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212, bcap--0fc5834c2f114d83b8b7ace471dbc8271d0afddd8c92ba1b84d5db8325a8ecd5, bcap--148a58dc4036cfc2d71a10b427582aeea304b4ac70874ff2fe7ec02f31cee561, bcap--17c9d255a2f8e1adfc1e4ec686e3cee3c7e3fd40fc7979328d4e1955cc2d29a1, bcap--263d190ebb4c40ddb21337a16a598f5ffcca4639031b3b70aaa3036aec67b31e, bcap--46afd334b69b00edb05f5487d7e00d2c5f52d82ab2d3adaa6d7c6d9158e73604, bcap--4cb8358e1e3eefdb6744ae63e84ce724bf73a47e471a12817aaf3a14466c2dd3, bcap--655141ae1d99b0b08dcbac36abbb6f135473d47d389f2ec9d41d9aa6d1201fbe, bcap--66881ffa01364264272e87b084a09b8a00ce0c6d7a49904cc73d7c60238e8ce0, bcap--67963edee7209ea85f9c07ec1f1195301e0ac40a975a44ef9891c5241a4ba2bc, bcap--6c72e4aaf8ffe22be663a6e041971cc22bbee9402bb0095c4935aa167b6ccb03, bcap--8a9884cad1e87d5d950d8dff3d4901a787e8f94fc99b00e83877fdf6e1a932c2, bcap--90dcc2c3039f9f4c7ed2b1de03dec0c75cec2e9d386de0bb302f90a5f923de23, bcap--a3675bf5a89a136bd4c64b5577021215c1e118aca2971e274b6d23ded6ac55a9, bcap--c5f3aebf586c1da32ddfbaad77fab841eb2c43c7da652f56e9ffe622382d803e, bcap--c89e202b7830cfc38743c25fc1b34ca8ceef3f113c4f091017cac7c843972da3, bcap--ccfa83125643932bdfc88a2178a94ec019a2687d7915dae1ed0d6852925f603d, bcap--e8c9fcd62a13b748b0a1c97543b828ee618833ea45789681323a37c9c300d773, bcap--f0163dead110803a0e982cacfa2589918cd7345eea1655c76a3e3f21b0037887, bcap--f65f1922d02456d3a4b7135bb3aa6483d1c76184d74608479b2634094b039383, bcap-ada-nsgda--2e9b7b3ea44f23cc2de35a6961d36b523b9043553970dac855544434c4595675, bcap-ada-nsgda--628f53f4f05a987ec17de0f5b2e780b2a43ec37a7e9bc13a92f9fcf529498ece, bcap-ada-nsgda--85e094213523086f45b393ee1dbb31f4d2786bfb648fa6343db420ead0089cf6, bcap-ada-nsgda--ecd97e3001a4e027dee7fb01f7e5b355a18314a17cc15b157514d2b6af27188e, bcap-dualnorm--41a1d59348a35169d7f75362b00a47a930424037f4dfb4ed879518cf8a08827d, bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36, bcap-dualnorm--716c59d5ea2fde1ff06d1170c4e856f4201eab877f94fa2bbb5fc1a50a63f724, bcap-dualnorm--78aa66ae5c32297882274c11f191638f2cd1d79a9be4963349db5ed3d2b9a249, bcap-dualnorm--9b189bf88659e26fb9d6ffac60dc8e768953bb81cc4e5a08bb621315eb23df50, bcap-dualnorm--9bd14ef912f8eb82e2dfd1a2c3be9449c6522e783c6372b970029f18faf26afd, bcap-dualnorm--a0b49070f142c7e5fa0a02b59704572c8fad809c8580ddbd6460e53e25566a1f, bcap-dualnorm--a181de95ac0bc6f5aacbc1bf7012f0ef141335e07e24cd0f9c777dd75fff3adb, bcap-dualnorm--b58b1cb2ad10de49ce185b1599285ce0b2c1c955f116e0da5e3b9d5464f57d21, bcap-dualnorm--cb59801fb5f793c77441fab1518bf61c4a60c5bf8ac707d6826c89d8d7b6a436, bcap-dualnorm--ece92e92b60d647e1ab34eeebe1b91ad9def7934ce50fc7d67b654884f06051e, bcap-dualnorm--f195eee9cc636a0db466b10192705a4f2f82484bf617abd0d4b567bad99c5b5e, bcap-dualnorm--f808b02bc8ccb3b4784bc24996f8e942ac2f4d072ca73cb4eb52980aec664b6c, bcap-dualnorm-d-only--3305345f128eaaef274d5e0932575a068cd40c59f65d4cfad4051322d282c864, bcap-dualnorm-d-only--d0e7f03963ecb85678d3319f54f6ab31fbd4ac4ad7e77e5394ecca6bfd12af4a, bcap-dualnorm-d-only--d3d5a2efb99e4946fbad23c361d86c7779b089269b3913059af97d837f9180bc, bcap-dualnorm-d-only--ef8fd85100fad0bbebaa0362be3ab81445c46c885050ad9568428225f0636085, bcap-nsgda-global--393c89658046680194170061b341d39118adfb1de6ef06a60154e41e3c2f89e7, bcap-nsgda-global--4d46c3064ad21b57f692a8edda5a7d6978e793ba7713f533fafdee6ee684e8d0, bcap-nsgda-global--9486b7a0c32346f4d1d598ee3954920068af501e85b4fcbda0a77047c508dfb5, bcap-nsgda-global--d3217ee7c19546a7c3ee4eb42d16c32ac0d4e2860bea465e28d26daf5a0cc42d, bcap-nsgda-layer--3cca4c69f24887ece2c1e993e1267e46985a8a466798f2a166786668cde3c29b, bcap-nsgda-layer--5dbe4d241e23201e8fbf62c975602d3950c7c0b0a943785666f4956a55b882d9, bcap-nsgda-layer--914acba8f40d868382473145641a488139d5b13be7100ca510250dd4a1484dae, bcap-nsgda-layer--cdf76062b3cde40373c7f5702696cd8a605eaa3cc7b2aad7be47e9e9365f3efa, bcap-original-horizon-diagnostics-v1, bcap-particle-rownorm-only--4c8ddce0b2146981faddd223759e932343d9a6543b84ff4a7aeae8c1ecb55823, bcap-particle-rownorm-only--c6ce0bcdd200531af05a8c88a9f53f4a3234b967048d8452d15673f332583ca4, bcap-particle-rownorm-only--dd858a09e394fe2722054ee23b18c6d0dede5665f266400c7b1b22284f94c04f, bcap-pure--2889aefa5f93bfa03e80c20614756f076e9def9b54969089929bbe6ee65ec58f, bcap-pure--51ceca8aa8932f319fe403a184501292b5b004f9f072468a4bbb1af93f516519, bcap-pure--7806a45c214248cad578989a25ba716a1a5aae053e51a8bd482a3c9e01c234b9, bcap-pure--8e5f19612de4c3b1a27e0e143aaed4621e79696fb37050a30271fa2f823cd9bf, bcap-pure--f1334418d949b79276fef9885d312d59193e888a647f3d11a75a7558acbb80c9, bcap-sgda--47c831d444f171a81e1efe3c1f0ce5e59792d4fb0ad0d86a1b5a183000188736, bcap-sgda--64346f2fe9f5eaa642c065acc8657011d4ede6f576ea5eb698231f36c280982d, bcap-sgda--64dd4c5c27562ac16f3b12b17903312f7c0f03e541aa4df906323026d96addc9, bcap-sgda--8abf3d4551b0152f3ed4416099b66fb9f299f8455bca0587e0b4fa71861a13f7, bcap-sgda--d6bc8507ebb19649754af5075970942d5044a3b6bc10b1019d29edcbd8de2201, bcap-tier2-round6-control-v1, bcap-tier2-round6-half-network-v1, bcap-tier2-round6-late-anneal-v1, bcap-tier2-round6-prior-smoothing-v1, bcap-tier2-round6-zero-damping-v1, bispf-v2, constraint_geometry-control-v1, constraint_geometry-nonascent-v1, e22, five-word-joint-ka2-v1, forge-no-critic-penalty, forge-onboarding-anchor-ablation, hydraulic-output-travel-v1, information_geometry_spectral_half_v1, k3p, k3p--00b69f56de29e1968b9d84f9b532afc535fa44555e235eb6c14cfc58b7baed9b, k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c, k3p--a4b78c36d9faacd837e079c3fd3b9623fc141f42737e03312053a86c560abb8a, k3p--caa08ebf04c2b95ed480dd9c23e39a8624e39ae27b2b80a9af1ac74f13a86b9f, k3p-a2-off-native-diagnostic, k3p-bcap-matched-v1, k3p-no-output-noise-diagnostic, k3p-r1r2-matched-v1, ka2, ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f, ka2--6183426d7810463d5461ad936a42c67a38516fce8b32b23065da215fed8d145d, ka2--d02d7932342e1fa1db0a7a91537394297601e55516882d20ec033b4992bb527f, ka2--e425fc18e432bbec6c1a1e2fc0b2f8024c7ad104fd5acf8908b6cfbbb5a3da03, kinetic_transport_sliced_v1, r1r2--083deac11d390b7895cca37396e9caf2adf5706d4ce560ae70a089e305ab3b4b, r1r2--14eeafe7d865bdc5f6886ae8db64afd22bac3fd20a82e5ddb59188ab4fa30cc6, r1r2--151d3b970d66ccb2956e2b914d518a0e5652e7164dccf000a29bbc82831b2d46, r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f, r1r2--4363c95b3f6f2739729c7a104bd080a427e3efbef1f915ce14c191009bfa3a27, r1r2--7728cf93188b9fe122536244667789941da52d435cfb0a3ae42b90db200d7595, r1r2--9481826257709128f1c864bac2950906d0ad940b8f75fbfa3d47317e7b26007d, r1r2--abf642c42c5346ad096c29202e4716db535c393c113478552133c1c22761ddbd, r1r2--b58a087cabab6b43997ec233416294cfc2786bab59026c07a1a4f2565970f5ff, r1r2--dad6fdf50034381c106102df008e26b7687b04918cab85c13721e2a2dbbbe743, r1r2--e033ba04e5b9609b896a084a182d785394869fcad19d4a15cffe86e9a973f3fe, r1r2--f398f6ea70a2d101c520a1a01db90ea968bbb16736e6cec7ffc887e1dd7e241a, r3gan-stacked-training-toy-v1, release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c, release07-gan-v3-mog--7311bde77895ceac2d493a6b102672cab0973b6685383339a2867d80956aa11f, release07-gan-v3-mog--8bac47a479c2bb8dea2edee5378b642fbe5e6dd8c5fceab2d4e8077d6371345e, release07-gan-v3-mog--c1b747662d851c7c1ee0d8572e34c0438f28d5e0920c572b74622a25479f9e26, release07-gan-v3-task-adapted-v1, thermodynamic-bcap-optimism-v1
+bcap--148a58dc4036cfc2d71a10b427582aeea304b4ac70874ff2fe7ec02f31cee561, bcap--17c9d255a2f8e1adfc1e4ec686e3cee3c7e3fd40fc7979328d4e1955cc2d29a1, bcap--263d190ebb4c40ddb21337a16a598f5ffcca4639031b3b70aaa3036aec67b31e, bcap--655141ae1d99b0b08dcbac36abbb6f135473d47d389f2ec9d41d9aa6d1201fbe, bcap--6c72e4aaf8ffe22be663a6e041971cc22bbee9402bb0095c4935aa167b6ccb03, bcap--8a9884cad1e87d5d950d8dff3d4901a787e8f94fc99b00e83877fdf6e1a932c2, bcap--90dcc2c3039f9f4c7ed2b1de03dec0c75cec2e9d386de0bb302f90a5f923de23, bcap--a3675bf5a89a136bd4c64b5577021215c1e118aca2971e274b6d23ded6ac55a9, bcap--c89e202b7830cfc38743c25fc1b34ca8ceef3f113c4f091017cac7c843972da3, bcap--ccfa83125643932bdfc88a2178a94ec019a2687d7915dae1ed0d6852925f603d, bcap--e8c9fcd62a13b748b0a1c97543b828ee618833ea45789681323a37c9c300d773, bcap--f0163dead110803a0e982cacfa2589918cd7345eea1655c76a3e3f21b0037887, bcap-original-horizon-diagnostics-v1, bcap-tier2-round6-control-v1, bcap-tier2-round6-half-network-v1, bcap-tier2-round6-late-anneal-v1, bcap-tier2-round6-prior-smoothing-v1, bcap-tier2-round6-zero-damping-v1, constraint_geometry-control-v1, constraint_geometry-nonascent-v1, five-word-joint-ka2-v1, hydraulic-output-travel-v1, information_geometry_spectral_half_v1, kinetic_transport_sliced_v1, thermodynamic-bcap-optimism-v1
 
 ## Experiment and family records
 
@@ -3992,6 +3992,22 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 
 [Evidence](../../reports/forge/attempts/11d3d8b814674fd0841217c7e4304c38/result.json) · [Record](records/readout-0297c36f9f2d9c5feb45b3cb.json)
 
+### bispf-prior-fresh-gaussian-v1 · readout-030ba1dfffb896ffe7ef8768
+
+**Scope:** research_diagnostic; scientific; revision `373a307163ee384dbed023239eda5b56bdce641eef92a5e8a5f87c8d3b54019c`.
+
+Replacing table codes with fresh N(0, I) latents of the same dimension loses sampled-latent passes that the learned BISPF default holds.
+
+**Observed:** {'INCOMPLETE': 15}; wall seconds 51.643; mechanism `structural`.
+
+
+
+Cancelled: every attempt crashed at prior construction (Recipe rejected fresh_gaussian during replace(prior_update=learned)); repaired and rerun as prior-ablation-a3-fresh-gaussian-r2. INCOMPLETE receipts preserved.
+
+**Next:** Superseded by prior-ablation-a3-fresh-gaussian-r2.
+
+[Evidence](../../reports/forge/attempts/00db84a9a51c43ad8782fce53359e1b4/result.json) · [Record](records/readout-030ba1dfffb896ffe7ef8768.json)
+
 ### forge-no-critic-penalty · readout-060e7be73e2832e314b9573f
 
 **Scope:** calibration_diagnostic; scientific; revision `1e1a3e447fc222392dd327f0ae3d17ecf4dd7e7ce26ff79f82d69c31668f4461`.
@@ -4072,6 +4088,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 
 [Evidence](../../reports/forge/technique-receipts/b86f62c3e4f84a43b85d366e4cc43824.json) · [Record](records/readout-170dc0a68d5b68737b370a5f.json)
 
+### bispf-optimized-quintic-v1 · readout-1d42b97bbb8f1366a766a233
+
+**Scope:** current; scientific; revision `97cff463de780cdb270a5cb968799379fe2eef3bbad671fd59df0c3d9515eeb0`.
+
+Ordinary re-qualification of the unchanged selected BISPF recipe on the current develop source, reusing the compatible prior-ablation A1 evidence; the recorded discriminator_stability outcomes are reproduced.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 4, 'INCOMPLETE': 3, 'PASS': 6}; wall seconds 1300.973; mechanism `structural`.
+
+
+
+Ordinary discriminator_stability revision-14 re-qualification stops at Tier 1: six API model toys fail or crash, zero_tanh_smoke is unsupported, five-word smoke hit its 900 s wall clock. No new inventory row registered; revision-9 qualification retained. See reports/prior-ablation-2026-10-25/README.md.
+
+**Next:** Repair the Tier 1 execution defects or hold the API model toys before re-qualifying.
+
+[Evidence](../../reports/forge/attempts/09fee72cca8c4de1b4e74d0ef3ad6eb1/result.json) · [Record](records/readout-1d42b97bbb8f1366a766a233.json)
+
 ### k3p-bcap-matched-v1 · readout-21b533460c29dd5049aa64df
 
 **Scope:** current; scientific; revision `18096544dede6a02e09e34be118d13e5554caa5aba4216980dbb442e91761312`.
@@ -4087,6 +4119,22 @@ Fixed matched BCap passed all 3 smoke requirements and the first 5/19 quality re
 **Next:** Stop this frozen failed cohort; do not continue mode hold or infer native/shape quality from cloud behavioral passes. Investigate the saved mode-hold state under a separately bounded hypothesis before new training; calibration and policy-aware tasks remain required for adoption and broader comparisons.
 
 [Evidence](../../reports/forge/technique-receipts/0184ca1327794ab58168d853ce0ad978.json) · [Record](records/readout-21b533460c29dd5049aa64df.json)
+
+### recipe-prior-refactor-r1r2-v1 · readout-271e0b4766487e5e23d59018
+
+**Scope:** current; scientific; revision `4717b4b13aba2f8a4f523a5b8c66863b60d55c5d05f4bfa2dd6a238a829a86a7`.
+
+Ordinary re-qualification of the unchanged selected r1r2 recipe on the current develop source reproduces its recorded discriminator_stability outcomes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 3, 'INCOMPLETE': 5, 'PASS': 5}; wall seconds 236.071; mechanism `structural`.
+
+ring16_acquisition: modes=16, hq=0.84424, mass_tv=0.051514
+
+Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 core Tier 1 verdicts (5 PASS, ring16_acquisition FAIL, clockfree_audit_measurement_v1 FAIL) and stops at Tier 1; revision-9 qualification retained.
+
+**Next:** Retain revision-9 qualification in technique-inventory; address ring16_acquisition and clockfree_audit_measurement_v1 in family follow-up.
+
+[Evidence](../../reports/forge/attempts/0288b6a506314fee89d2de726e8ebad2/result.json) · [Record](records/readout-271e0b4766487e5e23d59018.json)
 
 ### forge-no-critic-penalty · readout-28f0c9140b4cfeef57f23dd2
 
@@ -4312,6 +4360,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 [Evidence](../../reports/forge/attempts/3472d2f10e984168a3cb9877d287d069/result.json) · [Record](records/readout-4e44570c882c7d07bbddc813.json)
 
+### recipe-prior-refactor-k3p-v1 · readout-4f82f909f64b3d97917d6b1a
+
+**Scope:** current; scientific; revision `9e38108414dd84e7f5374086d86b08764ecc4553fbd329768438e9b71c900194`.
+
+Ordinary re-qualification of the unchanged selected k3p recipe on the current develop source reproduces its recorded discriminator_stability outcomes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 2, 'INCOMPLETE': 4, 'PASS': 5}; wall seconds 251.421; mechanism `structural`.
+
+five_word_joint_smoke: modes=5, mass_tv=0.018945
+
+Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 core Tier 1 verdicts (5 PASS, ring16_acquisition FAIL, clockfree_audit_measurement_v1 FAIL) and stops at Tier 1; revision-9 qualification retained.
+
+**Next:** Retain revision-9 qualification in technique-inventory; address ring16_acquisition and clockfree_audit_measurement_v1 in family follow-up.
+
+[Evidence](../../reports/forge/attempts/25526de766e04bb8bef6b9e79f42f90f/result.json) · [Record](records/readout-4f82f909f64b3d97917d6b1a.json)
+
 ### forge-onboarding-anchor-ablation · readout-5470a57cf1a74abc896c8a55
 
 **Scope:** calibration_diagnostic; scientific; revision `d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f`.
@@ -4376,6 +4440,22 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.0085, 'reg_coeff': 1.0,
 
 [Evidence](../../reports/forge/technique-receipts/3c6a84341114445da149f04ab7541f01.json) · [Record](records/readout-5bc30fee4d41b69294b1e32e.json)
 
+### bispf-prior-fresh-gaussian-v1 · readout-5ed4195bb58c87dc84a60827
+
+**Scope:** research_diagnostic; scientific; revision `535d9c1c86a6b34cd606465d32a8071e842e37015d4641da4c7e90c281e7c78b`.
+
+Replacing table codes with fresh N(0, I) latents of the same dimension loses sampled-latent passes that the learned BISPF default holds.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 10, 'PASS': 5}; wall seconds 1433.143; mechanism `structural`.
+
+vector_unequal_width: hq=0.84082, mass_tv=0.024658; vector_unequal_mass: hq=0.89111, mass_tv=0.092139
+
+Fresh N(0,I) latent: 5 PASS / 10 FAIL on the 15 supported sampled-MoG tests (33 blocked by design); identical verdicts to the frozen table; loses ring16_acquisition (hq 0.53) and mode_hold (hq 0.50) vs learned. See reports/prior-ablation-2026-10-25/README.md.
+
+**Next:** Stop; the learned table beats an ordinary Gaussian latent on this suite.
+
+[Evidence](../../reports/forge/attempts/0114e66e15cc4b6f9515a2c9f343a51e/result.json) · [Record](records/readout-5ed4195bb58c87dc84a60827.json)
+
 ### ka2-global-repair-v1 · readout-628b01d1adffd11312aff9b1
 
 **Scope:** current; scientific; revision `71a50b7b10fdc6307c92b781224e73625f670377ffeb4a31b9f3abe4b34be108`.
@@ -4391,6 +4471,22 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0363295227<0.3; q
 **Next:** Initial complete candidate rejected. Its subsequent separately bounded global coupled-rate search is concluded; no automatic paid continuation or default adoption.
 
 [Evidence](../../reports/forge/attempts/e2fcaf0f2965415db4c7234a024d3031/result.json) · [Record](records/readout-628b01d1adffd11312aff9b1.json)
+
+### bispf-pure-global-v1 · readout-6675da6b575648d03b2182e9
+
+**Scope:** research_diagnostic; scientific; revision `418fb58baf87609c9d8a8e95d60af662e1fe025f891dac4ccf81de16515f9b7b`.
+
+Disabling every declared BISPF shape/step gate (one pure global recipe) loses some of the selected recipe's passes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 18, 'INCOMPLETE': 3, 'PASS': 13}; wall seconds 2744.178; mechanism `structural`.
+
+
+
+Shape/step gates off: 13 PASS / 18 FAIL of 49; loses ring16_acquisition (sustained window), mode_hold, ring_extension, img_stripes2 and the five-word smoke (wall clock). See reports/prior-ablation-2026-10-25/README.md.
+
+**Next:** Stop; keep the declared gates in the default recipe and investigate which single gate carries ring16/mode_hold.
+
+[Evidence](../../reports/forge/attempts/104c447903794b97b819d06102efa873/result.json) · [Record](records/readout-6675da6b575648d03b2182e9.json)
 
 ### k3p-no-output-noise-diagnostic · readout-6c0c2c5c6610ecfe73fe315d
 
@@ -4471,6 +4567,22 @@ Both width 64 image tasks PASS all original sustained gates at 600 updates: HQ 1
 **Next:** Retain this positive diagnostic beside ordinary quality and the completed performance matrix; no natural-image quality or automatic promotion claim.
 
 [Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-7a4fda449cb2e080c1aebf91.json)
+
+### bispf-optimized-quintic-v1 · readout-7b017c8ed900b677ebf6bf55
+
+**Scope:** research_diagnostic; scientific; revision `97cff463de780cdb270a5cb968799379fe2eef3bbad671fd59df0c3d9515eeb0`.
+
+Re-qualification: the unchanged selected BISPF recipe on develop (after the review RNG-contract and declared-gate fixes) reproduces its recorded full-suite outcomes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 16, 'INCOMPLETE': 2, 'PASS': 20}; wall seconds 3203.035; mechanism `structural`.
+
+grid100: precision=0.30497, center_rms_sigma=1.4971, mass_tv=0.17028, radial_ks=0.42394
+
+Re-qualification on develop source b4d7f2c42: all 29 recorded PASS/FAIL verdicts reproduced (18 PASS, 11 FAIL); new: clockfree_audit PASS, target_shift_recovery and four API model toys FAIL. 19 PASS / 16 FAIL / 7 blocked / 5 not run / 2 incomplete of 49. See reports/prior-ablation-2026-10-25/README.md.
+
+**Next:** Keep as the default recipe; register a structural idea that combines learned precision with frozen-table mass evenness on the native grids.
+
+[Evidence](../../reports/forge/attempts/04a54e455df6414091592e87b703cde3/result.json) · [Record](records/readout-7b017c8ed900b677ebf6bf55.json)
 
 ### k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d · readout-813a2ad71ca3580b4a8d46c1
 
@@ -4632,6 +4744,22 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0394435711<0.3; q
 
 [Evidence](../../reports/forge/attempts/2f43521c43294c3a872be42d999debf1/result.json) · [Record](records/readout-9e297f3a07ea06f0abc19272.json)
 
+### recipe-prior-refactor-release07-gan-v3-v1 · readout-a3ec7ffcdaaf0f88b4171cec
+
+**Scope:** current; scientific; revision `bb975f7fe7f68c1e638cf5a36973a125d34fe4285aad773056e4b969fdf6cecc`.
+
+Ordinary re-qualification of the unchanged selected release07-gan-v3 recipe on the current develop source reproduces its recorded discriminator_stability outcomes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 3, 'INCOMPLETE': 5, 'PASS': 5}; wall seconds 252.911; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0038224
+
+Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 core Tier 1 verdicts (5 PASS, ring16_acquisition FAIL, clockfree_audit_measurement_v1 FAIL) and stops at Tier 1; revision-9 qualification retained.
+
+**Next:** Retain revision-9 qualification in technique-inventory; address ring16_acquisition and clockfree_audit_measurement_v1 in family follow-up.
+
+[Evidence](../../reports/forge/attempts/06e0437390f34e72a7d265fd9aab8a42/result.json) · [Record](records/readout-a3ec7ffcdaaf0f88b4171cec.json)
+
 ### k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5 · readout-a91dbccf086504f9accaee6b
 
 **Scope:** research_diagnostic; scientific; revision `3041a40a01932d40c304875add3e4e2689f4e535636861f3319a1a1f6792c402`.
@@ -4760,6 +4888,22 @@ This exact global configuration passed two_pole, unused_token_hold and ae_gan_ho
 
 [Evidence](../../reports/forge/attempts/5b5f7aab977745aea97e1b47871a351f/result.json) · [Record](records/readout-b42a8f277178ec58808d6b5c.json)
 
+### bispf-prior-frozen-v1 · readout-bb93e156247cbef1aa781703
+
+**Scope:** research_diagnostic; scientific; revision `21e3bfccfbf3b99d397b160ef62df3654082414ba1068129101254d6e17ef6e8`.
+
+Freezing the particle table (same initial locations and capacity) loses sampled-latent passes that the learned BISPF default holds.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 18, 'INCOMPLETE': 4, 'PASS': 13}; wall seconds 2557.195; mechanism `structural`.
+
+img_bars4: modes=2, hq=0.78125
+
+Frozen table: 13 PASS / 18 FAIL of 49; loses ring16_acquisition (hq 0.61), mode_hold, ae_gan_hold and ring_extension vs learned; crashes trajectory/residual_student hosts. Lower mass TV but precision 0.03-0.05 on the native grids. See reports/prior-ablation-2026-10-25/README.md.
+
+**Next:** Stop; use as the matched control for a learned-offset-on-frozen-anchor structural idea.
+
+[Evidence](../../reports/forge/attempts/0275756b64b94d01af4cac346397f64d/result.json) · [Record](records/readout-bb93e156247cbef1aa781703.json)
+
 ### bispf-optimized-quintic-v1 · readout-bbadc8452e77fa75caff13c6
 
 **Scope:** research_diagnostic; scientific; revision `8d941696e5e05607c763bccefbcbe34694996370bb6f1b03d70f514be6273def`.
@@ -4871,6 +5015,22 @@ The prerequisite mode_hold passes; all 1200 hold checks and 300 extension checks
 **Next:** Retain the explicit diagnostic scope and original checkpoint/initialization/stream identities; keep current-policy Tier 3 blocked.
 
 [Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-cd9493a6a30096475d381175.json)
+
+### recipe-prior-refactor-bcap-pure-v1 · readout-d278a74af331d2f3b7807234
+
+**Scope:** current; scientific; revision `c0f8979dc36bb4f102c4a103087bfc120d71f48ea22f2a5ca52c27d7d06d8557`.
+
+Ordinary re-qualification of the unchanged selected bcap-pure recipe on the current develop source reproduces its recorded discriminator_stability outcomes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 4, 'INCOMPLETE': 2, 'PASS': 7}; wall seconds 1014.505; mechanism `structural`.
+
+
+
+Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 core Tier 1 passes (including five_word_joint_smoke in 769.0s) and stops at Tier 1 on the revision-14 API model toys and unsupported zero_tanh_smoke; revision-9 qualification retained.
+
+**Next:** Retain revision-9 full qualification in technique-inventory; hold or repair revision-14 API model toys and zero_tanh_smoke separately.
+
+[Evidence](../../reports/forge/attempts/1292615001764ae2bc2e0da605e6af0b/result.json) · [Record](records/readout-d278a74af331d2f3b7807234.json)
 
 ### release07-gan-v3-mog-v1 · readout-d5a99d9470252f695a717dfc
 
@@ -4999,6 +5159,22 @@ All six declared DCGAN mock-data performance workloads completed their finite pu
 **Next:** Use the published scaling measurements to budget larger-image pilots; restore verifiable contention telemetry before paired timing claims. Profile complete-update components before changing recipes. Keep the default unchanged and require separate quality evidence for adoption.
 
 [Evidence](../../reports/forge/scaling-receipts/dcgan-performance-cloud-v2/ka2-dcgan_performance_b64-0dcd26728de3eb07.json) · [Record](records/readout-e6e872f73024fd6c0b2b2d42.json)
+
+### recipe-prior-refactor-ka2-v1 · readout-e8818ca1024f2d2972606913
+
+**Scope:** current; scientific; revision `6469950271908090f8608849192d212372abf993333a4207a024bfca7ac39d4c`.
+
+Ordinary re-qualification of the unchanged selected ka2 recipe on the current develop source reproduces its recorded discriminator_stability outcomes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 2, 'INCOMPLETE': 4, 'PASS': 5}; wall seconds 268.104; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0036862
+
+Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 core Tier 1 verdicts (5 PASS, ring16_acquisition FAIL, clockfree_audit_measurement_v1 FAIL) and stops at Tier 1; revision-9 qualification retained.
+
+**Next:** Retain revision-9 qualification in technique-inventory; address ring16_acquisition and clockfree_audit_measurement_v1 in family follow-up.
+
+[Evidence](../../reports/forge/attempts/09b56378266a49f4a5ea9510c765a51b/result.json) · [Record](records/readout-e8818ca1024f2d2972606913.json)
 
 ### bispf-throughput-v1 · readout-e96805cfab19f80314e3ec20
 
@@ -5750,4 +5926,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `3aa279e13001c206fe493e6a271c303da3876eaf7cdfffd72182d8e3a587f091`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `f1da1e79fa54311d2d483ace8827a3d6b2254a80ab7331a1ac12eec5a9953c33`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

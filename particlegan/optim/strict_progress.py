@@ -4,7 +4,6 @@ from copy import deepcopy
 import torch
 
 from .constraint_geometry import ConstraintGeometryOptimizer, project_nonascent
-from .dualnorm import NormalizedOptimizer
 
 
 def common_descent(displacement, normals):
@@ -30,6 +29,7 @@ class StrictProgressOptimizer(ConstraintGeometryOptimizer):
     protected losses and fixed critic, without sampling or mutable forward buffers.
     Inactive steps never call it and retain the base step bitwise. Pending-state
     restore requires rebinding this caller-owned evaluator before step().
+    Customizes the inherited step through the ``_check_step``/``_adjust_step`` hooks.
     """
 
     def __init__(self, *args, **kwargs):
@@ -75,13 +75,24 @@ class StrictProgressOptimizer(ConstraintGeometryOptimizer):
         self.strict_progress_stats['probes'] += 1
         return result
 
-    @torch.no_grad()
-    def step(self, closure=None):
+    def _clear_pending(self):
+        super()._clear_pending()
+        self._protected_values = self._protected_evaluator = None
+
+    def _check_step(self, closure):
+        """Reject a step without bound protected losses and a protected evaluator."""
         if (closure is not None or self._protected is None or self._protected_values is None
                 or self._protected_evaluator is None):
             raise ValueError('strict progress step requires protected backward and evaluator')
-        parameters = self._parameters()
-        originals = [p.detach().clone() for p in parameters]
+
+    def _adjust_step(self, parameters, originals):
+        """Bounded finite realization of a conflicting base displacement.
+
+        Runs inside ``step()`` after the base update. Any failure, including a
+        missing evaluator, aborts every pending input (``abort_pending()``). A
+        failed realization restores the pre-step parameters; a failed base
+        update is not rolled back.
+        """
         normals = self._protected.double()
 
         def put(direction):
@@ -94,64 +105,55 @@ class StrictProgressOptimizer(ConstraintGeometryOptimizer):
         def actual():
             return torch.cat([(p - old).flatten() for p, old in zip(parameters, originals)])
 
-        result = NormalizedOptimizer.step(self)
         displacement = actual()
         before = normals @ displacement.double()
         conflict = bool((before > 0).any())
         stats, progress = self.constraint_geometry_stats, self.strict_progress_stats
-        try:
-            if conflict:
-                progress['conflict_steps'] += 1
-                direction, possible = common_descent(displacement, normals)
-                accepted = False
-                if not possible:
-                    progress['pareto_stalls'] += 1
-                else:
-                    put(torch.zeros_like(displacement))
-                    baseline = self._evaluate()
-                    tolerance = 8 * torch.finfo(displacement.dtype).eps
-                    if not torch.allclose(baseline, self._protected_values, rtol=tolerance, atol=tolerance):
-                        raise ValueError('protected evaluator does not replay the original loss')
-                    for trial in range(9):
-                        scale = 2. ** -trial
-                        put(direction * scale)
-                        applied = actual()
-                        derivatives = normals @ applied.double()
-                        values = self._evaluate()
-                        bound = baseline + 1e-4 * derivatives
-                        nonzero = normals.norm(dim=1) > 0
-                        if (bool(torch.isfinite(values).all())
-                                and bool((derivatives[nonzero] < 0).all())
-                                and bool((values <= bound).all())):
-                            accepted = True
-                            progress['accepted_steps'] += 1
-                            progress['min_accepted_scale'] = min(progress['min_accepted_scale'], scale)
-                            progress['accepted_scale_sum'] += scale
-                            ratio = float(applied.double().norm() / displacement.double().norm())
-                            progress['retained_norm_ratio_sum'] += ratio
-                            progress['max_retained_norm_ratio'] = max(progress['max_retained_norm_ratio'], ratio)
-                            for index, decrease in enumerate(baseline - values):
-                                progress[f'protected_decrease_{index}_sum'] += float(decrease)
-                            progress['max_accepted_armijo_violation'] = max(
-                                progress['max_accepted_armijo_violation'], float((values - bound).max()))
-                            break
-                        progress['backtracks'] += int(trial < 8)
-                if not accepted:
-                    put(torch.zeros_like(displacement))
-                    progress['rejected_steps'] += 1
-            # Inactive: no recomposition, no evaluator, no additional optimizer call.
-            applied = actual()
-            stats['steps'] += 1
-            stats['projected_steps'] += int(not torch.equal(applied, displacement))
-            stats['max_derivative_before'] = max(stats['max_derivative_before'], float(before.max()))
-            stats['max_derivative_after'] = max(stats['max_derivative_after'], float((normals @ applied.double()).max()))
-        except Exception:
-            for p, old in zip(parameters, originals):
-                p.copy_(old)
-            raise
-        finally:
-            self._protected = self._protected_values = self._protected_evaluator = None
-        return result
+        if conflict:
+            progress['conflict_steps'] += 1
+            direction, possible = common_descent(displacement, normals)
+            accepted = False
+            if not possible:
+                progress['pareto_stalls'] += 1
+            else:
+                put(torch.zeros_like(displacement))
+                baseline = self._evaluate()
+                tolerance = 8 * torch.finfo(displacement.dtype).eps
+                if not torch.allclose(baseline, self._protected_values, rtol=tolerance, atol=tolerance):
+                    raise ValueError('protected evaluator does not replay the original loss')
+                for trial in range(9):
+                    scale = 2. ** -trial
+                    put(direction * scale)
+                    applied = actual()
+                    derivatives = normals @ applied.double()
+                    values = self._evaluate()
+                    bound = baseline + 1e-4 * derivatives
+                    nonzero = normals.norm(dim=1) > 0
+                    if (bool(torch.isfinite(values).all())
+                            and bool((derivatives[nonzero] < 0).all())
+                            and bool((values <= bound).all())):
+                        accepted = True
+                        progress['accepted_steps'] += 1
+                        progress['min_accepted_scale'] = min(progress['min_accepted_scale'], scale)
+                        progress['accepted_scale_sum'] += scale
+                        ratio = float(applied.double().norm() / displacement.double().norm())
+                        progress['retained_norm_ratio_sum'] += ratio
+                        progress['max_retained_norm_ratio'] = max(progress['max_retained_norm_ratio'], ratio)
+                        for index, decrease in enumerate(baseline - values):
+                            progress[f'protected_decrease_{index}_sum'] += float(decrease)
+                        progress['max_accepted_armijo_violation'] = max(
+                            progress['max_accepted_armijo_violation'], float((values - bound).max()))
+                        break
+                    progress['backtracks'] += int(trial < 8)
+            if not accepted:
+                put(torch.zeros_like(displacement))
+                progress['rejected_steps'] += 1
+        # Inactive: no recomposition, no evaluator, no additional optimizer call.
+        applied = actual()
+        stats['steps'] += 1
+        stats['projected_steps'] += int(not torch.equal(applied, displacement))
+        stats['max_derivative_before'] = max(stats['max_derivative_before'], float(before.max()))
+        stats['max_derivative_after'] = max(stats['max_derivative_after'], float((normals @ applied.double()).max()))
 
     def state_dict(self):
         result = super().state_dict()

@@ -233,6 +233,15 @@ def materialize(parent, root, cohort=TIER1):
 
 
 def validate(task, *, root=None):
+    """Validate a Tier 1 policy task; memoized by id inside a bound resolution cache."""
+    from .resolution_scope import active
+    cache = active(root)
+    if cache is not None:
+        return cache.tier1_validation(task, root, _validate)
+    return _validate(task, root=root)
+
+
+def _validate(task, *, root=None):
     cohort = task_cohort(task)
     if cohort is None:
         raise ValueError('explicit Tier 1 policy cohort is required')

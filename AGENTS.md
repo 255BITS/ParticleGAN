@@ -1,6 +1,9 @@
 **Experiment work: read [EXPERIMENTATION.md](EXPERIMENTATION.md) first.**
-Read the [compiled experiment memory](reports/forge/EXPERIMENT_MEMORY.md) before
-proposing another idea. Use Forge's declared gates and budgets; the initial
+Query prior evidence with `python -m experiments.forge recall --query "<topic>"` and read
+[reports/forge/problems.md](reports/forge/problems.md) and
+[reports/forge/technique-inventory.md](reports/forge/technique-inventory.md) before
+proposing another idea (use [compiled experiment memory](reports/forge/EXPERIMENT_MEMORY.md)
+as a reference index rather than loading it in full). Use Forge's declared gates and budgets; the initial
 profile is provisional until its calibration criteria pass.
 
 Use the terms and ownership rules in [RESEARCH_GLOSSARY.md](RESEARCH_GLOSSARY.md).

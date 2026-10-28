@@ -1,5 +1,10 @@
 # ParticleGAN Atlas: qualification and convergence
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../../../../forge/technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 Atlas adds local population checks and guarded reopening to
 [PR155’s E22](https://github.com/255BITS/ParticleGAN/pull/155) at `cabe2084`.
 It is implemented in [PR223](https://github.com/255BITS/ParticleGAN/pull/223).
@@ -143,6 +148,11 @@ and two assertions requiring CUDA to be absent.
 [test log](https://github.com/255BITS/ParticleGAN/blob/bdf05d1be0f68cfdb0c71e81e7e0d3cce477572f/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra17/full-pytest.log),
 [JUnit](https://github.com/255BITS/ParticleGAN/blob/bdf05d1be0f68cfdb0c71e81e7e0d3cce477572f/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra17/full-pytest-junit.xml),
 [replay closure](mnist/ra17-replay/CLOSED.json).
+
+The `run_full_suite.py` receipts above ran before CUDA tests became opt-in
+(2026-10-25). Today's `pyproject.toml` deselects `cuda`-marked tests, so a
+rerun must add `-m "cuda or not cuda"` to the `pytest.main` arguments to
+reproduce the same selection ([docs/testing.md](../../../../../docs/testing.md)).
 
 Replays compare losses, semantic training state, and RNG streams after every
 update, and primary sample bytes at the endpoints, for native and CPU-mapped

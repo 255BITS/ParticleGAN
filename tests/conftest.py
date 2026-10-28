@@ -7,9 +7,11 @@ import difflib
 import hashlib
 import importlib.util
 import json
+import os
 from pathlib import Path
 
 import pytest
+import torch
 
 from benchmarks.toy100.device import device_policy_scope
 
@@ -37,6 +39,15 @@ def _archived_inactive_comparison_scope(module, directory):
         "optimizer_convolution_rule": "polar", "training_precision": "float32"}
     original = (root / helper.INACTIVE).read_bytes()
     adapted, diff = helper.adapter_source(original)
+    # Review remediation (PRs #485, #492) declared further Recipe fields whose
+    # defaults are inactive. The archived helper serializes additions as JSON,
+    # which cannot spell True or (), so these go in as Python literals.
+    later_inactive = {"bispf_shape_gates": True, "bispf_gate_overrides": (), "prior_code_law": "table"}
+    tail = '    "training_precision": "float32",\n}\n'
+    assert adapted.decode().count(tail) == 1
+    adapted = adapted.decode().replace(tail, tail[:-2] + "".join(
+        f"    {name!r}: {value!r},\n" for name, value in later_inactive.items()) + "}\n").encode()
+    helper.INACTIVE_DEFAULTS = {**helper.INACTIVE_DEFAULTS, **later_inactive}
     # This new inactive field has explicit not-applicable provenance on the
     # original direct-coordinate hosts. It was absent from the original
     # comparator, whose existing assertions remain intact for every old field.
@@ -51,6 +62,10 @@ def _archived_inactive_comparison_scope(module, directory):
                         "source": "task prior-control applicability", "status": "not_applicable",
                         "reference_recipe_value": default, "representation":
                         state["applied"]["field_ownership"]["task_contract"]["prior"]["control_binding"]["representation"]}
+                elif name == "bispf_gate_overrides":
+                    # Ownership records are JSON values: the empty tuple is [].
+                    assert ownership["value"] == [] and default == ()
+                    assert ownership["source"].startswith("public Recipe ")
                 else:
                     assert ownership["value"] == default
                     assert ownership["source"].startswith("public Recipe ")
@@ -96,9 +111,14 @@ def _archived_inactive_comparison_scope(module, directory):
         yield
 
 
+def _module_basename(request):
+    # tests/ is a package, so pytest imports "tests.<name>"; match the file.
+    return request.module.__name__.rpartition(".")[2]
+
+
 @pytest.fixture(scope="module", autouse=True)
 def _preserve_archived_inactive_comparison(request, tmp_path_factory):
-    if request.module.__name__ != "test_bcap_integration_compatibility":
+    if _module_basename(request) != "test_bcap_integration_compatibility":
         yield
         return
     directory = tmp_path_factory.mktemp("bcap-inactive-adapter")
@@ -113,9 +133,55 @@ def _isolate_renderer_clock(request, monkeypatch):
     The archived protocol binds its test-file bytes. Keep this software-only
     clock isolation outside those frozen sources and preserve the CLI budget.
     """
-    if request.module.__name__ == "test_e22_routed_caption_late_phase_renderer":
+    if _module_basename(request) == "test_e22_routed_caption_late_phase_renderer":
         render = request.module.render
         monkeypatch.setattr(render, "STARTED", render.time.monotonic())
+
+
+def thread_budget(environ=None) -> int | None:
+    """Return the CPU thread budget the environment declares, if any.
+
+    ``OMP_NUM_THREADS`` and ``MKL_NUM_THREADS`` are both honoured; when both
+    are set the smaller positive value wins. Unset or invalid values declare
+    nothing, so an undeclared run keeps torch's own startup default.
+    """
+    environ = os.environ if environ is None else environ
+    values = []
+    for name in ("OMP_NUM_THREADS", "MKL_NUM_THREADS"):
+        try:
+            value = int(environ.get(name, ""))
+        except ValueError:
+            continue
+        if value >= 1:
+            values.append(value)
+    return min(values) if values else None
+
+
+@pytest.fixture(scope="session", autouse=True)
+def _pinned_torch_threads():
+    """Pin torch's intra-op thread count for the whole session.
+
+    Queued GPU experiments share this machine; tests must not grow to every
+    core. The value comes from OMP/MKL_NUM_THREADS (see ``thread_budget``).
+    """
+    previous = torch.get_num_threads()
+    budget = thread_budget()
+    if budget is not None:
+        torch.set_num_threads(budget)
+    yield torch.get_num_threads()
+    torch.set_num_threads(previous)
+
+
+@pytest.fixture(autouse=True)
+def _restore_torch_threads(_pinned_torch_threads):
+    """A test that changes torch's thread count must not leak it to the next.
+
+    Uses the module-level ``torch`` bound at collection: a test may replace
+    ``sys.modules["torch"]`` with a stub that is still installed at teardown.
+    """
+    yield
+    if torch.get_num_threads() != _pinned_torch_threads:
+        torch.set_num_threads(_pinned_torch_threads)
 
 
 @pytest.fixture(autouse=True)

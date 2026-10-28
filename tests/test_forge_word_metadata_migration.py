@@ -18,10 +18,35 @@ RECEIPT_SOURCE_MEMBER = "experiments/forge/behavior_adapters.py"
 POLICY_CHECKPOINT_REFRESH = "mog-policy-extra-state-source-binding-v1"
 POLICY_SOURCE_MEMBER = "particlegan/policy.py"
 POLICY_MIGRATION = "reports/forge/api-model-toys/policy-checkpoint-migration.json"
+REVIEW_POLICY_REFRESH = "review-policy-source-binding-20261025"
+
+
+def _before_review_policy_source_refresh(current, relative):
+    """Peel the review-stage policy.py rebinding; return (previous card, its sha256)."""
+    revision = current["evaluation"]["evaluator_revision"]
+    if revision["id"] != REVIEW_POLICY_REFRESH:
+        return current, file_hash(ROOT / relative)
+    assert revision["previous_task_path"] == relative
+    previous_bytes = subprocess.check_output([
+        "git", "show", revision["previous_task_commit"] + ":" + relative], cwd=ROOT)
+    assert hashlib.sha256(previous_bytes).hexdigest() == revision["previous_task_sha256"]
+    assert _git_blob(previous_bytes) == revision["previous_task_blob"]
+    previous = json.loads(previous_bytes)
+    sources = previous["evaluation"]["sources"]
+    assert revision["previous_revision"] == previous["evaluation"]["evaluator_revision"]
+    assert revision["previous_source_sha256"] == {POLICY_SOURCE_MEMBER: sources[POLICY_SOURCE_MEMBER]}
+    assert current["evaluation"]["sources"] == {
+        **sources, POLICY_SOURCE_MEMBER: file_hash(ROOT / POLICY_SOURCE_MEMBER)}
+    restored = deepcopy(current)
+    restored["evaluation"]["sources"] = sources
+    restored["evaluation"]["evaluator_revision"] = revision["previous_revision"]
+    assert restored == previous
+    return previous, revision["previous_task_sha256"]
 
 
 def _before_policy_checkpoint_source_refresh(current, relative):
     """Peel only the additive layer, preserving the exact upstream source pins."""
+    current, current_sha256 = _before_review_policy_source_refresh(current, relative)
     revision = current["evaluation"]["evaluator_revision"]
     if revision["id"] != POLICY_CHECKPOINT_REFRESH:
         return current
@@ -39,10 +64,9 @@ def _before_policy_checkpoint_source_refresh(current, relative):
     assert revision["previous_revision"] == previous["evaluation"]["evaluator_revision"]
     assert revision["previous_source_sha256"] == {POLICY_SOURCE_MEMBER: sources[POLICY_SOURCE_MEMBER]}
     assert sources[POLICY_SOURCE_MEMBER] == binding["previous_policy_sha256"]
-    assert binding["current_policy_sha256"] == file_hash(ROOT / POLICY_SOURCE_MEMBER)
     assert current["evaluation"]["sources"] == {
         **sources, POLICY_SOURCE_MEMBER: binding["current_policy_sha256"]}
-    assert file_hash(ROOT / relative) == binding["current_task_sha256"]
+    assert current_sha256 == binding["current_task_sha256"]
     restored = deepcopy(current)
     restored["evaluation"]["sources"] = sources
     restored["evaluation"]["evaluator_revision"] = revision["previous_revision"]
@@ -167,7 +191,7 @@ def test_policy_checkpoint_binding_is_additive_and_preserves_exact_original_sour
         assert _git_blob(original_bytes) == binding["original_blob"]
         assert json.loads(original_bytes)["evaluation"]["sources"] == binding["original_sources"]
         current = read_json(ROOT / relative)
-        assert current["evaluation"]["evaluator_revision"]["id"] == POLICY_CHECKPOINT_REFRESH
+        assert current["evaluation"]["evaluator_revision"]["id"] == REVIEW_POLICY_REFRESH
         upstream = _before_policy_checkpoint_source_refresh(current, relative)
         assert upstream["evaluation"]["evaluator_revision"]["id"] == binding["additive_previous_revision_id"] == RECEIPT_SOURCE_REFRESH
         original = json.loads(original_bytes)

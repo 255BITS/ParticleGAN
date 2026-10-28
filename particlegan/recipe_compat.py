@@ -21,6 +21,8 @@ SEARCH_RECIPE_DEFAULTS = {
     "loss_labels": (0.0, 1.0, 1.0), "adam_variant": "pytorch",
     "lr_schedule": "cosine", "lr_decay_rate": 0.96, "lr_decay_steps": 50_000,
     "lr_decay_staircase": False,
+    "bispf_shape_gates": True, "bispf_gate_overrides": (),
+    "prior_code_law": "table",
 }
 
 
@@ -35,7 +37,7 @@ def without_default_additions(values, *, fields=None):
                 {name: SEARCH_RECIPE_DEFAULTS[name] for name in fields})
     for name, default in defaults.items():
         value = result.get(name, default)
-        if name == "loss_labels" and isinstance(value, (list, tuple)):
+        if isinstance(value, list) and isinstance(default, tuple):
             value = tuple(value)
         if value == default:
             result.pop(name, None)

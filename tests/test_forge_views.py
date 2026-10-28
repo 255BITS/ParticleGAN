@@ -940,3 +940,22 @@ def test_previous_revision_names_its_exact_archive():
         bad["previous_revision"].update(change)
         with pytest.raises(ValueError, match=match):
             validate_view(bad, tasks)
+
+
+def test_qualify_exposes_counted_eligible_and_continuous_check_summary():
+    from experiments.forge.views import check_summary
+    tasks = {n: simple_task(n) for n in "ab"}
+    view = simple_view(("a", 1, "required"), ("b", 2, "held"))
+    view["assignments"][1]["hold"] = hold("b")
+    res_a = receipt(tasks["a"])
+    res_b = receipt(tasks["b"], final=2.)
+    default_out = qualify(view, tasks, [res_a, res_b])
+    assert default_out["status"] == "HELD"
+    assert default_out["eligible"] is False
+    assert default_out["counted_eligible"] is True
+    allowed_out = qualify(view, tasks, [res_a, res_b], allow_held_highest_tier=True)
+    assert allowed_out["status"] == "PASS"
+    assert allowed_out["eligible"] is True
+    assert allowed_out["counted_eligible"] is True
+    summary = check_summary({"evaluator_result": {"checks": {"c1": True, "c2": False, "c3": True, "c4": True}}})
+    assert summary == {"passed_checks": 3, "total_checks": 4, "check_pass_rate": 0.75}

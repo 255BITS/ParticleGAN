@@ -124,7 +124,7 @@ gradient parity is included in this count.
 ```sh
 PYTHONPATH=. python -u reports/forge/prior-coulomb/software_demo.py \
   runs/prior-coulomb/software-demo-new
-python -m pytest -q tests/test_coulomb_prior.py tests/test_recipe_owned_priors.py \
+python -m pytest -m "cuda or not cuda" -q tests/test_coulomb_prior.py tests/test_recipe_owned_priors.py \
   tests/test_forge_techniques.py tests/test_forge_boundaries.py \
   tests/test_forge_behavior_adapters.py tests/test_forge_imageprofiles.py \
   tests/test_forge_vectorprofiles.py tests/test_forge_word_smoke_hold.py \

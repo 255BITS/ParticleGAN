@@ -23,6 +23,9 @@ def test_batched_svd_preserves_rank_cutoff_and_smoothing(shape, smoothing):
     torch.testing.assert_close(_batched_polar(matrices, smoothing=smoothing), expected, rtol=1e-10, atol=1e-11)
 
 
+@pytest.mark.cuda
+
+
 @pytest.mark.skipif(not torch.cuda.is_available(), reason='CUDA graph verification')
 def test_quintic_graph_replays_eager_bitwise_for_changing_inputs():
     with torch.no_grad(), torch.autocast('cuda', dtype=torch.bfloat16):
@@ -36,6 +39,9 @@ def test_quintic_graph_replays_eager_bitwise_for_changing_inputs():
         matrices[0, 0, 0] = float('nan')
         with pytest.raises(ValueError, match='finite'):
             cache.direction(matrices, smoothing=.001)
+
+
+@pytest.mark.cuda
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason='CUDA graph layout verification')
@@ -53,6 +59,9 @@ def test_quintic_graph_pool_handles_interleaved_shapes_and_noncontiguous_kernels
             torch.testing.assert_close(actual, expected, rtol=0, atol=0)
             torch.testing.assert_close(actual, quintic_direction(value, smoothing=.001),
                                        rtol=3e-4, atol=5e-6)
+
+
+@pytest.mark.cuda
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason='CUDA optimizer dispatch')
@@ -86,6 +95,9 @@ def _trainer(precision, device):
     recipe = get_recipe('bispf_optimized', z_dim=4, num_particles=16, batch_size=4,
                         total_steps=3, training_precision=precision, optimizer_svd_backend='batched')
     return GANTrainer(recipe, g, d, seed=0)
+
+
+@pytest.mark.cuda
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason='BF16 training and restore')
@@ -127,6 +139,9 @@ def test_public_default_keeps_cpu_convolutions_in_float32():
     trainer = _trainer('bf16_channels_last', 'cpu')
     assert not trainer._bf16_generator and not trainer._noisy_D.bf16
     assert trainer.G[2].weight.is_contiguous()
+
+
+@pytest.mark.cuda
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason='CUDA capability fallback')

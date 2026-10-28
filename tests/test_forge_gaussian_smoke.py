@@ -96,6 +96,9 @@ def test_new_task_placement_preserves_archived_task():
     with pytest.raises(ValueError,match='fixed'):validate_task(changed)
 
 
+@pytest.mark.cuda
+
+
 @pytest.mark.skipif(not torch.cuda.is_available(),reason='CUDA contract requires GPU')
 def test_cuda_confirmation_and_exact_resume_are_isolated():
     from experiments.forge.state import state_digest
@@ -130,6 +133,8 @@ def test_cuda_confirmation_and_exact_resume_are_isolated():
             from experiments.forge.gaussian_tasks import _restore_parent
             _restore_parent(request,task('gaussian1d_stability'),{},resumed)
     check(device='cuda:1')
+
+@pytest.mark.cuda
 
 @pytest.mark.skipif(not torch.cuda.is_available(),reason='CUDA contract requires GPU')
 def test_tiny_public_execution_keeps_receipt_outside_strict_artifact_tree(tmp_path,monkeypatch):

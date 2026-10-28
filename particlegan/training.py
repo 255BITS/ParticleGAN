@@ -8,6 +8,7 @@ import torch
 from torch import nn
 
 from .particle_prior import MoGParticlePrior, ParticlePrior
+from .priors import unwrap_prior
 from .recipes import Recipe, learning_rate_scales
 from .policy import UpdatePolicy, _state_to_device, _validate_optimizer_state, input_noise_std, output_noise_std
 
@@ -79,6 +80,10 @@ def _normalized_recipe(recipe):
     for name in ("d_betas", "loss_labels"):
         if name in recipe and isinstance(recipe[name], (list, tuple)):
             recipe[name] = tuple(recipe[name])
+    if isinstance(recipe.get("bispf_gate_overrides"), (list, tuple)):
+        # JSON turns the stored ((gate, value), ...) pairs into nested lists.
+        recipe["bispf_gate_overrides"] = tuple(
+            tuple(pair) if isinstance(pair, list) else pair for pair in recipe["bispf_gate_overrides"])
     if all(recipe.get(key, value) == value for key, value in _REMOVED_RECIPE_FIELDS.items()):
         recipe = {key: value for key, value in recipe.items() if key not in _REMOVED_RECIPE_FIELDS}
     if recipe.get("initialization", None) in (None, "batch_feature_zero"):
@@ -131,12 +136,39 @@ class GANTrainer:
     ``extend_execution`` raises that allowance without changing the formulation.
     Optional named RNG streams isolate input/output noise, MoG kernel noise,
     evaluation and stochastic model layers and travel with checkpoints.
+    A ``ManipulatedPrior`` is classified by its storage prior
+    (``particlegan.priors.unwrap_prior``): a wrapped MoG gets the same MoG
+    noise stream as a plain one. Manipulator output postprocessing applies to
+    critic fakes, generator fakes, strict-progress replays and ``sample``;
+    manipulator penalties are reported as ``prior_manipulation`` every step;
+    ``strict_progress`` rejects non-additive manipulator transforms.
 
     The whole update always disables autograd multithreading, including graph
     construction and higher-order critic penalties. ``serial_backward=True``
     remains a compatibility assertion; False is rejected. The checkpoint
     records this constraint, and unmarked or False historical checkpoints
     require their original source. The caller's autograd mode is restored.
+
+    ``row_evidence_statistic`` is forwarded to ``UpdatePolicy`` (legacy
+    ``"sphericity"`` by default; ``"hotelling"`` is a declared candidate).
+    KA2's ``trust_mode`` candidate is selected with
+    ``optimizer_options={"ka2_trust_mode": "scale"}``, which the checkpoint
+    records with the other optimizer options.
+
+    ``serve_after_step`` (default True) is the public extension point for the
+    end-of-update serving swap. When a recipe serves an average
+    (``serve_average > 0``) and that average has settled, each ``step`` ends by
+    copying the averaged weights into the modules (the training iterate is
+    restored at the start of the next update). ``serve_after_step=False``
+    leaves the live training iterate in the modules after every update; the
+    served state stays available from ``served_snapshot``/``served_model``.
+    Only that swap changes: losses, optimizer updates and RNG consumption are
+    identical, and checkpoints always store the training iterate (a resumed
+    ``serve_after_step=False`` trainer also leaves the training iterate in the
+    modules after ``load_state_dict``). Recipes
+    with ``serve_average == 0`` behave identically either way. The option is
+    execution-only and is not recorded in checkpoints; pass the same value
+    when resuming.
     """
 
     def __init__(self, recipe, generator, discriminator, *, prior=None, seed=0,
@@ -144,11 +176,15 @@ class GANTrainer:
                  noise_generator=None, input_noise_generator=None,
                  prior_noise_generator=None, eval_generator=None, model_generator=None,
                  require_latent_damping=None, max_steps=None,
-                 optimizer_options=None, penalty_options=None, serial_backward=True):
+                 optimizer_options=None, penalty_options=None, serial_backward=True,
+                 row_evidence_statistic="sphericity", serve_after_step=True):
         if not isinstance(recipe, Recipe):
             raise TypeError("recipe must be a Recipe")
         if type(serial_backward) is not bool:
             raise TypeError("serial_backward must be a boolean")
+        if type(serve_after_step) is not bool:
+            raise TypeError("serve_after_step must be a boolean")
+        self.serve_after_step = serve_after_step
         if not serial_backward:
             raise ValueError("ParticleGAN requires serial_backward=True; autograd multithreading is disabled")
         if getattr(recipe, "row_policy", "independent") != "independent":
@@ -178,12 +214,17 @@ class GANTrainer:
         self.device, self.dtype = first_trainable.device, first_trainable.dtype
         self.prior = (recipe.make_prior().to(device=self.device, dtype=self.dtype)
                       if prior is None else prior)
+        base_prior = unwrap_prior(self.prior)
+        if (recipe.constraint_geometry_mode == "strict_progress"
+                and not getattr(self.prior, "additive_transforms", True)):
+            raise ValueError("strict_progress replay assumes additive prior transforms "
+                             "(latent + (z - loc)); a prior manipulator transforms codes non-additively")
         expected_prior = MoGParticlePrior if recipe.prior_kind == "mog" else ParticlePrior
-        if type(self.prior) is not expected_prior:
+        if type(base_prior) is not expected_prior:
             raise ValueError("prior must match the recipe's ParticlePrior or MoGParticlePrior kind")
-        if type(self.prior) is MoGParticlePrior and self.prior.standardize != recipe.standardize:
+        if type(base_prior) is MoGParticlePrior and base_prior.standardize != recipe.standardize:
             raise ValueError("prior standardize must match the recipe")
-        if prior_noise_generator is not None and type(self.prior) is not MoGParticlePrior:
+        if prior_noise_generator is not None and type(base_prior) is not MoGParticlePrior:
             raise ValueError("prior_noise_generator requires a MoG prior")
         if self.prior.z.shape != (recipe.num_particles, recipe.z_dim):
             raise ValueError("prior dimensions must match the recipe")
@@ -204,7 +245,7 @@ class GANTrainer:
         self.optimizer_options = dict(optimizer_options or {})
         self.penalty_options = dict(penalty_options or {})
         if require_latent_damping is None:
-            require_latent_damping = self.prior.z.requires_grad and recipe.latent_damping_max_rate > 0
+            require_latent_damping = base_prior.z.requires_grad and recipe.latent_damping_max_rate > 0
         if type(require_latent_damping) is not bool:
             raise TypeError("require_latent_damping must be a boolean or None")
         # The recipe picks the regularization formulation; its
@@ -219,6 +260,11 @@ class GANTrainer:
             weight=1.0 if recipe.prior_regularizer == "vicreg" or recipe.prior_reg > 0 else 0.,
             prior=self.prior, reference=self.prior)
         self.penalty = recipe.make_critic_penalty(self.opt_d, **self.penalty_options)
+        if recipe.effective_critic_formulation == "bispf":
+            # Readers of the critic thermal scale use this trainer's checkpointed
+            # critic record, never another trainer's state.
+            from .bispf import bind_thermal_source
+            bind_thermal_source(self.opt_d.record, self.loss, self.prior_regularizer)
         if eval_generator is not None and any(eval_generator is stream for stream in (
                 latent_generator, penalty_generator, noise_generator, input_noise_generator,
                 prior_noise_generator, model_generator)):
@@ -234,7 +280,8 @@ class GANTrainer:
             schedule=lambda step, config: learning_rate_scales(step, config),
             allow_shared_training_streams=not (recipe.continuous_policy is not None
                 or recipe.lr_control == "stationarity" or recipe.row_evidence_gate
-                or recipe.particle_birth_death or recipe.serve_average > 0))
+                or recipe.particle_birth_death or recipe.serve_average > 0),
+            row_evidence_statistic=row_evidence_statistic)
         self._STREAMS = type(self)._STREAMS
         if input_noise_generator is not None:
             self.input_noise_generator = self._stream(input_noise_generator, seed + 7)
@@ -242,7 +289,7 @@ class GANTrainer:
         else:
             self.input_noise_generator = self.noise_generator
         self.prior_noise_generator = None
-        if type(self.prior) is MoGParticlePrior:
+        if type(base_prior) is MoGParticlePrior:
             self.prior_noise_generator = self._stream(prior_noise_generator, seed + 6)
             self._STREAMS += ("prior_noise_generator",)
         self.model_generator = None
@@ -262,6 +309,9 @@ class GANTrainer:
                                    bf16=recipe.training_precision == "bf16_channels_last")
         self._bf16_generator = _convolution_autocast(self.G, recipe.training_precision == "bf16_channels_last")
         self._in_training_step = False
+        # Manipulator hooks resolved once; plain priors have neither.
+        self._postprocesses = bool(getattr(self.prior, "postprocesses_generated", False))
+        self._prior_penalty = bool(getattr(self.prior, "has_regularizer", False))
 
     @property
     def latent_damping(self):
@@ -309,6 +359,10 @@ class GANTrainer:
                                     rows=indices if rows is None else rows))
         return self.policy.generate(latent, sigma=sigma, stream=stream, model=model,
                                     rows=indices if rows is None else rows)
+
+    def _postprocess(self, prior, generated):
+        """Apply manipulator output postprocessing (every critic/serving path)."""
+        return prior.postprocess_generated(generated) if self._postprocesses else generated
 
     def served_snapshot(self):
         """Independent currently served generator/table state, also available in caller-owned loops."""
@@ -378,7 +432,7 @@ class GANTrainer:
         return self.policy._average_rate()
 
     def _sample_training_prior(self, n):
-        if type(self.prior) is MoGParticlePrior:
+        if self.prior_noise_generator is not None:
             return self.prior.sample(n, generator=self.latent_generator,
                                      noise_generator=self.prior_noise_generator)
         return self.prior.sample(n, generator=self.latent_generator)
@@ -414,7 +468,7 @@ class GANTrainer:
         with torch.no_grad():
             latent, indices_d = self._sample_training_prior(len(real))
             self.policy.observe_support(latent)
-            fake = self._generate(self.G, latent, sigma_out, noise, rows=indices_d)
+            fake = self._postprocess(self.prior, self._generate(self.G, latent, sigma_out, noise, rows=indices_d))
         self.policy.observe_critic_pair(real, fake)
         loss_d = self.loss.d_loss(critic(real), critic(fake))
         self.penalty.collect_stats = collect_stats
@@ -432,7 +486,7 @@ class GANTrainer:
         try:
             self.D.requires_grad_(False)
             latent, indices = self._sample_training_prior(len(real))
-            fake_g = self._generate(self.G, latent, sigma_out, noise, rows=indices)
+            fake_g = self._postprocess(self.prior, self._generate(self.G, latent, sigma_out, noise, rows=indices))
             fake_logits = critic(fake_g)
             real_g = generator_real() if callable(generator_real) else generator_real
             real_g = real if real_g is None else self._batch(real_g, "generator_real")
@@ -455,6 +509,17 @@ class GANTrainer:
             loss_g = loss_gan + recipe.prior_reg * prior_reg
             if self.prior.z.requires_grad and recipe.prior_l2 > 0:
                 loss_g = loss_g + recipe.prior_l2 * self.prior.z.square().mean()
+            prior_manip_loss = None
+            if self._prior_penalty:
+                raw_rows = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
+                prior_manip_loss = self.prior.regularize(
+                    raw_rows,
+                    sampled_codes=latent,
+                    indices=indices,
+                    generated=fake_g,
+                    logits=fake_logits,
+                )
+                loss_g = loss_g + prior_manip_loss
             if recipe.kinetic_transport_weight:
                 loss_g = loss_g + transport
             if recipe.kinetic_transport_local_weight:
@@ -468,7 +533,9 @@ class GANTrainer:
                 sampled_latent = latent.detach().clone()
                 def protected_evaluator():
                     replay = sampled_latent + (self.prior.z[indices] - locations[indices])
-                    logits = critic(self._generate(self.G, replay, sigma_out, noise, rows=indices))
+                    generated = self._postprocess(
+                        self.prior, self._generate(self.G, replay, sigma_out, noise, rows=indices))
+                    logits = critic(generated)
                     return (self.loss.g_loss(logits, real_logits),)
             constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
                                          protected_evaluator=protected_evaluator)
@@ -480,11 +547,15 @@ class GANTrainer:
             for parameter, flag in zip(self.D.parameters(), flags):
                 parameter.requires_grad_(flag)
         self.policy.finish_step()
-        self._serve_apply()
+        if self.serve_after_step:
+            self._serve_apply()
         result = {key: value.detach() for key, value in
                   dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
                        prior_regularization=prior_reg, penalty=penalty).items()}
         result["step"] = self.completed_steps
+        if prior_manip_loss is not None:
+            # Present every step whenever a manipulator penalty is active.
+            result["prior_manipulation"] = prior_manip_loss.detach()
         if recipe.kinetic_transport_weight:
             result["kinetic_transport"] = transport.detach()
         if recipe.kinetic_transport_local_weight:
@@ -530,7 +601,7 @@ class GANTrainer:
                 latent, rows = prior.sample(n, generator=stream, fixed_first_n=fixed_first_n, offset=offset)
                 sigma = (self._output_sigma(output_noise_std(self.recipe, self.completed_steps))
                          if output_noise else 0.0)
-                return self._generate(model, latent, sigma, stream, rows=rows)
+                return self._postprocess(prior, self._generate(model, latent, sigma, stream, rows=rows))
         finally:
             for module, flag in modes:
                 module.training = flag
@@ -663,9 +734,12 @@ class GANTrainer:
             from .coulomb_prior import CENTER_BUFFER, RADIUS_BUFFER
             for name in ("prior", "ema_prior"):
                 reference = state["models"][name]
-                if (not torch.isfinite(reference[CENTER_BUFFER]).all()
-                        or not torch.isfinite(reference[RADIUS_BUFFER])
-                        or reference[RADIUS_BUFFER] < 0):
+                center = reference.get(CENTER_BUFFER, reference.get(f"base.{CENTER_BUFFER}"))
+                radius = reference.get(RADIUS_BUFFER, reference.get(f"base.{RADIUS_BUFFER}"))
+                if (center is None or radius is None
+                        or not torch.isfinite(center).all()
+                        or not torch.isfinite(radius)
+                        or radius < 0):
                     raise ValueError("invalid checkpoint Coulomb initial reference")
         if not isinstance(state["optimizers"], list) or len(state["optimizers"]) != 2:
             raise ValueError("invalid checkpoint optimizer schema")
@@ -771,7 +845,8 @@ class GANTrainer:
         torch.set_rng_state(state["cpu_rng"].cpu())
         if self.device.type == "cuda":
             torch.cuda.set_rng_state(state["cuda_rng"].cpu(), self.device)
-        self._serve_apply()
+        if self.serve_after_step:
+            self._serve_apply()
 
 
 def _policy_property(name):

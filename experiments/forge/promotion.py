@@ -20,6 +20,7 @@ SCREENING_SEED = 0
 FIELDS = {"schema_version", "id", "qualification_view", "candidate_revision", "seeds", "tasks",
           "controls", "budgets", "scoring_weights", "aggregation", "acceptance", "no_tuning",
           "early_stop", "execution_backend", "cuda_model"}
+OPTIONAL_FIELDS = {"allow_held_highest_tier"}
 ACCEPTANCE = {"candidate": "all_pass", "controls": "match_declared", "missing": "reject", "conflicts": "reject"}
 
 
@@ -28,8 +29,13 @@ def _block(message):
 
 
 def _validate(contract):
-    if not isinstance(contract, dict) or set(contract) != FIELDS or contract.get("schema_version") != 1:
+    if (not isinstance(contract, dict)
+            or not FIELDS.issubset(contract)
+            or set(contract) - FIELDS - OPTIONAL_FIELDS
+            or contract.get("schema_version") != 1):
         _block("promotion contract has missing or unsupported fields")
+    if "allow_held_highest_tier" in contract and type(contract["allow_held_highest_tier"]) is not bool:
+        _block("allow_held_highest_tier must be a boolean")
     identifier(contract["id"], "registration id")
     identifier(contract["qualification_view"], "qualification view")
     seeds = contract["seeds"]
@@ -114,7 +120,7 @@ def _registration_identity(artifact):
     return canonical(value)
 
 
-def _finished(root, request):
+def _finished(root, request, *, allow_held_highest_tier=False):
     """Require real regraded evidence and its concluded readout, not a stamp."""
     if request["view"].get("calibration", {}).get("status") not in ("accepted", "PASS"):
         _block("promotion requires accepted view calibration; provisional screens cannot establish a default")
@@ -138,7 +144,8 @@ def _finished(root, request):
         if not attempt.get("superseded_by"):
             selected.extend(rows)
         bound[attempt["attempt_id"]] = attempt["result_hash"]
-    qualification = views.qualify(request["view"], request["tasks"], selected, candidate=request["candidate"])
+    qualification = views.qualify(request["view"], request["tasks"], selected, candidate=request["candidate"],
+                                  allow_held_highest_tier=allow_held_highest_tier)
     if qualification["status"] == "HELD":
         # Counted tiers may all pass, but the view's highest tier is held: never a PASS.
         _block("the qualifying view's highest tier is held (measured, not counted); a held view cannot qualify a candidate")
@@ -200,7 +207,8 @@ def register(root: Path, candidate_id: str, contract_path: Path) -> dict:
     candidate = _resolve(root, candidate_id, contract)
     if candidate["candidate_revision"] != contract["candidate_revision"]:
         _block("candidate revision differs from the preregistered finished revision")
-    qualification = _finished(root, candidate)
+    qualification = _finished(root, candidate,
+                              allow_held_highest_tier=bool(contract.get("allow_held_highest_tier")))
     subjects = {candidate_id: {"role": "candidate", "base_request": candidate,
                  "expected_statuses": {task: "PASS" for task in contract["tasks"]}}}
     for control in contract["controls"]:
@@ -303,7 +311,8 @@ def plan_promotion(root: Path, registration_id: str, queue_root: Path, *, freeze
         fresh = _resolve(root, name, artifact["contract"])
         if _signature(fresh) != subject["signature"]:
             _block("source, formulation, scoring, tasks, runtime or protocol changed since registration; in-stage tuning is forbidden")
-        if subject["role"] == "candidate" and _finished(root, fresh) != artifact["qualification"]:
+        if subject["role"] == "candidate" and _finished(
+                root, fresh, allow_held_highest_tier=bool(artifact["contract"].get("allow_held_highest_tier"))) != artifact["qualification"]:
             _block("qualification or calibrated gate acceptance changed since registration")
     requests = [_request(artifact, name, seed) for name in artifact["subjects"] for seed in artifact["contract"]["seeds"]]
     if freeze_source:
@@ -429,7 +438,8 @@ def validate_submission(root: Path, request: dict) -> dict:
         fresh = _resolve(root, name, artifact["contract"])
         if _signature(fresh) != subject["signature"]:
             _block("promotion source, formulation, scoring, tasks or runtime changed before submission")
-        if subject["role"] == "candidate" and _finished(root, fresh) != artifact["qualification"]:
+        if subject["role"] == "candidate" and _finished(
+                root, fresh, allow_held_highest_tier=bool(artifact["contract"].get("allow_held_highest_tier"))) != artifact["qualification"]:
             _block("promotion qualification evidence changed before submission")
     expected = _request(artifact, declaration.get("subject"), declaration.get("seed"))
     received = deepcopy(request)
@@ -491,7 +501,8 @@ def summarize_promotion(root: Path, registration_id: str) -> dict:
             if _signature(fresh) != subject["signature"]:
                 blockers.append("current source/formulation differs from the registered finished candidate")
             elif subject["role"] == "candidate":
-                current_qualification = _finished(root, fresh)
+                current_qualification = _finished(
+                    root, fresh, allow_held_highest_tier=bool(artifact["contract"].get("allow_held_highest_tier")))
                 if current_qualification != artifact["qualification"]:
                     blockers.append("qualification evidence or concluded readout changed after registration")
     except (CapabilityError, ValueError, FileNotFoundError) as error:

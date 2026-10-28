@@ -285,6 +285,9 @@ def test_uninitialized_fifo_valid_pending_or_resolved_checkpoint_restores(owner,
     equal(saved, target.state_dict() if owner == 'trainer' else target.policy.state_dict())
 
 
+@pytest.mark.cuda
+
+
 @pytest.mark.skipif(not torch.cuda.is_available(), reason='CUDA is unavailable')
 def test_cuda_default_preserves_feature_reactions_and_checkpoint_replay(monkeypatch):
     # Same explicit GPU model/data law and fixed seed, only the ambient default

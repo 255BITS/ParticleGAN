@@ -7,7 +7,7 @@ constants as effective candidate settings.
 from __future__ import annotations
 
 from copy import deepcopy
-from dataclasses import fields
+from dataclasses import dataclass, fields
 
 from particlegan import Recipe
 
@@ -28,6 +28,7 @@ TUNABLE_FIELDS = frozenset({
     "reg_coeff", "reg_coeff_end", "reg_coeff_anneal_end", "reg_kappa", "reg_every", "prior_reg",
     "prior_reg_target_std", "prior_reg_eps", "prior_l2", "prior_proximal_strength",
     "prior_coulomb_softening", "prior_coulomb_confinement", "prior_coulomb_neighbors",
+    "kinetic_transport_weight", "kinetic_transport_local_weight",
     "lr_anneal_start", "lr_floor", "network_lr_floor", "beta2_end", "beta2_anneal_end",
 })
 TASK_RECIPE_FIELDS = RESOURCE_FIELDS | {"prior_kind", "sigma_rel", "standardize"}
@@ -35,7 +36,6 @@ TECHNIQUE_RECIPE_FIELDS = frozenset({
     "training_precision",
     "optimizer_svd_backend", "optimizer_convolution_rule", "optimizer_dense_profile",
     "prior_update", "prior_regularizer",
-    "kinetic_transport_weight", "kinetic_transport_local_weight",
     "name", "critic_formulation", "model", "loss", "num_classes", "conditioning", "ucd_target", "encoder_mode",
     "distance_reduction", "continuous_policy", "reg_arm", "direct_particle_gain",
     "critic_r1_real", "critic_payoff_damping", "output_noise_mode", "lr_control",
@@ -44,7 +44,7 @@ TECHNIQUE_RECIPE_FIELDS = frozenset({
     "reopen_anchor", "reopen_guard", "row_evidence_null", "birth_death_isolation",
     "birth_death_feature_scale", "birth_death_backend", "birth_death_parent_policy",
     "constraint_geometry_mode", "row_policy", "optimizer_family", "optimizer_convolution", "loss_labels", "adam_variant", "lr_schedule", "lr_decay_staircase",
-    "critic_step_mode",
+    "critic_step_mode", "bispf_shape_gates", "bispf_gate_overrides", "prior_code_law",
 })
 HYPERPARAMETER_RECIPE_FIELDS = TUNABLE_FIELDS | {
     "prior_sigreg_projections", "prior_sigreg_knots",
@@ -63,6 +63,27 @@ RECIPE_FIELD_OWNERS = {
 }
 
 
+@dataclass(frozen=True)
+class RecipeFieldSpec:
+    name: str
+    owner: str
+    tunable: bool
+    default: object
+
+
+_DEFAULT_RECIPE = Recipe()
+RECIPE_FIELD_SPECS: dict[str, RecipeFieldSpec] = {
+    field.name: RecipeFieldSpec(
+        name=field.name,
+        owner=RECIPE_FIELD_OWNERS[field.name],
+        tunable=field.name in TUNABLE_FIELDS,
+        default=getattr(_DEFAULT_RECIPE, field.name),
+    )
+    for field in fields(Recipe)
+    if field.name in RECIPE_FIELD_OWNERS
+}
+
+
 def validate_registry():
     """Adding a public field requires an explicit Forge ownership decision."""
     groups = (TASK_RECIPE_FIELDS, TECHNIQUE_RECIPE_FIELDS, HYPERPARAMETER_RECIPE_FIELDS)
@@ -74,6 +95,8 @@ def validate_registry():
         raise ValueError(f"Recipe ownership registry differs from public API: missing={sorted(missing)}, unknown={sorted(unknown)}")
     if not TUNABLE_FIELDS <= HYPERPARAMETER_RECIPE_FIELDS:
         raise ValueError("search fields must be declared hyperparameters")
+    if set(RECIPE_FIELD_SPECS) != public:
+        raise ValueError("RecipeFieldSpec registry does not match public Recipe fields")
 
 
 validate_registry()

@@ -70,7 +70,7 @@ repository root, in the project Python environment, choose a fresh ignored path:
 
 ```sh
 CUBLAS_WORKSPACE_CONFIG=:4096:8 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
-  python -m pytest -q tests/test_tier1_prior_smoke.py
+  python -m pytest -m cuda -q tests/test_tier1_prior_smoke.py
 mkdir -p runs/api
 CUBLAS_WORKSPACE_CONFIG=:4096:8 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
   OPENBLAS_NUM_THREADS=1 python -u -m benchmarks.toy_audit.tier1_prior_smoke run \

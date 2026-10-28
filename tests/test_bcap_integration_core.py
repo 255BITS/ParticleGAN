@@ -215,7 +215,7 @@ def test_nonconflicting_direction_keeps_actual_rounded_base_update_bitwise():
     _equal(saved, baseline.state_dict())
 
 
-@pytest.mark.parametrize("device", ["cpu", "cuda:0"])
+@pytest.mark.parametrize("device", ["cpu", pytest.param("cuda:0", marks=pytest.mark.cuda)])
 @pytest.mark.parametrize("convolution", [False, True])
 def test_active_public_trainer_transport_joint_projection_and_full_checkpoint_resume(device, convolution):
     if device.startswith("cuda") and not torch.cuda.is_available():

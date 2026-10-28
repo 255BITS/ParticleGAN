@@ -95,7 +95,7 @@ the existing U-Net; invalid resolutions/head counts and incompatible
 architectures are rejected. No shared training-loop or regularizer changes
 were made in this round.
 
-All runs retain batch64, seed24002, four reverse steps, learned 20k×128 latent
+All runs retain batch 64, seed 24002, four reverse steps, learned 20k×128 latent
 particles, Gaussian step noise, joint time/class UCD, Rp logistic, VICReg,
 exact lazy-4 bcap, existing optimizer rates, constant LR and EMA.995. D is
 the same frozen ImageNet ResNet18 feature branch plus trainable pixel/head

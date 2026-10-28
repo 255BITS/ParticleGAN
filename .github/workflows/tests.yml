@@ -71,6 +71,15 @@ jobs:
           --receipt /tmp/pytest-shard-${{ matrix.shard }}.json --
           -q --durations=25 -o faulthandler_timeout=180
           --ignore=tests/test_e22_routed_caption_late_phase_renderer.py
+      # The minimum supported Python runs one deterministic quarter of the same
+      # suite. Its receipt stays local: release coverage is checked on 3.12.
+      - name: Test one suite shard on the minimum supported Python
+        if: matrix.python == '3.11'
+        run: >-
+          python scripts/ci_pytest.py run --index ${{ matrix.shard }} --count 4
+          --receipt /tmp/pytest-py311-shard-${{ matrix.shard }}.json --
+          -q --durations=25 -o faulthandler_timeout=180
+          --ignore=tests/test_e22_routed_caption_late_phase_renderer.py
       - name: Save collection coverage receipt
         if: always() && matrix.python == '3.12'
         uses: actions/upload-artifact@v4
@@ -189,7 +198,9 @@ jobs:
           for wheel in Path('dist').glob('*.whl'):
               with zipfile.ZipFile(wheel) as archive:
                   roots = {name.split('/')[0] for name in archive.namelist()}
-              assert all(root == 'particlegan' or root.endswith('.dist-info') for root in roots), roots
+              # particlegan_forge is the documented external tier API (EXPERIMENTATION.md).
+              packages = {'particlegan', 'particlegan_forge'}
+              assert all(root in packages or root.endswith('.dist-info') for root in roots), roots
           research = {'reports', 'results', 'experiments', 'benchmarks', 'lib', 'configs', 'data', 'runs', 'artifacts'}
           for source in Path('dist').glob('*.tar.gz'):
               with tarfile.open(source) as archive:

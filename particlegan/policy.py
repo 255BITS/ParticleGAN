@@ -133,6 +133,10 @@ class ServedModel:
     default, exactly as in ``GANTrainer.sample``.  The private sampling stream
     starts from the policy's evaluation RNG state and never advances a
     training stream.  Module parameters are frozen and modules are in eval.
+    A ``ManipulatedPrior`` whose manipulators postprocess generator outputs
+    has that postprocessing applied last (after optional output noise) in
+    ``generate``/``sample`` and ``routed_forward``, as in ``GANTrainer``'s
+    critic and generator paths and the birth/death row generator.
     """
 
     def __init__(self, models, table, controller, *, source, output_sigma,
@@ -164,6 +168,8 @@ class ServedModel:
         if output_noise and self.output_sigma != 0:
             y = y + self.output_sigma * torch.randn(
                 y.shape, generator=stream, device=y.device, dtype=y.dtype)
+        if getattr(self.prior, "postprocesses_generated", False):
+            y = self.prior.postprocess_generated(y)
         return y
 
     def _sampling_stream(self, generator):
@@ -233,6 +239,8 @@ class ServedModel:
             y = self.routing.forward(self.models, context, candidate, perturb_fn=perturb_fn)
             if output_noise and self.output_sigma != 0:
                 y = y + self.output_sigma * torch.randn(y.shape, device=y.device, dtype=y.dtype, generator=stream)
+            if getattr(self.prior, "postprocesses_generated", False):
+                y = self.prior.postprocess_generated(y)
             return y
 
 
@@ -282,6 +290,14 @@ class UpdatePolicy:
     observations, gradient evidence or counterfactual probes.
     Conditional loops with row controls disabled can use ``UpdatePolicy``
     without a routed row contract.
+
+    ``row_evidence_statistic`` declares the independent-row evidence gate's
+    test statistic (``particlegan.row_evidence``). The default
+    ``"sphericity"`` keeps the legacy trajectory of every qualified
+    row-evidence recipe; ``"hotelling"`` is a declared candidate (full
+    covariance T^2, float64 n x d x d accumulators). It is a trainer option,
+    not a recipe field, and the row-evidence checkpoint configuration records
+    it, so a mismatched resume is rejected.
     """
 
     _STREAMS = ("latent_generator", "penalty_generator", "eval_generator", "noise_generator")
@@ -292,7 +308,7 @@ class UpdatePolicy:
                  roles=None, generation=None, critic_features=None, encoder=None,
                  router=None, row_semantics="independent", seed=0, streams=None,
                  penalty=None, schedule=None, routed_rows=None,
-                 allow_shared_training_streams=False):
+                 allow_shared_training_streams=False, row_evidence_statistic="sphericity"):
         if not isinstance(recipe, Recipe):
             raise TypeError("recipe must be a Recipe")
         if not isinstance(generator, nn.Module) or not isinstance(critic, nn.Module):
@@ -408,6 +424,13 @@ class UpdatePolicy:
             self.reopen_guard.observe_epoch(self._loss_epoch(), self.surprise)
         self.birth_death = None
         self.row_evidence = None
+        # Declared trainer option (review finding #11): the row-evidence test statistic. "sphericity" is the
+        # legacy law of every qualified row-evidence recipe; "hotelling" is the full-covariance T^2 candidate.
+        if row_evidence_statistic not in ("sphericity", "hotelling"):
+            raise ValueError("row_evidence_statistic must be sphericity or hotelling")
+        if row_evidence_statistic != "sphericity" and (
+                not recipe.row_evidence_gate or self.row_policy == "routed_paired"):
+            raise ValueError("row_evidence_statistic applies only to the independent-row row_evidence_gate")
         if self.row_policy == "routed_paired":
             self.routed_control = routed_rows.bind(
                 models=self._training_modules(), averaged_models=self._average_modules(),
@@ -433,7 +456,8 @@ class UpdatePolicy:
                 features = ScalarHeadFeatures(self.D)
             rows = ParticleRows(table=table, optimizer=self.table_optimizer,
                                 averaged_table=self.averaged_table,
-                                generate=lambda latent: self._clean_generate(self.G, latent),
+                                generate=lambda latent: self._postprocess_generated(
+                                    self._clean_generate(self.G, latent)),
                                 critic_features=features,
                                 evaluation_modules=tuple(module for module in (self.G, encoder, router)
                                                          if module is not None),
@@ -445,7 +469,8 @@ class UpdatePolicy:
                 feature_scale=recipe.birth_death_feature_scale)
         if recipe.row_evidence_gate and self.routed_control is None:
             from .row_evidence import RowEvidence
-            self.row_evidence = RowEvidence(table, null=recipe.row_evidence_null)
+            self.row_evidence = RowEvidence(table, null=recipe.row_evidence_null,
+                                            statistic=row_evidence_statistic)
         self.penalty = None
         if penalty is None and hasattr(self.opt_d, "record"):
             penalty = recipe.make_critic_penalty(self.opt_d)
@@ -512,6 +537,8 @@ class UpdatePolicy:
         for name, module in self._training_modules().items():
             if name != "prior":
                 owners.update({id(p): name for p in module.parameters()})
+            else:
+                owners.update({id(p): "router" for p in module.parameters() if id(p) != id(self.table)})
         owners[id(self.table)] = "table"
         if roles is not None and (not isinstance(roles, (list, tuple)) or len(roles) != len(self.optimizers)):
             raise ValueError("roles must match policy optimizers and parameter groups")
@@ -979,6 +1006,12 @@ class UpdatePolicy:
 
     def _clean_generate(self, model, latent):
         return model(latent) if self.generation is None else self.generation(model, latent)
+
+    def _postprocess_generated(self, generated):
+        """Manipulator output postprocessing; identity for plain priors."""
+        if getattr(self.prior, "postprocesses_generated", False):
+            return self.prior.postprocess_generated(generated)
+        return generated
 
     def observe_sampled_rows(self, rows):
         """Record generator-side prior draws for row-local optimizer updates.

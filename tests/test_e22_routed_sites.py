@@ -302,6 +302,9 @@ def test_untimed_warmup_restores_entire_initial_checkpoint_modes_and_gradients(a
     assert p.table.grad is None and p.log_output_sigma.grad is None
 
 
+@pytest.mark.cuda
+
+
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required")
 def test_cuda_bf16_two_site_resume_crosses_accepted_move_after_cpu_checkpoint_load(api):
     receipt = run_trajectory(api, device="cuda", steps=16)

@@ -33,6 +33,8 @@ def _scalars(metrics, prefix=""):
         return {}, [prefix or "metrics"]
     for name, value in sorted(metrics.items()):
         key = f"{prefix}.{name}" if prefix else str(name)
+        if name == "noise_floor":  # reporting-only oracle annotation, not a compared metric
+            continue
         if isinstance(value, dict):
             nested, missing = _scalars(value, key)
             values.update(nested)

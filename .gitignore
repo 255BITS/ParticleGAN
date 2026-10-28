@@ -13,7 +13,7 @@ results/transition/
 results/gym/
 results/speed_100gaussians_*/
 results/speed_denoising_*/
-results/speed_*.runner.log
+results/*.runner.log
 data/
 .venv
 .pytest_cache/
@@ -80,8 +80,56 @@ dist/
 /reports/forge/test-performance.html
 # Full new Forge execution envelopes contain per-update diagnostics. Preserve
 # them locally/in artifact archives; publish compact technique-receipts instead.
-# Existing tracked historical envelopes retain their original Git identities.
-/reports/forge/attempts/
+# Existing tracked historical envelopes retain their original Git identities:
+# Forge calibration/telemetry read them from the checkout, so the 45 qualified
+# envelopes below are explicitly re-included instead of being tracked despite
+# an ignore rule. Do not add new envelopes to this list.
+/reports/forge/attempts/*
+!/reports/forge/attempts/04e834fc82f24061af71572dce3a22d8/
+!/reports/forge/attempts/0bce04d970264d4c95335030ed8724e7/
+!/reports/forge/attempts/0d955ecceae2440a94c617bac052a7f8/
+!/reports/forge/attempts/11d3d8b814674fd0841217c7e4304c38/
+!/reports/forge/attempts/176ad9907a734b45844d09b2a69ff31d/
+!/reports/forge/attempts/180af0fcfee447b697d5b5d05dc2877f/
+!/reports/forge/attempts/26ebdea492d4408d9ee1b0cccc8bf61b/
+!/reports/forge/attempts/270c483fe3b94932b7f7edcecd89c872/
+!/reports/forge/attempts/2dcfab451e2b4c2087c4c2dcdcfddb44/
+!/reports/forge/attempts/49d41e284fde41698212677403ca5d67/
+!/reports/forge/attempts/4ab4e77829044c73a7ea3d86981aac71/
+!/reports/forge/attempts/56177ab1d23243d8a6fe61413d8f870f/
+!/reports/forge/attempts/5693d7b9c35844c78f4440ed15bad4a2/
+!/reports/forge/attempts/5a5f1641fd80404fbb509d367e6a467f/
+!/reports/forge/attempts/5dd159dc811b41beab63dc7fee7689cc/
+!/reports/forge/attempts/633dcaca307e4e01b82b5281d82082fb/
+!/reports/forge/attempts/65265b43758f4dbd85b77ef2ed46ac4b/
+!/reports/forge/attempts/6577d4075c5042dea96c619ba197bd27/
+!/reports/forge/attempts/661bd9830be94225891954f5fb690342/
+!/reports/forge/attempts/680dcd337be343f69a1922cd3e89750a/
+!/reports/forge/attempts/6d10bbf90f1b4233a73034391599ecdb/
+!/reports/forge/attempts/6e2b5fdf4c8e4ddaba57316096f777a2/
+!/reports/forge/attempts/6f24cc4b4c814096bacc4fcc47110a98/
+!/reports/forge/attempts/737c15e2ea6345d18b2b159924f9652c/
+!/reports/forge/attempts/7ab18561c8bd48508ad4dec6d075f0ea/
+!/reports/forge/attempts/8f49adf865944a2db4ebee903147e24c/
+!/reports/forge/attempts/93c1e10057044b85ac731b9b59f50a0c/
+!/reports/forge/attempts/9cd112e7346b45ed8cb241e1498685ad/
+!/reports/forge/attempts/a1de5d14bd8b4640b95a826209ae3085/
+!/reports/forge/attempts/a388612acc494fbbbe99cb86370559aa/
+!/reports/forge/attempts/b766e89d1a0843ba9af94f2ce94e4273/
+!/reports/forge/attempts/beb49d1044cc48c1882fd958055a1522/
+!/reports/forge/attempts/bfb3885a560345559ba8a09adbfdfb56/
+!/reports/forge/attempts/c0178716dd3c4d5695b391919bf9ab81/
+!/reports/forge/attempts/d0414263a3914641992efbbab6f7b951/
+!/reports/forge/attempts/d4d633052321469e82caff90210ef309/
+!/reports/forge/attempts/dca8c7aa0eca484c9270d07125f7cb0b/
+!/reports/forge/attempts/e04676fe83e64552914c54aa75c06377/
+!/reports/forge/attempts/e13557902b3544a081defbcac092c136/
+!/reports/forge/attempts/e40a18d4e33d488d896c9fe4a1122ceb/
+!/reports/forge/attempts/e572cb95deeb49a18e712fa80f13e9c6/
+!/reports/forge/attempts/e65951a61a764989b7b416e418130061/
+!/reports/forge/attempts/eac540ccfe564a5ab396abdd545ab013/
+!/reports/forge/attempts/f04fd435083a46b68ff8bf278a8eb26d/
+!/reports/forge/attempts/fafc3da7cecf4b1780bbaedf66141092/
 
 /runs/routed-convergence-rotated-v1/
 /runs/routed-convergence-rotated-v1.launcher.log

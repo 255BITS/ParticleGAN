@@ -1,5 +1,10 @@
 # CIFAR-10 U-Net DDGAN baseline
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../forge/technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 Latest completed round: the fast plain U-Net reaches **FID 25.397 at 50k
 updates in 45.73 training minutes**. Attention improves the 10k scout to
 29.327, but finishes 50k at 26.334 in 53.09 minutes. Its diagnostic FID is best
@@ -24,8 +29,8 @@ required by torch-fidelity 0.3.0's matrix-square-root call.
 ```
 
 No arguments loads `configs/cifar_ddgan/default.yaml`: the measured 10k-update
-U-Net32 / pretrained-feature-D recipe, FID50k31.555 in9.22 training minutes.
-It uses exact bcap every fourth D update at4×weight, batch-local frozen xt
+U-Net32 / pretrained-feature-D recipe, FID50k 31.555 in 9.22 training minutes.
+It uses exact bcap every fourth D update at 4× weight, batch-local frozen xt
 feature caching and fused Adam. FD remains an optional experimental method. Joint timestep/class UCD, learned particles, Gaussian step noise,
 constant LR and toy optimizer rates remain. See [moonshot/READOUT.md](moonshot/READOUT.md)
 for the four-way architecture comparison, timing and limitations. Each run needs
@@ -39,7 +44,7 @@ Speed-round configs are under configs/cifar_ddgan/speed_*. Historical combined l
 tail -F results/cifar_ddgan/speed.live.log
 ```
 
-The architecture scouts used10,000 updates, batch 64 and seed 24002; no seed sweep. D and G use
+The architecture scouts used 10,000 updates, batch 64 and seed 24002; no seed sweep. D and G use
 independent real batches sampled with replacement. Training images receive
 horizontal flips; the FID reference is unaugmented.
 
@@ -58,7 +63,7 @@ sampled uniformly and independently at each reverse step. Step noise and the
 initial noisy image are fresh image-shaped Gaussians.
 
 D receives concatenated candidate/xt images and uses residual
-convolutions with per-image GroupNorm (`d_norm: group`). Joint UCD emits40 logits
+convolutions with per-image GroupNorm (`d_norm: group`). Joint UCD emits 40 logits
 without a timestep embedding; `(t-1)*10+c` selects the score and CE target.
 `ucd_target: class` retains explicit time embeddings and ten class logits.
 `d_norm: none` retains the original unnormalized architecture. D conditioning
@@ -88,13 +93,13 @@ Real/fake cross-entropies have coefficient .02. The bcap
 penalty differentiates only the candidate image, with class/time/xt fixed.
 Shared repo loss/regularizer implementations preserve the toy Rp logistic,
 bcap coefficient/kappa 1, unique-row latent VICReg 1, Adam (0,.999), LR .0006,
-D multiplier1.5, prior multiplier10 and EMA.995. `lr_floor: 1` keeps all rates
-constant; setting it below1 enables delayed cosine decay. No reconstruction/diffusion MSE was
+D multiplier 1.5, prior multiplier 10 and EMA .995. `lr_floor: 1` keeps all rates
+constant; setting it below 1 enables delayed cosine decay. No reconstruction/diffusion MSE was
 added. Training uses float32 with TF32 enabled for throughput.
 
 ## Evaluation and artifacts
 
-Every 10,000 updates: EMA5k-sample diagnostic FID, sample grid, full checkpoint.
+Every 10,000 updates: EMA 5k-sample diagnostic FID, sample grid, full checkpoint.
 At completion: EMA 50k-sample FID. Generation is balanced over requested classes.
 Grid rows: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck.
 Each grid reuses fixed evaluation RNG seeds. Evaluation uses separate generators

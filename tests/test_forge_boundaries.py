@@ -211,3 +211,16 @@ def test_legacy_candidate_resource_and_initialization_bindings_are_labelled():
                                                        source="candidate.recipe_overrides.z_dim")
     assert receipt["task_contract"]["initialization"] == dict(value="supplied", owner="technique",
                                                                source="legacy candidate/API initializer fallback")
+
+
+def test_declarative_recipe_field_specs_and_kinetic_transport_tunability():
+    from dataclasses import fields
+    from particlegan import Recipe
+    from experiments.forge.boundaries import RECIPE_FIELD_SPECS, TUNABLE_FIELDS, recipe_field_owner
+
+    assert set(RECIPE_FIELD_SPECS) == {f.name for f in fields(Recipe)}
+    for name in ("kinetic_transport_weight", "kinetic_transport_local_weight"):
+        assert name in TUNABLE_FIELDS
+        assert recipe_field_owner(name) == "hyperparameter"
+        spec = RECIPE_FIELD_SPECS[name]
+        assert spec.owner == "hyperparameter" and spec.tunable is True and spec.default == 0.0
