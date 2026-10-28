@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 856. Inventory coverage: complete. Unresolved import items: 7.
+Records: 861. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4120,6 +4120,22 @@ Fixed matched BCap passed all 3 smoke requirements and the first 5/19 quality re
 
 [Evidence](../../reports/forge/technique-receipts/0184ca1327794ab58168d853ce0ad978.json) · [Record](records/readout-21b533460c29dd5049aa64df.json)
 
+### recipe-prior-refactor-r1r2-v1 · readout-271e0b4766487e5e23d59018
+
+**Scope:** current; scientific; revision `4717b4b13aba2f8a4f523a5b8c66863b60d55c5d05f4bfa2dd6a238a829a86a7`.
+
+Ordinary re-qualification of the unchanged selected r1r2 recipe on the current develop source reproduces its recorded discriminator_stability outcomes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 3, 'INCOMPLETE': 5, 'PASS': 5}; wall seconds 236.071; mechanism `structural`.
+
+ring16_acquisition: modes=16, hq=0.84424, mass_tv=0.051514
+
+Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 core Tier 1 verdicts (5 PASS, ring16_acquisition FAIL, clockfree_audit_measurement_v1 FAIL) and stops at Tier 1; revision-9 qualification retained.
+
+**Next:** Retain revision-9 qualification in technique-inventory; address ring16_acquisition and clockfree_audit_measurement_v1 in family follow-up.
+
+[Evidence](../../reports/forge/attempts/0288b6a506314fee89d2de726e8ebad2/result.json) · [Record](records/readout-271e0b4766487e5e23d59018.json)
+
 ### forge-no-critic-penalty · readout-28f0c9140b4cfeef57f23dd2
 
 **Scope:** current; scientific; revision `aa9e200be9f520bf97e8d3408829b852188c80e2b64aa6f02430f58eaec117c9`.
@@ -4343,6 +4359,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
 [Evidence](../../reports/forge/attempts/3472d2f10e984168a3cb9877d287d069/result.json) · [Record](records/readout-4e44570c882c7d07bbddc813.json)
+
+### recipe-prior-refactor-k3p-v1 · readout-4f82f909f64b3d97917d6b1a
+
+**Scope:** current; scientific; revision `9e38108414dd84e7f5374086d86b08764ecc4553fbd329768438e9b71c900194`.
+
+Ordinary re-qualification of the unchanged selected k3p recipe on the current develop source reproduces its recorded discriminator_stability outcomes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 2, 'INCOMPLETE': 4, 'PASS': 5}; wall seconds 251.421; mechanism `structural`.
+
+five_word_joint_smoke: modes=5, mass_tv=0.018945
+
+Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 core Tier 1 verdicts (5 PASS, ring16_acquisition FAIL, clockfree_audit_measurement_v1 FAIL) and stops at Tier 1; revision-9 qualification retained.
+
+**Next:** Retain revision-9 qualification in technique-inventory; address ring16_acquisition and clockfree_audit_measurement_v1 in family follow-up.
+
+[Evidence](../../reports/forge/attempts/25526de766e04bb8bef6b9e79f42f90f/result.json) · [Record](records/readout-4f82f909f64b3d97917d6b1a.json)
 
 ### forge-onboarding-anchor-ablation · readout-5470a57cf1a74abc896c8a55
 
@@ -4712,6 +4744,22 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0394435711<0.3; q
 
 [Evidence](../../reports/forge/attempts/2f43521c43294c3a872be42d999debf1/result.json) · [Record](records/readout-9e297f3a07ea06f0abc19272.json)
 
+### recipe-prior-refactor-release07-gan-v3-v1 · readout-a3ec7ffcdaaf0f88b4171cec
+
+**Scope:** current; scientific; revision `bb975f7fe7f68c1e638cf5a36973a125d34fe4285aad773056e4b969fdf6cecc`.
+
+Ordinary re-qualification of the unchanged selected release07-gan-v3 recipe on the current develop source reproduces its recorded discriminator_stability outcomes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 3, 'INCOMPLETE': 5, 'PASS': 5}; wall seconds 252.911; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0038224
+
+Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 core Tier 1 verdicts (5 PASS, ring16_acquisition FAIL, clockfree_audit_measurement_v1 FAIL) and stops at Tier 1; revision-9 qualification retained.
+
+**Next:** Retain revision-9 qualification in technique-inventory; address ring16_acquisition and clockfree_audit_measurement_v1 in family follow-up.
+
+[Evidence](../../reports/forge/attempts/06e0437390f34e72a7d265fd9aab8a42/result.json) · [Record](records/readout-a3ec7ffcdaaf0f88b4171cec.json)
+
 ### k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5 · readout-a91dbccf086504f9accaee6b
 
 **Scope:** research_diagnostic; scientific; revision `3041a40a01932d40c304875add3e4e2689f4e535636861f3319a1a1f6792c402`.
@@ -4968,6 +5016,22 @@ The prerequisite mode_hold passes; all 1200 hold checks and 300 extension checks
 
 [Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-cd9493a6a30096475d381175.json)
 
+### recipe-prior-refactor-bcap-pure-v1 · readout-d278a74af331d2f3b7807234
+
+**Scope:** current; scientific; revision `c0f8979dc36bb4f102c4a103087bfc120d71f48ea22f2a5ca52c27d7d06d8557`.
+
+Ordinary re-qualification of the unchanged selected bcap-pure recipe on the current develop source reproduces its recorded discriminator_stability outcomes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 4, 'INCOMPLETE': 2, 'PASS': 7}; wall seconds 1014.505; mechanism `structural`.
+
+
+
+Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 core Tier 1 passes (including five_word_joint_smoke in 769.0s) and stops at Tier 1 on the revision-14 API model toys and unsupported zero_tanh_smoke; revision-9 qualification retained.
+
+**Next:** Retain revision-9 full qualification in technique-inventory; hold or repair revision-14 API model toys and zero_tanh_smoke separately.
+
+[Evidence](../../reports/forge/attempts/1292615001764ae2bc2e0da605e6af0b/result.json) · [Record](records/readout-d278a74af331d2f3b7807234.json)
+
 ### release07-gan-v3-mog-v1 · readout-d5a99d9470252f695a717dfc
 
 **Scope:** calibration_diagnostic; scientific; revision `a9b2aa0ace96762b024a30c0979a0eedce8d07f9fae5cb5dc03868522132962c`.
@@ -5095,6 +5159,22 @@ All six declared DCGAN mock-data performance workloads completed their finite pu
 **Next:** Use the published scaling measurements to budget larger-image pilots; restore verifiable contention telemetry before paired timing claims. Profile complete-update components before changing recipes. Keep the default unchanged and require separate quality evidence for adoption.
 
 [Evidence](../../reports/forge/scaling-receipts/dcgan-performance-cloud-v2/ka2-dcgan_performance_b64-0dcd26728de3eb07.json) · [Record](records/readout-e6e872f73024fd6c0b2b2d42.json)
+
+### recipe-prior-refactor-ka2-v1 · readout-e8818ca1024f2d2972606913
+
+**Scope:** current; scientific; revision `6469950271908090f8608849192d212372abf993333a4207a024bfca7ac39d4c`.
+
+Ordinary re-qualification of the unchanged selected ka2 recipe on the current develop source reproduces its recorded discriminator_stability outcomes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 2, 'INCOMPLETE': 4, 'PASS': 5}; wall seconds 268.104; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0036862
+
+Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 core Tier 1 verdicts (5 PASS, ring16_acquisition FAIL, clockfree_audit_measurement_v1 FAIL) and stops at Tier 1; revision-9 qualification retained.
+
+**Next:** Retain revision-9 qualification in technique-inventory; address ring16_acquisition and clockfree_audit_measurement_v1 in family follow-up.
+
+[Evidence](../../reports/forge/attempts/09b56378266a49f4a5ea9510c765a51b/result.json) · [Record](records/readout-e8818ca1024f2d2972606913.json)
 
 ### bispf-throughput-v1 · readout-e96805cfab19f80314e3ec20
 
@@ -5846,4 +5926,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `6d682846bfce995ea5d0bda24a76b82746de6787391f0b2b71794c8b4e84f024`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `f1da1e79fa54311d2d483ace8827a3d6b2254a80ab7331a1ac12eec5a9953c33`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
