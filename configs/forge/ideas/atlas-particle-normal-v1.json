@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "id": "atlas-particle-normal-v1",
+  "parent": "atlas",
+  "goal": "discriminator_stability",
+  "hypothesis": "Swapping the standardized MoG prior for an unstandardized particle prior table plus continuous normal perturbation replicates historical Atlas 19-task performance while resolving Forge screening incompatibilities.",
+  "changed_factors": [
+    "Unstandardized particle prior table (standardize=false, learnable=true)",
+    "Additive normal component via DV12 latent perturbation and learned output noise (output_noise_mode=learnable, init=0.029)",
+    "Preserved 128 feature cells and settled reopen guard"
+  ],
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Eliminating MoG mean standardization removes global row cross-derivatives, restoring feature-cell locality and stable birth/death transport.",
+  "api_version": "forge-api-v1",
+  "execution_path": "public_trainer",
+  "recipe_overrides": {
+    "prior_kind": "particles",
+    "output_noise_mode": "learnable",
+    "output_noise_std": 0.029,
+    "output_noise_warmup": 0.0,
+    "birth_death_backend": "auto",
+    "birth_death_cells": 128,
+    "reopen_guard": "settled"
+  },
+  "requires_capabilities": [
+    "particle_cloud",
+    "a2",
+    "named_rng",
+    "policy_controls",
+    "policy_serving"
+  ],
+  "api_changes": [],
+  "claim_contract": {
+    "schedule": "schedule_free",
+    "scoring_weights": "state_selected",
+    "sampling_law": "as_served"
+  },
+  "lifecycle": "proposed",
+  "prior_art": [
+    "docs/atlas.md",
+    "docs/e22.md",
+    "reports/develop-gates-20261001/atlas19-replay.json"
+  ],
+  "guide": "EXPERIMENTATION.md",
+  "recipe_preset": "atlas",
+  "prior": {
+    "kind": "particle_cloud",
+    "sigma": 0.0,
+    "standardize": false,
+    "learnable": true,
+    "exception_reason": "Feature-cell transport requires unstandardized row independence with continuous normal output density."
+  }
+}

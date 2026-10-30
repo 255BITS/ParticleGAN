@@ -1,0 +1,65 @@
+{
+  "campaign": {
+    "budget_seconds": 18000,
+    "candidate_budget_seconds": 3600,
+    "id": "atlas-prior-repair-campaign-v1"
+  },
+  "candidate": "atlas-particle-normal-v1",
+  "competing_explanation": "Historical gate failures were caused by global standardization cross-derivatives in MoGParticlePrior destroying feature-cell locality rather than intrinsic formulation defects in Atlas.",
+  "control": {
+    "candidate_id": "atlas",
+    "task_map": {
+      "gaussian1d_smoke": "gaussian1d_smoke",
+      "gaussian1d_stability": "gaussian1d_stability",
+      "grid100": "grid100",
+      "ring16_acquisition": "ring16_acquisition",
+      "rotated100": "rotated100",
+      "staggered100": "staggered100",
+      "two_pole": "two_pole",
+      "vector_anisotropic": "vector_anisotropic",
+      "vector_spiral": "vector_spiral"
+    }
+  },
+  "falsifier": {
+    "metric": "mean_error_sigma",
+    "op": ">",
+    "phase": "final",
+    "task_id": "gaussian1d_smoke",
+    "threshold": 0.2
+  },
+  "hypothesis": "Atlas with particle prior plus normal component passes all control tasks at or exceeding original E22/Atlas thresholds under protocol seed 0.",
+  "id": "atlas-particle-normal-replication-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "mode_precision",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "grid100",
+    "threshold": 0.95
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "record_id": "develop-original-atlas19-and-gate-diagnosis",
+        "scope": "historical_atlas19_qualification",
+        "source_commit": "437c75542845c432d6657c79e6022e38c538da2e"
+      },
+      "path": "reports/develop-gates-20261001/atlas19-replay.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "execution_backend": "cuda",
+    "through_tier": 2,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}
