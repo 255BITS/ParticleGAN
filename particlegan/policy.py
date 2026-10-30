@@ -324,6 +324,7 @@ class UpdatePolicy:
         if prior is not None and table.requires_grad != (recipe.prior_update == "learned"):
             raise ValueError("prior learning state contradicts Recipe.prior_update")
         self.table, self.device, self.dtype = table, table.device, table.dtype
+        self.num_particles = recipe.num_particles
         if not table.is_floating_point():
             raise ValueError("table must use a floating dtype")
         self.row_policy = getattr(recipe, "row_policy", "independent")
@@ -450,25 +451,28 @@ class UpdatePolicy:
                             and group["params"][0] in row_parameters):
                         tester.rows = len(table)
         elif recipe.particle_birth_death:
-            from .birth_death import ParticleRows, ParticleBirthDeath, ScalarHeadFeatures
-            features = critic_features
-            if recipe.birth_death_space == "critic" and features is None:
-                features = ScalarHeadFeatures(self.D)
-            rows = ParticleRows(table=table, optimizer=self.table_optimizer,
-                                averaged_table=self.averaged_table,
-                                generate=lambda latent: self._postprocess_generated(
-                                    self._clean_generate(self.G, latent)),
-                                critic_features=features,
-                                evaluation_modules=tuple(module for module in (self.G, encoder, router)
-                                                         if module is not None),
-                                controller=self.controller, completed_steps=lambda: self.completed_steps,
-                                semantics=row_semantics)
             cells = recipe.birth_death_cells if recipe.birth_death_backend != "knn" else None
-            self.birth_death = ParticleBirthDeath(
-                rows, seed + 6, space=recipe.birth_death_space,
-                isolation=recipe.birth_death_isolation,
-                feature_scale=recipe.birth_death_feature_scale,
-                cells=cells)
+            if cells is not None and len(table) <= cells:
+                self.birth_death = None
+            else:
+                from .birth_death import ParticleRows, ParticleBirthDeath, ScalarHeadFeatures
+                features = critic_features
+                if recipe.birth_death_space == "critic" and features is None:
+                    features = ScalarHeadFeatures(self.D)
+                rows = ParticleRows(table=table, optimizer=self.table_optimizer,
+                                    averaged_table=self.averaged_table,
+                                    generate=lambda latent: self._postprocess_generated(
+                                        self._clean_generate(self.G, latent)),
+                                    critic_features=features,
+                                    evaluation_modules=tuple(module for module in (self.G, encoder, router)
+                                                             if module is not None),
+                                    controller=self.controller, completed_steps=lambda: self.completed_steps,
+                                    semantics=row_semantics)
+                self.birth_death = ParticleBirthDeath(
+                    rows, seed + 6, space=recipe.birth_death_space,
+                    isolation=recipe.birth_death_isolation,
+                    feature_scale=recipe.birth_death_feature_scale,
+                    cells=cells)
         if recipe.row_evidence_gate and self.routed_control is None:
             from .row_evidence import RowEvidence
             self.row_evidence = RowEvidence(table, null=recipe.row_evidence_null,
@@ -1045,7 +1049,8 @@ class UpdatePolicy:
         if rows is not None and not averaged and self._phase == "generator":
             self.observe_sampled_rows(rows)
         if self.controller is not None:
-            if self._feature_selection is not None and self._feature_selection.state["actual_backend"] == "feature_cells":
+            if (self.birth_death is not None and self._feature_selection is not None
+                    and self._feature_selection.state["actual_backend"] == "feature_cells"):
                 latent = self.birth_death.perturb_latent(
                     latent, stream, self.controller, prior=self._prior_view(averaged), rows=rows,
                     record=stream is self.noise_generator)
@@ -1117,7 +1122,8 @@ class UpdatePolicy:
             self._fast = None
 
     def _serve_settled(self):
-        if self._feature_selection is not None and self._feature_selection.state["actual_backend"] == "feature_cells":
+        if (self.birth_death is not None and self._feature_selection is not None
+                and self._feature_selection.state["actual_backend"] == "feature_cells"):
             return self.birth_death.paired_average_eligible(self.completed_steps)
         tester = self._table_tester()
         return tester is not None and getattr(tester, "last_decisive", 0) == -1

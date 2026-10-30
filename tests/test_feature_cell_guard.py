@@ -3,9 +3,8 @@ import pytest
 import torch
 from torch import nn
 
-from particlegan import GANTrainer, Recipe, get_recipe
+from particlegan import GANTrainer, get_recipe
 from particlegan.birth_death import ParticleBirthDeath, ParticleRows
-from particlegan.policy import UpdatePolicy
 
 
 def _make_table(n_rows, z_dim=2):
@@ -95,18 +94,17 @@ def test_policy_small_table_guard_mode_hold_scale():
     prior = recipe.make_prior().double()
 
     trainer = GANTrainer(recipe, G, D, prior=prior, seed=123)
-    assert trainer.policy.birth_death is not None
-    assert trainer.policy.birth_death.cells == 128
+    assert trainer.birth_death is None
+    assert trainer.policy.birth_death is None
 
     table_before = trainer.prior.z.detach().clone()
     for step in range(20):
         real_batch = torch.randn(16, 2, dtype=torch.float64)
         trainer.step(real_batch)
 
-    # Verify no particles were killed or moved
-    assert trainer.birth_death.counters["moves"] == 0
-    # Prior table changed ONLY via gradient optimization, never via discrete row overwrites
-    assert trainer.birth_death.moved_rows is None
+    # Verify birth-death remains None and table changed only via gradient optimization
+    assert trainer.birth_death is None
+    assert not torch.equal(trainer.prior.z, table_before)
 
 
 # ---------------------------------------------------------------------------
@@ -122,14 +120,16 @@ def test_policy_small_table_guard_img_intensity2_scale():
     prior = recipe.make_prior().double()
 
     trainer = GANTrainer(recipe, G, D, prior=prior, seed=456)
-    assert trainer.policy.birth_death.cells == 128
+    assert trainer.birth_death is None
+    assert trainer.policy.birth_death is None
 
+    table_before = trainer.prior.z.detach().clone()
     for step in range(40):
         real_batch = torch.randn(32, 2, dtype=torch.float64)
         trainer.step(real_batch)
 
-    assert trainer.birth_death.counters["moves"] == 0
-    assert trainer.birth_death.moved_rows is None
+    assert trainer.birth_death is None
+    assert not torch.equal(trainer.prior.z, table_before)
 
 
 # ---------------------------------------------------------------------------
@@ -163,3 +163,74 @@ def test_legacy_knn_does_not_activate_small_table_guard():
     trainer = GANTrainer(recipe, G, D, prior=prior, seed=101)
     # Under pure knn backend, cells is None, preserving legacy moves
     assert trainer.policy.birth_death.cells is None
+
+
+# ---------------------------------------------------------------------------
+# Test 7: Suite A - Constructor-Level Guard Parametrization N in [6..128]
+# ---------------------------------------------------------------------------
+@pytest.mark.parametrize("N", [6, 8, 10, 12, 16, 32, 64, 128])
+def test_policy_small_table_guard_constructor_clean(N: int):
+    """Verify that UpdatePolicy with atlas preset constructs cleanly without ValueError
+    for all N <= 128 (including N=6, 8, 10 which previously crashed on leave-one-out isolation).
+    """
+    recipe = get_recipe("atlas", num_particles=N, z_dim=4, batch_size=16, birth_death_cells=128)
+    assert recipe.birth_death_isolation is True
+    assert recipe.birth_death_cells == 128
+
+    G = nn.Sequential(nn.Linear(4, 16), nn.Tanh(), nn.Linear(16, 2)).double()
+    D = nn.Sequential(nn.Linear(2, 16), nn.Tanh(), nn.Linear(16, 1)).double()
+    prior = recipe.make_prior().double()
+
+    trainer = GANTrainer(recipe, G, D, prior=prior, seed=42)
+    assert trainer.birth_death is None
+    assert trainer.policy.birth_death is None
+
+    # Step once to confirm runtime execution safety
+    trainer.step(torch.randn(16, 2, dtype=torch.float64))
+    assert trainer.birth_death is None
+
+
+# ---------------------------------------------------------------------------
+# Test 8: Suite B - Lifecycle Multi-Step and Checkpoint Restore Stability
+# ---------------------------------------------------------------------------
+@pytest.mark.parametrize("N", [8, 10, 12, 32, 128])
+def test_policy_small_table_guard_multistep_and_checkpoint(N: int):
+    """Verify multi-step training and checkpoint save/restore for small tables."""
+    recipe = get_recipe("atlas", num_particles=N, z_dim=4, batch_size=16, birth_death_cells=128)
+    G = nn.Sequential(nn.Linear(4, 16), nn.Tanh(), nn.Linear(16, 2)).double()
+    D = nn.Sequential(nn.Linear(2, 16), nn.Tanh(), nn.Linear(16, 1)).double()
+    prior = recipe.make_prior().double()
+
+    trainer = GANTrainer(recipe, G, D, prior=prior, seed=42)
+    table_before = trainer.prior.z.detach().clone()
+
+    for _ in range(10):
+        trainer.step(torch.randn(16, 2, dtype=torch.float64))
+
+    assert trainer.birth_death is None
+    assert not torch.equal(trainer.prior.z, table_before)
+
+    # Checkpoint save & restore roundtrip
+    state = trainer.state_dict()
+    assert "birth_death" not in state
+    trainer.load_state_dict(state)
+    assert trainer.birth_death is None
+
+
+# ---------------------------------------------------------------------------
+# Test 9: Boundary Guard Behavior N=128 (bypassed) vs N=129 (active)
+# ---------------------------------------------------------------------------
+def test_policy_table_boundary_cells_guard():
+    """Verify exact boundary: N=128 deactivates birth_death, N=129 instantiates ParticleBirthDeath."""
+    recipe_128 = get_recipe("atlas", num_particles=128, z_dim=4, batch_size=16, birth_death_cells=128)
+    recipe_129 = get_recipe("atlas", num_particles=129, z_dim=4, batch_size=16, birth_death_cells=128)
+
+    G = nn.Sequential(nn.Linear(4, 16), nn.Tanh(), nn.Linear(16, 2)).double()
+    D = nn.Sequential(nn.Linear(2, 16), nn.Tanh(), nn.Linear(16, 1)).double()
+
+    trainer_128 = GANTrainer(recipe_128, G, D, prior=recipe_128.make_prior().double(), seed=42)
+    trainer_129 = GANTrainer(recipe_129, G, D, prior=recipe_129.make_prior().double(), seed=42)
+
+    assert trainer_128.birth_death is None
+    assert trainer_129.birth_death is not None
+
