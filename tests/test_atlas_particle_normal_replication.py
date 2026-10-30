@@ -622,3 +622,150 @@ def test_generator_jacobian_expansion_invariant():
     )
 
 
+# ==============================================================================
+# Group 6: Tier B Research Fixes Replication Tests
+# ==============================================================================
+
+
+def test_tier_b_all_48_tasks_unblocked():
+    """Verify all 48 tasks in prior-ablation-full-suite-v1 are unblocked under atlas-particle-normal-v1."""
+    from experiments.forge.api import task_policy_blockers
+
+    candidate = json.loads((ROOT / "configs/forge/ideas/atlas-particle-normal-v1.json").read_text())
+    view = json.loads((ROOT / "configs/forge/views/prior-ablation-full-suite-v1.json").read_text())
+
+    blocked = []
+    for a in view["assignments"]:
+        task_id = a["task"]
+        task_path = ROOT / f"configs/forge/tasks/{task_id}.json"
+        assert task_path.exists(), f"Task config missing: {task_id}"
+        task = json.loads(task_path.read_text())
+        b = task_policy_blockers(task, candidate)
+        if b:
+            blocked.append((task_id, b))
+
+    assert len(view["assignments"]) == 48, f"Expected 48 tasks, got {len(view['assignments'])}"
+    assert len(blocked) == 0, f"Blocked tasks remain in replication suite: {blocked}"
+
+
+def test_tier_b_residual16_image_task_bindings():
+    """Verify published_residual16 profile binding for image tasks in prior-ablation-full-suite-v1."""
+    from experiments.forge.views import load_view
+
+    view = load_view(ROOT, "prior-ablation-full-suite-v1")
+    assigned = {a["task"] for a in view["assignments"]}
+
+    expected_residual = {
+        "img_stripes2_residual16",
+        "img_bars4_residual16",
+        "img_blobs4_residual16",
+        "img_intensity2_residual16",
+    }
+    raw_image = {"img_stripes2", "img_bars4", "img_blobs4", "img_intensity2"}
+
+    assert expected_residual.issubset(assigned), f"Missing residual16 tasks: {expected_residual - assigned}"
+    assert not raw_image.intersection(assigned), f"Found raw image tasks: {raw_image.intersection(assigned)}"
+
+
+def test_tier_b_zero_tanh_smoke_evaluator():
+    """Verify zero_tanh_smoke evaluator grades pass/fail thresholds correctly."""
+    from experiments.forge.views import grade_result, load_tasks
+
+    tasks = load_tasks(ROOT)
+    task = tasks["zero_tanh_smoke"]
+
+    sampling = {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean",
+    }
+    prior_proof = {
+        "contract": "recipe_owned_v1",
+        "applicability": "latent_prior",
+        "update": "learned",
+        "trainable_locations": True,
+        "regularizer": "vicreg",
+        "weight": 0.0,
+        "target_std": 1.0,
+        "eps": 1e-4,
+        "l2": 0.0,
+    }
+    recipe = {
+        "prior_update": "learned",
+        "prior_regularizer": "vicreg",
+        "prior_reg": 0.0,
+        "prior_reg_target_std": 1.0,
+        "prior_reg_eps": 1e-4,
+        "prior_l2": 0.0,
+    }
+
+    # Passing evidence: errors well below thresholds
+    live_pass = {
+        "mean_abs_error": 0.001,
+        "rms_error": 0.002,
+        "p99_abs_error": 0.005,
+        "saturated_fraction": 0.0,
+        "sample_count": 4096,
+    }
+    obs_pass = [{"step": i, **live_pass} for i in range(42, 1001, 42)]
+    evidence_pass = {"observations": obs_pass, "live": live_pass, "prior_policy": prior_proof, **sampling}
+    res_pass = grade_result(task, {"evidence": evidence_pass, "applied": {"recipe": recipe}})
+    assert res_pass["status"] == "PASS"
+
+    # Failing evidence: error exceeds mean_abs_error threshold (0.005)
+    live_fail = {
+        "mean_abs_error": 0.010,
+        "rms_error": 0.02,
+        "p99_abs_error": 0.05,
+        "saturated_fraction": 0.1,
+        "sample_count": 4096,
+    }
+    obs_fail = [{"step": i, **live_fail} for i in range(42, 1001, 42)]
+    evidence_fail = {"observations": obs_fail, "live": live_fail, "prior_policy": prior_proof, **sampling}
+    res_fail = grade_result(task, {"evidence": evidence_fail, "applied": {"recipe": recipe}})
+    assert res_fail["status"] == "FAIL"
+
+
+def test_tier_b_encoder_conditional_graceful_deactivation():
+    """Verify UpdatePolicy gracefully deactivates birth-death and row evidence on conditional/encoder models."""
+    from copy import deepcopy
+    from particlegan.policy import UpdatePolicy
+
+    recipe = get_recipe("atlas", z_dim=4, num_particles=64, batch_size=16)
+    G = nn.Sequential(nn.Linear(4, 16), nn.Linear(16, 4))
+    D = nn.Sequential(nn.Linear(4, 16), nn.Linear(16, 1))
+    E = nn.Sequential(nn.Linear(4, 16), nn.Linear(16, 4))
+    deterministic_orthogonal_(G, seed=0)
+    deterministic_orthogonal_(D, seed=1)
+    deterministic_orthogonal_(E, seed=2)
+
+    prior = recipe.make_prior(sigma=0.005)
+    deterministic_orthogonal_(unwrap_prior(prior), seed=3)
+    groups = [
+        dict(params=list(G.parameters()), lr=recipe.lr),
+        dict(params=list(E.parameters()), lr=recipe.lr),
+        dict(params=[unwrap_prior(prior).z], lr=recipe.lr * recipe.prior_lr_mult),
+    ]
+    opt_g = recipe.make_generator_optimizer(groups, latent_table=unwrap_prior(prior).z)
+    opt_d = recipe.make_critic_optimizer(D, ema_critic=deepcopy(D))
+
+    # Instantiate with conditional row_semantics and encoder
+    policy = UpdatePolicy(
+        recipe,
+        G,
+        D,
+        prior=prior,
+        encoder=E,
+        generator_optimizer=opt_g,
+        critic_optimizer=opt_d,
+        row_semantics="conditional",
+        seed=0,
+    )
+
+    # Birth-death, row-evidence, and feature selection must be gracefully deactivated (None)
+    assert policy.birth_death is None
+    assert policy.row_evidence is None
+    assert policy._feature_selection is None
+
+
+

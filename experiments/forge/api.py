@@ -140,8 +140,10 @@ def task_recipe_overrides(candidate, task):
         blockers = behavior_preflight(task, bound)
         if blockers:
             raise CapabilityError(blockers)
-        overrides = {**bound.get("recipe_overrides", {}),
-                     "total_steps": execution.get("original_schedule_horizon", execution["steps"])}
+        overrides = dict(bound.get("recipe_overrides", {}))
+        recipe = resolve_public_recipe(bound)
+        if recipe.total_steps is not None:
+            overrides["total_steps"] = execution.get("original_schedule_horizon", execution["steps"])
         if execution.get("host") == "ae_gan_hold":
             from benchmarks.locked_shared.hosts.ae_gan_hold import HoldConfig
             cfg = HoldConfig(name="forge")
@@ -229,6 +231,7 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
 PUBLIC_TRAINER_POLICY_ADAPTERS = frozenset({
     "transfer_vector", "transfer_image", "native100", "native100_continuation",
     "ring_endurance", "paired_adaptation", "clockfree_audit",
+    "word_joint", "public_api_model_toy", "transfer_behavior",
 })
 
 
@@ -466,7 +469,8 @@ class FormulationContext:
         if self.prior_config["kind"] != "particle_cloud" and (
                 self.recipe.row_evidence_gate or self.recipe.particle_birth_death):
             raise CapabilityError(["independent policy row controls require an explicit particle_cloud cohort; MoG is unsupported"])
-        if execution_path == "public_components" and policy_controls(self.recipe) and self.policy_task is None:
+        if (execution_path == "public_components" and policy_controls(self.recipe)
+                and self.policy_task is None and self.prior_mechanism is None):
             raise CapabilityError(["public_components hosts do not bind the ordered UpdatePolicy lifecycle"])
         if initializer not in ("deterministic_orthogonal", "supplied"):
             raise CapabilityError(["unsupported initializer"])
@@ -506,7 +510,7 @@ class FormulationContext:
               and (self.recipe.prior_betas or self.recipe.betas)[0] == 0)
         has_gaussian_kernel = p["kind"] == "mog" or prior_noise_sigma(p) > 0.0
         live_ok = (not (self.recipe.serve_average or self.recipe.continuous_policy)
-                   or (self.prior_mechanism is not None and self.execution_path == "public_trainer"))
+                   or (self.prior_mechanism is not None and self.execution_path in ("public_trainer", "public_components")))
         return {"public_trainer": scalar, "public_components": True, "scalar_gan": scalar,
                 "mog_prior": p["kind"] == "mog" or (self.prior_mechanism is not None and has_gaussian_kernel),
                 "particle_cloud": p["kind"] == "particle_cloud",

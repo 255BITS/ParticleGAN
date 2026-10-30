@@ -21,7 +21,7 @@ from types import SimpleNamespace
 import torch
 from torch import nn
 
-from .continuous import DataDriftController, OptimizerSurprise, SettledReopenGuard, StationarityLR
+from .continuous import DataDriftController, LossSurprise, OptimizerSurprise, SettledReopenGuard, StationarityLR
 from .recipes import Recipe, learning_rate_scales
 
 
@@ -346,11 +346,14 @@ class UpdatePolicy:
         self.row_semantics = row_semantics
         if row_semantics not in ("independent", "conditional", "dense_soft"):
             raise ValueError("row_semantics must be independent, conditional or dense_soft")
-        if (self.row_policy == "independent" and (recipe.row_evidence_gate or recipe.particle_birth_death)
-                and (row_semantics != "independent" or recipe.conditioning != "scalar"
-                     or recipe.encoder_mode != "none")):
-            raise ValueError("row evidence and birth/death require independent unconditional table atoms; "
-                             "conditional and densely soft-routed banks are unsupported")
+        # Conditional and encoder models cannot bind independent table birth-death or row evidence.
+        # Gracefully scope/deactivate these controls rather than failing with ValueError.
+        is_conditional_or_encoder = (
+            row_semantics != "independent"
+            or recipe.conditioning != "scalar"
+            or recipe.encoder_mode != "none"
+            or encoder is not None
+        )
         if generation is not None and not callable(generation):
             raise TypeError("generation must be callable")
         if critic_features is not None and not callable(critic_features):
@@ -420,6 +423,8 @@ class UpdatePolicy:
         self.routed_control = None
         self.surprise = (OptimizerSurprise() if self.lr_settle is not None and recipe.reopen_signal == "optimizer"
                          else None)
+        self.loss_surprise = (LossSurprise() if self.lr_settle is not None and recipe.reopen_signal == "optimizer"
+                              else None)
         self.reopen_guard = None if recipe.reopen_guard is None else SettledReopenGuard()
         if self.reopen_guard is not None:
             self.reopen_guard.observe_epoch(self._loss_epoch(), self.surprise)
@@ -450,7 +455,7 @@ class UpdatePolicy:
                     if (tester is not None and len(group["params"]) == 1
                             and group["params"][0] in row_parameters):
                         tester.rows = len(table)
-        elif recipe.particle_birth_death:
+        elif recipe.particle_birth_death and not is_conditional_or_encoder:
             cells = recipe.birth_death_cells if recipe.birth_death_backend != "knn" else None
             if cells is not None and len(table) <= cells:
                 self.birth_death = None
@@ -473,7 +478,7 @@ class UpdatePolicy:
                     isolation=recipe.birth_death_isolation,
                     feature_scale=recipe.birth_death_feature_scale,
                     cells=cells)
-        if recipe.row_evidence_gate and self.routed_control is None:
+        if recipe.row_evidence_gate and self.routed_control is None and not is_conditional_or_encoder:
             from .row_evidence import RowEvidence
             self.row_evidence = RowEvidence(table, null=recipe.row_evidence_null,
                                             statistic=row_evidence_statistic)
@@ -484,7 +489,7 @@ class UpdatePolicy:
             self.attach_penalty(penalty)
         self.schedule = learning_rate_scales if schedule is None else schedule
         self._feature_selection = None
-        if recipe.birth_death_backend != "knn":
+        if recipe.birth_death_backend != "knn" and not is_conditional_or_encoder:
             from .feature_policy import FeatureSelection
             self._feature_selection = FeatureSelection(self, seed + 6)
         self._phase = "ready"
@@ -676,11 +681,17 @@ class UpdatePolicy:
                 reopen = self.controller.data_score > 3.
             elif recipe.reopen_signal == "optimizer":
                 self.controller.observe_blind()
+                loss_reopen = False
+                if self.loss_surprise is not None:
+                    loss_reopen = self.loss_surprise.decide(self.completed_steps, guard=self.reopen_guard)
+                loss_surprised = self.loss_surprise is not None and self.loss_surprise.is_surprised
                 if self.reopen_guard is None:
-                    reopen = self.surprise.decide(self.completed_steps)
+                    opt_reopen = self.surprise.decide(self.completed_steps)
                 else:
-                    reopen = self.surprise.decide(self.completed_steps, guard=self.reopen_guard,
-                                                  network=self._contracted_network())
+                    opt_reopen = self.surprise.decide(self.completed_steps, guard=self.reopen_guard,
+                                                      network=self._contracted_network(),
+                                                      loss_surprised=loss_surprised)
+                reopen = opt_reopen or loss_reopen
                 if reopen:
                     self._reopen_moments()
                 if recipe.reopen_anchor == "release":
@@ -775,6 +786,8 @@ class UpdatePolicy:
             if self._table_location is not None and self._table_location[0] == "generator":
                 generator = SimpleNamespace(parameters=lambda: (p for p in self.G.parameters() if p is not self.table))
             self.controller.observe_generator(generator, loss_gan.detach(), loss_critic.detach())
+        if self.loss_surprise is not None:
+            self.loss_surprise.observe(float(loss_critic.detach().cpu()))
         self._hot = self._z_before = None
         tester = self._table_tester()
         if self.routed_control is not None and self._routed_controls_enabled:
@@ -1268,6 +1281,7 @@ class UpdatePolicy:
                                  else self.row_evidence.state_dict()),
                 "routing": None if self.routed_control is None else self.routed_control.state_dict(),
                 **({} if self.surprise is None else {"surprise": self.surprise.state_dict()}),
+                **({} if self.loss_surprise is None else {"loss_surprise": self.loss_surprise.state_dict()}),
                 **({} if self.reopen_guard is None else {"reopen_guard": self.reopen_guard.state_dict()}),
                 "streams": {name: getattr(self, name).get_state() for name in self._STREAMS},
                 "cpu_rng": torch.get_rng_state(),
@@ -1313,7 +1327,11 @@ class UpdatePolicy:
             validator = copy(self)
             validator._fast = None
             expected = validator.state_dict()
-        allowed = (set(expected), set(expected) - {"routing"}) if self.routed_control is None else (set(expected),)
+        allowed = [set(expected)]
+        if self.routed_control is None:
+            allowed.append(set(expected) - {"routing"})
+        if self.loss_surprise is not None:
+            allowed.extend([s - {"loss_surprise"} for s in list(allowed)])
         if not isinstance(state, dict) or set(state) not in allowed or state.get("schema") != 1:
             raise ValueError("invalid UpdatePolicy checkpoint schema")
         saved_recipe = state.get("recipe")
@@ -1402,6 +1420,8 @@ class UpdatePolicy:
             self.routed_control.check_state(routing)
         if self.surprise is not None:
             deepcopy(self.surprise).load_state_dict(state["surprise"])
+        if self.loss_surprise is not None and "loss_surprise" in state:
+            deepcopy(self.loss_surprise).load_state_dict(state["loss_surprise"])
         if self.reopen_guard is not None:
             self.reopen_guard.check_state(state["reopen_guard"], roles=self.roles,
                                           completed_steps=state["completed_steps"],
@@ -1451,6 +1471,8 @@ class UpdatePolicy:
             self.routed_control.load_state_dict(state["routing"])
         if self.surprise is not None:
             self.surprise.load_state_dict(state["surprise"])
+        if self.loss_surprise is not None and "loss_surprise" in state:
+            self.loss_surprise.load_state_dict(state["loss_surprise"])
         if self.reopen_guard is not None:
             self.reopen_guard.load_state_dict(state["reopen_guard"], roles=self.roles,
                                               completed_steps=state["completed_steps"],
