@@ -628,24 +628,33 @@ def test_generator_jacobian_expansion_invariant():
 
 
 def test_tier_b_all_48_tasks_unblocked():
-    """Verify all 48 tasks in prior-ablation-full-suite-v1 are unblocked under atlas-particle-normal-v1."""
-    from experiments.forge.api import task_policy_blockers
+    """Verify all 48 tasks in prior-ablation-full-suite-v1 construct formulation context without CapabilityError."""
+    from experiments.forge.api import task_formulation_context, CapabilityError
 
     candidate = json.loads((ROOT / "configs/forge/ideas/atlas-particle-normal-v1.json").read_text())
     view = json.loads((ROOT / "configs/forge/views/prior-ablation-full-suite-v1.json").read_text())
 
-    blocked = []
+    assert len(view["assignments"]) == 48, f"Expected 48 tasks in view, found {len(view['assignments'])}"
+
+    failures = {}
     for a in view["assignments"]:
         task_id = a["task"]
         task_path = ROOT / f"configs/forge/tasks/{task_id}.json"
         assert task_path.exists(), f"Task config missing: {task_id}"
         task = json.loads(task_path.read_text())
-        b = task_policy_blockers(task, candidate)
-        if b:
-            blocked.append((task_id, b))
+        try:
+            ctx = task_formulation_context(candidate, task)
+            assert ctx.recipe is not None, f"Recipe is None for task {task_id}"
+            assert ctx.prior_config is not None, f"Prior config is None for task {task_id}"
+        except CapabilityError as e:
+            failures[task_id] = f"CapabilityError: {e.blockers}"
+        except Exception as e:
+            failures[task_id] = f"{type(e).__name__}: {e}"
 
-    assert len(view["assignments"]) == 48, f"Expected 48 tasks, got {len(view['assignments'])}"
-    assert len(blocked) == 0, f"Blocked tasks remain in replication suite: {blocked}"
+    assert len(failures) == 0, (
+        f"{len(failures)}/48 tasks failed task_formulation_context generation:\n"
+        + "\n".join(f"  {tid}: {err}" for tid, err in failures.items())
+    )
 
 
 def test_tier_b_residual16_image_task_bindings():
@@ -766,6 +775,137 @@ def test_tier_b_encoder_conditional_graceful_deactivation():
     assert policy.birth_death is None
     assert policy.row_evidence is None
     assert policy._feature_selection is None
+
+
+def test_tier_b_gantrainer_checkpoint_preserves_loss_surprise():
+    """Verify GANTrainer._state_dict() and _load_state_dict() persist and restore policy.loss_surprise."""
+    from copy import deepcopy
+
+    recipe = get_recipe("atlas", z_dim=2, num_particles=32, batch_size=16)
+    G = nn.Sequential(nn.Linear(2, 8), nn.Linear(8, 2))
+    D = nn.Sequential(nn.Linear(2, 8), nn.Linear(8, 1))
+    deterministic_orthogonal_(G, seed=0)
+    deterministic_orthogonal_(D, seed=1)
+
+    prior = recipe.make_prior(sigma=0.005)
+    deterministic_orthogonal_(unwrap_prior(prior), seed=2)
+    trainer = GANTrainer(recipe, G, D, prior=prior, seed=0, serial_backward=True)
+
+    assert trainer.policy.loss_surprise is not None
+    real = torch.randn(16, 2)
+    trainer.step(real)
+    trainer.step(real)
+
+    # Set known state values on loss_surprise
+    ls = trainer.policy.loss_surprise
+    ls.calm = 0.6931
+    ls.fast = 0.7200
+    ls.var_calm = 0.0004
+    ls.streak = 1
+    ls.fires = 2
+    ls.armed = True
+    ls.since_calm = 3
+    ls.since_fire = 4
+    ls.last_z = 1.345
+
+    # Save state via GANTrainer
+    state = trainer.state_dict()
+    assert "loss_surprise" in state, "loss_surprise omitted from GANTrainer.state_dict()"
+    assert isinstance(state["loss_surprise"], dict)
+    assert state["loss_surprise"]["calm"] == pytest.approx(0.6931)
+    assert state["loss_surprise"]["fast"] == pytest.approx(0.7200)
+    assert state["loss_surprise"]["var_calm"] == pytest.approx(0.0004)
+    assert state["loss_surprise"]["streak"] == 1
+    assert state["loss_surprise"]["fires"] == 2
+
+    # Restore into clean replica
+    G2 = nn.Sequential(nn.Linear(2, 8), nn.Linear(8, 2))
+    D2 = nn.Sequential(nn.Linear(2, 8), nn.Linear(8, 1))
+    deterministic_orthogonal_(G2, seed=0)
+    deterministic_orthogonal_(D2, seed=1)
+    prior2 = recipe.make_prior(sigma=0.005)
+    deterministic_orthogonal_(unwrap_prior(prior2), seed=2)
+    trainer2 = GANTrainer(recipe, G2, D2, prior=prior2, seed=0, serial_backward=True)
+
+    assert trainer2.policy.loss_surprise.calm is None
+    trainer2.load_state_dict(state)
+
+    ls2 = trainer2.policy.loss_surprise
+    assert ls2 is not None
+    assert ls2.calm == pytest.approx(0.6931)
+    assert ls2.fast == pytest.approx(0.7200)
+    assert ls2.var_calm == pytest.approx(0.0004)
+    assert ls2.streak == 1
+    assert ls2.fires == 2
+    assert ls2.armed is True
+    assert ls2.since_calm == 3
+    assert ls2.since_fire == 4
+    assert ls2.last_z == pytest.approx(1.345)
+
+    # Backward compatibility: verify loading checkpoint lacking loss_surprise
+    legacy_state = deepcopy(state)
+    del legacy_state["loss_surprise"]
+    G3 = nn.Sequential(nn.Linear(2, 8), nn.Linear(8, 2))
+    D3 = nn.Sequential(nn.Linear(2, 8), nn.Linear(8, 1))
+    deterministic_orthogonal_(G3, seed=0)
+    deterministic_orthogonal_(D3, seed=1)
+    prior3 = recipe.make_prior(sigma=0.005)
+    deterministic_orthogonal_(unwrap_prior(prior3), seed=2)
+    trainer3 = GANTrainer(recipe, G3, D3, prior=prior3, seed=0, serial_backward=True)
+    trainer3.load_state_dict(legacy_state)
+
+
+def test_tier_b_loss_surprise_fires_on_distribution_shift_during_real_training():
+    """Verify LossSurprise observes generator loss and fires on abrupt distribution shift in real GANTrainer."""
+    from particlegan.continuous import LossSurprise
+
+    device = get_test_device()
+    recipe = get_recipe("atlas", z_dim=2, num_particles=256, batch_size=128, lr=0.005)
+    G = nn.Sequential(nn.Linear(2, 32), nn.Tanh(), nn.Linear(32, 1)).to(device)
+    D = nn.Sequential(nn.Linear(1, 32), nn.Tanh(), nn.Linear(32, 1)).to(device)
+    deterministic_orthogonal_(G, seed=0)
+    deterministic_orthogonal_(D, seed=1)
+
+    prior = recipe.make_prior(sigma=0.025).to(device)
+    trainer = GANTrainer(recipe, G, D, prior=prior, seed=0, serial_backward=True)
+
+    data_gen = torch.Generator().manual_seed(42)
+
+    # 1. Warm up model to equilibrium on N(2.0, 0.5^2)
+    for _ in range(50):
+        real = (2.0 + 0.5 * torch.randn(128, 1, generator=data_gen)).to(device)
+        trainer.step(real)
+
+    # Attach clean LossSurprise at equilibrium
+    trainer.policy.loss_surprise = LossSurprise()
+
+    # 2. Stationary phase: 200 steps on N(2.0, 0.5^2)
+    for _ in range(200):
+        real = (2.0 + 0.5 * torch.randn(128, 1, generator=data_gen)).to(device)
+        trainer.step(real)
+
+    ls = trainer.policy.loss_surprise
+    assert ls is not None
+    assert ls.calm is not None, "LossSurprise failed to establish calm baseline"
+    assert ls.fires == 0, f"LossSurprise fired prematurely during stationary training: fires={ls.fires}"
+    assert abs(ls.last_z) < 3.5, f"Stationary z-score unexpectedly high: {ls.last_z}"
+    assert ls.armed is True, "LossSurprise should be armed at equilibrium"
+    fires_before = ls.fires
+
+    # 3. Shift phase: abrupt shift to N(5.0, 0.5^2) (+3.0 mean shift)
+    surprised = False
+    for step in range(1, 10):
+        shifted_real = (5.0 + 0.5 * torch.randn(128, 1, generator=data_gen)).to(device)
+        trainer.step(shifted_real)
+        if ls.fires > fires_before:
+            surprised = True
+            break
+
+    assert surprised, (
+        f"LossSurprise failed to fire on abrupt distribution shift! "
+        f"last_z={ls.last_z:.4f}, streak={ls.streak}, calm={ls.calm:.4f}, fast={ls.fast:.4f}, var={ls.var_calm:.6f}"
+    )
+
 
 
 

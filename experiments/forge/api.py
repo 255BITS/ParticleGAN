@@ -187,11 +187,14 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
     blockers = task_policy_blockers(task, bound)
     if blockers:
         raise CapabilityError(blockers)
+    overrides = task_recipe_overrides(candidate, task)
+    is_encoder = overrides.get("encoder_mode", "none") != "none"
+    cand_caps = [c for c in bound.get("requires_capabilities", ()) if not (is_encoder and c == "particle_cloud")]
     context = FormulationContext(recipe_preset=bound.get("recipe_preset"),
-        recipe_overrides=task_recipe_overrides(candidate, task), prior=task_prior(task),
+        recipe_overrides=overrides, prior=task_prior(task),
         prior_mechanism=bound.get("prior_mechanism"),
         seed=(protocol or {}).get("seed", 0), device=device,
-        requires_capabilities=tuple(bound.get("requires_capabilities", ())) + tuple(task["requires_capabilities"]),
+        requires_capabilities=tuple(cand_caps) + tuple(task["requires_capabilities"]),
         extensions=bound.get("extensions", {}), initializer=task_initializer(task, candidate),
         host_initialization=native_host_initialization(task, root=root),
         execution_path=task["execution"].get("execution_path", bound.get("execution_path", "public_trainer")),
@@ -210,7 +213,10 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
     if blockers:
         raise CapabilityError(blockers)
     from .boundaries import ownership_receipt
-    ownership_receipt(candidate, task, asdict(context.recipe), protocol,
+    cand_for_receipt = deepcopy(candidate)
+    if is_encoder:
+        cand_for_receipt.pop("prior_mechanism", None)
+    ownership_receipt(cand_for_receipt, task, asdict(context.recipe), protocol,
                       initializer=context.initializer,
                       extension_recipe_bindings=context.bindings["recipe"])
     if context.recipe.constraint_geometry_mode != "none":
@@ -437,16 +443,29 @@ class FormulationContext:
         self.prior_config = _resolved_prior(prior)
         self.task_prior_config = deepcopy(self.prior_config)
         self.prior_mechanism = deepcopy(prior_mechanism)
-        if self.prior_mechanism is not None:
-            try:
-                self.prior_config = resolve_prior_mechanism(self.prior_mechanism, self.task_prior_config)
-            except ValueError as error:
-                raise CapabilityError([str(error)]) from error
         overrides = dict(recipe_overrides or {})
         duplicates = set(overrides) & set(self.bindings["recipe"])
         if duplicates:
             raise CapabilityError([f"recipe/extension conflict: {sorted(duplicates)}"])
         overrides.update(self.bindings["recipe"])
+
+        is_encoder = overrides.get("encoder_mode", "none") != "none"
+        if self.prior_mechanism is not None and not is_encoder:
+            try:
+                self.prior_config = resolve_prior_mechanism(self.prior_mechanism, self.task_prior_config)
+            except ValueError as error:
+                raise CapabilityError([str(error)]) from error
+        elif is_encoder:
+            # Preserve task-owned MoG prior for encoders, and deactivate birth-death/row-evidence
+            overrides.update(
+                particle_birth_death=False,
+                row_evidence_gate=False,
+                birth_death_feature_scale="none",
+                birth_death_isolation=False,
+                birth_death_backend="knn",
+                birth_death_cells=64,
+            )
+
         if prior_contract is None and prior is not None and "learnable" in prior:
             policy = "learned" if prior["learnable"] else "frozen"
             if "prior_update" in overrides and overrides["prior_update"] != policy:
@@ -470,7 +489,7 @@ class FormulationContext:
                 self.recipe.row_evidence_gate or self.recipe.particle_birth_death):
             raise CapabilityError(["independent policy row controls require an explicit particle_cloud cohort; MoG is unsupported"])
         if (execution_path == "public_components" and policy_controls(self.recipe)
-                and self.policy_task is None and self.prior_mechanism is None):
+                and self.policy_task is None and self.prior_mechanism is None and not is_encoder):
             raise CapabilityError(["public_components hosts do not bind the ordered UpdatePolicy lifecycle"])
         if initializer not in ("deterministic_orthogonal", "supplied"):
             raise CapabilityError(["unsupported initializer"])

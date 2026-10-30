@@ -1210,7 +1210,7 @@ class LossSurprise:
     Z_CALM = 1.5
     CONFIRMATION_STREAK = 2
     COOLDOWN = 16
-    MIN_VAR = 1e-4
+    MIN_VAR = 5e-6
 
     def __init__(self):
         self.fast = None
@@ -1251,7 +1251,7 @@ class LossSurprise:
         if self.since_fire is not None:
             self.since_fire += 1
 
-        if calm:
+        if calm or not self.armed:
             delta = loss - self.calm
             self.calm += self.ALPHA_SLOW * delta
             self.var_calm = (1.0 - self.ALPHA_SLOW) * self.var_calm + self.ALPHA_SLOW * (delta * delta)
@@ -1270,6 +1270,7 @@ class LossSurprise:
                 self.armed = False
                 self.streak = 0
                 self.since_fire = 0
+                self.calm = self.fast
                 if guard is not None:
                     guard.after_fire()
         elif calm and self.since_fire is not None and self.since_fire >= self.COOLDOWN:

@@ -787,7 +787,7 @@ class UpdatePolicy:
                 generator = SimpleNamespace(parameters=lambda: (p for p in self.G.parameters() if p is not self.table))
             self.controller.observe_generator(generator, loss_gan.detach(), loss_critic.detach())
         if self.loss_surprise is not None:
-            self.loss_surprise.observe(float(loss_critic.detach().cpu()))
+            self.loss_surprise.observe(float(loss_gan.detach().cpu()))
         self._hot = self._z_before = None
         tester = self._table_tester()
         if self.routed_control is not None and self._routed_controls_enabled:

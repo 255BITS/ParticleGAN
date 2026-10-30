@@ -226,7 +226,7 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
     if not isinstance(prior, dict) or prior.get("kind") not in {"mog", "particle_cloud"}:
         raise ValueError("ownership receipt requires the task's explicit prior")
     mechanism = (candidate or {}).get("prior_mechanism")
-    if mechanism is not None:
+    if mechanism is not None and resolved_recipe.get("encoder_mode", "none") == "none":
         from .priors import prior_code_path, resolve_prior_mechanism
         effective_prior = resolve_prior_mechanism(mechanism, prior)
         expected_prior = {"prior_kind": "mog" if effective_prior["kind"] == "mog" else "particles",
