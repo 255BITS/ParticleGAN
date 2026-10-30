@@ -707,7 +707,11 @@ class Recipe:
             if options.pop("sigma_rel") != 0:
                 raise ValueError("nonzero sigma_rel requires prior_kind='mog'")
             options.pop("standardize")
+            normal_sigma = options.pop("sigma", None)
             prior = ParticlePrior(**options)
+            if normal_sigma is not None and normal_sigma > 0:
+                from .priors import NormalNoiseManipulator
+                prior = prior.manipulate(NormalNoiseManipulator(sigma=float(normal_sigma)))
         else:
             raise ValueError("prior_kind must be 'particles' or 'mog'")
         if manipulators is not None:

@@ -224,8 +224,13 @@ class GANTrainer:
             raise ValueError("prior must match the recipe's ParticlePrior or MoGParticlePrior kind")
         if type(base_prior) is MoGParticlePrior and base_prior.standardize != recipe.standardize:
             raise ValueError("prior standardize must match the recipe")
-        if prior_noise_generator is not None and type(base_prior) is not MoGParticlePrior:
-            raise ValueError("prior_noise_generator requires a MoG prior")
+        is_mog = type(base_prior) is MoGParticlePrior
+        has_normal_noise = bool(getattr(self.prior, "normal_noise", False)) or any(
+            getattr(m, "normal_noise", False) or type(m).__name__ == "NormalNoiseManipulator"
+            for m in getattr(self.prior, "manipulators", ()))
+        has_prior_noise = is_mog or has_normal_noise
+        if prior_noise_generator is not None and not has_prior_noise:
+            raise ValueError("prior_noise_generator requires a MoG prior or normal noise manipulator")
         if self.prior.z.shape != (recipe.num_particles, recipe.z_dim):
             raise ValueError("prior dimensions must match the recipe")
         if not any(p.requires_grad for p in discriminator.parameters()):
@@ -289,7 +294,7 @@ class GANTrainer:
         else:
             self.input_noise_generator = self.noise_generator
         self.prior_noise_generator = None
-        if type(base_prior) is MoGParticlePrior:
+        if has_prior_noise:
             self.prior_noise_generator = self._stream(prior_noise_generator, seed + 6)
             self._STREAMS += ("prior_noise_generator",)
         self.model_generator = None
