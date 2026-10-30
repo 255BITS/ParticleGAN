@@ -234,3 +234,81 @@ def test_policy_table_boundary_cells_guard():
     assert trainer_128.birth_death is None
     assert trainer_129.birth_death is not None
 
+
+# ---------------------------------------------------------------------------
+# Test 10: Checkpoint Roundtrip Under Feature-Cells When Birth-Death is Deactivated vs Active
+# ---------------------------------------------------------------------------
+@pytest.mark.parametrize("birth_death_cells,expect_birth_death", [
+    (1024, False),  # Case 1: N=1024 <= cells=1024 -> birth_death deactivated (None in state)
+    (128, True),    # Case 2: N=1024 > cells=128 -> birth_death active (present in state)
+])
+def test_feature_cells_checkpoint_roundtrip_when_birth_death_deactivated(birth_death_cells: int, expect_birth_death: bool):
+    """Verify checkpoint save and restore roundtrip for feature_cells backend with and without birth_death.
+
+    Regression test for KeyError: 'birth_death' in FeatureSelection.saved_served_source().
+    When N=1024 and birth_death_cells=1024, the small-table guard sets birth_death to None,
+    omitting 'birth_death' from trainer.state_dict(). When restoring into a fresh trainer,
+    saved_served_source() must not assume 'birth_death' key exists in state.
+    """
+    recipe = get_recipe("atlas", num_particles=1024, z_dim=4, batch_size=16, birth_death_cells=birth_death_cells)
+    G = nn.Sequential(nn.Linear(4, 16), nn.Tanh(), nn.Linear(16, 2)).double()
+    D = nn.Sequential(nn.Linear(2, 16), nn.Tanh(), nn.Linear(16, 1)).double()
+    prior = recipe.make_prior().double()
+
+    trainer = GANTrainer(recipe, G, D, prior=prior, seed=42)
+
+    # Execute 1 step with real batch of shape (16, 2) to trigger backend selection transition
+    real_batch = torch.randn(16, 2, dtype=torch.float64)
+    trainer.step(real_batch)
+
+    # Verify backend resolved to feature_cells
+    assert trainer.policy._feature_selection.state["actual_backend"] == "feature_cells"
+    if expect_birth_death:
+        assert trainer.birth_death is not None
+        assert trainer.policy.birth_death is not None
+    else:
+        assert trainer.birth_death is None
+        assert trainer.policy.birth_death is None
+
+    # Capture checkpoint
+    state = trainer.state_dict()
+    assert ("birth_death" in state) is expect_birth_death
+
+    # Create fresh trainer with distinct seed to verify parameter overwriting
+    G_fresh = nn.Sequential(nn.Linear(4, 16), nn.Tanh(), nn.Linear(16, 2)).double()
+    D_fresh = nn.Sequential(nn.Linear(2, 16), nn.Tanh(), nn.Linear(16, 1)).double()
+    prior_fresh = recipe.make_prior().double()
+    trainer_fresh = GANTrainer(recipe, G_fresh, D_fresh, prior=prior_fresh, seed=999)
+
+    # Verify fresh trainer has distinct parameters before restoration
+    assert not torch.equal(trainer.prior.z, trainer_fresh.prior.z)
+
+    # Restore checkpoint into fresh trainer (must not raise KeyError: 'birth_death')
+    trainer_fresh.load_state_dict(state)
+
+    # Verify post-restore birth_death state and feature_cells backend
+    if expect_birth_death:
+        assert trainer_fresh.birth_death is not None
+        assert trainer_fresh.policy.birth_death is not None
+    else:
+        assert trainer_fresh.birth_death is None
+        assert trainer_fresh.policy.birth_death is None
+    assert trainer_fresh.policy._feature_selection.state["actual_backend"] == "feature_cells"
+
+    # Verify bitwise equality of parameters
+    for p_orig, p_restored in zip(trainer.G.parameters(), trainer_fresh.G.parameters()):
+        assert torch.equal(p_orig, p_restored)
+    for p_orig, p_restored in zip(trainer.D.parameters(), trainer_fresh.D.parameters()):
+        assert torch.equal(p_orig, p_restored)
+    assert torch.equal(trainer.prior.z, trainer_fresh.prior.z)
+    if hasattr(trainer, "ema_G") and trainer.ema_G is not None:
+        for p_orig, p_restored in zip(trainer.ema_G.parameters(), trainer_fresh.ema_G.parameters()):
+            assert torch.equal(p_orig, p_restored)
+    if hasattr(trainer, "ema_prior") and trainer.ema_prior is not None:
+        assert torch.equal(trainer.ema_prior.z, trainer_fresh.ema_prior.z)
+
+    # Verify bitwise equality of sampling output
+    sample_orig = trainer.sample(16)
+    sample_restored = trainer_fresh.sample(16)
+    assert torch.equal(sample_orig, sample_restored)
+

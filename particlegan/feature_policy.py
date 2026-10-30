@@ -268,7 +268,10 @@ class FeatureSelection:
     def saved_served_source(self, state):
         if state['backend_selection']['actual_backend'] != 'feature_cells':
             return None
+        birth_state = state.get('birth_death')
+        if birth_state is None:
+            return None
         birth = FeatureCellBirthDeath(self.facade, self.seed)
-        birth.load_state_dict(state['birth_death'])
+        birth.load_state_dict(birth_state)
         eligible = birth.paired_average_eligible(state['completed_steps'])
         return 'averaged' if self.policy.recipe.serve_average > 0 and eligible else 'fast'
