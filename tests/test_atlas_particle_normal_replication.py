@@ -65,7 +65,10 @@ def test_forge_atlas_particle_normal_idea_contract():
     assert idea["parent"] == "atlas"
     assert idea["trainer_family"] == "atlas"
     assert idea["recipe_preset"] == "atlas"
-    assert idea["recipe_overrides"] == {}
+    assert idea["recipe_overrides"] == {
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+    }
     assert idea["mechanism_class"] == "structural"
 
     # Technique-owned prior mechanism: unstandardized particles + normal_noise manipulator
@@ -455,3 +458,167 @@ def test_atlas_prior_noise_stream_isolation_and_reproducibility():
         t1.prior_noise_generator.get_state(),
         t2.prior_noise_generator.get_state(),
     )
+
+
+# ==============================================================================
+# Group 5: Clean Intra-Mode Covariance & Generator Jacobian Expansion
+# ==============================================================================
+
+
+def test_clean_evaluation_covariance_trace_bias():
+    """Verify that clean training (output_noise_std=0.0) with normal noise prior (sigma=0.005)
+    achieves abs_cov_trace_bias <= 0.15 on clean evaluation, whereas training with
+    output_noise_std=0.029 produces severe negative trace bias (cov_trace_bias < -0.50).
+    """
+    device = get_test_device()
+    target_sigma = 0.030
+    target_variance = target_sigma ** 2  # 0.0009
+
+    def sample_mode(n: int, gen: torch.Generator) -> torch.Tensor:
+        return target_sigma * torch.randn(n, 2, device=device, generator=gen)
+
+    # 1. Clean training cohort (output_noise_std = 0.0, output_noise_mode = "fixed")
+    recipe_clean = get_recipe(
+        "atlas",
+        z_dim=2,
+        num_particles=256,
+        batch_size=128,
+        lr=0.005,
+        output_noise_mode="fixed",
+        output_noise_std=0.0,
+    )
+    G_clean = SimpleMLPGenerator(z_dim=2, hidden_dim=64, n_hidden=2, out_dim=2).to(device)
+    D_clean = SimpleMLPDiscriminator(in_dim=2, hidden_dim=64, n_hidden=2, fourier=2).to(device)
+    deterministic_orthogonal_(G_clean, seed=0)
+    deterministic_orthogonal_(D_clean, seed=1)
+
+    prior_clean = recipe_clean.make_prior(sigma=0.005).to(device)
+    deterministic_orthogonal_(unwrap_prior(prior_clean), seed=2)
+    trainer_clean = GANTrainer(recipe_clean, G_clean, D_clean, prior=prior_clean, seed=0, serial_backward=True)
+
+    data_gen = torch.Generator(device=device).manual_seed(42)
+    steps = 400 if device.type == "cuda" else 150
+    for _ in range(steps):
+        real_batch = sample_mode(128, data_gen)
+        trainer_clean.step(real_batch)
+
+    # Clean evaluation
+    eval_gen = torch.Generator(device=device).manual_seed(713)
+    samples_clean = trainer_clean.sample(4096, generator=eval_gen, output_noise=False)
+
+    # Empirical covariance
+    cov_clean = torch.cov(samples_clean.T)
+    eval_trace = float(torch.trace(cov_clean).item())
+    target_trace = 2.0 * target_variance
+    cov_trace_bias = (eval_trace - target_trace) / target_trace
+
+    # Assert clean evaluation gate passes
+    assert abs(cov_trace_bias) <= 0.15, (
+        f"Clean training failed covariance gate: cov_trace_bias = {cov_trace_bias:.4f} (expected <= 0.15)"
+    )
+
+    # 2. Counterfactual Noisy training cohort (output_noise_std = 0.029, output_noise_mode = "fixed")
+    recipe_noisy = get_recipe(
+        "atlas",
+        z_dim=2,
+        num_particles=256,
+        batch_size=128,
+        lr=0.005,
+        output_noise_mode="fixed",
+        output_noise_std=0.029,
+    )
+    G_noisy = SimpleMLPGenerator(z_dim=2, hidden_dim=64, n_hidden=2, out_dim=2).to(device)
+    D_noisy = SimpleMLPDiscriminator(in_dim=2, hidden_dim=64, n_hidden=2, fourier=2).to(device)
+    deterministic_orthogonal_(G_noisy, seed=0)
+    deterministic_orthogonal_(D_noisy, seed=1)
+
+    prior_noisy = recipe_noisy.make_prior(sigma=0.005).to(device)
+    deterministic_orthogonal_(unwrap_prior(prior_noisy), seed=2)
+    trainer_noisy = GANTrainer(recipe_noisy, G_noisy, D_noisy, prior=prior_noisy, seed=0, serial_backward=True)
+
+    data_gen_noisy = torch.Generator(device=device).manual_seed(42)
+    for _ in range(steps):
+        real_batch = sample_mode(128, data_gen_noisy)
+        trainer_noisy.step(real_batch)
+
+    samples_noisy_clean_eval = trainer_noisy.sample(4096, generator=eval_gen, output_noise=False)
+    cov_noisy_clean_eval = torch.cov(samples_noisy_clean_eval.T)
+    eval_noisy_trace = float(torch.trace(cov_noisy_clean_eval).item())
+    noisy_cov_trace_bias = (eval_noisy_trace - target_trace) / target_trace
+
+    # Proves the bug: noisy training strips mode variance on clean evaluation
+    assert noisy_cov_trace_bias < -0.50, (
+        f"Counterfactual check: expected severe negative bias under noisy training, got {noisy_cov_trace_bias:.4f}"
+    )
+
+
+def test_generator_jacobian_expansion_invariant():
+    """Verify that the generator Jacobian expansion J_G (0.005^2 I) J_G^T accurately
+    models the local covariance of generator outputs under latent perturbations,
+    confirming the first-order Taylor expansion invariant across particles.
+    """
+    device = get_test_device()
+    target_sigma = 0.030
+    sigma_z = 0.005
+
+    recipe = get_recipe(
+        "atlas",
+        z_dim=2,
+        num_particles=128,
+        batch_size=128,
+        lr=0.005,
+        output_noise_mode="fixed",
+        output_noise_std=0.0,
+    )
+    G = SimpleMLPGenerator(z_dim=2, hidden_dim=64, n_hidden=2, out_dim=2).to(device)
+    D = SimpleMLPDiscriminator(in_dim=2, hidden_dim=64, n_hidden=2, fourier=2).to(device)
+    deterministic_orthogonal_(G, seed=0)
+    deterministic_orthogonal_(D, seed=1)
+
+    prior = recipe.make_prior(sigma=sigma_z).to(device)
+    deterministic_orthogonal_(unwrap_prior(prior), seed=2)
+    trainer = GANTrainer(recipe, G, D, prior=prior, seed=0, serial_backward=True)
+
+    data_gen = torch.Generator(device=device).manual_seed(42)
+    steps = 200 if device.type == "cuda" else 100
+    for _ in range(steps):
+        real_batch = target_sigma * torch.randn(128, 2, device=device, generator=data_gen)
+        trainer.step(real_batch)
+
+    # Compute numerical Jacobian at latent particle centroids
+    unwrapped = unwrap_prior(trainer.prior)
+    z_table = unwrapped.z.detach()[:5]  # First 5 particles
+    ratios = []
+
+    for i in range(len(z_table)):
+        z_i = z_table[i:i+1].clone().requires_grad_(True)
+        y_i = trainer.G(z_i)  # (1, 2)
+        # Compute Jacobian J = dy / dz (2 x 2)
+        j_rows = []
+        for dim in range(2):
+            grad = torch.autograd.grad(y_i[0, dim], z_i, retain_graph=True)[0]
+            j_rows.append(grad.squeeze(0))
+        J = torch.stack(j_rows, dim=0)  # (2, 2)
+
+        # Theoretical predicted covariance: Sigma_pred = J (sigma_z^2 I) J^T
+        sigma_pred = (sigma_z ** 2) * torch.matmul(J, J.T)
+        trace_pred = float(torch.trace(sigma_pred).item())
+
+        # Empirical local perturbation covariance: G(z_i + delta_z)
+        pert_gen = torch.Generator(device=device).manual_seed(100 + i)
+        delta_z = sigma_z * torch.randn(2048, 2, device=device, generator=pert_gen)
+        y_pert = trainer.G(z_i.detach() + delta_z)
+        cov_emp = torch.cov(y_pert.T)
+        trace_emp = float(torch.trace(cov_emp).item())
+
+        assert trace_pred > 0, f"Degenerate Jacobian at particle {i}"
+        ratio = trace_emp / trace_pred
+        ratios.append(ratio)
+
+    mean_ratio = sum(ratios) / len(ratios)
+    # The first-order Taylor expansion must accurately match empirical perturbation trace within 20%
+    assert 0.80 <= mean_ratio <= 1.20, (
+        f"Empirical perturbation did not match Jacobian expansion: ratio = {mean_ratio:.4f}"
+    )
+
+

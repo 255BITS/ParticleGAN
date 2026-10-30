@@ -463,10 +463,12 @@ class UpdatePolicy:
                                                          if module is not None),
                                 controller=self.controller, completed_steps=lambda: self.completed_steps,
                                 semantics=row_semantics)
+            cells = recipe.birth_death_cells if recipe.birth_death_backend != "knn" else None
             self.birth_death = ParticleBirthDeath(
                 rows, seed + 6, space=recipe.birth_death_space,
                 isolation=recipe.birth_death_isolation,
-                feature_scale=recipe.birth_death_feature_scale)
+                feature_scale=recipe.birth_death_feature_scale,
+                cells=cells)
         if recipe.row_evidence_gate and self.routed_control is None:
             from .row_evidence import RowEvidence
             self.row_evidence = RowEvidence(table, null=recipe.row_evidence_null,
@@ -841,7 +843,9 @@ class UpdatePolicy:
             if event and event.get("moves") and self.lr_settle is not None:
                 self._routed_rebase()
         elif self.birth_death is not None:
-            if self._feature_selection is not None and self._feature_selection.state["actual_backend"] == "feature_cells":
+            if getattr(self.birth_death, "cells", None) is not None and len(self.table) <= self.birth_death.cells:
+                event = None
+            elif self._feature_selection is not None and self._feature_selection.state["actual_backend"] == "feature_cells":
                 event = self.birth_death.maybe_apply(self._feature_selection.facade, self.last_output_sigma)
             else:
                 event = self.birth_death.maybe_apply(self.last_output_sigma)

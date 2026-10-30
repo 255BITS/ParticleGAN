@@ -7,7 +7,7 @@
   "api_version": "forge-api-v1",
   "changed_factors": [
     "Declare technique-owned prior_mechanism swapping task MoGParticlePrior for unstandardized ParticlePrior wrapped with NormalNoiseManipulator (sigma=0.005 on stochastic tasks, deterministic sigma=0.0 on enumerated particle-cloud image tasks)",
-    "Keep the entire public atlas preset recipe unchanged (recipe_overrides={}) so the prior mechanism swap is the sole trainer delta against control atlas"
+    "Train clean by overriding recipe_overrides with output_noise_mode='fixed' and output_noise_std=0.0, matching public clean evaluation (sampling_law='public_prior_without_output_noise') and compelling generator Jacobian expansion to match target mode covariance"
   ],
   "claim_contract": {
     "sampling_law": "task_declared",
@@ -35,7 +35,10 @@
     ],
     "standardize": false
   },
-  "recipe_overrides": {},
+  "recipe_overrides": {
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0
+  },
   "recipe_preset": "atlas",
   "requires_capabilities": [
     "particle_cloud",
