@@ -1047,6 +1047,7 @@ def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, nex
               "goal": study.get("scope", {}).get("view", study.get("view")) if study else candidate.get("goal"),
               "hypothesis": study["hypothesis"] if study else candidate.get("hypothesis", "See immutable candidate declaration."),
               "mechanism_class": candidate.get("mechanism_class", "unknown"), "prior": candidate.get("prior"),
+              **({"prior_mechanism": candidate["prior_mechanism"]} if candidate.get("prior_mechanism") is not None else {}),
               "claim_contract": candidate.get("claim_contract"),
               "source": {"path": selected[0]["source"]},
               "task_results": [row for attempt in selected for row in attempt["task_results"]],

@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 861. Inventory coverage: complete. Unresolved import items: 7.
+Records: 862. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4552,6 +4552,22 @@ The explicit published residual16 intensity host passed all sustained/terminal r
 
 [Evidence](../../reports/forge/attempts/e13557902b3544a081defbcac092c136/result.json) · [Record](records/readout-7650981f9a48a164aebbd631.json)
 
+### atlas-particle-normal-v1 · readout-78b2f38e0f8c24f678b47fa2
+
+**Scope:** research_diagnostic; scientific; revision `119e0a54eeb8727fbc823acf61cf2cfa364a63a69bed6b46d1cefcbb8f49d1cf`.
+
+Swapping MoGParticlePrior for a technique-owned unstandardized ParticlePrior plus NormalNoiseManipulator (sigma=0.005) unblocks public_trainer execution across the 48-task full suite while keeping the public atlas preset recipe fixed under protocol seed 0.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 12, 'PASS': 6}; wall seconds 3631.847; mechanism `structural`.
+
+vector_unequal_mass: hq=0.99146, mass_tv=0.014307; vector_anisotropic: hq=0.97925, mass_tv=0.005778
+
+Full-suite diagnostic (prior-ablation-full-suite-v1, seed 0, deterministic_orthogonal): technique-owned prior_mechanism (unstandardized ParticlePrior + NormalNoiseManipulator sigma=0.005, deterministic sigma=0.0 on enumerated image tasks) with unchanged atlas preset recipe unblocked all 25 public_trainer tasks (19 executed, 6 continuations gated by parent clean-variance verdicts, 23 non-policy/unrouted hosts blocked). Both study signatures confirmed: grid100 precision=0.99737 (>=0.95, 100/100 modes, mass_tv=0.02576, center_rms_sigma=0.13426; rotated100 precision=0.9993, staggered100 precision=0.9969) and gaussian1d_smoke mean_error_sigma=0.0052 (<=0.20 PASS). Total 6 PASS (gaussian1d_smoke, vector_two_broad, vector_anisotropic mass_tv=0.0058, vector_overlap, vector_spiral, img_stripes2 hq=1.0000), 12 FAIL, 1 runtime BLOCKED (zero_tanh_smoke), 29 preflight/dependency not run.
+
+**Next:** Test a clean-training Atlas study (output_noise_mode='fixed', output_noise_std=0.0 paired with prior_mechanism NormalNoiseManipulator sigma=0.005 and min(birth_death_cells, num_particles // 2) cell cap) so the generator carries full within-mode variance under clean evaluation without altering row-local particle transport.
+
+[Evidence](../../reports/forge/attempts/0d84b64687274007952d35a196692d98/result.json) · [Record](records/readout-78b2f38e0f8c24f678b47fa2.json)
+
 ### bispf-throughput-v1 · readout-7a4fda449cb2e080c1aebf91
 
 **Scope:** research_diagnostic; scientific; revision `5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d`.
@@ -5926,4 +5942,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `f1da1e79fa54311d2d483ace8827a3d6b2254a80ab7331a1ac12eec5a9953c33`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `5e3a422d6f2081fe80b72ba20cc22acf4669542077b17ee7ee629e6e0ee8d16f`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

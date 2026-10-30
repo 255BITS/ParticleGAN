@@ -150,6 +150,7 @@ def _validate_task(task, candidate, root, *, explicit_initializer=True):
         task_formulation_context(reference_candidate, task, device="cpu", root=root)
     else:
         FormulationContext(recipe_preset=candidate.get("recipe_preset"), recipe_overrides=overrides, prior=prior,
+            prior_mechanism=candidate.get("prior_mechanism"),
             device="cpu", requires_capabilities=tuple(candidate.get("requires_capabilities", ()))
                 + tuple(task["requires_capabilities"]), extensions=candidate.get("extensions", {}),
             initializer=initializer)
@@ -184,7 +185,8 @@ def _validate_candidate_identity(request):
     # depend on promotion seed; the registered RNG protocol is checked separately.
     context = FormulationContext(recipe_preset=candidate.get("recipe_preset"),
         recipe_overrides=candidate.get("recipe_overrides", {}),
-        prior=candidate.get("prior"), device="cpu",
+        prior=candidate.get("prior"), prior_mechanism=candidate.get("prior_mechanism"),
+        device="cpu",
         requires_capabilities=candidate.get("requires_capabilities", ()),
         extensions=candidate.get("extensions", {}),
         initializer=candidate.get("initializer", "deterministic_orthogonal"),

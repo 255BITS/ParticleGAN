@@ -390,7 +390,8 @@ class _Run:
     def receipt(self, evidence, *, save_state=True):
         trainer = self.trainer
         state = self.context.state_dict()
-        if self.policy_audit is not None:
+        from .api import policy_controls
+        if self.policy_audit is not None or policy_controls(self.context.recipe):
             from .policy_adapters import finite_policy_state
             self.finite = self.finite and finite_policy_state(state)
         else:

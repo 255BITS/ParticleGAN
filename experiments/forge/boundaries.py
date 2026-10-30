@@ -225,11 +225,20 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
     prior = execution.get("prior")
     if not isinstance(prior, dict) or prior.get("kind") not in {"mog", "particle_cloud"}:
         raise ValueError("ownership receipt requires the task's explicit prior")
-    expected_prior = {"prior_kind": "mog" if prior["kind"] == "mog" else "particles",
-                      "sigma_rel": 0., "standardize": prior["standardize"]}
+    mechanism = (candidate or {}).get("prior_mechanism")
+    if mechanism is not None:
+        from .priors import prior_code_path, resolve_prior_mechanism
+        effective_prior = resolve_prior_mechanism(mechanism, prior)
+        expected_prior = {"prior_kind": "mog" if effective_prior["kind"] == "mog" else "particles",
+                          "sigma_rel": 0., "standardize": effective_prior["standardize"]}
+    else:
+        effective_prior = None
+        expected_prior = {"prior_kind": "mog" if prior["kind"] == "mog" else "particles",
+                          "sigma_rel": 0., "standardize": prior["standardize"]}
     for name, value in expected_prior.items():
         if resolved_recipe[name] != value:
-            raise ValueError(f"effective Recipe {name} contradicts task-owned prior")
+            label = "technique-owned prior_mechanism" if effective_prior is not None else "task-owned prior"
+            raise ValueError(f"effective Recipe {name} contradicts {label}")
     resources = _resources(task)
     for name, (value, _) in resources.items():
         if resolved_recipe[name] != value:
@@ -251,9 +260,14 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
         source = _reference_source(candidate, name, value, extension_recipe_bindings)
         status = "metadata" if name == "name" else "effective"
         if name in expected_prior:
-            source = ("task.execution.prior.kind" if name == "prior_kind" else
-                      "task.execution.prior.standardize" if name == "standardize" else
-                      "public prior binding: absolute task sigma replaces relative calibration")
+            if effective_prior is not None and name in {"prior_kind", "standardize"}:
+                owner = "technique"
+                source = ("candidate.prior_mechanism.kind" if name == "prior_kind"
+                          else "candidate.prior_mechanism.standardize")
+            else:
+                source = ("task.execution.prior.kind" if name == "prior_kind" else
+                          "task.execution.prior.standardize" if name == "standardize" else
+                          "public prior binding: absolute task sigma replaces relative calibration")
         elif name == "total_steps":
             if value is None:
                 owner, source = "technique", "schedule-free technique; task.execution.steps bounds execution separately"
@@ -314,7 +328,11 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
     if recipe_owned_prior(task):
         prior_record["update_policy"] = _record(resolved_recipe["prior_update"], "technique", "Recipe.prior_update")
         prior_record["contract"] = execution["prior_contract"]
-    prior_record["code_path"] = "MoGParticlePrior" if prior["kind"] == "mog" else "ParticlePrior"
+    if effective_prior is not None:
+        prior_record["technique_mechanism"] = _record(effective_prior, "technique", "candidate.prior_mechanism")
+        prior_record["code_path"] = prior_code_path(effective_prior)
+    else:
+        prior_record["code_path"] = "MoGParticlePrior" if prior["kind"] == "mog" else "ParticlePrior"
     if not prior_binding["latent_table_controls"]:
         prior_record["declared_code_path"] = prior_record["code_path"]
         prior_record["code_path"] = None

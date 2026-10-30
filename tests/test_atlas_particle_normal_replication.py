@@ -60,27 +60,26 @@ def test_forge_atlas_particle_normal_idea_contract():
 
     validate_idea(idea)
 
+    assert idea["schema_version"] == 3
     assert idea["id"] == "atlas-particle-normal-v1"
     assert idea["parent"] == "atlas"
+    assert idea["trainer_family"] == "atlas"
     assert idea["recipe_preset"] == "atlas"
+    assert idea["recipe_overrides"] == {}
     assert idea["mechanism_class"] == "structural"
 
-    # Prior declaration must be unstandardized learnable particle cloud with sigma 0.0
-    prior_cfg = idea["prior"]
-    assert prior_cfg["kind"] == "particle_cloud"
-    assert prior_cfg["standardize"] is False
-    assert prior_cfg["learnable"] is True
-    assert prior_cfg["sigma"] == 0.0
+    # Technique-owned prior mechanism: unstandardized particles + normal_noise manipulator
+    mech = idea["prior_mechanism"]
+    assert mech["kind"] == "particles"
+    assert mech["standardize"] is False
+    assert mech["manipulators"] == [{"kind": "normal_noise", "sigma": 0.005}]
 
-    # Recipe overrides per survey_experiments_tests_1/report.md
-    overrides = idea["recipe_overrides"]
-    assert overrides["prior_kind"] == "particles"
-    assert overrides["output_noise_mode"] == "learnable"
-    assert overrides["output_noise_std"] == 0.029
-    assert overrides["output_noise_warmup"] == 0.0
-    assert overrides["birth_death_backend"] == "auto"
-    assert overrides["birth_death_cells"] == 128
-    assert overrides["reopen_guard"] == "settled"
+    # Claim contract matches full-suite task-declared live evaluation under schedule-free horizon
+    assert idea["claim_contract"] == {
+        "schedule": "schedule_free",
+        "scoring_weights": "live",
+        "sampling_law": "task_declared",
+    }
 
     # Required capabilities
     caps = set(idea["requires_capabilities"])
@@ -100,25 +99,14 @@ def test_forge_atlas_particle_normal_study_contract():
     assert study["status"] == "ready"
     assert study["candidate"] == "atlas-particle-normal-v1"
     assert study["control"]["candidate_id"] == "atlas"
-
-    # Control task map covers native 100-Gaussians and portability tasks
-    task_map = study["control"]["task_map"]
-    for task in (
-        "grid100",
-        "rotated100",
-        "staggered100",
-        "gaussian1d_smoke",
-        "gaussian1d_stability",
-        "ring16_acquisition",
-        "two_pole",
-        "vector_spiral",
-        "vector_anisotropic",
-    ):
-        assert task in task_map, f"Missing task in replication study: {task}"
+    assert study["control"]["task_map"] == {}
+    assert study["scope"]["view"] == "prior-ablation-full-suite-v1"
+    assert study["scope"]["execution_backend"] == "cuda"
+    assert study["scope"]["through_tier"] == 1
 
     # Prediction and falsifier signatures
     assert study["prediction"]["task_id"] == "grid100"
-    assert study["prediction"]["metric"] == "mode_precision"
+    assert study["prediction"]["metric"] == "precision"
     assert study["prediction"]["op"] == ">="
     assert study["prediction"]["threshold"] == 0.95
 
@@ -131,7 +119,10 @@ def test_forge_atlas_particle_normal_study_contract():
     evidence = study["prior_evidence"]
     assert len(evidence) >= 1
     assert evidence[0]["path"] == "reports/develop-gates-20261001/atlas19-replay.json"
-    assert evidence[0]["identity"]["record_id"] == "develop-original-atlas19-and-gate-diagnosis"
+    assert (
+        evidence[0]["identity"]["config_sha256"]
+        == "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4"
+    )
 
 
 def test_forge_validate_includes_replication_study():

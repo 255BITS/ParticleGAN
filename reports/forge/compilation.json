@@ -2,7 +2,7 @@
   "automation_digest": "391b85927f392edf67e5876d55583ddfa090cd4213d7436c2acbc522888a2f18",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "f1da1e79fa54311d2d483ace8827a3d6b2254a80ab7331a1ac12eec5a9953c33",
+  "input_digest": "5e3a422d6f2081fe80b72ba20cc22acf4669542077b17ee7ee629e6e0ee8d16f",
   "input_hashes": {
     "configs/forge/cadence-studies/bispf-lazy-cadence-v1.json": "fc7302ac06b61fa093a39265d440545fdab176852a588c40b750be16adc1e58b",
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
@@ -604,6 +604,7 @@
     "configs/forge/family-documentation/release07-gan-v3-mog.json": "3039d194c26039ef03f31c9577d668cdf9430071cc422b6369b550b043400320",
     "configs/forge/family-documentation/release07-gan-v3.json": "5ee853e46b22b57123d55e01620a59949c8998ea655e75e9dfbf5a96685c5905",
     "configs/forge/family-tags.json": "3a4aa728a133c35b56da6a027d70b93425fad58e47ce6c2cd0a19bf0965ba9c9",
+    "configs/forge/ideas/atlas-particle-normal-v1.json": "17242f730053ec9dd6d32da7c81afd0c2b77d32994014b3bffc78547e152d641",
     "configs/forge/ideas/atlas.json": "b8a7d65760d0c21d2b3ccd65564085a6e23cde20775791ecb0f8f932609cec65",
     "configs/forge/ideas/bcap-ada-nsgda-v1.json": "54a9d5bb1a67886015544142339fab9bf23988ba60cf759c38cafbce9d89e1c6",
     "configs/forge/ideas/bcap-default-baseline-control-v1.json": "04fff5076a7eeb436526e2d80832232231bc7e758194d1a2f9a3213f72343595",
@@ -865,6 +866,7 @@
     "configs/forge/selections/history/family-current-1549db2b3b66fd1c50f44058ea92d770c559f0f1f7632ecd6d5c367e222ba64c.json": "1549db2b3b66fd1c50f44058ea92d770c559f0f1f7632ecd6d5c367e222ba64c",
     "configs/forge/selections/tier1-existing-configs-v1.json": "18e990f873f8315d30740124afad4acad212f6708723b58816dda72d57e224b8",
     "configs/forge/selections/word-joint-task-v1.json": "9e1c77de1914e386eeb1032bd8cf586b4c45b99775ab71b983ee77a4d618edbb",
+    "configs/forge/studies/atlas-particle-normal-replication-study-v1.json": "606c7319ba54c92fd33ed0ab0479981706dec83230f51ca049eb0add1a7b4472",
     "configs/forge/studies/bcap-clockfree-coverage-v1.json": "a774e8bf265a51e2ad526db11594ebfea2e5cfaa4188d579ccfe01a3fc5e43bc",
     "configs/forge/studies/bcap-convolution-images-v1.json": "3be51ff7ce3ab44b3ae2f92d37557e6cb3735dbe48c6a71503c10a6e1f8bcc69",
     "configs/forge/studies/bcap-default-baseline-control-v1-study.json": "9454d24b52a070f35e7e742aa6c006e93b2d823ba6deb8500144e80d2eb1414a",
@@ -1716,6 +1718,7 @@
     "reports/forge/records/readout-7450f3d30d639bad8e4f25e5.json": "dbaccdb38f5be21dd938dcfc21e47a12d5888789107d96581ba9c8c1fb66fb9e",
     "reports/forge/records/readout-75d5cdc5a88167d59ceff1b2.json": "aa98d62e2ee73527a430b8be11e063988a5bbd4e414726f832e1cd4fc23b72ea",
     "reports/forge/records/readout-7650981f9a48a164aebbd631.json": "8de65757f721f3b5365d531c9078d3a471fda007c20d1b590317d45aac5be3a8",
+    "reports/forge/records/readout-78b2f38e0f8c24f678b47fa2.json": "cce1dd854643e411a140b9c1e06b49814aabae695ed3a9cddfce9b11f695af93",
     "reports/forge/records/readout-7a4fda449cb2e080c1aebf91.json": "4e7b95a2a9537176a13d659f028f8c8066c97372022ab24348f14da202a0e72b",
     "reports/forge/records/readout-7b017c8ed900b677ebf6bf55.json": "e6f4802bdbc27dfcff8731d99a0cc497590c37081c5305994279e00789509abd",
     "reports/forge/records/readout-813a2ad71ca3580b4a8d46c1.json": "eac2b794c3e9dfd16272125f684497d6c440b2e4689d8a0626d00ae42562bf07",
@@ -4224,7 +4227,7 @@
   },
   "operational_lifecycle_digest": "1f0e327db0f43b33080ec349f0bf27ded2d185bf2b60c86d613105800dbbbf2c",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "2ce40beda60c7ecaea90cde5890e6c52420f280be3f0e2d8c59e933887a40c1b",
+    "reports/forge/EXPERIMENT_MEMORY.md": "eee7feab7feea894a125ace233e88fc98f7d3e90095884b8a3c0ef776a099bbd",
     "reports/forge/publication-records.json": "5174449ad10c00a8d22dee09d3ef50c8fb0fc76f196d85197271ee7c0766c9d8"
   },
   "pending_readout": [
@@ -4260,12 +4263,12 @@
     "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
     "source_manifest_digest": "a3591610f1d5622ecfcc34b72e30d75b2bb3ce4fe81001c4a45bf4010856b080"
   },
-  "record_count": 861,
+  "record_count": 862,
   "reducer_hashes": {
-    "experiments.forge.knowledge": "b9ea0a5175a9c7e355cfb67e0f1b526760dd54ba83bc6aacaafb42c9ccd37867",
+    "experiments.forge.knowledge": "652e69d2644a14d794b5ad01f092a7c260ee7fb18ea17b8811d8e0a20a66b483",
     "experiments.forge.publication_memory": "7e9d1e7ea3ce0e165c6df54d324ddffec8d220a0eb1e2ad268ca2d16778ad9c4"
   },
-  "reducer_sha256": "b9ea0a5175a9c7e355cfb67e0f1b526760dd54ba83bc6aacaafb42c9ccd37867",
+  "reducer_sha256": "652e69d2644a14d794b5ad01f092a7c260ee7fb18ea17b8811d8e0a20a66b483",
   "reducer_version": "forge-knowledge-v2",
   "schema_version": 1,
   "scientific_normalization_complete": false,
