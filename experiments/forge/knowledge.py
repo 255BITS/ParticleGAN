@@ -1016,6 +1016,14 @@ def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, nex
     states = _queue_states(root, attempts)
     study_request = None
     from .studies import frozen_declaration, selected_study_id
+    if study_id is not None and (study_id.endswith(".json") or "/" in study_id):
+        study_path = (root / study_id).resolve() if not Path(study_id).is_absolute() else Path(study_id)
+        if study_path.exists():
+            import json
+            try:
+                study_id = json.loads(study_path.read_text()).get("id", study_id)
+            except Exception:
+                pass
     selected = [a for a in attempts if a["request"].get("candidate", {}).get("id") == candidate_id
                 and (requested_revision is None or a["request"]["candidate_revision"].startswith(requested_revision))
                 and (study_id is None or a["request"].get("study", {}).get("id") == study_id)]

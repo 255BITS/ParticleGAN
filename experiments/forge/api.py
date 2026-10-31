@@ -133,7 +133,22 @@ def task_recipe_overrides(candidate, task):
         from .model_toy_adapter import validate_task
         validate_task(task)
         resources = {**task_recipe_resources(task), **execution["recipe_fields"]}
-        return host_recipe_overrides(bound, execution, resources)
+        overrides = host_recipe_overrides(bound, execution, resources)
+        overrides.update(
+            particle_birth_death=False,
+            row_evidence_gate=False,
+            serve_average=0.0,
+            prior_kind="mog",
+            birth_death_feature_scale="none",
+            birth_death_isolation=False,
+            birth_death_backend="knn",
+            birth_death_cells=64,
+            continuous_policy=None,
+            lr_control="mobility",
+            reopen_guard=None,
+            total_steps=execution.get("original_schedule_horizon", execution.get("steps", 1200)),
+        )
+        return overrides
     if (task["adapter"] == "transfer_behavior" and execution.get("host") != "mode_hold"
             and not is_policy_task(task)):
         from .behavior_adapters import behavior_preflight
@@ -142,8 +157,16 @@ def task_recipe_overrides(candidate, task):
             raise CapabilityError(blockers)
         overrides = dict(bound.get("recipe_overrides", {}))
         recipe = resolve_public_recipe(bound)
-        if recipe.total_steps is not None:
-            overrides["total_steps"] = execution.get("original_schedule_horizon", execution["steps"])
+        overrides["total_steps"] = execution.get("original_schedule_horizon", execution.get("steps", 100))
+        overrides["lr_control"] = "mobility"
+        overrides["continuous_policy"] = None
+        overrides["reopen_guard"] = None
+        overrides["particle_birth_death"] = False
+        overrides["row_evidence_gate"] = False
+        overrides["birth_death_feature_scale"] = "none"
+        overrides["birth_death_isolation"] = False
+        overrides["birth_death_backend"] = "knn"
+        overrides["birth_death_cells"] = 64
         if execution.get("host") == "ae_gan_hold":
             from benchmarks.locked_shared.hosts.ae_gan_hold import HoldConfig
             cfg = HoldConfig(name="forge")
@@ -189,10 +212,14 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
         raise CapabilityError(blockers)
     overrides = task_recipe_overrides(candidate, task)
     is_encoder = overrides.get("encoder_mode", "none") != "none"
-    cand_caps = [c for c in bound.get("requires_capabilities", ()) if not (is_encoder and c == "particle_cloud")]
+    is_model_toy = task.get("adapter") == "public_api_model_toy"
+    cand_caps = [c for c in bound.get("requires_capabilities", ())
+                 if not (is_encoder and c == "particle_cloud")
+                 and not (is_model_toy and c in ("policy_controls", "policy_serving", "particle_cloud"))]
+    prior_mechanism = None if is_model_toy else bound.get("prior_mechanism")
     context = FormulationContext(recipe_preset=bound.get("recipe_preset"),
         recipe_overrides=overrides, prior=task_prior(task),
-        prior_mechanism=bound.get("prior_mechanism"),
+        prior_mechanism=prior_mechanism,
         seed=(protocol or {}).get("seed", 0), device=device,
         requires_capabilities=tuple(cand_caps) + tuple(task["requires_capabilities"]),
         extensions=bound.get("extensions", {}), initializer=task_initializer(task, candidate),
@@ -214,7 +241,7 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
         raise CapabilityError(blockers)
     from .boundaries import ownership_receipt
     cand_for_receipt = deepcopy(candidate)
-    if is_encoder:
+    if is_encoder or is_model_toy:
         cand_for_receipt.pop("prior_mechanism", None)
     ownership_receipt(cand_for_receipt, task, asdict(context.recipe), protocol,
                       initializer=context.initializer,
@@ -228,7 +255,7 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
                 context.recipe.input_noise_std or context.recipe.output_noise_std or context.recipe.standardize):
             raise CapabilityError(["strict_progress finite replay requires zero additive noise and an unstandardized prior"])
     context.host_adaptation = adaptation_receipt(candidate, task)
-    context.ownership_contract = {"candidate": deepcopy(candidate), "task": deepcopy(task),
+    context.ownership_contract = {"candidate": deepcopy(cand_for_receipt), "task": deepcopy(task),
                                   "protocol": deepcopy(protocol or {}),
                                   "extension_recipe_bindings": deepcopy(context.bindings["recipe"])}
     return context

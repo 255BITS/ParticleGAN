@@ -30,7 +30,7 @@
     "scoring_weights": "live"
   },
   "comparison": "Against baseline readout 78b2f38e, Tier A formulation fixes resolve covariance trace bias, unblock continuation tasks, and achieve clean passes across all unblocked Tier B tasks.",
-  "conclusion": "Atlas particle-normal prior production readiness qualified across full 48-task replication study",
+  "conclusion": "Atlas particle-normal prior replication study executed 21 of 48 tasks in research_diagnostic scope under seed 0: 11 passed, 10 failed, 27 tasks unexecuted due to preflight blockers. Prediction on grid100 observed (precision >= 0.95); falsifier avoided (mean_error_sigma <= 0.20). Overall study outcome is incomplete; qualified_tier 0 grants no production qualification or merge authorization.",
   "decision_outcomes": [
     {
       "attempt_ids": [
@@ -244,7 +244,7 @@
   "hypothesis": "Swapping MoGParticlePrior for a technique-owned unstandardized ParticlePrior plus NormalNoiseManipulator (sigma=0.005) unblocks public_trainer execution across the 48-task full suite while keeping the public atlas preset recipe fixed under protocol seed 0.",
   "lifecycle": "concluded",
   "mechanism_class": "structural",
-  "next_action": "Merge PR #497 to develop branch with verified production qualification.",
+  "next_action": "Resolve behavior adapter evaluator source hash mismatches in preflight checkers, execute unblocked tasks to complete study scope, and address intra-mode covariance scaling.",
   "prior": {
     "kind": "mog",
     "learnable": true,
