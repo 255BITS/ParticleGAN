@@ -12,11 +12,11 @@ import math
 import torch
 
 from particlegan import (
-    GANTrainer, Recipe, get_recipe, init, prior_capabilities, prior_mechanisms, unwrap_prior,
+    GANTrainer, Recipe, get_recipe, init, unwrap_prior,
 )
 from .rng import NamedStreams, RNG_VERSION
 from .priors import (
-    DEFAULT_PRIOR, prior_noise_sigma, prior_uses_noise_stream, resolve_prior, resolve_prior_mechanism,
+    prior_noise_sigma, prior_uses_noise_stream, resolve_prior, resolve_prior_mechanism,
 )
 
 
@@ -172,7 +172,7 @@ def task_recipe_overrides(candidate, task):
         if blockers:
             raise CapabilityError(blockers)
         overrides = dict(bound.get("recipe_overrides", {}))
-        recipe = resolve_public_recipe(bound)
+        resolve_public_recipe(bound)
         overrides["total_steps"] = execution.get("original_schedule_horizon", execution.get("steps", 100))
         overrides["lr_control"] = "mobility"
         overrides["continuous_policy"] = None
@@ -335,7 +335,6 @@ def task_policy_blockers(task, candidate):
         return []
     if candidate.get("prior_mechanism") is not None:
         adapter = task.get("adapter")
-        host_name = task.get("execution", {}).get("host")
         if adapter in PUBLIC_TRAINER_POLICY_ADAPTERS:
             return []
     host = "public components" if task.get("adapter") == "transfer_behavior" else "clean/live scoring"

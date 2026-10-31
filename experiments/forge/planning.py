@@ -11,7 +11,6 @@ from .contracts import atomic_json, canonical, identifier, read_json, stable_has
 from .sampling import candidate_blockers
 from .execution_policy import DEFAULT as DEFAULT_EXECUTION_POLICY, group_blockers, policy
 from .preflight import task_preflight
-from .priors import task_prior
 from .resolution_scope import active as active_resolution_cache, bind as bind_resolution_cache
 from .sources import compute_profile, inspect_source, runtime_manifest, snapshot_source
 from .views import (load_tasks, load_view, read_task_catalog, task_evaluation_fingerprint,

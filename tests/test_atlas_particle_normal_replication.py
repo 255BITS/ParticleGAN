@@ -27,7 +27,6 @@ from particlegan import (
     GANTrainer,
     MoGParticlePrior,
     ParticlePrior,
-    Recipe,
     get_recipe,
     unwrap_prior,
 )
@@ -383,7 +382,7 @@ def test_atlas_ring16_acquisition_replication():
     trainer = GANTrainer(recipe, G, D, prior=prior, seed=0, serial_backward=True)
 
     data_gen = torch.Generator(device=device).manual_seed(42)
-    step_budget = 500 if device.type == "cuda" else 150
+    step_budget = 500
 
     for _ in range(step_budget):
         real_batch = sample_ring(128, data_gen)
@@ -484,6 +483,7 @@ def test_clean_evaluation_covariance_trace_bias():
         num_particles=256,
         batch_size=128,
         lr=0.005,
+        birth_death_cells=256,
         output_noise_mode="fixed",
         output_noise_std=0.0,
     )
@@ -497,7 +497,7 @@ def test_clean_evaluation_covariance_trace_bias():
     trainer_clean = GANTrainer(recipe_clean, G_clean, D_clean, prior=prior_clean, seed=0, serial_backward=True)
 
     data_gen = torch.Generator(device=device).manual_seed(42)
-    steps = 400 if device.type == "cuda" else 150
+    steps = 500
     for _ in range(steps):
         real_batch = sample_mode(128, data_gen)
         trainer_clean.step(real_batch)
@@ -524,6 +524,7 @@ def test_clean_evaluation_covariance_trace_bias():
         num_particles=256,
         batch_size=128,
         lr=0.005,
+        birth_death_cells=256,
         output_noise_mode="fixed",
         output_noise_std=0.029,
     )

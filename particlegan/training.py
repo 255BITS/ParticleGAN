@@ -10,7 +10,7 @@ from torch import nn
 from .particle_prior import MoGParticlePrior, ParticlePrior
 from .priors import unwrap_prior
 from .recipes import Recipe, learning_rate_scales
-from .policy import UpdatePolicy, _state_to_device, _validate_optimizer_state, input_noise_std, output_noise_std
+from .policy import UpdatePolicy, _state_to_device, _validate_optimizer_state, input_noise_std as input_noise_std, output_noise_std
 
 
 def _convolution_autocast(module, enabled):

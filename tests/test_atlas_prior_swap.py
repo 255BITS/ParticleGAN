@@ -9,7 +9,6 @@ Verifies:
 6. 2-step checkpoint continuation numerical parity and stream restoration.
 7. Forge FormulationContext compatibility and rejection of MoG Atlas.
 """
-from copy import deepcopy
 import dataclasses
 import json
 import math
@@ -34,7 +33,6 @@ from particlegan import (
     prior_mechanisms,
     ManipulatedPrior,
     PriorManipulator,
-    unwrap_prior,
 )
 from experiments.forge.api import CapabilityError, FormulationContext
 from experiments.forge.priors import resolve_prior

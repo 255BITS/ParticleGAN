@@ -5,7 +5,6 @@ from copy import deepcopy
 import json
 from pathlib import Path
 
-import pytest
 import torch
 
 from particlegan import Recipe, get_recipe
@@ -14,7 +13,7 @@ from experiments.forge.api import task_formulation_context, task_recipe_override
 from experiments.forge.clockfree import learning_state, run_clockfree, source_audit, state_digest
 from experiments.forge.contracts import atomic_json, validate_idea
 from experiments.forge.planning import load_idea
-from experiments.forge.sources import inspect_source, snapshot_source, source_files
+from experiments.forge.sources import snapshot_source, source_files
 from experiments.forge.studies import load_study
 from experiments.forge.views import _adaptation, grade_result
 

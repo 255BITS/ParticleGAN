@@ -16,7 +16,6 @@ Empirical challenger tests:
 """
 from __future__ import annotations
 
-import math
 import pytest
 import torch
 import torch.nn as nn
@@ -24,7 +23,6 @@ import torch.nn as nn
 from particlegan import GANTrainer, get_recipe, unwrap_prior
 from particlegan.birth_death import ParticleBirthDeath, ParticleRows
 from particlegan.cell_statistics import population_policy
-from particlegan.feature_cells import FeatureCellBirthDeath
 from particlegan.init import deterministic_orthogonal_
 from lib.toy_models import SimpleMLPGenerator, SimpleMLPDiscriminator
 from benchmarks.locked_shared.mode_hold import ring_means, sample_ring, diversity
@@ -235,8 +233,9 @@ def test_small_table_guard_policy_1000_steps_zero_moves_and_no_decimation(N: int
     samples = trainer.sample(4096, generator=eval_gen, output_noise=False).cpu()
     div = diversity(samples, means, sigma=0.07)
 
-    # For N=8 particles on 8 modes, expected occupancy is 5/8; for N>=10, mode coverage must be >= 7/8
-    min_modes = 5 if N == 8 else 7
+    # Without turnover, coupon-collector occupancy for N particles across 8 modes has
+    # E[modes] = 5.25 at N=8, 6.39 at N=12 (P(<=6)=65.9%), and >= 7.06 for N>=16.
+    min_modes = 5 if N == 8 else (6 if N <= 12 else 7)
     assert div["modes"] >= min_modes, (
         f"Mode decimation detected for N={N}: covered {div['modes']}/8 modes (expected >= {min_modes})"
     )
@@ -295,13 +294,14 @@ def test_clean_vs_noisy_intra_mode_covariance_trace_bias():
     target_variance = target_sigma ** 2
     target_trace = 2.0 * target_variance
 
-    def train_single_mode(noise_std: float, steps: int = 400) -> tuple[float, float, float]:
+    def train_single_mode(noise_std: float, steps: int = 500) -> tuple[float, float, float]:
         recipe = get_recipe(
             "atlas",
             z_dim=2,
             num_particles=256,
             batch_size=128,
             lr=0.005,
+            birth_death_cells=256,
             output_noise_mode="fixed",
             output_noise_std=noise_std,
         )
@@ -359,7 +359,7 @@ def test_clean_vs_noisy_multi_mode_precision_and_coverage():
         noise = torch.randn(n, 2, device=device, generator=gen) * sigma_mode
         return centers[idx] + noise
 
-    def train_4mode(noise_std: float, steps: int = 800) -> tuple[float, int]:
+    def train_4mode(noise_std: float, steps: int = 1000) -> tuple[float, int, float]:
         recipe = get_recipe(
             "atlas",
             z_dim=2,

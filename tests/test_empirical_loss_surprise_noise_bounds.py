@@ -18,13 +18,12 @@ This adversarial suite stress-tests:
      on the very next step in exact lockstep.
    - Cooldown state persistence: Disarmed cooldown state is preserved across serialization.
 """
-from copy import deepcopy
 import math
 import pytest
 import torch
 import torch.nn as nn
 
-from particlegan import GANTrainer, Recipe, get_recipe
+from particlegan import GANTrainer, get_recipe
 from particlegan.continuous import LossSurprise
 from particlegan.init import deterministic_orthogonal_
 from particlegan.priors import unwrap_prior

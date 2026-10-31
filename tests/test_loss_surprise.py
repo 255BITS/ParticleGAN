@@ -1,7 +1,5 @@
 """Unit tests for LossSurprise abrupt distribution shift detector and SettledReopenGuard arming."""
-from copy import deepcopy
 from dataclasses import fields
-import io
 import math
 
 import pytest
@@ -11,7 +9,6 @@ import torch.nn as nn
 from particlegan import GANTrainer, Recipe, get_recipe
 from particlegan.continuous import LossSurprise, OptimizerSurprise, SettledReopenGuard
 from particlegan.init import deterministic_orthogonal_
-from particlegan.policy import UpdatePolicy
 from particlegan.priors import unwrap_prior
 
 

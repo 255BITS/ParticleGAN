@@ -8,9 +8,7 @@ Tests cover:
 3. Optimizer state serialization: saving/loading optimizer state preserves exact readiness
    ratio R(t) without step drift.
 """
-from copy import deepcopy
 import json
-import math
 from pathlib import Path
 import tempfile
 
@@ -18,16 +16,12 @@ import pytest
 import torch
 from torch import nn
 
-from experiments.forge.clockfree import run_clockfree, source_audit
-from experiments.forge.state import state_digest
+from experiments.forge.clockfree import run_clockfree
 from experiments.forge.views import grade_result
-from particlegan import GANTrainer, Recipe, get_recipe
+from particlegan import GANTrainer, get_recipe
 from particlegan.ka2 import (
     KA2CriticAdam,
-    KA2GradientPenalty,
-    KA2StepRecord,
     READINESS_THRESHOLD,
-    WARMUP_CALLS,
     _optimizer_moment_readiness,
 )
 

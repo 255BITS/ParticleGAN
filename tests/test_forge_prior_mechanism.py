@@ -11,13 +11,11 @@ import torch.nn as nn
 from particlegan import ManipulatedPrior, ParticlePrior, unwrap_prior
 from particlegan.priors import NormalNoiseManipulator
 from experiments.forge.api import (
-    CapabilityError,
     FormulationContext,
     policy_controls,
     task_formulation_context,
     task_policy_blockers,
 )
-from experiments.forge.boundaries import ownership_receipt
 from experiments.forge.contracts import read_json, validate_idea
 from experiments.forge.policy_adapters import finite_policy_state
 from experiments.forge.planning import candidate_revision_for, load_idea, resolve_idea
@@ -28,7 +26,6 @@ from experiments.forge.priors import (
     prior_uses_noise_stream,
     resolve_prior,
     resolve_prior_mechanism,
-    task_prior,
     validate_prior_mechanism,
 )
 from experiments.forge.state import require_consistent_rng, state_digest

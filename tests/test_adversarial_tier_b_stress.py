@@ -17,7 +17,6 @@ Empirical challenger tests:
 """
 from __future__ import annotations
 
-import copy
 from copy import deepcopy
 import pytest
 import torch
@@ -140,7 +139,6 @@ def test_empirical_loss_surprise_fires_on_abrupt_shift_within_2_to_3_steps(shift
 
 def test_gantrainer_checkpoint_loss_surprise_bit_exact_persistence():
     """Verify GANTrainer persists loss_surprise in state_dict and restores all fields bit-exactly."""
-    device = torch.device("cpu")
     recipe = get_recipe("atlas", z_dim=2, num_particles=256, batch_size=128, lr=0.005)
     G = nn.Sequential(nn.Linear(2, 32), nn.Linear(32, 2))
     D = nn.Sequential(nn.Linear(2, 32), nn.Linear(32, 1))
@@ -196,7 +194,6 @@ def test_gantrainer_checkpoint_loss_surprise_bit_exact_persistence():
 
 def test_gantrainer_checkpoint_backward_compatibility_omitted_loss_surprise():
     """Verify GANTrainer loads legacy checkpoints that lack the 'loss_surprise' key without error."""
-    device = torch.device("cpu")
     recipe = get_recipe("atlas", z_dim=2, num_particles=256, batch_size=128, lr=0.005)
     G = nn.Sequential(nn.Linear(2, 32), nn.Linear(32, 2))
     D = nn.Sequential(nn.Linear(2, 32), nn.Linear(32, 1))
@@ -228,7 +225,6 @@ def test_gantrainer_checkpoint_backward_compatibility_omitted_loss_surprise():
 
 def test_gantrainer_checkpoint_rejects_corrupted_loss_surprise():
     """Verify GANTrainer raises ValueError on corrupted loss_surprise checkpoint data."""
-    device = torch.device("cpu")
     recipe = get_recipe("atlas", z_dim=2, num_particles=256, batch_size=128, lr=0.005)
     G = nn.Sequential(nn.Linear(2, 32), nn.Linear(32, 2))
     D = nn.Sequential(nn.Linear(2, 32), nn.Linear(32, 1))
