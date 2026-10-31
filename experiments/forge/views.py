@@ -687,7 +687,7 @@ def _adaptation(task, evidence):
     required = ("config_sha256", "source_sha256", "runtime", "mode", "noise_horizon",
                 "diagnostic_every", "dense_after", "dense_until", "shift", "shift_pair", "optimizer_final")
     from .tier1_policy import schedule_free_policy
-    from .artifacts import read_json
+    from .contracts import read_json
     # A schedule-free policy recipe has no noise/schedule horizon; its actual
     # None is verified against the saved recipe by verify_pair_artifacts.
     optional = {"dense_after", "dense_until"} | ({"noise_horizon"} if schedule_free_policy(task) else set())

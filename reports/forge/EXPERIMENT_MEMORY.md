@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Current qualification is recomputed from compatible receipts. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 865. Inventory coverage: complete. Unresolved import items: 7.
+Records: 866. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -5256,6 +5256,22 @@ The unchanged ordinary revision 12 tier completes 28 tasks with 17 PASS and 11 F
 
 [Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-e96805cfab19f80314e3ec20.json)
 
+### atlas-particle-normal-v2 · readout-e97f5dbf54d7493604c4689f
+
+**Scope:** research_diagnostic; scientific; revision `25cbc5b8c787807ef64f0bb8f8e65eea25e3e13940f6fc90b733063baab912fc`.
+
+De-clocking Atlas's critic guard (d_guard_ratio=0.0, d_guard_min_steps=0), restoring LossSurprise equilibrium separation (Z_THRESH=3.5, Z_CALM=1.5), and binding clean/live public_components word_joint and model task snapshots allows atlas-particle-normal-v2 to pass clock-free parity, mode_hold, joint word acquisition/hold, and AE reconstruction on the 48-task full suite under protocol seed 0.
+
+**Observed:** {'FAIL': 16, 'PASS': 22}; wall seconds 3254.541; mechanism `structural`.
+
+staggered100: precision=0.99314, center_rms_sigma=0.13671, mass_tv=0.02165, radial_ks=0.15584; ae_gan_hold: recon_mse=0.0099752
+
+Under protocol seed 0 on prior-ablation-full-suite-v1 (NVIDIA RTX A6000), atlas-particle-normal-v2 achieves 22 PASS, 16 FAIL, 0 INCOMPLETE across 38 executed tasks (6 prerequisite-gated, 4 unimplemented-host blocked). Prediction on clockfree_audit observed (parity_comparisons=4 >= 4, 0 unexplained clock dependencies) and falsifier on gaussian1d_smoke avoided (mean_error_sigma=0.0626 <= 0.20). Clean training (output_noise_mode='fixed', output_noise_std=0.0), de-clocked critic guard (d_guard_ratio=0.0, d_guard_min_steps=0), restored LossSurprise equilibrium hysteresis (Z_THRESH=3.5, Z_CALM=1.5), and public_components/task-snapshot Forge bindings flip 5 tasks to PASS (clockfree_audit_measurement_v1, clockfree_audit, mode_hold, img_intensity2, model_ae_reconstruction) with 0 regressions and 0 INCOMPLETE errors.
+
+**Next:** Introduce a clock-free state-gated critic payoff/ratio guard (activating only after initial critic discrimination settles rather than at step 0 or fixed step 200) to recover five_word_joint_smoke/hold without regressing mode_hold or img_intensity2, and reduce clean per-mode covariance trace deficit (cov_trace_bias ~ -0.30 on 100-mode grids and ring16_acquisition) via local Jacobian spread or lower stationary R1/R2 damping.
+
+[Evidence](../../reports/forge/attempts/014b5d9fe3f648b787ee8b6c371fbd83/result.json) · [Record](records/readout-e97f5dbf54d7493604c4689f.json)
+
 ### recipe-prior-refactor-k3p-v1 · readout-ea9a34c10e46857f904487a0
 
 **Scope:** research_diagnostic; scientific; revision `14d360c8d0b026ef6bc21b4e98e560a15538ec8d10eda49770d1f96f55b90ace`.
@@ -5990,4 +6006,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `218fd7184f556520f067d2c15fc6c9d226dc11620d0279627e95c698927d7b25`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `418fa1fbcf8656becb9c1a75bd3022c00f0aac4f1d53c71037d82072611e9acc`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

@@ -16,16 +16,21 @@ from .state import require_consistent_rng, require_optimizer_steps, state_digest
 
 
 ALLOWED_STATE = ["parameters_and_ema", "optimizer_moments_and_bias_correction",
-                 "observed_gradients_and_row_visit_history", "named_training_rng"]
+                 "observed_gradients_and_row_visit_history",
+                 "continuous_policy_statistics_and_fifo_reservoirs", "named_training_rng"]
 
 
 def source_audit(recipe, extensions):
     """Conservative declaration for the shipped scalar API; unknown hooks block."""
     dependencies = []
-    if recipe.get("continuous_policy") is not None:
-        dependencies.append("continuous policy lifecycle needs a separate reviewed clock/state audit")
+    continuous = recipe.get("continuous_policy")
+    if continuous is not None:
+        if continuous != "dv12" or recipe.get("total_steps") is not None or recipe.get("lr_control") != "stationarity":
+            dependencies.append("continuous policy lifecycle needs a separate reviewed clock/state audit")
     elif recipe["lr_floor"] != 1 or recipe["network_lr_floor"] not in (None, 1):
         dependencies.append("learning-rate annealing depends on completed steps and horizon")
+    if recipe.get("beta2_end") is not None or recipe.get("reg_coeff_end") is not None:
+        dependencies.append("optimizer or penalty schedule depends on completed steps and horizon")
     if recipe["input_noise_std"]:
         dependencies.append("input-noise annealing depends on completed steps and horizon")
     if recipe["output_noise_std"] and recipe["output_noise_warmup"]:
@@ -37,8 +42,11 @@ def source_audit(recipe, extensions):
     if extensions:
         dependencies.append("additional formulation bindings need an explicit clock/state audit")
     root = Path(__file__).resolve().parents[2]
-    files = ["particlegan/training.py", "particlegan/recipes.py", "particlegan/k3p.py", "particlegan/ka2.py",
-             "particlegan/policy.py", "particlegan/continuous.py",
+    files = ["particlegan/training.py", "particlegan/recipes.py", "particlegan/recipe_schedules.py",
+             "particlegan/k3p.py", "particlegan/ka2.py", "particlegan/policy.py", "particlegan/continuous.py",
+             "particlegan/birth_death.py", "particlegan/feature_cells.py", "particlegan/feature_policy.py",
+             "particlegan/feature_reference.py", "particlegan/latent_geometry.py", "particlegan/mean_transport.py",
+             "particlegan/row_evidence.py", "particlegan/priors.py",
              "particlegan/grad_regularizers.py", "experiments/forge/clockfree.py",
              "experiments/forge/api.py", "experiments/forge/rng.py"]
     return {"source_sha256": {name: file_hash(root / name) for name in files},
@@ -67,6 +75,28 @@ def learning_state(state):
                 return tuple(_sanitize_settle(x) for x in obj)
             return obj
         cleaned_trainer["lr_settle"] = _sanitize_settle(cleaned_trainer["lr_settle"])
+    if isinstance(cleaned_trainer.get("birth_death"), dict):
+        bd = dict(cleaned_trainer["birth_death"])
+        if isinstance(bd.get("iso_log"), list):
+            bd["iso_log"] = [row[1:] if isinstance(row, list) and len(row) == 3 else row for row in bd["iso_log"]]
+        if isinstance(bd.get("last"), dict):
+            last = {k: v for k, v in bd["last"].items() if k != "step"}
+            if isinstance(last.get("mean_transport"), dict):
+                last["mean_transport"] = {k: v for k, v in last["mean_transport"].items() if k != "step"}
+            bd["last"] = last
+        if isinstance(bd.get("paired_average"), dict):
+            bd["paired_average"] = {k: v for k, v in bd["paired_average"].items() if k != "step"}
+        cleaned_trainer["birth_death"] = bd
+    if isinstance(cleaned_trainer.get("surprise"), dict):
+        surprise = dict(cleaned_trainer["surprise"])
+        if isinstance(surprise.get("log"), list):
+            surprise["log"] = [row[1:] if isinstance(row, list) and len(row) == 2 else row for row in surprise["log"]]
+        cleaned_trainer["surprise"] = surprise
+    if isinstance(cleaned_trainer.get("reopen_guard"), dict):
+        guard = dict(cleaned_trainer["reopen_guard"])
+        if isinstance(guard.get("excursion"), dict):
+            guard["excursion"] = {k: v for k, v in guard["excursion"].items() if k != "step"}
+        cleaned_trainer["reopen_guard"] = guard
     return {"trainer": cleaned_trainer,
             "training_rng": named}
 

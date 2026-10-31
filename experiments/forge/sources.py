@@ -88,7 +88,8 @@ def source_files(root: Path, extra_paths=()) -> list[Path]:
                 paths.add(path)
     # Existing task hosts sometimes read repo configs by relative path.
     for path in (root / "configs").rglob("*"):
-        if path.is_file() and path.suffix in SOURCE_SUFFIXES and "forge" not in path.relative_to(root).parts:
+        parts = path.relative_to(root).parts
+        if path.is_file() and path.suffix in SOURCE_SUFFIXES and ("forge" not in parts or parts[:3] == ("configs", "forge", "tasks")):
             paths.add(path)
     for relative in extra_paths:
         path = (root / relative).resolve()
