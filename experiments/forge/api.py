@@ -237,7 +237,7 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
 PUBLIC_TRAINER_POLICY_ADAPTERS = frozenset({
     "transfer_vector", "transfer_image", "native100", "native100_continuation",
     "ring_endurance", "paired_adaptation", "clockfree_audit",
-    "word_joint", "public_api_model_toy", "transfer_behavior",
+    "word_joint", "public_api_model_toy",
 })
 
 

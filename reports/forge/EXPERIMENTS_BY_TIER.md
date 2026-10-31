@@ -1130,10 +1130,10 @@ No published solution leaderboard for this view yet; task registration and relat
 | [vector_anisotropic](../../configs/forge/tasks/vector_anisotropic.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-vector-anisotropic) | transfer_vector / transfer_sustained | 1200 | 1800 | — |
 | [vector_overlap](../../configs/forge/tasks/vector_overlap.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-vector-overlap) | transfer_vector / transfer_sustained | 1200 | 1800 | — |
 | [vector_spiral](../../configs/forge/tasks/vector_spiral.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-vector-spiral) | transfer_vector / transfer_sustained | 1600 | 1800 | — |
-| [img_stripes2](../../configs/forge/tasks/img_stripes2.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-img-stripes2) | transfer_image / transfer_sustained | 600 | 1800 | — |
-| [img_bars4](../../configs/forge/tasks/img_bars4.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-img-bars4) | transfer_image / transfer_sustained | 600 | 1800 | — |
-| [img_blobs4](../../configs/forge/tasks/img_blobs4.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-img-blobs4) | transfer_image / transfer_sustained | 600 | 1800 | — |
-| [img_intensity2](../../configs/forge/tasks/img_intensity2.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-img-intensity2) | transfer_image / transfer_sustained | 600 | 1800 | — |
+| [img_stripes2_residual16](../../configs/forge/tasks/img_stripes2_residual16.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-img-stripes2) | transfer_image / transfer_sustained | 600 | 1800 | — |
+| [img_bars4_residual16](../../configs/forge/tasks/img_bars4_residual16.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-img-bars4) | transfer_image / transfer_sustained | 600 | 1800 | — |
+| [img_blobs4_residual16](../../configs/forge/tasks/img_blobs4_residual16.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-img-blobs4) | transfer_image / transfer_sustained | 600 | 1800 | — |
+| [img_intensity2_residual16](../../configs/forge/tasks/img_intensity2_residual16.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-img-intensity2) | transfer_image / transfer_sustained | 600 | 1800 | — |
 | [grid100](../../configs/forge/tasks/grid100.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-grid100) | native100 / native_accuracy | 7000 | 3600 | — |
 | [rotated100](../../configs/forge/tasks/rotated100.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-rotated100) | native100 / native_accuracy | 7000 | 3600 | — |
 | [staggered100](../../configs/forge/tasks/staggered100.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-staggered100) | native100 / native_accuracy | 7000 | 3600 | — |
@@ -5459,6 +5459,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `59ffbd9efecc04338d2a7a1c80c3782faafe0539b69363b8feab8cd480b1859a`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `3b056a12f554e54116d9dcd5deb8de682e0b0b4d29ac2833c62efa32c3ebcb75`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `b9d9b922cbe2cba740e9bd861de016149fdbc4bb2a2634edfedcba4aef7956bc`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `6ecb89da0bda839c8e32d7080a13b8626fb95985b23740c7e675487fe8f04688`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
