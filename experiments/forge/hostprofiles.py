@@ -36,6 +36,10 @@ def profile_source_paths(task: dict) -> list[str]:
     if "native_profile" in execution:
         from .nativeprofiles import native_profile_source_files
         paths.update(native_profile_source_files(task))
+    if (task.get("adapter") == "public_api_model_toy"
+            and execution.get("host_definition", {}).get("provider") == "benchmarks.toy_audit.api_model_ae"):
+        paths.update(("configs/forge/tasks/model_ae_reconstruction.json",
+                      "configs/forge/tasks/model_ae_gan_multimodal.json"))
     return sorted(paths)
 
 

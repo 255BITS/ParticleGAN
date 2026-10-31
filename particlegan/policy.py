@@ -346,14 +346,11 @@ class UpdatePolicy:
         self.row_semantics = row_semantics
         if row_semantics not in ("independent", "conditional", "dense_soft"):
             raise ValueError("row_semantics must be independent, conditional or dense_soft")
-        # Conditional and encoder models cannot bind independent table birth-death or row evidence.
-        # Gracefully scope/deactivate these controls rather than failing with ValueError.
-        is_conditional_or_encoder = (
-            row_semantics != "independent"
-            or recipe.conditioning != "scalar"
-            or recipe.encoder_mode != "none"
-            or encoder is not None
-        )
+        if (self.row_policy == "independent" and (recipe.row_evidence_gate or recipe.particle_birth_death)
+                and (row_semantics != "independent" or recipe.conditioning != "scalar"
+                     or recipe.encoder_mode != "none")):
+            raise ValueError("row evidence and birth/death require independent unconditional table atoms; "
+                             "conditional and densely soft-routed banks are unsupported")
         if generation is not None and not callable(generation):
             raise TypeError("generation must be callable")
         if critic_features is not None and not callable(critic_features):
@@ -455,7 +452,7 @@ class UpdatePolicy:
                     if (tester is not None and len(group["params"]) == 1
                             and group["params"][0] in row_parameters):
                         tester.rows = len(table)
-        elif recipe.particle_birth_death and not is_conditional_or_encoder:
+        elif recipe.particle_birth_death:
             cells = recipe.birth_death_cells if recipe.birth_death_backend != "knn" else None
             if cells is not None and len(table) <= cells:
                 self.birth_death = None
@@ -478,7 +475,7 @@ class UpdatePolicy:
                     isolation=recipe.birth_death_isolation,
                     feature_scale=recipe.birth_death_feature_scale,
                     cells=cells)
-        if recipe.row_evidence_gate and self.routed_control is None and not is_conditional_or_encoder:
+        if recipe.row_evidence_gate and self.routed_control is None:
             from .row_evidence import RowEvidence
             self.row_evidence = RowEvidence(table, null=recipe.row_evidence_null,
                                             statistic=row_evidence_statistic)
@@ -489,7 +486,7 @@ class UpdatePolicy:
             self.attach_penalty(penalty)
         self.schedule = learning_rate_scales if schedule is None else schedule
         self._feature_selection = None
-        if recipe.birth_death_backend != "knn" and not is_conditional_or_encoder:
+        if recipe.birth_death_backend != "knn":
             from .feature_policy import FeatureSelection
             self._feature_selection = FeatureSelection(self, seed + 6)
         self._phase = "ready"

@@ -177,6 +177,7 @@ def task_recipe_overrides(candidate, task):
         overrides["lr_control"] = "mobility"
         overrides["continuous_policy"] = None
         overrides["reopen_guard"] = None
+        overrides["serve_average"] = 0.0
         overrides["particle_birth_death"] = False
         overrides["row_evidence_gate"] = False
         overrides["birth_death_feature_scale"] = "none"
@@ -230,10 +231,13 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
     is_encoder = overrides.get("encoder_mode", "none") != "none"
     is_model_toy = task.get("adapter") == "public_api_model_toy"
     is_clean_word = task.get("adapter") == "word_joint" and not is_policy_task(task)
+    is_clean_behavior = (task.get("adapter") == "transfer_behavior"
+                         and task.get("execution", {}).get("host") != "mode_hold"
+                         and not is_policy_task(task))
     cand_caps = [c for c in bound.get("requires_capabilities", ())
                  if not (is_encoder and c == "particle_cloud")
                  and not (is_model_toy and c in ("policy_controls", "policy_serving", "particle_cloud"))
-                 and not (is_clean_word and c in ("policy_controls", "policy_serving"))]
+                 and not ((is_clean_word or is_clean_behavior) and c in ("policy_controls", "policy_serving"))]
     prior_mechanism = None if is_model_toy else bound.get("prior_mechanism")
     context = FormulationContext(recipe_preset=bound.get("recipe_preset"),
         recipe_overrides=overrides, prior=task_prior(task),

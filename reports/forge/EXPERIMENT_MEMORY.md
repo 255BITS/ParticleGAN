@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Current qualification is recomputed from compatible receipts. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 866. Inventory coverage: complete. Unresolved import items: 7.
+Records: 867. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4328,6 +4328,22 @@ The first Forge CPU smoke pilot failed two_pole after 80 updates: mean_abs 0.106
 
 [Evidence](../../reports/forge/attempts/b766e89d1a0843ba9af94f2ce94e4273/result.json) · [Record](records/readout-4bd94051f203bbbb28a3e7a6.json)
 
+### atlas-particle-normal-v2 · readout-4dc982d111099c9b0f33a18e
+
+**Scope:** research_diagnostic; scientific; revision `de4379506c30e147385182dfd8cdc61133024f4636c2ecbf07cea1c509cc2cc0`.
+
+Re-executing atlas-particle-normal-v2 on the repaired source tree (with profile-scoped AE task snapshot sources, restored UpdatePolicy conditional row-semantics validation, restored Recipe optimizer parameter deduplication, and SettleTest/FeatureCellBirthDeath diagnostic step-stamp sanitization) reproduces >= 22 PASS / 0 INCOMPLETE on prior-ablation-full-suite-v1 under protocol seed 0.
+
+**Observed:** {'FAIL': 16, 'PASS': 22}; wall seconds 3278.971; mechanism `structural`.
+
+img_stripes2_residual16: modes=2, hq=0.96875
+
+Re-verified atlas-particle-normal-v2 on the repaired source tree (profile-scoped AE task snapshot sources, restored UpdatePolicy conditional row-semantics validation, restored Recipe optimizer parameter deduplication, clean non-policy transfer_behavior serve_average/capability bindings, and active SettleTest/FeatureCellBirthDeath diagnostic step-stamp sanitization). Deterministically achieves 22 PASS, 16 FAIL, 0 INCOMPLETE across 38 executed tasks on prior-ablation-full-suite-v1 under protocol seed 0 (NVIDIA RTX A6000), observing clockfree_audit parity_comparisons=4 >= 4 and avoiding gaussian1d_smoke falsifier.
+
+**Next:** Address 100-mode clean-covariance deficits (grid100/staggered100/rotated100) and non-schedule joint BiGAN critic balance on five_word_joint_smoke in a dedicated follow-up mechanism study.
+
+[Evidence](../../reports/forge/attempts/01965a6433ca4f47bd304111d5c98578/result.json) · [Record](records/readout-4dc982d111099c9b0f33a18e.json)
+
 ### forge-no-critic-penalty · readout-4e04059eb9f631a2e406447e
 
 **Scope:** current; scientific; revision `ef50ff6fb20723ab9340fbb8d1a6c8abd45cb2e2950250578a13dd36207113b5`.
@@ -6006,4 +6022,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `418fa1fbcf8656becb9c1a75bd3022c00f0aac4f1d53c71037d82072611e9acc`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `9fac118e388b6b2688c3eb8213020b9d958b208df33b2f2e6921bf9887015fda`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

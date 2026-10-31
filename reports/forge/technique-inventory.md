@@ -35,7 +35,7 @@ Backfill coverage: **853/853 distinct recipe/test pairs attempted (selected and 
 | --- | ---: | ---: | ---: | --- | --- | ---: | --- |
 | [BCAP](families/bcap-pure.md) · [BCAP dualnorm (experimental starting point)](families/bcap-dualnorm.md) | 16 | **12** | 21 | 0 | 13: 0 PASS, 7 FAIL, 6 not measured | 49 | 84 registered searches (172 grid configurations); 473 declared candidate cards; selected recipe declared directly (no selecting search in its lineage) |
 | [BISPF](families/bispf.md) | 18 | **11** | 20 | 0 | 13: 0 PASS, 7 FAIL, 6 not measured | 49 | no registered configuration search; 11 declared candidate cards; selected recipe declared directly (no selecting search in its lineage) |
-| [Atlas](families/atlas.md) | 0 | **0** | 20 | 29 blocked | 13: 0 PASS, 0 FAIL, 6 not measured, 7 other | 49 | no registered configuration search; 2 declared candidate cards; selected recipe declared directly (no selecting search in its lineage) |
+| [Atlas](families/atlas.md) | 0 | **0** | 20 | 29 blocked | 13: 0 PASS, 0 FAIL, 6 not measured, 7 other | 49 | no registered configuration search; 3 declared candidate cards; selected recipe declared directly (no selecting search in its lineage) |
 | [E22](families/e22.md) | 0 | **0** | 20 | 29 blocked | 13: 0 PASS, 0 FAIL, 6 not measured, 7 other | 49 | untuned: no registered configuration search; 1 declared candidate card; selected recipe declared directly (no selecting search in its lineage) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md) | 5 | **2** | 42 | 0 | 13: 0 PASS, 0 FAIL, 13 not measured | 49 | 10 registered searches (16 grid configurations); 8 declared candidate cards; selected recipe descends from `release07-gan-v3-mog-family-defaults-round1-v1` (tuned on Tier ≤3) |
 | [K3P](families/k3p.md) | 5 | **2** | 42 | 0 | 13: 0 PASS, 0 FAIL, 13 not measured | 49 | 15 registered searches (50 grid configurations); 46 declared candidate cards; selected recipe descends from `k3p-family-defaults-round1-v1` (tuned on Tier ≤3) |
@@ -555,5 +555,5 @@ After any view revision (for example a held or removed test), always add `--refr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `3fc63c2a8f4353e11c07733341a6d8c7250930f8645a88f03ff38c4656f7e8cd`.
+Publication input digest `7932cf0b282077e47fd291763454bb11f28c7539f7ef3031c1f71380ef6c9f95`.
 [Performance by test and complete recipe](test-performance.md): compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.

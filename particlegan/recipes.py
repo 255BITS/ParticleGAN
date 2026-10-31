@@ -1234,6 +1234,7 @@ class Recipe:
             if module is not None:
                 for p in module.parameters():
                     if p.requires_grad and id(p) not in seen:
+                        seen.add(id(p))
                         g_params.append(p)
                         role_params.append(p)
             if role_params:

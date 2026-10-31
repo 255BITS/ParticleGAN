@@ -27,7 +27,8 @@ def source_audit(recipe, extensions):
     if continuous is not None:
         if continuous != "dv12" or recipe.get("total_steps") is not None or recipe.get("lr_control") != "stationarity":
             dependencies.append("continuous policy lifecycle needs a separate reviewed clock/state audit")
-    elif recipe["lr_floor"] != 1 or recipe["network_lr_floor"] not in (None, 1):
+    elif (recipe["lr_floor"] != 1 or recipe["network_lr_floor"] not in (None, 1)
+          or (recipe.get("lr_schedule") == "exponential" and recipe.get("lr_decay_rate", 0.96) != 1)):
         dependencies.append("learning-rate annealing depends on completed steps and horizon")
     if recipe.get("beta2_end") is not None or recipe.get("reg_coeff_end") is not None:
         dependencies.append("optimizer or penalty schedule depends on completed steps and horizon")
@@ -65,10 +66,15 @@ def learning_state(state):
     if "lr_settle" in cleaned_trainer:
         def _sanitize_settle(obj):
             if isinstance(obj, dict):
-                return {k: ({lk: lv for lk, lv in v.items() if lk != "step"}
-                            if k == "last_look" and isinstance(v, dict)
-                            else _sanitize_settle(v))
-                        for k, v in obj.items()}
+                out = {}
+                for k, v in obj.items():
+                    if k in ("last_look", "last") and isinstance(v, dict):
+                        out[k] = {lk: lv for lk, lv in v.items() if lk != "step"}
+                    elif k == "log" and isinstance(v, list):
+                        out[k] = [row[1:] if isinstance(row, list) and len(row) == 4 else row for row in v]
+                    else:
+                        out[k] = _sanitize_settle(v)
+                return out
             if isinstance(obj, list):
                 return [_sanitize_settle(x) for x in obj]
             if isinstance(obj, tuple):
@@ -80,9 +86,11 @@ def learning_state(state):
         if isinstance(bd.get("iso_log"), list):
             bd["iso_log"] = [row[1:] if isinstance(row, list) and len(row) == 3 else row for row in bd["iso_log"]]
         if isinstance(bd.get("last"), dict):
-            last = {k: v for k, v in bd["last"].items() if k != "step"}
+            last = {k: v for k, v in bd["last"].items() if k not in ("step", "eval_seconds")}
             if isinstance(last.get("mean_transport"), dict):
                 last["mean_transport"] = {k: v for k, v in last["mean_transport"].items() if k != "step"}
+            if isinstance(last.get("paired_average"), dict):
+                last["paired_average"] = {k: v for k, v in last["paired_average"].items() if k != "step"}
             bd["last"] = last
         if isinstance(bd.get("paired_average"), dict):
             bd["paired_average"] = {k: v for k, v in bd["paired_average"].items() if k != "step"}

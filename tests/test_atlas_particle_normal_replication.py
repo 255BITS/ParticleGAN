@@ -734,11 +734,11 @@ def test_tier_b_zero_tanh_smoke_evaluator():
 
 
 def test_tier_b_encoder_conditional_graceful_deactivation():
-    """Verify UpdatePolicy gracefully deactivates birth-death and row evidence on conditional/encoder models."""
+    """Verify UpdatePolicy rejects unadapted independent row controls on conditional models and constructs cleanly when adapted."""
     from copy import deepcopy
     from particlegan.policy import UpdatePolicy
 
-    recipe = get_recipe("atlas", z_dim=4, num_particles=64, batch_size=16)
+    unadapted = get_recipe("atlas", z_dim=4, num_particles=64, batch_size=16)
     G = nn.Sequential(nn.Linear(4, 16), nn.Linear(16, 4))
     D = nn.Sequential(nn.Linear(4, 16), nn.Linear(16, 1))
     E = nn.Sequential(nn.Linear(4, 16), nn.Linear(16, 4))
@@ -746,30 +746,56 @@ def test_tier_b_encoder_conditional_graceful_deactivation():
     deterministic_orthogonal_(D, seed=1)
     deterministic_orthogonal_(E, seed=2)
 
-    prior = recipe.make_prior(sigma=0.005)
+    prior = unadapted.make_prior(sigma=0.005)
     deterministic_orthogonal_(unwrap_prior(prior), seed=3)
     groups = [
-        dict(params=list(G.parameters()), lr=recipe.lr),
-        dict(params=list(E.parameters()), lr=recipe.lr),
-        dict(params=[unwrap_prior(prior).z], lr=recipe.lr * recipe.prior_lr_mult),
+        dict(params=list(G.parameters()), lr=unadapted.lr),
+        dict(params=list(E.parameters()), lr=unadapted.lr),
+        dict(params=[unwrap_prior(prior).z], lr=unadapted.lr * unadapted.prior_lr_mult),
     ]
-    opt_g = recipe.make_generator_optimizer(groups, latent_table=unwrap_prior(prior).z)
-    opt_d = recipe.make_critic_optimizer(D, ema_critic=deepcopy(D))
+    opt_g = unadapted.make_generator_optimizer([dict(g) for g in groups], latent_table=unwrap_prior(prior).z)
+    opt_d = unadapted.make_critic_optimizer(D, ema_critic=deepcopy(D))
 
-    # Instantiate with conditional row_semantics and encoder
+    with pytest.raises(ValueError, match="independent unconditional"):
+        UpdatePolicy(
+            unadapted,
+            G,
+            D,
+            prior=prior,
+            encoder=E,
+            generator_optimizer=opt_g,
+            critic_optimizer=opt_d,
+            row_semantics="conditional",
+            seed=0,
+        )
+
+    adapted = get_recipe(
+        "atlas",
+        z_dim=4,
+        num_particles=64,
+        batch_size=16,
+        particle_birth_death=False,
+        row_evidence_gate=False,
+        birth_death_isolation=False,
+        birth_death_feature_scale="none",
+        birth_death_backend="knn",
+        birth_death_cells=64,
+        output_noise_mode="fixed",
+        output_noise_std=0.0,
+    )
+    opt_g2 = adapted.make_generator_optimizer([dict(g) for g in groups], latent_table=unwrap_prior(prior).z)
+    opt_d2 = adapted.make_critic_optimizer(D, ema_critic=deepcopy(D))
     policy = UpdatePolicy(
-        recipe,
+        adapted,
         G,
         D,
         prior=prior,
         encoder=E,
-        generator_optimizer=opt_g,
-        critic_optimizer=opt_d,
+        generator_optimizer=opt_g2,
+        critic_optimizer=opt_d2,
         row_semantics="conditional",
         seed=0,
     )
-
-    # Birth-death, row-evidence, and feature selection must be gracefully deactivated (None)
     assert policy.birth_death is None
     assert policy.row_evidence is None
     assert policy._feature_selection is None
