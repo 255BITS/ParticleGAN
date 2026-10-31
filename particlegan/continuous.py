@@ -1196,9 +1196,9 @@ class LossSurprise:
     """Critic loss surprise detector for abrupt distribution shift recovery.
 
     Tracks short-term running loss L_fast against a calm equilibrium baseline
-    L_calm with variance var_calm. While calm (z < 1.5), the baseline adapts
+    L_calm with variance var_calm. While calm (z < 2.0), the baseline adapts
     slowly to track the game's equilibrium loss. When an abrupt distribution
-    shift occurs, critic loss jumps, producing z = (L_fast - L_calm) / sigma_calm > 3.5.
+    shift occurs, critic loss jumps, producing z = (L_fast - L_calm) / sigma_calm > 3.0.
     A confirmation streak of 2 consecutive steps triggers a re-open, while the
     baseline is frozen during excursions. The detector remains quiet at equilibrium
     and stays disarmed for a cooldown period after firing.
@@ -1206,8 +1206,8 @@ class LossSurprise:
 
     ALPHA_FAST = 0.5
     ALPHA_SLOW = 0.01
-    Z_THRESH = 3.5
-    Z_CALM = 1.5
+    Z_THRESH = 3.0
+    Z_CALM = 2.0
     CONFIRMATION_STREAK = 2
     COOLDOWN = 16
     MIN_VAR = 5e-6

@@ -52,8 +52,22 @@ def learning_state(state):
     stream_names = state["streams"]["manifest"]["bindings"]
     named = {key: value for key, value in state["streams"]["states"].items()
              if stream_names[key]["family"] != "eval"}
-    return {"trainer": {key: value for key, value in trainer.items()
-                        if key not in {"recipe", "completed_steps", "max_steps", "streams"}},
+    cleaned_trainer = {key: value for key, value in trainer.items()
+                       if key not in {"recipe", "completed_steps", "max_steps", "streams"}}
+    if "lr_settle" in cleaned_trainer:
+        def _sanitize_settle(obj):
+            if isinstance(obj, dict):
+                return {k: ({lk: lv for lk, lv in v.items() if lk != "step"}
+                            if k == "last_look" and isinstance(v, dict)
+                            else _sanitize_settle(v))
+                        for k, v in obj.items()}
+            if isinstance(obj, list):
+                return [_sanitize_settle(x) for x in obj]
+            if isinstance(obj, tuple):
+                return tuple(_sanitize_settle(x) for x in obj)
+            return obj
+        cleaned_trainer["lr_settle"] = _sanitize_settle(cleaned_trainer["lr_settle"])
+    return {"trainer": cleaned_trainer,
             "training_rng": named}
 
 
@@ -111,7 +125,7 @@ def run_clockfree(request, task, output, device):
     for name in ("reference", "step_label", "horizon", "evaluation_cadence", "restart"):
         if name != "reference":
             context, trainer, data = construct()
-            restored = (torch.load(directory / "initial.pt", map_location=device, weights_only=True)
+            restored = (torch.load(directory / "initial.pt", map_location="cpu", weights_only=True)
                         if name == "restart" else deepcopy(initial))
             context.load_state_dict(restored)
         proof["branch_initial"][name] = context.state_dict()

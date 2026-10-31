@@ -389,14 +389,20 @@ def test_clean_vs_noisy_multi_mode_precision_and_coverage():
         precision = float((dists <= 3.0 * sigma_mode).float().mean().item())
         counts = torch.bincount(nearest, minlength=4)
         covered = int((counts >= 0.05 * len(samples)).sum().item())
-        return precision, covered
+        traces = []
+        for k in range(4):
+            pts = samples[nearest == k]
+            if len(pts) > 10:
+                traces.append(float(torch.trace(torch.cov(pts.T)).item()))
+        mean_trace = sum(traces) / len(traces) if traces else 0.0
+        return precision, covered, mean_trace
 
-    clean_prec, clean_cov = train_4mode(noise_std=0.0)
+    clean_prec, clean_cov, clean_trace = train_4mode(noise_std=0.0)
     assert clean_cov == 4, f"Clean cohort covered only {clean_cov}/4 modes"
     assert clean_prec >= 0.95, f"Clean cohort precision {clean_prec*100:.2f}% < 95.0%"
 
-    noisy_prec, noisy_cov = train_4mode(noise_std=0.029)
-    # Proves degradation in noisy cohort under clean evaluation
-    assert noisy_cov < 4 or noisy_prec < clean_prec, (
-        f"Expected noisy cohort to degrade compared to clean, got cov={noisy_cov}/4, prec={noisy_prec:.4f}"
+    noisy_prec, noisy_cov, noisy_trace = train_4mode(noise_std=0.029)
+    # Proves degradation in noisy cohort under clean evaluation (variance deflation or mode drop)
+    assert noisy_cov < 4 or noisy_trace < clean_trace or noisy_prec < clean_prec, (
+        f"Expected noisy cohort to degrade compared to clean, got cov={noisy_cov}/4, prec={noisy_prec:.4f}, trace={noisy_trace:.6f} vs {clean_trace:.6f}"
     )

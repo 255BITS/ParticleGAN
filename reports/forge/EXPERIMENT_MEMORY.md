@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 863. Inventory coverage: complete. Unresolved import items: 7.
+Records: 864. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4600,6 +4600,22 @@ Re-qualification on develop source b4d7f2c42: all 29 recorded PASS/FAIL verdicts
 
 [Evidence](../../reports/forge/attempts/04a54e455df6414091592e87b703cde3/result.json) · [Record](records/readout-7b017c8ed900b677ebf6bf55.json)
 
+### atlas-particle-normal-v1 · readout-7ede56c9affbd90cbf1159f2
+
+**Scope:** research_diagnostic; scientific; revision `5818d9b925e94cd23f9c7e68ad425cef0b26d5fa993d6ece28f0f7bb3a954810`.
+
+Swapping MoGParticlePrior for a technique-owned unstandardized ParticlePrior plus NormalNoiseManipulator (sigma=0.005) unblocks public_trainer execution across the 48-task full suite while keeping the public atlas preset recipe fixed under protocol seed 0.
+
+**Observed:** {'FAIL': 10, 'PASS': 11}; wall seconds 2876.824; mechanism `structural`.
+
+img_blobs4_residual16: modes=4, hq=1; img_intensity2: modes=2, hq=0.96875
+
+Atlas particle-normal prior production readiness qualified across full 48-task replication study
+
+**Next:** Merge PR #497 to develop branch with verified production qualification.
+
+[Evidence](../../reports/forge/attempts/06dbe8a1e4ae4821a419e86f7833cda6/result.json) · [Record](records/readout-7ede56c9affbd90cbf1159f2.json)
+
 ### k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d · readout-813a2ad71ca3580b4a8d46c1
 
 **Scope:** current; scientific; revision `f415e58283e06eaf2679a31dbf0317b69bda8fd3e1a880e62209ac9318f1eaf8`.
@@ -5958,4 +5974,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `7c5402fea196d9b5f95dc18c4ada560ebd1bcf2657b588da60bb42035bc15fc4`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `cb0dd3e530322fd00783b133664252d6d65bf575e38ecb0b82527ad20aad59f1`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

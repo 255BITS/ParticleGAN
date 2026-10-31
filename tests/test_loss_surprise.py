@@ -27,14 +27,14 @@ def test_loss_surprise_quiet_at_equilibrium():
         fire = detector.decide(step)
         assert not fire, f"Premature fire at step {step}"
         assert detector.streak == 0, f"Streak non-zero at step {step}: {detector.streak}"
-        assert abs(detector.last_z) < 3.5, f"Exceeded threshold at equilibrium: z = {detector.last_z}"
+        assert abs(detector.last_z) < detector.Z_THRESH, f"Exceeded threshold at equilibrium: z = {detector.last_z}"
 
     assert detector.fires == 0
     assert detector.armed is True
 
 
 def test_loss_surprise_fires_on_abrupt_shift():
-    """Verify that an abrupt loss jump (z > 3.5) fires on exactly the second consecutive step."""
+    """Verify that an abrupt loss jump (z > 3.0) fires on exactly the second consecutive step."""
     detector = LossSurprise()
     guard = SettledReopenGuard()
 
@@ -51,7 +51,7 @@ def test_loss_surprise_fires_on_abrupt_shift():
     calm_baseline = detector.calm
     sigma_baseline = math.sqrt(detector.var_calm)
 
-    # Step 100: Abrupt jump to 2.5 (z >> 3.5)
+    # Step 100: Abrupt jump to 2.5 (z >> 3.0)
     # First step of jump: streak becomes 1, fire should be False (needs streak=2)
     jump_loss = calm_baseline + 8.0 * sigma_baseline
     detector.observe(jump_loss)
@@ -59,7 +59,7 @@ def test_loss_surprise_fires_on_abrupt_shift():
     assert not fired_1, "Should not fire on step 1 of abrupt shift (requires confirmation streak = 2)"
     assert detector.streak == 1
     assert detector.is_surprised is True
-    assert detector.last_z > 3.5
+    assert detector.last_z > detector.Z_THRESH
 
     # Step 101: Second step of jump: streak becomes 2 -> fires!
     detector.observe(jump_loss)

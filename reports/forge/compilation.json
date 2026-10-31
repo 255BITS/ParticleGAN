@@ -2,7 +2,7 @@
   "automation_digest": "391b85927f392edf67e5876d55583ddfa090cd4213d7436c2acbc522888a2f18",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "7c5402fea196d9b5f95dc18c4ada560ebd1bcf2657b588da60bb42035bc15fc4",
+  "input_digest": "cb0dd3e530322fd00783b133664252d6d65bf575e38ecb0b82527ad20aad59f1",
   "input_hashes": {
     "configs/forge/cadence-studies/bispf-lazy-cadence-v1.json": "fc7302ac06b61fa093a39265d440545fdab176852a588c40b750be16adc1e58b",
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
@@ -1183,7 +1183,7 @@
     "configs/forge/views/lazy_cadence_coverage.json": "0968a5f52988eac6436f92a52009b18534d37da88f0c66b1c46709e27e944c7c",
     "configs/forge/views/policy_cloud_coverage.json": "e5ff91752b78d3944294bc371b1e700887f05a8e0da9d297e3735392d3f57fae",
     "configs/forge/views/policy_cloud_coverage_as_served.json": "79dfe3e79ca70555c1af535aa8e06ea56206b54fe92bc42423656f5074efff0f",
-    "configs/forge/views/prior-ablation-full-suite-v1.json": "48d74380bb6f7a8589aad92893aa3cbfbaaa21026aa6e68a9d286784860365ff",
+    "configs/forge/views/prior-ablation-full-suite-v1.json": "94624cedcc405331239c8f129d68aa076e3ff0557fa00ff5f067e51e0ac18586",
     "configs/forge/views/quality_coverage.json": "0d8cc928ad958883d0bb1c0952aedbfba6f16bd91eb70c5fb51c11703b110ab5",
     "configs/forge/views/recipe-prior-refactor-k3p-diagnostic-v1.json": "6b85e92f848b5cf1be389f4d186b7f15a04e63e8d65b842bb8ebab0ddc73a43e",
     "configs/forge/views/recipe-prior-refactor-ka2-diagnostic-v1.json": "7c2a200dcc5b52df66d14f6d5163cf5bf14b3851f0f3cd4691c8a714c6a1ad7a",
@@ -1721,6 +1721,7 @@
     "reports/forge/records/readout-78b2f38e0f8c24f678b47fa2.json": "cce1dd854643e411a140b9c1e06b49814aabae695ed3a9cddfce9b11f695af93",
     "reports/forge/records/readout-7a4fda449cb2e080c1aebf91.json": "4e7b95a2a9537176a13d659f028f8c8066c97372022ab24348f14da202a0e72b",
     "reports/forge/records/readout-7b017c8ed900b677ebf6bf55.json": "e6f4802bdbc27dfcff8731d99a0cc497590c37081c5305994279e00789509abd",
+    "reports/forge/records/readout-7ede56c9affbd90cbf1159f2.json": "9a40eb09af54fc65f499d04c1d6f199008e8773ebbcdf441c496cb57139316a7",
     "reports/forge/records/readout-813a2ad71ca3580b4a8d46c1.json": "eac2b794c3e9dfd16272125f684497d6c440b2e4689d8a0626d00ae42562bf07",
     "reports/forge/records/readout-85a714c5fc9c0b038c400b22.json": "f0fbdb0eb17efcc48ded116e5cfdb1b80e1a9d3e5ec636f801a87b3fcd46d4c3",
     "reports/forge/records/readout-8aacfe961f0e62b062e621fa.json": "64ad75edcb2418ad8521bd2ae5a7f7995e2aa89a3aead45d0e0e0da6c5c23aa8",
@@ -4228,7 +4229,7 @@
   },
   "operational_lifecycle_digest": "1f0e327db0f43b33080ec349f0bf27ded2d185bf2b60c86d613105800dbbbf2c",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "affff797d96aa0a27ba265663e7b4edde1c75170d17c9f080120aa47947d1042",
+    "reports/forge/EXPERIMENT_MEMORY.md": "61a4522b2a6de2e32c936379a0cc2a7a6d6e26553ed7442fa2e8306493bffb95",
     "reports/forge/publication-records.json": "5174449ad10c00a8d22dee09d3ef50c8fb0fc76f196d85197271ee7c0766c9d8"
   },
   "pending_readout": [
@@ -4264,7 +4265,7 @@
     "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
     "source_manifest_digest": "a3591610f1d5622ecfcc34b72e30d75b2bb3ce4fe81001c4a45bf4010856b080"
   },
-  "record_count": 863,
+  "record_count": 864,
   "reducer_hashes": {
     "experiments.forge.knowledge": "652e69d2644a14d794b5ad01f092a7c260ee7fb18ea17b8811d8e0a20a66b483",
     "experiments.forge.publication_memory": "7e9d1e7ea3ce0e165c6df54d324ddffec8d220a0eb1e2ad268ca2d16778ad9c4"

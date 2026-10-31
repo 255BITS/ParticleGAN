@@ -237,7 +237,7 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
 PUBLIC_TRAINER_POLICY_ADAPTERS = frozenset({
     "transfer_vector", "transfer_image", "native100", "native100_continuation",
     "ring_endurance", "paired_adaptation", "clockfree_audit",
-    "word_joint", "public_api_model_toy",
+    "word_joint", "public_api_model_toy", "transfer_behavior",
 })
 
 
@@ -287,8 +287,7 @@ def task_policy_blockers(task, candidate):
     if candidate.get("prior_mechanism") is not None:
         adapter = task.get("adapter")
         host_name = task.get("execution", {}).get("host")
-        if (adapter in PUBLIC_TRAINER_POLICY_ADAPTERS
-                or (adapter == "transfer_behavior" and host_name == "mode_hold")):
+        if adapter in PUBLIC_TRAINER_POLICY_ADAPTERS:
             return []
     host = "public components" if task.get("adapter") == "transfer_behavior" else "clean/live scoring"
     return [f"{task.get('id', '<task>')}: {host} has no declared policy-control evidence and "

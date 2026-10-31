@@ -668,12 +668,10 @@ def test_tier_b_residual16_image_task_bindings():
         "img_stripes2_residual16",
         "img_bars4_residual16",
         "img_blobs4_residual16",
-        "img_intensity2_residual16",
     }
-    raw_image = {"img_stripes2", "img_bars4", "img_blobs4", "img_intensity2"}
-
     assert expected_residual.issubset(assigned), f"Missing residual16 tasks: {expected_residual - assigned}"
-    assert not raw_image.intersection(assigned), f"Found raw image tasks: {raw_image.intersection(assigned)}"
+    assert "img_intensity2" in assigned, "Expected img_intensity2 (transpose width 12) in view assignments"
+    assert not {"img_stripes2", "img_bars4", "img_blobs4", "img_intensity2_residual16"}.intersection(assigned)
 
 
 def test_tier_b_zero_tanh_smoke_evaluator():

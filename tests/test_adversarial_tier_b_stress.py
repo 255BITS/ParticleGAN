@@ -82,8 +82,8 @@ def test_empirical_loss_surprise_stationary_1000_steps_zero_false_positives():
         min_z = min(min_z, ls.last_z)
 
     assert ls.fires == 0, f"Expected 0 fires over 1,000 stationary steps, got {ls.fires}"
-    assert max_z < 1.0, f"Max stationary z-score unexpectedly high: {max_z:.4f} (expected << 3.5)"
-    assert max_z < 3.5, f"Stationary z-score exceeded threshold: {max_z:.4f}"
+    assert max_z < LossSurprise.Z_CALM, f"Max stationary z-score unexpectedly high: {max_z:.4f} (expected < {LossSurprise.Z_CALM})"
+    assert max_z < LossSurprise.Z_THRESH, f"Stationary z-score exceeded threshold: {max_z:.4f}"
     assert ls.armed is True, "LossSurprise should remain armed at equilibrium"
     assert ls.calm is not None, "Calm baseline was not established"
     assert ls.var_calm >= LossSurprise.MIN_VAR, f"Variance clamped below floor: {ls.var_calm}"

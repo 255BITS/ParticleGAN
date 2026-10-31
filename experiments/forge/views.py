@@ -687,9 +687,17 @@ def _adaptation(task, evidence):
     required = ("config_sha256", "source_sha256", "runtime", "mode", "noise_horizon",
                 "diagnostic_every", "dense_after", "dense_until", "shift", "shift_pair", "optimizer_final")
     from .tier1_policy import schedule_free_policy
+    from .artifacts import read_json
     # A schedule-free policy recipe has no noise/schedule horizon; its actual
     # None is verified against the saved recipe by verify_pair_artifacts.
     optional = {"dense_after", "dense_until"} | ({"noise_horizon"} if schedule_free_policy(task) else set())
+    if "noise_horizon" not in optional and active.get("noise_horizon") is None:
+        try:
+            cfg = read_json(Path(evidence["artifact_root"]) / "config.json")
+            if cfg.get("recipe", {}).get("total_steps") is None:
+                optional.add("noise_horizon")
+        except Exception:
+            pass
     for run in (active, frozen):
         if any(key not in run or (run[key] is None and key not in optional) for key in required):
             return _verdict("INCOMPLETE", "paired control lacks complete provenance/optimizer state")

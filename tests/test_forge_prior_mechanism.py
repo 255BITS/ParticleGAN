@@ -182,14 +182,14 @@ def test_policy_blockers_respect_opt_in_prior_mechanism():
     ):
         assert task_policy_blockers(tasks[runnable], opted_in) == [], f"Unexpected blocker on {runnable}"
 
-    for blocked_component_host in (
+    for unblocked_component_host in (
         "two_pole",
         "ae_gan_hold",
         "unused_token_hold",
         "trajectory",
     ):
-        assert task_policy_blockers(tasks[blocked_component_host], opted_in), (
-            f"Expected public_components blocker on {blocked_component_host}"
+        assert task_policy_blockers(tasks[unblocked_component_host], opted_in) == [], (
+            f"Unexpected blocker on {unblocked_component_host}"
         )
 
 

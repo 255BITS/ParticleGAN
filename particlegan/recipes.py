@@ -1236,17 +1236,17 @@ class Recipe:
                     if p.requires_grad and id(p) not in seen:
                         g_params.append(p)
                         role_params.append(p)
-                        seen.add(id(p))
-            if normalized and role_params:
-                role_groups = [{"params": role_params, "lr": self.lr, "role": role}]
-                if self.optimizer_convolution == "per_offset":
-                    from .optim.dualnorm import convolution_parameter_groups
-                    role_groups = convolution_parameter_groups(role_groups, [generator, encoder],
-                                                               family=self.optimizer_family,
-                                                               convolution_rule=self.optimizer_convolution_rule)
-                groups.extend(role_groups)
-        if g_params and not normalized:
-            groups.append({"params": g_params, "lr": self.lr})
+            if role_params:
+                if normalized:
+                    role_groups = [{"params": role_params, "lr": self.lr, "role": role}]
+                    if self.optimizer_convolution == "per_offset":
+                        from .optim.dualnorm import convolution_parameter_groups
+                        role_groups = convolution_parameter_groups(role_groups, [generator, encoder],
+                                                                   family=self.optimizer_family,
+                                                                   convolution_rule=self.optimizer_convolution_rule)
+                    groups.extend(role_groups)
+                else:
+                    groups.append({"params": role_params, "lr": self.lr})
         if base_params:
             groups.append({"params": base_params, "lr": self.lr * self.prior_lr_mult,
                            "betas": self.prior_betas if self.prior_betas is not None else self.betas,

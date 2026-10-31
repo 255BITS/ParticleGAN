@@ -160,8 +160,11 @@ class _NamedNoise(NoisePolicy):
     def __init__(self, components):
         self.components = components
         recipe = components.recipe
+        total_steps = recipe.total_steps
+        if total_steps is None:
+            total_steps = components.task.get("execution", {}).get("steps", 100)
         super().__init__(recipe.output_noise_std, recipe.input_noise_std,
-                         recipe.input_noise_anneal_end, recipe.total_steps,
+                         recipe.input_noise_anneal_end, total_steps,
                          seed=components.context.streams.seed,
                          output_noise_warmup=recipe.output_noise_warmup,
                          output_noise_rng="isolated" if recipe.output_noise_std else None)
@@ -399,7 +402,10 @@ class BehaviorComponents:
 
     def schedule_optimizer(self, optimizer, completed_updates):
         apply_optimizer_schedule(completed_updates, self.recipe, optimizer)
-        network, prior = learning_rate_scales(completed_updates, self.recipe)
+        if self.recipe.lr_control == "stationarity":
+            network, prior = 1.0, 1.0
+        else:
+            network, prior = learning_rate_scales(completed_updates, self.recipe)
         for group, base in zip(optimizer.param_groups, self.base_rates[id(optimizer)]):
             group["lr"] = base * (prior if group.get("forge_role") == "prior" else network)
             role = next(name for name, owned in self.optimizers.items() if owned is optimizer)
