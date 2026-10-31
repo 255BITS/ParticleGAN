@@ -464,6 +464,7 @@ def test_multi_cycle_save_load_no_step_drift():
         assert torch.equal(out_r["penalty"], out_c["penalty"]), f"penalty drift at step {idx}"
 
 
+@pytest.mark.cuda
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA not available")
 def test_cuda_optimizer_serialization_and_readiness():
     """Verify optimizer state serialization and readiness ratio on CUDA."""

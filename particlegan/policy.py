@@ -695,7 +695,7 @@ class UpdatePolicy:
                 if reopen:
                     self._reopen_moments()
                 if recipe.reopen_anchor == "release":
-                    self._anchor_release(reopen)
+                    self._anchor_release(opt_reopen)
             else:
                 self.controller.observe_blind()
                 reopen = False
