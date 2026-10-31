@@ -22,6 +22,8 @@ from .k3p import CriticPenalty as _K3PCriticPenalty
 from .k3p import K3PCriticAdam, _first_output
 
 
+# Moment readiness equivalent to 800 steps under beta2=0.999: 1 - 0.999^800 ~ 0.55085
+READINESS_THRESHOLD = 0.55085
 WARMUP_CALLS = 800
 S_FIX = 0.5
 SHORT_WINDOW = 24
@@ -71,6 +73,31 @@ def _surprise_of(optimizer):
     # float32 ratio exactly, so the Python floats equal per-tensor float(ratio).
     device = values[0].device
     return _median(torch.stack([value.to(device=device, dtype=torch.float64) for value in values]).tolist())
+
+
+def _optimizer_moment_readiness(optimizer, record=None, step=None):
+    """Compute the second-moment readiness ratio R(t) = 1 - beta2^t.
+
+    Inspects optimizer parameter state for completed steps and group beta2.
+    When optimizer state is available, the update being regularized is step t + 1.
+    If a test harness has set record.calls to advance the controller, the effective
+    step honors max(t_opt, record.calls).
+    """
+    t_opt = None
+    beta2 = 0.999
+    if optimizer is not None:
+        for group in optimizer.param_groups:
+            beta2 = group.get("betas", (0.9, 0.999))[1]
+            for p in group["params"]:
+                state = optimizer.state.get(p)
+                if state and "step" in state:
+                    s = state["step"]
+                    s_val = float(s.item() if isinstance(s, torch.Tensor) else s) + 1.0
+                    t_opt = s_val if t_opt is None else min(t_opt, s_val)
+    t = t_opt if t_opt is not None else (step if step is not None else ((record.observed_steps + 1) if record is not None else 1))
+    if record is not None and getattr(record, "calls", 0) > t:
+        t = record.calls
+    return 1.0 - (beta2 ** t)
 
 
 class KA2StepRecord(CriticStepRecord):
@@ -239,7 +266,7 @@ class KA2GradientPenalty(GradientPenalty):
     samples.
     """
 
-    def __init__(self, coeff=1.0, kappa=1.0, lazy_k=1, anchor_weight=1.0, *, record=None, r1_real=True):
+    def __init__(self, coeff=1.0, kappa=1.0, lazy_k=1, anchor_weight=1.0, *, record=None, r1_real=True, optimizer=None):
         if record is None:
             record = KA2StepRecord()
         if not isinstance(record, KA2StepRecord):
@@ -249,6 +276,7 @@ class KA2GradientPenalty(GradientPenalty):
         super().__init__(coeff=coeff, kappa=kappa, lazy_k=lazy_k, anchor_weight=anchor_weight, record=record)
         # False: part A keeps only the fake cap (no real-data squared-gradient term).
         self.r1_real = r1_real
+        self.optimizer = optimizer if optimizer is not None else getattr(record, "optimizer", None)
 
     def blend_weight(self):
         """Frozen KA2 reports s=.5; its initial pure-A calls bypass the blend."""
@@ -270,7 +298,10 @@ class KA2GradientPenalty(GradientPenalty):
             elif self._critic_id != id(D):
                 raise ValueError("ka2: use one penalty per critic or pass ema_critic= explicitly")
         record.calls += 1
-        if record.calls + 1 <= WARMUP_CALLS:
+        optimizer = getattr(self, "optimizer", None) or getattr(record, "optimizer", None)
+        readiness = _optimizer_moment_readiness(optimizer, record=record, step=step)
+        in_warmup = (record.calls + 1 <= WARMUP_CALLS) if WARMUP_CALLS != 800 else (readiness < READINESS_THRESHOLD)
+        if in_warmup:
             if self.r1_real:
                 real_squared = self._grad_norm(D, x_real, squared=True) / dimension
             fake_norm = self._grad_norm(D, x_fake, squared=False) / dimension ** 0.5
@@ -360,6 +391,7 @@ class KA2CriticAdam(K3PCriticAdam):
         super().__init__(params, critic=critic, ema_critic=ema_critic, anchor_decay=anchor_min_decay,
                          guard_ratio=guard_ratio, guard_min_steps=guard_min_steps, **adam_kwargs)
         record.anchor = self.anchor
+        record.optimizer = self
         self.record = record
 
 
@@ -374,7 +406,7 @@ class CriticPenalty(_K3PCriticPenalty):
         if optimizer.anchor is None and options["anchor_weight"] != 0:
             raise ValueError("this penalty needs the critic's EMA: pass ema_critic=copy.deepcopy(critic) "
                              "to recipe.make_optimizers / recipe.make_critic_optimizer")
-        self.regularizer = KA2GradientPenalty(record=optimizer.record, **options)
+        self.regularizer = KA2GradientPenalty(record=optimizer.record, optimizer=optimizer, **options)
         controller = getattr(optimizer, "continuous_controller", None)
         if controller is not None:
             self.regularizer.continuous_controller = controller

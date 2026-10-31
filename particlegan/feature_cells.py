@@ -286,6 +286,8 @@ class FeatureCellBirthDeath(FrozenFeatureReferenceBirthDeath):
     @torch.no_grad()
     def maybe_apply(self, trainer, sigma_out):
         self.moved_rows = None
+        if self.N <= self.settings["cells"]:
+            return None
         if not self.ready():
             return None
         sigma = 0. if sigma_out is None else float(sigma_out)

@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 400000,
+    "candidate_budget_seconds": 100000,
+    "id": "atlas-prior-repair-campaign-v2"
+  },
+  "candidate": "atlas-particle-normal-v2",
+  "competing_explanation": "If mode_hold, clockfree_audit, five_word_joint, or model_ae_reconstruction remain failing or incomplete, then failures stem from fundamental clean-evaluation variance deficits rather than spurious LossSurprise equilibrium reopens, fixed-step critic guard clock dependencies, and missing public_components / worker-snapshot bindings.",
+  "control": {
+    "candidate_id": "atlas-particle-normal-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "mean_error_sigma",
+    "op": ">",
+    "phase": "final",
+    "task_id": "gaussian1d_smoke",
+    "threshold": 0.2
+  },
+  "hypothesis": "De-clocking Atlas's critic guard (d_guard_ratio=0.0, d_guard_min_steps=0), restoring LossSurprise equilibrium separation (Z_THRESH=3.5, Z_CALM=1.5), and binding clean/live public_components word_joint and model task snapshots allows atlas-particle-normal-v2 to pass clock-free parity, mode_hold, joint word acquisition/hold, and AE reconstruction on the 48-task full suite under protocol seed 0.",
+  "id": "atlas-particle-normal-replication-study-v2",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "parity_comparisons",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "clockfree_audit",
+    "threshold": 4
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_revision": "c7e4c12988d060ec0bb8d903651ffbae3d2537e4d5b360a3bfa75a6e860de9fb",
+        "record_id": "readout-9f0d62f87d1ff351cfef7f98"
+      },
+      "path": "reports/forge/records/readout-9f0d62f87d1ff351cfef7f98.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "prior-ablation-full-suite-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

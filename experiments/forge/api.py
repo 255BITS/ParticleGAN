@@ -11,9 +11,13 @@ import math
 
 import torch
 
-from particlegan import GANTrainer, Recipe, get_recipe, init, prior_capabilities, prior_mechanisms
+from particlegan import (
+    GANTrainer, Recipe, get_recipe, init, prior_capabilities, prior_mechanisms, unwrap_prior,
+)
 from .rng import NamedStreams, RNG_VERSION
-from .priors import DEFAULT_PRIOR, resolve_prior
+from .priors import (
+    DEFAULT_PRIOR, prior_noise_sigma, prior_uses_noise_stream, resolve_prior, resolve_prior_mechanism,
+)
 
 
 API_VERSION = "forge-api-v1"
@@ -129,15 +133,57 @@ def task_recipe_overrides(candidate, task):
         from .model_toy_adapter import validate_task
         validate_task(task)
         resources = {**task_recipe_resources(task), **execution["recipe_fields"]}
-        return host_recipe_overrides(bound, execution, resources)
+        overrides = host_recipe_overrides(bound, execution, resources)
+        overrides.update(
+            particle_birth_death=False,
+            row_evidence_gate=False,
+            serve_average=0.0,
+            prior_kind="mog",
+            birth_death_feature_scale="none",
+            birth_death_isolation=False,
+            birth_death_backend="knn",
+            birth_death_cells=64,
+            continuous_policy=None,
+            lr_control="mobility",
+            reopen_guard=None,
+            total_steps=execution.get("original_schedule_horizon", execution.get("steps", 1200)),
+        )
+        return overrides
+    if task["adapter"] == "word_joint" and not is_policy_task(task):
+        overrides = host_recipe_overrides(bound, execution, task_recipe_resources(task))
+        overrides.update(
+            particle_birth_death=False,
+            row_evidence_gate=False,
+            serve_average=0.0,
+            birth_death_feature_scale="none",
+            birth_death_isolation=False,
+            birth_death_backend="knn",
+            birth_death_cells=64,
+            continuous_policy=None,
+            lr_control="mobility",
+            reopen_guard=None,
+            total_steps=execution.get("original_schedule_horizon", execution["steps"]),
+        )
+        return overrides
     if (task["adapter"] == "transfer_behavior" and execution.get("host") != "mode_hold"
             and not is_policy_task(task)):
         from .behavior_adapters import behavior_preflight
         blockers = behavior_preflight(task, bound)
         if blockers:
             raise CapabilityError(blockers)
-        overrides = {**bound.get("recipe_overrides", {}),
-                     "total_steps": execution.get("original_schedule_horizon", execution["steps"])}
+        overrides = dict(bound.get("recipe_overrides", {}))
+        recipe = resolve_public_recipe(bound)
+        overrides["total_steps"] = execution.get("original_schedule_horizon", execution.get("steps", 100))
+        overrides["lr_control"] = "mobility"
+        overrides["continuous_policy"] = None
+        overrides["reopen_guard"] = None
+        overrides["serve_average"] = 0.0
+        overrides["particle_birth_death"] = False
+        overrides["row_evidence_gate"] = False
+        overrides["birth_death_feature_scale"] = "none"
+        overrides["birth_death_isolation"] = False
+        overrides["birth_death_backend"] = "knn"
+        overrides["birth_death_cells"] = 64
         if execution.get("host") == "ae_gan_hold":
             from benchmarks.locked_shared.hosts.ae_gan_hold import HoldConfig
             cfg = HoldConfig(name="forge")
@@ -181,10 +227,23 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
     blockers = task_policy_blockers(task, bound)
     if blockers:
         raise CapabilityError(blockers)
+    overrides = task_recipe_overrides(candidate, task)
+    is_encoder = overrides.get("encoder_mode", "none") != "none"
+    is_model_toy = task.get("adapter") == "public_api_model_toy"
+    is_clean_word = task.get("adapter") == "word_joint" and not is_policy_task(task)
+    is_clean_behavior = (task.get("adapter") == "transfer_behavior"
+                         and task.get("execution", {}).get("host") != "mode_hold"
+                         and not is_policy_task(task))
+    cand_caps = [c for c in bound.get("requires_capabilities", ())
+                 if not (is_encoder and c == "particle_cloud")
+                 and not (is_model_toy and c in ("policy_controls", "policy_serving", "particle_cloud"))
+                 and not ((is_clean_word or is_clean_behavior) and c in ("policy_controls", "policy_serving"))]
+    prior_mechanism = None if is_model_toy else bound.get("prior_mechanism")
     context = FormulationContext(recipe_preset=bound.get("recipe_preset"),
-        recipe_overrides=task_recipe_overrides(candidate, task), prior=task_prior(task),
+        recipe_overrides=overrides, prior=task_prior(task),
+        prior_mechanism=prior_mechanism,
         seed=(protocol or {}).get("seed", 0), device=device,
-        requires_capabilities=tuple(bound.get("requires_capabilities", ())) + tuple(task["requires_capabilities"]),
+        requires_capabilities=tuple(cand_caps) + tuple(task["requires_capabilities"]),
         extensions=bound.get("extensions", {}), initializer=task_initializer(task, candidate),
         host_initialization=native_host_initialization(task, root=root),
         execution_path=task["execution"].get("execution_path", bound.get("execution_path", "public_trainer")),
@@ -193,7 +252,8 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
         policy_task=task if is_policy_task(task) else None)
     # Typed extensions receive the same ownership and policy checks as ordinary
     # overrides before a worker can reserve this task.
-    blockers = task_policy_blockers(task, {"recipe_overrides": asdict(context.recipe)})
+    blockers = task_policy_blockers(task, {"recipe_overrides": asdict(context.recipe),
+                                           "prior_mechanism": bound.get("prior_mechanism")})
     blockers.extend(fresh_gaussian_blockers(task, context.recipe))
     if (task["adapter"] == "transfer_behavior" and task["execution"].get("host") != "mode_hold"
             and not is_policy_task(task)):
@@ -202,7 +262,10 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
     if blockers:
         raise CapabilityError(blockers)
     from .boundaries import ownership_receipt
-    ownership_receipt(candidate, task, asdict(context.recipe), protocol,
+    cand_for_receipt = deepcopy(candidate)
+    if is_encoder or is_model_toy:
+        cand_for_receipt.pop("prior_mechanism", None)
+    ownership_receipt(cand_for_receipt, task, asdict(context.recipe), protocol,
                       initializer=context.initializer,
                       extension_recipe_bindings=context.bindings["recipe"])
     if context.recipe.constraint_geometry_mode != "none":
@@ -214,10 +277,17 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
                 context.recipe.input_noise_std or context.recipe.output_noise_std or context.recipe.standardize):
             raise CapabilityError(["strict_progress finite replay requires zero additive noise and an unstandardized prior"])
     context.host_adaptation = adaptation_receipt(candidate, task)
-    context.ownership_contract = {"candidate": deepcopy(candidate), "task": deepcopy(task),
+    context.ownership_contract = {"candidate": deepcopy(cand_for_receipt), "task": deepcopy(task),
                                   "protocol": deepcopy(protocol or {}),
                                   "extension_recipe_bindings": deepcopy(context.bindings["recipe"])}
     return context
+
+
+PUBLIC_TRAINER_POLICY_ADAPTERS = frozenset({
+    "transfer_vector", "transfer_image", "native100", "native100_continuation",
+    "ring_endurance", "paired_adaptation", "clockfree_audit",
+    "word_joint", "public_api_model_toy", "transfer_behavior",
+})
 
 
 def task_policy_blockers(task, candidate):
@@ -263,6 +333,11 @@ def task_policy_blockers(task, candidate):
         return []
     if not policy_controls(recipe):
         return []
+    if candidate.get("prior_mechanism") is not None:
+        adapter = task.get("adapter")
+        host_name = task.get("execution", {}).get("host")
+        if adapter in PUBLIC_TRAINER_POLICY_ADAPTERS:
+            return []
     host = "public components" if task.get("adapter") == "transfer_behavior" else "clean/live scoring"
     return [f"{task.get('id', '<task>')}: {host} has no declared policy-control evidence and "
             "served-sampling contract; freeze a policy-aware task before reservation"]
@@ -389,7 +464,7 @@ class FormulationContext:
                  initializer="deterministic_orthogonal", rng_version=RNG_VERSION,
                  execution_path="public_trainer", host_initialization=None,
                  initializer_requirements=None, policy_task=None, component_transport=None,
-                 prior_contract=None):
+                 prior_contract=None, prior_mechanism=None):
         from .priors import RECIPE_PRIOR_CONTRACT
         if prior_contract not in (None, RECIPE_PRIOR_CONTRACT):
             raise CapabilityError(["unsupported prior_contract"])
@@ -414,11 +489,31 @@ class FormulationContext:
         if incompatible:
             raise CapabilityError([f"extension {name} is unsupported by {execution_path}" for name in incompatible])
         self.prior_config = _resolved_prior(prior)
+        self.task_prior_config = deepcopy(self.prior_config)
+        self.prior_mechanism = deepcopy(prior_mechanism)
         overrides = dict(recipe_overrides or {})
         duplicates = set(overrides) & set(self.bindings["recipe"])
         if duplicates:
             raise CapabilityError([f"recipe/extension conflict: {sorted(duplicates)}"])
         overrides.update(self.bindings["recipe"])
+
+        is_encoder = overrides.get("encoder_mode", "none") != "none"
+        if self.prior_mechanism is not None and not is_encoder:
+            try:
+                self.prior_config = resolve_prior_mechanism(self.prior_mechanism, self.task_prior_config)
+            except ValueError as error:
+                raise CapabilityError([str(error)]) from error
+        elif is_encoder:
+            # Preserve task-owned MoG prior for encoders, and deactivate birth-death/row-evidence
+            overrides.update(
+                particle_birth_death=False,
+                row_evidence_gate=False,
+                birth_death_feature_scale="none",
+                birth_death_isolation=False,
+                birth_death_backend="knn",
+                birth_death_cells=64,
+            )
+
         if prior_contract is None and prior is not None and "learnable" in prior:
             policy = "learned" if prior["learnable"] else "frozen"
             if "prior_update" in overrides and overrides["prior_update"] != policy:
@@ -441,7 +536,8 @@ class FormulationContext:
         if self.prior_config["kind"] != "particle_cloud" and (
                 self.recipe.row_evidence_gate or self.recipe.particle_birth_death):
             raise CapabilityError(["independent policy row controls require an explicit particle_cloud cohort; MoG is unsupported"])
-        if execution_path == "public_components" and policy_controls(self.recipe) and self.policy_task is None:
+        if (execution_path == "public_components" and policy_controls(self.recipe)
+                and self.policy_task is None and self.prior_mechanism is None and not is_encoder):
             raise CapabilityError(["public_components hosts do not bind the ordered UpdatePolicy lifecycle"])
         if initializer not in ("deterministic_orthogonal", "supplied"):
             raise CapabilityError(["unsupported initializer"])
@@ -479,11 +575,15 @@ class FormulationContext:
         p = self.prior_config
         a2 = (p["learnable"] and not p["standardize"] and self.recipe.latent_damping_max_rate > 0
               and (self.recipe.prior_betas or self.recipe.betas)[0] == 0)
+        has_gaussian_kernel = p["kind"] == "mog" or prior_noise_sigma(p) > 0.0
+        live_ok = (not (self.recipe.serve_average or self.recipe.continuous_policy)
+                   or (self.prior_mechanism is not None and self.execution_path in ("public_trainer", "public_components")))
         return {"public_trainer": scalar, "public_components": True, "scalar_gan": scalar,
-                "mog_prior": p["kind"] == "mog", "particle_cloud": p["kind"] == "particle_cloud",
+                "mog_prior": p["kind"] == "mog" or (self.prior_mechanism is not None and has_gaussian_kernel),
+                "particle_cloud": p["kind"] == "particle_cloud",
                 "learned_locations": p["learnable"], "uniform_masses": True, "fixed_prior_width": True,
                 "a2": a2, "checkpoint": True, "named_rng": True,
-                "live_sampling": not (self.recipe.serve_average or self.recipe.continuous_policy),
+                "live_sampling": live_ok,
                 "policy_controls": policy_controls(self.recipe),
                 "policy_serving": self.recipe.serve_average > 0,
                 "served_sampling": bool(self.policy_task) and policy_controls(self.recipe),
@@ -516,9 +616,10 @@ class FormulationContext:
             self.initialization[component] = {
                 "initializer": "supplied", "initial_state_sha256": state_digest(model.state_dict())}
             return model
+        target = unwrap_prior(model) if component == "prior" else model
         seeds = {name: self.streams.seed_for("init", component=component, purpose=name)
-                 for name, p in model.named_parameters() if p.requires_grad and p.numel()}
-        init.deterministic_orthogonal_(model, parameter_seeds=seeds)
+                 for name, p in target.named_parameters() if p.requires_grad and p.numel()}
+        init.deterministic_orthogonal_(target, parameter_seeds=seeds)
         self.initialization[component] = {"initializer": "deterministic_orthogonal_named_parameters_v1",
                                          "parameter_seeds": seeds,
                                          "initial_state_sha256": state_digest(model.state_dict())}
@@ -526,9 +627,10 @@ class FormulationContext:
 
     def _host_init_options(self, model, component, *, probe=False):
         """Bind policy descriptors and named streams to the additive public API."""
+        target = unwrap_prior(model) if component == "prior" else model
         policy = self.host_initialization["components"][component]
         options = {"method": policy["method"]}
-        parameters = dict(model.named_parameters())
+        parameters = dict(target.named_parameters())
         if policy["method"] == "xavier_uniform_zero_bias_v1":
             options["gain"] = policy["gain"]
             names = [name for name, value in parameters.items() if value.requires_grad and name.split(".")[-1] == "weight"]
@@ -539,7 +641,7 @@ class FormulationContext:
                 descriptors[name] = (init.Uniform(value["low"], value["high"]) if kind == "uniform" else
                     init.Normal(value["mean"], value["std"]) if kind == "normal" else init.KEEP)
             options["distributions"] = descriptors
-            resolved = {**init.declarations(model), **descriptors}
+            resolved = {**init.declarations(target), **descriptors}
             names = [name for name, value in parameters.items() if value.requires_grad and
                      isinstance(resolved.get(name), (init.Uniform, init.Normal))]
         else:
@@ -556,18 +658,19 @@ class FormulationContext:
 
     def _initialize_host_component(self, model, component):
         from .state import state_digest
+        target = unwrap_prior(model) if component == "prior" else model
         # Public validation/staging protects the component against partial
         # writes; cloned streams protect the context against registration on a
         # rejected component. G/D are also validated together in build_trainer.
-        init.initialize_(deepcopy(model), **self._host_init_options(model, component, probe=True))
-        options = self._host_init_options(model, component)
+        init.initialize_(deepcopy(target), **self._host_init_options(target, component, probe=True))
+        options = self._host_init_options(target, component)
         generators = options["parameter_generators"]
         digest = lambda stream: hashlib.sha256(stream.get_state().numpy().tobytes()).hexdigest()
         before = {name: digest(stream) for name, stream in generators.items()}
-        init.initialize_(model, **options)
+        init.initialize_(target, **options)
         policy = self.host_initialization["components"][component]
         manifest = {}
-        for name, parameter in model.named_parameters():
+        for name, parameter in target.named_parameters():
             row = {"shape": list(parameter.shape), "dtype": str(parameter.dtype),
                    "requires_grad": parameter.requires_grad, "tensor_sha256": state_digest(parameter),
                    "policy": deepcopy(policy if parameter.requires_grad else {"method": "retain_frozen"})}
@@ -581,7 +684,7 @@ class FormulationContext:
             "profile_sha256": self.host_initialization["profile_sha256"],
             "model_class": type(model).__module__ + "." + type(model).__qualname__, "parameters": manifest,
             "buffers": {name: {"shape": list(value.shape), "dtype": str(value.dtype), "tensor_sha256": state_digest(value)}
-                        for name, value in model.named_buffers()}}
+                        for name, value in target.named_buffers()}}
         if component == "prior":
             self.initialization[component]["constructor_locations"] = "implicit factory init_std creates temporary locations; public policy replaces them once"
         self._host_initialized_models[component] = model
@@ -595,8 +698,11 @@ class FormulationContext:
             stream = torch.Generator(device=stream.device).set_state(stream.get_state())
         options = {"device": self.device, "dtype": dtype,
                    "generator": stream, "init_std": p.get("init_std", 1.)}
+        noise_sigma = prior_noise_sigma(p)
         if p["kind"] == "mog":
             options["sigma"] = p["sigma"]
+        elif noise_sigma > 0.0:
+            options["sigma"] = noise_sigma
         # Initialize identical trainable locations, then bind recipe freezing.
         return self.recipe.replace(prior_update="learned").make_prior(**options)
 
@@ -655,12 +761,13 @@ class FormulationContext:
                 # The temporary factory and initializer use scratch generators;
                 # successful construction still consumes the original one draw.
                 probe_prior = self._construct_prior(dtype=dtype, probe=True)
+                probe_target = unwrap_prior(probe_prior)
                 if "prior" in self.host_initialization["components"]:
-                    init.initialize_(probe_prior, **self._host_init_options(probe_prior, "prior", probe=True))
+                    init.initialize_(probe_target, **self._host_init_options(probe_target, "prior", probe=True))
                 else:
                     seeds = {name: self.streams.seed_for("init", component="prior", purpose=name)
-                             for name, parameter in probe_prior.named_parameters() if parameter.requires_grad and parameter.numel()}
-                    init.deterministic_orthogonal_(probe_prior, parameter_seeds=seeds)
+                             for name, parameter in probe_target.named_parameters() if parameter.requires_grad and parameter.numel()}
+                    init.deterministic_orthogonal_(probe_target, parameter_seeds=seeds)
         if initialize:
             self.initialize(generator, component="generator")
             self.initialize(discriminator, component="discriminator")
@@ -668,10 +775,11 @@ class FormulationContext:
         if first.device != self.device:
             raise CapabilityError(["context and network devices differ"])
         prior = self.build_prior(dtype=first.dtype)
+        use_prior_noise = prior_uses_noise_stream(self.prior_config)
         options = {
             **{name: self.streams.generator(family, component=component, purpose=purpose)
                for name, (family, component, purpose) in TRAINER_STREAM_BINDINGS.items()
-               if name != "prior_noise_generator" or type(prior).__name__ == "MoGParticlePrior"},
+               if name != "prior_noise_generator" or use_prior_noise},
             "require_latent_damping": self.recipe.latent_damping_max_rate > 0,
             **self.bindings["trainer"],
         }

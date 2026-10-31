@@ -120,7 +120,8 @@ def validate_idea(idea: dict) -> None:
                    "mechanism_rationale", "recipe_preset", "recipe_overrides", "extensions",
                    "requires_capabilities", "api_changes", "api_version", "execution_path",
                    "initializer", "claim_contract", "host_adaptation", "prior_art", "guide",
-                   "trainer_family", "configuration_id", "resolved_configuration_recipe"}
+                   "trainer_family", "configuration_id", "resolved_configuration_recipe",
+                   "prior_mechanism"}
         if set(idea) - allowed:
             raise ValueError("v3 candidate has study/task-owned or unsupported fields: "
                              + ", ".join(sorted(set(idea) - allowed)))
@@ -132,6 +133,9 @@ def validate_idea(idea: dict) -> None:
         identifier(idea["goal"], "goal")
         if not isinstance(idea["hypothesis"], str) or not idea["hypothesis"].strip():
             raise ValueError("state a hypothesis before submitting an idea")
+    if "prior_mechanism" in idea:
+        from .priors import validate_prior_mechanism
+        validate_prior_mechanism(idea["prior_mechanism"])
     if idea["schema_version"] == 2 and "decision_contract" not in idea:
         raise ValueError("v2 ideas require a decision_contract; use forge new to create the draft scaffold")
     if "decision_contract" in idea:

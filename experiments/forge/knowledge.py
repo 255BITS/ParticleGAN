@@ -1016,6 +1016,14 @@ def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, nex
     states = _queue_states(root, attempts)
     study_request = None
     from .studies import frozen_declaration, selected_study_id
+    if study_id is not None and (study_id.endswith(".json") or "/" in study_id):
+        study_path = (root / study_id).resolve() if not Path(study_id).is_absolute() else Path(study_id)
+        if study_path.exists():
+            import json
+            try:
+                study_id = json.loads(study_path.read_text()).get("id", study_id)
+            except Exception:
+                pass
     selected = [a for a in attempts if a["request"].get("candidate", {}).get("id") == candidate_id
                 and (requested_revision is None or a["request"]["candidate_revision"].startswith(requested_revision))
                 and (study_id is None or a["request"].get("study", {}).get("id") == study_id)]
@@ -1047,6 +1055,7 @@ def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, nex
               "goal": study.get("scope", {}).get("view", study.get("view")) if study else candidate.get("goal"),
               "hypothesis": study["hypothesis"] if study else candidate.get("hypothesis", "See immutable candidate declaration."),
               "mechanism_class": candidate.get("mechanism_class", "unknown"), "prior": candidate.get("prior"),
+              **({"prior_mechanism": candidate["prior_mechanism"]} if candidate.get("prior_mechanism") is not None else {}),
               "claim_contract": candidate.get("claim_contract"),
               "source": {"path": selected[0]["source"]},
               "task_results": [row for attempt in selected for row in attempt["task_results"]],

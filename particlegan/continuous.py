@@ -1035,7 +1035,7 @@ class OptimizerSurprise:
         if q is not None:
             self.pending[key] = q
 
-    def decide(self, step=None, *, guard=None, network=None):
+    def decide(self, step=None, *, guard=None, network=None, loss_surprised=False):
         """Fold this update's observations in; return True when a re-open fires."""
         if not self.pending:
             return False
@@ -1059,7 +1059,7 @@ class OptimizerSurprise:
         self.last_ratio = ratio
         self.last_ratios = {key: math.exp(value) for key, value in zip(keys, logs)}
         calm = ratio < self.CALM
-        permitted = True if guard is None else guard.observe(ratio, self.CALM, step, network)
+        permitted = True if guard is None else guard.observe(ratio, self.CALM, step, network, loss_surprised=loss_surprised)
         self.since_calm = 0 if calm else self.since_calm + 1
         if self.since_fire is not None:
             self.since_fire += 1
@@ -1118,7 +1118,7 @@ class SettledReopenGuard:
         self.excursion = None
         self.epoch_rebases = 0
 
-    def observe(self, ratio, calm_level, step, network):
+    def observe(self, ratio, calm_level, step, network, loss_surprised=False):
         network = {} if network is None else network
         if ratio < calm_level:
             self.calm_network = deepcopy(network)
@@ -1127,7 +1127,7 @@ class SettledReopenGuard:
         if self.excursion is None:
             witness = {**self.calm_network, **network}
             self.excursion = {"step": step, "network": deepcopy(witness)}
-        return bool(self.excursion["network"])
+        return bool(self.excursion["network"]) or loss_surprised
 
     def after_fire(self):
         # A re-open restores every ladder to its ceiling. It supplies no
@@ -1190,3 +1190,113 @@ class SettledReopenGuard:
         self.check_state(state, roles=roles, completed_steps=completed_steps,
                          anchor_started=anchor_started)
         self.__dict__.update(deepcopy({key: value for key, value in state.items() if key != "schema"}))
+
+
+class LossSurprise:
+    """Critic loss surprise detector for abrupt distribution shift recovery.
+
+    Tracks short-term running loss L_fast against a calm equilibrium baseline
+    L_calm with variance var_calm. While calm (z < 1.5), the baseline adapts
+    slowly to track the game's equilibrium loss. When an abrupt distribution
+    shift occurs, critic loss jumps, producing z = (L_fast - L_calm) / sigma_calm > 3.5.
+    A confirmation streak of 2 consecutive steps triggers a re-open, while the
+    baseline is frozen during excursions. The detector remains quiet at equilibrium
+    and stays disarmed for a cooldown period after firing.
+    """
+
+    ALPHA_FAST = 0.5
+    ALPHA_SLOW = 0.01
+    Z_THRESH = 3.5
+    Z_CALM = 1.5
+    CONFIRMATION_STREAK = 2
+    COOLDOWN = 16
+    MIN_VAR = 5e-6
+
+    def __init__(self):
+        self.fast = None
+        self.calm = None
+        self.var_calm = 0.01
+        self.streak = 0
+        self.armed = True
+        self.since_calm = 0
+        self.since_fire = None
+        self.fires = 0
+        self.last_z = 0.0
+        self.pending_loss = None
+
+    def observe(self, loss: float):
+        if not math.isfinite(loss):
+            return
+        self.pending_loss = float(loss)
+
+    def decide(self, step=None, *, guard=None):
+        if self.pending_loss is None:
+            return False
+        loss = self.pending_loss
+        self.pending_loss = None
+
+        if self.calm is None:
+            self.calm = loss
+            self.fast = loss
+            self.var_calm = max(self.MIN_VAR, 0.01)
+            return False
+
+        self.fast += self.ALPHA_FAST * (loss - self.fast)
+        sigma = math.sqrt(max(self.MIN_VAR, self.var_calm))
+        z = (self.fast - self.calm) / sigma
+        self.last_z = z
+
+        calm = z < self.Z_CALM
+        self.since_calm = 0 if calm else self.since_calm + 1
+        if self.since_fire is not None:
+            self.since_fire += 1
+
+        if calm or not self.armed:
+            delta = loss - self.calm
+            self.calm += self.ALPHA_SLOW * delta
+            self.var_calm = (1.0 - self.ALPHA_SLOW) * self.var_calm + self.ALPHA_SLOW * (delta * delta)
+            self.var_calm = max(self.MIN_VAR, self.var_calm)
+
+        fire = False
+        if self.armed:
+            if z > self.Z_THRESH:
+                self.streak += 1
+            else:
+                self.streak = 0
+
+            if self.streak >= self.CONFIRMATION_STREAK:
+                fire = True
+                self.fires += 1
+                self.armed = False
+                self.streak = 0
+                self.since_fire = 0
+                self.calm = self.fast
+                if guard is not None:
+                    guard.after_fire()
+        elif calm and self.since_fire is not None and self.since_fire >= self.COOLDOWN:
+            self.armed = True
+
+        return fire
+
+    @property
+    def is_surprised(self):
+        return self.last_z > self.Z_THRESH or self.streak > 0
+
+    def state_dict(self):
+        return deepcopy({
+            "fast": self.fast,
+            "calm": self.calm,
+            "var_calm": self.var_calm,
+            "streak": self.streak,
+            "armed": self.armed,
+            "since_calm": self.since_calm,
+            "since_fire": self.since_fire,
+            "fires": self.fires,
+            "last_z": self.last_z,
+            "pending_loss": self.pending_loss,
+        })
+
+    def load_state_dict(self, state):
+        if not isinstance(state, dict):
+            raise ValueError("incompatible loss-surprise state")
+        self.__dict__.update(deepcopy(state))

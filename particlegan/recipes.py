@@ -707,7 +707,11 @@ class Recipe:
             if options.pop("sigma_rel") != 0:
                 raise ValueError("nonzero sigma_rel requires prior_kind='mog'")
             options.pop("standardize")
+            normal_sigma = options.pop("sigma", None)
             prior = ParticlePrior(**options)
+            if normal_sigma is not None and normal_sigma > 0:
+                from .priors import NormalNoiseManipulator
+                prior = prior.manipulate(NormalNoiseManipulator(sigma=float(normal_sigma)))
         else:
             raise ValueError("prior_kind must be 'particles' or 'mog'")
         if manipulators is not None:
@@ -1230,19 +1234,20 @@ class Recipe:
             if module is not None:
                 for p in module.parameters():
                     if p.requires_grad and id(p) not in seen:
+                        seen.add(id(p))
                         g_params.append(p)
                         role_params.append(p)
-                        seen.add(id(p))
-            if normalized and role_params:
-                role_groups = [{"params": role_params, "lr": self.lr, "role": role}]
-                if self.optimizer_convolution == "per_offset":
-                    from .optim.dualnorm import convolution_parameter_groups
-                    role_groups = convolution_parameter_groups(role_groups, [generator, encoder],
-                                                               family=self.optimizer_family,
-                                                               convolution_rule=self.optimizer_convolution_rule)
-                groups.extend(role_groups)
-        if g_params and not normalized:
-            groups.append({"params": g_params, "lr": self.lr})
+            if role_params:
+                if normalized:
+                    role_groups = [{"params": role_params, "lr": self.lr, "role": role}]
+                    if self.optimizer_convolution == "per_offset":
+                        from .optim.dualnorm import convolution_parameter_groups
+                        role_groups = convolution_parameter_groups(role_groups, [generator, encoder],
+                                                                   family=self.optimizer_family,
+                                                                   convolution_rule=self.optimizer_convolution_rule)
+                    groups.extend(role_groups)
+                else:
+                    groups.append({"params": role_params, "lr": self.lr})
         if base_params:
             groups.append({"params": base_params, "lr": self.lr * self.prior_lr_mult,
                            "betas": self.prior_betas if self.prior_betas is not None else self.betas,

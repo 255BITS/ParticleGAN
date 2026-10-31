@@ -308,6 +308,12 @@ class ManipulatedPrior(nn.Module):
         return all(m.is_additive_transform for m in self.manipulators)
 
     @property
+    def normal_noise(self) -> bool:
+        """True when any manipulator adds normal noise."""
+        return any(getattr(m, "normal_noise", False) or type(m).__name__ == "NormalNoiseManipulator"
+                   for m in self.manipulators)
+
+    @property
     def row_local_gradients(self) -> bool:
         """``prior_capabilities(self)["row_local_gradients"]``.
 
@@ -373,11 +379,18 @@ class ManipulatedPrior(nn.Module):
         return torch.randint(0, self.base.num_particles, (batch_size,),
                              device=self.base.z.device, generator=generator)
 
-    def _transform(self, codes, idx, generator):
+    def _transform(self, codes, idx, generator, eps=None):
         for m in self._transforms:
-            codes = m.transform(
-                codes, idx, base_prior=self.base, generator=generator, training=self.training
-            )
+            if _accepts(m.transform, "eps"):
+                codes = m.transform(
+                    codes, idx, base_prior=self.base, generator=generator,
+                    training=self.training, eps=eps
+                )
+            else:
+                codes = m.transform(
+                    codes, idx, base_prior=self.base, generator=generator,
+                    training=self.training
+                )
         return codes
 
     def forward(
@@ -393,7 +406,7 @@ class ManipulatedPrior(nn.Module):
             codes = self.base(idx, generator=generator, eps=eps)
         else:
             codes = self.base(idx)
-        return self._transform(codes, idx, generator)
+        return self._transform(codes, idx, generator, eps=eps)
 
     def sample(
         self,
@@ -421,7 +434,7 @@ class ManipulatedPrior(nn.Module):
                     batch_size, generator=generator, fixed_first_n=True, offset=offset
                 )
             gen = noise_generator if noise_generator is not None else generator
-            return self._transform(base_codes, idx, gen), idx
+            return self._transform(base_codes, idx, gen, eps=eps), idx
 
         idx = self.sample_indices(batch_size, generator=generator)
         gen = noise_generator if noise_generator is not None else generator
@@ -732,6 +745,77 @@ class SimplexRoutingManipulator(PriorManipulator):
         w = codes[:, :num_modes]
         res = codes[:, num_modes:] if codes.shape[-1] > num_modes else None
         return w, res
+
+
+class NormalNoiseManipulator(PriorManipulator):
+    """Adds isotropic Gaussian noise N(0, sigma^2 I) to sampled particle codes.
+
+    Preserves row-local gradients and additive transforms for strict-progress
+    replay. Noise draws consume the provided generator (or noise_generator
+    routed via ManipulatedPrior).
+    """
+
+    normal_noise: bool = True
+    additive_transform: bool = True
+    row_local_gradients: bool = True
+    config_fields: Tuple[str, ...] = ("sigma",)
+
+    def __init__(
+        self,
+        sigma: float = 0.025,
+        *,
+        penalty_weight: float = 1.0,
+    ) -> None:
+        super().__init__(penalty_weight=penalty_weight)
+        if type(sigma) not in (int, float) or not math.isfinite(sigma) or sigma < 0:
+            raise ValueError(f"sigma must be a finite nonnegative number, got {sigma!r}")
+        self.sigma = float(sigma)
+
+    def transform(
+        self,
+        codes: torch.Tensor,
+        idx: Optional[torch.Tensor] = None,
+        *,
+        base_prior: nn.Module,
+        generator: Optional[torch.Generator] = None,
+        training: bool = True,
+        eps: Optional[torch.Tensor] = None,
+    ) -> torch.Tensor:
+        """Adds isotropic normal noise to codes.
+
+        Args:
+            codes: Float tensor of base particle codes, shape (B, D).
+            idx: Optional LongTensor of particle table indices, shape (B,).
+            base_prior: The underlying base prior module (ParticlePrior).
+            generator: Optional torch.Generator for isolated RNG control.
+            training: Boolean indicating training vs evaluation mode.
+            eps: Optional explicit noise tensor of shape (B, D) for reproducible
+                 snapshots or unit test fixtures.
+
+        Returns:
+            Perturbed latent tensor of shape (B, D).
+        """
+        if self.sigma <= 0:
+            return codes
+
+        if eps is not None:
+            if (eps.shape != codes.shape or eps.device != codes.device
+                    or eps.dtype != codes.dtype):
+                raise ValueError("eps must match sampled codes' shape, device and dtype")
+            noise = eps
+        else:
+            noise = torch.randn(
+                codes.shape,
+                device=codes.device,
+                dtype=codes.dtype,
+                generator=generator,
+            )
+
+        return codes + self.sigma * noise
+
+
+# Semantic alias
+AdditiveNormalManipulator = NormalNoiseManipulator
 
 
 def _register_initialization() -> None:

@@ -36,6 +36,10 @@ def profile_source_paths(task: dict) -> list[str]:
     if "native_profile" in execution:
         from .nativeprofiles import native_profile_source_files
         paths.update(native_profile_source_files(task))
+    if (task.get("adapter") == "public_api_model_toy"
+            and execution.get("host_definition", {}).get("provider") == "benchmarks.toy_audit.api_model_ae"):
+        paths.update(("configs/forge/tasks/model_ae_reconstruction.json",
+                      "configs/forge/tasks/model_ae_gan_multimodal.json"))
     return sorted(paths)
 
 
@@ -150,6 +154,7 @@ def _validate_task(task, candidate, root, *, explicit_initializer=True):
         task_formulation_context(reference_candidate, task, device="cpu", root=root)
     else:
         FormulationContext(recipe_preset=candidate.get("recipe_preset"), recipe_overrides=overrides, prior=prior,
+            prior_mechanism=candidate.get("prior_mechanism"),
             device="cpu", requires_capabilities=tuple(candidate.get("requires_capabilities", ()))
                 + tuple(task["requires_capabilities"]), extensions=candidate.get("extensions", {}),
             initializer=initializer)
@@ -184,7 +189,8 @@ def _validate_candidate_identity(request):
     # depend on promotion seed; the registered RNG protocol is checked separately.
     context = FormulationContext(recipe_preset=candidate.get("recipe_preset"),
         recipe_overrides=candidate.get("recipe_overrides", {}),
-        prior=candidate.get("prior"), device="cpu",
+        prior=candidate.get("prior"), prior_mechanism=candidate.get("prior_mechanism"),
+        device="cpu",
         requires_capabilities=candidate.get("requires_capabilities", ()),
         extensions=candidate.get("extensions", {}),
         initializer=candidate.get("initializer", "deterministic_orthogonal"),

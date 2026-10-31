@@ -224,8 +224,13 @@ class GANTrainer:
             raise ValueError("prior must match the recipe's ParticlePrior or MoGParticlePrior kind")
         if type(base_prior) is MoGParticlePrior and base_prior.standardize != recipe.standardize:
             raise ValueError("prior standardize must match the recipe")
-        if prior_noise_generator is not None and type(base_prior) is not MoGParticlePrior:
-            raise ValueError("prior_noise_generator requires a MoG prior")
+        is_mog = type(base_prior) is MoGParticlePrior
+        has_normal_noise = bool(getattr(self.prior, "normal_noise", False)) or any(
+            getattr(m, "normal_noise", False) or type(m).__name__ == "NormalNoiseManipulator"
+            for m in getattr(self.prior, "manipulators", ()))
+        has_prior_noise = is_mog or has_normal_noise
+        if prior_noise_generator is not None and not has_prior_noise:
+            raise ValueError("prior_noise_generator requires a MoG prior or normal noise manipulator")
         if self.prior.z.shape != (recipe.num_particles, recipe.z_dim):
             raise ValueError("prior dimensions must match the recipe")
         if not any(p.requires_grad for p in discriminator.parameters()):
@@ -289,7 +294,7 @@ class GANTrainer:
         else:
             self.input_noise_generator = self.noise_generator
         self.prior_noise_generator = None
-        if type(base_prior) is MoGParticlePrior:
+        if has_prior_noise:
             self.prior_noise_generator = self._stream(prior_noise_generator, seed + 6)
             self._STREAMS += ("prior_noise_generator",)
         self.model_generator = None
@@ -651,6 +656,8 @@ class GANTrainer:
             **({"birth_death": self.birth_death.state_dict()} if self.birth_death is not None else {}),
             **({"row_evidence": self.row_evidence.state_dict()} if self.row_evidence is not None else {}),
             **({"surprise": self.policy.surprise.state_dict()} if self.policy.surprise is not None else {}),
+            **({"loss_surprise": self.policy.loss_surprise.state_dict()}
+               if self.policy.loss_surprise is not None else {}),
             **({"reopen_guard": self.policy.reopen_guard.state_dict()}
                if self.policy.reopen_guard is not None else {}),
         })
@@ -687,8 +694,11 @@ class GANTrainer:
                 or state.get("serial_backward", False) != self.serial_backward):
             raise ValueError("checkpoint serial_backward execution mode does not match trainer; "
                              "resume unmarked or False historical checkpoints from their pinned original source")
+        allowed = [set(expected), set(expected) - {"policy"}]
+        if self.policy.loss_surprise is not None:
+            allowed.extend([s - {"loss_surprise"} for s in list(allowed)])
         if (not isinstance(state, dict) or state.get("schema") != 4
-                or set(state) not in (set(expected), set(expected) - {"policy"})):
+                or set(state) not in allowed):
             raise ValueError("invalid GANTrainer checkpoint schema")
         saved_recipe = state["recipe"]
         if (isinstance(saved_recipe, dict) and "prior_update" not in saved_recipe
@@ -788,6 +798,8 @@ class GANTrainer:
             self.row_evidence.check_state(state["row_evidence"])
         if self.policy.surprise is not None:
             deepcopy(self.policy.surprise).load_state_dict(_state_to_device(state["surprise"], self.device))
+        if self.policy.loss_surprise is not None and "loss_surprise" in state:
+            deepcopy(self.policy.loss_surprise).load_state_dict(_state_to_device(state["loss_surprise"], self.device))
         if self.policy.reopen_guard is not None:
             self.policy.reopen_guard.check_state(state["reopen_guard"], roles=self.policy.roles,
                                                  completed_steps=state["completed_steps"],
@@ -834,6 +846,8 @@ class GANTrainer:
             self.row_evidence.load_state_dict(state["row_evidence"])
         if self.policy.surprise is not None:
             self.policy.surprise.load_state_dict(_state_to_device(state["surprise"], self.device))
+        if self.policy.loss_surprise is not None and "loss_surprise" in state:
+            self.policy.loss_surprise.load_state_dict(_state_to_device(state["loss_surprise"], self.device))
         if self.policy.reopen_guard is not None:
             self.policy.reopen_guard.load_state_dict(state["reopen_guard"], roles=self.policy.roles,
                                                      completed_steps=state["completed_steps"],
