@@ -2,7 +2,7 @@
   "automation_digest": "48e5b43e871fcf16d33afde9e5412d00eb198180d3dc3bc133b003390d85af25",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "3203f8c2a8160cf8a1776b9f299bce45035fdd2447fa7c5e3661ec53fe499919",
+  "input_digest": "445d42811c8602ec99130aa7823e71bf691b6bbaa7e0ecb8e5b8eac0510a325d",
   "input_hashes": {
     "configs/forge/cadence-studies/bispf-lazy-cadence-v1.json": "fc7302ac06b61fa093a39265d440545fdab176852a588c40b750be16adc1e58b",
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
@@ -565,7 +565,7 @@
     "configs/forge/configurations/release07-gan-v3-mog--c1b747662d851c7c1ee0d8572e34c0438f28d5e0920c572b74622a25479f9e26.json": "7761dd9c39a22a668f639799f5000a0522a82e1a83cde608bc8e9c8a8f2f1597",
     "configs/forge/defaults.json": "e5699dacce7222eb7a819944eabb796330fd59530a23e0506f941a389a8330a5",
     "configs/forge/execution-policy.schema.json": "ba06ed1dbce661fd1e827229c4a357aaf3d4bb3263f70ba8cbea162b0dc44a11",
-    "configs/forge/family-documentation/atlas.json": "ca46303d52dc9375c8c6f3ea19174e949036acc221acec64cc94a64c3616cd72",
+    "configs/forge/family-documentation/atlas.json": "996ea630be1663048b9c997a051cffb270c4a7c200f50cb000a0560dc1b83107",
     "configs/forge/family-documentation/bcap-ada-nsgda.json": "7b801ce24b4a33b814f421ab26cfc634bb64efbae1632e0256fa867d16a9cbf5",
     "configs/forge/family-documentation/bcap-develop-integration-combined-v1.json": "3d521477aea3156188948a8ab32370f68c172e91404eaec1e09e96c3e3f17a0a",
     "configs/forge/family-documentation/bcap-develop-integration-winner-v1.json": "ad90a419fce1b7641abbed8384dbbf501ae7ae53839e565e52ad5e86ca07df5c",
@@ -874,6 +874,7 @@
     "configs/forge/studies/atlas-particle-normal-replication-study-v2.json": "55e2172934b4416271f62e0d9868bf53723a351cf214f9a26450b934621a512d",
     "configs/forge/studies/atlas-particle-normal-replication-study-v3.json": "d60c86b641e74cc9e2d50e3e101338ed3bf6f5c23a37d0e65399f39e63c84f61",
     "configs/forge/studies/atlas-particle-normal-replication-study-v4-reverified.json": "1a541e59eb4eff56237e7c8913339b0bf9fb5775beb05d5356ce2297c3bd082f",
+    "configs/forge/studies/atlas-particle-normal-v4-ordinary.json": "b3fb19847775cc5a2e177e13f853929bbb629d31059dc041a49bb0d76156af13",
     "configs/forge/studies/bcap-clockfree-coverage-v1.json": "a774e8bf265a51e2ad526db11594ebfea2e5cfaa4188d579ccfe01a3fc5e43bc",
     "configs/forge/studies/bcap-convolution-images-v1.json": "3be51ff7ce3ab44b3ae2f92d37557e6cb3735dbe48c6a71503c10a6e1f8bcc69",
     "configs/forge/studies/bcap-default-baseline-control-v1-study.json": "9454d24b52a070f35e7e742aa6c006e93b2d823ba6deb8500144e80d2eb1414a",
@@ -1150,7 +1151,7 @@
     "configs/forge/tasks/vector_unequal_width_published.json": "dbaca203f391ac52d40f08a8c7c1e58d54469aa3e260b26fc9e0c0bef0ba0172",
     "configs/forge/tasks/zero_tanh_rail_escape.json": "0018f232b03992c216186ba91ffa89d7ee03ed09eefe1c5230c737f31367e2c7",
     "configs/forge/tasks/zero_tanh_smoke.json": "2a87587a74026fe4873dcee566d1bc5c5b2e5c335483c6565ec0aef8b5d29b04",
-    "configs/forge/trainer-families.json": "f8b0b6bddbc313a06cdc19503e97b47c50a81849ab4b16a6c5d0370547324917",
+    "configs/forge/trainer-families.json": "53179738fddca1f8d764ab106a04eaefbe4bc261ed0c1d869ccc9e327c932793",
     "configs/forge/view-history/adaptation-v2.json": "21533b224174d5378d60b50a93ea0d4a586bb73bf25b4eeeec7b257f9322f21d",
     "configs/forge/view-history/adaptation-v3.json": "2a8a4862f3ed6c3639f3010706ba87de370f6df4c256197d663b28887a514084",
     "configs/forge/view-history/bispf_throughput_endurance-v1.json": "79ba370744414ba362958e5daed9240ce1a8edf4a367a26df5480c6a060e9a14",
@@ -4241,7 +4242,7 @@
   },
   "operational_lifecycle_digest": "d2cb158ba414b6a10783a969e55b1a93cb67a32c14766d615e8e024aacfedd61",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "a661ce14e14e10a5e33d87fb889eddac90d65c6c95ad1d70985ea831ce2ec77f",
+    "reports/forge/EXPERIMENT_MEMORY.md": "3127edaa27e40428f7ab9a527bfdb66aa0425e48c65de0d9289f34da57afb9c1",
     "reports/forge/publication-records.json": "5174449ad10c00a8d22dee09d3ef50c8fb0fc76f196d85197271ee7c0766c9d8"
   },
   "pending_readout": [

@@ -40,9 +40,9 @@
   "configuration_notes": [
     "Each result retains its executed source, recipe, task prior, initialization, budget and sampling law. These descriptions do not change or requalify recorded measurements.",
     "Task-owned objectives and active components matter: direct sample particles, learned latent rows and a generator network are different parameter roles. A declared recipe switch does not imply that every host can apply it.",
-    "Selected Atlas is a historical incumbent at source 928b485ffbe6e17d79b41d307ae8b6275489b37a, with explicit independent particle-cloud and served/state-selected identity. Original Atlas passes and clean diagnostics retain separate sampling cohorts.",
-    "Atlas differs from E22 through birth_death_backend='auto', birth_death_cells=128 and reopen_guard='settled'. Automatic selection is capability/evidence constrained; 128 is a preset cell count, not a promise that every host uses feature cells.",
-    "The settled reopen guard suppresses acquisition-time and known-loss-epoch excursions from looking like a moved target. It does not remove KA2's applied-call warmup or declare the whole trainer clock-free."
+    "Selected Atlas (`atlas-particle-normal-v4`) pairs the `particles` prior with `NormalNoiseManipulator(sigma=0.0065)` (`standardize=False`), `birth_death_cells=256`, clean fixed output noise (`output_noise_mode='fixed'`, `output_noise_std=0.0`), clock-free critic acquisition (`d_guard_ratio=0.0`, `d_guard_min_steps=0`), and a KA2 pre-anchor critic-only `LossSurprise` reopen guard. Historical particle-cloud incumbents and served/noisy-sampling cohorts remain separate.",
+    "Base Atlas differs from E22 through `birth_death_backend='auto'`, `birth_death_cells=128` (`256` in `atlas-particle-normal-v4`, routing `N=256` vector hosts past under-resolved `k=7` kNN turnover) and `reopen_guard='settled'`. Automatic selection is capability/evidence constrained; the configured cell count is a threshold/grid preset, not a promise that every host uses feature cells.",
+    "The settled reopen guard suppresses acquisition-time and known-loss-epoch excursions from looking like a moved target, and `atlas-particle-normal-v4` additionally folds critic-only `SettledReopenGuard` witnesses before `ka2_anchor_started` into the calm baseline while preserving post-anchor shift detection. It does not remove KA2's applied-call warmup."
   ],
   "references": [
     {
@@ -67,7 +67,9 @@
     }
   ],
   "sources": [
+    "configs/forge/ideas/atlas-particle-normal-v4.json",
     "configs/forge/ideas/atlas.json",
+    "particlegan/priors.py",
     "particlegan/recipes.py",
     "particlegan/policy.py",
     "particlegan/continuous.py",

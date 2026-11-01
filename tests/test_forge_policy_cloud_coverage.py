@@ -1267,15 +1267,41 @@ def test_publication_writes_records_results_and_readme_deterministically(tmp_pat
 
 
 def test_recipe_identity_maps_each_frozen_recipe_onto_its_selected_row(tmp_path):
-    from experiments.forge.attempt_coverage import selected_tasks
     from experiments.forge.policy_cloud_publication import recipe_identity
     from particlegan.recipe_compat import SEARCH_RECIPE_DEFAULTS
-    publication = read_json(ROOT / "reports/forge/technique-inventory.json")
-    rows = {name: row for name, row, _ in selected_tasks(publication)}
+    current = read_json(ROOT / "reports/forge/technique-inventory.json")
+    archived = read_json(ROOT / "configs/forge/selections/history/family-current-138fe6eb6c13251128aed4e0171908cd676e578682f49026fc8fd4be6492b7c2.json")
+    rows, fixture_rows, snapshots = {}, [], {}
+    for family in FAMILIES:
+        pin = next(item for item in archived["selections"] if item["trainer_family"] == family)
+        incumbent = next(row for row in current["evidence_rows"]
+                         if row.get("candidate_id") == pin["candidate_id"]
+                         and row.get("candidate_revision") == pin["candidate_revision"]
+                         and row.get("cohort") == pin["cohort"])
+        incumbent = {**incumbent, "trainer_family": pin["trainer_family"]}
+        rows[family] = incumbent
+        fixture_rows.append(incumbent)
+        key = incumbent["publication_key"]
+        snapshots[key] = current["evidence_sources"][key]
+    repo = tmp_path / "repo"
+    progress = {
+        "views": current["family_progress"]["views"],
+        "families": [
+            {"id": family, "current_cohort_anchor": "archived",
+             "cohorts": [{"anchor": "archived", "row_index": index, "views": []}]}
+            for index, family in enumerate(FAMILIES)
+        ],
+    }
+    atomic_json(repo / "reports/forge/technique-inventory.json",
+                {"rows": fixture_rows, "evidence_sources": snapshots, "family_progress": progress})
+    for pointer in snapshots.values():
+        target = repo / pointer["snapshot"]
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / pointer["snapshot"], target)
     recipes = {}
     for family in FAMILIES:
         row = rows[family]
-        contract = read_json(ROOT / publication["evidence_sources"][row["publication_key"]]["snapshot"])[
+        contract = read_json(repo / snapshots[row["publication_key"]]["snapshot"])[
             "recipe_contracts"][row["bindings"]["recipe_sha256"]]
         # A newer Recipe adds fields at their registered defaults.
         recipes[family] = {**contract, "prior_sigreg_knots": SEARCH_RECIPE_DEFAULTS["prior_sigreg_knots"],
@@ -1290,7 +1316,7 @@ def test_recipe_identity_maps_each_frozen_recipe_onto_its_selected_row(tmp_path)
     for family in FAMILIES:
         write(family, recipes[family])
     records = [{"owning_family": family, "source_digest": "source", "candidate_revision": "recipe"} for family in FAMILIES]
-    mapping = recipe_identity(ROOT, state_root, records)
+    mapping = recipe_identity(repo, state_root, records)
     for family in FAMILIES:
         assert mapping[family]["verified"] is True
         assert mapping[family]["restricted_to_selected_fields_sha256"] == rows[family]["bindings"]["recipe_sha256"]
@@ -1303,13 +1329,13 @@ def test_recipe_identity_maps_each_frozen_recipe_onto_its_selected_row(tmp_path)
                             ({"batch_size": recipes["atlas"]["batch_size"] + 1}, "differs from the selected recipe")):
         write("atlas", {**recipes["atlas"], **change})
         with pytest.raises(ValueError, match=message):
-            recipe_identity(ROOT, state_root, records)
+            recipe_identity(repo, state_root, records)
     write("atlas", recipes["atlas"])
     request = read_json(state_root / "requests/policy-cloud-atlas.json")
     request["protocol"]["seed"] = 1
     atomic_json(state_root / "requests/policy-cloud-atlas.json", request)
     with pytest.raises(ValueError, match="seed 0"):
-        recipe_identity(ROOT, state_root, records)
+        recipe_identity(repo, state_root, records)
 
 
 def test_policy_cloud_drain_dispatches_the_longest_dependency_chains_first(tmp_path, monkeypatch):

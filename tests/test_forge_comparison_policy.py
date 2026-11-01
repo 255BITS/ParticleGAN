@@ -203,3 +203,46 @@ def test_diagnostic_study_does_not_require_an_ordinary_qualifying_row(scope):
     studies = [{'request': {'candidate': {'id': 'diagnostic'}, 'view': {'id': 'view', 'evidence_scope': scope},
                             'execution_backend': 'cuda'}}]
     publication._validate_recorded_study_projection(studies, {'rows': []}, 'view', 'cuda')
+
+
+def test_additive_view_revision_is_valid_comparison_projection_and_retains_added_tasks():
+    actual_view = read_json(ROOT / 'configs/forge/views/discriminator_stability.json')
+    recorded_view = read_json(ROOT / 'configs/forge/view-history/discriminator_stability-v9.json')
+    publication._validate_comparison_policy(actual_view, recorded_view)
+
+    actual, projected, comparison = comparison_fixture()
+    actual['status_reasons'] = {'added-reason': ['new task failure reason']}
+    actual['rows'][0]['bindings']['task_contracts']['added_tier1'] = 'added-contract'
+    actual['rows'][0]['tasks'].append({'task_id': 'added_tier1', 'status': 'PASS', 'reasons_sha256': 'added-reason'})
+    projected['rows'][0]['bindings']['task_contracts']['added_tier1'] = 'added-contract'
+    comparison['added_actual_tasks'] = ['added_tier1']
+    comparison['verified_evaluator_lineage'] = {'family': {'acquire': 'a-source-refresh'}}
+    actual['rows'][0]['bindings']['task_contracts']['acquire'] = 'a-source-refresh'
+    projected['rows'][0]['bindings']['task_contracts']['acquire'] = 'a-source-refresh'
+
+    publication._comparison_projection(actual, projected, comparison)
+    carried = [t for t in projected['rows'][0]['nonrequired_tasks'] if t['task_id'] == 'added_tier1']
+    assert carried == [{'task_id': 'added_tier1', 'status': 'PASS', 'reasons_sha256': 'added-reason'}]
+    assert projected['status_reasons']['added-reason'] == ['new task failure reason']
+    assert projected['rows'][0]['qualified_tier'] == 1
+
+    # Unauthorized extra task contract without added_actual_tasks must fail closed.
+    bad_actual, bad_projected, bad_comparison = comparison_fixture()
+    bad_actual['rows'][0]['bindings']['task_contracts']['sneaky'] = 'x'
+    bad_projected['rows'][0]['bindings']['task_contracts']['sneaky'] = 'x'
+    with pytest.raises(ValueError, match='comparison projection changes recorded task contracts'):
+        publication._comparison_projection(bad_actual, bad_projected, bad_comparison)
+
+
+def test_evaluator_revision_lineage_accepts_source_only_refresh_and_rejects_gate_change():
+    from experiments.forge.views import load_tasks
+    recorded = read_json(ROOT / 'reports/forge/technique-inventory.json')
+    atlas_ref = next(row['bindings']['task_contracts'] for row in recorded['rows'] if row['trainer_family'] == 'atlas')
+    ref_eval = recorded['task_contracts'][atlas_ref['two_pole']]['evaluation_sha256']
+    live_two_pole = load_tasks(ROOT)['two_pole']
+    assert publication._evaluator_revision_reaches(ROOT, live_two_pole, ref_eval) is True
+
+    tampered = deepcopy(live_two_pole)
+    tampered['execution']['steps'] += 1
+    assert publication._evaluator_revision_reaches(ROOT, tampered, ref_eval) is False
+
