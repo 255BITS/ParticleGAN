@@ -247,7 +247,8 @@ class ParticleBirthDeath:
 
     Q = .05          # BH false-discovery rate per evaluation; dimension-test level
 
-    def __init__(self, rows, seed, *, space="data", isolation=False, feature_scale="none"):
+    def __init__(self, rows, seed, *, space="data", isolation=False, feature_scale="none",
+                 cells=None):
         if not isinstance(rows, ParticleRows):
             raise TypeError("particle birth/death requires an explicit ParticleRows contract")
         if space not in ("data", "critic") or feature_scale not in ("none", "std"):
@@ -281,6 +282,7 @@ class ParticleBirthDeath:
         self.space = space
         self.isolation = isolation
         self.feature_scale = feature_scale
+        self.cells = cells
         self.iso_log = []       # [step, flagged rows, acted] of the latest evaluations (diagnostics only)
         self.sample_shape = None
         if self.space == "critic":
@@ -466,6 +468,8 @@ class ParticleBirthDeath:
     def maybe_apply(self, sigma_out):
         """Run one evaluation (and its moves) when the reservoir has turned over."""
         self.moved_rows = None
+        if self.cells is not None and self.N <= self.cells:
+            return None
         if not self.ready():
             return None
         self.rows_since_eval = 0

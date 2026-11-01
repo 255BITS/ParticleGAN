@@ -178,19 +178,19 @@
       "importance": "diagnostic",
       "order": 29,
       "qualification_tier": 1,
-      "task": "img_stripes2"
+      "task": "img_stripes2_residual16"
     },
     {
       "importance": "diagnostic",
       "order": 30,
       "qualification_tier": 1,
-      "task": "img_bars4"
+      "task": "img_bars4_residual16"
     },
     {
       "importance": "diagnostic",
       "order": 31,
       "qualification_tier": 1,
-      "task": "img_blobs4"
+      "task": "img_blobs4_residual16"
     },
     {
       "importance": "diagnostic",

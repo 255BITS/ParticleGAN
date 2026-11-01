@@ -62,6 +62,8 @@ def code_sha(function):
             return {"frozenset": sorted((canonical(item) for item in value), key=repr)}
         if value is Ellipsis:
             return {"ellipsis": True}
+        if isinstance(value, slice):
+            return {"slice": [canonical(value.start), canonical(value.stop), canonical(value.step)]}
         if isinstance(value, complex):
             return {"complex": [value.real, value.imag]}
         return value

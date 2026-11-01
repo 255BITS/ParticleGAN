@@ -16,6 +16,13 @@ from .diffusion import DDGAN
 from .discriminators import BatchDistanceDiscriminator, LinearSkipDiscriminator
 from .gan_loss import GANLoss
 from .particle_prior import GaussianPrior, MoGParticlePrior, ParticlePrior, calibrate_mog_sigma
+from .priors import (
+    AdditiveNormalManipulator,
+    ManipulatedPrior,
+    NormalNoiseManipulator,
+    PriorManipulator,
+    unwrap_prior,
+)
 from .policy import E22Policy, ServedModel, StepNoise, UpdatePolicy
 from .recipes import (
     DEFAULT_RECIPE,
@@ -58,6 +65,7 @@ __all__ = [
     "RoutedBatch", "RoutedCandidate", "RoutedExecution", "RoutedRows",
     "E22Policy", "UpdatePolicy", "ServedModel", "StepNoise",
     "ParticlePrior", "MoGParticlePrior", "calibrate_mog_sigma", "GaussianPrior", "GANLoss",
+    "NormalNoiseManipulator", "AdditiveNormalManipulator", "ManipulatedPrior", "PriorManipulator", "unwrap_prior",
     "CoulombPriorRegularizer", "ParticleRegularizer", "InitialMMDRegularizer", "SIGReg",
     "StratifiedBlueNoisePrior", "SBNPPriorRegularizer", "ContinuousThermalCooler", "BISPFEngine", "BISPFLossAdapter",
     "BISPFStepRecord", "BISPFCriticAdam", "BISPFCriticPenalty", "SinkhornRelativisticLoss", "BISPFGates",

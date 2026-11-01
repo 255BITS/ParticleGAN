@@ -138,7 +138,12 @@ def _resolve_bindings(candidate, tasks, protocol, root):
         ownership = receipt["field_ownership"]
         result["recipe"][name] = {key: field["value"] for key, field in ownership["recipe_fields"].items()
                                  if field["status"] == "effective"}
-        result["prior"][name] = ownership["task_contract"]["prior"]["value"]
+        prior_contract = ownership["task_contract"]["prior"]
+        if "technique_mechanism" in prior_contract:
+            result["prior"][name] = {"task_prior": prior_contract["value"],
+                                     "technique_mechanism": prior_contract["technique_mechanism"]["value"]}
+        else:
+            result["prior"][name] = prior_contract["value"]
         result["initialization"][name] = deepcopy(ownership["task_contract"]["initialization"])
         result["budget"][name] = {"execution": ownership["task_contract"]["budget"]["value"],
                                  "resources": deepcopy(task["resources"])}

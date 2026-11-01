@@ -6,7 +6,111 @@ import math
 
 DEFAULT_PRIOR = {"kind": "mog", "sigma": .025, "standardize": False, "learnable": True}
 PRIOR_CODE_PATHS = {"mog": "MoGParticlePrior", "particle_cloud": "ParticlePrior"}
+PRIOR_MECHANISM_KINDS = {"particles": "particle_cloud", "mog": "mog"}
 RECIPE_PRIOR_CONTRACT = "recipe_owned_v1"
+
+
+def validate_prior_mechanism(mechanism):
+    """Validate an opt-in technique-owned prior mechanism declaration."""
+    if mechanism is None:
+        return None
+    if not isinstance(mechanism, dict):
+        raise ValueError("prior_mechanism must be an object")
+    required = {"kind", "standardize"}
+    if required - mechanism.keys():
+        raise ValueError(f"prior_mechanism requires {sorted(required - mechanism.keys())}")
+    unknown = set(mechanism) - {"kind", "standardize", "manipulators"}
+    if unknown:
+        raise ValueError(f"unsupported prior_mechanism fields: {sorted(unknown)}")
+    if not isinstance(mechanism["kind"], str) or mechanism["kind"] not in PRIOR_MECHANISM_KINDS:
+        raise ValueError("prior_mechanism kind must be particles or mog")
+    if type(mechanism["standardize"]) is not bool:
+        raise ValueError("prior_mechanism standardize must be a boolean")
+    if mechanism["kind"] == "particles" and mechanism["standardize"]:
+        raise ValueError("particles prior_mechanism requires standardize=False")
+    manipulators = mechanism.get("manipulators", [])
+    if not isinstance(manipulators, list):
+        raise ValueError("prior_mechanism manipulators must be a list")
+    if mechanism["kind"] == "mog" and manipulators:
+        raise ValueError("mog prior_mechanism already includes a Gaussian kernel; omit manipulators")
+    seen_kinds = set()
+    for item in manipulators:
+        if not isinstance(item, dict) or set(item) != {"kind", "sigma"}:
+            raise ValueError("each prior_mechanism manipulator requires exact fields kind and sigma")
+        if item["kind"] != "normal_noise":
+            raise ValueError(f"unsupported prior_mechanism manipulator kind: {item['kind']!r}")
+        if item["kind"] in seen_kinds:
+            raise ValueError(f"duplicate prior_mechanism manipulator kind: {item['kind']!r}")
+        seen_kinds.add(item["kind"])
+        sigma = item["sigma"]
+        if sigma != "task" and (type(sigma) not in (int, float) or not math.isfinite(sigma) or sigma < 0):
+            raise ValueError("normal_noise manipulator sigma must be 'task' or a finite nonnegative number")
+    return mechanism
+
+
+def resolve_prior_mechanism(mechanism, task_prior_cfg):
+    """Resolve a technique-owned prior mechanism against task-owned width and init."""
+    validate_prior_mechanism(mechanism)
+    if not isinstance(task_prior_cfg, dict) or "sigma" not in task_prior_cfg:
+        raise ValueError("task_prior_cfg must provide explicit sigma")
+    kind = PRIOR_MECHANISM_KINDS[mechanism["kind"]]
+    task_sigma = float(task_prior_cfg["sigma"])
+    resolved_manipulators = []
+    for item in mechanism.get("manipulators", []):
+        if task_sigma == 0.0:
+            raw_sigma = 0.0
+        elif item["sigma"] == "task":
+            raw_sigma = task_sigma
+        else:
+            raw_sigma = float(item["sigma"])
+        if raw_sigma > 0.0:
+            resolved_manipulators.append({"kind": "normal_noise", "sigma": raw_sigma})
+    if kind == "mog":
+        sigma = float(task_prior_cfg["sigma"])
+        if sigma <= 0.0:
+            raise ValueError("mog prior_mechanism requires positive task sigma")
+    else:
+        sigma = 0.0
+    effective = {
+        "kind": kind,
+        "sigma": sigma,
+        "standardize": mechanism["standardize"],
+        **({"learnable": task_prior_cfg["learnable"]} if "learnable" in task_prior_cfg else {}),
+        **({"init_std": task_prior_cfg["init_std"]} if "init_std" in task_prior_cfg else {}),
+        "owner": "technique",
+        "task_prior": {k: v for k, v in task_prior_cfg.items() if k != "learnable"},
+        "manipulators": resolved_manipulators,
+    }
+    return effective
+
+
+def prior_noise_sigma(prior_cfg):
+    """Effective additive Gaussian kernel width on a resolved prior config."""
+    if not isinstance(prior_cfg, dict):
+        return 0.0
+    if prior_cfg.get("kind") == "mog":
+        return float(prior_cfg.get("sigma", 0.0))
+    for item in prior_cfg.get("manipulators") or ():
+        if isinstance(item, dict) and item.get("kind") == "normal_noise":
+            return float(item.get("sigma", 0.0))
+    return 0.0
+
+
+def prior_uses_noise_stream(prior_cfg):
+    """Whether training/sampling consumes the isolated prior_noise_generator stream."""
+    return isinstance(prior_cfg, dict) and (
+        prior_cfg.get("kind") == "mog" or prior_noise_sigma(prior_cfg) > 0.0
+    )
+
+
+def prior_code_path(prior_cfg):
+    """Public class expression constructed for a resolved prior config."""
+    if prior_cfg.get("kind") == "mog":
+        return "MoGParticlePrior"
+    if any(m.get("kind") == "normal_noise" and m.get("sigma", 0.0) > 0.0
+           for m in (prior_cfg.get("manipulators") or ())):
+        return "ManipulatedPrior(ParticlePrior, [NormalNoiseManipulator])"
+    return "ParticlePrior"
 
 
 def recipe_owned_prior(task):
@@ -18,6 +122,7 @@ def recipe_owned_prior(task):
 
 def prior_policy_receipt(recipe, *priors):
     """Record policy and the actual location-table freezing, without draws."""
+    from particlegan.priors import unwrap_prior
     result = {"contract": RECIPE_PRIOR_CONTRACT, "update": recipe.prior_update,
             "regularizer": recipe.prior_regularizer, "weight": recipe.prior_reg,
             "target_std": recipe.prior_reg_target_std, "eps": recipe.prior_reg_eps,
@@ -29,16 +134,19 @@ def prior_policy_receipt(recipe, *priors):
     if recipe.prior_code_law != "table":
         # Recorded only for the opt-in control, so default receipts are unchanged.
         result["code_law"] = recipe.prior_code_law
-        from particlegan.priors import unwrap_prior
         result["actual_code_laws"] = [getattr(unwrap_prior(prior), "code_law", "table") for prior in priors]
+    manipulated = [prior.manipulator_spec() for prior in priors if getattr(prior, "manipulators", ())]
+    if manipulated:
+        result["manipulators"] = manipulated
     if recipe.prior_regularizer == "coulomb":
         from particlegan.coulomb_prior import CENTER_BUFFER, RADIUS_BUFFER
+        bases = [unwrap_prior(prior) for prior in priors]
         result["coulomb"] = dict(softening=recipe.prior_coulomb_softening,
             confinement=recipe.prior_coulomb_confinement, neighbors=recipe.prior_coulomb_neighbors,
             pair_policy="deterministic_cyclic_offsets_v1",
-            references=[dict(rows=len(prior.z), center=getattr(prior, CENTER_BUFFER).tolist(),
-                             radius=float(getattr(prior, RADIUS_BUFFER)))
-                        for prior in priors if hasattr(prior, CENTER_BUFFER)])
+            references=[dict(rows=len(base.z), center=getattr(base, CENTER_BUFFER).tolist(),
+                             radius=float(getattr(base, RADIUS_BUFFER)))
+                        for base in bases if hasattr(base, CENTER_BUFFER)])
     return result
 
 

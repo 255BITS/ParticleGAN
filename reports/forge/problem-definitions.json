@@ -499,6 +499,120 @@
           "path": "configs/forge/tasks/ring16_bigan_continuous.json"
         }
       ]
+    },
+    {
+      "task": "two_pole",
+      "title": "Separate direct sample particles across two symmetric poles",
+      "intent": "Drive a generator-free direct particle cloud from zero to two symmetric poles (`mean_abs >= 0.30`) and hold them steady with bounded critic gradient (`grad_med <= 1.0`) across the final five checks.",
+      "problem": "In selected `atlas-particle-normal-v4` (`particles` + `NormalNoiseManipulator(sigma=0.0065)` + `birth_death_cells=256`), direct particle coordinates without a separate generator remain pinned near the origin (`mean_abs = 0.00242` vs. `>= 0.30`, `grad_med = 0.00371`). Critic-space kNN birth-death (`birth_death_cells = 64` capped on the direct particle batch) recycles particles around the origin before symmetric pole separation develops.",
+      "pass_summary": "Yes: selected BCAP, BISPF, K3P, KA2, R1/R2 and Release-07 GAN v3 recipes pass.",
+      "passers": [
+        "Selected `recipe-prior-refactor-bcap-pure-v1`, `bispf-v1`, `recipe-prior-refactor-k3p-v1`, `recipe-prior-refactor-ka2-v1`, `recipe-prior-refactor-r1r2-v1` and `recipe-prior-refactor-release07-gan-v3-v1` pass the ordinary Tier 1 gate.",
+        "E22 remains blocked on direct particle-cloud host compatibility."
+      ],
+      "next_step": "Gate critic-space particle birth-death when no separate generator module is present (direct particle-transport hosts) or prevent real-anchor cloning from collapsing bipolar symmetry near zero, while preserving `atlas-particle-normal-v4`'s 24-pass full-suite gains.",
+      "evidence": [
+        {
+          "label": "Test dispositions and policy-cloud notes",
+          "path": "reports/forge/test-dispositions-20261015/README.md"
+        },
+        {
+          "label": "Task declaration",
+          "path": "configs/forge/tasks/two_pole.json"
+        }
+      ]
+    },
+    {
+      "task": "five_word_joint_smoke",
+      "title": "Acquire five discrete words and paired BiGAN reconstructions in 20,001 joint updates",
+      "intent": "Train a joint generator-encoder-prior-critic BiGAN over five five-letter words for 20,001 updates, acquiring all five clean word modes (`modes == 5`, `quality_fraction >= 0.95`, `mass_tv <= 0.10`) and exact high-confidence paired reconstructions (`reconstruction_exact == 1`, `minimum_reconstruction_token_probability >= 0.90`) at an independently confirmed scheduled state.",
+      "problem": "While selected `atlas-particle-normal-v4` passes `ae_gan_hold` and `unused_token_hold`, on the 20,001-step five-word joint BiGAN game its `particles` + `NormalNoiseManipulator(sigma=0.0065)` + `birth_death_cells=256` recipe fails to acquire discrete word modes (`modes = 0/5`, `quality_fraction = 0.0`, `reconstruction_exact = 0`, `reconstruction_nll = 22.46`).",
+      "pass_summary": "Yes: selected BCAP, BISPF, K3P, KA2, R1/R2 and Release-07 GAN v3 recipes pass.",
+      "passers": [
+        "Selected `bispf-v1`, `recipe-prior-refactor-bcap-pure-v1`, `recipe-prior-refactor-k3p-v1`, `recipe-prior-refactor-ka2-v1`, `recipe-prior-refactor-r1r2-v1` and `recipe-prior-refactor-release07-gan-v3-v1` pass the Tier 1 smoke gate.",
+        "Passing `five_word_joint_smoke` certifies one confirmed acquisition state; `five_word_joint_hold` separately grades sustained post-acquisition stability."
+      ],
+      "next_step": "Diagnose how critic-space birth-death and `sigma=0.0065` latent perturbation interact with the joint `(x, z)` BiGAN encoder-generator coupling over 20k discrete-token updates without regressing continuous multimodal coverage.",
+      "evidence": [
+        {
+          "label": "Five-word tier split readout",
+          "path": "reports/forge/five-word-tier-split/README.md"
+        },
+        {
+          "label": "Task declaration",
+          "path": "configs/forge/tasks/five_word_joint_smoke.json"
+        }
+      ]
+    },
+    {
+      "task": "model_ae_gan_multimodal",
+      "title": "Reconstruct four noisy corner Gaussians and generate balanced independent modes (AE-GAN)",
+      "intent": "Train a public-API multimodal AE-GAN to reconstruct four equally weighted corner Gaussians (`reconstruction_mse <= 0.025`, `reconstruction_mode_agreement >= 0.98`) while independently generating all four modes with balanced masses (`mass_tv <= 0.15`) and well-conditioned within-mode covariances (`0.10 <= eigen_ratio <= 4.0`) across the final five checks.",
+      "problem": "Selected `atlas-particle-normal-v4` satisfies seven of eight terminal bounds (`modes = 4`, `precision = 0.9980 >= 0.90`, `reconstruction_mse = 0.00438 <= 0.025`, `reconstruction_mode_agreement = 1.0`, `component_min_eigen_ratio = 0.140 >= 0.10`, `component_max_eigen_ratio = 1.169 <= 4.0`, `component_center_rms_sigma = 0.571 <= 1.0`), but misses the independent mode-mass balance gate (`mass_tv = 0.1948` vs. `<= 0.15`). Other selected families remain unmeasured in ordinary CUDA cohorts on this Rev 10+ Tier 1 task.",
+      "pass_summary": "Yes in standalone bounded API research (`bispf-optimized-quintic-v1` CPU cohort); no ordinary selected CUDA PASS yet.",
+      "passers": [
+        "Standalone bounded API research (`bispf-optimized-quintic-v1` on CPU) passes all eight sustained gates (`reconstruction_mse = 0.00927`, `precision = 0.9968`, `mass_tv = 0.1177 <= 0.15`).",
+        "That CPU research cohort is separate from the ordinary CUDA selected-family rows and does not fill `bispf-v1`'s unmeasured cell."
+      ],
+      "next_step": "Reduce prior mass imbalance under joint AE-GAN encoding (for example, balancing birth-death cell quotas against encoder-posterior assignments) and record ordinary CUDA measurements for the remaining selected families.",
+      "evidence": [
+        {
+          "label": "AE-GAN public-API model report",
+          "path": "reports/forge/api-model-toys/ae.md"
+        },
+        {
+          "label": "Task declaration",
+          "path": "configs/forge/tasks/model_ae_gan_multimodal.json"
+        }
+      ]
+    },
+    {
+      "task": "model_ddgan_gaussian_chain",
+      "title": "Learn four-step conditional reverse transitions and ancestral generation (DDGAN)",
+      "intent": "Train a four-step public-API DDGAN on a 2D Gaussian forward diffusion chain so every reverse conditional transition (`t1..t4`, `q0`/`q1`) and the final ancestral marginal satisfy `projection_cdf <= 0.12`, `normalized_mean <= 0.25`, and covariance eigenvalues in `[0.65, 1.40]` across the last five checks.",
+      "problem": "Both selected `atlas-particle-normal-v4` (ordinary CUDA) and the bounded `bispf-optimized-quintic-v1` API research run (CPU) match the outer reverse steps (`t3`, `t4`), but miss the sharp final denoising transitions (`t1`, `t2`) and ancestral marginal (`atlas-particle-normal-v4`: `final_projection_cdf = 0.1695 > 0.12`, `final_normalized_mean = 0.3367 > 0.25`, `t1_q0_projection_cdf = 0.2747 > 0.12`, `t1_q0_covariance_eigen_min = 0.2710 < 0.65`).",
+      "pass_summary": "No PASS under the current declaration in either ordinary selected cohorts or bounded API research.",
+      "passers": [
+        "Oracle transition samplers pass all 38 threshold checks in the bounded protocol, confirming scorer calibration.",
+        "Saved-state diagnostics isolate the failure to conditional reverse-step variance and mean drift at `t=1, 2` rather than numerical instability."
+      ],
+      "next_step": "Improve per-timestep conditional critic discrimination and reverse-generator stochasticity at small `t` under one unchanged global recipe without per-task hyperparameter tuning.",
+      "evidence": [
+        {
+          "label": "DDGAN public-API model report",
+          "path": "reports/forge/api-model-toys/ddgan.md"
+        },
+        {
+          "label": "DDGAN saved-state failure investigation",
+          "path": "reports/forge/ddgan-failure-investigation/README.md"
+        },
+        {
+          "label": "Task declaration",
+          "path": "configs/forge/tasks/model_ddgan_gaussian_chain.json"
+        }
+      ]
+    },
+    {
+      "task": "model_ae_ddgan_gaussian_chain",
+      "title": "Pair particle AE reconstruction with four-step DDGAN reverse transitions and ancestral generation",
+      "intent": "Reconstruct held-out inputs through a learned particle autoencoder and four public DDGAN reverse steps (`paired_nmse <= 0.10`, `paired_worst_axis_nrmse <= 0.25`, `paired_shuffled_gain >= 3.0`) while simultaneously passing all conditional reverse-transition and independent ancestral-chain bounds.",
+      "problem": "Selected `atlas-particle-normal-v4` passes every paired four-step reconstruction gate (`paired_nmse = 0.0147 <= 0.10`, `paired_worst_axis_nrmse = 0.1333 <= 0.25`, `paired_shuffled_gain = 134.67 >= 3.0`) and `final_projection_cdf = 0.1199 <= 0.12`, matching the bounded `bispf-optimized-quintic-v1` research pattern where paired encoding succeeds (`paired_nmse = 0.0441`) while independent ancestral covariance (`final_covariance_eigen_min = 0.4226 < 0.65`) and `t1`/`t2` reverse-transition bounds fail (`t1_q0_projection_cdf = 0.5950 > 0.12`).",
+      "pass_summary": "No complete PASS under the current declaration; paired four-step reconstruction passes while independent/conditional reverse generation fails.",
+      "passers": [
+        "Both `atlas-particle-normal-v4` (ordinary CUDA) and `bispf-optimized-quintic-v1` (bounded CPU research) pass all four paired four-step reconstruction gates with >45x-134x shuffled-input error gain.",
+        "Oracle reverse-chain controls pass all 42 gates."
+      ],
+      "next_step": "Align the ancestral prior and reverse chain with the encoder latent manifold at `t=1, 2` so independent ancestral sampling retains full variance (`>= 0.65`) without degrading paired reconstruction.",
+      "evidence": [
+        {
+          "label": "AE-DDGAN public-API model report",
+          "path": "reports/forge/api-model-toys/ae-ddgan.md"
+        },
+        {
+          "label": "Task declaration",
+          "path": "configs/forge/tasks/model_ae_ddgan_gaussian_chain.json"
+        }
+      ]
     }
   ]
 }

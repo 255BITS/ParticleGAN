@@ -11,7 +11,6 @@ from .contracts import atomic_json, canonical, identifier, read_json, stable_has
 from .sampling import candidate_blockers
 from .execution_policy import DEFAULT as DEFAULT_EXECUTION_POLICY, group_blockers, policy
 from .preflight import task_preflight
-from .priors import task_prior
 from .resolution_scope import active as active_resolution_cache, bind as bind_resolution_cache
 from .sources import compute_profile, inspect_source, runtime_manifest, snapshot_source
 from .views import (load_tasks, load_view, read_task_catalog, task_evaluation_fingerprint,
@@ -50,6 +49,7 @@ def _blocker_sig(candidate: dict) -> str:
         "host_adaptation": candidate.get("host_adaptation"),
         "claim_contract": candidate.get("claim_contract"),
         "capabilities": candidate.get("capabilities"),
+        **({"prior_mechanism": candidate["prior_mechanism"]} if candidate.get("prior_mechanism") is not None else {}),
     })
 
 
@@ -311,6 +311,7 @@ class ResolutionCache:
                     recipe_preset=idea.get("recipe_preset"),
                     recipe_overrides=idea.get("recipe_overrides", {}),
                     prior=prior,
+                    prior_mechanism=idea.get("prior_mechanism"),
                     seed=protocol["seed"],
                     requires_capabilities=idea.get("requires_capabilities", []),
                     extensions=idea.get("extensions", {}),
@@ -498,6 +499,8 @@ def candidate_revision_for(source_digest: str, candidate: dict) -> str:
     # Preserve identities of existing declarations with no adaptation contract.
     if candidate.get("host_adaptation") is not None:
         formulation["host_adaptation"] = candidate["host_adaptation"]
+    if candidate.get("prior_mechanism") is not None:
+        formulation["prior_mechanism"] = candidate["prior_mechanism"]
     formulation.update(resolved_recipe=candidate["resolved_recipe"], prior=candidate["prior"],
                        api_version=candidate.get("api_version", "forge-api-v1"))
     return stable_hash({"source": source_digest, "formulation": formulation})
@@ -571,6 +574,8 @@ def new_idea(root: Path, idea_id: str, parent: str, *, goal="discriminator_stabi
     idea = {k: deepcopy(inherited[k]) for k in FORMULATION_FIELDS if k in inherited}
     if "host_adaptation" in inherited:
         idea["host_adaptation"] = deepcopy(inherited["host_adaptation"])
+    if "prior_mechanism" in inherited:
+        idea["prior_mechanism"] = deepcopy(inherited["prior_mechanism"])
     idea.pop("prior", None)  # Priors are task conditions, not reusable recipes.
     from .boundaries import TASK_RECIPE_FIELDS
     idea["recipe_overrides"] = {key: value for key, value in idea.get("recipe_overrides", {}).items()
@@ -661,6 +666,7 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
     try:
         context = FormulationContext(recipe_preset=idea.get("recipe_preset"),
             recipe_overrides=idea.get("recipe_overrides", {}), prior=prior,
+            prior_mechanism=idea.get("prior_mechanism"),
             seed=protocol["seed"], requires_capabilities=idea.get("requires_capabilities", []),
             extensions=idea.get("extensions", {}), initializer=idea.get("initializer", "deterministic_orthogonal"),
             execution_path=idea.get("execution_path", "public_trainer"))

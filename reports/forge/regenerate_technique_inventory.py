@@ -391,7 +391,7 @@ def _recorded_study_question(root, idea_id, view_id, execution_backend, cuda_mod
 
 
 def _validate_comparison_policy(actual, comparison):
-    """Permit only older assignment dispositions, never another task or tier."""
+    """Permit older assignment dispositions and additive later tasks, never reordered or retiered tasks."""
     metadata = {"revision", "previous_revision", "policy_change_reason"}
     if (comparison.get("id") != actual.get("id")
             or type(comparison.get("revision")) is not int
@@ -399,19 +399,53 @@ def _validate_comparison_policy(actual, comparison):
             or {key: value for key, value in actual.items() if key not in metadata | {"assignments"}}
                != {key: value for key, value in comparison.items() if key not in metadata | {"assignments"}}):
         raise ValueError("comparison policy must change only older assignment dispositions")
+    actual_tasks = [assignment["task"] for assignment in actual["assignments"]]
+    comparison_tasks = [assignment["task"] for assignment in comparison["assignments"]]
+    if len(set(actual_tasks)) != len(actual_tasks) or len(set(comparison_tasks)) != len(comparison_tasks):
+        raise ValueError("comparison policy changes task identities, tiers or ordering")
     def structural(view):
         return [{key: value for key, value in assignment.items()
                  if key not in {"importance", "hold", "removal"}}
                 for assignment in view["assignments"]]
-    if structural(actual) != structural(comparison):
+    retained = set(comparison_tasks)
+    if [item for item in structural(actual) if item["task"] in retained] != structural(comparison):
         raise ValueError("comparison policy changes task identities, tiers or ordering")
+
+
+def _comparison_contracts_match(row, comparison):
+    family = row["bindings"]["trainer_family"]
+    reference = comparison["reference_task_contracts"].get(family)
+    if not isinstance(reference, dict):
+        return False
+    actual_contracts = row["bindings"]["task_contracts"]
+    added = set(comparison.get("added_actual_tasks", ()))
+    required = {item["task"] for item in comparison.get("policy", {}).get("assignments", ())}
+    if not required.issubset(reference) or set(actual_contracts) != set(reference) | added:
+        return False
+    lineage = comparison.get("verified_evaluator_lineage", {}).get(family, {})
+    return all(actual_contracts.get(task) in {digest, lineage.get(task)}
+               for task, digest in reference.items())
 
 
 def _comparison_projection(actual, projected, comparison):
     """Bind a policy-only projection to the original measured rows and tasks."""
     from copy import deepcopy
     from experiments.forge.contracts import stable_hash
+    originals_by_identity = {(row["candidate_id"], row.get("candidate_revision"), row.get("cohort")): row
+                             for row in actual["rows"]}
     originals = {row["candidate_revision"]: row for row in actual["rows"] if row.get("attempt_ids")}
+    added = set(comparison.get("added_actual_tasks", ()))
+    if added:
+        projected.setdefault("status_reasons", {}).update(deepcopy(actual.get("status_reasons", {})))
+        for row in projected["rows"]:
+            source_row = originals_by_identity.get((row["candidate_id"], row.get("candidate_revision"), row.get("cohort")))
+            if source_row is None:
+                continue
+            existing = {item["task_id"] for key in ("tasks", "nonrequired_tasks") for item in row[key]}
+            extra = [deepcopy(item) for key in ("tasks", "nonrequired_tasks")
+                     for item in source_row[key] if item["task_id"] in added and item["task_id"] not in existing]
+            if extra:
+                row["nonrequired_tasks"].extend(extra)
     observed = set()
     def statuses(row):
         return {item["task_id"]: item["status"] for key in ("tasks", "nonrequired_tasks") for item in row[key]}
@@ -419,8 +453,7 @@ def _comparison_projection(actual, projected, comparison):
         if not row.get("attempt_ids"):
             continue
         original = originals.get(row["candidate_revision"])
-        family = row["bindings"]["trainer_family"]
-        if (original is None or row["bindings"]["task_contracts"] != comparison["reference_task_contracts"].get(family)
+        if (original is None or not _comparison_contracts_match(row, comparison)
                 or any(row.get(key) != original.get(key) for key in
                        ("candidate_id", "candidate_revision", "cohort", "bindings", "runtime_cohort", "attempt_ids", "cost"))):
             raise ValueError("comparison projection changes recorded task contracts or measured cohort")
@@ -443,6 +476,7 @@ def _comparison_projection(actual, projected, comparison):
         original_admissions_reconstructed_before_projection=True, qualification_input=False, qualification_reuse=False,
         note="Projected tiers use the older comparison policy only. Actual executed-policy qualification is separate; no projected Tier 3 claim follows from an actual-policy pass.",
         actual_qualification=qualification, actual_qualification_sha256=stable_hash(qualification))
+
 
 
 def _extract_source(root, commit, destination, manifests, study_support=None):
@@ -626,8 +660,102 @@ def _bound_publication_rows(result, allowed_sources):
     return bound, unresolved
 
 
+def _evaluator_revision_reaches(root, task, target_evaluation_sha256):
+    """Verify source-only evaluator_revision ancestry without changing gates, sampling or budgets."""
+    from experiments.forge.views import task_evaluation_fingerprint
+    seen = set()
+    current = deepcopy(task)
+    while True:
+        fingerprint = task_evaluation_fingerprint(current)
+        if fingerprint == target_evaluation_sha256:
+            return True
+        if fingerprint in seen:
+            return False
+        seen.add(fingerprint)
+        revision = current.get("evaluation", {}).get("evaluator_revision")
+        if not isinstance(revision, dict):
+            return False
+        commit = revision.get("previous_task_commit")
+        rel = revision.get("previous_task_path")
+        if isinstance(commit, str) and isinstance(rel, str):
+            rel_path = Path(rel)
+            if (len(commit) != 40 or any(char not in "0123456789abcdef" for char in commit)
+                    or rel_path.is_absolute() or ".." in rel_path.parts or rel_path.suffix != ".json"):
+                return False
+            try:
+                previous = json.loads(subprocess.check_output(["git", "show", f"{commit}:{rel}"], cwd=root, text=True))
+            except (subprocess.CalledProcessError, json.JSONDecodeError):
+                return False
+            if ({key: value for key, value in previous.items() if key != "evaluation"}
+                    != {key: value for key, value in current.items() if key != "evaluation"}):
+                return False
+            prev_eval = {key: value for key, value in previous.get("evaluation", {}).items()
+                         if key not in {"sources", "evaluator_revision"}}
+            curr_eval = {key: value for key, value in current.get("evaluation", {}).items()
+                         if key not in {"sources", "evaluator_revision"}}
+            if prev_eval != curr_eval:
+                return False
+            current = previous
+            continue
+        prev_source = revision.get("previous_source_sha256")
+        sources = deepcopy(current.get("evaluation", {}).get("sources", {}))
+        added_members = revision.get("added_source_members", [])
+        if isinstance(prev_source, str) and isinstance(sources, dict) and isinstance(added_members, list):
+            for member in added_members:
+                sources.pop(member, None)
+            if len(sources) != 1:
+                return False
+            only = next(iter(sources))
+            next_task = deepcopy(current)
+            next_task["evaluation"]["sources"] = {only: prev_source}
+            if "previous_revision" in revision and revision["previous_revision"] is not None:
+                next_task["evaluation"]["evaluator_revision"] = deepcopy(revision["previous_revision"])
+            else:
+                next_task["evaluation"].pop("evaluator_revision", None)
+            current = next_task
+            continue
+        if isinstance(prev_source, dict) and isinstance(sources, dict) and set(prev_source).issubset(sources):
+            next_task = deepcopy(current)
+            for member in added_members if isinstance(added_members, list) else ():
+                next_task["evaluation"]["sources"].pop(member, None)
+            for member, digest in prev_source.items():
+                next_task["evaluation"]["sources"][member] = digest
+            if "previous_revision" in revision and revision["previous_revision"] is not None:
+                next_task["evaluation"]["evaluator_revision"] = deepcopy(revision["previous_revision"])
+            else:
+                next_task["evaluation"].pop("evaluator_revision", None)
+            current = next_task
+            continue
+        return False
+
+
+def _measured_candidates_at_source(root, manifests, studies, view_id, execution_backend):
+    """Find every non-diagnostic candidate with original attempts at this source."""
+    from experiments.forge.views import diagnostic_evidence_scope
+    measured = {record["request"]["candidate"]["id"] for record in studies
+                if record["request"]["view"]["id"] == view_id
+                and (execution_backend is None or record["request"]["execution_backend"] == execution_backend)
+                and not diagnostic_evidence_scope(record["request"])}
+    for path in sorted((root / "reports/forge/attempts").glob("*/request.json")):
+        resolved = read_json(path)
+        request = resolved.get("request", resolved)
+        source = request.get("source", {})
+        expected = manifests.get(source.get("digest"))
+        if expected is None or source.get("origin_commit") != expected.get("origin_commit"):
+            continue
+        if (request.get("view", {}).get("id") == view_id
+                and (execution_backend is None or request.get("execution_backend") == execution_backend)
+                and not diagnostic_evidence_scope(request)):
+            candidate_id = request.get("candidate", {}).get("id")
+            if isinstance(candidate_id, str):
+                measured.add(candidate_id)
+    return measured
+
+
 def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary,
-                   declaration_registration=None, comparison_policy=None):
+                   declaration_registration=None, candidate_roster=None, comparison_policy=None):
+    if declaration_registration is not None and candidate_roster is not None:
+        raise ValueError("cannot combine --declaration-registration and --candidate")
     commit = _resolve_commit(root, source_commit)
     manifests = _receipt_manifests(root, commit)
     studies, support = _recorded_studies(root, manifests)
@@ -653,6 +781,14 @@ def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary
         roster = {"registration_path": relative, "registration_sha256": file_hash(registration_path),
                   "candidate_ids": sorted(ids), "measured_candidate_ids": sorted(measured),
                   "execution_backend": "cuda", "qualification_transfer": False}
+    elif candidate_roster is not None:
+        selected_ids = sorted({identifier(cid, "candidate") for cid in candidate_roster})
+        measured = _measured_candidates_at_source(root, manifests, studies, view_id, execution_backend)
+        if not selected_ids or not measured.issubset(selected_ids):
+            raise ValueError("candidate roster omits an original measured candidate")
+        roster = {"scope": "explicit_candidate_roster", "candidate_ids": selected_ids,
+                  "measured_candidate_ids": sorted(measured),
+                  "execution_backend": execution_backend, "qualification_transfer": False}
     frozen_root = temporary / "source"
     catalog_closure = _extract_source(root, commit, frozen_root, manifests, study_support=support)
     contract = temporary / "manifests.json"
@@ -667,7 +803,8 @@ def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary
         if not comparison_path.is_absolute():
             comparison_path = root / comparison_path
         policy = read_json(comparison_path)
-        _validate_comparison_policy(read_json(frozen_root / "configs/forge/views" / f"{view_id}.json"), policy)
+        actual_view = read_json(frozen_root / "configs/forge/views" / f"{view_id}.json")
+        _validate_comparison_policy(actual_view, policy)
         recorded = read_json(root / CURRENT_PREFIX.with_suffix(".json"))
         manifest = read_json(root / EVIDENCE_MANIFEST)
         if stable_hash(policy) != manifest["policy_fingerprint"] or recorded["policy_fingerprint"] != stable_hash(policy):
@@ -678,19 +815,42 @@ def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary
         for entry in manifest["cohorts"]:
             _, rows = _snapshot(root, entry, manifest)
             verified.update(row["candidate_revision"] for row in rows.values())
-        reference = {}
+        from experiments.forge.views import load_tasks, task_evaluation_fingerprint
+        frozen_tasks = load_tasks(frozen_root)
+        comparison_task_ids = {assignment["task"] for assignment in policy["assignments"]}
+        added_actual_tasks = sorted({assignment["task"] for assignment in actual_view["assignments"]} - comparison_task_ids)
+        reference, verified_lineage = {}, {}
+        recorded_catalog = recorded.get("task_contracts", {})
         for row in recorded["rows"]:
-            if row.get("attempt_ids") and row.get("candidate_revision") in verified:
-                reference[row["trainer_family"]] = row["bindings"]["task_contracts"]
+            contracts = row.get("bindings", {}).get("task_contracts")
+            if row.get("candidate_revision") in verified and isinstance(contracts, dict) and contracts:
+                family = row["trainer_family"]
+                if family in reference and not row.get("attempt_ids"):
+                    continue
+                reference[family] = contracts
+                verified_lineage.pop(family, None)
+                family_lineage = {}
+                for task_id, ref_digest in contracts.items():
+                    ref_contract = recorded_catalog.get(ref_digest)
+                    frozen_task = frozen_tasks.get(task_id)
+                    if not isinstance(ref_contract, dict) or frozen_task is None:
+                        continue
+                    frozen_eval = task_evaluation_fingerprint(frozen_task)
+                    if frozen_eval != ref_contract.get("evaluation_sha256") and _evaluator_revision_reaches(
+                            root, frozen_task, ref_contract.get("evaluation_sha256")):
+                        family_lineage[task_id] = stable_hash({**ref_contract, "evaluation_sha256": frozen_eval})
+                if family_lineage:
+                    verified_lineage[family] = family_lineage
         comparison = {"policy": policy, "path": os.path.relpath(comparison_path, root),
-                      "sha256": file_hash(comparison_path), "reference_task_contracts": reference}
+                      "sha256": file_hash(comparison_path), "reference_task_contracts": reference,
+                      "added_actual_tasks": added_actual_tasks, "verified_evaluator_lineage": verified_lineage}
     comparison_contract = temporary / "comparison-policy.json"
     atomic_text(comparison_contract, _json_text(comparison))
     prefix = temporary / "inventory"
     # A fresh process is essential: already imported live model/resolver
     # modules cannot grade a reconstructed older checkout faithfully.
     program = (inspect.getsource(_recorded_study_question) + inspect.getsource(_validate_comparison_policy)
-               + inspect.getsource(_comparison_projection)) + """
+               + inspect.getsource(_comparison_contracts_match) + inspect.getsource(_comparison_projection)) + """
 import json, sys
 import torch
 torch.set_num_threads(1)
@@ -805,7 +965,7 @@ if comparison is not None:
         if not row.get('attempt_ids'):
             continue
         family = row['bindings']['trainer_family']
-        if row['bindings']['task_contracts'] != comparison['reference_task_contracts'].get(family):
+        if not _comparison_contracts_match(row, comparison):
             raise ValueError('comparison projection changes recorded task contracts: ' + str(family))
     # All admission/source reconstruction above used the original view. The
     # projection may only reuse those verified requests, never reconstruct a
@@ -871,11 +1031,13 @@ print(json.dumps(result, sort_keys=True))
 
 def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_stability", execution_backend="cuda",
                output_prefix: Path | str = "reports/forge/technique-inventory", source_commit=None,
-               declaration_registration=None, comparison_policy=None) -> dict:
+               declaration_registration=None, candidate_roster=None, comparison_policy=None) -> dict:
     """Regrade original evidence and publish deterministic compact artifacts."""
     root = Path(root).resolve()
-    if declaration_registration is not None and source_commit is None:
+    if (declaration_registration is not None or candidate_roster is not None) and source_commit is None:
         raise ValueError("declaration roster requires exact frozen source reconstruction")
+    if declaration_registration is not None and candidate_roster is not None:
+        raise ValueError("cannot combine --declaration-registration and --candidate")
     if comparison_policy is not None and source_commit is None:
         raise ValueError("independent comparison projection requires an exact frozen source")
     prefix = Path(output_prefix)
@@ -904,6 +1066,8 @@ def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_sta
             commit, frozen_digests = None, []
         else:
             comparison_options = {"comparison_policy": comparison_policy} if comparison_policy is not None else {}
+            if candidate_roster is not None:
+                comparison_options["candidate_roster"] = candidate_roster
             metadata, result, commit, frozen_digests = _frozen_report(
                 root, source_commit, view_id=view_id, execution_backend=execution_backend, temporary=Path(temporary),
                 declaration_registration=declaration_registration, **comparison_options)
@@ -948,6 +1112,9 @@ def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_sta
                (" --source-commit " + commit if commit else ""))
     if declaration_registration is not None:
         command += " --declaration-registration " + shlex.quote(str(declaration_registration))
+    if candidate_roster is not None:
+        for cid in sorted({identifier(item, "candidate") for item in candidate_roster}):
+            command += " --candidate " + shlex.quote(cid)
     if comparison_policy is not None:
         command += " --comparison-policy " + shlex.quote(str(comparison_policy))
     lines = markdown.splitlines()
@@ -2717,7 +2884,8 @@ def _declaration_source_preference(row, previous, preferred_source):
     return None
 
 
-def _recorded_measurement_pin(root, family_id, rows, pin, *, view_id, catalogs, previous, reports, guard):
+def _recorded_measurement_pin(root, family_id, rows, pin, *, view_id, catalogs, previous, reports, guard,
+                              live_error="current measurement requires current execution, evaluation and budget contracts"):
     """Retain a published whole measurement only under its original Git laws."""
     from experiments.forge.trainer_families import family_row_pin, scientific_row_hash
     from experiments.forge.views import load_view, load_tasks, task_execution_fingerprint, task_evaluation_fingerprint
@@ -2785,12 +2953,20 @@ def _recorded_measurement_pin(root, family_id, rows, pin, *, view_id, catalogs, 
             path.write_bytes(data)
             git_files[name] = hashlib.sha256(data).hexdigest()
         original_view = load_view(frozen, view_id)
-        if stable_hash(original_view) != report["policy_fingerprint"]:
+        recorded_fingerprints = {report["policy_fingerprint"]}
+        projection = report.get("comparison_policy_projection")
+        if isinstance(projection, dict) and projection.get("actual_policy_fingerprint"):
+            recorded_fingerprints.add(projection["actual_policy_fingerprint"])
+        if stable_hash(original_view) not in recorded_fingerprints:
             raise ValueError("stale measurement recorded Git view differs from its publication")
         required = {assignment["task"] for name in pin["measurement_views"]
                     for assignment in load_view(frozen, name)["assignments"]
                     if assignment["importance"] == "required" and assignment["qualification_tier"] == 1}
         required.update(pin.get("measurement_tasks", []))
+        live_required = {assignment["task"] for name in pin["measurement_views"]
+                         for assignment in load_view(root, name)["assignments"]
+                         if assignment["importance"] == "required" and assignment["qualification_tier"] == 1}
+        live_required.update(pin.get("measurement_tasks", []))
         live_tasks, frozen_tasks = load_tasks(root), load_tasks(frozen)
         drift, contracts = [], {}
         for name in sorted(required):
@@ -2811,6 +2987,9 @@ def _recorded_measurement_pin(root, family_id, rows, pin, *, view_id, catalogs, 
             if differences:
                 drift.append({"task": name, "fields": differences})
             contracts[name] = digest
+        for name in sorted(live_required - required):
+            drift.append({"task": name, "fields": {"view_requirement": {
+                "recorded": "absent_or_nonrequired", "live": "required_tier_1"}}})
         if not drift:
             raise ValueError("recorded measurement fallback requires actual contract drift")
         _, metadata = guard(frozen, family_id, [selected], pin, view_id=view_id, catalogs=catalogs)
@@ -2819,7 +2998,7 @@ def _recorded_measurement_pin(root, family_id, rows, pin, *, view_id, catalogs, 
              "previous_publication_input_digest": claimed,
              "scientific_row_sha256": scientific_row_hash(selected), "task_contracts": contracts,
              "git_declarations_sha256": git_files, "original_receipts": receipts, "contract_drift": drift,
-             "recorded_guard_pass": True, "live_guard_error": "current measurement requires current execution, evaluation and budget contracts"}
+             "recorded_guard_pass": True, "live_guard_error": live_error}
     metadata.update(selection_kind="recorded_source_measurement", original_pin=deepcopy(pin), qualified=False,
                     measurement_complete=False, current_measurement_complete=False,
                     recorded_measurement_complete=True, current_contracts=False,
@@ -2837,16 +3016,39 @@ def _retain_recorded_measurements(root, reports):
     path = root / CURRENT_PREFIX.with_suffix(".json")
     previous = read_json(path) if path.is_file() else None
     original, proofs = trainer_families._current_pin, []
+    contract_error = "current measurement requires current execution, evaluation and budget contracts"
+    tier1_error = "current measurement requires every required Tier 1 task in its measurement views to be PASS or FAIL"
+    def published_pin_exists(pin):
+        if not previous:
+            return False
+        for old_row in previous.get("rows", []):
+            if trainer_families.family_row_pin(
+                    old_row, selection_kind=pin["selection_kind"], reason=pin["reason"],
+                    measurement_views=pin.get("measurement_views"),
+                    measurement_tasks=pin.get("measurement_tasks")) != pin:
+                continue
+            prior_sel = old_row.get("selection", {})
+            if prior_sel.get("selection_kind") == "recorded_source_measurement":
+                if prior_sel.get("original_pin") == pin:
+                    return True
+            elif (prior_sel.get("selection_kind") == "current_measurement"
+                  and prior_sel.get("reason") == pin["reason"]
+                  and prior_sel.get("measurement_views") == pin["measurement_views"]
+                  and prior_sel.get("measurement_tasks") == pin.get("measurement_tasks")):
+                return True
+        return False
     def current_pin(directory, family_id, rows, pin, *, view_id, catalogs):
         try:
             return original(directory, family_id, rows, pin, view_id=view_id, catalogs=catalogs)
         except ValueError as error:
+            message = str(error)
             if (Path(directory).resolve() != root or pin["selection_kind"] != "current_measurement"
-                    or str(error) != "current measurement requires current execution, evaluation and budget contracts"):
+                    or message not in {contract_error, tier1_error}
+                    or (message == tier1_error and not published_pin_exists(pin))):
                 raise
             selected, metadata, proof = _recorded_measurement_pin(
                 root, family_id, rows, pin, view_id=view_id, catalogs=catalogs,
-                previous=previous, reports=reports, guard=original)
+                previous=previous, reports=reports, guard=original, live_error=message)
             proofs.append(proof)
             return selected, metadata
     trainer_families._current_pin = current_pin
@@ -2856,9 +3058,11 @@ def _retain_recorded_measurements(root, reports):
         trainer_families._current_pin = original
 
 
+
 def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discriminator_stability",
                     execution_backend=None, recorded_policy=None, advance_policy=False,
-                    ownership_migration=None, declaration_registration=None, comparison_policy=None):
+                    ownership_migration=None, declaration_registration=None, candidate_roster=None,
+                    comparison_policy=None):
     """Maintain one current table; registered source snapshots retain the history."""
     root = Path(root).resolve()
     if (root / "reports/forge/word_checkpoint_publication.py").is_file():
@@ -2874,8 +3078,10 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         raise ValueError("advancing the evidence policy requires --source-commit and no recorded policy")
     if ownership_migration is not None and not (advance_policy and source_commit and recorded_policy is None):
         raise ValueError("ownership migration requires explicit frozen-source policy advance")
-    if declaration_registration is not None and source_commit is None:
+    if (declaration_registration is not None or candidate_roster is not None) and source_commit is None:
         raise ValueError("declaration roster requires exact frozen source reconstruction")
+    if declaration_registration is not None and candidate_roster is not None:
+        raise ValueError("cannot combine --declaration-registration and --candidate")
     recorded_view = None
     if recorded_policy is not None:
         if manifest is None:
@@ -2922,6 +3128,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         with tempfile.TemporaryDirectory(prefix="forge-technique-evidence-") as temporary:
             roster_options = ({"declaration_registration": declaration_registration}
                               if declaration_registration is not None else {})
+            if candidate_roster is not None:
+                roster_options["candidate_roster"] = candidate_roster
             if comparison_policy is not None:
                 roster_options["comparison_policy"] = comparison_policy
             metadata = regenerate(root, view_id=view_id, execution_backend=execution_backend,
@@ -3345,6 +3553,8 @@ def main(argv=None):
                         help="write an independent source report; do not register or change current selections")
     parser.add_argument("--declaration-registration", type=Path,
                         help="enumerate the exact seven-leader ordinary CUDA registration recorded at --source-commit; keep full control lookup")
+    parser.add_argument("--candidate", dest="candidates", action="append",
+                        help="enumerate only these explicit candidate declaration IDs at --source-commit; keep full control lookup")
     parser.add_argument("--recorded-policy", type=Path,
                         help="rebuild registered rows under this exact archived view policy, without resolving live declarations")
     parser.add_argument("--comparison-policy", type=Path,
@@ -3361,7 +3571,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.refresh_performance:
         if (args.output_prefix or args.recorded_policy or args.comparison_policy or args.advance_policy or args.ownership_migration
-                or args.refresh_publication or args.source_commit or args.declaration_registration
+                or args.refresh_publication or args.source_commit or args.declaration_registration or args.candidates
                 or args.device != "all" or args.goal != "discriminator_stability"):
             parser.error("--refresh-performance preserves current evidence; source, policy, goal and device overrides are unsupported")
         from experiments.forge.scaling_publication import refresh_performance
@@ -3374,6 +3584,7 @@ def main(argv=None):
                                    execution_backend=None if args.device == "all" else args.device,
                                    source_commit=args.source_commit, output_prefix=args.output_prefix,
                                    declaration_registration=args.declaration_registration,
+                                   candidate_roster=args.candidates,
                                    comparison_policy=args.comparison_policy)), end="")
         return
     # A later declared view can refresh navigation without advancing/regrading
@@ -3387,7 +3598,7 @@ def main(argv=None):
             if stable_hash(read_json(view_path)) != manifest.get("policy_fingerprint"):
                 args.refresh_publication = True
     if args.refresh_publication:
-        if args.source_commit or args.recorded_policy or args.comparison_policy or args.advance_policy or args.ownership_migration or args.declaration_registration or args.device != "all":
+        if args.source_commit or args.recorded_policy or args.comparison_policy or args.advance_policy or args.ownership_migration or args.declaration_registration or args.candidates or args.device != "all":
             parser.error("--refresh-publication preserves the existing cohorts; source, policy and device overrides are unsupported")
         print(_json_text(refresh_publication(args.root, view_id=args.goal)), end="")
         return
@@ -3396,6 +3607,7 @@ def main(argv=None):
                                 source_commit=args.source_commit, recorded_policy=args.recorded_policy,
                                 advance_policy=args.advance_policy, ownership_migration=args.ownership_migration,
                                 declaration_registration=args.declaration_registration,
+                                candidate_roster=args.candidates,
                                 comparison_policy=args.comparison_policy)), end="")
 
 

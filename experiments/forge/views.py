@@ -687,9 +687,17 @@ def _adaptation(task, evidence):
     required = ("config_sha256", "source_sha256", "runtime", "mode", "noise_horizon",
                 "diagnostic_every", "dense_after", "dense_until", "shift", "shift_pair", "optimizer_final")
     from .tier1_policy import schedule_free_policy
+    from .contracts import read_json
     # A schedule-free policy recipe has no noise/schedule horizon; its actual
     # None is verified against the saved recipe by verify_pair_artifacts.
     optional = {"dense_after", "dense_until"} | ({"noise_horizon"} if schedule_free_policy(task) else set())
+    if "noise_horizon" not in optional and active.get("noise_horizon") is None:
+        try:
+            cfg = read_json(Path(evidence["artifact_root"]) / "config.json")
+            if cfg.get("recipe", {}).get("total_steps") is None:
+                optional.add("noise_horizon")
+        except Exception:
+            pass
     for run in (active, frozen):
         if any(key not in run or (run[key] is None and key not in optional) for key in required):
             return _verdict("INCOMPLETE", "paired control lacks complete provenance/optimizer state")
@@ -761,6 +769,35 @@ def _clockfree(task, evidence):
                     metrics={"parity_comparisons": len(comparisons)})
 
 
+def _zero_tanh(task, evidence):
+    evaluation = task["evaluation"]
+    thresholds = evaluation["thresholds"]
+    points = evidence.get("observations", evidence.get("curve"))
+    if not isinstance(points, list) or not points:
+        return _verdict("INCOMPLETE", "missing zero_tanh observation curve")
+    try:
+        _curve(points, thresholds)
+    except ValueError as exc:
+        return _verdict("INVALID" if points else "INCOMPLETE", str(exc))
+    live = evidence.get("live")
+    if not isinstance(live, dict) or any(not _finite(live.get(key)) for key, _, _ in thresholds):
+        return _verdict("INCOMPLETE", "missing finite final live metrics")
+    failed = []
+    for name, op, bound in thresholds:
+        val = live.get(name)
+        ok = (val <= bound if op == "<=" else
+              val >= bound if op == ">=" else
+              val == bound if op == "==" else False)
+        if not ok:
+            failed.append(f"{name} {op} {bound}")
+    passed = len(failed) == 0
+    status = "PASS" if passed else "FAIL"
+    reason = ("recomputed origin point-mass contraction gates"
+              if passed else f"failed thresholds: {', '.join(failed)}")
+    return _verdict(status, reason, metrics=live,
+                    evaluator_result={"passed": passed, "failed_bounds": failed})
+
+
 def grade_result(task: dict, result: dict | None, *, diagnostic=False) -> dict:
     """Independently grade compatible raw evidence, without changing it."""
     try:
@@ -815,7 +852,8 @@ def grade_result(task: dict, result: dict | None, *, diagnostic=False) -> dict:
                "transfer_sustained": _transfer, "native_accuracy": _native,
                "ring_hold": _ring, "ring_extension": _ring,
                "paired_adaptation": _adaptation, "clockfree_parity": _clockfree,
-               "image_training_performance": performance_grade}
+               "image_training_performance": performance_grade,
+               "zero_tanh_smoke": _zero_tanh}
     grader = graders.get(task["evaluation"]["kind"])
     if grader is None:
         return _verdict("BLOCKED", f"unsupported evaluator {task['evaluation']['kind']}")

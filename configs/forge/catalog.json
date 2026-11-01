@@ -7338,21 +7338,21 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "2534054c74047e2090be84287b60036af8872866",
+      "git_blob": "3d43c1737a9ed446af84dd56881fb405818aa9f8",
       "path": "experiments/forge/adaptation.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "e64fc04555a916d1b586ec42784310e5feb35a54",
+      "git_blob": "57e9feaf4252dcffc889bab519c9de844385bbbe",
       "path": "experiments/forge/adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "27041f639bcb3d184dca3180927da4c83ca87252",
+      "git_blob": "90e3f642a07af14021565b1df7cf81b2dbd522e4",
       "path": "experiments/forge/api.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7408,7 +7408,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "8f9ec3497c1acc0e05bed024f30dd3bf40f366fe",
+      "git_blob": "0c9e61b6383f7c7d39ce694a8cf8486c50c16a1b",
       "path": "experiments/forge/boundaries.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7534,7 +7534,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "935f7b7c148001886a6723a9daedd139c686449f",
+      "git_blob": "be0766618723455545850cc5e8d0c2dd5018cae9",
       "path": "experiments/forge/clockfree.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7562,7 +7562,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "60880aaca0cdd0a25452fa4e3848ef24afed845a",
+      "git_blob": "9fa99eba1a888e5f9ce433373a11e197a8da5f9f",
       "path": "experiments/forge/configuration_search.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7576,14 +7576,14 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "c8f393508c0d722481d6b306e0431abcb44e2e8f",
+      "git_blob": "1ce4d9608c24c47dcb74932ff049aad510635629",
       "path": "experiments/forge/contracts.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "2050db9f43d23be2869d53ffebdf5ebef70d5aa0",
+      "git_blob": "9d75250b050180fb4d10e0aa8089a7ba2a3b7a88",
       "path": "experiments/forge/decision_contracts.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7646,7 +7646,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "1555baf4e71b9f206788a7747c4769039d2bf531",
+      "git_blob": "e6b25553e4cea1f03ac8f25350393765bf8908a2",
       "path": "experiments/forge/hostprofiles.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7667,7 +7667,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "2610a1c533ccb3f0493d535d6ce745a0d1012ce9",
+      "git_blob": "43b7dbcefb95baecb2b0850c47423c2b18c220d2",
       "path": "experiments/forge/knowledge.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7744,7 +7744,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "789577c86ffceca1541e915f1ea6edb4e5fdf483",
+      "git_blob": "d6124d9115264fb2f08424b3fac189131df795f3",
       "path": "experiments/forge/planning.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7835,14 +7835,14 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "117235dc9194029c645489edccededad044ee4a8",
+      "git_blob": "0191b9e452cf8599ca46e28cf97083a11b043f2a",
       "path": "experiments/forge/priors.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "76d1dcf95d962bddc20bb62e5df0374005daca13",
+      "git_blob": "158de309814d6d0d2efb5320470afc9ef4119467",
       "path": "experiments/forge/promotion.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7996,7 +7996,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "3f1ab7b81ecf1ee53852433c33221105bb9a4e91",
+      "git_blob": "de778f326548dc96087ef735f2ed466d7cd632f2",
       "path": "experiments/forge/state.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -8122,7 +8122,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "848e08b501128656ad90e6ce44f0347fce976600",
+      "git_blob": "e4978ac79e4d5bad69fa658c465dcd6d1e286235",
       "path": "experiments/forge/views.py",
       "role": "engine_support",
       "suggested_tiers": []

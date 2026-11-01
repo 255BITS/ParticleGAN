@@ -193,6 +193,7 @@ def _resolved_recipe(candidate):
     """Use the same fixed prior and API bindings as an actual Forge request."""
     context = FormulationContext(recipe_preset=candidate.get("recipe_preset"),
         recipe_overrides=candidate.get("recipe_overrides", {}), prior=candidate.get("prior"),
+        prior_mechanism=candidate.get("prior_mechanism"),
         requires_capabilities=candidate.get("requires_capabilities", ()),
         extensions=candidate.get("extensions", {}),
         initializer=candidate.get("initializer", "deterministic_orthogonal"),
