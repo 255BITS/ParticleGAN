@@ -708,3 +708,511 @@ def test_live_repository_forge_readouts_are_current_and_source_clean():
     assert report["stages"]["compiled_reports"]["selected_diagnostic_rows_present"] is True
     assert report["stages"]["compiled_reports"]["clean_checkout_safe"] is True
     assert rfr.main(["--root", str(ROOT), "--check"]) == rfr.CURRENT_EXIT
+
+
+def test_clean_checkout_preserves_leaderboards_and_repairs_missing_attempts(
+    tmp_path: Path, monkeypatch
+):
+    from reports.forge import regenerate_technique_inventory
+
+    monkeypatch.setattr(
+        regenerate_technique_inventory,
+        "refresh_publication",
+        lambda root: {"report": str(Path(root) / "reports/forge/technique-inventory.md")},
+    )
+    monkeypatch.setattr(rfr, "_ensure_tier_report_markdown", lambda root: None)
+    monkeypatch.setattr(rfr, "_ensure_attempt_coverage_markdown", lambda root, json_mode=False: None)
+    monkeypatch.setattr(rfr.history, "validate_inventory", lambda root: {"valid": True})
+
+    compile_calls: list[bool] = []
+
+    def _fake_compile_memory(root: Path, *, summaries_only: bool = False):
+        compile_calls.append(bool(summaries_only))
+        if not summaries_only:
+            lb_path = Path(root) / "reports/forge/leaderboards/adaptation.md"
+            lb_path.parent.mkdir(parents=True, exist_ok=True)
+            lb_path.write_text("WIPED_WITHOUT_ATTEMPTS\n")
+        return {"summaries_only": bool(summaries_only)}
+
+    monkeypatch.setattr(rfr.knowledge, "compile_memory", _fake_compile_memory)
+
+    lb_file = tmp_path / "reports/forge/leaderboards/adaptation.md"
+    lb_file.parent.mkdir(parents=True, exist_ok=True)
+    lb_file.write_text("COMMITTED_LEADERBOARD_CONTENT\n")
+
+    # 1. Clean checkout (local attempt envelopes absent) skips summaries_only=False and preserves leaderboards.
+    monkeypatch.setattr(
+        rfr,
+        "check_selected_family_readouts",
+        lambda root, *, cuda_model=rfr.DEFAULT_CUDA_MODEL: {
+            "current": True,
+            "missing_families": [],
+            "stale_leaderboards": [],
+            "local_attempts_missing_families": [
+                {"family": "atlas", "candidate_id": "atlas-particle-normal-v4", "candidate_revision": "rev"}
+            ],
+        },
+    )
+    res_clean = rfr.refresh_compiled_reports(tmp_path)
+    assert res_clean["leaderboards_recompiled"] is False
+    assert compile_calls == [True]
+    assert lb_file.read_text() == "COMMITTED_LEADERBOARD_CONTENT\n"
+
+    # 2. Local attempt envelopes present -> runs full compile_memory(summaries_only=False) then summaries_only=True.
+    compile_calls.clear()
+    monkeypatch.setattr(
+        rfr,
+        "check_selected_family_readouts",
+        lambda root, *, cuda_model=rfr.DEFAULT_CUDA_MODEL: {
+            "current": True,
+            "missing_families": [],
+            "stale_leaderboards": [],
+            "local_attempts_missing_families": [],
+        },
+    )
+    res_full = rfr.refresh_compiled_reports(tmp_path)
+    assert res_full["leaderboards_recompiled"] is True
+    assert compile_calls == [False, True]
+
+    # 3. Stale leaderboard on clean checkout causes refresh_selected_family_readouts to target families
+    #    missing local attempt envelopes so board() will not wipe them.
+    resolved_cids: list[str] = []
+    monkeypatch.setattr(
+        rfr,
+        "check_selected_family_readouts",
+        lambda root, *, cuda_model=rfr.DEFAULT_CUDA_MODEL: {
+            "current": False,
+            "missing_families": [],
+            "stale_leaderboards": [
+                {"family": "atlas", "candidate_id": "atlas-particle-normal-v4", "view": "adaptation"}
+            ],
+            "local_attempts_missing_families": [
+                {"family": "atlas", "candidate_id": "atlas-particle-normal-v4", "candidate_revision": "rev1"},
+                {"family": "bispf", "candidate_id": "bispf-optimized-quintic-v1", "candidate_revision": "rev2"},
+            ],
+        },
+    )
+    monkeypatch.setattr(rfr, "catalog_source_manifest", lambda root, idea=None: {"digest": "2e8a97a0aa84" * 5 + "0000"})
+
+    def _fake_resolve(root, cid, **kwargs):
+        resolved_cids.append(cid)
+        return {
+            "request_id": f"req-{cid}",
+            "candidate_revision": f"rev-{cid}",
+            "policy_fingerprint": "pf-1",
+            "preflight_blockers": [],
+            "source": {"digest": "2e8a97a0aa84" * 5 + "0000"},
+            "jobs": [{"compatibility_key": f"ck-{cid}", "budget_seconds": 60}],
+        }
+
+    monkeypatch.setattr(rfr.planning, "resolve_idea", _fake_resolve)
+    monkeypatch.setattr(
+        rfr,
+        "_ensure_ordinary_requal_study",
+        lambda root, fam, cid, base_req, campaign, **kw: {"id": f"study-{fam}", "campaign": deepcopy(campaign)},
+    )
+    monkeypatch.setattr(rfr, "snapshot_source", lambda root, qroot, src: Path(qroot) / "snap")
+    monkeypatch.setattr(
+        rfr.forge_queue,
+        "Queue",
+        lambda *args, **kwargs: type(
+            "_Q",
+            (),
+            {"submit": lambda self, req, camp: {"request": req, "status": "queued"}},
+        )(),
+    )
+    monkeypatch.setattr(rfr.forge_queue, "drain", lambda *args, **kwargs: None)
+    monkeypatch.setattr(rfr, "_conclude_queue_submissions", lambda *args, **kwargs: ["readout-1", "readout-2"])
+
+    concluded = rfr.refresh_selected_family_readouts(
+        tmp_path, tmp_path / "runs/forge", gpus=["0", "1"], cuda_model="NVIDIA RTX A6000", json_mode=True
+    )
+    assert concluded == ["readout-1", "readout-2"]
+    assert sorted(set(resolved_cids)) == ["atlas-particle-normal-v4", "bispf-optimized-quintic-v1"]
+
+
+def test_compiled_reports_dynamic_diagnostics_unregistered_selection_and_markdown_sync(
+    tmp_path: Path, monkeypatch
+):
+    # 1. Dynamic diagnostic heading computation works for any promoted successor (e.g. atlas-particle-normal-v5).
+    live_inv = read_json(ROOT / "reports/forge/technique-inventory.json")
+    mutated_inv = deepcopy(live_inv)
+    for row in mutated_inv.get("rows", []):
+        if row.get("candidate_id") == "atlas-particle-normal-v4":
+            row["candidate_id"] = "atlas-particle-normal-v5"
+    for fam in mutated_inv.get("family_progress", {}).get("families", []):
+        if fam.get("id") == "atlas":
+            for cohort in fam.get("cohorts", []):
+                if cohort.get("candidate_id") == "atlas-particle-normal-v4":
+                    cohort["candidate_id"] = "atlas-particle-normal-v5"
+
+    phrases = rfr._expected_selected_diagnostic_phrases(ROOT, mutated_inv)
+    assert "Selected recipe 1-for-1 baseline-35 diagnostics (atlas-particle-normal-v5); seed 0" in phrases
+    assert "Selected recipe declared-suite Tier 1–3 diagnostics (atlas-particle-normal-v5); seed 0" in phrases
+    assert not any("atlas-particle-normal-v4" in p for p in phrases)
+
+    # 2. Unregistered family-current-v1.json modification raises CodeChangeRequiredError (exit code 2).
+    sel_rel = rfr.CURRENT_SELECTION
+    atomic_json(tmp_path / sel_rel, {"selections": []})
+    inv_doc = {"provenance": {"family_current_selection_sha256": "different-registered-sha"}}
+    with pytest.raises(rfr.CodeChangeRequiredError, match="differs from reports/forge/technique-inventory.json"):
+        rfr._validate_publication_registration_sync(tmp_path, inv_doc)
+
+    # 3. Missing/corrupted ATTEMPT_COVERAGE.md is detected and regenerated cleanly from attempt-coverage.json.
+    cov_sample = {
+        "schema_version": 1,
+        "maximum_tests": 4,
+        "maximum_per_gpu": 2,
+        "records": [
+            {
+                "key": "k-atlas-1",
+                "family": "atlas",
+                "label": "Atlas (atlas-particle-normal-v4; current selected)",
+                "candidate_id": "atlas-particle-normal-v4",
+                "candidate_revision": "efebaebc63fbb814b384b2009aedaf06465137a061cb9fe618b83c9a326f82dd",
+                "source_digest": "2e8a97a0aa845c961de00d403fdcd1673b34b33626e4546c3138882a40e7bacf",
+                "task": "gaussian1d_smoke",
+                "execution_sha256": "e1",
+                "evaluation_sha256": "v1",
+                "status": "PASS",
+                "attempted": True,
+                "origin": "retained_selected_row",
+                "diagnostic": False,
+                "evidence": "reports/forge/technique-inventory.json",
+            }
+        ],
+    }
+    atomic_json(tmp_path / "reports/forge/attempt-coverage.json", cov_sample)
+    assert rfr._attempt_coverage_markdown_synced(tmp_path, cov_sample) is False
+    rfr._ensure_attempt_coverage_markdown(tmp_path, json_mode=True)
+    assert (tmp_path / "reports/forge/ATTEMPT_COVERAGE.md").is_file()
+    assert rfr._attempt_coverage_markdown_synced(tmp_path, cov_sample) is True
+
+
+def test_requal_study_and_campaign_avoid_id_collisions_when_candidate_or_policy_changes(
+    tmp_path: Path, monkeypatch
+):
+    src_digest = "2e8a97a0aa845c961de00d403fdcd1673b34b33626e4546c3138882a40e7bacf"
+    src12 = src_digest[:12]
+
+    # 1. Campaign creation & collision avoidance when base campaign is already registered in queue state.
+    camp1 = rfr._select_or_create_requal_campaign(
+        tmp_path, {}, src12=src12, batch_sig="abcd1234", max_allowance=1200, family_count=2
+    )
+    assert camp1["id"] == f"stale-family-requal-{src12}"
+
+    camp2 = rfr._select_or_create_requal_campaign(
+        tmp_path,
+        {"campaigns": {camp1["id"]: camp1}},
+        src12=src12,
+        batch_sig="abcd1234",
+        max_allowance=1200,
+        family_count=2,
+    )
+    assert camp2["id"] == f"stale-family-requal-{src12}-abcd1234"
+
+    # 2. Study creation & collision avoidance when legacy study ID already exists for an older candidate or concluded run.
+    def _make_req(cid: str, rev: str) -> dict[str, Any]:
+        return {
+            "candidate_revision": rev,
+            "policy_fingerprint": "pf-v14",
+            "source": {"digest": src_digest},
+            "view": {
+                "id": "discriminator_stability",
+                "assignments": [{"task": "gaussian1d_smoke", "qualification_tier": 1}],
+            },
+            "tasks": {
+                "gaussian1d_smoke": {
+                    "preflight_blockers": [],
+                    "evaluation": {"thresholds": [["abs_mean_error", "<=", 0.05]]},
+                }
+            },
+            "jobs": [{"compatibility_key": f"ck-{cid}-{rev}"}],
+        }
+
+    req_v1 = _make_req("bispf-v1", "rev-1111")
+    study1 = rfr._ensure_ordinary_requal_study(
+        tmp_path,
+        "bispf",
+        "bispf-v1",
+        req_v1,
+        camp1,
+        cuda_model="NVIDIA RTX A6000",
+        through_tier=4,
+        q_state={},
+        concluded_records=[],
+    )
+    assert study1["id"] == f"requal-{src12}-bispf-ordinary"
+    assert study1["scope"]["through_tier"] == 4
+
+    # Promote bispf-optimized-quintic-v1 at the exact same source digest (no code changes):
+    # must mint a fresh bound study ID rather than returning study1 for bispf-v1.
+    req_v2 = _make_req("bispf-optimized-quintic-v1", "rev-2222")
+    study2 = rfr._ensure_ordinary_requal_study(
+        tmp_path,
+        "bispf",
+        "bispf-optimized-quintic-v1",
+        req_v2,
+        camp2,
+        cuda_model="NVIDIA RTX A6000",
+        through_tier=4,
+        q_state={},
+        concluded_records=[],
+    )
+    assert study2["id"] != study1["id"]
+    assert study2["id"].startswith(f"requal-{src12}-bispf-")
+    assert study2["candidate"] == "bispf-optimized-quintic-v1"
+    assert study2["campaign"]["id"] == camp2["id"]
+
+
+def test_check_selected_family_readouts_enforces_compat_key_cuda_model_and_tier3_unlocking(
+    tmp_path: Path, monkeypatch
+):
+    rev = "efebaebc63fbb814b384b2009aedaf06465137a061cb9fe618b83c9a326f82dd"
+    fake_req = {
+        "candidate_revision": rev,
+        "view": {
+            "assignments": [
+                {"task": "gaussian1d_smoke", "qualification_tier": 1, "importance": "required"},
+                {"task": "mode_hold", "qualification_tier": 2, "importance": "required"},
+                {"task": "ring_hold", "qualification_tier": 3, "importance": "required"},
+                {"task": "grid100", "qualification_tier": 2, "importance": "held"},
+                {"task": "grid100_14k", "qualification_tier": 3, "importance": "held"},
+            ]
+        },
+        "tasks": {
+            "gaussian1d_smoke": {"preflight_blockers": [], "dependencies": []},
+            "mode_hold": {"preflight_blockers": [], "dependencies": []},
+            "ring_hold": {"preflight_blockers": [], "dependencies": []},
+            "grid100": {"preflight_blockers": [], "dependencies": []},
+            "grid100_14k": {
+                "preflight_blockers": [],
+                "dependencies": [{"kind": "checkpoint", "task": "grid100"}],
+            },
+        },
+        "jobs": [
+            {"task_id": "gaussian1d_smoke", "task_ids": ["gaussian1d_smoke"], "compatibility_key": "ck-t1-new"},
+            {"task_id": "mode_hold", "task_ids": ["mode_hold"], "compatibility_key": "ck-t2-mode"},
+            {"task_id": "grid100", "task_ids": ["grid100"], "compatibility_key": "ck-t2-grid"},
+            {"task_id": "ring_hold", "task_ids": ["ring_hold"], "compatibility_key": "ck-t3-ring"},
+            {"task_id": "grid100_14k", "task_ids": ["grid100_14k"], "compatibility_key": "ck-t3-grid14k"},
+        ],
+    }
+    monkeypatch.setattr(
+        rfr,
+        "current_family_candidates",
+        lambda root: [{"family": "atlas", "candidate_id": "atlas-particle-normal-v4"}],
+    )
+    monkeypatch.setattr(rfr.planning, "resolve_idea", lambda *args, **kwargs: deepcopy(fake_req))
+
+    readout_path = tmp_path / "reports/forge/records/readout-atlas.json"
+
+    # 1. Mismatched compatibility_key or wrong cuda_model is ignored -> Tier 1 remains unmeasured.
+    atomic_json(
+        readout_path,
+        {
+            "lifecycle": "concluded",
+            "evidence_scope": "current",
+            "candidate_id": "atlas-particle-normal-v4",
+            "candidate_revision": rev,
+            "goal": "discriminator_stability",
+            "study": {
+                "scope": {
+                    "view": "discriminator_stability",
+                    "execution_backend": "cuda",
+                    "cuda_model": "NVIDIA RTX A6000",
+                }
+            },
+            "task_results": [
+                {"task_id": "gaussian1d_smoke", "compatibility_key": "ck-t1-STALE", "gate_status": "PASS"}
+            ],
+        },
+    )
+    stale_ck = rfr.check_selected_family_readouts(tmp_path, cuda_model="NVIDIA RTX A6000")
+    assert stale_ck["current"] is False
+    assert stale_ck["missing_families"][0]["unmeasured_tier1"] == ["gaussian1d_smoke"]
+
+    # 2. Tier 1 required task PASS unlocks Tier 2 tasks (mode_hold and grid100).
+    atomic_json(
+        readout_path,
+        {
+            "lifecycle": "concluded",
+            "evidence_scope": "current",
+            "candidate_id": "atlas-particle-normal-v4",
+            "candidate_revision": rev,
+            "goal": "discriminator_stability",
+            "study": {
+                "scope": {
+                    "view": "discriminator_stability",
+                    "execution_backend": "cuda",
+                    "cuda_model": "NVIDIA RTX A6000",
+                }
+            },
+            "task_results": [
+                {"task_id": "gaussian1d_smoke", "compatibility_key": "ck-t1-new", "gate_status": "PASS"}
+            ],
+        },
+    )
+    t2_unlocked = rfr.check_selected_family_readouts(tmp_path, cuda_model="NVIDIA RTX A6000")
+    assert t2_unlocked["current"] is False
+    assert t2_unlocked["missing_families"][0]["unmeasured_tier1"] == []
+    assert sorted(t2_unlocked["missing_families"][0]["unmeasured_tier2"]) == ["grid100", "mode_hold"]
+
+    # 3. Tier 1 + Tier 2 required tasks PASS (while held grid100 FAILs) unlocks Tier 3 ring_hold,
+    #    while checkpoint-dependent grid100_14k is recognized as dependency-blocked.
+    atomic_json(
+        readout_path,
+        {
+            "lifecycle": "concluded",
+            "evidence_scope": "current",
+            "candidate_id": "atlas-particle-normal-v4",
+            "candidate_revision": rev,
+            "goal": "discriminator_stability",
+            "study": {
+                "scope": {
+                    "view": "discriminator_stability",
+                    "execution_backend": "cuda",
+                    "cuda_model": "NVIDIA RTX A6000",
+                }
+            },
+            "task_results": [
+                {"task_id": "gaussian1d_smoke", "compatibility_key": "ck-t1-new", "gate_status": "PASS"},
+                {"task_id": "mode_hold", "compatibility_key": "ck-t2-mode", "gate_status": "PASS"},
+                {"task_id": "grid100", "compatibility_key": "ck-t2-grid", "gate_status": "FAIL"},
+            ],
+        },
+    )
+    t3_unlocked = rfr.check_selected_family_readouts(tmp_path, cuda_model="NVIDIA RTX A6000")
+    assert t3_unlocked["current"] is False
+    assert t3_unlocked["missing_families"][0]["unmeasured_by_tier"] == {"3": ["ring_hold"]}
+
+
+def test_scaling_campaign_reuse_guard_and_revision_bound_readout_conclusion(
+    tmp_path: Path, monkeypatch
+):
+    # 1. Existing scaling registration with already-published receipts and empty queue state is NOT overwritten.
+    monkeypatch.setattr(
+        rfr,
+        "current_family_candidates",
+        lambda root: [{"family": "atlas", "candidate_id": "atlas-particle-normal-v4"}],
+    )
+    monkeypatch.setattr(
+        rfr,
+        "load_view",
+        lambda root, name: {"assignments": [{"task": "dcgan_performance_r32"}]},
+    )
+    live_sha = {"particlegan/__init__.py": "sha-new"}
+    monkeypatch.setattr(rfr, "scaling_source_files_sha256", lambda root: live_sha)
+    monkeypatch.setattr(
+        rfr,
+        "catalog_source_manifest",
+        lambda root, idea=None: {"digest": "feedface1234567890abcdef"},
+    )
+
+    perf_dir = tmp_path / "configs/forge/performance"
+    perf_dir.mkdir(parents=True, exist_ok=True)
+    (perf_dir / "dcgan-performance-cloud-v3.json").write_text("{}\n")
+    old_manifest = {
+        "id": "dcgan-performance-cloud-v3",
+        "view": "dcgan_performance",
+        "execution_backend": "cuda",
+        "cuda_model": "NVIDIA RTX A6000",
+        "task_ids": ["dcgan_performance_r32"],
+        "family_selections": [{"family": "atlas", "candidate_id": "atlas-particle-normal-v4"}],
+        "campaign": {"id": "dcgan-performance-cloud-v3"},
+        "studies": ["dcgan-performance-cloud-v3-atlas"],
+    }
+    atomic_json(
+        tmp_path / "reports/forge/scaling-receipts/dcgan-performance-cloud-v3/cell-01.json",
+        {"result": {"identity": {"source": {"files_sha256": live_sha}}}},
+    )
+
+    registered_ids: list[str] = []
+
+    def _fake_load(root: Path, reg_id: str):
+        if reg_id == "dcgan-performance-cloud-v3":
+            return deepcopy(old_manifest)
+        return {**deepcopy(old_manifest), "id": reg_id, "campaign": {"id": reg_id}}
+
+    monkeypatch.setattr(rfr.scaling, "_load", _fake_load)
+    monkeypatch.setattr(
+        rfr.scaling,
+        "register",
+        lambda root, reg_id, **kwargs: registered_ids.append(reg_id),
+    )
+
+    chosen = rfr._select_or_register_scaling_campaign(
+        tmp_path, tmp_path / "runs/forge", cuda_model="NVIDIA RTX A6000", json_mode=True
+    )
+    assert chosen["id"] == "dcgan-performance-cloud-feedface1234"
+    assert registered_ids == ["dcgan-performance-cloud-feedface1234"]
+
+    # 2. _conclude_queue_submissions binds candidate_ref as '<cid>@<candidate_revision>'.
+    cand_rev = "efebaebc63fbb814b384b2009aedaf06465137a061cb9fe618b83c9a326f82dd"
+    q_root = tmp_path / "runs/forge"
+    atomic_json(
+        q_root / "queue/state.json",
+        {
+            "jobs": {
+                "job-1": {"result": {"task_results": [{"task_id": "dcgan_performance_r32", "gate_status": "PASS"}]}}
+            },
+            "submissions": {
+                "sub-1": {
+                    "lifecycle": "awaiting_readout",
+                    "request": {
+                        "campaign_id": "camp-1",
+                        "candidate": {"id": "atlas-particle-normal-v4"},
+                        "candidate_revision": cand_rev,
+                        "source": {"digest": "feedface1234567890abcdef"},
+                        "view": {"id": "dcgan_performance"},
+                        "jobs": [{"compatibility_key": "job-1"}],
+                    },
+                }
+            },
+        },
+    )
+    seen_refs: list[str] = []
+    monkeypatch.setattr(
+        rfr.knowledge,
+        "readout",
+        lambda root, ref, **kwargs: (seen_refs.append(ref) or {"record_id": "readout-new"}),
+    )
+    recs = rfr._conclude_queue_submissions(tmp_path, q_root, campaign_id="camp-1", json_mode=True)
+    assert recs == ["readout-new"]
+    assert seen_refs == [f"atlas-particle-normal-v4@{cand_rev}"]
+
+
+def test_frozen_checkout_missing_commit_and_empty_gpu_flags_raise_code_change_required(
+    tmp_path: Path, monkeypatch
+):
+    # 1. Missing frozen git commit raises CodeChangeRequiredError and leaves no partial checkout directory.
+    missing_commit = "0000000000000000000000000000000000000000"
+    checkout_root = tmp_path / "frozen-checkouts"
+    with pytest.raises(rfr.CodeChangeRequiredError, match="git archive failed"):
+        rfr._ensure_frozen_checkout(ROOT, missing_commit, checkout_root)
+    assert not (checkout_root / missing_commit).exists()
+
+    # 2. Empty --gpus list raises CodeChangeRequiredError when GPU stages are stale instead of defaulting to ['0','1'].
+    monkeypatch.setattr(
+        rfr,
+        "check_status",
+        lambda *args, **kwargs: {
+            "status": "NEEDS_REFRESH",
+            "source_digest": "2e8a97a0aa84",
+            "stale_stages": ["scaling_performance"],
+            "stages": {
+                "queue": {"current": True},
+                "scaling_performance": {"current": False},
+                "attempt_coverage": {"current": True},
+                "selected_family_readouts": {"current": True},
+                "compiled_reports": {"current": True},
+            },
+        },
+    )
+    with pytest.raises(rfr.CodeChangeRequiredError, match="at least one GPU index is required"):
+        rfr.refresh_all(tmp_path, gpus=[], json_mode=True)
+    with pytest.raises(rfr.CodeChangeRequiredError, match="non-empty --scaling-gpu"):
+        rfr.refresh_scaling_performance(
+            tmp_path, tmp_path / "runs/forge", scaling_gpu="  ", cuda_model="NVIDIA RTX A6000", json_mode=True
+        )
+

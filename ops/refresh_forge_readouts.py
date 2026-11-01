@@ -19,8 +19,10 @@ from copy import deepcopy
 import json
 import os
 from pathlib import Path
+import shutil
 import subprocess
 import sys
+import tempfile
 from typing import Any
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -29,7 +31,7 @@ if str(REPOSITORY_ROOT) not in sys.path:
 
 from experiments.forge import attempt_coverage, history, knowledge, planning, queue as forge_queue
 from experiments.forge import scaling, scaling_export, scaling_publication, studies
-from experiments.forge.contracts import atomic_json, file_hash, identifier, read_json, stable_hash
+from experiments.forge.contracts import atomic_json, atomic_text, file_hash, identifier, read_json, stable_hash
 from experiments.forge.sources import inspect_source, snapshot_source
 from experiments.forge.trainer_families import CURRENT_SELECTION, current_family_candidates
 from experiments.forge.views import (
@@ -360,6 +362,14 @@ def _concluded_ordinary_records(root: Path) -> list[dict[str, Any]]:
     return result
 
 
+def _discriminator_stability_max_tier(root: Path) -> int:
+    view_path = Path(root) / "configs/forge/views/discriminator_stability.json"
+    if not view_path.is_file():
+        return 4
+    assignments = read_json(view_path).get("assignments", [])
+    return max((int(item["qualification_tier"]) for item in assignments), default=2)
+
+
 def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA_MODEL) -> dict[str, Any]:
     root = Path(root).resolve()
     concluded = _concluded_ordinary_records(root)
@@ -368,8 +378,10 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
         lb_path = root / "reports/forge/leaderboards" / f"{view_id}.md"
         leaderboard_texts[view_id] = lb_path.read_text() if lb_path.is_file() else ""
 
+    requested_max_tier = _discriminator_stability_max_tier(root)
     missing_families = []
     stale_leaderboards = []
+    local_attempts_missing_families = []
     with planning.resolution_cache(root):
         for choice in current_family_candidates(root):
             family, cid = choice["family"], choice["candidate_id"]
@@ -378,7 +390,7 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
                     root,
                     cid,
                     view_id="discriminator_stability",
-                    through_tier=2,
+                    through_tier=requested_max_tier,
                     freeze_source=False,
                     execution_backend="cuda",
                     cuda_model=cuda_model,
@@ -386,9 +398,8 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
             except Exception as exc:
                 raise CodeChangeRequiredError(f"cannot resolve selected candidate {cid}: {exc}") from exc
 
-            t1_assignments = [
-                item for item in req["view"]["assignments"] if item["qualification_tier"] == 1
-            ]
+            assignments = req["view"]["assignments"]
+            t1_assignments = [item for item in assignments if int(item["qualification_tier"]) == 1]
             t1_runnable = [
                 item["task"]
                 for item in t1_assignments
@@ -397,6 +408,11 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
             if not t1_runnable:
                 continue
 
+            expected_compat_by_task = {
+                tid: job["compatibility_key"]
+                for job in req.get("jobs", [])
+                for tid in job.get("task_ids", [job["task_id"]])
+            }
             rev = req["candidate_revision"]
             matching = [
                 rec
@@ -406,18 +422,37 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
                 and (rec.get("study", {}).get("scope", {}).get("view") or rec.get("goal"))
                 == "discriminator_stability"
                 and rec.get("study", {}).get("scope", {}).get("execution_backend", "cuda") == "cuda"
+                and rec.get("study", {}).get("scope", {}).get("cuda_model") in {None, cuda_model}
             ]
             measured_statuses: dict[str, str] = {}
             unresolved_errors: dict[str, str] = {}
+            matched_attempt_ids: set[str] = set()
             for rec in matching:
+                rec_used = False
+                rec_row_attempts: set[str] = set()
                 for row in rec.get("task_results", []):
-                    st = row.get("gate_status") or row.get("status")
                     tid = str(row.get("task_id", ""))
+                    if (
+                        "compatibility_key" in row
+                        and tid in expected_compat_by_task
+                        and row["compatibility_key"] != expected_compat_by_task[tid]
+                    ):
+                        continue
+                    st = row.get("gate_status") or row.get("status")
                     if st in {"PASS", "FAIL", "BLOCKED"}:
                         measured_statuses[tid] = st
                         unresolved_errors.pop(tid, None)
+                        rec_used = True
+                        if row.get("_attempt_id"):
+                            rec_row_attempts.add(str(row["_attempt_id"]))
                     elif st in {"ERROR", "INVALID", "INCOMPLETE"} and tid not in measured_statuses:
                         unresolved_errors[tid] = st
+                if rec_used:
+                    if rec_row_attempts:
+                        matched_attempt_ids.update(rec_row_attempts)
+                    else:
+                        matched_attempt_ids.update(str(aid) for aid in rec.get("attempt_ids", []) if aid)
+
             if unresolved_errors:
                 bad_tid, bad_st = sorted(unresolved_errors.items())[0]
                 raise CodeChangeRequiredError(
@@ -425,39 +460,69 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
                     f"in current-source readout"
                 )
 
-            unmeasured_t1 = [task for task in t1_runnable if task not in measured_statuses]
-            unmeasured_t2: list[str] = []
-            t1_required_all_pass = all(
-                not req["tasks"][item["task"]].get("preflight_blockers")
-                and measured_statuses.get(item["task"]) == "PASS"
-                for item in t1_assignments
-                if item.get("importance") == "required"
-            )
-            if not unmeasured_t1 and t1_required_all_pass:
-                t2_runnable = [
-                    item["task"]
-                    for item in req["view"]["assignments"]
-                    if item["qualification_tier"] == 2
-                    and not req["tasks"][item["task"]].get("preflight_blockers")
-                ]
-                unmeasured_t2 = [
-                    task
-                    for task in t2_runnable
-                    if all(
-                        measured_statuses.get(dep["task"] if isinstance(dep, dict) else dep) == "PASS"
-                        for dep in req["tasks"][task].get("dependencies", [])
-                    )
-                    and task not in measured_statuses
-                ]
+            def _dep_blocked(task_id: str, seen: frozenset[str] = frozenset()) -> bool:
+                if task_id in seen:
+                    return False
+                next_seen = seen | {task_id}
+                for dep in req["tasks"].get(task_id, {}).get("dependencies", []):
+                    dep_task = dep["task"] if isinstance(dep, dict) else str(dep)
+                    if req["tasks"].get(dep_task, {}).get("preflight_blockers"):
+                        return True
+                    if measured_statuses.get(dep_task) in {"FAIL", "BLOCKED"}:
+                        return True
+                    if _dep_blocked(dep_task, next_seen):
+                        return True
+                return False
 
-            if not matching or unmeasured_t1 or unmeasured_t2:
+            view_max_tier = max((int(item["qualification_tier"]) for item in assignments), default=1)
+            unmeasured_by_tier: dict[int, list[str]] = {}
+            tier_gate_open = True
+            for tier in range(1, view_max_tier + 1):
+                if not tier_gate_open:
+                    break
+                tier_assignments = [
+                    item for item in assignments if int(item["qualification_tier"]) == tier
+                ]
+                tier_runnable = [
+                    item["task"]
+                    for item in tier_assignments
+                    if not req["tasks"][item["task"]].get("preflight_blockers")
+                    and not _dep_blocked(item["task"])
+                ]
+                unmeasured = [task for task in tier_runnable if task not in measured_statuses]
+                if unmeasured:
+                    unmeasured_by_tier[tier] = unmeasured
+                tier_required = [
+                    item["task"] for item in tier_assignments if item.get("importance") == "required"
+                ]
+                tier_gate_open = (not unmeasured) and all(
+                    not req["tasks"][task].get("preflight_blockers")
+                    and measured_statuses.get(task) == "PASS"
+                    for task in tier_required
+                )
+
+            if (
+                not matched_attempt_ids
+                or not all(
+                    (root / "reports/forge/attempts" / aid / "result.json").is_file()
+                    for aid in matched_attempt_ids
+                )
+            ):
+                local_attempts_missing_families.append(
+                    {"family": family, "candidate_id": cid, "candidate_revision": rev}
+                )
+
+            if not matching or unmeasured_by_tier:
                 missing_families.append(
                     {
                         "family": family,
                         "candidate_id": cid,
                         "candidate_revision": rev,
-                        "unmeasured_tier1": unmeasured_t1,
-                        "unmeasured_tier2": unmeasured_t2,
+                        "unmeasured_tier1": unmeasured_by_tier.get(1, []),
+                        "unmeasured_tier2": unmeasured_by_tier.get(2, []),
+                        "unmeasured_by_tier": {
+                            str(tier): tasks for tier, tasks in sorted(unmeasured_by_tier.items())
+                        },
                     }
                 )
                 continue
@@ -473,7 +538,139 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
         "current": not missing_families and not stale_leaderboards,
         "missing_families": missing_families,
         "stale_leaderboards": stale_leaderboards,
+        "local_attempts_missing_families": local_attempts_missing_families,
     }
+
+
+def _expected_selected_diagnostic_phrases(root: Path, inv_json: dict[str, Any]) -> list[str]:
+    progress = inv_json.get("family_progress") or {}
+    preflight_path = Path(root) / "reports/forge/tier-coverage-20261014/preflight.json"
+    if not progress or not preflight_path.is_file():
+        return []
+    from experiments.forge.family_reports import _selected_cohorts, _selected_row, _summed_views
+    from experiments.forge.policy_coverage import PARENTS
+
+    pins = {item["family"]: item for item in read_json(preflight_path).get("families", [])}
+    lowest_tier: dict[str, int] = {}
+    for view in _summed_views(progress):
+        for assignment in view.get("assignments", []):
+            if assignment.get("importance") in {"required", "held"} or "removal" in assignment:
+                tier = int(assignment["qualification_tier"])
+                task = assignment["task"]
+                lowest_tier[task] = min(tier, lowest_tier.get(task, tier))
+    declared_tasks = {task for task, assigned in lowest_tier.items() if assigned in (1, 2, 3)}
+    extra_tasks = declared_tasks - set(PARENTS)
+
+    phrases: list[str] = []
+    for family, cohort in _selected_cohorts(progress):
+        row = _selected_row(inv_json, cohort)
+        candidate_id = row.get("candidate_id")
+        if not candidate_id or pins.get(family["id"], {}).get("candidate_id") == candidate_id:
+            continue
+        tasks_map = cohort.get("tasks", {})
+        recorded = {
+            name: info["status"]
+            for name, info in tasks_map.items()
+            if info.get("status") in {"PASS", "FAIL"}
+        }
+        attempts = {
+            name: info["run_attempt"]
+            for name, info in tasks_map.items()
+            if isinstance(info.get("run_attempt"), dict)
+        }
+        if not any(attempt.get("attempted") and name not in recorded for name, attempt in attempts.items()):
+            continue
+        phrases.append(f"Selected recipe 1-for-1 baseline-35 diagnostics ({candidate_id}); seed 0")
+        if any(task in recorded or attempts.get(task, {}).get("attempted") for task in extra_tasks):
+            phrases.append(f"Selected recipe declared-suite Tier 1–3 diagnostics ({candidate_id}); seed 0")
+    return phrases
+
+
+def _attempt_coverage_markdown_synced(root: Path, cov: dict[str, Any]) -> bool:
+    md_path = Path(root) / "reports/forge/ATTEMPT_COVERAGE.md"
+    if not md_path.is_file():
+        return False
+    md_text = md_path.read_text()
+    records = cov.get("records", [])
+    for family in sorted({rec["family"] for rec in records if "family" in rec}):
+        fam_records = [rec for rec in records if rec.get("family") == family]
+        counts = Counter(rec["status"] for rec in fam_records)
+        label = fam_records[0].get("label", family)
+        expected_row = (
+            f"| {label} | {sum(bool(rec.get('attempted')) for rec in fam_records)}/{len(fam_records)} | "
+            f"{counts.get('PENDING', 0)} | "
+            + ", ".join(f"{n} {s}" for s, n in sorted(counts.items()))
+            + " |"
+        )
+        if expected_row not in md_text:
+            return False
+    return True
+
+
+def _validate_publication_registration_sync(root: Path, inv_json: dict[str, Any]) -> None:
+    provenance = inv_json.get("provenance") or {}
+    sel_path = Path(root) / CURRENT_SELECTION
+    if sel_path.is_file() and provenance.get("family_current_selection_sha256") is not None:
+        if file_hash(sel_path) != provenance.get("family_current_selection_sha256"):
+            raise CodeChangeRequiredError(
+                f"{CURRENT_SELECTION.as_posix()} differs from reports/forge/technique-inventory.json; "
+                "register the promoted family selection snapshot with "
+                "`python reports/forge/regenerate_technique_inventory.py --source-commit <executed-commit>`"
+            )
+    manifest_path = Path(root) / "reports/forge/technique-evidence/manifest.json"
+    if manifest_path.is_file() and provenance.get("evidence_manifest_sha256") is not None:
+        if stable_hash(read_json(manifest_path)) != provenance.get("evidence_manifest_sha256"):
+            raise CodeChangeRequiredError(
+                "reports/forge/technique-evidence/manifest.json differs from "
+                "reports/forge/technique-inventory.json; regenerate the registered inventory first"
+            )
+
+
+def _generated_pages_synced(root: Path, inv_json: dict[str, Any], inv_md: str) -> bool:
+    root = Path(root).resolve()
+    input_digest = (inv_json.get("provenance") or {}).get("input_digest")
+    if not input_digest or f"Publication input digest `{input_digest}`." not in inv_md:
+        return False
+    tier_page = root / "reports/forge/EXPERIMENTS_BY_TIER.md"
+    if not tier_page.is_file():
+        return False
+    tier_text = tier_page.read_text()
+    if (
+        not tier_text.startswith("# Forge experiments by tier\n")
+        or "Declaration input digest: `" not in tier_text
+        or "Published artifact input digest: `" not in tier_text
+    ):
+        return False
+    tp_json_path = root / "reports/forge/test-performance.json"
+    tp_md_path = root / "reports/forge/test-performance.md"
+    tp_html_path = root / "reports/forge/test-performance.html"
+    if not tp_json_path.is_file() or not tp_md_path.is_file() or not tp_html_path.is_file():
+        return False
+    try:
+        tp_json = read_json(tp_json_path)
+    except Exception:
+        return False
+    if (
+        tp_json.get("source_publication_digest") != input_digest
+        or not tp_md_path.read_text().startswith("# Which recipes pass each test?\n")
+        or not tp_html_path.read_text().strip()
+    ):
+        return False
+    if inv_json.get("family_progress"):
+        from experiments.forge.family_reports import generated_pages
+
+        for page_path, expected_text in generated_pages(root, inv_json).items():
+            if not page_path.is_file() or page_path.read_text() != expected_text:
+                return False
+    if inv_json.get("view") == "discriminator_stability":
+        from reports.forge.regenerate_technique_inventory import _shared_score_intro
+
+        shared = _shared_score_intro(root, inv_json)
+        if shared is not None:
+            shared_path, shared_text = shared
+            if not Path(shared_path).is_file() or Path(shared_path).read_text() != shared_text:
+                return False
+    return True
 
 
 def check_compiled_reports(root: Path) -> dict[str, Any]:
@@ -502,29 +699,36 @@ def check_compiled_reports(root: Path) -> dict[str, Any]:
     unknown_perf_rows = -1
     diagnostic_rows_present = False
     attempt_summary_synced = False
+    attempt_markdown_synced = False
+    generated_pages_synced = False
 
-    if inv_json_path.is_file() and inv_md_path.is_file():
+    if inv_json_path.is_file():
         inv_json = read_json(inv_json_path)
-        inv_md = inv_md_path.read_text()
-        if perf_path.is_file():
-            perf_synced = (
-                inv_json.get("scaling_performance", {}).get("manifest_sha256") == file_hash(perf_path)
-            )
-        if scaling_publication.START in inv_md and scaling_publication.END in inv_md:
-            block = inv_md.split(scaling_publication.START, 1)[1].split(scaling_publication.END, 1)[0]
-            unknown_perf_rows = sum(1 for line in block.splitlines() if "| UNKNOWN |" in line)
-        diagnostic_rows_present = (
-            "Selected recipe 1-for-1 baseline-35 diagnostics (atlas-particle-normal-v4); seed 0" in inv_md
-            and "Selected recipe declared-suite Tier 1–3 diagnostics (atlas-particle-normal-v4); seed 0"
-            in inv_md
-        )
-        if cov_path.is_file():
-            cov_sum = read_json(cov_path).get("summary", {})
-            expected_phrase = (
-                f"**{cov_sum.get('attempted')}/{cov_sum.get('total')} distinct recipe/test pairs attempted "
-                "(selected and research)**"
-            )
-            attempt_summary_synced = expected_phrase in inv_md
+        _validate_publication_registration_sync(root, inv_json)
+        if inv_md_path.is_file():
+            inv_md = inv_md_path.read_text()
+            if perf_path.is_file():
+                perf_synced = (
+                    inv_json.get("scaling_performance", {}).get("manifest_sha256")
+                    == file_hash(perf_path)
+                )
+            if scaling_publication.START in inv_md and scaling_publication.END in inv_md:
+                block = inv_md.split(scaling_publication.START, 1)[1].split(
+                    scaling_publication.END, 1
+                )[0]
+                unknown_perf_rows = sum(1 for line in block.splitlines() if "| UNKNOWN |" in line)
+            expected_diag_phrases = _expected_selected_diagnostic_phrases(root, inv_json)
+            diagnostic_rows_present = all(phrase in inv_md for phrase in expected_diag_phrases)
+            if cov_path.is_file():
+                cov_doc = read_json(cov_path)
+                cov_sum = cov_doc.get("summary", {})
+                expected_phrase = (
+                    f"**{cov_sum.get('attempted')}/{cov_sum.get('total')} distinct recipe/test pairs attempted "
+                    "(selected and research)**"
+                )
+                attempt_summary_synced = expected_phrase in inv_md
+                attempt_markdown_synced = _attempt_coverage_markdown_synced(root, cov_doc)
+            generated_pages_synced = _generated_pages_synced(root, inv_json, inv_md)
 
     current = (
         bool(mem_status.get("fresh"))
@@ -535,6 +739,8 @@ def check_compiled_reports(root: Path) -> dict[str, Any]:
         and unknown_perf_rows == 0
         and diagnostic_rows_present
         and attempt_summary_synced
+        and attempt_markdown_synced
+        and generated_pages_synced
     )
     return {
         "current": current,
@@ -546,6 +752,8 @@ def check_compiled_reports(root: Path) -> dict[str, Any]:
         "unknown_performance_rows": unknown_perf_rows,
         "selected_diagnostic_rows_present": diagnostic_rows_present,
         "attempt_summary_synced": attempt_summary_synced,
+        "attempt_markdown_synced": attempt_markdown_synced,
+        "generated_pages_synced": generated_pages_synced,
     }
 
 
@@ -598,6 +806,7 @@ def _conclude_queue_submissions(
             )
         req_digest = req["source"]["digest"]
         cid = req["candidate"]["id"]
+        cand_rev = str(req.get("candidate_revision", ""))
         study_id = studies.selected_study_id(req)
         view_id = req.get("view", {}).get("id", "unknown")
         is_diag = bool(diagnostic_evidence_scope(req))
@@ -618,17 +827,55 @@ def _conclude_queue_submissions(
         scope_note = "Diagnostic performance/research scope only; no qualification credit." if is_diag else (
             "Ordinary current-source seed-0 CUDA measurement recorded; archived historical pins remain intact."
         )
+        candidate_ref = cid
+        if cand_rev:
+            full_ref = f"{cid}@{cand_rev}"
+            candidate_ref = full_ref if len(full_ref) <= 160 else f"{cid}@{cand_rev[:16]}"
         _log(f"Recording readout for {cid} (study={study_id or 'none'}, {summary_counts})", json_mode=json_mode)
-        rec = knowledge.readout(
-            root,
-            cid,
-            conclusion=f"Completed {view_id} seed-0 CUDA execution for {cid} ({summary_counts}). {scope_note}",
-            comparison=f"Measured unchanged declaration {cid} at source {req_digest[:12]} under protocol seed 0.",
-            next_action="Retain source-bound readout and compiled Forge reports.",
-            study_id=study_id,
-        )
+        try:
+            rec = knowledge.readout(
+                root,
+                candidate_ref,
+                conclusion=f"Completed {view_id} seed-0 CUDA execution for {cid} ({summary_counts}). {scope_note}",
+                comparison=f"Measured unchanged declaration {cid} at source {req_digest[:12]} under protocol seed 0.",
+                next_action="Retain source-bound readout and compiled Forge reports.",
+                study_id=study_id,
+            )
+        except ValueError as exc:
+            raise CodeChangeRequiredError(
+                f"cannot conclude readout for {cid} (study={study_id or 'none'}): {exc}"
+            ) from exc
         concluded_records.append(rec["record_id"])
     return concluded_records
+
+
+def _scaling_registration_already_concluded_or_stale(
+    root: Path,
+    manifest: dict[str, Any],
+    *,
+    has_live_queue_submissions: bool,
+    expected_files_sha: dict[str, str],
+) -> bool:
+    receipt_dir = Path(root) / "reports/forge/scaling-receipts" / str(manifest.get("id", ""))
+    if receipt_dir.is_dir():
+        receipt_files = sorted(receipt_dir.glob("*.json"))
+        if receipt_files and not has_live_queue_submissions:
+            return True
+        for receipt_path in receipt_files:
+            doc = read_json(receipt_path)
+            files_sha = doc.get("result", {}).get("identity", {}).get("source", {}).get("files_sha256")
+            if files_sha is not None and files_sha != expected_files_sha:
+                return True
+
+    manifest_studies = set(manifest.get("studies", []))
+    records_dir = Path(root) / "reports/forge/records"
+    if manifest_studies and records_dir.is_dir():
+        for rec_path in sorted(records_dir.glob("readout-*.json")):
+            rec = read_json(rec_path)
+            if rec.get("lifecycle") == "concluded" and rec.get("study_id") in manifest_studies:
+                if not has_live_queue_submissions:
+                    return True
+    return False
 
 
 def _select_or_register_scaling_campaign(
@@ -639,6 +886,8 @@ def _select_or_register_scaling_campaign(
     json_mode: bool = False,
 ) -> dict[str, Any]:
     expected_pairs = {(c["family"], c["candidate_id"]) for c in current_family_candidates(root)}
+    expected_task_ids = [item["task"] for item in load_view(root, "dcgan_performance")["assignments"]]
+    expected_files_sha = scaling_source_files_sha256(root)
     perf_dir = root / "configs/forge/performance"
     state_path = Path(queue_root) / "queue/state.json"
     q_state = read_json(state_path) if state_path.is_file() else {"submissions": {}}
@@ -656,6 +905,7 @@ def _select_or_register_scaling_campaign(
                 or manifest.get("execution_backend") != "cuda"
                 or manifest.get("cuda_model") != cuda_model
                 or pairs != expected_pairs
+                or manifest.get("task_ids") != expected_task_ids
             ):
                 continue
             existing_subs = [
@@ -664,6 +914,13 @@ def _select_or_register_scaling_campaign(
                 if item["request"].get("campaign_id") == manifest["campaign"]["id"]
             ]
             if any(not _request_matches_worktree(root, item["request"]) for item in existing_subs):
+                continue
+            if _scaling_registration_already_concluded_or_stale(
+                root,
+                manifest,
+                has_live_queue_submissions=bool(existing_subs),
+                expected_files_sha=expected_files_sha,
+            ):
                 continue
             _log(f"Using registered scaling campaign {manifest['id']}", json_mode=json_mode)
             return manifest
@@ -687,6 +944,9 @@ def refresh_scaling_performance(
     cuda_model: str,
     json_mode: bool = False,
 ) -> dict[str, Any]:
+    scaling_gpu = str(scaling_gpu).strip()
+    if not scaling_gpu:
+        raise CodeChangeRequiredError("a non-empty --scaling-gpu index is required when scaling_performance is stale")
     manifest = _select_or_register_scaling_campaign(root, queue_root, cuda_model=cuda_model, json_mode=json_mode)
     reg_id = manifest["id"]
     campaign_id = manifest["campaign"]["id"]
@@ -704,7 +964,7 @@ def refresh_scaling_performance(
     )
     forge_queue.drain(
         queue,
-        devices=[str(scaling_gpu)],
+        devices=[scaling_gpu],
         workers_per_gpu=1,
         allow_sharing=False,
         campaign=campaign_id,
@@ -724,8 +984,6 @@ def _ensure_frozen_checkout(
     *,
     preserved_absent_paths: list[str] | tuple[str, ...] = (),
 ) -> Path:
-    import shutil
-
     absent_list = sorted(set(preserved_absent_paths))
     dir_name = f"{commit}-{stable_hash(absent_list)[:8]}" if absent_list else commit
     target = checkout_root / dir_name
@@ -736,18 +994,42 @@ def _ensure_frozen_checkout(
     if target.exists():
         shutil.rmtree(target)
     target.mkdir(parents=True, exist_ok=True)
-    archive = subprocess.Popen(["git", "archive", commit], cwd=root, stdout=subprocess.PIPE)
-    assert archive.stdout is not None
-    subprocess.run(["tar", "-x", "-C", str(target)], stdin=archive.stdout, check=True)
-    archive.stdout.close()
-    if archive.wait() != 0:
-        raise CodeChangeRequiredError(f"git archive failed for frozen commit {commit}")
-    for rel in absent_list:
-        rel_path = Path(rel)
-        if rel_path.is_absolute() or ".." in rel_path.parts:
-            raise CodeChangeRequiredError(f"unsafe preserved_absent_path: {rel}")
-        (target / rel_path).unlink(missing_ok=True)
-    stamp.write_text(f"{expected_stamp}\n")
+    try:
+        archive = subprocess.Popen(
+            ["git", "archive", commit],
+            cwd=root,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        assert archive.stdout is not None and archive.stderr is not None
+        tar_proc = subprocess.run(
+            ["tar", "-x", "-C", str(target)],
+            stdin=archive.stdout,
+            capture_output=True,
+            text=True,
+        )
+        archive.stdout.close()
+        git_err = archive.stderr.read().decode("utf-8", errors="replace").strip()
+        archive.stderr.close()
+        git_rc = archive.wait()
+        if git_rc != 0:
+            raise CodeChangeRequiredError(
+                f"git archive failed for frozen commit {commit} (rc={git_rc}): {git_err or 'missing commit'}"
+            )
+        if tar_proc.returncode != 0:
+            raise CodeChangeRequiredError(
+                f"tar extraction failed for frozen commit {commit} (rc={tar_proc.returncode}): "
+                f"{tar_proc.stderr.strip() or 'invalid archive'}"
+            )
+        for rel in absent_list:
+            rel_path = Path(rel)
+            if rel_path.is_absolute() or ".." in rel_path.parts:
+                raise CodeChangeRequiredError(f"unsafe preserved_absent_path: {rel}")
+            (target / rel_path).unlink(missing_ok=True)
+        stamp.write_text(f"{expected_stamp}\n")
+    except Exception:
+        shutil.rmtree(target, ignore_errors=True)
+        raise
     return target
 
 
@@ -774,6 +1056,10 @@ def _prepare_combined_attempt_request(
         for name in all_ordinary_views
         if (frozen_checkout / "configs/forge/views" / f"{name}.json").is_file()
     ]
+    if not view_names:
+        raise CodeChangeRequiredError(
+            f"frozen checkout {frozen_checkout} has no ordinary view declarations for {family}"
+        )
     partial_specs = []
     partial_outputs = []
     for view_name in view_names:
@@ -789,12 +1075,20 @@ def _prepare_combined_attempt_request(
         )
     spec_path = req_dir / f"_{family}-prepare.json"
     atomic_json(spec_path, {"source_root": str(frozen_checkout), "requests": partial_specs})
-    subprocess.run(
-        [sys.executable, str(attempt_coverage.WORKER), "prepare", str(spec_path)],
-        check=True,
-        stdout=subprocess.DEVNULL,
-        timeout=600,
-    )
+    try:
+        subprocess.run(
+            [sys.executable, str(attempt_coverage.WORKER), "prepare", str(spec_path)],
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
+            text=True,
+            timeout=600,
+        )
+    except subprocess.CalledProcessError as exc:
+        raise CodeChangeRequiredError(
+            f"failed to prepare frozen attempt request for {family} ({candidate_id}): "
+            f"{(exc.stderr or '').strip() or exc}"
+        ) from exc
     merged = read_json(partial_outputs[0])
     seen_job_keys = {job["compatibility_key"] for job in merged.get("jobs", [])}
     for part_out in partial_outputs[1:]:
@@ -883,14 +1177,20 @@ def _frozen_preflight_blockers(frozen_checkout: Path, candidate_id: str) -> dict
     )
     env = dict(os.environ)
     env["PYTHONPATH"] = str(frozen_checkout)
-    proc = subprocess.run(
-        [sys.executable, "-c", script, str(frozen_checkout), candidate_id],
-        check=True,
-        capture_output=True,
-        text=True,
-        env=env,
-        timeout=120,
-    )
+    try:
+        proc = subprocess.run(
+            [sys.executable, "-c", script, str(frozen_checkout), candidate_id],
+            check=True,
+            capture_output=True,
+            text=True,
+            env=env,
+            timeout=120,
+        )
+    except subprocess.CalledProcessError as exc:
+        raise CodeChangeRequiredError(
+            f"failed to inspect frozen preflight blockers for {candidate_id} in {frozen_checkout}: "
+            f"{(exc.stderr or '').strip() or exc}"
+        ) from exc
     return json.loads(proc.stdout)
 
 
@@ -1218,6 +1518,113 @@ def _signature_for_request(req: dict[str, Any]) -> tuple[dict[str, Any], dict[st
     raise CodeChangeRequiredError(f"no numerical final-metric threshold found for view {req['view']['id']}")
 
 
+def _requal_binding_fingerprint(
+    candidate_id: str,
+    req: dict[str, Any],
+    *,
+    cuda_model: str,
+) -> str:
+    return stable_hash(
+        {
+            "candidate_id": candidate_id,
+            "candidate_revision": req.get("candidate_revision"),
+            "policy_fingerprint": req.get("policy_fingerprint"),
+            "jobs": sorted(job["compatibility_key"] for job in req.get("jobs", [])),
+            "cuda_model": cuda_model,
+        }
+    )[:8]
+
+
+def _study_reusable_for_requal(
+    root: Path,
+    q_state: dict[str, Any],
+    concluded_records: list[dict[str, Any]],
+    study: dict[str, Any],
+    *,
+    candidate_id: str,
+    req: dict[str, Any],
+    cuda_model: str,
+    required_through_tier: int,
+) -> bool:
+    if study.get("candidate") != candidate_id:
+        return False
+    scope = study.get("scope") or {}
+    if (
+        scope.get("view") != "discriminator_stability"
+        or scope.get("execution_backend") != "cuda"
+        or scope.get("cuda_model") != cuda_model
+        or int(scope.get("through_tier", 1)) < required_through_tier
+    ):
+        return False
+    study_id = study["id"]
+    for sub in q_state.get("submissions", {}).values():
+        if studies.selected_study_id(sub.get("request", {})) == study_id and sub.get("status") == "concluded":
+            return False
+    study_hash = stable_hash(study)
+    for rec in concluded_records:
+        if rec.get("study_id") == study_id:
+            if rec.get("candidate_revision") != req.get("candidate_revision"):
+                return False
+            if rec.get("study_sha256") not in {None, study_hash}:
+                return False
+    try:
+        resolved = planning.resolve_idea(root, candidate_id, study=study_id, freeze_source=False)
+    except Exception:
+        return False
+    if resolved.get("preflight_blockers") or resolved.get("study_review", {}).get("status") != "READY":
+        return False
+    locked = (q_state.get("studies") or {}).get(study_id)
+    if locked is not None and locked != {
+        "declaration": resolved["study"],
+        "binding": resolved["study_admission"],
+    }:
+        return False
+    return True
+
+
+def _select_or_create_requal_campaign(
+    root: Path,
+    q_state: dict[str, Any],
+    *,
+    src12: str,
+    batch_sig: str,
+    max_allowance: int,
+    family_count: int,
+) -> dict[str, Any]:
+    req_cand_budget = max(max_allowance, 100000)
+    req_total_budget = max(max_allowance * max(family_count, 1) * 2, 600000)
+    campaigns_dir = Path(root) / "configs/forge/campaigns"
+    q_campaigns = q_state.get("campaigns") or {}
+
+    base_id = identifier(f"stale-family-requal-{src12}", "campaign")
+    base_path = campaigns_dir / f"{base_id}.json"
+    if base_path.is_file() and base_id not in q_campaigns:
+        existing = read_json(base_path)
+        if (
+            existing.get("id") == base_id
+            and float(existing.get("candidate_budget_seconds", 0)) >= req_cand_budget
+            and float(existing.get("budget_seconds", 0)) >= req_total_budget
+        ):
+            return existing
+
+    if not base_path.exists() and base_id not in q_campaigns:
+        campaign_id = base_id
+    else:
+        campaign_id = identifier(f"stale-family-requal-{src12}-{batch_sig}", "campaign")
+        idx = 2
+        while (campaigns_dir / f"{campaign_id}.json").exists() or campaign_id in q_campaigns:
+            campaign_id = identifier(f"stale-family-requal-{src12}-{batch_sig}-r{idx}", "campaign")
+            idx += 1
+
+    campaign = {
+        "id": campaign_id,
+        "candidate_budget_seconds": req_cand_budget,
+        "budget_seconds": req_total_budget,
+    }
+    atomic_json(campaigns_dir / f"{campaign_id}.json", campaign)
+    return campaign
+
+
 def _ensure_ordinary_requal_study(
     root: Path,
     family: str,
@@ -1226,12 +1633,43 @@ def _ensure_ordinary_requal_study(
     campaign: dict[str, Any],
     *,
     cuda_model: str,
+    through_tier: int | None = None,
+    q_state: dict[str, Any] | None = None,
+    concluded_records: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
+    q_state = q_state or {}
+    concluded_records = concluded_records if concluded_records is not None else _concluded_ordinary_records(root)
+    target_tier = through_tier if through_tier is not None else _discriminator_stability_max_tier(root)
     src12 = req["source"]["digest"][:12]
-    study_id = identifier(f"requal-{src12}-{family}-ordinary", "study")
-    path = studies.study_path(root, study_id)
-    if path.is_file():
-        return studies.load_study(root, study_id)
+    bind8 = _requal_binding_fingerprint(candidate_id, req, cuda_model=cuda_model)
+
+    legacy_id = identifier(f"requal-{src12}-{family}-ordinary", "study")
+    bound_id = identifier(f"requal-{src12}-{family}-{bind8}-ordinary", "study")
+    for candidate_study_id in (bound_id, legacy_id):
+        existing_path = studies.study_path(root, candidate_study_id)
+        if existing_path.is_file():
+            existing_study = studies.load_study(root, candidate_study_id)
+            if _study_reusable_for_requal(
+                root,
+                q_state,
+                concluded_records,
+                existing_study,
+                candidate_id=candidate_id,
+                req=req,
+                cuda_model=cuda_model,
+                required_through_tier=min(2, target_tier),
+            ):
+                return existing_study
+
+    q_studies = q_state.get("studies") or {}
+    if not studies.study_path(root, legacy_id).exists() and legacy_id not in q_studies:
+        study_id = legacy_id
+    else:
+        study_id = bound_id
+        idx = 2
+        while studies.study_path(root, study_id).exists() or study_id in q_studies:
+            study_id = identifier(f"requal-{src12}-{family}-{bind8}-r{idx}-ordinary", "study")
+            idx += 1
 
     control_id = (
         "bispf-optimized-quintic-v1"
@@ -1247,12 +1685,12 @@ def _ensure_ordinary_requal_study(
         hypothesis=(
             f"Ordinary re-qualification of the unchanged selected {family} recipe ({candidate_id}) on "
             f"current develop source {src12} under protocol seed 0 on {cuda_model} records current-source "
-            "discriminator_stability and shared Tier 1 goal-view verdicts."
+            "discriminator_stability and shared goal-view verdicts."
         ),
         execution_backend="cuda",
     )
     study["status"] = "ready"
-    study["scope"]["through_tier"] = 2
+    study["scope"]["through_tier"] = target_tier
     study["scope"]["cuda_model"] = cuda_model
     study["campaign"] = deepcopy(campaign)
     study["prior_evidence"] = [
@@ -1270,7 +1708,7 @@ def _ensure_ordinary_requal_study(
         "bindings; seed-0 public-API execution on fixed hardware isolates current-source behavior."
     )
     studies.validate_study(study)
-    atomic_json(path, study)
+    atomic_json(studies.study_path(root, study_id), study)
     return study
 
 
@@ -1283,21 +1721,27 @@ def refresh_selected_family_readouts(
     json_mode: bool = False,
 ) -> list[str]:
     status = check_selected_family_readouts(root, cuda_model=cuda_model)
-    missing = status["missing_families"]
-    if not missing:
+    if status["current"]:
         return []
 
+    targets_by_family: dict[str, str] = {}
+    for item in status["missing_families"]:
+        targets_by_family[item["family"]] = item["candidate_id"]
+    for item in status.get("local_attempts_missing_families", []):
+        targets_by_family.setdefault(item["family"], item["candidate_id"])
+    if not targets_by_family:
+        return []
+
+    max_tier = _discriminator_stability_max_tier(root)
     src12 = catalog_source_manifest(root)["digest"][:12]
-    campaign_id = identifier(f"stale-family-requal-{src12}", "campaign")
     prepared: list[tuple[str, str, dict[str, Any]]] = []
     max_allowance = 0
-    for item in missing:
-        family, cid = item["family"], item["candidate_id"]
+    for family, cid in sorted(targets_by_family.items()):
         base_req = planning.resolve_idea(
             root,
             cid,
             view_id="discriminator_stability",
-            through_tier=2,
+            through_tier=max_tier,
             freeze_source=False,
             execution_backend="cuda",
             cuda_model=cuda_model,
@@ -1306,21 +1750,37 @@ def refresh_selected_family_readouts(
         max_allowance = max(max_allowance, allowance)
         prepared.append((family, cid, base_req))
 
-    campaign_path = root / "configs/forge/campaigns" / f"{campaign_id}.json"
-    if campaign_path.is_file():
-        campaign = read_json(campaign_path)
-    else:
-        campaign = {
-            "id": campaign_id,
-            "candidate_budget_seconds": max(max_allowance, 100000),
-            "budget_seconds": max(max_allowance * max(len(prepared), 1) * 2, 600000),
-        }
-        atomic_json(campaign_path, campaign)
+    state_path = Path(queue_root) / "queue/state.json"
+    q_state = read_json(state_path) if state_path.is_file() else {}
+    concluded_records = _concluded_ordinary_records(root)
+    batch_sig = stable_hash(
+        [
+            (family, _requal_binding_fingerprint(cid, base_req, cuda_model=cuda_model))
+            for family, cid, base_req in prepared
+        ]
+    )[:8]
+    default_campaign = _select_or_create_requal_campaign(
+        root,
+        q_state,
+        src12=src12,
+        batch_sig=batch_sig,
+        max_allowance=max_allowance,
+        family_count=len(prepared),
+    )
 
     queue = forge_queue.Queue(queue_root, report_root=root / "reports/forge")
+    submitted_campaigns: list[str] = []
     for family, cid, base_req in prepared:
         study = _ensure_ordinary_requal_study(
-            root, family, cid, base_req, campaign, cuda_model=cuda_model
+            root,
+            family,
+            cid,
+            base_req,
+            default_campaign,
+            cuda_model=cuda_model,
+            through_tier=max_tier,
+            q_state=q_state,
+            concluded_records=concluded_records,
         )
         request = planning.resolve_idea(root, cid, study=study["id"])
         if request["preflight_blockers"]:
@@ -1330,26 +1790,34 @@ def refresh_selected_family_readouts(
         request["source"]["snapshot_path"] = str(
             snapshot_source(Path(root), Path(queue_root), request["source"])
         )
-        entry = queue.submit(request, deepcopy(campaign))
+        study_campaign = deepcopy(study["campaign"])
+        entry = queue.submit(request, study_campaign)
+        if study_campaign["id"] not in submitted_campaigns:
+            submitted_campaigns.append(study_campaign["id"])
         _log(
             f"Submitted {study['id']} ({cid}) -> request {entry['request']['request_id']} ({entry['status']})",
             json_mode=json_mode,
         )
 
     drain_devices = [str(g) for g in gpus]
-    _log(
-        f"Draining ordinary requalification campaign {campaign_id} across GPUs {','.join(drain_devices)} "
-        f"(workers_per_gpu=1). Tail logs: tail -f {queue_root / 'events.jsonl'}",
-        json_mode=json_mode,
-    )
-    forge_queue.drain(
-        queue,
-        devices=drain_devices,
-        workers_per_gpu=1,
-        allow_sharing=False,
-        campaign=campaign_id,
-    )
-    return _conclude_queue_submissions(root, queue_root, campaign_id=campaign_id, json_mode=json_mode)
+    concluded_ids: list[str] = []
+    for campaign_id in submitted_campaigns:
+        _log(
+            f"Draining ordinary requalification campaign {campaign_id} across GPUs {','.join(drain_devices)} "
+            f"(workers_per_gpu=1). Tail logs: tail -f {queue_root / 'events.jsonl'}",
+            json_mode=json_mode,
+        )
+        forge_queue.drain(
+            queue,
+            devices=drain_devices,
+            workers_per_gpu=1,
+            allow_sharing=False,
+            campaign=campaign_id,
+        )
+        concluded_ids.extend(
+            _conclude_queue_submissions(root, queue_root, campaign_id=campaign_id, json_mode=json_mode)
+        )
+    return concluded_ids
 
 
 def _retry_shared_gpu_timeouts(
@@ -1400,23 +1868,85 @@ def _retry_shared_gpu_timeouts(
     return retried_keys
 
 
-def refresh_compiled_reports(root: Path, *, json_mode: bool = False) -> dict[str, Any]:
+def _ensure_attempt_coverage_markdown(root: Path, *, json_mode: bool = False) -> None:
+    cov_path = Path(root) / "reports/forge/attempt-coverage.json"
+    if not cov_path.is_file():
+        return
+    cov_doc = read_json(cov_path)
+    if _attempt_coverage_markdown_synced(root, cov_doc):
+        return
+    _log("Regenerating reports/forge/ATTEMPT_COVERAGE.md from attempt-coverage.json", json_mode=json_mode)
+    state = {
+        "schema_version": 1,
+        "jobs": {rec["key"]: _record_to_state_job(rec) for rec in cov_doc.get("records", [])},
+        "maximum_tests": cov_doc.get("maximum_tests", 4),
+        "maximum_per_gpu": cov_doc.get("maximum_per_gpu", 2),
+        "include_research": True,
+    }
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        tmp_root = Path(tmp_dir)
+        attempt_coverage.publish(tmp_root, state)
+        rendered_md = (tmp_root / "reports/forge/ATTEMPT_COVERAGE.md").read_text()
+    atomic_text(Path(root) / "reports/forge/ATTEMPT_COVERAGE.md", rendered_md)
+
+
+def _ensure_tier_report_markdown(root: Path) -> None:
+    from experiments.forge.tier_report import REPORT_PATH, build_report, render_markdown as render_tiers
+
+    target = Path(root) / REPORT_PATH
+    inv_path = Path(root) / "reports/forge/technique-inventory.json"
+    if target.is_file() or not inv_path.is_file():
+        return
+    publication = read_json(inv_path)
+    if not publication.get("family_progress"):
+        return
+    report = build_report(root, publication=publication)
+    atomic_text(target, render_tiers(report, root, target))
+
+
+def refresh_compiled_reports(
+    root: Path,
+    *,
+    cuda_model: str = DEFAULT_CUDA_MODEL,
+    json_mode: bool = False,
+) -> dict[str, Any]:
     from reports.forge import regenerate_technique_inventory
 
     root = Path(root).resolve()
     _log("Refreshing technique-inventory.json/.md, family pages, problems.md, test-performance.md", json_mode=json_mode)
-    pub_summary = regenerate_technique_inventory.refresh_publication(root)
+    try:
+        pub_summary = regenerate_technique_inventory.refresh_publication(root)
+    except ValueError as exc:
+        raise CodeChangeRequiredError(
+            f"cannot refresh technique-inventory publication without snapshot registration: {exc}"
+        ) from exc
+
+    _ensure_tier_report_markdown(root)
+    _ensure_attempt_coverage_markdown(root, json_mode=json_mode)
 
     if not history.validate_inventory(root).get("valid"):
         _log("Updating Forge history catalog coverage", json_mode=json_mode)
         history.import_history(root)
 
-    _log("Compiling live goal leaderboards and automation telemetry", json_mode=json_mode)
-    knowledge.compile_memory(root, summaries_only=False)
+    readout_status = check_selected_family_readouts(root, cuda_model=cuda_model)
+    missing_local_attempts = readout_status.get("local_attempts_missing_families", [])
+    if not missing_local_attempts:
+        _log("Compiling live goal leaderboards and automation telemetry", json_mode=json_mode)
+        knowledge.compile_memory(root, summaries_only=False)
+    else:
+        _log(
+            "Skipping full goal-leaderboard re-reduction (raw attempt envelopes absent on clean checkout; "
+            "preserving committed goal leaderboards)",
+            json_mode=json_mode,
+        )
 
     _log("Sealing clean-checkout-safe EXPERIMENT_MEMORY.md and compilation.json", json_mode=json_mode)
     mem_summary = knowledge.compile_memory(root, summaries_only=True)
-    return {"publication": pub_summary, "memory": mem_summary}
+    return {
+        "publication": pub_summary,
+        "memory": mem_summary,
+        "leaderboards_recompiled": not missing_local_attempts,
+    }
 
 
 def refresh_all(
@@ -1435,7 +1965,8 @@ def refresh_all(
     attempt_state_root = Path(
         attempt_state_root or (queue_root / "attempt-coverage-refresh")
     ).resolve()
-    gpu_list = [str(g).strip() for g in (gpus or ["0", "1"]) if str(g).strip()]
+    raw_gpus = ["0", "1"] if gpus is None else gpus
+    gpu_list = [str(g).strip() for g in raw_gpus if str(g).strip()]
 
     initial = check_status(root, queue_root=queue_root, cuda_model=cuda_model)
     if initial["status"] == "CURRENT":
@@ -1444,6 +1975,15 @@ def refresh_all(
 
     actions_executed: list[str] = []
     if not reports_only:
+        gpu_stages_stale = any(
+            stage in initial["stale_stages"]
+            for stage in ("queue", "scaling_performance", "attempt_coverage", "selected_family_readouts")
+        )
+        if gpu_stages_stale and not gpu_list:
+            raise CodeChangeRequiredError(
+                "at least one GPU index is required in --gpus when GPU refresh stages are stale"
+            )
+
         q_info = initial["stages"]["queue"]
         if not q_info["current"]:
             queue = forge_queue.Queue(queue_root, report_root=root / "reports/forge")
@@ -1489,8 +2029,12 @@ def refresh_all(
             if records:
                 actions_executed.append("selected_family_readouts")
 
-    if actions_executed or not check_compiled_reports(root)["current"]:
-        refresh_compiled_reports(root, json_mode=json_mode)
+    if (
+        actions_executed
+        or not initial["stages"]["compiled_reports"]["current"]
+        or not initial["stages"]["selected_family_readouts"]["current"]
+    ):
+        refresh_compiled_reports(root, cuda_model=cuda_model, json_mode=json_mode)
         actions_executed.append("compiled_reports")
 
     final = check_status(root, queue_root=queue_root, cuda_model=cuda_model)

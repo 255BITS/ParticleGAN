@@ -874,11 +874,14 @@ python ops/refresh_forge_readouts.py --reports-only
 `--check` launches no training and exits `0` when all readouts and compiled reports
 are current, `1` when out-of-date stages can be refreshed automatically, and `2`
 when code or declaration changes are required (such as preflight blockers, corrupt
-manifests or non-gate `ERROR`/`INCOMPLETE` task outcomes). Running without
-`--check` drains any stale stages end to end (using `--scaling-gpu` with one worker
-so all 48 DCGAN performance cells share one uncontended hardware cohort), preserves
-historical `family-current-v1.json` pins under their original frozen sources, and
-seals clean-checkout-safe `EXPERIMENT_MEMORY.md` and `compilation.json` manifests.
+manifests, unregistered `family-current-v1.json` snapshot edits, or non-gate
+`ERROR`/`INCOMPLETE` task outcomes). Running without `--check` drains any stale
+stages end to end (using `--scaling-gpu` with one worker so all 48 DCGAN
+performance cells share one uncontended hardware cohort), preserves historical
+`family-current-v1.json` pins under their original frozen sources, preserves
+committed goal leaderboards on clean checkouts where ignored `reports/forge/attempts/*`
+envelopes are absent, and seals clean-checkout-safe `EXPERIMENT_MEMORY.md` and
+`compilation.json` manifests.
 
 ## Calibrate a screen before adopting it
 
