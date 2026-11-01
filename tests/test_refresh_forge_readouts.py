@@ -1833,7 +1833,9 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         assert not (wt / "reports/forge/test-performance.json").exists()
         assert not (wt / "reports/forge/test-performance.html").exists()
 
-        # 1. Simulate GitHub Actions clean CPU-only CI: Python 3.11 +cpu packages and no nvidia-smi.
+        # 1. Simulate GitHub Actions clean CPU-only CI: Python 3.11 +cpu packages, torch.__version__ +cpu, and no nvidia-smi.
+        import torch
+
         cpu_ci_runtime = {
             "python": "3.11.9",
             "implementation": "CPython",
@@ -1843,6 +1845,9 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         }
         if hasattr(sources._gpu_models, "cache_clear"):
             sources._gpu_models.cache_clear()
+        rti._CURRENT_SOURCE_TIER1_CACHE.clear()
+        rti._CONCLUDED_TIER1_RECORDS_CACHE.clear()
+        monkeypatch.setattr(torch, "__version__", "2.4.0+cpu")
         monkeypatch.setattr(sources, "_gpu_models", lambda: None)
         monkeypatch.setattr(sources, "runtime_manifest", lambda: deepcopy(cpu_ci_runtime))
         monkeypatch.setattr(planning, "runtime_manifest", lambda: deepcopy(cpu_ci_runtime))
@@ -1859,6 +1864,7 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
             cuda_model="NVIDIA RTX A6000",
         )
         assert probed_req["runtime"]["python"] == "3.11.9"
+        assert probed_req["rng"]["runtime"]["torch"] == "2.4.0+cpu"
         assert probed_req["compute_profiles"]["cuda"]["availability"] == "unavailable"
         probed_compat = {
             tid: job["compatibility_key"]
@@ -1957,7 +1963,8 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is True
 
         # 5. When a durable local attempt request.json exists on disk, full compatibility_key hash reconstruction
-        #    is enforced AND _CURRENT_SOURCE_TIER1_CACHE invalidates automatically on local envelope changes.
+        #    is enforced (including sci["rng"]["runtime"]["torch"] when host torch.__version__ is +cpu)
+        #    AND _CURRENT_SOURCE_TIER1_CACHE invalidates automatically on local envelope changes.
         zt_row = next(r for r in atlas_rec["task_results"] if r["task_id"] == "zero_tanh_smoke")
         zt_aid = zt_row["_attempt_id"]
         local_req_path = wt / "reports/forge/attempts" / zt_aid / "request.json"
@@ -1970,6 +1977,12 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
                     "packages": {"numpy": "2.5.4", "scipy": "1.18.1", "torch": "2.14.1"},
                     "python": "3.14.8",
                     "system": "Linux",
+                },
+                "rng": {
+                    "runtime": {
+                        "rng": "torch.Generator",
+                        "torch": "2.14.1+cu130",
+                    }
                 },
                 "compute_profiles": {
                     "cuda": {
@@ -1989,6 +2002,82 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         assert rfr.check_selected_family_readouts(wt)["current"] is True
         assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is True
 
+        # Non-A6000 GPU host (where _resolve_idea_for_readout_check falls back to execution_backend="cpu")
+        # also reconstructs CUDA compatibility_key cleanly when durable local request.json is present.
+        monkeypatch.setattr(
+            sources,
+            "_gpu_models",
+            lambda: frozenset({("NVIDIA GeForce RTX 4090", "560.35.03", "8.9")}),
+        )
+        assert rfr.check_selected_family_readouts(wt)["current"] is True
+        assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is True
+        monkeypatch.setattr(sources, "_gpu_models", lambda: None)
+
+        # Fallback to job.science.{runtime,compute,rng.runtime} when request wrapper omits them.
+        job_only_envelope = {
+            "schema_version": 1,
+            "job": {
+                "science": {
+                    "runtime": deepcopy(valid_workstation_envelope["request"]["runtime"]),
+                    "rng": {"runtime": deepcopy(valid_workstation_envelope["request"]["rng"]["runtime"])},
+                    "compute": deepcopy(valid_workstation_envelope["request"]["compute_profiles"]["cuda"]),
+                }
+            },
+        }
+        atomic_json(local_req_path, job_only_envelope)
+        assert rfr.check_selected_family_readouts(wt)["current"] is True
+        assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is True
+
+        # Full dual (request + job.science) envelope matches when consistent, and fails closed if either side
+        # is tampered or malformed (never silently bypassing a tampered/corrupt side via fallback).
+        dual_envelope = {
+            "schema_version": 1,
+            "request": deepcopy(valid_workstation_envelope["request"]),
+            "job": deepcopy(job_only_envelope["job"]),
+        }
+        atomic_json(local_req_path, dual_envelope)
+        assert rfr.check_selected_family_readouts(wt)["current"] is True
+        assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is True
+
+        tampered_job_rng_envelope = deepcopy(dual_envelope)
+        tampered_job_rng_envelope["job"]["science"]["rng"]["runtime"]["torch"] = "2.99.0-tampered"
+        atomic_json(local_req_path, tampered_job_rng_envelope)
+        sfr_tampered_job_rng = rfr.check_selected_family_readouts(wt)
+        assert sfr_tampered_job_rng["current"] is False
+        assert sfr_tampered_job_rng["missing_families"][0]["unmeasured_tier1"] == ["zero_tanh_smoke"]
+        assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is False
+
+        malformed_req_rt_dual = deepcopy(dual_envelope)
+        malformed_req_rt_dual["request"]["runtime"] = "corrupt-non-dict"
+        atomic_json(local_req_path, malformed_req_rt_dual)
+        sfr_malformed_req_rt = rfr.check_selected_family_readouts(wt)
+        assert sfr_malformed_req_rt["current"] is False
+        assert sfr_malformed_req_rt["missing_families"][0]["unmeasured_tier1"] == ["zero_tanh_smoke"]
+        assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is False
+
+        malformed_job_sci_envelope = {"schema_version": 1, "job": {"science": "corrupt-string"}}
+        atomic_json(local_req_path, malformed_job_sci_envelope)
+        sfr_malformed_job_sci = rfr.check_selected_family_readouts(wt)
+        assert sfr_malformed_job_sci["current"] is False
+        assert sfr_malformed_job_sci["missing_families"][0]["unmeasured_tier1"] == ["zero_tanh_smoke"]
+        assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is False
+
+        tampered_rng_envelope = deepcopy(valid_workstation_envelope)
+        tampered_rng_envelope["request"]["rng"]["runtime"]["torch"] = "2.99.0-tampered"
+        atomic_json(local_req_path, tampered_rng_envelope)
+        sfr_tampered_rng = rfr.check_selected_family_readouts(wt)
+        assert sfr_tampered_rng["current"] is False
+        assert sfr_tampered_rng["missing_families"][0]["unmeasured_tier1"] == ["zero_tanh_smoke"]
+        assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is False
+
+        malformed_rng_envelope = deepcopy(valid_workstation_envelope)
+        malformed_rng_envelope["request"]["rng"]["runtime"] = "corrupt-non-dict"
+        atomic_json(local_req_path, malformed_rng_envelope)
+        sfr_malformed_rng = rfr.check_selected_family_readouts(wt)
+        assert sfr_malformed_rng["current"] is False
+        assert sfr_malformed_rng["missing_families"][0]["unmeasured_tier1"] == ["zero_tanh_smoke"]
+        assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is False
+
         tampered_envelope = deepcopy(valid_workstation_envelope)
         tampered_envelope["request"]["runtime"]["python"] = "3.99.0-tampered"
         atomic_json(local_req_path, tampered_envelope)
@@ -2006,13 +2095,24 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         # 6. Unit-level edge cases on _ReadoutCompatibilityMatcher:
         #    (a) rec["attempt_ids"] fallback with partial local attempts uses result.json task ownership so a corrupt
         #        attempt for task_a fails closed on task_a without poisoning task_b whose attempt is absent locally;
-        #    (b) editing a sibling task inside a multi-task prerequisite execution group invalidates downstream tasks.
+        #    (b) editing a sibling task inside a multi-task prerequisite execution group invalidates downstream tasks;
+        #    (c) malformed job.task_ids (str or int instead of list) fails closed without TypeError or char-splitting bypass.
         unit_root = tmp_path / "matcher-unit"
         (unit_root / "reports/forge/attempts/aid_a").mkdir(parents=True)
         (unit_root / "reports/forge/attempts/aid_a/request.json").write_text("{corrupt\n")
         atomic_json(
             unit_root / "reports/forge/attempts/aid_a/result.json",
             {"task_results": [{"task_id": "task_a"}]},
+        )
+        (unit_root / "reports/forge/attempts/aid_bad_str_ids").mkdir(parents=True)
+        atomic_json(
+            unit_root / "reports/forge/attempts/aid_bad_str_ids/request.json",
+            {"job": {"task_ids": "task_a"}},
+        )
+        (unit_root / "reports/forge/attempts/aid_bad_int_ids").mkdir(parents=True)
+        atomic_json(
+            unit_root / "reports/forge/attempts/aid_bad_int_ids/request.json",
+            {"job": {"task_ids": 123}},
         )
         unit_req = {
             "source": {"digest": "a" * 64},
@@ -2073,6 +2173,22 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         unit_rec = {"attempt_ids": ["aid_a", "aid_b_absent"]}
         assert unit_matcher.matches(unit_rec, {"task_id": "task_a", "compatibility_key": "c" * 64}, "task_a") is False
         assert unit_matcher.matches(unit_rec, {"task_id": "task_b", "compatibility_key": "d" * 64}, "task_b") is True
+        assert (
+            unit_matcher.matches(
+                {"attempt_ids": ["aid_bad_str_ids"]},
+                {"task_id": "task_a", "compatibility_key": "c" * 64},
+                "task_a",
+            )
+            is False
+        )
+        assert (
+            unit_matcher.matches(
+                {"attempt_ids": ["aid_bad_int_ids"]},
+                {"task_id": "task_a", "compatibility_key": "c" * 64},
+                "task_a",
+            )
+            is False
+        )
         assert (
             unit_matcher.matches(
                 {"attempt_ids": ["aid_absent"]},

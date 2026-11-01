@@ -2461,9 +2461,18 @@ class _ReadoutCompatibilityMatcher:
     def _attempt_covered_tasks(self, attempt_id: str, env_doc: dict) -> tuple[str, ...]:
         env_job = env_doc.get("job")
         if isinstance(env_job, dict):
-            covered = env_job.get("task_ids") or ([env_job["task_id"]] if "task_id" in env_job else [])
-            if covered:
-                return tuple(str(x) for x in covered)
+            raw_ids = env_job.get("task_ids")
+            if "task_ids" in env_job and not isinstance(raw_ids, list):
+                return ()
+            covered = (
+                raw_ids
+                if isinstance(raw_ids, list) and raw_ids
+                else ([env_job["task_id"]] if isinstance(env_job.get("task_id"), str) and env_job["task_id"] else [])
+            )
+            if covered and all(isinstance(x, str) and x for x in covered):
+                return tuple(covered)
+            if "task_ids" in env_job or "task_id" in env_job:
+                return ()
         if not _is_valid_attempt_id(attempt_id):
             return ()
         if attempt_id not in self._attempt_covered_cache:
@@ -2476,7 +2485,7 @@ class _ReadoutCompatibilityMatcher:
                         tasks_found = tuple(
                             str(item["task_id"])
                             for item in res_doc["task_results"]
-                            if isinstance(item, dict) and item.get("task_id")
+                            if isinstance(item, dict) and isinstance(item.get("task_id"), str) and item["task_id"]
                         )
                 except Exception:
                     tasks_found = ()
@@ -2484,21 +2493,84 @@ class _ReadoutCompatibilityMatcher:
         return self._attempt_covered_cache[attempt_id]
 
     def _reconstructed_compat(self, attempt_doc: dict) -> dict[str, str]:
-        env_req = attempt_doc.get("request") if isinstance(attempt_doc.get("request"), dict) else attempt_doc
-        runtime = env_req.get("runtime") if isinstance(env_req, dict) else None
-        if not isinstance(runtime, dict) and isinstance(attempt_doc.get("job"), dict):
-            runtime = (attempt_doc["job"].get("science") or {}).get("runtime")
+        if not isinstance(attempt_doc, dict):
+            return {}
+        if "request" in attempt_doc:
+            if not isinstance(attempt_doc["request"], dict):
+                return {}
+            env_req = attempt_doc["request"]
+        else:
+            env_req = attempt_doc
+
+        j_sci: dict | None = None
+        if "job" in attempt_doc:
+            env_job = attempt_doc["job"]
+            if not isinstance(env_job, dict):
+                return {}
+            if "science" in env_job:
+                if not isinstance(env_job["science"], dict):
+                    return {}
+                j_sci = env_job["science"]
+
+        req_runtime = None
+        if "runtime" in env_req:
+            if not isinstance(env_req["runtime"], dict):
+                return {}
+            req_runtime = env_req["runtime"]
+        job_runtime = None
+        if j_sci is not None and "runtime" in j_sci:
+            if not isinstance(j_sci["runtime"], dict):
+                return {}
+            job_runtime = j_sci["runtime"]
+        if req_runtime is not None and job_runtime is not None and req_runtime != job_runtime:
+            return {}
+        runtime = req_runtime if req_runtime is not None else job_runtime
         if not isinstance(runtime, dict):
             return {}
-        raw_profiles = env_req.get("compute_profiles") if isinstance(env_req, dict) else None
-        compute_profiles = dict(raw_profiles) if isinstance(raw_profiles, dict) else {}
-        if isinstance(attempt_doc.get("job"), dict):
-            j_comp = (attempt_doc["job"].get("science") or {}).get("compute")
-            if isinstance(j_comp, dict) and isinstance(j_comp.get("backend"), str) and j_comp["backend"] not in compute_profiles:
-                compute_profiles[j_comp["backend"]] = {k: v for k, v in j_comp.items() if k != "threads"}
+
+        req_rng_runtime = None
+        if "rng" in env_req:
+            env_rng = env_req["rng"]
+            if not isinstance(env_rng, dict):
+                return {}
+            if "runtime" in env_rng:
+                if not isinstance(env_rng["runtime"], dict):
+                    return {}
+                req_rng_runtime = env_rng["runtime"]
+        job_rng_runtime = None
+        if j_sci is not None and "rng" in j_sci:
+            j_rng = j_sci["rng"]
+            if not isinstance(j_rng, dict):
+                return {}
+            if "runtime" in j_rng:
+                if not isinstance(j_rng["runtime"], dict):
+                    return {}
+                job_rng_runtime = j_rng["runtime"]
+        if req_rng_runtime is not None and job_rng_runtime is not None and req_rng_runtime != job_rng_runtime:
+            return {}
+        rng_runtime = req_rng_runtime if req_rng_runtime is not None else job_rng_runtime
+
+        compute_profiles: dict[str, dict] = {}
+        if "compute_profiles" in env_req:
+            raw_profiles = env_req["compute_profiles"]
+            if not isinstance(raw_profiles, dict):
+                return {}
+            for b_key, b_prof in raw_profiles.items():
+                if not isinstance(b_key, str) or not isinstance(b_prof, dict):
+                    return {}
+                compute_profiles[b_key] = {k: v for k, v in b_prof.items() if k != "threads"}
+        if j_sci is not None and "compute" in j_sci:
+            j_comp = j_sci["compute"]
+            if not isinstance(j_comp, dict) or not isinstance(j_comp.get("backend"), str):
+                return {}
+            j_comp_norm = {k: v for k, v in j_comp.items() if k != "threads"}
+            b_name = j_comp["backend"]
+            if b_name in compute_profiles and compute_profiles[b_name] != j_comp_norm:
+                return {}
+            compute_profiles[b_name] = j_comp_norm
         if not compute_profiles:
             return {}
-        sig = stable_hash({"runtime": runtime, "compute_profiles": compute_profiles})
+        sig = stable_hash({"runtime": runtime, "compute_profiles": compute_profiles, "rng_runtime": rng_runtime})
         if sig not in self._rekey_cache:
             cloned = []
             valid_groups: set[str] = set()
@@ -2521,6 +2593,8 @@ class _ReadoutCompatibilityMatcher:
                 else:
                     new_compute = dict(sci["compute"])
                 new_sci = {**sci, "runtime": runtime, "compute": new_compute}
+                if isinstance(rng_runtime, dict) and isinstance(sci.get("rng"), dict):
+                    new_sci["rng"] = {**sci["rng"], "runtime": dict(rng_runtime)}
                 if "prerequisites" in new_sci and isinstance(new_sci["prerequisites"], dict):
                     new_sci["prerequisites"] = dict(new_sci["prerequisites"])
                 cloned.append({**job, "science": new_sci})
@@ -2758,12 +2832,13 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
     cov_stat = (cov_path.stat().st_mtime_ns, cov_path.stat().st_size) if cov_path.is_file() else None
     host_probe_sig = None
     try:
+        import torch as _torch_probe
         from experiments.forge import planning as _planning_probe
         from experiments.forge import sources as _sources_probe
 
         gpu_probe = _sources_probe._gpu_models()
         gpu_sig = tuple(sorted(tuple(x) for x in gpu_probe)) if gpu_probe is not None else None
-        host_probe_sig = (stable_hash(_planning_probe.runtime_manifest()), gpu_sig)
+        host_probe_sig = (stable_hash(_planning_probe.runtime_manifest()), str(_torch_probe.__version__), gpu_sig)
     except Exception:
         host_probe_sig = None
 

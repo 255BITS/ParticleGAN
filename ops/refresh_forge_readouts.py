@@ -1188,7 +1188,11 @@ def check_compiled_reports(root: Path) -> dict[str, Any]:
                 from reports.forge import regenerate_technique_inventory as rti
 
                 expected_tier1 = rti._current_source_tier1_readouts_markdown(inv_json, root, inv_md_path)
-                current_source_tier1_synced = (not expected_tier1) or (expected_tier1 in inv_md)
+                current_source_tier1_synced = (
+                    (expected_tier1 in inv_md)
+                    if expected_tier1
+                    else ("### Current-source selected-recipe Tier 1 readouts" not in inv_md)
+                )
                 refresh_docs_synced = (
                     "python ops/refresh_forge_readouts.py --check" in inv_md
                     and "python ops/refresh_forge_readouts.py --reports-only" in inv_md
