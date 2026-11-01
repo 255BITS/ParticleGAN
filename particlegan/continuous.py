@@ -1251,7 +1251,23 @@ class LossSurprise:
         if self.since_fire is not None:
             self.since_fire += 1
 
-        if calm or not self.armed:
+        witness_roles = set()
+        if guard is not None:
+            for witness in getattr(guard, "calm_network", {}).values():
+                if isinstance(witness, dict) and "role" in witness:
+                    witness_roles.add(witness["role"])
+            excursion = getattr(guard, "excursion", None)
+            if isinstance(excursion, dict) and isinstance(excursion.get("network"), dict):
+                for witness in excursion["network"].values():
+                    if isinstance(witness, dict) and "role" in witness:
+                        witness_roles.add(witness["role"])
+        permitted = not (
+            guard is not None
+            and getattr(guard, "ka2_anchor_started", None) is False
+            and witness_roles == {"critic"}
+        )
+
+        if calm or not self.armed or not permitted:
             delta = loss - self.calm
             self.calm += self.ALPHA_SLOW * delta
             self.var_calm = (1.0 - self.ALPHA_SLOW) * self.var_calm + self.ALPHA_SLOW * (delta * delta)
@@ -1259,7 +1275,7 @@ class LossSurprise:
 
         fire = False
         if self.armed:
-            if z > self.Z_THRESH:
+            if permitted and z > self.Z_THRESH:
                 self.streak += 1
             else:
                 self.streak = 0

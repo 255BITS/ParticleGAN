@@ -1,8 +1,8 @@
 {
-  "automation_digest": "05359c69464586567cb11853098fdec384183d908050799ce0d013528fc5991e",
+  "automation_digest": "48e5b43e871fcf16d33afde9e5412d00eb198180d3dc3bc133b003390d85af25",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "d50fa58258285917431f984a23358f713284d4f616f9317ed3f5a37590705f65",
+  "input_digest": "3203f8c2a8160cf8a1776b9f299bce45035fdd2447fa7c5e3661ec53fe499919",
   "input_hashes": {
     "configs/forge/cadence-studies/bispf-lazy-cadence-v1.json": "fc7302ac06b61fa093a39265d440545fdab176852a588c40b750be16adc1e58b",
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
@@ -607,6 +607,7 @@
     "configs/forge/ideas/atlas-particle-normal-v1.json": "7e00726ccf7aae18ba99f4aaed2b15c81718a481a4bec05185fd7b281eda8410",
     "configs/forge/ideas/atlas-particle-normal-v2.json": "389546e860c3dc65fa9a73450f5fbfecbe5ef3afd7f662f263968f67bb4b1af7",
     "configs/forge/ideas/atlas-particle-normal-v3.json": "b84f75272c6cdc47a8276ad45c5377e38cc7d50f06e4857168089c3b128c7852",
+    "configs/forge/ideas/atlas-particle-normal-v4.json": "d39d59bda65febd439f48333b7c87d398ed85c40fbc8da18c07e6fd63cb15579",
     "configs/forge/ideas/atlas.json": "b8a7d65760d0c21d2b3ccd65564085a6e23cde20775791ecb0f8f932609cec65",
     "configs/forge/ideas/bcap-ada-nsgda-v1.json": "54a9d5bb1a67886015544142339fab9bf23988ba60cf759c38cafbce9d89e1c6",
     "configs/forge/ideas/bcap-default-baseline-control-v1.json": "04fff5076a7eeb436526e2d80832232231bc7e758194d1a2f9a3213f72343595",
@@ -872,6 +873,7 @@
     "configs/forge/studies/atlas-particle-normal-replication-study-v2-reverified.json": "8101f8415416ae27d978c4f3e14a4dcd508bc63b2e752045c1605f86a48efea8",
     "configs/forge/studies/atlas-particle-normal-replication-study-v2.json": "55e2172934b4416271f62e0d9868bf53723a351cf214f9a26450b934621a512d",
     "configs/forge/studies/atlas-particle-normal-replication-study-v3.json": "d60c86b641e74cc9e2d50e3e101338ed3bf6f5c23a37d0e65399f39e63c84f61",
+    "configs/forge/studies/atlas-particle-normal-replication-study-v4-reverified.json": "1a541e59eb4eff56237e7c8913339b0bf9fb5775beb05d5356ce2297c3bd082f",
     "configs/forge/studies/bcap-clockfree-coverage-v1.json": "a774e8bf265a51e2ad526db11594ebfea2e5cfaa4188d579ccfe01a3fc5e43bc",
     "configs/forge/studies/bcap-convolution-images-v1.json": "3be51ff7ce3ab44b3ae2f92d37557e6cb3735dbe48c6a71503c10a6e1f8bcc69",
     "configs/forge/studies/bcap-default-baseline-control-v1-study.json": "9454d24b52a070f35e7e742aa6c006e93b2d823ba6deb8500144e80d2eb1414a",
@@ -1704,6 +1706,7 @@
     "reports/forge/records/readout-3721266a32807c156725dfc8.json": "c8ef1472c7567309af305e7f43c12f409fe274859632b2870203178407e5d666",
     "reports/forge/records/readout-3f3f893ae724d651f1655fc9.json": "84b02d31208bb5ca7627c39a71ef76474faeb42a801b3c49cfd5e956fa3ca6c9",
     "reports/forge/records/readout-40767bea377ac807d62a047a.json": "d49e1f912efdf48b8e4d4ac0a079489413897202507ccbf0b8c73baedf32829e",
+    "reports/forge/records/readout-423f82f13ee30c0a95fd266a.json": "390e8f14911d6423ba85c6b63bd69e51b4bee081860a7f7e264743305e6781fd",
     "reports/forge/records/readout-454e20c82f89cc56488e7f98.json": "59b4c8dcc1129d44489aa580209024d81a50ce89a628bca4872fdeef3713817b",
     "reports/forge/records/readout-457f93f65c1e6782fba74306.json": "8feea7701b49752fe29bbd7852b94adac6afe255cf5dd613b19f9ae18eb09fde",
     "reports/forge/records/readout-464567d128031fee54c42252.json": "fcd0d78ac4f12472eb12091a693a3d69909b80c1b2d4cca77e3220835cad8e2b",
@@ -1834,7 +1837,7 @@
     "reports/forge/technique-evidence/e09c650155820e13454549d67238e1ea27df10061265a297c3311087afbcf921.json": "539fdf0b580d66d867d810b7f9a0b70f3cd813d348b3b50a7c576b0c9d6eab8a",
     "reports/forge/technique-evidence/manifest.json": "ace7da47dd43579ec14101bc560bbc6d513a857041dd212a89db57de05124c8d",
     "reports/forge/technique-inventory.json": "8225806b829d773b9e1230d75971648f35c91bca5abcfb0f90b7d8cd624f801d",
-    "reports/forge/technique-inventory.md": "b32774ee17d55daf57f79c85163c39ed70dcf8dd8d851016bcf7a8a16b6b5aa1",
+    "reports/forge/technique-inventory.md": "3c88bcee7236703e4c5b329bba139bbcd147603152a5e2fa1cadbbd792b348df",
     "reports/forge/technique-receipts/001093b404dc498b8f8c0125c26dc754.json": "fe780b8a8caa6bf4ec7547bc360cfeeb72ea56883a4d9ef4c0dadb3922a72cce",
     "reports/forge/technique-receipts/0031ba37faa14f999038fcfaddee07d5.json": "2fbb325d3209da742093cdb892be18f82006f33a42e2840f44330190d63fc7ae",
     "reports/forge/technique-receipts/003b3403b2354741a01033a5bab7b80b.json": "a92e30a20ce61f02dcbab668d3acdfcfb4598b91f197ae753ac6c428d4b69973",
@@ -4236,9 +4239,9 @@
     "unclassified": [],
     "valid": true
   },
-  "operational_lifecycle_digest": "faf7843ccfd518acfc21dd9a3fd9a3be808ecfc807f640884bd2af39567dbe85",
+  "operational_lifecycle_digest": "d2cb158ba414b6a10783a969e55b1a93cb67a32c14766d615e8e024aacfedd61",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "62c9e0e0535909bd2650ebad2c7328a1ae000a3746315147f8c1e7e5148adc4f",
+    "reports/forge/EXPERIMENT_MEMORY.md": "a661ce14e14e10a5e33d87fb889eddac90d65c6c95ad1d70985ea831ce2ec77f",
     "reports/forge/publication-records.json": "5174449ad10c00a8d22dee09d3ef50c8fb0fc76f196d85197271ee7c0766c9d8"
   },
   "pending_readout": [
@@ -4272,9 +4275,9 @@
   "qualification_refresh": {
     "mode": "preserved_published_evidence",
     "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
-    "source_manifest_digest": "9fac118e388b6b2688c3eb8213020b9d958b208df33b2f2e6921bf9887015fda"
+    "source_manifest_digest": "a243c7ce9483f3afc8c109aab0bb5836573cfb28add24f60028511a799146fa4"
   },
-  "record_count": 868,
+  "record_count": 869,
   "reducer_hashes": {
     "experiments.forge.knowledge": "e1cc85f2149c19f9c48d2332c2daea2f64e17f2b6a23e2888baab2fa7f79494e",
     "experiments.forge.publication_memory": "7e9d1e7ea3ce0e165c6df54d324ddffec8d220a0eb1e2ad268ca2d16778ad9c4"
@@ -4284,7 +4287,7 @@
   "schema_version": 1,
   "scientific_normalization_complete": false,
   "scientific_source_digests": [
-    "54c872b50fe64a939cfcdc312f00e39dcc51277944f1437e6c1573d78a26ce61"
+    "2e8a97a0aa845c961de00d403fdcd1673b34b33626e4546c3138882a40e7bacf"
   ],
   "view_count": 27
 }
