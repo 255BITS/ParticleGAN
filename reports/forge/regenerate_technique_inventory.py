@@ -2240,10 +2240,102 @@ def _stale_measurement_labels(markdown, result, root, path):
     return "\n".join(lines)
 
 
+def _selected_diagnostic_rows(markdown, result, root, path):
+    """Show nonqualifying Tier 1-3 diagnostic rows for promoted selected recipes."""
+    progress = result.get("family_progress") or {}
+    preflight_path = Path(root) / "reports/forge/tier-coverage-20261014/preflight.json"
+    heading = "## Research recipes and separate diagnostics"
+    if not progress or heading not in markdown or not preflight_path.is_file():
+        return markdown
+    from experiments.forge.family_reports import (_selected_cohorts, _selected_row,
+                                                  _summed_views, link, score)
+    from experiments.forge.policy_coverage import PARENTS, TIERS as BASELINE_TIERS
+    from experiments.forge.research_tiers import attempt_count
+    pins = {item["family"]: item for item in read_json(preflight_path).get("families", [])}
+    lowest_tier: dict[str, int] = {}
+    for view in _summed_views(progress):
+        for assignment in view.get("assignments", []):
+            if assignment.get("importance") in {"required", "held"} or "removal" in assignment:
+                tier = int(assignment["qualification_tier"])
+                task = assignment["task"]
+                lowest_tier[task] = min(tier, lowest_tier.get(task, tier))
+    declared_tiers = {str(tier): {task for task, assigned in lowest_tier.items() if assigned == tier}
+                      for tier in (1, 2, 3)}
+    baseline_tiers = {str(tier): set(tasks) for tier, tasks in BASELINE_TIERS.items()}
+    extra_tasks = set().union(*declared_tiers.values()) - set(PARENTS)
+    additions: dict[str, list[str]] = {}
+    family_cells: list[str] = []
+    for family, cohort in _selected_cohorts(progress):
+        family_cell = link(root, path, family["label"], family["page"])
+        family_cells.append(family_cell)
+        row = _selected_row(result, cohort)
+        candidate_id = row.get("candidate_id")
+        if not candidate_id or pins.get(family["id"], {}).get("candidate_id") == candidate_id:
+            continue
+        tasks_map = cohort.get("tasks", {})
+        recorded = {name: info["status"] for name, info in tasks_map.items()
+                    if info.get("status") in {"PASS", "FAIL"}}
+        attempts = {name: info["run_attempt"] for name, info in tasks_map.items()
+                    if isinstance(info.get("run_attempt"), dict)}
+        if not any(attempt.get("attempted") and name not in recorded for name, attempt in attempts.items()):
+            continue
+
+        def format_row(label, requirements):
+            label_cell = link(root, path, label, family["page"], cohort["anchor"])
+            cells = [family_cell, label_cell]
+            for tier in ("1", "2", "3"):
+                required = requirements[tier]
+                if not required:
+                    cells.append("—")
+                    continue
+                counted = attempt_count(recorded, attempts, required, fill=True)
+                cells.append(link(root, path, score(counted), family["page"], f"{cohort['anchor']}-tier-{tier}"))
+            all_required = set().union(*requirements.values())
+            total = attempt_count(recorded, attempts, all_required, fill=True)
+            cells.append(link(root, path, score(total), family["page"], cohort["anchor"]))
+            return "| " + " | ".join(cells) + " |"
+
+        rows_for_family = [format_row(f"Selected recipe 1-for-1 baseline-35 diagnostics ({candidate_id}); seed 0",
+                                      baseline_tiers)]
+        if any(task in recorded or attempts.get(task, {}).get("attempted") for task in extra_tasks):
+            rows_for_family.append(format_row(
+                f"Selected recipe declared-suite Tier 1–3 diagnostics ({candidate_id}); seed 0",
+                declared_tiers))
+        additions[family_cell] = rows_for_family
+    if not additions:
+        return markdown
+    before, section_and_after = markdown.split(heading, 1)
+    lines = section_and_after.splitlines()
+    table_start = next((idx for idx, line in enumerate(lines) if line.startswith("| Family |")), None)
+    if table_start is None:
+        return markdown
+    table_end = table_start + 2
+    while table_end < len(lines) and lines[table_end].startswith("| "):
+        table_end += 1
+    table_rows = lines[table_start + 2:table_end]
+    for family_cell in family_cells:
+        new_rows = additions.get(family_cell)
+        if not new_rows:
+            continue
+        prefix = f"| {family_cell} | "
+        indices = [idx for idx, line in enumerate(table_rows) if line.startswith(prefix)]
+        if indices:
+            insert_at = indices[-1] + 1
+        else:
+            later_prefixes = tuple(f"| {later} | " for later in family_cells[family_cells.index(family_cell) + 1:])
+            insert_at = next((idx for idx, line in enumerate(table_rows)
+                              if later_prefixes and line.startswith(later_prefixes)), len(table_rows))
+        table_rows[insert_at:insert_at] = new_rows
+    rebuilt = lines[:table_start + 2] + table_rows + lines[table_end:]
+    suffix = "\n" if section_and_after.endswith("\n") else ""
+    return before + heading + "\n".join(rebuilt) + suffix
+
+
 def _current_markdown(result, root, path):
     if result.get("family_progress"):
         from experiments.forge.family_reports import render_leaderboard
         markdown = _stale_measurement_labels(render_leaderboard(root, result, path), result, root, path)
+        markdown = _selected_diagnostic_rows(markdown, result, root, path)
         matrix_link = os.path.relpath(root / "reports/forge/test-performance.md", path.parent)
         markdown += ("\n[Performance by test and complete recipe](" + matrix_link + "): "
                      "compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.\n")

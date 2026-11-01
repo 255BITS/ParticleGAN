@@ -109,13 +109,18 @@ updates; the Forge worker enforces the hard reservation deadline.
 
 ## Bounded execution and logs
 
-The current execution registration is `dcgan-performance-cloud-v2`, frozen from
-commit `58ade47791367abd46c68ede8d5e7d9fea3dbafb`. Its GPU tasks reserve 24 GiB
-each, independently of the measured allocator peaks. The earlier v1 registration
-retains its original task/reservation bindings; its unstarted requests were
-cancelled for telemetry and reservation corrections with zero paid execution.
-It cannot be replayed against the revised task contracts. Choose a new
-registration ID for future execution after any source or declaration change.
+The current execution registration is `dcgan-performance-cloud-v3`, frozen from
+`develop` commit `289209f06d95d07161e988b053ef7c5f40fafd16` (replacing the split
+`dcgan-performance-cloud-v2` cohort after `atlas-particle-normal-v4` promotion so
+all eight selected recipes share one single-GPU 48-cell cohort). Its GPU tasks
+reserve 24 GiB each, independently of the measured allocator peaks. The earlier v1
+and v2 registrations retain their original task/reservation bindings; v1's unstarted
+requests were cancelled for telemetry and reservation corrections with zero paid
+execution and cannot be replayed against the revised task contracts. Choose a new
+registration ID for future execution after any source or declaration change, or run
+`python ops/refresh_forge_readouts.py --gpus 0,1 --scaling-gpu 0` to register,
+drain on a single GPU (`workers_per_gpu=1`), conclude readouts, publish
+`scaling-performance.json` and regenerate all downstream Forge reports in one step.
 
 Read `EXPERIMENTATION.md` and compiled memory first. Registration freezes the
 currently selected complete recipes and creates ready diagnostic studies with a
@@ -139,7 +144,7 @@ excluded.
 In another terminal:
 
 ```sh
-python -m experiments.forge --queue-root runs/forge logs --follow --campaign dcgan-performance-cloud-v2
+python -m experiments.forge --queue-root runs/forge logs --follow --campaign dcgan-performance-cloud-v3
 tail -F runs/forge/events.jsonl
 ```
 
@@ -154,7 +159,7 @@ declarations and reports; never force-add bulk logs.
 Publish a completed registration directly from its queue evidence:
 
 ```sh
-python -m experiments.forge --queue-root runs/forge scaling publish dcgan-performance-cloud-v2
+python -m experiments.forge --queue-root runs/forge scaling publish dcgan-performance-cloud-v3
 ```
 
 This command validates the exact frozen requests, jobs, source maps, candidate
