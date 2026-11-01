@@ -2331,11 +2331,302 @@ def _selected_diagnostic_rows(markdown, result, root, path):
     return before + heading + "\n".join(rebuilt) + suffix
 
 
+_CURRENT_SOURCE_TIER1_CACHE: dict[tuple, dict | None] = {}
+
+
+def _format_tier1_bucket(outcomes: list[str], total: int, *, bold_score: bool = False) -> str:
+    passed = sum(item == "PASS" for item in outcomes)
+    failed = sum(item == "FAIL" for item in outcomes)
+    preflight_blocked = sum(item == "PREFLIGHT_BLOCKED" for item in outcomes)
+    dep_blocked = sum(item == "BLOCKED" for item in outcomes)
+    unmeasured = sum(item == "UNMEASURED" for item in outcomes)
+    base = f"**{passed}/{total}**" if bold_score else f"{passed}/{total}"
+    notes = []
+    if not bold_score and failed:
+        notes.append(f"{failed} fail")
+    if preflight_blocked:
+        notes.append(f"{preflight_blocked} preflight-blocked")
+    if dep_blocked:
+        notes.append(f"{dep_blocked} blocked")
+    if unmeasured:
+        notes.append(f"{unmeasured} not run")
+    return f"{base} ({', '.join(notes)})" if notes else base
+
+
+def _current_source_tier1_readouts_markdown(result, root, path) -> str:
+    root = Path(root).resolve()
+    path = Path(path).resolve()
+    progress = result.get("family_progress")
+    if not isinstance(progress, dict) or not progress.get("families"):
+        return ""
+    records_dir = root / "reports/forge/records"
+    view_path = root / "configs/forge/views/discriminator_stability.json"
+    if not records_dir.is_dir() or not view_path.is_file():
+        return ""
+    record_paths = sorted(records_dir.glob("readout-*.json"))
+    if not record_paths:
+        return ""
+    from experiments.forge.family_reports import _selected_cohorts, _selected_row, link
+
+    selected_specs = []
+    for family, cohort in _selected_cohorts(progress):
+        row = _selected_row(result, cohort)
+        candidate_id = row.get("candidate_id")
+        if not candidate_id:
+            return ""
+        card = root / "configs/forge/ideas" / f"{candidate_id}.json"
+        if not card.is_file():
+            card = root / "configs/forge/configurations" / f"{candidate_id}.json"
+        if not card.is_file():
+            return ""
+        selected_specs.append(
+            (
+                family["id"],
+                family["label"],
+                family["page"],
+                candidate_id,
+                card.relative_to(root).as_posix(),
+                card.stat().st_mtime_ns,
+            )
+        )
+    if not selected_specs:
+        return ""
+
+    cache_key = (
+        str(root),
+        view_path.stat().st_mtime_ns,
+        tuple(selected_specs),
+        tuple((p.name, p.stat().st_mtime_ns, p.stat().st_size) for p in record_paths),
+    )
+    if cache_key not in _CURRENT_SOURCE_TIER1_CACHE:
+        payload = None
+        try:
+            from experiments.forge import planning
+
+            concluded = []
+            for rec_path in record_paths:
+                rec = read_json(rec_path)
+                if rec.get("lifecycle") != "concluded" or rec.get("evidence_scope") != "current":
+                    continue
+                scope = (rec.get("study") or {}).get("scope") or {}
+                if (
+                    (scope.get("view") or rec.get("goal")) == "discriminator_stability"
+                    and scope.get("execution_backend", "cuda") == "cuda"
+                    and scope.get("cuda_model") in {None, "NVIDIA RTX A6000"}
+                ):
+                    concluded.append((rec_path.relative_to(root).as_posix(), rec_path.name, rec))
+
+            rows_data = []
+            source_digests = set()
+            view_revision = None
+            req_total = 0
+            diag_total = 0
+            any_matched = False
+            with planning.resolution_cache(root):
+                for fam_id, fam_label, fam_page, cid, card_rel, _ in selected_specs:
+                    req = planning.resolve_idea(
+                        root,
+                        cid,
+                        view_id="discriminator_stability",
+                        through_tier=1,
+                        freeze_source=False,
+                        execution_backend="cuda",
+                        cuda_model="NVIDIA RTX A6000",
+                    )
+                    source_digests.add(req["source"]["digest"])
+                    view_revision = req["view"]["revision"]
+                    t1_assignments = [
+                        item for item in req["view"]["assignments"] if int(item["qualification_tier"]) == 1
+                    ]
+                    req_tasks = [item["task"] for item in t1_assignments if item.get("importance") == "required"]
+                    diag_tasks = [item["task"] for item in t1_assignments if item.get("importance") != "required"]
+                    req_total = len(req_tasks)
+                    diag_total = len(diag_tasks)
+                    expected_compat = {
+                        tid: job["compatibility_key"]
+                        for job in req.get("jobs", [])
+                        for tid in job.get("task_ids", [job["task_id"]])
+                    }
+                    rev = req["candidate_revision"]
+                    matching = [
+                        item
+                        for item in concluded
+                        if item[2].get("candidate_id") == cid and item[2].get("candidate_revision") == rev
+                    ]
+                    measured: dict[str, str] = {}
+                    used_records: list[tuple[str, str]] = []
+                    for rec_rel, rec_name, rec in matching:
+                        used = False
+                        for trow in rec.get("task_results", []):
+                            tid = str(trow.get("task_id", ""))
+                            if (
+                                "compatibility_key" in trow
+                                and tid in expected_compat
+                                and trow["compatibility_key"] != expected_compat[tid]
+                            ):
+                                continue
+                            st = trow.get("gate_status") or trow.get("status")
+                            if st in {"PASS", "FAIL", "BLOCKED"}:
+                                measured[tid] = st
+                                used = True
+                        if used:
+                            used_records.append((rec_rel, rec_name))
+                    if used_records:
+                        any_matched = True
+
+                    def _outcomes(task_ids: list[str]) -> list[str]:
+                        out = []
+                        for tid in task_ids:
+                            if req["tasks"][tid].get("preflight_blockers"):
+                                out.append("PREFLIGHT_BLOCKED")
+                            elif measured.get(tid) in {"PASS", "FAIL", "BLOCKED"}:
+                                out.append(measured[tid])
+                            else:
+                                out.append("UNMEASURED")
+                        return out
+
+                    req_outcomes = _outcomes(req_tasks)
+                    diag_outcomes = _outcomes(diag_tasks)
+                    rows_data.append(
+                        {
+                            "family_id": fam_id,
+                            "family_label": fam_label,
+                            "family_page": fam_page,
+                            "candidate_id": cid,
+                            "card_rel": card_rel,
+                            "source_digest": req["source"]["digest"],
+                            "candidate_revision": rev,
+                            "req_outcomes": req_outcomes,
+                            "diag_outcomes": diag_outcomes,
+                            "req_pass": sum(item == "PASS" for item in req_outcomes),
+                            "total_pass": sum(item == "PASS" for item in req_outcomes + diag_outcomes),
+                            "all_preflight_blocked": all(
+                                item == "PREFLIGHT_BLOCKED" for item in req_outcomes + diag_outcomes
+                            ),
+                            "used_records": used_records,
+                        }
+                    )
+            if any_matched and len(source_digests) == 1:
+                rows_data.sort(key=lambda item: (-item["total_pass"], -item["req_pass"], item["family_label"]))
+                payload = {
+                    "source_digest": next(iter(source_digests)),
+                    "view_revision": view_revision,
+                    "req_total": req_total,
+                    "diag_total": diag_total,
+                    "rows": rows_data,
+                }
+        except Exception:
+            payload = None
+        if len(_CURRENT_SOURCE_TIER1_CACHE) >= 8:
+            _CURRENT_SOURCE_TIER1_CACHE.pop(next(iter(_CURRENT_SOURCE_TIER1_CACHE)))
+        _CURRENT_SOURCE_TIER1_CACHE[cache_key] = payload
+
+    cached = _CURRENT_SOURCE_TIER1_CACHE.get(cache_key)
+    if not cached:
+        return ""
+
+    src12 = cached["source_digest"][:12]
+    req_total = cached["req_total"]
+    diag_total = cached["diag_total"]
+    all_total = req_total + diag_total
+    lines = [
+        "### Current-source selected-recipe Tier 1 readouts",
+        "",
+        (
+            f"Matched current-source (`{src12}`, `discriminator_stability` revision {cached['view_revision']}) "
+            f"ordinary Tier 1 readouts for each family's unchanged selected recipe under protocol seed 0 on "
+            f"`NVIDIA RTX A6000` ({req_total} required + {diag_total} diagnostic = {all_total} Tier 1 tests). "
+            "`## Selected recipes` above retains historical recorded-source pins until a new family selection "
+            "snapshot is registered; these concluded `reports/forge/records/readout-*.json` records show "
+            "matched current-source Tier 1 performance side by side without regrading historical cohorts."
+        ),
+        "",
+        (
+            f"| Family | Selected recipe | Source / revision | Required Tier 1 ({req_total}) "
+            f"| Diagnostic Tier 1 ({diag_total}) | Total Tier 1 ({all_total}) | Evidence |"
+        ),
+        "| --- | --- | --- | ---: | ---: | ---: | --- |",
+    ]
+    for item in cached["rows"]:
+        family_cell = link(root, path, item["family_label"], item["family_page"])
+        card_href = os.path.relpath(root / item["card_rel"], path.parent)
+        recipe_cell = f"[`{item['candidate_id']}`]({card_href})"
+        rev12 = item["candidate_revision"][:12]
+        src_rev_cell = f"`{item['source_digest'][:12]}` / `{rev12}`"
+        req_cell = _format_tier1_bucket(item["req_outcomes"], req_total)
+        diag_cell = _format_tier1_bucket(item["diag_outcomes"], diag_total)
+        tot_cell = _format_tier1_bucket(
+            item["req_outcomes"] + item["diag_outcomes"], all_total, bold_score=True
+        )
+        if item["used_records"]:
+            ev_links = [
+                f"[`{rec_name}`]({os.path.relpath(root / rec_rel, path.parent)})"
+                for rec_rel, rec_name in item["used_records"]
+            ]
+            ev_cell = " · ".join(ev_links)
+        elif item["all_preflight_blocked"]:
+            ev_cell = f"[`{Path(item['card_rel']).name}`]({card_href}) (preflight-blocked)"
+        else:
+            ev_cell = f"[`{Path(item['card_rel']).name}`]({card_href}) (not run)"
+        lines.append(
+            f"| {family_cell} | {recipe_cell} | {src_rev_cell} | {req_cell} | {diag_cell} | {tot_cell} | {ev_cell} |"
+        )
+    return "\n".join(lines)
+
+
+def _current_source_tier1_readouts_section(markdown: str, result, root, path) -> str:
+    heading = "\n## Research recipes and separate diagnostics\n"
+    if heading not in markdown or "### Current-source selected-recipe Tier 1 readouts" in markdown:
+        return markdown
+    block = _current_source_tier1_readouts_markdown(result, root, path)
+    if not block:
+        return markdown
+    before, after = markdown.split(heading, 1)
+    next_h2 = after.find("\n## ")
+    details_pos = after.find("\n<details>\n")
+    if details_pos >= 0 and (next_h2 < 0 or details_pos < next_h2):
+        insert_pos = details_pos
+    elif next_h2 >= 0:
+        insert_pos = next_h2
+    else:
+        insert_pos = len(after)
+    return before + heading + after[:insert_pos].rstrip("\n") + "\n\n" + block + "\n" + after[insert_pos:]
+
+
+def _single_command_refresh_docs(markdown: str) -> str:
+    target = (
+        "## Refresh\n\n"
+        "```sh\n"
+        "python reports/forge/regenerate_technique_inventory.py\n"
+        "```\n\n"
+        "This regenerates the leaderboard,"
+    )
+    if target not in markdown or "python ops/refresh_forge_readouts.py" in markdown:
+        return markdown
+    replacement = (
+        "## Refresh\n\n"
+        "```sh\n"
+        "python ops/refresh_forge_readouts.py --check\n"
+        "python ops/refresh_forge_readouts.py\n"
+        "python ops/refresh_forge_readouts.py --reports-only\n"
+        "python reports/forge/regenerate_technique_inventory.py\n"
+        "```\n\n"
+        "`ops/refresh_forge_readouts.py` checks or refreshes all out-of-date Forge stages end to end when no "
+        "code changes are needed (auto-selecting an uncontended GPU for the 48-cell DCGAN scaling table via "
+        "`--scaling-gpu auto`, draining diagnostic attempt coverage and current-source selected-family readouts, "
+        "and sealing clean-checkout-safe compiled reports; `--reports-only` skips GPU launches).\n\n"
+        "`python reports/forge/regenerate_technique_inventory.py` regenerates the leaderboard,"
+    )
+    return markdown.replace(target, replacement, 1)
+
+
 def _current_markdown(result, root, path):
     if result.get("family_progress"):
         from experiments.forge.family_reports import render_leaderboard
         markdown = _stale_measurement_labels(render_leaderboard(root, result, path), result, root, path)
         markdown = _selected_diagnostic_rows(markdown, result, root, path)
+        markdown = _current_source_tier1_readouts_section(markdown, result, root, path)
+        markdown = _single_command_refresh_docs(markdown)
         matrix_link = os.path.relpath(root / "reports/forge/test-performance.md", path.parent)
         markdown += ("\n[Performance by test and complete recipe](" + matrix_link + "): "
                      "compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.\n")

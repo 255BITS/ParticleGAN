@@ -16,10 +16,10 @@
     "unmeasured_attempts": 892
   },
   "concurrency": {
-    "mean_active_workers": 0.04299193620163019,
+    "mean_active_workers": 0.042832965166073524,
     "measured_attempts": 1741,
     "missing_interval_attempts": 3,
-    "observation_window_seconds": 2886228.243580818,
+    "observation_window_seconds": 2896983.4810373783,
     "peak_distinct_gpu_devices": 2,
     "peak_workers": 6,
     "scope": "Actual supervised-attempt intervals; this is process occupancy, not GPU kernel utilization."
@@ -70,11 +70,11 @@
       "measured_attempts": 1409
     },
     "maximum_reaped_child_peak_rss_bytes": {
-      "maximum_bytes": 3404824576,
+      "maximum_bytes": 3404402688,
       "measured_attempts": 1741
     },
     "process_peak_rss_bytes": {
-      "maximum_bytes": 3404824576,
+      "maximum_bytes": 3404402688,
       "measured_attempts": 1730
     },
     "supervisor_peak_rss_bytes": {
@@ -664,11 +664,11 @@
   "schema_version": 1,
   "scope": "recorded current Forge receipts; historical imports are excluded",
   "spend": {
-    "attempts": 1907,
-    "known_wall_seconds": 140219.4650598558,
+    "attempts": 1955,
+    "known_wall_seconds": 140810.10877263188,
     "scope": "Unique paid attempts, including retries; grouped predicates and subscribers are not charged again.",
     "unknown_cost_attempts": 0,
-    "wall_seconds": 140219.4650598558
+    "wall_seconds": 140810.10877263188
   },
   "task_gate_counts": {
     "BLOCKED": 6,

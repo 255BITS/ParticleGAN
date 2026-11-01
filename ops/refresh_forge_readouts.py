@@ -2,7 +2,7 @@
 
 Usage:
   python ops/refresh_forge_readouts.py --check
-  python ops/refresh_forge_readouts.py --gpus 0,1 --scaling-gpu 0
+  python ops/refresh_forge_readouts.py --gpus 0,1 --scaling-gpu auto
   python ops/refresh_forge_readouts.py --reports-only
 
 Exit codes:
@@ -196,6 +196,116 @@ def check_queue_status(root: Path, queue_root: Path) -> dict[str, Any]:
     }
 
 
+def _scaling_contention_status(result: dict[str, Any]) -> str:
+    hw = result.get("hardware")
+    if isinstance(hw, dict):
+        return str(hw.get("contention_status", "unknown"))
+    id_hw = (result.get("identity") or {}).get("hardware")
+    if isinstance(id_hw, dict) and "contention_status" in id_hw:
+        return str(id_hw["contention_status"])
+    return "clear"
+
+
+def _resolve_scaling_gpu(
+    scaling_gpu: str,
+    gpus: list[str] | tuple[str, ...] = ("0", "1"),
+    *,
+    json_mode: bool = False,
+) -> str:
+    raw = str(scaling_gpu).strip()
+    if not raw:
+        raise CodeChangeRequiredError("a non-empty --scaling-gpu index is required when scaling_performance is stale")
+    if raw.lower() != "auto":
+        return raw
+
+    candidates = [str(g).strip() for g in gpus if str(g).strip()]
+    if not candidates:
+        raise CodeChangeRequiredError("cannot auto-select --scaling-gpu from empty --gpus list")
+
+    try:
+        gpu_proc = subprocess.run(
+            ["nvidia-smi", "--query-gpu=index,uuid,memory.used,utilization.gpu", "--format=csv,noheader,nounits"],
+            capture_output=True,
+            text=True,
+            timeout=10,
+            check=False,
+        )
+        app_proc = subprocess.run(
+            ["nvidia-smi", "--query-compute-apps=gpu_uuid,pid,used_memory", "--format=csv,noheader,nounits"],
+            capture_output=True,
+            text=True,
+            timeout=10,
+            check=False,
+        )
+        if gpu_proc.returncode == 0 and app_proc.returncode == 0:
+            by_phys_index: dict[str, tuple[str, float, float]] = {}
+            by_uuid: dict[str, tuple[str, float, float]] = {}
+            for line in gpu_proc.stdout.splitlines():
+                parts = [part.strip() for part in line.split(",")]
+                if len(parts) != 4 or not parts[0].isdigit() or not parts[1].startswith("GPU-"):
+                    continue
+                idx_str, uuid_str = parts[0], parts[1]
+                mem_used = float(parts[2]) if parts[2] else 0.0
+                util = float(parts[3]) if parts[3] else 0.0
+                info = (uuid_str, mem_used, util)
+                by_phys_index[idx_str] = info
+                by_uuid[uuid_str] = info
+
+            own_pid = str(os.getpid())
+            ext_procs_by_uuid: Counter[str] = Counter()
+            for line in app_proc.stdout.splitlines():
+                line = line.strip()
+                if not line:
+                    continue
+                parts = [part.strip() for part in line.split(",")]
+                if len(parts) == 3 and parts[0].startswith("GPU-") and parts[1].isdigit() and parts[1] != own_pid:
+                    ext_procs_by_uuid[parts[0]] += 1
+
+            visible_env = os.environ.get("CUDA_VISIBLE_DEVICES")
+            visible_tokens = (
+                [tok.strip() for tok in visible_env.split(",") if tok.strip()]
+                if visible_env is not None and visible_env.strip()
+                else None
+            )
+
+            scored: list[tuple[tuple[bool, int, float, float, int], str, str, int, float]] = []
+            for pos, cand in enumerate(candidates):
+                gpu_info: tuple[str, float, float] | None = None
+                if visible_tokens is not None and cand.isdigit() and int(cand) < len(visible_tokens):
+                    mapped = visible_tokens[int(cand)]
+                    gpu_info = by_uuid.get(mapped) if mapped.startswith("GPU-") else by_phys_index.get(mapped)
+                else:
+                    gpu_info = by_uuid.get(cand) if cand.startswith("GPU-") else by_phys_index.get(cand)
+                if gpu_info is None:
+                    continue
+                uuid_str, mem_used, util = gpu_info
+                proc_count = ext_procs_by_uuid.get(uuid_str, 0)
+                score = (proc_count > 0, proc_count, mem_used, util, pos)
+                scored.append((score, cand, uuid_str, proc_count, mem_used))
+
+            if scored:
+                scored.sort(key=lambda item: item[0])
+                _, best_cand, best_uuid, best_procs, best_mem = scored[0]
+                if best_procs == 0:
+                    _log(
+                        f"Auto-selected uncontended scaling GPU cuda:{best_cand} "
+                        f"({best_uuid}, 0 external compute processes, {best_mem:.0f} MiB used)",
+                        json_mode=json_mode,
+                    )
+                else:
+                    _log(
+                        f"Warning: all candidate GPUs have external compute processes; auto-selected "
+                        f"least-contended cuda:{best_cand} ({best_uuid}, {best_procs} external compute processes)",
+                        json_mode=json_mode,
+                    )
+                return best_cand
+    except (OSError, subprocess.SubprocessError, ValueError):
+        pass
+
+    _log(f"nvidia-smi unavailable for --scaling-gpu auto; falling back to cuda:{candidates[0]}", json_mode=json_mode)
+    return candidates[0]
+
+
 def check_scaling_performance(root: Path) -> dict[str, Any]:
     root = Path(root).resolve()
     try:
@@ -226,24 +336,65 @@ def check_scaling_performance(root: Path) -> dict[str, Any]:
     cohorts = set()
     expected_files_sha = scaling_source_files_sha256(root)
     stale_source_cells = []
+    contended_cells = []
+    comp_keys_by_task: dict[str, set[str]] = {tid: set() for tid in expected_tasks}
+    complete_pairs_by_task: dict[str, set[tuple[str, str]]] = {tid: set() for tid in expected_tasks}
 
     for row in records:
         cell = (row["trainer_family"], row["candidate_id"], row["task_id"])
         result = row["result"]
         status = scaling_publication.performance_status(result)
+        contention = _scaling_contention_status(result)
+        if contention != "clear":
+            contended_cells.append({"cell": cell, "contention": contention})
+        hw_hash = stable_hash(scaling_publication.hardware_key(result))
         if status == "COMPLETE":
             complete_cells.add(cell)
+            if row["task_id"] in complete_pairs_by_task:
+                complete_pairs_by_task[row["task_id"]].add((row["trainer_family"], row["candidate_id"]))
+                if "comparison_key" in row:
+                    comp_key = str(row["comparison_key"])
+                elif isinstance(result.get("hardware"), dict):
+                    comp_key = scaling_publication.comparison_key(
+                        result, receipt_sha256=row.get("receipt_sha256")
+                    )
+                else:
+                    comp_key = stable_hash(
+                        (
+                            row["task_id"],
+                            result["identity"]["source"]["sha256"],
+                            result["identity"]["runtime_sha256"],
+                            hw_hash,
+                            contention,
+                            stable_hash(row) if contention != "clear" else None,
+                        )
+                    )
+                comp_keys_by_task[row["task_id"]].add(comp_key)
         else:
             non_complete.append({"cell": cell, "status": status})
         cohorts.add(
             (
                 result["identity"]["source"]["sha256"],
                 result["identity"]["runtime_sha256"],
-                stable_hash(scaling_publication.hardware_key(result)),
+                hw_hash,
             )
         )
         if result["identity"]["source"].get("files_sha256") != expected_files_sha:
             stale_source_cells.append(cell)
+
+    unpaired_tasks = []
+    for tid in expected_tasks:
+        unavailable_for_task = {
+            (u["trainer_family"], u["candidate_id"])
+            for u in unavailable
+            if u.get("task_id") == tid
+        }
+        runnable_for_task = expected_perf_pairs - unavailable_for_task
+        if runnable_for_task and (
+            complete_pairs_by_task.get(tid, set()) != runnable_for_task
+            or len(comp_keys_by_task.get(tid, set())) != 1
+        ):
+            unpaired_tasks.append(tid)
 
     declaration_mismatches = []
     reg_id = (evidence.get("export") or {}).get("registration")
@@ -268,6 +419,8 @@ def check_scaling_performance(root: Path) -> dict[str, Any]:
         and not non_complete
         and not missing
         and len(cohorts) == 1
+        and not contended_cells
+        and not unpaired_tasks
         and not stale_source_cells
         and not declaration_mismatches
     )
@@ -279,6 +432,8 @@ def check_scaling_performance(root: Path) -> dict[str, Any]:
         "unavailable_cells": len(unavailable),
         "non_complete_cells": non_complete,
         "table_cohorts": len(cohorts),
+        "contended_cells": len(contended_cells),
+        "unpaired_tasks": sorted(unpaired_tasks),
         "stale_source_cells": len(stale_source_cells),
         "declaration_mismatches": declaration_mismatches,
     }
@@ -607,23 +762,139 @@ def _attempt_coverage_markdown_synced(root: Path, cov: dict[str, Any]) -> bool:
     return True
 
 
-def _validate_publication_registration_sync(root: Path, inv_json: dict[str, Any]) -> None:
+def _registered_evidence_satisfies_selection(root: Path) -> bool:
+    root = Path(root).resolve()
+    sel_path = root / CURRENT_SELECTION
+    manifest_path = root / "reports/forge/technique-evidence/manifest.json"
+    if not sel_path.is_file() or not manifest_path.is_file():
+        return False
+    try:
+        from experiments.forge.trainer_families import load_current_selection, scientific_row_hash
+        from reports.forge import regenerate_technique_inventory as rti
+
+        manifest = read_json(manifest_path)
+        cohorts = manifest.get("cohorts") or []
+        view_id = manifest.get("view")
+        policy_fp = manifest.get("policy_fingerprint")
+        view_rev = manifest.get("view_revision")
+        if (
+            manifest.get("schema_version") != 1
+            or not cohorts
+            or not isinstance(view_id, str)
+            or not isinstance(policy_fp, str)
+        ):
+            return False
+        live_view_path = root / "configs/forge/views" / f"{view_id}.json"
+        if not live_view_path.is_file():
+            return False
+        live_view = read_json(live_view_path)
+        if stable_hash(live_view) != policy_fp:
+            frozen_view_path = root / "configs/forge/view-history" / f"{view_id}-v{view_rev}.json"
+            if not frozen_view_path.is_file():
+                return False
+            frozen_view = read_json(frozen_view_path)
+            if (
+                frozen_view.get("id") != view_id
+                or frozen_view.get("revision") != view_rev
+                or stable_hash(frozen_view) != policy_fp
+            ):
+                return False
+        registered_hashes: set[str] = set()
+        for entry in cohorts:
+            _, rows = rti._snapshot(root, entry, manifest)
+            registered_hashes.update(scientific_row_hash(row) for row in rows.values())
+        archived_hashes: set[str] = set()
+        for _, _, _, rows in rti._archived_reports(root, manifest):
+            archived_hashes.update(scientific_row_hash(row) for row in rows.values())
+        pins = load_current_selection(
+            root,
+            view_id=view_id,
+            policy_fingerprint=policy_fp,
+            selection_card=read_json(sel_path),
+        )
+        if not pins:
+            return False
+        for pin in pins.values():
+            row_sha = pin.get("scientific_row_sha256")
+            permitted = registered_hashes | archived_hashes if pin.get("historical_row") else registered_hashes
+            if not row_sha or row_sha not in permitted:
+                return False
+        return True
+    except Exception:
+        return False
+
+
+def _validate_publication_registration_sync(root: Path, inv_json: dict[str, Any]) -> bool:
     provenance = inv_json.get("provenance") or {}
     sel_path = Path(root) / CURRENT_SELECTION
-    if sel_path.is_file() and provenance.get("family_current_selection_sha256") is not None:
-        if file_hash(sel_path) != provenance.get("family_current_selection_sha256"):
-            raise CodeChangeRequiredError(
-                f"{CURRENT_SELECTION.as_posix()} differs from reports/forge/technique-inventory.json; "
-                "register the promoted family selection snapshot with "
-                "`python reports/forge/regenerate_technique_inventory.py --source-commit <executed-commit>`"
-            )
+    sel_mismatch = (
+        sel_path.is_file()
+        and provenance.get("family_current_selection_sha256") is not None
+        and file_hash(sel_path) != provenance.get("family_current_selection_sha256")
+    )
     manifest_path = Path(root) / "reports/forge/technique-evidence/manifest.json"
-    if manifest_path.is_file() and provenance.get("evidence_manifest_sha256") is not None:
-        if stable_hash(read_json(manifest_path)) != provenance.get("evidence_manifest_sha256"):
+    manifest_mismatch = (
+        manifest_path.is_file()
+        and provenance.get("evidence_manifest_sha256") is not None
+        and stable_hash(read_json(manifest_path)) != provenance.get("evidence_manifest_sha256")
+    )
+    if not sel_mismatch and not manifest_mismatch:
+        return True
+    if _registered_evidence_satisfies_selection(Path(root)):
+        return False
+    if sel_mismatch:
+        raise CodeChangeRequiredError(
+            f"{CURRENT_SELECTION.as_posix()} differs from reports/forge/technique-inventory.json; "
+            "register the promoted family selection snapshot with "
+            "`python reports/forge/regenerate_technique_inventory.py --source-commit <executed-commit>`"
+        )
+    raise CodeChangeRequiredError(
+        "reports/forge/technique-evidence/manifest.json differs from "
+        "reports/forge/technique-inventory.json; regenerate the registered inventory first"
+    )
+
+
+def _republish_registered_inventory(root: Path, *, json_mode: bool = False) -> dict[str, Any]:
+    from reports.forge import regenerate_technique_inventory as rti
+
+    root = Path(root).resolve()
+    inv_json_path = root / "reports/forge/technique-inventory.json"
+    manifest_path = root / "reports/forge/technique-evidence/manifest.json"
+    needs_republish = False
+    if inv_json_path.is_file():
+        needs_republish = not _validate_publication_registration_sync(root, read_json(inv_json_path))
+    elif manifest_path.is_file():
+        if not _registered_evidence_satisfies_selection(root):
             raise CodeChangeRequiredError(
-                "reports/forge/technique-evidence/manifest.json differs from "
-                "reports/forge/technique-inventory.json; regenerate the registered inventory first"
+                "reports/forge/technique-evidence/manifest.json cannot satisfy current family selection without "
+                "new snapshot registration"
             )
+        needs_republish = True
+
+    try:
+        if needs_republish:
+            manifest = read_json(manifest_path)
+            view_id = str(manifest["view"])
+            live_view_path = root / "configs/forge/views" / f"{view_id}.json"
+            live_differs = stable_hash(read_json(live_view_path)) != manifest.get("policy_fingerprint")
+            comparison_policy = (
+                root / "configs/forge/view-history" / f"{view_id}-v{manifest['view_revision']}.json"
+                if live_differs
+                else None
+            )
+            _log(
+                f"Republishing technique-inventory.json/.md from registered evidence snapshots (view={view_id})",
+                json_mode=json_mode,
+            )
+            summary = rti.publish_current(root, view_id=view_id, comparison_policy=comparison_policy)
+            if live_differs:
+                summary = rti.refresh_publication(root, view_id=view_id)
+            return summary
+        return rti.refresh_publication(root)
+    except ValueError as exc:
+        raise CodeChangeRequiredError(
+            f"cannot refresh technique-inventory publication without snapshot registration: {exc}"
+        ) from exc
 
 
 def _generated_pages_synced(root: Path, inv_json: dict[str, Any], inv_md: str) -> bool:
@@ -695,16 +966,19 @@ def check_compiled_reports(root: Path) -> dict[str, Any]:
     perf_path = root / "reports/forge/scaling-performance.json"
     cov_path = root / "reports/forge/attempt-coverage.json"
 
+    publication_registration_synced = False
     perf_synced = False
     unknown_perf_rows = -1
     diagnostic_rows_present = False
+    current_source_tier1_synced = False
+    refresh_docs_synced = False
     attempt_summary_synced = False
     attempt_markdown_synced = False
     generated_pages_synced = False
 
     if inv_json_path.is_file():
         inv_json = read_json(inv_json_path)
-        _validate_publication_registration_sync(root, inv_json)
+        publication_registration_synced = _validate_publication_registration_sync(root, inv_json)
         if inv_md_path.is_file():
             inv_md = inv_md_path.read_text()
             if perf_path.is_file():
@@ -719,6 +993,18 @@ def check_compiled_reports(root: Path) -> dict[str, Any]:
                 unknown_perf_rows = sum(1 for line in block.splitlines() if "| UNKNOWN |" in line)
             expected_diag_phrases = _expected_selected_diagnostic_phrases(root, inv_json)
             diagnostic_rows_present = all(phrase in inv_md for phrase in expected_diag_phrases)
+            if inv_json.get("family_progress"):
+                from reports.forge import regenerate_technique_inventory as rti
+
+                expected_tier1 = rti._current_source_tier1_readouts_markdown(inv_json, root, inv_md_path)
+                current_source_tier1_synced = (not expected_tier1) or (expected_tier1 in inv_md)
+                refresh_docs_synced = (
+                    "python ops/refresh_forge_readouts.py --check" in inv_md
+                    and "python ops/refresh_forge_readouts.py --reports-only" in inv_md
+                )
+            else:
+                current_source_tier1_synced = True
+                refresh_docs_synced = True
             if cov_path.is_file():
                 cov_doc = read_json(cov_path)
                 cov_sum = cov_doc.get("summary", {})
@@ -735,9 +1021,12 @@ def check_compiled_reports(root: Path) -> dict[str, Any]:
         and bool(inv_cov.get("valid"))
         and clean_checkout_safe
         and selected_pending_readout == []
+        and publication_registration_synced
         and perf_synced
         and unknown_perf_rows == 0
         and diagnostic_rows_present
+        and current_source_tier1_synced
+        and refresh_docs_synced
         and attempt_summary_synced
         and attempt_markdown_synced
         and generated_pages_synced
@@ -748,9 +1037,12 @@ def check_compiled_reports(root: Path) -> dict[str, Any]:
         "inventory_valid": bool(inv_cov.get("valid")),
         "clean_checkout_safe": clean_checkout_safe,
         "selected_pending_readout": selected_pending_readout,
+        "publication_registration_synced": publication_registration_synced,
         "scaling_performance_synced": perf_synced,
         "unknown_performance_rows": unknown_perf_rows,
         "selected_diagnostic_rows_present": diagnostic_rows_present,
+        "current_source_tier1_synced": current_source_tier1_synced,
+        "refresh_docs_synced": refresh_docs_synced,
         "attempt_summary_synced": attempt_summary_synced,
         "attempt_markdown_synced": attempt_markdown_synced,
         "generated_pages_synced": generated_pages_synced,
@@ -863,8 +1155,11 @@ def _scaling_registration_already_concluded_or_stale(
             return True
         for receipt_path in receipt_files:
             doc = read_json(receipt_path)
-            files_sha = doc.get("result", {}).get("identity", {}).get("source", {}).get("files_sha256")
+            res = doc.get("result", {})
+            files_sha = res.get("identity", {}).get("source", {}).get("files_sha256")
             if files_sha is not None and files_sha != expected_files_sha:
+                return True
+            if _scaling_contention_status(res) != "clear":
                 return True
 
     manifest_studies = set(manifest.get("studies", []))
@@ -936,20 +1231,106 @@ def _select_or_register_scaling_campaign(
     return scaling._load(root, reg_id)
 
 
+def _evict_superseded_scaling_queue_jobs(
+    root: Path,
+    queue_root: Path,
+    manifest: dict[str, Any],
+    resolved_gpu: str,
+    *,
+    json_mode: bool = False,
+) -> int:
+    state_path = Path(queue_root) / "queue/state.json"
+    if not state_path.is_file():
+        return 0
+    expected_keys: set[str] = set()
+    for sel in manifest.get("family_selections", []):
+        try:
+            req = planning.resolve_idea(
+                root,
+                sel["candidate_id"],
+                "dcgan_performance",
+                campaign_id=manifest["campaign"]["id"],
+                execution_backend=manifest["execution_backend"],
+                cuda_model=manifest.get("cuda_model"),
+                study_id=sel["study_id"],
+            )
+            for job_def in req.get("jobs", []):
+                expected_keys.add(job_def["compatibility_key"])
+        except Exception:
+            continue
+    if not expected_keys:
+        return 0
+
+    state = read_json(state_path)
+    jobs = state.get("jobs", {})
+    subs = state.get("submissions", {})
+    expected_device = f"cuda:{resolved_gpu}" if resolved_gpu.isdigit() else resolved_gpu
+    evict_keys: set[str] = set()
+    evict_sub_ids: set[str] = set()
+    evict_attempts: list[str] = []
+
+    for ck in sorted(expected_keys):
+        job = jobs.get(ck)
+        if not job or job.get("state") not in {"completed", "failed"}:
+            continue
+        raw_res = (((job.get("result") or {}).get("raw") or {}).get("result") or {})
+        hw = raw_res.get("hardware") if isinstance(raw_res.get("hardware"), dict) else {}
+        contention = hw.get("contention_status")
+        device = hw.get("device")
+        bad_contention = contention is not None and contention != "clear"
+        bad_device = isinstance(device, str) and expected_device.startswith("cuda:") and device != expected_device
+        if not (bad_contention or bad_device):
+            continue
+        subscriber_ids = list(job.get("subscribers") or [])
+        non_scaling_subscribers = [
+            sid
+            for sid in subscriber_ids
+            if subs.get(sid, {}).get("request", {}).get("view", {}).get("id") != "dcgan_performance"
+        ]
+        if non_scaling_subscribers:
+            continue
+        evict_keys.add(ck)
+        evict_sub_ids.update(sid for sid in subscriber_ids if sid in subs)
+        aid = (job.get("result") or {}).get("attempt_id") or job.get("attempt_id")
+        if isinstance(aid, str) and aid:
+            evict_attempts.append(aid)
+
+    if not evict_keys:
+        return 0
+
+    archive_dir = Path(queue_root) / "superseded-scaling" / str(manifest.get("id", "scaling")) / "attempts"
+    archive_dir.mkdir(parents=True, exist_ok=True)
+    for aid in evict_attempts:
+        src = Path(root) / "reports/forge/attempts" / aid
+        dst = archive_dir / aid
+        if src.exists() and not dst.exists():
+            shutil.move(str(src), str(dst))
+    for ck in evict_keys:
+        jobs.pop(ck, None)
+    for sid in evict_sub_ids:
+        subs.pop(sid, None)
+    atomic_json(state_path, state)
+    _log(
+        f"Evicted {len(evict_keys)} superseded/contended scaling job(s) before draining on {expected_device}",
+        json_mode=json_mode,
+    )
+    return len(evict_keys)
+
+
 def refresh_scaling_performance(
     root: Path,
     queue_root: Path,
     *,
     scaling_gpu: str,
+    gpus: list[str] | tuple[str, ...] = ("0", "1"),
     cuda_model: str,
     json_mode: bool = False,
 ) -> dict[str, Any]:
-    scaling_gpu = str(scaling_gpu).strip()
-    if not scaling_gpu:
-        raise CodeChangeRequiredError("a non-empty --scaling-gpu index is required when scaling_performance is stale")
+    resolved_gpu = _resolve_scaling_gpu(scaling_gpu, gpus, json_mode=json_mode)
     manifest = _select_or_register_scaling_campaign(root, queue_root, cuda_model=cuda_model, json_mode=json_mode)
     reg_id = manifest["id"]
     campaign_id = manifest["campaign"]["id"]
+    _evict_superseded_scaling_queue_jobs(root, queue_root, manifest, resolved_gpu, json_mode=json_mode)
     queue = forge_queue.Queue(queue_root, report_root=root / "reports/forge")
 
     enqueued = scaling.enqueue(root, queue_root, reg_id, queue=queue)
@@ -958,13 +1339,13 @@ def refresh_scaling_performance(
         raise CodeChangeRequiredError(f"scaling campaign {reg_id} has preflight blockers: {blocked}")
 
     _log(
-        f"Draining scaling campaign {campaign_id} on single GPU cuda:{scaling_gpu} (workers_per_gpu=1). "
+        f"Draining scaling campaign {campaign_id} on single GPU cuda:{resolved_gpu} (workers_per_gpu=1). "
         f"Tail logs: tail -f {queue_root / 'events.jsonl'}",
         json_mode=json_mode,
     )
     forge_queue.drain(
         queue,
-        devices=[scaling_gpu],
+        devices=[resolved_gpu],
         workers_per_gpu=1,
         allow_sharing=False,
         campaign=campaign_id,
@@ -1910,16 +2291,9 @@ def refresh_compiled_reports(
     cuda_model: str = DEFAULT_CUDA_MODEL,
     json_mode: bool = False,
 ) -> dict[str, Any]:
-    from reports.forge import regenerate_technique_inventory
-
     root = Path(root).resolve()
     _log("Refreshing technique-inventory.json/.md, family pages, problems.md, test-performance.md", json_mode=json_mode)
-    try:
-        pub_summary = regenerate_technique_inventory.refresh_publication(root)
-    except ValueError as exc:
-        raise CodeChangeRequiredError(
-            f"cannot refresh technique-inventory publication without snapshot registration: {exc}"
-        ) from exc
+    pub_summary = _republish_registered_inventory(root, json_mode=json_mode)
 
     _ensure_tier_report_markdown(root)
     _ensure_attempt_coverage_markdown(root, json_mode=json_mode)
@@ -1955,7 +2329,7 @@ def refresh_all(
     queue_root: Path | None = None,
     attempt_state_root: Path | None = None,
     gpus: list[str] | None = None,
-    scaling_gpu: str = "0",
+    scaling_gpu: str = "auto",
     cuda_model: str = DEFAULT_CUDA_MODEL,
     reports_only: bool = False,
     json_mode: bool = False,
@@ -1975,6 +2349,10 @@ def refresh_all(
 
     actions_executed: list[str] = []
     if not reports_only:
+        if not initial["stages"]["compiled_reports"].get("publication_registration_synced", True):
+            _republish_registered_inventory(root, json_mode=json_mode)
+            actions_executed.append("publication_registration_sync")
+
         gpu_stages_stale = any(
             stage in initial["stale_stages"]
             for stage in ("queue", "scaling_performance", "attempt_coverage", "selected_family_readouts")
@@ -2003,6 +2381,7 @@ def refresh_all(
                 root,
                 queue_root,
                 scaling_gpu=str(scaling_gpu),
+                gpus=gpu_list,
                 cuda_model=cuda_model,
                 json_mode=json_mode,
             )
@@ -2058,7 +2437,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Attempt-coverage state directory (default: runs/forge/attempt-coverage-refresh)",
     )
     parser.add_argument("--gpus", default="0,1", help="Comma-separated GPU indices for parallel stages")
-    parser.add_argument("--scaling-gpu", default="0", help="Single GPU index for uncontended DCGAN scaling table")
+    parser.add_argument(
+        "--scaling-gpu",
+        default="auto",
+        help="Single GPU index (or 'auto' for an uncontended GPU from --gpus) for DCGAN scaling table",
+    )
     parser.add_argument("--cuda-model", default=DEFAULT_CUDA_MODEL, help="Named CUDA hardware cohort")
     parser.add_argument("--check", action="store_true", help="Read-only check; exit 0 if current, 1 if stale, 2 if broken")
     parser.add_argument("--reports-only", action="store_true", help="Regenerate compiled reports without launching GPU runs")

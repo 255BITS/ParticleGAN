@@ -1216,3 +1216,271 @@ def test_frozen_checkout_missing_commit_and_empty_gpu_flags_raise_code_change_re
             tmp_path, tmp_path / "runs/forge", scaling_gpu="  ", cuda_model="NVIDIA RTX A6000", json_mode=True
         )
 
+
+def test_resolve_scaling_gpu_auto_picks_uncontended_handles_cuda_visible_devices_and_fallbacks(monkeypatch):
+    class _Proc:
+        def __init__(self, returncode: int, stdout: str):
+            self.returncode = returncode
+            self.stdout = stdout
+
+    gpu_csv = (
+        "0, GPU-ed080e41-3193-3755-6756-f3d46c433331, 1093, 2\n"
+        "1, GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce, 15, 0\n"
+    )
+    app_csv = (
+        "GPU-ed080e41-3193-3755-6756-f3d46c433331, 4123, 450\n"
+        "GPU-ed080e41-3193-3755-6756-f3d46c433331, 4199, 600\n"
+    )
+
+    def _fake_run(cmd, **kwargs):
+        query_arg = cmd[1]
+        if query_arg.startswith("--query-gpu="):
+            return _Proc(0, gpu_csv)
+        return _Proc(0, app_csv)
+
+    monkeypatch.delenv("CUDA_VISIBLE_DEVICES", raising=False)
+    monkeypatch.setattr(rfr.subprocess, "run", _fake_run)
+
+    # 1. Explicit GPU index bypasses auto selection.
+    assert rfr._resolve_scaling_gpu("0", ["0", "1"], json_mode=True) == "0"
+
+    # 2. Auto picks clear GPU 1 over GUI-contended GPU 0.
+    assert rfr._resolve_scaling_gpu("auto", ["0", "1"], json_mode=True) == "1"
+
+    # 3. Respects CUDA_VISIBLE_DEVICES remapping (logical 0 -> physical 1 / clear UUID).
+    monkeypatch.setenv("CUDA_VISIBLE_DEVICES", "GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce,GPU-ed080e41-3193-3755-6756-f3d46c433331")
+    assert rfr._resolve_scaling_gpu("auto", ["0", "1"], json_mode=True) == "0"
+    monkeypatch.delenv("CUDA_VISIBLE_DEVICES", raising=False)
+
+    # 4. Falls back to least-contended when all GPUs have external compute processes.
+    busy_apps = (
+        "GPU-ed080e41-3193-3755-6756-f3d46c433331, 4123, 450\n"
+        "GPU-ed080e41-3193-3755-6756-f3d46c433331, 4199, 600\n"
+        "GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce, 5500, 120\n"
+    )
+    monkeypatch.setattr(
+        rfr.subprocess,
+        "run",
+        lambda cmd, **kw: _Proc(0, gpu_csv if cmd[1].startswith("--query-gpu=") else busy_apps),
+    )
+    assert rfr._resolve_scaling_gpu("auto", ["0", "1"], json_mode=True) == "1"
+
+    # 5. Missing nvidia-smi falls back to first candidate; empty --gpus raises CodeChangeRequiredError.
+    def _raise_oserror(*args, **kwargs):
+        raise FileNotFoundError("nvidia-smi")
+
+    monkeypatch.setattr(rfr.subprocess, "run", _raise_oserror)
+    assert rfr._resolve_scaling_gpu("auto", ["1", "0"], json_mode=True) == "1"
+    with pytest.raises(rfr.CodeChangeRequiredError, match="empty --gpus"):
+        rfr._resolve_scaling_gpu("auto", [], json_mode=True)
+
+
+def test_scaling_contention_unpaired_rejection_and_superseded_job_eviction(tmp_path: Path, monkeypatch):
+    monkeypatch.setattr(
+        rfr,
+        "current_family_candidates",
+        lambda root: [
+            {"family": "atlas", "trainer_family": "atlas", "candidate_id": "atlas-particle-normal-v4"},
+            {"family": "bispf", "trainer_family": "bispf", "candidate_id": "bispf-optimized-quintic-v1"},
+        ],
+    )
+    monkeypatch.setattr(
+        rfr,
+        "load_view",
+        lambda root, name: {"assignments": [{"task": "dcgan_performance_r32"}]},
+    )
+    live_files_sha = {"particlegan/__init__.py": "sha-live"}
+    monkeypatch.setattr(rfr, "scaling_source_files_sha256", lambda root: live_files_sha)
+    monkeypatch.setattr(rfr.scaling_publication, "performance_status", lambda res: res["status"])
+    monkeypatch.setattr(rfr.scaling_publication, "hardware_key", lambda res: res["identity"]["hardware"])
+
+    def _rec(fam: str, cid: str, contention: str, comp_key: str):
+        return {
+            "trainer_family": fam,
+            "candidate_id": cid,
+            "task_id": "dcgan_performance_r32",
+            "comparison_key": comp_key,
+            "result": {
+                "status": "COMPLETE",
+                "hardware": {"contention_status": contention},
+                "identity": {
+                    "source": {"sha256": "src-sha-1", "files_sha256": live_files_sha},
+                    "runtime_sha256": "rt-sha-1",
+                    "hardware": {"backend": "cuda", "gpu": {"uuid": "GPU-1", "name": "RTX A6000"}},
+                },
+            },
+        }
+
+    # 1. Contended & unpaired rows fail check_scaling_performance even on a single hardware cohort.
+    contended_manifest = {
+        "unavailable": [],
+        "records": [
+            _rec("atlas", "atlas-particle-normal-v4", "contended", "priv-key-a"),
+            _rec("bispf", "bispf-optimized-quintic-v1", "contended", "priv-key-b"),
+        ],
+    }
+    monkeypatch.setattr(rfr.scaling_publication, "load_performance", lambda root: contended_manifest)
+    bad = rfr.check_scaling_performance(tmp_path)
+    assert bad["current"] is False
+    assert bad["contended_cells"] == 2
+    assert bad["unpaired_tasks"] == ["dcgan_performance_r32"]
+
+    # 2. Clear & paired rows pass check_scaling_performance.
+    clear_manifest = {
+        "unavailable": [],
+        "records": [
+            _rec("atlas", "atlas-particle-normal-v4", "clear", "shared-key-1"),
+            _rec("bispf", "bispf-optimized-quintic-v1", "clear", "shared-key-1"),
+        ],
+    }
+    monkeypatch.setattr(rfr.scaling_publication, "load_performance", lambda root: clear_manifest)
+    ok = rfr.check_scaling_performance(tmp_path)
+    assert ok["current"] is True
+    assert ok["contended_cells"] == 0
+    assert ok["unpaired_tasks"] == []
+
+    # 3. _evict_superseded_scaling_queue_jobs evicts contended dcgan_performance jobs, sparing non-scaling subscribers.
+    q_root = tmp_path / "runs/forge"
+    attempt_dir = tmp_path / "reports/forge/attempts/att-contended"
+    attempt_dir.mkdir(parents=True, exist_ok=True)
+    (attempt_dir / "result.json").write_text("{}\n")
+
+    manifest = {
+        "id": "dcgan-performance-cloud-test",
+        "execution_backend": "cuda",
+        "cuda_model": "NVIDIA RTX A6000",
+        "campaign": {"id": "dcgan-performance-cloud-test"},
+        "family_selections": [
+            {"family": "atlas", "candidate_id": "atlas-particle-normal-v4", "study_id": "st-atlas"},
+            {"family": "bispf", "candidate_id": "bispf-optimized-quintic-v1", "study_id": "st-bispf"},
+        ],
+    }
+    monkeypatch.setattr(
+        rfr.planning,
+        "resolve_idea",
+        lambda root, cid, view_id, **kw: {
+            "jobs": [{"compatibility_key": f"ck-{cid}"}]
+        },
+    )
+    atomic_json(
+        q_root / "queue/state.json",
+        {
+            "jobs": {
+                "ck-atlas-particle-normal-v4": {
+                    "state": "completed",
+                    "subscribers": ["sub-atlas"],
+                    "result": {
+                        "attempt_id": "att-contended",
+                        "raw": {"result": {"hardware": {"contention_status": "contended", "device": "cuda:0"}}},
+                    },
+                },
+                "ck-bispf-optimized-quintic-v1": {
+                    "state": "completed",
+                    "subscribers": ["sub-bispf", "sub-ordinary"],
+                    "result": {
+                        "attempt_id": "att-shared",
+                        "raw": {"result": {"hardware": {"contention_status": "contended", "device": "cuda:0"}}},
+                    },
+                },
+            },
+            "submissions": {
+                "sub-atlas": {"request": {"view": {"id": "dcgan_performance"}}},
+                "sub-bispf": {"request": {"view": {"id": "dcgan_performance"}}},
+                "sub-ordinary": {"request": {"view": {"id": "discriminator_stability"}}},
+            },
+        },
+    )
+    evicted = rfr._evict_superseded_scaling_queue_jobs(tmp_path, q_root, manifest, "1", json_mode=True)
+    assert evicted == 1
+    after_state = read_json(q_root / "queue/state.json")
+    assert "ck-atlas-particle-normal-v4" not in after_state["jobs"]
+    assert "sub-atlas" not in after_state["submissions"]
+    assert "ck-bispf-optimized-quintic-v1" in after_state["jobs"]
+    assert not attempt_dir.exists()
+    assert (q_root / "superseded-scaling/dcgan-performance-cloud-test/attempts/att-contended/result.json").is_file()
+
+
+def test_publication_registration_sync_allows_committed_snapshot_republish_and_rejects_unregistered(
+    tmp_path: Path, monkeypatch
+):
+    # Committed repository snapshots satisfy family-current-v1.json!
+    assert rfr._registered_evidence_satisfies_selection(ROOT) is True
+
+    live_inv = read_json(ROOT / "reports/forge/technique-inventory.json")
+    stale_prov_inv = deepcopy(live_inv)
+    stale_prov_inv["provenance"]["evidence_manifest_sha256"] = "0" * 64
+    # Because committed snapshots satisfy family-current-v1.json, this reports False (NEEDS_REFRESH) rather than CodeChangeRequiredError.
+    assert rfr._validate_publication_registration_sync(ROOT, stale_prov_inv) is False
+
+    # And _republish_registered_inventory triggers publish_current + refresh_publication when out of sync.
+    calls: list[tuple[str, Any]] = []
+    from reports.forge import regenerate_technique_inventory as rti
+
+    monkeypatch.setattr(
+        rfr,
+        "_validate_publication_registration_sync",
+        lambda root, inv: False,
+    )
+    monkeypatch.setattr(
+        rti,
+        "publish_current",
+        lambda root, **kw: (calls.append(("publish_current", kw.get("comparison_policy"))) or {"rows": 8}),
+    )
+    monkeypatch.setattr(
+        rti,
+        "refresh_publication",
+        lambda root, **kw: (calls.append(("refresh_publication", kw.get("view_id"))) or {"rows": 8}),
+    )
+    summary = rfr._republish_registered_inventory(ROOT, json_mode=True)
+    assert summary == {"rows": 8}
+    assert [name for name, _ in calls] == ["publish_current", "refresh_publication"]
+    manifest = read_json(ROOT / "reports/forge/technique-evidence/manifest.json")
+    assert Path(calls[0][1]).name == f"{manifest['view']}-v{manifest['view_revision']}.json"
+
+    # When registered evidence does NOT satisfy selection (unregistered snapshot), raises CodeChangeRequiredError.
+    monkeypatch.undo()
+    monkeypatch.setattr(rfr, "_registered_evidence_satisfies_selection", lambda root: False)
+    with pytest.raises(rfr.CodeChangeRequiredError, match="differs from reports/forge/technique-inventory.json"):
+        rfr._validate_publication_registration_sync(ROOT, stale_prov_inv)
+
+
+def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier1_readouts():
+    status = rfr.check_status(ROOT)
+    assert status["status"] == "CURRENT", json.dumps(status, indent=2, sort_keys=True)
+    assert status["stale_stages"] == []
+    assert status["source_digest"] == "2e8a97a0aa845c961de00d403fdcd1673b34b33626e4546c3138882a40e7bacf"
+
+    perf = status["stages"]["scaling_performance"]
+    assert perf["complete_cells"] == 48
+    assert perf["contended_cells"] == 0
+    assert perf["unpaired_tasks"] == []
+    assert perf["table_cohorts"] == 1
+
+    comp = status["stages"]["compiled_reports"]
+    assert comp["publication_registration_synced"] is True
+    assert comp["current_source_tier1_synced"] is True
+    assert comp["refresh_docs_synced"] is True
+
+    inv_md = (ROOT / "reports/forge/technique-inventory.md").read_text()
+    perf_block = inv_md.split("<!-- Forge scaling performance: start -->", 1)[1].split(
+        "<!-- Forge scaling performance: end -->", 1
+    )[0]
+    assert perf_block.count("| clear |") == 48
+    assert "| contended |" not in perf_block
+
+    assert "### Current-source selected-recipe Tier 1 readouts" in inv_md
+    for expected_snippet in (
+        "| [GAN v3 release 0.7](families/release07-gan-v3.md) | [`recipe-prior-refactor-release07-gan-v3-v1`]",
+        "| [R1/R2](families/r1r2.md) | [`recipe-prior-refactor-r1r2-v1`]",
+        "| [K3P](families/k3p.md) | [`recipe-prior-refactor-k3p-v1`]",
+        "| [KA2](families/ka2.md) | [`recipe-prior-refactor-ka2-v1`]",
+        "| [Atlas](families/atlas.md) | [`atlas-particle-normal-v4`]",
+        "| [BISPF](families/bispf.md) | [`bispf-optimized-quintic-v1`]",
+        "| [BCAP](families/bcap-pure.md) | [`recipe-prior-refactor-bcap-pure-v1`]",
+        "| [E22](families/e22.md) | [`e22`]",
+        "python ops/refresh_forge_readouts.py --check",
+        "python ops/refresh_forge_readouts.py --reports-only",
+    ):
+        assert expected_snippet in inv_md
+
+

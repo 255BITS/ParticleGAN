@@ -867,7 +867,7 @@ coverage and compiled Forge reports with one command:
 
 ```sh
 python ops/refresh_forge_readouts.py --check
-python ops/refresh_forge_readouts.py --gpus 0,1 --scaling-gpu 0
+python ops/refresh_forge_readouts.py --gpus 0,1 --scaling-gpu auto
 python ops/refresh_forge_readouts.py --reports-only
 ```
 
@@ -876,12 +876,15 @@ are current, `1` when out-of-date stages can be refreshed automatically, and `2`
 when code or declaration changes are required (such as preflight blockers, corrupt
 manifests, unregistered `family-current-v1.json` snapshot edits, or non-gate
 `ERROR`/`INCOMPLETE` task outcomes). Running without `--check` drains any stale
-stages end to end (using `--scaling-gpu` with one worker so all 48 DCGAN
-performance cells share one uncontended hardware cohort), preserves historical
-`family-current-v1.json` pins under their original frozen sources, preserves
-committed goal leaderboards on clean checkouts where ignored `reports/forge/attempts/*`
-envelopes are absent, and seals clean-checkout-safe `EXPERIMENT_MEMORY.md` and
-`compilation.json` manifests.
+stages end to end (`--scaling-gpu auto` inspects `nvidia-smi` to select a GPU from
+`--gpus` with zero external compute processes so all 48 DCGAN performance cells
+share one `Contention: clear` hardware cohort and matched comparison key per task),
+automatically republishes `technique-inventory.{json,md}` when committed
+`technique-evidence/manifest.json` snapshots already satisfy `family-current-v1.json`,
+preserves historical `family-current-v1.json` pins under their original frozen
+sources, preserves committed goal leaderboards on clean checkouts where ignored
+`reports/forge/attempts/*` envelopes are absent, and seals clean-checkout-safe
+`EXPERIMENT_MEMORY.md` and `compilation.json` manifests.
 
 ## Calibrate a screen before adopting it
 
