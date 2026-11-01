@@ -182,6 +182,27 @@ def test_atlas_particle_normal_v4_readout_recovers_mode_hold_with_zero_regressio
     assert atlas_pin["candidate_id"] == "atlas-particle-normal-v4"
     assert atlas_pin["execution_backend"] == "cuda"
 
+    inventory = read_json(ROOT / "reports/forge/technique-inventory.json")
+    atlas_row = next(row for row in inventory["rows"] if row["trainer_family"] == "atlas")
+    assert atlas_row["candidate_id"] == "atlas-particle-normal-v4"
+    published_tasks = {
+        item["task_id"]: item["status"]
+        for key in ("tasks", "nonrequired_tasks")
+        for item in atlas_row[key]
+    }
+    assert "INVALID" not in published_tasks.values()
+    assert "ERROR" not in published_tasks.values()
+    assert published_tasks["clockfree_audit_measurement_v1"] == "PASS"
+    for item in v4_ordinary["task_results"]:
+        assert published_tasks[item["task_id"]] == item["gate_status"]
+
+    inventory_md = (ROOT / "reports/forge/technique-inventory.md").read_text()
+    atlas_top_line = next(
+        line for line in inventory_md.splitlines() if line.startswith("| **[Atlas](families/atlas.md)** |")
+    )
+    assert "[18/29]" in atlas_top_line
+    assert "invalid" not in atlas_top_line.lower()
+
     v3_readout = read_json(ROOT / "reports/forge/records/readout-efb8bacf93e19fc2b0d7f7bf.json")
     v2_readout = read_json(ROOT / "reports/forge/records/readout-4dc982d111099c9b0f33a18e.json")
     bispf_readout = read_json(ROOT / "reports/forge/records/readout-7b017c8ed900b677ebf6bf55.json")

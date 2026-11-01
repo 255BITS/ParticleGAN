@@ -8,11 +8,11 @@
 
 ## Technique overview
 
-Atlas is the E22 independent-row policy with two added controls: automatic selection of a bounded critic-feature birth/death backend and a settled-state guard on optimizer-surprise reopening. It retains E22's KA2 critic, adaptive per-group rates, row evidence, learned output noise and state-selected serving. Its formulation is not a new adversarial loss.
+Atlas extends E22's independent-row policy with automatic selection of a bounded critic-feature birth/death backend and a settled-state guard on surprise reopening. It retains KA2 critic regularization, adaptive per-group stationarity rates, row evidence, and state-selected serving without introducing a new adversarial loss. Selected Atlas (`atlas-particle-normal-v4`) pairs an unstandardized `particles` prior plus `NormalNoiseManipulator(sigma=0.0065)` (`birth_death_cells=256`) with clean fixed output noise (`0.0`), clock-free critic acquisition (`d_guard_ratio=0.0`, `d_guard_min_steps=0`), and a KA2 pre-anchor critic-only `LossSurprise` reopen guard.
 
 ## Mathematical formulation
 
-$G$ is the generator, $D$ the raw-score critic, $P$ the task prior, $x$ a real batch, $z\sim P$ a latent batch and $y$ the generated batch, including any declared output noise. $C$ is the critic actually evaluated: $C=D$ without input noise; otherwise every forward evaluates $D(u+\epsilon_{\mathrm{in}})$ with a fresh draw. $\mathbb E$ means a sample mean, $\lVert\cdot\rVert_2$ is the Euclidean norm, $(a)_+=\max(a,0)$ and $\operatorname{softplus}(a)=\log(1+e^a)$. The scalar sketch detaches $y$ during the critic update and resamples differentiable $y$ after that update; joint and auxiliary hosts retain task-owned objectives. $g_r=\nabla_x C(x)$ and $g_f=\nabla_y C(y)$ are per-sample input gradients; $d$ counts critic-input coordinates. $\lambda$ is penalty strength and $\kappa$ the cap threshold. $\bar C$ evaluates the critic parameter EMA with the same fresh-input-noise law as $C$. $A$ is the early RMS-scaled penalty, $B_{\mathrm{cap}}$ the late L2 cap term and $P_{\mathrm{anchor}}$ the dimension-normalized gradient proximity. $w$ is the configured anchor weight. $n$ counts applied penalty calls, $W\in\{0,1\}$ releases or restores the anchor, and $\alpha\in[0,1]$ is the moment-surprise tracking state. $\delta$ is critic EMA decay and $\theta$ the live critic parameters. Moment surprise compares critic gradient RMS with completed Adam second-moment RMS. $j$ indexes optimizer groups, $\eta_j^{(0)}$ is a group's base LR, $s_j$ its adaptive multiplier and $b$ the stationarity block size in intrinsic time. Intrinsic time accumulates applied LR divided by base LR. Game trust is policy confidence derived from optimizer surprise; drift means statistically detected change in update behavior. KA2 anchors critic input gradients; A2 separately dampens sparse latent-row responses. $h_i$ is latent row $i$'s current gradient, $h_i^{\mathrm{prev}}$ its last observed gradient, $\rho_i$ the A2 response multiplier and $\Delta z_i$ the corresponding row update. $\operatorname{cos}$ denotes the implementation's bounded cosine similarity, including its handling of zero-length history.
+$G$ is the generator, $D$ the raw-score critic, $P$ the task prior, $x$ a real batch, $z\sim P$ a latent batch and $y$ the generated batch, including any declared output noise. $C$ is the critic actually evaluated: $C=D$ without input noise; otherwise every forward evaluates $D(u+\epsilon_{\mathrm{in}})$ with a fresh draw. $\mathbb E$ means a sample mean, $\lVert\cdot\rVert_2$ is the Euclidean norm, $(a)_+=\max(a,0)$ and $\operatorname{softplus}(a)=\log(1+e^a)$. The scalar sketch detaches $y$ during the critic update and resamples differentiable $y$ after that update; joint and auxiliary hosts retain task-owned objectives. $g_r=\nabla_x C(x)$ and $g_f=\nabla_y C(y)$ are per-sample input gradients; $d$ counts critic-input coordinates. $\lambda$ is penalty strength and $\kappa$ the cap threshold. $\bar C$ evaluates the critic parameter EMA with the same fresh-input-noise law as $C$. $A$ is the early RMS-scaled penalty, $B_{\mathrm{cap}}$ the late L2 cap term and $P_{\mathrm{anchor}}$ the dimension-normalized gradient proximity. $w$ is the configured anchor weight. $t$ is the critic Adam step state with second-moment decay $\beta_2$ and readiness $1-\beta_2^t$, $n$ counts applied penalty calls, $W\in\{0,1\}$ releases or restores the anchor, and $\alpha\in[0,1]$ is the moment-surprise tracking state. $\delta$ is critic EMA decay and $\theta$ the live critic parameters. Moment surprise compares critic gradient RMS with completed Adam second-moment RMS. $j$ indexes optimizer groups, $\eta_j^{(0)}$ is a group's base LR, $s_j$ its adaptive multiplier and $b$ the stationarity block size in intrinsic time. Intrinsic time accumulates applied LR divided by base LR. Game trust is policy confidence derived from optimizer surprise; drift means statistically detected change in update behavior. KA2 anchors critic input gradients; A2 separately dampens sparse latent-row responses. $h_i$ is latent row $i$'s current gradient, $h_i^{\mathrm{prev}}$ its last observed gradient, $\rho_i$ the A2 response multiplier and $\Delta z_i$ the corresponding row update. $\operatorname{cos}$ denotes the implementation's bounded cosine similarity, including its handling of zero-length history.
 
 **Default paired adversarial loss**
 
@@ -30,13 +30,13 @@ $$
 
 $A$ uses RMS input-gradient units; $B_{\mathrm{cap}}$ uses unnormalized L2 caps. When the anchor first starts, copy the live critic and set $P_{\mathrm{anchor}}=0$ for that call. Subsequent calls evaluate its EMA; its fresh input-noise draws follow the same law as the live critic.
 
-**KA2 applied-call handover**
+**KA2 second-moment readiness handover**
 
 $$
-R_{\mathrm{KA2}}=\begin{cases}\dfrac{\lambda}{2}A,&n<800,\\\dfrac{\lambda}{2}\left[\dfrac12 A+\dfrac12\left(B_{\mathrm{cap}}+WwP_{\mathrm{anchor}}\right)\right],&n\ge800.\end{cases}
+R_{\mathrm{KA2}}=\begin{cases}\dfrac{\lambda}{2}A,&1-\beta_2^t<0.55085,\\\dfrac{\lambda}{2}\left[\dfrac12 A+\dfrac12\left(B_{\mathrm{cap}}+WwP_{\mathrm{anchor}}\right)\right],&1-\beta_2^t\ge0.55085.\end{cases}
 $$
 
-The first $799$ applied penalty calls use $A$ alone. Starting at call $800$, the equal blend operates even at constant LR. Moment-surprise ratios release $W$ above $3$ and restore it below $1.75$ once reference history exists. Lazy skips do not increment $n$; an applied lazy penalty includes its cadence multiplier. The independent-row preset uses $\lambda=3$, $\kappa=1$, $w=1$; game trust and drift evidence also modulate anchor release/tracking.
+Current KA2 gates the Phase A to blend transition by optimizer second-moment readiness $1-\beta_2^t$ without an explicit step-count clock; at $\beta_2=0.999$, $1-\beta_2^t<0.55085$ holds for steps $1\dots 799$ and the equal blend starts at step $800$ (matching the historical $n<800$ applied-call warmup). Moment-surprise ratios release $W$ above $3$ and restore it below $1.75$ once reference history exists. Lazy skips do not increment $n$; an applied lazy penalty includes its cadence multiplier. The independent-row preset uses $\lambda=3$, $\kappa=1$, $w=1$; game trust and drift evidence also modulate anchor release/tracking.
 
 **Stationarity learning-rate ladder**
 
@@ -50,21 +50,21 @@ This is the stationarity ladder before policy corrections. Displacement tests us
 
 ```text
 For each training iteration:
-  Select a supported feature backend automatically; the Atlas preset allows 128 feature cells.
+  Select a supported feature backend automatically (256 feature cells in selected atlas-particle-normal-v4; 128 in base Atlas).
   Restore the fast training state if the previous inference state used averages.
-  Set stationarity LRs; permit optimizer-surprise reopen only when the settled guard admits the excursion.
+  Set stationarity LRs; permit surprise reopen only when the settled guard (and pre-anchor critic-only filter) admits the excursion.
   Damp only the critic's rate using payoff error; retain the policy's floor relative to table motion.
-  Draw real x and prior z; generate detached fake with the learned output-noise law.
+  Draw real x and prior z (with additive NormalNoiseManipulator sigma=0.0065 in selected v4); generate detached fake with the declared output-noise law.
   Compute the paired critic loss and add KA2 regularization shown above.
     g_r and g_f are gradients of the critic with respect to its detached real/fake inputs.
     Compute the early RMS-scaled real-gradient/fake-cap term A shown above.
     Compute the late unnormalized real/fake cap term B_caps shown above.
     Measure real-input gradient proximity to the critic average; use zero when the anchor first starts.
-    Use the early-only KA2 penalty for calls 1..799, then the equal early/late blend shown above.
+    Use early-only KA2 while optimizer second-moment readiness 1 - beta_2^t < 0.55085 (steps 1..799 at beta_2=0.999), then the equal early/late blend.
     Its gradient anchor release/tracking also reads the policy's game-trust and drift evidence.
-  Backpropagate; apply the Adam-state critic spike guard, take its Adam/AMSGrad step, record surprise.
+  Backpropagate; apply any configured critic spike guard (disabled in selected v4), take its Adam/AMSGrad step, record surprise.
   Freeze D parameters; draw fresh latent rows, regenerate fake and recompute both scores.
-  Compute the paired generator adversarial loss from the updated critic; backpropagate through G, latent rows and learned log output-noise sigma.
+  Compute the paired generator adversarial loss from the updated critic; backpropagate through G, latent rows and any learnable output-noise parameter.
   Observe row gradients. A2 applies when some rows have zero gradient, cumulative observed fraction < .5, and Adam state exists:
     Scale observed-row Adam responses using the A2 cosine-agreement rule; leave rows without history unchanged.
   Apply the policy corrections to statistically flagged hot rows and exclude those rows from settling tests.
@@ -79,13 +79,13 @@ For each training iteration:
 
 | Characteristic | Behavior |
 | --- | --- |
-| Adversarial loss | Paired relativistic logistic with KA2 input-gradient regularization. Scalar GANTrainer jointly learns the generated-output noise scale through the generator loss. Caller-owned joint/conditional objectives must explicitly bind their roles and guard contexts. |
+| Adversarial loss | Paired relativistic logistic with KA2 input-gradient regularization. Selected `atlas-particle-normal-v4` fixes generated-output noise at zero; base Atlas jointly learns the generated-output noise scale through the generator loss. Caller-owned joint/conditional objectives must explicitly bind their roles and guard contexts. |
 | Optimizer | KA2 critic Adam and shared K3P generator/prior Adam, with AMSGrad enabled and $\beta_1=0$, $\beta_2=0.999$ in the independent-row preset. AMSGrad keeps a running maximum second moment; the policy also owns per-group stationarity, row evidence and restart state. |
-| Learning rates and annealing | Base LR $0.00425$, critic multiplier $1$, latent-prior multiplier $2$. No total training horizon drives the LR: per-group two-scale displacement tests halve settled rates, restore rates on drift and enlarge inconclusive observation windows. Optimizer surprise can reopen the ladders and restart generator moments. The critic also receives payoff-error damping; external update/time limits are budgets, not LR schedules. |
-| Parameter-gradient clipping | The critic spike guard remains: after $200$ Adam steps, clip each tensor relative to $5$ times its bias-corrected second-moment RMS. With AMSGrad it uses the running maximum denominator that Adam will apply. Row-evidence corrections and A2 modify other responses separately; there is no added fixed global norm clip. |
-| Critic penalties and anchors | KA2 $\lambda=3$ and $\kappa=1$, using early real R1/fake RMS caps followed by an equal early/late blend and adaptive critic-gradient anchoring. The applied-call warmup at $800$ remains, even though the LR controller has no fixed horizon. The policy modulates anchor release and EMA tracking using its own evidence. |
-| Damping and update guards | A2 dampens eligible sparse latent-row Adam responses by gradient agreement, with scale $0.75+0.25\operatorname{cos}(h_i,h_i^{\mathrm{prev}})$ in $[0.5,1]$. It activates only when some rows have zero gradient, cumulative observed-row fraction is below $0.5$, and Adam state exists; missing row history gives scale $1$. RowEvidence identifies unusually inconsistent transport, can hold table LR descent, excludes flagged rows from settling tests and corrects hot-row motion. Birth/death uses real-support evidence in standardized critic features and copies/rebases state after a move. These controls require the independent-row policy contract. Atlas adds reopen_guard='settled': an optimizer-surprise excursion must begin after network contraction, with known KA2 loss epochs rebased. Automatic feature selection may choose a feature-cell or kNN path; the chosen backend and its sampling law are recorded. |
-| Training and sampling noise | Critic-input noise is zero. Generated-output noise is learnable, initialized at standard deviation $0.029$, with a policy settlement/mobility-dependent floor. DV12 also perturbs latent rows from support statistics. These sampled laws are part of served evidence; a clean diagnostic is a different cohort. |
+| Learning rates and annealing | Base LR $0.00425$, critic multiplier $1$, latent-prior multiplier $2$. No total training horizon drives the LR: per-group two-scale displacement tests halve settled rates, restore rates on drift and enlarge inconclusive observation windows. Surprise detectors can reopen the ladders and restart generator moments when admitted by the settled guard. The critic also receives payoff-error damping; external update/time limits are budgets, not LR schedules. |
+| Parameter-gradient clipping | Selected `atlas-particle-normal-v4` disables the step-gated critic spike guard (`d_guard_ratio=0.0`, `d_guard_min_steps=0`) for clock-free critic acquisition. Base Atlas retains the inherited guard: after $200$ Adam steps, clip each tensor relative to $5$ times its bias-corrected second-moment RMS, using the running maximum denominator under AMSGrad. Row-evidence corrections and A2 modify other responses separately; there is no added fixed global norm clip. |
+| Critic penalties and anchors | KA2 $\lambda=3$ and $\kappa=1$, using early real R1/fake RMS caps followed by an equal early/late blend and adaptive critic-gradient anchoring. Current KA2 gates the Phase A to blend handover by optimizer second-moment readiness $1-\beta_2^t<0.55085$ (matching $800$ steps under $\beta_2=0.999$ without an explicit step-count clock). The policy modulates anchor release and EMA tracking using its own evidence. |
+| Damping and update guards | A2 dampens eligible sparse latent-row Adam responses by gradient agreement, with scale $0.75+0.25\operatorname{cos}(h_i,h_i^{\mathrm{prev}})$ in $[0.5,1]$. It activates only when some rows have zero gradient, cumulative observed-row fraction is below $0.5$, and Adam state exists; missing row history gives scale $1$. RowEvidence identifies unusually inconsistent transport, can hold table LR descent, excludes flagged rows from settling tests and corrects hot-row motion. Birth/death uses real-support evidence in standardized critic features and copies/rebases state after a move. Atlas adds `reopen_guard='settled'`: a surprise excursion must begin after network contraction, with known KA2 loss epochs rebased, and `atlas-particle-normal-v4` folds pre-anchor (`ka2_anchor_started=False`) critic-only `LossSurprise` witnesses into the calm baseline while preserving post-anchor shift detection. Automatic feature selection (`birth_death_cells=256` in selected v4; `128` in base Atlas) chooses a feature-cell, kNN, or population-bypassed path and records the resolved backend. |
+| Training and sampling noise | Critic-input noise is zero. Selected `atlas-particle-normal-v4` pairs an unstandardized `particles` prior with additive `NormalNoiseManipulator` ($\sigma=0.0065$) and fixed zero generated-output noise (`output_noise_mode='fixed'`, `output_noise_std=0.0`). Base Atlas uses learnable generated-output noise initialized at standard deviation $0.029$ with a settlement/mobility-dependent floor. DV12 also perturbs latent rows from support statistics during turnover. Clean and noisy served laws remain separate cohorts. |
 | Parameter averaging and serving | serve_average=$4$ maintains generator/prior averages over four table-tester blocks. The update rate is table LR scale / ($4$ times block size), with the $0.995$ EMA fallback when no tester rate is available. Serving selects fast or averaged state according to settlement evidence; the critic's adaptive gradient anchor is a separate average. A selected feature-cell backend has its own paired-average eligibility check; the recorded backend decides when average serving is valid. |
 
 ## Configuration differences
@@ -94,7 +94,7 @@ For each training iteration:
 - Task-owned objectives and active components matter: direct sample particles, learned latent rows and a generator network are different parameter roles. A declared recipe switch does not imply that every host can apply it.
 - Selected Atlas (`atlas-particle-normal-v4`) pairs the `particles` prior with `NormalNoiseManipulator(sigma=0.0065)` (`standardize=False`), `birth_death_cells=256`, clean fixed output noise (`output_noise_mode='fixed'`, `output_noise_std=0.0`), clock-free critic acquisition (`d_guard_ratio=0.0`, `d_guard_min_steps=0`), and a KA2 pre-anchor critic-only `LossSurprise` reopen guard. Historical particle-cloud incumbents and served/noisy-sampling cohorts remain separate.
 - Base Atlas differs from E22 through `birth_death_backend='auto'`, `birth_death_cells=128` (`256` in `atlas-particle-normal-v4`, routing `N=256` vector hosts past under-resolved `k=7` kNN turnover) and `reopen_guard='settled'`. Automatic selection is capability/evidence constrained; the configured cell count is a threshold/grid preset, not a promise that every host uses feature cells.
-- The settled reopen guard suppresses acquisition-time and known-loss-epoch excursions from looking like a moved target, and `atlas-particle-normal-v4` additionally folds critic-only `SettledReopenGuard` witnesses before `ka2_anchor_started` into the calm baseline while preserving post-anchor shift detection. It does not remove KA2's applied-call warmup.
+- The settled reopen guard suppresses acquisition-time and known-loss-epoch excursions from looking like a moved target, and `atlas-particle-normal-v4` folds critic-only `SettledReopenGuard` witnesses before `ka2_anchor_started` into the calm baseline while preserving post-anchor shift detection. Current KA2 gates its Phase A to blend handover on optimizer second-moment readiness $1-\beta_2^t<0.55085$ (equivalent to $800$ steps at $\beta_2=0.999$ without an explicit call-count clock), while archived snapshots retain their original executed source contracts.
 
 <details>
 <summary>Implementation and recipe sources</summary>
@@ -149,9 +149,9 @@ Comparison policy: discriminator_stability revision 9, **tier 0**. Actual execut
 
 Source digest: `2e8a97a0aa845c961de00d403fdcd1673b34b33626e4546c3138882a40e7bacf`. Candidate revision: `efebaebc63fbb814b384b2009aedaf06465137a061cb9fe618b83c9a326f82dd`. Runtime cohort: `767710fe7bd0b09c8f303128d74bce9ceb5988630f4c0158fd0a18cd1ee08b63`.
 
-[Frozen numerical evidence](../technique-evidence/e4a7c571970057207edab5821c2eb5448b2a51f6266d8c01bad6a75a9d5c5196.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
+[Frozen numerical evidence](../technique-evidence/4eaeb2e733970936d752120f26b8987bbb676615ef791ef415d1740480eae5cf.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
 
-Selection: current_measurement. Promote atlas-particle-normal-v4 (particles + NormalNoiseManipulator(sigma=0.0065), birth_death_cells=256, clean fixed output noise 0.0, d_guard_ratio=0.0, KA2 pre-anchor critic-only LossSurprise guard) as the selected Atlas candidate following ordinary discriminator_stability Tier 1 CUDA measurement on NVIDIA RTX A6000 (7/13 required + 1/1 diagnostic Tier 1 PASS; 24/38 PASS on prior-ablation-full-suite-v1). Actual executed-policy qualification, comparison-policy projection, and research-diagnostic full-suite readouts retain their separate source-bound proofs; no public-default adoption claim.
+Selection: current_measurement. Promote atlas-particle-normal-v4 (particles + NormalNoiseManipulator(sigma=0.0065), birth_death_cells=256, clean fixed output noise 0.0, d_guard_ratio=0.0, KA2 pre-anchor critic-only LossSurprise guard) as the selected Atlas candidate following ordinary discriminator_stability Tier 1 CUDA measurement on NVIDIA RTX A6000 (7/13 required + 1/1 diagnostic Tier 1 PASS, 18/29 Tier 1 view requirements across views; 24/38 PASS on prior-ablation-full-suite-v1). Actual executed-policy qualification, comparison-policy projection, and research-diagnostic full-suite readouts retain their separate source-bound proofs; no public-default adoption claim.
 
 </details>
 
@@ -160,7 +160,7 @@ Complete current Tier 1 measurement in: discriminator_stability. PASS and FAIL a
 | View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Tier 4 tests | Total distinct tests | Held (measured, not counted) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [adaptation](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation) | [2/3](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-1) | [0/12 (12 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-2) | [0/1 (1 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-4) | [2/16 (13 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation) | [0/7 (7 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
-| [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous) | [2/4](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1) | [0/12 (12 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-2) | [0/6 (6 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-4) | [2/22 (18 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous) | [0/7 (7 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
+| [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous) | [3/4](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1) | [0/12 (12 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-2) | [0/6 (6 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-4) | [3/22 (18 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous) | [0/7 (7 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
 | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability) | [7/13](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | [0/16 (16 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-2) | [0/1 (1 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | [7/30 (17 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability) | [0/13 (7 not run, 6 incompatible)](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
 | [formulation_comparison](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison) | [2/3](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-1) | [0/12 (12 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-2) | [0/1 (1 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-4) | [2/16 (13 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison) | [0/7 (7 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
 | [host_profile_transfer](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer) | [2/3](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-1) | [0/12 (12 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-2) | [0/1 (1 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-4) | [2/16 (13 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer) | [0/7 (7 not run)](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
@@ -186,7 +186,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [ae_gan_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ae_gan_hold) | [adaptation](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-1) | PASS | matches recorded run |
-| [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1) | INVALID | matches recorded run |
+| [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1) | PASS | matches recorded run |
 | [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | FAIL | matches recorded run |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_smoke) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | PASS | matches recorded run |
 | [model_ae_ddgan_gaussian_chain](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_ddgan_gaussian_chain) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | FAIL | matches recorded run |
@@ -646,7 +646,7 @@ Additional eligibility requirements:
 | [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | required | FAIL | matches recorded run |
 | [unused_token_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-unused_token_hold) | required | PASS | matches recorded run |
 | [ae_gan_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ae_gan_hold) | required | PASS | matches recorded run |
-| [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_measurement_v1) | required | INVALID | matches recorded run |
+| [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_measurement_v1) | required | PASS | matches recorded run |
 
 <a name="cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-2"></a>
 
@@ -800,7 +800,7 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [model_ddgan_gaussian_chain](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ddgan_gaussian_chain) | required | FAIL | matches recorded run |
 | [model_vae_categorical](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_categorical) | required | PASS | matches recorded run |
 | [model_vae_hard](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_hard) | required | PASS | matches recorded run |
-| [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_measurement_v1) | diagnostic | INVALID | matches recorded run |
+| [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
 
 <a name="cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-2"></a>
 
@@ -1088,7 +1088,7 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 | [staggered100](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-staggered100) | diagnostic | UNKNOWN | matches recorded run |
 | [ring_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring_hold) | diagnostic | UNKNOWN | matches recorded run |
 | [ring_extension](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring_extension) | diagnostic | UNKNOWN | matches recorded run |
-| [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_measurement_v1) | diagnostic | INVALID | matches recorded run |
+| [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
 
 <a name="cohort-cuda-bc3debd3fa5e-lazy_cadence_coverage-tier-2"></a>
 
@@ -1285,7 +1285,7 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 | [model_ddgan_gaussian_chain](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ddgan_gaussian_chain) | diagnostic | FAIL | matches recorded run |
 | [model_vae_categorical](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_categorical) | diagnostic | PASS | matches recorded run |
 | [model_vae_hard](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_hard) | diagnostic | PASS | matches recorded run |
-| [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_measurement_v1) | diagnostic | INVALID | matches recorded run |
+| [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
 | [clockfree_audit](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [gaussian1d_stability](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_stability) | diagnostic | UNKNOWN | matches recorded run |
 | [five_word_joint_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_hold) | diagnostic | UNKNOWN | matches recorded run |
@@ -1837,13 +1837,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 ### clockfree_audit_measurement_v1
 
-**clockfree_audit_measurement_v1: INVALID**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit_measurement_v1.json).
+**clockfree_audit_measurement_v1: PASS**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit_measurement_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. artifact root is missing or is not a directory
-
-Execution: **recorded**.
-Attempt: `800f097527524ca6ac5fcd40e98c7c4b`; raw outcome: completed.
-Recorded execution seconds: 8.13378; charged wall seconds: 8.13378 (shared execution is charged once to clockfree_audit_measurement_v1).
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. declared state/horizon/cadence/restart comparisons agree; source audit bound
 
 Actual task device: `1` (recorded execution receipt).
 

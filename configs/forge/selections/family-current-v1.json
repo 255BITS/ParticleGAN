@@ -882,11 +882,11 @@
         "discriminator_stability"
       ],
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
-      "reason": "Promote atlas-particle-normal-v4 (particles + NormalNoiseManipulator(sigma=0.0065), birth_death_cells=256, clean fixed output noise 0.0, d_guard_ratio=0.0, KA2 pre-anchor critic-only LossSurprise guard) as the selected Atlas candidate following ordinary discriminator_stability Tier 1 CUDA measurement on NVIDIA RTX A6000 (7/13 required + 1/1 diagnostic Tier 1 PASS; 24/38 PASS on prior-ablation-full-suite-v1). Actual executed-policy qualification, comparison-policy projection, and research-diagnostic full-suite readouts retain their separate source-bound proofs; no public-default adoption claim.",
+      "reason": "Promote atlas-particle-normal-v4 (particles + NormalNoiseManipulator(sigma=0.0065), birth_death_cells=256, clean fixed output noise 0.0, d_guard_ratio=0.0, KA2 pre-anchor critic-only LossSurprise guard) as the selected Atlas candidate following ordinary discriminator_stability Tier 1 CUDA measurement on NVIDIA RTX A6000 (7/13 required + 1/1 diagnostic Tier 1 PASS, 18/29 Tier 1 view requirements across views; 24/38 PASS on prior-ablation-full-suite-v1). Actual executed-policy qualification, comparison-policy projection, and research-diagnostic full-suite readouts retain their separate source-bound proofs; no public-default adoption claim.",
       "recipe_sha256": "f9d4a3b5831c97f686b677df3e168253084b4ac366526c6fc1ee5a6212c11ace",
       "rng_sha256": "495400e2de1b9f9f94a86625a2132091646dcbb8357f48c3512ed24154b89b6d",
       "runtime_cohort_sha256": "bc3debd3fa5e9fcdbb7fafabb9bfd5ad49c7580a97006e4060bf7e7505b22d62",
-      "scientific_row_sha256": "934612e336bc86d7a644b9cfe7eb55b520d3c13b6e09effe69b7a70a8bbea541",
+      "scientific_row_sha256": "a08d27d5ddaced723e5b475b32a8944edaaab4b5682447e133f1a50fea247ad7",
       "selection_kind": "current_measurement",
       "source_digest": "2e8a97a0aa845c961de00d403fdcd1673b34b33626e4546c3138882a40e7bacf",
       "task_keys_sha256": "0f99364cdb1a7e66fbf778a554c08495493ff5bb4baa0cf89d38dc7512967004",

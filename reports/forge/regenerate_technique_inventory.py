@@ -419,7 +419,8 @@ def _comparison_contracts_match(row, comparison):
         return False
     actual_contracts = row["bindings"]["task_contracts"]
     added = set(comparison.get("added_actual_tasks", ()))
-    if set(actual_contracts) != set(reference) | added or set(reference) & added:
+    required = {item["task"] for item in comparison.get("policy", {}).get("assignments", ())}
+    if not required.issubset(reference) or set(actual_contracts) != set(reference) | added:
         return False
     lineage = comparison.get("verified_evaluator_lineage", {}).get(family, {})
     return all(actual_contracts.get(task) in {digest, lineage.get(task)}
@@ -728,6 +729,29 @@ def _evaluator_revision_reaches(root, task, target_evaluation_sha256):
         return False
 
 
+def _measured_candidates_at_source(root, manifests, studies, view_id, execution_backend):
+    """Find every non-diagnostic candidate with original attempts at this source."""
+    from experiments.forge.views import diagnostic_evidence_scope
+    measured = {record["request"]["candidate"]["id"] for record in studies
+                if record["request"]["view"]["id"] == view_id
+                and (execution_backend is None or record["request"]["execution_backend"] == execution_backend)
+                and not diagnostic_evidence_scope(record["request"])}
+    for path in sorted((root / "reports/forge/attempts").glob("*/request.json")):
+        resolved = read_json(path)
+        request = resolved.get("request", resolved)
+        source = request.get("source", {})
+        expected = manifests.get(source.get("digest"))
+        if expected is None or source.get("origin_commit") != expected.get("origin_commit"):
+            continue
+        if (request.get("view", {}).get("id") == view_id
+                and (execution_backend is None or request.get("execution_backend") == execution_backend)
+                and not diagnostic_evidence_scope(request)):
+            candidate_id = request.get("candidate", {}).get("id")
+            if isinstance(candidate_id, str):
+                measured.add(candidate_id)
+    return measured
+
+
 def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary,
                    declaration_registration=None, candidate_roster=None, comparison_policy=None):
     if declaration_registration is not None and candidate_roster is not None:
@@ -758,12 +782,8 @@ def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary
                   "candidate_ids": sorted(ids), "measured_candidate_ids": sorted(measured),
                   "execution_backend": "cuda", "qualification_transfer": False}
     elif candidate_roster is not None:
-        from experiments.forge.views import diagnostic_evidence_scope
         selected_ids = sorted({identifier(cid, "candidate") for cid in candidate_roster})
-        measured = {record["request"]["candidate"]["id"] for record in studies
-                    if record["request"]["view"]["id"] == view_id
-                    and (execution_backend is None or record["request"]["execution_backend"] == execution_backend)
-                    and not diagnostic_evidence_scope(record["request"])}
+        measured = _measured_candidates_at_source(root, manifests, studies, view_id, execution_backend)
         if not selected_ids or not measured.issubset(selected_ids):
             raise ValueError("candidate roster omits an original measured candidate")
         roster = {"scope": "explicit_candidate_roster", "candidate_ids": selected_ids,
@@ -808,6 +828,7 @@ def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary
                 if family in reference and not row.get("attempt_ids"):
                     continue
                 reference[family] = contracts
+                verified_lineage.pop(family, None)
                 family_lineage = {}
                 for task_id, ref_digest in contracts.items():
                     ref_contract = recorded_catalog.get(ref_digest)
