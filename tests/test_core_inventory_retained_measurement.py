@@ -8,11 +8,11 @@ from experiments.forge import trainer_families as families
 from experiments.forge.contracts import atomic_json, read_json, stable_hash
 from experiments.forge.views import load_view, load_tasks, task_execution_fingerprint, task_evaluation_fingerprint
 from reports.forge import regenerate_technique_inventory as publication
-from test_forge_trainer_families import study
+from test_forge_trainer_families import study  # noqa: F401
 
 
 @pytest.fixture
-def retained(study):
+def retained(study):  # noqa: F811
     root, rows, catalogs, _, _, _ = study
     selected = rows[0]
     selected.update(trainer_family="r1r2", attempt_ids=["retained-attempt"])

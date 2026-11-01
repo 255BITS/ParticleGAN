@@ -1275,6 +1275,14 @@
       "json_sha256": "00dde1d7fae1b37134b9c1d549974230d11fb27a9644ddd63736ca345d3aca1d",
       "snapshot": "reports/forge/technique-evidence/2c45cc0649ef839b6455d74b353d4331fd789686dda68f104536706fb0970358.json",
       "source_commit": "d9d72d53761c898bce20102e1995fc3d899c1447"
+    },
+    {
+      "candidates": {
+        "atlas-particle-normal-v4": "2026-11-01T04:26:13.092+00:00"
+      },
+      "json_sha256": "400fd1ec457f711afefa1f8d4c12d3338a1b9cbfd80a644d28bb3a893bc256d8",
+      "snapshot": "reports/forge/technique-evidence/e4a7c571970057207edab5821c2eb5448b2a51f6266d8c01bad6a75a9d5c5196.json",
+      "source_commit": "6261a5458c1f3e14c7c9faf1fc6966e03b2acfb1"
     }
   ],
   "note": "Numerical evidence/provenance only. The sole current technique leaderboard is reports/forge/technique-inventory.md; snapshots cannot qualify the latest checkout.",

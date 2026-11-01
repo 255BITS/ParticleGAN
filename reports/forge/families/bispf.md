@@ -125,11 +125,9 @@ Source digest: `c82ed2dc712e4c9ebda80678e453635bd8a16dc74fae1450234ed368aa956213
 
 [Frozen numerical evidence](../technique-evidence/2c45cc0649ef839b6455d74b353d4331fd789686dda68f104536706fb0970358.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
 
-Selection: current_measurement. Preserve every incumbent pass with one globally configured optimized BISPF recipe. Actual executed-policy qualification, older comparison-policy tiers, exercised wide-channel diagnostics and observed performance targets retain their separate source-bound proofs. No public-default adoption or natural-image quality claim.
+Selection: recorded_source_measurement. Recorded source-bound original measurement retained; stale against current task contracts. No current measurement, qualification reuse or comparable live ranking. Original selection: Preserve every incumbent pass with one globally configured optimized BISPF recipe. Actual executed-policy qualification, older comparison-policy tiers, exercised wide-channel diagnostics and observed performance targets retain their separate source-bound proofs. No public-default adoption or natural-image quality claim.
 
 </details>
-
-Complete current Tier 1 measurement in: discriminator_stability. PASS and FAIL are both measured outcomes; other cohorts retain their own required cells.
 
 | View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Tier 4 tests | Total distinct tests | Held (measured, not counted) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |

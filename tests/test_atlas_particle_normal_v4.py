@@ -155,9 +155,32 @@ def test_atlas_particle_normal_v4_readout_recovers_mode_hold_with_zero_regressio
         read_json(path)
         for path in sorted((ROOT / "reports/forge/records").glob("readout-*.json"))
         if read_json(path).get("candidate_id") == "atlas-particle-normal-v4"
+        and read_json(path).get("study_id") == "atlas-particle-normal-replication-study-v4-reverified"
     ]
-    assert len(v4_records) == 1, f"Expected exactly 1 v4 readout record, found {len(v4_records)}"
+    assert len(v4_records) == 1, f"Expected exactly 1 v4 full-suite readout record, found {len(v4_records)}"
     v4_readout = v4_records[0]
+
+    v4_ordinary_records = [
+        read_json(path)
+        for path in sorted((ROOT / "reports/forge/records").glob("readout-*.json"))
+        if read_json(path).get("candidate_id") == "atlas-particle-normal-v4"
+        and read_json(path).get("study_id") == "atlas-particle-normal-v4-ordinary"
+    ]
+    assert len(v4_ordinary_records) == 1, (
+        f"Expected exactly 1 v4 ordinary discriminator_stability readout, found {len(v4_ordinary_records)}"
+    )
+    v4_ordinary = v4_ordinary_records[0]
+    assert all(item["valid_receipt"] for item in v4_ordinary["provenance"]["attempts"])
+    ordinary_counts = Counter(row["gate_status"] for row in v4_ordinary["task_results"])
+    assert len(v4_ordinary["task_results"]) == 14
+    assert ordinary_counts["INCOMPLETE"] == 0
+    assert ordinary_counts["PASS"] == 8
+    assert ordinary_counts["FAIL"] == 6
+
+    selection = read_json(ROOT / "configs/forge/selections/family-current-v1.json")
+    atlas_pin = next(pin for pin in selection["selections"] if pin["trainer_family"] == "atlas")
+    assert atlas_pin["candidate_id"] == "atlas-particle-normal-v4"
+    assert atlas_pin["execution_backend"] == "cuda"
 
     v3_readout = read_json(ROOT / "reports/forge/records/readout-efb8bacf93e19fc2b0d7f7bf.json")
     v2_readout = read_json(ROOT / "reports/forge/records/readout-4dc982d111099c9b0f33a18e.json")

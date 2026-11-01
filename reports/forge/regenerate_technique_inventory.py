@@ -729,7 +729,9 @@ def _evaluator_revision_reaches(root, task, target_evaluation_sha256):
 
 
 def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary,
-                   declaration_registration=None, comparison_policy=None):
+                   declaration_registration=None, candidate_roster=None, comparison_policy=None):
+    if declaration_registration is not None and candidate_roster is not None:
+        raise ValueError("cannot combine --declaration-registration and --candidate")
     commit = _resolve_commit(root, source_commit)
     manifests = _receipt_manifests(root, commit)
     studies, support = _recorded_studies(root, manifests)
@@ -755,6 +757,18 @@ def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary
         roster = {"registration_path": relative, "registration_sha256": file_hash(registration_path),
                   "candidate_ids": sorted(ids), "measured_candidate_ids": sorted(measured),
                   "execution_backend": "cuda", "qualification_transfer": False}
+    elif candidate_roster is not None:
+        from experiments.forge.views import diagnostic_evidence_scope
+        selected_ids = sorted({identifier(cid, "candidate") for cid in candidate_roster})
+        measured = {record["request"]["candidate"]["id"] for record in studies
+                    if record["request"]["view"]["id"] == view_id
+                    and (execution_backend is None or record["request"]["execution_backend"] == execution_backend)
+                    and not diagnostic_evidence_scope(record["request"])}
+        if not selected_ids or not measured.issubset(selected_ids):
+            raise ValueError("candidate roster omits an original measured candidate")
+        roster = {"scope": "explicit_candidate_roster", "candidate_ids": selected_ids,
+                  "measured_candidate_ids": sorted(measured),
+                  "execution_backend": execution_backend, "qualification_transfer": False}
     frozen_root = temporary / "source"
     catalog_closure = _extract_source(root, commit, frozen_root, manifests, study_support=support)
     contract = temporary / "manifests.json"
@@ -996,11 +1010,13 @@ print(json.dumps(result, sort_keys=True))
 
 def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_stability", execution_backend="cuda",
                output_prefix: Path | str = "reports/forge/technique-inventory", source_commit=None,
-               declaration_registration=None, comparison_policy=None) -> dict:
+               declaration_registration=None, candidate_roster=None, comparison_policy=None) -> dict:
     """Regrade original evidence and publish deterministic compact artifacts."""
     root = Path(root).resolve()
-    if declaration_registration is not None and source_commit is None:
+    if (declaration_registration is not None or candidate_roster is not None) and source_commit is None:
         raise ValueError("declaration roster requires exact frozen source reconstruction")
+    if declaration_registration is not None and candidate_roster is not None:
+        raise ValueError("cannot combine --declaration-registration and --candidate")
     if comparison_policy is not None and source_commit is None:
         raise ValueError("independent comparison projection requires an exact frozen source")
     prefix = Path(output_prefix)
@@ -1029,6 +1045,8 @@ def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_sta
             commit, frozen_digests = None, []
         else:
             comparison_options = {"comparison_policy": comparison_policy} if comparison_policy is not None else {}
+            if candidate_roster is not None:
+                comparison_options["candidate_roster"] = candidate_roster
             metadata, result, commit, frozen_digests = _frozen_report(
                 root, source_commit, view_id=view_id, execution_backend=execution_backend, temporary=Path(temporary),
                 declaration_registration=declaration_registration, **comparison_options)
@@ -1073,6 +1091,9 @@ def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_sta
                (" --source-commit " + commit if commit else ""))
     if declaration_registration is not None:
         command += " --declaration-registration " + shlex.quote(str(declaration_registration))
+    if candidate_roster is not None:
+        for cid in sorted({identifier(item, "candidate") for item in candidate_roster}):
+            command += " --candidate " + shlex.quote(cid)
     if comparison_policy is not None:
         command += " --comparison-policy " + shlex.quote(str(comparison_policy))
     lines = markdown.splitlines()
@@ -3019,7 +3040,8 @@ def _retain_recorded_measurements(root, reports):
 
 def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discriminator_stability",
                     execution_backend=None, recorded_policy=None, advance_policy=False,
-                    ownership_migration=None, declaration_registration=None, comparison_policy=None):
+                    ownership_migration=None, declaration_registration=None, candidate_roster=None,
+                    comparison_policy=None):
     """Maintain one current table; registered source snapshots retain the history."""
     root = Path(root).resolve()
     if (root / "reports/forge/word_checkpoint_publication.py").is_file():
@@ -3035,8 +3057,10 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         raise ValueError("advancing the evidence policy requires --source-commit and no recorded policy")
     if ownership_migration is not None and not (advance_policy and source_commit and recorded_policy is None):
         raise ValueError("ownership migration requires explicit frozen-source policy advance")
-    if declaration_registration is not None and source_commit is None:
+    if (declaration_registration is not None or candidate_roster is not None) and source_commit is None:
         raise ValueError("declaration roster requires exact frozen source reconstruction")
+    if declaration_registration is not None and candidate_roster is not None:
+        raise ValueError("cannot combine --declaration-registration and --candidate")
     recorded_view = None
     if recorded_policy is not None:
         if manifest is None:
@@ -3083,6 +3107,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         with tempfile.TemporaryDirectory(prefix="forge-technique-evidence-") as temporary:
             roster_options = ({"declaration_registration": declaration_registration}
                               if declaration_registration is not None else {})
+            if candidate_roster is not None:
+                roster_options["candidate_roster"] = candidate_roster
             if comparison_policy is not None:
                 roster_options["comparison_policy"] = comparison_policy
             metadata = regenerate(root, view_id=view_id, execution_backend=execution_backend,
@@ -3506,6 +3532,8 @@ def main(argv=None):
                         help="write an independent source report; do not register or change current selections")
     parser.add_argument("--declaration-registration", type=Path,
                         help="enumerate the exact seven-leader ordinary CUDA registration recorded at --source-commit; keep full control lookup")
+    parser.add_argument("--candidate", dest="candidates", action="append",
+                        help="enumerate only these explicit candidate declaration IDs at --source-commit; keep full control lookup")
     parser.add_argument("--recorded-policy", type=Path,
                         help="rebuild registered rows under this exact archived view policy, without resolving live declarations")
     parser.add_argument("--comparison-policy", type=Path,
@@ -3522,7 +3550,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.refresh_performance:
         if (args.output_prefix or args.recorded_policy or args.comparison_policy or args.advance_policy or args.ownership_migration
-                or args.refresh_publication or args.source_commit or args.declaration_registration
+                or args.refresh_publication or args.source_commit or args.declaration_registration or args.candidates
                 or args.device != "all" or args.goal != "discriminator_stability"):
             parser.error("--refresh-performance preserves current evidence; source, policy, goal and device overrides are unsupported")
         from experiments.forge.scaling_publication import refresh_performance
@@ -3535,6 +3563,7 @@ def main(argv=None):
                                    execution_backend=None if args.device == "all" else args.device,
                                    source_commit=args.source_commit, output_prefix=args.output_prefix,
                                    declaration_registration=args.declaration_registration,
+                                   candidate_roster=args.candidates,
                                    comparison_policy=args.comparison_policy)), end="")
         return
     # A later declared view can refresh navigation without advancing/regrading
@@ -3548,7 +3577,7 @@ def main(argv=None):
             if stable_hash(read_json(view_path)) != manifest.get("policy_fingerprint"):
                 args.refresh_publication = True
     if args.refresh_publication:
-        if args.source_commit or args.recorded_policy or args.comparison_policy or args.advance_policy or args.ownership_migration or args.declaration_registration or args.device != "all":
+        if args.source_commit or args.recorded_policy or args.comparison_policy or args.advance_policy or args.ownership_migration or args.declaration_registration or args.candidates or args.device != "all":
             parser.error("--refresh-publication preserves the existing cohorts; source, policy and device overrides are unsupported")
         print(_json_text(refresh_publication(args.root, view_id=args.goal)), end="")
         return
@@ -3557,6 +3586,7 @@ def main(argv=None):
                                 source_commit=args.source_commit, recorded_policy=args.recorded_policy,
                                 advance_policy=args.advance_policy, ownership_migration=args.ownership_migration,
                                 declaration_registration=args.declaration_registration,
+                                candidate_roster=args.candidates,
                                 comparison_policy=args.comparison_policy)), end="")
 
 

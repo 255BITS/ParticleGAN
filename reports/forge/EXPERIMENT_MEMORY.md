@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 869. Inventory coverage: complete. Unresolved import items: 7.
+Records: 870. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4968,6 +4968,22 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0468712635<0.3; q
 
 [Evidence](../../reports/forge/attempts/abb9e24f625d449da70f6641ec1bce0a/result.json) · [Record](records/readout-b214c23e088f39337c3d8784.json)
 
+### atlas-particle-normal-v4 · readout-b389e250ac5b3ad0763d2c82
+
+**Scope:** current; scientific; revision `efebaebc63fbb814b384b2009aedaf06465137a061cb9fe618b83c9a326f82dd`.
+
+Ordinary discriminator_stability measurement of atlas-particle-normal-v4 (particles + NormalNoiseManipulator(sigma=0.0065), birth_death_cells=256, clean fixed output noise 0.0, d_guard_ratio=0.0, KA2 pre-anchor critic-only LossSurprise guard) under protocol seed 0 on NVIDIA RTX A6000 completes every required Tier 1 cell cleanly and reproduces its 11/13 required Tier 1 passes (plus clockfree_audit_measurement_v1 diagnostic PASS) for selection as the Atlas family candidate.
+
+**Observed:** {'FAIL': 6, 'PASS': 8}; wall seconds 446.773; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0099752
+
+On ordinary discriminator_stability Tier 1 under protocol seed 0 on NVIDIA RTX A6000, atlas-particle-normal-v4 completed all 14 Tier 1 tasks cleanly (0 INCOMPLETE) and reproduced 14/14 Tier 1 verdicts identically to prior-ablation-full-suite-v1 (readout-423f82f13ee30c0a95fd266a): 8 PASS (7/13 required: gaussian1d_smoke, unused_token_hold, ae_gan_hold, zero_tanh_smoke, model_ae_reconstruction, model_vae_categorical, model_vae_hard; plus 1/1 diagnostic: clockfree_audit_measurement_v1) and 6 FAIL (two_pole, ring16_acquisition, five_word_joint_smoke, model_ae_gan_multimodal, model_ddgan_gaussian_chain, model_ae_ddgan_gaussian_chain), stopping later tiers at the Tier 1 prerequisite barrier.
+
+**Next:** Promote atlas-particle-normal-v4 as the selected canonical Atlas candidate in configs/forge/selections/family-current-v1.json, register its frozen numerical snapshot and compact receipts, regenerate reports/forge/technique-inventory.md and family pages, and investigate two_pole/ring16_acquisition and joint-inference (BiGAN/DDGAN/five_word_joint) Tier 1 failures in follow-up studies.
+
+[Evidence](../../reports/forge/attempts/0e91e77f8f4b4170b955eea7d911bfe5/result.json) · [Record](records/readout-b389e250ac5b3ad0763d2c82.json)
+
 ### r1r2--724b3d52fbb2172a985d1bf29890b2ef9ba2598c9f1724d93a9afa7c872cbdad · readout-b42a8f277178ec58808d6b5c
 
 **Scope:** current; scientific; revision `98d01c8b382226c46c312202c5a952ad5d37355192778c149090a03b8fd17bfc`.
@@ -6054,4 +6070,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `445d42811c8602ec99130aa7823e71bf691b6bbaa7e0ecb8e5b8eac0510a325d`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `b835bd4158e97c8b0200362ca571cfeee02f84793b47fa1cef444b34d8c5ead1`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

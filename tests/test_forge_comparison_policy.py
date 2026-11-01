@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
-from test_forge_current_technique_inventory import ROOT, evidence, publication
+from test_forge_current_technique_inventory import ROOT, evidence, publication  # noqa: F401
 
 
 def test_actual_registered_dispositions_are_a_valid_comparison_projection():
@@ -83,7 +83,7 @@ def test_projection_rejects_changed_evidence_or_missing_original(change):
         publication._comparison_projection(actual, projected, comparison)
 
 
-def test_explicit_cached_comparison_preserves_registered_rows_without_regrading(evidence):
+def test_explicit_cached_comparison_preserves_registered_rows_without_regrading(evidence):  # noqa: F811
     root, manifest = evidence
     publication.publish_current(root)
     original = read_json(root / 'reports/forge/technique-inventory.json')['rows']
@@ -235,14 +235,35 @@ def test_additive_view_revision_is_valid_comparison_projection_and_retains_added
 
 
 def test_evaluator_revision_lineage_accepts_source_only_refresh_and_rejects_gate_change():
-    from experiments.forge.views import load_tasks
+    from experiments.forge.views import load_tasks, task_evaluation_fingerprint
     recorded = read_json(ROOT / 'reports/forge/technique-inventory.json')
-    atlas_ref = next(row['bindings']['task_contracts'] for row in recorded['rows'] if row['trainer_family'] == 'atlas')
-    ref_eval = recorded['task_contracts'][atlas_ref['two_pole']]['evaluation_sha256']
     live_two_pole = load_tasks(ROOT)['two_pole']
+    live_eval = task_evaluation_fingerprint(live_two_pole)
+    k3p_ref = next(row['bindings']['task_contracts'] for row in recorded['rows'] if row['trainer_family'] == 'k3p')
+    ref_eval = recorded['task_contracts'][k3p_ref['two_pole']]['evaluation_sha256']
+    assert ref_eval != live_eval
     assert publication._evaluator_revision_reaches(ROOT, live_two_pole, ref_eval) is True
 
     tampered = deepcopy(live_two_pole)
     tampered['execution']['steps'] += 1
     assert publication._evaluator_revision_reaches(ROOT, tampered, ref_eval) is False
+
+    tampered_gate = deepcopy(live_two_pole)
+    tampered_gate['evaluation']['thresholds'][0][2] = 0.99
+    assert publication._evaluator_revision_reaches(ROOT, tampered_gate, ref_eval) is False
+
+
+def test_candidate_roster_requires_frozen_source_and_cannot_combine_with_declaration_registration(tmp_path):
+    with pytest.raises(ValueError, match='declaration roster requires exact frozen source reconstruction'):
+        publication.regenerate(tmp_path, candidate_roster=['atlas-particle-normal-v4'])
+    with pytest.raises(ValueError, match='cannot combine --declaration-registration and --candidate'):
+        publication.regenerate(
+            tmp_path,
+            source_commit='HEAD',
+            declaration_registration=Path('reg.json'),
+            candidate_roster=['atlas-particle-normal-v4'],
+        )
+    with pytest.raises(ValueError, match='declaration roster requires exact frozen source reconstruction'):
+        publication.publish_current(tmp_path, candidate_roster=['atlas-particle-normal-v4'])
+
 
