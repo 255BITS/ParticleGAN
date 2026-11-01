@@ -1517,7 +1517,16 @@ def _copy_minimal_repo(src_root: Path, dst_root: Path) -> None:
             shutil.copy2(s, dst_root / rel)
 
 
-def test_evict_superseded_scaling_queue_jobs_matches_real_queue_schema_and_prunes_subscribers(tmp_path: Path):
+def test_evict_superseded_scaling_queue_jobs_matches_real_queue_schema_and_prunes_subscribers(
+    tmp_path: Path, monkeypatch
+):
+    from experiments.forge import sources
+
+    monkeypatch.setattr(
+        sources,
+        "_gpu_models",
+        lambda: frozenset({("NVIDIA RTX A6000", "615.78.08", "8.6")}),
+    )
     repo = tmp_path / "repo"
     _copy_minimal_repo(ROOT, repo)
     (repo / "reports/forge/attempts/att-gpu0-contended").mkdir(parents=True)
@@ -1683,14 +1692,13 @@ def test_current_source_tier1_readouts_ignores_non_tier1_records_and_invalidates
     )
     try:
         live_inv = read_json(wt / "reports/forge/technique-inventory.json")
-        atlas_req = rfr.planning.resolve_idea(
+        atlas_req = rti._resolve_idea_for_readout_check(
             wt,
             "atlas-particle-normal-v4",
             view_id="discriminator_stability",
             through_tier=1,
-            freeze_source=False,
-            execution_backend="cuda",
             cuda_model="NVIDIA RTX A6000",
+            planning_mod=rfr.planning,
         )
         # Add a concluded current-source record containing ONLY a non-Tier-1 task: must NOT be cited in Tier 1 Evidence column.
         atomic_json(
@@ -1741,14 +1749,13 @@ def test_current_source_tier1_readouts_ignores_non_tier1_records_and_invalidates
         assert md_stale == ""
 
         # Re-stamp Atlas readout to the new source/revision (without second_t1_task) to verify _dep_blocked ('1 blocked').
-        new_atlas_req = rfr.planning.resolve_idea(
+        new_atlas_req = rti._resolve_idea_for_readout_check(
             wt,
             "atlas-particle-normal-v4",
             view_id="discriminator_stability",
             through_tier=1,
-            freeze_source=False,
-            execution_backend="cuda",
             cuda_model="NVIDIA RTX A6000",
+            planning_mod=rfr.planning,
         )
         new_compat = {
             tid: job["compatibility_key"]
@@ -1774,6 +1781,311 @@ def test_current_source_tier1_readouts_ignores_non_tier1_records_and_invalidates
         )
         assert "1 preflight-blocked, 1 blocked" in md2
     finally:
+        subprocess.run(
+            ["git", "-C", str(ROOT), "worktree", "remove", "--force", str(wt)],
+            check=False,
+            capture_output=True,
+        )
+        shutil.rmtree(wt, ignore_errors=True)
+
+
+def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidate_task_edits(
+    tmp_path: Path, monkeypatch
+):
+    import shutil
+    import subprocess
+    from experiments.forge import planning, sources
+    from experiments.forge.family_reports import generated_pages
+    from reports.forge import regenerate_technique_inventory as rti
+
+    wt = tmp_path / "wt-clean-cpu-ci"
+    subprocess.run(
+        ["git", "-C", str(ROOT), "worktree", "add", "--detach", str(wt), "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    try:
+        # Copy only tracked working-tree updates into the detached worktree while keeping
+        # gitignored runs/forge/, reports/forge/attempts/, and test-performance.{json,html} absent.
+        for rel in (
+            "ops/refresh_forge_readouts.py",
+            "reports/forge/regenerate_technique_inventory.py",
+            "reports/forge/technique-inventory.json",
+            "reports/forge/technique-inventory.md",
+            "reports/forge/test-performance.md",
+            "reports/forge/EXPERIMENTS_BY_TIER.md",
+            "reports/forge/EXPERIMENT_MEMORY.md",
+            "reports/forge/compilation.json",
+            "reports/forge/problems.md",
+        ):
+            src_file = ROOT / rel
+            if src_file.is_file():
+                dst_file = wt / rel
+                dst_file.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(src_file, dst_file)
+        fam_src = ROOT / "reports/forge/families"
+        if fam_src.is_dir():
+            for p in sorted(fam_src.glob("*.md")):
+                shutil.copy2(p, wt / "reports/forge/families" / p.name)
+
+        assert not (wt / "runs/forge").exists()
+        assert not (wt / "reports/forge/test-performance.json").exists()
+        assert not (wt / "reports/forge/test-performance.html").exists()
+
+        # 1. Simulate GitHub Actions clean CPU-only CI: Python 3.11 +cpu packages and no nvidia-smi.
+        cpu_ci_runtime = {
+            "python": "3.11.9",
+            "implementation": "CPython",
+            "system": "Linux",
+            "machine": "x86_64",
+            "packages": {"torch": "2.4.0+cpu", "numpy": "1.26.4", "scipy": "1.13.1"},
+        }
+        if hasattr(sources._gpu_models, "cache_clear"):
+            sources._gpu_models.cache_clear()
+        monkeypatch.setattr(sources, "_gpu_models", lambda: None)
+        monkeypatch.setattr(sources, "runtime_manifest", lambda: deepcopy(cpu_ci_runtime))
+        monkeypatch.setattr(planning, "runtime_manifest", lambda: deepcopy(cpu_ci_runtime))
+
+        # Confirm host-resolved compatibility_key genuinely differs from recorded GPU-workstation keys
+        # and that no local attempt envelopes exist for current-source readout rows on the clean worktree.
+        probed_req = planning.resolve_idea(
+            wt,
+            "atlas-particle-normal-v4",
+            view_id="discriminator_stability",
+            through_tier=1,
+            freeze_source=False,
+            execution_backend="cuda",
+            cuda_model="NVIDIA RTX A6000",
+        )
+        assert probed_req["runtime"]["python"] == "3.11.9"
+        assert probed_req["compute_profiles"]["cuda"]["availability"] == "unavailable"
+        probed_compat = {
+            tid: job["compatibility_key"]
+            for job in probed_req["jobs"]
+            for tid in job.get("task_ids", [job["task_id"]])
+        }
+        atlas_rec_path = next(
+            p
+            for p in sorted((wt / "reports/forge/records").glob("readout-*.json"))
+            if read_json(p).get("lifecycle") == "concluded"
+            and read_json(p).get("evidence_scope") == "current"
+            and read_json(p).get("candidate_id") == "atlas-particle-normal-v4"
+            and read_json(p).get("candidate_revision") == probed_req["candidate_revision"]
+        )
+        atlas_rec = read_json(atlas_rec_path)
+        for row in atlas_rec["task_results"]:
+            assert not (wt / "reports/forge/attempts" / row["_attempt_id"]).exists()
+            assert row["compatibility_key"] != probed_compat[row["task_id"]]
+
+        # Clean CPU CI must report status == CURRENT and match every committed page byte-for-byte.
+        status_cpu = rfr.check_status(wt)
+        assert status_cpu["status"] == "CURRENT", json.dumps(status_cpu, indent=2, sort_keys=True)
+        assert status_cpu["stale_stages"] == []
+        assert status_cpu["source_digest"] == "2e8a97a0aa845c961de00d403fdcd1673b34b33626e4546c3138882a40e7bacf"
+
+        wt_inv = read_json(wt / "reports/forge/technique-inventory.json")
+        pages = generated_pages(wt, wt_inv)
+        overview_path = wt / "reports/forge/technique-inventory.md"
+        pages[overview_path] = rti._current_markdown(wt_inv, wt, overview_path)
+        assert "### Current-source selected-recipe Tier 1 readouts" in pages[overview_path]
+        for page_path, expected_text in pages.items():
+            assert page_path.read_text() == expected_text, page_path
+
+        # 2. Simulate a non-A6000 GPU host (e.g. RTX 4090) where compute_profile("cuda", "NVIDIA RTX A6000") raises ValueError.
+        monkeypatch.setattr(
+            sources,
+            "_gpu_models",
+            lambda: frozenset({("NVIDIA GeForce RTX 4090", "560.35.03", "8.9")}),
+        )
+        status_4090 = rfr.check_status(wt)
+        assert status_4090["status"] == "CURRENT", json.dumps(status_4090, indent=2, sort_keys=True)
+        assert rti._current_markdown(wt_inv, wt, overview_path) == overview_path.read_text()
+
+        # Restore CPU-only CI probe for invalidation checks below.
+        monkeypatch.setattr(sources, "_gpu_models", lambda: None)
+
+        # 3. Editing a task card NOT listed in source.files (zero_tanh_smoke.json) keeps source_digest unchanged
+        #    yet invalidates the stale readout row on the clean CPU worktree via attempt-coverage.json fingerprints
+        #    without needing manual _CURRENT_SOURCE_TIER1_CACHE.clear().
+        zt_path = wt / "configs/forge/tasks/zero_tanh_smoke.json"
+        orig_zt_bytes = zt_path.read_bytes()
+        zt_doc = read_json(zt_path)
+        zt_doc["execution"]["steps"] = int(zt_doc["execution"]["steps"]) + 10
+        atomic_json(zt_path, zt_doc)
+
+        assert (
+            rfr.catalog_source_manifest(wt)["digest"]
+            == "2e8a97a0aa845c961de00d403fdcd1673b34b33626e4546c3138882a40e7bacf"
+        )
+        sfr_after_edit = rfr.check_selected_family_readouts(wt)
+        assert sfr_after_edit["current"] is False
+        assert len(sfr_after_edit["missing_families"]) == 7
+        for item in sfr_after_edit["missing_families"]:
+            assert item["unmeasured_tier1"] == ["zero_tanh_smoke"]
+
+        tier1_md_after_edit = rti._current_source_tier1_readouts_markdown(wt_inv, wt, overview_path)
+        assert "1 not run" in tier1_md_after_edit
+        assert rfr.check_compiled_reports(wt)["current"] is False
+
+        # Restore zero_tanh_smoke.json and confirm CURRENT is restored automatically.
+        zt_path.write_bytes(orig_zt_bytes)
+        assert rfr.check_selected_family_readouts(wt)["current"] is True
+        assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is True
+
+        # 4. Non-hex garbage compatibility_key on a clean checkout is rejected automatically.
+        orig_atlas_bytes = atlas_rec_path.read_bytes()
+        bad_ck_rec = deepcopy(atlas_rec)
+        for row in bad_ck_rec["task_results"]:
+            if row["task_id"] == "zero_tanh_smoke":
+                row["compatibility_key"] = "ck-t1-STALE"
+        atomic_json(atlas_rec_path, bad_ck_rec)
+        sfr_bad_ck = rfr.check_selected_family_readouts(wt)
+        assert sfr_bad_ck["current"] is False
+        assert sfr_bad_ck["missing_families"] == [
+            {
+                "family": "atlas",
+                "candidate_id": "atlas-particle-normal-v4",
+                "candidate_revision": probed_req["candidate_revision"],
+                "unmeasured_tier1": ["zero_tanh_smoke"],
+                "unmeasured_tier2": [],
+                "unmeasured_by_tier": {"1": ["zero_tanh_smoke"]},
+            }
+        ]
+        assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is False
+        atlas_rec_path.write_bytes(orig_atlas_bytes)
+        assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is True
+
+        # 5. When a durable local attempt request.json exists on disk, full compatibility_key hash reconstruction
+        #    is enforced AND _CURRENT_SOURCE_TIER1_CACHE invalidates automatically on local envelope changes.
+        zt_row = next(r for r in atlas_rec["task_results"] if r["task_id"] == "zero_tanh_smoke")
+        zt_aid = zt_row["_attempt_id"]
+        local_req_path = wt / "reports/forge/attempts" / zt_aid / "request.json"
+        valid_workstation_envelope = {
+            "schema_version": 1,
+            "request": {
+                "runtime": {
+                    "implementation": "CPython",
+                    "machine": "x86_64",
+                    "packages": {"numpy": "2.5.4", "scipy": "1.18.1", "torch": "2.14.1"},
+                    "python": "3.14.8",
+                    "system": "Linux",
+                },
+                "compute_profiles": {
+                    "cuda": {
+                        "autograd_multithreading_enabled": False,
+                        "backend": "cuda",
+                        "compute_capability": "8.6",
+                        "deterministic": True,
+                        "driver": "615.78.08",
+                        "model": "NVIDIA RTX A6000",
+                        "tf32": False,
+                        "threads": 1,
+                    }
+                },
+            },
+        }
+        atomic_json(local_req_path, valid_workstation_envelope)
+        assert rfr.check_selected_family_readouts(wt)["current"] is True
+        assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is True
+
+        tampered_envelope = deepcopy(valid_workstation_envelope)
+        tampered_envelope["request"]["runtime"]["python"] = "3.99.0-tampered"
+        atomic_json(local_req_path, tampered_envelope)
+        sfr_tampered_local = rfr.check_selected_family_readouts(wt)
+        assert sfr_tampered_local["current"] is False
+        assert sfr_tampered_local["missing_families"][0]["unmeasured_tier1"] == ["zero_tanh_smoke"]
+        assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is False
+
+        local_req_path.write_text("{corrupt-attempt-request-json\n")
+        sfr_corrupt_local = rfr.check_selected_family_readouts(wt)
+        assert sfr_corrupt_local["current"] is False
+        assert sfr_corrupt_local["missing_families"][0]["unmeasured_tier1"] == ["zero_tanh_smoke"]
+        assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is False
+
+        # 6. Unit-level edge cases on _ReadoutCompatibilityMatcher:
+        #    (a) rec["attempt_ids"] fallback with partial local attempts uses result.json task ownership so a corrupt
+        #        attempt for task_a fails closed on task_a without poisoning task_b whose attempt is absent locally;
+        #    (b) editing a sibling task inside a multi-task prerequisite execution group invalidates downstream tasks.
+        unit_root = tmp_path / "matcher-unit"
+        (unit_root / "reports/forge/attempts/aid_a").mkdir(parents=True)
+        (unit_root / "reports/forge/attempts/aid_a/request.json").write_text("{corrupt\n")
+        atomic_json(
+            unit_root / "reports/forge/attempts/aid_a/result.json",
+            {"task_results": [{"task_id": "task_a"}]},
+        )
+        unit_req = {
+            "source": {"digest": "a" * 64},
+            "jobs": [
+                {
+                    "task_id": "task_a",
+                    "task_ids": ["task_a"],
+                    "execution_group": "task_a",
+                    "compatibility_key": "1" * 64,
+                    "resources": {"gpus": 1, "backend": "cuda"},
+                    "science": {"execution": {"task_a": "ex_a"}, "evaluation": {"task_a": "ev_a"}, "compute": {"threads": 1}},
+                },
+                {
+                    "task_id": "task_b",
+                    "task_ids": ["task_b"],
+                    "execution_group": "task_b",
+                    "compatibility_key": "2" * 64,
+                    "resources": {"gpus": 1, "backend": "cuda"},
+                    "science": {"execution": {"task_b": "ex_b"}, "evaluation": {"task_b": "ev_b"}, "compute": {"threads": 1}},
+                },
+                {
+                    "task_id": "ring_hold",
+                    "task_ids": ["ring_hold", "ring_extension"],
+                    "execution_group": "ring_group",
+                    "compatibility_key": "3" * 64,
+                    "resources": {"gpus": 1, "backend": "cuda"},
+                    "science": {
+                        "execution": {"ring_hold": "ex_rh", "ring_extension": "ex_re_EDITED"},
+                        "evaluation": {"ring_hold": "ev_rh", "ring_extension": "ev_re"},
+                        "compute": {"threads": 1},
+                    },
+                },
+                {
+                    "task_id": "ring_downstream",
+                    "task_ids": ["ring_downstream"],
+                    "execution_group": "ring_downstream",
+                    "compatibility_key": "4" * 64,
+                    "resources": {"gpus": 1, "backend": "cuda"},
+                    "science": {
+                        "execution": {"ring_downstream": "ex_rd"},
+                        "evaluation": {"ring_downstream": "ev_rd"},
+                        "prerequisites": {"ring_hold": "3" * 64},
+                        "compute": {"threads": 1},
+                    },
+                },
+            ],
+        }
+        unit_cov = {
+            ("a" * 64, "task_a"): {("ex_a", "ev_a")},
+            ("a" * 64, "task_b"): {("ex_b", "ev_b")},
+            ("a" * 64, "ring_hold"): {("ex_rh", "ev_rh")},
+            ("a" * 64, "ring_extension"): {("ex_re_ORIG", "ev_re")},
+            ("a" * 64, "ring_downstream"): {("ex_rd", "ev_rd")},
+        }
+        unit_matcher = rti._ReadoutCompatibilityMatcher(
+            unit_root, unit_req, coverage_fps=unit_cov, planning_mod=planning
+        )
+        unit_rec = {"attempt_ids": ["aid_a", "aid_b_absent"]}
+        assert unit_matcher.matches(unit_rec, {"task_id": "task_a", "compatibility_key": "c" * 64}, "task_a") is False
+        assert unit_matcher.matches(unit_rec, {"task_id": "task_b", "compatibility_key": "d" * 64}, "task_b") is True
+        assert (
+            unit_matcher.matches(
+                {"attempt_ids": ["aid_absent"]},
+                {"task_id": "ring_downstream", "compatibility_key": "e" * 64},
+                "ring_downstream",
+            )
+            is False
+        )
+    finally:
+        if hasattr(sources._gpu_models, "cache_clear"):
+            sources._gpu_models.cache_clear()
+        rti._CURRENT_SOURCE_TIER1_CACHE.clear()
+        rti._CONCLUDED_TIER1_RECORDS_CACHE.clear()
         subprocess.run(
             ["git", "-C", str(ROOT), "worktree", "remove", "--force", str(wt)],
             check=False,

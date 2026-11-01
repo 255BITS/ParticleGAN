@@ -2332,6 +2332,279 @@ def _selected_diagnostic_rows(markdown, result, root, path):
 
 
 _CURRENT_SOURCE_TIER1_CACHE: dict[tuple, dict | None] = {}
+_CONCLUDED_TIER1_RECORDS_CACHE: dict[tuple, tuple[list[tuple[str, str, dict]], tuple[str, ...]]] = {}
+_SCOPED_COVERAGE_KEYS = ("research_scope", "repair_scope", "policy_scope", "cohort_scope")
+_READOUT_SOURCE_SUFFIXES = {".py", ".json", ".toml", ".yaml", ".yml", ".sh"}
+
+
+def _is_sha256_hex(value) -> bool:
+    return isinstance(value, str) and len(value) == 64 and all(ch in "0123456789abcdef" for ch in value)
+
+
+def _is_valid_attempt_id(value) -> bool:
+    return (
+        isinstance(value, str)
+        and bool(value)
+        and "/" not in value
+        and "\\" not in value
+        and value not in {".", ".."}
+    )
+
+
+def _load_attempt_coverage_task_fps(root: Path) -> dict[tuple[str, str], set[tuple[str, str]]]:
+    cov_path = Path(root) / "reports/forge/attempt-coverage.json"
+    if not cov_path.is_file():
+        return {}
+    try:
+        doc = read_json(cov_path)
+    except Exception:
+        return {}
+    unscoped: dict[tuple[str, str], set[tuple[str, str]]] = {}
+    scoped: dict[tuple[str, str], set[tuple[str, str]]] = {}
+    for rec in doc.get("records", []) if isinstance(doc, dict) else []:
+        if not isinstance(rec, dict):
+            continue
+        src = rec.get("source_digest")
+        tid = rec.get("task")
+        ex_fp = rec.get("execution_sha256")
+        ev_fp = rec.get("evaluation_sha256")
+        if (
+            isinstance(src, str)
+            and src
+            and isinstance(tid, str)
+            and tid
+            and isinstance(ex_fp, str)
+            and ex_fp
+            and isinstance(ev_fp, str)
+            and ev_fp
+        ):
+            target = scoped if any(rec.get(k) for k in _SCOPED_COVERAGE_KEYS) else unscoped
+            target.setdefault((src, tid), set()).add((ex_fp, ev_fp))
+    merged = dict(scoped)
+    merged.update(unscoped)
+    return merged
+
+
+def _resolve_idea_for_readout_check(
+    root: Path,
+    candidate_id: str,
+    *,
+    view_id: str,
+    through_tier: int,
+    cuda_model: str,
+    planning_mod,
+) -> dict:
+    try:
+        return planning_mod.resolve_idea(
+            root,
+            candidate_id,
+            view_id=view_id,
+            through_tier=through_tier,
+            freeze_source=False,
+            execution_backend="cuda",
+            cuda_model=cuda_model,
+        )
+    except ValueError as exc:
+        if "select one compatible CUDA model cohort" not in str(exc):
+            raise
+        return planning_mod.resolve_idea(
+            root,
+            candidate_id,
+            view_id=view_id,
+            through_tier=through_tier,
+            freeze_source=False,
+            execution_backend="cpu",
+            cuda_model=None,
+        )
+
+
+class _ReadoutCompatibilityMatcher:
+    def __init__(
+        self,
+        root: Path,
+        req: dict,
+        *,
+        coverage_fps: dict[tuple[str, str], set[tuple[str, str]]],
+        planning_mod,
+        attempt_cache: dict[str, dict | None] | None = None,
+    ) -> None:
+        self.root = Path(root)
+        self.req = req
+        self.source_digest = (req.get("source") or {}).get("digest")
+        self.coverage_fps = coverage_fps
+        self.planning_mod = planning_mod
+        self.req_jobs = list(req.get("jobs", []))
+        self.job_by_task: dict[str, dict] = {
+            str(tid): job
+            for job in self.req_jobs
+            for tid in job.get("task_ids", [job["task_id"]])
+        }
+        self._attempt_cache = attempt_cache if attempt_cache is not None else {}
+        self._attempt_covered_cache: dict[str, tuple[str, ...]] = {}
+        self._rekey_cache: dict[str, dict[str, str]] = {}
+
+    def _load_attempt_request(self, attempt_id) -> dict | None:
+        if not _is_valid_attempt_id(attempt_id):
+            return None
+        if attempt_id not in self._attempt_cache:
+            path = self.root / "reports/forge/attempts" / attempt_id / "request.json"
+            if not path.is_file():
+                self._attempt_cache[attempt_id] = None
+            else:
+                try:
+                    loaded = read_json(path)
+                    self._attempt_cache[attempt_id] = loaded if isinstance(loaded, dict) else {}
+                except Exception:
+                    self._attempt_cache[attempt_id] = {}
+        return self._attempt_cache[attempt_id]
+
+    def _attempt_covered_tasks(self, attempt_id: str, env_doc: dict) -> tuple[str, ...]:
+        env_job = env_doc.get("job")
+        if isinstance(env_job, dict):
+            covered = env_job.get("task_ids") or ([env_job["task_id"]] if "task_id" in env_job else [])
+            if covered:
+                return tuple(str(x) for x in covered)
+        if not _is_valid_attempt_id(attempt_id):
+            return ()
+        if attempt_id not in self._attempt_covered_cache:
+            res_path = self.root / "reports/forge/attempts" / attempt_id / "result.json"
+            tasks_found: tuple[str, ...] = ()
+            if res_path.is_file():
+                try:
+                    res_doc = read_json(res_path)
+                    if isinstance(res_doc, dict) and isinstance(res_doc.get("task_results"), list):
+                        tasks_found = tuple(
+                            str(item["task_id"])
+                            for item in res_doc["task_results"]
+                            if isinstance(item, dict) and item.get("task_id")
+                        )
+                except Exception:
+                    tasks_found = ()
+            self._attempt_covered_cache[attempt_id] = tasks_found
+        return self._attempt_covered_cache[attempt_id]
+
+    def _reconstructed_compat(self, attempt_doc: dict) -> dict[str, str]:
+        env_req = attempt_doc.get("request") if isinstance(attempt_doc.get("request"), dict) else attempt_doc
+        runtime = env_req.get("runtime") if isinstance(env_req, dict) else None
+        if not isinstance(runtime, dict) and isinstance(attempt_doc.get("job"), dict):
+            runtime = (attempt_doc["job"].get("science") or {}).get("runtime")
+        if not isinstance(runtime, dict):
+            return {}
+        raw_profiles = env_req.get("compute_profiles") if isinstance(env_req, dict) else None
+        compute_profiles = dict(raw_profiles) if isinstance(raw_profiles, dict) else {}
+        if isinstance(attempt_doc.get("job"), dict):
+            j_comp = (attempt_doc["job"].get("science") or {}).get("compute")
+            if isinstance(j_comp, dict) and isinstance(j_comp.get("backend"), str) and j_comp["backend"] not in compute_profiles:
+                compute_profiles[j_comp["backend"]] = {k: v for k, v in j_comp.items() if k != "threads"}
+        if not compute_profiles:
+            return {}
+        sig = stable_hash({"runtime": runtime, "compute_profiles": compute_profiles})
+        if sig not in self._rekey_cache:
+            cloned = []
+            valid_groups: set[str] = set()
+            for job in self.req_jobs:
+                sci = job.get("science")
+                if not isinstance(sci, dict):
+                    continue
+                gpus = (job.get("resources") or {}).get("gpus")
+                if type(gpus) is int and gpus == 0:
+                    backend = "cpu"
+                elif type(gpus) is int and gpus > 0:
+                    backend = "cuda"
+                else:
+                    backend = str((job.get("resources") or {}).get("backend") or (sci.get("compute") or {}).get("backend") or "cuda")
+                prof = compute_profiles.get(backend)
+                group = str(job.get("execution_group", job["task_id"]))
+                if isinstance(prof, dict):
+                    valid_groups.add(group)
+                    new_compute = {**prof, "threads": sci["compute"]["threads"]}
+                else:
+                    new_compute = dict(sci["compute"])
+                new_sci = {**sci, "runtime": runtime, "compute": new_compute}
+                if "prerequisites" in new_sci and isinstance(new_sci["prerequisites"], dict):
+                    new_sci["prerequisites"] = dict(new_sci["prerequisites"])
+                cloned.append({**job, "science": new_sci})
+            by_task = {m: j for j in cloned for m in j.get("task_ids", [j["task_id"]])}
+            if all(p in by_task for j in cloned for p in (j["science"].get("prerequisites") or {})):
+                self.planning_mod.rekey_jobs(cloned)
+                reconstructed: dict[str, str] = {}
+                for j in cloned:
+                    grp = str(j.get("execution_group", j["task_id"]))
+                    prereq_ok = all(
+                        str(by_task[p].get("execution_group", by_task[p]["task_id"])) in valid_groups
+                        for p in (j["science"].get("prerequisites") or {})
+                    )
+                    if grp in valid_groups and prereq_ok:
+                        for m in j.get("task_ids", [j["task_id"]]):
+                            reconstructed[str(m)] = j["compatibility_key"]
+                self._rekey_cache[sig] = reconstructed
+            else:
+                self._rekey_cache[sig] = {}
+        return self._rekey_cache[sig]
+
+    def matches(self, rec: dict, row: dict, tid: str) -> bool:
+        job = self.job_by_task.get(tid)
+        if job is None:
+            return True
+        sci = job.get("science")
+        if not isinstance(sci, dict):
+            return ("compatibility_key" not in row) or (row.get("compatibility_key") == job.get("compatibility_key"))
+        if "compatibility_key" in row and row.get("compatibility_key") == job.get("compatibility_key"):
+            return True
+        if "compatibility_key" in row:
+            row_aid = row.get("_attempt_id") or row.get("attempt_id")
+            if isinstance(row_aid, str) and row_aid:
+                env_doc = self._load_attempt_request(row_aid)
+                if env_doc is not None:
+                    return row.get("compatibility_key") == self._reconstructed_compat(env_doc).get(tid)
+            else:
+                matching_envs: list[dict] = []
+                for aid in rec.get("attempt_ids", []) if isinstance(rec.get("attempt_ids"), list) else []:
+                    env_doc = self._load_attempt_request(aid)
+                    if env_doc is None:
+                        continue
+                    covered = self._attempt_covered_tasks(aid, env_doc)
+                    if covered and tid not in covered:
+                        continue
+                    matching_envs.append(env_doc)
+                if matching_envs:
+                    return any(
+                        row.get("compatibility_key") == self._reconstructed_compat(e).get(tid)
+                        for e in matching_envs
+                    )
+            if not _is_sha256_hex(row.get("compatibility_key")):
+                return False
+        if isinstance(self.source_digest, str) and self.source_digest:
+            for member_tid in job.get("task_ids", [tid]):
+                m_key = str(member_tid)
+                recorded_pairs = self.coverage_fps.get((self.source_digest, m_key))
+                if recorded_pairs is not None:
+                    cur_pair = ((sci.get("execution") or {}).get(m_key), (sci.get("evaluation") or {}).get(m_key))
+                    if cur_pair not in recorded_pairs:
+                        return False
+            for prereq_tid in (sci.get("prerequisites") or {}):
+                p_key = str(prereq_tid)
+                p_job = self.job_by_task.get(p_key)
+                if isinstance(p_job, dict) and isinstance(p_job.get("science"), dict):
+                    p_sci = p_job["science"]
+                    for p_member in p_job.get("task_ids", [p_key]):
+                        pm_key = str(p_member)
+                        recorded_prereq = self.coverage_fps.get((self.source_digest, pm_key))
+                        if recorded_prereq is not None:
+                            p_pair = (
+                                (p_sci.get("execution") or {}).get(pm_key),
+                                (p_sci.get("evaluation") or {}).get(pm_key),
+                            )
+                            if p_pair not in recorded_prereq:
+                                return False
+                else:
+                    recorded_prereq = self.coverage_fps.get((self.source_digest, p_key))
+                    p_info = (sci.get("prerequisites") or {}).get(prereq_tid)
+                    if recorded_prereq is not None and isinstance(p_info, dict):
+                        p_pair = (p_info.get("execution"), p_info.get("evaluation"))
+                        if p_pair not in recorded_prereq:
+                            return False
+        return True
 
 
 def _format_tier1_bucket(outcomes: list[str], total: int, *, bold_score: bool = False) -> str:
@@ -2398,45 +2671,121 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
         if tasks_dir.is_dir()
         else ()
     )
+    defaults_path = root / "configs/forge/defaults.json"
+    protocols_dir = root / "configs/forge/protocols"
+    forge_cfg_stats = (
+        (defaults_path.stat().st_mtime_ns, defaults_path.stat().st_size) if defaults_path.is_file() else None,
+        tuple((p.name, p.stat().st_mtime_ns, p.stat().st_size) for p in sorted(protocols_dir.glob("*.json")))
+        if protocols_dir.is_dir()
+        else (),
+    )
     src_count = 0
     src_max_mtime = 0
     src_total_size = 0
     for sub in ("particlegan", "experiments", "benchmarks", "lib"):
         sub_dir = root / sub
         if sub_dir.is_dir():
-            for py_file in sub_dir.rglob("*.py"):
-                st = py_file.stat()
+            for src_file in sub_dir.rglob("*"):
+                if (
+                    src_file.is_file()
+                    and src_file.suffix in _READOUT_SOURCE_SUFFIXES
+                    and not any(part in {"__pycache__", ".venv", "runs"} for part in src_file.relative_to(root).parts)
+                ):
+                    st = src_file.stat()
+                    src_count += 1
+                    if st.st_mtime_ns > src_max_mtime:
+                        src_max_mtime = st.st_mtime_ns
+                    src_total_size += st.st_size
+    cfg_dir = root / "configs"
+    if cfg_dir.is_dir():
+        for cfg_file in cfg_dir.rglob("*"):
+            if (
+                cfg_file.is_file()
+                and cfg_file.suffix in _READOUT_SOURCE_SUFFIXES
+                and "forge" not in cfg_file.relative_to(root).parts
+            ):
+                st = cfg_file.stat()
                 src_count += 1
                 if st.st_mtime_ns > src_max_mtime:
                     src_max_mtime = st.st_mtime_ns
                 src_total_size += st.st_size
+
+    record_stats = tuple((p.name, p.stat().st_mtime_ns, p.stat().st_size) for p in record_paths)
+    rec_cache_key = (str(root), record_stats)
+    if rec_cache_key not in _CONCLUDED_TIER1_RECORDS_CACHE:
+        parsed_concluded: list[tuple[str, str, dict]] = []
+        ref_aids: set[str] = set()
+        for rec_path in record_paths:
+            try:
+                rec = read_json(rec_path)
+            except Exception:
+                continue
+            if not isinstance(rec, dict) or rec.get("lifecycle") != "concluded" or rec.get("evidence_scope") != "current":
+                continue
+            scope = (rec.get("study") or {}).get("scope") or {}
+            if (
+                (scope.get("view") or rec.get("goal")) == "discriminator_stability"
+                and scope.get("execution_backend", "cuda") == "cuda"
+                and scope.get("cuda_model") in {None, "NVIDIA RTX A6000"}
+            ):
+                parsed_concluded.append((rec_path.relative_to(root).as_posix(), rec_path.name, rec))
+                for aid in rec.get("attempt_ids", []) if isinstance(rec.get("attempt_ids"), list) else []:
+                    if _is_valid_attempt_id(aid):
+                        ref_aids.add(aid)
+                for trow in rec.get("task_results", []) if isinstance(rec.get("task_results"), list) else []:
+                    if isinstance(trow, dict):
+                        row_aid = trow.get("_attempt_id") or trow.get("attempt_id")
+                        if _is_valid_attempt_id(row_aid):
+                            ref_aids.add(row_aid)
+        if len(_CONCLUDED_TIER1_RECORDS_CACHE) >= 8:
+            _CONCLUDED_TIER1_RECORDS_CACHE.pop(next(iter(_CONCLUDED_TIER1_RECORDS_CACHE)))
+        _CONCLUDED_TIER1_RECORDS_CACHE[rec_cache_key] = (parsed_concluded, tuple(sorted(ref_aids)))
+    concluded, referenced_aids = _CONCLUDED_TIER1_RECORDS_CACHE[rec_cache_key]
+
+    attempts_dir = root / "reports/forge/attempts"
+    attempt_stats_list = []
+    if attempts_dir.is_dir() and referenced_aids:
+        for aid in referenced_aids:
+            req_p = attempts_dir / aid / "request.json"
+            res_p = attempts_dir / aid / "result.json"
+            req_st = (req_p.stat().st_mtime_ns, req_p.stat().st_size) if req_p.is_file() else None
+            res_st = (res_p.stat().st_mtime_ns, res_p.stat().st_size) if res_p.is_file() else None
+            if req_st is not None or res_st is not None:
+                attempt_stats_list.append((aid, req_st, res_st))
+    attempt_stats = tuple(attempt_stats_list)
+
+    cov_path = root / "reports/forge/attempt-coverage.json"
+    cov_stat = (cov_path.stat().st_mtime_ns, cov_path.stat().st_size) if cov_path.is_file() else None
+    host_probe_sig = None
+    try:
+        from experiments.forge import planning as _planning_probe
+        from experiments.forge import sources as _sources_probe
+
+        gpu_probe = _sources_probe._gpu_models()
+        gpu_sig = tuple(sorted(tuple(x) for x in gpu_probe)) if gpu_probe is not None else None
+        host_probe_sig = (stable_hash(_planning_probe.runtime_manifest()), gpu_sig)
+    except Exception:
+        host_probe_sig = None
 
     cache_key = (
         str(root),
         view_path.stat().st_mtime_ns,
         tuple(selected_specs),
         task_stats,
+        forge_cfg_stats,
         (src_count, src_max_mtime, src_total_size),
-        tuple((p.name, p.stat().st_mtime_ns, p.stat().st_size) for p in record_paths),
+        record_stats,
+        attempt_stats,
+        cov_stat,
+        host_probe_sig,
     )
     if cache_key not in _CURRENT_SOURCE_TIER1_CACHE:
         payload = None
         try:
             from experiments.forge import planning
 
-            concluded = []
-            for rec_path in record_paths:
-                rec = read_json(rec_path)
-                if rec.get("lifecycle") != "concluded" or rec.get("evidence_scope") != "current":
-                    continue
-                scope = (rec.get("study") or {}).get("scope") or {}
-                if (
-                    (scope.get("view") or rec.get("goal")) == "discriminator_stability"
-                    and scope.get("execution_backend", "cuda") == "cuda"
-                    and scope.get("cuda_model") in {None, "NVIDIA RTX A6000"}
-                ):
-                    concluded.append((rec_path.relative_to(root).as_posix(), rec_path.name, rec))
-
+            coverage_fps = _load_attempt_coverage_task_fps(root)
+            shared_attempt_cache: dict[str, dict | None] = {}
             rows_data = []
             source_digests = set()
             view_revision = None
@@ -2445,14 +2794,13 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
             any_matched = False
             with planning.resolution_cache(root):
                 for fam_id, fam_label, fam_page, cid, card_rel, _ in selected_specs:
-                    req = planning.resolve_idea(
+                    req = _resolve_idea_for_readout_check(
                         root,
                         cid,
                         view_id="discriminator_stability",
                         through_tier=1,
-                        freeze_source=False,
-                        execution_backend="cuda",
                         cuda_model="NVIDIA RTX A6000",
+                        planning_mod=planning,
                     )
                     source_digests.add(req["source"]["digest"])
                     view_revision = req["view"]["revision"]
@@ -2464,11 +2812,13 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
                     t1_task_set = set(req_tasks) | set(diag_tasks)
                     req_total = len(req_tasks)
                     diag_total = len(diag_tasks)
-                    expected_compat = {
-                        tid: job["compatibility_key"]
-                        for job in req.get("jobs", [])
-                        for tid in job.get("task_ids", [job["task_id"]])
-                    }
+                    compat_matcher = _ReadoutCompatibilityMatcher(
+                        root,
+                        req,
+                        coverage_fps=coverage_fps,
+                        planning_mod=planning,
+                        attempt_cache=shared_attempt_cache,
+                    )
                     rev = req["candidate_revision"]
                     matching = [
                         item
@@ -2485,11 +2835,7 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
                             tid = str(trow.get("task_id", ""))
                             if tid not in t1_task_set:
                                 continue
-                            if (
-                                "compatibility_key" in trow
-                                and tid in expected_compat
-                                and trow["compatibility_key"] != expected_compat[tid]
-                            ):
+                            if not compat_matcher.matches(rec, trow, tid):
                                 continue
                             st = trow.get("gate_status") or trow.get("status")
                             if st in {"PASS", "FAIL", "BLOCKED"}:

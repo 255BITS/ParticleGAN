@@ -585,8 +585,16 @@ def _discriminator_stability_max_tier(root: Path) -> int:
 
 
 def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA_MODEL) -> dict[str, Any]:
+    from reports.forge.regenerate_technique_inventory import (
+        _ReadoutCompatibilityMatcher,
+        _load_attempt_coverage_task_fps,
+        _resolve_idea_for_readout_check,
+    )
+
     root = Path(root).resolve()
     concluded = _concluded_ordinary_records(root)
+    coverage_fps = _load_attempt_coverage_task_fps(root)
+    shared_attempt_cache: dict[str, dict[str, Any] | None] = {}
     leaderboard_texts = {}
     for view_id in ORDINARY_LEADERBOARD_VIEWS:
         lb_path = root / "reports/forge/leaderboards" / f"{view_id}.md"
@@ -600,14 +608,13 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
         for choice in current_family_candidates(root):
             family, cid = choice["family"], choice["candidate_id"]
             try:
-                req = planning.resolve_idea(
+                req = _resolve_idea_for_readout_check(
                     root,
                     cid,
                     view_id="discriminator_stability",
                     through_tier=requested_max_tier,
-                    freeze_source=False,
-                    execution_backend="cuda",
                     cuda_model=cuda_model,
+                    planning_mod=planning,
                 )
             except Exception as exc:
                 raise CodeChangeRequiredError(f"cannot resolve selected candidate {cid}: {exc}") from exc
@@ -622,22 +629,30 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
             if not t1_runnable:
                 continue
 
-            expected_compat_by_task = {
-                tid: job["compatibility_key"]
-                for job in req.get("jobs", [])
-                for tid in job.get("task_ids", [job["task_id"]])
-            }
+            compat_matcher = _ReadoutCompatibilityMatcher(
+                root,
+                req,
+                coverage_fps=coverage_fps,
+                planning_mod=planning,
+                attempt_cache=shared_attempt_cache,
+            )
             rev = req["candidate_revision"]
-            matching = [
-                rec
-                for rec in concluded
-                if rec.get("candidate_id") == cid
-                and rec.get("candidate_revision") == rev
-                and (rec.get("study", {}).get("scope", {}).get("view") or rec.get("goal"))
-                == "discriminator_stability"
-                and rec.get("study", {}).get("scope", {}).get("execution_backend", "cuda") == "cuda"
-                and rec.get("study", {}).get("scope", {}).get("cuda_model") in {None, cuda_model}
-            ]
+            req_source_digest = (req.get("source") or {}).get("digest")
+            matching = []
+            for rec in concluded:
+                scope = (rec.get("study") or {}).get("scope") or {}
+                if (
+                    rec.get("candidate_id") == cid
+                    and rec.get("candidate_revision") == rev
+                    and (
+                        not req_source_digest
+                        or (rec.get("source") or {}).get("digest") in {None, req_source_digest}
+                    )
+                    and (scope.get("view") or rec.get("goal")) == "discriminator_stability"
+                    and scope.get("execution_backend", "cuda") == "cuda"
+                    and scope.get("cuda_model") in {None, cuda_model}
+                ):
+                    matching.append(rec)
             measured_statuses: dict[str, str] = {}
             unresolved_errors: dict[str, str] = {}
             matched_attempt_ids: set[str] = set()
@@ -646,19 +661,16 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
                 rec_row_attempts: set[str] = set()
                 for row in rec.get("task_results", []):
                     tid = str(row.get("task_id", ""))
-                    if (
-                        "compatibility_key" in row
-                        and tid in expected_compat_by_task
-                        and row["compatibility_key"] != expected_compat_by_task[tid]
-                    ):
+                    if not compat_matcher.matches(rec, row, tid):
                         continue
                     st = row.get("gate_status") or row.get("status")
                     if st in {"PASS", "FAIL", "BLOCKED"}:
                         measured_statuses[tid] = st
                         unresolved_errors.pop(tid, None)
                         rec_used = True
-                        if row.get("_attempt_id"):
-                            rec_row_attempts.add(str(row["_attempt_id"]))
+                        row_aid = row.get("_attempt_id") or row.get("attempt_id")
+                        if row_aid:
+                            rec_row_attempts.add(str(row_aid))
                     elif st in {"ERROR", "INVALID", "INCOMPLETE"} and tid not in measured_statuses:
                         unresolved_errors[tid] = st
                 if rec_used:
@@ -1076,17 +1088,18 @@ def _generated_pages_synced(root: Path, inv_json: dict[str, Any], inv_md: str) -
     tp_json_path = root / "reports/forge/test-performance.json"
     tp_md_path = root / "reports/forge/test-performance.md"
     tp_html_path = root / "reports/forge/test-performance.html"
-    if not tp_json_path.is_file() or not tp_md_path.is_file() or not tp_html_path.is_file():
+    if not tp_md_path.is_file() or not tp_md_path.read_text().startswith("# Which recipes pass each test?\n"):
         return False
-    try:
-        tp_json = read_json(tp_json_path)
-    except Exception:
-        return False
-    if (
-        tp_json.get("source_publication_digest") != input_digest
-        or not tp_md_path.read_text().startswith("# Which recipes pass each test?\n")
-        or not tp_html_path.read_text().strip()
-    ):
+    # test-performance.json and test-performance.html are gitignored offline artifacts;
+    # validate them when present locally without failing clean git checkouts or CI runners.
+    if tp_json_path.is_file():
+        try:
+            tp_json = read_json(tp_json_path)
+        except Exception:
+            return False
+        if tp_json.get("source_publication_digest") != input_digest:
+            return False
+    if tp_html_path.is_file() and not tp_html_path.read_text().strip():
         return False
     if inv_json.get("family_progress"):
         from experiments.forge.family_reports import generated_pages
