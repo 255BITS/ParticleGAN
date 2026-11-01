@@ -31,7 +31,15 @@ if str(REPOSITORY_ROOT) not in sys.path:
 
 from experiments.forge import attempt_coverage, history, knowledge, planning, queue as forge_queue
 from experiments.forge import scaling, scaling_export, scaling_publication, studies
-from experiments.forge.contracts import atomic_json, atomic_text, file_hash, identifier, read_json, stable_hash
+from experiments.forge.contracts import (
+    atomic_json,
+    atomic_text,
+    file_hash,
+    file_lock,
+    identifier,
+    read_json,
+    stable_hash,
+)
 from experiments.forge.sources import inspect_source, snapshot_source
 from experiments.forge.trainer_families import CURRENT_SELECTION, current_family_candidates
 from experiments.forge.views import (
@@ -206,6 +214,35 @@ def _scaling_contention_status(result: dict[str, Any]) -> str:
     return "clear"
 
 
+def _safe_float(raw: str, default: float = 0.0) -> float:
+    token = raw.strip()
+    if not token:
+        return default
+    try:
+        val = float(token)
+    except ValueError:
+        return default
+    return val if val == val else default
+
+
+def _lookup_gpu_token(
+    token: str,
+    by_phys_index: dict[str, tuple[str, float, float]],
+    by_uuid: dict[str, tuple[str, float, float]],
+) -> tuple[str, float, float] | None:
+    tok = token.strip()
+    if not tok or tok.startswith("MIG-"):
+        return None
+    if tok.startswith("GPU-"):
+        if tok in by_uuid:
+            return by_uuid[tok]
+        matches = [info for uuid_key, info in by_uuid.items() if uuid_key.startswith(tok)]
+        return matches[0] if len(matches) == 1 else None
+    if tok.isdigit():
+        return by_phys_index.get(tok)
+    return None
+
+
 def _resolve_scaling_gpu(
     scaling_gpu: str,
     gpus: list[str] | tuple[str, ...] = ("0", "1"),
@@ -221,6 +258,23 @@ def _resolve_scaling_gpu(
     candidates = [str(g).strip() for g in gpus if str(g).strip()]
     if not candidates:
         raise CodeChangeRequiredError("cannot auto-select --scaling-gpu from empty --gpus list")
+
+    visible_env = os.environ.get("CUDA_VISIBLE_DEVICES")
+    visible_tokens = (
+        [tok.strip() for tok in visible_env.split(",") if tok.strip()]
+        if visible_env is not None and visible_env.strip()
+        else None
+    )
+    if visible_tokens is not None:
+        valid_candidates = [
+            cand for cand in candidates if not cand.isdigit() or int(cand) < len(visible_tokens)
+        ]
+        if not valid_candidates:
+            raise CodeChangeRequiredError(
+                f"no --gpus candidate {candidates} is within visible CUDA_VISIBLE_DEVICES ({visible_env!r})"
+            )
+    else:
+        valid_candidates = candidates
 
     try:
         gpu_proc = subprocess.run(
@@ -245,8 +299,8 @@ def _resolve_scaling_gpu(
                 if len(parts) != 4 or not parts[0].isdigit() or not parts[1].startswith("GPU-"):
                     continue
                 idx_str, uuid_str = parts[0], parts[1]
-                mem_used = float(parts[2]) if parts[2] else 0.0
-                util = float(parts[3]) if parts[3] else 0.0
+                mem_used = _safe_float(parts[2], 0.0)
+                util = _safe_float(parts[3], 0.0)
                 info = (uuid_str, mem_used, util)
                 by_phys_index[idx_str] = info
                 by_uuid[uuid_str] = info
@@ -261,21 +315,26 @@ def _resolve_scaling_gpu(
                 if len(parts) == 3 and parts[0].startswith("GPU-") and parts[1].isdigit() and parts[1] != own_pid:
                     ext_procs_by_uuid[parts[0]] += 1
 
-            visible_env = os.environ.get("CUDA_VISIBLE_DEVICES")
-            visible_tokens = (
-                [tok.strip() for tok in visible_env.split(",") if tok.strip()]
-                if visible_env is not None and visible_env.strip()
-                else None
-            )
+            visible_uuids: set[str] | None = None
+            if visible_tokens is not None:
+                visible_uuids = {
+                    info[0]
+                    for tok in visible_tokens
+                    if (info := _lookup_gpu_token(tok, by_phys_index, by_uuid)) is not None
+                }
 
             scored: list[tuple[tuple[bool, int, float, float, int], str, str, int, float]] = []
-            for pos, cand in enumerate(candidates):
+            for pos, cand in enumerate(valid_candidates):
                 gpu_info: tuple[str, float, float] | None = None
-                if visible_tokens is not None and cand.isdigit() and int(cand) < len(visible_tokens):
-                    mapped = visible_tokens[int(cand)]
-                    gpu_info = by_uuid.get(mapped) if mapped.startswith("GPU-") else by_phys_index.get(mapped)
+                if visible_tokens is not None:
+                    if cand.isdigit():
+                        gpu_info = _lookup_gpu_token(visible_tokens[int(cand)], by_phys_index, by_uuid)
+                    else:
+                        cand_info = _lookup_gpu_token(cand, by_phys_index, by_uuid)
+                        if cand_info is not None and visible_uuids is not None and cand_info[0] in visible_uuids:
+                            gpu_info = cand_info
                 else:
-                    gpu_info = by_uuid.get(cand) if cand.startswith("GPU-") else by_phys_index.get(cand)
+                    gpu_info = _lookup_gpu_token(cand, by_phys_index, by_uuid)
                 if gpu_info is None:
                     continue
                 uuid_str, mem_used, util = gpu_info
@@ -302,8 +361,8 @@ def _resolve_scaling_gpu(
     except (OSError, subprocess.SubprocessError, ValueError):
         pass
 
-    _log(f"nvidia-smi unavailable for --scaling-gpu auto; falling back to cuda:{candidates[0]}", json_mode=json_mode)
-    return candidates[0]
+    _log(f"nvidia-smi unavailable for --scaling-gpu auto; falling back to cuda:{valid_candidates[0]}", json_mode=json_mode)
+    return valid_candidates[0]
 
 
 def check_scaling_performance(root: Path) -> dict[str, Any]:
@@ -762,6 +821,39 @@ def _attempt_coverage_markdown_synced(root: Path, cov: dict[str, Any]) -> bool:
     return True
 
 
+def _verified_current_publication(doc: Any, *, view_id: str | None = None) -> bool:
+    if not isinstance(doc, dict):
+        return False
+    if doc.get("publication_scope") != "current_technique_inventory" or doc.get("recorded_policy"):
+        return False
+    if view_id is not None and doc.get("view") != view_id:
+        return False
+    prov = doc.get("provenance")
+    if not isinstance(prov, dict):
+        return False
+    checked = deepcopy(doc)
+    claimed = checked["provenance"].pop("input_digest", None)
+    return isinstance(claimed, str) and claimed == stable_hash(checked)
+
+
+def _git_head_verified_publication_bytes(root: Path, *, view_id: str | None = None) -> bytes | None:
+    try:
+        proc = subprocess.run(
+            ["git", "-C", str(root), "show", "HEAD:reports/forge/technique-inventory.json"],
+            capture_output=True,
+            timeout=30,
+            check=False,
+        )
+        if proc.returncode != 0 or not proc.stdout:
+            return None
+        doc = json.loads(proc.stdout.decode("utf-8"))
+        if _verified_current_publication(doc, view_id=view_id):
+            return proc.stdout
+    except (OSError, subprocess.SubprocessError, UnicodeDecodeError, ValueError):
+        return None
+    return None
+
+
 def _registered_evidence_satisfies_selection(root: Path) -> bool:
     root = Path(root).resolve()
     sel_path = root / CURRENT_SELECTION
@@ -819,6 +911,22 @@ def _registered_evidence_satisfies_selection(root: Path) -> bool:
             permitted = registered_hashes | archived_hashes if pin.get("historical_row") else registered_hashes
             if not row_sha or row_sha not in permitted:
                 return False
+        has_verified_baseline = False
+        inv_json_path = root / "reports/forge/technique-inventory.json"
+        if inv_json_path.is_file():
+            try:
+                has_verified_baseline = _verified_current_publication(read_json(inv_json_path), view_id=view_id)
+            except Exception:
+                has_verified_baseline = False
+        if not has_verified_baseline:
+            has_verified_baseline = _git_head_verified_publication_bytes(root, view_id=view_id) is not None
+        if not has_verified_baseline and any(pin.get("selection_kind") == "current_measurement" for pin in pins.values()):
+            live_src = inspect_source(root)["digest"]
+            if any(
+                pin.get("selection_kind") == "current_measurement" and pin.get("source_digest") != live_src
+                for pin in pins.values()
+            ):
+                return False
         return True
     except Exception:
         return False
@@ -839,7 +947,14 @@ def _validate_publication_registration_sync(root: Path, inv_json: dict[str, Any]
         and stable_hash(read_json(manifest_path)) != provenance.get("evidence_manifest_sha256")
     )
     if not sel_mismatch and not manifest_mismatch:
-        return True
+        if _verified_current_publication(inv_json):
+            return True
+        if _registered_evidence_satisfies_selection(Path(root)):
+            return False
+        raise CodeChangeRequiredError(
+            "reports/forge/technique-inventory.json failed publication input digest verification and "
+            "cannot be regenerated from registered snapshots"
+        )
     if _registered_evidence_satisfies_selection(Path(root)):
         return False
     if sel_mismatch:
@@ -860,9 +975,35 @@ def _republish_registered_inventory(root: Path, *, json_mode: bool = False) -> d
     root = Path(root).resolve()
     inv_json_path = root / "reports/forge/technique-inventory.json"
     manifest_path = root / "reports/forge/technique-evidence/manifest.json"
-    needs_republish = False
+    cur_doc: dict[str, Any] | None = None
     if inv_json_path.is_file():
-        needs_republish = not _validate_publication_registration_sync(root, read_json(inv_json_path))
+        try:
+            loaded = read_json(inv_json_path)
+            if isinstance(loaded, dict):
+                cur_doc = loaded
+        except ValueError:
+            cur_doc = None
+
+    if cur_doc is None or not _verified_current_publication(cur_doc):
+        expected_view = None
+        if manifest_path.is_file():
+            try:
+                expected_view = str(read_json(manifest_path).get("view") or "") or None
+            except ValueError:
+                expected_view = None
+        head_bytes = _git_head_verified_publication_bytes(root, view_id=expected_view)
+        if head_bytes is not None:
+            _log(
+                "Restoring verified baseline technique-inventory.json from HEAD before publication sync",
+                json_mode=json_mode,
+            )
+            inv_json_path.parent.mkdir(parents=True, exist_ok=True)
+            atomic_text(inv_json_path, head_bytes.decode("utf-8"))
+            cur_doc = read_json(inv_json_path)
+
+    needs_republish = False
+    if cur_doc is not None:
+        needs_republish = not _validate_publication_registration_sync(root, cur_doc)
     elif manifest_path.is_file():
         if not _registered_evidence_satisfies_selection(root):
             raise CodeChangeRequiredError(
@@ -870,6 +1011,11 @@ def _republish_registered_inventory(root: Path, *, json_mode: bool = False) -> d
                 "new snapshot registration"
             )
         needs_republish = True
+
+    inv_md_path = root / "reports/forge/technique-inventory.md"
+    if not inv_md_path.is_file():
+        inv_md_path.parent.mkdir(parents=True, exist_ok=True)
+        atomic_text(inv_md_path, "# Forge technique inventory\n")
 
     try:
         if needs_republish:
@@ -899,8 +1045,23 @@ def _republish_registered_inventory(root: Path, *, json_mode: bool = False) -> d
 
 def _generated_pages_synced(root: Path, inv_json: dict[str, Any], inv_md: str) -> bool:
     root = Path(root).resolve()
-    input_digest = (inv_json.get("provenance") or {}).get("input_digest")
+    prov = inv_json.get("provenance") or {}
+    input_digest = prov.get("input_digest")
     if not input_digest or f"Publication input digest `{input_digest}`." not in inv_md:
+        return False
+    reducer_path = root / "reports/forge/regenerate_technique_inventory.py"
+    if (
+        reducer_path.is_file()
+        and prov.get("publication_reducer_sha256") is not None
+        and prov.get("publication_reducer_sha256") != file_hash(reducer_path)
+    ):
+        return False
+    registry_path = root / "configs/forge/trainer-families.json"
+    if (
+        registry_path.is_file()
+        and prov.get("trainer_family_registry_sha256") is not None
+        and prov.get("trainer_family_registry_sha256") != file_hash(registry_path)
+    ):
         return False
     tier_page = root / "reports/forge/EXPERIMENTS_BY_TIER.md"
     if not tier_page.is_file():
@@ -963,6 +1124,7 @@ def check_compiled_reports(root: Path) -> dict[str, Any]:
 
     inv_json_path = root / "reports/forge/technique-inventory.json"
     inv_md_path = root / "reports/forge/technique-inventory.md"
+    manifest_path = root / "reports/forge/technique-evidence/manifest.json"
     perf_path = root / "reports/forge/scaling-performance.json"
     cov_path = root / "reports/forge/attempt-coverage.json"
 
@@ -976,8 +1138,24 @@ def check_compiled_reports(root: Path) -> dict[str, Any]:
     attempt_markdown_synced = False
     generated_pages_synced = False
 
+    inv_json: dict[str, Any] | None = None
     if inv_json_path.is_file():
-        inv_json = read_json(inv_json_path)
+        try:
+            loaded_inv = read_json(inv_json_path)
+            if isinstance(loaded_inv, dict):
+                inv_json = loaded_inv
+            elif not _registered_evidence_satisfies_selection(root):
+                raise CodeChangeRequiredError("invalid technique-inventory.json: top-level JSON must be an object")
+        except ValueError as exc:
+            if not _registered_evidence_satisfies_selection(root):
+                raise CodeChangeRequiredError(f"invalid technique-inventory.json: {exc}") from exc
+    elif manifest_path.is_file() and not _registered_evidence_satisfies_selection(root):
+        raise CodeChangeRequiredError(
+            "reports/forge/technique-evidence/manifest.json cannot satisfy current family selection without "
+            "new snapshot registration"
+        )
+
+    if inv_json is not None:
         publication_registration_synced = _validate_publication_registration_sync(root, inv_json)
         if inv_md_path.is_file():
             inv_md = inv_md_path.read_text()
@@ -1231,6 +1409,31 @@ def _select_or_register_scaling_campaign(
     return scaling._load(root, reg_id)
 
 
+def _job_matches_resolved_gpu(job: dict[str, Any], hw: dict[str, Any], resolved_gpu: str) -> bool:
+    target = str(resolved_gpu).strip()
+    if not target:
+        return True
+    phys_uuid = hw.get("physical_uuid")
+    uuid_matches = (
+        target.startswith("GPU-")
+        and isinstance(phys_uuid, str)
+        and (phys_uuid == target or phys_uuid.startswith(target))
+    )
+    worker_dev = str((job.get("worker") or {}).get("device") or "").strip()
+    if worker_dev:
+        return worker_dev == target or uuid_matches
+    cvd = str(hw.get("cuda_visible_devices") or "").strip()
+    if cvd:
+        return cvd == target or uuid_matches
+    if target.startswith("GPU-") and isinstance(phys_uuid, str) and phys_uuid:
+        return uuid_matches
+    dev = str(hw.get("device") or "").strip()
+    if dev:
+        expected_dev = f"cuda:{target}" if target.isdigit() else target
+        return dev == expected_dev
+    return True
+
+
 def _evict_superseded_scaling_queue_jobs(
     root: Path,
     queue_root: Path,
@@ -1239,21 +1442,29 @@ def _evict_superseded_scaling_queue_jobs(
     *,
     json_mode: bool = False,
 ) -> int:
-    state_path = Path(queue_root) / "queue/state.json"
+    queue_root = Path(queue_root).resolve()
+    state_path = queue_root / "queue/state.json"
     if not state_path.is_file():
         return 0
     expected_keys: set[str] = set()
+    view_id = str(manifest.get("view") or "dcgan_performance")
     for sel in manifest.get("family_selections", []):
+        cid = sel.get("candidate_id")
+        if not cid:
+            continue
+        study_id = sel.get("study") or sel.get("study_id")
         try:
-            req = planning.resolve_idea(
-                root,
-                sel["candidate_id"],
-                "dcgan_performance",
-                campaign_id=manifest["campaign"]["id"],
-                execution_backend=manifest["execution_backend"],
-                cuda_model=manifest.get("cuda_model"),
-                study_id=sel["study_id"],
-            )
+            if study_id and scaling.study_path(root, str(study_id)).is_file():
+                req = planning.resolve_idea(root, cid, study=str(study_id))
+            else:
+                req = planning.resolve_idea(
+                    root,
+                    cid,
+                    view_id=view_id,
+                    freeze_source=False,
+                    execution_backend=manifest.get("execution_backend", "cuda"),
+                    cuda_model=manifest.get("cuda_model"),
+                )
             for job_def in req.get("jobs", []):
                 expected_keys.add(job_def["compatibility_key"])
         except Exception:
@@ -1261,55 +1472,73 @@ def _evict_superseded_scaling_queue_jobs(
     if not expected_keys:
         return 0
 
-    state = read_json(state_path)
-    jobs = state.get("jobs", {})
-    subs = state.get("submissions", {})
-    expected_device = f"cuda:{resolved_gpu}" if resolved_gpu.isdigit() else resolved_gpu
-    evict_keys: set[str] = set()
-    evict_sub_ids: set[str] = set()
-    evict_attempts: list[str] = []
+    expected_device = f"cuda:{resolved_gpu}" if str(resolved_gpu).isdigit() else str(resolved_gpu)
+    with file_lock(queue_root / "queue.lock"):
+        if not state_path.is_file():
+            return 0
+        state = read_json(state_path)
+        jobs = state.get("jobs", {})
+        subs = state.get("submissions", {})
+        evict_keys: set[str] = set()
+        evict_sub_ids: set[str] = set()
+        evict_attempts: list[str] = []
 
-    for ck in sorted(expected_keys):
-        job = jobs.get(ck)
-        if not job or job.get("state") not in {"completed", "failed"}:
-            continue
-        raw_res = (((job.get("result") or {}).get("raw") or {}).get("result") or {})
-        hw = raw_res.get("hardware") if isinstance(raw_res.get("hardware"), dict) else {}
-        contention = hw.get("contention_status")
-        device = hw.get("device")
-        bad_contention = contention is not None and contention != "clear"
-        bad_device = isinstance(device, str) and expected_device.startswith("cuda:") and device != expected_device
-        if not (bad_contention or bad_device):
-            continue
-        subscriber_ids = list(job.get("subscribers") or [])
-        non_scaling_subscribers = [
-            sid
-            for sid in subscriber_ids
-            if subs.get(sid, {}).get("request", {}).get("view", {}).get("id") != "dcgan_performance"
-        ]
-        if non_scaling_subscribers:
-            continue
-        evict_keys.add(ck)
-        evict_sub_ids.update(sid for sid in subscriber_ids if sid in subs)
-        aid = (job.get("result") or {}).get("attempt_id") or job.get("attempt_id")
-        if isinstance(aid, str) and aid:
-            evict_attempts.append(aid)
+        for ck in sorted(expected_keys):
+            job = jobs.get(ck)
+            if not job or (job.get("status") != "terminal" and job.get("state") not in {"completed", "failed"}):
+                continue
+            res_obj = job.get("result") or {}
+            raw_res = ((res_obj.get("raw") or {}).get("result") or {})
+            hw = raw_res.get("hardware") if isinstance(raw_res.get("hardware"), dict) else None
+            if hw is None:
+                trows = res_obj.get("task_results") or []
+                if trows and isinstance(trows[0], dict) and isinstance(trows[0].get("hardware"), dict):
+                    hw = trows[0]["hardware"]
+            hw_dict = hw if isinstance(hw, dict) else {}
+            bad_contention = hw_dict.get("contention_status") != "clear"
+            bad_device = not _job_matches_resolved_gpu(job, hw_dict, resolved_gpu)
+            if not (bad_contention or bad_device):
+                continue
+            subscriber_ids = list(job.get("subscribers") or [])
+            blocking_subscribers = [
+                sid
+                for sid in subscriber_ids
+                if sid in subs
+                and (
+                    subs[sid].get("request", {}).get("view", {}).get("id") != "dcgan_performance"
+                    or subs[sid].get("status") in {"queued", "running", "paused"}
+                )
+            ]
+            if blocking_subscribers:
+                continue
+            evict_keys.add(ck)
+            evict_sub_ids.update(sid for sid in subscriber_ids if sid in subs)
+            aid = res_obj.get("attempt_id") or job.get("attempt_id")
+            if isinstance(aid, str) and aid:
+                evict_attempts.append(aid)
 
-    if not evict_keys:
-        return 0
+        if not evict_keys:
+            return 0
 
-    archive_dir = Path(queue_root) / "superseded-scaling" / str(manifest.get("id", "scaling")) / "attempts"
-    archive_dir.mkdir(parents=True, exist_ok=True)
-    for aid in evict_attempts:
-        src = Path(root) / "reports/forge/attempts" / aid
-        dst = archive_dir / aid
-        if src.exists() and not dst.exists():
-            shutil.move(str(src), str(dst))
-    for ck in evict_keys:
-        jobs.pop(ck, None)
-    for sid in evict_sub_ids:
-        subs.pop(sid, None)
-    atomic_json(state_path, state)
+        archive_dir = queue_root / "superseded-scaling" / str(manifest.get("id", "scaling")) / "attempts"
+        archive_dir.mkdir(parents=True, exist_ok=True)
+        for aid in evict_attempts:
+            src = Path(root) / "reports/forge/attempts" / aid
+            dst = archive_dir / aid
+            if src.exists() and not dst.exists():
+                shutil.move(str(src), str(dst))
+        for ck in evict_keys:
+            jobs.pop(ck, None)
+        for sid in evict_sub_ids:
+            subs.pop(sid, None)
+        if evict_sub_ids:
+            for other_job in jobs.values():
+                if isinstance(other_job.get("subscribers"), list):
+                    other_job["subscribers"] = [
+                        sid for sid in other_job["subscribers"] if sid not in evict_sub_ids
+                    ]
+        atomic_json(state_path, state)
+
     _log(
         f"Evicted {len(evict_keys)} superseded/contended scaling job(s) before draining on {expected_device}",
         json_mode=json_mode,

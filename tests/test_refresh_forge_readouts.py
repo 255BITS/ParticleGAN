@@ -1247,10 +1247,28 @@ def test_resolve_scaling_gpu_auto_picks_uncontended_handles_cuda_visible_devices
     # 2. Auto picks clear GPU 1 over GUI-contended GPU 0.
     assert rfr._resolve_scaling_gpu("auto", ["0", "1"], json_mode=True) == "1"
 
-    # 3. Respects CUDA_VISIBLE_DEVICES remapping (logical 0 -> physical 1 / clear UUID).
-    monkeypatch.setenv("CUDA_VISIBLE_DEVICES", "GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce,GPU-ed080e41-3193-3755-6756-f3d46c433331")
+    # 3. Respects CUDA_VISIBLE_DEVICES remapping (logical 0 -> physical 1 / clear UUID, including short UUID prefix).
+    monkeypatch.setenv("CUDA_VISIBLE_DEVICES", "GPU-548116b7,GPU-ed080e41")
     assert rfr._resolve_scaling_gpu("auto", ["0", "1"], json_mode=True) == "0"
+
+    # 3b. Single-device CUDA_VISIBLE_DEVICES="0" never leaks out-of-range ordinal "1"; out-of-range --gpus raises CodeChangeRequiredError.
+    monkeypatch.setenv("CUDA_VISIBLE_DEVICES", "0")
+    assert rfr._resolve_scaling_gpu("auto", ["0", "1"], json_mode=True) == "0"
+    with pytest.raises(rfr.CodeChangeRequiredError, match="CUDA_VISIBLE_DEVICES"):
+        rfr._resolve_scaling_gpu("auto", ["1"], json_mode=True)
     monkeypatch.delenv("CUDA_VISIBLE_DEVICES", raising=False)
+
+    # 3c. Non-numeric nvidia-smi telemetry tokens ([N/A], [Not Supported]) do not abort auto-selection.
+    na_gpu_csv = (
+        "0, GPU-ed080e41-3193-3755-6756-f3d46c433331, [N/A], [Not Supported]\n"
+        "1, GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce, 15, [N/A]\n"
+    )
+    monkeypatch.setattr(
+        rfr.subprocess,
+        "run",
+        lambda cmd, **kw: _Proc(0, na_gpu_csv if cmd[1].startswith("--query-gpu=") else app_csv),
+    )
+    assert rfr._resolve_scaling_gpu("auto", ["0", "1"], json_mode=True) == "1"
 
     # 4. Falls back to least-contended when all GPUs have external compute processes.
     busy_apps = (
@@ -1484,3 +1502,281 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         assert expected_snippet in inv_md
 
 
+def _copy_minimal_repo(src_root: Path, dst_root: Path) -> None:
+    import shutil
+
+    dst_root.mkdir(parents=True, exist_ok=True)
+    ignore = shutil.ignore_patterns("__pycache__", "*.pyc")
+    for rel in ("configs", "particlegan", "experiments", "benchmarks", "lib"):
+        s = src_root / rel
+        if s.is_dir():
+            shutil.copytree(s, dst_root / rel, ignore=ignore)
+    for rel in ("pyproject.toml", "README.md"):
+        s = src_root / rel
+        if s.is_file():
+            shutil.copy2(s, dst_root / rel)
+
+
+def test_evict_superseded_scaling_queue_jobs_matches_real_queue_schema_and_prunes_subscribers(tmp_path: Path):
+    repo = tmp_path / "repo"
+    _copy_minimal_repo(ROOT, repo)
+    (repo / "reports/forge/attempts/att-gpu0-contended").mkdir(parents=True)
+    (repo / "reports/forge/attempts/att-gpu0-contended/result.json").write_text("{}\n")
+
+    real_manifest = rfr.scaling._load(repo, "dcgan-performance-cloud-2e8a97a0aa84")
+    atlas_sel = next(s for s in real_manifest["family_selections"] if s["family"] == "atlas")
+    real_req = rfr.planning.resolve_idea(repo, atlas_sel["candidate_id"], study=atlas_sel["study"])
+    ck_keep, ck_evict_wrong_gpu, ck_active_blocked = [j["compatibility_key"] for j in real_req["jobs"][:3]]
+
+    q_root = tmp_path / "runs/forge"
+    atomic_json(
+        q_root / "queue/state.json",
+        {
+            "schema_version": 1,
+            "jobs": {
+                # Valid GPU 1 terminal job: worker.device='1', cuda_visible_devices='1', inside-worker device='cuda:0'.
+                ck_keep: {
+                    "status": "terminal",
+                    "worker": {"device": "1"},
+                    "subscribers": ["sub-mixed"],
+                    "result": {
+                        "attempt_id": "att-gpu1-clear",
+                        "raw": {
+                            "result": {
+                                "hardware": {
+                                    "contention_status": "clear",
+                                    "cuda_visible_devices": "1",
+                                    "device": "cuda:0",
+                                    "physical_uuid": "GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce",
+                                }
+                            }
+                        },
+                    },
+                },
+                # Wrong-GPU (GPU 0) terminal job sharing 'sub-mixed' with ck_keep: must be evicted and sub-mixed pruned from ck_keep.
+                ck_evict_wrong_gpu: {
+                    "status": "terminal",
+                    "worker": {"device": "0"},
+                    "subscribers": ["sub-mixed"],
+                    "result": {
+                        "attempt_id": "att-gpu0-contended",
+                        "raw": {
+                            "result": {
+                                "hardware": {
+                                    "contention_status": "clear",
+                                    "cuda_visible_devices": "0",
+                                    "device": "cuda:0",
+                                    "physical_uuid": "GPU-ed080e41-3193-3755-6756-f3d46c433331",
+                                }
+                            }
+                        },
+                    },
+                },
+                # Contended job attached to an active ('running') submission: must NOT be evicted mid-flight.
+                ck_active_blocked: {
+                    "status": "terminal",
+                    "worker": {"device": "0"},
+                    "subscribers": ["sub-running"],
+                    "result": {
+                        "attempt_id": "att-running",
+                        "raw": {
+                            "result": {
+                                "hardware": {
+                                    "contention_status": "contended",
+                                    "cuda_visible_devices": "0",
+                                    "device": "cuda:0",
+                                }
+                            }
+                        },
+                    },
+                },
+            },
+            "submissions": {
+                "sub-mixed": {"status": "concluded", "request": {"view": {"id": "dcgan_performance"}}},
+                "sub-running": {"status": "running", "request": {"view": {"id": "dcgan_performance"}}},
+            },
+        },
+    )
+
+    evicted = rfr._evict_superseded_scaling_queue_jobs(repo, q_root, real_manifest, "1", json_mode=True)
+    assert evicted == 1
+    after = read_json(q_root / "queue/state.json")
+    assert ck_keep in after["jobs"]
+    assert after["jobs"][ck_keep]["subscribers"] == []
+    assert ck_evict_wrong_gpu not in after["jobs"]
+    assert "sub-mixed" not in after["submissions"]
+    assert ck_active_blocked in after["jobs"]
+    assert "sub-running" in after["submissions"]
+    assert not (repo / "reports/forge/attempts/att-gpu0-contended").exists()
+    assert (
+        q_root / "superseded-scaling/dcgan-performance-cloud-2e8a97a0aa84/attempts/att-gpu0-contended/result.json"
+    ).is_file()
+
+
+def test_republish_registered_inventory_end_to_end_recovers_missing_and_unverified_inventory(tmp_path: Path):
+    import shutil
+    import subprocess
+
+    wt = tmp_path / "wt"
+    subprocess.run(
+        ["git", "-C", str(ROOT), "worktree", "add", "--detach", str(wt), "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    try:
+        inv_path = wt / "reports/forge/technique-inventory.json"
+        md_path = wt / "reports/forge/technique-inventory.md"
+
+        # Scenario A: stale evidence_manifest_sha256 with self-consistent input_digest -> real publish_current + refresh_publication.
+        doc_a = read_json(inv_path)
+        doc_a["provenance"]["evidence_manifest_sha256"] = "0" * 64
+        doc_a["provenance"].pop("input_digest", None)
+        doc_a["provenance"]["input_digest"] = rfr.stable_hash(doc_a)
+        atomic_json(inv_path, doc_a)
+        assert rfr.check_compiled_reports(wt)["publication_registration_synced"] is False
+        rfr._republish_registered_inventory(wt, json_mode=True)
+        assert rfr._verified_current_publication(read_json(inv_path)) is True
+        assert rfr.check_compiled_reports(wt)["publication_registration_synced"] is True
+
+        # Scenario B: broken input_digest + stale evidence_manifest_sha256 -> HEAD baseline restoration + recovery.
+        doc_b = read_json(inv_path)
+        doc_b["provenance"]["evidence_manifest_sha256"] = "0" * 64
+        atomic_json(inv_path, doc_b)
+        assert rfr.check_compiled_reports(wt)["publication_registration_synced"] is False
+        rfr._republish_registered_inventory(wt, json_mode=True)
+        assert rfr._verified_current_publication(read_json(inv_path)) is True
+        assert rfr.check_compiled_reports(wt)["publication_registration_synced"] is True
+
+        # Scenario C: deleted or corrupt technique-inventory.json + deleted technique-inventory.md -> HEAD baseline restoration + recovery.
+        inv_path.write_text("{corrupt-json\n")
+        assert rfr.check_compiled_reports(wt)["current"] is False
+        inv_path.unlink()
+        md_path.unlink()
+        assert rfr.check_compiled_reports(wt)["current"] is False
+        rfr._republish_registered_inventory(wt, json_mode=True)
+        assert inv_path.is_file() and md_path.is_file()
+        assert rfr._verified_current_publication(read_json(inv_path)) is True
+        assert "### Current-source selected-recipe Tier 1 readouts" in md_path.read_text()
+    finally:
+        subprocess.run(
+            ["git", "-C", str(ROOT), "worktree", "remove", "--force", str(wt)],
+            check=False,
+            capture_output=True,
+        )
+        shutil.rmtree(wt, ignore_errors=True)
+
+
+def test_current_source_tier1_readouts_ignores_non_tier1_records_and_invalidates_cache_on_task_change(
+    tmp_path: Path,
+):
+    import shutil
+    import subprocess
+    from reports.forge import regenerate_technique_inventory as rti
+
+    wt = tmp_path / "wt-tier1"
+    subprocess.run(
+        ["git", "-C", str(ROOT), "worktree", "add", "--detach", str(wt), "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    try:
+        live_inv = read_json(wt / "reports/forge/technique-inventory.json")
+        atlas_req = rfr.planning.resolve_idea(
+            wt,
+            "atlas-particle-normal-v4",
+            view_id="discriminator_stability",
+            through_tier=1,
+            freeze_source=False,
+            execution_backend="cuda",
+            cuda_model="NVIDIA RTX A6000",
+        )
+        # Add a concluded current-source record containing ONLY a non-Tier-1 task: must NOT be cited in Tier 1 Evidence column.
+        atomic_json(
+            wt / "reports/forge/records/readout-tier2-only.json",
+            {
+                "lifecycle": "concluded",
+                "evidence_scope": "current",
+                "candidate_id": "atlas-particle-normal-v4",
+                "candidate_revision": atlas_req["candidate_revision"],
+                "source": {"digest": atlas_req["source"]["digest"]},
+                "study": {
+                    "scope": {
+                        "view": "discriminator_stability",
+                        "execution_backend": "cuda",
+                        "cuda_model": "NVIDIA RTX A6000",
+                    }
+                },
+                "task_results": [{"task_id": "nonexistent_tier2_task", "gate_status": "PASS"}],
+            },
+        )
+        md1 = rti._current_source_tier1_readouts_markdown(
+            live_inv, wt, wt / "reports/forge/technique-inventory.md"
+        )
+        assert "### Current-source selected-recipe Tier 1 readouts" in md1
+        assert "readout-tier2-only.json" not in md1
+
+        v = read_json(wt / "configs/forge/views/discriminator_stability.json")
+        req_t1_tasks = [
+            item["task"]
+            for item in sorted(v["assignments"], key=lambda x: x.get("order", 0))
+            if int(item["qualification_tier"]) == 1 and item.get("importance") == "required"
+        ]
+        first_t1_task, second_t1_task = req_t1_tasks[0], req_t1_tasks[1]
+        task_card_path = wt / "configs/forge/tasks" / f"{first_t1_task}.json"
+        task_card = read_json(task_card_path)
+        task_card["requires_capabilities"] = sorted({*task_card.get("requires_capabilities", []), "a2"})
+        atomic_json(task_card_path, task_card)
+
+        second_card_path = wt / "configs/forge/tasks" / f"{second_t1_task}.json"
+        second_card = read_json(second_card_path)
+        second_card["dependencies"] = [{"task": first_t1_task, "kind": "gate"}]
+        atomic_json(second_card_path, second_card)
+
+        # Cache must invalidate on task-card edit and refuse stale-revision readout records.
+        md_stale = rti._current_source_tier1_readouts_markdown(
+            live_inv, wt, wt / "reports/forge/technique-inventory.md"
+        )
+        assert md_stale == ""
+
+        # Re-stamp Atlas readout to the new source/revision (without second_t1_task) to verify _dep_blocked ('1 blocked').
+        new_atlas_req = rfr.planning.resolve_idea(
+            wt,
+            "atlas-particle-normal-v4",
+            view_id="discriminator_stability",
+            through_tier=1,
+            freeze_source=False,
+            execution_backend="cuda",
+            cuda_model="NVIDIA RTX A6000",
+        )
+        new_compat = {
+            tid: job["compatibility_key"]
+            for job in new_atlas_req.get("jobs", [])
+            for tid in job.get("task_ids", [job["task_id"]])
+        }
+        for rec_p in sorted((wt / "reports/forge/records").glob("readout-*.json")):
+            if rec_p.name == "readout-tier2-only.json":
+                continue
+            rec_doc = read_json(rec_p)
+            if rec_doc.get("candidate_id") == "atlas-particle-normal-v4":
+                rec_doc["candidate_revision"] = new_atlas_req["candidate_revision"]
+                rec_doc["source"] = {"digest": new_atlas_req["source"]["digest"]}
+                rec_doc["task_results"] = [
+                    {**r, "compatibility_key": new_compat.get(r.get("task_id"), r.get("compatibility_key"))}
+                    for r in rec_doc.get("task_results", [])
+                    if r.get("task_id") != second_t1_task
+                ]
+                atomic_json(rec_p, rec_doc)
+
+        md2 = rti._current_source_tier1_readouts_markdown(
+            live_inv, wt, wt / "reports/forge/technique-inventory.md"
+        )
+        assert "1 preflight-blocked, 1 blocked" in md2
+    finally:
+        subprocess.run(
+            ["git", "-C", str(ROOT), "worktree", "remove", "--force", str(wt)],
+            check=False,
+            capture_output=True,
+        )
+        shutil.rmtree(wt, ignore_errors=True)

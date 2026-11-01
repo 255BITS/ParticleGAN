@@ -2392,10 +2392,31 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
     if not selected_specs:
         return ""
 
+    tasks_dir = root / "configs/forge/tasks"
+    task_stats = (
+        tuple((p.name, p.stat().st_mtime_ns, p.stat().st_size) for p in sorted(tasks_dir.glob("*.json")))
+        if tasks_dir.is_dir()
+        else ()
+    )
+    src_count = 0
+    src_max_mtime = 0
+    src_total_size = 0
+    for sub in ("particlegan", "experiments", "benchmarks", "lib"):
+        sub_dir = root / sub
+        if sub_dir.is_dir():
+            for py_file in sub_dir.rglob("*.py"):
+                st = py_file.stat()
+                src_count += 1
+                if st.st_mtime_ns > src_max_mtime:
+                    src_max_mtime = st.st_mtime_ns
+                src_total_size += st.st_size
+
     cache_key = (
         str(root),
         view_path.stat().st_mtime_ns,
         tuple(selected_specs),
+        task_stats,
+        (src_count, src_max_mtime, src_total_size),
         tuple((p.name, p.stat().st_mtime_ns, p.stat().st_size) for p in record_paths),
     )
     if cache_key not in _CURRENT_SOURCE_TIER1_CACHE:
@@ -2440,6 +2461,7 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
                     ]
                     req_tasks = [item["task"] for item in t1_assignments if item.get("importance") == "required"]
                     diag_tasks = [item["task"] for item in t1_assignments if item.get("importance") != "required"]
+                    t1_task_set = set(req_tasks) | set(diag_tasks)
                     req_total = len(req_tasks)
                     diag_total = len(diag_tasks)
                     expected_compat = {
@@ -2451,7 +2473,9 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
                     matching = [
                         item
                         for item in concluded
-                        if item[2].get("candidate_id") == cid and item[2].get("candidate_revision") == rev
+                        if item[2].get("candidate_id") == cid
+                        and item[2].get("candidate_revision") == rev
+                        and (item[2].get("source") or {}).get("digest") in {None, req["source"]["digest"]}
                     ]
                     measured: dict[str, str] = {}
                     used_records: list[tuple[str, str]] = []
@@ -2459,6 +2483,8 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
                         used = False
                         for trow in rec.get("task_results", []):
                             tid = str(trow.get("task_id", ""))
+                            if tid not in t1_task_set:
+                                continue
                             if (
                                 "compatibility_key" in trow
                                 and tid in expected_compat
@@ -2474,6 +2500,20 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
                     if used_records:
                         any_matched = True
 
+                    def _dep_blocked(task_id: str, seen: frozenset[str] = frozenset()) -> bool:
+                        if task_id in seen:
+                            return False
+                        next_seen = seen | {task_id}
+                        for dep in req["tasks"].get(task_id, {}).get("dependencies", []):
+                            dep_task = dep["task"] if isinstance(dep, dict) else str(dep)
+                            if req["tasks"].get(dep_task, {}).get("preflight_blockers"):
+                                return True
+                            if measured.get(dep_task) in {"FAIL", "BLOCKED"}:
+                                return True
+                            if _dep_blocked(dep_task, next_seen):
+                                return True
+                        return False
+
                     def _outcomes(task_ids: list[str]) -> list[str]:
                         out = []
                         for tid in task_ids:
@@ -2481,6 +2521,8 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
                                 out.append("PREFLIGHT_BLOCKED")
                             elif measured.get(tid) in {"PASS", "FAIL", "BLOCKED"}:
                                 out.append(measured[tid])
+                            elif _dep_blocked(tid):
+                                out.append("BLOCKED")
                             else:
                                 out.append("UNMEASURED")
                         return out
