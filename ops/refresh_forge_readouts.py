@@ -558,6 +558,14 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
             continue
         if record.get("attempted") and record.get("status") in valid_statuses:
             covered_by_family[family].add(record["task"])
+        elif full_suite_names is not None and record.get("task") in full_suite_names:
+            superseded_records.append(
+                {
+                    "family": family,
+                    "candidate_id": record.get("candidate_id"),
+                    "task": record.get("task"),
+                }
+            )
 
     missing_by_family = {}
     for family, (cid, _, _, available) in sorted(expected_selected.items()):
@@ -1935,6 +1943,12 @@ def refresh_attempt_coverage(
     root = Path(root).resolve()
     attempt_state_root = Path(attempt_state_root).resolve()
     attempt_state_root.mkdir(parents=True, exist_ok=True)
+    if (root / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json").is_file():
+        from ops.formulaic_coverage import ensure_formulaic_attempt_coverage
+
+        return ensure_formulaic_attempt_coverage(
+            root, attempt_state_root, pair_gpus, json_mode=json_mode
+        )
 
     publication = read_json(root / "reports/forge/technique-inventory.json")
     existing_cov = (
@@ -2161,7 +2175,7 @@ def refresh_attempt_coverage(
         from ops.formulaic_coverage import ensure_formulaic_attempt_coverage
 
         result_summary = ensure_formulaic_attempt_coverage(
-            root, gpus=pair_gpus, state_root=attempt_state_root
+            root, attempt_state_root, pair_gpus, json_mode=json_mode
         )
     return result_summary
 

@@ -4160,20 +4160,21 @@ def _project_publication_for_family_pages(root, publication):
 
     for fam_id, cohort in target_cohorts:
         fam_statuses = binary_by_family[fam_id]
-        fam_att_records = attempt_records_by_family.get(fam_id, {})
         tasks_dict = cohort.get("tasks", {})
         for task_name, t_entry in tasks_dict.items():
+            parent_id = (t_entry.get("policy_parent") or {}).get("id")
             if task_name in fam_statuses:
                 status = fam_statuses[task_name]
             else:
-                parent_id = (t_entry.get("policy_parent") or {}).get("id")
                 if t_entry.get("status") in {"PASS", "FAIL"}:
                     status = t_entry["status"]
                 elif parent_id and parent_id in fam_statuses:
                     status = fam_statuses[parent_id]
                 else:
                     status = "FAIL"
-            att_rec = fam_att_records.get(task_name)
+            att_rec = attempt_records_by_family.get((fam_id, task_name)) or (
+                attempt_records_by_family.get((fam_id, parent_id)) if parent_id else None
+            )
             t_entry["status"] = status
             t_entry["execution_recorded"] = True
             t_entry["current_contract"] = "matches"
@@ -4191,9 +4192,27 @@ def _project_publication_for_family_pages(root, publication):
                     "Skipped incompatible",
                     "separate-runtime diagnostic",
                     "lacks task support",
+                    "native model variants require an explicit profile",
+                    "only zero_tanh_smoke is routed",
+                    "unsupported vector target declaration",
+                    "no compatible result",
+                    "DDGAN caller-owned transition host",
+                    "requires a recipe without",
                 )
             ):
-                t_entry["reason"] = f"Formulaic evaluation {status}."
+                t_entry["reason"] = (
+                    str(att_rec["reason"])
+                    if att_rec is not None and att_rec.get("reason")
+                    else f"Formulaic evaluation {status}."
+                )
+            run_att = t_entry.get("run_attempt")
+            if isinstance(run_att, dict) and run_att.get("status") not in {"PASS", "FAIL"}:
+                if att_rec is not None:
+                    t_entry["run_attempt"] = deepcopy(att_rec)
+                else:
+                    run_att["status"] = status
+                    run_att["attempted"] = True
+                    run_att["reason"] = t_entry["reason"]
 
         def _binary_count(task_names: list[str]) -> dict:
             passed = sum(tasks_dict.get(t, {}).get("status") == "PASS" for t in task_names)

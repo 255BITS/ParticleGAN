@@ -291,34 +291,7 @@ def _run_grid100_deep_variant(
 
     task_for_ctx = deepcopy(task)
     task_for_ctx["execution"]["model"] = {"hidden": 128, "layers": 3, "fourier": 2}
-    cand_for_ctx = deepcopy(cand_adapted)
-    cand_for_ctx.pop("prior_mechanism", None)
-    cand_for_ctx["requires_capabilities"] = [
-        c
-        for c in cand_for_ctx.get("requires_capabilities", ())
-        if c not in {"policy_controls", "policy_serving", "particle_cloud"}
-    ]
-    cand_overrides = dict(cand_for_ctx.get("recipe_overrides") or {})
-    cand_overrides.pop("sigma_rel", None)
-    cand_overrides.update(
-        prior_kind="mog",
-        standardize=False,
-        particle_birth_death=False,
-        birth_death_feature_scale="none",
-        birth_death_isolation=False,
-        birth_death_backend="knn",
-        birth_death_cells=64,
-        row_evidence_gate=False,
-        row_policy="independent",
-        continuous_policy=None,
-        lr_control="mobility",
-        reopen_guard=None,
-        serve_average=0.0,
-        output_noise_mode="fixed",
-        total_steps=int(task["execution"].get("steps", 7000)),
-    )
-    cand_for_ctx["recipe_overrides"] = cand_overrides
-    context = task_formulation_context(cand_for_ctx, task_for_ctx, {"seed": seed}, device=device, root=root)
+    context = task_formulation_context(cand_adapted, task_for_ctx, {"seed": seed}, device=device, root=root)
 
     if is_res_tanh:
         g = ResidualMLPGenerator(context.recipe.z_dim, 128, 7, 2, scale=5.25).to(dev)
@@ -813,14 +786,29 @@ def ensure_formulaic_attempt_coverage(
                     "attempted": False,
                 }
 
+    for existing_key in list(jobs.keys()):
+        j_item = jobs[existing_key]
+        if any(j_item.get(k) for k in ("research_scope", "policy_scope", "repair_scope", "cohort_scope")):
+            continue
+        pair = (str(j_item.get("family") or ""), str(j_item.get("task") or ""))
+        if pair in selected_keys_by_pair and existing_key != selected_keys_by_pair[pair]:
+            jobs.pop(existing_key, None)
+
     # First pass: apply cached result.json files from attempt_state_root / "attempts" / key / "result.json"
     # or harvested verdicts from committed records
     to_execute: list[dict[str, Any]] = []
     for (family, task_name), key in sorted(selected_keys_by_pair.items()):
         job = jobs[key]
-        if job.get("attempted") and job.get("status") in {"PASS", "FAIL"}:
-            continue
         res_file = attempt_state_root / "attempts" / key / "result.json"
+        if job.get("attempted") and job.get("status") in {"PASS", "FAIL"}:
+            if res_file.is_file():
+                try:
+                    cached_res = read_json(res_file)
+                    if cached_res.get("execution_seconds") is not None:
+                        job["seconds"] = cached_res["execution_seconds"]
+                except Exception:
+                    pass
+            continue
         if res_file.is_file():
             try:
                 cached_res = read_json(res_file)
@@ -838,6 +826,8 @@ def ensure_formulaic_attempt_coverage(
                         reason=cached_res.get("reason", f"Executed {task_name}: {cached_res['status']}."),
                         evidence=ev_path,
                     )
+                    if cached_res.get("execution_seconds") is not None:
+                        job["seconds"] = cached_res["execution_seconds"]
                     job.pop("original_attempt", None)
                     job.pop("block_kind", None)
                     harvested[(family, task_name)] = {
@@ -897,6 +887,8 @@ def ensure_formulaic_attempt_coverage(
                 reason=res.get("reason", f"Executed {item['task']}: {res['status']}."),
                 evidence=ev_path,
             )
+            if res.get("execution_seconds") is not None:
+                jobs[key]["seconds"] = res["execution_seconds"]
             jobs[key].pop("original_attempt", None)
             jobs[key].pop("block_kind", None)
             harvested[(item["family"], item["task"])] = {
@@ -939,6 +931,8 @@ def ensure_formulaic_attempt_coverage(
             reason=res["reason"],
             evidence=ev_path,
         )
+        if res.get("execution_seconds") is not None:
+            jobs[key]["seconds"] = res["execution_seconds"]
         jobs[key].pop("original_attempt", None)
         jobs[key].pop("block_kind", None)
 
@@ -973,7 +967,7 @@ def _run_parallel_batches(
             return 2
         return 1
 
-    ordered = sorted(items, key=lambda x: (_task_weight(x), x["task"], x["family"]))
+    ordered = sorted(items, key=lambda x: (_task_weight(x), x["family"], x["task"]))
     buckets: dict[str, list[dict[str, Any]]] = {g: [] for g in gpu_list}
     for idx, item in enumerate(ordered):
         g = gpu_list[idx % len(gpu_list)]

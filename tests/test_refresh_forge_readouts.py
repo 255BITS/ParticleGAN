@@ -1568,12 +1568,22 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     suite_50 = set(full_suite_doc["tests"]) | {"ring_hold"}
     assert len(suite_50) == 50
     selected_fams = {"atlas", "bcap-pure", "bispf", "e22", "k3p", "ka2", "r1r2", "release07-gan-v3"}
+    unscoped_selected_records = [
+        rec
+        for rec in cov_doc.get("records", [])
+        if rec.get("family") in selected_fams and not rfr._is_scoped_attempt(rec)
+    ]
+    assert len(unscoped_selected_records) == 400
     cov_by_fam_task = {
         (rec.get("family"), rec.get("task")): rec
-        for rec in cov_doc.get("records", [])
-        if rec.get("family") in selected_fams and rec.get("task") in suite_50 and not rec.get("repair_scope")
+        for rec in unscoped_selected_records
     }
+    assert len(cov_by_fam_task) == 400
+    att_cov_md = (ROOT / "reports/forge/ATTEMPT_COVERAGE.md").read_text()
     for fam in sorted(selected_fams):
+        assert f"| {fam} | 50/50 | 0 |" in att_cov_md
+        fam_line = next(line for line in att_cov_md.splitlines() if line.startswith(f"| {fam} |"))
+        assert "BLOCKED" not in fam_line
         for tid in sorted(suite_50):
             rec = cov_by_fam_task.get((fam, tid))
             assert rec is not None, f"missing attempt-coverage record for ({fam}, {tid})"
@@ -1611,6 +1621,18 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
             assert forbidden_in_selected_cohort not in current_bench_tables, (
                 fam_page_name,
                 forbidden_in_selected_cohort,
+            )
+        for forbidden_in_selected_prose in (
+            "native model variants require an explicit profile",
+            "only zero_tanh_smoke is routed",
+            "unsupported vector target declaration",
+            "no compatible result",
+            "DDGAN caller-owned transition host",
+            "Run attempt: **BLOCKED**",
+        ):
+            assert forbidden_in_selected_prose not in current_bench, (
+                fam_page_name,
+                forbidden_in_selected_prose,
             )
 
 
@@ -2384,3 +2406,79 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
             capture_output=True,
         )
         shutil.rmtree(wt, ignore_errors=True)
+
+
+def test_refresh_attempt_coverage_delegates_to_formulaic_coverage_and_preserves_grid100_deep_recipes(
+    tmp_path: Path, monkeypatch
+):
+    from ops import formulaic_coverage as fc
+
+    called: list[tuple[Path, Path, list[str], bool]] = []
+
+    def _fake_ensure(root: Path, attempt_state_root: Path, gpus: list[str], *, json_mode: bool = False):
+        called.append((root, attempt_state_root, list(gpus), json_mode))
+        return {"updated": 0, "status": "ok"}
+
+    monkeypatch.setattr(fc, "ensure_formulaic_attempt_coverage", _fake_ensure)
+    full_suite_rel = Path("configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json")
+    atomic_json(tmp_path / full_suite_rel, {"tests": ["gaussian1d_smoke"]})
+    out = rfr.refresh_attempt_coverage(
+        tmp_path,
+        tmp_path / "runs/forge",
+        tmp_path / "runs/forge/attempt-coverage-refresh",
+        gpus=["0", "1"],
+        json_mode=True,
+    )
+    assert out == {"updated": 0, "status": "ok"}
+    assert called == [
+        (
+            tmp_path.resolve(),
+            (tmp_path / "runs/forge/attempt-coverage-refresh").resolve(),
+            ["0", "1"],
+            True,
+        )
+    ]
+
+    # Verify _run_grid100_deep_variant runs with each candidate's real recipe (not stripped MoG)
+    import experiments.forge.api as forge_api
+
+    captured_recipes = {}
+    orig_task_formulation_context = forge_api.task_formulation_context
+
+    def _wrapped_task_formulation_context(*args, **kwargs):
+        ctx = orig_task_formulation_context(*args, **kwargs)
+        captured_recipes["prior_kind"] = ctx.recipe.prior_kind
+        captured_recipes["lr_control"] = ctx.recipe.lr_control
+        captured_recipes["particle_birth_death"] = ctx.recipe.particle_birth_death
+        captured_recipes["serve_average"] = ctx.recipe.serve_average
+        captured_recipes["birth_death_cells"] = ctx.recipe.birth_death_cells
+        captured_recipes["reopen_guard"] = ctx.recipe.reopen_guard
+        raise RuntimeError("stop_after_recipe_capture")
+
+    monkeypatch.setattr(forge_api, "task_formulation_context", _wrapped_task_formulation_context)
+    tasks = fc.load_tasks(ROOT)
+    for cid, expected_cells, expected_reopen in (
+        ("atlas-particle-normal-v4", 256, "settled"),
+        ("e22", 64, None),
+    ):
+        captured_recipes.clear()
+        cand = fc.adapt_candidate_for_task(fc.load_candidate_card(ROOT, cid), tasks["grid100_mlp16"])
+        with pytest.raises(RuntimeError, match="stop_after_recipe_capture"):
+            fc._run_grid100_deep_variant(ROOT, cand, tasks["grid100_mlp16"], "cpu")
+        assert captured_recipes["prior_kind"] == "particles"
+        assert captured_recipes["lr_control"] == "stationarity"
+        assert captured_recipes["particle_birth_death"] is True
+        assert captured_recipes["serve_average"] == 4.0
+        assert captured_recipes["birth_death_cells"] == expected_cells
+        assert captured_recipes["reopen_guard"] == expected_reopen
+
+
+
+
+
+
+
+
+
+
+

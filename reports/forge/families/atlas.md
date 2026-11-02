@@ -1830,7 +1830,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 **clockfree_audit: PASS**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. declared state/horizon/cadence/restart comparisons agree; source audit bound
 
 Run attempt: **PASS** (new_attempt; qualification unchanged). declared state/horizon/cadence/restart comparisons agree; source audit bound [Attempt evidence](../attempt-coverage.json).
 
@@ -1902,7 +1902,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_w
 
 **clockfree_audit_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/clockfree_audit_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. declared state/horizon/cadence/restart comparisons agree; source audit bound
 
 Policy-cohort variant of [clockfree_audit](../../../configs/forge/tasks/clockfree_audit.json); parent task SHA256 `70bcc2939bb83d299e1396cb4c9cb43fa43e5c233e80ecd5412abadab2393f3f`. This measurement supplies no cells to the parent clean cohort.
 
@@ -1922,7 +1922,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_w
 
 **clockfree_audit_tier1_policy_selected_cloud_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/clockfree_audit_tier1_policy_selected_cloud_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. declared state/horizon/cadence/restart comparisons agree; source audit bound
 
 Policy-cohort variant of [clockfree_audit](../../../configs/forge/tasks/clockfree_audit.json); parent task SHA256 `d7748d04db85633e5c678622486b94b2a44f0e462ffb9c4b0179216db7840258`. This measurement supplies no cells to the parent clean cohort.
 
@@ -1942,7 +1942,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **cover_leftover: PASS**. [Current experiment declaration](../../../configs/forge/tasks/cover_leftover.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
 
@@ -1974,7 +1974,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **cover_leftover_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/cover_leftover_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [cover_leftover](../../../configs/forge/tasks/cover_leftover.json); parent task SHA256 `62558d6d4de641078c9d20c0e13d58073ec00c341b478eaafdaf83b80909f9f1`. This measurement supplies no cells to the parent clean cohort.
 
@@ -2156,7 +2156,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 **five_word_joint_hold: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_hold.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Required checkpoint prerequisite five_word_joint_smoke executed and failed (FAIL).
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). Required checkpoint prerequisite five_word_joint_smoke executed and failed (FAIL). [Attempt evidence](../attempt-coverage.json).
 
@@ -2191,7 +2191,7 @@ Dependencies: five_word_joint_smoke (checkpoint).
 
 **five_word_joint_hold_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/five_word_joint_hold_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Required checkpoint prerequisite five_word_joint_smoke executed and failed (FAIL).
 
 Policy-cohort variant of [five_word_joint_hold](../../../configs/forge/tasks/five_word_joint_hold.json); parent task SHA256 `d74c3ad2985901b4520427ed0e475de060c518c5a1bd5e3ec89967999893888f`. This measurement supplies no cells to the parent clean cohort.
 
@@ -2396,7 +2396,7 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 **gaussian1d_smoke_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/gaussian1d_smoke_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. any scheduled full pass with independent same-state confirmation
 
 Policy-cohort variant of [gaussian1d_smoke](../../../configs/forge/tasks/gaussian1d_smoke.json); parent task SHA256 `2bc761da66a3ebf6d4e231245ba66f93c443b3ad96f59e7a6e6b94473bcb9149`. This measurement supplies no cells to the parent clean cohort.
 
@@ -2427,7 +2427,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_publ
 
 **gaussian1d_smoke_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/gaussian1d_smoke_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. any scheduled full pass with independent same-state confirmation
 
 Policy-cohort variant of [gaussian1d_smoke](../../../configs/forge/tasks/gaussian1d_smoke.json); parent task SHA256 `2bc761da66a3ebf6d4e231245ba66f93c443b3ad96f59e7a6e6b94473bcb9149`. This measurement supplies no cells to the parent clean cohort.
 
@@ -2458,7 +2458,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_w
 
 **gaussian1d_stability: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_stability.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. stationary hold, deadline reacquisition and shifted hold
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). stationary hold, deadline reacquisition and shifted hold [Attempt evidence](../attempt-coverage.json).
 
@@ -2494,7 +2494,7 @@ Dependencies: gaussian1d_smoke (checkpoint).
 
 **gaussian1d_stability_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/gaussian1d_stability_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. stationary hold, deadline reacquisition and shifted hold
 
 Policy-cohort variant of [gaussian1d_stability](../../../configs/forge/tasks/gaussian1d_stability.json); parent task SHA256 `c6926e60b8cdc1cacdb11f6d8790c3064199ba659205100224d9c68fbbd72c7c`. This measurement supplies no cells to the parent clean cohort.
 
@@ -2528,7 +2528,7 @@ Dependencies: gaussian1d_smoke_policy_cloud_coverage_as_served_v1 (checkpoint).
 
 **gaussian1d_stability_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/gaussian1d_stability_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. stationary hold, deadline reacquisition and shifted hold
 
 Policy-cohort variant of [gaussian1d_stability](../../../configs/forge/tasks/gaussian1d_stability.json); parent task SHA256 `c6926e60b8cdc1cacdb11f6d8790c3064199ba659205100224d9c68fbbd72c7c`. This measurement supplies no cells to the parent clean cohort.
 
@@ -2562,7 +2562,7 @@ Dependencies: gaussian1d_smoke_policy_cloud_coverage_v1 (checkpoint).
 
 **grid100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/grid100.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). coverage, sustained live accuracy, or independent holdout failed [Attempt evidence](../attempt-coverage.json).
 
@@ -2603,7 +2603,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100_14k: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/grid100_14k.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
 Run attempt: **FAIL** (policy_cloud_execution; qualification unchanged). coverage, sustained live accuracy, or independent holdout failed [Attempt evidence](../atlas-e22-policy-cloud-20261015/records.json).
 
@@ -2644,7 +2644,7 @@ Dependencies: grid100 (checkpoint), clockfree_audit (gate).
 
 **grid100_14k_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/grid100_14k_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
 Policy-cohort variant of [grid100_14k](../../../configs/forge/tasks/grid100_14k.json); parent task SHA256 `ae6dfb2b6eb62d6bf758172d5fbf9e8c35a9af0c7adee432076be1de6eee62fa`. This measurement supplies no cells to the parent clean cohort.
 
@@ -2685,7 +2685,7 @@ Dependencies: grid100_policy_cloud_coverage_as_served_v1 (checkpoint), clockfree
 
 **grid100_14k_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/grid100_14k_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
 Policy-cohort variant of [grid100_14k](../../../configs/forge/tasks/grid100_14k.json); parent task SHA256 `ae6dfb2b6eb62d6bf758172d5fbf9e8c35a9af0c7adee432076be1de6eee62fa`. This measurement supplies no cells to the parent clean cohort.
 
@@ -2800,7 +2800,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100_mlp16: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/grid100_mlp16.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. native model variants require an explicit profile; grid100_mlp16: native model variants require an explicit profile
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Failed grid100_mlp16 bounds: modes >= 100, precision >= 0.97, min_hq_mode_mass >= 0.005, mass_tv <= 0.1, max_mode_mass <= 0.02, min_cov_eig_ratio >= 0.4.
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed grid100_mlp16 bounds: modes >= 100, precision >= 0.97, min_hq_mode_mass >= 0.005, mass_tv <= 0.1, max_mode_mass <= 0.02, min_cov_eig_ratio >= 0.4. [Attempt evidence](../attempt-coverage.json).
 
@@ -2843,7 +2843,7 @@ Dependencies: grid100 (gate).
 
 **grid100_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/grid100_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
 Policy-cohort variant of [grid100](../../../configs/forge/tasks/grid100.json); parent task SHA256 `659d1018b4634af5a8f132461c54a70acddc2c062682f1223cb20198a6885757`. This measurement supplies no cells to the parent clean cohort.
 
@@ -2882,7 +2882,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_publ
 
 **grid100_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/grid100_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
 Policy-cohort variant of [grid100](../../../configs/forge/tasks/grid100.json); parent task SHA256 `659d1018b4634af5a8f132461c54a70acddc2c062682f1223cb20198a6885757`. This measurement supplies no cells to the parent clean cohort.
 
@@ -2958,9 +2958,9 @@ Current measurement: particle_cloud prior (sigma 0); public_prior_without_output
 
 **grid100_res16_tanh: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/grid100_res16_tanh.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. native model variants require an explicit profile; grid100_res16_tanh: native model variants require an explicit profile
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Failed grid100_res16_tanh bounds: min_cov_eig_ratio >= 0.4, max_cov_eig_ratio <= 1.7, min_radial_median_ratio >= 0.65, accuracy_abs_cov_trace_bias <= 0.1, accuracy_radial_ks <= 0.04.
 
-Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed grid100_res16_tanh bounds: modes >= 100, precision >= 0.97, min_hq_mode_mass >= 0.005, mass_tv <= 0.1, max_mode_mass <= 0.02, min_cov_eig_ratio >= 0.4. [Attempt evidence](../attempt-coverage.json).
+Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed grid100_res16_tanh bounds: min_cov_eig_ratio >= 0.4, max_cov_eig_ratio <= 1.7, min_radial_median_ratio >= 0.65, accuracy_abs_cov_trace_bias <= 0.1, accuracy_radial_ks <= 0.04. [Attempt evidence](../attempt-coverage.json).
 
 Used by: [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4).
 
@@ -3001,7 +3001,7 @@ Dependencies: grid100 (gate).
 
 **img_bars4: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/img_bars4.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
 
@@ -3029,7 +3029,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_bars4_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/img_bars4_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [img_bars4](../../../configs/forge/tasks/img_bars4.json); parent task SHA256 `4786360fc4e66be0bbd1bdee42b3fcb924555d2bd0ee2a8d9198a72a5ba909e1`. This measurement supplies no cells to the parent clean cohort.
 
@@ -3055,7 +3055,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_enum
 
 **img_bars4_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/img_bars4_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [img_bars4](../../../configs/forge/tasks/img_bars4.json); parent task SHA256 `4786360fc4e66be0bbd1bdee42b3fcb924555d2bd0ee2a8d9198a72a5ba909e1`. This measurement supplies no cells to the parent clean cohort.
 
@@ -3129,7 +3129,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_blobs4: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/img_blobs4.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
 
@@ -3157,7 +3157,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_blobs4_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/img_blobs4_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [img_blobs4](../../../configs/forge/tasks/img_blobs4.json); parent task SHA256 `1dad4afb589ce9d342d3ab334d8dd6c25b74be2cbbc7df31f3d0a0d0ae92cacb`. This measurement supplies no cells to the parent clean cohort.
 
@@ -3183,7 +3183,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_enum
 
 **img_blobs4_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/img_blobs4_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [img_blobs4](../../../configs/forge/tasks/img_blobs4.json); parent task SHA256 `1dad4afb589ce9d342d3ab334d8dd6c25b74be2cbbc7df31f3d0a0d0ae92cacb`. This measurement supplies no cells to the parent clean cohort.
 
@@ -3233,7 +3233,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_intensity2: PASS**. [Current experiment declaration](../../../configs/forge/tasks/img_intensity2.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
 
@@ -3261,7 +3261,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_intensity2_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/img_intensity2_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [img_intensity2](../../../configs/forge/tasks/img_intensity2.json); parent task SHA256 `c439fa5d485a46164ed89eb3f1d9494eec8fcbfb167e02a9e69f7d4e323bbb40`. This measurement supplies no cells to the parent clean cohort.
 
@@ -3287,7 +3287,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_enum
 
 **img_intensity2_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/img_intensity2_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [img_intensity2](../../../configs/forge/tasks/img_intensity2.json); parent task SHA256 `c439fa5d485a46164ed89eb3f1d9494eec8fcbfb167e02a9e69f7d4e323bbb40`. This measurement supplies no cells to the parent clean cohort.
 
@@ -3337,7 +3337,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_stripes2: PASS**. [Current experiment declaration](../../../configs/forge/tasks/img_stripes2.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
 
@@ -3365,7 +3365,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_stripes2_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/img_stripes2_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [img_stripes2](../../../configs/forge/tasks/img_stripes2.json); parent task SHA256 `530f3f35ba921a3221237d5747a6e3f2649a943816d43413f61e2c47e797bf79`. This measurement supplies no cells to the parent clean cohort.
 
@@ -3391,7 +3391,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_enum
 
 **img_stripes2_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/img_stripes2_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [img_stripes2](../../../configs/forge/tasks/img_stripes2.json); parent task SHA256 `530f3f35ba921a3221237d5747a6e3f2649a943816d43413f61e2c47e797bf79`. This measurement supplies no cells to the parent clean cohort.
 
@@ -3465,7 +3465,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **mid_scale_identity: PASS**. [Current experiment declaration](../../../configs/forge/tasks/mid_scale_identity.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
 
@@ -3499,7 +3499,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **mid_scale_identity_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/mid_scale_identity_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [mid_scale_identity](../../../configs/forge/tasks/mid_scale_identity.json); parent task SHA256 `c4a5a7fee89fb2bf0b781b0c408f134b7955e5eb00b71923bdb80488150dd247`. This measurement supplies no cells to the parent clean cohort.
 
@@ -3531,7 +3531,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_learned_parame
 
 **misgan_block_neural_imputer: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/misgan_block_neural_imputer.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. misgan_block_neural_imputer: unsupported vector target declaration
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Failed misgan_block_neural_imputer bounds: acc, acc_lo.
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed misgan_block_neural_imputer bounds: acc, acc_lo. [Attempt evidence](../attempt-coverage.json).
 
@@ -3560,7 +3560,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **misgan_block_recovery: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/misgan_block_recovery.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. misgan_block_recovery: unsupported vector target declaration
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Failed misgan_block_recovery bounds: acc, acc_lo, hq, mask_tv, mass_tv, modes.
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed misgan_block_recovery bounds: acc, acc_lo, hq, mask_tv, mass_tv, modes. [Attempt evidence](../attempt-coverage.json).
 
@@ -3591,7 +3591,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **mode_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/mode_hold.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
 
@@ -3619,7 +3619,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **mode_hold_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/mode_hold_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [mode_hold](../../../configs/forge/tasks/mode_hold.json); parent task SHA256 `6e8165cfc672976b263207eec0a0fea65cd8f94d7b5aeddf2d8cf6992de7537e`. This measurement supplies no cells to the parent clean cohort.
 
@@ -3645,7 +3645,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_publ
 
 **mode_hold_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/mode_hold_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [mode_hold](../../../configs/forge/tasks/mode_hold.json); parent task SHA256 `6e8165cfc672976b263207eec0a0fea65cd8f94d7b5aeddf2d8cf6992de7537e`. This measurement supplies no cells to the parent clean cohort.
 
@@ -3671,7 +3671,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_w
 
 **model_ae_ddgan_bimodal_chain: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_ddgan_bimodal_chain.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
 
@@ -3973,7 +3973,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 **model_ddgan_bimodal_chain: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_ddgan_bimodal_chain.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
 
@@ -4293,7 +4293,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 **residual_student: PASS**. [Current experiment declaration](../../../configs/forge/tasks/residual_student.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
 
@@ -4322,7 +4322,7 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **residual_student_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/residual_student_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [residual_student](../../../configs/forge/tasks/residual_student.json); parent task SHA256 `9f2929246105b0776ee52b609c84d72e9753b195593b47b542117b0451e69f7c`. This measurement supplies no cells to the parent clean cohort.
 
@@ -4488,7 +4488,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **ring16_bigan_continuous: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/ring16_bigan_continuous.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. ring16_bigan_continuous: unsupported vector target declaration
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Failed ring16_bigan_continuous bounds: hq, recon_rmse.
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed ring16_bigan_continuous bounds: hq, recon_rmse. [Attempt evidence](../attempt-coverage.json).
 
@@ -4517,7 +4517,7 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 **ring_extension: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/ring_extension.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Required checkpoint prerequisite ring_hold executed and failed (FAIL).
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). Required checkpoint prerequisite ring_hold executed and failed (FAIL). [Attempt evidence](../attempt-coverage.json).
 
@@ -4549,7 +4549,7 @@ Dependencies: ring_hold (checkpoint).
 
 **ring_extension_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/ring_extension_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Required checkpoint prerequisite ring_hold executed and failed (FAIL).
 
 Policy-cohort variant of [ring_extension](../../../configs/forge/tasks/ring_extension.json); parent task SHA256 `213d1122f849b6987b802e6a5413dcf0d6bc6b893bb14f93eeecfd6edc47dbf9`. This measurement supplies no cells to the parent clean cohort.
 
@@ -4579,7 +4579,7 @@ Dependencies: ring_hold_policy_cloud_coverage_as_served_v1 (checkpoint).
 
 **ring_extension_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/ring_extension_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Required checkpoint prerequisite ring_hold executed and failed (FAIL).
 
 Policy-cohort variant of [ring_extension](../../../configs/forge/tasks/ring_extension.json); parent task SHA256 `213d1122f849b6987b802e6a5413dcf0d6bc6b893bb14f93eeecfd6edc47dbf9`. This measurement supplies no cells to the parent clean cohort.
 
@@ -4609,7 +4609,7 @@ Dependencies: ring_hold_policy_cloud_coverage_v1 (checkpoint).
 
 **ring_hold: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/ring_hold.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. first qualifying window failed acquisition or uninterrupted hold
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). first qualifying window failed acquisition or uninterrupted hold [Attempt evidence](../attempt-coverage.json).
 
@@ -4641,7 +4641,7 @@ Dependencies: mode_hold (gate).
 
 **ring_hold_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/ring_hold_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. first qualifying window failed acquisition or uninterrupted hold
 
 Policy-cohort variant of [ring_hold](../../../configs/forge/tasks/ring_hold.json); parent task SHA256 `a605b47cb4ec3cacdc69a01ed5fb2186e185d9ccde177638452f086c0898203d`. This measurement supplies no cells to the parent clean cohort.
 
@@ -4671,7 +4671,7 @@ Dependencies: mode_hold_policy_cloud_coverage_as_served_v1 (gate).
 
 **ring_hold_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/ring_hold_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. first qualifying window failed acquisition or uninterrupted hold
 
 Policy-cohort variant of [ring_hold](../../../configs/forge/tasks/ring_hold.json); parent task SHA256 `a605b47cb4ec3cacdc69a01ed5fb2186e185d9ccde177638452f086c0898203d`. This measurement supplies no cells to the parent clean cohort.
 
@@ -4701,7 +4701,7 @@ Dependencies: mode_hold_policy_cloud_coverage_v1 (gate).
 
 **rotated100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/rotated100.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). coverage, sustained live accuracy, or independent holdout failed [Attempt evidence](../attempt-coverage.json).
 
@@ -4742,7 +4742,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **rotated100_14k: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/rotated100_14k.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
 Run attempt: **FAIL** (policy_cloud_execution; qualification unchanged). coverage, sustained live accuracy, or independent holdout failed [Attempt evidence](../atlas-e22-policy-cloud-20261015/records.json).
 
@@ -4783,7 +4783,7 @@ Dependencies: rotated100 (checkpoint), clockfree_audit (gate).
 
 **rotated100_14k_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/rotated100_14k_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
 Policy-cohort variant of [rotated100_14k](../../../configs/forge/tasks/rotated100_14k.json); parent task SHA256 `f5b2e2f2e7ef70fc88887cf5342e511ff15fb59597af32300b94f966695f3ef9`. This measurement supplies no cells to the parent clean cohort.
 
@@ -4824,7 +4824,7 @@ Dependencies: rotated100_policy_cloud_coverage_as_served_v1 (checkpoint), clockf
 
 **rotated100_14k_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/rotated100_14k_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
 Policy-cohort variant of [rotated100_14k](../../../configs/forge/tasks/rotated100_14k.json); parent task SHA256 `f5b2e2f2e7ef70fc88887cf5342e511ff15fb59597af32300b94f966695f3ef9`. This measurement supplies no cells to the parent clean cohort.
 
@@ -4902,7 +4902,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **rotated100_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/rotated100_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
 Policy-cohort variant of [rotated100](../../../configs/forge/tasks/rotated100.json); parent task SHA256 `5f8b990a7031ea63d618eb0a8c08d5738d409fd63415f7d8c24cd12842fd2553`. This measurement supplies no cells to the parent clean cohort.
 
@@ -4941,7 +4941,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_publ
 
 **rotated100_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/rotated100_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
 Policy-cohort variant of [rotated100](../../../configs/forge/tasks/rotated100.json); parent task SHA256 `5f8b990a7031ea63d618eb0a8c08d5738d409fd63415f7d8c24cd12842fd2553`. This measurement supplies no cells to the parent clean cohort.
 
@@ -4980,7 +4980,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_w
 
 **staggered100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/staggered100.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). coverage, sustained live accuracy, or independent holdout failed [Attempt evidence](../attempt-coverage.json).
 
@@ -5021,7 +5021,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100_14k: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/staggered100_14k.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
 Run attempt: **FAIL** (policy_cloud_execution; qualification unchanged). coverage, sustained live accuracy, or independent holdout failed [Attempt evidence](../atlas-e22-policy-cloud-20261015/records.json).
 
@@ -5062,7 +5062,7 @@ Dependencies: staggered100 (checkpoint), clockfree_audit (gate).
 
 **staggered100_14k_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/staggered100_14k_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
 Policy-cohort variant of [staggered100_14k](../../../configs/forge/tasks/staggered100_14k.json); parent task SHA256 `4630e532f304a9c3c3236d1dd514fc7b69a7b98372d25e2bcd4c9e8fd08874db`. This measurement supplies no cells to the parent clean cohort.
 
@@ -5103,7 +5103,7 @@ Dependencies: staggered100_policy_cloud_coverage_as_served_v1 (checkpoint), cloc
 
 **staggered100_14k_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/staggered100_14k_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
 Policy-cohort variant of [staggered100_14k](../../../configs/forge/tasks/staggered100_14k.json); parent task SHA256 `4630e532f304a9c3c3236d1dd514fc7b69a7b98372d25e2bcd4c9e8fd08874db`. This measurement supplies no cells to the parent clean cohort.
 
@@ -5181,7 +5181,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/staggered100_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
 Policy-cohort variant of [staggered100](../../../configs/forge/tasks/staggered100.json); parent task SHA256 `a4b20718512db5cb3193a7a919095651ff179fbc6eea4977b5bc54c1a145541f`. This measurement supplies no cells to the parent clean cohort.
 
@@ -5220,7 +5220,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_publ
 
 **staggered100_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/staggered100_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
 Policy-cohort variant of [staggered100](../../../configs/forge/tasks/staggered100.json); parent task SHA256 `a4b20718512db5cb3193a7a919095651ff179fbc6eea4977b5bc54c1a145541f`. This measurement supplies no cells to the parent clean cohort.
 
@@ -5259,7 +5259,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_w
 
 **target_shift_recovery: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/target_shift_recovery.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed live recovery and matched frozen negative control
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed live recovery and matched frozen negative control [Attempt evidence](../attempt-coverage.json).
 
@@ -5282,7 +5282,7 @@ Dependencies: mode_hold (gate).
 
 **target_shift_recovery_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/target_shift_recovery_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed live recovery and matched frozen negative control
 
 Policy-cohort variant of [target_shift_recovery](../../../configs/forge/tasks/target_shift_recovery.json); parent task SHA256 `6e522bcb4bd1b58808e2486f4ab56d31a7b428682697c1e82121107f40161671`. This measurement supplies no cells to the parent clean cohort.
 
@@ -5305,7 +5305,7 @@ Dependencies: mode_hold_policy_cloud_coverage_as_served_v1 (gate).
 
 **target_shift_recovery_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/target_shift_recovery_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed live recovery and matched frozen negative control
 
 Policy-cohort variant of [target_shift_recovery](../../../configs/forge/tasks/target_shift_recovery.json); parent task SHA256 `6e522bcb4bd1b58808e2486f4ab56d31a7b428682697c1e82121107f40161671`. This measurement supplies no cells to the parent clean cohort.
 
@@ -5328,7 +5328,7 @@ Dependencies: mode_hold_policy_cloud_coverage_v1 (gate).
 
 **trajectory: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/trajectory.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
 
@@ -5355,7 +5355,7 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **trajectory_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/trajectory_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [trajectory](../../../configs/forge/tasks/trajectory.json); parent task SHA256 `23999b9018348f98cb55a9d3ba40ae48d1583c5d5d573d965246fe19c0c9bac9`. This measurement supplies no cells to the parent clean cohort.
 
@@ -5530,7 +5530,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_part
 
 **unipolar: PASS**. [Current experiment declaration](../../../configs/forge/tasks/unipolar.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
 
@@ -5559,7 +5559,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **unipolar_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/unipolar_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [unipolar](../../../configs/forge/tasks/unipolar.json); parent task SHA256 `52ed4bbf499e743c12152e91a3fda3a2e5272585a9ed56080f85433128951afe`. This measurement supplies no cells to the parent clean cohort.
 
@@ -5682,7 +5682,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_para
 
 **vector_anisotropic: PASS**. [Current experiment declaration](../../../configs/forge/tasks/vector_anisotropic.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
 
@@ -5713,7 +5713,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_anisotropic_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_anisotropic_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [vector_anisotropic](../../../configs/forge/tasks/vector_anisotropic.json); parent task SHA256 `9f51728c453c022e8026ba06faa6a656e1f2e2d073794842b61441de3bc0e9b6`. This measurement supplies no cells to the parent clean cohort.
 
@@ -5742,7 +5742,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_publ
 
 **vector_anisotropic_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_anisotropic_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [vector_anisotropic](../../../configs/forge/tasks/vector_anisotropic.json); parent task SHA256 `9f51728c453c022e8026ba06faa6a656e1f2e2d073794842b61441de3bc0e9b6`. This measurement supplies no cells to the parent clean cohort.
 
@@ -5798,7 +5798,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_overlap: PASS**. [Current experiment declaration](../../../configs/forge/tasks/vector_overlap.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
 
@@ -5827,7 +5827,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_overlap_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_overlap_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [vector_overlap](../../../configs/forge/tasks/vector_overlap.json); parent task SHA256 `1b488aeaa3d7feca518a46e4a1abe3f73ae7b94e2e7417f45f63007cdd05a2ec`. This measurement supplies no cells to the parent clean cohort.
 
@@ -5854,7 +5854,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_publ
 
 **vector_overlap_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_overlap_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [vector_overlap](../../../configs/forge/tasks/vector_overlap.json); parent task SHA256 `1b488aeaa3d7feca518a46e4a1abe3f73ae7b94e2e7417f45f63007cdd05a2ec`. This measurement supplies no cells to the parent clean cohort.
 
@@ -5906,7 +5906,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_spiral: PASS**. [Current experiment declaration](../../../configs/forge/tasks/vector_spiral.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
 
@@ -5935,7 +5935,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_spiral_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_spiral_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [vector_spiral](../../../configs/forge/tasks/vector_spiral.json); parent task SHA256 `4a77235e0141bde59a2fc3735342529a00fba0c19fd92e72d110a64b40023dcf`. This measurement supplies no cells to the parent clean cohort.
 
@@ -5962,7 +5962,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_publ
 
 **vector_spiral_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_spiral_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [vector_spiral](../../../configs/forge/tasks/vector_spiral.json); parent task SHA256 `4a77235e0141bde59a2fc3735342529a00fba0c19fd92e72d110a64b40023dcf`. This measurement supplies no cells to the parent clean cohort.
 
@@ -6014,7 +6014,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_two_broad: PASS**. [Current experiment declaration](../../../configs/forge/tasks/vector_two_broad.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
 
@@ -6045,7 +6045,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_two_broad_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_two_broad_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [vector_two_broad](../../../configs/forge/tasks/vector_two_broad.json); parent task SHA256 `1a083444f25f9d4794430bbdbef5eca15e32ccd789228f4ac67c3367326a8357`. This measurement supplies no cells to the parent clean cohort.
 
@@ -6074,7 +6074,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_publ
 
 **vector_two_broad_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_two_broad_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [vector_two_broad](../../../configs/forge/tasks/vector_two_broad.json); parent task SHA256 `1a083444f25f9d4794430bbdbef5eca15e32ccd789228f4ac67c3367326a8357`. This measurement supplies no cells to the parent clean cohort.
 
@@ -6130,7 +6130,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_mass: PASS**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_mass.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
 
@@ -6162,7 +6162,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_mass_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_unequal_mass_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [vector_unequal_mass](../../../configs/forge/tasks/vector_unequal_mass.json); parent task SHA256 `27e0e7c633c186a8c8c75f69b26ad0f6bb922aac1aafe9becd85ea1401e85fc0`. This measurement supplies no cells to the parent clean cohort.
 
@@ -6192,7 +6192,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_publ
 
 **vector_unequal_mass_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_unequal_mass_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [vector_unequal_mass](../../../configs/forge/tasks/vector_unequal_mass.json); parent task SHA256 `27e0e7c633c186a8c8c75f69b26ad0f6bb922aac1aafe9becd85ea1401e85fc0`. This measurement supplies no cells to the parent clean cohort.
 
@@ -6250,7 +6250,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_width: PASS**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_width.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
 
@@ -6281,7 +6281,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_width_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/vector_unequal_width_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [vector_unequal_width](../../../configs/forge/tasks/vector_unequal_width.json); parent task SHA256 `6b22881f666e4c1cdb07cf0a212711a3561300d9727466bb83334c065e7d3e26`. This measurement supplies no cells to the parent clean cohort.
 
@@ -6310,7 +6310,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_publ
 
 **vector_unequal_width_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/vector_unequal_width_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Policy-cohort variant of [vector_unequal_width](../../../configs/forge/tasks/vector_unequal_width.json); parent task SHA256 `6b22881f666e4c1cdb07cf0a212711a3561300d9727466bb83334c065e7d3e26`. This measurement supplies no cells to the parent clean cohort.
 
@@ -6366,7 +6366,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **zero_tanh_rail_escape: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/zero_tanh_rail_escape.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. zero_tanh_rail_escape: zero_tanh_rail_escape: unsupported tanh host zero_tanh_rail_escape; only zero_tanh_smoke is routed
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Failed rail-escape bounds: mean_abs_error <= 0.005.
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed rail-escape bounds: mean_abs_error <= 0.005. [Attempt evidence](../attempt-coverage.json).
 

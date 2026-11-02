@@ -5,14 +5,14 @@ Every record identifies an attempt to run an unchanged selected or archived rese
 | Family or exact recipe | Attempted / distinct tests | Pending | Outcome counts |
 | --- | ---: | ---: | --- |
 | atlas | 50/50 | 0 | 28 FAIL, 22 PASS |
-| bcap-pure | 53/53 | 0 | 3 BLOCKED, 33 FAIL, 17 PASS |
+| bcap-pure | 50/50 | 0 | 33 FAIL, 17 PASS |
 | bispf | 50/50 | 0 | 29 FAIL, 21 PASS |
-| e22 | 53/53 | 0 | 3 BLOCKED, 33 FAIL, 17 PASS |
-| k3p | 53/53 | 0 | 3 BLOCKED, 29 FAIL, 21 PASS |
-| ka2 | 53/53 | 0 | 3 BLOCKED, 31 FAIL, 19 PASS |
+| e22 | 50/50 | 0 | 33 FAIL, 17 PASS |
+| k3p | 50/50 | 0 | 29 FAIL, 21 PASS |
+| ka2 | 50/50 | 0 | 31 FAIL, 19 PASS |
 | atlas selected-cloud after investigation | 3/3 | 0 | 2 ERROR, 1 FAIL |
-| r1r2 | 53/53 | 0 | 3 BLOCKED, 31 FAIL, 19 PASS |
-| release07-gan-v3 | 53/53 | 0 | 3 BLOCKED, 31 FAIL, 19 PASS |
+| r1r2 | 50/50 | 0 | 31 FAIL, 19 PASS |
+| release07-gan-v3 | 50/50 | 0 | 31 FAIL, 19 PASS |
 | E22 checkpoint-export repair (same recipe) | 2/2 | 0 | 2 FAIL |
 | ATLAS checkpoint-export repair (same recipe) | 2/2 | 0 | 2 FAIL |
 | BISPF continuation attempts before prior-metadata fix | 3/3 | 0 | 1 BLOCKED, 2 ERROR |
@@ -200,9 +200,6 @@ These are recorded start attempts, not missing runs. A source or formulation cha
 | confidence-lr-finite-cap-gaussian-v1 | five_word_joint_smoke | TIMEOUT | original task wall-time limit exhausted |
 | confidence-lr-finite-cap-gaussian-v1 | gaussian1d_stability | BLOCKED | checkpoint parent gaussian1d_smoke: FAIL |
 | confidence-lr-finite-cap-gaussian-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
-| e22 | grid100_14k | BLOCKED | checkpoint parent grid100: BLOCKED |
-| e22 | rotated100_14k | BLOCKED | checkpoint parent rotated100: BLOCKED |
-| e22 | staggered100_14k | BLOCKED | checkpoint parent staggered100: BLOCKED |
 | generator-confidence-lr-bcap-direction-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
 | generator-idle-ema-bcap-direction-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: INCOMPLETE |
 | generator-idle-ema-bcap-direction-v1 | gaussian1d_stability | BLOCKED | checkpoint parent gaussian1d_smoke: INCOMPLETE |

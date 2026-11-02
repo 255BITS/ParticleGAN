@@ -25,7 +25,7 @@ Passes / required-view instances for one selected recipe per family. Shared test
 
 Counts follow the declared view revisions: adaptation 4, clockfree_continuous 5, discriminator_stability 14, formulation_comparison 3, host_profile_transfer 6, quality_coverage 4. The recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered; no recorded verdict was regraded.
 
-Backfill coverage: **985/985 distinct recipe/test pairs attempted (selected and research)**; 0 pending and 0 running. [Outcomes, blocked attempts and setup](ATTEMPT_COVERAGE.md). This counts attempts, including start refusals, rather than passes or qualification.
+Backfill coverage: **967/967 distinct recipe/test pairs attempted (selected and research)**; 0 pending and 0 running. [Outcomes, blocked attempts and setup](ATTEMPT_COVERAGE.md). This counts attempts, including start refusals, rather than passes or qualification.
 
 ## Full-suite results — failures included
 
@@ -523,5 +523,5 @@ After any view revision (for example a held or removed test), always add `--refr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `25f3fce0c1313bb8332b7c9f0840514335150ded802451834b2fa569865e5c23`.
+Publication input digest `3cf58000752ce226019a0b130b929b2f4acb15bdc73e7c60b8d114a02178f3dc`.
 [Performance by test and complete recipe](test-performance.md): compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.
