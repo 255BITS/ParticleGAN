@@ -61,7 +61,7 @@
       "report/paired_error_2d": 1,
       "report/prior-ablation-2026-10-25": 3,
       "report/prior-comparison": 4,
-      "report/project": 11,
+      "report/project": 12,
       "report/r1-integrations": 2,
       "report/readme-100gaussians": 9,
       "report/releases": 1,
@@ -112,20 +112,20 @@
       "frozen_driver": 28,
       "frozen_evaluator_or_audit": 2,
       "frozen_support": 28,
-      "narrative": 961,
+      "narrative": 962,
       "structured_evidence": 5056,
       "support": 1552,
       "support_artifact": 52,
       "visualization": 23,
       "visualization_artifact": 740
     },
-    "files": 11783
+    "files": 11784
   },
   "coverage": {
-    "declared_count": 11783,
+    "declared_count": 11784,
     "missing": [],
     "stale": [],
-    "tracked_count": 11783,
+    "tracked_count": 11784,
     "unclassified": [],
     "valid": true
   },
@@ -8670,6 +8670,13 @@
       "git_blob": "7a00b7e9562fe14de79758f6ec0adb61ed871a61",
       "path": "reports/atlas-explanation/render_infographics.py",
       "role": "visualization",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/project",
+      "git_blob": "2a6a9e4c34426ad82cb2b9068cef3da7b46b5cd0",
+      "path": "reports/baseline_formulaic_tier_evaluation_report.md",
+      "role": "narrative",
       "suggested_tiers": []
     },
     {
