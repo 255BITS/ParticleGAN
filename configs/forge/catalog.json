@@ -61,7 +61,7 @@
       "report/paired_error_2d": 1,
       "report/prior-ablation-2026-10-25": 3,
       "report/prior-comparison": 4,
-      "report/project": 12,
+      "report/project": 13,
       "report/r1-integrations": 2,
       "report/readme-100gaussians": 9,
       "report/releases": 1,
@@ -112,20 +112,20 @@
       "frozen_driver": 28,
       "frozen_evaluator_or_audit": 2,
       "frozen_support": 28,
-      "narrative": 962,
+      "narrative": 963,
       "structured_evidence": 5056,
       "support": 1552,
       "support_artifact": 52,
       "visualization": 23,
       "visualization_artifact": 740
     },
-    "files": 11784
+    "files": 11785
   },
   "coverage": {
-    "declared_count": 11784,
+    "declared_count": 11785,
     "missing": [],
     "stale": [],
-    "tracked_count": 11784,
+    "tracked_count": 11785,
     "unclassified": [],
     "valid": true
   },
@@ -14150,6 +14150,13 @@
       "git_blob": "c012ec6c4ee6dc0bf317d31c3656d6a8783dd2fa",
       "path": "reports/e22-animation/render_gif.py",
       "role": "visualization",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/project",
+      "git_blob": "4235afedc1925e16e8dee952ca7391900cc193b4",
+      "path": "reports/family_tier1_evaluation_and_progress_report.md",
+      "role": "narrative",
       "suggested_tiers": []
     },
     {
