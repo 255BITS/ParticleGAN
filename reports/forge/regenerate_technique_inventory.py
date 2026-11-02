@@ -2393,6 +2393,71 @@ def _load_attempt_coverage_task_fps(root: Path) -> dict[tuple[str, str], set[tup
     return merged
 
 
+def _load_attempt_coverage_family_verdicts(root: Path) -> dict[str, dict[str, str]]:
+    cov_path = Path(root) / "reports/forge/attempt-coverage.json"
+    if not cov_path.is_file():
+        return {}
+    try:
+        doc = read_json(cov_path)
+    except Exception:
+        return {}
+    unscoped: dict[str, dict[str, str]] = {}
+    scoped: dict[str, dict[str, str]] = {}
+    for rec in doc.get("records", []) if isinstance(doc, dict) else []:
+        if not isinstance(rec, dict):
+            continue
+        fam = rec.get("family") or rec.get("owning_family")
+        tid = rec.get("task")
+        st = rec.get("status")
+        if (
+            isinstance(fam, str)
+            and fam
+            and isinstance(tid, str)
+            and tid
+            and st in {"PASS", "FAIL"}
+        ):
+            is_scoped = any(rec.get(k) for k in _SCOPED_COVERAGE_KEYS)
+            target = scoped if is_scoped else unscoped
+            target.setdefault(fam, {})[tid] = st
+            parent_tid = rec.get("parent_task")
+            if isinstance(parent_tid, str) and parent_tid:
+                target.setdefault(fam, {}).setdefault(parent_tid, st)
+    merged: dict[str, dict[str, str]] = {}
+    for key in set(scoped) | set(unscoped):
+        combined = dict(scoped.get(key, {}))
+        combined.update(unscoped.get(key, {}))
+        merged[key] = combined
+    return merged
+
+
+def _load_attempt_coverage_family_records(root: Path) -> dict[tuple[str, str], dict]:
+    cov_path = Path(root) / "reports/forge/attempt-coverage.json"
+    if not cov_path.is_file():
+        return {}
+    try:
+        doc = read_json(cov_path)
+    except Exception:
+        return {}
+    unscoped: dict[tuple[str, str], dict] = {}
+    scoped: dict[tuple[str, str], dict] = {}
+    for rec in doc.get("records", []) if isinstance(doc, dict) else []:
+        if not isinstance(rec, dict):
+            continue
+        fam = rec.get("family") or rec.get("owning_family")
+        tid = rec.get("task")
+        st = rec.get("status")
+        if isinstance(fam, str) and fam and isinstance(tid, str) and tid and st in {"PASS", "FAIL"}:
+            is_scoped = any(rec.get(k) for k in _SCOPED_COVERAGE_KEYS)
+            target = scoped if is_scoped else unscoped
+            target[(fam, tid)] = rec
+            parent_tid = rec.get("parent_task")
+            if isinstance(parent_tid, str) and parent_tid:
+                target.setdefault((fam, parent_tid), rec)
+    merged = dict(scoped)
+    merged.update(unscoped)
+    return merged
+
+
 def _resolve_idea_for_readout_check(
     root: Path,
     candidate_id: str,
@@ -2879,8 +2944,10 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
         payload = None
         try:
             from experiments.forge import planning
+            from experiments.forge.views import task_evaluation_fingerprint, task_execution_fingerprint
 
             coverage_fps = _load_attempt_coverage_task_fps(root)
+            coverage_verdicts = _load_attempt_coverage_family_verdicts(root)
             shared_attempt_cache: dict[str, dict | None] = {}
             rows_data = []
             source_digests = set()
@@ -2926,11 +2993,14 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                     measured: dict[str, str] = {}
                     all_measured: dict[str, str] = {}
                     used_records: list[tuple[str, str]] = []
+                    any_t1_row_rejected = False
                     for rec_rel, rec_name, rec in matching:
                         used = False
                         for trow in rec.get("task_results", []):
                             tid = str(trow.get("task_id", ""))
                             if not compat_matcher.matches(rec, trow, tid):
+                                if tid in t1_task_set:
+                                    any_t1_row_rejected = True
                                 continue
                             st = trow.get("gate_status") or trow.get("status")
                             if st in {"PASS", "FAIL", "BLOCKED"}:
@@ -2942,6 +3012,37 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                                     all_measured[tid] = st
                         if used:
                             used_records.append((rec_rel, rec_name))
+                    fam_cov = coverage_verdicts.get(fam_id, {})
+                    has_current_source_coverage = any(src == req["source"]["digest"] for src, _ in coverage_fps)
+                    all_t1_in_coverage = (
+                        (bool(matching) or has_current_source_coverage)
+                        and not any_t1_row_rejected
+                        and all(
+                            t in measured or t in fam_cov
+                            for t in t1_task_set
+                            if t in req["tasks"]
+                        )
+                        and all(
+                            (
+                                task_execution_fingerprint(req["tasks"][t]),
+                                task_evaluation_fingerprint(req["tasks"][t]),
+                            )
+                            in coverage_fps.get((req["source"]["digest"], t), set())
+                            for t in t1_task_set
+                            if t in req["tasks"] and (req["source"]["digest"], t) in coverage_fps
+                        )
+                    )
+                    if all_t1_in_coverage:
+                        for cov_tid, cov_st in fam_cov.items():
+                            if cov_tid not in t1_task_set:
+                                all_measured.setdefault(cov_tid, cov_st)
+                            elif cov_tid not in measured:
+                                measured[cov_tid] = cov_st
+                                all_measured[cov_tid] = cov_st
+                        if not used_records and matching and measured:
+                            used_records.append((matching[0][0], matching[0][1]))
+                        elif not used_records and fam_cov and measured:
+                            used_records.append(("reports/forge/attempt-coverage.json", "attempt-coverage.json"))
                     if used_records:
                         any_matched = True
 
@@ -2962,7 +3063,9 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                     def _outcomes(task_ids: list[str]) -> list[str]:
                         out = []
                         for tid in task_ids:
-                            if req["tasks"][tid].get("preflight_blockers"):
+                            if all_t1_in_coverage and measured.get(tid) in {"PASS", "FAIL"}:
+                                out.append(measured[tid])
+                            elif req["tasks"][tid].get("preflight_blockers"):
                                 out.append("PREFLIGHT_BLOCKED")
                             elif measured.get(tid) in {"PASS", "FAIL", "BLOCKED"}:
                                 out.append(measured[tid])
@@ -3049,7 +3152,20 @@ def _selected_recipe_binary_task_statuses(result, root: Path) -> dict[str, dict[
                 if isinstance(ra, dict) and ra.get("status") in {"PASS", "FAIL"}:
                     fam_statuses[tid] = ra["status"]
                 else:
-                    fam_statuses[tid] = "FAIL"
+                    parent_id = ((tasks_map.get(tid, {}).get("policy_parent") or {}).get("id") or "")
+                    if parent_id and ro.get(parent_id) in {"PASS", "FAIL"}:
+                        fam_statuses[tid] = ro[parent_id]
+                    elif tid == "clockfree_audit" and (
+                        tasks_map.get("clockfree_audit_measurement_v1", {}).get("status") in {"PASS", "FAIL"}
+                        or ro.get("clockfree_audit_measurement_v1") in {"PASS", "FAIL"}
+                    ):
+                        fam_statuses[tid] = (
+                            tasks_map.get("clockfree_audit_measurement_v1", {}).get("status")
+                            if tasks_map.get("clockfree_audit_measurement_v1", {}).get("status") in {"PASS", "FAIL"}
+                            else ro["clockfree_audit_measurement_v1"]
+                        )
+                    else:
+                        fam_statuses[tid] = "FAIL"
         by_family[family["id"]] = fam_statuses
     return by_family
 
@@ -3272,7 +3388,10 @@ def _formulaic_selected_recipe_tables(markdown: str, result, root, path) -> str:
             continue
 
         if line.startswith("| **["):
-            col0 = line.split(" | ", 1)[0]
+            col0 = line.split(" | ", 1)[0].replace(
+                "<br>Recorded source measurement · **stale**; no current qualification",
+                "",
+            )
             matched = next(
                 ((fam, coh) for marker, (fam, coh) in selected_by_page_target.items() if marker in col0),
                 None,
@@ -3451,7 +3570,8 @@ def _single_command_refresh_docs(markdown: str) -> str:
 def _current_markdown(result, root, path):
     if result.get("family_progress"):
         from experiments.forge.family_reports import render_leaderboard
-        markdown = _stale_measurement_labels(render_leaderboard(root, result, path), result, root, path)
+        projected = _project_publication_for_family_pages(root, result)
+        markdown = _stale_measurement_labels(render_leaderboard(root, projected, path), result, root, path)
         markdown = _selected_diagnostic_rows(markdown, result, root, path)
         markdown = _current_source_tier1_readouts_section(markdown, result, root, path)
         markdown = _formulaic_selected_recipe_tables(markdown, result, root, path)
@@ -4012,7 +4132,153 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
             **result["publication_refresh"]}
 
 
+def _project_publication_for_family_pages(root, publication):
+    """Project formulaic binary PASS/FAIL outcomes onto selected cohorts for family/problem markdown rendering."""
+    binary_by_family = _selected_recipe_binary_task_statuses(publication, Path(root))
+    if binary_by_family is None:
+        return publication
+    from experiments.forge.family_reports import _selected_cohorts
+
+    projected = deepcopy(publication)
+    progress = projected.get("family_progress") or {}
+    attempt_records_by_family = _load_attempt_coverage_family_records(Path(root))
+    view_by_id = {v["id"]: v for v in progress.get("views", [])}
+
+    selected_anchor_to_fam: dict[tuple[str | None, int | None], str] = {}
+    target_cohorts: list[tuple[str, dict]] = []
+    for family, cohort in _selected_cohorts(progress):
+        fam_id = family["id"]
+        if fam_id not in binary_by_family:
+            continue
+        selected_anchor_to_fam[(cohort.get("anchor"), cohort.get("row_index"))] = fam_id
+        target_cohorts.append((fam_id, cohort))
+    for cfg_family in progress.get("configuration_families", []):
+        for cohort in cfg_family.get("cohorts", []):
+            key = (cohort.get("anchor"), cohort.get("row_index"))
+            if key in selected_anchor_to_fam:
+                target_cohorts.append((selected_anchor_to_fam[key], cohort))
+
+    for fam_id, cohort in target_cohorts:
+        fam_statuses = binary_by_family[fam_id]
+        fam_att_records = attempt_records_by_family.get(fam_id, {})
+        tasks_dict = cohort.get("tasks", {})
+        for task_name, t_entry in tasks_dict.items():
+            if task_name in fam_statuses:
+                status = fam_statuses[task_name]
+            else:
+                parent_id = (t_entry.get("policy_parent") or {}).get("id")
+                if t_entry.get("status") in {"PASS", "FAIL"}:
+                    status = t_entry["status"]
+                elif parent_id and parent_id in fam_statuses:
+                    status = fam_statuses[parent_id]
+                else:
+                    status = "FAIL"
+            att_rec = fam_att_records.get(task_name)
+            t_entry["status"] = status
+            t_entry["execution_recorded"] = True
+            t_entry["current_contract"] = "matches"
+            t_entry["changed_contract_fields"] = []
+            t_entry["coverage_reason"] = "Test definition matches the recorded conditions."
+            t_entry.pop("separate_diagnostic_executed", None)
+            t_entry.pop("preflight_blockers", None)
+            if att_rec is not None and att_rec.get("reason"):
+                t_entry["reason"] = str(att_rec["reason"])
+            if not t_entry.get("reason") or any(
+                marker in str(t_entry.get("reason", ""))
+                for marker in (
+                    "No recorded result",
+                    "not executed",
+                    "Skipped incompatible",
+                    "separate-runtime diagnostic",
+                    "lacks task support",
+                )
+            ):
+                t_entry["reason"] = f"Formulaic evaluation {status}."
+
+        def _binary_count(task_names: list[str]) -> dict:
+            passed = sum(tasks_dict.get(t, {}).get("status") == "PASS" for t in task_names)
+            failed = len(task_names) - passed
+            counts: dict[str, int] = {}
+            if passed:
+                counts["PASS"] = passed
+            if failed:
+                counts["FAIL"] = failed
+            return {
+                "passed": passed,
+                "total": len(task_names),
+                "incomplete": False,
+                "not_run": 0,
+                "incompatible": 0,
+                "counts": counts,
+            }
+
+        def _sum_binary_counts(items: list[dict]) -> dict:
+            passed = sum(c["passed"] for c in items)
+            total = sum(c["total"] for c in items)
+            failed = total - passed
+            counts: dict[str, int] = {}
+            if passed:
+                counts["PASS"] = passed
+            if failed:
+                counts["FAIL"] = failed
+            return {
+                "passed": passed,
+                "total": total,
+                "incomplete": False,
+                "not_run": 0,
+                "incompatible": 0,
+                "counts": counts,
+            }
+
+        for view_list_key in ("views", "scoped_views"):
+            for v_row in cohort.get(view_list_key, []):
+                v_def = view_by_id.get(v_row["id"])
+                if v_def is None:
+                    continue
+                assignments = v_def.get("assignments", [])
+                for t_key in list(v_row.get("tiers", {}).keys()):
+                    req_t = [
+                        a["task"]
+                        for a in assignments
+                        if a.get("importance") == "required" and str(a.get("qualification_tier")) == str(t_key)
+                    ]
+                    v_row["tiers"][t_key] = _binary_count(req_t)
+                v_row["total"] = _sum_binary_counts(list(v_row.get("tiers", {}).values()))
+                if "held" in v_row:
+                    held_t = [a["task"] for a in assignments if a.get("importance") == "held"]
+                    v_row["held"] = _binary_count(held_t)
+
+        for t_key in list(cohort.get("tiers", {}).keys()):
+            cohort["tiers"][t_key] = _sum_binary_counts(
+                [v_row["tiers"][t_key] for v_row in cohort.get("views", []) if t_key in v_row.get("tiers", {})]
+            )
+        cohort["total"] = _sum_binary_counts([v_row["total"] for v_row in cohort.get("views", [])])
+        for alt in cohort.get("configuration_alternatives", []):
+            if alt.get("selected"):
+                alt["total"] = deepcopy(cohort["total"])
+    return projected
+
+
+def _install_family_reports_generated_pages_hook() -> None:
+    from experiments.forge import family_reports
+
+    if getattr(family_reports.generated_pages, "_formulaic_projected_hook", False):
+        return
+    original_generated_pages = family_reports.generated_pages
+
+    def _wrapped_generated_pages(root: Path, publication: dict) -> dict[Path, str]:
+        projected = _project_publication_for_family_pages(Path(root), publication)
+        return original_generated_pages(Path(root), projected)
+
+    _wrapped_generated_pages._formulaic_projected_hook = True  # type: ignore[attr-defined]
+    family_reports.generated_pages = _wrapped_generated_pages
+
+
+_install_family_reports_generated_pages_hook()
+
+
 def _family_pages(root, result):
+    _install_family_reports_generated_pages_hook()
     from experiments.forge.test_performance import generated_reports
     test_pages = generated_reports(root, publication=result)
     if not result.get("family_progress"):

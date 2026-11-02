@@ -1510,7 +1510,13 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     assert "Selected-recipe tables evaluate every test formulaically as binary PASS or FAIL" in inv_md
     selected_block = inv_md.split("## Selected recipes\n", 1)[1].split("## Full-suite results", 1)[0]
     selected_table_lines = "\n".join(line for line in selected_block.splitlines() if line.startswith("|"))
-    for forbidden in ("not run", "incompatible", "blocked", "diagnostic attempt"):
+    for forbidden in (
+        "not run",
+        "incompatible",
+        "blocked",
+        "diagnostic attempt",
+        "Recorded source measurement · **stale**; no current qualification",
+    ):
         assert forbidden not in selected_table_lines
     for expected_selected_score in (
         "**[23/29](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 8/14 tests (6 fail)",
@@ -1520,9 +1526,10 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         "**[25/29](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/14 tests (4 fail)",
         "**[18/29](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 8/14 tests (6 fail)",
         "**[25/29](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/14 tests (4 fail)",
-        "**[0/29](families/e22.md#cohort-cuda-1bf9d7d34422-tier-1)** · 0/14 tests (14 fail)",
+        "**[17/29](families/e22.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/14 tests (7 fail)",
         "**[83/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 20/36 tests (16 fail)",
         "**[67/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 17/36 tests (19 fail)",
+        "**[59/115](families/e22.md#cohort-cuda-1bf9d7d34422)** · 14/36 tests (22 fail)",
     ):
         assert expected_selected_score in selected_table_lines
 
@@ -1553,6 +1560,58 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         row_line = next(line for line in full_suite_block.splitlines() if line.startswith(selected_row_prefix))
         assert "not run" not in row_line
         assert "| 0 | 0 |" in row_line
+
+    # Verify all 8 selected recipes have executed PASS/FAIL across all 50 suite tasks in attempt-coverage.json
+    # and all linked family detail pages agree without UNKNOWN, 'recorded definition unavailable', or 'not run'.
+    cov_doc = read_json(ROOT / "reports/forge/attempt-coverage.json")
+    full_suite_doc = read_json(ROOT / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json")
+    suite_50 = set(full_suite_doc["tests"]) | {"ring_hold"}
+    assert len(suite_50) == 50
+    selected_fams = {"atlas", "bcap-pure", "bispf", "e22", "k3p", "ka2", "r1r2", "release07-gan-v3"}
+    cov_by_fam_task = {
+        (rec.get("family"), rec.get("task")): rec
+        for rec in cov_doc.get("records", [])
+        if rec.get("family") in selected_fams and rec.get("task") in suite_50 and not rec.get("repair_scope")
+    }
+    for fam in sorted(selected_fams):
+        for tid in sorted(suite_50):
+            rec = cov_by_fam_task.get((fam, tid))
+            assert rec is not None, f"missing attempt-coverage record for ({fam}, {tid})"
+            assert rec.get("attempted") is True
+            assert rec.get("status") in {"PASS", "FAIL"}, f"non-binary status for ({fam}, {tid}): {rec.get('status')}"
+
+    for fam_page_name in (
+        "atlas.md",
+        "bcap-pure.md",
+        "bcap-dualnorm.md",
+        "bispf.md",
+        "e22.md",
+        "k3p.md",
+        "ka2.md",
+        "r1r2.md",
+        "release07-gan-v3.md",
+    ):
+        fam_md = (ROOT / "reports/forge/families" / fam_page_name).read_text()
+        view_table_header = (
+            "| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Tier 4 tests | Total distinct tests | Held (measured, not counted) |"
+        )
+        current_bench = (
+            view_table_header
+            + fam_md.split(view_table_header, 1)[1]
+            .split("\n## adaptation\n", 1)[0]
+        )
+        current_bench_tables = "\n".join(line for line in current_bench.splitlines() if line.startswith("|"))
+        for forbidden_in_selected_cohort in (
+            "| UNKNOWN |",
+            "recorded definition unavailable",
+            "diagnostic attempt",
+            "not run)",
+            "blocked)",
+        ):
+            assert forbidden_in_selected_cohort not in current_bench_tables, (
+                fam_page_name,
+                forbidden_in_selected_cohort,
+            )
 
 
 
@@ -1923,8 +1982,11 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         # Copy only tracked working-tree updates into the detached worktree while keeping
         # gitignored runs/forge/, reports/forge/attempts/, and test-performance.{json,html} absent.
         for rel in (
+            "ops/formulaic_coverage.py",
             "ops/refresh_forge_readouts.py",
             "reports/forge/regenerate_technique_inventory.py",
+            "reports/forge/attempt-coverage.json",
+            "reports/forge/ATTEMPT_COVERAGE.md",
             "reports/forge/technique-inventory.json",
             "reports/forge/technique-inventory.md",
             "reports/forge/test-performance.md",

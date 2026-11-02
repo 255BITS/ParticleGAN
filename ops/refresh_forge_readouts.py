@@ -510,14 +510,25 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
     pending = int(summary.get("pending", 0))
     running = int(summary.get("running", 0))
 
+    full_suite_card = root / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json"
+    full_suite_names = (
+        sorted({*read_json(full_suite_card)["tests"], "ring_hold"})
+        if full_suite_card.is_file()
+        else None
+    )
+    valid_statuses = {"PASS", "FAIL"} if full_suite_names is not None else attempt_coverage.DONE
+
     selected = attempt_coverage.selected_tasks(publication)
     expected_selected: dict[str, tuple[str, str, str, list[str]]] = {}
     commit_tasks_cache: dict[str, set[str]] = {}
     for family, selection, tasks in selected:
-        commit = _selected_family_source_commit(root, publication, family, selection)
-        if commit not in commit_tasks_cache:
-            commit_tasks_cache[commit] = _git_task_names_at_commit(root, commit)
-        available = [task for task in tasks if task in commit_tasks_cache[commit]]
+        if full_suite_names is not None:
+            available = list(full_suite_names)
+        else:
+            commit = _selected_family_source_commit(root, publication, family, selection)
+            if commit not in commit_tasks_cache:
+                commit_tasks_cache[commit] = _git_task_names_at_commit(root, commit)
+            available = [task for task in tasks if task in commit_tasks_cache[commit]]
         expected_selected[family] = (
             selection["candidate_id"],
             selection["candidate_revision"],
@@ -545,7 +556,7 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
                 }
             )
             continue
-        if record.get("attempted") and record.get("status") in attempt_coverage.DONE:
+        if record.get("attempted") and record.get("status") in valid_statuses:
             covered_by_family[family].add(record["task"])
 
     missing_by_family = {}
@@ -2146,6 +2157,12 @@ def refresh_attempt_coverage(
     ]
     if bad_new:
         raise CodeChangeRequiredError(f"newly executed diagnostic attempts failed with non-gate errors: {bad_new}")
+    if (root / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json").is_file():
+        from ops.formulaic_coverage import ensure_formulaic_attempt_coverage
+
+        result_summary = ensure_formulaic_attempt_coverage(
+            root, gpus=pair_gpus, state_root=attempt_state_root
+        )
     return result_summary
 
 
