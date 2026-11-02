@@ -1519,14 +1519,14 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     ):
         assert forbidden not in selected_table_lines
     for expected_selected_score in (
-        "**[23/29](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 8/14 tests (6 fail)",
-        "**[24/29](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/14 tests (5 fail)",
-        "**[24/29](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/14 tests (5 fail)",
-        "**[22/29](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/14 tests (7 fail)",
-        "**[25/29](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/14 tests (4 fail)",
-        "**[18/29](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 8/14 tests (6 fail)",
-        "**[25/29](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/14 tests (4 fail)",
-        "**[17/29](families/e22.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/14 tests (7 fail)",
+        "**[23/27](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 8/12 tests (4 fail)",
+        "**[24/27](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/12 tests (3 fail)",
+        "**[24/27](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/12 tests (3 fail)",
+        "**[22/27](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/12 tests (5 fail)",
+        "**[25/27](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/12 tests (2 fail)",
+        "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 8/12 tests (4 fail)",
+        "**[25/27](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/12 tests (2 fail)",
+        "**[17/27](families/e22.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/12 tests (5 fail)",
         "**[83/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 20/36 tests (16 fail)",
         "**[67/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 17/36 tests (19 fail)",
         "**[59/115](families/e22.md#cohort-cuda-1bf9d7d34422)** · 14/36 tests (22 fail)",
@@ -1538,7 +1538,7 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     )[0]
     for forbidden in ("not run", "incompatible", "blocked", "preflight-blocked"):
         assert forbidden not in tier1_readouts_block
-    assert "| Required Tier 1 (13) | Diagnostic Tier 1 (1) | Total Tier 1 (14) | Tier 2 (16) | Tier 3 (6) | Total Tier 1–3 (36) |" in tier1_readouts_block
+    assert "| Required Tier 1 (11) | Diagnostic Tier 1 (1) | Total Tier 1 (12) | Tier 2 (18) | Tier 3 (6) | Total Tier 1–3 (36) |" in tier1_readouts_block
 
     view_breakdown_block = inv_md.split("<summary>Selected recipe breakdown by view", 1)[1].split("</details>", 1)[0]
     for forbidden in ("not run", "incompatible", "blocked", "diagnostic attempt"):
@@ -1806,8 +1806,8 @@ def test_republish_registered_inventory_end_to_end_recovers_missing_and_unverifi
         # Scenario D: stale '(7 not run)' in ## Selected recipes is flagged by current_source_tier1_synced and repaired.
         orig_md = md_path.read_text()
         stale_md = orig_md.replace(
-            "**[18/29](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 8/14 tests (6 fail)",
-            "**[18/29](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** (7 not run)",
+            "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 8/12 tests (4 fail)",
+            "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** (7 not run)",
             1,
         )
         assert stale_md != orig_md
@@ -1973,7 +1973,7 @@ def test_current_source_tier1_readouts_ignores_non_tier1_records_and_invalidates
         md3 = rti._current_source_tier1_readouts_markdown(
             live_inv, wt, wt / "reports/forge/technique-inventory.md"
         )
-        assert "| Required Tier 1 (13) | Diagnostic Tier 1 (1) | Total Tier 1 (14) | Tier 2 (16) | Tier 3 (6) | Total Tier 1–3 (36) |" in md3
+        assert "| Required Tier 1 (11) | Diagnostic Tier 1 (1) | Total Tier 1 (12) | Tier 2 (18) | Tier 3 (6) | Total Tier 1–3 (36) |" in md3
         assert "preflight-blocked" not in md3 and " blocked" not in md3
     finally:
         subprocess.run(
@@ -2004,6 +2004,7 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         # Copy only tracked working-tree updates into the detached worktree while keeping
         # gitignored runs/forge/, reports/forge/attempts/, and test-performance.{json,html} absent.
         for rel in (
+            "configs/forge/views/discriminator_stability.json",
             "ops/formulaic_coverage.py",
             "ops/refresh_forge_readouts.py",
             "reports/forge/regenerate_technique_inventory.py",

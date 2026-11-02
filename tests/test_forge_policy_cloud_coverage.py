@@ -179,8 +179,8 @@ def test_committed_declarations_view_and_tiers_cover_all_selected_tests():
         ("model_ae_gan_multimodal", 1),
         ("model_vae_hard", 1),
         ("model_vae_categorical", 1),
-        ("model_ddgan_gaussian_chain", 1),
-        ("model_ae_ddgan_gaussian_chain", 1),
+        ("model_ddgan_gaussian_chain", 2),
+        ("model_ae_ddgan_gaussian_chain", 2),
         ("model_ddgan_bimodal_chain", 2),
         ("model_ae_ddgan_bimodal_chain", 2),
     }
