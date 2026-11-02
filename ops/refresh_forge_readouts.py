@@ -1188,8 +1188,36 @@ def check_compiled_reports(root: Path) -> dict[str, Any]:
                 from reports.forge import regenerate_technique_inventory as rti
 
                 expected_tier1 = rti._current_source_tier1_readouts_markdown(inv_json, root, inv_md_path)
+                formulaic_synced = True
+                if rti._selected_recipe_binary_task_statuses(inv_json, root) is not None:
+                    rewritten = rti._formulaic_selected_recipe_tables(inv_md, inv_json, root, inv_md_path)
+                    sel_rows = "\n".join(
+                        line
+                        for line in inv_md.split("## Full-suite results", 1)[0].splitlines()
+                        if line.startswith("|")
+                    )
+                    vb_rows = (
+                        "\n".join(
+                            line
+                            for line in inv_md.split("<summary>Selected recipe breakdown by view", 1)[1]
+                            .split("</details>", 1)[0]
+                            .splitlines()
+                            if line.startswith("|")
+                        )
+                        if "<summary>Selected recipe breakdown by view" in inv_md
+                        else ""
+                    )
+                    formulaic_synced = (
+                        rewritten == inv_md
+                        and "Every selected recipe is evaluated formulaically across Tier 1, Tier 2, Tier 3, and Tier 4 as binary PASS or FAIL"
+                        in inv_md
+                        and not any(
+                            tok in sel_rows or tok in vb_rows
+                            for tok in ("not run", "incompatible", "blocked", "diagnostic attempt", "preflight-blocked")
+                        )
+                    )
                 current_source_tier1_synced = (
-                    (expected_tier1 in inv_md)
+                    (expected_tier1 in inv_md and formulaic_synced)
                     if expected_tier1
                     else ("### Current-source selected-recipe Tier 1 readouts" not in inv_md)
                 )

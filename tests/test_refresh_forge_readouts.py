@@ -1501,6 +1501,60 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     ):
         assert expected_snippet in inv_md
 
+    # Selected recipes table, Current-source Tier 1 readouts table, and Selected recipe breakdown by view
+    # must evaluate all 8 selected recipes formulaically as binary PASS/FAIL with zero 'not run' / third-option labels.
+    assert (
+        "Every selected recipe is evaluated formulaically across Tier 1, Tier 2, Tier 3, and Tier 4 as binary PASS or FAIL"
+        in inv_md
+    )
+    assert "Selected-recipe tables evaluate every test formulaically as binary PASS or FAIL" in inv_md
+    selected_block = inv_md.split("## Selected recipes\n", 1)[1].split("## Full-suite results", 1)[0]
+    selected_table_lines = "\n".join(line for line in selected_block.splitlines() if line.startswith("|"))
+    for forbidden in ("not run", "incompatible", "blocked", "diagnostic attempt"):
+        assert forbidden not in selected_table_lines
+    for expected_selected_score in (
+        "**[23/29](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 8/14 tests (6 fail)",
+        "**[24/29](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/14 tests (5 fail)",
+        "**[24/29](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/14 tests (5 fail)",
+        "**[22/29](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/14 tests (7 fail)",
+        "**[25/29](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/14 tests (4 fail)",
+        "**[18/29](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 8/14 tests (6 fail)",
+        "**[25/29](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/14 tests (4 fail)",
+        "**[0/29](families/e22.md#cohort-cuda-1bf9d7d34422-tier-1)** · 0/14 tests (14 fail)",
+        "**[83/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 20/36 tests (16 fail)",
+        "**[67/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 17/36 tests (19 fail)",
+    ):
+        assert expected_selected_score in selected_table_lines
+
+    tier1_readouts_block = inv_md.split("### Current-source selected-recipe Tier 1 readouts\n", 1)[1].split(
+        "\n<details>\n", 1
+    )[0]
+    for forbidden in ("not run", "incompatible", "blocked", "preflight-blocked"):
+        assert forbidden not in tier1_readouts_block
+    assert "| Required Tier 1 (13) | Diagnostic Tier 1 (1) | Total Tier 1 (14) | Tier 2 (16) | Tier 3 (6) | Total Tier 1–3 (36) |" in tier1_readouts_block
+
+    view_breakdown_block = inv_md.split("<summary>Selected recipe breakdown by view", 1)[1].split("</details>", 1)[0]
+    for forbidden in ("not run", "incompatible", "blocked", "diagnostic attempt"):
+        assert forbidden not in view_breakdown_block
+
+    full_suite_block = inv_md.split("## Full-suite results — failures included\n", 1)[1].split(
+        "## Held and removed tests", 1
+    )[0]
+    for selected_row_prefix in (
+        "| [BISPF](families/bispf.md) |",
+        "| [K3P](families/k3p.md) |",
+        "| [KA2](families/ka2.md) |",
+        "| [BCAP](families/bcap-pure.md)",
+        "| [GAN v3 release 0.7](families/release07-gan-v3.md) |",
+        "| [Atlas](families/atlas.md) |",
+        "| [R1/R2](families/r1r2.md) |",
+        "| [E22](families/e22.md) |",
+    ):
+        row_line = next(line for line in full_suite_block.splitlines() if line.startswith(selected_row_prefix))
+        assert "not run" not in row_line
+        assert "| 0 | 0 |" in row_line
+
+
 
 def _copy_minimal_repo(src_root: Path, dst_root: Path) -> None:
     import shutil
@@ -1667,6 +1721,20 @@ def test_republish_registered_inventory_end_to_end_recovers_missing_and_unverifi
         assert inv_path.is_file() and md_path.is_file()
         assert rfr._verified_current_publication(read_json(inv_path)) is True
         assert "### Current-source selected-recipe Tier 1 readouts" in md_path.read_text()
+
+        # Scenario D: stale '(7 not run)' in ## Selected recipes is flagged by current_source_tier1_synced and repaired.
+        orig_md = md_path.read_text()
+        stale_md = orig_md.replace(
+            "**[18/29](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 8/14 tests (6 fail)",
+            "**[18/29](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** (7 not run)",
+            1,
+        )
+        assert stale_md != orig_md
+        md_path.write_text(stale_md)
+        assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is False
+        rfr._republish_registered_inventory(wt, json_mode=True)
+        assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is True
+        assert "(7 not run)" not in md_path.read_text()
     finally:
         subprocess.run(
             ["git", "-C", str(ROOT), "worktree", "remove", "--force", str(wt)],
@@ -1780,6 +1848,52 @@ def test_current_source_tier1_readouts_ignores_non_tier1_records_and_invalidates
             live_inv, wt, wt / "reports/forge/technique-inventory.md"
         )
         assert "1 preflight-blocked, 1 blocked" in md2
+
+        # Once all remaining runnable selected families are also re-stamped (so 0 tasks are UNMEASURED),
+        # dependency-blocked ('BLOCKED') and preflight-blocked tasks evaluate to binary FAIL.
+        selected_cids = {c["candidate_id"] for c in rfr.current_family_candidates(wt)}
+        for rec_p in sorted((wt / "reports/forge/records").glob("readout-*.json")):
+            if rec_p.name == "readout-tier2-only.json":
+                continue
+            rec_doc = read_json(rec_p)
+            cid = rec_doc.get("candidate_id")
+            if cid not in selected_cids:
+                continue
+            fam_req = rti._resolve_idea_for_readout_check(
+                wt,
+                cid,
+                view_id="discriminator_stability",
+                through_tier=1,
+                cuda_model="NVIDIA RTX A6000",
+                planning_mod=rfr.planning,
+            )
+            fam_compat = {
+                tid: job["compatibility_key"]
+                for job in fam_req.get("jobs", [])
+                for tid in job.get("task_ids", [job["task_id"]])
+            }
+            rec_doc["candidate_revision"] = fam_req["candidate_revision"]
+            rec_doc["source"] = {"digest": fam_req["source"]["digest"]}
+            rec_doc["task_results"] = [
+                {
+                    **r,
+                    "compatibility_key": fam_compat.get(r.get("task_id"), r.get("compatibility_key")),
+                    **(
+                        {"gate_status": "FAIL", "status": "FAIL"}
+                        if r.get("task_id") == first_t1_task
+                        else {}
+                    ),
+                }
+                for r in rec_doc.get("task_results", [])
+                if r.get("task_id") != second_t1_task
+            ]
+            atomic_json(rec_p, rec_doc)
+
+        md3 = rti._current_source_tier1_readouts_markdown(
+            live_inv, wt, wt / "reports/forge/technique-inventory.md"
+        )
+        assert "| Required Tier 1 (13) | Diagnostic Tier 1 (1) | Total Tier 1 (14) | Tier 2 (16) | Tier 3 (6) | Total Tier 1–3 (36) |" in md3
+        assert "preflight-blocked" not in md3 and " blocked" not in md3
     finally:
         subprocess.run(
             ["git", "-C", str(ROOT), "worktree", "remove", "--force", str(wt)],
