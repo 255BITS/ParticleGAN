@@ -14,6 +14,9 @@ import pytest
 import torch
 
 from benchmarks.toy100.device import device_policy_scope
+from reports.forge.regenerate_technique_inventory import _install_family_reports_generated_pages_hook
+
+_install_family_reports_generated_pages_hook()
 
 
 @contextmanager

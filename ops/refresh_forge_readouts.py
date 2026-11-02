@@ -510,14 +510,25 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
     pending = int(summary.get("pending", 0))
     running = int(summary.get("running", 0))
 
+    full_suite_card = root / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json"
+    full_suite_names = (
+        sorted({*read_json(full_suite_card)["tests"], "ring_hold"})
+        if full_suite_card.is_file()
+        else None
+    )
+    valid_statuses = {"PASS", "FAIL"} if full_suite_names is not None else attempt_coverage.DONE
+
     selected = attempt_coverage.selected_tasks(publication)
     expected_selected: dict[str, tuple[str, str, str, list[str]]] = {}
     commit_tasks_cache: dict[str, set[str]] = {}
     for family, selection, tasks in selected:
-        commit = _selected_family_source_commit(root, publication, family, selection)
-        if commit not in commit_tasks_cache:
-            commit_tasks_cache[commit] = _git_task_names_at_commit(root, commit)
-        available = [task for task in tasks if task in commit_tasks_cache[commit]]
+        if full_suite_names is not None:
+            available = list(full_suite_names)
+        else:
+            commit = _selected_family_source_commit(root, publication, family, selection)
+            if commit not in commit_tasks_cache:
+                commit_tasks_cache[commit] = _git_task_names_at_commit(root, commit)
+            available = [task for task in tasks if task in commit_tasks_cache[commit]]
         expected_selected[family] = (
             selection["candidate_id"],
             selection["candidate_revision"],
@@ -545,8 +556,16 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
                 }
             )
             continue
-        if record.get("attempted") and record.get("status") in attempt_coverage.DONE:
+        if record.get("attempted") and record.get("status") in valid_statuses:
             covered_by_family[family].add(record["task"])
+        elif full_suite_names is not None and record.get("task") in full_suite_names:
+            superseded_records.append(
+                {
+                    "family": family,
+                    "candidate_id": record.get("candidate_id"),
+                    "task": record.get("task"),
+                }
+            )
 
     missing_by_family = {}
     for family, (cid, _, _, available) in sorted(expected_selected.items()):
@@ -1188,8 +1207,36 @@ def check_compiled_reports(root: Path) -> dict[str, Any]:
                 from reports.forge import regenerate_technique_inventory as rti
 
                 expected_tier1 = rti._current_source_tier1_readouts_markdown(inv_json, root, inv_md_path)
+                formulaic_synced = True
+                if rti._selected_recipe_binary_task_statuses(inv_json, root) is not None:
+                    rewritten = rti._formulaic_selected_recipe_tables(inv_md, inv_json, root, inv_md_path)
+                    sel_rows = "\n".join(
+                        line
+                        for line in inv_md.split("## Full-suite results", 1)[0].splitlines()
+                        if line.startswith("|")
+                    )
+                    vb_rows = (
+                        "\n".join(
+                            line
+                            for line in inv_md.split("<summary>Selected recipe breakdown by view", 1)[1]
+                            .split("</details>", 1)[0]
+                            .splitlines()
+                            if line.startswith("|")
+                        )
+                        if "<summary>Selected recipe breakdown by view" in inv_md
+                        else ""
+                    )
+                    formulaic_synced = (
+                        rewritten == inv_md
+                        and "Every selected recipe is evaluated formulaically across Tier 1, Tier 2, Tier 3, and Tier 4 as binary PASS or FAIL"
+                        in inv_md
+                        and not any(
+                            tok in sel_rows or tok in vb_rows
+                            for tok in ("not run", "incompatible", "blocked", "diagnostic attempt", "preflight-blocked")
+                        )
+                    )
                 current_source_tier1_synced = (
-                    (expected_tier1 in inv_md)
+                    (expected_tier1 in inv_md and formulaic_synced)
                     if expected_tier1
                     else ("### Current-source selected-recipe Tier 1 readouts" not in inv_md)
                 )
@@ -1896,6 +1943,12 @@ def refresh_attempt_coverage(
     root = Path(root).resolve()
     attempt_state_root = Path(attempt_state_root).resolve()
     attempt_state_root.mkdir(parents=True, exist_ok=True)
+    if (root / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json").is_file():
+        from ops.formulaic_coverage import ensure_formulaic_attempt_coverage
+
+        return ensure_formulaic_attempt_coverage(
+            root, attempt_state_root, pair_gpus, json_mode=json_mode
+        )
 
     publication = read_json(root / "reports/forge/technique-inventory.json")
     existing_cov = (
@@ -2118,6 +2171,12 @@ def refresh_attempt_coverage(
     ]
     if bad_new:
         raise CodeChangeRequiredError(f"newly executed diagnostic attempts failed with non-gate errors: {bad_new}")
+    if (root / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json").is_file():
+        from ops.formulaic_coverage import ensure_formulaic_attempt_coverage
+
+        result_summary = ensure_formulaic_attempt_coverage(
+            root, attempt_state_root, pair_gpus, json_mode=json_mode
+        )
     return result_summary
 
 
