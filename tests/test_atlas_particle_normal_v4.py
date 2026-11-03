@@ -200,7 +200,7 @@ def test_atlas_particle_normal_v4_readout_recovers_mode_hold_with_zero_regressio
     atlas_top_line = next(
         line for line in inventory_md.splitlines() if line.startswith("| **[Atlas](families/atlas.md)** |")
     )
-    assert "[18/29]" in atlas_top_line
+    assert "[18/27]" in atlas_top_line
     assert "invalid" not in atlas_top_line.lower()
 
     v3_readout = read_json(ROOT / "reports/forge/records/readout-efb8bacf93e19fc2b0d7f7bf.json")
