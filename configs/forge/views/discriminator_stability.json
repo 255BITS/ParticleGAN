@@ -405,8 +405,7 @@
   "eligibility": {},
   "calibration": {
     "status": "provisional",
-    "adoption_blocker": "Revision9 recipe-owned prior comparisons are provisional and require bounded calibration before scientific default adoption. Archived task declarations and gates retain their original identities.",
-    "ddgan_chain_calibration": "Reclassified model_ddgan_gaussian_chain and model_ae_ddgan_gaussian_chain from Tier 1 to Tier 2: both tasks test a 4-step reverse diffusion chain demanding 38-42 simultaneous distribution matching bounds across 8 panels and ancestral marginal distributions; generator prediction variance at step 1 (t=1, where reverse diffusion noise is 0%) requires multi-step distribution quality beyond the 2,500-step smoke scope of Tier 1, matching the complexity of model_ddgan_bimodal_chain and model_ae_ddgan_bimodal_chain (which are already in Tier 2)."
+    "adoption_blocker": "Revision9 recipe-owned prior comparisons are provisional and require bounded calibration before scientific default adoption. Archived task declarations and gates retain their original identities."
   },
   "ranking": {
     "policy": "qualified_tier_only_with_raw_metrics",

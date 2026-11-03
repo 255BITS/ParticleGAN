@@ -69,7 +69,7 @@ jobs:
         run: >-
           python scripts/ci_pytest.py run --index ${{ matrix.shard }} --count 4
           --receipt /tmp/pytest-shard-${{ matrix.shard }}.json --
-          -q --durations=25 -o faulthandler_timeout=180
+          -q --durations=25 -o faulthandler_timeout=600
           --ignore=tests/test_e22_routed_caption_late_phase_renderer.py
       # The minimum supported Python runs one deterministic quarter of the same
       # suite. Its receipt stays local: release coverage is checked on 3.12.
@@ -78,7 +78,7 @@ jobs:
         run: >-
           python scripts/ci_pytest.py run --index ${{ matrix.shard }} --count 4
           --receipt /tmp/pytest-py311-shard-${{ matrix.shard }}.json --
-          -q --durations=25 -o faulthandler_timeout=180
+          -q --durations=25 -o faulthandler_timeout=600
           --ignore=tests/test_e22_routed_caption_late_phase_renderer.py
       - name: Save collection coverage receipt
         if: always() && matrix.python == '3.12'
