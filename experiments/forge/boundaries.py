@@ -25,7 +25,7 @@ TUNABLE_FIELDS = frozenset({
     "lr", "d_lr_mult", "prior_lr_mult", "betas", "prior_betas", "d_betas", "d_eps", "prior_eps",
     "direct_particle_betas", "eps", "amsgrad", "lr_decay_rate", "lr_decay_steps",
     "optimizer_momentum", "optimizer_adam_lr", "optimizer_smoothing",
-    "reg_coeff", "reg_coeff_end", "reg_coeff_anneal_end", "reg_kappa", "reg_every", "prior_reg",
+    "reg_coeff", "reg_coeff_end", "reg_coeff_anneal_end", "reg_kappa", "reg_every", "ebi_beta", "prior_reg",
     "prior_reg_target_std", "prior_reg_eps", "prior_l2", "prior_proximal_strength",
     "prior_coulomb_softening", "prior_coulomb_confinement", "prior_coulomb_neighbors",
     "kinetic_transport_weight", "kinetic_transport_local_weight",
@@ -55,6 +55,7 @@ HYPERPARAMETER_RECIPE_FIELDS = TUNABLE_FIELDS | {
     "input_noise_anneal_end", "output_noise_std", "output_noise_warmup",
     "routing_temperature", "observation_sigma", "reconstruction_weight", "serve_average",
     "birth_death_cells", "birth_death_metric_rank", "birth_death_chunk",
+    "kappa_radial",
 }
 RECIPE_FIELD_OWNERS = {
     **dict.fromkeys(TASK_RECIPE_FIELDS, "task"),

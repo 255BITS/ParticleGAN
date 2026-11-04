@@ -25,6 +25,8 @@ class ParticleEncoding:
     kl: torch.Tensor
     log_probs: torch.Tensor | None
     mode: str
+    soft_log_probs: torch.Tensor | None = None
+    uniformity_weight: float = 0.0
 
     def _cost(self, prediction, target):
         if (target.ndim < 2 or target.numel() == 0
@@ -32,6 +34,7 @@ class ParticleEncoding:
                 or target.shape[0] != self.codes.shape[0]):
             raise ValueError("prediction must be [B,S,...] and target [B,...], matching codes")
         cost = (prediction - target[:, None]).square().flatten(2).mean(2)
+        score_surrogate = cost.new_zeros(())
         if self.mode == "categorical":
             draws = cost.shape[1]
             if draws < 2:
@@ -39,8 +42,17 @@ class ParticleEncoding:
             baseline = (cost.sum(1, keepdim=True) - cost) / (draws - 1)
             selected = self.log_probs.gather(1, self.indices)
             score = ((cost - baseline).detach() * selected).mean()
-            return cost.mean() + (score - score.detach())
-        return cost.mean()
+            score_surrogate = (score - score.detach()).to(cost.dtype)
+        uniform_surrogate = cost.new_zeros(())
+        routing_log_probs = self.soft_log_probs if self.soft_log_probs is not None else self.log_probs
+        if routing_log_probs is not None and self.uniformity_weight > 0.0 and self.mode in ("ae", "categorical", "hard"):
+            p_hat = routing_log_probs.exp().mean(dim=0)
+            k = p_hat.shape[0]
+            if k > 1:
+                kl_u = (p_hat * (p_hat.clamp_min(1e-12).log() + math.log(k))).sum()
+                uniform_loss = self.uniformity_weight * kl_u
+                uniform_surrogate = (uniform_loss - uniform_loss.detach()).to(cost.dtype)
+        return cost.mean() + score_surrogate + uniform_surrogate
 
     def reconstruction_loss(self, prediction, target):
         """Mean squared reconstruction error; never adds a KL penalty.
@@ -86,7 +98,7 @@ def _hard_center(means, log_probs):
     return means[indices] + (proxy - proxy.detach()), indices
 
 
-def particle_ae(query, offset, prior, *, temperature=0.25, distance_reduction="sum", offset_bound=3.0):
+def particle_ae(query, offset, prior, *, temperature=0.25, distance_reduction="sum", offset_bound=3.0, uniformity_weight=0.0):
     """Hard selected center + sigma * bounded offset; no sampling or KL.
 
     Query uses a biased soft straight-through derivative; table gradients pass
@@ -98,11 +110,12 @@ def particle_ae(query, offset, prior, *, temperature=0.25, distance_reduction="s
         raise ValueError("offset must match query shape, device and dtype")
     center, indices = _hard_center(means, log_probs)
     codes = center + prior.sigma * offset_bound * torch.tanh(offset / offset_bound)
-    return ParticleEncoding(codes[:, None], indices[:, None], query.new_zeros(len(query)), None, "ae")
+    return ParticleEncoding(codes[:, None], indices[:, None], query.new_zeros(len(query)), None, "ae",
+                            soft_log_probs=log_probs, uniformity_weight=uniformity_weight)
 
 
 def particle_vae(query, prior, *, temperature=0.25, distance_reduction="sum", draws=2,
-                 hard=True, generator=None):
+                 hard=True, generator=None, uniformity_weight=0.05):
     """Sample q(k|X) and prior-matching local Gaussian noise.
 
     Soft q is distance-based categorical: joint KL = log(K) - H(q).
@@ -114,6 +127,7 @@ def particle_vae(query, prior, *, temperature=0.25, distance_reduction="sum", dr
     if type(hard) is not bool:
         raise ValueError("hard must be a boolean")
     means, log_probs = _routing(query, prior, temperature, distance_reduction, hard)
+    soft_log_probs = log_probs
     if hard:
         center, chosen = _hard_center(means, log_probs)
         indices = chosen[:, None].expand(-1, draws)
@@ -128,4 +142,5 @@ def particle_vae(query, prior, *, temperature=0.25, distance_reduction="sum", dr
     eps = torch.randn((len(query), draws, query.shape[1]), device=query.device,
                       dtype=query.dtype, generator=generator)
     codes = centers + prior.sigma * eps
-    return ParticleEncoding(codes, indices, kl, log_probs, "hard" if hard else "categorical")
+    return ParticleEncoding(codes, indices, kl, log_probs, "hard" if hard else "categorical",
+                            soft_log_probs=soft_log_probs, uniformity_weight=uniformity_weight)

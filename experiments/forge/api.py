@@ -148,6 +148,11 @@ def task_recipe_overrides(candidate, task):
             reopen_guard=None,
             total_steps=execution.get("original_schedule_horizon", execution.get("steps", 1200)),
         )
+        if overrides.get("critic_formulation") == "bcap":
+            overrides["routing_temperature"] = 0.20
+        elif overrides.get("critic_formulation") == "bispf":
+            overrides["ebi_beta"] = 4.0
+            overrides["network_lr_floor"] = 0.2
         return overrides
     if task["adapter"] == "word_joint" and not is_policy_task(task):
         overrides = host_recipe_overrides(bound, execution, task_recipe_resources(task))
@@ -164,6 +169,12 @@ def task_recipe_overrides(candidate, task):
             reopen_guard=None,
             total_steps=execution.get("original_schedule_horizon", execution["steps"]),
         )
+        if bound.get("recipe_preset") == "atlas" or bound.get("candidate_id", "").startswith("atlas"):
+            overrides["input_noise_std"] = 0.5
+        elif overrides.get("critic_formulation") == "bispf":
+            overrides["ebi_beta"] = 4.0
+            overrides["prior_reg"] = 0.02
+            overrides["network_lr_floor"] = 0.2
         return overrides
     if (task["adapter"] == "transfer_behavior" and execution.get("host") != "mode_hold"
             and not is_policy_task(task)):
@@ -184,6 +195,10 @@ def task_recipe_overrides(candidate, task):
         overrides["birth_death_isolation"] = False
         overrides["birth_death_backend"] = "knn"
         overrides["birth_death_cells"] = 64
+        if overrides.get("critic_formulation") == "bispf":
+            overrides["ebi_beta"] = 4.0
+            overrides["prior_reg"] = 0.02
+            overrides["network_lr_floor"] = 0.2
         if execution.get("host") == "ae_gan_hold":
             from benchmarks.locked_shared.hosts.ae_gan_hold import HoldConfig
             cfg = HoldConfig(name="forge")

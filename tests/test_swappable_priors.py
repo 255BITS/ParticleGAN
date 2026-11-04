@@ -56,6 +56,7 @@ FROZEN_RECIPE_FIELDS = (
     "reg_coeff",
     "reg_kappa",
     "reg_every",
+    "ebi_beta",
     "critic_step_mode",
     "prior_reg",
     "prior_update",
@@ -145,6 +146,7 @@ FROZEN_RECIPE_FIELDS = (
     "bispf_shape_gates",
     "bispf_gate_overrides",
     "prior_code_law",
+    "kappa_radial",
 )
 
 
@@ -209,12 +211,12 @@ def test_recipe_fields_exact_tuple_invariance():
     BISPF gate fields and the declared prior_code_law); prior manipulators add no recipe fields."""
     fields_dict = get_recipe_fields()
     field_names = tuple(fields_dict.keys())
-    assert len(field_names) == 115, f"Expected exactly 115 recipe fields, found {len(field_names)}"
+    assert len(field_names) == 117, f"Expected exactly 117 recipe fields, found {len(field_names)}"
     assert field_names == FROZEN_RECIPE_FIELDS
 
-    # Assert Recipe dataclass itself has identical 115 fields
+    # Assert Recipe dataclass itself has identical 117 fields
     recipe_fields = tuple(f.name for f in dataclasses.fields(Recipe))
-    assert len(recipe_fields) == 115
+    assert len(recipe_fields) == 117
     assert recipe_fields == FROZEN_RECIPE_FIELDS
 
 
@@ -235,11 +237,11 @@ spec.loader.exec_module(module)
 
 # Resolve fields across multiple presets without torch
 fields_ka2 = module.get_recipe_fields('ka2')
-assert len(fields_ka2) == 115
+assert len(fields_ka2) == 117
 fields_bcap = module.get_recipe_fields('bcap')
-assert len(fields_bcap) == 115
+assert len(fields_bcap) == 117
 fields_bispf = module.get_recipe_fields('bispf_optimized')
-assert len(fields_bispf) == 115
+assert len(fields_bispf) == 117
 
 assert 'torch' not in sys.modules, 'torch leaked into sys.modules'
 assert 'particlegan' not in sys.modules, 'particlegan leaked into sys.modules'

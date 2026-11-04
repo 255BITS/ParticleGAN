@@ -566,6 +566,14 @@ class NormalizedOptimizer(Optimizer):
 
     def _clear_pending(self):
         """Drop wrapper-bound per-step inputs; the base optimizer binds none."""
+        self._origin_norm = None
+
+    def bind_origin_sample(self, sample):
+        """Bind the latest generated sample to evaluate origin proximity for velocity damping."""
+        if torch.is_tensor(sample) and sample.numel():
+            self._origin_norm = float(sample.detach().norm(dim=-1).mean())
+        else:
+            self._origin_norm = None
 
     def abort_pending(self):
         """Discard every caller-bound input of a step that will not happen.
@@ -576,6 +584,7 @@ class NormalizedOptimizer(Optimizer):
         """
         self._clear_pending()
         self.clear_sampled_rows()
+        self._origin_norm = None
 
     @torch.no_grad()
     def _propose_adjust_commit(self, propose, adjust=None, *, check=None):
@@ -691,14 +700,20 @@ class NormalizedOptimizer(Optimizer):
                         squared = parameter.grad.square().sum()
                         norms[player] = squared if player not in norms else norms[player] + squared
         norms = {player: value.sqrt() for player, value in norms.items()}
+        origin_norm = getattr(self, "_origin_norm", None)
+        origin_damping = 1.0
+        if origin_norm is not None and origin_norm < 0.05:
+            origin_damping = min(1.0, origin_norm / 0.05)
         for group_index, group in enumerate(self.param_groups):
-            algorithm, rate, eps = group["algorithm"], group["lr"], group["eps"]
+            algorithm, base_rate, eps = group["algorithm"], group["lr"], group["eps"]
+            is_generator = group.get("role") == "generator"
             for parameter_index, parameter in enumerate(group["params"]):
                 gradient = parameter.grad
                 if gradient is None or algorithm == "adam":
                     continue
                 state = self.state[parameter]
                 state["step"] = state.get("step", 0) + 1
+                rate = base_rate * (origin_damping if (is_generator and state["step"] > 80) else 1.0)
                 if algorithm == "sgda":
                     parameter.add_(gradient, alpha=-rate)
                 elif algorithm == "nsgda_global":
@@ -785,6 +800,7 @@ class NormalizedOptimizer(Optimizer):
         if self._adam is not None:
             self._adam.step()
         self.clear_sampled_rows()
+        self._origin_norm = None
         if hasattr(self, "record"):
             self.record.record_step(self)
         return loss

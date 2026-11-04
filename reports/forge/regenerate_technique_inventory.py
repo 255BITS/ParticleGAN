@@ -2390,6 +2390,17 @@ def _load_attempt_coverage_task_fps(root: Path) -> dict[tuple[str, str], set[tup
             target.setdefault((src, tid), set()).add((ex_fp, ev_fp))
     merged = dict(scoped)
     merged.update(unscoped)
+    if unscoped:
+        by_task: dict[str, set[tuple[str, str]]] = {}
+        for (_, tid), pairs in unscoped.items():
+            by_task.setdefault(tid, set()).update(pairs)
+        try:
+            from ops.refresh_forge_readouts import catalog_source_manifest
+            live_src = catalog_source_manifest(Path(root))["digest"]
+            for tid, pairs in by_task.items():
+                merged.setdefault((live_src, tid), set()).update(pairs)
+        except Exception:
+            pass
     return merged
 
 

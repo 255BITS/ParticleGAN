@@ -16,7 +16,7 @@
     "fcf270c33afb4488a1441ddabde10d85"
   ],
   "candidate_id": "atlas-particle-normal-v4",
-  "candidate_revision": "efebaebc63fbb814b384b2009aedaf06465137a061cb9fe618b83c9a326f82dd",
+  "candidate_revision": "b79f1561e0357ddb406078aa2a9f12ccfce3c345f0f94f3ebe684790776a485c",
   "claim_contract": {
     "sampling_law": "task_declared",
     "schedule": "schedule_free",
@@ -2414,7 +2414,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "9a43d6a49e990a20ba17d17728c77ef674e48263a5669f6f5a55eb3af843f8f3",
+      "compatibility_key": "0a0d2f73f8993e761cd09f03363264524480f3ec313d8bb3c54112f8bb57a790",
       "cost": {
         "adapter_seconds": 2.714343405998079,
         "charged_task": "ae_gan_hold",
@@ -2917,7 +2917,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "02a846e6868cdc02e3a2c7a66518841292c8daa0fc8d6b75a57a767397ac93c5",
+      "compatibility_key": "055f92d128ad1e7099d0edb54850e8cc601194208a6a4c809b2b3848d9dbd4c3",
       "cost": {
         "adapter_loop_seconds": 11.496385856997222,
         "adapter_seconds": 15.070151830004761,
@@ -6897,7 +6897,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "0464549ef2eb570b2831adb61e058b56da70a7911a29724806d58645ec6c7e6b",
+      "compatibility_key": "a3014cd1b347d338aaf4190afb09adfeb10f13a0666271de31d995fce5bcc4bd",
       "cost": {
         "adapter_seconds": 0.9792529330006801,
         "charged_task": "two_pole",
@@ -7368,7 +7368,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "8e74470b766077033fc64c7453a02e084edd3cf735cded0d16cdd35ac2fb01b0",
+      "compatibility_key": "497c74ea9f81ae9831c7f1c753bcb061db768b1e979033bfe54e04e543d1634e",
       "cost": {
         "adapter_loop_seconds": 17.501211538998177,
         "adapter_seconds": 17.77648459901684,
@@ -9360,7 +9360,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "485c46741106682d7a09ef6656caa87499bdea4d46bcf66cd86a792a35d1c6fd",
+      "compatibility_key": "ec5870531b27799aae66900a8abdf8f8c929be2cd7c821334f3dde23abf8ea26",
       "cost": {
         "adapter_loop_seconds": 150.03327391901985,
         "adapter_seconds": 150.21771929200622,
@@ -12529,7 +12529,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "edcbcd21de0daa35c83cf0a081af14eb021d50f54d9c63f482c9b6fb00d64a42",
+      "compatibility_key": "c4a6af04c844f12ecf58fa627030ea009dc4381346e4e3973762964821adebd5",
       "cost": {
         "adapter_loop_seconds": 20.494466028001625,
         "adapter_seconds": 20.826512122992426,
@@ -15230,7 +15230,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "4538eb4be5f71e4e8e6ddaf217d361c1befd0cee42becad02d5405352cf551e9",
+      "compatibility_key": "364ca720da04320b9350b954981db59d6fbd9d397f22f9496f647fdc55bdd947",
       "cost": {
         "adapter_reported_inclusive_seconds": 1.8441302859864663,
         "adapter_seconds": 1.8530323980085086,
@@ -17272,7 +17272,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "0478181439ae5f3295df4953dc61f79be15ee5af5ed09d6c5a302e666d47f993",
+      "compatibility_key": "8448287f2912ef9ba1ef90967319ff4b466626babed97a02287143ee7df0b0fb",
       "cost": {
         "adapter_seconds": 1.6876820990000851,
         "charged_task": "unused_token_hold",
@@ -17860,7 +17860,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "10786850b4b3ba3636c1f26f3de349cda71a884828707e29a69acd0a61d44327",
+      "compatibility_key": "ca6ae291520af3daede6f4a31fbbcd27295a6801db261ad124db5e9c461f3747",
       "cost": {
         "adapter_loop_seconds": 11.65975004300708,
         "adapter_seconds": 15.31285329599632,
@@ -20198,7 +20198,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "5f21c63ec82a6e6b411457e1172aae2316ace5d722cf1b09fe2d6f1617935811",
+      "compatibility_key": "13206c221bb571ca8de8632f73d8e38405c0323d85150d184f4f83f1354d0964",
       "cost": {
         "adapter_loop_seconds": 35.32286378601566,
         "adapter_seconds": 41.365748412994435,
@@ -23510,7 +23510,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "b01cf7b3bf95e3f614c986ab1e49d6f7e7e86a9f2391e71cca683143dccd42f7",
+      "compatibility_key": "2634b9f1a5de13a8cafa09f784cf112a5dc3d78174f35b29727e6352d57bf547",
       "cost": {
         "adapter_loop_seconds": 31.387750003981637,
         "adapter_seconds": 31.67483284897753,
@@ -44423,7 +44423,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "57f2e860fd58745e004615b0e8d14958566342a36a88d8e0cacddf8e4322ad02",
+      "compatibility_key": "67a19984d834ea7e517dc2c465191da78967a9b348b15f4405807b5136e1b894",
       "cost": {
         "adapter_loop_seconds": 16.616805934987497,
         "adapter_seconds": 19.894448053993983,
@@ -46443,7 +46443,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "809e4344a64f24101d3ae079a5b90a3c849afb1118e3e36d541f0bd84caba321",
+      "compatibility_key": "72bd2522e8449cad67f8d8d1f19249df23682c853390f4e6bd969d43904c4d26",
       "cost": {
         "adapter_loop_seconds": 8.446998456987785,
         "adapter_seconds": 11.868682771018939,
@@ -48387,7 +48387,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "783c2acd9dcb59a47d1e601dca6539a863cfdb478060cf26cce508505bfffd6b",
+      "compatibility_key": "04d3d924f76c54ed95a46436a505ab2221d50555427aa8e1cf5d495c9e389c77",
       "cost": {
         "adapter_loop_seconds": 28.67003226801171,
         "adapter_seconds": 33.288972926995484,

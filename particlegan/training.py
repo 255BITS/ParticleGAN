@@ -492,6 +492,8 @@ class GANTrainer:
             self.D.requires_grad_(False)
             latent, indices = self._sample_training_prior(len(real))
             fake_g = self._postprocess(self.prior, self._generate(self.G, latent, sigma_out, noise, rows=indices))
+            if hasattr(self.opt_g, "bind_origin_sample"):
+                self.opt_g.bind_origin_sample(fake_g)
             fake_logits = critic(fake_g)
             real_g = generator_real() if callable(generator_real) else generator_real
             real_g = real if real_g is None else self._batch(real_g, "generator_real")
