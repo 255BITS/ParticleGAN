@@ -43,7 +43,7 @@ def test_winning_recipe_is_the_common_default():
     assert get_recipe() == get_recipe(DEFAULT_RECIPE)
     winner = get_recipe()
     assert winner.name == DEFAULT_RECIPE
-    assert Recipe(**winner.to_dict()) == winner
+    assert Recipe.from_dict(winner.to_dict()) == winner
     assert isinstance(make_trainer(), GANTrainer)
 
 

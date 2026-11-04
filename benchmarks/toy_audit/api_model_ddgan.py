@@ -234,7 +234,7 @@ def task_recipe(case, recipe_name=None, recipe=None):
         result = recipe
     elif recipe_name in (None, BASELINE):
         candidate = json.loads((ROOT / "configs/forge/ideas" / (BASELINE + ".json")).read_text())
-        result = Recipe(**{**candidate["recipe_overrides"], **fields})
+        result = Recipe.from_dict({**candidate["recipe_overrides"], **fields})
     else:
         result = get_recipe(recipe_name, **fields)
     from experiments.forge.api import policy_controls

@@ -65,7 +65,7 @@ def _archived_inactive_comparison_scope(module, directory):
         adapted.decode().splitlines(keepends=True), fromfile=helper.INACTIVE,
         tofile="outside-Git/test_bcap_integration_compatibility_adapted.py"))
     from particlegan import Recipe
-    recipe = Recipe()
+    recipe = Recipe.from_dict({})
     for name, default in helper.INACTIVE_DEFAULTS.items():
         assert getattr(recipe, name) == default, (name, "inactive public default changed")
         assert name not in module.NEW_INACTIVE_FIELDS

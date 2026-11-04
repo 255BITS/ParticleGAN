@@ -10,10 +10,10 @@ from experiments.forge.techniques import recipe_field_active, technique_signatur
 
 @pytest.fixture
 def modern():
-    return Recipe(optimizer_family="adam", reg_arm="a_r1r2", d_guard_ratio=0,
+    return Recipe.from_dict(dict(optimizer_family="adam", reg_arm="a_r1r2", d_guard_ratio=0,
                   reg_anchor_weight=0, latent_damping_max_rate=0, direct_particle_gain=False,
                   betas=(0, .9), beta2_end=.99, reg_coeff_end=.1,
-                  lr_floor=1, network_lr_floor=1, network_lr_horizon_cap=None)
+                  lr_floor=1, network_lr_floor=1, network_lr_horizon_cap=None))
 
 
 def test_positive_strengths_and_schedule_timing_keep_mechanisms(modern):
@@ -63,7 +63,7 @@ def test_family_names_cannot_mask_fixed_mechanism_changes(modern):
 
 
 def test_k3p_floor_cannot_disable_the_blended_penalty_phase():
-    base = Recipe(critic_formulation="k3p", network_lr_floor=.01)
+    base = Recipe.from_dict(dict(critic_formulation="k3p", network_lr_floor=.01))
     validate_same_technique(base, base.replace(network_lr_floor=.25))
     with pytest.raises(ValueError, match="k3p_penalty_lr_floor"):
         validate_same_technique(base, base.replace(network_lr_floor=.5))
@@ -83,7 +83,7 @@ def test_inactive_fields_follow_recipe_and_actual_prior_contract(modern):
 
 
 def test_numeric_ablation_activation_is_visible_even_outside_search_whitelist():
-    recipe = Recipe()
+    recipe = Recipe.from_dict({})
     for name in ("reg_anchor_weight", "d_guard_ratio", "latent_damping_max_rate",
                  "input_noise_std", "output_noise_std"):
         with pytest.raises(ValueError, match="changes technique"):

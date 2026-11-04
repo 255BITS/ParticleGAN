@@ -34,7 +34,7 @@ def _recipe(task, **overrides):
                    standardize=prior["standardize"], sigma_rel=0., total_steps=execution["steps"])
     if task["adapter"] == "transfer_vector":
         options.update(z_dim=host["z_dim"], num_particles=host["particles"], batch_size=host["batch"])
-    return asdict(Recipe(**{**options, **overrides}))
+    return asdict(Recipe.from_dict({**options, **overrides}))
 
 
 def test_every_public_recipe_field_has_one_explicit_owner(monkeypatch):

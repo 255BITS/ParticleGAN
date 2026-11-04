@@ -485,7 +485,7 @@ def construct_owner(root, binding, *, device, source_guard):
         _loaded_source(root, value, relative)
     if torch.get_default_dtype() != torch.float32 or torch.get_num_threads() != 1:
         raise ValueError("original float32/CPU1 execution required")
-    recipe = Recipe(**binding["recipe"])
+    recipe = Recipe.from_dict(binding["recipe"])
     if (canonical(asdict(recipe)) != canonical(binding["recipe"])
             or canonical(recipe.to_dict()) != canonical(binding["recipe_serialized"])):
         raise ValueError("actual complete Recipe differs before construction")

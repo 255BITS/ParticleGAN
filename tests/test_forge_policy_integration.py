@@ -23,18 +23,18 @@ CLOUD = {"kind": "particle_cloud", "sigma": 0., "standardize": False,
 
 
 def test_formulations_are_explicit_and_default_checkpoint_recipe_stays_compatible():
-    assert get_recipe("ka2") == Recipe()
+    assert get_recipe("ka2") == Recipe.from_dict({})
     assert "critic_formulation" not in get_recipe("ka2").to_dict()
     critic = nn.Linear(2, 1)
     assert type(get_recipe("ka2").make_critic_optimizer(critic)) is KA2CriticAdam
     k3p = get_recipe("k3p")
     assert type(k3p.make_critic_optimizer(critic)) is K3PCriticAdam
     assert k3p.to_dict()["critic_formulation"] == "k3p"
-    assert Recipe(name="e22").continuous_policy is None
+    assert Recipe.from_dict(dict(name="e22")).continuous_policy is None
 
 
 def test_installed_atlas_preset_matches_frozen_config_mechanisms():
-    frozen = Recipe(**json.loads((ROOT / "configs/100gaussians/atlas.json").read_text()))
+    frozen = Recipe.from_dict(json.loads((ROOT / "configs/100gaussians/atlas.json").read_text()))
     assert get_recipe("atlas", num_particles=frozen.num_particles, z_dim=frozen.z_dim,
                       batch_size=frozen.batch_size).replace(name=frozen.name).to_dict() == frozen.to_dict()
 
@@ -80,7 +80,7 @@ def test_policy_applicability_blocks_before_construction_or_task_reservation():
         FormulationContext(recipe_preset="e22", prior=CLOUD, execution_path="public_components")
     task = json.loads((ROOT / "configs/forge/tasks/clockfree_audit.json").read_text())
     candidate = {"recipe_preset": "atlas", "prior": CLOUD,
-                 "resolved_recipe": Recipe().to_dict()}
+                 "resolved_recipe": Recipe.from_dict({}).to_dict()}
     assert any("policy-aware task" in x for x in task_policy_blockers(task, candidate))
     assert any("policy-aware task" in x for x in adapter_preflight(task, candidate, root=ROOT))
     with pytest.raises(CapabilityError, match="policy-aware task"):
@@ -100,8 +100,8 @@ def test_host_resources_leave_schedule_free_horizon_and_external_budget_distinct
 
 
 def test_ka2_clock_audit_exposes_delayed_call_transition():
-    recipe = Recipe(lr_floor=1, network_lr_floor=1, input_noise_std=0,
-                    output_noise_warmup=0, d_guard_min_steps=0)
+    recipe = Recipe.from_dict(dict(lr_floor=1, network_lr_floor=1, input_noise_std=0,
+                    output_noise_warmup=0, d_guard_min_steps=0))
     dependencies = source_audit(recipe.to_dict(), {})["unexplained_clock_dependencies"]
     assert len(dependencies) == 1 and "call 800" in dependencies[0]
     assert not source_audit(recipe.replace(critic_formulation="k3p").to_dict(), {})["unexplained_clock_dependencies"]

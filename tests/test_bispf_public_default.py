@@ -24,11 +24,11 @@ def test_public_default_matches_every_selected_candidate_field_except_label():
         if field != "name":
             assert actual[field] == value, field
     assert get_recipe() == get_recipe("bispf_optimized")
-    assert Recipe(**get_recipe().to_dict()) == get_recipe()
+    assert Recipe.from_dict(get_recipe().to_dict()) == get_recipe()
     assert actual["optimizer_svd_backend"] == "batched"
     assert actual["training_precision"] == "bf16_channels_last"
-    # Existing direct construction and explicit preset keep their old meaning.
-    assert Recipe() == get_recipe("ka2")
+    # Explicit historical snapshot restoration and presets keep their meaning.
+    assert Recipe.from_dict({}) == get_recipe("ka2")
     assert get_recipe("bispf").optimizer_family == "formulation"
     assert get_recipe("bispf").loss == "relativistic"
     assert get_recipe("bispf").prior_reg == .05

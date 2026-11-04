@@ -418,7 +418,7 @@ def construct_owner(root, binding, *, source_guard, device="cuda:1"):
     device = torch.device(device)
     if device.type != "cuda" or device.index is None or torch.get_num_threads() != 1 or torch.get_default_dtype() != torch.float32:
         raise ValueError("declared image owner requires one explicit CUDA device, CPU1 and FP32")
-    recipe = Recipe(**binding["recipe"])
+    recipe = Recipe.from_dict(binding["recipe"])
     if canonical(asdict(recipe)) != canonical(binding["recipe"]) or canonical(recipe.to_dict()) != canonical(binding["recipe_serialized"]):
         raise ValueError("actual complete public Recipe differs")
     owner = ImageOwner()

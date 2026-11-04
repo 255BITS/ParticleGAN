@@ -134,7 +134,7 @@ jobs:
           assert default.training_precision == "bf16_channels_last"
           assert default == get_recipe(DEFAULT_RECIPE)
           assert Recipe(**get_recipe_fields()) == default
-          assert Recipe(**default.to_dict()) == default
+          assert Recipe.from_dict(default.to_dict()) == default
           assert get_recipe('gan') == default
           e22 = get_recipe('e22', num_particles=32, z_dim=2, batch_size=8)
           assert e22.name == 'e22' and e22.total_steps is None
