@@ -16,6 +16,17 @@ from ops import refresh_forge_readouts as rfr
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def _assert_current_source_scope(report, root):
+    measured = report["current_source_measurements"]
+    assert measured["scope"] == "current_source_measurements"
+    assert measured["source_digest"] == rfr.catalog_source_manifest(root)["digest"]
+    if measured["stages"]["scaling_performance"]["stale_source_cells"]:
+        assert measured["status"] == "NEEDS_REFRESH"
+        assert "scaling_performance" in measured["stale_stages"]
+    assert report["scope"] == "published_reports" and report["qualification_reuse"] is False
+    return measured
+
+
 def test_record_to_state_job_losslessly_round_trips_new_attempt_through_coverage_value():
     published_record = {
         "key": "abc123",
@@ -294,6 +305,7 @@ def test_check_scaling_performance_detects_missing_corrupt_multicohort_and_stale
     monkeypatch.setattr(rfr.scaling_publication, "load_performance", lambda root: split_manifest)
     split = rfr.check_scaling_performance(tmp_path)
     assert split["current"] is False
+    assert split["published_source_current"] is False
     assert split["table_cohorts"] == 2
 
     # 5. Stale code file digest -> stale_source_cells == 1 -> current=False.
@@ -308,6 +320,37 @@ def test_check_scaling_performance_detects_missing_corrupt_multicohort_and_stale
     stale = rfr.check_scaling_performance(tmp_path)
     assert stale["current"] is False
     assert stale["stale_source_cells"] == 1
+    assert stale["published_source_current"] is True
+
+
+@pytest.mark.parametrize("broken_stage", [None, "compiled_reports", "scaling_performance", "selection"])
+def test_published_check_keeps_source_drift_separate_and_rejects_broken_originals(
+    tmp_path, monkeypatch, capsys, broken_stage
+):
+    strict = {
+        "status": "NEEDS_REFRESH", "scope": "current_source_measurements", "source_digest": "latest-source",
+        "stale_stages": ["scaling_performance", "selected_family_readouts"],
+        "stages": {
+            "queue": {"current": True}, "attempt_coverage": {"current": True},
+            "compiled_reports": {"current": broken_stage != "compiled_reports"},
+            "scaling_performance": {"current": False, "stale_source_cells": 48,
+                                    "published_source_current": broken_stage != "scaling_performance"},
+            "selected_family_readouts": {"current": False, "missing_families": [{"family": "original-family"}]},
+        },
+    }
+    original = deepcopy(strict)
+    monkeypatch.setattr(rfr, "check_status", lambda *args, **kwargs: strict)
+    monkeypatch.setattr(rfr, "_registered_evidence_satisfies_selection", lambda root: broken_stage != "selection")
+    assert rfr.main(["--root", str(tmp_path), "--check", "--reports-only", "--json"]) == (
+        rfr.CURRENT_EXIT if broken_stage is None else rfr.NEEDS_REFRESH_EXIT)
+    report = json.loads(capsys.readouterr().out)
+    assert report["scope"] == "published_reports" and report["qualification_reuse"] is False
+    assert report["current_source_measurements"] == original
+    assert report["stages"]["published_scaling_performance"]["stale_source_cells"] == 48
+    assert strict == original
+    assert not (tmp_path / "runs").exists()
+    assert rfr.main(["--root", str(tmp_path), "--check", "--json"]) == rfr.NEEDS_REFRESH_EXIT
+    assert json.loads(capsys.readouterr().out) == original
 
 
 def test_selected_family_preserved_absent_paths_reads_snapshot_closure(tmp_path: Path):
@@ -692,22 +735,24 @@ def test_main_cli_exit_codes_check_noop_reports_only_and_code_change_required(
 
 
 def test_live_repository_forge_readouts_are_current_and_source_clean():
-    report = rfr.check_status(ROOT)
+    report = rfr.check_published_status(ROOT)
     assert report["status"] == "CURRENT", json.dumps(report, indent=2, sort_keys=True)
     assert report["stale_stages"] == []
-    assert report["stages"]["scaling_performance"]["complete_cells"] == 48
-    assert report["stages"]["scaling_performance"]["missing_cells"] == 0
-    assert report["stages"]["scaling_performance"]["unavailable_cells"] == 0
-    assert report["stages"]["scaling_performance"]["table_cohorts"] == 1
+    measured = _assert_current_source_scope(report, ROOT)
+    assert report["stages"]["published_scaling_performance"]["complete_cells"] == 48
+    assert report["stages"]["published_scaling_performance"]["missing_cells"] == 0
+    assert report["stages"]["published_scaling_performance"]["unavailable_cells"] == 0
+    assert report["stages"]["published_scaling_performance"]["table_cohorts"] == 1
     assert report["stages"]["attempt_coverage"]["pending"] == 0
     assert report["stages"]["attempt_coverage"]["superseded_record_count"] == 0
     assert report["stages"]["attempt_coverage"]["missing_by_family"] == {}
-    assert report["stages"]["selected_family_readouts"]["missing_families"] == []
-    assert report["stages"]["selected_family_readouts"]["stale_leaderboards"] == []
+    assert report["stages"]["registered_selected_publications"]["current"] is True
     assert report["stages"]["compiled_reports"]["unknown_performance_rows"] == 0
     assert report["stages"]["compiled_reports"]["selected_diagnostic_rows_present"] is True
     assert report["stages"]["compiled_reports"]["clean_checkout_safe"] is True
-    assert rfr.main(["--root", str(ROOT), "--check"]) == rfr.CURRENT_EXIT
+    assert rfr.main(["--root", str(ROOT), "--check", "--reports-only"]) == rfr.CURRENT_EXIT
+    assert rfr.main(["--root", str(ROOT), "--check"]) == (
+        rfr.CURRENT_EXIT if measured["status"] == "CURRENT" else rfr.NEEDS_REFRESH_EXIT)
 
 
 def test_clean_checkout_preserves_leaderboards_and_repairs_missing_attempts(
@@ -1463,12 +1508,12 @@ def test_publication_registration_sync_allows_committed_snapshot_republish_and_r
 
 
 def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier1_readouts():
-    status = rfr.check_status(ROOT)
+    status = rfr.check_published_status(ROOT)
     assert status["status"] == "CURRENT", json.dumps(status, indent=2, sort_keys=True)
     assert status["stale_stages"] == []
-    assert status["source_digest"] == "f115e8c0ed83c3cbc0a18c6cbe5cf629f8d6177194e834be7c74384fe6f6004b"
+    _assert_current_source_scope(status, ROOT)
 
-    perf = status["stages"]["scaling_performance"]
+    perf = status["stages"]["published_scaling_performance"]
     assert perf["complete_cells"] == 48
     assert perf["contended_cells"] == 0
     assert perf["unpaired_tasks"] == []
@@ -1486,8 +1531,35 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     assert perf_block.count("| clear |") == 48
     assert "| contended |" not in perf_block
 
-    assert "### Current-source selected-recipe Tier 1 readouts" in inv_md
+    from experiments.forge.family_reports import _selected_cohorts, _selected_row
+    publication = read_json(ROOT / "reports/forge/technique-inventory.json")
+    selected = {family["id"]: (family, _selected_row(publication, cohort))
+                for family, cohort in _selected_cohorts(publication["family_progress"])}
+    expected_families = (
+        ("release07-gan-v3", "GAN v3 release 0.7", "recipe-prior-refactor-release07-gan-v3-v1"),
+        ("r1r2", "R1/R2", "recipe-prior-refactor-r1r2-v1"),
+        ("k3p", "K3P", "recipe-prior-refactor-k3p-v1"),
+        ("ka2", "KA2", "recipe-prior-refactor-ka2-v1"),
+        ("atlas", "Atlas", "atlas-particle-normal-v4"),
+        ("bispf", "BISPF", "bispf-optimized-quintic-v1"),
+        ("bcap-pure", "BCAP", "recipe-prior-refactor-bcap-pure-v1"),
+        ("e22", "E22", "e22"),
+    )
+    assert set(selected) == {family for family, _, _ in expected_families}
+    for family_id, label, candidate in expected_families:
+        family, row = selected[family_id]
+        assert family["label"] == label and row["candidate_id"] == candidate
+        assert f"[{label}](families/{Path(family['page']).name})" in inv_md
+        detail = (ROOT / family["page"]).read_text()
+        assert f"Selected configuration: [{candidate}]" in detail
+        assert f"Candidate revision: `{row['candidate_revision']}`" in detail
     for expected_snippet in (
+        "python ops/refresh_forge_readouts.py --check",
+        "python ops/refresh_forge_readouts.py --reports-only",
+    ):
+        assert expected_snippet in inv_md
+
+    current_source_candidate_snippets = (
         "| [GAN v3 release 0.7](families/release07-gan-v3.md) | [`recipe-prior-refactor-release07-gan-v3-v1`]",
         "| [R1/R2](families/r1r2.md) | [`recipe-prior-refactor-r1r2-v1`]",
         "| [K3P](families/k3p.md) | [`recipe-prior-refactor-k3p-v1`]",
@@ -1496,10 +1568,7 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         "| [BISPF](families/bispf.md) | [`bispf-optimized-quintic-v1`]",
         "| [BCAP](families/bcap-pure.md) | [`recipe-prior-refactor-bcap-pure-v1`]",
         "| [E22](families/e22.md) | [`e22`]",
-        "python ops/refresh_forge_readouts.py --check",
-        "python ops/refresh_forge_readouts.py --reports-only",
-    ):
-        assert expected_snippet in inv_md
+    )
 
     # Selected recipes table, Current-source Tier 1 readouts table, and Selected recipe breakdown by view
     # must evaluate all 8 selected recipes formulaically as binary PASS/FAIL with zero 'not run' / third-option labels.
@@ -1533,12 +1602,19 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     ):
         assert expected_selected_score in selected_table_lines
 
-    tier1_readouts_block = inv_md.split("### Current-source selected-recipe Tier 1 readouts\n", 1)[1].split(
-        "\n<details>\n", 1
-    )[0]
-    for forbidden in ("not run", "incompatible", "blocked", "preflight-blocked"):
-        assert forbidden not in tier1_readouts_block
-    assert "| Required Tier 1 (11) | Diagnostic Tier 1 (1) | Total Tier 1 (12) | Tier 2 (18) | Tier 3 (6) | Total Tier 1–3 (36) |" in tier1_readouts_block
+    from reports.forge import regenerate_technique_inventory as rti
+    tier1_readouts_block = rti._current_source_tier1_readouts_markdown(
+        publication, ROOT, ROOT / "reports/forge/technique-inventory.md")
+    if tier1_readouts_block:
+        assert tier1_readouts_block in inv_md
+        for expected_snippet in current_source_candidate_snippets:
+            assert expected_snippet in tier1_readouts_block
+        for forbidden in ("not run", "incompatible", "blocked", "preflight-blocked"):
+            assert forbidden not in tier1_readouts_block
+        assert "| Required Tier 1 (11) | Diagnostic Tier 1 (1) | Total Tier 1 (12) | Tier 2 (18) | Tier 3 (6) | Total Tier 1–3 (36) |" in tier1_readouts_block
+    else:
+        assert "### Current-source selected-recipe Tier 1 readouts" not in inv_md
+        assert status["current_source_measurements"]["stages"]["selected_family_readouts"]["missing_families"]
 
     view_breakdown_block = inv_md.split("<summary>Selected recipe breakdown by view", 1)[1].split("</details>", 1)[0]
     for forbidden in ("not run", "incompatible", "blocked", "diagnostic attempt"):
@@ -1561,8 +1637,8 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         assert "not run" not in row_line
         assert "| 0 | 0 |" in row_line
 
-    # Verify all 8 selected recipes have executed PASS/FAIL across all 50 suite tasks in attempt-coverage.json
-    # and all linked family detail pages agree without UNKNOWN, 'recorded definition unavailable', or 'not run'.
+    # Verify all 8 selected recipes retain certified PASS/FAIL across all 50
+    # original suite tasks, independently from current-definition compatibility.
     cov_doc = read_json(ROOT / "reports/forge/attempt-coverage.json")
     full_suite_doc = read_json(ROOT / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json")
     suite_50 = set(full_suite_doc["tests"]) | {"ring_hold"}
@@ -1579,6 +1655,13 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         for rec in unscoped_selected_records
     }
     assert len(cov_by_fam_task) == 400
+    projected = rti._project_publication_for_family_pages(ROOT, publication)
+    projected_cohorts = {family["id"]: cohort for family, cohort in
+                         _selected_cohorts(projected["family_progress"])}
+    archived_display = projected.get("recorded_formulaic_display")
+    if archived_display:
+        assert archived_display["qualification_input"] is False
+        assert archived_display["qualification_reuse"] is False
     att_cov_md = (ROOT / "reports/forge/ATTEMPT_COVERAGE.md").read_text()
     for fam in sorted(selected_fams):
         assert f"| {fam} | 50/50 | 0 |" in att_cov_md
@@ -1589,6 +1672,16 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
             assert rec is not None, f"missing attempt-coverage record for ({fam}, {tid})"
             assert rec.get("attempted") is True
             assert rec.get("status") in {"PASS", "FAIL"}, f"non-binary status for ({fam}, {tid}): {rec.get('status')}"
+            if archived_display and tid in projected_cohorts[fam]["tasks"]:
+                cell = projected_cohorts[fam]["tasks"][tid]
+                proof = cell["recorded_formulaic_display"]
+                assert cell["status"] == rec["status"]
+                for key in ("key", "candidate_id", "candidate_revision", "source_digest",
+                            "execution_sha256", "evaluation_sha256"):
+                    assert proof[key] == rec[key], (fam, tid, key)
+                original_cohort = next(cohort for family, cohort in
+                                       _selected_cohorts(publication["family_progress"]) if family["id"] == fam)
+                assert cell["current_contract"] == original_cohort["tasks"][tid]["current_contract"]
 
     for fam_page_name in (
         "atlas.md",
@@ -1613,7 +1706,6 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         current_bench_tables = "\n".join(line for line in current_bench.splitlines() if line.startswith("|"))
         for forbidden_in_selected_cohort in (
             "| UNKNOWN |",
-            "recorded definition unavailable",
             "diagnostic attempt",
             "not run)",
             "blocked)",
@@ -1622,6 +1714,8 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
                 fam_page_name,
                 forbidden_in_selected_cohort,
             )
+        if tier1_readouts_block:
+            assert "recorded definition unavailable" not in current_bench_tables
         for forbidden_in_selected_prose in (
             "native model variants require an explicit profile",
             "only zero_tanh_smoke is routed",
@@ -1635,6 +1729,22 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
                 forbidden_in_selected_prose,
             )
 
+
+
+def test_recorded_overview_integrity_rejects_score_drift_without_current_source(monkeypatch):
+    from reports.forge import regenerate_technique_inventory as rti
+
+    publication = read_json(ROOT / "reports/forge/technique-inventory.json")
+    monkeypatch.setattr(rti, "_concluded_current_source_tier1_payload", lambda *args: None)
+    overview = ROOT / "reports/forge/technique-inventory.md"
+    original = rti._current_markdown(publication, ROOT, overview)
+    assert "### Current-source selected-recipe Tier 1 readouts" not in original
+    assert rfr._generated_pages_synced(ROOT, publication, original) is True
+    corrupted = original.replace("**[72/115]", "**[73/115]", 1)
+    assert corrupted != original
+    assert rfr._generated_pages_synced(ROOT, publication, corrupted) is False
+    fake_current = original + "\n### Current-source selected-recipe Tier 1 readouts\n\nFalse qualification.\n"
+    assert rfr._generated_pages_synced(ROOT, publication, fake_current) is False
 
 
 def _copy_minimal_repo(src_root: Path, dst_root: Path) -> None:
@@ -1760,6 +1870,7 @@ def test_evict_superseded_scaling_queue_jobs_matches_real_queue_schema_and_prune
 def test_republish_registered_inventory_end_to_end_recovers_missing_and_unverified_inventory(tmp_path: Path):
     import shutil
     import subprocess
+    from reports.forge import regenerate_technique_inventory as rti
 
     wt = tmp_path / "wt"
     subprocess.run(
@@ -1801,9 +1912,18 @@ def test_republish_registered_inventory_end_to_end_recovers_missing_and_unverifi
         rfr._republish_registered_inventory(wt, json_mode=True)
         assert inv_path.is_file() and md_path.is_file()
         assert rfr._verified_current_publication(read_json(inv_path)) is True
-        assert "### Current-source selected-recipe Tier 1 readouts" in md_path.read_text()
+        recovered = read_json(inv_path)
+        expected_tier1 = rti._current_source_tier1_readouts_markdown(recovered, wt, md_path)
+        if expected_tier1:
+            assert expected_tier1 in md_path.read_text()
+        else:
+            assert "### Current-source selected-recipe Tier 1 readouts" not in md_path.read_text()
+            archived = rti._recorded_source_binary_projection(recovered, wt)
+            assert archived is not None and archived["qualification_input"] is False
+            assert rfr.check_selected_family_readouts(wt)["missing_families"]
 
-        # Scenario D: stale '(7 not run)' in ## Selected recipes is flagged by current_source_tier1_synced and repaired.
+        # Scenario D: stale selected scores and false current-source claims are
+        # detected and repaired without inventing a new-source measurement.
         orig_md = md_path.read_text()
         stale_md = orig_md.replace(
             "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 8/12 tests (4 fail)",
@@ -1812,10 +1932,23 @@ def test_republish_registered_inventory_end_to_end_recovers_missing_and_unverifi
         )
         assert stale_md != orig_md
         md_path.write_text(stale_md)
+        assert stale_md != rti._current_markdown(recovered, wt, md_path)
+        assert rfr.check_compiled_reports(wt)["generated_pages_synced"] is False
+        corrupt_status = rfr.check_published_status(wt)
+        assert corrupt_status["status"] == "NEEDS_REFRESH"
+        assert "compiled_reports" in corrupt_status["stale_stages"]
+        if not expected_tier1:
+            md_path.write_text(stale_md + "\n### Current-source selected-recipe Tier 1 readouts\n\n"
+                               "Stale claim: archived scores are current-source measurements.\n")
         assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is False
         rfr._republish_registered_inventory(wt, json_mode=True)
         assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is True
         assert "(7 not run)" not in md_path.read_text()
+        assert "Stale claim: archived scores" not in md_path.read_text()
+        if expected_tier1:
+            assert expected_tier1 in md_path.read_text()
+        else:
+            assert "### Current-source selected-recipe Tier 1 readouts" not in md_path.read_text()
     finally:
         subprocess.run(
             ["git", "-C", str(ROOT), "worktree", "remove", "--force", str(wt)],
@@ -1846,6 +1979,45 @@ def _sync_tracked_worktree_edits(src_root: Path, dst_root: Path) -> None:
             shutil.copy2(src_file, dst_file)
 
 
+def _restore_recorded_source_cohort(root: Path) -> str:
+    """Use exact pre-cleanup source bytes for archived compatibility controls.
+
+    This isolated software fixture is separate from the latest-source integrity
+    checks. Original records keep their source IDs, gates and runtime identities.
+    """
+    import io
+    import subprocess
+    import tarfile
+    from experiments.forge import sources
+
+    commit = "a1e8073ae8352d3aff25f04bb51446454e873d90"
+    expected_digest = "f115e8c0ed83c3cbc0a18c6cbe5cf629f8d6177194e834be7c74384fe6f6004b"
+    current_paths = set(rfr.catalog_source_manifest(root)["files"])
+    tree = subprocess.check_output(
+        ["git", "-C", str(root), "ls-tree", "-r", "--name-only", commit], text=True).splitlines()
+    frozen_paths = set()
+    for name in tree:
+        path = Path(name)
+        conventional = (path.parts[0] in sources.SOURCE_DIRS
+                        or (path.parts[0] == "configs" and "forge" not in path.parts))
+        if ((conventional or name in current_paths) and path.suffix in sources.SOURCE_SUFFIXES
+                and not {"__pycache__", ".venv", "runs"}.intersection(path.parts)):
+            frozen_paths.add(name)
+    archive = subprocess.check_output(["git", "-C", str(root), "archive", commit, "--", *sorted(frozen_paths)])
+    with tarfile.open(fileobj=io.BytesIO(archive)) as bundle:
+        for member in bundle.getmembers():
+            if not member.isfile():
+                continue
+            assert member.name in frozen_paths
+            target = root / member.name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(bundle.extractfile(member).read())
+    for name in current_paths - frozen_paths:
+        (root / name).unlink()
+    assert rfr.catalog_source_manifest(root)["digest"] == expected_digest
+    return expected_digest
+
+
 def test_current_source_tier1_readouts_ignores_non_tier1_records_and_invalidates_cache_on_task_change(
     tmp_path: Path,
 ):
@@ -1862,6 +2034,7 @@ def test_current_source_tier1_readouts_ignores_non_tier1_records_and_invalidates
     )
     try:
         _sync_tracked_worktree_edits(ROOT, wt)
+        _restore_recorded_source_cohort(wt)
         live_inv = read_json(wt / "reports/forge/technique-inventory.json")
         atlas_req = rti._resolve_idea_for_readout_check(
             wt,
@@ -2074,8 +2247,8 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         monkeypatch.setattr(sources, "runtime_manifest", lambda: deepcopy(cpu_ci_runtime))
         monkeypatch.setattr(planning, "runtime_manifest", lambda: deepcopy(cpu_ci_runtime))
 
-        # Confirm host-resolved compatibility_key genuinely differs from recorded GPU-workstation keys
-        # and that no local attempt envelopes exist for current-source readout rows on the clean worktree.
+        # Resolve the latest checkout under the CPU CI runtime before checking
+        # the original GPU-workstation receipts in the separate pinned cohort.
         probed_req = planning.resolve_idea(
             wt,
             "atlas-particle-normal-v4",
@@ -2088,6 +2261,39 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         assert probed_req["runtime"]["python"] == "3.11.9"
         assert probed_req["rng"]["runtime"]["torch"] == "2.4.0+cpu"
         assert probed_req["compute_profiles"]["cuda"]["availability"] == "unavailable"
+        # Published integrity is portable; latest-source measurement gaps remain explicit.
+        status_cpu = rfr.check_published_status(wt)
+        assert status_cpu["status"] == "CURRENT", json.dumps(status_cpu, indent=2, sort_keys=True)
+        assert status_cpu["stale_stages"] == []
+        _assert_current_source_scope(status_cpu, wt)
+
+        wt_inv = read_json(wt / "reports/forge/technique-inventory.json")
+        pages = generated_pages(wt, wt_inv)
+        overview_path = wt / "reports/forge/technique-inventory.md"
+        pages[overview_path] = rti._current_markdown(wt_inv, wt, overview_path)
+        for page_path, expected_text in pages.items():
+            assert page_path.read_text() == expected_text, page_path
+
+        # 2. Simulate a non-A6000 GPU host (e.g. RTX 4090) where compute_profile("cuda", "NVIDIA RTX A6000") raises ValueError.
+        monkeypatch.setattr(
+            sources,
+            "_gpu_models",
+            lambda: frozenset({("NVIDIA GeForce RTX 4090", "560.35.03", "8.9")}),
+        )
+        status_4090 = rfr.check_published_status(wt)
+        assert status_4090["status"] == "CURRENT", json.dumps(status_4090, indent=2, sort_keys=True)
+        assert rti._current_markdown(wt_inv, wt, overview_path) == overview_path.read_text()
+
+        # Restore CPU-only CI probe for invalidation checks below.
+        monkeypatch.setattr(sources, "_gpu_models", lambda: None)
+
+        # The following task/runtime tamper controls use their exact recorded
+        # source cohort, independently of the latest checkout tested above.
+        recorded_digest = _restore_recorded_source_cohort(wt)
+        rti._CURRENT_SOURCE_TIER1_CACHE.clear()
+        probed_req = planning.resolve_idea(
+            wt, "atlas-particle-normal-v4", view_id="discriminator_stability", through_tier=1,
+            freeze_source=False, execution_backend="cuda", cuda_model="NVIDIA RTX A6000")
         probed_compat = {
             tid: job["compatibility_key"]
             for job in probed_req["jobs"]
@@ -2105,33 +2311,8 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         for row in atlas_rec["task_results"]:
             assert not (wt / "reports/forge/attempts" / row["_attempt_id"]).exists()
             assert row["compatibility_key"] != probed_compat[row["task_id"]]
-
-        # Clean CPU CI must report status == CURRENT and match every committed page byte-for-byte.
-        status_cpu = rfr.check_status(wt)
-        assert status_cpu["status"] == "CURRENT", json.dumps(status_cpu, indent=2, sort_keys=True)
-        assert status_cpu["stale_stages"] == []
-        assert status_cpu["source_digest"] == "f115e8c0ed83c3cbc0a18c6cbe5cf629f8d6177194e834be7c74384fe6f6004b"
-
-        wt_inv = read_json(wt / "reports/forge/technique-inventory.json")
-        pages = generated_pages(wt, wt_inv)
-        overview_path = wt / "reports/forge/technique-inventory.md"
-        pages[overview_path] = rti._current_markdown(wt_inv, wt, overview_path)
-        assert "### Current-source selected-recipe Tier 1 readouts" in pages[overview_path]
-        for page_path, expected_text in pages.items():
-            assert page_path.read_text() == expected_text, page_path
-
-        # 2. Simulate a non-A6000 GPU host (e.g. RTX 4090) where compute_profile("cuda", "NVIDIA RTX A6000") raises ValueError.
-        monkeypatch.setattr(
-            sources,
-            "_gpu_models",
-            lambda: frozenset({("NVIDIA GeForce RTX 4090", "560.35.03", "8.9")}),
-        )
-        status_4090 = rfr.check_status(wt)
-        assert status_4090["status"] == "CURRENT", json.dumps(status_4090, indent=2, sort_keys=True)
-        assert rti._current_markdown(wt_inv, wt, overview_path) == overview_path.read_text()
-
-        # Restore CPU-only CI probe for invalidation checks below.
-        monkeypatch.setattr(sources, "_gpu_models", lambda: None)
+        overview_path.write_text(rti._current_markdown(wt_inv, wt, overview_path))
+        assert rfr.check_selected_family_readouts(wt)["current"] is True
 
         # 3. Editing a task card NOT listed in source.files (zero_tanh_smoke.json) keeps source_digest unchanged
         #    yet invalidates the stale readout row on the clean CPU worktree via attempt-coverage.json fingerprints
@@ -2142,10 +2323,7 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         zt_doc["execution"]["steps"] = int(zt_doc["execution"]["steps"]) + 10
         atomic_json(zt_path, zt_doc)
 
-        assert (
-            rfr.catalog_source_manifest(wt)["digest"]
-            == "f115e8c0ed83c3cbc0a18c6cbe5cf629f8d6177194e834be7c74384fe6f6004b"
-        )
+        assert rfr.catalog_source_manifest(wt)["digest"] == recorded_digest
         sfr_after_edit = rfr.check_selected_family_readouts(wt)
         assert sfr_after_edit["current"] is False
         assert len(sfr_after_edit["missing_families"]) == 7

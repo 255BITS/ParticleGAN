@@ -2,6 +2,7 @@
 
 Usage:
   python ops/refresh_forge_readouts.py --check
+  python ops/refresh_forge_readouts.py --check --reports-only
   python ops/refresh_forge_readouts.py --gpus 0,1 --scaling-gpu auto
   python ops/refresh_forge_readouts.py --reports-only
 
@@ -473,18 +474,18 @@ def check_scaling_performance(root: Path) -> dict[str, Any]:
             declaration_mismatches.append(("registration_missing", reg_id))
 
     missing = sorted(expected_cells - complete_cells)
-    current = (
+    published_source_current = (
         not unavailable
         and not non_complete
         and not missing
         and len(cohorts) == 1
         and not contended_cells
         and not unpaired_tasks
-        and not stale_source_cells
         and not declaration_mismatches
     )
     return {
-        "current": current,
+        "current": published_source_current and not stale_source_cells,
+        "published_source_current": published_source_current,
         "expected_cells": len(expected_cells),
         "complete_cells": len(complete_cells),
         "missing_cells": len(missing),
@@ -1122,6 +1123,14 @@ def _generated_pages_synced(root: Path, inv_json: dict[str, Any], inv_md: str) -
         return False
     if inv_json.get("family_progress"):
         from experiments.forge.family_reports import generated_pages
+        from reports.forge import regenerate_technique_inventory as rti
+
+        # Archived display scores still need an integrity check when the latest
+        # source has no Tier 1 payload. A digest footer alone cannot detect a
+        # changed overview score or a false source-qualification claim.
+        if (rti._recorded_source_binary_projection(inv_json, root) is not None
+                and inv_md != rti._current_markdown(inv_json, root, root / "reports/forge/technique-inventory.md")):
+            return False
 
         for page_path, expected_text in generated_pages(root, inv_json).items():
             if not page_path.is_file() or page_path.read_text() != expected_text:
@@ -1309,9 +1318,47 @@ def check_status(
     stale = [name for name, info in stages.items() if not info.get("current")]
     return {
         "status": "CURRENT" if not stale else "NEEDS_REFRESH",
+        "scope": "current_source_measurements",
         "source_digest": catalog_source_manifest(root)["digest"],
         "stale_stages": stale,
         "stages": stages,
+    }
+
+
+def check_published_status(
+    root: Path,
+    *,
+    queue_root: Path | None = None,
+    cuda_model: str = DEFAULT_CUDA_MODEL,
+) -> dict[str, Any]:
+    """Check retained publications while reporting latest-source gaps separately.
+
+    Original receipts and registered selection snapshots must still validate.
+    This scope never transfers their measurements onto different source bytes.
+    """
+    strict = check_status(root, queue_root=queue_root, cuda_model=cuda_model)
+    stages = {name: deepcopy(strict["stages"][name])
+              for name in ("queue", "attempt_coverage", "compiled_reports")}
+    performance = deepcopy(strict["stages"]["scaling_performance"])
+    performance["current"] = performance.get("published_source_current", False)
+    performance["scope"] = "recorded_source_cohort"
+    stages["published_scaling_performance"] = performance
+    stages["registered_selected_publications"] = {
+        "current": _registered_evidence_satisfies_selection(Path(root)),
+        "scope": "registered_original_snapshots",
+        "qualification_reuse": False,
+    }
+    stale = [name for name, info in stages.items() if not info.get("current")]
+    return {
+        "status": "CURRENT" if not stale else "NEEDS_REFRESH",
+        "scope": "published_reports",
+        "source_digest": strict["source_digest"],
+        "stale_stages": stale,
+        "stages": stages,
+        "current_source_measurements": strict,
+        "qualification_reuse": False,
+        "note": "Publication integrity does not establish measurements for the latest source. "
+                "Original source cohorts and qualifications remain unchanged; source drift does not authorize reruns.",
     }
 
 
@@ -2749,7 +2796,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument("--cuda-model", default=DEFAULT_CUDA_MODEL, help="Named CUDA hardware cohort")
     parser.add_argument("--check", action="store_true", help="Read-only check; exit 0 if current, 1 if stale, 2 if broken")
-    parser.add_argument("--reports-only", action="store_true", help="Regenerate compiled reports without launching GPU runs")
+    parser.add_argument("--reports-only", action="store_true", help="Regenerate reports without GPU runs; with --check, inspect published integrity read-only and report current-source gaps separately")
     parser.add_argument("--json", action="store_true", help="Emit structured JSON summary on stdout")
     return parser.parse_args(argv)
 
@@ -2759,11 +2806,16 @@ def main(argv: list[str] | None = None) -> int:
     gpus = [token.strip() for token in args.gpus.split(",") if token.strip()]
     try:
         if args.check:
-            report = check_status(args.root, queue_root=args.queue_root, cuda_model=args.cuda_model)
+            checker = check_published_status if args.reports_only else check_status
+            report = checker(args.root, queue_root=args.queue_root, cuda_model=args.cuda_model)
             if args.json:
                 print(json.dumps(report, indent=2, sort_keys=True))
             else:
                 _log(f"Status: {report['status']} (stale stages: {report['stale_stages'] or 'none'})")
+                if args.reports_only:
+                    measured = report["current_source_measurements"]
+                    _log(f"Scope: published reports; current-source measurements: {measured['status']} "
+                         f"(stale stages: {measured['stale_stages'] or 'none'}). No qualification reuse.")
                 if report["stale_stages"]:
                     print(json.dumps(report, indent=2, sort_keys=True))
             return CURRENT_EXIT if report["status"] == "CURRENT" else NEEDS_REFRESH_EXIT

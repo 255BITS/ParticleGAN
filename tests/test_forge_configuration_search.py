@@ -523,11 +523,27 @@ def test_existing_positive_floor_round_retains_all_configuration_identities():
     assert before == {path: path.read_bytes() for path in paths}
 
 
-def test_actual_context_recipe_matches_frozen_card_and_report(checkout, spec):
+@pytest.mark.parametrize("base_overrides", [
+    {}, {"ebi_beta": 30.0, "kappa_radial": 1.0},
+    {"ebi_beta": 15.0}, {"kappa_radial": 2.0}, {"ebi_beta": 15.0, "kappa_radial": 2.0},
+], ids=["implicit-defaults", "explicit-defaults", "ebi-nondefault", "radial-nondefault", "both-nondefault"])
+def test_actual_context_recipe_matches_frozen_card_and_report(checkout, spec, base_overrides):
+    base_path = checkout / "configs/forge/ideas/base.json"
+    base = read_json(base_path)
+    base["recipe_overrides"].update(base_overrides)
+    atomic_json(base_path, base)
     planned = search.plan_search(checkout, checkout / "runs", spec)
     for trial in planned["trials"]:
         card = trial["declaration"]
-        assert stable_hash(card["resolved_configuration_recipe"]) == stable_hash(trial["resolved_recipe"])
+        # Full frozen cards retain the added fields; legacy runtime packets
+        # omit only their original default values. Compare the entire expected
+        # packet independently of the production compatibility projector.
+        expected_packet = deepcopy(card["resolved_configuration_recipe"])
+        for name, default in (("ebi_beta", 30.0), ("kappa_radial", 1.0)):
+            assert expected_packet[name] == base_overrides.get(name, default)
+            if expected_packet[name] == default:
+                expected_packet.pop(name)
+        assert stable_hash(expected_packet) == stable_hash(trial["resolved_recipe"])
         assert trial["configuration_id"] == search.configuration_id(card, resolved_recipe=trial["resolved_recipe"])
         assert card["prior"] == planned["base_declaration"]["prior"]
         assert trial["resolved_recipe"]["prior_kind"] == "mog"

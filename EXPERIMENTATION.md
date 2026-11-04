@@ -127,12 +127,13 @@ experimental receipts [unbound](reports/forge/import-gaps.json); a later written
 sensitivity assertion is separately preserved. That research is still developing;
 import its receipts when available using the existing framework.
 
-Incoming E22/KA2 changes the public API and model of record. Its inspected
-positives use particle clouds and noisy state-selected serving. Follow the
-[pinned compatibility checklist](reports/forge/UPSTREAM_E22_COMPATIBILITY.md)
-when that API lands in develop, preserving MoG support, named streams, external
-budgets and complete policy checkpoints. Current receipts retain their frozen
-source and formulation identity.
+E22/KA2 is available through the [public API](docs/api.md), including the E22
+preset and `E22Policy`. The inspected positives in the
+[historical integration checklist](reports/forge/UPSTREAM_E22_COMPATIBILITY.md)
+use particle clouds and noisy state-selected serving. Preserve their frozen
+source, formulation, prior and sampling identities; they do not supply evidence
+for a different MoG or clean-live task. MoG support, named streams, external
+budgets and complete policy checkpoints remain required integration contracts.
 
 Run commands from the repository root in the project's Python environment.
 The [registered formulation comparison](reports/forge/studies/FORMULATION_COMPARISON_V1.md)
@@ -158,7 +159,10 @@ automatic matrix filling, tuning, seed study, continuation or promotion follows.
 
 The history, recall, compile, validate, and board commands launch no training.
 Recall includes source-bound concluded configuration and policy publications as
-non-qualifying summaries. [Research memory freshness](docs/forge-research-memory.md)
+non-qualifying summaries. It returns compact source identity pins and a file
+count by default. Add `recall --full-provenance` when the complete source-file
+hash manifest is needed; stored records retain their full provenance.
+[Research memory freshness](docs/forge-research-memory.md)
 is visible in plans; `forge compile --check` checks it without artifact hydration.
 Use `forge compile --summaries-only` to refresh recall after a reporting or source
 merge while preserving published qualifications and telemetry. Inspect missing
@@ -318,11 +322,27 @@ Scheduling policy changes request identity, but does not enter scientific job
 compatibility or grant qualification. Reuse still requires the exact recipe,
 task, source, prior, initialization, sampling and runtime bindings.
 
-The current six-task Tier 1 reserves up to 2,220 seconds: the 120-second
-scalar Gaussian can-it-pass smoke, three existing 300-second behavior tasks,
-the 300-second ring acquisition and the 900-second confirmed word smoke.
-The explicit `tier1-word-smoke-v1` campaign caps required-smoke campaign and
-candidate reservations at that amount. Its Gaussian task requires any passing
+Use the [generated tier guide](reports/forge/EXPERIMENTS_BY_TIER.md#discriminator_stability)
+and [registered view](configs/forge/views/discriminator_stability.json) for the
+current tasks, roles and allowances. Revision 14 declares 11 required Tier 1
+tasks whose individual timeout allowances sum to 4,140 seconds. This sum is not
+an execution reservation: the read-only plan resolves grouped execution, reuse,
+unsupported hosts and candidate-specific bindings before admission.
+
+```sh
+python -m experiments.forge plan k3p --through-tier 1 --device cpu
+```
+
+For revision 14, this CPU K3P plan contains 12 execution groups and a
+4,440-second worst-case allowance, including the 300-second clock audit
+diagnostic. Review the actual plan for the intended candidate and device.
+
+Historical revision 8 had six required Tier 1 tasks and a 2,220-second
+required-task allowance: the 120-second scalar Gaussian can-it-pass smoke,
+three 300-second behavior tasks, the 300-second ring acquisition and the
+900-second confirmed word smoke. The registered `tier1-word-smoke-v1` campaign
+retains its revision-8 campaign and candidate caps of 2,220 seconds; it does not
+budget the expanded current Tier 1. Its Gaussian task requires any passing
 scheduled state plus independent same-state confirmation, and completes all
 1,000 updates. The continuing Gaussian retention/target-shift task is required
 Tier 2 with its own passing smoke checkpoint dependency and 600-second allowance.
@@ -335,11 +355,11 @@ must pass. Its allowance is 300 seconds, and its recipe, prior, architecture,
 optimizer histories, streams and original 20,000-update schedule horizon remain
 unchanged. The original sustained `five_word_joint_acquisition` declaration and
 its evidence remain historical. See the [split readout](reports/forge/five-word-tier-split/README.md).
-Revision 8 has required counts 6/21/2; its full through-Tier-2 reservation is
+Revision 8 had required counts 6/21/2; its full through-Tier-2 reservation was
 42,720 seconds per candidate (43,020 including the optional 300-second clock
-audit diagnostic). The new default `technique-inventory-word-split-v1` campaign
-reserves 46,620 seconds per family through Tier 3, including the diagnostic,
-and 326,340 seconds for the seven selected families. Historical campaigns,
+audit diagnostic). The revision-8 `technique-inventory-word-split-v1` campaign
+retains 46,620 seconds per family through Tier 3, including the diagnostic,
+and 326,340 seconds for its seven-family roster. Historical campaigns,
 including `tier1-gaussian-smoke-v1` and `tier1-acquisition-v2`, remain unchanged. Revision 3's `tier1-acquisition-v1` retains its
 2,100-second cap; historical `smoke.json` retains its 900-second cap. Neither
 covers the complete revision-4 Tier 1.
@@ -442,29 +462,40 @@ Older snapshots retain their recorded execution contract.
 
 ## Tiers and views
 
-| Qualification tier | Current stability profile (revision 11) | Purpose |
+Current assignments are generated from the
+[registered views](configs/forge/views/) in the
+[tier guide](reports/forge/EXPERIMENTS_BY_TIER.md). The
+[`discriminator_stability` revision-14 profile](reports/forge/EXPERIMENTS_BY_TIER.md#discriminator_stability)
+declares:
+
+| Qualification tier | Required and other assignments | Purpose |
 | --- | --- | --- |
-| 1: smoke | `gaussian1d_smoke`, `two_pole`, `unused_token_hold`, `ae_gan_hold`, `ring16_acquisition`, `five_word_joint_smoke`; 23,131 total host updates, up to 2,220 reserved seconds | Behavior, finite-state, intended-update, mechanism and confirmed acquisition checks; placement remains provisional |
-| 2: quality | 10 counted hosts, including the five-word hold; 11 held: own-checkpoint Gaussian stability, four vector density, three image and three 7,000-update native coverage/accuracy gates | Require sustained live quality and continued learning across families |
-| 3: endurance | Own-state ring endurance, counted once as `ring_extension` (acquisition, hold and extension of one run; `ring_hold` is its removed phase); reserve up to 7,500 total updates | Detect late failure after acquisition |
+| 1: smoke | 11 required, 1 diagnostic | Behavior, finite-state, mechanism, confirmed acquisition and model-family checks; placement remains provisional |
+| 2: quality | 18 required, 7 held | Sustained live quality and continued learning across families |
+| 3: endurance | 1 required, 1 held, 1 diagnostic removed from the count | Late failure after acquisition; `ring_extension` counts the shared ring run once |
+| 4: stress_and_formulations | 5 held | Smaller-network accuracy, masked-observation recovery and joint BiGAN questions |
 
-The current counted denominator is 6/10/1. Revision 9's 6/21/2, revision 7's 6/20/2, revision 3's 5/19/2 and
-revision 2's published 3/19/2 results remain historical evidence; adding acquisition requirements or holding
-tests does not regrade them or transfer API demonstrations into Forge qualification.
-The expanded smoke profile needs calibration before scientific adoption.
+The counted denominator is 11/18/1 for Tiers 1–3; Tier 4 has no counted
+requirements. Revision 11's 6/10/1, revision 9's 6/21/2, revision 7's 6/20/2,
+revision 3's 5/19/2 and revision 2's published 3/19/2 results remain historical
+evidence. Adding requirements or holding tests does not regrade those results
+or transfer API demonstrations into Forge qualification. Calibration remains
+provisional. Check the generated guide and a read-only plan after any view change.
 
-After the [2026-10-15 test dispositions](reports/forge/test-dispositions-20261015/README.md) the six ordinary
-views count 81 view requirements (Tier 1/2/3): adaptation 3/9/0 (revision 3), clockfree_continuous 4/9/1
+At the [2026-10-15 test dispositions](reports/forge/test-dispositions-20261015/README.md), the six ordinary
+views counted 81 view requirements (Tier 1/2/3): adaptation 3/9/0 (revision 3), clockfree_continuous 4/9/1
 (revision 4), discriminator_stability 6/10/1 (revision 11), formulation_comparison 3/9/1 (revision 2),
-host_profile_transfer 3/9/1 (revision 5) and quality_coverage 3/9/0 (revision 3). Held in all six at Tier 2:
+host_profile_transfer 3/9/1 (revision 5) and quality_coverage 3/9/0 (revision 3). At those revisions, held in all six at Tier 2:
 `vector_unequal_mass`, `vector_unequal_width`, `vector_anisotropic`, `vector_overlap`, `img_bars4`,
 `img_blobs4`, `img_intensity2`, `grid100`, `rotated100` and `staggered100`. Also held: `gaussian1d_stability`
 (discriminator_stability, Tier 2), `target_shift_recovery` (adaptation and clockfree_continuous, Tier 3) and
 `grid100_14k`, `rotated100_14k` and `staggered100_14k` (clockfree_continuous, Tier 3, behind their held 7k
 parents). Removed from the count: `ring_hold` (a phase of `ring_extension` in the four ring views) and
-`clockfree_audit` (a duplicate of `clockfree_audit_measurement_v1` in clockfree_continuous). While
-`target_shift_recovery` is held, adaptation counts the same tests as quality_coverage and reports `HELD`.
-`tier1_policy_coverage` is a separate scope and stays at revision 1.
+`clockfree_audit` (a duplicate of `clockfree_audit_measurement_v1` in clockfree_continuous). At that point,
+adaptation counted the same tests as quality_coverage and reported `HELD` while
+`target_shift_recovery` was held. These are pinned historical dispositions; use
+the generated tier guide for subsequent revisions and current roles.
+`tier1_policy_coverage` remains a separate scope.
 
 All required lower-tier tasks must pass before higher-tier work is eligible.
 Failed, missing, invalid, and blocked evidence stop higher-tier spending after
@@ -688,9 +719,9 @@ a new immutable campaign ID with adequate budgets. The Modern GAN recipe uses
 its own one-candidate campaign; it does not rerun unchanged techniques. New ordinary
 requests finish runnable tasks in a tier, then apply required failures to higher
 tiers. Frozen requests without the new policy retain fail-fast behavior; unsupported
-techniques reserve no training resources. Counted denominators are 6/10/1
-for the current revision-11 `discriminator_stability` view, including unknown and blocked
-cells. The current publication retains its recorded revision 9 qualification (6/21/2) until
+techniques reserve no training resources. Current counted denominators, including
+unknown and blocked cells, follow the [registered view and tier guide](#tiers-and-views).
+The publication retains its recorded revision 9 qualification (6/21/2) until
 ordinary evidence explicitly advances it; earlier revision-2 3/19/2 cohorts
 retain their original outcomes in its companion JSON and immutable snapshots.
 A zero passes/total cell alone does not establish a scientific failure.
@@ -860,26 +891,46 @@ an explicit classification. Generated Forge records and boards never become
 historical mapper inputs. Keep bulk checkpoints/samples in their declared durable
 location; unavailable local artifacts remain evidence gaps.
 
-When no package or adapter code changes are needed—for example after promoting a
-new selected family candidate or merging source changes into `develop`—refresh all
-selected-family readouts, single-GPU DCGAN scaling performance, diagnostic attempt
-coverage and compiled Forge reports with one command:
+For documentation and software maintenance, check retained publications and
+refresh compiled reports without training:
 
 ```sh
-python ops/refresh_forge_readouts.py --check
-python ops/refresh_forge_readouts.py --gpus 0,1 --scaling-gpu auto
+# Read-only integrity check under the publications' original source bindings.
+python ops/refresh_forge_readouts.py --check --reports-only
+# Rebuild report displays from retained evidence without changing source pins.
 python ops/refresh_forge_readouts.py --reports-only
+# Separately inspect gaps against the current source and declarations.
+python ops/refresh_forge_readouts.py --check
 ```
 
-`--check` launches no training and exits `0` when all readouts and compiled reports
-are current, `1` when out-of-date stages can be refreshed automatically, and `2`
-when code or declaration changes are required (such as preflight blockers, corrupt
-manifests, unregistered `family-current-v1.json` snapshot edits, or non-gate
-`ERROR`/`INCOMPLETE` task outcomes). Running without `--check` drains any stale
-stages end to end (`--scaling-gpu auto` inspects `nvidia-smi` to select a GPU from
-`--gpus` with zero external compute processes so all 48 DCGAN performance cells
-share one `Contention: clear` hardware cohort and matched comparison key per task),
-automatically republishes `technique-inventory.{json,md}` when committed
+`--check --reports-only` verifies retained publication integrity and reports
+current-source measurement gaps separately. Its `CURRENT` result preserves the
+recorded cohort; it grants no evidence for changed software. Package or adapter
+changes can leave the strict current-source check at `NEEDS_REFRESH` while the
+original publication remains intact. Preserve the original results, source pins,
+budgets and qualifications. Do not rerun unchanged experiments, rewrite their
+source bindings or transfer qualification merely to make a cleanup merge current.
+
+Strict `--check` launches no training and exits `0` when readouts and compiled
+reports match the current source and declarations, `1` when evidence or reporting
+gaps remain, and `2` when code or declaration changes are required (such as
+preflight blockers, corrupt manifests, unregistered `family-current-v1.json`
+snapshot edits, or non-gate `ERROR`/`INCOMPLETE` task outcomes).
+`--reports-only` without `--check` rebuilds report displays and leaves unavailable
+current-source measurements explicit; a partial result can remain `NEEDS_REFRESH`.
+
+For a separately authorized and budgeted new-source evaluation, the execution
+command is:
+
+```sh
+python ops/refresh_forge_readouts.py --gpus 0,1 --scaling-gpu auto
+```
+
+Running without `--check` or `--reports-only` drains stale stages end to end.
+`--scaling-gpu auto` inspects `nvidia-smi` to select a GPU from `--gpus` with zero
+external compute processes so all 48 DCGAN performance cells share one
+`Contention: clear` hardware cohort and matched comparison key per task. The
+publisher regenerates `technique-inventory.{json,md}` when committed
 `technique-evidence/manifest.json` snapshots already satisfy `family-current-v1.json`,
 preserves historical `family-current-v1.json` pins under their original frozen
 sources, preserves committed goal leaderboards on clean checkouts where ignored

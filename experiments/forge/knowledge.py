@@ -665,7 +665,17 @@ def in_flight_work(root: Path, query: str = "", goal: str | None = None) -> list
     return items
 
 
-def recall(root: Path, query: str = "", goal: str | None = None, *, include_in_flight: bool = False) -> list[dict]:
+def _recall_source(source, *, full_provenance: bool):
+    """Keep source identity readable without copying a complete file manifest."""
+    if full_provenance or not isinstance(source, dict) or "files" not in source:
+        return deepcopy(source)
+    compact = {key: deepcopy(value) for key, value in source.items() if key != "files"}
+    compact["file_count"] = len(source["files"])
+    return compact
+
+
+def recall(root: Path, query: str = "", goal: str | None = None, *, include_in_flight: bool = False,
+           full_provenance: bool = False) -> list[dict]:
     """Search normalized records; missing goal tags remain visible as unknown."""
     records, _ = _memory_records(Path(root))
     words = re.findall(r"[a-z0-9_]+", query.lower())
@@ -693,7 +703,8 @@ def recall(root: Path, query: str = "", goal: str | None = None, *, include_in_f
         matches.append({"record_id": record["record_id"], "candidate_id": record.get("candidate_id"),
                         "candidate_revision": record.get("candidate_revision"), "evidence_scope": record.get("evidence_scope"),
                         "hypothesis": record.get("hypothesis"), "conclusion": record.get("conclusion"),
-                        "next_action": record.get("next_action"), "source": record.get("source"),
+                        "next_action": record.get("next_action"),
+                        "source": _recall_source(record.get("source"), full_provenance=full_provenance),
                         "cost": record.get("recorded_cost") or _cost(record.get("task_results", [])), "match_score": score,
                         "exact_identity_match": exact, "study_id": record.get("study_id"),
                         "qualification_input": record.get("qualification_input", record.get("evidence_scope") == "current"),
@@ -714,7 +725,8 @@ def recall(root: Path, query: str = "", goal: str | None = None, *, include_in_f
                 "hypothesis": item.get("hypothesis"),
                 "conclusion": None,
                 "next_action": f"In-flight ({item['kind']}: {item.get('status')})",
-                "source": item.get("source") or item.get("queue_root"),
+                "source": _recall_source(item.get("source") or item.get("queue_root"),
+                                         full_provenance=full_provenance),
                 "cost": _cost([]),
                 "match_score": 0,
                 "exact_identity_match": False,
@@ -730,6 +742,18 @@ def _link(source) -> str:
     if isinstance(source, dict):
         return source.get("url") or "../../" + source.get("path", "")
     return "../../" + str(source or "")
+
+
+def _evidence_navigation(record: dict) -> str:
+    """Use durable provenance for raw receipts, independent of local hydration."""
+    source = record.get("source")
+    path = source.get("path", "") if isinstance(source, dict) else str(source or "")
+    record_link = f"records/{record['record_id']}.json"
+    if path.startswith("reports/forge/attempts/") and not (isinstance(source, dict) and source.get("url")):
+        return (f"[Record and receipt provenance]({record_link}) · "
+                "[Original artifact retrieval](../../docs/forge-artifact-resolver.md). "
+                "Original receipt availability is separate from this record.")
+    return f"[Evidence]({_link(source)}) · [Record]({record_link})"
 
 
 def _cell(value) -> str:
@@ -949,7 +973,7 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
                       _metric_excerpt(rows), "",
                       str(record.get("conclusion", "Conclusion pending.")), "",
                       f"**Next:** {record.get('next_action', 'Readout pending.')}", "",
-                      f"[Evidence]({_link(record.get('source'))}) · [Record](records/{record['record_id']}.json)", ""]
+                      _evidence_navigation(record), ""]
         closed_partial = any(record.get("lifecycle") == "closed_partial_cut" for record in publication_records)
         lines += ["## Compact publications and closed partial cuts" if closed_partial else "## Concluded compact publications", "",
                   "These study and trial projections preserve recorded outcomes, unknowns and source cohorts. "

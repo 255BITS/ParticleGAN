@@ -215,6 +215,7 @@ def parser():
     r.add_argument("--query", default="")
     r.add_argument("--goal", "--view", dest="goal")
     r.add_argument("--limit", type=int, default=8, help="maximum concise prior-art matches (default 8)")
+    r.add_argument("--full-provenance", action="store_true", help="include complete source file manifests in recall matches")
     compile_parser = commands.add_parser("compile", help="rebuild deterministic memory and leaderboards without training")
     compile_parser.add_argument("--check", action="store_true", help="read-only freshness check; exit nonzero for stale memory")
     compile_parser.add_argument("--summaries-only", action="store_true", help="refresh recall while preserving published qualification/telemetry snapshots")
@@ -586,7 +587,8 @@ def main(argv=None):
         elif command == "recall":
             if args.limit < 1:
                 raise ValueError("recall --limit must be positive")
-            matches = knowledge.recall(root, query=args.query, goal=args.goal)
+            matches = knowledge.recall(root, query=args.query, goal=args.goal,
+                                       full_provenance=args.full_provenance)
             in_flight = knowledge.in_flight_work(root, query=args.query, goal=args.goal)
             emit({"matches_total": len(matches), "shown": min(len(matches), args.limit), "matches": matches[:args.limit],
                   "in_flight": in_flight,

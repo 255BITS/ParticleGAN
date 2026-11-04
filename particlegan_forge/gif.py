@@ -5,11 +5,7 @@ import hashlib
 import math
 from pathlib import Path
 
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
 import numpy as np
-from PIL import Image
 
 
 def _safe_float(v: object) -> float:
@@ -62,7 +58,24 @@ def render_training_gif(
       - ``target_images``: optional (N_t, C, H, W) array/tensor
       - ``sample_images``: optional (N_s, C, H, W) array/tensor
       - ``current_stream_image``: optional (1, C, H, W) array/tensor (for single-stream tasks)
+
+    Rendering requires the ``experiments`` extra. Imports stay local so the
+    tier API works with the base installation and preserves the caller's
+    Matplotlib backend.
     """
+    try:
+        from matplotlib.backends.backend_agg import FigureCanvasAgg
+        from matplotlib.figure import Figure
+        from PIL import Image
+    except ModuleNotFoundError as exc:
+        if (exc.name or "").split(".")[0] not in {"matplotlib", "PIL"}:
+            raise
+        raise ModuleNotFoundError(
+            "GIF rendering requires Matplotlib and Pillow; install "
+            "'particlegan[experiments]' to enable render_training_gif.",
+            name=exc.name,
+        ) from exc
+
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     pil_frames: list[Image.Image] = []
@@ -78,7 +91,9 @@ def render_training_gif(
     )
 
     for idx, frame in enumerate(frames):
-        fig, axes = plt.subplots(1, 3, figsize=(9.0, 3.0), dpi=100)
+        fig = Figure(figsize=(9.0, 3.0), dpi=100)
+        FigureCanvasAgg(fig)
+        axes = fig.subplots(1, 3)
         fig.patch.set_facecolor("#111418")
 
         # Panel 0: Target / Stream input
@@ -145,7 +160,7 @@ def render_training_gif(
         fig.canvas.draw()
         rgba = np.asarray(fig.canvas.buffer_rgba())
         pil_frames.append(Image.fromarray(rgba).convert("P", palette=Image.Palette.ADAPTIVE))
-        plt.close(fig)
+        fig.clear()
 
     if pil_frames:
         pil_frames[0].save(

@@ -37,6 +37,7 @@ if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
 from experiments.forge.contracts import atomic_text, file_hash, identifier, read_json, stable_hash
+from experiments.forge.publication_storage import compact_current_publication, publication_json_text
 from experiments.forge.technique_board import render_markdown, write_report
 
 
@@ -220,7 +221,7 @@ def project_receipt(root: Path | str, attempt_id: str) -> dict:
 
 
 def _json_text(value):
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False) + "\n"
+    return publication_json_text(value)
 
 
 def _write_changed(path, content):
@@ -3126,20 +3127,81 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
     return _CURRENT_SOURCE_TIER1_CACHE.get(cache_key)
 
 
-def _selected_recipe_binary_task_statuses(result, root: Path) -> dict[str, dict[str, str]] | None:
-    cached = _concluded_current_source_tier1_payload(result, root)
-    if not cached:
+def _recorded_source_binary_projection(result, root: Path) -> dict | None:
+    """Retain a complete, source-bound display matrix without qualifying new code."""
+    from experiments.forge.family_reports import _selected_cohorts, _selected_row, full_suite_tasks
+
+    progress = result.get("family_progress") or {}
+    relative = "reports/forge/attempt-coverage.json"
+    expected = progress.get("input_hashes", {}).get(relative)
+    path = Path(root) / relative
+    if not expected or not path.is_file():
         return None
-    complete_binary = all(
-        "UNMEASURED" not in (item["req_outcomes"] + item["diag_outcomes"])
-        for item in cached["rows"]
-    )
-    if not complete_binary:
+    if file_hash(path) != expected:
+        raise ValueError("recorded formulaic display coverage digest changed")
+    coverage = read_json(path)
+    if (coverage.get("schema") != "forge_attempt_coverage_v1"
+            or coverage.get("qualification_input") is not False
+            or coverage.get("qualification_reuse") is not False
+            or coverage.get("formulations_modified") is not False):
+        raise ValueError("recorded formulaic display requires diagnostic-only coverage")
+    required = set(full_suite_tasks(progress))
+    if not required:
+        return None
+    families = {}
+    for family, cohort in _selected_cohorts(progress):
+        row = _selected_row(result, cohort)
+        candidate, revision = row.get("candidate_id"), row.get("candidate_revision")
+        source = row.get("bindings", {}).get("source_digest")
+        if not candidate or not _is_sha256_hex(revision) or not _is_sha256_hex(source):
+            return None
+        records = {}
+        for record in coverage.get("records", []):
+            if (record.get("family") != family["id"]
+                    or record.get("candidate_id") != candidate
+                    or record.get("candidate_revision") != revision
+                    or record.get("source_digest") != source
+                    or any(record.get(key) for key in _SCOPED_COVERAGE_KEYS)):
+                continue
+            task = record.get("task")
+            identity = [source, revision, task, record.get("execution_sha256"), record.get("evaluation_sha256")]
+            if (not task or not all(_is_sha256_hex(value) for value in identity[3:])
+                    or record.get("key") != stable_hash(identity)):
+                raise ValueError("recorded formulaic display has an invalid attempt binding")
+            if task in records and records[task] != record:
+                raise ValueError("recorded formulaic display has conflicting attempts")
+            if record.get("attempted") is True and record.get("status") in {"PASS", "FAIL"}:
+                records[task] = record
+        if not required.issubset(records):
+            return None
+        families[family["id"]] = {"candidate_id": candidate, "candidate_revision": revision,
+                                   "source_digest": source, "records": records}
+    if not families:
+        return None
+    return {"scope": "recorded_source_formulaic_display", "qualification_input": False,
+            "qualification_reuse": False, "coverage": {"path": relative, "sha256": expected},
+            "families": families}
+
+
+def _formulaic_display_payload(result, root: Path) -> dict | None:
+    current = _concluded_current_source_tier1_payload(result, root)
+    if current and all("UNMEASURED" not in (item["req_outcomes"] + item["diag_outcomes"])
+                       for item in current["rows"]):
+        return current
+    recorded = _recorded_source_binary_projection(result, root)
+    return recorded
+
+
+def _selected_recipe_binary_task_statuses(result, root: Path) -> dict[str, dict[str, str]] | None:
+    cached = _formulaic_display_payload(result, root)
+    if cached is None:
         return None
     from experiments.forge.family_reports import _selected_cohorts, _selected_row, _summed_views, full_suite_tasks
 
     progress = result.get("family_progress") or {}
-    measured_by_cid = {item["candidate_id"]: item.get("measured", {}) for item in cached["rows"]}
+    recorded_display = cached.get("scope") == "recorded_source_formulaic_display"
+    measured_by_cid = {} if recorded_display else {
+        item["candidate_id"]: item.get("measured", {}) for item in cached["rows"]}
     all_tasks: set[str] = set(full_suite_tasks(progress))
     for view in _summed_views(progress):
         for assignment in view.get("assignments", []):
@@ -3149,12 +3211,15 @@ def _selected_recipe_binary_task_statuses(result, root: Path) -> dict[str, dict[
     for family, cohort in _selected_cohorts(progress):
         row = _selected_row(result, cohort)
         cid = row.get("candidate_id", "")
-        ro = measured_by_cid.get(cid, {})
+        ro = ({task: record["status"] for task, record in cached["families"][family["id"]]["records"].items()}
+              if recorded_display else measured_by_cid.get(cid, {}))
         tasks_map = cohort.get("tasks", {})
         fam_statuses: dict[str, str] = {}
         for tid in set(tasks_map) | set(ro) | all_tasks:
             rec_st = tasks_map.get(tid, {}).get("status")
-            if rec_st in {"PASS", "FAIL"}:
+            if recorded_display and tid in ro:
+                fam_statuses[tid] = ro[tid]
+            elif rec_st in {"PASS", "FAIL"}:
                 fam_statuses[tid] = rec_st
             elif ro.get(tid) in {"PASS", "FAIL"}:
                 fam_statuses[tid] = ro[tid]
@@ -3318,6 +3383,12 @@ def _formulaic_selected_recipe_tables(markdown: str, result, root, path) -> str:
     binary_by_family = _selected_recipe_binary_task_statuses(result, root)
     if binary_by_family is None:
         return markdown
+    display = _formulaic_display_payload(result, root)
+    if display.get("scope") == "recorded_source_formulaic_display":
+        note = ("Recorded formulaic scores retain each recipe's original source and task bindings in "
+                "[the coverage receipts](attempt-coverage.json). They are an archived display projection, "
+                "not current-source qualification; current-source evidence gaps remain separate.\n\n")
+        markdown = markdown.replace("## Selected recipes\n\n", "## Selected recipes\n\n" + note, 1)
     from experiments.forge.family_reports import (
         _selected_cohorts,
         _summed_views,
@@ -4128,6 +4199,7 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
     from experiments.forge.scaling_publication import attach_performance
     attach_performance(root, result)
     result["provenance"].pop("input_digest", None)
+    result = compact_current_publication(result)
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)
@@ -4151,6 +4223,11 @@ def _project_publication_for_family_pages(root, publication):
     from experiments.forge.family_reports import _selected_cohorts
 
     projected = deepcopy(publication)
+    display = _formulaic_display_payload(publication, Path(root))
+    recorded_display = display.get("scope") == "recorded_source_formulaic_display"
+    if recorded_display:
+        projected["recorded_formulaic_display"] = {key: deepcopy(display[key])
+            for key in ("scope", "qualification_input", "qualification_reuse", "coverage")}
     progress = projected.get("family_progress") or {}
     attempt_records_by_family = _load_attempt_coverage_family_records(Path(root))
     view_by_id = {v["id"]: v for v in progress.get("views", [])}
@@ -4174,6 +4251,11 @@ def _project_publication_for_family_pages(root, publication):
         tasks_dict = cohort.get("tasks", {})
         for task_name, t_entry in tasks_dict.items():
             parent_id = (t_entry.get("policy_parent") or {}).get("id")
+            original = display["families"][fam_id]["records"].get(task_name) if recorded_display else None
+            if recorded_display and original is None:
+                # An archived complete ordinary suite grants nothing to other
+                # diagnostic or newly declared tasks on the family page.
+                continue
             if task_name in fam_statuses:
                 status = fam_statuses[task_name]
             else:
@@ -4183,14 +4265,23 @@ def _project_publication_for_family_pages(root, publication):
                     status = fam_statuses[parent_id]
                 else:
                     status = "FAIL"
-            att_rec = attempt_records_by_family.get((fam_id, task_name)) or (
-                attempt_records_by_family.get((fam_id, parent_id)) if parent_id else None
-            )
+            att_rec = original if recorded_display else (
+                attempt_records_by_family.get((fam_id, task_name)) or (
+                    attempt_records_by_family.get((fam_id, parent_id)) if parent_id else None))
             t_entry["status"] = status
             t_entry["execution_recorded"] = True
-            t_entry["current_contract"] = "matches"
-            t_entry["changed_contract_fields"] = []
-            t_entry["coverage_reason"] = "Test definition matches the recorded conditions."
+            if recorded_display:
+                t_entry["recorded_formulaic_display"] = {
+                    "scope": display["scope"], "qualification_input": False, "qualification_reuse": False,
+                    **{key: deepcopy(original[key]) for key in (
+                        "key", "candidate_id", "candidate_revision", "source_digest", "execution_sha256", "evaluation_sha256")}}
+                t_entry["coverage_reason"] = ("Recorded formulaic display retains its original source and task bindings. "
+                    + str(t_entry.get("coverage_reason", "Current task compatibility is unverified."))
+                    + " No current-source qualification is granted.")
+            else:
+                t_entry["current_contract"] = "matches"
+                t_entry["changed_contract_fields"] = []
+                t_entry["coverage_reason"] = "Test definition matches the recorded conditions."
             t_entry.pop("separate_diagnostic_executed", None)
             t_entry.pop("preflight_blockers", None)
             if att_rec is not None and att_rec.get("reason"):
@@ -5022,6 +5113,7 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         result["current_fallback_reporting_scope"] = fallback_reporting
     from experiments.forge.scaling_publication import attach_performance
     attach_performance(root, result)
+    result = compact_current_publication(result)
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)
@@ -5031,6 +5123,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                       if not recorded_policy and view_id == "discriminator_stability" else None)
     shared_intro = (_shared_score_intro(root, result)
                     if not recorded_policy and view_id == "discriminator_stability" else None)
+    # Validate the serialized size before changing selection cards or outputs.
+    json_text = _json_text(result)
     # Validate all inputs before changing selection cards, registry or outputs.
     if selection_archive:
         relative_selection, original, _ = selection_archive
@@ -5040,7 +5134,7 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     if pending_snapshot:
         _write_changed(*pending_snapshot)
         _write_changed(manifest_path, json.dumps(manifest, sort_keys=True, indent=2) + "\n")
-    _write_changed(json_path, _json_text(result))
+    _write_changed(json_path, json_text)
     _write_changed(markdown_path, markdown)
     _write_family_pages(root, pages)
     if shared_archive:
