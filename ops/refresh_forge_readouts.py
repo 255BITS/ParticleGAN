@@ -1123,6 +1123,14 @@ def _generated_pages_synced(root: Path, inv_json: dict[str, Any], inv_md: str) -
         return False
     if inv_json.get("family_progress"):
         from experiments.forge.family_reports import generated_pages
+        from reports.forge import regenerate_technique_inventory as rti
+
+        # Archived display scores still need an integrity check when the latest
+        # source has no Tier 1 payload. A digest footer alone cannot detect a
+        # changed overview score or a false source-qualification claim.
+        if (rti._recorded_source_binary_projection(inv_json, root) is not None
+                and inv_md != rti._current_markdown(inv_json, root, root / "reports/forge/technique-inventory.md")):
+            return False
 
         for page_path, expected_text in generated_pages(root, inv_json).items():
             if not page_path.is_file() or page_path.read_text() != expected_text:
