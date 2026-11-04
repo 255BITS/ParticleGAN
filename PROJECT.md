@@ -6,7 +6,7 @@
 - **Family Abstractions**:
   - BISPF: Born-Infeld Sinkhorn Particle Flow (`particlegan/bispf.py`, `particlegan/_bispf/`, `particlegan/recipes.py`)
   - Atlas: Particle-Normal Prior, DV12 stationarity policy, birth/death feature cell guard, KA2 de-clocked anchor (`particlegan/policy.py`, `particlegan/birth_death.py`, `particlegan/feature_cells.py`)
-  - BCAP: Bounded Critic Alignment Penalty (`particlegan/grad_regularizers.py`, `particlegan/optim/dualnorm.py`)
+  - BCAP: recipes built on the fixed one-sided L2 critic input-gradient cap `b_cap`; no recorded acronym expansion. See the [research glossary](RESEARCH_GLOSSARY.md#acronyms-and-short-names) (`particlegan/grad_regularizers.py`, `particlegan/optim/dualnorm.py`).
 - **Version Control & Integration**: Git PR workflow into `develop` using `gh pr create` and clean incremental merges.
 
 ## Feature Inventory
@@ -31,12 +31,13 @@
 
 ## Interface Contracts
 ### Evaluation Views ↔ Tasks
-- `configs/forge/views/*.json` define `assignments` containing `task`, `qualification_tier`, `importance` (`required` vs `diagnostic`), and `order`.
-- Tasks must conform to public ParticleGAN API contract: binary PASS/FAIL metric, reproducible evaluation receipts under `reports/forge/records/`.
+- `configs/forge/views/*.json` define `assignments` containing `task`, `qualification_tier`, `importance` (`required`, `held`, or `diagnostic`), and `order`. Held tests retain their results in full-suite comparisons while remaining outside qualification, as defined in the [research glossary](RESEARCH_GLOSSARY.md).
+- Tasks own the problem, initial prior distribution and capacity, architecture, sampling, budget and gates; recipes own prior updates and regularization. Use the [field ownership contract](docs/forge-field-boundaries.md) and [task/study guide](docs/forge-studies.md).
+- Toy tests follow the [public ParticleGAN API contract](reports/toy_audit/api_contract/README.md), including a numerical pass/fail metric and an actual-training GIF. Concluded scientific records live in `reports/forge/records/`; execution receipts bind original request/result/evidence envelopes. Retained receipt locations and [artifact restoration](docs/forge-artifact-resolver.md) preserve those identities separately from compact records.
 
 ### Reporting ↔ Leaderboard Index
 - Standalone reports under `reports/` must not conflict with `reports/leaderboard-index.json`. Avoid `# ... leaderboard` title headers on non-indexed reports.
-- `ops/refresh_forge_readouts.py --check` must return `CURRENT` at all times.
+- `python ops/refresh_forge_readouts.py --check --reports-only` verifies retained publication integrity. The strict `--check` separately checks evidence against the current source; legitimate software changes can leave that scope `NEEDS_REFRESH`. Preserve the original source pins and results, report the gap, and avoid rerunning unchanged studies solely to merge a cleanup.
 - All tracked files in `SOURCE_ROOTS` must be declared in `configs/forge/catalog.json`.
 
 ## Code Layout

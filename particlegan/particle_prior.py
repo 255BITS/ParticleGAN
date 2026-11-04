@@ -242,7 +242,6 @@ class ParticlePrior(nn.Module):
 
     def manipulate(self, *manipulators: Any) -> "ManipulatedPrior":
         """Wrap this prior in a ManipulatedPrior chaining the given manipulators."""
-        from .priors import ManipulatedPrior
         return ManipulatedPrior(self, manipulators)
 
 
@@ -494,3 +493,8 @@ def make_prior(kind: str, **kwargs) -> ParticlePrior:
     if kind == "fresh_gaussian":
         return FreshGaussianPrior(**kwargs)
     return ParticlePrior(**kwargs, learnable=(kind == "particles"))
+
+
+# Manipulator initialization registers these prior classes through init.py.
+# Bind the public return annotation only after those classes are available.
+from .priors import ManipulatedPrior  # noqa: E402

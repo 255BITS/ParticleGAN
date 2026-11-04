@@ -4006,7 +4006,7 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 
 **Next:** Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.
 
-[Evidence](../../reports/forge/attempts/11d3d8b814674fd0841217c7e4304c38/result.json) · [Record](records/readout-0297c36f9f2d9c5feb45b3cb.json)
+[Record and receipt provenance](records/readout-0297c36f9f2d9c5feb45b3cb.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### bispf-prior-fresh-gaussian-v1 · readout-030ba1dfffb896ffe7ef8768
 
@@ -4022,7 +4022,7 @@ Cancelled: every attempt crashed at prior construction (Recipe rejected fresh_ga
 
 **Next:** Superseded by prior-ablation-a3-fresh-gaussian-r2.
 
-[Evidence](../../reports/forge/attempts/00db84a9a51c43ad8782fce53359e1b4/result.json) · [Record](records/readout-030ba1dfffb896ffe7ef8768.json)
+[Record and receipt provenance](records/readout-030ba1dfffb896ffe7ef8768.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### forge-no-critic-penalty · readout-060e7be73e2832e314b9573f
 
@@ -4038,7 +4038,7 @@ Learned-MoG vector_two_broad PASS after exactly one registered operational cance
 
 **Next:** Retain cancelled receipt/cost and final scientific pass. Do not repeat this scientific PASS or promote from one reference. Complete host-provenance review before choosing further bounded calibration cells.
 
-[Evidence](../../reports/forge/attempts/661bd9830be94225891954f5fb690342/result.json) · [Record](records/readout-060e7be73e2832e314b9573f.json)
+[Record and receipt provenance](records/readout-060e7be73e2832e314b9573f.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### recipe-prior-refactor-bcap-pure-v1 · readout-0df182292d888440f5fb32ce
 
@@ -4054,7 +4054,7 @@ Completed discriminator_stability seed-0 CUDA execution for recipe-prior-refacto
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Evidence](../../reports/forge/attempts/20b7cdd05cd24eafbdcd579c83c602ef/result.json) · [Record](records/readout-0df182292d888440f5fb32ce.json)
+[Record and receipt provenance](records/readout-0df182292d888440f5fb32ce.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### forge-onboarding-anchor-ablation · readout-10242573330bec1494c7602b
 
@@ -4070,7 +4070,7 @@ The public EMA-anchor ablation failed two_pole after 80 fixed-seed CPU updates: 
 
 **Next:** Stop this ablation at tier 1. Keep its frozen FAIL receipt as onboarding and fail-fast evidence; do not promote it or spend on downstream tasks. A scientific anchor comparison would require one explicitly bounded compatible parent/ablation design after the initial gate calibration gaps are addressed.
 
-[Evidence](../../reports/forge/attempts/c0178716dd3c4d5695b391919bf9ab81/result.json) · [Record](records/readout-10242573330bec1494c7602b.json)
+[Record and receipt provenance](records/readout-10242573330bec1494c7602b.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### bispf-optimized-quintic-v1 · readout-10ed0ff3f18514315a760f4a
 
@@ -4102,7 +4102,7 @@ Completed discriminator_stability seed-0 CUDA execution for bispf-optimized-quin
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Evidence](../../reports/forge/attempts/24c1108ac40e4ea1adcc2ca091a7afed/result.json) · [Record](records/readout-143d85d4540548b0ecec1604.json)
+[Record and receipt provenance](records/readout-143d85d4540548b0ecec1604.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### forge-no-critic-penalty · readout-15e86dd160a1d64a04ceee04
 
@@ -4118,7 +4118,7 @@ Corrected-source smoke matrix: two_pole FAIL, unused_token_hold FAIL, ae_gan_hol
 
 **Next:** Keep ordinary qualification stopped and retain this frozen cohort. The two-cell learned-MoG GPU pilot is registered but must wait for the requested joint device window. Collect deeper independent references only through explicit diagnostic selections, then evaluate the unchanged calibration criteria before adoption.
 
-[Evidence](../../reports/forge/attempts/04e834fc82f24061af71572dce3a22d8/result.json) · [Record](records/readout-15e86dd160a1d64a04ceee04.json)
+[Record and receipt provenance](records/readout-15e86dd160a1d64a04ceee04.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p-a2-off-native-diagnostic · readout-170dc0a68d5b68737b370a5f
 
@@ -4150,7 +4150,7 @@ Ordinary discriminator_stability revision-14 re-qualification stops at Tier 1: s
 
 **Next:** Repair the Tier 1 execution defects or hold the API model toys before re-qualifying.
 
-[Evidence](../../reports/forge/attempts/09fee72cca8c4de1b4e74d0ef3ad6eb1/result.json) · [Record](records/readout-1d42b97bbb8f1366a766a233.json)
+[Record and receipt provenance](records/readout-1d42b97bbb8f1366a766a233.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p-bcap-matched-v1 · readout-21b533460c29dd5049aa64df
 
@@ -4182,7 +4182,7 @@ Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 c
 
 **Next:** Retain revision-9 qualification in technique-inventory; address ring16_acquisition and clockfree_audit_measurement_v1 in family follow-up.
 
-[Evidence](../../reports/forge/attempts/0288b6a506314fee89d2de726e8ebad2/result.json) · [Record](records/readout-271e0b4766487e5e23d59018.json)
+[Record and receipt provenance](records/readout-271e0b4766487e5e23d59018.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### forge-no-critic-penalty · readout-28f0c9140b4cfeef57f23dd2
 
@@ -4214,7 +4214,7 @@ Joined host-profile diagnostic: 3 PASS and 2 FAIL across five cells for 156.2837
 
 **Next:** Preserve this control and do not fill its remaining quality cells or extend the failed 7k parent. A separately registered A2-off native diagnostic changes one substantive factor while preserving seed/init/MoG width and full gates; reuse this certified grid result without another control launch. Do not infer a cause or a positive lineage from this single run.
 
-[Evidence](../../reports/forge/attempts/49d41e284fde41698212677403ca5d67/result.json) · [Record](records/readout-2c2eb24207b627b2ad26ea18.json)
+[Record and receipt provenance](records/readout-2c2eb24207b627b2ad26ea18.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### forge-onboarding-anchor-ablation · readout-2c30cecb0a3f37d001ce3b28
 
@@ -4230,7 +4230,7 @@ Corrected-source smoke matrix: two_pole FAIL, unused_token_hold PASS, ae_gan_hol
 
 **Next:** Keep ordinary qualification stopped and retain this frozen cohort. The two-cell learned-MoG GPU pilot is registered but must wait for the requested joint device window. Collect deeper independent references only through explicit diagnostic selections, then evaluate the unchanged calibration criteria before adoption.
 
-[Evidence](../../reports/forge/attempts/9cd112e7346b45ed8cb241e1498685ad/result.json) · [Record](records/readout-2c30cecb0a3f37d001ce3b28.json)
+[Record and receipt provenance](records/readout-2c30cecb0a3f37d001ce3b28.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### bispf-optimized-quintic-v1 · readout-322bc05e8bb593d80d65cb36
 
@@ -4262,7 +4262,7 @@ Native BISPF on the two explicitly wider architecture-portability hosts passes s
 
 **Next:** Retain both native outcomes as controls. Quintic passes both wider tasks and proceeds to separately frozen full performance and ordinary quality; Frobenius regresses stripes and stops. No default adoption follows.
 
-[Evidence](../../reports/forge/attempts/91832bb54bc74d1abc42a8576d9fc7e7/result.json) · [Record](records/readout-3721266a32807c156725dfc8.json)
+[Record and receipt provenance](records/readout-3721266a32807c156725dfc8.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### recipe-prior-refactor-release07-gan-v3-v1 · readout-3bd45e331f5dd03701da2700
 
@@ -4278,7 +4278,7 @@ Completed discriminator_stability seed-0 CUDA execution for recipe-prior-refacto
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Evidence](../../reports/forge/attempts/126f66ff2db84a6180a8ec209ef0de05/result.json) · [Record](records/readout-3bd45e331f5dd03701da2700.json)
+[Record and receipt provenance](records/readout-3bd45e331f5dd03701da2700.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### bispf-v1 · readout-3f3f893ae724d651f1655fc9
 
@@ -4326,7 +4326,7 @@ Guarding LossSurprise.decide against KA2 pre-anchor critic-only SettledReopenGua
 
 **Next:** Investigate adaptive per-population cell budgeting so N=256 rare-mode vector hosts avoid under-resolved k=7 kNN turnover without doubling K=256 FeatureCellBirthDeath cells on N=20000 100-mode tasks (grid100, rotated100, staggered100), and investigate joint-inference stability for BiGAN/DDGAN/five_word_joint hosts.
 
-[Evidence](../../reports/forge/attempts/0c838aeea25340e98edcb149d65ae720/result.json) · [Record](records/readout-423f82f13ee30c0a95fd266a.json)
+[Record and receipt provenance](records/readout-423f82f13ee30c0a95fd266a.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### bispf-optimized-quintic-v1 · readout-44a844de0b6e23e430a12858
 
@@ -4342,7 +4342,7 @@ Completed dcgan_performance seed-0 CUDA execution for bispf-optimized-quintic-v1
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Evidence](../../reports/forge/attempts/29038f0dbba04f8186bf39a2c8f46e86/result.json) · [Record](records/readout-44a844de0b6e23e430a12858.json)
+[Record and receipt provenance](records/readout-44a844de0b6e23e430a12858.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### e22 · readout-454e20c82f89cc56488e7f98
 
@@ -4374,7 +4374,7 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
-[Evidence](../../reports/forge/attempts/0d93422aa0ff4852bba4f0de4a1e6926/result.json) · [Record](records/readout-457f93f65c1e6782fba74306.json)
+[Record and receipt provenance](records/readout-457f93f65c1e6782fba74306.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### bispf-optimized-quintic-v1 · readout-464567d128031fee54c42252
 
@@ -4406,7 +4406,7 @@ Stop this numerical-backend revision: graph acceleration improves the 64-pixel p
 
 **Next:** Retain the rejected solver and partial costs under their original identities. Test separately declared optimizer-rule alternatives with direct wide-channel controls before an ordinary full study or selection.
 
-[Evidence](../../reports/forge/attempts/697e75ed0af449a7b3beb42dfcbd3763/result.json) · [Record](records/readout-47d84c98f42853a07d20becb.json)
+[Record and receipt provenance](records/readout-47d84c98f42853a07d20becb.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p · readout-4bd94051f203bbbb28a3e7a6
 
@@ -4422,7 +4422,7 @@ The first Forge CPU smoke pilot failed two_pole after 80 updates: mean_abs 0.106
 
 **Next:** Preserve this exact negative result, investigate smoke transfer predictiveness in Phase D, and continue software/multi-GPU verification without weakening this gate to turn the result into a pass.
 
-[Evidence](../../reports/forge/attempts/b766e89d1a0843ba9af94f2ce94e4273/result.json) · [Record](records/readout-4bd94051f203bbbb28a3e7a6.json)
+[Record and receipt provenance](records/readout-4bd94051f203bbbb28a3e7a6.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### atlas-particle-normal-v2 · readout-4dc982d111099c9b0f33a18e
 
@@ -4438,7 +4438,7 @@ Re-verified atlas-particle-normal-v2 on the repaired source tree (profile-scoped
 
 **Next:** Address 100-mode clean-covariance deficits (grid100/staggered100/rotated100) and non-schedule joint BiGAN critic balance on five_word_joint_smoke in a dedicated follow-up mechanism study.
 
-[Evidence](../../reports/forge/attempts/01965a6433ca4f47bd304111d5c98578/result.json) · [Record](records/readout-4dc982d111099c9b0f33a18e.json)
+[Record and receipt provenance](records/readout-4dc982d111099c9b0f33a18e.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### forge-no-critic-penalty · readout-4e04059eb9f631a2e406447e
 
@@ -4454,7 +4454,7 @@ The ordinary fresh-checkout two_pole attempt failed its slope bound (grad_med1.2
 
 **Next:** Retain all nine cheap-cell outcomes and costs. Keep ordinary qualification stopped. Review the exact historical/public-host parity differences before deeper reference spending; reserve the required GPU window and register only justified missing reference cells. Do not tune thresholds or treat unmeasured reference labels as failures.
 
-[Evidence](../../reports/forge/attempts/6f24cc4b4c814096bacc4fcc47110a98/result.json) · [Record](records/readout-4e04059eb9f631a2e406447e.json)
+[Record and receipt provenance](records/readout-4e04059eb9f631a2e406447e.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p--370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6 · readout-4e44570c882c7d07bbddc813
 
@@ -4470,7 +4470,7 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
-[Evidence](../../reports/forge/attempts/3472d2f10e984168a3cb9877d287d069/result.json) · [Record](records/readout-4e44570c882c7d07bbddc813.json)
+[Record and receipt provenance](records/readout-4e44570c882c7d07bbddc813.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### recipe-prior-refactor-k3p-v1 · readout-4f82f909f64b3d97917d6b1a
 
@@ -4486,7 +4486,7 @@ Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 c
 
 **Next:** Retain revision-9 qualification in technique-inventory; address ring16_acquisition and clockfree_audit_measurement_v1 in family follow-up.
 
-[Evidence](../../reports/forge/attempts/25526de766e04bb8bef6b9e79f42f90f/result.json) · [Record](records/readout-4f82f909f64b3d97917d6b1a.json)
+[Record and receipt provenance](records/readout-4f82f909f64b3d97917d6b1a.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### recipe-prior-refactor-r1r2-v1 · readout-5449c98aa6ac41a9138a74e6
 
@@ -4502,7 +4502,7 @@ Completed dcgan_performance seed-0 CUDA execution for recipe-prior-refactor-r1r2
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Evidence](../../reports/forge/attempts/3461078db4c0407eb0dbb1a145d9d570/result.json) · [Record](records/readout-5449c98aa6ac41a9138a74e6.json)
+[Record and receipt provenance](records/readout-5449c98aa6ac41a9138a74e6.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### forge-onboarding-anchor-ablation · readout-5470a57cf1a74abc896c8a55
 
@@ -4518,7 +4518,7 @@ Registered mode-hold diagnostic FAIL: 5/8 modes, HQ .992919921875, zero passing 
 
 **Next:** Conclude this mode-only diagnostic. Preserve the negative in memory; do not fill this exact calibration profile solely for adoption, since all three smoke predicates fail and the unchanged criteria require a positive with no false rejection. A new justified profile or independently compatible positive reference is needed; no general downstream or universal algorithm claim.
 
-[Evidence](../../reports/forge/attempts/eac540ccfe564a5ab396abdd545ab013/result.json) · [Record](records/readout-5470a57cf1a74abc896c8a55.json)
+[Record and receipt provenance](records/readout-5470a57cf1a74abc896c8a55.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### ka2 · readout-56577544c52c17aa60639d19
 
@@ -4550,7 +4550,7 @@ Reject the one-factor A2-off diagnostic on the named affine grid100 learned-MoG 
 
 **Next:** Keep A2 in the reference and preserve this negative in memory. Do not extend this failed parent, rerun its control or launch a seed/width sweep. Further calibration needs a supported new hypothesis or compatible saved positive evidence; no qualification or default adoption.
 
-[Evidence](../../reports/forge/attempts/d4d633052321469e82caff90210ef309/result.json) · [Record](records/readout-5830d399b6741ce7b3a2b992.json)
+[Record and receipt provenance](records/readout-5830d399b6741ce7b3a2b992.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### r1r2--abf642c42c5346ad096c29202e4716db535c393c113478552133c1c22761ddbd · readout-5bc30fee4d41b69294b1e32e
 
@@ -4582,7 +4582,7 @@ Fresh N(0,I) latent: 5 PASS / 10 FAIL on the 15 supported sampled-MoG tests (33 
 
 **Next:** Stop; the learned table beats an ordinary Gaussian latent on this suite.
 
-[Evidence](../../reports/forge/attempts/0114e66e15cc4b6f9515a2c9f343a51e/result.json) · [Record](records/readout-5ed4195bb58c87dc84a60827.json)
+[Record and receipt provenance](records/readout-5ed4195bb58c87dc84a60827.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### recipe-prior-refactor-r1r2-v1 · readout-613fc91cba03a8c327465202
 
@@ -4598,7 +4598,7 @@ Completed discriminator_stability seed-0 CUDA execution for recipe-prior-refacto
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Evidence](../../reports/forge/attempts/037b39c9b7be4cca9270cd9bd5e6844f/result.json) · [Record](records/readout-613fc91cba03a8c327465202.json)
+[Record and receipt provenance](records/readout-613fc91cba03a8c327465202.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### ka2-global-repair-v1 · readout-628b01d1adffd11312aff9b1
 
@@ -4614,7 +4614,7 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0363295227<0.3; q
 
 **Next:** Initial complete candidate rejected. Its subsequent separately bounded global coupled-rate search is concluded; no automatic paid continuation or default adoption.
 
-[Evidence](../../reports/forge/attempts/e2fcaf0f2965415db4c7234a024d3031/result.json) · [Record](records/readout-628b01d1adffd11312aff9b1.json)
+[Record and receipt provenance](records/readout-628b01d1adffd11312aff9b1.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### bispf-pure-global-v1 · readout-6675da6b575648d03b2182e9
 
@@ -4630,7 +4630,7 @@ Shape/step gates off: 13 PASS / 18 FAIL of 49; loses ring16_acquisition (sustain
 
 **Next:** Stop; keep the declared gates in the default recipe and investigate which single gate carries ring16/mode_hold.
 
-[Evidence](../../reports/forge/attempts/104c447903794b97b819d06102efa873/result.json) · [Record](records/readout-6675da6b575648d03b2182e9.json)
+[Record and receipt provenance](records/readout-6675da6b575648d03b2182e9.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p-no-output-noise-diagnostic · readout-6c0c2c5c6610ecfe73fe315d
 
@@ -4678,7 +4678,7 @@ Registered mode-hold diagnostic FAIL: 0/8 modes, HQ 0, zero passing observations
 
 **Next:** Conclude this mode-only diagnostic. Preserve the negative in memory; do not fill this exact calibration profile solely for adoption, since all three smoke predicates fail and the unchanged criteria require a positive with no false rejection. A new justified profile or independently compatible positive reference is needed; no general downstream or universal algorithm claim.
 
-[Evidence](../../reports/forge/attempts/6d10bbf90f1b4233a73034391599ecdb/result.json) · [Record](records/readout-75d5cdc5a88167d59ceff1b2.json)
+[Record and receipt provenance](records/readout-75d5cdc5a88167d59ceff1b2.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p · readout-7650981f9a48a164aebbd631
 
@@ -4694,7 +4694,7 @@ The explicit published residual16 intensity host passed all sustained/terminal r
 
 **Next:** Bind published vector/native architecture and initialization policies explicitly through shared public components before expanding the full reference matrix. Keep this positive, prior failures and costs in separate compatible cohorts. Register any further diagnostic narrowly; no automatic control/reference sweep or adoption is justified by one image pass.
 
-[Evidence](../../reports/forge/attempts/e13557902b3544a081defbcac092c136/result.json) · [Record](records/readout-7650981f9a48a164aebbd631.json)
+[Record and receipt provenance](records/readout-7650981f9a48a164aebbd631.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### atlas-particle-normal-v1 · readout-78b2f38e0f8c24f678b47fa2
 
@@ -4710,7 +4710,7 @@ Full-suite diagnostic (prior-ablation-full-suite-v1, seed 0, deterministic_ortho
 
 **Next:** Test a clean-training Atlas study (output_noise_mode='fixed', output_noise_std=0.0 paired with prior_mechanism NormalNoiseManipulator sigma=0.005 and min(birth_death_cells, num_particles // 2) cell cap) so the generator carries full within-mode variance under clean evaluation without altering row-local particle transport.
 
-[Evidence](../../reports/forge/attempts/0d84b64687274007952d35a196692d98/result.json) · [Record](records/readout-78b2f38e0f8c24f678b47fa2.json)
+[Record and receipt provenance](records/readout-78b2f38e0f8c24f678b47fa2.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### bispf-throughput-v1 · readout-7a4fda449cb2e080c1aebf91
 
@@ -4742,7 +4742,7 @@ Re-qualification on develop source b4d7f2c42: all 29 recorded PASS/FAIL verdicts
 
 **Next:** Keep as the default recipe; register a structural idea that combines learned precision with frozen-table mass evenness on the native grids.
 
-[Evidence](../../reports/forge/attempts/04a54e455df6414091592e87b703cde3/result.json) · [Record](records/readout-7b017c8ed900b677ebf6bf55.json)
+[Record and receipt provenance](records/readout-7b017c8ed900b677ebf6bf55.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### recipe-prior-refactor-k3p-v1 · readout-7bbb55d0ca2d3c3b99f56d10
 
@@ -4758,7 +4758,7 @@ Completed dcgan_performance seed-0 CUDA execution for recipe-prior-refactor-k3p-
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Evidence](../../reports/forge/attempts/174aa0a8d4c541b8b32dc6814c1c138c/result.json) · [Record](records/readout-7bbb55d0ca2d3c3b99f56d10.json)
+[Record and receipt provenance](records/readout-7bbb55d0ca2d3c3b99f56d10.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### atlas-particle-normal-v1 · readout-7ede56c9affbd90cbf1159f2
 
@@ -4774,7 +4774,7 @@ Atlas particle-normal prior replication study executed 21 of 48 tasks in researc
 
 **Next:** Resolve behavior adapter evaluator source hash mismatches in preflight checkers, execute unblocked tasks to complete study scope, and address intra-mode covariance scaling.
 
-[Evidence](../../reports/forge/attempts/06dbe8a1e4ae4821a419e86f7833cda6/result.json) · [Record](records/readout-7ede56c9affbd90cbf1159f2.json)
+[Record and receipt provenance](records/readout-7ede56c9affbd90cbf1159f2.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d · readout-813a2ad71ca3580b4a8d46c1
 
@@ -4790,7 +4790,7 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
-[Evidence](../../reports/forge/attempts/9007daae982e4bc3b8c9f4019d48bd26/result.json) · [Record](records/readout-813a2ad71ca3580b4a8d46c1.json)
+[Record and receipt provenance](records/readout-813a2ad71ca3580b4a8d46c1.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### atlas-particle-normal-v4 · readout-828f21ff6556847d8f000678
 
@@ -4806,7 +4806,7 @@ Cancelled partial diagnostic run of atlas-particle-normal-v4 on pre-fix commit 6
 
 **Next:** Mark revision 79e308b48506 superseded by efebaebc63fb and retain clean reverified v4 evidence.
 
-[Evidence](../../reports/forge/attempts/0513f65929764393a3aeda21d0860cc5/result.json) · [Record](records/readout-828f21ff6556847d8f000678.json)
+[Record and receipt provenance](records/readout-828f21ff6556847d8f000678.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### bispf-optimized-frobenius-v1 · readout-85a714c5fc9c0b038c400b22
 
@@ -4822,7 +4822,7 @@ Frobenius convolution rule fails both width64 image gates at600 updates: stripes
 
 **Next:** Stop this exact Frobenius revision; do not run full performance or ordinary qualification for selection. Preserve the collapse failure and its actual-training GIFs; no outcome-based rerun, seed repeat or gate change.
 
-[Evidence](../../reports/forge/attempts/63fe579365654297972e5ee55c5bd970/result.json) · [Record](records/readout-85a714c5fc9c0b038c400b22.json)
+[Record and receipt provenance](records/readout-85a714c5fc9c0b038c400b22.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### forge-onboarding-anchor-ablation · readout-8aacfe961f0e62b062e621fa
 
@@ -4838,7 +4838,7 @@ All three registered smoke cells completed: two_pole FAIL (mean_abs0.1048249<0.3
 
 **Next:** Retain all nine cheap-cell outcomes and costs. Keep ordinary qualification stopped. Review the exact historical/public-host parity differences before deeper reference spending; reserve the required GPU window and register only justified missing reference cells. Do not tune thresholds or treat unmeasured reference labels as failures.
 
-[Evidence](../../reports/forge/attempts/633dcaca307e4e01b82b5281d82082fb/result.json) · [Record](records/readout-8aacfe961f0e62b062e621fa.json)
+[Record and receipt provenance](records/readout-8aacfe961f0e62b062e621fa.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### bcap-dualnorm-convolution-v1 · readout-8b207a728977752808cf002c
 
@@ -4886,7 +4886,7 @@ Completed dcgan_performance seed-0 CUDA execution for e22 (PASS 6). Diagnostic p
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Evidence](../../reports/forge/attempts/34b3fcb182e6418cbaff54fdd41890a1/result.json) · [Record](records/readout-8e9d62a78cd58a9fc3bde49e.json)
+[Record and receipt provenance](records/readout-8e9d62a78cd58a9fc3bde49e.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p-bcap-matched-v1 · readout-95e0cdfdc2f043a0046285c1
 
@@ -4902,7 +4902,7 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 
 **Next:** Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.
 
-[Evidence](../../reports/forge/attempts/26ebdea492d4408d9ee1b0cccc8bf61b/result.json) · [Record](records/readout-95e0cdfdc2f043a0046285c1.json)
+[Record and receipt provenance](records/readout-95e0cdfdc2f043a0046285c1.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### atlas · readout-99058c02555c6e8edcc6e461
 
@@ -4934,7 +4934,7 @@ The registered merged-develop quick screen completed 0/3 PASS on GPU 0: mode_hol
 
 **Next:** Keep the full reference denominator and stop automatic expansion to ablations or the full reference matrix. Review host/formulation solvability and initial-state parity before selecting another bounded scientific diagnosis. Correct future sampling declarations and CUDA telemetry without rewriting these receipts or rerunning failed science just for reporting. The separately registered physical two-GPU pilot still needs a joint device window; this serial screen does not satisfy it.
 
-[Evidence](../../reports/forge/attempts/5a5f1641fd80404fbb509d367e6a467f/result.json) · [Record](records/readout-9c29229a2baba56de3b40845.json)
+[Record and receipt provenance](records/readout-9c29229a2baba56de3b40845.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### release07-gan-v3-cloud-v1 · readout-9c48b366ebe60b61721c269d
 
@@ -4950,7 +4950,7 @@ Preregistered full7000-update grid100_release07_cloud_named_v1 FAIL; sustained c
 
 **Next:** Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.
 
-[Evidence](../../reports/forge/attempts/176ad9907a734b45844d09b2a69ff31d/result.json) · [Record](records/readout-9c48b366ebe60b61721c269d.json)
+[Record and receipt provenance](records/readout-9c48b366ebe60b61721c269d.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### r1r2-global-repair-v1 · readout-9e297f3a07ea06f0abc19272
 
@@ -4966,7 +4966,7 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0394435711<0.3; q
 
 **Next:** Initial complete candidate rejected. Its subsequent separately bounded global coupled-rate search is concluded; no automatic paid continuation or default adoption.
 
-[Evidence](../../reports/forge/attempts/2f43521c43294c3a872be42d999debf1/result.json) · [Record](records/readout-9e297f3a07ea06f0abc19272.json)
+[Record and receipt provenance](records/readout-9e297f3a07ea06f0abc19272.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### atlas-particle-normal-v1 · readout-9e900493324c626b8c842923
 
@@ -4982,7 +4982,7 @@ Atlas particle-normal prior replication study executed in research_diagnostic sc
 
 **Next:** Review saved diagnostics and address intra-mode covariance scaling under clean evaluation.
 
-[Evidence](../../reports/forge/attempts/023159858507410585d95bc3183ee34d/result.json) · [Record](records/readout-9e900493324c626b8c842923.json)
+[Record and receipt provenance](records/readout-9e900493324c626b8c842923.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### atlas-particle-normal-v1 · readout-9f0d62f87d1ff351cfef7f98
 
@@ -4998,7 +4998,7 @@ Atlas particle-normal prior replication study executed in research_diagnostic sc
 
 **Next:** Review saved diagnostics and address intra-mode covariance calibration under clean evaluation.
 
-[Evidence](../../reports/forge/attempts/030d035755034e66bbf373df05b7b054/result.json) · [Record](records/readout-9f0d62f87d1ff351cfef7f98.json)
+[Record and receipt provenance](records/readout-9f0d62f87d1ff351cfef7f98.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### recipe-prior-refactor-release07-gan-v3-v1 · readout-a3ec7ffcdaaf0f88b4171cec
 
@@ -5014,7 +5014,7 @@ Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 c
 
 **Next:** Retain revision-9 qualification in technique-inventory; address ring16_acquisition and clockfree_audit_measurement_v1 in family follow-up.
 
-[Evidence](../../reports/forge/attempts/06e0437390f34e72a7d265fd9aab8a42/result.json) · [Record](records/readout-a3ec7ffcdaaf0f88b4171cec.json)
+[Record and receipt provenance](records/readout-a3ec7ffcdaaf0f88b4171cec.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5 · readout-a91dbccf086504f9accaee6b
 
@@ -5030,7 +5030,7 @@ Both800-update diagnostic variants PASS movement/slope: original-schedule1.05422
 
 **Next:** See reports/forge/k3p-two-pole-horizon-v1/README.md and saved force analysis. Retain the main gate and family selection. Investigate existing global critic/particle balance before any new separately bounded search; no automatic follow-on work.
 
-[Evidence](../../reports/forge/attempts/21bdde76d2f045e98b829627eb9071f1/result.json) · [Record](records/readout-a91dbccf086504f9accaee6b.json)
+[Record and receipt provenance](records/readout-a91dbccf086504f9accaee6b.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p-r1r2-matched-v1 · readout-a9c44ece3a8e2265db452db4
 
@@ -5062,7 +5062,7 @@ One preregistered full 7000-update clean learned-MoG grid diagnostic FAIL for 93
 
 **Next:** Stop this exact diagnostic and its infeasible no-output-noise-reference-v1 roster: every lineage is already smoke-negative or reference-negative, so no possible completion satisfies a reference positive and zero false rejects. Do not spend on its smoke, other reference cells or 14k continuation. Preserve all 16 reference purposes and frozen criteria. Next stage should first use saved terminal artifacts to locate per-mode shape/centre/critic-response failure and require a new supported structural hypothesis with a separately bounded preregistration. Production promotion remains blocked on accepted calibration and finished exact qualification.
 
-[Evidence](../../reports/forge/attempts/180af0fcfee447b697d5b5d05dc2877f/result.json) · [Record](records/readout-abd06840fa1f42a4f64c13ab.json)
+[Record and receipt provenance](records/readout-abd06840fa1f42a4f64c13ab.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p · readout-acc70fcaf6cedb9a3772e41e
 
@@ -5078,7 +5078,7 @@ Frozen v2 smoke remains FAIL (two_pole travel); unused_token_hold and learned-Mo
 
 **Next:** Stop filling the v2 matrix solely for adoption. Preserve the remaining 13 baseline reference cells and both ablation reference vectors as unknown. Preregister a separately versioned test of the already-proposed quick-discriminator screen with unchanged thresholds and the same 16 independent references, bounded GPU stages and no automatic promotion. Keep the registered physical GPU pilot for its distinct operational question when ownership is available.
 
-[Evidence](../../reports/forge/attempts/270c483fe3b94932b7f7edcecd89c872/result.json) · [Record](records/readout-acc70fcaf6cedb9a3772e41e.json)
+[Record and receipt provenance](records/readout-acc70fcaf6cedb9a3772e41e.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### recipe-prior-refactor-bcap-pure-v1 · readout-ad21627bf4def92894dd98ce
 
@@ -5126,7 +5126,7 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0468712635<0.3; q
 
 **Next:** Initial complete candidate rejected. Its subsequent separately bounded global coupled-rate search is concluded; no automatic paid continuation or default adoption.
 
-[Evidence](../../reports/forge/attempts/abb9e24f625d449da70f6641ec1bce0a/result.json) · [Record](records/readout-b214c23e088f39337c3d8784.json)
+[Record and receipt provenance](records/readout-b214c23e088f39337c3d8784.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### atlas-particle-normal-v4 · readout-b389e250ac5b3ad0763d2c82
 
@@ -5142,7 +5142,7 @@ On ordinary discriminator_stability Tier 1 under protocol seed 0 on NVIDIA RTX A
 
 **Next:** Promote atlas-particle-normal-v4 as the selected canonical Atlas candidate in configs/forge/selections/family-current-v1.json, register its frozen numerical snapshot and compact receipts, regenerate reports/forge/technique-inventory.md and family pages, and investigate two_pole/ring16_acquisition and joint-inference (BiGAN/DDGAN/five_word_joint) Tier 1 failures in follow-up studies.
 
-[Evidence](../../reports/forge/attempts/0e91e77f8f4b4170b955eea7d911bfe5/result.json) · [Record](records/readout-b389e250ac5b3ad0763d2c82.json)
+[Record and receipt provenance](records/readout-b389e250ac5b3ad0763d2c82.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### r1r2--724b3d52fbb2172a985d1bf29890b2ef9ba2598c9f1724d93a9afa7c872cbdad · readout-b42a8f277178ec58808d6b5c
 
@@ -5158,7 +5158,7 @@ This exact global configuration passed two_pole, unused_token_hold and ae_gan_ho
 
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
-[Evidence](../../reports/forge/attempts/5b5f7aab977745aea97e1b47871a351f/result.json) · [Record](records/readout-b42a8f277178ec58808d6b5c.json)
+[Record and receipt provenance](records/readout-b42a8f277178ec58808d6b5c.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### recipe-prior-refactor-ka2-v1 · readout-ba142a8baa78fa77a792bf27
 
@@ -5174,7 +5174,7 @@ Completed dcgan_performance seed-0 CUDA execution for recipe-prior-refactor-ka2-
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Evidence](../../reports/forge/attempts/21ccad78a5eb485e9dadc2dd756fbd1c/result.json) · [Record](records/readout-ba142a8baa78fa77a792bf27.json)
+[Record and receipt provenance](records/readout-ba142a8baa78fa77a792bf27.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### bispf-prior-frozen-v1 · readout-bb93e156247cbef1aa781703
 
@@ -5190,7 +5190,7 @@ Frozen table: 13 PASS / 18 FAIL of 49; loses ring16_acquisition (hq 0.61), mode_
 
 **Next:** Stop; use as the matched control for a learned-offset-on-frozen-anchor structural idea.
 
-[Evidence](../../reports/forge/attempts/0275756b64b94d01af4cac346397f64d/result.json) · [Record](records/readout-bb93e156247cbef1aa781703.json)
+[Record and receipt provenance](records/readout-bb93e156247cbef1aa781703.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### bispf-optimized-quintic-v1 · readout-bbadc8452e77fa75caff13c6
 
@@ -5206,7 +5206,7 @@ Quintic convolution rule passes both width64 gates at600 updates: stripes HQ1 wi
 
 **Next:** Proceed only with separately frozen matched full DCGAN performance and ordinary quality campaigns from H2. Selection requires the declared latency targets and preservation of every incumbent ordinary pass; no public-default adoption follows this diagnostic.
 
-[Evidence](../../reports/forge/attempts/1902c3ab92d14b7590efd8c5751d4019/result.json) · [Record](records/readout-bbadc8452e77fa75caff13c6.json)
+[Record and receipt provenance](records/readout-bbadc8452e77fa75caff13c6.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### r3gan-stacked-training-toy-v1 · readout-bc440d0469187c9299bd524c
 
@@ -5254,7 +5254,7 @@ Corrected intensity FAIL and learned-MoG vector_two_broad PASS under the same fr
 
 **Next:** Stop automatic reference-matrix expansion. Audit canonical host architecture provenance and register any justified substantive diagnosis under a new frozen identity. Preserve full 16 independent-reference denominator; unknown tasks are neither passes nor failures. Keep legacy cutover blocked until accepted calibration.
 
-[Evidence](../../reports/forge/attempts/65265b43758f4dbd85b77ef2ed46ac4b/result.json) · [Record](records/readout-c3df7159c90725fdef1cb700.json)
+[Record and receipt provenance](records/readout-c3df7159c90725fdef1cb700.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### recipe-prior-refactor-r1r2-v1 · readout-c4561c13c0ea2d2622f5c963
 
@@ -5286,7 +5286,7 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 **Next:** Retain all nine cheap-cell outcomes and costs. Keep ordinary qualification stopped. Review the exact historical/public-host parity differences before deeper reference spending; reserve the required GPU window and register only justified missing reference cells. Do not tune thresholds or treat unmeasured reference labels as failures.
 
-[Evidence](../../reports/forge/attempts/6577d4075c5042dea96c619ba197bd27/result.json) · [Record](records/readout-c723a88e5122f97011aabad9.json)
+[Record and receipt provenance](records/readout-c723a88e5122f97011aabad9.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### bispf-throughput-v1 · readout-cd9493a6a30096475d381175
 
@@ -5318,7 +5318,7 @@ Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 c
 
 **Next:** Retain revision-9 full qualification in technique-inventory; hold or repair revision-14 API model toys and zero_tanh_smoke separately.
 
-[Evidence](../../reports/forge/attempts/1292615001764ae2bc2e0da605e6af0b/result.json) · [Record](records/readout-d278a74af331d2f3b7807234.json)
+[Record and receipt provenance](records/readout-d278a74af331d2f3b7807234.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### release07-gan-v3-mog-v1 · readout-d5a99d9470252f695a717dfc
 
@@ -5334,7 +5334,7 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 
 **Next:** Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.
 
-[Evidence](../../reports/forge/attempts/0bce04d970264d4c95335030ed8724e7/result.json) · [Record](records/readout-d5a99d9470252f695a717dfc.json)
+[Record and receipt provenance](records/readout-d5a99d9470252f695a717dfc.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### recipe-prior-refactor-release07-gan-v3-v1 · readout-d84b69a82debc8d2678cf004
 
@@ -5350,7 +5350,7 @@ Completed dcgan_performance seed-0 CUDA execution for recipe-prior-refactor-rele
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Evidence](../../reports/forge/attempts/0764d7c984ea41cca2e3f0d509ea296a/result.json) · [Record](records/readout-d84b69a82debc8d2678cf004.json)
+[Record and receipt provenance](records/readout-d84b69a82debc8d2678cf004.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### r1r2--f78d5d603be1611025389c4ca0f7f485f3d2caa0a25fb6bc38b7c96da3509a3e · readout-da2ac34b1675880ab8ace248
 
@@ -5366,7 +5366,7 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
-[Evidence](../../reports/forge/attempts/a399cef53ff04eaa930b5c231f64db52/result.json) · [Record](records/readout-da2ac34b1675880ab8ace248.json)
+[Record and receipt provenance](records/readout-da2ac34b1675880ab8ace248.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### bispf-throughput-v1 · readout-dbb540fd1a0d83052f31aef8
 
@@ -5414,7 +5414,7 @@ Both800-update diagnostics FAIL movement: original-schedule .0896976665 and stre
 
 **Next:** See reports/forge/k3p-two-pole-horizon-v1/README.md and saved force analysis. Retain the main gate and family selection. Investigate existing global critic/particle balance before any new separately bounded search; no automatic follow-on work.
 
-[Evidence](../../reports/forge/attempts/200fd64ddd1a42a5bf300e5cae01e0b6/result.json) · [Record](records/readout-dd6ff59094d1d766c5b0fe2b.json)
+[Record and receipt provenance](records/readout-dd6ff59094d1d766c5b0fe2b.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### ka2--4496b859e066d7a4b6279f2d34fbd58d083e0f18c2a22ade5ba12c964d01a7ca · readout-e3ab30a3f7ae4a6debe66e5d
 
@@ -5430,7 +5430,7 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
-[Evidence](../../reports/forge/attempts/a4a15aa781654502ae87fd689c75e346/result.json) · [Record](records/readout-e3ab30a3f7ae4a6debe66e5d.json)
+[Record and receipt provenance](records/readout-e3ab30a3f7ae4a6debe66e5d.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### bispf-throughput-v1 · readout-e5cf5311e83c25cc0b333270
 
@@ -5462,7 +5462,7 @@ Completed discriminator_stability seed-0 CUDA execution for recipe-prior-refacto
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Evidence](../../reports/forge/attempts/0cf45d6c288747b7a26fc158d60b87b5/result.json) · [Record](records/readout-e6cf768866c160ba1338f662.json)
+[Record and receipt provenance](records/readout-e6cf768866c160ba1338f662.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### recipe-prior-refactor-ka2-v1 · readout-e6e872f73024fd6c0b2b2d42
 
@@ -5494,7 +5494,7 @@ Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 c
 
 **Next:** Retain revision-9 qualification in technique-inventory; address ring16_acquisition and clockfree_audit_measurement_v1 in family follow-up.
 
-[Evidence](../../reports/forge/attempts/09b56378266a49f4a5ea9510c765a51b/result.json) · [Record](records/readout-e8818ca1024f2d2972606913.json)
+[Record and receipt provenance](records/readout-e8818ca1024f2d2972606913.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### bispf-throughput-v1 · readout-e96805cfab19f80314e3ec20
 
@@ -5526,7 +5526,7 @@ Under protocol seed 0 on prior-ablation-full-suite-v1 (NVIDIA RTX A6000), atlas-
 
 **Next:** Introduce a clock-free state-gated critic payoff/ratio guard (activating only after initial critic discrimination settles rather than at step 0 or fixed step 200) to recover five_word_joint_smoke/hold without regressing mode_hold or img_intensity2, and reduce clean per-mode covariance trace deficit (cov_trace_bias ~ -0.30 on 100-mode grids and ring16_acquisition) via local Jacobian spread or lower stationary R1/R2 damping.
 
-[Evidence](../../reports/forge/attempts/014b5d9fe3f648b787ee8b6c371fbd83/result.json) · [Record](records/readout-e97f5dbf54d7493604c4689f.json)
+[Record and receipt provenance](records/readout-e97f5dbf54d7493604c4689f.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### recipe-prior-refactor-k3p-v1 · readout-ea9a34c10e46857f904487a0
 
@@ -5558,7 +5558,7 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 
 **Next:** Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.
 
-[Evidence](../../reports/forge/attempts/56177ab1d23243d8a6fe61413d8f870f/result.json) · [Record](records/readout-eeec25002d17191c315f126b.json)
+[Record and receipt provenance](records/readout-eeec25002d17191c315f126b.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### atlas-particle-normal-v3 · readout-efb8bacf93e19fc2b0d7f7bf
 
@@ -5574,7 +5574,7 @@ Raising birth_death_cells from 128 to 256 (eliminating noisy 2-particle-per-cell
 
 **Next:** Investigate clean-served intra-mode covariance expansion on N=20000 100-mode tasks (grid100/staggered100/rotated100) without repulsive prior penalties that perturb zero_tanh_smoke or enumerated 32-particle image tables, and address joint BiGAN critic balance on five_word_joint_smoke.
 
-[Evidence](../../reports/forge/attempts/03ed15006b144838b825af8571ec4396/result.json) · [Record](records/readout-efb8bacf93e19fc2b0d7f7bf.json)
+[Record and receipt provenance](records/readout-efb8bacf93e19fc2b0d7f7bf.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### recipe-prior-refactor-ka2-v1 · readout-efc9b823a6b391bc25754f9a
 
@@ -5590,7 +5590,7 @@ Completed discriminator_stability seed-0 CUDA execution for recipe-prior-refacto
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Evidence](../../reports/forge/attempts/185a6fef9e344f08b4068e83be208753/result.json) · [Record](records/readout-efc9b823a6b391bc25754f9a.json)
+[Record and receipt provenance](records/readout-efc9b823a6b391bc25754f9a.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### r1r2--f398f6ea70a2d101c520a1a01db90ea968bbb16736e6cec7ffc887e1dd7e241a · readout-f0dadd320f7db48cbf5d7b20
 
@@ -5654,7 +5654,7 @@ Completed dcgan_performance seed-0 CUDA execution for recipe-prior-refactor-bcap
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Evidence](../../reports/forge/attempts/310b82cc25b34a5f8bcd1d36873343ab/result.json) · [Record](records/readout-f878dc3aade4f1e6cc109a58.json)
+[Record and receipt provenance](records/readout-f878dc3aade4f1e6cc109a58.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe · readout-fa5fada954b7b255ec86d748
 
@@ -5702,7 +5702,7 @@ Completed dcgan_performance seed-0 CUDA execution for atlas-particle-normal-v4 (
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Evidence](../../reports/forge/attempts/7168f82ac7344678b74c76543ccee6eb/result.json) · [Record](records/readout-ff53c8e071687458a4c51315.json)
+[Record and receipt provenance](records/readout-ff53c8e071687458a4c51315.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### ring16-duration-20261011 · ring16-duration-20261011-readout
 
@@ -6326,4 +6326,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `8e1c869aad5a69c81b8c5d811384c19bc322f1c821ffe3076f20a7c50487674a`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `8fb3ea5bc241de320882820bdb69a90262387351ee7fd54d41a5c1c21e716009`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

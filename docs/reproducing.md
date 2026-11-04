@@ -1,6 +1,7 @@
 # Reproducing and checking experiments
 
-Use Python 3.10 or newer. The CPU test workflow checks Python 3.11 and 3.12.
+Use Python 3.11 or newer, as required by [the package metadata](../pyproject.toml).
+The CPU test workflow checks Python 3.11 and 3.12.
 Run these commands from the repository root:
 
 ```bash
@@ -30,6 +31,13 @@ an expensive training run reaches its final evaluation.
 
 ## Record the environment
 
+Run `python scripts/check_lint.py` for the reviewed Ruff baseline used by CI.
+Install the `dev` extra to get its pinned Ruff version. The baseline retains
+existing fixture imports and exports; new findings and resolved exemptions both
+fail the check. After reviewing a change, refresh the compact baseline with
+`python scripts/check_lint.py --update-baseline`. Historical source snapshots
+under `reports/` are outside this lint scope.
+
 The manifest defines supported dependency ranges, not a bit-for-bit numerical
 environment. Save the resolved environment and commit with every full study:
 
@@ -46,9 +54,17 @@ different PyTorch/CUDA versions and hardware. Historical tables were produced
 before the evaluation-randomness fix and should not be expected to match new
 trajectories bit for bit.
 
-## Controlled prior comparison
+Software maintenance can change a source digest while leaving the original
+experiment results intact. Check retained publication integrity with
+`python ops/refresh_forge_readouts.py --check --reports-only`; use strict
+`--check` separately to inspect current-source evidence gaps. Preserve original
+receipt identities and qualification results when that scope reports
+`NEEDS_REFRESH`. A source change alone does not justify rerunning an unchanged
+study or relabelling its results as evidence for the new source.
 
-The current comparison protocol uses the same generator, discriminator, loss,
+## Historical controlled prior comparison
+
+The earlier VICReg comparison used the same generator, discriminator, loss,
 penalty, learning rates, and training budget for three priors:
 
 * `particles`: a learned finite table, with its prior optimizer and VICReg term;
@@ -62,8 +78,12 @@ further ablations are needed to distinguish their individual effects.
 
 The completed comparison and its protocol are in
 [the prior-comparison report](../reports/prior-comparison/README.md); its
-driver is in the repository history. Treat the old GIFs as results of earlier
-recipes, not as this controlled three-way comparison.
+driver is in the repository history. The newer
+[2026-10-25 matched prior ablation](../reports/prior-ablation-2026-10-25/README.md)
+uses the BISPF recipe and its SBNP regularizer under its own declared protocol.
+Keep the two studies' recipes, initializers, budgets and sampling laws separate.
+The older GIFs retain their original recipes and are not evidence for either
+matched comparison unless its report binds them explicitly.
 
 ## Interpreting shape and diversity
 

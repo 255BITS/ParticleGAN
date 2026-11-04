@@ -37,6 +37,7 @@ if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
 from experiments.forge.contracts import atomic_text, file_hash, identifier, read_json, stable_hash
+from experiments.forge.publication_storage import compact_current_publication, publication_json_text
 from experiments.forge.technique_board import render_markdown, write_report
 
 
@@ -220,7 +221,7 @@ def project_receipt(root: Path | str, attempt_id: str) -> dict:
 
 
 def _json_text(value):
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False) + "\n"
+    return publication_json_text(value)
 
 
 def _write_changed(path, content):
@@ -4128,6 +4129,7 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
     from experiments.forge.scaling_publication import attach_performance
     attach_performance(root, result)
     result["provenance"].pop("input_digest", None)
+    result = compact_current_publication(result)
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)
@@ -5022,6 +5024,7 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         result["current_fallback_reporting_scope"] = fallback_reporting
     from experiments.forge.scaling_publication import attach_performance
     attach_performance(root, result)
+    result = compact_current_publication(result)
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)
@@ -5031,6 +5034,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                       if not recorded_policy and view_id == "discriminator_stability" else None)
     shared_intro = (_shared_score_intro(root, result)
                     if not recorded_policy and view_id == "discriminator_stability" else None)
+    # Validate the serialized size before changing selection cards or outputs.
+    json_text = _json_text(result)
     # Validate all inputs before changing selection cards, registry or outputs.
     if selection_archive:
         relative_selection, original, _ = selection_archive
@@ -5040,7 +5045,7 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     if pending_snapshot:
         _write_changed(*pending_snapshot)
         _write_changed(manifest_path, json.dumps(manifest, sort_keys=True, indent=2) + "\n")
-    _write_changed(json_path, _json_text(result))
+    _write_changed(json_path, json_text)
     _write_changed(markdown_path, markdown)
     _write_family_pages(root, pages)
     if shared_archive:
