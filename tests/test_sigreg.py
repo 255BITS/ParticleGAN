@@ -209,10 +209,14 @@ def test_word_public_component_checkpoint_replays_regularizer_and_named_streams(
 
 def test_all_current_tier1_tier2_bindings_admit_sigreg_after_source_refresh():
     from experiments.forge.adapters import adapter_preflight
+    from recipe_entrypoint_compat import model_source_blockers
     candidate = json.loads((ROOT / "configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json").read_text())
     candidate["recipe_overrides"].update(prior_regularizer="sigreg", prior_reg=.001)
     view = json.loads((ROOT / "configs/forge/views/discriminator_stability.json").read_text())
     for row in view["assignments"]:
         if row["qualification_tier"] <= 2:
             task = json.loads((ROOT / "configs/forge/tasks" / (row["task"] + ".json")).read_text())
-            assert adapter_preflight(task, candidate, root=ROOT) == [], row["task"]
+            # Source-bound model cards require their original checkout or a
+            # separately qualified new cohort after restoration API migration.
+            expected = model_source_blockers(ROOT, task) if task["adapter"] == "public_api_model_toy" else []
+            assert adapter_preflight(task, candidate, root=ROOT) == expected, row["task"]

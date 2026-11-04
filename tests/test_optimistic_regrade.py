@@ -6,7 +6,7 @@ import json
 import pytest
 
 from particlegan.recipes import get_recipe, learning_rate_scale
-from reports.toy100.optimistic_regrade import _bind_optimizer_groups
+from experiments.forge.archived_recipe_readers import bind_optimizer_groups as _bind_optimizer_groups
 
 
 def _fixture():
@@ -44,6 +44,23 @@ def _fixture():
 def test_scratch_group_regrade_binds_all_roles_and_rates():
     record, receipt, protocol = _fixture()
     _bind_optimizer_groups(record, receipt, protocol)
+
+
+def test_current_reader_preserves_archived_module_and_public_recipe():
+    import sys
+
+    from particlegan import Recipe
+    from reports.toy100 import optimistic_regrade as archived
+
+    record, receipt, protocol = _fixture()
+    original_recipe, search_path = archived.Recipe, sys.path[:]
+    with pytest.raises(TypeError, match="Recipe.from_dict"):
+        Recipe(**protocol["global_recipe"])
+    _bind_optimizer_groups(record, receipt, protocol)
+    assert archived.Recipe is original_recipe is Recipe
+    assert sys.path == search_path
+    with pytest.raises(TypeError, match="Recipe.from_dict"):
+        Recipe(**protocol["global_recipe"])
 
 
 def test_scratch_group_regrade_rejects_midcourse_rate_even_with_rehashed_trace():

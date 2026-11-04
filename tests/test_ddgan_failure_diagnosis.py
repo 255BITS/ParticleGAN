@@ -10,6 +10,7 @@ import torch
 from torch import nn
 
 from benchmarks.toy_audit import api_model_ddgan as api
+from experiments.forge.archived_recipe_readers import analyze_saved_state
 from experiments.forge.rng import NamedStreams
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -114,14 +115,24 @@ def test_checkpoint_analysis_preserves_original_state_streams_and_caller_rng():
     state = fixture.state_dict()
     before, rng = deepcopy(state), torch.get_rng_state().clone()
     receipt = dict(observations=[dict(step=0, metrics={}, passed=False, failed_bounds=["incomplete"])])
-    value = diagnose.analyze(api, NamedStreams, state, receipt, n=16, context_count=1)
+    public_recipe = api.Recipe
+    # The software-only reader must not weaken the public constructor or patch
+    # the original analyzer/API globals to accept compact checkpoint fields.
+    with pytest.raises(TypeError, match="Recipe.from_dict"):
+        public_recipe(**state["recipe"])
+    value = analyze_saved_state(diagnose, api, NamedStreams, state, receipt,
+                                n=16, context_count=1)
     assert _equal(state, before)
     assert torch.equal(rng, torch.get_rng_state())
     assert value["purity"]["training_updates_added"] == 0
     assert not value["purity"]["optimizer_constructed"]
+    assert api.Recipe is public_recipe
+    with pytest.raises(TypeError, match="Recipe.from_dict"):
+        public_recipe(**state["recipe"])
     state["recipe"]["loss"] = "hinge"
     with pytest.raises(ValueError, match="requires non_saturating loss"):
-        diagnose.analyze(api, NamedStreams, state, receipt, n=16, context_count=1)
+        analyze_saved_state(diagnose, api, NamedStreams, state, receipt,
+                            n=16, context_count=1)
 
 
 def test_committed_diagnosis_preserves_source_failure_identity():
