@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+- **One recipe selection path for new training.** Bare or partial `Recipe(...)`
+  calls now raise a migration error rather than silently selecting historical
+  KA2 settings. Use `get_recipe()` for the selected public default, or explicitly
+  select a named preset. Restore compact saved configurations with
+  `Recipe.from_dict(saved_fields)`; historical values and checkpoint semantics
+  are preserved. Fully resolved field dictionaries and `dataclasses.replace`
+  remain supported. This is an intentional constructor API break, not a change
+  to any preset, optimizer, penalty or recorded training result.
+
 ## 0.9.4 — 2026-10-23
 
 - **Python 3.11+ requirement and patched build/image dependencies.** Raise

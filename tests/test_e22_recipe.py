@@ -10,7 +10,7 @@ from particlegan import DEFAULT_RECIPE, Recipe, get_recipe, learning_rate_scales
 def test_e22_preset_matches_declared_policy_without_task_placeholders():
     fields = json.loads((Path(__file__).parents[1] / "configs/100gaussians/e22-noout.json").read_text())
     fields.update(num_particles=20_000, z_dim=2, batch_size=2048)
-    expected = Recipe(**fields).replace(name="e22")
+    expected = Recipe.from_dict(fields).replace(name="e22")
     assert get_recipe("e22") == expected
     assert get_recipe() == get_recipe(DEFAULT_RECIPE)
 
@@ -22,7 +22,7 @@ def test_e22_task_overrides_and_resolved_recipe_round_trip():
     assert recipe.output_noise_std == .1 and recipe.lr == .001
     assert recipe.total_steps is None and recipe.continuous_policy == "dv12"
     assert recipe.row_evidence_gate and recipe.particle_birth_death
-    assert Recipe(**recipe.to_dict()) == recipe
+    assert Recipe.from_dict(recipe.to_dict()) == recipe
     assert recipe.replace(serve_average=2).serve_average == 2
     with pytest.raises(TypeError):
         get_recipe("e22", unknown_control=True)
@@ -55,7 +55,7 @@ def test_routed_preset_is_named_adaptation_with_both_row_controls():
     assert options.row_evidence_gate and options.particle_birth_death
     assert options.continuous_policy == "dv12" and options.lr_control == "stationarity"
     assert options.table_release_rule == "anchor" and options.serve_average == 4
-    assert Recipe(**json.loads(json.dumps(options.to_dict()))) == options
+    assert Recipe.from_dict(json.loads(json.dumps(options.to_dict()))) == options
     assert get_recipe("e22").row_policy == "independent"
 
 
@@ -74,7 +74,7 @@ def test_routed_row_controls_can_be_toggled_without_independent_metric_overrides
     assert recipe.row_evidence_gate is evidence
     assert recipe.particle_birth_death is birth_death
     assert recipe.birth_death_feature_scale == "std" and recipe.birth_death_isolation
-    assert Recipe(**json.loads(json.dumps(recipe.to_dict()))) == recipe
+    assert Recipe.from_dict(json.loads(json.dumps(recipe.to_dict()))) == recipe
 
 
 def test_native_row_metric_prerequisites_remain_enforced():

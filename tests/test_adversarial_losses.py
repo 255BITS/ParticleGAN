@@ -122,7 +122,7 @@ def test_invalid_loss_is_rejected_at_public_configuration_boundary(loss):
     with pytest.raises(ValueError, match="adversarial loss"):
         GANLoss(loss)
     with pytest.raises(ValueError, match="adversarial loss"):
-        Recipe(loss=loss)
+        Recipe.from_dict(dict(loss=loss))
     with pytest.raises(ValueError, match="adversarial loss"):
         get_recipe("bcap", loss=loss)
 
@@ -132,7 +132,7 @@ def test_public_recipe_selects_objective_and_persists_alternatives(loss):
     recipe = get_recipe("bcap", loss=loss, num_particles=8, batch_size=4)
     assert recipe.loss == recipe.make_loss().loss == loss
     packet = recipe.to_dict()
-    assert Recipe(**packet) == recipe
+    assert Recipe.from_dict(packet) == recipe
     if loss == "relativistic":
         assert "loss" not in packet  # original checkpoint/config identities
     else:

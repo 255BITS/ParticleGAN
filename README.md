@@ -124,7 +124,9 @@ retaining gradients through frozen modules to trainable inputs.
 Caller-owned loops use the recipe's role-named factories, including
 `make_optimizers`, `make_critic_penalty` and `make_prior_regularizer`.
 Save the resolved `recipe.to_dict()` and the complete `trainer.state_dict()`
-for continuation; changing the current default does not migrate an old run.
+for continuation; restore the recipe with `Recipe.from_dict(saved_fields)`.
+Changing the current default does not migrate an old run. Bare or partial `Recipe(...)` calls raise
+an error: use `get_recipe()` to select the current public recipe for new runs.
 See the [API reference](docs/api.md#recipes-and-defaults) for component ownership
 and optimizer contracts.
 

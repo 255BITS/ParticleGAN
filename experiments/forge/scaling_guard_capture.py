@@ -136,7 +136,7 @@ def run_replay(root,output,device="cuda:0"):
             capture=ReplayCapture(trainer,output);capture.attach(stack);captures.append(capture)
             return trainer
         stack.enter_context(patch.object(FormulationContext,"build_trainer",build))
-        measured=run_benchmark(Recipe(**declaration["recipe"]),declaration["spec"],output/"replay",device)
+        measured=run_benchmark(Recipe.from_dict(declaration["recipe"]),declaration["spec"],output/"replay",device)
     checks={key:measured["identity"][key]==original["identity"][key] for key in
             ("initial_model_sha256","initial_parameter_sha256","initialization_sha256","batch_sequence_sha256","final_parameter_sha256")}
     capture=captures[0]

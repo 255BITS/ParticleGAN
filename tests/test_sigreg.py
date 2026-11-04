@@ -65,7 +65,7 @@ def test_supplied_projection_formula_matches_explicit_trapezoid_and_gradient():
 
 
 def test_statistic_detects_mean_and_expansion_that_variance_floor_allows():
-    prior = Recipe(num_particles=256).make_prior(generator=torch.Generator().manual_seed(0))
+    prior = Recipe.from_dict(dict(num_particles=256)).make_prior(generator=torch.Generator().manual_seed(0))
     init.deterministic_orthogonal_(prior, seed=0)
     directions = torch.eye(2)
     normal = sigreg_statistic(prior.z, directions)

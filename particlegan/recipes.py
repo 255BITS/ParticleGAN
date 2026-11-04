@@ -1,6 +1,7 @@
 """Shared hyperparameters and small component factories; callers own control flow."""
 import math
 from dataclasses import asdict, dataclass, fields, replace
+from collections.abc import Mapping
 
 # Promote a registered trainer preset here; model-family factories inherit it.
 DEFAULT_RECIPE = "bispf_optimized"
@@ -19,13 +20,14 @@ def _reject_table_storage_owners(table, tensors):
             raise ValueError("frozen prior must not share storage with networks or optimizer parameters")
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, init=False)
 class Recipe:
     """Resolved hyperparameters plus role-named factories (``make_*``) for one model.
 
     Fields are validated at construction; ``replace`` returns a modified copy.
-    Use ``get_recipe()`` for the current default. Dataclass field defaults retain
-    the KA2 restoration contract for older saved configurations.
+    Use ``get_recipe()`` for new runs and ``Recipe.from_dict(saved_fields)``
+    for restoration. Direct construction requires every field: omitted fields
+    must never silently select the historical KA2 restoration defaults.
     Two fields expose KA2 ablations; their defaults retain that formulation:
 
     * ``reg_anchor_weight`` (1.0) scales the critic penalty's EMA-anchor term,
@@ -250,6 +252,37 @@ class Recipe:
     lr_decay_rate: float = 0.96
     lr_decay_steps: int = 50_000
     lr_decay_staircase: bool = False
+
+    def __init__(self, **resolved_fields):
+        declared = {field.name for field in fields(type(self))}
+        unknown = resolved_fields.keys() - declared
+        if unknown:
+            raise TypeError(f"Unknown recipe field(s): {', '.join(sorted(unknown))}")
+        if resolved_fields.keys() != declared:
+            raise TypeError(
+                "Recipe() no longer selects implicit defaults. Use get_recipe() "
+                "for a new run (or get_recipe('ka2') for an explicit historical "
+                "preset); use Recipe.from_dict(saved_fields) to restore a saved "
+                "configuration. Direct construction requires every resolved field."
+            )
+        for name, value in resolved_fields.items():
+            object.__setattr__(self, name, value)
+        self.__post_init__()
+
+    @classmethod
+    def from_dict(cls, saved_fields):
+        """Restore a saved recipe without resolving today's default preset.
+
+        Compact historical snapshots omit neutral fields added later. Their
+        restoration defaults are retained here, never used for a new run.
+        """
+        if not isinstance(saved_fields, Mapping):
+            raise TypeError("saved recipe fields must be a mapping")
+        defaults = {field.name: field.default for field in fields(cls)}
+        unknown = saved_fields.keys() - defaults.keys()
+        if unknown:
+            raise TypeError(f"Unknown recipe field(s): {', '.join(sorted(unknown))}")
+        return cls(**{**defaults, **saved_fields})
 
     def __post_init__(self):
         if self.training_precision not in ("float32", "bf16_channels_last"):
@@ -1156,7 +1189,7 @@ class Recipe:
 def get_recipe(name="gan", *, trainer=None, **overrides):
     """Build and validate the selected recipe; see ``get_recipe_fields``.
 
-    Restore resolved checkpoints with ``Recipe(**saved_fields)`` instead of
+    Restore resolved checkpoints with ``Recipe.from_dict(saved_fields)`` instead of
     resolving the current default again.
     """
     return Recipe(**get_recipe_fields(name, trainer=trainer, **overrides))
@@ -1205,11 +1238,10 @@ def get_recipe_fields(name="gan", *, trainer=None, **overrides):
     Return every declarative field without constructing runtime components.
     This function can be loaded directly from ``recipes.py`` by configuration
     tools that do not import Torch. Preset names and field names are checked;
-    call ``get_recipe`` or ``Recipe(**fields)`` for value validation before
-    training. Returned fields are independent of the legacy ``Recipe()``
-    restoration defaults.
+    call ``get_recipe`` for value validation before training. Returned fields
+    are independent of the historical restoration defaults.
 
-    Use ``Recipe(**saved_fields)`` for resolved checkpoints and
+    Use ``Recipe.from_dict(saved_fields)`` for resolved checkpoints and
     ``recipe.replace(name=...)`` for custom report labels.
     """
     models = {

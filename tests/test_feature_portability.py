@@ -75,7 +75,7 @@ def make(*, width=2, backend='auto', device='cpu'):
                             torch.nn.Linear(8, 1, device=device))
     prior = ParticlePrior(1024, 2, device=device,
                           generator=torch.Generator(device=device).manual_seed(SEED + 1))
-    recipe = Recipe(**dict(BASE, z_dim=2, num_particles=1024, batch_size=128,
+    recipe = Recipe.from_dict(dict(BASE, z_dim=2, num_particles=1024, batch_size=128,
                            birth_death_backend=backend))
     return GANTrainer(recipe, G, D, prior=prior, seed=SEED, serial_backward=True)
 
