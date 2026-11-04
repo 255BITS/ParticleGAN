@@ -1439,6 +1439,20 @@ The previous K3P critic replays through
 The following loop and Adam controller descriptions use the explicit KA2 recipe.
 The default optimized BISPF recipe also uses the protected-backward contract below.
 
+For BISPF, declare a native continuous feature vector with
+`recipe.make_critic_penalty(opt_d, input_domain="continuous")`, or pass
+`penalty_options={"input_domain": "continuous"}` to `GANTrainer`. The declaration
+retains the continuous RMS gradient norm, smooth Born–Infeld cap, gradient floor
+and logit gauge at widths such as 1024 or 4096. It uses the existing continuous
+law and keeps the native tensor shape. Explicit `"categorical"` selects the
+categorical law for `[batch, categories]` matrices, including small vocabularies.
+The default `"auto"` preserves the original rule: matrices of width at least
+170 use the categorical law; lower widths and image tensors keep their existing
+behavior. This is a data-domain declaration, not an empirical quality
+qualification. `GANTrainer` checkpoints bind `penalty_options` and refuse a
+different declaration on restore. Component-loop callers must save and check
+their selected penalty options along with the recipe and optimizer state.
+
 ```python
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
 penalty = recipe.make_critic_penalty(opt_d)

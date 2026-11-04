@@ -1104,6 +1104,7 @@ class _BISPFPenaltyKernel:
         tau_cooling: float = 0.020,
         s_min: float = 1e-5,
         thermal_decay: float = 0.95,
+        input_domain: str = "auto",
         record: CriticStepRecord | None = None,
     ) -> None:
         for name, val, pos in (
@@ -1133,6 +1134,8 @@ class _BISPFPenaltyKernel:
             raise ValueError("sinkhorn_iters must be a positive integer")
         if anchor_weight != 0.0:
             raise ValueError("BISPF uses a zero-mean logit gauge instead of an EMA critic anchor (require reg_anchor_weight=0)")
+        if not isinstance(input_domain, str) or input_domain not in ("auto", "continuous", "categorical"):
+            raise ValueError("input_domain must be auto, continuous or categorical")
         self.arm = "bispf"
         self.coeff = float(coeff)
         self.kappa = float(kappa)
@@ -1148,6 +1151,7 @@ class _BISPFPenaltyKernel:
         self.tau_cooling = float(tau_cooling)
         self.s_min = float(s_min)
         self.thermal_decay = float(thermal_decay)
+        self.input_domain = input_domain
         self.cooler = ContinuousThermalCooler(
             tau_cooling=self.tau_cooling,
             s_min=self.s_min,
@@ -1186,6 +1190,8 @@ class _BISPFPenaltyKernel:
         collect_stats: bool = False,
         **kwargs,
     ) -> Tuple[torch.Tensor, Dict[str, Any]]:
+        if self.input_domain == "categorical" and (x_real.ndim != 2 or x_fake.ndim != 2):
+            raise ValueError("categorical BISPF inputs require native [batch, categories] tensors")
         if self.coeff == 0.0 or (self.lazy_k > 1 and step % self.lazy_k != 0):
             self.record._last_d_logits = None
             zero = x_real.new_zeros(())
@@ -1204,7 +1210,12 @@ class _BISPFPenaltyKernel:
         self._observe_sinkhorn(float(res.item()), float(data_scale.item()), ema_decay=self.thermal_decay)
 
         is_image_tensor = (x_real.ndim >= 3)
-        is_discrete_simplex = (x_real.ndim == 2 and dim >= 170)
+        # Preserve the historical heuristic unless the caller declares the data
+        # domain. Width alone cannot distinguish a continuous hidden vector from
+        # a categorical codebook. No reshaping or value-dependent inference.
+        is_discrete_simplex = self.input_domain == "categorical" or (
+            self.input_domain == "auto" and x_real.ndim == 2 and dim >= 170
+        )
         # Evaluate transport chords for continuous low-dimensional vector flows (dim <= 64).
         # Bypass chords for discrete categorical token codebooks and high-dimensional images
         # when chord_blend is standard (<= 0.10), preventing manifold-blur distortion across

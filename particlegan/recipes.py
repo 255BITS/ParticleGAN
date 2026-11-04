@@ -762,6 +762,13 @@ class Recipe:
         fills ``penalty.last_stats``. ``penalty_overrides`` replace the
         recipe's ``coeff``, ``kappa``, ``lazy_k``,
         ``anchor_weight`` or ``r1_real`` for this penalty.
+
+        BISPF also accepts ``input_domain="continuous"`` for native continuous
+        vectors of any width, or ``"categorical"`` for categorical matrices.
+        The default ``"auto"`` preserves the historical shape/width heuristic.
+        This declaration selects the existing domain law; it does not reshape
+        data. Use ``GANTrainer(..., penalty_options={"input_domain": ...})`` to
+        bind it to the trainer's checked checkpoint configuration.
         """
         if self.effective_critic_formulation == "bispf":
             from .bispf import BISPFCriticPenalty as CriticPenalty
