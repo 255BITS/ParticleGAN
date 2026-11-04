@@ -2623,7 +2623,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 | --- | --- | --- | --- | --- | --- | --- |
 | five_word_joint_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
 | five_word_joint_hold | [BISPF](../../configs/forge/ideas/bispf-optimized-quintic-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / d9d72d53761c / a5c1a7106c9f | [source-bound receipt index](technique-inventory.json) |
-| five_word_joint_smoke | [Atlas](../../configs/forge/ideas/atlas-particle-normal-v4.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 6261a5458c1f / 767710fe7bd0 | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_smoke | [Atlas](../../configs/forge/ideas/atlas-particle-normal-v4.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 6261a5458c1f / 767710fe7bd0 | [source-bound receipt index](technique-inventory.json) |
 | five_word_joint_smoke | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
 | five_word_joint_smoke | [BISPF](../../configs/forge/ideas/bispf-optimized-quintic-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / d9d72d53761c / a5c1a7106c9f | [source-bound receipt index](technique-inventory.json) |
 | five_word_joint_smoke | [K3P](../../configs/forge/ideas/recipe-prior-refactor-k3p-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 3c8a0c05c790 | [source-bound receipt index](technique-inventory.json) |
@@ -5465,6 +5465,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `3fc4482d79634ae5e5fd46dd5c365d99a192f6b0c09d62f0804c52536e8641a8`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `d66d52adea00c7d325fbc66ed306c41c361683c747428b5317c5367ed2875311`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `b02a8a0ff9c617daaad50d9e92e94fe68064f7701515ba8253507e9f39026e71`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `d342bdb58e0aefa03ce007f8c605e4da7ef326d00867ffb48c6e930035e24069`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

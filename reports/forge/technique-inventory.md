@@ -6,6 +6,8 @@ Click a count for its gates, measurements and evidence. Required lower tiers mus
 
 ## Selected recipes
 
+Recorded formulaic scores retain each recipe's original source and task bindings in [the coverage receipts](attempt-coverage.json). They are an archived display projection, not current-source qualification; current-source evidence gaps remain separate.
+
 Passes / required-view instances for one selected recipe per family. Shared tests count once in every view that requires them: **115 means 115 counted view requirements, including repeated tests**, from 36 distinct tests. 48 held and 4 removed view assignments (13 held tests and 1 removed test) are still measured and listed under **Held and removed tests** below. These totals project recorded task outcomes onto the current requirements; historical qualifications keep their original policy revisions. Every selected recipe is evaluated formulaically across Tier 1, Tier 2, Tier 3, and Tier 4 as binary PASS or FAIL (reporting both counted view-requirement passes and distinct-test passes/failures, with no third option: any constructor refusal, preflight blocker, dependency block, or non-passing outcome counts as FAIL). Held failures remain visible in the full-suite results below; separate diagnostic runs appear below.
 
 | Family / selected recipe | Tier 1 requirements | Tier 2 requirements | Tier 3 requirements | Tier 4 requirements | Total view requirements |
@@ -223,21 +225,6 @@ Research recipes use their recorded revision 9 assignments. Those assignments st
 | [KA2](families/ka2.md) | [Unchanged selected recipe: deeper diagnostics (Torch 2.13)](actual-missing-diagnostics-20261014/README.md) | — | — | [0/7 (4 diagnostic attempts)](actual-missing-diagnostics-20261014/README.md) | [0/7 (4 diagnostic attempts)](actual-missing-diagnostics-20261014/README.md) |
 | [R1/R2](families/r1r2.md) | [Selected recipe Tier 2 diagnostics; seed 0](tier-coverage-20261014/README.md) | — | [9/21](tier-coverage-20261014/README.md) | — | [9/21](tier-coverage-20261014/README.md) |
 | [R1/R2](families/r1r2.md) | [Unchanged selected recipe: deeper diagnostics (Torch 2.13)](actual-missing-diagnostics-20261014/README.md) | — | — | [0/7 (4 diagnostic attempts)](actual-missing-diagnostics-20261014/README.md) | [0/7 (4 diagnostic attempts)](actual-missing-diagnostics-20261014/README.md) |
-
-### Current-source selected-recipe Tier 1 readouts
-
-Matched current-source (`7fa32036642a`, `discriminator_stability` revision 14) formulaic Tier 1–3 evaluation for each family's selected recipe under protocol seed 0 on `NVIDIA RTX A6000` (11 required + 1 diagnostic = 12 Tier 1 tests, 18 Tier 2 tests, 6 Tier 3 tests; 36 distinct tests total). Every test evaluates to binary PASS or FAIL (any constructor/preflight refusal or non-passing outcome counts as FAIL, with no third option).
-
-| Family | Selected recipe | Source / revision | Required Tier 1 (11) | Diagnostic Tier 1 (1) | Total Tier 1 (12) | Tier 2 (18) | Tier 3 (6) | Total Tier 1–3 (36) | Evidence |
-| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
-| [GAN v3 release 0.7](families/release07-gan-v3.md) | [`recipe-prior-refactor-release07-gan-v3-v1`](../../configs/forge/ideas/recipe-prior-refactor-release07-gan-v3-v1.json) | `7fa32036642a` / `13e50361f97f` | 10/11 (1 fail) | 0/1 (1 fail) | **10/12** (2 fail) | 7/18 (11 fail) | 0/6 (6 fail) | **17/36** (19 fail) | [`attempt-coverage.json`](attempt-coverage.json) |
-| [R1/R2](families/r1r2.md) | [`recipe-prior-refactor-r1r2-v1`](../../configs/forge/ideas/recipe-prior-refactor-r1r2-v1.json) | `7fa32036642a` / `4875e7bed41f` | 10/11 (1 fail) | 0/1 (1 fail) | **10/12** (2 fail) | 5/18 (13 fail) | 0/6 (6 fail) | **15/36** (21 fail) | [`attempt-coverage.json`](attempt-coverage.json) |
-| [K3P](families/k3p.md) | [`recipe-prior-refactor-k3p-v1`](../../configs/forge/ideas/recipe-prior-refactor-k3p-v1.json) | `7fa32036642a` / `d07ff177de0d` | 9/11 (2 fail) | 0/1 (1 fail) | **9/12** (3 fail) | 9/18 (9 fail) | 0/6 (6 fail) | **18/36** (18 fail) | [`attempt-coverage.json`](attempt-coverage.json) |
-| [KA2](families/ka2.md) | [`recipe-prior-refactor-ka2-v1`](../../configs/forge/ideas/recipe-prior-refactor-ka2-v1.json) | `7fa32036642a` / `9c3a121916e7` | 9/11 (2 fail) | 0/1 (1 fail) | **9/12** (3 fail) | 9/18 (9 fail) | 0/6 (6 fail) | **18/36** (18 fail) | [`attempt-coverage.json`](attempt-coverage.json) |
-| [Atlas](families/atlas.md) | [`atlas-particle-normal-v4`](../../configs/forge/ideas/atlas-particle-normal-v4.json) | `7fa32036642a` / `372ac21ccab7` | 7/11 (4 fail) | 1/1 | **8/12** (4 fail) | 8/18 (10 fail) | 1/6 (5 fail) | **17/36** (19 fail) | [`attempt-coverage.json`](attempt-coverage.json) |
-| [BISPF](families/bispf.md) | [`bispf-optimized-quintic-v1`](../../configs/forge/ideas/bispf-optimized-quintic-v1.json) | `7fa32036642a` / `f0028d3b5d1b` | 7/11 (4 fail) | 1/1 | **8/12** (4 fail) | 10/18 (8 fail) | 2/6 (4 fail) | **20/36** (16 fail) | [`attempt-coverage.json`](attempt-coverage.json) |
-| [E22](families/e22.md) | [`e22`](../../configs/forge/ideas/e22.json) | `7fa32036642a` / `8ef18538bbac` | 7/11 (4 fail) | 0/1 (1 fail) | **7/12** (5 fail) | 7/18 (11 fail) | 0/6 (6 fail) | **14/36** (22 fail) | [`attempt-coverage.json`](attempt-coverage.json) |
-| [BCAP](families/bcap-pure.md) | [`recipe-prior-refactor-bcap-pure-v1`](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | `7fa32036642a` / `c392df89f501` | 6/11 (5 fail) | 1/1 | **7/12** (5 fail) | 9/18 (9 fail) | 1/6 (5 fail) | **17/36** (19 fail) | [`attempt-coverage.json`](attempt-coverage.json) |
 
 <details>
 <summary>Historical seed-only studies (excluded from backfill)</summary>
@@ -523,5 +510,5 @@ After any view revision (for example a held or removed test), always add `--refr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `625d2ae9de7ca5b77d4a64a5b7475998b1ba44521bff62b3087499576e1bb460`.
+Publication input digest `04dee11a87dd7bd4c35eeb72a70f02164fd493146fdb06785d954a6fadebba38`.
 [Performance by test and complete recipe](test-performance.md): compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.

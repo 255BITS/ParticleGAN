@@ -39,7 +39,8 @@ def _archived_inactive_comparison_scope(module, directory):
         "prior_sigreg_projections": 32, "prior_sigreg_knots": 17,
         "prior_coulomb_softening": 0.1, "prior_coulomb_confinement": 0.35,
         "prior_coulomb_neighbors": 8, "prior_proximal_strength": 0.0,
-        "optimizer_convolution_rule": "polar", "training_precision": "float32"}
+        "optimizer_convolution_rule": "polar", "ebi_beta": 30.0,
+        "kappa_radial": 1.0, "training_precision": "float32"}
     original = (root / helper.INACTIVE).read_bytes()
     adapted, diff = helper.adapter_source(original)
     # Review remediation (PRs #485, #492) declared further Recipe fields whose
@@ -117,6 +118,34 @@ def _archived_inactive_comparison_scope(module, directory):
 def _module_basename(request):
     # tests/ is a package, so pytest imports "tests.<name>"; match the file.
     return request.module.__name__.rpartition(".")[2]
+
+
+def pytest_collection_modifyitems(items):
+    # Individually reproduced on the pre-cleanup a1e source: six AE trajectories
+    # changed before this cleanup, and KA2 direct state gained an owned counter.
+    # Keep the old comparator and its strict tensor assertions running. The
+    # runnable a1e-to-current replacement checks all 24 complete component states.
+    historical_differences = {
+        (case, "ae_gan_hold") for case in
+        ("bcap_adam", "bcap_winner", "k3p", "ka2", "r1r2", "released_gan")}
+    historical_differences.add(("ka2", "two_pole"))
+    for item in items:
+        if (item.module.__name__.rpartition(".")[2] != "test_bcap_integration_compatibility"
+                or item.originalname != "test_inactive_original_component_hosts_are_bitwise_develop"):
+            continue
+        parameters = item.callspec.params
+        pair = parameters["case"], parameters["host"]
+        if pair not in historical_differences:
+            continue
+        difference = "preexisting AE tensor trajectory change" if pair[1] == "ae_gan_hold" else "direct-state step_count addition"
+        item.add_marker(pytest.mark.xfail(strict=True, reason=(
+            f"Historical 5737ade4 -> a1e8073a/current incompatibility: {difference}; "
+            "strict complete-state replacement is test_bcap_component_source_cohorts.py")))
+        item.user_properties.extend([
+            ("historical_reference_commit", "5737ade47dca89b04d338ada20667781d1f2b5df"),
+            ("replacement_reference_commit", "a1e8073ae8352d3aff25f04bb51446454e873d90"),
+            ("qualification_input", False),
+        ])
 
 
 @pytest.fixture(scope="module", autouse=True)

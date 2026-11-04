@@ -289,7 +289,7 @@ instructions. Recall retains source identity pins by default and supports
 6,030 rendered match bytes without changing the stored records.
 
 The current inventory prunes only unreachable content-addressed catalog entries.
-It shrinks from **24,773,683 to 19,235,723 bytes**, keeping 559 referenced recipe
+It shrinks from **24,773,683 bytes to about 18.3 MiB**, keeping 559 referenced recipe
 contracts and 380 task contracts, with their contents unchanged. The writer checks
 the 25 MiB budget before changing publication files. Every scientific row remains
 unchanged, and all **2,809 original receipt and record files** retain their byte
@@ -306,6 +306,18 @@ Duplicate prior imports are removed. CI now checks a pinned Ruff version against
 a reviewed baseline across live packages, experiments, benchmarks, scripts,
 operations, and tests. New diagnostics and resolved exemptions require review;
 moving unrelated lines does not invalidate the baseline.
+
+The two current word tasks explicitly bind the cleaned adapter through an
+additive evaluator provenance revision. Their previous declarations remain
+recoverable by Git commit, path, blob, and SHA-256. Initialization, data, model
+capacity, prior, sampling, budgets, and numerical gates remain unchanged. This
+creates an explicit future evaluation identity without relabelling old results.
+
+Full CI also exposed older schema and initialization assumptions already failing
+on the audited `develop` commit. Software compatibility fixtures now identify
+their original and later source cohorts explicitly, retain strict tensor/RNG
+comparisons, and test default-field compatibility and checkpoint counters without
+changing production revision formulas or archived evidence.
 
 Publication integrity and current-source measurements have separate checks.
 `python ops/refresh_forge_readouts.py --check --reports-only` checks retained
