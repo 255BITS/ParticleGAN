@@ -755,7 +755,7 @@
         "particlegan/optim/prior_proximal.py": "35017568a9821c2cd1cbca0162bbdd3e42aa090347904b583b7032f5390eef9f",
         "particlegan/optim/strict_progress.py": "8149a811d3dab0fbd2e6d2489d5b6c855e0e516a8741fca72e31a3d0e1cdc8f7",
         "particlegan/output_moments.py": "8089a3021a834aa8e71ebd805788ce085a27d4728c50c73af76960a2504aa6d0",
-        "particlegan/particle_prior.py": "3b1894a96ef11b409f0867dfb28b2caf13419a899e936ec161e4d7397700512d",
+        "particlegan/particle_prior.py": "6b9c705d76b1483dcbae1f77b5f321069967c208343c8c64248dc5e14dca9b6a",
         "particlegan/policy.py": "be442dcf21f03a5d1cd364177724fc15560df8cbf401c85bd4630f62f5ea9535",
         "particlegan/population_continuity.py": "e13da3fda91b07d5d560bc44749ebd72a80a2df3c31d8cecf1900ecbd93d8939",
         "particlegan/priors.py": "514e91baf15255c99c1941bc2fa74d6a6061c4170c4a3a9a8ffec8c16ce3ff23",
@@ -769,7 +769,7 @@
         "particlegan/training.py": "a036dfe73aaab52b1b2d29081e323d4c35e163c852ea6883e70f8625c1cdea01",
         "particlegan/vicreg_loss.py": "177a68b98036e4725cacf6bc0d95277111184c0dcb9566d3f7fc1527046cefda"
       },
-      "sha256": "373261943b29f3bf0d24f372980e262fab865152df74ae2139714c0654d9a469"
+      "sha256": "52126b7e2ed1803ee43a4f02cc7da4f79c29b9ab25eb9a57085aabc26191757f"
     },
     "task_sha256": "35a57d89ecf108814d001d1ad84190ea1268f661d978d68c454415b5145f4344"
   },

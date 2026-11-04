@@ -16,7 +16,7 @@
     "f0a90d578dba44fa85bef2a948b78aa8"
   ],
   "candidate_id": "recipe-prior-refactor-release07-gan-v3-v1",
-  "candidate_revision": "207c0479c4543f0974eca2613e0d80fc13d76ea74585494b0854f63e8e532065",
+  "candidate_revision": "28233d06b1e91a331b65e017a59052d6a38a90d542fe82bf60f5dcc16a16d2fe",
   "claim_contract": {
     "sampling_law": "task_declared",
     "schedule": "scheduled",
@@ -375,7 +375,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "db9743d64c905dae3a2c6847a9e30b3c5b77886a79f1f361bca4fa2a110a6c8e",
+      "compatibility_key": "35591b4dfbd139cf07e875e0eaa9d831a26a4de622215757488448b84680b56a",
       "cost": {
         "adapter_loop_seconds": 10.824264922994189,
         "adapter_seconds": 14.506735053000739,
@@ -4602,7 +4602,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "90596449d1196355ac9857293888adb190d090a278704910fb96b60f0c092dc4",
+      "compatibility_key": "e6f94f89eaef1f0aba41ac5600ea9107d7f2dcece64b89accb16f093f1feaa3b",
       "cost": {
         "adapter_seconds": 1.4702450369950384,
         "charged_task": "unused_token_hold",
@@ -6830,7 +6830,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "3a820ca2c0d9d43d0ab8ade9c91e1314b6f4c4bde372904f5f345e3b2aba11f9",
+      "compatibility_key": "0ea3fad7d18bae89612b474213b3b8629fe993cff6c9b39cb39f423b02e68e0e",
       "cost": {
         "adapter_seconds": 0.8438114160089754,
         "charged_task": "two_pole",
@@ -9377,7 +9377,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "a13b20776ef9445915488f472b19e8194d8c01c213220a161868c0a81cbb06a2",
+      "compatibility_key": "e480d36cbc61e2f3a752f343b05e62d2e77d2516996552df8b8cfeccee7cda85",
       "cost": {
         "adapter_seconds": 2.4944227449886966,
         "charged_task": "ae_gan_hold",
@@ -9843,7 +9843,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "9931cd6d664bd16237cd3f3f4cfc61596ada8f1070cadd2f21224ee76743a0c8",
+      "compatibility_key": "a39c5014d5576c3f8393fcadd6fd060231e0795eedb911781f5f98bcee549ea1",
       "cost": {
         "adapter_loop_seconds": 17.549959044001298,
         "adapter_seconds": 21.229822135996073,
@@ -12255,7 +12255,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "82c71268d5a6c33acaa1eadd1dd72db7669b69ba07b71abe2c70d48ee6f4fb12",
+      "compatibility_key": "d3d44cb6cb7fda3f13ddf19b2c2dabb0c8eb59b9d2b07bb5a61c0ad5215de12a",
       "cost": {
         "adapter_loop_seconds": 24.087362238991773,
         "adapter_seconds": 27.431723571993643,
@@ -14341,7 +14341,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "634b2d8025229391d4c62815609196dc26bad3dd78d428a9ebd58176f0048ceb",
+      "compatibility_key": "ce5c397eb14942ace891ff473ce91f5b69e9bc80ea17cfdcf954e6e9b5fc0c34",
       "cost": {
         "adapter_loop_seconds": 23.976041992980754,
         "adapter_seconds": 28.26216979601304,
@@ -17563,7 +17563,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "b9a3982141db0f21c26b3339720b84215c2565e2f0c28d40ca8c8ed158ffd990",
+      "compatibility_key": "fe91376e2eb12ac9f4c3a826e487a39081d2d8bd814f3c092812049466d1d036",
       "cost": {
         "adapter_loop_seconds": 7.1809084540000185,
         "adapter_seconds": 7.417302159999963,
@@ -19494,7 +19494,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "6755158736d7f9067c10ae83361310dbbeeed6c394d1c4a35cd3f5a73673728c",
+      "compatibility_key": "bc295987214cfe5c9258c2106f18331f0f4448f3df8db83cb7bb5a3b1707b6a7",
       "cost": {
         "adapter_loop_seconds": 14.116748189990176,
         "adapter_seconds": 14.363332385983085,
@@ -40621,7 +40621,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "75af713853b7e51638072d4bf035f02e4cef9a3a3d9820ff2ddb4df0dae1d2db",
+      "compatibility_key": "3102979a40c9430c56a5dd32cce6cd482ea15efb5dc8cd48ecffb96df0f21de7",
       "cost": {
         "adapter_loop_seconds": 131.30055645099492,
         "adapter_seconds": 131.48536445299396,
@@ -43832,7 +43832,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "6c063548050dd322c1bdec7ac81f29a3016b72a2e9202aae46183f25596023ad",
+      "compatibility_key": "f9ac6a909baba890f17a0912ee718078e6c1b6d3804537e6a9e989fc57323c45",
       "cost": {
         "adapter_loop_seconds": 31.287015742011135,
         "adapter_seconds": 37.49958784098271,
@@ -47230,7 +47230,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "fafe3766a7fc73f5a297f808b92232c035390c6c622dcf7af77c87f40857b20b",
+      "compatibility_key": "7ec26958b95b4522ee8f945ed88594c8dada380426c87ed131110368f11b53bd",
       "cost": {
         "adapter_loop_seconds": 8.46418492399971,
         "adapter_seconds": 11.849720280006295,
@@ -49207,7 +49207,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "af6986c50cb0c57e8cc53ca4a2851e26d5f59e8699908d666f4b2ffc99084ef6",
+      "compatibility_key": "49965736aca9b469f7fbc417647c8e4120aac55daf7e8c7eb234952025a06f64",
       "cost": {
         "adapter_reported_inclusive_seconds": 1.1626440200197976,
         "adapter_seconds": 1.1697591590054799,
@@ -49451,7 +49451,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "047ecc020f631a959c9bf38423edd4b652c95bb5f6677db55f7fbb3fa7bc1964",
+      "compatibility_key": "173d41da4a562100b9e7838f1e1b2ff6ef4cf661b9e92a621595ef6c097b66b6",
       "cost": {
         "adapter_loop_seconds": 8.199371302005602,
         "adapter_seconds": 8.489046554022934,

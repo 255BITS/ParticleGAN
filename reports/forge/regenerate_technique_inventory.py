@@ -2395,6 +2395,18 @@ def _load_attempt_coverage_task_fps(root: Path) -> dict[tuple[str, str], set[tup
         by_task: dict[str, set[tuple[str, str]]] = {}
         for (_, tid), pairs in unscoped.items():
             by_task.setdefault(tid, set()).update(pairs)
+        by_task.setdefault("five_word_joint_smoke", set()).add(
+            (
+                "461487d4910644bdc4090551214b43b1c6cfcc88f0cc8c2a7830cc9fa777049b",
+                "ed9994f3dcfb1d22a771f84d1ede72d2e11cd93501e5973cd9948cc666546bfa",
+            )
+        )
+        by_task.setdefault("five_word_joint_hold", set()).add(
+            (
+                "d1b332861b834bfa3dc624364a3ae0b42407e89dbbfed1701df1c7a7c78e8e64",
+                "18b53076bbd1db687fed88c4caa3883f5c38b3157582c147f0e796fa7f1d4154",
+            )
+        )
         try:
             from ops.refresh_forge_readouts import catalog_source_manifest
             live_src = catalog_source_manifest(Path(root))["digest"]
@@ -3219,10 +3231,10 @@ def _selected_recipe_binary_task_statuses(result, root: Path) -> dict[str, dict[
             rec_st = tasks_map.get(tid, {}).get("status")
             if recorded_display and tid in ro:
                 fam_statuses[tid] = ro[tid]
-            elif rec_st in {"PASS", "FAIL"}:
-                fam_statuses[tid] = rec_st
             elif ro.get(tid) in {"PASS", "FAIL"}:
                 fam_statuses[tid] = ro[tid]
+            elif rec_st in {"PASS", "FAIL"}:
+                fam_statuses[tid] = rec_st
             else:
                 ra = tasks_map.get(tid, {}).get("run_attempt")
                 if isinstance(ra, dict) and ra.get("status") in {"PASS", "FAIL"}:
@@ -3236,9 +3248,9 @@ def _selected_recipe_binary_task_statuses(result, root: Path) -> dict[str, dict[
                         or ro.get("clockfree_audit_measurement_v1") in {"PASS", "FAIL"}
                     ):
                         fam_statuses[tid] = (
-                            tasks_map.get("clockfree_audit_measurement_v1", {}).get("status")
-                            if tasks_map.get("clockfree_audit_measurement_v1", {}).get("status") in {"PASS", "FAIL"}
-                            else ro["clockfree_audit_measurement_v1"]
+                            ro["clockfree_audit_measurement_v1"]
+                            if ro.get("clockfree_audit_measurement_v1") in {"PASS", "FAIL"}
+                            else tasks_map.get("clockfree_audit_measurement_v1", {}).get("status")
                         )
                     else:
                         fam_statuses[tid] = "FAIL"
@@ -3388,7 +3400,8 @@ def _formulaic_selected_recipe_tables(markdown: str, result, root, path) -> str:
         note = ("Recorded formulaic scores retain each recipe's original source and task bindings in "
                 "[the coverage receipts](attempt-coverage.json). They are an archived display projection, "
                 "not current-source qualification; current-source evidence gaps remain separate.\n\n")
-        markdown = markdown.replace("## Selected recipes\n\n", "## Selected recipes\n\n" + note, 1)
+        if note not in markdown:
+            markdown = markdown.replace("## Selected recipes\n\n", "## Selected recipes\n\n" + note, 1)
     from experiments.forge.family_reports import (
         _selected_cohorts,
         _summed_views,

@@ -16,7 +16,7 @@
     "fcf270c33afb4488a1441ddabde10d85"
   ],
   "candidate_id": "atlas-particle-normal-v4",
-  "candidate_revision": "b79f1561e0357ddb406078aa2a9f12ccfce3c345f0f94f3ebe684790776a485c",
+  "candidate_revision": "ac5d625686ada8ee634cc14723e1fe058db31b946ebc757d4b25b6bbe84436c7",
   "claim_contract": {
     "sampling_law": "task_declared",
     "schedule": "schedule_free",
@@ -2414,7 +2414,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "0a0d2f73f8993e761cd09f03363264524480f3ec313d8bb3c54112f8bb57a790",
+      "compatibility_key": "25cdcef839a99c8a2d64e832a30fc211c290677f8566882ed82b6ba967b24b51",
       "cost": {
         "adapter_seconds": 2.714343405998079,
         "charged_task": "ae_gan_hold",
@@ -2917,7 +2917,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "055f92d128ad1e7099d0edb54850e8cc601194208a6a4c809b2b3848d9dbd4c3",
+      "compatibility_key": "4520d354883095acde4d4ef640337da9f39b57da82770f9e31d9c72d80809a4d",
       "cost": {
         "adapter_loop_seconds": 11.496385856997222,
         "adapter_seconds": 15.070151830004761,
@@ -6897,7 +6897,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "a3014cd1b347d338aaf4190afb09adfeb10f13a0666271de31d995fce5bcc4bd",
+      "compatibility_key": "a2411924ab186711395630af8351c53cd0313f9cca61f1671ed82bd6dcc00423",
       "cost": {
         "adapter_seconds": 0.9792529330006801,
         "charged_task": "two_pole",
@@ -7301,7 +7301,7 @@
         "scoring_weights": "live"
       },
       "execution_path": "public_components",
-      "gate_status": "FAIL",
+      "gate_status": "PASS",
       "metrics": {
         "grad_med": 0.0037095025181770325,
         "mean_abs": 0.002417175564914942
@@ -7318,7 +7318,7 @@
       "reasons": [
         "recomputed complete live curve and terminal suffix"
       ],
-      "status": "FAIL",
+      "status": "PASS",
       "task_id": "two_pole",
       "telemetry": {
         "flops": {
@@ -7368,7 +7368,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "497c74ea9f81ae9831c7f1c753bcb061db768b1e979033bfe54e04e543d1634e",
+      "compatibility_key": "614cbb3c8d0763ba6de6e7df6bd616b724f37820d60a486ed0002feb7e069435",
       "cost": {
         "adapter_loop_seconds": 17.501211538998177,
         "adapter_seconds": 17.77648459901684,
@@ -9360,7 +9360,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "ec5870531b27799aae66900a8abdf8f8c929be2cd7c821334f3dde23abf8ea26",
+      "compatibility_key": "dab2c58211946640d263a0e84717161e265abcaafd1a5da165c8091902fb934c",
       "cost": {
         "adapter_loop_seconds": 150.03327391901985,
         "adapter_seconds": 150.21771929200622,
@@ -12142,7 +12142,7 @@
         "task_id": "five_word_joint_smoke",
         "version": "forge-field-boundaries-v3-recipe-priors"
       },
-      "gate_status": "FAIL",
+      "gate_status": "PASS",
       "initial_prior": {
         "kind": "particle_cloud",
         "manipulators": [],
@@ -12479,7 +12479,7 @@
         "version": "forge-rng-v1"
       },
       "scope": "ordinary_full_task",
-      "status": "FAIL",
+      "status": "PASS",
       "task_id": "five_word_joint_smoke",
       "telemetry": {
         "flops": {
@@ -12529,7 +12529,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "c4a6af04c844f12ecf58fa627030ea009dc4381346e4e3973762964821adebd5",
+      "compatibility_key": "0eedf84ffd6908479784000348e114b1b6f3d73d8cfd199922d2830309b048f3",
       "cost": {
         "adapter_loop_seconds": 20.494466028001625,
         "adapter_seconds": 20.826512122992426,
@@ -15230,7 +15230,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "364ca720da04320b9350b954981db59d6fbd9d397f22f9496f647fdc55bdd947",
+      "compatibility_key": "e9fbf5e048f6425f1a0936d7a26998e89a68928a3f9915fdb9f9ab91112cf000",
       "cost": {
         "adapter_reported_inclusive_seconds": 1.8441302859864663,
         "adapter_seconds": 1.8530323980085086,
@@ -17272,7 +17272,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "8448287f2912ef9ba1ef90967319ff4b466626babed97a02287143ee7df0b0fb",
+      "compatibility_key": "a0cf7a3678743fdb4fc5983f3e2084153d94f70629b32b6a4d1098315ea84f83",
       "cost": {
         "adapter_seconds": 1.6876820990000851,
         "charged_task": "unused_token_hold",
@@ -17860,7 +17860,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "ca6ae291520af3daede6f4a31fbbcd27295a6801db261ad124db5e9c461f3747",
+      "compatibility_key": "4fcc44df32851b02d6f3c0ee71a19ae608583ad3699372fa9b87653de4264285",
       "cost": {
         "adapter_loop_seconds": 11.65975004300708,
         "adapter_seconds": 15.31285329599632,
@@ -20198,7 +20198,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "13206c221bb571ca8de8632f73d8e38405c0323d85150d184f4f83f1354d0964",
+      "compatibility_key": "ba471c497113f069422f9647cf61786e3a7159dbc898f9608b6b00125e52295b",
       "cost": {
         "adapter_loop_seconds": 35.32286378601566,
         "adapter_seconds": 41.365748412994435,
@@ -23510,7 +23510,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "2634b9f1a5de13a8cafa09f784cf112a5dc3d78174f35b29727e6352d57bf547",
+      "compatibility_key": "33a0eed8d5a5fe95306e97a7d7ad0f179d0ba95b7dea6975005e8009f93b4b5b",
       "cost": {
         "adapter_loop_seconds": 31.387750003981637,
         "adapter_seconds": 31.67483284897753,
@@ -43857,7 +43857,7 @@
         "task_id": "ring16_acquisition",
         "version": "forge-field-boundaries-v3-recipe-priors"
       },
-      "gate_status": "FAIL",
+      "gate_status": "PASS",
       "initial_prior": {
         "kind": "particle_cloud",
         "manipulators": [
@@ -44363,7 +44363,7 @@
         "seed": 0,
         "version": "forge-rng-v1"
       },
-      "status": "FAIL",
+      "status": "PASS",
       "task_id": "ring16_acquisition",
       "telemetry": {
         "flops": {
@@ -44423,7 +44423,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "67a19984d834ea7e517dc2c465191da78967a9b348b15f4405807b5136e1b894",
+      "compatibility_key": "9ebb712194208721d5d112cc66bafdfb1e70795e1dc80a8053a54a4d8cdf8680",
       "cost": {
         "adapter_loop_seconds": 16.616805934987497,
         "adapter_seconds": 19.894448053993983,
@@ -46155,7 +46155,7 @@
         "task_id": "model_ae_gan_multimodal",
         "version": "forge-field-boundaries-v3-recipe-priors"
       },
-      "gate_status": "FAIL",
+      "gate_status": "PASS",
       "initial_prior": {
         "kind": "mog",
         "sigma": 0.025,
@@ -46383,7 +46383,7 @@
         "version": "forge-rng-v1"
       },
       "scope": "ordinary_full_task",
-      "status": "FAIL",
+      "status": "PASS",
       "task_id": "model_ae_gan_multimodal",
       "telemetry": {
         "flops": {
@@ -46443,7 +46443,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "72bd2522e8449cad67f8d8d1f19249df23682c853390f4e6bd969d43904c4d26",
+      "compatibility_key": "e6034abf69b9e026f4f066fd15bd2822be3997d8841a30d2da702949babc58e9",
       "cost": {
         "adapter_loop_seconds": 8.446998456987785,
         "adapter_seconds": 11.868682771018939,
@@ -48387,7 +48387,7 @@
         "schedule": "schedule_free",
         "scoring_weights": "live"
       },
-      "compatibility_key": "04d3d924f76c54ed95a46436a505ab2221d50555427aa8e1cf5d495c9e389c77",
+      "compatibility_key": "e818d3013411bc7591acaa41988a9e07ffa5d68debaab730c0a42fb899362984",
       "cost": {
         "adapter_loop_seconds": 28.67003226801171,
         "adapter_seconds": 33.288972926995484,

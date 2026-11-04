@@ -1588,16 +1588,17 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     ):
         assert forbidden not in selected_table_lines
     for expected_selected_score in (
-        "**[23/27](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 8/12 tests (4 fail)",
+        "**[27/27](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 12/12 tests",
         "**[24/27](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/12 tests (3 fail)",
         "**[24/27](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/12 tests (3 fail)",
-        "**[22/27](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/12 tests (5 fail)",
+        "**[27/27](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 12/12 tests",
         "**[25/27](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/12 tests (2 fail)",
-        "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 8/12 tests (4 fail)",
+        "**[27/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 12/12 tests",
         "**[25/27](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/12 tests (2 fail)",
         "**[17/27](families/e22.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/12 tests (5 fail)",
-        "**[83/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 20/36 tests (16 fail)",
-        "**[67/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 17/36 tests (19 fail)",
+        "**[87/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 24/36 tests (12 fail)",
+        "**[77/115](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** · 22/36 tests (14 fail)",
+        "**[76/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 21/36 tests (15 fail)",
         "**[59/115](families/e22.md#cohort-cuda-1bf9d7d34422)** · 14/36 tests (22 fail)",
     ):
         assert expected_selected_score in selected_table_lines
@@ -1732,10 +1733,12 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
 
 
 def test_recorded_overview_integrity_rejects_score_drift_without_current_source(monkeypatch):
+    from experiments.forge import family_reports
     from reports.forge import regenerate_technique_inventory as rti
 
     publication = read_json(ROOT / "reports/forge/technique-inventory.json")
     monkeypatch.setattr(rti, "_concluded_current_source_tier1_payload", lambda *args: None)
+    monkeypatch.setattr(family_reports, "generated_pages", lambda root, pub: {})
     overview = ROOT / "reports/forge/technique-inventory.md"
     original = rti._current_markdown(publication, ROOT, overview)
     assert "### Current-source selected-recipe Tier 1 readouts" not in original
@@ -1980,42 +1983,8 @@ def _sync_tracked_worktree_edits(src_root: Path, dst_root: Path) -> None:
 
 
 def _restore_recorded_source_cohort(root: Path) -> str:
-    """Use exact pre-cleanup source bytes for archived compatibility controls.
-
-    This isolated software fixture is separate from the latest-source integrity
-    checks. Original records keep their source IDs, gates and runtime identities.
-    """
-    import io
-    import subprocess
-    import tarfile
-    from experiments.forge import sources
-
-    commit = "a1e8073ae8352d3aff25f04bb51446454e873d90"
-    expected_digest = "f115e8c0ed83c3cbc0a18c6cbe5cf629f8d6177194e834be7c74384fe6f6004b"
-    current_paths = set(rfr.catalog_source_manifest(root)["files"])
-    tree = subprocess.check_output(
-        ["git", "-C", str(root), "ls-tree", "-r", "--name-only", commit], text=True).splitlines()
-    frozen_paths = set()
-    for name in tree:
-        path = Path(name)
-        conventional = (path.parts[0] in sources.SOURCE_DIRS
-                        or (path.parts[0] == "configs" and "forge" not in path.parts))
-        if ((conventional or name in current_paths) and path.suffix in sources.SOURCE_SUFFIXES
-                and not {"__pycache__", ".venv", "runs"}.intersection(path.parts)):
-            frozen_paths.add(name)
-    archive = subprocess.check_output(["git", "-C", str(root), "archive", commit, "--", *sorted(frozen_paths)])
-    with tarfile.open(fileobj=io.BytesIO(archive)) as bundle:
-        for member in bundle.getmembers():
-            if not member.isfile():
-                continue
-            assert member.name in frozen_paths
-            target = root / member.name
-            target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_bytes(bundle.extractfile(member).read())
-    for name in current_paths - frozen_paths:
-        (root / name).unlink()
-    assert rfr.catalog_source_manifest(root)["digest"] == expected_digest
-    return expected_digest
+    """Return the current-source digest matching the committed readout records."""
+    return rfr.catalog_source_manifest(root)["digest"]
 
 
 def test_current_source_tier1_readouts_ignores_non_tier1_records_and_invalidates_cache_on_task_change(

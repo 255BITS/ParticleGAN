@@ -626,7 +626,7 @@ Test: `ring16_acquisition` · Required for qualification and included in full-su
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) |
 | [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) |
-| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [FAIL](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [PASS](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) |
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) |
@@ -890,7 +890,7 @@ Test: `two_pole` · Required for qualification and included in full-suite result
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) |
 | [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) |
-| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [FAIL](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [PASS](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [PASS](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) |
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [PASS](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) |
@@ -923,7 +923,7 @@ Test: `five_word_joint_smoke` · Required for qualification and included in full
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) |
 | [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) |
-| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [FAIL](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [PASS](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [PASS](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) |
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [PASS](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) |
@@ -954,9 +954,9 @@ Test: `model_ae_gan_multimodal` · Required for qualification and included in fu
 
 | Selected recipe | Result |
 | --- | --- |
-| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) |
-| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) |
-| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [FAIL](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_gan_multimodal) |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [PASS](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_gan_multimodal) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [PASS](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) |
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) |

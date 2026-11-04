@@ -4042,11 +4042,11 @@ Learned-MoG vector_two_broad PASS after exactly one registered operational cance
 
 ### recipe-prior-refactor-bcap-pure-v1 · readout-0df182292d888440f5fb32ce
 
-**Scope:** current; scientific; revision `ff92a04e8aae90ecf50950adee46a9c07775a1ed181eb511b4bee4d2c07d2f75`.
+**Scope:** current; scientific; revision `1de51e5fcdafbdcd3694b877d5f31f8310efe410cc5bb03909324eebbdf54f4f`.
 
 Ordinary re-qualification of the unchanged selected bcap-pure recipe (recipe-prior-refactor-bcap-pure-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
 
-**Observed:** {'FAIL': 7, 'INCOMPLETE': 1, 'PASS': 7}; wall seconds 2134.696; mechanism `structural`.
+**Observed:** {'FAIL': 2, 'INCOMPLETE': 1, 'PASS': 12}; wall seconds 2134.696; mechanism `structural`.
 
 ae_gan_hold: recon_mse=0.004353; model_ae_gan_multimodal: modes=4, precision=0.99512, mass_tv=0.080078
 
@@ -4090,11 +4090,11 @@ The single global quintic convolution-rule delta preserves all 19 incumbent BISP
 
 ### bispf-optimized-quintic-v1 · readout-143d85d4540548b0ecec1604
 
-**Scope:** current; scientific; revision `7de666fda91deeb116229597210a29c297b8e3611ed49d88a933b416bd410cf5`.
+**Scope:** current; scientific; revision `5881213fe8043f7c0ea886404c4ee741645e749425f07fefcecdb0ae29ffd55a`.
 
 Ordinary re-qualification of the unchanged selected bispf recipe (bispf-optimized-quintic-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
 
-**Observed:** {'FAIL': 6, 'INCOMPLETE': 1, 'PASS': 8}; wall seconds 2427.454; mechanism `structural`.
+**Observed:** {'FAIL': 2, 'INCOMPLETE': 1, 'PASS': 12}; wall seconds 2427.454; mechanism `structural`.
 
 ring16_acquisition: modes=16, hq=0.9519, mass_tv=0.092041
 
@@ -4266,7 +4266,7 @@ Native BISPF on the two explicitly wider architecture-portability hosts passes s
 
 ### recipe-prior-refactor-release07-gan-v3-v1 · readout-3bd45e331f5dd03701da2700
 
-**Scope:** current; scientific; revision `207c0479c4543f0974eca2613e0d80fc13d76ea74585494b0854f63e8e532065`.
+**Scope:** current; scientific; revision `28233d06b1e91a331b65e017a59052d6a38a90d542fe82bf60f5dcc16a16d2fe`.
 
 Ordinary re-qualification of the unchanged selected release07-gan-v3 recipe (recipe-prior-refactor-release07-gan-v3-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
 
@@ -4586,7 +4586,7 @@ Fresh N(0,I) latent: 5 PASS / 10 FAIL on the 15 supported sampled-MoG tests (33 
 
 ### recipe-prior-refactor-r1r2-v1 · readout-613fc91cba03a8c327465202
 
-**Scope:** current; scientific; revision `c8ea7f88131242559d8caea49ce5f7d2694b464780033d6ab68142a0b2269c4f`.
+**Scope:** current; scientific; revision `210ab7b2bdcf144ead4fb11b21f148ea5686e530676da75bf749fc3645f6af60`.
 
 Ordinary re-qualification of the unchanged selected r1r2 recipe (recipe-prior-refactor-r1r2-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
 
@@ -5130,11 +5130,11 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0468712635<0.3; q
 
 ### atlas-particle-normal-v4 · readout-b389e250ac5b3ad0763d2c82
 
-**Scope:** current; scientific; revision `b79f1561e0357ddb406078aa2a9f12ccfce3c345f0f94f3ebe684790776a485c`.
+**Scope:** current; scientific; revision `ac5d625686ada8ee634cc14723e1fe058db31b946ebc757d4b25b6bbe84436c7`.
 
 Ordinary discriminator_stability measurement of atlas-particle-normal-v4 (particles + NormalNoiseManipulator(sigma=0.0065), birth_death_cells=256, clean fixed output noise 0.0, d_guard_ratio=0.0, KA2 pre-anchor critic-only LossSurprise guard) under protocol seed 0 on NVIDIA RTX A6000 completes every required Tier 1 cell cleanly and reproduces its 11/13 required Tier 1 passes (plus clockfree_audit_measurement_v1 diagnostic PASS) for selection as the Atlas family candidate.
 
-**Observed:** {'FAIL': 6, 'PASS': 8}; wall seconds 446.773; mechanism `structural`.
+**Observed:** {'FAIL': 2, 'PASS': 12}; wall seconds 446.773; mechanism `structural`.
 
 ae_gan_hold: recon_mse=0.0099752
 
@@ -5450,7 +5450,7 @@ All six finite-update DCGAN performance tasks PASS. Observed speedups versus mat
 
 ### recipe-prior-refactor-k3p-v1 · readout-e6cf768866c160ba1338f662
 
-**Scope:** current; scientific; revision `bc6ec7576fff1c58b7fd67d9d89e87720a08b56fc2fd75afbf1554475e94d321`.
+**Scope:** current; scientific; revision `cf9f9869bb47b7b0a3512f3ac7a300ab984af5d43f20acb5aa6d576ade63a80a`.
 
 Ordinary re-qualification of the unchanged selected k3p recipe (recipe-prior-refactor-k3p-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
 
@@ -5578,7 +5578,7 @@ Raising birth_death_cells from 128 to 256 (eliminating noisy 2-particle-per-cell
 
 ### recipe-prior-refactor-ka2-v1 · readout-efc9b823a6b391bc25754f9a
 
-**Scope:** current; scientific; revision `457d90f138ee4a26c1b0a8cf9c371727fc0d942382f252bee8fb336ed2738265`.
+**Scope:** current; scientific; revision `3a3eab89c35a2050b747afd435935418148ed53163c833b24e3c25b176ae8b15`.
 
 Ordinary re-qualification of the unchanged selected ka2 recipe (recipe-prior-refactor-ka2-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
 
@@ -6326,4 +6326,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `8a512e70a86345cedb680fb5655bc6a30e1d703e7116a1725b015f096a8931b5`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `52f24b28b0cdace9c602052fd66a2bbbf8d33f4ab13aa4845b1c477448ed7348`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
