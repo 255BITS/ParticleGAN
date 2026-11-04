@@ -17,7 +17,7 @@
     "dfb7fe00029147b08301a61590822e15"
   ],
   "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
-  "candidate_revision": "ff92a04e8aae90ecf50950adee46a9c07775a1ed181eb511b4bee4d2c07d2f75",
+  "candidate_revision": "1de51e5fcdafbdcd3694b877d5f31f8310efe410cc5bb03909324eebbdf54f4f",
   "claim_contract": {
     "sampling_law": "task_declared",
     "schedule": "scheduled",
@@ -2469,7 +2469,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "68f5e8824e9b92577595e224874ce2ce8431c8526dd642e348ac00389b70bd83",
+      "compatibility_key": "b133cb0fee64f61f33d301bfdffe2d260963ee1c4c45e188afdd11898ff188d2",
       "cost": {
         "adapter_seconds": 3.893320898001548,
         "charged_task": "ae_gan_hold",
@@ -2925,7 +2925,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "2eb41b2b5577c37c5e7e0b23eadd7a4230213a42c830efa4564d09ad353491f4",
+      "compatibility_key": "b2f4db5f5206f27e15fae9e78f3c9c56581eadcf7f142c6fe6f3dc283a603f52",
       "cost": {
         "adapter_loop_seconds": 11.181080698996084,
         "adapter_seconds": 11.419530280982144,
@@ -4487,7 +4487,7 @@
         "task_id": "zero_tanh_smoke",
         "version": "forge-field-boundaries-v3-recipe-priors"
       },
-      "gate_status": "FAIL",
+      "gate_status": "PASS",
       "host_adaptation": {
         "contract": {
           "recipe_fields": [
@@ -4814,7 +4814,7 @@
         "seed": 0,
         "version": "forge-rng-v1"
       },
-      "status": "FAIL",
+      "status": "PASS",
       "task_id": "zero_tanh_smoke",
       "telemetry": {
         "flops": {
@@ -4874,7 +4874,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "2b5130ece9f8b33744a233b0342c57a788dd417f1e8032444fc688a94b3fbb5c",
+      "compatibility_key": "a412231568fb9258e9a4d8a519455d0f68310ad0fda9122f5d0c926721482476",
       "cost": {
         "adapter_loop_seconds": 50.84526471802383,
         "adapter_seconds": 54.09852194599807,
@@ -6591,7 +6591,7 @@
         "task_id": "model_ae_gan_multimodal",
         "version": "forge-field-boundaries-v3-recipe-priors"
       },
-      "gate_status": "FAIL",
+      "gate_status": "PASS",
       "host_adaptation": {
         "contract": {
           "recipe_fields": [
@@ -6906,7 +6906,7 @@
         "version": "forge-rng-v1"
       },
       "scope": "ordinary_full_task",
-      "status": "FAIL",
+      "status": "PASS",
       "task_id": "model_ae_gan_multimodal",
       "telemetry": {
         "flops": {
@@ -6969,7 +6969,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "4e6f2f9d256e6d798075af5469bbc728e315861565a3650034f6375dbbd44bf3",
+      "compatibility_key": "10046e63d79b2d0a523663ee313c25cf5f6532caf2bf5ee3f35080e937fee141",
       "cost": {
         "adapter_loop_seconds": 67.30963408999378,
         "adapter_seconds": 73.28901515097823,
@@ -10347,7 +10347,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "77e5c174034c8ebc8ad2de71bc1e13fd8cb607db221592a027275b043868da02",
+      "compatibility_key": "63c174fad05ed6c492fc7cf7b6b49df8f61fbfaba1ae906a517bcdae56c577e2",
       "cost": {
         "adapter_reported_inclusive_seconds": 1.141620590002276,
         "adapter_seconds": 1.148436903982656,
@@ -10597,7 +10597,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "ee9592822048f6f271229f4313c3d958903396d80f14192a850cee1881f8aa95",
+      "compatibility_key": "44fc3d1dbf8420af9c26b4452ac66510dfab9ce462315305d350b003532c9612",
       "cost": {
         "adapter_loop_seconds": 12.09323914599372,
         "adapter_seconds": 12.38557488299557,
@@ -13250,7 +13250,7 @@
     },
     {
       "_attempt_id": "6903ccea0e51448ebd820962dd6cd3e5",
-      "compatibility_key": "21a65e2cde42ca25d01ab6bf63f8cb6dc112209232a65439d66cce4960de19a9",
+      "compatibility_key": "b3525a56208eb07610ae26f5c5a07b6b1a49d20856bf93fd14da56d93f236ac1",
       "cost": {
         "charged_task": "five_word_joint_smoke",
         "device": "0",
@@ -13293,7 +13293,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "57b792cf2e8b5973e4f5fe3f01ac49cc3a2340819babc290942e2273ca340b76",
+      "compatibility_key": "cf4d01c239177a3d598246023b9d8cc9905591ee0abfcdd0ce1192bd9c35385e",
       "cost": {
         "adapter_loop_seconds": 51.46293049500673,
         "adapter_seconds": 51.71233190599014,
@@ -34424,7 +34424,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "7c7d6af43c483e445deb67c35140cd4ab268f76558313f4936ba0065e11cdb40",
+      "compatibility_key": "84d29f8523f4460213188d746973f85fbcaa6097738b5f093e42f4383d5904ea",
       "cost": {
         "adapter_loop_seconds": 54.5966139449738,
         "adapter_seconds": 58.023172746005,
@@ -36060,7 +36060,7 @@
         "task_id": "model_ae_reconstruction",
         "version": "forge-field-boundaries-v3-recipe-priors"
       },
-      "gate_status": "FAIL",
+      "gate_status": "PASS",
       "host_adaptation": {
         "contract": {
           "recipe_fields": [
@@ -36375,7 +36375,7 @@
         "version": "forge-rng-v1"
       },
       "scope": "ordinary_full_task",
-      "status": "FAIL",
+      "status": "PASS",
       "task_id": "model_ae_reconstruction",
       "telemetry": {
         "flops": {
@@ -36436,7 +36436,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "27d44360274bf9d8d37782ef17a655c2cac2c2bacce7072b092ac09c2d8c96be",
+      "compatibility_key": "75ad81b029add4dbce99565218c0f7b7297589dbf64c9d958174fa9ffb1a60df",
       "cost": {
         "adapter_loop_seconds": 44.53980296399095,
         "adapter_seconds": 48.721513172989944,
@@ -41349,7 +41349,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "9c36bd109e9086b59fc88296830837310bbaf792617e50773cf76bbfb3e0dc43",
+      "compatibility_key": "0addb30532c0fb8f852e727150d01e1205423ac01514362c9a0658ddc654adfe",
       "cost": {
         "adapter_seconds": 1.1628869060077704,
         "charged_task": "two_pole",
@@ -41803,7 +41803,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "9a0717eb4260b449b71063b5d57605b7c1beb8c543149d91c84b1fcf402fa47d",
+      "compatibility_key": "d2836e3239e2cd49841b56ddb16b504116183317d96e3ed7f13f93fe19f2fb53",
       "cost": {
         "adapter_loop_seconds": 40.21698829799425,
         "adapter_seconds": 43.73783374400227,
@@ -43826,7 +43826,7 @@
         "task_id": "model_vae_hard",
         "version": "forge-field-boundaries-v3-recipe-priors"
       },
-      "gate_status": "FAIL",
+      "gate_status": "PASS",
       "host_adaptation": {
         "contract": {
           "recipe_fields": [
@@ -44162,7 +44162,7 @@
         "version": "forge-rng-v1"
       },
       "scope": "ordinary_full_task",
-      "status": "FAIL",
+      "status": "PASS",
       "task_id": "model_vae_hard",
       "telemetry": {
         "flops": {
@@ -46037,7 +46037,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "d5f9107cf5440e45f3e91e8b1ed5d42e8086b918f090c6d2bbe103d180dd9c92",
+      "compatibility_key": "40370bdb0f39393a2e88e88ab19d2396580169eb043953b39832a3cf3e834024",
       "cost": {
         "adapter_seconds": 2.3480559560121037,
         "charged_task": "unused_token_hold",
@@ -46589,7 +46589,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "21a65e2cde42ca25d01ab6bf63f8cb6dc112209232a65439d66cce4960de19a9",
+      "compatibility_key": "b3525a56208eb07610ae26f5c5a07b6b1a49d20856bf93fd14da56d93f236ac1",
       "cost": {
         "adapter_loop_seconds": 760.8894244190014,
         "adapter_seconds": 761.0741264190001,
@@ -49824,7 +49824,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "e58b9129e335221802d341b9a872c7f66d36d675c327d2994b98130e2954e7cc",
+      "compatibility_key": "3711e28c384818a9ce55e060ee587f8a7aefadd81e78435baeba69ded1445223",
       "cost": {
         "adapter_loop_seconds": 27.320744877011748,
         "adapter_seconds": 30.950766063004266,
@@ -51847,7 +51847,7 @@
         "task_id": "model_vae_categorical",
         "version": "forge-field-boundaries-v3-recipe-priors"
       },
-      "gate_status": "FAIL",
+      "gate_status": "PASS",
       "host_adaptation": {
         "contract": {
           "recipe_fields": [
@@ -52183,7 +52183,7 @@
         "version": "forge-rng-v1"
       },
       "scope": "ordinary_full_task",
-      "status": "FAIL",
+      "status": "PASS",
       "task_id": "model_vae_categorical",
       "telemetry": {
         "flops": {

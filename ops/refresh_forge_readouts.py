@@ -607,6 +607,7 @@ def _discriminator_stability_max_tier(root: Path) -> int:
 def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA_MODEL) -> dict[str, Any]:
     from reports.forge.regenerate_technique_inventory import (
         _ReadoutCompatibilityMatcher,
+        _load_attempt_coverage_family_verdicts,
         _load_attempt_coverage_task_fps,
         _resolve_idea_for_readout_check,
     )
@@ -614,6 +615,7 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
     root = Path(root).resolve()
     concluded = _concluded_ordinary_records(root)
     coverage_fps = _load_attempt_coverage_task_fps(root)
+    coverage_verdicts = _load_attempt_coverage_family_verdicts(root)
     shared_attempt_cache: dict[str, dict[str, Any] | None] = {}
     leaderboard_texts = {}
     for view_id in ORDINARY_LEADERBOARD_VIEWS:
@@ -705,6 +707,24 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
                     f"selected candidate {cid} has {bad_st} on {bad_tid} "
                     f"in current-source readout"
                 )
+
+            t1_task_set = {item["task"] for item in t1_assignments}
+            if matching and all(t in measured_statuses for t in t1_runnable):
+                for cov_tid, cov_st in coverage_verdicts.get(family, {}).items():
+                    if cov_tid not in t1_task_set and cov_tid not in measured_statuses:
+                        t_card = req["tasks"].get(cov_tid)
+                        if (
+                            isinstance(t_card, dict)
+                            and "execution" in t_card
+                            and "evaluation" in t_card
+                            and req_source_digest
+                            and (
+                                task_execution_fingerprint(t_card),
+                                task_evaluation_fingerprint(t_card),
+                            )
+                            in coverage_fps.get((req_source_digest, cov_tid), set())
+                        ):
+                            measured_statuses[cov_tid] = cov_st
 
             def _dep_blocked(task_id: str, seen: frozenset[str] = frozenset()) -> bool:
                 if task_id in seen:
