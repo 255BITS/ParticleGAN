@@ -318,7 +318,8 @@ class ResolutionCache:
                     initializer=idea.get("initializer", "deterministic_orthogonal"),
                     execution_path=idea.get("execution_path", "public_trainer"),
                 )
-                recipe = asdict(context.recipe)
+                from particlegan.recipe_compat import without_default_additions
+                recipe = without_default_additions(asdict(context.recipe), fields=("ebi_beta", "kappa_radial"))
                 if "configuration_id" in idea:
                     from .configuration_search import recipe_identity_fields
                     if stable_hash(recipe_identity_fields(recipe)) != stable_hash(recipe_identity_fields(idea["resolved_configuration_recipe"])):
@@ -495,13 +496,15 @@ def candidate_revision_for(source_digest: str, candidate: dict) -> str:
     validation. Callers at execution boundaries must first reconstruct and
     validate resolved_recipe from the actual public formulation declaration.
     """
+    from particlegan.recipe_compat import without_default_additions
     formulation = {key: candidate.get(key) for key in FORMULATION_FIELDS}
     # Preserve identities of existing declarations with no adaptation contract.
     if candidate.get("host_adaptation") is not None:
         formulation["host_adaptation"] = candidate["host_adaptation"]
     if candidate.get("prior_mechanism") is not None:
         formulation["prior_mechanism"] = candidate["prior_mechanism"]
-    formulation.update(resolved_recipe=candidate["resolved_recipe"], prior=candidate["prior"],
+    resolved_recipe = without_default_additions(candidate["resolved_recipe"], fields=("ebi_beta", "kappa_radial"))
+    formulation.update(resolved_recipe=resolved_recipe, prior=candidate["prior"],
                        api_version=candidate.get("api_version", "forge-api-v1"))
     return stable_hash({"source": source_digest, "formulation": formulation})
 
@@ -670,7 +673,8 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
             seed=protocol["seed"], requires_capabilities=idea.get("requires_capabilities", []),
             extensions=idea.get("extensions", {}), initializer=idea.get("initializer", "deterministic_orthogonal"),
             execution_path=idea.get("execution_path", "public_trainer"))
-        recipe = asdict(context.recipe)
+        from particlegan.recipe_compat import without_default_additions
+        recipe = without_default_additions(asdict(context.recipe), fields=("ebi_beta", "kappa_radial"))
         if "configuration_id" in idea:
             from .configuration_search import recipe_identity_fields
             if stable_hash(recipe_identity_fields(recipe)) != stable_hash(recipe_identity_fields(idea["resolved_configuration_recipe"])):

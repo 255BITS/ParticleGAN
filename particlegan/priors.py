@@ -765,11 +765,15 @@ class NormalNoiseManipulator(PriorManipulator):
         sigma: float = 0.025,
         *,
         penalty_weight: float = 1.0,
+        kappa_radial: float = 1.0,
     ) -> None:
         super().__init__(penalty_weight=penalty_weight)
         if type(sigma) not in (int, float) or not math.isfinite(sigma) or sigma < 0:
             raise ValueError(f"sigma must be a finite nonnegative number, got {sigma!r}")
+        if type(kappa_radial) not in (int, float) or not math.isfinite(kappa_radial) or kappa_radial < 0:
+            raise ValueError(f"kappa_radial must be a finite nonnegative number, got {kappa_radial!r}")
         self.sigma = float(sigma)
+        self.kappa_radial = float(kappa_radial)
 
     def transform(
         self,
@@ -810,6 +814,21 @@ class NormalNoiseManipulator(PriorManipulator):
                 dtype=codes.dtype,
                 generator=generator,
             )
+
+        if self.kappa_radial != 1.0 and codes.ndim >= 2 and codes.shape[-1] >= 2:
+            codes_detached = codes.detach()
+            norm = codes_detached.norm(dim=-1, keepdim=True)
+            mask = norm > 1e-6
+            if mask.any():
+                e_r = torch.zeros_like(codes_detached)
+                e_r = torch.where(mask, codes_detached / norm.clamp_min(1e-6), e_r)
+                z_r = (noise * e_r).sum(dim=-1, keepdim=True) * e_r
+                z_theta = noise - z_r
+                noise = torch.where(
+                    mask,
+                    self.kappa_radial * z_r + z_theta,
+                    noise,
+                )
 
         return codes + self.sigma * noise
 

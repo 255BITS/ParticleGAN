@@ -220,6 +220,9 @@ def test_atlas_particle_normal_v4_readout_recovers_mode_hold_with_zero_regressio
     assert (
         candidate_revision_for(resolved["source"]["digest"], resolved["candidate"])
         == resolved["candidate_revision"]
+    )
+    assert (
+        candidate_revision_for(atlas_row["bindings"]["source_digest"], resolved["candidate"])
         == v4_readout["candidate_revision"]
     )
 

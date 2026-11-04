@@ -19,7 +19,6 @@ def _reject_table_storage_owners(table, tensors):
                 and tensor.untyped_storage().data_ptr() == address):
             raise ValueError("frozen prior must not share storage with networks or optimizer parameters")
 
-
 @dataclass(frozen=True)
 class Recipe:
     """Resolved hyperparameters plus role-named factories (``make_*``) for one model.
@@ -66,6 +65,7 @@ class Recipe:
     reg_coeff: float = 1.0
     reg_kappa: float = 1.0
     reg_every: int = 1
+    ebi_beta: float = 30.0
     # Optional finite same-training-panel critic step guard; none preserves history.
     critic_step_mode: str = "none"
     prior_reg: float = 0.0
@@ -265,6 +265,7 @@ class Recipe:
     # draws, and replaces each sampled code with init_std * N(0, I) of the same
     # dimension (ParticlePrior.code_law). Opt-in; not part of any preset.
     prior_code_law: str = "table"
+    kappa_radial: float = 1.0
 
     def __post_init__(self):
         if type(self.bispf_shape_gates) is not bool:
@@ -440,6 +441,8 @@ class Recipe:
                 raise ValueError("bispf formulation does not accept a legacy reg_arm")
             if self.reg_anchor_weight != 0:
                 raise ValueError("bispf formulation uses a zero-mean logit gauge instead of an EMA critic anchor (require reg_anchor_weight=0)")
+        if type(self.ebi_beta) not in (int, float) or not math.isfinite(self.ebi_beta) or self.ebi_beta <= 0:
+            raise ValueError("ebi_beta must be finite and positive")
         if self.reg_arm is not None and self.critic_formulation not in ("bcap", "bispf"):
             # Keep resolved recipe/Forge provenance truthful about the optimizer
             # family selected by an explicit legacy arm.
@@ -519,9 +522,13 @@ class Recipe:
         if (type(self.kinetic_transport_weight) not in (int, float)
                 or not math.isfinite(self.kinetic_transport_weight) or self.kinetic_transport_weight < 0):
             raise ValueError("kinetic_transport_weight must be finite and nonnegative")
-        if (type(self.kinetic_transport_local_weight) not in (int, float)
+        if (not isinstance(self.kinetic_transport_local_weight, (int, float))
                 or not math.isfinite(self.kinetic_transport_local_weight) or self.kinetic_transport_local_weight < 0):
             raise ValueError("kinetic_transport_local_weight must be finite and nonnegative")
+        if type(self.kappa_radial) not in (int, float) or isinstance(self.kappa_radial, bool):
+            raise TypeError(f"kappa_radial must be a float, got {type(self.kappa_radial).__name__}")
+        if self.kappa_radial <= 0:
+            raise ValueError(f"kappa_radial must be positive, got {self.kappa_radial}")
         if type(self.kinetic_transport_projections) is not int or self.kinetic_transport_projections < 1:
             raise ValueError("kinetic_transport_projections must be a positive integer")
         if type(self.amsgrad) is not bool:
@@ -634,6 +641,8 @@ class Recipe:
     def to_dict(self):
         from .recipe_compat import without_default_additions
         result = without_default_additions(asdict(self))
+        if "kinetic_transport_local_weight" in result:
+            result["kinetic_transport_local_weight"] = float(result["kinetic_transport_local_weight"])
         if self.loss == "relativistic":
             # Older recipes/checkpoints had this one fixed objective. Preserve
             # their packets while recording every alternative explicitly.
@@ -711,7 +720,7 @@ class Recipe:
             prior = ParticlePrior(**options)
             if normal_sigma is not None and normal_sigma > 0:
                 from .priors import NormalNoiseManipulator
-                prior = prior.manipulate(NormalNoiseManipulator(sigma=float(normal_sigma)))
+                prior = prior.manipulate(NormalNoiseManipulator(sigma=float(normal_sigma), kappa_radial=float(self.kappa_radial)))
         else:
             raise ValueError("prior_kind must be 'particles' or 'mog'")
         if manipulators is not None:
@@ -744,7 +753,7 @@ class Recipe:
         if self.encoder_mode == "ae":
             if offset is None:
                 raise ValueError("AE encoding requires offset")
-            return particle_ae(query, offset, base, **options)
+            return particle_ae(query, offset, base, uniformity_weight=self.ucd_weight, **options)
         if self.encoder_mode in ("categorical", "hard"):
             if offset is not None:
                 raise ValueError("prior-matching VAE does not accept an offset")
@@ -777,8 +786,11 @@ class Recipe:
         Anchors, bandwidths and normalizers come from detached real targets.
         This auxiliary term does not become a protected projection objective.
         """
+        weight = float(self.kinetic_transport_local_weight)
+        if weight <= 0:
+            return fake.new_zeros(())
         from .kinetic_transport import kinetic_transport_local_loss
-        return self.kinetic_transport_local_weight * kinetic_transport_local_loss(fake, real)
+        return weight * kinetic_transport_local_loss(fake, real)
 
     def make_critic_penalty(self, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
         """The critic gradient penalty paired with one critic optimizer.
@@ -810,7 +822,7 @@ class Recipe:
             if not self.critic_r1_real:
                 raise ValueError("critic_r1_real=False requires the KA2 formulation")
             options = {"coeff": self.reg_coeff, "kappa": self.reg_kappa, "lazy_k": self.reg_every,
-                       "anchor_weight": self.reg_anchor_weight, **overrides}
+                       "anchor_weight": self.reg_anchor_weight, "ebi_beta": self.ebi_beta, **overrides}
             from .bispf import _BISPFPenaltyKernel
             _BISPFPenaltyKernel(**options)
             return options
@@ -1003,7 +1015,8 @@ class Recipe:
         return K3PGeneratorAdam(params, latent_table=latent_table, direct_particles=direct_particles,
                                 latent_max_rate=self.latent_damping_max_rate,
                                 direct_betas=self.direct_particle_betas,
-                                direct_gain=self.direct_particle_gain, **options)
+                                direct_gain=self.direct_particle_gain,
+                                saddle_escape=(self.continuous_policy == "dv12"), **options)
 
     def bispf_gates(self):
         """Resolved ``BISPFGates`` from ``bispf_shape_gates`` and ``bispf_gate_overrides``."""

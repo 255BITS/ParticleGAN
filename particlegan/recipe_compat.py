@@ -23,6 +23,8 @@ SEARCH_RECIPE_DEFAULTS = {
     "lr_decay_staircase": False,
     "bispf_shape_gates": True, "bispf_gate_overrides": (),
     "prior_code_law": "table",
+    "kappa_radial": 1.0,
+    "ebi_beta": 30.0,
 }
 
 

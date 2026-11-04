@@ -1466,7 +1466,7 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     status = rfr.check_status(ROOT)
     assert status["status"] == "CURRENT", json.dumps(status, indent=2, sort_keys=True)
     assert status["stale_stages"] == []
-    assert status["source_digest"] == "2e8a97a0aa845c961de00d403fdcd1673b34b33626e4546c3138882a40e7bacf"
+    assert status["source_digest"] == "f115e8c0ed83c3cbc0a18c6cbe5cf629f8d6177194e834be7c74384fe6f6004b"
 
     perf = status["stages"]["scaling_performance"]
     assert perf["complete_cells"] == 48
@@ -1825,6 +1825,27 @@ def test_republish_registered_inventory_end_to_end_recovers_missing_and_unverifi
         shutil.rmtree(wt, ignore_errors=True)
 
 
+def _sync_tracked_worktree_edits(src_root: Path, dst_root: Path) -> None:
+    import shutil
+    import subprocess
+
+    diff_proc = subprocess.run(
+        ["git", "-C", str(src_root), "diff", "--name-only", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    for rel in diff_proc.stdout.splitlines():
+        rel = rel.strip()
+        if not rel:
+            continue
+        src_file = src_root / rel
+        if src_file.is_file():
+            dst_file = dst_root / rel
+            dst_file.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src_file, dst_file)
+
+
 def test_current_source_tier1_readouts_ignores_non_tier1_records_and_invalidates_cache_on_task_change(
     tmp_path: Path,
 ):
@@ -1840,6 +1861,7 @@ def test_current_source_tier1_readouts_ignores_non_tier1_records_and_invalidates
         text=True,
     )
     try:
+        _sync_tracked_worktree_edits(ROOT, wt)
         live_inv = read_json(wt / "reports/forge/technique-inventory.json")
         atlas_req = rti._resolve_idea_for_readout_check(
             wt,
@@ -2003,6 +2025,7 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
     try:
         # Copy only tracked working-tree updates into the detached worktree while keeping
         # gitignored runs/forge/, reports/forge/attempts/, and test-performance.{json,html} absent.
+        _sync_tracked_worktree_edits(ROOT, wt)
         for rel in (
             "configs/forge/views/discriminator_stability.json",
             "ops/formulaic_coverage.py",
@@ -2087,7 +2110,7 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         status_cpu = rfr.check_status(wt)
         assert status_cpu["status"] == "CURRENT", json.dumps(status_cpu, indent=2, sort_keys=True)
         assert status_cpu["stale_stages"] == []
-        assert status_cpu["source_digest"] == "2e8a97a0aa845c961de00d403fdcd1673b34b33626e4546c3138882a40e7bacf"
+        assert status_cpu["source_digest"] == "f115e8c0ed83c3cbc0a18c6cbe5cf629f8d6177194e834be7c74384fe6f6004b"
 
         wt_inv = read_json(wt / "reports/forge/technique-inventory.json")
         pages = generated_pages(wt, wt_inv)
@@ -2121,7 +2144,7 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
 
         assert (
             rfr.catalog_source_manifest(wt)["digest"]
-            == "2e8a97a0aa845c961de00d403fdcd1673b34b33626e4546c3138882a40e7bacf"
+            == "f115e8c0ed83c3cbc0a18c6cbe5cf629f8d6177194e834be7c74384fe6f6004b"
         )
         sfr_after_edit = rfr.check_selected_family_readouts(wt)
         assert sfr_after_edit["current"] is False

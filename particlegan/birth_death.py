@@ -261,12 +261,15 @@ class ParticleBirthDeath:
             raise ValueError("birth_death_space='critic' needs an explicit critic-feature callback")
         self.rows = rows
         self.N = n = rows.table.shape[0]
-        self.k = min(math.ceil((math.log2(n / self.Q) + 1) / 2), n - 2)
-        if self.k < 4:
-            raise ValueError("particle_birth_death needs at least 6 particles")
-        if isolation and self.k >= (n + 1) // 2:
-            raise ValueError("birth/death isolation needs enough particles for leave-one-out neighbours in its reference half")
-        self.s_k = math.sqrt(2. * float(torch.polygamma(1, torch.tensor(float(self.k), dtype=torch.float64))))
+        d_z = rows.table.shape[1] if rows.table.ndim >= 2 else 0
+        self.k = min(math.ceil((math.log2(max(n, 1) / self.Q) + 1) / 2), max(1, n - 2))
+        self.capacity_bypassed = self.N <= 2 * self.k + d_z
+        if not self.capacity_bypassed:
+            if self.k < 4:
+                raise ValueError("particle_birth_death needs at least 6 particles")
+            if isolation and self.k >= (n + 1) // 2:
+                raise ValueError("birth/death isolation needs enough particles for leave-one-out neighbours in its reference half")
+        self.s_k = math.sqrt(2. * float(torch.polygamma(1, torch.tensor(float(max(1, self.k)), dtype=torch.float64))))
         self.dry_run = False   # test hook: evaluate, never move
         device, dtype = rows.table.device, rows.table.dtype
         self.reservoir = None  # [N, D_out], allocated on the first batch
@@ -468,6 +471,9 @@ class ParticleBirthDeath:
     def maybe_apply(self, sigma_out):
         """Run one evaluation (and its moves) when the reservoir has turned over."""
         self.moved_rows = None
+        d_z = self.rows.table.shape[1] if self.rows.table.ndim >= 2 else 0
+        if self.capacity_bypassed or self.N <= 2 * self.k + d_z:
+            return None
         if self.cells is not None and self.N <= self.cells:
             return None
         if not self.ready():
