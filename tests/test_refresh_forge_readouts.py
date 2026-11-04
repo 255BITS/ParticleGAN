@@ -2164,8 +2164,8 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         monkeypatch.setattr(sources, "runtime_manifest", lambda: deepcopy(cpu_ci_runtime))
         monkeypatch.setattr(planning, "runtime_manifest", lambda: deepcopy(cpu_ci_runtime))
 
-        # Confirm host-resolved compatibility_key genuinely differs from recorded GPU-workstation keys
-        # and that no local attempt envelopes exist for current-source readout rows on the clean worktree.
+        # Resolve the latest checkout under the CPU CI runtime before checking
+        # the original GPU-workstation receipts in the separate pinned cohort.
         probed_req = planning.resolve_idea(
             wt,
             "atlas-particle-normal-v4",
@@ -2178,24 +2178,6 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         assert probed_req["runtime"]["python"] == "3.11.9"
         assert probed_req["rng"]["runtime"]["torch"] == "2.4.0+cpu"
         assert probed_req["compute_profiles"]["cuda"]["availability"] == "unavailable"
-        probed_compat = {
-            tid: job["compatibility_key"]
-            for job in probed_req["jobs"]
-            for tid in job.get("task_ids", [job["task_id"]])
-        }
-        atlas_rec_path = next(
-            p
-            for p in sorted((wt / "reports/forge/records").glob("readout-*.json"))
-            if read_json(p).get("lifecycle") == "concluded"
-            and read_json(p).get("evidence_scope") == "current"
-            and read_json(p).get("candidate_id") == "atlas-particle-normal-v4"
-            and read_json(p).get("candidate_revision") == probed_req["candidate_revision"]
-        )
-        atlas_rec = read_json(atlas_rec_path)
-        for row in atlas_rec["task_results"]:
-            assert not (wt / "reports/forge/attempts" / row["_attempt_id"]).exists()
-            assert row["compatibility_key"] != probed_compat[row["task_id"]]
-
         # Published integrity is portable; latest-source measurement gaps remain explicit.
         status_cpu = rfr.check_published_status(wt)
         assert status_cpu["status"] == "CURRENT", json.dumps(status_cpu, indent=2, sort_keys=True)
@@ -2229,6 +2211,23 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         probed_req = planning.resolve_idea(
             wt, "atlas-particle-normal-v4", view_id="discriminator_stability", through_tier=1,
             freeze_source=False, execution_backend="cuda", cuda_model="NVIDIA RTX A6000")
+        probed_compat = {
+            tid: job["compatibility_key"]
+            for job in probed_req["jobs"]
+            for tid in job.get("task_ids", [job["task_id"]])
+        }
+        atlas_rec_path = next(
+            p
+            for p in sorted((wt / "reports/forge/records").glob("readout-*.json"))
+            if read_json(p).get("lifecycle") == "concluded"
+            and read_json(p).get("evidence_scope") == "current"
+            and read_json(p).get("candidate_id") == "atlas-particle-normal-v4"
+            and read_json(p).get("candidate_revision") == probed_req["candidate_revision"]
+        )
+        atlas_rec = read_json(atlas_rec_path)
+        for row in atlas_rec["task_results"]:
+            assert not (wt / "reports/forge/attempts" / row["_attempt_id"]).exists()
+            assert row["compatibility_key"] != probed_compat[row["task_id"]]
         overview_path.write_text(rti._current_markdown(wt_inv, wt, overview_path))
         assert rfr.check_selected_family_readouts(wt)["current"] is True
 
