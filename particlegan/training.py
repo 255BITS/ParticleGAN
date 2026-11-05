@@ -108,7 +108,8 @@ _ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
                         "optimizer_family": "formulation", "eps": 1e-8,
                         "optimizer_momentum": 0.0, "optimizer_adam_lr": None,
                         "beta2_end": None, "beta2_anneal_end": 0.2,
-                        "reg_coeff_end": None, "reg_coeff_anneal_end": 0.2}
+                        "reg_coeff_end": None, "reg_coeff_anneal_end": 0.2,
+                        "generator_gradient_response": "none"}
 
 
 class GANTrainer:
@@ -260,6 +261,10 @@ class GANTrainer:
             self.G, self.D, self.prior, ema_critic=ema_critic,
             require_latent_damping=require_latent_damping, **self.optimizer_options)
         self.prior_mechanisms = self.opt_g.prior_mechanisms
+        self._gradient_response = None
+        if getattr(recipe, "generator_gradient_response", "none") != "none":
+            from .gradient_response import GradientCoherence
+            self._gradient_response = GradientCoherence()
         self.loss = recipe.make_loss()
         self.prior_regularizer = recipe.make_prior_regularizer(
             weight=1.0 if recipe.prior_regularizer == "vicreg" or recipe.prior_reg > 0 else 0.,
@@ -548,7 +553,27 @@ class GANTrainer:
                                          protected_evaluator=protected_evaluator)
             self.policy.after_generator_backward(
                 loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
-            self.opt_g.step()
+            if self._gradient_response is not None:
+                params = list(self.G.parameters())
+                grads = [torch.zeros_like(p) if p.grad is None else p.grad for p in params]
+                gain = self._gradient_response.observe(grads)
+                # Replace noisy stochastic parameter gradients with bias-corrected EMA mean
+                for p, m in zip(params, self._gradient_response.packet["means"]):
+                    p.grad = (m / self._gradient_response.packet["weight"]).to(p).clone()
+                # Temporarily scale generator proposal learning rate
+                saved_lrs = []
+                for group in self.opt_g.param_groups:
+                    saved_lrs.append(group["lr"])
+                    if group.get("role") == "generator":
+                        group["lr"] = group["lr"] * gain
+                try:
+                    self.opt_g.step()
+                finally:
+                    for group, lr in zip(self.opt_g.param_groups, saved_lrs):
+                        group["lr"] = lr
+                    self._gradient_response.response["applied_steps"] += 1
+            else:
+                self.opt_g.step()
             self.policy.after_generator_step()
         finally:
             for parameter, flag in zip(self.D.parameters(), flags):

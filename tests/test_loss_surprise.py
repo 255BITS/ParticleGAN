@@ -152,7 +152,7 @@ def test_zero_recipe_bloat():
     assert "loss_surprise_threshold" not in field_names
     assert "loss_surprise_cooldown" not in field_names
     # Recipe field count invariant
-    assert len(field_names) == 117
+    assert len(field_names) == 118
 
 
 def test_policy_loss_surprise_integration():

@@ -25,6 +25,7 @@ SEARCH_RECIPE_DEFAULTS = {
     "prior_code_law": "table",
     "kappa_radial": 1.0,
     "ebi_beta": 30.0,
+    "generator_gradient_response": "none",
 }
 
 

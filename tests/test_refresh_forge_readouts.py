@@ -1928,8 +1928,13 @@ def test_republish_registered_inventory_end_to_end_recovers_missing_and_unverifi
         # Scenario D: stale selected scores and false current-source claims are
         # detected and repaired without inventing a new-source measurement.
         orig_md = md_path.read_text()
+        target_atlas_score = (
+            "**[27/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 12/12 tests"
+            if "**[27/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 12/12 tests" in orig_md
+            else "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 8/12 tests (4 fail)"
+        )
         stale_md = orig_md.replace(
-            "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 8/12 tests (4 fail)",
+            target_atlas_score,
             "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** (7 not run)",
             1,
         )

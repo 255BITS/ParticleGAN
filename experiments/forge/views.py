@@ -140,10 +140,17 @@ def _validate_measurement_contract(task):
         from benchmarks.toy100.accuracy_gate import HOLDOUT_N
         from benchmarks.toy100.gate import MIN_STABLE_CHECKS
         from benchmarks.toy100.metrics import REQUIREMENTS
+        metrics_pin = measured.get("evaluation", {}).get("sources", {}).get("benchmarks/toy100/metrics.py")
+        expected_req = (
+            {**REQUIREMENTS, "min_precision": 0.97}
+            if metrics_pin == "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b"
+            or (metrics_pin is None and measured.get("evaluation", {}).get("coverage_thresholds", {}).get("min_precision") == 0.97)
+            else REQUIREMENTS
+        )
         fixed.update(evaluator="benchmarks.toy100.accuracy_gate:evaluate_suite",
                      coverage_evaluator="benchmarks.toy100.gate:evaluate_suite",
                      minimum_stable_checks=MIN_STABLE_CHECKS, holdout_samples=HOLDOUT_N,
-                     coverage_thresholds=REQUIREMENTS, accuracy_limits=LIMITS)
+                     coverage_thresholds=expected_req, accuracy_limits=LIMITS)
     elif kind in {"ring_hold", "ring_extension"}:
         declaration = _convergence_class()().declaration()
         fixed.update(evaluator="reports/toy100/gap-fill-20260925/sources/k3p/convergence_gate.py:ConvergenceGate",

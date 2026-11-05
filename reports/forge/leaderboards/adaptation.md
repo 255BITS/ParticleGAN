@@ -13,7 +13,7 @@ Ordered by attained tier, then candidate name/cohort; raw metrics and cost remai
 | atlas-particle-normal-v3 / d39facf334fe / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | atlas-particle-normal-v3 / d39facf334fe / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | atlas-particle-normal-v4 / ac5d625686ad / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
-| atlas-particle-normal-v4 / ac5d625686ad / cuda (NVIDIA RTX A6000) | current | 0 | FAIL 1, NOT_RUN 20, PASS 2; 7 held (0 pass, not counted) | 23.086 | Run the next eligible task within an explicit budget. |
+| atlas-particle-normal-v4 / 310adba735bd / cuda (NVIDIA RTX A6000) | current | 0 | FAIL 1, NOT_RUN 20, PASS 2; 7 held (0 pass, not counted) | 23.086 | Run the next eligible task within an explicit budget. |
 | bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212 / 4cf21dd77d0b / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212 / 4cf21dd77d0b / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | bcap--0fc5834c2f114d83b8b7ace471dbc8271d0afddd8c92ba1b84d5db8325a8ecd5 / b0041769b149 / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
@@ -784,6 +784,7 @@ Ordered by attained tier, then candidate name/cohort; raw metrics and cost remai
 | bcap-particle-rownorm-only-v1 / 82a4bb4f6531 / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | bcap-prior-coulomb-control-v1 / 1de51e5fcdaf / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | bcap-prior-coulomb-control-v1 / 1de51e5fcdaf / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 20, PASS 3; 7 held (0 pass, not counted) | 24.55 | Run the next eligible task within an explicit budget. |
+| recipe-prior-refactor-bcap-pure-v1 / 19dd0f0147fc / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 20, PASS 3; 7 held (0 pass, not counted) | 24.55 | Run the next eligible task within an explicit budget. |
 | bcap-prior-proximal-v1 / 38b7d1e08385 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | bcap-prior-proximal-v1 / 38b7d1e08385 / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | bcap-pure--023915c9fd7c40786d1a4790539547147134610285b98821f411a3529f57f7e4 / 639030c10770 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
@@ -929,7 +930,7 @@ Ordered by attained tier, then candidate name/cohort; raw metrics and cost remai
 | bispf-optimized-frobenius-v1 / 5c4f570ff999 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | bispf-optimized-frobenius-v1 / 5c4f570ff999 / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | bispf-optimized-quintic-v1 / 5881213fe804 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
-| bispf-optimized-quintic-v1 / 5881213fe804 / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 20, PASS 3; 7 held (0 pass, not counted) | 28.863 | Run the next eligible task within an explicit budget. |
+| bispf-optimized-quintic-v1 / 0c60515ab6fc / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 20, PASS 3; 7 held (0 pass, not counted) | 28.863 | Run the next eligible task within an explicit budget. |
 | bispf-optimized-v1 / c95ae4a162ae / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | bispf-optimized-v1 / c95ae4a162ae / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | bispf-prior-fresh-gaussian-v1 / 228027c04546 / cuda (NVIDIA RTX A6000) | current | 0 | BLOCKED 13, NOT_RUN 10; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
@@ -943,7 +944,7 @@ Ordered by attained tier, then candidate name/cohort; raw metrics and cost remai
 | bispf-v1 / 0dd7928e2cb0 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | bispf-v1 / 0dd7928e2cb0 / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | e22 / 5d5582d35b88 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | BLOCKED 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
-| e22 / 5d5582d35b88 / cuda (NVIDIA RTX A6000) | current | 0 | BLOCKED 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
+| e22 / 33d206040450 / cuda (NVIDIA RTX A6000) | current | 0 | BLOCKED 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | five-word-joint-ka2-v1 / 334d755dd524 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | five-word-joint-ka2-v1 / 334d755dd524 / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | forge-no-critic-penalty / 7e7d6109af1b / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
@@ -1091,13 +1092,13 @@ Ordered by attained tier, then candidate name/cohort; raw metrics and cost remai
 | r3gan-stacked-training-toy-v1 / 078e581a7d14 / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | r3gan-stacked-training-toy-v1 / 078e581a7d14 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | recipe-prior-refactor-k3p-v1 / cf9f9869bb47 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
-| recipe-prior-refactor-k3p-v1 / cf9f9869bb47 / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 20, PASS 3; 7 held (0 pass, not counted) | 23.838 | Run the next eligible task within an explicit budget. |
-| recipe-prior-refactor-ka2-v1 / 3a3eab89c35a / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 20, PASS 3; 7 held (0 pass, not counted) | 23.832 | Run the next eligible task within an explicit budget. |
+| recipe-prior-refactor-k3p-v1 / c5d10fa33454 / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 20, PASS 3; 7 held (0 pass, not counted) | 23.838 | Run the next eligible task within an explicit budget. |
+| recipe-prior-refactor-ka2-v1 / c75a31307540 / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 20, PASS 3; 7 held (0 pass, not counted) | 23.832 | Run the next eligible task within an explicit budget. |
 | recipe-prior-refactor-ka2-v1 / 3a3eab89c35a / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | recipe-prior-refactor-r1r2-v1 / 210ab7b2bdcf / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
-| recipe-prior-refactor-r1r2-v1 / 210ab7b2bdcf / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 20, PASS 3; 7 held (0 pass, not counted) | 21.781 | Run the next eligible task within an explicit budget. |
+| recipe-prior-refactor-r1r2-v1 / 48d635b370ee / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 20, PASS 3; 7 held (0 pass, not counted) | 21.781 | Run the next eligible task within an explicit budget. |
 | recipe-prior-refactor-release07-gan-v3-v1 / 28233d06b1e9 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
-| recipe-prior-refactor-release07-gan-v3-v1 / 28233d06b1e9 / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 20, PASS 3; 7 held (0 pass, not counted) | 22.003 | Run the next eligible task within an explicit budget. |
+| recipe-prior-refactor-release07-gan-v3-v1 / 771936a6cb1b / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 20, PASS 3; 7 held (0 pass, not counted) | 22.003 | Run the next eligible task within an explicit budget. |
 | release07-gan-v3-cloud-v1 / 60614cb714f8 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | BLOCKED 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | release07-gan-v3-cloud-v1 / 60614cb714f8 / cuda (NVIDIA RTX A6000) | current | 0 | BLOCKED 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c / e38a9b8435b3 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 23; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |

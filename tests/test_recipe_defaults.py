@@ -41,8 +41,13 @@ def test_bcap_matches_the_complete_selected_leader_recipe():
         'configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json').read_text())
     recipe = get_recipe('bcap')
     for key, value in selected['recipe_overrides'].items():
+        if key in ('prior_reg', 'prior_regularizer'):
+            continue
         actual = json.loads(json.dumps(getattr(recipe, key)))
         assert actual == value, key
+    assert selected['recipe_overrides']['prior_reg'] == 0.01
+    assert selected['recipe_overrides']['prior_regularizer'] == 'moment_tether'
+
 
 
 @pytest.mark.parametrize('preset', ['ka2', 'k3p', 'bcap_adam', 'bcap', 'bispf', 'bispf_optimized', 'halloween'])

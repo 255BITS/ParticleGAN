@@ -676,7 +676,7 @@
       "commit": "6c895b5924d02e54b0f34d22486aea411a31572f",
       "files_sha256": {
         "benchmarks/toy_audit/reproducibility.py": "5f29fd7f9579be894e97bf4ad93bee8c77aeff104437b5d4e6dc4a4303935891",
-        "experiments/forge/api.py": "5fe26782608e397516ac2998cfbc57e232436fbe72365441b9d7655125b33c5e",
+        "experiments/forge/api.py": "2081402ed7fdb768b184762a8c186f4dbfb60da85cbea51d0210495f331c82b4",
         "experiments/forge/contracts.py": "a5166993ae079d9e35e93b727640413e48c4a91ae7848ceefb4377448db3c916",
         "experiments/forge/priors.py": "99f2e11e2425dc406673ff3f63973f062b2feea113231f3775fad1ad3f5ed595",
         "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
@@ -716,6 +716,7 @@
         "particlegan/feature_reference.py": "e0c3a6d600d136f02f8bf3df4aab6bad4816506ef94519f7800153aded18fd0b",
         "particlegan/gan_loss.py": "f73cc593aef5d7507dc1a468ee261cc186c8dbfbee3a0aad769b6e252c2c143f",
         "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+        "particlegan/gradient_response.py": "a83a9415e1cc60337d33f6eeec9db314df8f2cf6a8b08d5933f9734ec38cb3bc",
         "particlegan/init.py": "3534ff23efa413cdf8b4125b91e0d30671d873b3e2958547d4e744b750454b9b",
         "particlegan/initial_mmd.py": "4c3f949cc2ec307b5860f03721114a504b8634e35620d20c7d3431eb7539968a",
         "particlegan/k3p.py": "0cbb09526d22a14e6df35c5a3dc94e21158d93d3fec882a41f82445668952564",
@@ -741,17 +742,17 @@
         "particlegan/policy.py": "be442dcf21f03a5d1cd364177724fc15560df8cbf401c85bd4630f62f5ea9535",
         "particlegan/population_continuity.py": "e13da3fda91b07d5d560bc44749ebd72a80a2df3c31d8cecf1900ecbd93d8939",
         "particlegan/priors.py": "514e91baf15255c99c1941bc2fa74d6a6061c4170c4a3a9a8ffec8c16ce3ff23",
-        "particlegan/recipe_compat.py": "b083905d10941a569799840d9aa4fc1773a5097f849ba5bde8ccdb6c2e0f468e",
+        "particlegan/recipe_compat.py": "7a81d5f4a5e719b0fdb394e899805e8d299b00685d5d20eff1389595d1ab37e0",
         "particlegan/recipe_schedules.py": "b675bdc9f72224b11e9887f8ed66b1a541ffc76d80242709969cc67ac47ca46a",
-        "particlegan/recipes.py": "571fc14d340ba50a952ddd891f43721189ea5b0c04e87c3e02c6196a9972aaf7",
+        "particlegan/recipes.py": "49207dfd764b20bed6805e156887e3e6316e30b447b29286b562da4672f314b1",
         "particlegan/routing.py": "6f13c070446ce8a963f115d8aaeea85fb37491aebd8ad564c8155f7c775aa2c8",
         "particlegan/row_evidence.py": "f5814ed469089c74c9d9cbc21ffd1f72c102a409b9fe1591e8230e42427b04c2",
         "particlegan/sigreg.py": "96bac4b2344f9d505a7d767ecfbb58ab06442e2a1de1a48ea479baa2288e048b",
         "particlegan/tensorflow_adam.py": "37f1192e48b84907446d8f676c62631bf87ff450b2a2e6b63e7489adc33e24e9",
-        "particlegan/training.py": "a036dfe73aaab52b1b2d29081e323d4c35e163c852ea6883e70f8625c1cdea01",
+        "particlegan/training.py": "05272bd524b9c2c0812d4e9db912970fbdaa90eabba7763a1e251058dab007fe",
         "particlegan/vicreg_loss.py": "177a68b98036e4725cacf6bc0d95277111184c0dcb9566d3f7fc1527046cefda"
       },
-      "sha256": "52126b7e2ed1803ee43a4f02cc7da4f79c29b9ab25eb9a57085aabc26191757f"
+      "sha256": "4ba84f489adc70ee5874cb7dd790bd8ab6054bafb28a3c147f0dcb4216fab7e4"
     },
     "task_sha256": "7f98c9b997c36af81e1578d51be268afd568d1a267070e46a6cda4779d4b682a"
   },
