@@ -3063,9 +3063,10 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                             elif cov_tid not in measured:
                                 measured[cov_tid] = cov_st
                                 all_measured[cov_tid] = cov_st
-                        if not used_records and matching and measured:
-                            used_records.append((matching[0][0], matching[0][1]))
-                        elif not used_records and fam_cov and measured:
+                        # Coverage may supply Tier 1 measurements even when a
+                        # matching readout contains only Tier 2. Cite coverage,
+                        # never an unrelated readout that contributed no row.
+                        if not used_records and fam_cov and measured:
                             used_records.append(("reports/forge/attempt-coverage.json", "attempt-coverage.json"))
                     if used_records:
                         any_matched = True

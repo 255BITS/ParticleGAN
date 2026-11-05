@@ -1986,7 +1986,31 @@ def _sync_tracked_worktree_edits(src_root: Path, dst_root: Path) -> None:
 
 
 def _restore_recorded_source_cohort(root: Path) -> str:
-    """Return the current-source digest matching the committed readout records."""
+    """Restore the pre-migration software cohort for archived tamper controls.
+
+    Latest-source integrity is checked separately above. These controls need
+    actual original source bytes, rather than relabeling the latest checkout.
+    No training or published evidence is rewritten.
+    """
+    import io
+    import subprocess
+    import tarfile
+    from experiments.forge.sources import SOURCE_DIRS, SOURCE_SUFFIXES
+
+    assert root.resolve() != ROOT.resolve()
+    revision = "6261a5458c1f3e14c7c9faf1fc6966e03b2acfb1"
+    current = set(rfr.catalog_source_manifest(root)["files"])
+    names = subprocess.check_output(
+        ["git", "ls-tree", "-r", "--name-only", revision], cwd=ROOT, text=True).splitlines()
+    desired = {name for name in names if name in current or (
+        Path(name).suffix in SOURCE_SUFFIXES and (
+            Path(name).parts[0] in SOURCE_DIRS
+            or name.startswith("configs/") and "forge" not in Path(name).parts))}
+    for name in current - desired:
+        (root / name).unlink()
+    data = subprocess.check_output(["git", "archive", revision, "--", *sorted(desired)], cwd=ROOT)
+    with tarfile.open(fileobj=io.BytesIO(data)) as archive:
+        archive.extractall(root, filter="data")
     return rfr.catalog_source_manifest(root)["digest"]
 
 
