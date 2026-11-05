@@ -1,0 +1,25 @@
+{
+  "assignments": [
+    {"importance": "diagnostic", "order": 0, "qualification_tier": 1, "task": "gaussian1d_smoke"},
+    {"importance": "diagnostic", "order": 1, "qualification_tier": 1, "task": "two_pole"},
+    {"importance": "diagnostic", "order": 2, "qualification_tier": 1, "task": "ring16_acquisition"},
+    {"importance": "diagnostic", "order": 3, "qualification_tier": 1, "task": "five_word_joint_smoke"},
+    {"importance": "diagnostic", "order": 4, "qualification_tier": 1, "task": "five_word_joint_hold"}
+  ],
+  "calibration": {
+    "adoption_blocker": "Research diagnostic for the 2026-10-15 BISPF ablation dig; not a qualification view. Task declarations and gates keep their original identities.",
+    "status": "provisional"
+  },
+  "eligibility": {},
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "dig-bispf-ablation-priority-v1",
+  "policy_change_reason": "Stage 2 of the BISPF ablation: the remaining priority tests, to check the tether arm keeps what the control passes; no ordinary qualification.",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "qualified_tier_only_with_raw_metrics"
+  },
+  "revision": 1,
+  "schema_version": 1
+}

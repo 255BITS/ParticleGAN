@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "dig-bispf-ablation-v1",
+  "budget_seconds": 10800,
+  "candidate_budget_seconds": 3720,
+  "accept_shared_cost_transfer": false,
+  "purpose": "Opt-in BISPF ablation dig (2026-10-15): BCAP control, BCAP+SBNP tether, full BISPF on one frozen source; mode_hold first, then five priority tests. Seed 0 only; about 2 GPU-hours of actual training."
+}

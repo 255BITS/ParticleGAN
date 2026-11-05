@@ -1,0 +1,59 @@
+{
+  "campaign": {
+    "budget_seconds": 10800,
+    "candidate_budget_seconds": 3720,
+    "id": "dig-bispf-ablation-v1"
+  },
+  "candidate": "recipe-prior-refactor-bcap-pure-v1",
+  "competing_explanation": "If BISPF's critic-side parts (Born-Infeld chord penalty, Sinkhorn coupling, logit gauge, harmonic thermal cooling) are needed, the tether-only arm fails mode_hold's sustained gate (>= 5 terminal passes of modes>=8 and hq>=0.9) while BISPF passes it; if the tether costs other capabilities, the tether arm loses a priority test the control passes.",
+  "control": {
+    "candidate_id": "bcap-sbnp-tether-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "quality_fraction",
+    "op": "<",
+    "phase": "final",
+    "task_id": "five_word_joint_hold",
+    "threshold": 0.95
+  },
+  "hypothesis": "Matched control: the selected BCAP recipe rerun unchanged on the same frozen source as the tether and BISPF arms.",
+  "id": "dig-bispf-ablation-control-priority-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "quality_fraction",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "five_word_joint_hold",
+    "threshold": 0.95
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "gate_status": "FAIL",
+        "observation_count": 24
+      },
+      "path": "reports/forge/bcap-prior-search/covariance/repair-witness.json",
+      "selector": [
+        "witnesses",
+        "control",
+        "mode_hold"
+      ],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "dig-bispf-ablation-priority-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}
