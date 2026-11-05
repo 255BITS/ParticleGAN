@@ -1,0 +1,32 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "ring16_acquisition_6400"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "ring16_acquisition"
+    }
+  ],
+  "calibration": {
+    "adoption_blocker": "Research diagnostic for the user-authorised ring16 cap change; no ordinary qualification follows from this view.",
+    "status": "provisional"
+  },
+  "eligibility": {},
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "dig2-ring16-cap-diagnostic-v1",
+  "policy_change_reason": "Every runnable selected recipe on ring16 at the new 6400-update cap (full-budget schedules) and, as the matched control on the same frozen source, the original 1600-update task.",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "qualified_tier_only_with_raw_metrics"
+  },
+  "revision": 1,
+  "schema_version": 1
+}
