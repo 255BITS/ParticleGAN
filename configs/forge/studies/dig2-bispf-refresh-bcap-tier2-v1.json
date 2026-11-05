@@ -1,0 +1,59 @@
+{
+  "campaign": {
+    "budget_seconds": 40000,
+    "candidate_budget_seconds": 16200,
+    "id": "dig2-bispf-refresh-v1"
+  },
+  "candidate": "recipe-prior-refactor-bcap-pure-v1",
+  "competing_explanation": "If BISPF's recorded lead (mode_hold) came from the stale source/runtime (fafd6615, older Python/numpy), the current-source rerun gives BISPF and BCAP the same mode_hold verdict, or changes another counted verdict; verdicts are the Forge sustained/confirmed gates, not endpoints.",
+  "control": {
+    "candidate_id": "bispf-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "hq",
+    "op": "<",
+    "phase": "final",
+    "task_id": "mode_hold",
+    "threshold": 0.9
+  },
+  "hypothesis": "Matched control: the selected BCAP recipe (BISPF's parent) rerun unchanged on the same frozen source as BISPF; its recorded verdicts (mode_hold FAIL, all other counted tests PASS) reproduce.",
+  "id": "dig2-bispf-refresh-bcap-tier2-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "modes",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "mode_hold",
+    "threshold": 8
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "gate_status": "FAIL",
+        "observation_count": 24
+      },
+      "path": "reports/forge/bcap-prior-search/covariance/repair-witness.json",
+      "selector": [
+        "witnesses",
+        "control",
+        "mode_hold"
+      ],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "dig2-bispf-refresh-tier2-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}
