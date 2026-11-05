@@ -253,10 +253,10 @@ assert 'particlegan' not in sys.modules, 'particlegan leaked into sys.modules'
 
 @pytest.mark.parametrize("preset", ["ka2", "bcap", "bispf", "bispf_optimized", "e22"])
 def test_recipe_serialization_roundtrip(preset):
-    """Verify Recipe.to_dict() and Recipe(**recipe.to_dict()) roundtrips cleanly without data loss."""
+    """Verify Recipe.to_dict() and Recipe.from_dict(recipe.to_dict()) roundtrips cleanly without data loss."""
     recipe = get_recipe(preset)
     as_dict = recipe.to_dict()
-    reconstructed = Recipe(**as_dict)
+    reconstructed = Recipe.from_dict(as_dict)
     assert reconstructed == recipe
     assert get_recipe_fields(preset) == dataclasses.asdict(recipe)
 

@@ -277,6 +277,17 @@ def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer
                 blockers = task_preflight(deepcopy(task), candidate, {}, root=ROOT, tasks=tasks)
                 assert f"{task['id']}: evaluator source changed; revise the task definition: {path}" in blockers
                 continue
+            if path in {"benchmarks/toy_audit/api_model_ae.py",
+                        "benchmarks/toy_audit/api_model_ddgan.py",
+                        "benchmarks/toy_audit/api_model_vae.py"}:
+                from recipe_entrypoint_compat import frozen_restoration_source
+                frozen_restoration_source(ROOT, path, digest)
+                if hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != digest:
+                    from experiments.forge.preflight import task_preflight
+                    candidate = json.loads((ROOT / "configs/forge/ideas/k3p.json").read_text())
+                    blockers = task_preflight(deepcopy(task), candidate, {}, root=ROOT, tasks=tasks)
+                    assert f"{task['id']}: evaluator source changed; revise the task definition: {path}" in blockers
+                continue
             assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == digest
     if missing_history:
         pytest.skip("frozen legacy-card source pins need archived commit(s) " + ", ".join(sorted(c[:12] for c in missing_history))

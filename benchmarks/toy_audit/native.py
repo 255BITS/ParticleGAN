@@ -35,7 +35,7 @@ def run(problem, output, *, device="cuda:0", steps=7000, shift=False):
     torch.manual_seed(1234)
     root = Path(__file__).resolve().parents[2]
     options = json.loads((root / "configs/100gaussians/atlas.json").read_text())
-    recipe = Recipe(**{**options, "num_particles": 20000, "z_dim": 2, "batch_size": 2048})
+    recipe = Recipe.from_dict({**options, "num_particles": 20000, "z_dim": 2, "batch_size": 2048})
     with torch.device(device):
         prior = ParticlePrior(20000, 2)
         with torch.no_grad():

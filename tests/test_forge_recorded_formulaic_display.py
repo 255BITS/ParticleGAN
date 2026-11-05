@@ -137,3 +137,18 @@ def test_recorded_projection_validates_each_attempt_key(recorded):
     publication["family_progress"]["input_hashes"][COVERAGE.as_posix()] = file_hash(root / COVERAGE)
     with pytest.raises(ValueError, match="invalid attempt binding"):
         inventory._recorded_source_binary_projection(publication, root)
+
+
+def test_historical_task_fingerprints_are_not_aliased_to_current_source(tmp_path, monkeypatch):
+    from ops import refresh_forge_readouts
+    old_source, live_source = "a" * 64, "b" * 64
+    execution, evaluation = "c" * 64, "d" * 64
+    atomic_json(tmp_path / COVERAGE, {"records": [{
+        "source_digest": old_source, "task": "unit-task",
+        "execution_sha256": execution, "evaluation_sha256": evaluation,
+    }]})
+    monkeypatch.setattr(refresh_forge_readouts, "catalog_source_manifest",
+                        lambda root: {"digest": live_source})
+    fingerprints = inventory._load_attempt_coverage_task_fps(tmp_path)
+    assert fingerprints == {(old_source, "unit-task"): {(execution, evaluation)}}
+    assert (live_source, "unit-task") not in fingerprints

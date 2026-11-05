@@ -72,6 +72,9 @@ def resolve_public_recipe(candidate, **overrides):
     exposed publicly as ``bcap_adam``. Public ``get_recipe("bcap")`` may select
     the winning public default without changing archived Forge cards or
     their identities. Explicit optimizer and rate overrides still take effect.
+    Its unnamed historical cards explicitly bind the KA2 preset. New cards
+    should declare ``recipe_preset``; this versioned protocol does not select
+    restoration defaults as a substitute for the public recipe factory.
     """
     options = {**candidate.get("recipe_overrides", {}), **overrides}
     preset = candidate.get("recipe_preset")
@@ -79,7 +82,10 @@ def resolve_public_recipe(candidate, **overrides):
         if API_VERSION == "forge-api-v1" and preset == "bcap":
             label = options.pop("name", "bcap")
             return get_recipe("bcap_adam", **options).replace(name=label)
-        return Recipe(**options) if preset is None else get_recipe(preset, **options)
+        if preset is None:
+            label = options.pop("name", "ka2")
+            return get_recipe("ka2", **options).replace(name=label)
+        return get_recipe(preset, **options)
     except (TypeError, ValueError) as error:
         raise CapabilityError([f"unsupported recipe: {error}"]) from error
 
@@ -451,6 +457,8 @@ class FormulationContext:
     Recipe-only variables stay in ``recipe_overrides``. Prior width is explicit
     and does not run historical nearest-neighbor calibration. ``extensions``
     are validated bindings registered once through ``CapabilityRegistry``.
+    This is the frozen Forge-v1 protocol: an omitted preset means explicit
+    historical KA2. Declare ``recipe_preset`` for a current public recipe.
     """
     def __init__(self, *, recipe_preset=None, recipe_overrides=None, prior=None, seed=0, device="cpu",
                  requires_capabilities=(), registry=None, extensions=None,

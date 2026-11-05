@@ -2391,83 +2391,8 @@ def _load_attempt_coverage_task_fps(root: Path) -> dict[tuple[str, str], set[tup
             target.setdefault((src, tid), set()).add((ex_fp, ev_fp))
     merged = dict(scoped)
     merged.update(unscoped)
-    if unscoped:
-        by_task: dict[str, set[tuple[str, str]]] = {}
-        for (_, tid), pairs in unscoped.items():
-            by_task.setdefault(tid, set()).update(pairs)
-        by_task.setdefault("five_word_joint_smoke", set()).add(
-            (
-                "461487d4910644bdc4090551214b43b1c6cfcc88f0cc8c2a7830cc9fa777049b",
-                "ed9994f3dcfb1d22a771f84d1ede72d2e11cd93501e5973cd9948cc666546bfa",
-            )
-        )
-        by_task.setdefault("five_word_joint_hold", set()).add(
-            (
-                "d1b332861b834bfa3dc624364a3ae0b42407e89dbbfed1701df1c7a7c78e8e64",
-                "18b53076bbd1db687fed88c4caa3883f5c38b3157582c147f0e796fa7f1d4154",
-            )
-        )
-        by_task.setdefault("grid100", set()).add(
-            (
-                "59f2a390bfe15b5b06d99df4f9767258774fddab12a297fe2b83eb0635131a63",
-                "035a006309308989d60bc90a9b77ea63fa042648a65c155bcbf09bed0e9b165e",
-            )
-        )
-        by_task.setdefault("rotated100", set()).add(
-            (
-                "409698067483c30bb62d602c7c8560583d23f440e1c55d3ebb83402ef1319ff0",
-                "035a006309308989d60bc90a9b77ea63fa042648a65c155bcbf09bed0e9b165e",
-            )
-        )
-        by_task.setdefault("staggered100", set()).add(
-            (
-                "b97e8a1a77efa5c71d7ba43817991ac81f9e255d90af975c462b12419e0a03b8",
-                "035a006309308989d60bc90a9b77ea63fa042648a65c155bcbf09bed0e9b165e",
-            )
-        )
-        by_task.setdefault("grid100_mlp16", set()).add(
-            (
-                "324497a215c97e261be49139a6fd80de9988d90e853ce3cbe8cef6e479c052a6",
-                "1ac127eb2ec6bbbf18e515093744274ab8f3d7d7690af9eec8aff865f5219a45",
-            )
-        )
-        by_task.setdefault("grid100_res16_tanh", set()).add(
-            (
-                "03409fb391ae17213b9eca6cc9f66765871cd83bded82db00e2cee11e2de5a33",
-                "1c18bc0d1e775d484d9d2fd7b7518335d9228b9251f01ec5b4467bbcbe87651a",
-            )
-        )
-        by_task.setdefault("model_ae_ddgan_bimodal_chain", set()).add(
-            (
-                "700afbb7302b48e3f287b208b6c9a5bc38ca9b2d10aedcfaebd331d9e1b248da",
-                "e7317072be74a9711e80bbf986ea836869d3530a758a42787ef8d2cdb24e1b1f",
-            )
-        )
-        by_task.setdefault("model_ae_ddgan_gaussian_chain", set()).add(
-            (
-                "67563538d401f1b94dc03a6b2fdfa309c4282ef508967f3500ce7615861deecd",
-                "00753c31f84626df000df5745e0ec896b5649485bb2c6bf3809f3f94a18a59f3",
-            )
-        )
-        by_task.setdefault("model_ddgan_bimodal_chain", set()).add(
-            (
-                "0ab53cd46649cd6fb054dad6c05df65eb21b13f7f990c15363faf6055c41c25e",
-                "904fb7cd6e18d2ad359a22115bee7714daa7da0ec23c67570b74f703025dcfca",
-            )
-        )
-        by_task.setdefault("model_ddgan_gaussian_chain", set()).add(
-            (
-                "cf83ffdd69d31283f467395dd5e93fdc74e739e971b0d95159c0a7ff577e1a7d",
-                "1c830a5009d3ae8db399ae86d5bb37fedcb02f6146a7654cf92599d8e2c255fe",
-            )
-        )
-        try:
-            from ops.refresh_forge_readouts import catalog_source_manifest
-            live_src = catalog_source_manifest(Path(root))["digest"]
-            for tid, pairs in by_task.items():
-                merged.setdefault((live_src, tid), set()).update(pairs)
-        except Exception:
-            pass
+    # Source identities are immutable. Historical task fingerprints must not
+    # be copied under today's source digest merely to populate a live table.
     return merged
 
 
@@ -3117,9 +3042,10 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                             elif cov_tid not in measured:
                                 measured[cov_tid] = cov_st
                                 all_measured[cov_tid] = cov_st
-                        if not used_records and matching and measured:
-                            used_records.append((matching[0][0], matching[0][1]))
-                        elif not used_records and fam_cov and measured:
+                        # Coverage may supply Tier 1 measurements even when a
+                        # matching readout contains only Tier 2. Cite coverage,
+                        # never an unrelated readout that contributed no row.
+                        if not used_records and fam_cov and measured:
                             used_records.append(("reports/forge/attempt-coverage.json", "attempt-coverage.json"))
                     if used_records:
                         any_matched = True
