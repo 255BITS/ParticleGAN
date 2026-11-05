@@ -55,7 +55,7 @@ def _trainer(n, backend):
     G = torch.nn.Sequential(torch.nn.Linear(2, 8), torch.nn.Tanh(), torch.nn.Linear(8, 2))
     D = torch.nn.Sequential(torch.nn.Linear(2, 8), torch.nn.Tanh(), torch.nn.Linear(8, 1))
     prior = ParticlePrior(n, 2, generator=torch.Generator().manual_seed(6))
-    return GANTrainer(Recipe(**config), G, D, prior=prior, seed=5, serial_backward=True)
+    return GANTrainer(Recipe.from_dict(config), G, D, prior=prior, seed=5, serial_backward=True)
 
 
 def test_factory_routes_small_populations_to_the_reference_law_with_metadata():

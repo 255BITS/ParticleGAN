@@ -92,7 +92,7 @@ def test_baseline_binding_and_protocol_refusals():
     from benchmarks.toy_audit.api_model_vae import ROOT
     from particlegan import Recipe
     candidate = json.loads((ROOT / f"configs/forge/ideas/{BASELINE}.json").read_text())
-    baseline = Recipe(**candidate["recipe_overrides"])
+    baseline = Recipe.from_dict(candidate["recipe_overrides"])
     case = list_cases()[0]
     recipe = task_recipe(case)
     fixture = build_case("api-model-vae-hard", recipe=recipe, max_steps=1)

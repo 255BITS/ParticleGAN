@@ -248,7 +248,7 @@ def verify_pair_artifacts(evidence: dict) -> dict:
     from .api import policy_controls
     schedule_free = (config["recipe"]["total_steps"] is None
                      and (execution.get("policy_contract", {}).get("schedule") == "preserve_resolved_recipe_none"
-                          or policy_controls(Recipe(**config["recipe"]))))
+                          or policy_controls(Recipe.from_dict(config["recipe"]))))
     expected_horizon = None if schedule_free else execution["original_schedule_horizon"]
     for name, final in (("active", "active_final"), ("frozen", "frozen_final")):
         run = evidence[name]

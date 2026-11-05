@@ -127,7 +127,7 @@ def test_mixed_precision_is_training_only_and_checkpoint_continuation_is_exact()
 def test_previous_execution_policy_remains_explicit_and_restorable():
     recipe = get_recipe('bispf_optimized', optimizer_svd_backend='native', training_precision='float32')
     assert 'training_precision' not in recipe.to_dict()
-    assert type(recipe)(**recipe.to_dict()) == recipe
+    assert type(recipe).from_dict(recipe.to_dict()) == recipe
     with pytest.raises(ValueError, match='training_precision'):
         recipe.replace(training_precision='fp16')
     from experiments.forge.techniques import validate_same_technique

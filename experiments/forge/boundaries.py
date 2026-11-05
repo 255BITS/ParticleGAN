@@ -72,7 +72,7 @@ class RecipeFieldSpec:
     default: object
 
 
-_DEFAULT_RECIPE = Recipe()
+_DEFAULT_RECIPE = Recipe.from_dict({})
 RECIPE_FIELD_SPECS: dict[str, RecipeFieldSpec] = {
     field.name: RecipeFieldSpec(
         name=field.name,

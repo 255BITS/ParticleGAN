@@ -88,8 +88,8 @@ def test_scoped_adapter_refuses_nondefault_metadata(tmp_path, monkeypatch, field
     from conftest import _archived_inactive_comparison_scope
     from tests.archived_forge_contracts import COMMITS
 
-    changed = replace(particlegan.Recipe(), **{field: value})
-    monkeypatch.setattr(particlegan, "Recipe", lambda: changed)
+    changed = replace(particlegan.Recipe.from_dict({}), **{field: value})
+    monkeypatch.setattr(particlegan, "Recipe", SimpleNamespace(from_dict=lambda fields: changed))
     imported = SimpleNamespace(__file__=str(ROOT / helper().INACTIVE), ROOT=ROOT,
         DEVELOP=COMMITS["bcap_legacy_questions"], NEW_INACTIVE_FIELDS={})
     with pytest.raises(AssertionError, match=field):

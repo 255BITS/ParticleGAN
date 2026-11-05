@@ -17,7 +17,7 @@ from particlegan.recipe_schedules import (
 
 
 def plain_recipe(**changes):
-    return Recipe(**{
+    return Recipe.from_dict({
         "name": "schedule-unit", "optimizer_family": "adam", "reg_arm": "a_r1r2",
         "num_particles": 8, "z_dim": 2, "batch_size": 4, "total_steps": 20,
         "standardize": False, "lr": .0002, "d_lr_mult": 1., "prior_lr_mult": 1.,

@@ -166,7 +166,7 @@ def test_dv12_clockfree_audit_passes_including_settle_and_feature_cells_and_bloc
         assert source_audit({**dv12_dict, "beta2_end": 0.9}, {})["unexplained_clock_dependencies"] != []
         assert source_audit({**dv12_dict, "total_steps": 1000}, {})["unexplained_clock_dependencies"] != []
         assert source_audit({**dv12_dict, "lr_control": "mobility"}, {})["unexplained_clock_dependencies"] != []
-        exp_dict = Recipe(
+        exp_dict = Recipe.from_dict(dict(
             critic_formulation="k3p",
             continuous_policy=None,
             lr_control="mobility",
@@ -178,7 +178,7 @@ def test_dv12_clockfree_audit_passes_including_settle_and_feature_cells_and_bloc
             input_noise_std=0.0,
             output_noise_warmup=0.0,
             d_guard_min_steps=0,
-        ).to_dict()
+        )).to_dict()
         assert source_audit(exp_dict, {})["unexplained_clock_dependencies"] != []
     finally:
         torch.set_num_threads(previous)

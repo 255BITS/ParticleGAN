@@ -585,11 +585,6 @@
         "`experiments.forge.views.grade_result` imported but unused": 1
       }
     },
-    "tests/test_forge_model_publication.py": {
-      "F401": {
-        "`copy.deepcopy` imported but unused": 1
-      }
-    },
     "tests/test_forge_model_toys.py": {
       "F401": {
         "`torch` imported but unused": 1
