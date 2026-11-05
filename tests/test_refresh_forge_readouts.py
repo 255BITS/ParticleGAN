@@ -1985,6 +1985,40 @@ def _sync_tracked_worktree_edits(src_root: Path, dst_root: Path) -> None:
             shutil.copy2(src_file, dst_file)
 
 
+def _readout_workstation_envelope_fixture():
+    """Declared metadata for software compatibility controls, with no training."""
+    return {
+        "schema_version": 1,
+        "request": {
+            "runtime": {
+                "implementation": "CPython",
+                "machine": "x86_64",
+                "packages": {"numpy": "2.5.4", "scipy": "1.18.1", "torch": "2.14.1"},
+                "python": "3.14.8",
+                "system": "Linux",
+            },
+            "rng": {
+                "runtime": {
+                    "rng": "torch.Generator",
+                    "torch": "2.14.1+cu130",
+                }
+            },
+            "compute_profiles": {
+                "cuda": {
+                    "autograd_multithreading_enabled": False,
+                    "backend": "cuda",
+                    "compute_capability": "8.6",
+                    "deterministic": True,
+                    "driver": "615.78.08",
+                    "model": "NVIDIA RTX A6000",
+                    "tf32": False,
+                    "threads": 1,
+                }
+            },
+        },
+    }
+
+
 def _restore_recorded_source_cohort(root: Path) -> str:
     """Restore the pre-migration software cohort for archived tamper controls.
 
@@ -2011,7 +2045,56 @@ def _restore_recorded_source_cohort(root: Path) -> str:
     data = subprocess.check_output(["git", "archive", revision, "--", *sorted(desired)], cwd=ROOT)
     with tarfile.open(fileobj=io.BytesIO(data)) as archive:
         archive.extractall(root, filter="data")
-    return rfr.catalog_source_manifest(root)["digest"]
+    manifest = rfr.catalog_source_manifest(root)
+    assert manifest["digest"] == "2e8a97a0aa845c961de00d403fdcd1673b34b33626e4546c3138882a40e7bacf"
+    _bind_readout_software_fixture(root, manifest["digest"])
+    return manifest["digest"]
+
+
+def _bind_readout_software_fixture(root: Path, source_digest: str) -> None:
+    """Bind copied metadata to this API for tamper tests, never qualification.
+
+    Ordinary receipts used an earlier declaration identity. Preserve each
+    original identity in the private fixture and derive compatibility keys
+    independently from planner jobs and the declared workstation envelope.
+    Published rows, gate outcomes and source files remain unchanged.
+    """
+    from experiments.forge import planning
+    runtime = _readout_workstation_envelope_fixture()["request"]
+    for choice in rfr.current_family_candidates(root):
+        req = planning.resolve_idea(
+            root, choice["candidate_id"], view_id="discriminator_stability",
+            through_tier=rfr._discriminator_stability_max_tier(root), freeze_source=False,
+            execution_backend="cuda", cuda_model="NVIDIA RTX A6000")
+        assert req["source"]["digest"] == source_digest
+        jobs = deepcopy(req["jobs"])
+        for job in jobs:
+            science = job["science"]
+            science["runtime"] = deepcopy(runtime["runtime"])
+            science["rng"]["runtime"] = deepcopy(runtime["rng"]["runtime"])
+            science["compute"] = {**runtime["compute_profiles"]["cuda"],
+                                  "threads": science["compute"]["threads"]}
+        planning.rekey_jobs(jobs)
+        keys = {tid: job["compatibility_key"] for job in jobs
+                for tid in job.get("task_ids", [job["task_id"]])}
+        for path in (root / "reports/forge/records").glob("readout-*.json"):
+            record = read_json(path)
+            if (record.get("candidate_id") != choice["candidate_id"]
+                    or record.get("evidence_scope") != "current"):
+                continue
+            old_revision = record["candidate_revision"]
+            record["software_fixture_original_identity"] = {
+                "candidate_revision": old_revision, "source": deepcopy(record["source"])}
+            record["qualification_input"] = record["qualification_reuse"] = False
+            record["candidate_revision"] = req["candidate_revision"]
+            record["source"] = {"digest": source_digest}
+            for row in record["task_results"]:
+                if row["task_id"] in keys:
+                    row["compatibility_key"] = keys[row["task_id"]]
+            atomic_json(path, record)
+            for board in (root / "reports/forge/leaderboards").glob("*.md"):
+                text = board.read_text()
+                board.write_text(text.replace(old_revision[:12], req["candidate_revision"][:12]))
 
 
 def test_current_source_tier1_readouts_ignores_non_tier1_records_and_invalidates_cache_on_task_change(
@@ -2364,36 +2447,7 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         zt_row = next(r for r in atlas_rec["task_results"] if r["task_id"] == "zero_tanh_smoke")
         zt_aid = zt_row["_attempt_id"]
         local_req_path = wt / "reports/forge/attempts" / zt_aid / "request.json"
-        valid_workstation_envelope = {
-            "schema_version": 1,
-            "request": {
-                "runtime": {
-                    "implementation": "CPython",
-                    "machine": "x86_64",
-                    "packages": {"numpy": "2.5.4", "scipy": "1.18.1", "torch": "2.14.1"},
-                    "python": "3.14.8",
-                    "system": "Linux",
-                },
-                "rng": {
-                    "runtime": {
-                        "rng": "torch.Generator",
-                        "torch": "2.14.1+cu130",
-                    }
-                },
-                "compute_profiles": {
-                    "cuda": {
-                        "autograd_multithreading_enabled": False,
-                        "backend": "cuda",
-                        "compute_capability": "8.6",
-                        "deterministic": True,
-                        "driver": "615.78.08",
-                        "model": "NVIDIA RTX A6000",
-                        "tf32": False,
-                        "threads": 1,
-                    }
-                },
-            },
-        }
+        valid_workstation_envelope = _readout_workstation_envelope_fixture()
         atomic_json(local_req_path, valid_workstation_envelope)
         assert rfr.check_selected_family_readouts(wt)["current"] is True
         assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is True

@@ -87,7 +87,11 @@ Its hand-set linear critic is an explicit arithmetic fixture, not a learned GAN.
 
 ## Train an actual four-category GAN
 
+From the source checkout, install the example dependencies first. GIF rendering
+uses Pillow from the `experiments` extra.
+
 ```sh
+python -m pip install -e '.[experiments,dev]'
 python examples/bispf_categorical.py --output runs/software/bispf-categorical
 ```
 
