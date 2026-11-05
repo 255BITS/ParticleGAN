@@ -58,7 +58,7 @@ def restore_archived_contracts(root, scope):
             )
         )
         tasks_dir = root / "configs/forge/tasks"
-        if tasks_dir.is_dir():
+        if scope == "tier1_completion" and tasks_dir.is_dir():
             for task_path in tasks_dir.glob("*.json"):
                 card = json.loads(task_path.read_text())
                 rev = card.get("evaluation", {}).get("evaluator_revision") or {}
