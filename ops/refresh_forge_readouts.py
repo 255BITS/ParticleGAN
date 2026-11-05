@@ -719,10 +719,13 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
                             and "evaluation" in t_card
                             and req_source_digest
                             and (
-                                task_execution_fingerprint(t_card),
-                                task_evaluation_fingerprint(t_card),
+                                (req_source_digest, cov_tid) not in coverage_fps
+                                or (
+                                    task_execution_fingerprint(t_card),
+                                    task_evaluation_fingerprint(t_card),
+                                )
+                                in coverage_fps.get((req_source_digest, cov_tid), set())
                             )
-                            in coverage_fps.get((req_source_digest, cov_tid), set())
                         ):
                             measured_statuses[cov_tid] = cov_st
 

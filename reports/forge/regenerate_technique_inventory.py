@@ -2958,16 +2958,30 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
             req_total = 0
             diag_total = 0
             any_matched = False
+            runnable_count = 0
+            runnable_matched_count = 0
             with planning.resolution_cache(root):
-                for fam_id, fam_label, fam_page, cid, card_rel, _ in selected_specs:
+                resolved_specs = []
+                for spec in selected_specs:
                     req = _resolve_idea_for_readout_check(
                         root,
-                        cid,
+                        spec[3],
                         view_id="discriminator_stability",
                         through_tier=1,
                         cuda_model="NVIDIA RTX A6000",
                         planning_mod=planning,
                     )
+                    t1_tasks = [
+                        item["task"]
+                        for item in req["view"]["assignments"]
+                        if int(item["qualification_tier"]) == 1 and item["task"] in req["tasks"]
+                    ]
+                    all_t1_preflight_blocked = bool(t1_tasks) and all(
+                        req["tasks"][t].get("preflight_blockers") for t in t1_tasks
+                    )
+                    resolved_specs.append((all_t1_preflight_blocked, spec, req))
+                resolved_specs.sort(key=lambda item: item[0])
+                for all_t1_preflight_blocked, (fam_id, fam_label, fam_page, cid, card_rel, _), req in resolved_specs:
                     source_digests.add(req["source"]["digest"])
                     view_revision = req["view"]["revision"]
                     t1_assignments = [
@@ -3017,8 +3031,13 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                             used_records.append((rec_rel, rec_name))
                     fam_cov = coverage_verdicts.get(fam_id, {})
                     has_current_source_coverage = any(src == req["source"]["digest"] for src, _ in coverage_fps)
+                    all_runnable_matched = runnable_count > 0 and runnable_matched_count == runnable_count
                     all_t1_in_coverage = (
-                        (bool(matching) or has_current_source_coverage)
+                        (
+                            bool(matching)
+                            or has_current_source_coverage
+                            or (all_t1_preflight_blocked and all_runnable_matched)
+                        )
                         and not any_t1_row_rejected
                         and all(
                             t in measured or t in fam_cov
@@ -3049,6 +3068,10 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                             used_records.append(("reports/forge/attempt-coverage.json", "attempt-coverage.json"))
                     if used_records:
                         any_matched = True
+                    if not all_t1_preflight_blocked:
+                        runnable_count += 1
+                        if matching and not any_t1_row_rejected and used_records:
+                            runnable_matched_count += 1
 
                     def _dep_blocked(task_id: str, seen: frozenset[str] = frozenset()) -> bool:
                         if task_id in seen:

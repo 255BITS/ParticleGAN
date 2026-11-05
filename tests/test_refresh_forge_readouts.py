@@ -1591,17 +1591,17 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     # newer Tier 1 claims. Preserve the certified base-cohort display scores;
     # original measurements and the later cohort remain unchanged in evidence.
     for expected_selected_score in (
-        "**[23/27](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 8/12 tests (4 fail)",
+        "**[27/27](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 12/12 tests",
         "**[24/27](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/12 tests (3 fail)",
         "**[24/27](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/12 tests (3 fail)",
-        "**[22/27](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/12 tests (5 fail)",
+        "**[27/27](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 12/12 tests",
         "**[25/27](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/12 tests (2 fail)",
-        "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 8/12 tests (4 fail)",
+        "**[27/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 12/12 tests",
         "**[25/27](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/12 tests (2 fail)",
         "**[17/27](families/e22.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/12 tests (5 fail)",
-        "**[83/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 20/36 tests (16 fail)",
-        "**[72/115](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** · 17/36 tests (19 fail)",
-        "**[67/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 17/36 tests (19 fail)",
+        "**[109/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 31/36 tests (5 fail)",
+        "**[105/115](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** · 30/36 tests (6 fail)",
+        "**[99/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 29/36 tests (7 fail)",
         "**[59/115](families/e22.md#cohort-cuda-1bf9d7d34422)** · 14/36 tests (22 fail)",
     ):
         assert expected_selected_score in selected_table_lines
@@ -2036,7 +2036,7 @@ def _restore_recorded_source_cohort(root: Path) -> str:
     current = set(rfr.catalog_source_manifest(root)["files"])
     names = subprocess.check_output(
         ["git", "ls-tree", "-r", "--name-only", revision], cwd=ROOT, text=True).splitlines()
-    desired = {name for name in names if name in current or (
+    desired = {name for name in names if name in current or name.startswith("configs/forge/tasks/") or (
         Path(name).suffix in SOURCE_SUFFIXES and (
             Path(name).parts[0] in SOURCE_DIRS
             or name.startswith("configs/") and "forge" not in Path(name).parts))}
