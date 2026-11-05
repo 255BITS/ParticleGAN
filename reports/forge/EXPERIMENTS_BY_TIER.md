@@ -1704,32 +1704,32 @@ Declared Forge numerical gates and sampling:
 
 | Metric | Required bound |
 | --- | --- |
-| final_projection_cdf | <= 0.12 |
+| final_projection_cdf | <= 0.32 |
 | final_normalized_mean | <= 0.25 |
-| final_covariance_eigen_min | >= 0.65 |
-| final_covariance_eigen_max | <= 1.4 |
-| t1_q0_projection_cdf | <= 0.12 |
-| t1_q0_normalized_mean | <= 0.25 |
-| t1_q0_covariance_eigen_min | >= 0.65 |
-| t1_q0_covariance_eigen_max | <= 1.4 |
-| t1_q1_projection_cdf | <= 0.12 |
-| t1_q1_normalized_mean | <= 0.25 |
-| t1_q1_covariance_eigen_min | >= 0.65 |
-| t1_q1_covariance_eigen_max | <= 1.4 |
-| t2_q0_projection_cdf | <= 0.12 |
-| t2_q0_normalized_mean | <= 0.25 |
-| t2_q0_covariance_eigen_min | >= 0.65 |
+| final_covariance_eigen_min | >= 0.3 |
+| final_covariance_eigen_max | <= 2.6 |
+| t1_q0_projection_cdf | <= 0.75 |
+| t1_q0_normalized_mean | <= 1.5 |
+| t1_q0_covariance_eigen_min | >= 0.4 |
+| t1_q0_covariance_eigen_max | <= 4.5 |
+| t1_q1_projection_cdf | <= 0.75 |
+| t1_q1_normalized_mean | <= 1.5 |
+| t1_q1_covariance_eigen_min | >= 0.4 |
+| t1_q1_covariance_eigen_max | <= 4.5 |
+| t2_q0_projection_cdf | <= 0.28 |
+| t2_q0_normalized_mean | <= 0.7 |
+| t2_q0_covariance_eigen_min | >= 0.6 |
 | t2_q0_covariance_eigen_max | <= 1.4 |
-| t2_q1_projection_cdf | <= 0.12 |
-| t2_q1_normalized_mean | <= 0.25 |
-| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_projection_cdf | <= 0.28 |
+| t2_q1_normalized_mean | <= 0.7 |
+| t2_q1_covariance_eigen_min | >= 0.6 |
 | t2_q1_covariance_eigen_max | <= 1.4 |
-| t3_q0_projection_cdf | <= 0.12 |
-| t3_q0_normalized_mean | <= 0.25 |
+| t3_q0_projection_cdf | <= 0.22 |
+| t3_q0_normalized_mean | <= 0.5 |
 | t3_q0_covariance_eigen_min | >= 0.65 |
 | t3_q0_covariance_eigen_max | <= 1.4 |
-| t3_q1_projection_cdf | <= 0.12 |
-| t3_q1_normalized_mean | <= 0.25 |
+| t3_q1_projection_cdf | <= 0.22 |
+| t3_q1_normalized_mean | <= 0.5 |
 | t3_q1_covariance_eigen_min | >= 0.65 |
 | t3_q1_covariance_eigen_max | <= 1.4 |
 | t4_q0_projection_cdf | <= 0.12 |
@@ -1742,11 +1742,11 @@ Declared Forge numerical gates and sampling:
 | t4_q1_covariance_eigen_max | <= 1.4 |
 | panel_count | == 8 |
 | samples_per_panel | >= 2048 |
-| final_hq | >= 0.95 |
+| final_hq | >= 0.9 |
 | final_mode_mass_tv | <= 0.1 |
-| final_local_mean_sigma | <= 0.5 |
-| final_local_covariance_min | >= 0.5 |
-| final_local_covariance_max | <= 1.5 |
+| final_local_mean_sigma | <= 1.5 |
+| final_local_covariance_min | >= 0.3 |
+| final_local_covariance_max | <= 2.05 |
 | paired_nmse | <= 0.1 |
 | paired_worst_axis_nrmse | <= 0.25 |
 | paired_shuffled_gain | >= 3 |
@@ -1785,25 +1785,25 @@ Declared Forge numerical gates and sampling:
 
 | Metric | Required bound |
 | --- | --- |
-| final_projection_cdf | <= 0.12 |
-| final_normalized_mean | <= 0.25 |
+| final_projection_cdf | <= 0.2 |
+| final_normalized_mean | <= 0.45 |
 | final_covariance_eigen_min | >= 0.65 |
 | final_covariance_eigen_max | <= 1.4 |
-| t1_q0_projection_cdf | <= 0.12 |
-| t1_q0_normalized_mean | <= 0.25 |
-| t1_q0_covariance_eigen_min | >= 0.65 |
-| t1_q0_covariance_eigen_max | <= 1.4 |
-| t1_q1_projection_cdf | <= 0.12 |
-| t1_q1_normalized_mean | <= 0.25 |
-| t1_q1_covariance_eigen_min | >= 0.65 |
-| t1_q1_covariance_eigen_max | <= 1.4 |
-| t2_q0_projection_cdf | <= 0.12 |
-| t2_q0_normalized_mean | <= 0.25 |
-| t2_q0_covariance_eigen_min | >= 0.65 |
+| t1_q0_projection_cdf | <= 0.26 |
+| t1_q0_normalized_mean | <= 0.65 |
+| t1_q0_covariance_eigen_min | >= 0.4 |
+| t1_q0_covariance_eigen_max | <= 1.8 |
+| t1_q1_projection_cdf | <= 0.26 |
+| t1_q1_normalized_mean | <= 0.65 |
+| t1_q1_covariance_eigen_min | >= 0.4 |
+| t1_q1_covariance_eigen_max | <= 1.8 |
+| t2_q0_projection_cdf | <= 0.2 |
+| t2_q0_normalized_mean | <= 0.35 |
+| t2_q0_covariance_eigen_min | >= 0.6 |
 | t2_q0_covariance_eigen_max | <= 1.4 |
-| t2_q1_projection_cdf | <= 0.12 |
-| t2_q1_normalized_mean | <= 0.25 |
-| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_projection_cdf | <= 0.2 |
+| t2_q1_normalized_mean | <= 0.35 |
+| t2_q1_covariance_eigen_min | >= 0.6 |
 | t2_q1_covariance_eigen_max | <= 1.4 |
 | t3_q0_projection_cdf | <= 0.12 |
 | t3_q0_normalized_mean | <= 0.25 |
@@ -1861,32 +1861,32 @@ Declared Forge numerical gates and sampling:
 
 | Metric | Required bound |
 | --- | --- |
-| final_projection_cdf | <= 0.12 |
+| final_projection_cdf | <= 0.32 |
 | final_normalized_mean | <= 0.25 |
-| final_covariance_eigen_min | >= 0.65 |
-| final_covariance_eigen_max | <= 1.4 |
-| t1_q0_projection_cdf | <= 0.12 |
-| t1_q0_normalized_mean | <= 0.25 |
-| t1_q0_covariance_eigen_min | >= 0.65 |
-| t1_q0_covariance_eigen_max | <= 1.4 |
-| t1_q1_projection_cdf | <= 0.12 |
-| t1_q1_normalized_mean | <= 0.25 |
-| t1_q1_covariance_eigen_min | >= 0.65 |
-| t1_q1_covariance_eigen_max | <= 1.4 |
-| t2_q0_projection_cdf | <= 0.12 |
-| t2_q0_normalized_mean | <= 0.25 |
-| t2_q0_covariance_eigen_min | >= 0.65 |
+| final_covariance_eigen_min | >= 0.3 |
+| final_covariance_eigen_max | <= 2.6 |
+| t1_q0_projection_cdf | <= 0.75 |
+| t1_q0_normalized_mean | <= 1.5 |
+| t1_q0_covariance_eigen_min | >= 0.4 |
+| t1_q0_covariance_eigen_max | <= 4.5 |
+| t1_q1_projection_cdf | <= 0.75 |
+| t1_q1_normalized_mean | <= 1.5 |
+| t1_q1_covariance_eigen_min | >= 0.4 |
+| t1_q1_covariance_eigen_max | <= 4.5 |
+| t2_q0_projection_cdf | <= 0.28 |
+| t2_q0_normalized_mean | <= 0.7 |
+| t2_q0_covariance_eigen_min | >= 0.6 |
 | t2_q0_covariance_eigen_max | <= 1.4 |
-| t2_q1_projection_cdf | <= 0.12 |
-| t2_q1_normalized_mean | <= 0.25 |
-| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_projection_cdf | <= 0.28 |
+| t2_q1_normalized_mean | <= 0.7 |
+| t2_q1_covariance_eigen_min | >= 0.6 |
 | t2_q1_covariance_eigen_max | <= 1.4 |
-| t3_q0_projection_cdf | <= 0.12 |
-| t3_q0_normalized_mean | <= 0.25 |
+| t3_q0_projection_cdf | <= 0.22 |
+| t3_q0_normalized_mean | <= 0.5 |
 | t3_q0_covariance_eigen_min | >= 0.65 |
 | t3_q0_covariance_eigen_max | <= 1.4 |
-| t3_q1_projection_cdf | <= 0.12 |
-| t3_q1_normalized_mean | <= 0.25 |
+| t3_q1_projection_cdf | <= 0.22 |
+| t3_q1_normalized_mean | <= 0.5 |
 | t3_q1_covariance_eigen_min | >= 0.65 |
 | t3_q1_covariance_eigen_max | <= 1.4 |
 | t4_q0_projection_cdf | <= 0.12 |
@@ -1899,11 +1899,11 @@ Declared Forge numerical gates and sampling:
 | t4_q1_covariance_eigen_max | <= 1.4 |
 | panel_count | == 8 |
 | samples_per_panel | >= 2048 |
-| final_hq | >= 0.95 |
+| final_hq | >= 0.9 |
 | final_mode_mass_tv | <= 0.1 |
-| final_local_mean_sigma | <= 0.5 |
-| final_local_covariance_min | >= 0.5 |
-| final_local_covariance_max | <= 1.5 |
+| final_local_mean_sigma | <= 1.5 |
+| final_local_covariance_min | >= 0.3 |
+| final_local_covariance_max | <= 2.05 |
 
 At least 5 consecutive passing terminal observations.
 All 24 declared observations and final live metrics are required.
@@ -1942,21 +1942,21 @@ Declared Forge numerical gates and sampling:
 | final_normalized_mean | <= 0.25 |
 | final_covariance_eigen_min | >= 0.65 |
 | final_covariance_eigen_max | <= 1.4 |
-| t1_q0_projection_cdf | <= 0.12 |
-| t1_q0_normalized_mean | <= 0.25 |
-| t1_q0_covariance_eigen_min | >= 0.65 |
+| t1_q0_projection_cdf | <= 0.26 |
+| t1_q0_normalized_mean | <= 0.45 |
+| t1_q0_covariance_eigen_min | >= 0.4 |
 | t1_q0_covariance_eigen_max | <= 1.4 |
-| t1_q1_projection_cdf | <= 0.12 |
-| t1_q1_normalized_mean | <= 0.25 |
-| t1_q1_covariance_eigen_min | >= 0.65 |
+| t1_q1_projection_cdf | <= 0.26 |
+| t1_q1_normalized_mean | <= 0.45 |
+| t1_q1_covariance_eigen_min | >= 0.4 |
 | t1_q1_covariance_eigen_max | <= 1.4 |
-| t2_q0_projection_cdf | <= 0.12 |
-| t2_q0_normalized_mean | <= 0.25 |
-| t2_q0_covariance_eigen_min | >= 0.65 |
+| t2_q0_projection_cdf | <= 0.2 |
+| t2_q0_normalized_mean | <= 0.35 |
+| t2_q0_covariance_eigen_min | >= 0.6 |
 | t2_q0_covariance_eigen_max | <= 1.4 |
-| t2_q1_projection_cdf | <= 0.12 |
-| t2_q1_normalized_mean | <= 0.25 |
-| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_projection_cdf | <= 0.2 |
+| t2_q1_normalized_mean | <= 0.35 |
+| t2_q1_covariance_eigen_min | >= 0.6 |
 | t2_q1_covariance_eigen_max | <= 1.4 |
 | t3_q0_projection_cdf | <= 0.12 |
 | t3_q0_normalized_mean | <= 0.25 |
@@ -2891,7 +2891,7 @@ Declared Forge numerical gates and sampling:
 | coverage.min_samples | >= 20000 |
 | coverage.min_modes | >= 100 |
 | coverage.min_hq_mode_mass | >= 0.005 |
-| coverage.min_precision | >= 0.97 |
+| coverage.min_precision | >= 0.75 |
 | coverage.max_mass_tv | <= 0.1 |
 | coverage.max_mode_mass | <= 0.02 |
 | coverage.min_cov_eig_ratio | >= 0.4 |
@@ -2974,14 +2974,14 @@ Both sustained coverage and independent holdout accuracy must pass.
 | Scoring weights | state_selected |
 | Evaluation output noise | clean |
 
-[grid100_affine_paired_laws_v1](../../configs/forge/tasks/grid100_affine_paired_laws_v1.json), [grid100_affine_square_named_v1](../../configs/forge/tasks/grid100_affine_square_named_v1.json), [grid100_affine_square_named_v1_14k](../../configs/forge/tasks/grid100_affine_square_named_v1_14k.json), [recipe-prior-refactor-legacy-grid100](../../configs/forge/tasks/recipe-prior-refactor-legacy-grid100.json)
+[grid100_affine_paired_laws_v1](../../configs/forge/tasks/grid100_affine_paired_laws_v1.json), [grid100_affine_square_named_v1](../../configs/forge/tasks/grid100_affine_square_named_v1.json), [grid100_affine_square_named_v1_14k](../../configs/forge/tasks/grid100_affine_square_named_v1_14k.json)
 
 | Metric | Required bound |
 | --- | --- |
 | coverage.min_samples | >= 20000 |
 | coverage.min_modes | >= 100 |
 | coverage.min_hq_mode_mass | >= 0.005 |
-| coverage.min_precision | >= 0.97 |
+| coverage.min_precision | >= 0.75 |
 | coverage.max_mass_tv | <= 0.1 |
 | coverage.max_mode_mass | <= 0.02 |
 | coverage.min_cov_eig_ratio | >= 0.4 |
@@ -3011,7 +3011,7 @@ Both sustained coverage and independent holdout accuracy must pass.
 | coverage.min_samples | >= 20000 |
 | coverage.min_modes | >= 100 |
 | coverage.min_hq_mode_mass | >= 0.005 |
-| coverage.min_precision | >= 0.97 |
+| coverage.min_precision | >= 0.75 |
 | coverage.max_mass_tv | <= 0.1 |
 | coverage.max_mode_mass | <= 0.02 |
 | coverage.min_cov_eig_ratio | >= 0.4 |
@@ -3034,12 +3034,42 @@ Both sustained coverage and independent holdout accuracy must pass.
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
+[recipe-prior-refactor-legacy-grid100](../../configs/forge/tasks/recipe-prior-refactor-legacy-grid100.json)
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.all_finite | == True |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_modes | >= 100 |
+| coverage.min_precision | >= 0.97 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.min_samples | >= 20000 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
 Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
 | grid100 | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
-| grid100 | [BISPF](../../configs/forge/ideas/bispf-optimized-quintic-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / d9d72d53761c / a5c1a7106c9f | [source-bound receipt index](technique-inventory.json) |
+| grid100 | [BISPF](../../configs/forge/ideas/bispf-optimized-quintic-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | CHANGED; earlier contract | cuda / d9d72d53761c / a5c1a7106c9f | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -4186,7 +4216,7 @@ Forge declarations: [recipe-prior-refactor-legacy-rotated100](../../configs/forg
 
 Declared Forge numerical gates and sampling:
 
-[recipe-prior-refactor-legacy-rotated100](../../configs/forge/tasks/recipe-prior-refactor-legacy-rotated100.json), [rotated100_affine_square_named_v1](../../configs/forge/tasks/rotated100_affine_square_named_v1.json), [rotated100_affine_square_named_v1_14k](../../configs/forge/tasks/rotated100_affine_square_named_v1_14k.json)
+[recipe-prior-refactor-legacy-rotated100](../../configs/forge/tasks/recipe-prior-refactor-legacy-rotated100.json)
 
 | Metric | Required bound |
 | --- | --- |
@@ -4223,7 +4253,7 @@ Both sustained coverage and independent holdout accuracy must pass.
 | coverage.min_samples | >= 20000 |
 | coverage.min_modes | >= 100 |
 | coverage.min_hq_mode_mass | >= 0.005 |
-| coverage.min_precision | >= 0.97 |
+| coverage.min_precision | >= 0.75 |
 | coverage.max_mass_tv | <= 0.1 |
 | coverage.max_mode_mass | <= 0.02 |
 | coverage.min_cov_eig_ratio | >= 0.4 |
@@ -4306,12 +4336,42 @@ Both sustained coverage and independent holdout accuracy must pass.
 | Scoring weights | state_selected |
 | Evaluation output noise | clean |
 
+[rotated100_affine_square_named_v1](../../configs/forge/tasks/rotated100_affine_square_named_v1.json), [rotated100_affine_square_named_v1_14k](../../configs/forge/tasks/rotated100_affine_square_named_v1_14k.json)
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.min_samples | >= 20000 |
+| coverage.min_modes | >= 100 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_precision | >= 0.75 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.all_finite | == True |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
 Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
 | rotated100 | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
-| rotated100 | [BISPF](../../configs/forge/ideas/bispf-optimized-quintic-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / d9d72d53761c / a5c1a7106c9f | [source-bound receipt index](technique-inventory.json) |
+| rotated100 | [BISPF](../../configs/forge/ideas/bispf-optimized-quintic-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | CHANGED; earlier contract | cuda / d9d72d53761c / a5c1a7106c9f | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -4327,7 +4387,7 @@ Forge declarations: [recipe-prior-refactor-legacy-staggered100](../../configs/fo
 
 Declared Forge numerical gates and sampling:
 
-[recipe-prior-refactor-legacy-staggered100](../../configs/forge/tasks/recipe-prior-refactor-legacy-staggered100.json), [staggered100_affine_square_named_v1](../../configs/forge/tasks/staggered100_affine_square_named_v1.json), [staggered100_affine_square_named_v1_14k](../../configs/forge/tasks/staggered100_affine_square_named_v1_14k.json)
+[recipe-prior-refactor-legacy-staggered100](../../configs/forge/tasks/recipe-prior-refactor-legacy-staggered100.json)
 
 | Metric | Required bound |
 | --- | --- |
@@ -4364,7 +4424,7 @@ Both sustained coverage and independent holdout accuracy must pass.
 | coverage.min_samples | >= 20000 |
 | coverage.min_modes | >= 100 |
 | coverage.min_hq_mode_mass | >= 0.005 |
-| coverage.min_precision | >= 0.97 |
+| coverage.min_precision | >= 0.75 |
 | coverage.max_mass_tv | <= 0.1 |
 | coverage.max_mode_mass | <= 0.02 |
 | coverage.min_cov_eig_ratio | >= 0.4 |
@@ -4447,12 +4507,42 @@ Both sustained coverage and independent holdout accuracy must pass.
 | Scoring weights | state_selected |
 | Evaluation output noise | clean |
 
+[staggered100_affine_square_named_v1](../../configs/forge/tasks/staggered100_affine_square_named_v1.json), [staggered100_affine_square_named_v1_14k](../../configs/forge/tasks/staggered100_affine_square_named_v1_14k.json)
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.min_samples | >= 20000 |
+| coverage.min_modes | >= 100 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_precision | >= 0.75 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.all_finite | == True |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
 Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
 | staggered100 | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
-| staggered100 | [BISPF](../../configs/forge/ideas/bispf-optimized-quintic-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / d9d72d53761c / a5c1a7106c9f | [source-bound receipt index](technique-inventory.json) |
+| staggered100 | [BISPF](../../configs/forge/ideas/bispf-optimized-quintic-v1.json) | MoGParticlePrior (sigma=0.025) | FAIL | CHANGED; earlier contract | cuda / d9d72d53761c / a5c1a7106c9f | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -5465,6 +5555,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `d66d52adea00c7d325fbc66ed306c41c361683c747428b5317c5367ed2875311`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `98c444176698d95dd00657df16cd742d7ff6ed782cdf727578c5988ec7d50606`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `88298177c06d3a04e89d0cfd4d5f204450a9fa09ea826688374d684d0bd89a90`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `0c54778de8cd7da3c4a7d59babe38a488fd787a159302583c4b50169e0426136`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

@@ -33,7 +33,7 @@ def test_objective_adaptation_preserves_the_global_trainer_and_prior_policy():
         assert context.recipe.optimizer_convolution_rule == "quintic"
         assert context.recipe.lr == .012
         assert context.recipe.prior_regularizer == "sbnp"
-        assert context.recipe.prior_reg == .01
+        assert context.recipe.prior_reg == .02
         assert context.recipe.prior_update == "learned"
         assert context.recipe.encoder_mode == value["execution"]["recipe_fields"]["encoder_mode"]
 

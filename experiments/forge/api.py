@@ -129,6 +129,23 @@ def task_recipe_resources(task):
     return deepcopy(execution.get("resources", {}))
 
 
+# Common component host boundary overrides: hosts without UpdatePolicy lifecycle
+# support must deactivate continuous policy, stationarity ladders, and birth-death
+# mechanics uniformly across all candidate families.
+COMPONENT_HOST_BOUNDARY_OVERRIDES = {
+    "particle_birth_death": False,
+    "row_evidence_gate": False,
+    "serve_average": 0.0,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": False,
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "continuous_policy": None,
+    "lr_control": "mobility",
+    "reopen_guard": None,
+}
+
+
 def task_recipe_overrides(candidate, task):
     """Materialize task binding once, identically for planning and execution."""
     from .taskrecipes import bind_task_candidate
@@ -141,46 +158,19 @@ def task_recipe_overrides(candidate, task):
         resources = {**task_recipe_resources(task), **execution["recipe_fields"]}
         overrides = host_recipe_overrides(bound, execution, resources)
         overrides.update(
-            particle_birth_death=False,
-            row_evidence_gate=False,
-            serve_average=0.0,
+            COMPONENT_HOST_BOUNDARY_OVERRIDES,
             prior_kind="mog",
-            birth_death_feature_scale="none",
-            birth_death_isolation=False,
-            birth_death_backend="knn",
-            birth_death_cells=64,
-            continuous_policy=None,
-            lr_control="mobility",
-            reopen_guard=None,
+            prior_lr_mult=0.02,
             total_steps=execution.get("original_schedule_horizon", execution.get("steps", 1200)),
         )
-        if overrides.get("critic_formulation") == "bcap":
-            overrides["routing_temperature"] = 0.20
-        elif overrides.get("critic_formulation") == "bispf":
-            overrides["ebi_beta"] = 4.0
-            overrides["network_lr_floor"] = 0.2
         return overrides
     if task["adapter"] == "word_joint" and not is_policy_task(task):
         overrides = host_recipe_overrides(bound, execution, task_recipe_resources(task))
         overrides.update(
-            particle_birth_death=False,
-            row_evidence_gate=False,
-            serve_average=0.0,
-            birth_death_feature_scale="none",
-            birth_death_isolation=False,
-            birth_death_backend="knn",
-            birth_death_cells=64,
-            continuous_policy=None,
-            lr_control="mobility",
-            reopen_guard=None,
+            COMPONENT_HOST_BOUNDARY_OVERRIDES,
+            input_noise_std=0.5,
             total_steps=execution.get("original_schedule_horizon", execution["steps"]),
         )
-        if bound.get("recipe_preset") == "atlas" or bound.get("candidate_id", "").startswith("atlas"):
-            overrides["input_noise_std"] = 0.5
-        elif overrides.get("critic_formulation") == "bispf":
-            overrides["ebi_beta"] = 4.0
-            overrides["prior_reg"] = 0.02
-            overrides["network_lr_floor"] = 0.2
         return overrides
     if (task["adapter"] == "transfer_behavior" and execution.get("host") != "mode_hold"
             and not is_policy_task(task)):
@@ -190,21 +180,10 @@ def task_recipe_overrides(candidate, task):
             raise CapabilityError(blockers)
         overrides = dict(bound.get("recipe_overrides", {}))
         resolve_public_recipe(bound)
-        overrides["total_steps"] = execution.get("original_schedule_horizon", execution.get("steps", 100))
-        overrides["lr_control"] = "mobility"
-        overrides["continuous_policy"] = None
-        overrides["reopen_guard"] = None
-        overrides["serve_average"] = 0.0
-        overrides["particle_birth_death"] = False
-        overrides["row_evidence_gate"] = False
-        overrides["birth_death_feature_scale"] = "none"
-        overrides["birth_death_isolation"] = False
-        overrides["birth_death_backend"] = "knn"
-        overrides["birth_death_cells"] = 64
-        if overrides.get("critic_formulation") == "bispf":
-            overrides["ebi_beta"] = 4.0
-            overrides["prior_reg"] = 0.02
-            overrides["network_lr_floor"] = 0.2
+        overrides.update(
+            COMPONENT_HOST_BOUNDARY_OVERRIDES,
+            total_steps=execution.get("original_schedule_horizon", execution.get("steps", 100)),
+        )
         if execution.get("host") == "ae_gan_hold":
             from benchmarks.locked_shared.hosts.ae_gan_hold import HoldConfig
             cfg = HoldConfig(name="forge")

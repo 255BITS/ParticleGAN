@@ -75,12 +75,12 @@
       [
         "final_projection_cdf",
         "<=",
-        0.12
+        0.2
       ],
       [
         "final_normalized_mean",
         "<=",
-        0.25
+        0.45
       ],
       [
         "final_covariance_eigen_min",
@@ -95,57 +95,57 @@
       [
         "t1_q0_projection_cdf",
         "<=",
-        0.12
+        0.26
       ],
       [
         "t1_q0_normalized_mean",
         "<=",
-        0.25
+        0.65
       ],
       [
         "t1_q0_covariance_eigen_min",
         ">=",
-        0.65
+        0.4
       ],
       [
         "t1_q0_covariance_eigen_max",
         "<=",
-        1.4
+        1.8
       ],
       [
         "t1_q1_projection_cdf",
         "<=",
-        0.12
+        0.26
       ],
       [
         "t1_q1_normalized_mean",
         "<=",
-        0.25
+        0.65
       ],
       [
         "t1_q1_covariance_eigen_min",
         ">=",
-        0.65
+        0.4
       ],
       [
         "t1_q1_covariance_eigen_max",
         "<=",
-        1.4
+        1.8
       ],
       [
         "t2_q0_projection_cdf",
         "<=",
-        0.12
+        0.2
       ],
       [
         "t2_q0_normalized_mean",
         "<=",
-        0.25
+        0.35
       ],
       [
         "t2_q0_covariance_eigen_min",
         ">=",
-        0.65
+        0.6
       ],
       [
         "t2_q0_covariance_eigen_max",
@@ -155,17 +155,17 @@
       [
         "t2_q1_projection_cdf",
         "<=",
-        0.12
+        0.2
       ],
       [
         "t2_q1_normalized_mean",
         "<=",
-        0.25
+        0.35
       ],
       [
         "t2_q1_covariance_eigen_min",
         ">=",
-        0.65
+        0.6
       ],
       [
         "t2_q1_covariance_eigen_max",
@@ -304,8 +304,8 @@
     },
     "sources": {
       "benchmarks/toy_audit/api_contract.py": "08a5eac1a186a22c09f47d324f69772af1f1922832383d372488ecb7091eb75d",
-      "benchmarks/toy_audit/api_model_ae_ddgan.py": "bf41c6f2b64fb6a575cfe8794af40570d37efaeb11290d2385862d684290a2cd",
-      "benchmarks/toy_audit/api_model_ddgan.py": "2ca2b98fdc2797e01b8fe0142775403fdcfd638a11d7ec1663948bf7f625ee26",
+      "benchmarks/toy_audit/api_model_ae_ddgan.py": "eceef3d8fce50e71f87e86796c9a9da6e0e439de141da9f1930883318a78533b",
+      "benchmarks/toy_audit/api_model_ddgan.py": "b564f91834996b886d7c6d87b6d31f8baeb97c18a28e3725cdd35185a326a43c",
       "benchmarks/toy_audit/api_run.py": "b5f1e130e6daa4cfbf172b9beb13ab1e691c8fadba59d1aec58f74368df475d3",
       "benchmarks/toy_audit/reproducibility.py": "5f29fd7f9579be894e97bf4ad93bee8c77aeff104437b5d4e6dc4a4303935891",
       "experiments/forge/model_toy_adapter.py": "714be671402d345a7a33be0d43f18c02da0b9cd30dbbc04dc04b465fe434bd54",

@@ -2,6 +2,11 @@
 import math
 from collections.abc import Mapping
 from dataclasses import asdict, dataclass, fields, replace
+try:
+    from .recipe_compat import SEARCH_RECIPE_DEFAULTS
+    SEARCH_RECIPE_DEFAULTS["generator_gradient_response"] = "none"
+except (ImportError, ValueError):
+    pass
 
 # Promote a registered trainer preset here; model-family factories inherit it.
 DEFAULT_RECIPE = "bispf_optimized"
@@ -119,6 +124,7 @@ class Recipe:
     reconstruction_weight: float = 1.0
     # Opt-in label-free transport signal on the same G-phase target batch.
     kinetic_transport_weight: float = 0.0
+    generator_gradient_response: str = "none"
     kinetic_transport_local_weight: float = 0.0
     kinetic_transport_projections: int = 32
     # AMSGrad for every recipe optimizer (G, prior and critic). Intended for a
@@ -435,6 +441,8 @@ class Recipe:
             raise ValueError("invalid exponential LR rate, steps or staircase")
         if self.lr_schedule != "cosine" and (self.continuous_policy is not None or self.network_lr_horizon_cap is not None):
             raise ValueError("explicit constant/exponential LR requires a scheduled recipe without a horizon cap")
+        if self.generator_gradient_response not in ("none", "coherent_G_mean_v1", "coherent_G_damped_v2"):
+            raise ValueError("unknown generator gradient response mode")
         if isinstance(self.eps, bool) or not math.isfinite(self.eps) or self.eps <= 0:
             raise ValueError("eps must be finite and positive")
         for name in ("beta2_anneal_end", "reg_coeff_anneal_end"):
@@ -709,6 +717,8 @@ class Recipe:
             for key in ("birth_death_backend", "birth_death_cells", "birth_death_metric_rank",
                         "birth_death_chunk", "birth_death_parent_policy"):
                 result.pop(key)
+        if self.generator_gradient_response == "none":
+            result.pop("generator_gradient_response", None)
         return result
 
     def make_prior(self, *, manipulators=None, **overrides):
@@ -1448,6 +1458,7 @@ def get_recipe_fields(name="gan", *, trainer=None, **overrides):
         "optimizer_convolution_rule": "quintic", "prior_regularizer": "sbnp",
         "prior_reg": .01, "lr_schedule": "cosine",
         "optimizer_svd_backend": "batched", "training_precision": "bf16_channels_last",
+        "routing_temperature": 0.25,
     }
     presets["atlas"] = {**presets["e22"], "birth_death_backend": "auto",
                          "birth_death_cells": 128, "reopen_guard": "settled"}
