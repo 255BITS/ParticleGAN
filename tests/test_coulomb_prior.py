@@ -135,7 +135,7 @@ def test_initial_reference_after_public_init_is_fixed_and_checkpointed():
 
 
 def test_disabled_exact_model_optimizer_and_rng_parity():
-    baseline, disabled = trainer(context()), trainer(context(prior_regularizer='coulomb', prior_reg=0))
+    baseline, disabled = trainer(context(prior_reg=0)), trainer(context(prior_regularizer='coulomb', prior_reg=0))
     assert not hasattr(disabled.prior, CENTER_BUFFER)
     for name in ('G', 'D', 'prior'):
         equal(getattr(baseline, name).state_dict(), getattr(disabled, name).state_dict())

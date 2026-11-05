@@ -1932,7 +1932,7 @@ def test_republish_registered_inventory_end_to_end_recovers_missing_and_unverifi
         # detected and repaired without inventing a new-source measurement.
         orig_md = md_path.read_text()
         stale_md = orig_md.replace(
-            "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 8/12 tests (4 fail)",
+            "**[27/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 12/12 tests",
             "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** (7 not run)",
             1,
         )
@@ -1943,9 +1943,8 @@ def test_republish_registered_inventory_end_to_end_recovers_missing_and_unverifi
         corrupt_status = rfr.check_published_status(wt)
         assert corrupt_status["status"] == "NEEDS_REFRESH"
         assert "compiled_reports" in corrupt_status["stale_stages"]
-        if not expected_tier1:
-            md_path.write_text(stale_md + "\n### Current-source selected-recipe Tier 1 readouts\n\n"
-                               "Stale claim: archived scores are current-source measurements.\n")
+        md_path.write_text(stale_md + "\n### Current-source selected-recipe Tier 1 readouts\n\n"
+                           "Stale claim: archived scores are current-source measurements.\n")
         assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is False
         rfr._republish_registered_inventory(wt, json_mode=True)
         assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is True

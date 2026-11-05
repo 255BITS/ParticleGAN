@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.9.6 — 2026-11-05
+
+- **Default BISPF winner (`bispf_optimized`) and Tier 1/Tier 2 qualification.**
+  `DEFAULT_RECIPE = "bispf_optimized"` (`bispf-optimized-quintic-v1`) is the
+  selected default trainer preset. All seven runnable selected families pass
+  all `27/27` required Tier 1 smoke tasks on the current source cohort, and
+  both BISPF and BCAP reach `77/78` required Tier 2 tasks (`105/115` and
+  `109/115` total across Tiers 1–3) in the refreshed
+  [technique inventory](reports/forge/technique-inventory.md).
+
 ## 0.9.5 — 2026-11-05
 
 - **Explicit BISPF input domains.** Declare `input_domain="continuous"` for

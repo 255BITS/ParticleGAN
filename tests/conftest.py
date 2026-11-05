@@ -46,7 +46,12 @@ def _archived_inactive_comparison_scope(module, directory):
     # Review remediation (PRs #485, #492) declared further Recipe fields whose
     # defaults are inactive. The archived helper serializes additions as JSON,
     # which cannot spell True or (), so these go in as Python literals.
-    later_inactive = {"bispf_shape_gates": True, "bispf_gate_overrides": (), "prior_code_law": "table"}
+    later_inactive = {
+        "bispf_shape_gates": True,
+        "bispf_gate_overrides": (),
+        "prior_code_law": "table",
+        "generator_gradient_response": "none",
+    }
     tail = '    "training_precision": "float32",\n}\n'
     assert adapted.decode().count(tail) == 1
     adapted = adapted.decode().replace(tail, tail[:-2] + "".join(

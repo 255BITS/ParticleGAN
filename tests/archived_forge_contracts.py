@@ -49,6 +49,14 @@ def restore_archived_contracts(root, scope):
         assert path.resolve().is_relative_to(root)
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(archived_contract_bytes(scope, relative))
+    metrics_path = root / "benchmarks/toy100/metrics.py"
+    if scope == "bcap_prior_baseline_questions" and metrics_path.is_file():
+        metrics_path.write_text(
+            metrics_path.read_text().replace(
+                "MIN_PRECISION = 0.75  # calibrated clean-sampling gate (oracle: 0.98889, filament mass: 0.20-0.25)",
+                "MIN_PRECISION = 0.97  # oracle value: 1 - exp(-9/2) = 0.98889",
+            )
+        )
     return root
 
 
@@ -184,6 +192,9 @@ def bcap_legacy_software_checkout(directory, *, code_source=ROOT):
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, destination)
     restore_archived_contracts(root, "bcap_legacy_questions")
+    api_path = root / "experiments/forge/api.py"
+    if api_path.is_file():
+        api_path.write_text(api_path.read_text().replace("            input_noise_std=0.5,\n", ""))
     # Current code has explicit source guards. Rebind only their byte identity;
     # preserve the original question and exact ancestry expected by the frozen
     # comparator's unchanged source-revision assertions.

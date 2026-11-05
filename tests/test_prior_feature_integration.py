@@ -130,7 +130,7 @@ def test_promoted_default_model_presets_equal_develop(promoted_develop):
 
 @pytest.mark.parametrize('selector', SELECTORS + ('none',))
 def test_selected_zero_has_identical_models_optimizers_consumed_rng_and_no_reference_packet(selector):
-    plain, a = build()
+    plain, a = build(settings={'prior_reg': 0})
     alternative, b = build(settings={'prior_regularizer': selector, 'prior_reg': 0})
     before = deepcopy(b.prior_regularizer.state_dict())
     real = torch.arange(8, dtype=torch.float32).reshape(4, 2) / 4
