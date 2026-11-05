@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.9.5 — 2026-11-05
+
+- **Explicit BISPF input domains.** Declare `input_domain="continuous"` for
+  native feature vectors of any width, or `"categorical"` for categorical
+  matrices, through the public critic penalty factory or `GANTrainer`'s
+  `penalty_options`. The default `"auto"` preserves the existing shape gates;
+  an explicit domain overrides automatic simplex detection. Small categorical
+  codebooks also stay out of the late continuous 2D thermal-freeze rule.
+  Checkpoints retain the selected domain and reject mismatched restoration.
+- **Runnable categorical examples.** The
+  [input-domain guide](docs/bispf-input-domains.md) includes a checked arithmetic
+  walkthrough, four-category GAN training with numerical quality gates and an
+  actual-training GIF, and exact checkpoint continuation. The checked CPU run
+  passes its final five observations; it supplies no Forge qualification or
+  native-model quality claim.
+
+- **One recipe selection path for new training.** Bare or partial `Recipe(...)`
+  calls now raise a migration error rather than silently selecting historical
+  KA2 settings. Use `get_recipe()` for the selected public default, or explicitly
+  select a named preset. Restore compact saved configurations with
+  `Recipe.from_dict(saved_fields)`; historical values and checkpoint semantics
+  are preserved. Fully resolved field dictionaries and `dataclasses.replace`
+  remain supported. This is an intentional constructor API break, not a change
+  to any preset, optimizer, penalty or recorded training result.
+
 ## 0.9.4 — 2026-10-23
 
 - **Python 3.11+ requirement and patched build/image dependencies.** Raise

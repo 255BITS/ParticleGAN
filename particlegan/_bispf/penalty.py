@@ -46,6 +46,7 @@ class _BISPFPenaltyKernel:
         tau_cooling: float = 0.020,
         s_min: float = 1e-5,
         thermal_decay: float = 0.95,
+        input_domain: str = "auto",
         record: CriticStepRecord | None = None,
         gates: BISPFGates | None = None,
     ) -> None:
@@ -79,6 +80,8 @@ class _BISPFPenaltyKernel:
             raise ValueError("sinkhorn_iters must be a positive integer")
         if anchor_weight != 0.0:
             raise ValueError("BISPF uses a zero-mean logit gauge instead of an EMA critic anchor (require reg_anchor_weight=0)")
+        if not isinstance(input_domain, str) or input_domain not in ("auto", "continuous", "categorical"):
+            raise ValueError("input_domain must be auto, continuous or categorical")
         self.arm = "bispf"
         self.coeff = float(coeff)
         self.kappa = float(kappa)
@@ -94,6 +97,7 @@ class _BISPFPenaltyKernel:
         self.tau_cooling = float(tau_cooling)
         self.s_min = float(s_min)
         self.thermal_decay = float(thermal_decay)
+        self.input_domain = input_domain
         self.cooler = ContinuousThermalCooler(
             tau_cooling=self.tau_cooling,
             s_min=self.s_min,
@@ -139,6 +143,8 @@ class _BISPFPenaltyKernel:
         collect_stats: bool = False,
         **kwargs,
     ) -> Tuple[torch.Tensor, Dict[str, Any]]:
+        if self.input_domain == "categorical" and (x_real.ndim != 2 or x_fake.ndim != 2):
+            raise ValueError("categorical BISPF inputs require native [batch, categories] tensors")
         if self.coeff == 0.0 or (self.lazy_k > 1 and step % self.lazy_k != 0):
             self.record._last_d_logits = None
             zero = x_real.new_zeros(())
@@ -158,7 +164,11 @@ class _BISPFPenaltyKernel:
 
         gates = self.gates
         is_image_tensor = gates.active("image") and x_real.ndim >= 3
-        is_discrete_simplex = gates.active("simplex") and x_real.ndim == 2 and dim >= gates.simplex_min_dim
+        # Explicit host semantics take precedence over automatic shape gates.
+        # Auto retains develop's configurable historical heuristic unchanged.
+        is_discrete_simplex = self.input_domain == "categorical" or (
+            self.input_domain == "auto" and gates.active("simplex")
+            and x_real.ndim == 2 and dim >= gates.simplex_min_dim)
         # Evaluate transport chords for continuous low-dimensional vector flows (dim <= chord_max_dim).
         # The declared chord bypass skips chords for discrete categorical token codebooks and
         # high-dimensional images when chord_blend is standard (<= chord_blend_override),
@@ -198,7 +208,7 @@ class _BISPFPenaltyKernel:
         else:
             t_scale = self.cooler.scale if hasattr(self, "cooler") else 1.0
 
-        if (gates.active("late_thermal") and call_idx >= gates.late_thermal_min_call
+        if (not is_discrete_simplex and gates.active("late_thermal") and call_idx >= gates.late_thermal_min_call
                 and dim == gates.late_thermal_dim
                 and gates.late_thermal_min_real_batch <= b_r <= gates.late_thermal_max_real_batch
                 and b_f >= gates.late_thermal_min_fake_batch):

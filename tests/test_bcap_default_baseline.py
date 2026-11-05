@@ -131,8 +131,8 @@ def test_named_bcap_changes_only_direction_mode_and_matches_measured_recipe(actu
     assert recipe.kinetic_transport_weight == recipe.kinetic_transport_local_weight == 0.
     expected = {**actual_develop["presets"]["bcap"], "constraint_geometry_mode": "direction_blend"}
     assert json.loads(json.dumps(recipe.to_dict())) == json.loads(json.dumps(expected))
-    assert Recipe(**recipe.to_dict()) == recipe
-    assert Recipe().constraint_geometry_mode == "none"
+    assert Recipe.from_dict(recipe.to_dict()) == recipe
+    assert Recipe.from_dict({}).constraint_geometry_mode == "none"
 
 
 def test_explicit_none_restores_incumbent_and_forge_v1_remains_pinned(actual_develop):
@@ -147,7 +147,7 @@ def test_explicit_none_restores_incumbent_and_forge_v1_remains_pinned(actual_dev
 @pytest.mark.parametrize("name", ("bcap", "bcap_adam"))
 def test_actual_develop_checkpoint_resumes_exactly_from_saved_recipe(actual_develop, name):
     saved = actual_develop[name]
-    restored = _build(Recipe(**saved["checkpoint"]["recipe"]))
+    restored = _build(Recipe.from_dict(saved["checkpoint"]["recipe"]))
     assert not hasattr(restored.opt_g, "bind_protected_losses")
     restored.load_state_dict(saved["checkpoint"])
     _equal(saved["losses"], restored.step(_batch()))

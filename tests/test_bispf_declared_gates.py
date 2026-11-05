@@ -156,7 +156,7 @@ def test_recipe_declares_gates_for_every_bispf_component():
     recipe = get_recipe("bispf", bispf_shape_gates=False,
                         bispf_gate_overrides={"late_thermal_min_call": 10, "simplex_min_dim": 99})
     assert recipe.bispf_gate_overrides == (("late_thermal_min_call", 10), ("simplex_min_dim", 99))
-    restored = Recipe(**json.loads(json.dumps(recipe.to_dict())))
+    restored = Recipe.from_dict(json.loads(json.dumps(recipe.to_dict())))
     assert restored == recipe
     gates = recipe.bispf_gates()
     assert not gates.shape_gates and gates.late_thermal_min_call == 10

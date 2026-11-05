@@ -51,7 +51,7 @@ def _assert_same_models(left, right):
 
 def test_default_critic_is_ka2():
     recipe = get_recipe("ka2")
-    assert recipe == Recipe() and recipe.name == "ka2"
+    assert recipe == Recipe.from_dict({}) and recipe.name == "ka2"
     trainer = _trainer(get_recipe(trainer="ka2", num_particles=64, z_dim=2, batch_size=8))
     assert isinstance(trainer.opt_d, KA2CriticAdam)
     assert isinstance(trainer.penalty.regularizer, KA2GradientPenalty)

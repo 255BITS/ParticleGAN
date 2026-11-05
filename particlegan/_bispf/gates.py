@@ -31,12 +31,17 @@ class BISPFGates:
 
     Gates that do not depend on shape or step, such as the thermal freeze
     threshold, are unaffected.
+
+    The critic penalty's explicit ``input_domain`` declaration takes precedence
+    over the automatic simplex gate. ``shape_gates=False`` disables heuristic
+    domain detection; it does not override an explicitly categorical host.
     """
 
     shape_gates: bool = True
 
-    # Critic penalty: rank-2 inputs with dim >= simplex_min_dim are treated as
-    # discrete simplex codes (endpoint hard caps, no gauge, no chords, no cooling).
+    # Critic penalty in input_domain="auto": rank-2 inputs with dim >=
+    # simplex_min_dim are treated as discrete simplex codes (endpoint hard
+    # caps, no gauge, no chords, no cooling).
     simplex_enabled: bool = True
     simplex_min_dim: int = 170
     # Critic penalty: inputs of rank >= 3 are treated as images (adaptive

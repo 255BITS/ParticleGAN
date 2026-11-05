@@ -2391,29 +2391,8 @@ def _load_attempt_coverage_task_fps(root: Path) -> dict[tuple[str, str], set[tup
             target.setdefault((src, tid), set()).add((ex_fp, ev_fp))
     merged = dict(scoped)
     merged.update(unscoped)
-    if unscoped:
-        by_task: dict[str, set[tuple[str, str]]] = {}
-        for (_, tid), pairs in unscoped.items():
-            by_task.setdefault(tid, set()).update(pairs)
-        by_task.setdefault("five_word_joint_smoke", set()).add(
-            (
-                "461487d4910644bdc4090551214b43b1c6cfcc88f0cc8c2a7830cc9fa777049b",
-                "ed9994f3dcfb1d22a771f84d1ede72d2e11cd93501e5973cd9948cc666546bfa",
-            )
-        )
-        by_task.setdefault("five_word_joint_hold", set()).add(
-            (
-                "d1b332861b834bfa3dc624364a3ae0b42407e89dbbfed1701df1c7a7c78e8e64",
-                "18b53076bbd1db687fed88c4caa3883f5c38b3157582c147f0e796fa7f1d4154",
-            )
-        )
-        try:
-            from ops.refresh_forge_readouts import catalog_source_manifest
-            live_src = catalog_source_manifest(Path(root))["digest"]
-            for tid, pairs in by_task.items():
-                merged.setdefault((live_src, tid), set()).update(pairs)
-        except Exception:
-            pass
+    # Source identities are immutable. Historical task fingerprints must not
+    # be copied under today's source digest merely to populate a live table.
     return merged
 
 
@@ -3063,9 +3042,10 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                             elif cov_tid not in measured:
                                 measured[cov_tid] = cov_st
                                 all_measured[cov_tid] = cov_st
-                        if not used_records and matching and measured:
-                            used_records.append((matching[0][0], matching[0][1]))
-                        elif not used_records and fam_cov and measured:
+                        # Coverage may supply Tier 1 measurements even when a
+                        # matching readout contains only Tier 2. Cite coverage,
+                        # never an unrelated readout that contributed no row.
+                        if not used_records and fam_cov and measured:
                             used_records.append(("reports/forge/attempt-coverage.json", "attempt-coverage.json"))
                     if used_records:
                         any_matched = True

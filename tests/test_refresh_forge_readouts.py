@@ -1587,18 +1587,21 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         "Recorded source measurement · **stale**; no current qualification",
     ):
         assert forbidden not in selected_table_lines
+    # API source maintenance does not inherit a different source cohort's
+    # newer Tier 1 claims. Preserve the certified base-cohort display scores;
+    # original measurements and the later cohort remain unchanged in evidence.
     for expected_selected_score in (
-        "**[27/27](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 12/12 tests",
+        "**[23/27](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 8/12 tests (4 fail)",
         "**[24/27](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/12 tests (3 fail)",
         "**[24/27](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/12 tests (3 fail)",
-        "**[27/27](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 12/12 tests",
+        "**[22/27](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/12 tests (5 fail)",
         "**[25/27](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/12 tests (2 fail)",
-        "**[27/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 12/12 tests",
+        "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 8/12 tests (4 fail)",
         "**[25/27](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/12 tests (2 fail)",
         "**[17/27](families/e22.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/12 tests (5 fail)",
-        "**[87/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 24/36 tests (12 fail)",
-        "**[77/115](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** · 22/36 tests (14 fail)",
-        "**[76/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 21/36 tests (15 fail)",
+        "**[83/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 20/36 tests (16 fail)",
+        "**[72/115](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** · 17/36 tests (19 fail)",
+        "**[67/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 17/36 tests (19 fail)",
         "**[59/115](families/e22.md#cohort-cuda-1bf9d7d34422)** · 14/36 tests (22 fail)",
     ):
         assert expected_selected_score in selected_table_lines
@@ -1982,9 +1985,116 @@ def _sync_tracked_worktree_edits(src_root: Path, dst_root: Path) -> None:
             shutil.copy2(src_file, dst_file)
 
 
+def _readout_workstation_envelope_fixture():
+    """Declared metadata for software compatibility controls, with no training."""
+    return {
+        "schema_version": 1,
+        "request": {
+            "runtime": {
+                "implementation": "CPython",
+                "machine": "x86_64",
+                "packages": {"numpy": "2.5.4", "scipy": "1.18.1", "torch": "2.14.1"},
+                "python": "3.14.8",
+                "system": "Linux",
+            },
+            "rng": {
+                "runtime": {
+                    "rng": "torch.Generator",
+                    "torch": "2.14.1+cu130",
+                }
+            },
+            "compute_profiles": {
+                "cuda": {
+                    "autograd_multithreading_enabled": False,
+                    "backend": "cuda",
+                    "compute_capability": "8.6",
+                    "deterministic": True,
+                    "driver": "615.78.08",
+                    "model": "NVIDIA RTX A6000",
+                    "tf32": False,
+                    "threads": 1,
+                }
+            },
+        },
+    }
+
+
 def _restore_recorded_source_cohort(root: Path) -> str:
-    """Return the current-source digest matching the committed readout records."""
-    return rfr.catalog_source_manifest(root)["digest"]
+    """Restore the pre-migration software cohort for archived tamper controls.
+
+    Latest-source integrity is checked separately above. These controls need
+    actual original source bytes, rather than relabeling the latest checkout.
+    No training or published evidence is rewritten.
+    """
+    import io
+    import subprocess
+    import tarfile
+    from experiments.forge.sources import SOURCE_DIRS, SOURCE_SUFFIXES
+
+    assert root.resolve() != ROOT.resolve()
+    revision = "6261a5458c1f3e14c7c9faf1fc6966e03b2acfb1"
+    current = set(rfr.catalog_source_manifest(root)["files"])
+    names = subprocess.check_output(
+        ["git", "ls-tree", "-r", "--name-only", revision], cwd=ROOT, text=True).splitlines()
+    desired = {name for name in names if name in current or (
+        Path(name).suffix in SOURCE_SUFFIXES and (
+            Path(name).parts[0] in SOURCE_DIRS
+            or name.startswith("configs/") and "forge" not in Path(name).parts))}
+    for name in current - desired:
+        (root / name).unlink()
+    data = subprocess.check_output(["git", "archive", revision, "--", *sorted(desired)], cwd=ROOT)
+    with tarfile.open(fileobj=io.BytesIO(data)) as archive:
+        archive.extractall(root, filter="data")
+    manifest = rfr.catalog_source_manifest(root)
+    assert manifest["digest"] == "2e8a97a0aa845c961de00d403fdcd1673b34b33626e4546c3138882a40e7bacf"
+    _bind_readout_software_fixture(root, manifest["digest"])
+    return manifest["digest"]
+
+
+def _bind_readout_software_fixture(root: Path, source_digest: str) -> None:
+    """Bind copied metadata to this API for tamper tests, never qualification.
+
+    Ordinary receipts used an earlier declaration identity. Preserve each
+    original identity in the private fixture and derive compatibility keys
+    independently from planner jobs and the declared workstation envelope.
+    Published rows, gate outcomes and source files remain unchanged.
+    """
+    from experiments.forge import planning
+    runtime = _readout_workstation_envelope_fixture()["request"]
+    for choice in rfr.current_family_candidates(root):
+        req = planning.resolve_idea(
+            root, choice["candidate_id"], view_id="discriminator_stability",
+            through_tier=rfr._discriminator_stability_max_tier(root), freeze_source=False,
+            execution_backend="cuda", cuda_model="NVIDIA RTX A6000")
+        assert req["source"]["digest"] == source_digest
+        jobs = deepcopy(req["jobs"])
+        for job in jobs:
+            science = job["science"]
+            science["runtime"] = deepcopy(runtime["runtime"])
+            science["rng"]["runtime"] = deepcopy(runtime["rng"]["runtime"])
+            science["compute"] = {**runtime["compute_profiles"]["cuda"],
+                                  "threads": science["compute"]["threads"]}
+        planning.rekey_jobs(jobs)
+        keys = {tid: job["compatibility_key"] for job in jobs
+                for tid in job.get("task_ids", [job["task_id"]])}
+        for path in (root / "reports/forge/records").glob("readout-*.json"):
+            record = read_json(path)
+            if (record.get("candidate_id") != choice["candidate_id"]
+                    or record.get("evidence_scope") != "current"):
+                continue
+            old_revision = record["candidate_revision"]
+            record["software_fixture_original_identity"] = {
+                "candidate_revision": old_revision, "source": deepcopy(record["source"])}
+            record["qualification_input"] = record["qualification_reuse"] = False
+            record["candidate_revision"] = req["candidate_revision"]
+            record["source"] = {"digest": source_digest}
+            for row in record["task_results"]:
+                if row["task_id"] in keys:
+                    row["compatibility_key"] = keys[row["task_id"]]
+            atomic_json(path, record)
+            for board in (root / "reports/forge/leaderboards").glob("*.md"):
+                text = board.read_text()
+                board.write_text(text.replace(old_revision[:12], req["candidate_revision"][:12]))
 
 
 def test_current_source_tier1_readouts_ignores_non_tier1_records_and_invalidates_cache_on_task_change(
@@ -2337,36 +2447,7 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         zt_row = next(r for r in atlas_rec["task_results"] if r["task_id"] == "zero_tanh_smoke")
         zt_aid = zt_row["_attempt_id"]
         local_req_path = wt / "reports/forge/attempts" / zt_aid / "request.json"
-        valid_workstation_envelope = {
-            "schema_version": 1,
-            "request": {
-                "runtime": {
-                    "implementation": "CPython",
-                    "machine": "x86_64",
-                    "packages": {"numpy": "2.5.4", "scipy": "1.18.1", "torch": "2.14.1"},
-                    "python": "3.14.8",
-                    "system": "Linux",
-                },
-                "rng": {
-                    "runtime": {
-                        "rng": "torch.Generator",
-                        "torch": "2.14.1+cu130",
-                    }
-                },
-                "compute_profiles": {
-                    "cuda": {
-                        "autograd_multithreading_enabled": False,
-                        "backend": "cuda",
-                        "compute_capability": "8.6",
-                        "deterministic": True,
-                        "driver": "615.78.08",
-                        "model": "NVIDIA RTX A6000",
-                        "tf32": False,
-                        "threads": 1,
-                    }
-                },
-            },
-        }
+        valid_workstation_envelope = _readout_workstation_envelope_fixture()
         atomic_json(local_req_path, valid_workstation_envelope)
         assert rfr.check_selected_family_readouts(wt)["current"] is True
         assert rfr.check_compiled_reports(wt)["current_source_tier1_synced"] is True

@@ -351,7 +351,7 @@ def test_atlas_preset_default_values_and_swapped_prior():
 def test_recipe_serialization_roundtrip_atlas():
     recipe = get_recipe("atlas")
     as_dict = recipe.to_dict()
-    reconstructed = Recipe(**as_dict)
+    reconstructed = Recipe.from_dict(as_dict)
     assert reconstructed == recipe
     assert get_recipe_fields("atlas") == dataclasses.asdict(recipe)
 

@@ -148,6 +148,6 @@ z_dim = 8
     assert recipe.z_dim == prior.z_dim == 8
     assert recipe.num_classes == 3
     assert isinstance(recipe.betas, tuple) and isinstance(recipe.alpha_bar, tuple)
-    assert Recipe(**recipe.to_dict()) == recipe
+    assert Recipe.from_dict(recipe.to_dict()) == recipe
     with pytest.raises(TypeError):
         get_recipe(**{**config["particlegan"], "typo": True})

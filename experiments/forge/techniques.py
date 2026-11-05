@@ -11,7 +11,7 @@ from .contracts import stable_hash
 
 
 def _recipe(value):
-    return value if isinstance(value, Recipe) else Recipe(**value)
+    return value if isinstance(value, Recipe) else Recipe.from_dict(value)
 
 
 def technique_signature(value):
