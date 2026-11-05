@@ -1587,18 +1587,21 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         "Recorded source measurement · **stale**; no current qualification",
     ):
         assert forbidden not in selected_table_lines
+    # API source maintenance does not inherit a different source cohort's
+    # newer Tier 1 claims. Preserve the certified base-cohort display scores;
+    # original measurements and the later cohort remain unchanged in evidence.
     for expected_selected_score in (
-        "**[27/27](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 12/12 tests",
+        "**[23/27](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 8/12 tests (4 fail)",
         "**[24/27](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/12 tests (3 fail)",
         "**[24/27](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/12 tests (3 fail)",
-        "**[27/27](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 12/12 tests",
+        "**[22/27](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/12 tests (5 fail)",
         "**[25/27](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/12 tests (2 fail)",
-        "**[27/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 12/12 tests",
+        "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 8/12 tests (4 fail)",
         "**[25/27](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/12 tests (2 fail)",
         "**[17/27](families/e22.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/12 tests (5 fail)",
-        "**[87/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 24/36 tests (12 fail)",
-        "**[77/115](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** · 22/36 tests (14 fail)",
-        "**[76/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 21/36 tests (15 fail)",
+        "**[83/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 20/36 tests (16 fail)",
+        "**[72/115](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** · 17/36 tests (19 fail)",
+        "**[67/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 17/36 tests (19 fail)",
         "**[59/115](families/e22.md#cohort-cuda-1bf9d7d34422)** · 14/36 tests (22 fail)",
     ):
         assert expected_selected_score in selected_table_lines

@@ -17,7 +17,7 @@ critic penalty and prior regularizer.
 Requires Python 3.11+. PyTorch and NumPy are installed as dependencies.
 
 ```bash
-python -m pip install particlegan           # the library (0.9.4)
+python -m pip install particlegan           # the library (0.9.5)
 ```
 
 To run the examples, experiments and tests, install from source with the extras you need:

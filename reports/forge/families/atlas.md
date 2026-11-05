@@ -172,21 +172,21 @@ Complete current Tier 1 measurement in: discriminator_stability. PASS and FAIL a
 
 | View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Tier 4 tests | Total distinct tests | Held (measured, not counted) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| [adaptation](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation) | [3/3](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-2) | [0/1](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-4) | [11/16](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
-| [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous) | [4/4](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-2) | [1/6](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-4) | [13/22](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
-| [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability) | [11/11](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | [8/18](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-2) | [0/1](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | [19/30](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability) | [5/13](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
-| [formulation_comparison](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison) | [3/3](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-2) | [0/1](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-4) | [11/16](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
-| [host_profile_transfer](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer) | [3/3](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-2) | [0/1](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-4) | [11/16](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
-| [quality_coverage](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage) | [3/3](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-2) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-4) | [11/15](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
+| [adaptation](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation) | [2/3](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-2) | [0/1](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-4) | [10/16](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
+| [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous) | [3/4](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-2) | [1/6](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-4) | [12/22](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
+| [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability) | [7/11](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | [8/18](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-2) | [0/1](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | [15/30](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability) | [5/13](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
+| [formulation_comparison](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison) | [2/3](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-2) | [0/1](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-4) | [10/16](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
+| [host_profile_transfer](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer) | [2/3](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-2) | [0/1](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-4) | [10/16](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
+| [quality_coverage](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage) | [2/3](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-2) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-4) | [10/15](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
 
 Separate cohort coverage (excluded from family totals):
 
 | View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Tier 4 tests | Total distinct tests |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | [lazy_cadence_coverage](atlas.md#cohort-cuda-bc3debd3fa5e-lazy_cadence_coverage) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-lazy_cadence_coverage-tier-1) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-lazy_cadence_coverage-tier-2) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-lazy_cadence_coverage-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-lazy_cadence_coverage-tier-4) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-lazy_cadence_coverage) |
-| [policy_cloud_coverage](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage) | [7/7](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage-tier-1) | [13/21](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage-tier-2) | [1/7](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage-tier-4) | [21/35](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage) |
-| [policy_cloud_coverage_as_served](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage_as_served) | [7/7](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage_as_served-tier-1) | [13/21](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage_as_served-tier-2) | [1/7](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage_as_served-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage_as_served-tier-4) | [21/35](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage_as_served) |
-| [tier1_policy_coverage](atlas.md#cohort-cuda-bc3debd3fa5e-tier1_policy_coverage) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-tier1_policy_coverage-tier-1) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-tier1_policy_coverage-tier-2) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-tier1_policy_coverage-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-tier1_policy_coverage-tier-4) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-tier1_policy_coverage) |
+| [policy_cloud_coverage](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage) | [4/7](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage-tier-1) | [13/21](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage-tier-2) | [1/7](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage-tier-4) | [18/35](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage) |
+| [policy_cloud_coverage_as_served](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage_as_served) | [4/7](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage_as_served-tier-1) | [13/21](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage_as_served-tier-2) | [1/7](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage_as_served-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage_as_served-tier-4) | [18/35](atlas.md#cohort-cuda-bc3debd3fa5e-policy_cloud_coverage_as_served) |
+| [tier1_policy_coverage](atlas.md#cohort-cuda-bc3debd3fa5e-tier1_policy_coverage) | [3/7](atlas.md#cohort-cuda-bc3debd3fa5e-tier1_policy_coverage-tier-1) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-tier1_policy_coverage-tier-2) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-tier1_policy_coverage-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-tier1_policy_coverage-tier-4) | [3/7](atlas.md#cohort-cuda-bc3debd3fa5e-tier1_policy_coverage) |
 
 With run-attempt coverage, not run means no attempt; incompatible means a constructor refusal; blocked means a missing required artifact; diagnostic attempts retain separate-runtime outcomes. Other cohorts retain their recorded missing/preflight counts. All remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
 
@@ -200,14 +200,14 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | --- | --- | --- | --- |
 | [ae_gan_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ae_gan_hold) | [adaptation](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-1) | PASS | matches recorded run |
 | [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1) | PASS | matches recorded run |
-| [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | PASS | matches recorded run |
+| [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | FAIL | matches recorded run |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_smoke) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | PASS | matches recorded run |
-| [model_ae_gan_multimodal](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_gan_multimodal) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | PASS | matches recorded run |
+| [model_ae_gan_multimodal](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_gan_multimodal) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | FAIL | matches recorded run |
 | [model_ae_reconstruction](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_reconstruction) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | PASS | matches recorded run |
 | [model_vae_categorical](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_categorical) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | PASS | matches recorded run |
 | [model_vae_hard](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_hard) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | PASS | matches recorded run |
-| [ring16_acquisition](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | PASS | matches recorded run |
-| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | [adaptation](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-1) | PASS | matches recorded run |
+| [ring16_acquisition](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | FAIL | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | [adaptation](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-1) | FAIL | matches recorded run |
 | [unused_token_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-unused_token_hold) | [adaptation](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-1) | PASS | matches recorded run |
 | [zero_tanh_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-zero_tanh_smoke) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | PASS | matches recorded run |
 
@@ -334,7 +334,7 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | required | PASS | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | required | FAIL | matches recorded run |
 | [unused_token_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-unused_token_hold) | required | PASS | matches recorded run |
 | [ae_gan_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ae_gan_hold) | required | PASS | matches recorded run |
 
@@ -451,11 +451,11 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
-| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | diagnostic | PASS | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | diagnostic | FAIL | matches recorded run |
 | [unused_token_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-unused_token_hold) | diagnostic | PASS | matches recorded run |
 | [ae_gan_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ae_gan_hold) | diagnostic | PASS | matches recorded run |
-| [ring16_acquisition](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition) | diagnostic | PASS | matches recorded run |
-| [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
+| [ring16_acquisition](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition) | diagnostic | FAIL | matches recorded run |
+| [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | diagnostic | FAIL | matches recorded run |
 | [gaussian1d_stability](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
 | [five_word_joint_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_hold) | diagnostic | FAIL | matches recorded run |
 | [trajectory](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-trajectory) | diagnostic | FAIL | matches recorded run |
@@ -501,7 +501,7 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | diagnostic | PASS | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | diagnostic | FAIL | matches recorded run |
 
 <a name="cohort-cuda-bc3debd3fa5e-bcap-tier1-stability-diagnostic-v1-tier-2"></a>
 
@@ -537,7 +537,7 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | diagnostic | PASS | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | diagnostic | FAIL | matches recorded run |
 
 <a name="cohort-cuda-bc3debd3fa5e-bcap-tier1-stability-repairs-diagnostic-v1-tier-2"></a>
 
@@ -656,7 +656,7 @@ Additional eligibility requirements:
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | required | PASS | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | required | FAIL | matches recorded run |
 | [unused_token_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-unused_token_hold) | required | PASS | matches recorded run |
 | [ae_gan_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ae_gan_hold) | required | PASS | matches recorded run |
 | [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_measurement_v1) | required | PASS | matches recorded run |
@@ -801,13 +801,13 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_smoke) | required | PASS | matches recorded run |
-| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | required | PASS | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | required | FAIL | matches recorded run |
 | [unused_token_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-unused_token_hold) | required | PASS | matches recorded run |
 | [ae_gan_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ae_gan_hold) | required | PASS | matches recorded run |
-| [ring16_acquisition](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition) | required | PASS | matches recorded run |
-| [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | required | PASS | matches recorded run |
+| [ring16_acquisition](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition) | required | FAIL | matches recorded run |
+| [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | required | FAIL | matches recorded run |
 | [zero_tanh_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-zero_tanh_smoke) | required | PASS | matches recorded run |
-| [model_ae_gan_multimodal](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_gan_multimodal) | required | PASS | matches recorded run |
+| [model_ae_gan_multimodal](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_gan_multimodal) | required | FAIL | matches recorded run |
 | [model_ae_reconstruction](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_reconstruction) | required | PASS | matches recorded run |
 | [model_vae_categorical](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_categorical) | required | PASS | matches recorded run |
 | [model_vae_hard](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_hard) | required | PASS | matches recorded run |
@@ -883,7 +883,7 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | required | PASS | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | required | FAIL | matches recorded run |
 | [unused_token_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-unused_token_hold) | required | PASS | matches recorded run |
 | [ae_gan_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ae_gan_hold) | required | PASS | matches recorded run |
 
@@ -959,7 +959,7 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | required | PASS | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | required | FAIL | matches recorded run |
 | [unused_token_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-unused_token_hold) | required | PASS | matches recorded run |
 | [ae_gan_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ae_gan_hold) | required | PASS | matches recorded run |
 
@@ -1073,11 +1073,11 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
-| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | diagnostic | PASS | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | diagnostic | FAIL | matches recorded run |
 | [unused_token_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-unused_token_hold) | diagnostic | PASS | matches recorded run |
 | [ae_gan_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ae_gan_hold) | diagnostic | PASS | matches recorded run |
-| [ring16_acquisition](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition) | diagnostic | PASS | matches recorded run |
-| [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
+| [ring16_acquisition](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition) | diagnostic | FAIL | matches recorded run |
+| [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | diagnostic | FAIL | matches recorded run |
 | [gaussian1d_stability](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
 | [five_word_joint_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_hold) | diagnostic | FAIL | matches recorded run |
 | [trajectory](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-trajectory) | diagnostic | FAIL | matches recorded run |
@@ -1139,13 +1139,13 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole_policy_cloud_coverage_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole_policy_cloud_coverage_v1) | required | PASS | matches recorded run |
+| [two_pole_policy_cloud_coverage_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
 | [gaussian1d_smoke_policy_cloud_coverage_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_smoke_policy_cloud_coverage_v1) | required | PASS | matches recorded run |
-| [ring16_acquisition_policy_cloud_coverage_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition_policy_cloud_coverage_v1) | required | PASS | matches recorded run |
+| [ring16_acquisition_policy_cloud_coverage_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
 | [clockfree_audit_measurement_v1_policy_cloud_coverage_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_measurement_v1_policy_cloud_coverage_v1) | required | PASS | matches recorded run |
 | [unused_token_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-unused_token_hold_policy_cloud_coverage_v1) | required | PASS | matches recorded run |
 | [ae_gan_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ae_gan_hold_policy_cloud_coverage_v1) | required | PASS | matches recorded run |
-| [five_word_joint_smoke_policy_cloud_coverage_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke_policy_cloud_coverage_v1) | required | PASS | matches recorded run |
+| [five_word_joint_smoke_policy_cloud_coverage_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
 
 <a name="cohort-cuda-bc3debd3fa5e-policy_cloud_coverage-tier-2"></a>
 
@@ -1213,13 +1213,13 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole_policy_cloud_coverage_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole_policy_cloud_coverage_v1) | required | PASS | matches recorded run |
+| [two_pole_policy_cloud_coverage_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
 | [gaussian1d_smoke_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_smoke_policy_cloud_coverage_as_served_v1) | required | PASS | matches recorded run |
-| [ring16_acquisition_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition_policy_cloud_coverage_as_served_v1) | required | PASS | matches recorded run |
+| [ring16_acquisition_policy_cloud_coverage_as_served_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition_policy_cloud_coverage_as_served_v1) | required | FAIL | matches recorded run |
 | [clockfree_audit_measurement_v1_policy_cloud_coverage_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_measurement_v1_policy_cloud_coverage_v1) | required | PASS | matches recorded run |
 | [unused_token_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-unused_token_hold_policy_cloud_coverage_v1) | required | PASS | matches recorded run |
 | [ae_gan_hold_policy_cloud_coverage_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ae_gan_hold_policy_cloud_coverage_v1) | required | PASS | matches recorded run |
-| [five_word_joint_smoke_policy_cloud_coverage_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke_policy_cloud_coverage_v1) | required | PASS | matches recorded run |
+| [five_word_joint_smoke_policy_cloud_coverage_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke_policy_cloud_coverage_v1) | required | FAIL | matches recorded run |
 
 <a name="cohort-cuda-bc3debd3fa5e-policy_cloud_coverage_as_served-tier-2"></a>
 
@@ -1286,14 +1286,14 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
-| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | diagnostic | PASS | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | diagnostic | FAIL | matches recorded run |
 | [unused_token_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-unused_token_hold) | diagnostic | PASS | matches recorded run |
 | [ae_gan_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ae_gan_hold) | diagnostic | PASS | matches recorded run |
-| [ring16_acquisition](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition) | diagnostic | PASS | matches recorded run |
-| [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
+| [ring16_acquisition](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition) | diagnostic | FAIL | matches recorded run |
+| [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | diagnostic | FAIL | matches recorded run |
 | [zero_tanh_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-zero_tanh_smoke) | diagnostic | PASS | matches recorded run |
 | [model_ae_ddgan_gaussian_chain](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_ddgan_gaussian_chain) | diagnostic | FAIL | matches recorded run |
-| [model_ae_gan_multimodal](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_gan_multimodal) | diagnostic | PASS | matches recorded run |
+| [model_ae_gan_multimodal](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_gan_multimodal) | diagnostic | FAIL | matches recorded run |
 | [model_ae_reconstruction](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_reconstruction) | diagnostic | PASS | matches recorded run |
 | [model_ddgan_gaussian_chain](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ddgan_gaussian_chain) | diagnostic | FAIL | matches recorded run |
 | [model_vae_categorical](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_categorical) | diagnostic | PASS | matches recorded run |
@@ -1368,7 +1368,7 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | required | PASS | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | required | FAIL | matches recorded run |
 | [unused_token_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-unused_token_hold) | required | PASS | matches recorded run |
 | [ae_gan_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ae_gan_hold) | required | PASS | matches recorded run |
 
@@ -1426,7 +1426,7 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
+| [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | diagnostic | FAIL | matches recorded run |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
 | [gaussian1d_stability](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
 | [five_word_joint_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_hold) | diagnostic | FAIL | matches recorded run |
@@ -1484,7 +1484,7 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
+| [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | diagnostic | FAIL | matches recorded run |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
 | [gaussian1d_stability](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
 | [five_word_joint_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_hold) | diagnostic | FAIL | matches recorded run |
@@ -1542,7 +1542,7 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
+| [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | diagnostic | FAIL | matches recorded run |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
 | [gaussian1d_stability](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
 | [five_word_joint_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_hold) | diagnostic | FAIL | matches recorded run |
@@ -1600,7 +1600,7 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
+| [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | diagnostic | FAIL | matches recorded run |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
 | [gaussian1d_stability](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
 | [five_word_joint_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_hold) | diagnostic | FAIL | matches recorded run |
@@ -1697,10 +1697,10 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [gaussian1d_acquisition_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_acquisition_tier1_policy_selected_cloud_v1) | required | FAIL | matches recorded run |
-| [two_pole_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole_tier1_policy_selected_cloud_v1) | required | PASS | matches recorded run |
+| [two_pole_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole_tier1_policy_selected_cloud_v1) | required | FAIL | matches recorded run |
 | [unused_token_hold_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-unused_token_hold_tier1_policy_selected_cloud_v1) | required | PASS | matches recorded run |
 | [ae_gan_hold_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ae_gan_hold_tier1_policy_selected_cloud_v1) | required | PASS | matches recorded run |
-| [ring16_acquisition_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition_tier1_policy_selected_cloud_v1) | required | PASS | matches recorded run |
+| [ring16_acquisition_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition_tier1_policy_selected_cloud_v1) | required | FAIL | matches recorded run |
 | [five_word_joint_acquisition_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_acquisition_tier1_policy_selected_cloud_v1) | required | FAIL | matches recorded run |
 | [clockfree_audit_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_tier1_policy_selected_cloud_v1) | required | PASS | matches recorded run |
 
@@ -2222,7 +2222,7 @@ Dependencies: five_word_joint_smoke_policy_cloud_coverage_v1 (checkpoint).
 
 ### five_word_joint_smoke
 
-**five_word_joint_smoke: PASS**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_smoke.json).
+**five_word_joint_smoke: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_smoke.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. any scheduled full joint pass plus independent same-state confirmation
 
@@ -2281,9 +2281,9 @@ Current measurement: particle_cloud prior (sigma 0); generated_and_paired_recons
 
 ### five_word_joint_smoke_policy_cloud_coverage_v1
 
-**five_word_joint_smoke_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/five_word_joint_smoke_policy_cloud_coverage_v1.json).
+**five_word_joint_smoke_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/five_word_joint_smoke_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
 
 Policy-cohort variant of [five_word_joint_smoke](../../../configs/forge/tasks/five_word_joint_smoke.json); parent task SHA256 `e08fb1405013d7ea1792e4536d1a93e5722348de9bfe712e3d4e8686baa0421e`. This measurement supplies no cells to the parent clean cohort.
 
@@ -3871,7 +3871,7 @@ Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_wit
 
 ### model_ae_gan_multimodal
 
-**model_ae_gan_multimodal: PASS**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_gan_multimodal.json).
+**model_ae_gan_multimodal: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_gan_multimodal.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
@@ -4347,7 +4347,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_conditional_pr
 
 ### ring16_acquisition
 
-**ring16_acquisition: PASS**. [Current experiment declaration](../../../configs/forge/tasks/ring16_acquisition.json).
+**ring16_acquisition: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/ring16_acquisition.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
@@ -4396,9 +4396,9 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 ### ring16_acquisition_policy_cloud_coverage_as_served_v1
 
-**ring16_acquisition_policy_cloud_coverage_as_served_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/ring16_acquisition_policy_cloud_coverage_as_served_v1.json).
+**ring16_acquisition_policy_cloud_coverage_as_served_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/ring16_acquisition_policy_cloud_coverage_as_served_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
 
 Policy-cohort variant of [ring16_acquisition](../../../configs/forge/tasks/ring16_acquisition.json); parent task SHA256 `83ae3f6e1ff2bc2230882db72afbb0a2e075e271147382e69ee236b4a8df35f0`. This measurement supplies no cells to the parent clean cohort.
 
@@ -4426,9 +4426,9 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_as_served_publ
 
 ### ring16_acquisition_policy_cloud_coverage_v1
 
-**ring16_acquisition_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/ring16_acquisition_policy_cloud_coverage_v1.json).
+**ring16_acquisition_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/ring16_acquisition_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
 
 Policy-cohort variant of [ring16_acquisition](../../../configs/forge/tasks/ring16_acquisition.json); parent task SHA256 `83ae3f6e1ff2bc2230882db72afbb0a2e075e271147382e69ee236b4a8df35f0`. This measurement supplies no cells to the parent clean cohort.
 
@@ -4456,9 +4456,9 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_public_prior_w
 
 ### ring16_acquisition_tier1_policy_selected_cloud_v1
 
-**ring16_acquisition_tier1_policy_selected_cloud_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ring16_acquisition_tier1_policy_selected_cloud_v1.json).
+**ring16_acquisition_tier1_policy_selected_cloud_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ring16_acquisition_tier1_policy_selected_cloud_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
 
 Policy-cohort variant of [ring16_acquisition](../../../configs/forge/tasks/ring16_acquisition.json); parent task SHA256 `e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1`. This measurement supplies no cells to the parent clean cohort.
 
@@ -5378,7 +5378,7 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_conditional_pr
 
 ### two_pole
 
-**two_pole: PASS**. [Current experiment declaration](../../../configs/forge/tasks/two_pole.json).
+**two_pole: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/two_pole.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
@@ -5474,9 +5474,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 ### two_pole_policy_cloud_coverage_v1
 
-**two_pole_policy_cloud_coverage_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/two_pole_policy_cloud_coverage_v1.json).
+**two_pole_policy_cloud_coverage_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/policy_cloud_coverage_v1/two_pole_policy_cloud_coverage_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
 
 Policy-cohort variant of [two_pole](../../../configs/forge/tasks/two_pole.json); parent task SHA256 `93bebb4d3a017eb04450c3c84afe1d3f6efd4a38e6d86c9548a4bf431a042bf1`. This measurement supplies no cells to the parent clean cohort.
 
@@ -5501,9 +5501,9 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_learned_partic
 
 ### two_pole_tier1_policy_selected_cloud_v1
 
-**two_pole_tier1_policy_selected_cloud_v1: PASS**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/two_pole_tier1_policy_selected_cloud_v1.json).
+**two_pole_tier1_policy_selected_cloud_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/two_pole_tier1_policy_selected_cloud_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. Formulaic evaluation FAIL.
 
 Policy-cohort variant of [two_pole](../../../configs/forge/tasks/two_pole.json); parent task SHA256 `55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5`. This measurement supplies no cells to the parent clean cohort.
 

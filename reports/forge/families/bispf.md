@@ -133,7 +133,7 @@ Selection: recorded_source_measurement. Recorded source-bound original measureme
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [9/12](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-4) | [12/16](bispf.md#cohort-cuda-1bf9d7d34422-adaptation) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
 | [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [4/4](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [9/12](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [2/6](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-4) | [15/22](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
-| [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [11/11](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [10/18](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [1/1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | [22/30](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [0/13](bispf.md#cohort-cuda-1bf9d7d34422-held) |
+| [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [7/11](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [10/18](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [1/1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | [18/30](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [0/13](bispf.md#cohort-cuda-1bf9d7d34422-held) |
 | [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [3/3](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [9/12](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [1/1](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-4) | [13/16](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
 | [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [3/3](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [9/12](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [1/1](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-4) | [13/16](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
 | [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [3/3](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [9/12](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-4) | [12/15](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
@@ -161,14 +161,14 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [clockfree_audit_measurement_v1](bispf.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | PASS | matches recorded run |
 | [five_word_joint_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
 | [gaussian1d_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
-| [model_ae_gan_multimodal](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
+| [model_ae_gan_multimodal](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | FAIL | matches recorded run |
 | [model_ae_reconstruction](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_reconstruction) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
-| [model_vae_categorical](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_categorical) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
-| [model_vae_hard](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_hard) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
+| [model_vae_categorical](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_categorical) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | FAIL | matches recorded run |
+| [model_vae_hard](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_hard) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | FAIL | matches recorded run |
 | [ring16_acquisition](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
 | [two_pole](bispf.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | PASS | matches recorded run |
 | [unused_token_hold](bispf.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | PASS | matches recorded run |
-| [zero_tanh_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_smoke) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
+| [zero_tanh_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_smoke) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | FAIL | matches recorded run |
 
 <a name="cohort-cuda-1bf9d7d34422-tier-2"></a>
 
@@ -844,11 +844,11 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [ae_gan_hold](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | PASS | matches recorded run |
 | [ring16_acquisition](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | required | PASS | matches recorded run |
 | [five_word_joint_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | required | PASS | matches recorded run |
-| [zero_tanh_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_smoke) | required | PASS | matches recorded run |
-| [model_ae_gan_multimodal](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) | required | PASS | matches recorded run |
+| [zero_tanh_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_smoke) | required | FAIL | matches recorded run |
+| [model_ae_gan_multimodal](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) | required | FAIL | matches recorded run |
 | [model_ae_reconstruction](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_reconstruction) | required | PASS | matches recorded run |
-| [model_vae_categorical](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_categorical) | required | PASS | matches recorded run |
-| [model_vae_hard](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_hard) | required | PASS | matches recorded run |
+| [model_vae_categorical](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_categorical) | required | FAIL | matches recorded run |
+| [model_vae_hard](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_hard) | required | FAIL | matches recorded run |
 | [clockfree_audit_measurement_v1](bispf.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
 
 <a name="cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2"></a>
@@ -1181,13 +1181,13 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 | [ae_gan_hold](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | diagnostic | PASS | matches recorded run |
 | [ring16_acquisition](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | diagnostic | PASS | matches recorded run |
 | [five_word_joint_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
-| [zero_tanh_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_smoke) | diagnostic | PASS | matches recorded run |
+| [zero_tanh_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_smoke) | diagnostic | FAIL | matches recorded run |
 | [model_ae_ddgan_gaussian_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_gaussian_chain) | diagnostic | FAIL | matches recorded run |
-| [model_ae_gan_multimodal](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) | diagnostic | PASS | matches recorded run |
+| [model_ae_gan_multimodal](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) | diagnostic | FAIL | matches recorded run |
 | [model_ae_reconstruction](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_reconstruction) | diagnostic | PASS | matches recorded run |
 | [model_ddgan_gaussian_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_gaussian_chain) | diagnostic | FAIL | matches recorded run |
-| [model_vae_categorical](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_categorical) | diagnostic | PASS | matches recorded run |
-| [model_vae_hard](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_hard) | diagnostic | PASS | matches recorded run |
+| [model_vae_categorical](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_categorical) | diagnostic | FAIL | matches recorded run |
+| [model_vae_hard](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_hard) | diagnostic | FAIL | matches recorded run |
 | [clockfree_audit_measurement_v1](bispf.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
 | [clockfree_audit](bispf.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit) | diagnostic | PASS | matches recorded run |
 | [gaussian1d_stability](bispf.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
@@ -3123,7 +3123,7 @@ Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_wit
 
 ### model_ae_gan_multimodal
 
-**model_ae_gan_multimodal: PASS**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_gan_multimodal.json).
+**model_ae_gan_multimodal: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_gan_multimodal.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
@@ -3324,7 +3324,7 @@ Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_wit
 
 ### model_vae_categorical
 
-**model_vae_categorical: PASS**. [Current experiment declaration](../../../configs/forge/tasks/model_vae_categorical.json).
+**model_vae_categorical: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_vae_categorical.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
@@ -3364,7 +3364,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 ### model_vae_hard
 
-**model_vae_hard: PASS**. [Current experiment declaration](../../../configs/forge/tasks/model_vae_hard.json).
+**model_vae_hard: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_vae_hard.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
@@ -4730,7 +4730,7 @@ Dependencies: zero_tanh_smoke (gate).
 
 ### zero_tanh_smoke
 
-**zero_tanh_smoke: PASS**. [Current experiment declaration](../../../configs/forge/tasks/zero_tanh_smoke.json).
+**zero_tanh_smoke: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/zero_tanh_smoke.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. failed thresholds: mean_abs_error <= 0.005, rms_error <= 0.01
 
