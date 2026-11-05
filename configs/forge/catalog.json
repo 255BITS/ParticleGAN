@@ -40,7 +40,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 119,
+      "forge_engine": 120,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -105,7 +105,7 @@
       "candidate_patch": 26,
       "configuration": 810,
       "driver": 405,
-      "engine_support": 119,
+      "engine_support": 120,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1551,
       "frozen_candidate_implementation": 15,
@@ -119,13 +119,13 @@
       "visualization": 23,
       "visualization_artifact": 740
     },
-    "files": 11786
+    "files": 11787
   },
   "coverage": {
-    "declared_count": 11786,
+    "declared_count": 11787,
     "missing": [],
     "stale": [],
-    "tracked_count": 11786,
+    "tracked_count": 11787,
     "unclassified": [],
     "valid": true
   },
@@ -7354,6 +7354,13 @@
       "family": "forge_engine",
       "git_blob": "639399c14b256b2e588072551fc46e4575a72f2d",
       "path": "experiments/forge/api.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "e68bba90e47b1e8709f2f3cf6c10d1107a50af97",
+      "path": "experiments/forge/archived_recipe_readers.py",
       "role": "engine_support",
       "suggested_tiers": []
     },

@@ -4283,18 +4283,16 @@
     "reports/toy_audit/api_contract/model_modes/publication.json": "3fe2d2f3b09d9e1c34b5dea5435e3d67a6aee30023e265acef25ffc6808fc6cd"
   },
   "inventory_coverage": {
-    "declared_count": 11786,
-    "missing": [
-      "experiments/forge/archived_recipe_readers.py"
-    ],
+    "declared_count": 11787,
+    "missing": [],
     "stale": [],
     "tracked_count": 11787,
     "unclassified": [],
-    "valid": false
+    "valid": true
   },
   "operational_lifecycle_digest": "3403f3aeb1dd1cdf39ec03a0df9e9415edea6a501d2e8a23ff7bc9e4321e2302",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "593766f34e91eaf3212e6b771449d27c9f0a8cb8ca4d492816690dfe3862c0e0",
+    "reports/forge/EXPERIMENT_MEMORY.md": "8ed7630418e628885595f774831c5c67d3de973d61f4a3830ab122715a4741b3",
     "reports/forge/publication-records.json": "5174449ad10c00a8d22dee09d3ef50c8fb0fc76f196d85197271ee7c0766c9d8"
   },
   "pending_readout": [
