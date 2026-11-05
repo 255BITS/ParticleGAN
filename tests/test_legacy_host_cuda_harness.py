@@ -275,7 +275,10 @@ def test_repaired_hosts_and_replay_declarations_pin_current_sources():
             assert set(revision["previous_source_sha256"]) == {"experiments/forge/behavior_adapters.py"}
             refreshed = set(revision["previous_source_sha256"])
             revision = revision["previous_revision"]
-        if revision.get("id") != "pr399-host-device-replay-source-only-v1":
+        if revision.get("id") not in {
+            "pr399-host-device-replay-source-only-v1",
+            "tier2-grid-triad-clean-sampling-calibration-v1",
+        }:
             continue
         changed = set(revision["previous_source_sha256"]) | set(revision["added_source_members"]) | refreshed
         for name in changed:

@@ -164,23 +164,23 @@ def test_moment_tether_zero_weight_and_empty_rows_safety():
 def test_recipe_rejects_invalid_prior_reg(bad_val):
     """Verify Recipe rejects negative and non-finite prior_reg."""
     with pytest.raises(ValueError, match="prior_reg must be finite and nonnegative"):
-        Recipe(prior_reg=bad_val)
+        Recipe.from_dict({"prior_reg": bad_val})
 
 
 @pytest.mark.parametrize("bad_eps", [0.0, -0.01, -1.0, float("nan"), float("inf"), float("-inf")])
 def test_recipe_rejects_invalid_prior_reg_eps(bad_eps):
     """Verify Recipe rejects nonpositive and non-finite prior_reg_eps."""
     with pytest.raises(ValueError):
-        Recipe(prior_reg_eps=bad_eps)
+        Recipe.from_dict({"prior_reg_eps": bad_eps})
 
 
 def test_recipe_rejects_unsupported_prior_regularizer():
     """Verify Recipe rejects unknown prior_regularizer strings."""
     with pytest.raises(ValueError, match="prior_regularizer must be vicreg, none, coulomb, sigreg, moment_tether, initial_mmd or sbnp"):
-        Recipe(prior_regularizer="unsupported_regularizer")
+        Recipe.from_dict({"prior_regularizer": "unsupported_regularizer"})
 
     with pytest.raises(ValueError, match="prior_regularizer must be vicreg, none, coulomb, sigreg, moment_tether, initial_mmd or sbnp"):
-        Recipe(prior_regularizer="")
+        Recipe.from_dict({"prior_regularizer": ""})
 
 
 def test_recipe_rejects_unsupported_moment_tether_kwargs():

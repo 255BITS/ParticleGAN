@@ -528,6 +528,7 @@ def test_central_revision_helper_preserves_the_existing_planning_formula(tmp_pat
     legacy_recipe = deepcopy(candidate["resolved_recipe"])
     assert legacy_recipe.pop("ebi_beta") == 30.0
     assert legacy_recipe.pop("kappa_radial") == 1.0
+    assert legacy_recipe.pop("generator_gradient_response") == "none"
     formulation = {name: candidate.get(name) for name in FORMULATION_FIELDS}
     formulation.update(resolved_recipe=legacy_recipe, prior=candidate["prior"],
                        api_version=candidate.get("api_version", "forge-api-v1"))
@@ -550,6 +551,7 @@ def test_nondefault_recipe_additions_remain_in_scientific_revision(tmp_path, fie
     candidate = req["candidate"]
     expected_recipe = deepcopy(candidate["resolved_recipe"])
     expected_recipe.pop(default_other)
+    expected_recipe.pop("generator_gradient_response", None)
     assert expected_recipe[field] == value
     formulation = {name: candidate.get(name) for name in FORMULATION_FIELDS}
     formulation.update(resolved_recipe=expected_recipe, prior=candidate["prior"],

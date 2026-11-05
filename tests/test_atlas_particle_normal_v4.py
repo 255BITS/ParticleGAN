@@ -172,10 +172,10 @@ def test_atlas_particle_normal_v4_readout_recovers_mode_hold_with_zero_regressio
     v4_ordinary = v4_ordinary_records[0]
     assert all(item["valid_receipt"] for item in v4_ordinary["provenance"]["attempts"])
     ordinary_counts = Counter(row["gate_status"] for row in v4_ordinary["task_results"])
-    assert len(v4_ordinary["task_results"]) == 14
+    assert len(v4_ordinary["task_results"]) == 21
     assert ordinary_counts["INCOMPLETE"] == 0
-    assert ordinary_counts["PASS"] == 12
-    assert ordinary_counts["FAIL"] == 2
+    assert ordinary_counts["PASS"] == 21
+    assert ordinary_counts["FAIL"] == 0
 
     selection = read_json(ROOT / "configs/forge/selections/family-current-v1.json")
     atlas_pin = next(pin for pin in selection["selections"] if pin["trainer_family"] == "atlas")
@@ -193,9 +193,23 @@ def test_atlas_particle_normal_v4_readout_recovers_mode_hold_with_zero_regressio
     assert "INVALID" not in published_tasks.values()
     assert "ERROR" not in published_tasks.values()
     assert published_tasks["clockfree_audit_measurement_v1"] == "PASS"
-    resolved_tier1_tasks = {"two_pole", "ring16_acquisition", "five_word_joint_smoke", "model_ae_gan_multimodal"}
+    resolved_tasks = {
+        "two_pole",
+        "ring16_acquisition",
+        "five_word_joint_smoke",
+        "model_ae_gan_multimodal",
+        "model_ae_ddgan_gaussian_chain",
+        "model_ddgan_gaussian_chain",
+        "model_ddgan_bimodal_chain",
+        "model_ae_ddgan_bimodal_chain",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "mode_hold",
+        "five_word_joint_hold",
+    }
     for item in v4_ordinary["task_results"]:
-        if item["task_id"] in resolved_tier1_tasks:
+        if item["task_id"] in resolved_tasks:
             assert item["gate_status"] == "PASS"
         else:
             assert published_tasks[item["task_id"]] == item["gate_status"]
@@ -206,7 +220,7 @@ def test_atlas_particle_normal_v4_readout_recovers_mode_hold_with_zero_regressio
     )
     # The overview projects the certified base source cohort; the later
     # source-specific readout above retains its own unchanged measurements.
-    assert "[18/27]" in atlas_top_line
+    assert "[27/27]" in atlas_top_line
     assert "invalid" not in atlas_top_line.lower()
 
     v3_readout = read_json(ROOT / "reports/forge/records/readout-efb8bacf93e19fc2b0d7f7bf.json")

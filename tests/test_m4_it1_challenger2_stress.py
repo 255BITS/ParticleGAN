@@ -197,19 +197,19 @@ def test_gradient_coherence_corrupted_checkpoint_rejection():
 def test_recipe_rejects_invalid_reg_coeff(bad_reg_coeff):
     """Verify that negative or non-finite reg_coeff fails closed at recipe creation."""
     with pytest.raises(ValueError, match="reg_coeff must be finite and nonnegative"):
-        Recipe(reg_coeff=bad_reg_coeff)
+        Recipe.from_dict({"reg_coeff": bad_reg_coeff})
 
 
 @pytest.mark.parametrize("bad_mode", ["unsupported", "coherent_v3", 123, ""])
 def test_recipe_rejects_unsupported_generator_gradient_response(bad_mode):
     """Verify that unknown generator_gradient_response mode fails closed."""
     with pytest.raises(ValueError, match="unknown generator gradient response mode"):
-        Recipe(generator_gradient_response=bad_mode)
+        Recipe.from_dict({"generator_gradient_response": bad_mode})
 
 
 def test_gantrainer_checkpoint_fail_closed_rejections():
     """Verify that corrupted checkpoint states fail closed in GANTrainer.load_state_dict."""
-    trainer = GANTrainer(Recipe(), nn.Linear(2, 2), nn.Linear(2, 1), seed=0)
+    trainer = GANTrainer(Recipe.from_dict({}), nn.Linear(2, 2), nn.Linear(2, 1), seed=0)
     sd = trainer.state_dict()
 
     # 1. Older formulation schema rejection

@@ -50,13 +50,21 @@ def restore_archived_contracts(root, scope):
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(archived_contract_bytes(scope, relative))
     metrics_path = root / "benchmarks/toy100/metrics.py"
-    if scope == "bcap_prior_baseline_questions" and metrics_path.is_file():
+    if scope in {"bcap_prior_baseline_questions", "tier1_completion"} and metrics_path.is_file():
         metrics_path.write_text(
             metrics_path.read_text().replace(
                 "MIN_PRECISION = 0.75  # calibrated clean-sampling gate (oracle: 0.98889, filament mass: 0.20-0.25)",
                 "MIN_PRECISION = 0.97  # oracle value: 1 - exp(-9/2) = 0.98889",
             )
         )
+        tasks_dir = root / "configs/forge/tasks"
+        if tasks_dir.is_dir():
+            for task_path in tasks_dir.glob("*.json"):
+                card = json.loads(task_path.read_text())
+                rev = card.get("evaluation", {}).get("evaluator_revision") or {}
+                if rev.get("id") == "tier2-grid-triad-clean-sampling-calibration-v1":
+                    card["evaluation"]["coverage_thresholds"]["min_precision"] = 0.97
+                    task_path.write_text(json.dumps(card, indent=2) + "\n")
     return root
 
 

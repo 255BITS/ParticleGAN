@@ -45,6 +45,7 @@ def load_fixture(case_id, device=DEVICE):
     return fixture
 
 
+@pytest.mark.cuda
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required for empirical challenge")
 @pytest.mark.parametrize("case_id", [
     "api-model-ddgan-gaussian-chain",
@@ -75,6 +76,7 @@ def test_it8_checkpoint_replay_determinism_cuda(case_id):
     assert max_diff < 1e-6, f"{case_id} metric discrepancy vs receipt: {max_diff}"
 
 
+@pytest.mark.cuda
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required for empirical challenge")
 @pytest.mark.parametrize("case_id", [
     "api-model-ae-ddgan-gaussian-chain",
@@ -101,6 +103,7 @@ def test_it8_paired_reconstruction_replay_cuda(case_id):
     )
 
 
+@pytest.mark.cuda
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required for empirical challenge")
 @pytest.mark.parametrize("case_id", [
     "api-model-ae-ddgan-gaussian-chain",
@@ -155,6 +158,7 @@ def test_it8_genuine_coordinate_pairing_shuffled_loss_cuda(case_id):
     assert m_zero["paired_shuffled_gain"] >= 3.0
 
 
+@pytest.mark.cuda
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required for empirical challenge")
 @pytest.mark.parametrize("case_id", [
     "api-model-ae-ddgan-gaussian-chain",
@@ -198,6 +202,7 @@ def test_it8_paired_sample_size_stress_cuda(case_id, n_samples):
     )
 
 
+@pytest.mark.cuda
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required for empirical challenge")
 @pytest.mark.parametrize("case_id", [
     "api-model-ae-ddgan-gaussian-chain",
@@ -221,6 +226,7 @@ def test_it8_paired_multi_seed_stress_cuda(case_id, eval_seed):
     )
 
 
+@pytest.mark.cuda
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required for empirical challenge")
 @pytest.mark.parametrize("case_id", [
     "api-model-ddgan-bimodal-chain",
@@ -241,6 +247,7 @@ def test_it8_bimodal_ancestral_operating_envelope_cuda(case_id):
     assert len(obs["failed_bounds"]) == 0, f"{case_id} had failing bounds: {obs['failed_bounds']}"
 
 
+@pytest.mark.cuda
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required for empirical challenge")
 @pytest.mark.parametrize("eval_seed", [10000, 10001, 10002, 10003, 10004])
 def test_it8_ae_bimodal_multi_seed_covariance_envelope_cuda(eval_seed):

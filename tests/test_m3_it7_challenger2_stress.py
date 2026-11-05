@@ -36,6 +36,7 @@ def load_fixture(case_id, device=DEVICE):
     return fixture
 
 
+@pytest.mark.cuda
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required for empirical challenge")
 @pytest.mark.parametrize("case_id", [
     "api-model-ae-ddgan-gaussian-chain",
@@ -62,6 +63,7 @@ def test_paired_reconstruction_replay_cuda(case_id):
     )
 
 
+@pytest.mark.cuda
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required for empirical challenge")
 @pytest.mark.parametrize("case_id", [
     "api-model-ae-ddgan-gaussian-chain",
@@ -105,6 +107,7 @@ def test_paired_sample_size_stress_cuda(case_id, n_samples):
     )
 
 
+@pytest.mark.cuda
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required for empirical challenge")
 @pytest.mark.parametrize("case_id", [
     "api-model-ae-ddgan-gaussian-chain",
@@ -128,6 +131,7 @@ def test_paired_multi_seed_stress_cuda(case_id, eval_seed):
     )
 
 
+@pytest.mark.cuda
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required for empirical challenge")
 def test_bimodal_ancestral_protocol_operating_envelope_cuda():
     """Verify bimodal AE ancestral marginal bounds under official protocol seed (10000)."""
@@ -144,6 +148,7 @@ def test_bimodal_ancestral_protocol_operating_envelope_cuda():
     assert len(obs["failed_bounds"]) == 0, f"failed bounds: {obs['failed_bounds']}"
 
 
+@pytest.mark.cuda
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required for empirical challenge")
 @pytest.mark.parametrize("eval_seed", [10000, 10001, 10002, 10003, 10004])
 def test_bimodal_ancestral_multi_seed_robustness(eval_seed):

@@ -2,7 +2,7 @@
   "automation_digest": "23f9c3ed1281890bdff3006abd783ccb5a5fdf0616212a4d1c1b4232e35eb913",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "ace9a8209735ae43cfacaed58b24cfd738af8ccc7943b426226bafefe809c610",
+  "input_digest": "0b3811101fd20fad4c2a64f6a7322c7abccef4640943559fe2c5941fe02c6db8",
   "input_hashes": {
     "configs/forge/cadence-studies/bispf-lazy-cadence-v1.json": "fc7302ac06b61fa093a39265d440545fdab176852a588c40b750be16adc1e58b",
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
@@ -716,7 +716,7 @@
     "configs/forge/performance/bispf-throughput-performance-v1.json": "fe46502356364350379e4654d6e21728fc4302de0941ca6f07fa0ecd71ea0158",
     "configs/forge/performance/dcgan-performance-cloud-2e8a97a0aa84.json": "8b075ce92b5cae6df7885fecb26e9b9684b7d31dd5e31d62a4753f4ffe3a44be",
     "configs/forge/performance/dcgan-performance-cloud-v1.json": "f6e2e1665e46baa16c94018742efca58b6cebac38ea8954c2fa5ccd22c4565f6",
-    "configs/forge/performance/dcgan-performance-cloud-v2.json": "2c5a96bd9158407a51c1ec853ed67136cc92e3085dec95fb4b3cd5dbacf49fe5",
+    "configs/forge/performance/dcgan-performance-cloud-v2.json": "636b7e0ce1ae51e66a72cb31adadf18a371ab6854a10b63f17c45d2700837deb",
     "configs/forge/promotion-template.json": "f9a254eeb6e05ff1e8d16fe3f77dc42f31d1156a1cc65f1ad626f8387ca581be",
     "configs/forge/protocols/screening.json": "3fefb4d47fd2cd8aa6ed110c0a9f5bffefaae700431d1f57ca7b162c8efbb803",
     "configs/forge/rounds/family-defaults-round1-v1.json": "395db17a29821d50314aa32552d602d9699c782797510b82a204eddf4a02b18a",
@@ -4292,7 +4292,7 @@
   },
   "operational_lifecycle_digest": "35d3595bda5c0fe86aee1e845f592ea0a23abc88bf5cc271b38e6603438d0196",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "a481faeb0154d2afd404538f148209825d047a693c24111d458477d7423a4277",
+    "reports/forge/EXPERIMENT_MEMORY.md": "105b84789fcb5968a73a5ae417b3ab6e4517a16c47561f88b5cd913d844d49ff",
     "reports/forge/publication-records.json": "5174449ad10c00a8d22dee09d3ef50c8fb0fc76f196d85197271ee7c0766c9d8"
   },
   "pending_readout": [
