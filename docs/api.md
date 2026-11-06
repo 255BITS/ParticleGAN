@@ -490,6 +490,15 @@ remains caller-owned. Evaluation cannot borrow a training stream.
   and device, with the same parameter freezing, before loading. Save your data-loader position or separate data RNG
   alongside it. Loading on CPU first works for a compatible CUDA trainer:
   `trainer.load_state_dict(torch.load(path, map_location="cpu", weights_only=True))`.
+  Save and restore only between completed updates. Both methods raise
+  `RuntimeError` during an active trainer step or policy hook sequence, including
+  inside `generator_real` callbacks, before changing live state.
+  When `generator_gradient_response` is enabled, the checkpoint also includes
+  its float64 gradient history, normalization weights, gain diagnostics and
+  applied-step count. Older checkpoints that enabled this response but omitted
+  its history cannot resume exactly and raise `ValueError`; use their original
+  source or start a new run. Checkpoints with response `none` retain their
+  existing schema and compatibility.
 
 For scheduled recipes, `total_steps` fixes every schedule horizon. By default it is also
 the execution bound. After restoring a checkpoint with its original bound, call

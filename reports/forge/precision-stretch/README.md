@@ -33,7 +33,7 @@ their original caps; inspect the expanded plan before admission.
 The read-only CPU BISPF plan reserves 5,340 seconds through Tier 1 and 70,620
 seconds through Tier 4. The historical 46,620-second per-candidate inventory
 campaign does not cover that full Tier 4 scope; a full-suite submission needs
-an explicitly adequate campaign. No full-budget family run was launched here.
+an explicitly adequate campaign. No full-budget precision run was launched here.
 
 ## Meaning of simulation
 
@@ -83,7 +83,7 @@ training: [FP32](software/fp32.gif), [8-bit](software/mxfp8.gif),
 [4-bit](software/nvfp4.gif). These are explicitly **INCOMPLETE** prefixes of the
 1,000-update tests; they establish execution/media/checkpoint behavior only.
 The [selected-family preflight](preflight.json) finds seven ready recipes and an
-E22 policy-serving contract blocker. All full-budget family cells remain
+E22 policy-serving contract blocker. All full-budget precision cells remain
 unmeasured. No quality leaderboard pass is inferred from these software checks.
 
 The shared `transfer_vector` adapter calls public `GANTrainer` and
