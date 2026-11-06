@@ -62,14 +62,15 @@ of its `bcap` preset, so this card explicitly binds DualNorm and those rates.
 Task architecture, prior, initialization, actual data batches, sampling law,
 budgets and evaluation cadence remain task-owned.
 
-The [bounded example](../configs/forge/searches/bcap-dualnorm-smoothing-tier1-v1.json)
+The [bounded example](../configs/forge/searches/bcap-dualnorm-smoothing-tier1-v2.json)
 declares three positive scales `1e-5`, `1e-4`, `1e-3`, one whole configuration per
-trial, protocol seed `0`, current Tier 1 and CUDA. The view-v14 expansion reserves
-at most 15,660 seconds, 5,220 per candidate, including the existing diagnostic. It is unexecuted;
+trial, protocol seed `0`, current Tier 1 and CUDA. The view-v15 expansion reserves
+at most 18,360 seconds, 6,120 per candidate, including the precision stretch tests
+and diagnostics. The v1 example retains its original v14 budget. Both are unexecuted;
 the values illustrate the search interface and are not selected defaults.
 
 ```sh
-python -m experiments.forge search plan bcap-dualnorm-smoothing-tier1-v1
+python -m experiments.forge search plan bcap-dualnorm-smoothing-tier1-v2
 ```
 
 Planning launches no training. Execution remains explicit through the ordinary

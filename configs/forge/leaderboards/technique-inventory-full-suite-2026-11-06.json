@@ -65,8 +65,8 @@
   ],
   "previous_list": "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json",
   "change": "Append the NVFP4 and MXFP8 stretch tests. Preserve all 49 earlier tests and their archived evidence; FP32 is a diagnostic control.",
-  "retained_display": {
-    "path": "reports/forge/precision-stretch/retained-display.json",
-    "sha256": "52578ebffbbc2d530dedc8b575aa83dd05fea36875c23e153fff9b20f735c5cd"
+  "recorded_display_scope": {
+    "path": "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json",
+    "sha256": "14155fb6273af76ef248db2da6335c22ddeab2a1deb82b3eb3f0f6cd08b19c34"
   }
 }

@@ -42,6 +42,7 @@ def test_original_24_task_adaptations_stay_ready_and_original_reference_stays_bl
                  "misgan_block_neural_imputer", "ring16_bigan_continuous"}
     original_hosts = set(adapted["tasks"]) - additions
     original_hosts -= {name for name, task in adapted["tasks"].items() if task["adapter"] == "public_api_model_toy"}
+    original_hosts -= {name for name, task in adapted["tasks"].items() if "linear_precision" in task["execution"]}
     assert additions <= set(adapted["tasks"]) and len(original_hosts) == 24
     assert all(not adapted["tasks"][name]["preflight_blockers"] for name in original_hosts)
     assert sum(bool(original["tasks"][name]["preflight_blockers"]) for name in original_hosts) == 21

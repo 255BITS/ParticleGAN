@@ -17,7 +17,9 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from particlegan import get_recipe, init, scale_learning_rates
+from particlegan import MoGParticlePrior, ParticlePrior, get_recipe, init, scale_learning_rates
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
+from particlegan.priors import ManipulatedPrior, unwrap_prior
 from lib.sparse_toy import SparseMixedToy
 from lib.denoising_toy import GaussianGrid
 from lib.trajectory import Routes
@@ -105,9 +107,26 @@ _CASES = [
         thresholds={"observed_max_error_max": 1e-6, "acc_min": 0.95, "acc_lo_min": 0.65, "missing_std_ratio": [0.70, 1.30]},
         sampling="8D block sensor-dropout problem; 3-pair MisGAN (G_x, D_x), (G_m, D_m), (G_i, D_i); ambiguous single-sensor queries",
         scope="Tier 4 3-pair MisGAN grading neural imputer G_i([x*m, m, z_i])."),
+    _definition(
+        "misgan-mcar-p50-recovery", "pr196-mcar-p50-recovery", "2-pair MisGAN recovery on 8D MCAR p=0.5 coordinate dropout",
+        "2-pair incomplete-data MisGAN on 8D MCAR p=0.5 coordinate-wise dropout (resampling empty masks); recovers 2D 100-mode manifold, 8D subspace, MCAR coordinate observation rate and ppost Bayesian imputation.", 4000,
+        kind="misgan_recovery",
+        thresholds={"modes_min": 90, "hq_min": 0.85, "mass_tv_max": 0.12, "off_plane_max": 0.05, "mask_tv_max": 0.05, "acc_min": 0.90, "impute_rmse_max": 0.12},
+        sampling="8D MCAR p=0.5 coordinate-wise dropout (resampling empty masks); 2-pair MisGAN (G_x, D_x) and (G_m, D_m); ppost imputation",
+        scope="Tier 4 incomplete-data 2-pair MisGAN on MCAR p=0.5 coordinate dropout with detached mask gradient in L_x."),
+    _definition(
+        "misgan-mcar-p80-anchored", "pr196-mcar-p80-anchored", "3-pair MisGAN neural imputer on 8D MCAR p=0.80 with 10% anchors and GAIN hint",
+        "3-pair MisGAN on 8D extreme MCAR p=0.80 missingness with 10% complete anchor rows and neural imputer G_i trained with GAIN partial-hint conditioning on D_i([x_imp, h]).", 4000,
+        kind="misgan_anchored_imputer",
+        thresholds={"modes_min": 80, "hq_min": 0.80, "mass_tv_max": 0.15, "off_plane_max": 0.06, "imp_acc_min": 0.65, "imp_off_plane_max": 0.06, "impute_rmse_max": 0.18},
+        sampling="8D extreme MCAR p=0.80 missingness with 10% complete anchor rows; 3-pair MisGAN (G_x, D_x), (G_m, D_m), (G_i, D_i) with GAIN partial-hint conditioning",
+        scope="Tier 4 3-pair MisGAN with GAIN partial-hint conditioning and 10% complete anchor rows under 80% MCAR missingness."),
 ]
 for _row in _CASES:
     if _row["id"].startswith(("api-mask-","api-posterior-","api-misgan-")): _row["eval_samples"]=4096
+    if _row["id"] in ("api-misgan-mcar-p50-recovery", "api-misgan-mcar-p80-anchored"):
+        _row["batch_size"] = 512
+        _row["default_recipe"] = "bispf"
     if _row["id"].startswith("api-sparse-"):
         _row["thresholds"]={k:v for k,v in _row["thresholds"].items() if k not in ("full_original_update_budget","terminal_observations")}
     _fixed_rows={"api-trajectory-edit":12,"api-trajectory-residual":12,"api-unipolar-hold":2,
@@ -119,12 +138,30 @@ for _row in _CASES:
 CASES = {row["id"]: row for row in _CASES}
 
 
+_STRETCH_PROVIDERS = (
+    "benchmarks.toy_audit.api_pacgan",
+    "benchmarks.toy_audit.api_infogan",
+    "benchmarks.toy_audit.api_cgan_overlap",
+    "benchmarks.toy_audit.api_cramergan",
+    "benchmarks.toy_audit.api_cyclegan",
+)
+
+
+def _iter_stretch_providers():
+    from importlib import import_module
+    for mod_name in _STRETCH_PROVIDERS:
+        yield import_module(mod_name)
+
+
 def list_cases():
-    return deepcopy(_CASES)
+    rows = deepcopy(_CASES)
+    for mod in _iter_stretch_providers():
+        rows.extend(mod.list_cases())
+    return rows
 
 
-def _rng(seed):
-    return torch.Generator().manual_seed(int(seed))
+def _rng(seed, device="cpu"):
+    return torch.Generator(device=device).manual_seed(int(seed))
 
 
 def _bound(metrics, name, lo=None, hi=None):
@@ -525,6 +562,8 @@ def _task(name):
     if name.startswith("mask"): return MaskTask(name.removeprefix("mask-").replace("-","_"))
     if name == "misgan-block-recovery": return MisGANBlockRecoveryTask()
     if name == "misgan-block-neural-imputer": return MisGANBlockNeuralImputerTask()
+    if name == "misgan-mcar-p50-recovery": return MisGANMCARP50RecoveryTask()
+    if name == "misgan-mcar-p80-anchored": return MisGANMCARP80AnchoredTask()
     return PairedTask(name)
 
 
@@ -771,7 +810,7 @@ def score_misgan_neural_imputer(predict_fn, problem=None, eval_seed=99123):
     if problem is None:
         problem = misgan.Problem("block", 20000, 10000, 0, "cpu")
     
-    rng = _rng(eval_seed)
+    rng = _rng(eval_seed, device=problem.x_test.device)
     if callable(predict_fn):
         draws = predict_fn(problem.x_test, problem.m_test, rng)
     else:
@@ -790,6 +829,7 @@ def score_misgan_neural_imputer(predict_fn, problem=None, eval_seed=99123):
         failures = ["observed_max_error", "acc", "acc_lo", "missing_std_ratio", "nonfinite_output"]
         return observation(metrics, failures, [])
 
+    draws = draws.to(device=problem.x_test.device, dtype=problem.x_test.dtype)
     obs_err = float(((draws - problem.x_test[None]) * problem.m_test[None]).abs().max())
 
     x2 = problem.to2d(draws.reshape(-1, 8))
@@ -800,7 +840,7 @@ def score_misgan_neural_imputer(predict_fn, problem=None, eval_seed=99123):
     acc = float(hit.mean())
     acc_lo = float(hit[:, lo].mean()) if lo.any() else 0.0
 
-    ref_rng = _rng(eval_seed + 1)
+    ref_rng = _rng(eval_seed + 1, device=problem.x_test.device)
     _, ref_draws = misgan.bayes_posterior(problem, problem.x_test, problem.m_test, draws=len(draws), generator=ref_rng)
     miss = 1 - problem.m_test
     nmiss = miss.sum().clamp_min(1)
@@ -824,6 +864,267 @@ def score_misgan_neural_imputer(predict_fn, problem=None, eval_seed=99123):
     failures = [item for name, lo_val, hi_val in limits for item in _bound(metrics, name, lo_val, hi_val)]
     views = [
         view("Neural imputer ambiguous draws projected to 2D", centers, x2[:1024], "scatter"),
+    ]
+    return observation(metrics, failures, views)
+
+
+def build_mcar_p50_problem(n_train=20000, n_test=10000, seed=0, device="cpu"):
+    """MCAR p=0.5 problem where all-zero mask rows are resampled so >=1 coordinate is observed."""
+    problem = misgan.Problem("mcar_p50", n_train, n_test, seed, device)
+    rng_resample = torch.Generator(device=problem.m_train.device).manual_seed(int(seed) + 777)
+    for attr in ("m_train", "m_test"):
+        m = getattr(problem, attr).clone()
+        empty = (m.sum(1) == 0).nonzero(as_tuple=False).squeeze(1)
+        while len(empty) > 0:
+            m[empty] = (torch.rand(len(empty), misgan.DIM, generator=rng_resample, device=m.device) >= 0.5).float()
+            empty = (m.sum(1) == 0).nonzero(as_tuple=False).squeeze(1)
+        setattr(problem, attr, m)
+    problem.x_train = problem.x_train_full * problem.m_train
+    p_zero = float(problem.probs[0])
+    problem.probs = problem.probs.clone()
+    problem.probs[0] = 0.0
+    problem.probs = problem.probs / (1.0 - p_zero)
+    problem.missing_rate = (problem.probs[:, None] * (1 - (torch.arange(2 ** misgan.DIM)[:, None] // misgan.BITS) % 2)).sum(0)
+    return problem
+
+
+@torch.no_grad()
+def score_misgan_mcar_p50_recovery(x, m, problem=None, eval_seed=99123, use_ppost=True):
+    if problem is None:
+        problem = build_mcar_p50_problem(20000, 10000, 0, "cpu")
+
+    if not torch.all(torch.isfinite(x)) or not torch.all(torch.isfinite(m)):
+        metrics = dict(
+            modes=0,
+            hq=0.0,
+            mass_tv=1.0,
+            off_plane=float("inf"),
+            mask_tv=1.0,
+            acc=0.0,
+            impute_rmse=float("inf"),
+        )
+        failures = ["modes", "hq", "mass_tv", "off_plane", "mask_tv", "acc", "impute_rmse", "nonfinite_output"]
+        return observation(metrics, failures, [])
+
+    off_plane = problem.off_plane(x)
+
+    x2 = problem.to2d(x)
+    centers = misgan.grid_centers(device=x.device, dtype=torch.float32)
+    dists = torch.cdist(x2, centers)
+    d, nearest = dists.min(1)
+    hq = float((d <= 0.09).float().mean())
+    hq_counts = torch.bincount(nearest[d <= 0.09], minlength=100)
+    modes = int((hq_counts >= 10).sum())
+    all_counts = torch.bincount(nearest, minlength=100).float()
+    mass_tv = float(0.5 * (all_counts / len(x) - 0.01).abs().sum())
+
+    hard_m = (m > 0.5).float()
+    emp_obs_rate = hard_m.mean(0).double().cpu()
+    target_obs_rate = (1.0 - problem.missing_rate).double().cpu()
+    mask_tv = float((emp_obs_rate - target_obs_rate).abs().mean())
+
+    centers_eval = centers.to(device=problem.x_test.device, dtype=problem.x_test.dtype)
+    y_test_eval = problem.y_test.to(device=problem.x_test.device)
+    x_test = problem.x_test
+    m_test = problem.m_test
+    miss = (1.0 - m_test).clamp_min(0.0)
+
+    if use_ppost:
+        k = misgan_ppost_indices(x, x_test, m_test, sigma=0.005, draws=4, generator=_rng(eval_seed))
+        hit_list = []
+        imp_draws = []
+        imp_x2 = None
+        for draw_idx in range(k.shape[0]):
+            x_k = x[k[draw_idx]].to(device=x_test.device, dtype=x_test.dtype)
+            imp_d = m_test * x_test + (1.0 - m_test) * x_k
+            imp_draws.append(imp_d)
+            imp_x2_d = problem.to2d(imp_d)
+            if draw_idx == 0:
+                imp_x2 = imp_x2_d
+            imp_nearest = torch.cdist(imp_x2_d, centers_eval).argmin(1)
+            hit_list.append((imp_nearest == y_test_eval).float())
+        hit = torch.stack(hit_list, dim=0).mean(dim=0)
+        imp_mean = torch.stack(imp_draws, dim=0).mean(dim=0)
+    else:
+        _, imp_draws_t = misgan.bayes_posterior(problem, x_test, m_test, draws=4, generator=_rng(eval_seed, device=x_test.device))
+        imp_mean = imp_draws_t.mean(0)
+        imp_x2 = problem.to2d(imp_draws_t[0])
+        imp_nearest = torch.cdist(problem.to2d(imp_mean), centers_eval).argmin(1)
+        hit = (imp_nearest == y_test_eval).float()
+
+    acc = float(hit.mean())
+    row_mse = ((imp_mean - x_test).pow(2) * miss).sum(1) / miss.sum(1).clamp_min(1.0)
+    impute_rmse = float(row_mse.sqrt().mean())
+
+    metrics = dict(
+        modes=modes,
+        hq=hq,
+        mass_tv=mass_tv,
+        off_plane=off_plane,
+        mask_tv=mask_tv,
+        acc=acc,
+        impute_rmse=impute_rmse,
+    )
+
+    limits = [
+        ("modes", 90, 100),
+        ("hq", 0.85, None),
+        ("mass_tv", None, 0.12),
+        ("off_plane", None, 0.05),
+        ("mask_tv", None, 0.05),
+        ("acc", 0.90, None),
+        ("impute_rmse", None, 0.12),
+    ]
+    failures = [item for name, lo_val, hi_val in limits for item in _bound(metrics, name, lo_val, hi_val)]
+    views = [
+        view("Generated 8D data projected to 2D grid", centers, x2[:1024], "scatter"),
+        view("Coordinate observation rates vs MCAR target", target_obs_rate.float(), emp_obs_rate.float(), "bar"),
+        view("Imputed test data projected to 2D", centers, imp_x2[:1024], "scatter"),
+    ]
+    return observation(metrics, failures, views)
+
+
+def build_mcar_p80_anchored_problem(n_train=20000, n_test=10000, seed=0, device="cpu", anchor_rate=0.10):
+    """Extreme MCAR p=0.80 missingness with 10% complete anchor rows and anchor-assisted query panel."""
+    problem = misgan.Problem("mcar_p80", n_train, n_test, seed, device)
+    raw_train = problem.raw(problem.x_train_full)
+    raw_test = problem.raw(problem.x_test)
+    raw_ref = problem.raw(problem.x_ref)
+
+    rng_anchor = torch.Generator(device=problem.m_train.device).manual_seed(int(seed) + 888)
+    anchor_train = torch.rand(len(problem.m_train), generator=rng_anchor, device=problem.m_train.device) < anchor_rate
+    m_train = problem.m_train.clone()
+    m_train[anchor_train] = 1.0
+
+    # Anchor-assisted MCAR query panel: 10% complete anchors + MCAR queries with >=2 observed coordinates
+    anchor_test = torch.rand(len(problem.m_test), generator=rng_anchor, device=problem.m_test.device) < anchor_rate
+    m_test = problem.m_test.clone()
+    m_test[anchor_test] = 1.0
+    underdetermined = (m_test.sum(1) < 2).nonzero(as_tuple=False).squeeze(1)
+    if len(underdetermined) > 0:
+        scores = torch.rand(len(underdetermined), misgan.DIM, generator=rng_anchor, device=m_test.device)
+        top2 = scores.topk(2, dim=1).indices
+        m_test[underdetermined] = 0.0
+        m_test[underdetermined.unsqueeze(1), top2] = 1.0
+
+    m_train_d = m_train.double().cpu()
+    count = m_train_d.sum(0).clamp_min(1.0)
+    problem.mean = (raw_train.cpu() * m_train_d).sum(0) / count
+    problem.std = (((raw_train.cpu() - problem.mean) ** 2 * m_train_d).sum(0) / count).sqrt()
+
+    f32 = dict(device=problem.device, dtype=torch.float32)
+    problem.x_train_full = problem.standardize(raw_train.cpu()).to(**f32)
+    problem.m_train = m_train.to(**f32)
+    problem.x_train = problem.x_train_full * problem.m_train
+    problem.x_test = problem.standardize(raw_test.cpu()).to(**f32)
+    problem.m_test = m_test.to(**f32)
+    problem.x_ref = problem.standardize(raw_ref.cpu()).to(**f32)
+
+    base_probs = misgan.pattern_probs("mcar_p80") * (1.0 - anchor_rate)
+    base_probs[-1] += anchor_rate
+    problem.probs = base_probs
+    problem.missing_rate = (problem.probs[:, None] * (1 - (torch.arange(2 ** misgan.DIM)[:, None] // misgan.BITS) % 2)).sum(0)
+    return problem
+
+
+@torch.no_grad()
+def score_misgan_mcar_p80_anchored(x, m=None, predict_fn=None, problem=None, eval_seed=99123):
+    if problem is None:
+        problem = build_mcar_p80_anchored_problem(20000, 10000, 0, "cpu")
+
+    if isinstance(x, tuple):
+        if len(x) == 3:
+            x, m, predict_fn = x
+        elif len(x) == 2:
+            x, m = x
+
+    if not torch.all(torch.isfinite(x)) or (m is not None and not torch.all(torch.isfinite(m))):
+        metrics = dict(
+            modes=0,
+            hq=0.0,
+            mass_tv=1.0,
+            off_plane=float("inf"),
+            imp_acc=0.0,
+            imp_off_plane=float("inf"),
+            impute_rmse=float("inf"),
+        )
+        failures = ["modes", "hq", "mass_tv", "off_plane", "imp_acc", "imp_off_plane", "impute_rmse", "nonfinite_output"]
+        return observation(metrics, failures, [])
+
+    rng = _rng(eval_seed, device=problem.x_test.device)
+    if predict_fn is not None:
+        draws = predict_fn(problem.x_test, problem.m_test, rng) if callable(predict_fn) else predict_fn
+        if draws.ndim == 2:
+            draws = draws.unsqueeze(0)
+    else:
+        k = misgan_ppost_indices(x, problem.x_test, problem.m_test, sigma=0.005, draws=4, generator=_rng(eval_seed))
+        imp_list = []
+        for draw_idx in range(k.shape[0]):
+            x_k = x[k[draw_idx]].to(device=problem.x_test.device, dtype=problem.x_test.dtype)
+            imp_list.append(problem.m_test * problem.x_test + (1.0 - problem.m_test) * x_k)
+        draws = torch.stack(imp_list, dim=0)
+
+    if not torch.all(torch.isfinite(draws)):
+        metrics = dict(
+            modes=0,
+            hq=0.0,
+            mass_tv=1.0,
+            off_plane=float("inf"),
+            imp_acc=0.0,
+            imp_off_plane=float("inf"),
+            impute_rmse=float("inf"),
+        )
+        failures = ["modes", "hq", "mass_tv", "off_plane", "imp_acc", "imp_off_plane", "impute_rmse", "nonfinite_output"]
+        return observation(metrics, failures, [])
+
+    draws = draws.to(device=problem.x_test.device, dtype=problem.x_test.dtype)
+    off_plane = problem.off_plane(x)
+    x2 = problem.to2d(x)
+    centers = misgan.grid_centers(device=x.device, dtype=torch.float32)
+    dists = torch.cdist(x2, centers)
+    d, nearest = dists.min(1)
+    hq = float((d <= 0.09).float().mean())
+    hq_counts = torch.bincount(nearest[d <= 0.09], minlength=100)
+    modes = int((hq_counts >= 10).sum())
+    all_counts = torch.bincount(nearest, minlength=100).float()
+    mass_tv = float(0.5 * (all_counts / len(x) - 0.01).abs().sum())
+
+    centers_eval = centers.to(device=draws.device, dtype=draws.dtype)
+    y_test_eval = problem.y_test.to(device=draws.device)
+    flat_draws = draws.reshape(-1, 8)
+    imp_x2_all = problem.to2d(flat_draws)
+    imp_nearest = torch.cdist(imp_x2_all, centers_eval).argmin(1).reshape(len(draws), len(problem.x_test))
+    imp_acc = float((imp_nearest == y_test_eval[None]).float().mean())
+    imp_off_plane = problem.off_plane(flat_draws)
+
+    imp_mean = draws.mean(0)
+    miss = (1.0 - problem.m_test).clamp_min(0.0)
+    row_mse = ((imp_mean - problem.x_test).pow(2) * miss).sum(1) / miss.sum(1).clamp_min(1.0)
+    impute_rmse = float(row_mse.sqrt().mean())
+
+    metrics = dict(
+        modes=modes,
+        hq=hq,
+        mass_tv=mass_tv,
+        off_plane=off_plane,
+        imp_acc=imp_acc,
+        imp_off_plane=imp_off_plane,
+        impute_rmse=impute_rmse,
+    )
+
+    limits = [
+        ("modes", 80, 100),
+        ("hq", 0.80, None),
+        ("mass_tv", None, 0.15),
+        ("off_plane", None, 0.06),
+        ("imp_acc", 0.65, None),
+        ("imp_off_plane", None, 0.06),
+        ("impute_rmse", None, 0.18),
+    ]
+    failures = [item for name, lo_val, hi_val in limits for item in _bound(metrics, name, lo_val, hi_val)]
+    views = [
+        view("Generated 8D data projected to 2D grid", centers, x2[:1024], "scatter"),
+        view("Anchor-assisted neural imputer projected to 2D", centers, imp_x2_all[:1024], "scatter"),
     ]
     return observation(metrics, failures, views)
 
@@ -862,6 +1163,43 @@ class MisGANBlockNeuralImputerTask:
         return score_misgan_neural_imputer(predict, self.problem, eval_seed=seed)
 
 
+class MisGANMCARP50RecoveryTask(MisGANBlockRecoveryTask):
+    """Exact incomplete-data law for the 2-pair MCAR p=0.5 recovery gate."""
+    name = "misgan-mcar-p50-recovery"
+    paired = False
+
+    def __init__(self):
+        self.problem = build_mcar_p50_problem(20000, 10000, 0, "cpu")
+
+    def evaluate(self, predict, n, seed):
+        x, m = predict(n, _rng(seed))
+        return score_misgan_mcar_p50_recovery(x, m, self.problem, eval_seed=seed, use_ppost=True)
+
+
+class MisGANMCARP80AnchoredTask(MisGANBlockRecoveryTask):
+    """Exact incomplete-data law + Bayes imputer witness for the 3-pair MCAR p=0.80 anchored gate."""
+    name = "misgan-mcar-p80-anchored"
+    paired = False
+
+    def __init__(self):
+        self.problem = build_mcar_p80_anchored_problem(20000, 10000, 0, "cpu")
+
+    def exact_law(self, n, rng):
+        idx = torch.randint(len(self.problem.m_train), (n,), generator=rng)
+        x = self.problem.x_train_full[idx]
+        m = self.problem.m_train[idx]
+
+        def predict_fn(x_q, m_q, r):
+            _, samples = misgan.bayes_posterior(self.problem, x_q, m_q, draws=8, generator=r)
+            return samples
+
+        return x, m, predict_fn
+
+    def evaluate(self, predict, n, seed):
+        out = predict(n, _rng(seed))
+        return score_misgan_mcar_p80_anchored(out, problem=self.problem, eval_seed=seed)
+
+
 class _ModuleBundle(nn.Module):
     """One public module over the pair networks. Parameters stay the originals."""
 
@@ -883,49 +1221,167 @@ def _count_critic_steps(optimizer):
     optimizer.register_step_post_hook(_after)
 
 
-class MisGANRecoveryFixture:
+class _FixtureRNGStreams:
+    """Isolated deterministic RNG stream forks for constructor, data, latent, and noise."""
+
+    def __init__(self, seed: int, device: torch.device | str = "cpu"):
+        self.seed = int(seed)
+        self.device = torch.device(device)
+        self._counters: dict[str, int] = {}
+
+    def fork_seed(self, name: str) -> int:
+        idx = self._counters.get(name, 0)
+        self._counters[name] = idx + 1
+        offset = sum((i + 1) * ord(ch) for i, ch in enumerate(name)) + 1009 * (idx + 1)
+        return self.seed + offset
+
+    def fork(self, name: str) -> torch.Generator:
+        return torch.Generator(device=self.device).manual_seed(self.fork_seed(name))
+
+
+class _MisGANBaseFixture:
     api_components = (
         "Recipe.make_prior",
         "Recipe.make_optimizers",
         "Recipe.make_loss",
+        "Recipe.make_critic_penalty",
+        "Recipe.prior_regularization",
         "scale_learning_rates",
     )
 
-    def __init__(self, case, seed=DEFAULT_SEED, recipe_name="atlas", max_steps=None, device="cpu"):
+    def _sample_prior(self, batch_size: int):
+        if isinstance(self.prior, (MoGParticlePrior, ManipulatedPrior)) or hasattr(self.prior, "sigma"):
+            return self.prior.sample(batch_size, generator=self.latent_rng, noise_generator=self.noise_rng)
+        return self.prior.sample(batch_size, generator=self.latent_rng)
+
+    def _make_default_recipe(self, recipe_name):
+        eff_name = "bispf" if recipe_name is None else recipe_name
+        base = get_recipe(eff_name)
+        kw = dict(batch_size=self.batch_size, num_particles=self.particles, z_dim=self.z_dim)
+        if base.continuous_policy is None:
+            kw["total_steps"] = self.case["default_steps"]
+        return get_recipe(eff_name, **kw)
+
+    def _schedule_recipe(self):
+        sched = self.recipe
+        if sched.lr_control == "stationarity" or sched.continuous_policy is not None or sched.total_steps is None:
+            return get_recipe("ka2", total_steps=self.limit)
+        return sched
+
+    def _prior_reg_loss(self, idx_g: torch.Tensor) -> torch.Tensor:
+        base_prior = unwrap_prior(self.prior)
+        if hasattr(self.opt_g, "set_sampled_rows") and hasattr(base_prior, "z") and base_prior.z.requires_grad:
+            self.opt_g.set_sampled_rows(base_prior.z, idx_g)
+        loss_prior = torch.zeros((), device=self.device)
+        if hasattr(base_prior, "z"):
+            loss_prior = loss_prior + self.recipe.prior_regularization(
+                base_prior.z, regularizer=self.regularizer, prior=self.prior
+            )
+        if isinstance(self.prior, ManipulatedPrior) and self.prior.has_regularizer:
+            loss_prior = loss_prior + self.prior.regularize(
+                idx=idx_g, generator=self.noise_rng, step=self.completed_steps
+            )
+        return loss_prior
+
+    def rebind_trainer(self, recipe, prior=None):
+        if recipe.total_steps is None and recipe.continuous_policy is None:
+            recipe = recipe.replace(total_steps=self.case["default_steps"])
+        self.recipe = recipe
+        if prior is not None:
+            self.prior = prior.to(self.device)
+            self.recipe.apply_prior_policy(self.prior)
+        elif getattr(self, "prior", None) is None:
+            prior_recipe = self.recipe.replace(
+                prior_update="learned",
+                num_particles=self.particles,
+                z_dim=self.z_dim,
+            )
+            self.prior = prior_recipe.make_prior(
+                sigma=0.025,
+                sigma_rel=0.0,
+                device=self.device,
+                generator=self._rng_streams.fork("constructor"),
+            )
+            init.deterministic_orthogonal_(
+                unwrap_prior(self.prior),
+                seed=self._rng_streams.fork_seed("constructor"),
+            )
+            self.recipe.apply_prior_policy(self.prior)
+        else:
+            self.prior = self.prior.to(self.device)
+            self.recipe.apply_prior_policy(self.prior)
+
+        self.loss = self.recipe.make_loss()
+        self.regularizer = self.recipe.make_prior_regularizer(prior=self.prior)
+        ema_critic = deepcopy(self.D) if self.recipe.effective_critic_formulation != "bispf" else None
+        self.opt_g, self.opt_d = self.recipe.make_optimizers(
+            self.G,
+            self.D,
+            self.prior,
+            ema_critic=ema_critic,
+            foreach=False,
+            fused=False,
+        )
+        self.base_rates = [
+            [group["lr"] for group in self.opt_g.param_groups],
+            [group["lr"] for group in self.opt_d.param_groups],
+        ]
+        self.penalty_x = self.recipe.make_critic_penalty(self.opt_d, collect_stats=True)
+        if not hasattr(self.opt_d, "record"):
+            _count_critic_steps(self.opt_d)
+
+
+class MisGANRecoveryFixture(_MisGANBaseFixture):
+    def __init__(
+        self,
+        case=None,
+        seed=DEFAULT_SEED,
+        recipe_name="bispf",
+        max_steps=None,
+        device="cpu",
+        *,
+        recipe=None,
+        prior=None,
+        steps=None,
+        batch_size=None,
+        particles=256,
+        z_dim=8,
+    ):
+        if case is None:
+            case = deepcopy(CASES["api-misgan-block-recovery"])
         self.case = case
         self.seed = int(seed)
         self.device = torch.device(device)
         self.completed_steps = 0
-        self.limit = case["default_steps"] if max_steps is None else max_steps
+        eff_max_steps = steps if steps is not None else max_steps
+        self.limit = case["default_steps"] if eff_max_steps is None else eff_max_steps
         if type(self.limit) is not int or not 0 < self.limit <= case["default_steps"]:
             raise ValueError("max_steps must be in the declared budget")
-        
-        self.recipe = get_recipe(
-            "ka2" if recipe_name in ("ka2", "atlas", "bcap", None) else recipe_name,
-            batch_size=case["batch_size"],
-            total_steps=case["default_steps"],
-            num_particles=128,
-            z_dim=8,
-            prior_kind="mog",
-            sigma_rel=0.25,
-            standardize=False,
-            input_noise_std=0.0,
-            output_noise_std=0.0,
-            lr=0.002,
-        ).replace(name="misgan_recovery_" + str(recipe_name))
 
-        self.problem = misgan.Problem("block", 20000, 10000, 0, device=self.device)
-        self.data_rng = _rng(self.seed + 10)
-        self.latent_rng = _rng(self.seed + 11)
+        self.batch_size = int(batch_size if batch_size is not None else case["batch_size"])
+        self.particles = int(particles)
+        self.z_dim = int(z_dim)
+        self._rng_streams = _FixtureRNGStreams(self.seed, device=self.device)
+
+        if case["id"] == "api-misgan-mcar-p50-recovery":
+            self.problem = build_mcar_p50_problem(20000, 10000, 0, device=self.device)
+            self._scorer = score_misgan_mcar_p50_recovery
+        else:
+            self.problem = misgan.Problem("block", 20000, 10000, 0, device=self.device)
+            self._scorer = score_misgan_recovery
+
+        self.data_rng = _rng(self.seed + 10, device=self.device)
+        self.latent_rng = _rng(self.seed + 11, device=self.device)
+        self.noise_rng = _rng(self.seed + 12, device=self.device)
 
         with construction_rng(self.seed, "cpu"):
             self.G_x = nn.Sequential(
-                nn.Linear(8, 64), nn.LeakyReLU(0.2),
+                nn.Linear(self.z_dim, 64), nn.LeakyReLU(0.2),
                 nn.Linear(64, 64), nn.LeakyReLU(0.2),
                 nn.Linear(64, 8),
             ).to(self.device)
             self.G_m = nn.Sequential(
-                nn.Linear(8, 64), nn.LeakyReLU(0.2),
+                nn.Linear(self.z_dim, 64), nn.LeakyReLU(0.2),
                 nn.Linear(64, 64), nn.LeakyReLU(0.2),
                 nn.Linear(64, 8), nn.Sigmoid(),
             ).to(self.device)
@@ -939,70 +1395,84 @@ class MisGANRecoveryFixture:
                 nn.Linear(64, 64), nn.LeakyReLU(0.2),
                 nn.Linear(64, 1),
             ).to(self.device)
-            self.prior = self.recipe.make_prior()
 
         init.deterministic_orthogonal_(self.G_x, seed=self.seed + 1)
         init.deterministic_orthogonal_(self.G_m, seed=self.seed + 2)
         init.deterministic_orthogonal_(self.D_x, seed=self.seed + 3)
         init.deterministic_orthogonal_(self.D_m, seed=self.seed + 4)
-        if self.prior is not None:
-            init.deterministic_orthogonal_(self.prior, seed=self.seed + 5)
 
         self.G = _ModuleBundle(G_x=self.G_x, G_m=self.G_m)
         self.D = _ModuleBundle(D_x=self.D_x, D_m=self.D_m)
-        self.opt_g = torch.optim.Adam(
-            list(self.G_x.parameters()) + list(self.G_m.parameters()),
-            lr=self.recipe.lr,
-        )
-        self.opt_d = torch.optim.Adam(
-            list(self.D_x.parameters()) + list(self.D_m.parameters()),
-            lr=self.recipe.lr,
-        )
-        _count_critic_steps(self.opt_d)
-        self.loss = self.recipe.make_loss()
+
+        if recipe is None:
+            recipe = self._make_default_recipe(recipe_name)
+        self.prior = None
+        self.rebind_trainer(recipe, prior=prior)
         self.last_losses = {}
 
     def step(self):
         if self.completed_steps >= self.limit:
             raise RuntimeError("declared execution cap reached")
-        scale_learning_rates(self.completed_steps, self.recipe, [self.opt_g, self.opt_d], [[g["lr"] for g in self.opt_g.param_groups], [g["lr"] for g in self.opt_d.param_groups]], self.prior)
-        
+        scale_learning_rates(
+            self.completed_steps,
+            self._schedule_recipe(),
+            [self.opt_g, self.opt_d],
+            self.base_rates,
+            self.prior,
+        )
+
         self.G_x.train(); self.G_m.train(); self.D_x.train(); self.D_m.train()
-        x_real, m_real, _ = self.problem.train_batch(self.recipe.batch_size, self.data_rng)
-        
-        z_x, _ = self.prior.sample(self.recipe.batch_size, generator=self.latent_rng)
-        z_m, _ = self.prior.sample(self.recipe.batch_size, generator=self.latent_rng)
+        bs = int(self.recipe.batch_size or self.batch_size)
+        x_real, m_real, _ = self.problem.train_batch(bs, self.data_rng)
+
+        z_x, idx_x = self._sample_prior(bs)
+        z_m, idx_m = self._sample_prior(bs)
         x_fake = self.G_x(z_x)
+        if isinstance(self.prior, ManipulatedPrior) and self.prior.postprocesses_generated:
+            x_fake = self.prior.postprocess_generated(x_fake)
         m_fake = self.G_m(z_m)
-        
+
         real_dx_in = torch.cat([x_real * m_real, m_real], dim=1)
         fake_dx_in = torch.cat([x_fake.detach() * m_fake.detach(), m_fake.detach()], dim=1)
-        
+
         loss_dx = self.loss.d_loss(self.D_x(real_dx_in).squeeze(-1), self.D_x(fake_dx_in).squeeze(-1))
         loss_dm = self.loss.d_loss(self.D_m(m_real).squeeze(-1), self.D_m(m_fake.detach()).squeeze(-1))
-        loss_d = loss_dx + loss_dm
-        
+        reg_d = self.penalty_x(self.D_x, real_dx_in, fake_dx_in)
+        loss_d = loss_dx + loss_dm + reg_d
+
         self.opt_d.zero_grad()
         loss_d.backward()
         self.opt_d.step()
-        
+
         m_detached = m_fake.detach()
         fake_gx_in = torch.cat([x_fake * m_detached, m_detached], dim=1)
-        
-        loss_gx = self.loss.g_loss(self.D_x(fake_gx_in).squeeze(-1), self.D_x(real_dx_in).squeeze(-1))
-        loss_gm = self.loss.g_loss(self.D_m(m_fake).squeeze(-1), self.D_m(m_real).squeeze(-1))
-        loss_g = loss_gx + loss_gm
-        
+
+        with torch.no_grad():
+            real_dx_logits = self.D_x(real_dx_in).squeeze(-1)
+            real_dm_logits = self.D_m(m_real).squeeze(-1)
+        loss_gx = self.loss.g_loss(self.D_x(fake_gx_in).squeeze(-1), real_dx_logits)
+        loss_gm = self.loss.g_loss(self.D_m(m_fake).squeeze(-1), real_dm_logits)
+        loss_adv = loss_gx + loss_gm
+
+        idx_g = torch.unique(torch.cat([idx_x.reshape(-1), idx_m.reshape(-1)]))
+        loss_prior = self._prior_reg_loss(idx_g)
+        loss_g = loss_adv + loss_prior
+
         self.opt_g.zero_grad()
-        loss_g.backward()
+        if self.recipe.constraint_geometry_mode != "none":
+            constraint_geometry_backward(loss_g, self.opt_g, (loss_adv,))
+        else:
+            loss_g.backward()
         self.opt_g.step()
-        
+
         self.completed_steps += 1
         self.last_losses = dict(
             loss_g=float(loss_g.detach()),
             loss_d=float(loss_d.detach()),
             loss_gx=float(loss_gx.detach()),
             loss_gm=float(loss_gm.detach()),
+            critic_penalty=float(reg_d.detach()),
+            loss_prior=float(loss_prior.detach()),
         )
         if not all(math.isfinite(v) for v in self.last_losses.values()):
             raise FloatingPointError("nonfinite actual GAN update")
@@ -1010,13 +1480,25 @@ class MisGANRecoveryFixture:
 
     @torch.no_grad()
     def observe(self, n=4096, seed=99123):
-        self.G_x.eval(); self.G_m.eval()
-        gen = _rng(seed)
-        z_x, _ = self.prior.sample(n, generator=gen)
-        z_m, _ = self.prior.sample(n, generator=gen)
-        x = self.G_x(z_x)
-        m = self.G_m(z_m)
-        return score_misgan_recovery(x, m, self.problem, eval_seed=seed, use_ppost=True)
+        flags = {m: m.training for model in (self.G_x, self.G_m) for m in model.modules()}
+        try:
+            self.G_x.eval(); self.G_m.eval()
+            gen = _rng(seed, device=self.device)
+            noise_gen = _rng(seed + 1, device=self.device)
+            if isinstance(self.prior, (MoGParticlePrior, ManipulatedPrior)) or hasattr(self.prior, "sigma"):
+                z_x, _ = self.prior.sample(n, generator=gen, noise_generator=noise_gen)
+                z_m, _ = self.prior.sample(n, generator=gen, noise_generator=noise_gen)
+            else:
+                z_x, _ = self.prior.sample(n, generator=gen)
+                z_m, _ = self.prior.sample(n, generator=gen)
+            x = self.G_x(z_x)
+            if isinstance(self.prior, ManipulatedPrior) and self.prior.postprocesses_generated:
+                x = self.prior.postprocess_generated(x)
+            m = self.G_m(z_m)
+            return self._scorer(x, m, self.problem, eval_seed=seed, use_ppost=True)
+        finally:
+            for mod, flag in flags.items():
+                mod.training = flag
 
     def state_dict(self):
         return {
@@ -1049,49 +1531,57 @@ class MisGANRecoveryFixture:
         self.last_losses = state["last_losses"]
 
 
-class MisGANNeuralImputerFixture:
-    api_components = (
-        "Recipe.make_prior",
-        "Recipe.make_optimizers",
-        "Recipe.make_loss",
-        "scale_learning_rates",
-    )
-
-    def __init__(self, case, seed=DEFAULT_SEED, recipe_name="atlas", max_steps=None, device="cpu"):
+class MisGANNeuralImputerFixture(_MisGANBaseFixture):
+    def __init__(
+        self,
+        case=None,
+        seed=DEFAULT_SEED,
+        recipe_name="bispf",
+        max_steps=None,
+        device="cpu",
+        *,
+        recipe=None,
+        prior=None,
+        steps=None,
+        batch_size=None,
+        particles=256,
+        z_dim=8,
+    ):
+        if case is None:
+            case = deepcopy(CASES["api-misgan-block-neural-imputer"])
         self.case = case
         self.seed = int(seed)
         self.device = torch.device(device)
         self.completed_steps = 0
-        self.limit = case["default_steps"] if max_steps is None else max_steps
+        eff_max_steps = steps if steps is not None else max_steps
+        self.limit = case["default_steps"] if eff_max_steps is None else eff_max_steps
         if type(self.limit) is not int or not 0 < self.limit <= case["default_steps"]:
             raise ValueError("max_steps must be in the declared budget")
-        
-        self.recipe = get_recipe(
-            "ka2" if recipe_name in ("ka2", "atlas", "bcap", None) else recipe_name,
-            batch_size=case["batch_size"],
-            total_steps=case["default_steps"],
-            num_particles=128,
-            z_dim=8,
-            prior_kind="mog",
-            sigma_rel=0.25,
-            standardize=False,
-            input_noise_std=0.0,
-            output_noise_std=0.0,
-            lr=0.002,
-        ).replace(name="misgan_neural_imputer_" + str(recipe_name))
 
-        self.problem = misgan.Problem("block", 20000, 10000, 0, device=self.device)
-        self.data_rng = _rng(self.seed + 10)
-        self.latent_rng = _rng(self.seed + 11)
+        self.batch_size = int(batch_size if batch_size is not None else case["batch_size"])
+        self.particles = int(particles)
+        self.z_dim = int(z_dim)
+        self._rng_streams = _FixtureRNGStreams(self.seed, device=self.device)
+        self.is_anchored_mcar = (case["id"] == "api-misgan-mcar-p80-anchored")
+        self.hint_rate = 0.50
+
+        if self.is_anchored_mcar:
+            self.problem = build_mcar_p80_anchored_problem(20000, 10000, 0, device=self.device)
+        else:
+            self.problem = misgan.Problem("block", 20000, 10000, 0, device=self.device)
+
+        self.data_rng = _rng(self.seed + 10, device=self.device)
+        self.latent_rng = _rng(self.seed + 11, device=self.device)
+        self.noise_rng = _rng(self.seed + 12, device=self.device)
 
         with construction_rng(self.seed, "cpu"):
             self.G_x = nn.Sequential(
-                nn.Linear(8, 64), nn.LeakyReLU(0.2),
+                nn.Linear(self.z_dim, 64), nn.LeakyReLU(0.2),
                 nn.Linear(64, 64), nn.LeakyReLU(0.2),
                 nn.Linear(64, 8),
             ).to(self.device)
             self.G_m = nn.Sequential(
-                nn.Linear(8, 64), nn.LeakyReLU(0.2),
+                nn.Linear(self.z_dim, 64), nn.LeakyReLU(0.2),
                 nn.Linear(64, 64), nn.LeakyReLU(0.2),
                 nn.Linear(64, 8), nn.Sigmoid(),
             ).to(self.device)
@@ -1116,7 +1606,6 @@ class MisGANNeuralImputerFixture:
                 nn.Linear(64, 64), nn.LeakyReLU(0.2),
                 nn.Linear(64, 1),
             ).to(self.device)
-            self.prior = self.recipe.make_prior()
 
         init.deterministic_orthogonal_(self.G_x, seed=self.seed + 1)
         init.deterministic_orthogonal_(self.G_m, seed=self.seed + 2)
@@ -1124,68 +1613,88 @@ class MisGANNeuralImputerFixture:
         init.deterministic_orthogonal_(self.D_x, seed=self.seed + 4)
         init.deterministic_orthogonal_(self.D_m, seed=self.seed + 5)
         init.deterministic_orthogonal_(self.D_i, seed=self.seed + 6)
-        if self.prior is not None:
-            init.deterministic_orthogonal_(self.prior, seed=self.seed + 7)
 
         self.G = _ModuleBundle(G_x=self.G_x, G_m=self.G_m, G_i=self.G_i)
         self.D = _ModuleBundle(D_x=self.D_x, D_m=self.D_m, D_i=self.D_i)
-        self.opt_g = torch.optim.Adam(
-            list(self.G_x.parameters()) + list(self.G_m.parameters()) + list(self.G_i.parameters()),
-            lr=self.recipe.lr,
-        )
-        self.opt_d = torch.optim.Adam(
-            list(self.D_x.parameters()) + list(self.D_m.parameters()) + list(self.D_i.parameters()),
-            lr=self.recipe.lr,
-        )
-        _count_critic_steps(self.opt_d)
-        self.loss = self.recipe.make_loss()
+
+        if recipe is None:
+            recipe = self._make_default_recipe(recipe_name)
+        self.prior = None
+        self.rebind_trainer(recipe, prior=prior)
         self.last_losses = {}
+
+    def _sample_hint(self, m: torch.Tensor) -> torch.Tensor:
+        if not self.is_anchored_mcar:
+            return m
+        b = (torch.rand(m.shape, generator=self.noise_rng, device=m.device) < self.hint_rate).float()
+        return b * m + 0.5 * (1.0 - b)
 
     def step(self):
         if self.completed_steps >= self.limit:
             raise RuntimeError("declared execution cap reached")
-        scale_learning_rates(self.completed_steps, self.recipe, [self.opt_g, self.opt_d], [[g["lr"] for g in self.opt_g.param_groups], [g["lr"] for g in self.opt_d.param_groups]], self.prior)
+        scale_learning_rates(
+            self.completed_steps,
+            self._schedule_recipe(),
+            [self.opt_g, self.opt_d],
+            self.base_rates,
+            self.prior,
+        )
 
         self.G_x.train(); self.G_m.train(); self.G_i.train()
         self.D_x.train(); self.D_m.train(); self.D_i.train()
-        x_real, m_real, _ = self.problem.train_batch(self.recipe.batch_size, self.data_rng)
+        bs = int(self.recipe.batch_size or self.batch_size)
+        x_real, m_real, _ = self.problem.train_batch(bs, self.data_rng)
 
-        z_x, _ = self.prior.sample(self.recipe.batch_size, generator=self.latent_rng)
-        z_m, _ = self.prior.sample(self.recipe.batch_size, generator=self.latent_rng)
-        z_i = torch.randn(self.recipe.batch_size, 4, generator=self.latent_rng, device=self.device)
+        z_x, idx_x = self._sample_prior(bs)
+        z_m, idx_m = self._sample_prior(bs)
+        z_i = torch.randn(bs, 4, generator=self.latent_rng, device=self.device)
 
         x_fake = self.G_x(z_x)
+        if isinstance(self.prior, ManipulatedPrior) and self.prior.postprocesses_generated:
+            x_fake = self.prior.postprocess_generated(x_fake)
         m_fake = self.G_m(z_m)
 
         cond = torch.cat([x_real * m_real, m_real, z_i], dim=1)
         raw_imp = self.G_i(cond)
         completed = m_real * x_real + (1 - m_real) * raw_imp
+        hint = self._sample_hint(m_real)
 
         real_dx_in = torch.cat([x_real * m_real, m_real], dim=1)
         fake_dx_in = torch.cat([x_fake.detach() * m_fake.detach(), m_fake.detach()], dim=1)
 
         loss_dx = self.loss.d_loss(self.D_x(real_dx_in).squeeze(-1), self.D_x(fake_dx_in).squeeze(-1))
         loss_dm = self.loss.d_loss(self.D_m(m_real).squeeze(-1), self.D_m(m_fake.detach()).squeeze(-1))
-        
-        real_di_in = torch.cat([x_fake.detach(), m_real], dim=1)
-        fake_di_in = torch.cat([completed.detach(), m_real], dim=1)
-        loss_di = self.loss.d_loss(self.D_i(real_di_in).squeeze(-1), self.D_i(fake_di_in).squeeze(-1))
 
-        loss_d = loss_dx + loss_dm + loss_di
+        real_di_in = torch.cat([x_fake.detach(), hint], dim=1)
+        fake_di_in = torch.cat([completed.detach(), hint], dim=1)
+        loss_di = self.loss.d_loss(self.D_i(real_di_in).squeeze(-1), self.D_i(fake_di_in).squeeze(-1))
+        reg_d = self.penalty_x(self.D_x, real_dx_in, fake_dx_in)
+
+        loss_d = loss_dx + loss_dm + loss_di + reg_d
         self.opt_d.zero_grad()
         loss_d.backward()
         self.opt_d.step()
 
         m_detached = m_fake.detach()
         fake_gx_in = torch.cat([x_fake * m_detached, m_detached], dim=1)
-        loss_gx = self.loss.g_loss(self.D_x(fake_gx_in).squeeze(-1), self.D_x(real_dx_in).squeeze(-1))
-        loss_gm = self.loss.g_loss(self.D_m(m_fake).squeeze(-1), self.D_m(m_real).squeeze(-1))
-        
-        loss_gi = self.loss.g_loss(self.D_i(torch.cat([completed, m_real], dim=1)).squeeze(-1), self.D_i(real_di_in).squeeze(-1))
+        with torch.no_grad():
+            real_dx_logits = self.D_x(real_dx_in).squeeze(-1)
+            real_dm_logits = self.D_m(m_real).squeeze(-1)
+            real_di_logits = self.D_i(real_di_in).squeeze(-1)
+        loss_gx = self.loss.g_loss(self.D_x(fake_gx_in).squeeze(-1), real_dx_logits)
+        loss_gm = self.loss.g_loss(self.D_m(m_fake).squeeze(-1), real_dm_logits)
+        loss_gi = self.loss.g_loss(self.D_i(torch.cat([completed, hint], dim=1)).squeeze(-1), real_di_logits)
+        loss_adv = loss_gx + loss_gm + loss_gi
 
-        loss_g = loss_gx + loss_gm + loss_gi
+        idx_g = torch.unique(torch.cat([idx_x.reshape(-1), idx_m.reshape(-1)]))
+        loss_prior = self._prior_reg_loss(idx_g)
+        loss_g = loss_adv + loss_prior
+
         self.opt_g.zero_grad()
-        loss_g.backward()
+        if self.recipe.constraint_geometry_mode != "none":
+            constraint_geometry_backward(loss_g, self.opt_g, (loss_adv,))
+        else:
+            loss_g.backward()
         self.opt_g.step()
 
         self.completed_steps += 1
@@ -1195,6 +1704,8 @@ class MisGANNeuralImputerFixture:
             loss_gx=float(loss_gx.detach()),
             loss_gm=float(loss_gm.detach()),
             loss_gi=float(loss_gi.detach()),
+            critic_penalty=float(reg_d.detach()),
+            loss_prior=float(loss_prior.detach()),
         )
         if not all(math.isfinite(v) for v in self.last_losses.values()):
             raise FloatingPointError("nonfinite actual GAN update")
@@ -1202,17 +1713,43 @@ class MisGANNeuralImputerFixture:
 
     @torch.no_grad()
     def observe(self, n=4096, seed=99123):
-        self.G_i.eval()
-        def predict_fn(x, m, rng, draws=16):
-            out_draws = []
-            for d in range(draws):
-                zi = torch.randn(len(x), 4, generator=rng, device=x.device)
-                cond = torch.cat([x * m, m, zi], dim=1)
-                raw = self.G_i(cond)
-                grafted = m * x + (1 - m) * raw
-                out_draws.append(grafted)
-            return torch.stack(out_draws, dim=0)
-        return score_misgan_neural_imputer(predict_fn, self.problem, eval_seed=seed)
+        flags = {m: m.training for model in (self.G_x, self.G_m, self.G_i) for m in model.modules()}
+        try:
+            self.G_x.eval(); self.G_m.eval(); self.G_i.eval()
+
+            def predict_fn(x_q, m_q, rng, draws=16):
+                x_q = x_q.to(self.device)
+                m_q = m_q.to(self.device)
+                out_draws = []
+                for _ in range(draws):
+                    zi = torch.randn(len(x_q), 4, generator=rng, device=rng.device).to(device=self.device, dtype=x_q.dtype)
+                    cond = torch.cat([x_q * m_q, m_q, zi], dim=1)
+                    raw = self.G_i(cond)
+                    grafted = m_q * x_q + (1 - m_q) * raw
+                    out_draws.append(grafted)
+                return torch.stack(out_draws, dim=0)
+
+            if self.is_anchored_mcar:
+                gen = _rng(seed, device=self.device)
+                noise_gen = _rng(seed + 1, device=self.device)
+                if isinstance(self.prior, (MoGParticlePrior, ManipulatedPrior)) or hasattr(self.prior, "sigma"):
+                    z_x, _ = self.prior.sample(n, generator=gen, noise_generator=noise_gen)
+                    z_m, _ = self.prior.sample(n, generator=gen, noise_generator=noise_gen)
+                else:
+                    z_x, _ = self.prior.sample(n, generator=gen)
+                    z_m, _ = self.prior.sample(n, generator=gen)
+                x = self.G_x(z_x)
+                if isinstance(self.prior, ManipulatedPrior) and self.prior.postprocesses_generated:
+                    x = self.prior.postprocess_generated(x)
+                m = self.G_m(z_m)
+                return score_misgan_mcar_p80_anchored(
+                    x, m, lambda x_q, m_q, r: predict_fn(x_q, m_q, r, draws=8), self.problem, eval_seed=seed
+                )
+
+            return score_misgan_neural_imputer(predict_fn, self.problem, eval_seed=seed)
+        finally:
+            for mod, flag in flags.items():
+                mod.training = flag
 
     def state_dict(self):
         return {
@@ -1250,10 +1787,14 @@ class MisGANNeuralImputerFixture:
 
 
 def build_case(case_id,*,device="cpu",seed=DEFAULT_SEED,recipe_name="atlas",max_steps=None):
-    if case_id not in CASES: raise ValueError(f"unknown conditional API case {case_id!r}")
-    if torch.device(device).type!="cpu": raise ValueError("This frozen caller-owned conditional protocol is CPU-only")
-    if case_id == "api-misgan-block-recovery":
+    if case_id not in CASES:
+        for mod in _iter_stretch_providers():
+            if any(row["id"] == case_id for row in mod.list_cases()):
+                return mod.build_case(case_id, device=device, seed=seed, recipe_name=recipe_name, max_steps=max_steps)
+        raise ValueError(f"unknown conditional API case {case_id!r}")
+    if case_id in ("api-misgan-block-recovery", "api-misgan-mcar-p50-recovery"):
         return MisGANRecoveryFixture(deepcopy(CASES[case_id]), seed=seed, recipe_name=recipe_name, max_steps=max_steps, device=device)
-    if case_id == "api-misgan-block-neural-imputer":
+    if case_id in ("api-misgan-block-neural-imputer", "api-misgan-mcar-p80-anchored"):
         return MisGANNeuralImputerFixture(deepcopy(CASES[case_id]), seed=seed, recipe_name=recipe_name, max_steps=max_steps, device=device)
+    if torch.device(device).type!="cpu": raise ValueError("This frozen caller-owned conditional protocol is CPU-only")
     return ConditionalFixture(deepcopy(CASES[case_id]),_task(case_id.removeprefix("api-")),seed,recipe_name,max_steps)

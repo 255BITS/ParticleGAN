@@ -272,7 +272,7 @@ Removed from the count at this tier (still measured):
 
 | Experiment | Removed in | Reason | Recorded result |
 | --- | --- | --- | --- |
-| [ring_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold) | [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [removed: phase of ring_extension (counted there)](../test-dispositions-20261015/README.md#ring_hold) | UNKNOWN |
+| [ring_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold) | [clockfree_continuous](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3), [discriminator_stability](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3), [formulation_comparison](ka2.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3), [host_profile_transfer](ka2.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [removed: phase of ring_extension (counted there)](../test-dispositions-20261015/README.md#ring_hold) | FAIL |
 
 <a name="cohort-cuda-1bf9d7d34422-tier-4"></a>
 
@@ -693,7 +693,7 @@ Additional eligibility requirements:
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [clockfree_audit](ka2.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit) | required | FAIL | recorded definition unavailable |
-| [ring_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold) | [removed: phase of ring_extension (counted there)](../test-dispositions-20261015/README.md#ring_hold) | UNKNOWN | matches recorded run |
+| [ring_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold) | [removed: phase of ring_extension (counted there)](../test-dispositions-20261015/README.md#ring_hold) | FAIL | matches recorded run |
 | [ring_extension](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_extension) | required | FAIL | matches recorded run |
 | [grid100_14k](ka2.md#cohort-cuda-1bf9d7d34422-experiment-grid100_14k) | required | FAIL | recorded definition unavailable |
 | [rotated100_14k](ka2.md#cohort-cuda-1bf9d7d34422-experiment-rotated100_14k) | required | FAIL | recorded definition unavailable |
@@ -853,7 +853,7 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [ring_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold) | [removed: phase of ring_extension (counted there)](../test-dispositions-20261015/README.md#ring_hold) | UNKNOWN | matches recorded run |
+| [ring_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold) | [removed: phase of ring_extension (counted there)](../test-dispositions-20261015/README.md#ring_hold) | FAIL | matches recorded run |
 | [ring_extension](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_extension) | required | FAIL | matches recorded run |
 | [zero_tanh_rail_escape](ka2.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_rail_escape) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | FAIL | recorded definition unavailable |
 
@@ -936,7 +936,7 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [ring_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold) | [removed: phase of ring_extension (counted there)](../test-dispositions-20261015/README.md#ring_hold) | UNKNOWN | matches recorded run |
+| [ring_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold) | [removed: phase of ring_extension (counted there)](../test-dispositions-20261015/README.md#ring_hold) | FAIL | matches recorded run |
 | [ring_extension](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_extension) | required | FAIL | matches recorded run |
 
 <a name="cohort-cuda-1bf9d7d34422-formulation_comparison-tier-4"></a>
@@ -1010,7 +1010,7 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [ring_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold) | [removed: phase of ring_extension (counted there)](../test-dispositions-20261015/README.md#ring_hold) | UNKNOWN | matches recorded run |
+| [ring_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold) | [removed: phase of ring_extension (counted there)](../test-dispositions-20261015/README.md#ring_hold) | FAIL | matches recorded run |
 | [ring_extension](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_extension) | required | FAIL | matches recorded run |
 
 <a name="cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-4"></a>
@@ -1101,7 +1101,7 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 | [grid100](ka2.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | changed since run |
 | [rotated100](ka2.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | changed since run |
 | [staggered100](ka2.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | changed since run |
-| [ring_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold) | diagnostic | UNKNOWN | matches recorded run |
+| [ring_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold) | diagnostic | FAIL | matches recorded run |
 | [ring_extension](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_extension) | diagnostic | FAIL | matches recorded run |
 | [clockfree_audit_measurement_v1](ka2.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | diagnostic | FAIL | matches recorded run |
 
@@ -1177,7 +1177,7 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 | [staggered100](ka2.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | changed since run |
 | [model_ae_ddgan_bimodal_chain](ka2.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_bimodal_chain) | diagnostic | FAIL | recorded definition unavailable |
 | [model_ddgan_bimodal_chain](ka2.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_bimodal_chain) | diagnostic | FAIL | recorded definition unavailable |
-| [ring_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold) | diagnostic | UNKNOWN | matches recorded run |
+| [ring_hold](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold) | diagnostic | FAIL | matches recorded run |
 | [ring_extension](ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_extension) | diagnostic | FAIL | matches recorded run |
 | [zero_tanh_rail_escape](ka2.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_rail_escape) | diagnostic | FAIL | recorded definition unavailable |
 | [grid100_14k](ka2.md#cohort-cuda-1bf9d7d34422-experiment-grid100_14k) | diagnostic | FAIL | recorded definition unavailable |
@@ -1588,7 +1588,7 @@ One evidence entry per experiment is shared by its view rows. Test-definition ch
 
 **ae_gan_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/ae_gan_hold.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -1659,7 +1659,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 **clockfree_audit: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. step_label changed the update or common-prefix state
 
 Run attempt: **FAIL** (retained_attempt; qualification unchanged). step_label changed the update or common-prefix state [Attempt evidence](../actual-missing-diagnostics-20261014/results.json).
 
@@ -1679,7 +1679,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **clockfree_audit_measurement_v1: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit_measurement_v1.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. step_label changed the update or common-prefix state
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. step_label changed the update or common-prefix state
 
 Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -1727,7 +1727,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **cover_leftover: PASS**. [Current experiment declaration](../../../configs/forge/tasks/cover_leftover.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. Formulaic evaluation PASS.
 
 Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -1927,7 +1927,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 **five_word_joint_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_hold.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. Formulaic evaluation PASS.
 
 Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -1962,7 +1962,7 @@ Dependencies: five_word_joint_smoke (checkpoint).
 
 **five_word_joint_smoke: PASS**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_smoke.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. any scheduled full joint pass plus independent same-state confirmation
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. any scheduled full joint pass plus independent same-state confirmation
 
 Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -2055,7 +2055,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **gaussian1d_smoke: PASS**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_smoke.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. any scheduled full pass with independent same-state confirmation
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. any scheduled full pass with independent same-state confirmation
 
 Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -2105,7 +2105,7 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 **gaussian1d_stability: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_stability.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. Formulaic evaluation FAIL.
 
 Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -2141,7 +2141,7 @@ Dependencies: gaussian1d_smoke (checkpoint).
 
 **grid100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/grid100.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. Formulaic evaluation FAIL.
 
 Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -2182,7 +2182,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100_14k: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/grid100_14k.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Required checkpoint prerequisite grid100 executed and failed (FAIL).
 
 Used by: [clockfree_continuous / Tier 3](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [prior-ablation-full-suite-v1 / Tier 1](ka2.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -2299,7 +2299,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100_mlp16: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/grid100_mlp16.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed grid100_mlp16 bounds: modes >= 100, precision >= 0.97, min_hq_mode_mass >= 0.005, mass_tv <= 0.1, max_mode_mass <= 0.02, min_cov_eig_ratio >= 0.4.
 
 Used by: [discriminator_stability / Tier 4](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4).
 
@@ -2377,7 +2377,7 @@ Current measurement: particle_cloud prior (sigma 0); public_prior_without_output
 
 **grid100_res16_tanh: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/grid100_res16_tanh.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed grid100_res16_tanh bounds: modes >= 100, precision >= 0.97, min_hq_mode_mass >= 0.005, mass_tv <= 0.1, max_mode_mass <= 0.02, min_cov_eig_ratio >= 0.4.
 
 Used by: [discriminator_stability / Tier 4](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4).
 
@@ -2416,7 +2416,7 @@ Dependencies: grid100 (gate).
 
 **img_bars4: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/img_bars4.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. Formulaic evaluation FAIL.
 
 Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -2496,7 +2496,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_blobs4: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/img_blobs4.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. Formulaic evaluation FAIL.
 
 Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -2550,7 +2550,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_intensity2: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/img_intensity2.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. Formulaic evaluation FAIL.
 
 Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -2604,7 +2604,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_stripes2: PASS**. [Current experiment declaration](../../../configs/forge/tasks/img_stripes2.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. Formulaic evaluation PASS.
 
 Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -2684,7 +2684,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **mid_scale_identity: PASS**. [Current experiment declaration](../../../configs/forge/tasks/mid_scale_identity.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. Formulaic evaluation PASS.
 
 Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -2718,7 +2718,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **misgan_block_neural_imputer: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/misgan_block_neural_imputer.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed misgan_block_neural_imputer bounds: acc, acc_lo.
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed misgan_block_neural_imputer bounds: acc, acc_lo. [Attempt evidence](../attempt-coverage.json).
 
@@ -2745,7 +2745,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **misgan_block_recovery: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/misgan_block_recovery.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed misgan_block_recovery bounds: acc, acc_lo, hq, mask_tv, mass_tv, modes.
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed misgan_block_recovery bounds: acc, acc_lo, hq, mask_tv, mass_tv, modes. [Attempt evidence](../attempt-coverage.json).
 
@@ -2774,7 +2774,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **mode_hold: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/mode_hold.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. Formulaic evaluation FAIL.
 
 Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -2802,7 +2802,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **model_ae_ddgan_bimodal_chain: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_ddgan_bimodal_chain.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Used by: [discriminator_stability / Tier 2](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [prior-ablation-full-suite-v1 / Tier 1](ka2.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -2876,7 +2876,7 @@ Dependencies: model_ae_ddgan_gaussian_chain (gate).
 
 **model_ae_ddgan_gaussian_chain: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_ddgan_gaussian_chain.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Used by: [discriminator_stability / Tier 2](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [prior-ablation-full-suite-v1 / Tier 1](ka2.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -2943,7 +2943,7 @@ Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_wit
 
 **model_ae_gan_multimodal: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_gan_multimodal.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **FAIL** (current_source_readout; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../records/readout-efc9b823a6b391bc25754f9a.json).
 
@@ -2978,7 +2978,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 **model_ae_reconstruction: PASS**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_reconstruction.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (current_source_readout; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../records/readout-efc9b823a6b391bc25754f9a.json).
 
@@ -3007,7 +3007,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 **model_ddgan_bimodal_chain: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_ddgan_bimodal_chain.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Used by: [discriminator_stability / Tier 2](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [prior-ablation-full-suite-v1 / Tier 1](ka2.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -3077,7 +3077,7 @@ Dependencies: model_ddgan_gaussian_chain (gate).
 
 **model_ddgan_gaussian_chain: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_ddgan_gaussian_chain.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Used by: [discriminator_stability / Tier 2](ka2.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [prior-ablation-full-suite-v1 / Tier 1](ka2.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -3140,7 +3140,7 @@ Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_wit
 
 **model_vae_categorical: PASS**. [Current experiment declaration](../../../configs/forge/tasks/model_vae_categorical.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (current_source_readout; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../records/readout-efc9b823a6b391bc25754f9a.json).
 
@@ -3180,7 +3180,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 **model_vae_hard: PASS**. [Current experiment declaration](../../../configs/forge/tasks/model_vae_hard.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (current_source_readout; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../records/readout-efc9b823a6b391bc25754f9a.json).
 
@@ -3313,7 +3313,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **residual_student: PASS**. [Current experiment declaration](../../../configs/forge/tasks/residual_student.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. Formulaic evaluation PASS.
 
 Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -3342,7 +3342,7 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **ring16_acquisition: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/ring16_acquisition.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -3423,7 +3423,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **ring16_bigan_continuous: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/ring16_bigan_continuous.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed ring16_bigan_continuous bounds: hq, mass_tv, modes, recon_rmse.
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed ring16_bigan_continuous bounds: hq, mass_tv, modes, recon_rmse. [Attempt evidence](../attempt-coverage.json).
 
@@ -3450,7 +3450,7 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 **ring_extension: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/ring_extension.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. Required checkpoint prerequisite ring_hold executed and failed (FAIL).
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). Required checkpoint prerequisite ring_hold executed and failed (FAIL). [Attempt evidence](../attempt-coverage.json).
 
@@ -3480,9 +3480,9 @@ Dependencies: ring_hold (checkpoint).
 
 ### ring_hold
 
-**ring_hold: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/ring_hold.json).
+**ring_hold: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/ring_hold.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. Executable: completed in a separate-runtime diagnostic. This ordinary cohort remains not run; see actual-missing-diagnostics-20261014.
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. first qualifying window failed acquisition or uninterrupted hold
 
 Run attempt: **FAIL** (retained_attempt; qualification unchanged). first qualifying window failed acquisition or uninterrupted hold [Attempt evidence](../actual-missing-diagnostics-20261014/results.json).
 
@@ -3514,7 +3514,7 @@ Dependencies: mode_hold (gate).
 
 **rotated100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/rotated100.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. Formulaic evaluation FAIL.
 
 Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -3555,7 +3555,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **rotated100_14k: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/rotated100_14k.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Required checkpoint prerequisite rotated100 executed and failed (FAIL).
 
 Used by: [clockfree_continuous / Tier 3](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [prior-ablation-full-suite-v1 / Tier 1](ka2.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -3633,7 +3633,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/staggered100.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. Formulaic evaluation FAIL.
 
 Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -3674,7 +3674,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100_14k: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/staggered100_14k.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Required checkpoint prerequisite staggered100 executed and failed (FAIL).
 
 Used by: [clockfree_continuous / Tier 3](ka2.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [prior-ablation-full-suite-v1 / Tier 1](ka2.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -3752,7 +3752,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **target_shift_recovery: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/target_shift_recovery.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed live recovery and matched frozen negative control
 
 Run attempt: **FAIL** (retained_attempt; qualification unchanged). recomputed live recovery and matched frozen negative control [Attempt evidence](../actual-missing-diagnostics-20261014/results.json).
 
@@ -3775,7 +3775,7 @@ Dependencies: mode_hold (gate).
 
 **trajectory: PASS**. [Current experiment declaration](../../../configs/forge/tasks/trajectory.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. Formulaic evaluation PASS.
 
 Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -3802,7 +3802,7 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **two_pole: PASS**. [Current experiment declaration](../../../configs/forge/tasks/two_pole.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -3931,7 +3931,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_part
 
 **unipolar: PASS**. [Current experiment declaration](../../../configs/forge/tasks/unipolar.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. Formulaic evaluation PASS.
 
 Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -3960,7 +3960,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **unused_token_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/unused_token_hold.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -4031,7 +4031,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_para
 
 **vector_anisotropic: PASS**. [Current experiment declaration](../../../configs/forge/tasks/vector_anisotropic.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. Formulaic evaluation PASS.
 
 Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -4091,7 +4091,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_overlap: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/vector_overlap.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. Formulaic evaluation FAIL.
 
 Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -4147,7 +4147,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_spiral: PASS**. [Current experiment declaration](../../../configs/forge/tasks/vector_spiral.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. Formulaic evaluation PASS.
 
 Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -4203,7 +4203,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_two_broad: PASS**. [Current experiment declaration](../../../configs/forge/tasks/vector_two_broad.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. Formulaic evaluation PASS.
 
 Run attempt: **PASS** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -4263,7 +4263,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_mass: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_mass.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. Formulaic evaluation FAIL.
 
 Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -4325,7 +4325,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_width: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_width.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. Formulaic evaluation FAIL.
 
 Run attempt: **FAIL** (retained_receipt; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../tier-coverage-20261014/results.json).
 
@@ -4385,7 +4385,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **zero_tanh_rail_escape: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/zero_tanh_rail_escape.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed rail-escape bounds: mean_abs_error <= 0.005, rms_error <= 0.01, p99_abs_error <= 0.025, saturated_fraction == 0.0.
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed rail-escape bounds: mean_abs_error <= 0.005, rms_error <= 0.01, p99_abs_error <= 0.025, saturated_fraction == 0.0. [Attempt evidence](../attempt-coverage.json).
 
@@ -4414,7 +4414,7 @@ Dependencies: zero_tanh_smoke (gate).
 
 **zero_tanh_smoke: PASS**. [Current experiment declaration](../../../configs/forge/tasks/zero_tanh_smoke.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed origin point-mass contraction gates
 
 Run attempt: **PASS** (current_source_readout; qualification unchanged). recomputed origin point-mass contraction gates [Attempt evidence](../records/readout-efc9b823a6b391bc25754f9a.json).
 

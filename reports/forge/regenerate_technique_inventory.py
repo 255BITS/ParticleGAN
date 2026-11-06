@@ -3132,6 +3132,7 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                     "view_revision": view_revision,
                     "req_total": req_total,
                     "diag_total": diag_total,
+                    "stretch_total": sum(item.get("importance") in {"stretch", "held"} for item in t1_assignments),
                     "rows": rows_data,
                 }
         except Exception:
@@ -3162,6 +3163,16 @@ def _recorded_source_binary_projection(result, root: Path) -> dict | None:
             or coverage.get("formulations_modified") is not False):
         raise ValueError("recorded formulaic display requires diagnostic-only coverage")
     required = set(full_suite_tasks(progress))
+    scope = progress.get("recorded_display_scope")
+    if scope is not None:
+        text = scope.get("text")
+        if (not isinstance(text, str) or hashlib.sha256(text.encode()).hexdigest() != scope.get("sha256")
+                or progress.get("input_hashes", {}).get(scope.get("path")) != scope.get("sha256")):
+            raise ValueError("recorded display scope digest changed")
+        declaration = json.loads(text)
+        if declaration.get("schema") != "forge_fixed_test_list_v1" or not declaration.get("tests"):
+            raise ValueError("invalid recorded display scope")
+        required = set(declaration["tests"])
     if not required:
         return None
     families = {}
@@ -3199,51 +3210,11 @@ def _recorded_source_binary_projection(result, root: Path) -> dict | None:
             "families": families}
 
 
-def _retained_published_display(result, root: Path) -> dict | None:
-    """Preserve a prior display, pinned to original blobs and whole evidence rows.
-
-    This does not regrade receipts or import qualification. It prevents a new
-    task/source revision from changing previously published display outcomes.
-    """
-    from experiments.forge.family_reports import _selected_cohorts, _selected_row
-    from experiments.forge.leaderboard_contract import load_fixed_test_list
-    from experiments.forge.trainer_families import scientific_row_hash
-    fixed = load_fixed_test_list(root)
-    binding = (fixed or {}).get("retained_display")
-    if binding is None:
-        return None
-    relative = Path(binding["path"])
-    if relative.is_absolute() or ".." in relative.parts or file_hash(root / relative) != binding["sha256"]:
-        raise ValueError("retained published display digest changed")
-    saved = read_json(root / relative)
-    if (saved.get("schema") != "forge_retained_published_display_v1"
-            or saved.get("qualification_input") is not False
-            or saved.get("qualification_reuse") is not False
-            or saved.get("qualification_regraded") is not False):
-        raise ValueError("retained published display cannot confer qualification")
-    families = {}
-    for family, cohort in _selected_cohorts(result["family_progress"]):
-        row = _selected_row(result, cohort)
-        previous = saved["families"].get(family["id"])
-        if (previous is None or previous["candidate_id"] != row["candidate_id"]
-                or previous["scientific_row_sha256"] != scientific_row_hash(row)):
-            return None  # A newly selected scientific row never inherits old scores.
-        if any(status not in {"PASS", "FAIL"} for status in previous["statuses"].values()):
-            raise ValueError("invalid retained published status")
-        families[family["id"]] = {"records": {name: {"status": status,
-            "publication": previous["publication"]} for name, status in previous["statuses"].items()}}
-    return {"scope": "retained_published_display", "qualification_input": False, "qualification_reuse": False,
-            "coverage": binding, "families": families}
-
-
 def _formulaic_display_payload(result, root: Path) -> dict | None:
     current = _concluded_current_source_tier1_payload(result, root)
     if current and all("UNMEASURED" not in (item["req_outcomes"] + item["diag_outcomes"])
                        for item in current["rows"]):
         return current
-    retained = _retained_published_display(result, root)
-    if retained is not None:
-        return retained
     recorded = _recorded_source_binary_projection(result, root)
     return recorded
 
@@ -3255,7 +3226,7 @@ def _selected_recipe_binary_task_statuses(result, root: Path) -> dict[str, dict[
     from experiments.forge.family_reports import _selected_cohorts, _selected_row, _summed_views, full_suite_tasks
 
     progress = result.get("family_progress") or {}
-    recorded_display = cached.get("scope") in {"recorded_source_formulaic_display", "retained_published_display"}
+    recorded_display = cached.get("scope") == "recorded_source_formulaic_display"
     measured_by_cid = {} if recorded_display else {
         item["candidate_id"]: item.get("measured", {}) for item in cached["rows"]}
     all_tasks: set[str] = set(full_suite_tasks(progress))
@@ -3333,6 +3304,7 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
     src12 = cached["source_digest"][:12]
     req_total = cached["req_total"]
     diag_total = cached["diag_total"]
+    other_label = "Stretch / diagnostic" if cached.get("stretch_total", 0) else "Diagnostic"
     all_total = req_total + diag_total
     if binary_by_family is not None:
         t2_total = len(distinct_by_tier[2])
@@ -3344,7 +3316,7 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
             (
                 f"Matched current-source (`{src12}`, `discriminator_stability` revision {cached['view_revision']}) "
                 f"formulaic Tier 1–3 evaluation for each family's selected recipe under protocol seed 0 on "
-                f"`NVIDIA RTX A6000` ({req_total} required + {diag_total} diagnostic = {all_total} Tier 1 tests, "
+                f"`NVIDIA RTX A6000` ({req_total} required + {diag_total} {other_label.lower()} = {all_total} Tier 1 tests, "
                 f"{t2_total} Tier 2 tests, {t3_total} Tier 3 tests; {tot36_total} distinct tests total). "
                 "Every test evaluates to binary PASS or FAIL (any constructor/preflight refusal or non-passing "
                 "outcome counts as FAIL, with no third option)."
@@ -3352,7 +3324,7 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
             "",
             (
                 f"| Family | Selected recipe | Source / revision | Required Tier 1 ({req_total}) "
-                f"| Diagnostic Tier 1 ({diag_total}) | Total Tier 1 ({all_total}) | Tier 2 ({t2_total}) "
+                f"| {other_label} Tier 1 ({diag_total}) | Total Tier 1 ({all_total}) | Tier 2 ({t2_total}) "
                 f"| Tier 3 ({t3_total}) | Total Tier 1–3 ({tot36_total}) | Evidence |"
             ),
             "| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
@@ -3397,7 +3369,7 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
         (
             f"Matched current-source (`{src12}`, `discriminator_stability` revision {cached['view_revision']}) "
             f"ordinary Tier 1 readouts for each family's unchanged selected recipe under protocol seed 0 on "
-            f"`NVIDIA RTX A6000` ({req_total} required + {diag_total} diagnostic = {all_total} Tier 1 tests). "
+            f"`NVIDIA RTX A6000` ({req_total} required + {diag_total} {other_label.lower()} = {all_total} Tier 1 tests). "
             "`## Selected recipes` above retains historical recorded-source pins until a new family selection "
             "snapshot is registered; these concluded `reports/forge/records/readout-*.json` records show "
             "matched current-source Tier 1 performance side by side without regrading historical cohorts."
@@ -3405,7 +3377,7 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
         "",
         (
             f"| Family | Selected recipe | Source / revision | Required Tier 1 ({req_total}) "
-            f"| Diagnostic Tier 1 ({diag_total}) | Total Tier 1 ({all_total}) | Evidence |"
+            f"| {other_label} Tier 1 ({diag_total}) | Total Tier 1 ({all_total}) | Evidence |"
         ),
         "| --- | --- | --- | ---: | ---: | ---: | --- |",
     ]
@@ -3443,13 +3415,7 @@ def _formulaic_selected_recipe_tables(markdown: str, result, root, path) -> str:
     if binary_by_family is None:
         return markdown
     display = _formulaic_display_payload(result, root)
-    if display.get("scope") == "retained_published_display":
-        note = ("Previously published scores retain their original commit/blob identities in "
-                "[the display provenance receipt](precision-stretch/retained-display.json). "
-                "New tests remain unmeasured; neither display retention nor these new tests change recorded qualification.\n\n")
-        if note not in markdown:
-            markdown = markdown.replace("## Selected recipes\n\n", "## Selected recipes\n\n" + note, 1)
-    elif display.get("scope") == "recorded_source_formulaic_display":
+    if display.get("scope") == "recorded_source_formulaic_display":
         note = ("Recorded formulaic scores retain each recipe's original source and task bindings in "
                 "[the coverage receipts](attempt-coverage.json). They are an archived display projection, "
                 "not current-source qualification; current-source evidence gaps remain separate.\n\n")
@@ -4364,8 +4330,7 @@ def _project_publication_for_family_pages(root, publication):
 
     projected = deepcopy(publication)
     display = _formulaic_display_payload(publication, Path(root))
-    retained_display = display.get("scope") == "retained_published_display"
-    recorded_display = retained_display or display.get("scope") == "recorded_source_formulaic_display"
+    recorded_display = display.get("scope") == "recorded_source_formulaic_display"
     if recorded_display:
         projected["recorded_formulaic_display"] = {key: deepcopy(display[key])
             for key in ("scope", "qualification_input", "qualification_reuse", "coverage")}
@@ -4411,12 +4376,7 @@ def _project_publication_for_family_pages(root, publication):
                     attempt_records_by_family.get((fam_id, parent_id)) if parent_id else None))
             t_entry["status"] = status
             t_entry["execution_recorded"] = True
-            if retained_display:
-                t_entry["retained_published_display"] = {"qualification_input": False,
-                    "qualification_reuse": False, "publication": deepcopy(original["publication"])}
-                t_entry["coverage_reason"] = ("Previously published display retained under its original Git commit/blob. "
-                    "Current-source compatibility and qualification are unchanged.")
-            elif recorded_display:
+            if recorded_display:
                 t_entry["recorded_formulaic_display"] = {
                     "scope": display["scope"], "qualification_input": False, "qualification_reuse": False,
                     **{key: deepcopy(original[key]) for key in (

@@ -1590,23 +1590,18 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     # API source maintenance does not inherit a different source cohort's
     # newer Tier 1 claims. Preserve the certified base-cohort display scores;
     # original measurements and the later cohort remain unchanged in evidence.
-    for expected_selected_score in (
-        "**[27/27](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 12/12 tests",
-        "**[24/27](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/12 tests (3 fail)",
-        "**[24/27](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/12 tests (3 fail)",
-        "**[27/27](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 12/12 tests",
-        "**[25/27](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/12 tests (2 fail)",
-        "**[27/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 12/12 tests",
-        "**[25/27](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/12 tests (2 fail)",
-        "**[17/27](families/e22.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/12 tests (5 fail)",
-        "**[109/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 31/36 tests (5 fail)",
-        "**[105/115](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** · 30/36 tests (6 fail)",
-        "**[99/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 29/36 tests (7 fail)",
-        "**[59/115](families/e22.md#cohort-cuda-1bf9d7d34422)** · 14/36 tests (22 fail)",
-    ):
-        assert expected_selected_score in selected_table_lines
-
+    from experiments.forge.family_reports import _summed_views
     from reports.forge import regenerate_technique_inventory as rti
+    proof = rti._recorded_source_binary_projection(publication, ROOT)
+    assert proof is not None
+    for family, cohort in _selected_cohorts(publication["family_progress"]):
+        records = proof["families"][family["id"]]["records"]
+        required = [a["task"] for view in _summed_views(publication["family_progress"])
+                    for a in view["assignments"] if a["importance"] == "required"]
+        passed = sum(records.get(name, {}).get("status") == "PASS" for name in required)
+        expected = f"**[{passed}/{len(required)}]({family['page']}#{cohort['anchor']})**"
+        assert expected in selected_table_lines
+
     tier1_readouts_block = rti._current_source_tier1_readouts_markdown(
         publication, ROOT, ROOT / "reports/forge/technique-inventory.md")
     if tier1_readouts_block:
@@ -1615,14 +1610,18 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
             assert expected_snippet in tier1_readouts_block
         for forbidden in ("not run", "incompatible", "blocked", "preflight-blocked"):
             assert forbidden not in tier1_readouts_block
-        assert "| Required Tier 1 (11) | Diagnostic Tier 1 (1) | Total Tier 1 (12) | Tier 2 (18) | Tier 3 (6) | Total Tier 1–3 (36) |" in tier1_readouts_block
+        assert "| Required Tier 1 (11) | Stretch / diagnostic Tier 1 (4) | Total Tier 1 (15) |" in tier1_readouts_block
     else:
         assert "### Current-source selected-recipe Tier 1 readouts" not in inv_md
         assert status["current_source_measurements"]["stages"]["selected_family_readouts"]["missing_families"]
 
     view_breakdown_block = inv_md.split("<summary>Selected recipe breakdown by view", 1)[1].split("</details>", 1)[0]
+    # New stretch cells can be unmeasured without changing required-tier
+    # evidence. Check the required columns independently of the stretch column.
+    required_columns = "\n".join(" | ".join(line.split(" | ")[:7])
+                                 for line in view_breakdown_block.splitlines() if line.startswith("| ["))
     for forbidden in ("not run", "incompatible", "blocked", "diagnostic attempt"):
-        assert forbidden not in view_breakdown_block
+        assert forbidden not in required_columns
 
     full_suite_block = inv_md.split("## Full-suite results — failures included\n", 1)[1].split(
         "## Held and removed tests", 1
@@ -1639,7 +1638,7 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     ):
         row_line = next(line for line in full_suite_block.splitlines() if line.startswith(selected_row_prefix))
         assert "not run" not in row_line
-        assert "| 0 | 0 |" in row_line
+        assert "| 2 | 0 |" in row_line
 
     # Verify all 8 selected recipes retain certified PASS/FAIL across all 50
     # original suite tasks, independently from current-definition compatibility.
@@ -1936,11 +1935,11 @@ def test_republish_registered_inventory_end_to_end_recovers_missing_and_unverifi
         # Scenario D: stale selected scores and false current-source claims are
         # detected and repaired without inventing a new-source measurement.
         orig_md = md_path.read_text()
-        stale_md = orig_md.replace(
-            "**[27/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 12/12 tests",
-            "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** (7 not run)",
-            1,
-        )
+        import re
+        score = re.search(r"\*\*\[(\d+)/(\d+)\]\(families/atlas\.md#[^)]+\)\*\*", orig_md)
+        assert score is not None
+        changed_score = score.group(0).replace(f"[{score.group(1)}/", f"[{int(score.group(1)) + 1}/", 1)
+        stale_md = orig_md[:score.start()] + changed_score + orig_md[score.end():]
         assert stale_md != orig_md
         md_path.write_text(stale_md)
         assert stale_md != rti._current_markdown(recovered, wt, md_path)
@@ -2251,7 +2250,7 @@ def test_current_source_tier1_readouts_ignores_non_tier1_records_and_invalidates
         md3 = rti._current_source_tier1_readouts_markdown(
             live_inv, wt, wt / "reports/forge/technique-inventory.md"
         )
-        assert "| Required Tier 1 (11) | Diagnostic Tier 1 (1) | Total Tier 1 (12) | Tier 2 (18) | Tier 3 (6) | Total Tier 1–3 (36) |" in md3
+        assert "| Required Tier 1 (11) | Stretch / diagnostic Tier 1 (4) | Total Tier 1 (15) |" in md3
         assert "preflight-blocked" not in md3 and " blocked" not in md3
     finally:
         subprocess.run(

@@ -1,4 +1,4 @@
-<a id="precision-stretch"></a>
+<a name="precision-stretch"></a>
 
 # Blackwell-format low-precision training stretch tests
 

@@ -131,12 +131,12 @@ Selection: recorded_source_measurement. Recorded source-bound original measureme
 
 | View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Tier 4 tests | Total distinct tests | Held (measured, not counted) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [12/12](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-4) | [15/16](bispf.md#cohort-cuda-1bf9d7d34422-adaptation) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
-| [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [4/4](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [12/12](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [2/6](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-4) | [18/22](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
-| [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [11/11](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [17/18](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [1/1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | [29/30](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [0/15](bispf.md#cohort-cuda-1bf9d7d34422-held) |
-| [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [3/3](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [12/12](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [1/1](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-4) | [16/16](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
-| [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [3/3](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [12/12](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [1/1](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-4) | [16/16](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
-| [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [3/3](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [12/12](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-4) | [15/15](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
+| [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [9/12](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-4) | [12/16](bispf.md#cohort-cuda-1bf9d7d34422-adaptation) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
+| [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [4/4](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [9/12](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [2/6](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-4) | [15/22](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
+| [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [7/11](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [10/18](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [1/1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | [18/30](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [0/15](bispf.md#cohort-cuda-1bf9d7d34422-held) |
+| [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [3/3](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [9/12](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [1/1](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-4) | [13/16](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
+| [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [3/3](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [9/12](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [1/1](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-4) | [13/16](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
+| [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [3/3](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [9/12](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-4) | [12/15](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
 
 Separate cohort coverage (excluded from family totals):
 
@@ -161,14 +161,14 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [clockfree_audit_measurement_v1](bispf.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | PASS | matches recorded run |
 | [five_word_joint_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | changed since run |
 | [gaussian1d_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
-| [model_ae_gan_multimodal](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | recorded definition unavailable |
+| [model_ae_gan_multimodal](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | FAIL | recorded definition unavailable |
 | [model_ae_reconstruction](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_reconstruction) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | recorded definition unavailable |
-| [model_vae_categorical](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_categorical) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | recorded definition unavailable |
-| [model_vae_hard](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_hard) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | recorded definition unavailable |
+| [model_vae_categorical](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_categorical) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | FAIL | recorded definition unavailable |
+| [model_vae_hard](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_hard) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | FAIL | recorded definition unavailable |
 | [ring16_acquisition](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | matches recorded run |
 | [two_pole](bispf.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | PASS | changed since run |
 | [unused_token_hold](bispf.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | PASS | changed since run |
-| [zero_tanh_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_smoke) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | PASS | recorded definition unavailable |
+| [zero_tanh_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_smoke) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | FAIL | recorded definition unavailable |
 
 Held at this tier (measured and shown, not counted):
 
@@ -188,17 +188,17 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [cover_leftover](bispf.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | PASS | changed since run |
 | [five_word_joint_hold](bispf.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | PASS | changed since run |
 | [gaussian1d_stability](bispf.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | PASS | changed since run |
+| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | FAIL | changed since run |
 | [img_stripes2](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_stripes2) | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | PASS | matches recorded run |
 | [mid_scale_identity](bispf.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | PASS | changed since run |
 | [mode_hold](bispf.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | PASS | matches recorded run |
-| [model_ae_ddgan_bimodal_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_bimodal_chain) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | PASS | recorded definition unavailable |
-| [model_ae_ddgan_gaussian_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_gaussian_chain) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | PASS | recorded definition unavailable |
-| [model_ddgan_bimodal_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_bimodal_chain) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | PASS | recorded definition unavailable |
-| [model_ddgan_gaussian_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_gaussian_chain) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | PASS | recorded definition unavailable |
+| [model_ae_ddgan_bimodal_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_bimodal_chain) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | FAIL | recorded definition unavailable |
+| [model_ae_ddgan_gaussian_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_gaussian_chain) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | FAIL | recorded definition unavailable |
+| [model_ddgan_bimodal_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_bimodal_chain) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | FAIL | recorded definition unavailable |
+| [model_ddgan_gaussian_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_gaussian_chain) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | FAIL | recorded definition unavailable |
 | [residual_student](bispf.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | PASS | changed since run |
-| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | PASS | changed since run |
-| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | PASS | changed since run |
+| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | FAIL | changed since run |
 | [trajectory](bispf.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | PASS | changed since run |
 | [unipolar](bispf.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | PASS | changed since run |
 | [vector_spiral](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_spiral) | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | PASS | matches recorded run |
@@ -328,9 +328,9 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | [img_bars4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | PASS | changed since run |
-| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | PASS | changed since run |
-| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | PASS | changed since run |
+| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-adaptation-tier-3"></a>
 
@@ -380,9 +380,9 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | [img_bars4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | PASS | changed since run |
-| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | PASS | changed since run |
-| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | PASS | changed since run |
+| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-2"></a>
 
@@ -431,9 +431,9 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | [vector_unequal_mass](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | diagnostic | FAIL | matches recorded run |
 | [vector_unequal_width](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width) | diagnostic | FAIL | matches recorded run |
 | [vector_anisotropic](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) | diagnostic | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | PASS | changed since run |
-| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | PASS | changed since run |
-| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | PASS | changed since run |
+| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-2"></a>
 
@@ -730,9 +730,9 @@ Additional eligibility requirements:
 | [img_bars4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | PASS | changed since run |
-| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | PASS | changed since run |
-| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | PASS | changed since run |
+| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3"></a>
 
@@ -853,11 +853,11 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [ae_gan_hold](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | required | PASS | changed since run |
 | [ring16_acquisition](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | required | PASS | matches recorded run |
 | [five_word_joint_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | required | PASS | changed since run |
-| [zero_tanh_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_smoke) | required | PASS | recorded definition unavailable |
-| [model_ae_gan_multimodal](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) | required | PASS | recorded definition unavailable |
+| [zero_tanh_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_smoke) | required | FAIL | recorded definition unavailable |
+| [model_ae_gan_multimodal](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) | required | FAIL | recorded definition unavailable |
 | [model_ae_reconstruction](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_reconstruction) | required | PASS | recorded definition unavailable |
-| [model_vae_categorical](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_categorical) | required | PASS | recorded definition unavailable |
-| [model_vae_hard](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_hard) | required | PASS | recorded definition unavailable |
+| [model_vae_categorical](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_categorical) | required | FAIL | recorded definition unavailable |
+| [model_vae_hard](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_hard) | required | FAIL | recorded definition unavailable |
 | [clockfree_audit_measurement_v1](bispf.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
 | [precision_gaussian_fp32](bispf.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_fp32) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [precision_gaussian_mxfp8](bispf.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | UNKNOWN | recorded definition unavailable |
@@ -877,10 +877,10 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [cover_leftover](bispf.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | required | PASS | changed since run |
 | [mid_scale_identity](bispf.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | required | PASS | changed since run |
 | [mode_hold](bispf.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | required | PASS | matches recorded run |
-| [model_ae_ddgan_gaussian_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_gaussian_chain) | required | PASS | recorded definition unavailable |
+| [model_ae_ddgan_gaussian_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_gaussian_chain) | required | FAIL | recorded definition unavailable |
 | [vector_two_broad](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | required | PASS | matches recorded run |
 | [vector_unequal_mass](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_mass) | FAIL | matches recorded run |
-| [model_ddgan_gaussian_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_gaussian_chain) | required | PASS | recorded definition unavailable |
+| [model_ddgan_gaussian_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_gaussian_chain) | required | FAIL | recorded definition unavailable |
 | [vector_unequal_width](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_width) | FAIL | matches recorded run |
 | [vector_anisotropic](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_anisotropic) | FAIL | matches recorded run |
 | [vector_overlap](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | FAIL | matches recorded run |
@@ -889,11 +889,11 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | PASS | changed since run |
-| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | PASS | changed since run |
-| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | PASS | changed since run |
-| [model_ae_ddgan_bimodal_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_bimodal_chain) | required | PASS | recorded definition unavailable |
-| [model_ddgan_bimodal_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_bimodal_chain) | required | PASS | recorded definition unavailable |
+| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | FAIL | changed since run |
+| [model_ae_ddgan_bimodal_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_bimodal_chain) | required | FAIL | recorded definition unavailable |
+| [model_ddgan_bimodal_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_bimodal_chain) | required | FAIL | recorded definition unavailable |
 
 <a name="cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3"></a>
 
@@ -959,9 +959,9 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 | [img_bars4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | PASS | changed since run |
-| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | PASS | changed since run |
-| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | PASS | changed since run |
+| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | FAIL | changed since run |
 | [img_intensity2_residual16](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [vector_two_broad_published](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad_published) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [vector_unequal_mass_published](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass_published) | diagnostic | UNKNOWN | recorded definition unavailable |
@@ -1035,9 +1035,9 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 | [img_bars4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | PASS | changed since run |
-| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | PASS | changed since run |
-| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | PASS | changed since run |
+| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | FAIL | changed since run |
 | [img_intensity2_residual16](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [vector_two_broad_published](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad_published) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [vector_unequal_mass_published](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass_published) | diagnostic | UNKNOWN | recorded definition unavailable |
@@ -1146,9 +1146,9 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 | [img_bars4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | PASS | changed since run |
-| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | PASS | changed since run |
-| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | PASS | changed since run |
+| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | changed since run |
 | [ring_hold](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold) | diagnostic | PASS | matches recorded run |
 | [ring_extension](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ring_extension) | diagnostic | PASS | matches recorded run |
 | [clockfree_audit_measurement_v1](bispf.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
@@ -1193,13 +1193,13 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 | [ae_gan_hold](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | diagnostic | PASS | changed since run |
 | [ring16_acquisition](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | diagnostic | PASS | matches recorded run |
 | [five_word_joint_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | PASS | changed since run |
-| [zero_tanh_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_smoke) | diagnostic | PASS | recorded definition unavailable |
-| [model_ae_ddgan_gaussian_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_gaussian_chain) | diagnostic | PASS | recorded definition unavailable |
-| [model_ae_gan_multimodal](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) | diagnostic | PASS | recorded definition unavailable |
+| [zero_tanh_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_smoke) | diagnostic | FAIL | recorded definition unavailable |
+| [model_ae_ddgan_gaussian_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_gaussian_chain) | diagnostic | FAIL | recorded definition unavailable |
+| [model_ae_gan_multimodal](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) | diagnostic | FAIL | recorded definition unavailable |
 | [model_ae_reconstruction](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_reconstruction) | diagnostic | PASS | recorded definition unavailable |
-| [model_ddgan_gaussian_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_gaussian_chain) | diagnostic | PASS | recorded definition unavailable |
-| [model_vae_categorical](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_categorical) | diagnostic | PASS | recorded definition unavailable |
-| [model_vae_hard](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_hard) | diagnostic | PASS | recorded definition unavailable |
+| [model_ddgan_gaussian_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_gaussian_chain) | diagnostic | FAIL | recorded definition unavailable |
+| [model_vae_categorical](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_categorical) | diagnostic | FAIL | recorded definition unavailable |
+| [model_vae_hard](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_hard) | diagnostic | FAIL | recorded definition unavailable |
 | [clockfree_audit_measurement_v1](bispf.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
 | [clockfree_audit](bispf.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit) | diagnostic | PASS | recorded definition unavailable |
 | [gaussian1d_stability](bispf.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
@@ -1220,11 +1220,11 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 | [img_bars4_residual16](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [img_blobs4_residual16](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [img_intensity2](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | PASS | changed since run |
-| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | PASS | changed since run |
-| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | PASS | changed since run |
-| [model_ae_ddgan_bimodal_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_bimodal_chain) | diagnostic | PASS | recorded definition unavailable |
-| [model_ddgan_bimodal_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_bimodal_chain) | diagnostic | PASS | recorded definition unavailable |
+| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | changed since run |
+| [model_ae_ddgan_bimodal_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_bimodal_chain) | diagnostic | FAIL | recorded definition unavailable |
+| [model_ddgan_bimodal_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_bimodal_chain) | diagnostic | FAIL | recorded definition unavailable |
 | [ring_hold](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold) | diagnostic | PASS | matches recorded run |
 | [ring_extension](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ring_extension) | diagnostic | PASS | matches recorded run |
 | [zero_tanh_rail_escape](bispf.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_rail_escape) | diagnostic | FAIL | recorded definition unavailable |
@@ -1296,9 +1296,9 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | [img_bars4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | PASS | changed since run |
-| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | PASS | changed since run |
-| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | PASS | changed since run |
+| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | required | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | required | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | required | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-quality_coverage-tier-3"></a>
 
@@ -1348,9 +1348,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | PASS | changed since run |
-| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | PASS | changed since run |
-| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | PASS | changed since run |
+| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-2"></a>
 
@@ -1406,9 +1406,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | PASS | changed since run |
-| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | PASS | changed since run |
-| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | PASS | changed since run |
+| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-2"></a>
 
@@ -1464,9 +1464,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | PASS | changed since run |
-| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | PASS | changed since run |
-| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | PASS | changed since run |
+| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-2"></a>
 
@@ -1522,9 +1522,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [img_bars4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
 | [img_blobs4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | FAIL | matches recorded run |
 | [img_intensity2](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | FAIL | matches recorded run |
-| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | PASS | changed since run |
-| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | PASS | changed since run |
-| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | PASS | changed since run |
+| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | changed since run |
+| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | changed since run |
+| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | changed since run |
 
 <a name="cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-2"></a>
 
@@ -1636,7 +1636,7 @@ One evidence entry per experiment is shared by its view rows. Test-definition ch
 
 **ae_gan_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/ae_gan_hold.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -1707,7 +1707,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 **clockfree_audit: PASS**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. declared state/horizon/cadence/restart comparisons agree; source audit bound
 
 Run attempt: **PASS** (new_attempt; qualification unchanged). declared state/horizon/cadence/restart comparisons agree; source audit bound [Attempt evidence](../attempt-coverage.json).
 
@@ -1727,7 +1727,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **clockfree_audit_measurement_v1: PASS**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit_measurement_v1.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. declared state/horizon/cadence/restart comparisons agree; source audit bound
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. declared state/horizon/cadence/restart comparisons agree; source audit bound
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -1781,7 +1781,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **cover_leftover: PASS**. [Current experiment declaration](../../../configs/forge/tasks/cover_leftover.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -1998,7 +1998,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 **five_word_joint_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_hold.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. every joint generation/inverse check throughout the fixed continuation window
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. every joint generation/inverse check throughout the fixed continuation window
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -2059,7 +2059,7 @@ Dependencies: five_word_joint_smoke (checkpoint).
 
 **five_word_joint_smoke: PASS**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_smoke.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. any scheduled full joint pass plus independent same-state confirmation
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. any scheduled full joint pass plus independent same-state confirmation
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -2152,7 +2152,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **gaussian1d_smoke: PASS**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_smoke.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. any scheduled full pass with independent same-state confirmation
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. any scheduled full pass with independent same-state confirmation
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -2202,7 +2202,7 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 **gaussian1d_stability: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_stability.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. stationary hold, deadline reacquisition and shifted hold
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. stationary hold, deadline reacquisition and shifted hold
 
 Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -2253,9 +2253,9 @@ Dependencies: gaussian1d_smoke (checkpoint).
 
 ### grid100
 
-**grid100: PASS**. [Current experiment declaration](../../../configs/forge/tasks/grid100.json).
+**grid100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/grid100.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. coverage, sustained live accuracy, or independent holdout failed
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. coverage, sustained live accuracy, or independent holdout failed
 
 Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -2324,7 +2324,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100_14k: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/grid100_14k.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Required checkpoint prerequisite grid100 executed and failed (FAIL).
 
 Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -2441,7 +2441,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100_mlp16: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/grid100_mlp16.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed grid100_mlp16 bounds: modes >= 100, precision >= 0.97, min_hq_mode_mass >= 0.005, mass_tv <= 0.1, max_mode_mass <= 0.02, min_cov_eig_ratio >= 0.4.
 
 Used by: [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4).
 
@@ -2519,7 +2519,7 @@ Current measurement: particle_cloud prior (sigma 0); public_prior_without_output
 
 **grid100_res16_tanh: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/grid100_res16_tanh.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed grid100_res16_tanh bounds: modes >= 100, precision >= 0.97, min_hq_mode_mass >= 0.005, mass_tv <= 0.1, min_cov_eig_ratio >= 0.4, max_cov_eig_ratio <= 1.7.
 
 Used by: [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4).
 
@@ -2558,7 +2558,7 @@ Dependencies: grid100 (gate).
 
 **img_bars4: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/img_bars4.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -2651,7 +2651,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_blobs4: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/img_blobs4.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -2718,7 +2718,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_intensity2: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/img_intensity2.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -2785,7 +2785,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_stripes2: PASS**. [Current experiment declaration](../../../configs/forge/tasks/img_stripes2.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -2878,7 +2878,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **mid_scale_identity: PASS**. [Current experiment declaration](../../../configs/forge/tasks/mid_scale_identity.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -2929,7 +2929,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **misgan_block_neural_imputer: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/misgan_block_neural_imputer.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed misgan_block_neural_imputer bounds: acc, acc_lo, missing_std_ratio.
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed misgan_block_neural_imputer bounds: acc, acc_lo, missing_std_ratio. [Attempt evidence](../attempt-coverage.json).
 
@@ -2956,7 +2956,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **misgan_block_recovery: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/misgan_block_recovery.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed misgan_block_recovery bounds: acc, acc_lo, hq, mask_tv, mass_tv, modes.
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed misgan_block_recovery bounds: acc, acc_lo, hq, mask_tv, mass_tv, modes. [Attempt evidence](../attempt-coverage.json).
 
@@ -2985,7 +2985,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **mode_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/mode_hold.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -3024,9 +3024,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 ### model_ae_ddgan_bimodal_chain
 
-**model_ae_ddgan_bimodal_chain: PASS**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_ddgan_bimodal_chain.json).
+**model_ae_ddgan_bimodal_chain: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_ddgan_bimodal_chain.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Used by: [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -3098,9 +3098,9 @@ Dependencies: model_ae_ddgan_gaussian_chain (gate).
 
 ### model_ae_ddgan_gaussian_chain
 
-**model_ae_ddgan_gaussian_chain: PASS**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_ddgan_gaussian_chain.json).
+**model_ae_ddgan_gaussian_chain: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_ddgan_gaussian_chain.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Used by: [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -3165,9 +3165,9 @@ Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_wit
 
 ### model_ae_gan_multimodal
 
-**model_ae_gan_multimodal: PASS**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_gan_multimodal.json).
+**model_ae_gan_multimodal: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_gan_multimodal.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **FAIL** (current_source_readout; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../records/readout-143d85d4540548b0ecec1604.json).
 
@@ -3202,7 +3202,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 **model_ae_reconstruction: PASS**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_reconstruction.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (current_source_readout; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../records/readout-143d85d4540548b0ecec1604.json).
 
@@ -3229,9 +3229,9 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 ### model_ddgan_bimodal_chain
 
-**model_ddgan_bimodal_chain: PASS**. [Current experiment declaration](../../../configs/forge/tasks/model_ddgan_bimodal_chain.json).
+**model_ddgan_bimodal_chain: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_ddgan_bimodal_chain.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Used by: [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -3299,9 +3299,9 @@ Dependencies: model_ddgan_gaussian_chain (gate).
 
 ### model_ddgan_gaussian_chain
 
-**model_ddgan_gaussian_chain: PASS**. [Current experiment declaration](../../../configs/forge/tasks/model_ddgan_gaussian_chain.json).
+**model_ddgan_gaussian_chain: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_ddgan_gaussian_chain.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Used by: [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -3362,9 +3362,9 @@ Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_wit
 
 ### model_vae_categorical
 
-**model_vae_categorical: PASS**. [Current experiment declaration](../../../configs/forge/tasks/model_vae_categorical.json).
+**model_vae_categorical: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_vae_categorical.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **FAIL** (current_source_readout; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../records/readout-1d42b97bbb8f1366a766a233.json).
 
@@ -3402,9 +3402,9 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 ### model_vae_hard
 
-**model_vae_hard: PASS**. [Current experiment declaration](../../../configs/forge/tasks/model_vae_hard.json).
+**model_vae_hard: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_vae_hard.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **FAIL** (current_source_readout; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../records/readout-1d42b97bbb8f1366a766a233.json).
 
@@ -3537,7 +3537,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **residual_student: PASS**. [Current experiment declaration](../../../configs/forge/tasks/residual_student.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -3580,7 +3580,7 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **ring16_acquisition: PASS**. [Current experiment declaration](../../../configs/forge/tasks/ring16_acquisition.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -3661,7 +3661,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **ring16_bigan_continuous: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/ring16_bigan_continuous.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed ring16_bigan_continuous bounds: hq, mass_tv, mode_consistency, recon_rmse.
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed ring16_bigan_continuous bounds: hq, mass_tv, mode_consistency, recon_rmse. [Attempt evidence](../attempt-coverage.json).
 
@@ -3688,7 +3688,7 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 **ring_extension: PASS**. [Current experiment declaration](../../../configs/forge/tasks/ring_extension.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed every extension observation without selecting another window
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. recomputed every extension observation without selecting another window
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -3750,7 +3750,7 @@ Dependencies: ring_hold (checkpoint).
 
 **ring_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/ring_hold.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed first-convergence hold
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. recomputed first-convergence hold
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -3808,9 +3808,9 @@ Dependencies: mode_hold (gate).
 
 ### rotated100
 
-**rotated100: PASS**. [Current experiment declaration](../../../configs/forge/tasks/rotated100.json).
+**rotated100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/rotated100.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. coverage, sustained live accuracy, or independent holdout failed
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. coverage, sustained live accuracy, or independent holdout failed
 
 Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -3879,7 +3879,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **rotated100_14k: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/rotated100_14k.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Required checkpoint prerequisite rotated100 executed and failed (FAIL).
 
 Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -3955,9 +3955,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 ### staggered100
 
-**staggered100: PASS**. [Current experiment declaration](../../../configs/forge/tasks/staggered100.json).
+**staggered100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/staggered100.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. coverage, sustained live accuracy, or independent holdout failed
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. coverage, sustained live accuracy, or independent holdout failed
 
 Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -4026,7 +4026,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100_14k: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/staggered100_14k.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Required checkpoint prerequisite staggered100 executed and failed (FAIL).
 
 Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -4104,7 +4104,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **target_shift_recovery: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/target_shift_recovery.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. recomputed live recovery and matched frozen negative control
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed live recovery and matched frozen negative control [Attempt evidence](../attempt-coverage.json).
 
@@ -4127,7 +4127,7 @@ Dependencies: mode_hold (gate).
 
 **trajectory: PASS**. [Current experiment declaration](../../../configs/forge/tasks/trajectory.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -4166,7 +4166,7 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **two_pole: PASS**. [Current experiment declaration](../../../configs/forge/tasks/two_pole.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -4295,7 +4295,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_part
 
 **unipolar: PASS**. [Current experiment declaration](../../../configs/forge/tasks/unipolar.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -4338,7 +4338,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **unused_token_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/unused_token_hold.json).
 
-Test definition: **changed since run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Recorded formulaic display retains its original source and task bindings. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -4409,7 +4409,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_para
 
 **vector_anisotropic: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/vector_anisotropic.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -4485,7 +4485,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_overlap: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/vector_overlap.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -4555,7 +4555,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_spiral: PASS**. [Current experiment declaration](../../../configs/forge/tasks/vector_spiral.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -4625,7 +4625,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_two_broad: PASS**. [Current experiment declaration](../../../configs/forge/tasks/vector_two_broad.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -4701,7 +4701,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_mass: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_mass.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -4780,7 +4780,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_width: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_width.json).
 
-Test definition: **matches recorded run**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. recomputed complete live curve and terminal suffix
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. recomputed complete live curve and terminal suffix
 
 Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -4856,7 +4856,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **zero_tanh_rail_escape: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/zero_tanh_rail_escape.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation FAIL.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed rail-escape bounds: mean_abs_error <= 0.005, rms_error <= 0.01, p99_abs_error <= 0.025.
 
 Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed rail-escape bounds: mean_abs_error <= 0.005, rms_error <= 0.01, p99_abs_error <= 0.025. [Attempt evidence](../attempt-coverage.json).
 
@@ -4883,9 +4883,9 @@ Dependencies: zero_tanh_smoke (gate).
 
 ### zero_tanh_smoke
 
-**zero_tanh_smoke: PASS**. [Current experiment declaration](../../../configs/forge/tasks/zero_tanh_smoke.json).
+**zero_tanh_smoke: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/zero_tanh_smoke.json).
 
-Test definition: **recorded definition unavailable**. Previously published display retained under its original Git commit/blob. Current-source compatibility and qualification are unchanged. Formulaic evaluation PASS.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. failed thresholds: mean_abs_error <= 0.005, rms_error <= 0.01
 
 Run attempt: **FAIL** (current_source_readout; qualification unchanged). failed thresholds: mean_abs_error <= 0.005, rms_error <= 0.01 [Attempt evidence](../records/readout-143d85d4540548b0ecec1604.json).
 

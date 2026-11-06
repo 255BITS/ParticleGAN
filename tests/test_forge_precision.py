@@ -3,6 +3,7 @@ import json
 from copy import deepcopy
 from pathlib import Path
 
+import pytest
 import torch
 
 from experiments.forge.adapters import adapter_preflight, run_task
@@ -40,10 +41,26 @@ def test_preflight_refuses_an_unimplemented_precision_policy():
     assert any("precision differs" in reason for reason in adapter_preflight(value, CANDIDATE, root=ROOT))
 
 
+@pytest.mark.parametrize("policy", [None, "nvfp4", {}, {"format": "int4"}])
+def test_malformed_precision_never_falls_back_to_unquantized_training(policy):
+    from experiments.forge.precision import grade
+    value = task("nvfp4")
+    value["execution"]["linear_precision"] = policy
+    assert adapter_preflight(value, CANDIDATE, root=ROOT)
+    assert grade(value, {})[0] == "INVALID"
+
+
+def test_new_stretch_tasks_stay_visible_without_invalidating_archived_coverage():
+    from ops.refresh_forge_readouts import check_attempt_coverage
+    coverage = check_attempt_coverage(ROOT)
+    assert coverage["current"] is True
+    assert coverage["missing_by_family"] == {}
+    assert coverage["unmeasured_current_tasks"] == ["precision_gaussian_mxfp8", "precision_gaussian_nvfp4"]
+
+
 def test_adding_unmeasured_stretch_tasks_preserves_source_bound_display_records():
     from reports.forge.regenerate_technique_inventory import (
         _formulaic_display_payload,
-        _retained_published_display,
         _selected_recipe_binary_task_statuses,
     )
     publication = json.loads((ROOT / "reports/forge/technique-inventory.json").read_text())
@@ -60,9 +77,6 @@ def test_adding_unmeasured_stretch_tasks_preserves_source_bound_display_records(
             assert name not in observed["records"]
             assert statuses[family][name] not in {"PASS", "FAIL"}
     assert publication["rows"] == before
-    changed = deepcopy(publication)
-    changed["rows"][0]["candidate_id"] += "-different-recipe"
-    assert _retained_published_display(changed, ROOT) is None
 
 
 def test_public_trainer_precision_prefixes_have_gifs_matching_starts_and_data(tmp_path):

@@ -24,9 +24,11 @@ def declaration(format):
 
 
 def validate(task):
-    value = task["execution"].get("linear_precision")
-    if value is None:
+    if "linear_precision" not in task["execution"]:
         return None
+    value = task["execution"]["linear_precision"]
+    if not isinstance(value, dict):
+        raise TypeError("linear precision requires a complete reference contract")
     if value != declaration(value.get("format")):
         raise ValueError("linear precision differs from the supported complete reference contract")
     if task["adapter"] != "transfer_vector":
@@ -66,7 +68,10 @@ def initial_parameters(generator, discriminator):
 
 
 def grade(task, evidence):
-    policy = validate(task)
+    try:
+        policy = validate(task)
+    except (ValueError, TypeError, KeyError) as error:
+        return "INVALID", str(error)
     if policy is None:
         return None
     observed = evidence.get("linear_precision")
@@ -74,10 +79,15 @@ def grade(task, evidence):
         return "INCOMPLETE", "missing observed linear-precision execution"
     if observed.get("contract") != policy:
         return "INVALID", "observed linear precision differs from task"
+    groups = observed.get("layers")
+    if not isinstance(groups, dict):
+        return "INVALID", "malformed observed linear layers"
     if policy["format"] != "fp32":
         for role in ("generator", "discriminator"):
-            layers = observed.get("layers", {}).get(role, {})
-            if not layers or any(layer.get("format") != policy["format"] for layer in layers.values()):
+            layers = groups.get(role, {})
+            if (not isinstance(layers, dict) or not layers
+                    or any(not isinstance(layer, dict) or layer.get("format") != policy["format"]
+                           for layer in layers.values())):
                 return "INVALID", "missing or contradictory quantized linear layers"
             for phase in ("forward", "dgrad", "wgrad"):
                 if not any(type(layer.get(phase)) is int and layer[phase] > 0 for layer in layers.values()):

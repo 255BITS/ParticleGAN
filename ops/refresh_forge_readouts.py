@@ -519,6 +519,21 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
         if full_suite_card.is_file()
         else None
     )
+    # This integrity stage checks the source-bound published coverage, not
+    # experiments introduced after that source was frozen. Surface new cells
+    # separately; completing them requires new compatible evidence, never a
+    # relabel or rerun of the archived source merely to refresh a report.
+    unmeasured_current_tasks = []
+    scope = publication.get("family_progress", {}).get("recorded_display_scope")
+    if scope is not None:
+        import hashlib
+        text = scope.get("text")
+        if (not isinstance(text, str) or hashlib.sha256(text.encode()).hexdigest() != scope.get("sha256")
+                or publication["family_progress"].get("input_hashes", {}).get(scope.get("path")) != scope.get("sha256")):
+            raise ValueError("recorded display scope digest changed")
+        recorded_names = sorted({*json.loads(text)["tests"], "ring_hold"})
+        unmeasured_current_tasks = sorted(set(full_suite_names or []) - set(recorded_names))
+        full_suite_names = recorded_names
     valid_statuses = {"PASS", "FAIL"} if full_suite_names is not None else attempt_coverage.DONE
 
     selected = attempt_coverage.selected_tasks(publication)
@@ -583,6 +598,7 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
         "running": running,
         "superseded_record_count": len(superseded_records),
         "missing_by_family": missing_by_family,
+        "unmeasured_current_tasks": unmeasured_current_tasks,
     }
 
 
