@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.9.7 — 2026-11-05
+
+- **Unified `stretch` experiment role and tier-by-tier stretch leaderboard.**
+  Introduce `stretch` (`STRETCH_ROLES = {"stretch", "held"}`) across
+  `experiments.forge` and `particlegan_forge` as the canonical role unifying
+  extra-credit, optional, frontier, and held benchmark experiments. Render a
+  dedicated `## Stretch experiments` table by tier (`Tier 1 stretch` through
+  `Tier 4 stretch` plus `Total stretch`) in the
+  [technique inventory](reports/forge/technique-inventory.md) and clarify
+  view-level `ranking` versus task-assignment roles (`required`, `stretch`,
+  `diagnostic`) in [RESEARCH_GLOSSARY.md](RESEARCH_GLOSSARY.md) and
+  [EXPERIMENTATION.md](EXPERIMENTATION.md).
+
 ## 0.9.6 — 2026-11-05
 
 - **Default BISPF winner (`bispf_optimized`) and Tier 1/Tier 2 qualification.**

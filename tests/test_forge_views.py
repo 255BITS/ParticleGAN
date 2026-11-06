@@ -970,3 +970,54 @@ def test_qualify_exposes_counted_eligible_and_continuous_check_summary():
     assert allowed_out["counted_eligible"] is True
     summary = check_summary({"evaluator_result": {"checks": {"c1": True, "c2": False, "c3": True, "c4": True}}})
     assert summary == {"passed_checks": 3, "total_checks": 4, "check_pass_rate": 0.75}
+
+
+def test_stretch_assignments_and_stretch_tiers_never_block_qualification_or_pass():
+    from experiments.forge.views import is_stretch, stretch_note
+    tasks = {n: simple_task(n) for n in "abc"}
+    view = simple_view(("a", 1, "required"), ("b", 2, "stretch"), ("c", 2, "stretch"))
+    view["assignments"][2]["stretch"] = {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "Frontier extra-credit benchmark task for multi-tier stretch validation.",
+    }
+    validate_view(view, tasks)
+    assert is_stretch("stretch") and is_stretch("held") and not is_stretch("required")
+    assert is_stretch(view["assignments"][1]) and stretch_note(view["assignments"][2])["reason"] == "frontier"
+
+    # Even when stretch tasks fail or are not run, a passing required tier qualifies the view as PASS.
+    result = qualify(view, tasks, [receipt(tasks["a"]), receipt(tasks["b"], final=2.)])
+    assert result["status"] == "PASS" and result["eligible"] is True and result["qualified_tier"] == 1
+    assert result["tiers"][1]["status"] == "STRETCH"
+    assert result["tiers"][1]["stretch_total"] == 2 and result["tiers"][1]["stretch_passed"] == 0
+    assert (result["stretch_total"], result["stretch_passed"]) == (2, 0)
+    assert result["stretch_tasks"] == ["b", "c"] and result["stretch_tiers"] == [2]
+
+    # When stretch tasks pass, stretch_passed increments without altering required totals.
+    both_pass = qualify(view, tasks, [receipt(tasks["a"]), receipt(tasks["b"]), receipt(tasks["c"])])
+    assert both_pass["status"] == "PASS" and (both_pass["stretch_total"], both_pass["stretch_passed"]) == (2, 2)
+    assert (both_pass["required_total"], both_pass["required_passed"]) == (1, 1)
+
+    # A stretch-only view reports STRETCH and is not eligible for required qualification.
+    stretch_only = simple_view(("b", 1, "stretch"))
+    validate_view(stretch_only, tasks)
+    so_out = qualify(stretch_only, tasks, [receipt(tasks["b"])])
+    assert so_out["status"] == "STRETCH" and not so_out["eligible"] and so_out["qualified_tier"] == 0
+
+    # Invalid stretch metadata is rejected.
+    bad_role = deepcopy(view)
+    bad_role["assignments"][0]["stretch"] = {"reason": "frontier"}
+    with pytest.raises(ValueError, match="requires importance stretch"):
+        validate_view(bad_role, tasks)
+    missing_summary = deepcopy(view)
+    missing_summary["assignments"][1]["stretch"] = {"reason": "frontier"}
+    with pytest.raises(ValueError, match="stretch metadata needs at least"):
+        validate_view(missing_summary, tasks)
+    bad_reason = deepcopy(view)
+    bad_reason["assignments"][1]["stretch"] = {
+        "reason": "invalid_reason",
+        "summary": "Frontier extra-credit benchmark task for multi-tier stretch validation.",
+    }
+    with pytest.raises(ValueError, match="stretch reason"):
+        validate_view(bad_reason, tasks)
+

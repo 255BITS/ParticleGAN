@@ -14,8 +14,10 @@ import tempfile
 
 SCHEMA_VERSION = 1
 GATES = frozenset({"PASS", "FAIL", "INCOMPLETE", "INVALID", "NOT_RUN", "BLOCKED"})
-IMPORTANCES = frozenset({"required", "held", "ranking", "diagnostic"})
+STRETCH_ROLES = frozenset({"stretch", "held"})
+IMPORTANCES = frozenset({"required", "stretch", "held", "ranking", "diagnostic"})
 HOLD_REASONS = frozenset({"no_global_recipe", "unsolved", "held_prerequisite"})
+STRETCH_REASONS = frozenset({"frontier", "extra_credit", "optional", *HOLD_REASONS, "stretch_prerequisite"})
 REMOVAL_REASONS = frozenset({"phase", "duplicate", "superseded", "ill_posed"})
 
 

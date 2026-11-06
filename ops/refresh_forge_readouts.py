@@ -44,6 +44,7 @@ from experiments.forge.contracts import (
 from experiments.forge.sources import inspect_source, snapshot_source
 from experiments.forge.trainer_families import CURRENT_SELECTION, current_family_candidates
 from experiments.forge.views import (
+    COUNTED_OR_HELD,
     diagnostic_evidence_scope,
     load_tasks,
     load_view,
@@ -823,7 +824,7 @@ def _expected_selected_diagnostic_phrases(root: Path, inv_json: dict[str, Any]) 
     lowest_tier: dict[str, int] = {}
     for view in _summed_views(progress):
         for assignment in view.get("assignments", []):
-            if assignment.get("importance") in {"required", "held"} or "removal" in assignment:
+            if assignment.get("importance") in COUNTED_OR_HELD or "removal" in assignment:
                 tier = int(assignment["qualification_tier"])
                 task = assignment["task"]
                 lowest_tier[task] = min(tier, lowest_tier.get(task, tier))

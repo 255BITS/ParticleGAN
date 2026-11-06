@@ -48,8 +48,9 @@ sections below describe.
 ## Read first
 
 - The [current technique leaderboard](reports/forge/technique-inventory.md) is the
-  single current status page. Held failures remain in its full-suite results; the
-  qualification subset is separate.
+  single current status page. Stretch and held experiments appear in its dedicated
+  `## Stretch experiments` table by tier as well as in the `## Full-suite results — failures included`
+  table; the required qualification subset is separate.
 - The [problem list](reports/forge/problems.md) explains each outstanding question:
   what it tests, what fails and which configurations have passed it.
 - The [compiled experiment memory](reports/forge/EXPERIMENT_MEMORY.md) is a
@@ -59,7 +60,8 @@ sections below describe.
   joint BiGAN examples, scorer controls, registration and artifact publication.
 
 Register ordinary new questions as required Tier 1 tasks in the existing
-`discriminator_stability` view. Revise that view and check its full reservation
+`discriminator_stability` view, or assign frontier/extra-credit/optional questions
+with `importance: "stretch"` in their appropriate tier (`1`–`4`). Revise that view and check its full reservation
 budget. Create a separate view only for an explicitly different claim or
 diagnostic scope. Preserving an old denominator alone is not a reason for a new
 view. Historical receipts and pinned view revisions keep their original results.
@@ -505,10 +507,20 @@ Diagnostics remain visible without vetoing required passes. The hold and extensi
 share one uninterrupted execution; the extension cannot borrow another
 candidate's trained state or hide behind a passing ordinary hold.
 
-A view can also mark a previously required test as **held** (role `held`): it is
-still declared, run, graded and shown, but it is not counted, and it never blocks
-progress or becomes a next task. Its `hold` note in the view gives the reason
-(`no_global_recipe`, `unsolved`, or `held_prerequisite` with the held parents in
+A view assigns each task a role (`required`, `stretch`, `held`, or `diagnostic`)
+and declares a view-level `ranking` policy (`order_by: ["qualified_tier", "candidate_id"]`,
+`metric_aggregation_allowed: false` — candidates rank by highest qualified tier,
+never by summing raw metrics across tasks). **Stretch** (`importance: "stretch"`)
+is the single canonical role for optional, extra-credit, frontier, and held
+benchmark tasks: stretch tests are declared, run, graded, and displayed in their
+own **`## Stretch experiments`** leaderboard table by tier (`Tier 1 stretch`–`Tier 4 stretch`,
+`Total stretch`) as well as in `## Full-suite results — failures included`, and
+they never block tier qualification or view-level `PASS`. A view can also mark a
+previously required test as **held** (role `held`, the backwards-compatible alias
+of `stretch` that carries a disposition note): it is
+still declared, run, graded and shown in the stretch and full-suite tables, but it is not counted, and it never blocks
+progress or becomes a next task. Its `hold` (or `stretch`) note in the view gives the reason
+(`no_global_recipe`, `unsolved`, `frontier`, `extra_credit`, `optional`, or `held_prerequisite` / `stretch_prerequisite` with the parents in
 `blocked_by`), a plain-language summary, an explanation link and the rule for
 counting it again. A test **removed from the count** stays assigned as
 `diagnostic` with a `removal` note (`phase`, `duplicate`, `superseded` or
@@ -518,11 +530,12 @@ counted test. A counted test may depend on a removed one only when that removed 
 is a phase of it: the same uninterrupted run and tier, with the counted test
 continuing the phase's own saved state (a checkpoint dependency). The phase still
 gates its counted test, whose grader replays it, and the phase's own prerequisites
-must be counted, so a held or diagnostic test never decides a counted verdict.
-A tier with only held tests has status `HELD`; it neither passes nor stops later
-tiers. A view reports `PASS` only when every counted tier passes and its highest
-tier is counted. If every counted tier passes but the highest tier is held, or
-nothing is counted, the view reports `HELD`, which is never eligible; a counted
+must be counted, so a stretch, held, or diagnostic test never decides a counted verdict.
+A tier with only stretch tasks has status `STRETCH` and never blocks view-level `PASS`;
+a tier with only legacy held tasks has status `HELD` and neither passes nor stops later
+tiers. A view reports `PASS` when every counted tier passes and its highest non-stretch
+tier is counted. If every counted tier passes but the highest non-stretch tier is held, or
+nothing is counted in a held-only view, the view reports `HELD`, which is never eligible; a counted
 failure still reports as a failure. These notes are view policy: changing a
 summary, re-entry rule or link needs a new archived revision. Apply a recorded set of decisions with
 `python -m experiments.forge test-dispositions check|apply --registry <file>`;
@@ -530,7 +543,7 @@ summary, re-entry rule or link needs a new archived revision. Apply a recorded s
 byte for byte before writing, so a second apply changes nothing.
 
 The [experiments by tier report](reports/forge/EXPERIMENTS_BY_TIER.md) lists the
-current task assignments for every view, including required, ranking and
+current task assignments for every view, including required, stretch, held, and
 diagnostic roles, declared budgets, dependencies and tasks unassigned to any
 view. Regenerate it after adding tasks or changing tier placement:
 

@@ -292,12 +292,12 @@ def _anchors(path: Path) -> set:
 
 
 def unresolved_explanations(root: Path | str, views) -> list[str]:
-    """Hold and removal links whose Markdown file or explicit <a name> anchor is missing under root."""
+    """Hold, stretch and removal links whose Markdown file or explicit <a name> anchor is missing under root."""
     problems = []
     for view in views:
         for assignment in view["assignments"]:
-            note = assignment.get("hold") or assignment.get("removal")
-            if not note:
+            note = assignment.get("hold") or assignment.get("stretch") or assignment.get("removal")
+            if not note or "explanation" not in note:
                 continue
             path, _, anchor = note["explanation"].partition("#")
             if anchor not in _anchors(Path(root) / path):

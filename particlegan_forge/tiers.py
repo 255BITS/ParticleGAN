@@ -27,6 +27,8 @@ from .contracts import (
     HOLD_REASONS,
     IMPORTANCES,
     REMOVAL_REASONS,
+    STRETCH_REASONS,
+    STRETCH_ROLES,
     atomic_json,
     atomic_text,
     file_hash,
@@ -275,11 +277,12 @@ class TaskSpec:
 
 @dataclass
 class TierAssignment:
-    """Assignment of a task to a qualification tier with role and hold/removal notes."""
+    """Assignment of a task to a qualification tier with role and stretch/hold/removal notes."""
     task: str
     qualification_tier: int = 1
     importance: str = "required"
     order: int = 0
+    stretch: dict[str, Any] | None = None
     hold: dict[str, Any] | None = None
     removal: dict[str, Any] | None = None
 
@@ -289,6 +292,12 @@ class TierAssignment:
             raise ValueError("qualification_tier must be >= 1")
         if self.importance not in IMPORTANCES:
             raise ValueError(f"invalid importance: {self.importance!r}")
+        if self.stretch is not None:
+            if self.importance != "stretch" or not isinstance(self.stretch, dict):
+                raise ValueError("stretch metadata requires importance='stretch' and a dict")
+            reason = self.stretch.get("reason")
+            if reason is not None and reason not in STRETCH_REASONS:
+                raise ValueError(f"invalid stretch reason: {reason!r}")
         if self.importance == "held":
             if not isinstance(self.hold, dict) or self.hold.get("reason") not in HOLD_REASONS:
                 raise ValueError("held task requires hold metadata with valid reason")
@@ -306,6 +315,8 @@ class TierAssignment:
             "importance": self.importance,
             "order": self.order,
         }
+        if self.stretch is not None:
+            out["stretch"] = dict(self.stretch)
         if self.hold is not None:
             out["hold"] = dict(self.hold)
         if self.removal is not None:
@@ -318,6 +329,7 @@ class TierSpec:
     """Contiguous tier grouping in a TierView."""
     tier: int
     required: list[str] = field(default_factory=list)
+    stretch: list[str] | dict[str, dict[str, Any]] = field(default_factory=list)
     held: dict[str, dict[str, Any]] = field(default_factory=dict)
     diagnostic: list[str] = field(default_factory=list)
     ranking: list[str] = field(default_factory=list)
@@ -365,6 +377,18 @@ class TierView:
             for task_id in t.required:
                 assignments.append(TierAssignment(task=task_id, qualification_tier=t.tier, importance="required", order=order))
                 order += 1
+            if isinstance(t.stretch, dict):
+                for task_id, stretch_meta in t.stretch.items():
+                    assignments.append(
+                        TierAssignment(task=task_id, qualification_tier=t.tier, importance="stretch", order=order, stretch=stretch_meta)
+                    )
+                    order += 1
+            else:
+                for task_id in t.stretch:
+                    assignments.append(
+                        TierAssignment(task=task_id, qualification_tier=t.tier, importance="stretch", order=order)
+                    )
+                    order += 1
             for task_id, hold_meta in t.held.items():
                 assignments.append(
                     TierAssignment(task=task_id, qualification_tier=t.tier, importance="held", order=order, hold=hold_meta)
@@ -416,6 +440,7 @@ class TierView:
                     qualification_tier=int(a["qualification_tier"]),
                     importance=a["importance"],
                     order=int(a.get("order", idx)),
+                    stretch=a.get("stretch"),
                     hold=a.get("hold"),
                     removal=a.get("removal"),
                 )
@@ -731,6 +756,7 @@ class ForgeWorkspace:
         task_id: str,
         new_tier: int,
         importance: str | None = None,
+        stretch: dict[str, Any] | None = None,
         hold: dict[str, Any] | None = None,
         reason: str,
     ) -> TierView:
@@ -750,13 +776,15 @@ class ForgeWorkspace:
         for a in current_view.assignments:
             if a.task == task_id:
                 found = True
+                next_importance = importance or a.importance
                 updated_assignments.append(
                     TierAssignment(
                         task=a.task,
                         qualification_tier=new_tier,
-                        importance=importance or a.importance,
+                        importance=next_importance,
                         order=a.order,
-                        hold=hold if (importance or a.importance) == "held" else None,
+                        stretch=(stretch if stretch is not None else a.stretch) if next_importance == "stretch" else None,
+                        hold=hold if next_importance == "held" else None,
                         removal=a.removal,
                     )
                 )
@@ -1031,6 +1059,7 @@ class ForgeWorkspace:
             assigns = tiers_map[t_num]
             req = [a for a in assigns if a.importance == "required"]
             held = [a for a in assigns if a.importance == "held"]
+            stretch = [a for a in assigns if a.importance in STRETCH_ROLES]
             task_outcomes = {}
             for a in assigns:
                 task = tasks[a.task]
@@ -1048,19 +1077,20 @@ class ForgeWorkspace:
                 task_outcomes[a.task] = outcome
             req_statuses = [task_outcomes[a.task]["status"] for a in req]
             req_passed = sum(status == "PASS" for status in req_statuses)
+            stretch_passed = sum(task_outcomes[a.task]["status"] == "PASS" for a in stretch)
 
             # Each tier reports its own status (as experiments/forge/views.py
             # does); a tier above the first open counted tier is flagged via
             # ``gated_by_lower_tier`` instead of having its status overwritten.
             gated = blocked_by_lower
             if not req:
-                t_status = "HELD"
+                t_status = "STRETCH" if any(a.importance == "stretch" for a in assigns) else "HELD"
             else:
                 t_status = _tier_status(req_statuses)
                 if t_status != "PASS":
                     blocked_by_lower = True
 
-            tier_summaries[t_num] = {
+            ts_entry = {
                 "tier": t_num,
                 "status": t_status,
                 "gated_by_lower_tier": gated,
@@ -1070,12 +1100,16 @@ class ForgeWorkspace:
                 "diagnostic_total": sum(a.importance == "diagnostic" for a in assigns),
                 "tasks": task_outcomes,
             }
+            if any(a.importance == "stretch" for a in assigns):
+                ts_entry["stretch_passed"] = stretch_passed
+                ts_entry["stretch_total"] = len(stretch)
+            tier_summaries[t_num] = ts_entry
 
-        counted = [ts for _, ts in sorted(tier_summaries.items()) if ts["status"] != "HELD"]
+        counted = [ts for _, ts in sorted(tier_summaries.items()) if ts["status"] not in {"HELD", "STRETCH"}]
         if view.evidence_scope == "research_diagnostic":
             overall = "DIAGNOSTIC"
         elif not counted:
-            overall = "HELD"
+            overall = "STRETCH" if any(ts["status"] == "STRETCH" for ts in tier_summaries.values()) else "HELD"
         else:
             first_open = next((ts for ts in counted if ts["status"] != "PASS"), None)
             if first_open is not None:
@@ -1100,6 +1134,7 @@ class ForgeWorkspace:
             "adapter_source_verified": source_verified,
             "eligible": overall == "PASS" and source_verified,
             "held_tiers": [ts["tier"] for ts in tier_summaries.values() if ts["status"] == "HELD"],
+            "stretch_tiers": [ts["tier"] for ts in tier_summaries.values() if ts["status"] in {"HELD", "STRETCH"}],
             "tiers": tier_summaries,
         }
 
@@ -1126,7 +1161,7 @@ class ForgeWorkspace:
             for a in sorted(tiers_map[t_num], key=lambda x: x.order):
                 self.run_task(candidate_id, a.task, device=device, seed=seed)
             q = self.qualify(candidate_id, view_id, device=device, seed=seed)
-            if q["tiers"][t_num]["status"] not in {"PASS", "HELD"} and view.evidence_scope != "research_diagnostic":
+            if q["tiers"][t_num]["status"] not in {"PASS", "HELD", "STRETCH"} and view.evidence_scope != "research_diagnostic":
                 break
         return self.qualify(candidate_id, view_id, device=device, seed=seed)
 
@@ -1176,14 +1211,37 @@ class ForgeWorkspace:
             t_cells = []
             for t in tier_nums:
                 ts = q["tiers"].get(t, {"required_passed": 0, "required_total": 0, "status": "NOT_RUN"})
-                if ts["status"] == "HELD":
-                    t_cells.append("`HELD`")
+                if ts["status"] in {"HELD", "STRETCH"}:
+                    t_cells.append(f"`{ts['status']}`")
                     continue
                 suffix = "(*)" if ts["status"] in {"INCOMPLETE", "NOT_RUN", "BLOCKED"} else ""
                 t_cells.append(f"`{ts['required_passed']}{suffix}/{ts['required_total']}`")
             status = f"`{q['status']}`" + ("" if q["adapter_source_verified"] else " (adapter source unverified)")
             row = [f"**{cand.technique}**", f"`{cid}`", f"`{device}`", *t_cells, f"**`{tot_pass}/{tot_req}`**", status]
             lines.append("| " + " | ".join(row) + " |")
+
+        if any(a.importance in STRETCH_ROLES for a in primary_view.assignments):
+            stretch_cols = ["Technique", "Recipe"] + [f"Tier {t} stretch" for t in tier_nums] + ["Total stretch"]
+            lines.extend([
+                "",
+                "## Stretch experiments",
+                "",
+                "| " + " | ".join(stretch_cols) + " |",
+                "| " + " | ".join(["---"] * len(stretch_cols)) + " |",
+            ])
+            for _, _, cid, cand, q, _ in rows_scored:
+                s_cells = []
+                s_tot_pass = 0
+                s_tot = 0
+                for t in tier_nums:
+                    ts = q["tiers"].get(t, {"tasks": {}})
+                    s_tasks = [tout for tout in ts["tasks"].values() if tout["importance"] in STRETCH_ROLES]
+                    sp = sum(tout["status"] == "PASS" for tout in s_tasks)
+                    st = len(s_tasks)
+                    s_tot_pass += sp
+                    s_tot += st
+                    s_cells.append(f"`{sp}/{st}`" if st else "—")
+                lines.append("| " + " | ".join([cand.technique, f"`{cid}`", *s_cells, f"**`{s_tot_pass}/{s_tot}`**"]) + " |")
 
         lines.extend(["", "## Per-Task Breakdown", ""])
         for a in sorted(primary_view.assignments, key=lambda x: (x.qualification_tier, x.order)):

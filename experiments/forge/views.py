@@ -20,19 +20,36 @@ from .initialization import task_initializer
 
 
 ROOT = Path(__file__).resolve().parents[2]
-# A held task stays assigned, graded and shown, but it is not counted: it never
-# enters required totals, blockers or next tasks. A task removed from the count
-# stays assigned as diagnostic and carries a removal note naming why.
-IMPORTANCES = {"required", "ranking", "diagnostic", "held"}
-COUNTED_OR_HELD = frozenset({"required", "held"})
-HOLD_SCHEMA, REMOVAL_SCHEMA = "forge_hold_v1", "forge_count_removal_v1"
+# A stretch (or legacy held) task stays assigned, graded and shown in the
+# Stretch table, but it is not counted in required totals, blockers or next
+# tasks. A task removed from the count stays assigned as diagnostic and carries
+# a removal note naming why.
+STRETCH_ROLES = frozenset({"stretch", "held"})
+IMPORTANCES = {"required", "stretch", "ranking", "diagnostic", "held"}
+COUNTED_OR_HELD = frozenset({"required", *STRETCH_ROLES})
+HOLD_SCHEMA, STRETCH_SCHEMA, REMOVAL_SCHEMA = "forge_hold_v1", "forge_stretch_v1", "forge_count_removal_v1"
 # unsolved: no recorded recipe has ever passed the current declaration.
 # held_prerequisite: the task depends on a held task (listed in blocked_by).
 HOLD_REASONS = frozenset({"no_global_recipe", "unsolved", "held_prerequisite"})
+STRETCH_REASONS = frozenset({"frontier", "extra_credit", "optional", *HOLD_REASONS, "stretch_prerequisite"})
 # phase and duplicate name the counted task that carries the question (counted_by).
 REMOVAL_REASONS = frozenset({"phase", "duplicate", "superseded", "ill_posed"})
 GATE_STATUSES = {"PASS", "FAIL", "INCOMPLETE", "INVALID", "NOT_RUN", "BLOCKED"}
 DIAGNOSTIC_SCOPES = frozenset({"calibration_diagnostic", "research_diagnostic"})
+
+
+def is_stretch(assignment_or_role: dict | str | None) -> bool:
+    """True when an assignment dict or importance string represents a stretch/held task."""
+    role = assignment_or_role.get("importance") if isinstance(assignment_or_role, dict) else assignment_or_role
+    return role in STRETCH_ROLES
+
+
+def stretch_note(assignment: dict | None) -> dict | None:
+    """Return the stretch or legacy hold note attached to a stretch assignment, if any."""
+    if not isinstance(assignment, dict) or not is_stretch(assignment):
+        return None
+    note = assignment.get("stretch") or assignment.get("hold")
+    return note if isinstance(note, dict) else None
 
 
 def diagnostic_evidence_scope(request: dict) -> str | None:
@@ -295,6 +312,30 @@ def _validate_hold(name, hold):
         raise ValueError(f"{name}: hold needs a concrete re-entry criterion")
 
 
+def _validate_stretch(name, stretch):
+    if stretch is None:
+        return
+    allowed = {"schema", "previous_importance", "reason", "blocked_by", "summary", "explanation", "reentry", "graduation"}
+    required = {"reason", "summary"}
+    if not isinstance(stretch, dict) or not required <= set(stretch) <= allowed:
+        raise ValueError(f"{name}: stretch metadata needs at least {sorted(required)} and only {sorted(allowed)}")
+    if "schema" in stretch and stretch["schema"] not in {STRETCH_SCHEMA, HOLD_SCHEMA}:
+        raise ValueError(f"{name}: stretch schema must be {STRETCH_SCHEMA}")
+    if stretch["reason"] not in STRETCH_REASONS:
+        raise ValueError(f"{name}: stretch reason must be one of {sorted(STRETCH_REASONS)}")
+    if "blocked_by" in stretch:
+        blocked = stretch["blocked_by"]
+        if (not isinstance(blocked, list) or any(not isinstance(x, str) or not x for x in blocked)
+                or blocked != sorted(set(blocked))):
+            raise ValueError(f"{name}: stretch blocked_by must list distinct task ids in sorted order")
+    plain_summary(stretch["summary"], f"{name}: stretch")
+    if "explanation" in stretch:
+        explanation_reference(stretch["explanation"], f"{name}: stretch")
+    for field in ("reentry", "graduation"):
+        if field in stretch and (not isinstance(stretch[field], str) or len(stretch[field].strip()) < 20):
+            raise ValueError(f"{name}: stretch {field} needs a concrete criterion of at least 20 characters")
+
+
 def _validate_removal(name, removal):
     keys = {"schema", "previous_importance", "reason", "counted_by", "summary", "explanation"}
     if not isinstance(removal, dict) or set(removal) != keys:
@@ -368,7 +409,7 @@ def validate_view(view: dict, tasks: dict) -> None:
         raise ValueError("view eligibility must be an object")
     _validate_previous_revision(view)
     index = {}
-    required_tiers = set()  # Tiers with a counted or held task.
+    required_tiers = set()  # Tiers with a counted or stretch/held task.
     for assignment in assignments:
         if not isinstance(assignment, dict):
             raise ValueError("assignment must be an object")
@@ -389,6 +430,10 @@ def validate_view(view: dict, tasks: dict) -> None:
             _validate_hold(name, assignment.get("hold"))
         elif "hold" in assignment:
             raise ValueError(f"{name}: hold metadata requires importance held")
+        if assignment["importance"] == "stretch":
+            _validate_stretch(name, assignment.get("stretch"))
+        elif "stretch" in assignment:
+            raise ValueError(f"{name}: stretch metadata requires importance stretch")
         if "removal" in assignment:
             if assignment["importance"] != "diagnostic":
                 raise ValueError(f"{name}: a task removed from the count stays assigned as diagnostic")
@@ -472,6 +517,14 @@ def validate_view(view: dict, tasks: dict) -> None:
             if (hold["reason"] == "held_prerequisite") != bool(held_parents):
                 raise ValueError(f"{name}: a task held behind a held prerequisite uses reason held_prerequisite, "
                                  "and only such a task does")
+        if assignment["importance"] == "stretch" and isinstance(assignment.get("stretch"), dict):
+            stretch = assignment["stretch"]
+            stretch_parents = sorted(dep["task"] for dep in _dependencies(tasks[name])
+                                     if is_stretch(index[dep["task"]]))
+            if "blocked_by" in stretch and stretch["blocked_by"] != stretch_parents:
+                raise ValueError(f"{name}: stretch blocked_by must list its stretch prerequisites {stretch_parents}")
+            if stretch["reason"] in {"held_prerequisite", "stretch_prerequisite"} and not stretch_parents:
+                raise ValueError(f"{name}: stretch prerequisite reason requires a stretch prerequisite")
         removal = assignment.get("removal")
         if removal and removal["reason"] == "phase":
             target = removal["counted_by"]
@@ -951,15 +1004,12 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
             allow_held_highest_tier: bool = False) -> dict:
     """Reduce one candidate's compatible receipts; tier attainment is computed.
 
-    Held tasks are graded and shown but never counted. A tier with no required
-    task has status HELD: it neither passes nor stops progression. The view
-    reports PASS only when every counted tier passes and its highest assigned
-    tier is counted (unless allow_held_highest_tier is explicitly authorized).
-    When every counted tier passes but that highest tier is held, or nothing is
-    counted, the view status is HELD and the candidate is not eligible
-    (counted_eligible remains True when all counted tiers passed); qualified_tier
-    is then the highest counted tier reached. A counted failure still reports
-    FAIL, BLOCKED or INCOMPLETE. HELD is never a PASS.
+    Stretch and held tasks are graded and shown but never counted in required
+    totals. A tier with no required task has status STRETCH (when its nonrequired
+    tasks are stretch) or HELD (legacy held): it neither passes nor stops
+    progression. Pure stretch tiers never block a view from reporting PASS once
+    every counted tier passes; legacy held highest tiers still report HELD unless
+    allow_held_highest_tier is explicitly authorized.
     """
     validate_view(view, tasks)
     if not isinstance(results, list):
@@ -986,7 +1036,7 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
         rows[name] = {"task_id": name, "qualification_tier": assignment["qualification_tier"],
                       "importance": assignment["importance"], **grade,
                       **({"check_summary": summary} if summary is not None else {}),
-                      **{key: deepcopy(assignment[key]) for key in ("hold", "removal") if key in assignment},
+                      **{key: deepcopy(assignment[key]) for key in ("hold", "stretch", "removal") if key in assignment},
                       "cost": sum(_cost(r) for r in receipts)}
         rows[name].pop("evidence", None)
     # Retiering may place children before parents in presentation order. Resolve
@@ -1032,8 +1082,15 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
                               "checkpoint continuation is not bound to the producer's own state")
                     row.update(_verdict("BLOCKED", reason))
     held_rows = [row for row in rows.values() if row["importance"] == "held"]
-    held_summary = {"held_total": len(held_rows), "held_passed": sum(row["status"] == "PASS" for row in held_rows),
-                    "held_tasks": [row["task_id"] for row in held_rows]}
+    stretch_rows = [row for row in rows.values() if is_stretch(row)]
+    held_summary = {
+        "held_total": len(held_rows),
+        "held_passed": sum(row["status"] == "PASS" for row in held_rows),
+        "held_tasks": [row["task_id"] for row in held_rows],
+        "stretch_total": len(stretch_rows),
+        "stretch_passed": sum(row["status"] == "PASS" for row in stretch_rows),
+        "stretch_tasks": [row["task_id"] for row in stretch_rows],
+    }
     if view.get("evidence_scope") in DIAGNOSTIC_SCOPES:
         return {"view": view["id"], "view_revision": view["revision"], "policy_fingerprint": view_fingerprint(view),
                 "status": "DIAGNOSTIC", "qualified_tier": 0, "eligible": False, "counted_eligible": False,
@@ -1043,7 +1100,7 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
                 "tiers": [], "tasks": list(rows.values()),
                 "task_statuses": {name: row["status"] for name, row in rows.items()},
                 "next_task": None, "next_tasks": [], "blockers": [], "required_passed": 0, "required_total": 0,
-                **held_summary, "held_tiers": [], "counted_tiers": [],
+                **held_summary, "held_tiers": [], "stretch_tiers": [], "counted_tiers": [],
                 "cost_seconds": sum(row["cost"] for row in rows.values())}
     index = {a["task"]: a for a in assignments}
 
@@ -1067,10 +1124,18 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
         subset = [rows[a["task"]] for a in assignments if a["qualification_tier"] == tier]
         required = [row for row in subset if row["importance"] == "required"]
         held = [row for row in subset if row["importance"] == "held"]
-        shared = {"held_total": len(held), "held_passed": sum(row["status"] == "PASS" for row in held),
-                  "diagnostic_total": sum(r["importance"] == "diagnostic" for r in subset)}
+        stretch = [row for row in subset if is_stretch(row)]
+        has_explicit_stretch = any(row["importance"] == "stretch" for row in subset)
+        shared = {
+            "held_total": len(held),
+            "held_passed": sum(row["status"] == "PASS" for row in held),
+            "diagnostic_total": sum(r["importance"] == "diagnostic" for r in subset),
+            **({"stretch_total": len(stretch), "stretch_passed": sum(row["status"] == "PASS" for row in stretch)}
+               if has_explicit_stretch else {}),
+        }
         if not required:
-            tiers.append({"qualification_tier": tier, "status": "HELD", "required_passed": 0,
+            tier_status = "STRETCH" if (stretch and not held) else "HELD"
+            tiers.append({"qualification_tier": tier, "status": tier_status, "required_passed": 0,
                           "required_total": 0, "counts": {}, **shared})
             continue
         counts = dict(Counter(row["status"] for row in required))
@@ -1092,14 +1157,15 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
             next_tasks = [row["task_id"] for row in required if row["status"] == "NOT_RUN" and ready(row["task_id"])]
     if eligibility:
         blockers = [{"task_id": None, "status": "BLOCKED", "reasons": eligibility}, *blockers]
-    counted = [t["qualification_tier"] for t in tiers if t["status"] != "HELD"]
+    counted = [t["qualification_tier"] for t in tiers if t["status"] not in {"HELD", "STRETCH"}]
     complete = bool(counted) and qualified_tier == counted[-1]
     counted_eligible = bool(complete and not eligibility)
     allow_held = bool(allow_held_highest_tier or view.get("eligibility", {}).get("allow_held_highest_tier"))
     status = ("BLOCKED" if eligibility else
               "PASS" if complete and (tiers[-1]["status"] != "HELD" or allow_held) else
+              "STRETCH" if not counted and any(t["status"] == "STRETCH" for t in tiers) else
               "HELD" if complete or not counted else
-              next((t["status"] for t in tiers if t["status"] != "HELD" and t["qualification_tier"] > qualified_tier),
+              next((t["status"] for t in tiers if t["status"] not in {"HELD", "STRETCH"} and t["qualification_tier"] > qualified_tier),
                    "INCOMPLETE"))
     if status == "NOT_RUN":
         status = "INCOMPLETE"
@@ -1110,6 +1176,8 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
             "next_task": next_tasks[0] if next_tasks else None, "next_tasks": next_tasks,
             "blockers": blockers, "required_passed": sum(row["status"] == "PASS" for row in rows.values() if row["importance"] == "required"),
             "required_total": sum(row["importance"] == "required" for row in rows.values()),
-            **held_summary, "held_tiers": [t["qualification_tier"] for t in tiers if t["status"] == "HELD"],
+            **held_summary,
+            "held_tiers": [t["qualification_tier"] for t in tiers if t["status"] == "HELD"],
+            "stretch_tiers": [t["qualification_tier"] for t in tiers if t["status"] in {"HELD", "STRETCH"}],
             "counted_tiers": counted,
             "cost_seconds": sum(row["cost"] for row in rows.values())}

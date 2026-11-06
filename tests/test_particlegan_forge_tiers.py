@@ -389,3 +389,24 @@ def test_tier_statuses_match_experiments_forge_views(tmp_path):
     ws2, _ = _workspace(tmp_path / "w2", _ok())
     q2 = ws2.qualify("c", "v")
     assert q2["tiers"][1]["status"] == "NOT_RUN" and q2["status"] == "INCOMPLETE"
+
+
+def test_particlegan_forge_stretch_tier_and_leaderboard_table(tmp_path):
+    tasks = [_task("t1"), _task("s2")]
+    tiers = [TierSpec(tier=1, required=["t1"]), TierSpec(tier=2, stretch=["s2"])]
+    ws, _ = _workspace(tmp_path, _ok(), tasks=tasks, tiers=tiers)
+    ws.run_task("c", "t1")
+    q = ws.qualify("c", "v")
+    assert q["status"] == "PASS" and q["eligible"] is True and q["qualified_tier"] == 1
+    assert q["tiers"][2]["status"] == "STRETCH" and q["stretch_tiers"] == [2]
+    assert q["tiers"][2]["stretch_total"] == 1 and q["tiers"][2]["stretch_passed"] == 0
+
+    ws.run_task("c", "s2")
+    q_after = ws.qualify("c", "v")
+    assert q_after["tiers"][2]["stretch_passed"] == 1
+    out = ws.compile_reports(view_id="v")
+    board = Path(out["leaderboard"]).read_text()
+    assert "## Stretch experiments" in board
+    assert "| Tier 1 stretch | Tier 2 stretch | Total stretch |" in board
+    assert "| — | `1/1` | **`1/1`** |" in board
+

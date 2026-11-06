@@ -1113,3 +1113,34 @@ def test_comparison_projection_labels_actual_execution_policy_separately(report)
     assert 'no qualification reuse' in family_page
     overview = render_leaderboard(root, publication, root / 'reports/forge/technique-inventory.md')
     assert 'comparison policy revision 1, tier 0; actual executed-policy qualification **tier 3**, revision 11 (PASS)' in overview
+
+
+def test_stretch_experiments_table_renders_tier_columns_and_supports_stretch_role(report):
+    root, publication = report
+    # Without stretch or held tasks, the stretch table is absent.
+    generate(report)
+    no_stretch_text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    assert "## Stretch experiments" not in no_stretch_text
+
+    # Mark 'failed' as stretch (frontier) and 'missing' as held.
+    uncount(root, "alpha", {
+        "failed": ("stretch", "stretch", {
+            "schema": "forge_stretch_v1",
+            "reason": "frontier",
+            "summary": "Fixture: failed is a frontier stretch task in Tier 2.",
+        }),
+        "missing": ("held", "hold", hold_note("missing", "unsolved")),
+    })
+    cohort = generate(report)
+    assert score(cohort["total"]) == "3/3"
+    assert score(cohort["views"][0]["held"]) == "0/2 (1 not run)"
+    text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    assert "## Stretch experiments" in text
+    stretch_sec = text.split("## Stretch experiments", 1)[1].split("\n## ", 1)[0]
+    assert "| Family / selected recipe | Tier 1 stretch | Tier 2 stretch | Tier 3 stretch | Total stretch |" in stretch_sec
+    assert "**2 stretch view assignments** across **2 distinct stretch tests**" in stretch_sec
+    assert "[0/1](families/k3p.md#" in stretch_sec
+    assert "[0/2 (1 not run)](families/k3p.md#" in stretch_sec
+    family_page = generated_pages(root, publication)[root / "reports/forge/families/k3p.md"]
+    assert "stretch: frontier stretch benchmark beyond the required suite" in family_page
+
