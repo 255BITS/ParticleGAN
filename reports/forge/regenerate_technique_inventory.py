@@ -3199,11 +3199,51 @@ def _recorded_source_binary_projection(result, root: Path) -> dict | None:
             "families": families}
 
 
+def _retained_published_display(result, root: Path) -> dict | None:
+    """Preserve a prior display, pinned to original blobs and whole evidence rows.
+
+    This does not regrade receipts or import qualification. It prevents a new
+    task/source revision from changing previously published display outcomes.
+    """
+    from experiments.forge.family_reports import _selected_cohorts, _selected_row
+    from experiments.forge.leaderboard_contract import load_fixed_test_list
+    from experiments.forge.trainer_families import scientific_row_hash
+    fixed = load_fixed_test_list(root)
+    binding = (fixed or {}).get("retained_display")
+    if binding is None:
+        return None
+    relative = Path(binding["path"])
+    if relative.is_absolute() or ".." in relative.parts or file_hash(root / relative) != binding["sha256"]:
+        raise ValueError("retained published display digest changed")
+    saved = read_json(root / relative)
+    if (saved.get("schema") != "forge_retained_published_display_v1"
+            or saved.get("qualification_input") is not False
+            or saved.get("qualification_reuse") is not False
+            or saved.get("qualification_regraded") is not False):
+        raise ValueError("retained published display cannot confer qualification")
+    families = {}
+    for family, cohort in _selected_cohorts(result["family_progress"]):
+        row = _selected_row(result, cohort)
+        previous = saved["families"].get(family["id"])
+        if (previous is None or previous["candidate_id"] != row["candidate_id"]
+                or previous["scientific_row_sha256"] != scientific_row_hash(row)):
+            return None  # A newly selected scientific row never inherits old scores.
+        if any(status not in {"PASS", "FAIL"} for status in previous["statuses"].values()):
+            raise ValueError("invalid retained published status")
+        families[family["id"]] = {"records": {name: {"status": status,
+            "publication": previous["publication"]} for name, status in previous["statuses"].items()}}
+    return {"scope": "retained_published_display", "qualification_input": False, "qualification_reuse": False,
+            "coverage": binding, "families": families}
+
+
 def _formulaic_display_payload(result, root: Path) -> dict | None:
     current = _concluded_current_source_tier1_payload(result, root)
     if current and all("UNMEASURED" not in (item["req_outcomes"] + item["diag_outcomes"])
                        for item in current["rows"]):
         return current
+    retained = _retained_published_display(result, root)
+    if retained is not None:
+        return retained
     recorded = _recorded_source_binary_projection(result, root)
     return recorded
 
@@ -3215,7 +3255,7 @@ def _selected_recipe_binary_task_statuses(result, root: Path) -> dict[str, dict[
     from experiments.forge.family_reports import _selected_cohorts, _selected_row, _summed_views, full_suite_tasks
 
     progress = result.get("family_progress") or {}
-    recorded_display = cached.get("scope") == "recorded_source_formulaic_display"
+    recorded_display = cached.get("scope") in {"recorded_source_formulaic_display", "retained_published_display"}
     measured_by_cid = {} if recorded_display else {
         item["candidate_id"]: item.get("measured", {}) for item in cached["rows"]}
     all_tasks: set[str] = set(full_suite_tasks(progress))
@@ -3233,6 +3273,9 @@ def _selected_recipe_binary_task_statuses(result, root: Path) -> dict[str, dict[
         fam_statuses: dict[str, str] = {}
         for tid in set(tasks_map) | set(ro) | all_tasks:
             rec_st = tasks_map.get(tid, {}).get("status")
+            if recorded_display and tid not in ro:
+                fam_statuses[tid] = rec_st or "UNKNOWN"
+                continue
             if recorded_display and tid in ro:
                 fam_statuses[tid] = ro[tid]
             elif ro.get(tid) in {"PASS", "FAIL"}:
@@ -3400,7 +3443,13 @@ def _formulaic_selected_recipe_tables(markdown: str, result, root, path) -> str:
     if binary_by_family is None:
         return markdown
     display = _formulaic_display_payload(result, root)
-    if display.get("scope") == "recorded_source_formulaic_display":
+    if display.get("scope") == "retained_published_display":
+        note = ("Previously published scores retain their original commit/blob identities in "
+                "[the display provenance receipt](precision-stretch/retained-display.json). "
+                "New tests remain unmeasured; neither display retention nor these new tests change recorded qualification.\n\n")
+        if note not in markdown:
+            markdown = markdown.replace("## Selected recipes\n\n", "## Selected recipes\n\n" + note, 1)
+    elif display.get("scope") == "recorded_source_formulaic_display":
         note = ("Recorded formulaic scores retain each recipe's original source and task bindings in "
                 "[the coverage receipts](attempt-coverage.json). They are an archived display projection, "
                 "not current-source qualification; current-source evidence gaps remain separate.\n\n")
@@ -3565,6 +3614,10 @@ def _formulaic_selected_recipe_tables(markdown: str, result, root, path) -> str:
                 continue
             family, cohort = matched
             fam_statuses = binary_by_family[family["id"]]
+            if any(fam_statuses.get(task) not in {"PASS", "FAIL"} for task in all_distinct_stretch):
+                # The family renderer already preserves archived outcomes and
+                # labels new cells not run/blocked. Do not invent binary FAILs.
+                continue
             tier_cells = []
             v_pass_total = 0
             v_tot_total = 0
@@ -3616,14 +3669,18 @@ def _formulaic_selected_recipe_tables(markdown: str, result, root, path) -> str:
                 continue
             family, _ = matched
             fam_statuses = binary_by_family[family["id"]]
-            p_all = sum(fam_statuses.get(t) == "PASS" for t in fs_tasks)
-            f_all = len(fs_tasks) - p_all
-            p_unc = sum(fam_statuses.get(t) == "PASS" for t in uncounted_fs_tasks)
-            f_unc = len(uncounted_fs_tasks) - p_unc
-            held_summary = f"{len(uncounted_fs_tasks)}: {p_unc} PASS, {f_unc} FAIL"
+            from experiments.forge.leaderboard_contract import fixed_outcomes
+            counts = fixed_outcomes(fam_statuses, fs_tasks, uncounted_fs_tasks)
+            held = counts["held"]
+            held_summary = f"{held['total']}: {held['passed']} PASS, {held['failed']} FAIL"
+            if held["not_measured"]:
+                held_summary += f", {held['not_measured']} not measured"
+            if held["total"] - held["passed"] - held["failed"] - held["not_measured"]:
+                held_summary += ", other outcomes"
+            other = ", ".join(f"{n} {status.lower()}" for status, n in counts["other"].items()) or "0"
             tuning_col = parts[7]
             lines[idx] = (
-                f"{col0} | {p_all} | **{f_all}** | 0 | 0 | {held_summary} | {len(fs_tasks)} | {tuning_col}"
+                f"{col0} | {counts['passed']} | **{counts['failed']}** | {counts['not_measured']} | {other} | {held_summary} | {len(fs_tasks)} | {tuning_col}"
             )
         elif in_view_breakdown and line.startswith("| [") and " | ↳ [" in line:
             parts = line.split(" | ")
@@ -4307,7 +4364,8 @@ def _project_publication_for_family_pages(root, publication):
 
     projected = deepcopy(publication)
     display = _formulaic_display_payload(publication, Path(root))
-    recorded_display = display.get("scope") == "recorded_source_formulaic_display"
+    retained_display = display.get("scope") == "retained_published_display"
+    recorded_display = retained_display or display.get("scope") == "recorded_source_formulaic_display"
     if recorded_display:
         projected["recorded_formulaic_display"] = {key: deepcopy(display[key])
             for key in ("scope", "qualification_input", "qualification_reuse", "coverage")}
@@ -4353,7 +4411,12 @@ def _project_publication_for_family_pages(root, publication):
                     attempt_records_by_family.get((fam_id, parent_id)) if parent_id else None))
             t_entry["status"] = status
             t_entry["execution_recorded"] = True
-            if recorded_display:
+            if retained_display:
+                t_entry["retained_published_display"] = {"qualification_input": False,
+                    "qualification_reuse": False, "publication": deepcopy(original["publication"])}
+                t_entry["coverage_reason"] = ("Previously published display retained under its original Git commit/blob. "
+                    "Current-source compatibility and qualification are unchanged.")
+            elif recorded_display:
                 t_entry["recorded_formulaic_display"] = {
                     "scope": display["scope"], "qualification_input": False, "qualification_reuse": False,
                     **{key: deepcopy(original[key]) for key in (

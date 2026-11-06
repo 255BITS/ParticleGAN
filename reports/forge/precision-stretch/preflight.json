@@ -1,0 +1,64 @@
+{
+  "families": [
+    {
+      "blockers": [],
+      "candidate_id": "atlas-particle-normal-v4",
+      "family": "atlas",
+      "full_budget_result": "NOT_RUN",
+      "status": "READY"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
+      "family": "bcap-pure",
+      "full_budget_result": "NOT_RUN",
+      "status": "READY"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "bispf-optimized-quintic-v1",
+      "family": "bispf",
+      "full_budget_result": "NOT_RUN",
+      "status": "READY"
+    },
+    {
+      "blockers": [
+        "precision_gaussian_nvfp4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "candidate_id": "e22",
+      "family": "e22",
+      "full_budget_result": "NOT_RUN",
+      "status": "BLOCKED"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "recipe-prior-refactor-k3p-v1",
+      "family": "k3p",
+      "full_budget_result": "NOT_RUN",
+      "status": "READY"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "recipe-prior-refactor-ka2-v1",
+      "family": "ka2",
+      "full_budget_result": "NOT_RUN",
+      "status": "READY"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "family": "r1r2",
+      "full_budget_result": "NOT_RUN",
+      "status": "READY"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "recipe-prior-refactor-release07-gan-v3-v1",
+      "family": "release07-gan-v3",
+      "full_budget_result": "NOT_RUN",
+      "status": "READY"
+    }
+  ],
+  "qualification_input": false,
+  "schema": "forge_precision_preflight_v1"
+}

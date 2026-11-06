@@ -893,6 +893,11 @@ def grade_result(task: dict, result: dict | None, *, diagnostic=False) -> dict:
     sampling = grade_sampling(task, evidence)
     if sampling is not None:
         return _verdict(sampling["status"], sampling["reason"])
+    if "linear_precision" in task.get("execution", {}):
+        from .precision import grade as precision_grade
+        precision = precision_grade(task, evidence)
+        if precision is not None:
+            return _verdict(*precision)
     from .tier1_policy import is_policy_task
     if is_policy_task(task) and task["adapter"] != "clockfree_audit":
         from .tier1_policy import validate_evidence

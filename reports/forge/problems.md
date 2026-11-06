@@ -41,6 +41,8 @@ Passer summaries reflect the evidence audit dated **2026-10-15**. Selected-resul
 | [Reconstruct four noisy corner Gaussians and generate balanced independent modes (AE-GAN)](problems.md#model_ae_gan_multimodal) | Train a public-API multimodal AE-GAN to reconstruct four equally weighted corner Gaussians (`reconstruction_mse <= 0.025`, `reconstruction_mode_agreement >= 0.98`) while independently generating all four modes with balanced masses (`mass_tv <= 0.15`) and well-conditioned within-mode covariances (`0.10 <= eigen_ratio <= 4.0`) across the final five checks. | Yes in standalone bounded API research (`bispf-optimized-quintic-v1` CPU cohort); no ordinary selected CUDA PASS yet. |
 | [Learn four-step conditional reverse transitions and ancestral generation (DDGAN)](problems.md#model_ddgan_gaussian_chain) | Train a four-step public-API DDGAN on a 2D Gaussian forward diffusion chain so every reverse conditional transition (`t1..t4`, `q0`/`q1`) and the final ancestral marginal satisfy `projection_cdf <= 0.12`, `normalized_mean <= 0.25`, and covariance eigenvalues in `[0.65, 1.40]` across the last five checks. | No PASS under the current declaration in either ordinary selected cohorts or bounded API research. |
 | [Pair particle AE reconstruction with four-step DDGAN reverse transitions and ancestral generation](problems.md#model_ae_ddgan_gaussian_chain) | Reconstruct held-out inputs through a learned particle autoencoder and four public DDGAN reverse steps (`paired_nmse <= 0.10`, `paired_worst_axis_nrmse <= 0.25`, `paired_shuffled_gain >= 3.0`) while simultaneously passing all conditional reverse-transition and independent ancestral-chain bounds. | No complete PASS under the current declaration; paired four-step reconstruction passes while independent/conditional reverse generation fails. |
+| [Learn a Gaussian with 8-bit MXFP8 training arithmetic](problems.md#precision_gaussian_mxfp8) | Train from the shared deterministic initialization using Blackwell-format MXFP8 software-reference forward and backward GEMM operands; match the full scalar Gaussian law at five final checks. | Not measured. Short software checks do not establish a quality PASS. |
+| [Learn a Gaussian with 4-bit NVFP4 training arithmetic](problems.md#precision_gaussian_nvfp4) | Train from the shared deterministic initialization using Blackwell-format NVFP4 software-reference forward and backward GEMM operands; match the full scalar Gaussian law at five final checks. | Not measured. Short software checks do not establish a quality PASS. |
 
 <a name="gaussian1d_stability"></a>
 
@@ -1032,3 +1034,67 @@ Test: `model_ae_ddgan_gaussian_chain` · Required for qualification and included
 **What remains to solve.** Align the ancestral prior and reverse chain with the encoder latent manifold at `t=1, 2` so independent ancestral sampling retains full variance (`>= 0.65`) without degrading paired reconstruction.
 
 Evidence: [AE-DDGAN public-API model report](api-model-toys/ae-ddgan.md) · [Task declaration](../../configs/forge/tasks/model_ae_ddgan_gaussian_chain.json).
+
+
+<a name="precision_gaussian_mxfp8"></a>
+
+## Learn a Gaussian with 8-bit MXFP8 training arithmetic
+
+Test: `precision_gaussian_mxfp8` · Held for qualification; included in full-suite results.
+
+**What it tests.** Train from the shared deterministic initialization using Blackwell-format MXFP8 software-reference forward and backward GEMM operands; match the full scalar Gaussian law at five final checks.
+
+**The problem.** No full-budget family evidence has been registered. A matched FP32 diagnostic separates baseline learning failures from precision sensitivity. Native kernel and higher-order autograd parity remain unverified.
+
+**Has any configuration beaten it?** Not measured. Short software checks do not establish a quality PASS.
+
+- No compatible full-budget passing configuration is recorded.
+
+**Selected recipes' recorded results:**
+
+| Selected recipe | Result |
+| --- | --- |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [NOT MEASURED](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-precision_gaussian_mxfp8) |
+| [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) |
+| [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) |
+| [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) |
+| [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) |
+| [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) |
+
+**What remains to solve.** Run the unchanged selected family recipes through the optional Tier 1 tasks and their FP32 control under the expanded reservation budget. Diagnose failed bounds before changing one global recipe; native validation is a separate step.
+
+Evidence: [Protocol, precision semantics and limitations](precision-stretch/README.md#precision-stretch).
+
+
+<a name="precision_gaussian_nvfp4"></a>
+
+## Learn a Gaussian with 4-bit NVFP4 training arithmetic
+
+Test: `precision_gaussian_nvfp4` · Held for qualification; included in full-suite results.
+
+**What it tests.** Train from the shared deterministic initialization using Blackwell-format NVFP4 software-reference forward and backward GEMM operands; match the full scalar Gaussian law at five final checks.
+
+**The problem.** No full-budget family evidence has been registered. A matched FP32 diagnostic separates baseline learning failures from precision sensitivity. Native kernel and higher-order autograd parity remain unverified.
+
+**Has any configuration beaten it?** Not measured. Short software checks do not establish a quality PASS.
+
+- No compatible full-budget passing configuration is recorded.
+
+**Selected recipes' recorded results:**
+
+| Selected recipe | Result |
+| --- | --- |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [NOT MEASURED](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-precision_gaussian_nvfp4) |
+| [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) |
+| [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) |
+| [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) |
+| [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) |
+| [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) |
+
+**What remains to solve.** Run the unchanged selected family recipes through the optional Tier 1 tasks and their FP32 control under the expanded reservation budget. Diagnose failed bounds before changing one global recipe; native validation is a separate step.
+
+Evidence: [Protocol, precision semantics and limitations](precision-stretch/README.md#precision-stretch).

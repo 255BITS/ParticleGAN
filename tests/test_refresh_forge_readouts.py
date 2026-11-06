@@ -1676,7 +1676,8 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
             assert rec is not None, f"missing attempt-coverage record for ({fam}, {tid})"
             assert rec.get("attempted") is True
             assert rec.get("status") in {"PASS", "FAIL"}, f"non-binary status for ({fam}, {tid}): {rec.get('status')}"
-            if archived_display and tid in projected_cohorts[fam]["tasks"]:
+            if (archived_display and archived_display.get("scope") == "recorded_source_formulaic_display"
+                    and tid in projected_cohorts[fam]["tasks"]):
                 cell = projected_cohorts[fam]["tasks"][tid]
                 proof = cell["recorded_formulaic_display"]
                 assert cell["status"] == rec["status"]
@@ -1746,7 +1747,11 @@ def test_recorded_overview_integrity_rejects_score_drift_without_current_source(
     original = rti._current_markdown(publication, ROOT, overview)
     assert "### Current-source selected-recipe Tier 1 readouts" not in original
     assert rfr._generated_pages_synced(ROOT, publication, original) is True
-    corrupted = original.replace("**[72/115]", "**[73/115]", 1)
+    import re
+    score = re.search(r"\*\*\[(\d+)/(\d+)\]", original)
+    assert score is not None
+    changed_score = f"**[{int(score.group(1)) + 1}/{score.group(2)}]"
+    corrupted = original[:score.start()] + changed_score + original[score.end():]
     assert corrupted != original
     assert rfr._generated_pages_synced(ROOT, publication, corrupted) is False
     fake_current = original + "\n### Current-source selected-recipe Tier 1 readouts\n\nFalse qualification.\n"
@@ -2671,7 +2676,8 @@ def test_refresh_attempt_coverage_delegates_to_formulaic_coverage_and_preserves_
         return {"updated": 0, "status": "ok"}
 
     monkeypatch.setattr(fc, "ensure_formulaic_attempt_coverage", _fake_ensure)
-    full_suite_rel = Path("configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json")
+    from experiments.forge.leaderboard_contract import FIXED_TEST_LIST
+    full_suite_rel = FIXED_TEST_LIST
     atomic_json(tmp_path / full_suite_rel, {"tests": ["gaussian1d_smoke"]})
     out = rfr.refresh_attempt_coverage(
         tmp_path,

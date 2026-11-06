@@ -2,9 +2,9 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **178 tasks**; **141 assigned** to at least one view; **37 unassigned**. Showing **27/27 views**.
+Catalog: **181 tasks**; **144 assigned** to at least one view; **37 unassigned**. Showing **27/27 views**.
 
-Declared priors across the catalog: **71 MoGParticlePrior**, **107 ParticlePrior** (including **10 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
+Declared priors across the catalog: **74 MoGParticlePrior**, **107 ParticlePrior** (including **10 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
 Reproducible comparisons use the fixed screening seed `0` and candidate-independent named RNG streams. Within each task, candidates share architecture, data law, batch size, prior, initialization, training budget, evaluation cadence and sampling law. Only the declared trainer change varies. The initialization column exposes fixed controls and component policies that take precedence over the deterministic orthogonal fallback; these are separate comparison cohorts. Historical results retain their original bindings.
 
@@ -46,7 +46,7 @@ This report follows changing declarations and published evidence; it selects no 
 | [clockfree_continuous](../../configs/forge/views/clockfree_continuous.json) | 5 | 4 required | 12 required, 7 held | 6 required, 1 diagnostic (1 removed from the count) | 0 tasks | provisional |
 | [dcgan_performance](../../configs/forge/views/dcgan_performance.json) | 1 | 6 diagnostic | 0 tasks | 0 tasks | 0 tasks | undeclared |
 | [dcgan_performance_cpu_smoke](../../configs/forge/views/dcgan_performance_cpu_smoke.json) | 1 | 1 diagnostic | 0 tasks | 0 tasks | 0 tasks | undeclared |
-| [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 14 | 11 required, 1 diagnostic | 18 required, 7 held | 1 required, 1 held, 1 diagnostic (1 removed from the count) | 5 held | provisional |
+| [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 15 | 11 required, 2 stretch, 2 diagnostic | 18 required, 7 held | 1 required, 1 held, 1 diagnostic (1 removed from the count) | 5 held | provisional |
 | [formulation_comparison](../../configs/forge/views/formulation_comparison.json) | 3 | 3 required | 12 required, 7 held, 15 diagnostic | 1 required, 1 diagnostic (1 removed from the count) | 0 tasks | provisional |
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 6 | 3 required | 12 required, 7 held, 13 diagnostic | 1 required, 1 diagnostic (1 removed from the count) | 0 tasks | provisional |
 | [k3p_two_pole_horizon](../../configs/forge/views/k3p_two_pole_horizon.json) | 1 | 2 diagnostic | 0 tasks | 0 tasks | 0 tasks | provisional |
@@ -608,7 +608,7 @@ No tasks assigned.
 
 ## discriminator_stability
 
-Declaration: [discriminator_stability](../../configs/forge/views/discriminator_stability.json); revision 14; goal: `discriminator_stability`.
+Declaration: [discriminator_stability](../../configs/forge/views/discriminator_stability.json); revision 15; goal: `discriminator_stability`.
 
 Declared calibration status: **provisional**.
 
@@ -620,7 +620,7 @@ Tier 4, the highest tier, has only held tasks, so while they are held this view 
 
 ### Tier 1: smoke
 
-11 required, 1 diagnostic.
+11 required, 2 stretch, 2 diagnostic.
 
 | Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -636,6 +636,9 @@ Tier 4, the highest tier, has only held tasks, so while they are held this view 
 | [model_vae_categorical](../../configs/forge/tasks/model_vae_categorical.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; component policy; screening | [Question, results, GIFs](#experiment-api-model-vae-categorical) | public_api_model_toy / transfer_sustained | 1200 | 300 | — |
 | [model_vae_hard](../../configs/forge/tasks/model_vae_hard.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; component policy; screening | [Question, results, GIFs](#experiment-api-model-vae-hard) | public_api_model_toy / transfer_sustained | 1200 | 300 | — |
 | [clockfree_audit_measurement_v1](../../configs/forge/tasks/clockfree_audit_measurement_v1.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-clockfree-audit-measurement-v1) | clockfree_audit / clockfree_parity | 24 | 300 | — |
+| [precision_gaussian_fp32](../../configs/forge/tasks/precision_gaussian_fp32.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-precision-gaussian) | transfer_vector / transfer_sustained | 1000 | 300 | — |
+| [precision_gaussian_mxfp8](../../configs/forge/tasks/precision_gaussian_mxfp8.json) | [stretch: frontier stretch benchmark beyond the required suite](precision-stretch/README.md#precision-stretch) | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-precision-gaussian) | transfer_vector / transfer_sustained | 1000 | 300 | — |
+| [precision_gaussian_nvfp4](../../configs/forge/tasks/precision_gaussian_nvfp4.json) | [stretch: frontier stretch benchmark beyond the required suite](precision-stretch/README.md#precision-stretch) | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-precision-gaussian) | transfer_vector / transfer_sustained | 1000 | 300 | — |
 
 ### Tier 2: quality
 
@@ -3949,6 +3952,44 @@ Related public-API demonstrations, with their own recorded contracts:
 | --- | --- | --- | --- | --- | --- |
 | [api-model-ae-reconstruction](../toy_audit/api_contract/model_modes/media/api-model-ae-reconstruction.gif) | Reconstruct four equally weighted noisy corner Gaussians with public deterministic particle-AE routing and bounded offsets; explicit reconstruction-only objective control. Scope: Four equally weighted Gaussians at (+/-1,+/-1), sigma=.08; independently drawn target and prior samples. Explicit reconstruction-only objective control; independent generation is measured but not required. | MoGParticlePrior (sigma_rel=0) | COMPLETE / PASS; 1200/1200 updates; recomputed complete live curve and terminal suffix | bispf / cpu / 1e57b5216ea3 | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
 
+### Experiment: precision-gaussian
+
+Train N(2, 0.5^2) from scratch using FP32 as the matched full-precision control.
+
+Forge declarations: [precision_gaussian_fp32](../../configs/forge/tasks/precision_gaussian_fp32.json), [precision_gaussian_mxfp8](../../configs/forge/tasks/precision_gaussian_mxfp8.json), [precision_gaussian_nvfp4](../../configs/forge/tasks/precision_gaussian_nvfp4.json).
+
+Declared Forge numerical gates and sampling:
+
+[precision_gaussian_fp32](../../configs/forge/tasks/precision_gaussian_fp32.json), [precision_gaussian_mxfp8](../../configs/forge/tasks/precision_gaussian_mxfp8.json), [precision_gaussian_nvfp4](../../configs/forge/tasks/precision_gaussian_nvfp4.json)
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, discriminator, prior; exact optimizer updates = True; mechanism exercised = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-gaussian1d-acquisition](../toy_audit/api_contract/gaussian1d/goal.gif) | Can the public ParticleGAN trainer acquire the scalar law N(2, 0.5^2) from random initialization within 1,000 updates, with correct location, width and CDF shape at five terminal checks? Scope: Acquire N(2, .5^2) in 1,000 updates from random initialization; exact Gaussian CDF, location and width gates must pass at five terminal checks. Tier 1 remains provisional; this standalone API cohort grants no whole-view qualification. | MoGParticlePrior (sigma_rel=0) | COMPLETE / FAIL; 1000/1000 updates; cdf_ks <= 0.05, last 5 post-update metric observations do not all pass | k3p / cpu / 666642486d3c | [definition](../toy_audit/api_contract/gaussian1d/results.json); [readout](../toy_audit/api_contract/gaussian1d/results.json); [recipe and provenance](../toy_audit/api_contract/gaussian1d/results.json) |
+
 ### Experiment: recipe-prior-refactor-legacy-clockfree-audit-measurement-v1
 
 Measure the original four clock/state parity conditions and zero-dependency condition for an explicitly scheduled recipe; diagnostic FAIL grants no clock-free claim or qualification.
@@ -5555,6 +5596,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `98c444176698d95dd00657df16cd742d7ff6ed782cdf727578c5988ec7d50606`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `e91827d83ca2d165832de9dbabd2d7c5a6c5772cfcb8d75ab3db8287f9712be0`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `5bbd12292184aa36a1ee8685c51783d3358ec9b5970638d5151a9f22d253cb5b`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `40a020c24730366b81cd39d4af9463161ed590c2443a66f0414159022e7aa758`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

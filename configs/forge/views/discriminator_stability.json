@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "discriminator_stability",
-  "revision": 14,
+  "revision": 15,
   "goal": "discriminator_stability",
   "assignments": [
     {
@@ -400,6 +400,36 @@
       "qualification_tier": 1,
       "importance": "required",
       "order": 12
+    },
+    {
+      "task": "precision_gaussian_fp32",
+      "qualification_tier": 1,
+      "order": 101,
+      "importance": "diagnostic"
+    },
+    {
+      "task": "precision_gaussian_mxfp8",
+      "qualification_tier": 1,
+      "order": 102,
+      "importance": "stretch",
+      "stretch": {
+        "reason": "frontier",
+        "summary": "Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format MXFP8 software-reference training arithmetic?",
+        "explanation": "reports/forge/precision-stretch/README.md#precision-stretch",
+        "graduation": "Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass."
+      }
+    },
+    {
+      "task": "precision_gaussian_nvfp4",
+      "qualification_tier": 1,
+      "order": 103,
+      "importance": "stretch",
+      "stretch": {
+        "reason": "frontier",
+        "summary": "Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format NVFP4 software-reference training arithmetic?",
+        "explanation": "reports/forge/precision-stretch/README.md#precision-stretch",
+        "graduation": "Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass."
+      }
     }
   ],
   "eligibility": {},
@@ -412,10 +442,10 @@
     "compare_compatible_cohorts": true,
     "cost_separate": true
   },
-  "policy_change_reason": "Register AE, hard/categorical VAE, actual DDGAN chains and AE-DDGAN paired chains as public-API model tasks. Reclassified model_ddgan_gaussian_chain and model_ae_ddgan_gaussian_chain from Tier 1 to Tier 2: both 4-step diffusion chains require multi-step distribution quality across 38-42 bounds beyond the 2,500-step smoke scope of Tier 1, matching bimodal chain complexity in Tier 2. Frozen historical grades and cohorts are unchanged; calibration remains provisional.",
+  "policy_change_reason": "Add optional Blackwell-format NVFP4 and MXFP8 software-reference training toys at Tier 1, plus their matched FP32 diagnostic. Required gates, archived outcomes and qualifications are unchanged. Native hardware parity is unverified.",
   "previous_revision": {
-    "archive": "configs/forge/view-history/discriminator_stability-v13.json",
-    "policy_fingerprint": "766297373255342be272f0270f687ba4a1610bfaae4f087e87c157997a195c66",
-    "revision": 13
+    "archive": "configs/forge/view-history/discriminator_stability-v14.json",
+    "policy_fingerprint": "fe4ea8a83dea3e38cf52c5e08ee40618b49a3a572323f4e3ef4fead8715b6b2d",
+    "revision": 14
   }
 }

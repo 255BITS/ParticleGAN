@@ -339,6 +339,13 @@ For revision 14, this CPU K3P plan contains 12 execution groups and a
 4,440-second worst-case allowance, including the 300-second clock audit
 diagnostic. Review the actual plan for the intended candidate and device.
 
+Revision 15 adds optional Tier 1 [NVFP4 and MXFP8 training toys](reports/forge/precision-stretch/README.md)
+and their matched FP32 diagnostic. Required counts remain unchanged. Each new
+task reserves 300 seconds; the equivalent CPU K3P plan now reserves 5,340
+seconds. Existing campaigns retain their original caps. These are explicit
+Blackwell-format software references; native kernel and higher-order autograd
+parity remain unverified. Full-budget family results are initially unmeasured.
+
 Historical revision 8 had six required Tier 1 tasks and a 2,220-second
 required-task allowance: the 120-second scalar Gaussian can-it-pass smoke,
 three 300-second behavior tasks, the 300-second ring acquisition and the

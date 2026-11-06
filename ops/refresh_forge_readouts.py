@@ -42,6 +42,7 @@ from experiments.forge.contracts import (
     stable_hash,
 )
 from experiments.forge.sources import inspect_source, snapshot_source
+from experiments.forge.leaderboard_contract import FIXED_TEST_LIST
 from experiments.forge.trainer_families import CURRENT_SELECTION, current_family_candidates
 from experiments.forge.views import (
     COUNTED_OR_HELD,
@@ -512,7 +513,7 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
     pending = int(summary.get("pending", 0))
     running = int(summary.get("running", 0))
 
-    full_suite_card = root / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json"
+    full_suite_card = root / FIXED_TEST_LIST
     full_suite_names = (
         sorted({*read_json(full_suite_card)["tests"], "ring_hold"})
         if full_suite_card.is_file()
@@ -1152,7 +1153,7 @@ def _generated_pages_synced(root: Path, inv_json: dict[str, Any], inv_md: str) -
         # Archived display scores still need an integrity check when the latest
         # source has no Tier 1 payload. A digest footer alone cannot detect a
         # changed overview score or a false source-qualification claim.
-        if (rti._recorded_source_binary_projection(inv_json, root) is not None
+        if (rti._formulaic_display_payload(inv_json, root) is not None
                 and inv_md != rti._current_markdown(inv_json, root, root / "reports/forge/technique-inventory.md")):
             return False
 
@@ -2014,7 +2015,7 @@ def refresh_attempt_coverage(
     root = Path(root).resolve()
     attempt_state_root = Path(attempt_state_root).resolve()
     attempt_state_root.mkdir(parents=True, exist_ok=True)
-    if (root / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json").is_file():
+    if (root / FIXED_TEST_LIST).is_file():
         from ops.formulaic_coverage import ensure_formulaic_attempt_coverage
 
         return ensure_formulaic_attempt_coverage(
@@ -2242,7 +2243,7 @@ def refresh_attempt_coverage(
     ]
     if bad_new:
         raise CodeChangeRequiredError(f"newly executed diagnostic attempts failed with non-gate errors: {bad_new}")
-    if (root / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json").is_file():
+    if (root / FIXED_TEST_LIST).is_file():
         from ops.formulaic_coverage import ensure_formulaic_attempt_coverage
 
         result_summary = ensure_formulaic_attempt_coverage(

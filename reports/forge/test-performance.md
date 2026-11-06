@@ -28,10 +28,10 @@ One row is **one test under one exact protocol**. One column is a complete recip
 
 ## Selected-recipe matrix
 
-Indexed: **1421 test/protocol rows**, **565 complete recipe/source/runtime identities**; below: **309 rows**, **9 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
+Indexed: **1424 test/protocol rows**, **565 complete recipe/source/runtime identities**; below: **312 rows**, **9 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
 
 <details>
-<summary>Open all 309 selected-protocol rows and their exact recipe identities</summary>
+<summary>Open all 312 selected-protocol rows and their exact recipe identities</summary>
 
 | Recipe | Full identity |
 | --- | --- |
@@ -167,6 +167,9 @@ Indexed: **1421 test/protocol rows**, **565 complete recipe/source/runtime ident
 | model_ddgan_bimodal_chain<br>seed 0 · 5000 updates · source 2e8a97a0aa<br>`eb14df526703` | [CHANGED](../../configs/forge/tasks/model_ddgan_bimodal_chain.json) | 0/9 | NO INDEXED WITNESS | [NOT RUN](technique-evidence/4eaeb2e733970936d752120f26b8987bbb676615ef791ef415d1740480eae5cf.json) | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | model_ddgan_gaussian_chain<br>seed 0 · 2500 updates · source 2e8a97a0aa<br>`8cfd444c0a86` | [CHANGED](../../configs/forge/tasks/model_ddgan_gaussian_chain.json) | 0/9 | NO INDEXED WITNESS | [FAIL](technique-receipts/fcf270c33afb4488a1441ddabde10d85.json) | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | model_ddgan_gaussian_chain<br>unmeasured declaration<br>`f682323992d0` | [matches](../../configs/forge/tasks/model_ddgan_gaussian_chain.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| precision_gaussian_fp32<br>unmeasured declaration<br>`223bef19050f` | [matches](../../configs/forge/tasks/precision_gaussian_fp32.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| precision_gaussian_mxfp8<br>unmeasured declaration<br>`25566ab6ee21` | [matches](../../configs/forge/tasks/precision_gaussian_mxfp8.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| precision_gaussian_nvfp4<br>unmeasured declaration<br>`0ba493f1a4bd` | [matches](../../configs/forge/tasks/precision_gaussian_nvfp4.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | recipe-prior-refactor-legacy-ae_gan_hold<br>unmeasured declaration<br>`f967bda5583e` | [matches](../../configs/forge/tasks/recipe-prior-refactor-legacy-ae_gan_hold.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | recipe-prior-refactor-legacy-clockfree_audit_measurement_v1<br>unmeasured declaration<br>`29b73d74338f` | [matches](../../configs/forge/tasks/recipe-prior-refactor-legacy-clockfree_audit_measurement_v1.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | recipe-prior-refactor-legacy-cover_leftover<br>unmeasured declaration<br>`f9d7e6d10844` | [matches](../../configs/forge/tasks/recipe-prior-refactor-legacy-cover_leftover.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |

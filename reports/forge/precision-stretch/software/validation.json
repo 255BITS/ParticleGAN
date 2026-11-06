@@ -1,0 +1,385 @@
+{
+  "api": "particlegan.GANTrainer",
+  "base_commit": "9fc54fab90a7d6da39db274b651dbf824fc3929a",
+  "execution_scientific_sources_sha256": {
+    "configs/forge/tasks/precision_gaussian_fp32.json": "1f52a2d28b005d46e74f1034c742748a1e482ac58c694ee6e2f3d08fe5b29d7b",
+    "configs/forge/tasks/precision_gaussian_mxfp8.json": "15e186f7bfe440b716e5e4a5688332fe53e6fd01987a409361ca962b875e3624",
+    "configs/forge/tasks/precision_gaussian_nvfp4.json": "2b7dc79935e221f6ca32622fd52b8778692d97b041f559ed35cc8fcb557293d2",
+    "experiments/forge/adapters.py": "9466ba304bd61d0b084f159d2d251cd6916ff7248861462fa6aee55ee347953c",
+    "experiments/forge/precision.py": "4c1669b2a21bac44f04384c0604906c84400b3937e1160b530d4c7ec5f72299b",
+    "experiments/forge/views.py": "d6fac18b26b0f68e847841393ac2c95ce1597ff0a20320e338535c84cf9d2c36",
+    "particlegan/__init__.py": "fcfe9c4dd56ae58f9cb68b765e2185ba3bc8a8b22f8b13154239a102740b9ba9",
+    "particlegan/low_precision.py": "8f9f4e5040e984feec6434cfb227eca2851aa47ef40d8b3b6dbce1c66360e7dd"
+  },
+  "native_parity": "unverified",
+  "prefixes": [
+    {
+      "batch_sequence_sha256": "57f77923a9eacb96ca44e03242dc374777fe7946802837823fceed9007d2ebd9",
+      "completed_updates": 3,
+      "final_metrics": {
+        "cdf_ks": 0.9999632356149398,
+        "finite_fraction": 1.0,
+        "mean": -0.12934846756343177,
+        "mean_error_sigma": 4.2586969351268635,
+        "sample_count": 4096,
+        "std": 0.06883578436405874,
+        "std_ratio": 0.13767156872811748,
+        "step": 3
+      },
+      "format": "fp32",
+      "gif": {
+        "path": "reports/forge/precision-stretch/software/fp32.gif",
+        "sha256": "5cd9c9cf37f4f0ed39a1619b267dc730e9c9101a42ffa6b70e468e4bdfd55686"
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "optimizer_updates": {
+          "discriminator": 3,
+          "generator": 3,
+          "prior": 3
+        },
+        "unintended_rng_deviations": 0
+      },
+      "initial_parameters": {
+        "discriminator": "d8150b75dc00e2921c8e626292e222872baf84643f8e1add2c983e2647ea8b21",
+        "generator": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6"
+      },
+      "original_artifact_archive": "/nvme/dev/particlegan/artifacts/precision-stretch-software-20261106/fp32",
+      "original_receipt_sha256": "4db91cc72a26fd723ca097b76b3bbe6d26a2ea996f19616df6d9f43a05cc0d03",
+      "precision": {
+        "contract": {
+          "accumulator": "fp32",
+          "backend": "software_reference",
+          "bias_storage_nonlinearity_loss_prior_optimizer": "fp32",
+          "format": "fp32",
+          "gemm_output": "fp32",
+          "gemms": [
+            "fprop",
+            "dgrad",
+            "wgrad"
+          ],
+          "higher_order_autograd": "native_autograd",
+          "master_parameters": "fp32",
+          "native_parity": "unverified",
+          "schema_version": 1,
+          "stochastic_gradient_rounding": false,
+          "wgrad_random_hadamard": false
+        },
+        "higher_order_scope": "software straight-through reference; native higher-order parity unverified",
+        "layers": {
+          "discriminator": {},
+          "generator": {}
+        },
+        "native_speed_memory_or_kernel_parity_claim": false,
+        "rounding_rng_owner": "each EmulatedLinear._extra_state tensor (format tag and RNG bytes)"
+      },
+      "quality_status": "INCOMPLETE",
+      "required_updates": 1000,
+      "scope": "three-update software prefix; no quality or qualification credit"
+    },
+    {
+      "batch_sequence_sha256": "57f77923a9eacb96ca44e03242dc374777fe7946802837823fceed9007d2ebd9",
+      "completed_updates": 3,
+      "final_metrics": {
+        "cdf_ks": 0.9999636147635181,
+        "finite_fraction": 1.0,
+        "mean": -0.1237739808857441,
+        "mean_error_sigma": 4.247547961771488,
+        "sample_count": 4096,
+        "std": 0.06566440474033759,
+        "std_ratio": 0.13132880948067518,
+        "step": 3
+      },
+      "format": "mxfp8",
+      "gif": {
+        "path": "reports/forge/precision-stretch/software/mxfp8.gif",
+        "sha256": "dbd113797cea085045a8439a52272c3c5f943053d20cc34aa4be87ae334f6501"
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "optimizer_updates": {
+          "discriminator": 3,
+          "generator": 3,
+          "prior": 3
+        },
+        "unintended_rng_deviations": 0
+      },
+      "initial_parameters": {
+        "discriminator": "d8150b75dc00e2921c8e626292e222872baf84643f8e1add2c983e2647ea8b21",
+        "generator": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6"
+      },
+      "original_artifact_archive": "/nvme/dev/particlegan/artifacts/precision-stretch-software-20261106/mxfp8",
+      "original_receipt_sha256": "4ead043708a58fef5602c584744f83c9961b4feb1440e7cc423a386d30f8c90e",
+      "precision": {
+        "contract": {
+          "accumulator": "fp32",
+          "backend": "software_reference",
+          "bias_storage_nonlinearity_loss_prior_optimizer": "fp32",
+          "format": "mxfp8",
+          "gemm_output": "bf16",
+          "gemms": [
+            "fprop",
+            "dgrad",
+            "wgrad"
+          ],
+          "higher_order_autograd": "straight_through_quantizers",
+          "master_parameters": "fp32",
+          "native_parity": "unverified",
+          "schema_version": 1,
+          "stochastic_gradient_rounding": false,
+          "wgrad_random_hadamard": false
+        },
+        "higher_order_scope": "software straight-through reference; native higher-order parity unverified",
+        "layers": {
+          "discriminator": {
+            "net.0": {
+              "dgrad": 24,
+              "format": "mxfp8",
+              "forward": 21,
+              "wgrad": 24
+            },
+            "net.2": {
+              "dgrad": 30,
+              "format": "mxfp8",
+              "forward": 21,
+              "wgrad": 24
+            },
+            "net.4": {
+              "dgrad": 27,
+              "format": "mxfp8",
+              "forward": 21,
+              "wgrad": 21
+            }
+          },
+          "generator": {
+            "net.0": {
+              "dgrad": 6,
+              "format": "mxfp8",
+              "forward": 9,
+              "wgrad": 6
+            },
+            "net.2": {
+              "dgrad": 6,
+              "format": "mxfp8",
+              "forward": 9,
+              "wgrad": 6
+            },
+            "net.4": {
+              "dgrad": 6,
+              "format": "mxfp8",
+              "forward": 9,
+              "wgrad": 6
+            }
+          }
+        },
+        "native_speed_memory_or_kernel_parity_claim": false,
+        "rounding_rng_owner": "each EmulatedLinear._extra_state tensor (format tag and RNG bytes)"
+      },
+      "quality_status": "INCOMPLETE",
+      "required_updates": 1000,
+      "scope": "three-update software prefix; no quality or qualification credit"
+    },
+    {
+      "batch_sequence_sha256": "57f77923a9eacb96ca44e03242dc374777fe7946802837823fceed9007d2ebd9",
+      "completed_updates": 3,
+      "final_metrics": {
+        "cdf_ks": 0.9999704629989895,
+        "finite_fraction": 1.0,
+        "mean": -0.14342570304870605,
+        "mean_error_sigma": 4.286851406097412,
+        "sample_count": 4096,
+        "std": 0.07182893123643408,
+        "std_ratio": 0.14365786247286816,
+        "step": 3
+      },
+      "format": "nvfp4",
+      "gif": {
+        "path": "reports/forge/precision-stretch/software/nvfp4.gif",
+        "sha256": "33faeb1b274cd7dd1e383bb76ed02b837543370e1deee9cf02f4d28f736b201e"
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "optimizer_updates": {
+          "discriminator": 3,
+          "generator": 3,
+          "prior": 3
+        },
+        "unintended_rng_deviations": 0
+      },
+      "initial_parameters": {
+        "discriminator": "d8150b75dc00e2921c8e626292e222872baf84643f8e1add2c983e2647ea8b21",
+        "generator": "01a823b580c2f0f4dab42ab42c4d02695fca338724152107b7285fae67212ed6"
+      },
+      "original_artifact_archive": "/nvme/dev/particlegan/artifacts/precision-stretch-software-20261106/nvfp4",
+      "original_receipt_sha256": "ddd95f14363d08070154f9103479c1e4efff5e8f26e795a4fbbb5554c9f0b3f8",
+      "precision": {
+        "contract": {
+          "accumulator": "fp32",
+          "backend": "software_reference",
+          "bias_storage_nonlinearity_loss_prior_optimizer": "fp32",
+          "format": "nvfp4",
+          "gemm_output": "bf16",
+          "gemms": [
+            "fprop",
+            "dgrad",
+            "wgrad"
+          ],
+          "higher_order_autograd": "straight_through_quantizers",
+          "master_parameters": "fp32",
+          "native_parity": "unverified",
+          "schema_version": 1,
+          "stochastic_gradient_rounding": true,
+          "wgrad_random_hadamard": true
+        },
+        "higher_order_scope": "software straight-through reference; native higher-order parity unverified",
+        "layers": {
+          "discriminator": {
+            "net.0": {
+              "dgrad": 24,
+              "format": "nvfp4",
+              "forward": 21,
+              "wgrad": 24
+            },
+            "net.2": {
+              "dgrad": 30,
+              "format": "nvfp4",
+              "forward": 21,
+              "wgrad": 24
+            },
+            "net.4": {
+              "dgrad": 27,
+              "format": "nvfp4",
+              "forward": 21,
+              "wgrad": 21
+            }
+          },
+          "generator": {
+            "net.0": {
+              "dgrad": 6,
+              "format": "nvfp4",
+              "forward": 9,
+              "wgrad": 6
+            },
+            "net.2": {
+              "dgrad": 6,
+              "format": "nvfp4",
+              "forward": 9,
+              "wgrad": 6
+            },
+            "net.4": {
+              "dgrad": 6,
+              "format": "nvfp4",
+              "forward": 9,
+              "wgrad": 6
+            }
+          }
+        },
+        "native_speed_memory_or_kernel_parity_claim": false,
+        "rounding_rng_owner": "each EmulatedLinear._extra_state tensor (format tag and RNG bytes)"
+      },
+      "quality_status": "INCOMPLETE",
+      "required_updates": 1000,
+      "scope": "three-update software prefix; no quality or qualification credit"
+    }
+  ],
+  "protocol_seed": 0,
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": false,
+    "batch_size": 2048,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_space": "data",
+    "conditioning": "scalar",
+    "constraint_geometry_mode": "direction_blend",
+    "continuous_policy": null,
+    "critic_formulation": "bispf",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 0.0,
+    "d_lr_mult": 1.5,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": false,
+    "distance_reduction": "sum",
+    "ema_decay": 0.0,
+    "encoder_mode": "none",
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 1.0,
+    "model": "gan",
+    "name": "bispf_optimized",
+    "network_lr_floor": 1.0,
+    "network_lr_horizon_cap": null,
+    "num_classes": null,
+    "num_particles": 20000,
+    "observation_sigma": 0.03,
+    "optimizer_convolution": "per_offset",
+    "optimizer_convolution_rule": "quintic",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "optimizer_svd_backend": "batched",
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.0,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_kind": "particles",
+    "prior_lr_mult": 2.5,
+    "prior_reg": 0.01,
+    "prior_regularizer": "sbnp",
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 0.0,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_signal": "data",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "sigma_rel": 0.0,
+    "standardize": true,
+    "table_release_rule": "any",
+    "total_steps": 7000,
+    "training_precision": "bf16_channels_last",
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "schema": "forge_precision_software_validation_v1",
+  "task_delta": {
+    "evaluation.observations": 3,
+    "execution.steps": 3,
+    "id_suffix": "-software-prefix"
+  }
+}
