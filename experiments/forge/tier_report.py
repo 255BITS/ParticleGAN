@@ -240,13 +240,21 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
                          for importance in roles if tier["counts"].get(importance)) or "0 tasks"
 
     def held_status(view):
-        """The HELD rule of a view whose highest assigned tier counts nothing, else None."""
+        """The HELD rule of a view whose highest non-stretch tier counts nothing, else None."""
         tiers = [tier for tier in view["tiers"] if tier["tasks"]]
-        if not any(tier["counts"].get("held") or tier["counts"].get("stretch") for tier in tiers) or tiers[-1]["counts"]["required"]:
+        non_stretch = [
+            tier for tier in tiers
+            if tier["counts"]["required"] or tier["counts"].get("held") or not tier["counts"].get("stretch")
+        ]
+        if not any(tier["counts"].get("held") for tier in tiers) or not non_stretch or non_stretch[-1]["counts"]["required"]:
             return None
         if not any(tier["counts"]["required"] for tier in tiers):
             return "Nothing in this view is counted while its tasks are held, so it reports HELD for every candidate."
-        return (f"Tier {tiers[-1]['qualification_tier']}, the highest tier, has only held tasks, so while they are "
+        top = non_stretch[-1]
+        if top is tiers[-1]:
+            return (f"Tier {top['qualification_tier']}, the highest tier, has only held tasks, so while they are "
+                    "held this view never shows PASS: a candidate that passes every counted tier gets HELD.")
+        return (f"Tier {top['qualification_tier']}, the highest non-stretch tier, has only held tasks, so while they are "
                 "held this view never shows PASS: a candidate that passes every counted tier gets HELD.")
 
     for view in report["views"]:
@@ -309,10 +317,12 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
         if status_rule:
             lines += ["", status_rule]
         for tier in view["tiers"]:
-            held_only = (tier["counts"].get("held") or tier["counts"].get("stretch")) and not tier["counts"]["required"]
+            held_only = tier["counts"].get("held") and not tier["counts"]["required"]
+            stretch_only = tier["counts"].get("stretch") and not tier["counts"]["required"] and not tier["counts"].get("held")
             lines += ["", f"### Tier {tier['qualification_tier']}: {tier['name']}", "", count_text(tier) + "." +
                       (" Nothing here is counted while these tasks are held, so this tier's status is HELD: "
-                       "it neither passes nor stops later tiers." if held_only else ""), ""]
+                       "it neither passes nor stops later tiers." if held_only else
+                       " Nothing here is counted in required qualification; this tier's status is STRETCH and never blocks view-level PASS or later tiers." if stretch_only else ""), ""]
             lines += task_table(tier["tasks"]) if tier["tasks"] else ["No tasks assigned."]
     lines += ["", "## Tasks unassigned to any view", "",
               "These catalog tasks have no tier placement. Add an assignment to a view to include them in its policy.", ""]

@@ -507,9 +507,12 @@ Diagnostics remain visible without vetoing required passes. The hold and extensi
 share one uninterrupted execution; the extension cannot borrow another
 candidate's trained state or hide behind a passing ordinary hold.
 
-A view assigns each task a role (`required`, `stretch`, `held`, or `diagnostic`)
-and declares a view-level `ranking` policy (`order_by: ["qualified_tier", "candidate_id"]`,
-`metric_aggregation_allowed: false` — candidates rank by highest qualified tier,
+A view assigns each task a role (`required`, `stretch`, `held`, or `diagnostic`;
+legacy `ranking` is retained in `IMPORTANCES` only for schema compatibility)
+and declares a view-level `ranking` policy (`policy: "qualified_tier_only_with_raw_metrics"`,
+`compare_compatible_cohorts: true`, `cost_separate: true` in `configs/forge/views/*.json`,
+or `order_by: ["qualified_tier", "candidate_id"]`, `metric_aggregation_allowed: false`
+in `particlegan_forge` — candidates rank by highest qualified tier,
 never by summing raw metrics across tasks). **Stretch** (`importance: "stretch"`)
 is the single canonical role for optional, extra-credit, frontier, and held
 benchmark tasks: stretch tests are declared, run, graded, and displayed in their

@@ -511,7 +511,7 @@ def validate_view(view: dict, tasks: dict) -> None:
         if assignment["importance"] == "held":
             hold = assignment["hold"]
             held_parents = sorted(dep["task"] for dep in _dependencies(tasks[name])
-                                  if index[dep["task"]]["importance"] == "held")
+                                  if is_stretch(index[dep["task"]]))
             if hold["blocked_by"] != held_parents:
                 raise ValueError(f"{name}: hold blocked_by must list exactly its held prerequisites {held_parents}")
             if (hold["reason"] == "held_prerequisite") != bool(held_parents):
@@ -523,8 +523,9 @@ def validate_view(view: dict, tasks: dict) -> None:
                                      if is_stretch(index[dep["task"]]))
             if "blocked_by" in stretch and stretch["blocked_by"] != stretch_parents:
                 raise ValueError(f"{name}: stretch blocked_by must list its stretch prerequisites {stretch_parents}")
-            if stretch["reason"] in {"held_prerequisite", "stretch_prerequisite"} and not stretch_parents:
-                raise ValueError(f"{name}: stretch prerequisite reason requires a stretch prerequisite")
+            if stretch["reason"] in {"held_prerequisite", "stretch_prerequisite"}:
+                if not stretch_parents or stretch.get("blocked_by") != stretch_parents:
+                    raise ValueError(f"{name}: stretch prerequisite reason requires blocked_by listing stretch prerequisites {stretch_parents}")
         removal = assignment.get("removal")
         if removal and removal["reason"] == "phase":
             target = removal["counted_by"]
@@ -1158,12 +1159,13 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
     if eligibility:
         blockers = [{"task_id": None, "status": "BLOCKED", "reasons": eligibility}, *blockers]
     counted = [t["qualification_tier"] for t in tiers if t["status"] not in {"HELD", "STRETCH"}]
+    non_stretch = [t for t in tiers if t["status"] != "STRETCH"]
     complete = bool(counted) and qualified_tier == counted[-1]
     counted_eligible = bool(complete and not eligibility)
     allow_held = bool(allow_held_highest_tier or view.get("eligibility", {}).get("allow_held_highest_tier"))
     status = ("BLOCKED" if eligibility else
-              "PASS" if complete and (tiers[-1]["status"] != "HELD" or allow_held) else
-              "STRETCH" if not counted and any(t["status"] == "STRETCH" for t in tiers) else
+              "PASS" if complete and (non_stretch[-1]["status"] != "HELD" or allow_held) else
+              "STRETCH" if not non_stretch and bool(tiers) else
               "HELD" if complete or not counted else
               next((t["status"] for t in tiers if t["status"] not in {"HELD", "STRETCH"} and t["qualification_tier"] > qualified_tier),
                    "INCOMPLETE"))

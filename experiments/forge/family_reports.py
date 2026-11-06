@@ -1189,19 +1189,22 @@ def _uncounted_disclosure(summed, selected):
 
 
 def _held_top_tier_notes(summed):
-    """A view whose highest tier has only held tests never shows PASS."""
+    """A view whose highest non-stretch tier has only held tests never shows PASS."""
     counted = {view["id"]: sorted((a["task"], a["qualification_tier"]) for a in view["assignments"]
                                   if a["importance"] == "required") for view in summed}
     notes = []
     for view in summed:
-        top = max(a["qualification_tier"] for a in view["assignments"])
+        non_stretch_tiers = [a["qualification_tier"] for a in view["assignments"] if a["importance"] != "stretch"]
+        if not non_stretch_tiers:
+            continue
+        top = max(non_stretch_tiers)
         highest = [a for a in view["assignments"] if a["qualification_tier"] == top]
-        held = sorted(a["task"] for a in highest if is_stretch(a))
+        held = sorted(a["task"] for a in highest if a["importance"] == "held")
         if not held or any(a["importance"] == "required" for a in highest):
             continue
         if not counted[view["id"]]:
             # Nothing counted: name every held test of the view, not only its top tier.
-            held = sorted(a["task"] for a in view["assignments"] if is_stretch(a))
+            held = sorted(a["task"] for a in view["assignments"] if a["importance"] == "held")
         names, verb = ", ".join(held), "is" if len(held) == 1 else "are"
         same = [other["id"] for other in summed if other is not view and counted[other["id"]] == counted[view["id"]]]
         rule = "a recipe that passes every counted tier gets HELD, and a counted failure still shows as a failure."
@@ -1258,7 +1261,6 @@ def _stretch_section(root, page, progress, selected, report_tiers):
         return []
     stretch_total = len(stretch_assignments)
     stretch_distinct = len({a["task"] for a in stretch_assignments})
-    has_held_anchor = any(role_note(a) for a in stretch_assignments)
     cols = " | ".join(f"Tier {t} stretch" for t in report_tiers)
     div = " | ".join(["---"] + ["---:"] * (len(report_tiers) + 1))
     lines = [
@@ -1288,8 +1290,7 @@ def _stretch_section(root, page, progress, selected, report_tiers):
         cells = [label]
         for t in report_tiers:
             cells.append(link(root, page, score(tier_counts[t]), family["page"], f"{cohort['anchor']}-tier-{t}"))
-        total_anchor = f"{cohort['anchor']}-held" if has_held_anchor else cohort["anchor"]
-        cells.append(link(root, page, score(total_count), family["page"], total_anchor))
+        cells.append(link(root, page, score(total_count), family["page"], f"{cohort['anchor']}-held"))
         lines.append("| " + " | ".join(cells) + " |")
     return lines + [""]
 
@@ -1839,10 +1840,12 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                         f"task dependencies passed first. Required counts (Tier {tier_label}): **{' / '.join(map(str, requirements))}**.")
                 if any(held_counts):
                     text += f" Held counts (measured and shown, not counted): **{' / '.join(map(str, held_counts))}**."
-                    top = max(a["qualification_tier"] for a in definition["assignments"])
-                    if not any(requirements):
+                    non_stretch_tiers = [a["qualification_tier"] for a in definition["assignments"] if a["importance"] != "stretch"]
+                    top = max(non_stretch_tiers, default=0)
+                    has_legacy_held = any(a["importance"] == "held" for a in definition["assignments"])
+                    if not any(requirements) and has_legacy_held:
                         text += " Nothing here is counted while these tests are held, so the view reports HELD."
-                    elif not requirements[top - 1] and any(is_stretch(a) and a["qualification_tier"] == top for a in definition["assignments"]):
+                    elif top and not requirements[top - 1] and any(a["importance"] == "held" and a["qualification_tier"] == top for a in definition["assignments"]):
                         text += (f" Its highest tier, Tier {top}, has only held tests, so while they are held the view "
                                  "never shows PASS: a recipe that passes every counted tier gets HELD.")
                 lines += [text, ""]

@@ -1084,7 +1084,7 @@ class ForgeWorkspace:
             # ``gated_by_lower_tier`` instead of having its status overwritten.
             gated = blocked_by_lower
             if not req:
-                t_status = "STRETCH" if any(a.importance == "stretch" for a in assigns) else "HELD"
+                t_status = "STRETCH" if (stretch and not held) else "HELD"
             else:
                 t_status = _tier_status(req_statuses)
                 if t_status != "PASS":
@@ -1106,15 +1106,16 @@ class ForgeWorkspace:
             tier_summaries[t_num] = ts_entry
 
         counted = [ts for _, ts in sorted(tier_summaries.items()) if ts["status"] not in {"HELD", "STRETCH"}]
+        non_stretch = [ts for _, ts in sorted(tier_summaries.items()) if ts["status"] != "STRETCH"]
         if view.evidence_scope == "research_diagnostic":
             overall = "DIAGNOSTIC"
         elif not counted:
-            overall = "STRETCH" if any(ts["status"] == "STRETCH" for ts in tier_summaries.values()) else "HELD"
+            overall = "STRETCH" if (not non_stretch and bool(tier_summaries)) else "HELD"
         else:
             first_open = next((ts for ts in counted if ts["status"] != "PASS"), None)
             if first_open is not None:
                 overall = "INCOMPLETE" if first_open["status"] == "NOT_RUN" else first_open["status"]
-            elif tier_summaries[max(tier_summaries)]["status"] == "HELD":
+            elif non_stretch[-1]["status"] == "HELD":
                 overall = "HELD"
             else:
                 overall = "PASS"

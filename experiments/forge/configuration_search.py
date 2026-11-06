@@ -406,8 +406,9 @@ def _qualification(trial, through_tier):
     """
     required = [task for task in trial["tasks"] if task["importance"] == "required"]
     held = [task for task in trial["tasks"] if task["importance"] == "held"]
+    stretch = [task for task in trial["tasks"] if task["importance"] in {"stretch", "held"}]
     tuning = [task for task in required if task["qualification_tier"] <= through_tier]
-    held_only = {task["qualification_tier"] for task in held} - {task["qualification_tier"] for task in required}
+    held_only = {task["qualification_tier"] for task in stretch} - {task["qualification_tier"] for task in required}
     tiers, qualified_tier = [], 0
     advancing = not trial.get("submission_blockers")
     for tier in sorted({task["qualification_tier"] for task in required}):

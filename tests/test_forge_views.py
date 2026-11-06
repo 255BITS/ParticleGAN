@@ -1021,3 +1021,26 @@ def test_stretch_assignments_and_stretch_tiers_never_block_qualification_or_pass
     with pytest.raises(ValueError, match="stretch reason"):
         validate_view(bad_reason, tasks)
 
+    # A pure STRETCH tier above a HELD tier must not flip a HELD view into PASS.
+    held_plus_stretch = simple_view(("a", 1, "required"), ("b", 2, "held"), ("c", 3, "stretch"))
+    held_plus_stretch["assignments"][1]["hold"] = hold("b", reason="unsolved")
+    validate_view(held_plus_stretch, tasks)
+    hps_out = qualify(held_plus_stretch, tasks, [receipt(tasks["a"]), receipt(tasks["b"]), receipt(tasks["c"])])
+    assert hps_out["status"] == "HELD" and not hps_out["eligible"] and hps_out["counted_eligible"] is True
+    assert hps_out["qualified_tier"] == 1 and hps_out["held_tiers"] == [2] and hps_out["stretch_tiers"] == [2, 3]
+
+    # Stretch prerequisite reason requires blocked_by listing stretch prerequisites.
+    dep_tasks = {n: simple_task(n) for n in "ab"}
+    dep_tasks["b"]["dependencies"] = [{"task": "a", "kind": "gate"}]
+    dep_view = simple_view(("a", 1, "stretch"), ("b", 2, "stretch"))
+    dep_view["assignments"][1]["stretch"] = {
+        "schema": "forge_stretch_v1",
+        "reason": "stretch_prerequisite",
+        "summary": "Depends on stretch task a and therefore requires blocked_by.",
+    }
+    with pytest.raises(ValueError, match="requires blocked_by"):
+        validate_view(dep_view, dep_tasks)
+    dep_view["assignments"][1]["stretch"]["blocked_by"] = ["a"]
+    validate_view(dep_view, dep_tasks)
+
+

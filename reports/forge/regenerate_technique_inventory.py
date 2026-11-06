@@ -406,7 +406,7 @@ def _validate_comparison_policy(actual, comparison):
         raise ValueError("comparison policy changes task identities, tiers or ordering")
     def structural(view):
         return [{key: value for key, value in assignment.items()
-                 if key not in {"importance", "hold", "removal"}}
+                 if key not in {"importance", "hold", "stretch", "removal"}}
                 for assignment in view["assignments"]]
     retained = set(comparison_tasks)
     if [item for item in structural(actual) if item["task"] in retained] != structural(comparison):

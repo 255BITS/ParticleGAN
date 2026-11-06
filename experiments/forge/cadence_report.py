@@ -71,7 +71,7 @@ def _assignments(summary, source_assignments):
     through = summary.get("tuning_through_tier", math.inf)
     for row in rows:
         name, tier, role = row.get("task"), row.get("qualification_tier"), row.get("importance")
-        if not isinstance(name, str) or type(tier) is not int or tier < 1 or role not in _ROLES:
+        if not isinstance(name, str) or type(tier) is not int or tier < 1 or role not in (*_ROLES, "stretch"):
             raise ValueError("cadence report requires task, qualification_tier and importance")
         if source_assignments is None and tier > through:
             continue
@@ -184,7 +184,8 @@ def build_report(summary, *, control_value=1, source_assignments=None):
         for tier in sorted({a["tier"] for a in assignments}):
             roles = {}
             for role in _ROLES:
-                cells = [a for a in assignments if a["tier"] == tier and a["importance"] == role]
+                cells = [a for a in assignments if a["tier"] == tier
+                         and (a["importance"] in {"stretch", "held"} if role == "held" else a["importance"] == role)]
                 statuses = Counter(rows.get(a["task"], {}).get("gate_status", "UNAVAILABLE") for a in cells)
                 roles[role] = {"denominator": len(cells), "pass": statuses.get("PASS", 0),
                                "fail": statuses.get("FAIL", 0),
