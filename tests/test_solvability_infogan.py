@@ -33,7 +33,6 @@ from particlegan import (
 from benchmarks.toy_audit.api_infogan import (
     CASE_ID,
     NUM_MODES,
-    RING_RADIUS,
     SIGMA_PARALLEL,
     SIGMA_PERP,
     InfoGANAnisotropicFixture,

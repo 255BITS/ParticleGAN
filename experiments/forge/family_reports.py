@@ -1160,7 +1160,10 @@ def _diagnostic_passers(selected, task):
 def _uncounted_disclosure(summed, selected):
     """What holding changed and what it did not, computed from recorded statuses."""
     counted = [a["task"] for view in summed for a in view["assignments"] if a["importance"] == "required"]
-    uncounted = [a for view in summed for a in view["assignments"] if role_note(a)]
+    uncounted = [
+        a for view in summed for a in view["assignments"]
+        if a.get("importance") == "held" or "removal" in a
+    ]
     if not uncounted:
         return []
     passes = sum(cohort["tasks"][a["task"]]["status"] == "PASS" for _, cohort in selected for a in uncounted)

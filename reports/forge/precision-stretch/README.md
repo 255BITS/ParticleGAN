@@ -7,7 +7,10 @@ learn `N(2, 0.5²)` from scratch with **NVFP4 (4-bit)** or **MXFP8 (8-bit)**
 linear training. `precision_gaussian_fp32` is their matched diagnostic control.
 They belong to `discriminator_stability` revision 15, never gate required
 qualification, and appear in the existing technique inventory's stretch table.
-The new dated full-suite list appends both tests, preserving all 49 older tests.
+The new dated full-suite list includes the nine existing GAN formulation
+stretch tests and both precision tests, preserving all 49 older tests.
+The [view archive receipt](view-provenance.json) pins the initial proposal and
+the exact updated `develop` parent under their original Git/blob identities.
 
 ## Frozen question and numerical gates
 
@@ -27,7 +30,7 @@ histogram bins affect GIF presentation only. Each task reserves 300 seconds,
 including evaluation and its actual-training GIF. The three tasks add at most
 900 seconds per candidate to a through-Tier-1 plan. Existing campaigns retain
 their original caps; inspect the expanded plan before admission.
-The read-only CPU BISPF plan reserves 5,340 seconds through Tier 1 and 62,820
+The read-only CPU BISPF plan reserves 5,340 seconds through Tier 1 and 70,620
 seconds through Tier 4. The historical 46,620-second per-candidate inventory
 campaign does not cover that full Tier 4 scope; a full-suite submission needs
 an explicitly adequate campaign. No full-budget family run was launched here.
@@ -74,7 +77,8 @@ Blackwell training or claim speed/memory savings.
 
 The [software validation receipt](software/validation.json) records three genuine
 public-trainer updates in each precision condition, matching initial master
-parameters and target batches, finite gradients/state and isolated RNGs. Actual
+parameters and target batches, finite gradients/state and isolated RNGs. The
+receipt retains its original source commit and hashes. Actual
 training: [FP32](software/fp32.gif), [8-bit](software/mxfp8.gif),
 [4-bit](software/nvfp4.gif). These are explicitly **INCOMPLETE** prefixes of the
 1,000-update tests; they establish execution/media/checkpoint behavior only.

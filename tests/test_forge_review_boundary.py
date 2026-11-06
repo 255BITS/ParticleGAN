@@ -188,8 +188,9 @@ def test_committed_inventory_reports_against_the_fixed_dated_list():
     fixed = load_fixed_test_list(ROOT)
     previous = load_fixed_test_list(ROOT, "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json")
     assert previous and len(previous["tests"]) == 49
-    assert fixed and fixed["dated"] == "2026-11-06" and len(fixed["tests"]) == 51
-    assert set(fixed["tests"]) - set(previous["tests"]) == {"precision_gaussian_mxfp8", "precision_gaussian_nvfp4"}
+    assert fixed and fixed["dated"] == "2026-11-06" and len(fixed["tests"]) == 60
+    view = views.load_view(ROOT, "discriminator_stability")
+    assert set(fixed["tests"]) - set(previous["tests"]) == {a["task"] for a in view["assignments"] if a["importance"] == "stretch"}
     text = (ROOT / "reports/forge/technique-inventory.md").read_text()
     section = text.split("## Full-suite results — failures included", 1)[1].split("## ", 1)[0]
     assert f"fixed test list `{fixed['id']}`" in section

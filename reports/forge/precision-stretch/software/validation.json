@@ -377,6 +377,7 @@
     "z_dim": 2
   },
   "schema": "forge_precision_software_validation_v1",
+  "source_commit": "754bc853966869772f1c192850d0a62581d342de",
   "task_delta": {
     "evaluation.observations": 3,
     "execution.steps": 3,

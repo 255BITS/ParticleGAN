@@ -12,7 +12,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from particlegan import MoGParticlePrior, ParticlePrior, Recipe, get_recipe, init, scale_learning_rates
+from particlegan import MoGParticlePrior, Recipe, get_recipe, init, scale_learning_rates
 from particlegan.bispf import _attach_critic_input_hook, bind_thermal_source
 from particlegan.optim.constraint_geometry import constraint_geometry_backward
 from particlegan.priors import ManipulatedPrior, unwrap_prior

@@ -519,6 +519,7 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
         if full_suite_card.is_file()
         else None
     )
+    current_scope_names = set(full_suite_names or [])
     # This integrity stage checks the source-bound published coverage, not
     # experiments introduced after that source was frozen. Surface new cells
     # separately; completing them requires new compatible evidence, never a
@@ -541,7 +542,7 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
     commit_tasks_cache: dict[str, set[str]] = {}
     for family, selection, tasks in selected:
         if full_suite_names is not None:
-            available = list(full_suite_names)
+            available = full_suite_names if scope is not None else sorted({*full_suite_names, *tasks})
         else:
             commit = _selected_family_source_commit(root, publication, family, selection)
             if commit not in commit_tasks_cache:
@@ -590,6 +591,9 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
         missing = sorted(set(available) - covered_by_family.get(family, set()))
         if missing:
             missing_by_family[family] = {"candidate_id": cid, "missing_tasks": missing}
+    if scope is not None:
+        unmeasured_current_tasks = sorted(name for name in current_scope_names
+            if any(name not in covered for covered in covered_by_family.values()))
 
     current = pending == 0 and running == 0 and not superseded_records and not missing_by_family
     return {

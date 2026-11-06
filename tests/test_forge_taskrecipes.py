@@ -40,7 +40,9 @@ def test_original_24_task_adaptations_stay_ready_and_original_reference_stays_bl
                  "five_word_joint_hold", "clockfree_audit_measurement_v1", "zero_tanh_smoke",
                  "zero_tanh_rail_escape", "grid100_mlp16", "grid100_res16_tanh", "misgan_block_recovery",
                  "misgan_block_neural_imputer", "ring16_bigan_continuous"}
-    original_hosts = set(adapted["tasks"]) - additions
+    original_view = json.loads((ROOT / "reports/forge/precision-stretch/initial-view-v14.json").read_text())
+    original_hosts = set(adapted["tasks"]) & {a["task"] for a in original_view["assignments"]}
+    original_hosts -= additions
     original_hosts -= {name for name, task in adapted["tasks"].items() if task["adapter"] == "public_api_model_toy"}
     original_hosts -= {name for name, task in adapted["tasks"].items() if "linear_precision" in task["execution"]}
     assert additions <= set(adapted["tasks"]) and len(original_hosts) == 24

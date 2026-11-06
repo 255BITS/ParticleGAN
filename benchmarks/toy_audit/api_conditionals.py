@@ -17,7 +17,7 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from particlegan import MoGParticlePrior, ParticlePrior, get_recipe, init, scale_learning_rates
+from particlegan import MoGParticlePrior, get_recipe, init, scale_learning_rates
 from particlegan.optim.constraint_geometry import constraint_geometry_backward
 from particlegan.priors import ManipulatedPrior, unwrap_prior
 from lib.sparse_toy import SparseMixedToy

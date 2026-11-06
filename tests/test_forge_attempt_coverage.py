@@ -269,6 +269,7 @@ def test_holding_or_removing_tests_keeps_the_committed_selected_universe():
     # union. The FP32 diagnostic does not enter this counted/stretch universe.
     old = read_json(Path(__file__).resolve().parents[1] /
                     "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json")
-    expected = set(old["tests"]) | {"ring_hold", "precision_gaussian_nvfp4", "precision_gaussian_mxfp8"}
+    view = read_json(Path(__file__).resolve().parents[1] / "configs/forge/views/discriminator_stability.json")
+    expected = set(old["tests"]) | {"ring_hold"} | {a["task"] for a in view["assignments"] if a["importance"] == "stretch"}
     assert universe and all(set(tasks) == expected for _, _, tasks in universe)
     assert runner.selected_tasks(counted) == runner.selected_tasks(uncounted) == universe

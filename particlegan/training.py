@@ -642,7 +642,6 @@ class GANTrainer:
 
     def state_dict(self):
         """Return an independent checkpoint (the training iterate; the served average is derived); save the caller's data cursor too."""
-        self._check_checkpoint_boundary()
         swapped = self._fast is not None
         self._serve_release()
         try:
@@ -688,17 +687,10 @@ class GANTrainer:
                if self.policy.loss_surprise is not None else {}),
             **({"reopen_guard": self.policy.reopen_guard.state_dict()}
                if self.policy.reopen_guard is not None else {}),
-            **({"gradient_response": self._gradient_response.state_dict()}
-               if self._gradient_response is not None else {}),
         })
-
-    def _check_checkpoint_boundary(self):
-        if self._in_training_step or self.policy._phase != "ready":
-            raise RuntimeError("trainer checkpoints require a completed update boundary")
 
     def load_state_dict(self, state):
         """Restore a compatible checkpoint, including global PyTorch RNG state (a rejected checkpoint leaves the served model served)."""
-        self._check_checkpoint_boundary()
         served = self._fast is not None
         try:
             return self._load_state_dict(state)
@@ -729,9 +721,6 @@ class GANTrainer:
                 or state.get("serial_backward", False) != self.serial_backward):
             raise ValueError("checkpoint serial_backward execution mode does not match trainer; "
                              "resume unmarked or False historical checkpoints from their pinned original source")
-        if self._gradient_response is not None and isinstance(state, dict) and "gradient_response" not in state:
-            raise ValueError("checkpoint lacks gradient response history; resume it with its original source "
-                             "or start a new run; exact continuation cannot reconstruct omitted history")
         allowed = [set(expected), set(expected) - {"policy"}]
         if self.policy.loss_surprise is not None:
             allowed.extend([s - {"loss_surprise"} for s in list(allowed)])
@@ -757,14 +746,6 @@ class GANTrainer:
         steps = state["completed_steps"]
         if type(steps) is not int or steps < 0 or (self.max_steps is not None and steps > self.max_steps):
             raise ValueError("invalid checkpoint step count")
-        gradient_response = None
-        if self._gradient_response is not None:
-            gradient_response = deepcopy(self._gradient_response)
-            gradient_response.load_state_dict(state["gradient_response"], self.G.parameters())
-            if steps and (gradient_response.packet is None
-                          or gradient_response.packet["count"] < steps
-                          or gradient_response.response["applied_steps"] < steps):
-                raise ValueError("incomplete checkpoint gradient response history")
         rates = state["initial_lrs"]
         if (not isinstance(rates, list) or len(rates) != 2
                 or any(not isinstance(a, list) or len(a) != len(b) for a, b in zip(rates, self.initial_lrs))
@@ -898,7 +879,6 @@ class GANTrainer:
             self.policy.reopen_guard.load_state_dict(state["reopen_guard"], roles=self.policy.roles,
                                                      completed_steps=state["completed_steps"],
                                                      anchor_started=self.policy._loss_epoch(state["optimizers"][1]))
-        self._gradient_response = gradient_response
         self.initial_lrs, self.completed_steps = deepcopy(rates), steps
         self.last_output_sigma = None if metadata is None else metadata["last_output_sigma"]
         for name, value in state["streams"].items():

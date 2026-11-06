@@ -75,51 +75,16 @@ class GradientCoherence:
         ))
 
     def load_state_dict(self, value, parameters):
-        """Validate all history before restoring, preserving its float64 accumulators."""
-        parameters = tuple(parameters)
-        if (not isinstance(value, dict) or type(value.get("schema")) is not int
-                or value["schema"] != 1 or value.get("mode") != self.mode):
+        if value.get("schema") != 1 or value.get("mode") != self.mode:
             raise ValueError("gradient response checkpoint identity mismatch")
-        if set(value) != {"schema", "mode", "beta", "min_gain", "power", "packet", "response"}:
-            raise ValueError("invalid gradient response checkpoint schema")
-        for key in ("beta", "min_gain", "power"):
-            if type(value[key]) not in (int, float) or not math.isfinite(value[key]) or value[key] <= 0:
-                raise ValueError("invalid gradient response configuration")
-        if value["beta"] >= 1 or value["min_gain"] > 1:
-            raise ValueError("invalid gradient response configuration")
-        response = value["response"]
-        if (not isinstance(response, dict) or set(response) != {"applied_steps"}
-                or type(response["applied_steps"]) is not int or response["applied_steps"] < 0):
-            raise ValueError("invalid gradient response step counter")
-        packet = value["packet"]
-        if packet is None and response["applied_steps"]:
-            raise ValueError("gradient response history is missing for applied steps")
+        self.beta = value.get("beta", 7 / 8)
+        self.min_gain = value.get("min_gain", 0.015)
+        self.power = value.get("power", 1.0)
+        self.response = deepcopy(value.get("response", dict(applied_steps=0)))
+        packet = value.get("packet")
         if packet is not None:
-            if (not isinstance(packet, dict)
-                    or set(packet) != {"means", "second", "weight", "weight2", "count", "last"}
-                    or type(packet["count"]) is not int or packet["count"] < 1):
-                raise ValueError("invalid gradient response history schema")
-            if response["applied_steps"] > packet["count"]:
-                raise ValueError("gradient response steps exceed observed history")
-            means, second = packet["means"], packet["second"]
-            if (not parameters or not isinstance(means, list) or len(means) != len(parameters)
-                    or any(not isinstance(m, torch.Tensor) or m.layout != torch.strided
-                           or m.shape != p.shape or m.dtype != torch.float64 or not bool(torch.isfinite(m).all())
-                           for m, p in zip(means, parameters))
-                    or not isinstance(second, torch.Tensor) or second.layout != torch.strided
-                    or second.ndim != 0 or second.dtype != torch.float64
-                    or not bool(torch.isfinite(second)) or bool(second < 0)):
-                raise ValueError("invalid gradient response history tensors")
-            for key in ("weight", "weight2"):
-                if type(packet[key]) not in (int, float) or not math.isfinite(packet[key]) or not 0 < packet[key] <= 1:
-                    raise ValueError("invalid gradient response history weight")
-            last = packet["last"]
-            if (not isinstance(last, dict) or set(last) != {"gain", "coherence", "mean_square", "second_moment"}
-                    or any(type(x) not in (int, float) or not math.isfinite(x) or x < 0 for x in last.values())
-                    or not value["min_gain"] <= last["gain"] <= 1 or last["coherence"] > 1):
-                raise ValueError("invalid gradient response history diagnostics")
-            packet = deepcopy(packet)
-            packet["means"] = [m.to(p.device) for m, p in zip(packet["means"], parameters)]
-            packet["second"] = packet["second"].to(parameters[0].device)
-        self.beta, self.min_gain, self.power = value["beta"], value["min_gain"], value["power"]
-        self.response, self.packet = deepcopy(response), packet
+            self.packet = deepcopy(packet)
+            self.packet["means"] = [m.to(p.device) for m, p in zip(self.packet["means"], parameters)]
+            self.packet["second"] = self.packet["second"].to(parameters[0].device)
+        else:
+            self.packet = None
