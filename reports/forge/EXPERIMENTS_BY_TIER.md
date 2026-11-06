@@ -2,9 +2,9 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **178 tasks**; **141 assigned** to at least one view; **37 unassigned**. Showing **27/27 views**.
+Catalog: **187 tasks**; **141 assigned** to at least one view; **46 unassigned**. Showing **27/27 views**.
 
-Declared priors across the catalog: **71 MoGParticlePrior**, **107 ParticlePrior** (including **10 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
+Declared priors across the catalog: **80 MoGParticlePrior**, **107 ParticlePrior** (including **10 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
 Reproducible comparisons use the fixed screening seed `0` and candidate-independent named RNG streams. Within each task, candidates share architecture, data law, batch size, prior, initialization, training budget, evaluation cadence and sampling law. Only the declared trainer change varies. The initialization column exposes fixed controls and component policies that take precedence over the deterministic orthogonal fallback; these are separate comparison cohorts. Historical results retain their original bindings.
 
@@ -1548,11 +1548,20 @@ These catalog tasks have no tier placement. Add an assignment to a view to inclu
 
 | Task | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| [alice_spiral_bigan](../../configs/forge/tasks/alice_spiral_bigan.json) | MoGParticlePrior (sigma=0.06) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-alice-spiral-bigan) | transfer_vector / alice_spiral_bigan | 4000 | 600 | — |
+| [cgan_overlapping_classes](../../configs/forge/tasks/cgan_overlapping_classes.json) | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-cgan-overlapping-classes) | transfer_vector / cgan_overlapping_classes | 3000 | 600 | — |
+| [cramer_energy_overlap](../../configs/forge/tasks/cramer_energy_overlap.json) | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-cramer-energy-overlap) | transfer_vector / cramer_energy_overlap | 3000 | 600 | — |
+| [cyclegan_unpaired_constellation](../../configs/forge/tasks/cyclegan_unpaired_constellation.json) | MoGParticlePrior (sigma=0.08) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-cyclegan-unpaired-constellation) | transfer_vector / cyclegan_unpaired_constellation | 3500 | 600 | — |
 | [five_word_joint_acquisition](../../configs/forge/tasks/five_word_joint_acquisition.json) | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-five-word-joint) | word_joint / transfer_sustained | 20001 | 900 | — |
 | [gaussian1d_acquisition](../../configs/forge/tasks/gaussian1d_acquisition.json) | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / transfer_sustained | 1000 | 120 | — |
 | [gaussian1d_shallow_smoke](../../configs/forge/tasks/gaussian1d_shallow_smoke.json) | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / gaussian_smoke | 1000 | 120 | — |
 | [gaussian1d_shallow_stability](../../configs/forge/tasks/gaussian1d_shallow_stability.json) | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / gaussian_stability | 6000 | 600 | [gaussian1d_shallow_smoke](../../configs/forge/tasks/gaussian1d_shallow_smoke.json) (checkpoint) |
 | [grid100_affine_square_named_v1_14k](../../configs/forge/tasks/grid100_affine_square_named_v1_14k.json) | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; component policy; screening | [Question, results, GIFs](#experiment-grid100) | native100_continuation / native_accuracy | 14000 total; 7000 additional | 7200 | [grid100_affine_square_named_v1](../../configs/forge/tasks/grid100_affine_square_named_v1.json) (checkpoint); [clockfree_audit](../../configs/forge/tasks/clockfree_audit.json) (gate) |
+| [infogan_anisotropic_modes](../../configs/forge/tasks/infogan_anisotropic_modes.json) | MoGParticlePrior (sigma=0.05) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-infogan-anisotropic-modes) | transfer_vector / infogan_anisotropic_modes | 3500 | 600 | — |
+| [misgan_mcar_p50_recovery](../../configs/forge/tasks/misgan_mcar_p50_recovery.json) | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-misgan-mcar-p50-recovery) | transfer_vector / misgan_mcar_p50_recovery | 4000 | 1800 | — |
+| [misgan_mcar_p80_anchored](../../configs/forge/tasks/misgan_mcar_p80_anchored.json) | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-misgan-mcar-p80-anchored) | transfer_vector / misgan_mcar_p80_anchored | 4000 | 1800 | — |
+| [pacgan8_grid100](../../configs/forge/tasks/pacgan8_grid100.json) | MoGParticlePrior (sigma=0.05) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-pacgan8-grid100) | transfer_vector / pacgan8_grid100 | 4000 | 600 | — |
+| [pacgan_unequal_mass](../../configs/forge/tasks/pacgan_unequal_mass.json) | MoGParticlePrior (sigma=0.05) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-pacgan-unequal-mass) | transfer_vector / pacgan_unequal_mass | 3000 | 600 | — |
 | [recipe-prior-refactor-legacy-ae_gan_hold](../../configs/forge/tasks/recipe-prior-refactor-legacy-ae_gan_hold.json) | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-ae-gan-hold) | transfer_behavior / transfer_sustained | 250 | 300 | — |
 | [recipe-prior-refactor-legacy-clockfree_audit_measurement_v1](../../configs/forge/tasks/recipe-prior-refactor-legacy-clockfree_audit_measurement_v1.json) | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-recipe-prior-refactor-legacy-clockfree-audit-measurement-v1) | clockfree_audit / clockfree_parity | 24 | 300 | — |
 | [recipe-prior-refactor-legacy-cover_leftover](../../configs/forge/tasks/recipe-prior-refactor-legacy-cover_leftover.json) | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-cover-leftover) | transfer_behavior / transfer_sustained | 800 | 1800 | — |
@@ -1689,6 +1698,37 @@ Related public-API demonstrations, with their own recorded contracts:
 | [api-ae-anchor-hold](../toy_audit/api_contract/media/api-ae-anchor-hold.gif) | Reconstruct the noisy two-anchor inputs while the independently sampled prior covers both anchors Scope: New public Recipe.encode particle AE with reconstruction weight1 and applied GAN/KA2; independently sampled prior quality is separately scored. | MoGParticlePrior (sigma_rel=0.025) | COMPLETE / FAIL; 250/250 updates; quality_fraction, quality_mass_tv, last 5 post-update metric observations do not all pass | ae_gan / cpu / 3efb003d4c86 | [definition](../toy_audit/api_contract/cases.json); [readout](../toy_audit/api_contract/readout.json); [recipe and provenance](../toy_audit/api_contract/runs.json) |
 | [api-model-ae-gan-multimodal](../toy_audit/api_contract/model_modes/media/api-model-ae-gan-multimodal.gif) | Reconstruct four equally weighted noisy corner Gaussians and independently generate their modes, masses and within-mode shapes. Scope: Four equally weighted Gaussians at (+/-1,+/-1), sigma=.08; independently drawn target and prior samples. Reconstruction and all prior gates must pass together. | MoGParticlePrior (sigma_rel=0) | COMPLETE / PASS; 1200/1200 updates; recomputed complete live curve and terminal suffix | bispf / cpu / 1e57b5216ea3 | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
 | [api-model-ae-reconstruction](../toy_audit/api_contract/model_modes/media/api-model-ae-reconstruction.gif) | Reconstruct four equally weighted noisy corner Gaussians with public deterministic particle-AE routing and bounded offsets; explicit reconstruction-only objective control. Scope: Four equally weighted Gaussians at (+/-1,+/-1), sigma=.08; independently drawn target and prior samples. Explicit reconstruction-only objective control; independent generation is measured but not required. | MoGParticlePrior (sigma_rel=0) | COMPLETE / PASS; 1200/1200 updates; recomputed complete live curve and terminal suffix | bispf / cpu / 1e57b5216ea3 | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
+
+### Experiment: alice-spiral-bigan
+
+Continuous 2D Archimedes spiral joint (G(z), E(x), D(x, z)) with ALICE cycle-consistency regularization and MoGParticlePrior(sigma=0.06).
+
+Forge declarations: [alice_spiral_bigan](../../configs/forge/tasks/alice_spiral_bigan.json).
+
+Declared Forge numerical gates and sampling:
+
+[alice_spiral_bigan](../../configs/forge/tasks/alice_spiral_bigan.json)
+
+| Metric | Required bound |
+| --- | --- |
+| arc_bins | >= 15 |
+| hq | >= 0.85 |
+| mass_tv | <= 0.16 |
+| recon_rmse | <= 0.14 |
+| latent_recon_rmse | <= 0.25 |
+| arc_consistency | >= 0.9 |
+
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.06) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | — |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
 
 ### Experiment: api-model-ae-ddgan-bimodal-chain
 
@@ -2090,6 +2130,37 @@ Related public-API demonstrations, with their own recorded contracts:
 | --- | --- | --- | --- | --- | --- |
 | [api-model-vae-hard](../toy_audit/api_contract/model_modes/media/api-model-vae-hard.gif) | Can a genuine particle VAE retain the input and posterior noise while independently generating both target modes? Scope: New constrained two-mode seed-0 public-component cohort; does not reproduce or qualify historical 100-mode results. Hard routing has constant log(K) KL and biased straight-through gradients; categorical routing uses the public leave-one-out score estimator and a variable KL. A stochastic no-KL AE is not a VAE. | MoGParticlePrior (sigma_rel=0) | COMPLETE / FAIL; 1200/1200 updates; last 5 post-update metric observations do not all pass | bispf / cpu / 48177d41bb0b | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
 
+### Experiment: cgan-overlapping-classes
+
+Conditional GAN with Projection Discriminator / UCD on 4 overlapping 2D Gaussian classes (sigma=0.35), testing preservation of within-class variance and central overlap density against AC-GAN boundary repulsion.
+
+Forge declarations: [cgan_overlapping_classes](../../configs/forge/tasks/cgan_overlapping_classes.json).
+
+Declared Forge numerical gates and sampling:
+
+[cgan_overlapping_classes](../../configs/forge/tasks/cgan_overlapping_classes.json)
+
+| Metric | Required bound |
+| --- | --- |
+| classes_covered | == 4 |
+| class_mass_tv | <= 0.08 |
+| mean_center_err | <= 0.12 |
+| min_cov_eig_ratio | >= 0.6 |
+| max_cov_eig_ratio | <= 1.5 |
+| overlap_density_ratio | >= 0.55 |
+
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | — |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
+
 ### Experiment: clockfree-audit
 
 Check saved public trainer state under step_label, horizon, evaluation_cadence, restart perturbations.
@@ -2288,6 +2359,68 @@ Related public-API demonstrations, with their own recorded contracts:
 | Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | [api-guarded-leftover](../toy_audit/api_contract/media/api-guarded-leftover.gif) | Cover both signed poles while preserving content and removing the guarded leak Scope: New caller-owned clean paired-error RpGAN/KA2 host; historical results remain unchanged. | MoGParticlePrior (sigma_rel=0.25) | COMPLETE / PASS; 800/800 updates | conditional_ka2 / cpu / 58bcb6febe12 | [definition](../toy_audit/api_contract/cases.json); [readout](../toy_audit/api_contract/readout.json); [recipe and provenance](../toy_audit/api_contract/runs.json) |
+
+### Experiment: cramer-energy-overlap
+
+CramerGAN two-sample unbiased energy distance (Bellemare et al., NeurIPS 2017) on 9-mode 3x3 overlapping heterogeneous-mass 2D Gaussian mixture.
+
+Forge declarations: [cramer_energy_overlap](../../configs/forge/tasks/cramer_energy_overlap.json).
+
+Declared Forge numerical gates and sampling:
+
+[cramer_energy_overlap](../../configs/forge/tasks/cramer_energy_overlap.json)
+
+| Metric | Required bound |
+| --- | --- |
+| modes | == 9 |
+| hq | >= 0.88 |
+| mass_tv | <= 0.1 |
+| energy_distance | <= 0.06 |
+| min_cov_eig_ratio | >= 0.35 |
+
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.1) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | — |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
+
+### Experiment: cyclegan-unpaired-constellation
+
+Unpaired 2D domain translation and mode-level bijection (G_xy, G_yx, D_y, D_x) between an 8-mode ring (R=2.5, sigma=0.08) and an 8-mode square-perimeter constellation ({-2, 0, +2}^2 \ {(0, 0)}, sigma=0.08) with cycle-consistency regularization (Zhu et al. ICCV 2017; Kim et al. ICML 2017).
+
+Forge declarations: [cyclegan_unpaired_constellation](../../configs/forge/tasks/cyclegan_unpaired_constellation.json).
+
+Declared Forge numerical gates and sampling:
+
+[cyclegan_unpaired_constellation](../../configs/forge/tasks/cyclegan_unpaired_constellation.json)
+
+| Metric | Required bound |
+| --- | --- |
+| modes_y | >= 7 |
+| modes_x | >= 7 |
+| hq_y | >= 0.85 |
+| hq_x | >= 0.85 |
+| mass_tv_y | <= 0.15 |
+| cycle_rmse | <= 0.12 |
+| bijection_ber | <= 0.15 |
+
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.08) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | — |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
 
 ### Experiment: dcgan-performance-b64
 
@@ -3437,6 +3570,38 @@ Related public-API demonstrations, with their own recorded contracts:
 | [image-develop-img_stripes2-residual_upsample16](../toy_audit/api_contract/media/image-develop-img_stripes2-residual_upsample16.gif) | Recover both centered horizontal and vertical stripes with pixel contrast and balanced output mass. Scope: Recover both centered horizontal and vertical stripes with pixel contrast and balanced output mass. | ParticlePrior (sigma=0) | COMPLETE / PASS; 600/600 updates | atlas / cpu / 39eff89a9223 | [definition](../toy_audit/api_contract/cases.json); [readout](../toy_audit/api_contract/readout.json); [recipe and provenance](../toy_audit/api_contract/runs.json) |
 | [image-develop-img_stripes2-source-transpose12](../toy_audit/api_contract/media/image-develop-img_stripes2-source-transpose12.gif) | Recover both centered horizontal and vertical stripes with pixel contrast and balanced output mass. Scope: Recover both centered horizontal and vertical stripes with pixel contrast and balanced output mass. | ParticlePrior (sigma=0) | COMPLETE / PASS; 600/600 updates | atlas / cpu / 39eff89a9223 | [definition](../toy_audit/api_contract/cases.json); [readout](../toy_audit/api_contract/readout.json); [recipe and provenance](../toy_audit/api_contract/runs.json) |
 
+### Experiment: infogan-anisotropic-modes
+
+Variational mutual information InfoGAN (G([z, c_disc, c_cont]), D(x), Q(c\|x)) on 8 rotated anisotropic 2D Gaussians arranged on a ring (R=3.0, sigma_parallel=0.25, sigma_perp=0.05).
+
+Forge declarations: [infogan_anisotropic_modes](../../configs/forge/tasks/infogan_anisotropic_modes.json).
+
+Declared Forge numerical gates and sampling:
+
+[infogan_anisotropic_modes](../../configs/forge/tasks/infogan_anisotropic_modes.json)
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 8 |
+| hq | >= 0.85 |
+| mass_tv | <= 0.12 |
+| discrete_nmi | >= 0.85 |
+| q_acc | >= 0.9 |
+| continuous_r2 | >= 0.65 |
+
+At least 5 consecutive passing terminal observations.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.05) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | — |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
+
 ### Experiment: mid-scale-identity
 
 Checks identity preservation and target edit magnitude at intermediate control strength.
@@ -3576,6 +3741,70 @@ Declared Forge numerical gates and sampling:
 | mask_tv | <= 0.05 |
 | acc | >= 0.96 |
 | acc_lo | >= 0.7 |
+
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | — |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
+
+### Experiment: misgan-mcar-p50-recovery
+
+2-pair incomplete-data MisGAN on 8D MCAR p=0.5 coordinate-wise dropout (resampling empty masks); recovers 2D 100-mode manifold, 8D subspace, MCAR coordinate observation rate and ppost Bayesian imputation.
+
+Forge declarations: [misgan_mcar_p50_recovery](../../configs/forge/tasks/misgan_mcar_p50_recovery.json).
+
+Declared Forge numerical gates and sampling:
+
+[misgan_mcar_p50_recovery](../../configs/forge/tasks/misgan_mcar_p50_recovery.json)
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 90 |
+| hq | >= 0.85 |
+| mass_tv | <= 0.12 |
+| off_plane | <= 0.05 |
+| mask_tv | <= 0.05 |
+| acc | >= 0.9 |
+| impute_rmse | <= 0.12 |
+
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | — |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
+
+### Experiment: misgan-mcar-p80-anchored
+
+3-pair MisGAN on 8D extreme MCAR p=0.80 missingness with 10% complete anchor rows and neural imputer G_i trained with GAIN partial-hint conditioning on D_i([x_imp, h]).
+
+Forge declarations: [misgan_mcar_p80_anchored](../../configs/forge/tasks/misgan_mcar_p80_anchored.json).
+
+Declared Forge numerical gates and sampling:
+
+[misgan_mcar_p80_anchored](../../configs/forge/tasks/misgan_mcar_p80_anchored.json)
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 80 |
+| hq | >= 0.8 |
+| mass_tv | <= 0.15 |
+| off_plane | <= 0.06 |
+| imp_acc | >= 0.65 |
+| imp_off_plane | <= 0.06 |
+| impute_rmse | <= 0.18 |
 
 
 | Measurement | Declared condition |
@@ -3948,6 +4177,65 @@ Related public-API demonstrations, with their own recorded contracts:
 | Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | [api-model-ae-reconstruction](../toy_audit/api_contract/model_modes/media/api-model-ae-reconstruction.gif) | Reconstruct four equally weighted noisy corner Gaussians with public deterministic particle-AE routing and bounded offsets; explicit reconstruction-only objective control. Scope: Four equally weighted Gaussians at (+/-1,+/-1), sigma=.08; independently drawn target and prior samples. Explicit reconstruction-only objective control; independent generation is measured but not required. | MoGParticlePrior (sigma_rel=0) | COMPLETE / PASS; 1200/1200 updates; recomputed complete live curve and terminal suffix | bispf / cpu / 1e57b5216ea3 | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
+
+### Experiment: pacgan8-grid100
+
+PacGAN m=8 packed discriminator on 100-mode 10x10 2D Gaussian grid (centers in {-9,-7,...,7,9}^2, sigma=0.05) testing high-order product-measure mode coverage and within-mode covariance preservation.
+
+Forge declarations: [pacgan8_grid100](../../configs/forge/tasks/pacgan8_grid100.json).
+
+Declared Forge numerical gates and sampling:
+
+[pacgan8_grid100](../../configs/forge/tasks/pacgan8_grid100.json)
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 95 |
+| hq | >= 0.85 |
+| mass_tv | <= 0.15 |
+| min_cov_eig_ratio | >= 0.15 |
+
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.05) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | — |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
+
+### Experiment: pacgan-unequal-mass
+
+PacGAN m=4 packed discriminator on 5-mode 2D Gaussian ring (R=2.0, sigma=0.08) with unequal mode weights (0.40, 0.30, 0.20, 0.08, 0.02) testing rare 2% mode survival without within-mode covariance collapse.
+
+Forge declarations: [pacgan_unequal_mass](../../configs/forge/tasks/pacgan_unequal_mass.json).
+
+Declared Forge numerical gates and sampling:
+
+[pacgan_unequal_mass](../../configs/forge/tasks/pacgan_unequal_mass.json)
+
+| Metric | Required bound |
+| --- | --- |
+| modes | == 5 |
+| min_mode_mass | >= 0.01 |
+| mass_tv | <= 0.1 |
+| hq | >= 0.88 |
+| min_cov_eig_ratio | >= 0.2 |
+
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.05) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | — |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
 
 ### Experiment: recipe-prior-refactor-legacy-clockfree-audit-measurement-v1
 
@@ -5555,6 +5843,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `98c444176698d95dd00657df16cd742d7ff6ed782cdf727578c5988ec7d50606`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `fd3c4e26f1f2cef662f1c9b16572f77971761cc31bf18b561abfd1c56c2042d8`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `5bbd12292184aa36a1ee8685c51783d3358ec9b5970638d5151a9f22d253cb5b`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `bfbcb228210a9b6fe7afa0134f5f03ea269f52767e5559b88f1f5bc22b28e26f`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

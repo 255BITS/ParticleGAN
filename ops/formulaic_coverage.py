@@ -43,14 +43,27 @@ DDGAN_TASKS = frozenset(
         "model_ae_ddgan_bimodal_chain",
     }
 )
+STRETCH_FIXTURE_CASE_IDS = {
+    "misgan_block_recovery": "api-misgan-block-recovery",
+    "misgan_block_neural_imputer": "api-misgan-block-neural-imputer",
+    "misgan_mcar_p50_recovery": "api-misgan-mcar-p50-recovery",
+    "misgan_mcar_p80_anchored": "api-misgan-mcar-p80-anchored",
+    "pacgan_unequal_mass": "api-pacgan-unequal-mass",
+    "pacgan8_grid100": "api-pacgan8-grid100",
+    "ring16_bigan_continuous": "api-ring16-bigan-continuous",
+    "alice_spiral_bigan": "api-alice-spiral-bigan",
+    "infogan_anisotropic_modes": "api-infogan-anisotropic-modes",
+    "cgan_overlapping_classes": "api-cgan-overlapping-classes",
+    "cramer_energy_overlap": "api-cramer-energy-overlap",
+    "cyclegan_unpaired_constellation": "api-cyclegan-unpaired-constellation",
+}
+STRETCH_FIXTURE_TASKS = frozenset(STRETCH_FIXTURE_CASE_IDS)
 HELD_TIER34_TASKS = frozenset(
     {
         "zero_tanh_rail_escape",
         "grid100_mlp16",
         "grid100_res16_tanh",
-        "misgan_block_recovery",
-        "misgan_block_neural_imputer",
-        "ring16_bigan_continuous",
+        *STRETCH_FIXTURE_TASKS,
     }
 )
 CONTINUATION_PARENTS = {
@@ -99,7 +112,7 @@ def adapt_candidate_for_task(candidate: dict[str, Any], task: dict[str, Any]) ->
         overrides["output_noise_mode"] = "fixed"
         overrides["output_noise_std"] = 0.0
 
-    if tid in DDGAN_TASKS or "misgan" in tid:
+    if tid in DDGAN_TASKS or tid in STRETCH_FIXTURE_TASKS or "misgan" in tid:
         overrides["input_noise_std"] = 0.0
         overrides["output_noise_std"] = 0.0
         overrides["output_noise_mode"] = "fixed"
@@ -366,82 +379,44 @@ def _run_misgan_or_bigan_task(
     device: str,
 ) -> dict[str, Any]:
     import torch
+    from benchmarks.toy_audit.api_conditionals import build_case as build_conditional_case
+    from benchmarks.toy_audit.api_ring16 import build_case as build_ring16_case
     from experiments.forge.api import task_formulation_context
 
     t0 = time.perf_counter()
     seed = 0
     _seed_everything(seed)
     tid = task["id"]
-    steps = int(task["execution"].get("steps", 7000 if "misgan" in tid else 4000))
+    if tid not in STRETCH_FIXTURE_CASE_IDS:
+        raise ValueError(f"unsupported fixture task: {tid}")
+    case_id = STRETCH_FIXTURE_CASE_IDS[tid]
+    host_def = dict(task["execution"].get("host_definition") or {})
+    steps = int(task["execution"].get("steps", host_def.get("steps", 7000 if "misgan" in tid else 4000)))
     obs_count = int(task["evaluation"].get("observations", 24))
     min_stable = int(task["evaluation"].get("minimum_stable_checks", 5))
     eval_n = int(task["evaluation"].get("eval_samples", 4096))
     eval_seed = int(task["evaluation"].get("seed", 99123 if "misgan" in tid else 10000))
 
     task_for_ctx = deepcopy(task)
-    task_for_ctx["execution"]["model"] = {"hidden": 128, "layers": 3, "fourier": 2}
+    task_for_ctx["execution"]["model"] = {
+        "hidden": int(host_def.get("hidden", 128)),
+        "layers": int(host_def.get("layers", 3)),
+        "fourier": int(host_def.get("fourier", 2)),
+    }
     context = task_formulation_context(cand_adapted, task_for_ctx, {"seed": seed}, device=device, root=root)
-
-    def _fixture_recipe(batch_size: int, num_particles: int, z_dim: int, sigma_rel: float):
-        return context.recipe.replace(
-            batch_size=batch_size,
-            num_particles=num_particles,
-            z_dim=z_dim,
-            prior_kind="mog",
-            sigma_rel=sigma_rel,
-            standardize=False,
-            input_noise_std=0.0,
-            output_noise_std=0.0,
-            output_noise_mode="fixed",
-            lr_control="mobility",
-            continuous_policy=None,
-            reopen_signal="data",
-            reopen_anchor="hold",
-            reopen_guard=None,
-            particle_birth_death=False,
-            birth_death_space="data",
-            birth_death_feature_scale="none",
-            birth_death_isolation=False,
-            birth_death_backend="knn",
-            birth_death_cells=64,
-            birth_death_metric_rank=8,
-            birth_death_chunk=256,
-            row_evidence_gate=False,
-            row_policy="independent",
-            total_steps=steps,
-        )
-
-    if tid == "misgan_block_recovery":
-        from benchmarks.toy_audit.api_conditionals import CASES, MisGANRecoveryFixture
-
-        case_meta = deepcopy(CASES["api-misgan-block-recovery"])
-        fixture = MisGANRecoveryFixture(case_meta, device="cpu", seed=seed, max_steps=steps)
-        fixture.recipe = _fixture_recipe(case_meta["batch_size"], 128, 8, 0.25)
-        fixture.loss = fixture.recipe.make_loss()
-    elif tid == "misgan_block_neural_imputer":
-        from benchmarks.toy_audit.api_conditionals import CASES, MisGANNeuralImputerFixture
-
-        case_meta = deepcopy(CASES["api-misgan-block-neural-imputer"])
-        fixture = MisGANNeuralImputerFixture(case_meta, device="cpu", seed=seed, max_steps=steps)
-        fixture.recipe = _fixture_recipe(case_meta["batch_size"], 128, 8, 0.25)
-        fixture.loss = fixture.recipe.make_loss()
-    elif tid == "ring16_bigan_continuous":
-        from benchmarks.toy_audit.api_ring16 import Ring16BiGANFixture, _bigan_case
-
-        case_meta = _bigan_case()
-        fixture = Ring16BiGANFixture(case_meta, device=device, seed=seed, max_steps=steps)
-        fixture.recipe = _fixture_recipe(case_meta.get("batch_size", 128), 256, 2, 0.1)
-        groups = [
-            dict(params=list(fixture.G.parameters()), lr=fixture.recipe.lr),
-            dict(params=list(fixture.E.parameters()), lr=fixture.recipe.lr),
-        ]
-        fixture.opt_g = fixture.recipe.make_generator_optimizer(groups)
-        fixture.opt_d = fixture.recipe.make_critic_optimizer(fixture.D, ema_critic=deepcopy(fixture.D))
-        fixture.base_rates = [[group["lr"] for group in opt.param_groups] for opt in (fixture.opt_g, fixture.opt_d)]
-        fixture.loss = fixture.recipe.make_loss()
-        fixture.penalty = fixture.recipe.make_critic_penalty(fixture.opt_d)
-    else:
-        raise ValueError(f"unsupported fixture task: {tid}")
+    prior = context.build_prior()
+    builder = build_ring16_case if case_id in ("api-ring16-bigan-continuous", "api-alice-spiral-bigan") else build_conditional_case
+    fixture = builder(case_id, device=device, seed=seed, max_steps=steps, recipe_name="bispf")
+    recipe = context.recipe.replace(
+        batch_size=int(host_def.get("batch", getattr(fixture, "batch_size", 128))),
+        num_particles=int(host_def.get("particles", getattr(fixture, "particles", 256))),
+        z_dim=int(host_def.get("z_dim", getattr(fixture, "z_dim", 8))),
+        input_noise_std=0.0,
+        output_noise_std=0.0,
+        output_noise_mode="fixed",
+        total_steps=steps if context.recipe.continuous_policy is None else context.recipe.total_steps,
+    )
+    fixture.rebind_trainer(recipe, prior=prior)
 
     for opt in (getattr(fixture, "opt_g", None), getattr(fixture, "opt_d", None)):
         if opt is not None:
@@ -576,7 +551,7 @@ def execute_single_task(
         res = _run_zero_tanh_rail_escape(root, cand_adapted, task, device)
     elif task_name in {"grid100_mlp16", "grid100_res16_tanh"}:
         res = _run_grid100_deep_variant(root, cand_adapted, task, device)
-    elif task_name in {"misgan_block_recovery", "misgan_block_neural_imputer", "ring16_bigan_continuous"}:
+    elif task_name in STRETCH_FIXTURE_TASKS:
         res = _run_misgan_or_bigan_task(root, cand_adapted, task, device)
     else:
         res = _run_standard_task(root, cand_adapted, task, device, attempt_dir)
