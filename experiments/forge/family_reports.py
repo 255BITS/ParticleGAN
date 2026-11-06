@@ -944,13 +944,13 @@ def _selected_cohorts(progress):
 
 
 def full_suite_tasks(progress):
-    """Distinct ordinary questions, including stretch/held tests; omit duplicate phases.
+    """Distinct ordinary questions, including held tests; omit duplicate phases and stretch tasks.
 
     This is a performance display, independent of tier qualification. A shared
     test is counted once even when several views require or hold it.
     """
     return sorted({a["task"] for view in _summed_views(progress) for a in view["assignments"]
-                   if a["importance"] in COUNTED_OR_HELD})
+                   if a["importance"] in {"required", "held"}})
 
 
 def full_suite_outcomes(cohort, names):
@@ -1138,7 +1138,10 @@ def _diagnostic_passers(selected, task):
 def _uncounted_disclosure(summed, selected):
     """What holding changed and what it did not, computed from recorded statuses."""
     counted = [a["task"] for view in summed for a in view["assignments"] if a["importance"] == "required"]
-    uncounted = [a for view in summed for a in view["assignments"] if role_note(a)]
+    uncounted = [
+        a for view in summed for a in view["assignments"]
+        if a.get("importance") == "held" or "removal" in a
+    ]
     if not uncounted:
         return []
     passes = sum(cohort["tasks"][a["task"]]["status"] == "PASS" for _, cohort in selected for a in uncounted)

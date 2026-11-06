@@ -3435,7 +3435,10 @@ def _formulaic_selected_recipe_tables(markdown: str, result, root, path) -> str:
     all_distinct_req = [t for t_key in ("1", "2", "3", "4") for t in distinct_req_by_tier[t_key]]
     all_distinct_stretch = sorted({t for t_key in ("1", "2", "3", "4") for t in distinct_stretch_by_tier[t_key]})
 
-    fs_tasks = full_suite_tasks(progress)
+    from experiments.forge.leaderboard_contract import load_fixed_test_list
+
+    fixed_list = load_fixed_test_list(root)
+    fs_tasks = list(fixed_list["tests"]) if fixed_list else full_suite_tasks(progress)
     counted_set = set(all_distinct_req)
     uncounted_fs_tasks = [t for t in fs_tasks if t not in counted_set]
 
