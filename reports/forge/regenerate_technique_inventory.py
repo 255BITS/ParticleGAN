@@ -2252,11 +2252,12 @@ def _selected_diagnostic_rows(markdown, result, root, path):
                                                   _summed_views, link, score)
     from experiments.forge.policy_coverage import PARENTS, TIERS as BASELINE_TIERS
     from experiments.forge.research_tiers import attempt_count
+    from experiments.forge.views import COUNTED_OR_HELD
     pins = {item["family"]: item for item in read_json(preflight_path).get("families", [])}
     lowest_tier: dict[str, int] = {}
     for view in _summed_views(progress):
         for assignment in view.get("assignments", []):
-            if assignment.get("importance") in {"required", "held"} or "removal" in assignment:
+            if assignment.get("importance") in COUNTED_OR_HELD or "removal" in assignment:
                 tier = int(assignment["qualification_tier"])
                 task = assignment["task"]
                 lowest_tier[task] = min(tier, lowest_tier.get(task, tier))
@@ -3412,20 +3413,27 @@ def _formulaic_selected_recipe_tables(markdown: str, result, root, path) -> str:
         link,
     )
 
+    from experiments.forge.views import is_stretch
     progress = result.get("family_progress") or {}
     summed_views = _summed_views(progress)
     view_by_id = {v["id"]: v for v in summed_views}
     distinct_req_by_tier: dict[str, list[str]] = {t: [] for t in ("1", "2", "3", "4")}
     seen_req_by_tier: dict[str, set[str]] = {t: set() for t in ("1", "2", "3", "4")}
+    distinct_stretch_by_tier: dict[str, list[str]] = {t: [] for t in ("1", "2", "3", "4")}
+    seen_stretch_by_tier: dict[str, set[str]] = {t: set() for t in ("1", "2", "3", "4")}
     for view in summed_views:
         for assignment in view.get("assignments", []):
+            t_key = str(assignment["qualification_tier"])
             if assignment.get("importance") == "required":
-                t_key = str(assignment["qualification_tier"])
                 if t_key in seen_req_by_tier:
                     seen_req_by_tier[t_key].add(assignment["task"])
+            elif is_stretch(assignment) and t_key in seen_stretch_by_tier:
+                seen_stretch_by_tier[t_key].add(assignment["task"])
     for t_key in ("1", "2", "3", "4"):
         distinct_req_by_tier[t_key] = sorted(seen_req_by_tier[t_key])
+        distinct_stretch_by_tier[t_key] = sorted(seen_stretch_by_tier[t_key])
     all_distinct_req = [t for t_key in ("1", "2", "3", "4") for t in distinct_req_by_tier[t_key]]
+    all_distinct_stretch = sorted({t for t_key in ("1", "2", "3", "4") for t in distinct_stretch_by_tier[t_key]})
 
     fs_tasks = full_suite_tasks(progress)
     counted_set = set(all_distinct_req)
@@ -3437,8 +3445,9 @@ def _formulaic_selected_recipe_tables(markdown: str, result, root, path) -> str:
         rel_page = os.path.relpath(root / family["page"], path.parent)
         selected_by_page_target[f"]({rel_page})"] = (family, cohort)
 
-    def _fmt_selected_cell(v_pass: int, v_tot: int, d_pass: int, d_tot: int, page: str, anchor: str) -> str:
-        v_link = f"**{link(root, path, f'{v_pass}/{v_tot}', page, anchor)}**"
+    def _fmt_selected_cell(v_pass: int, v_tot: int, d_pass: int, d_tot: int, page: str, anchor: str, *, bold: bool = True) -> str:
+        raw_link = link(root, path, f"{v_pass}/{v_tot}", page, anchor)
+        v_link = f"**{raw_link}**" if bold else raw_link
         if d_tot <= 0:
             return v_link
         d_fail = d_tot - d_pass
@@ -3469,17 +3478,26 @@ def _formulaic_selected_recipe_tables(markdown: str, result, root, path) -> str:
 
     lines = markdown.splitlines()
     in_full_suite = False
+    in_stretch = False
     in_view_breakdown = False
     for idx, line in enumerate(lines):
         if line.startswith("## Full-suite results — failures included"):
             in_full_suite = True
+            in_stretch = False
             in_view_breakdown = False
             continue
-        if line.startswith("## ") and not line.startswith("## Full-suite results"):
+        if line.startswith("## Stretch experiments"):
+            in_stretch = True
             in_full_suite = False
+            in_view_breakdown = False
+            continue
+        if line.startswith("## ") and not line.startswith("## Full-suite results") and not line.startswith("## Stretch experiments"):
+            in_full_suite = False
+            in_stretch = False
         if line.startswith("<summary>Selected recipe breakdown by view"):
             in_view_breakdown = True
             in_full_suite = False
+            in_stretch = False
             continue
         if in_view_breakdown and line.startswith("</details>"):
             in_view_breakdown = False
@@ -3535,6 +3553,54 @@ def _formulaic_selected_recipe_tables(markdown: str, result, root, path) -> str:
                 len(all_distinct_req),
                 family["page"],
                 cohort["anchor"],
+            )
+            lines[idx] = f"{col0} | " + " | ".join([*tier_cells, total_cell]) + " |"
+        elif in_stretch and line.startswith("| ["):
+            col0 = line.split(" | ", 1)[0]
+            matched = next(
+                ((fam, coh) for marker, (fam, coh) in selected_by_page_target.items() if marker in col0),
+                None,
+            )
+            if matched is None:
+                continue
+            family, cohort = matched
+            fam_statuses = binary_by_family[family["id"]]
+            tier_cells = []
+            v_pass_total = 0
+            v_tot_total = 0
+            for t_key in ("1", "2", "3", "4"):
+                v_pass = 0
+                v_tot = 0
+                for view in summed_views:
+                    for assignment in view.get("assignments", []):
+                        if is_stretch(assignment) and str(assignment["qualification_tier"]) == t_key:
+                            v_tot += 1
+                            if fam_statuses.get(assignment["task"]) == "PASS":
+                                v_pass += 1
+                v_pass_total += v_pass
+                v_tot_total += v_tot
+                d_tasks = distinct_stretch_by_tier[t_key]
+                d_pass = sum(fam_statuses.get(t) == "PASS" for t in d_tasks)
+                tier_cells.append(
+                    _fmt_selected_cell(
+                        v_pass,
+                        v_tot,
+                        d_pass,
+                        len(d_tasks),
+                        family["page"],
+                        f"{cohort['anchor']}-tier-{t_key}",
+                        bold=False,
+                    )
+                )
+            d_pass_total = sum(fam_statuses.get(t) == "PASS" for t in all_distinct_stretch)
+            total_cell = _fmt_selected_cell(
+                v_pass_total,
+                v_tot_total,
+                d_pass_total,
+                len(all_distinct_stretch),
+                family["page"],
+                f"{cohort['anchor']}-held",
+                bold=False,
             )
             lines[idx] = f"{col0} | " + " | ".join([*tier_cells, total_cell]) + " |"
         elif in_full_suite and line.startswith("| ["):
@@ -3603,7 +3669,7 @@ def _formulaic_selected_recipe_tables(markdown: str, result, root, path) -> str:
                     held_t = [
                         a["task"]
                         for a in v_def.get("assignments", [])
-                        if a.get("importance") == "held"
+                        if is_stretch(a)
                     ]
                     hp = sum(fam_statuses.get(t) == "PASS" for t in held_t)
                     ht = len(held_t)
@@ -4171,13 +4237,14 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
     # count stays assigned as diagnostic with a note naming who carries it.
     # no_longer_required_tasks: required by the recorded policy, not counted by
     # the declared view (held or removed from the count).
+    from experiments.forge.views import is_stretch
     result["declared_view"] = {"revision": declared["revision"], "policy_fingerprint": stable_hash(declared),
                                "tier_requirements": requirements,
                                "added_required_tasks": {tier: [name for name in names if name not in manifest["tier_requirements"][tier]]
                                                         for tier, names in requirements.items()},
                                "no_longer_required_tasks": {tier: [name for name in names if name not in requirements.get(tier, [])]
                                                             for tier, names in manifest["tier_requirements"].items()},
-                               "held_tasks": {tier: [row["task"] for row in declared_tier(tier, lambda row: row["importance"] == "held")]
+                               "held_tasks": {tier: [row["task"] for row in declared_tier(tier, is_stretch)]
                                               for tier in result["tier_requirements"]},
                                "removed_from_count": {tier: [{"task": row["task"], "reason": row["removal"]["reason"],
                                                               "counted_by": row["removal"]["counted_by"]}
@@ -4382,7 +4449,8 @@ def _project_publication_for_family_pages(root, publication):
                     v_row["tiers"][t_key] = _binary_count(req_t)
                 v_row["total"] = _sum_binary_counts(list(v_row.get("tiers", {}).values()))
                 if "held" in v_row:
-                    held_t = [a["task"] for a in assignments if a.get("importance") == "held"]
+                    from experiments.forge.views import is_stretch
+                    held_t = [a["task"] for a in assignments if is_stretch(a)]
                     v_row["held"] = _binary_count(held_t)
 
         for t_key in list(cohort.get("tiers", {}).keys()):

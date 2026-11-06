@@ -90,11 +90,14 @@ def build_report(root: Path, view_id: str | None = None, *, publication: dict | 
                 (a for a in view["assignments"] if a["qualification_tier"] == tier),
                 key=lambda a: (a["order"], a["task"]))
             counts = Counter(a["importance"] for a in assignments)
+            role_counts = {importance: counts[importance] for importance in IMPORTANCES}
+            if counts["stretch"]:
+                role_counts["stretch"] = counts["stretch"]
             tiers.append({
                 "qualification_tier": tier, "name": name,
-                "counts": {importance: counts[importance] for importance in IMPORTANCES},
+                "counts": role_counts,
                 "tasks": [{**task_row(a["task"]), "importance": a["importance"], "order": a["order"],
-                           **{key: deepcopy(a[key]) for key in ("hold", "removal") if key in a}}
+                           **{key: deepcopy(a[key]) for key in ("hold", "stretch", "removal") if key in a}}
                           for a in assignments],
             })
         result_views.append({
@@ -147,10 +150,12 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
         return f"[{_cell(label)}]({quote(relative, safe='/._-')}" + (f"#{quote(anchor)}" if anchor else "") + ")"
 
     def role(task):
-        """The declared role; held and removed roles link their explanation."""
+        """The declared role; stretch, held and removed roles link their explanation when provided."""
         note = role_note(task)
         if not note:
             return _cell(task["importance"])
+        if "explanation" not in note:
+            return _cell(role_label(task))
         path, _, anchor = note["explanation"].partition("#")
         return link(role_label(task), path, anchor)
 
@@ -229,14 +234,15 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
 
     def count_text(tier):
         removed = sum("removal" in task for task in tier["tasks"])
-        return ", ".join(f"{tier['counts'][importance]} {importance}" +
+        roles = ("required", "stretch", "held", "ranking", "diagnostic")
+        return ", ".join(f"{tier['counts'].get(importance, 0)} {importance}" +
                          (f" ({removed} removed from the count)" if importance == "diagnostic" and removed else "")
-                         for importance in IMPORTANCES if tier["counts"][importance]) or "0 tasks"
+                         for importance in roles if tier["counts"].get(importance)) or "0 tasks"
 
     def held_status(view):
         """The HELD rule of a view whose highest assigned tier counts nothing, else None."""
         tiers = [tier for tier in view["tiers"] if tier["tasks"]]
-        if not any(tier["counts"]["held"] for tier in tiers) or tiers[-1]["counts"]["required"]:
+        if not any(tier["counts"].get("held") or tier["counts"].get("stretch") for tier in tiers) or tiers[-1]["counts"]["required"]:
             return None
         if not any(tier["counts"]["required"] for tier in tiers):
             return "Nothing in this view is counted while its tasks are held, so it reports HELD for every candidate."
@@ -303,7 +309,7 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
         if status_rule:
             lines += ["", status_rule]
         for tier in view["tiers"]:
-            held_only = tier["counts"]["held"] and not tier["counts"]["required"]
+            held_only = (tier["counts"].get("held") or tier["counts"].get("stretch")) and not tier["counts"]["required"]
             lines += ["", f"### Tier {tier['qualification_tier']}: {tier['name']}", "", count_text(tier) + "." +
                       (" Nothing here is counted while these tasks are held, so this tier's status is HELD: "
                        "it neither passes nor stops later tiers." if held_only else ""), ""]

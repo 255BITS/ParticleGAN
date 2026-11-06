@@ -17,7 +17,7 @@
     "f5f384df3e364b4cafbc2e4d4d398949"
   ],
   "candidate_id": "bispf-optimized-quintic-v1",
-  "candidate_revision": "7bcbd537975ee65e05c46aa14625dcfc8d19d2c9034b78740c5bdc786bb75db5",
+  "candidate_revision": "7a5c7749fbabcf54842a7c962e07a3f075c6e644516d948ab71930d5e49baa47",
   "claim_contract": {
     "sampling_law": "task_declared",
     "schedule": "scheduled",
@@ -280,7 +280,7 @@
   "record_type": "scientific",
   "schema_version": 1,
   "source": {
-    "digest": "0a89a54afb8761c8a52122bd987d6c8e00e76313771d17907ac527d0ff646145",
+    "digest": "f20a4f6e8ae6a532b36f4cef2eb91b2ef47910964a36ccb843a4285705cbc543",
     "path": "reports/forge/attempts/24c1108ac40e4ea1adcc2ca091a7afed/result.json"
   },
   "study": {
@@ -368,7 +368,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "cc78acf695fcf77fd472b20533798a54225ad9038345c6f5a646e0b5d4387cac",
+      "compatibility_key": "06d9e53ab61377dd5b4c5aa1f2e0c7ef8089c1dd938cca0b0b34c7a02d6e16a8",
       "cost": {
         "adapter_loop_seconds": 75.9080520440184,
         "adapter_seconds": 76.26483041699976,
@@ -21500,7 +21500,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "c6916f38605b09449898dc977a60609141158931109dba8e0f87af7cd3511fad",
+      "compatibility_key": "bcce345a313249c3512385e253156eb157d92a579e3586adfd14c97f1555bc88",
       "cost": {
         "adapter_loop_seconds": 46.21895259802113,
         "adapter_seconds": 49.795052353001665,
@@ -23897,7 +23897,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "ea0df41e09c80ec0ecdceac72eb6a948536ce0e720cc8e39040fd87c2331675d",
+      "compatibility_key": "4fbf6fa4fa441032bdf1c6122fdaa0a5219eeb37b142f7a0af47f5fa8da72e3c",
       "cost": {
         "adapter_reported_inclusive_seconds": 1.7513236369995866,
         "adapter_seconds": 1.7602077379997354,
@@ -24159,7 +24159,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "829a325db29d84b083257e380c682237ddfba685b885e79c8d8ae565b33ceab1",
+      "compatibility_key": "d1db048c421e4f029e0735f7b98bbd1e10b03a16d9d8c3a6c386fd72a5c55f1f",
       "cost": {
         "adapter_loop_seconds": 796.8952024980099,
         "adapter_seconds": 797.1736915349902,
@@ -27360,7 +27360,7 @@
     },
     {
       "_attempt_id": "40d539d69aae4995a61fc5b1d2c2e051",
-      "compatibility_key": "829a325db29d84b083257e380c682237ddfba685b885e79c8d8ae565b33ceab1",
+      "compatibility_key": "d1db048c421e4f029e0735f7b98bbd1e10b03a16d9d8c3a6c386fd72a5c55f1f",
       "cost": {
         "charged_task": "five_word_joint_smoke",
         "device": "1",
@@ -29509,7 +29509,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "7b894ea6f315c6f3b623be7f3e4900b5172c7cae38d33e82c38b689f24627c32",
+      "compatibility_key": "971609756973073ba02536a6fd5e367c4300737ca8acbb1810ab7bf71ad446d1",
       "cost": {
         "adapter_seconds": 4.755380738992244,
         "charged_task": "ae_gan_hold",
@@ -29965,7 +29965,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "a91e36d2e521185ca7275e5140ba106c410fa2dfd3d0ee765ea492ea8d46c0a7",
+      "compatibility_key": "46ea586254f617257d7b339e64101a27fc399fc172bd602f9ca3a75465430560",
       "cost": {
         "adapter_loop_seconds": 29.036343784973724,
         "adapter_seconds": 29.3886373960122,
@@ -31918,7 +31918,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "d9da80dbcbc62a54003245b5f736a0f34f549619cce03390dd5c18f6d5bed0d2",
+      "compatibility_key": "fd9ebf271ee8371920af6ea4599bbc9b6ba7bc3197a1eb8541cd35128f30aca3",
       "cost": {
         "adapter_loop_seconds": 139.32227534099366,
         "adapter_seconds": 145.5472579159832,
@@ -35314,7 +35314,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "defd90613304037c928942582db0f0f99ef1450a476206acbfe7aeeebd2d23c8",
+      "compatibility_key": "2b8a95d1b66fe2027a0ab5f9be4920785b83549de58ee1c5546ae71c59d41f29",
       "cost": {
         "adapter_loop_seconds": 18.05328956298763,
         "adapter_seconds": 18.436933819000842,
@@ -38008,7 +38008,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "f93f5322f81fea3ff90bc92749dd7c9dfc2705803c0c12f392fb1cc1932446e1",
+      "compatibility_key": "cb9f28cdf4adc64a0c01b208ada89976beb82d0f094ae2a41ad00c3b356c9802",
       "cost": {
         "adapter_loop_seconds": 103.34685424598865,
         "adapter_seconds": 107.58779744201456,
@@ -42926,7 +42926,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "04e1b137c6881c0411c08ec6a81fd27767e78a30e87b09bbd6755907ae936464",
+      "compatibility_key": "78508799dc753be9573ec970133fe18a1aaa0f84c9beedfa6bfe7b78ff28ffd4",
       "cost": {
         "adapter_seconds": 1.574781200994039,
         "charged_task": "two_pole",
@@ -43380,7 +43380,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "922cafb0c81442494a3f0458051aa9a210f35ba48d48d2f80a4eb5fd32d671c8",
+      "compatibility_key": "c7131440e168fed7690268ca61e5664297ea35c6743106cb37b807c8058262a2",
       "cost": {
         "adapter_loop_seconds": 94.17797258801875,
         "adapter_seconds": 97.54156437001075,
@@ -45473,7 +45473,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "ee947cecfc814fe123378d0abf9019196ccfbccb51353c41b46618c40ad266d7",
+      "compatibility_key": "eb9f096032b69327d8d6c10b4140fff3d7b4e673adce40cbb790ab31e15ae719",
       "cost": {
         "adapter_loop_seconds": 56.67958638400887,
         "adapter_seconds": 60.15675081597874,
@@ -47485,7 +47485,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "e7a030ea212c986158db46af018154b08c8573219d5960bb0eb046985cc1a5a8",
+      "compatibility_key": "11f10a648f96f7eaf19fa4778e777a82285eb8d3b413cb7c1443ba21758952da",
       "cost": {
         "adapter_loop_seconds": 47.41284041199833,
         "adapter_seconds": 51.155013074021554,
@@ -51724,7 +51724,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "d9b1f0b9569f6ed285b1d1a83f3111acb5dcbcde506ee3d1253f1b502be77f8b",
+      "compatibility_key": "fcb942d235876d29f9123a85f687f05c56177b395b6638e9f2786913530454fb",
       "cost": {
         "adapter_seconds": 5.108894108998356,
         "charged_task": "unused_token_hold",
@@ -52240,42 +52240,42 @@
     },
     {
       "_attempt_id": "24c1108ac40e4ea1adcc2ca091a7afed",
-      "compatibility_key": "9d5f887867f7696f22e72e6bdd50f30cb3e7efaac7021b3b2177a46270f9a4f9",
+      "compatibility_key": "966ed98fd6daaa7f1144625524988e0dbda475172df8ef31ac8d7e69187e940c",
       "gate_status": "PASS",
       "status": "PASS",
       "task_id": "model_ddgan_bimodal_chain"
     },
     {
       "_attempt_id": "24c1108ac40e4ea1adcc2ca091a7afed",
-      "compatibility_key": "ac9e6a5e6065da6e55547f82715a56959e6b4b05d650151203547434b9c4d3f8",
+      "compatibility_key": "9509fa4143543a00b451e41014c6f08c128c7ecfc3d07826c5f439f1a86a44a8",
       "gate_status": "PASS",
       "status": "PASS",
       "task_id": "model_ae_ddgan_bimodal_chain"
     },
     {
       "_attempt_id": "24c1108ac40e4ea1adcc2ca091a7afed",
-      "compatibility_key": "6174022af9442b0d3aee565387667832ac98ec2d8cb342dfbcdcde378c7a5a12",
+      "compatibility_key": "e1b4e5c70692c00f4869798f9737a2b742f9eab0cfde0dfd70d3fa210883d47b",
       "gate_status": "PASS",
       "status": "PASS",
       "task_id": "grid100"
     },
     {
       "_attempt_id": "24c1108ac40e4ea1adcc2ca091a7afed",
-      "compatibility_key": "f63e6449b8711f1e49952cf37d345184da43a6c1d9121c5fc12561a17528e597",
+      "compatibility_key": "aeacbaa594cb89e56c8560773df236f512176162b82061906a59e4a0b93c852a",
       "gate_status": "PASS",
       "status": "PASS",
       "task_id": "rotated100"
     },
     {
       "_attempt_id": "24c1108ac40e4ea1adcc2ca091a7afed",
-      "compatibility_key": "23d39d8d5e0330d03b68d3008e8036f969bb32809496b689a428317576a07ee3",
+      "compatibility_key": "16567a1c61383c2b190887caa19eb442ccc6e8c8895f66cb01d69b2257488e17",
       "gate_status": "PASS",
       "status": "PASS",
       "task_id": "staggered100"
     },
     {
       "_attempt_id": "24c1108ac40e4ea1adcc2ca091a7afed",
-      "compatibility_key": "88da21898ec661144fd3560269ea9a09d7d2eac5e747e2031a90ce622146e244",
+      "compatibility_key": "065375555e0896a1acc6118b58d02f5b9029451c1110eee5c4a3e2c2f3724549",
       "gate_status": "PASS",
       "status": "PASS",
       "task_id": "mode_hold"
