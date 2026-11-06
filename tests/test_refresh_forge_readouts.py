@@ -1883,6 +1883,7 @@ def test_evict_superseded_scaling_queue_jobs_matches_real_queue_schema_and_prune
 
 
 def test_republish_registered_inventory_end_to_end_recovers_missing_and_unverified_inventory(tmp_path: Path):
+    import re
     import shutil
     import subprocess
     from reports.forge import regenerate_technique_inventory as rti
@@ -1940,11 +1941,13 @@ def test_republish_registered_inventory_end_to_end_recovers_missing_and_unverifi
         # Scenario D: stale selected scores and false current-source claims are
         # detected and repaired without inventing a new-source measurement.
         orig_md = md_path.read_text()
-        stale_md = orig_md.replace(
-            "**[27/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 12/12 tests",
-            "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** (7 not run)",
-            1,
+        stale_md, mutations = re.subn(
+            r"(\*\*\[)(\d+)(/\d+\]\(families/atlas\.md#[^)]+-tier-1\)\*\*)",
+            lambda match: f"{match[1]}{int(match[2]) + 1}{match[3]} (7 not run)",
+            orig_md,
+            count=1,
         )
+        assert mutations == 1
         assert stale_md != orig_md
         md_path.write_text(stale_md)
         assert stale_md != rti._current_markdown(recovered, wt, md_path)
