@@ -1660,16 +1660,17 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         assert "not run" not in row_line
         assert "| 2 | 0 |" in row_line
 
-    # Verify all 8 selected recipes retain certified PASS/FAIL across all 50
-    # original suite tasks plus all declared stretch tasks, independently from
-    # current-definition compatibility.
+    # Verify certified PASS/FAIL for the original suite and the nine measured
+    # GAN stretch tasks. New precision tasks have no archived measurements.
     from experiments.forge.views import load_view
 
     cov_doc = read_json(ROOT / "reports/forge/attempt-coverage.json")
     full_suite_doc = read_json(ROOT / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json")
+    view = load_view(ROOT, "discriminator_stability")
+    archived_view = read_json(ROOT / view["previous_revision"]["archive"])
     stretch_tasks = {
         a["task"]
-        for a in load_view(ROOT, "discriminator_stability")["assignments"]
+        for a in archived_view["assignments"]
         if a["importance"] == "stretch"
     }
     suite_50 = set(full_suite_doc["tests"]) | {"ring_hold"} | stretch_tasks
@@ -1736,7 +1737,14 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
             + fam_md.split(view_table_header, 1)[1]
             .split("\n## adaptation\n", 1)[0]
         )
-        current_bench_tables = "\n".join(line for line in current_bench.splitlines() if line.startswith("|"))
+        new_tasks = {"precision_gaussian_mxfp8", "precision_gaussian_nvfp4"}
+        for task_id in new_tasks:
+            new_row = next(line for line in current_bench.splitlines() if line.startswith(f"| [{task_id}]"))
+            assert "| UNKNOWN |" in new_row
+        current_bench_tables = "\n".join(
+            line for line in current_bench.splitlines()
+            if line.startswith("|") and not any(line.startswith(f"| [{task_id}]") for task_id in new_tasks)
+        )
         for forbidden_in_selected_cohort in (
             "| UNKNOWN |",
             "diagnostic attempt",
