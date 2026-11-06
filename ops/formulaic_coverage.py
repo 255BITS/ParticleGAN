@@ -722,13 +722,31 @@ def ensure_formulaic_attempt_coverage(
         job_copy = deepcopy(rec)
         if job_copy.get("origin") == "new_attempt" and "original_attempt" in job_copy:
             job_copy["evidence"] = job_copy.pop("original_attempt")
-        jobs.setdefault(rec["key"], job_copy)
+        jobs[rec["key"]] = job_copy
 
     all_tasks = load_tasks(root)
-    selected = attempt_coverage.selected_tasks(pub)
+    live_views = [read_json(p) for p in sorted((root / "configs/forge/views").glob("*.json"))]
+    pub_for_selection = deepcopy(pub)
+    if isinstance(pub_for_selection.get("family_progress"), dict):
+        pub_for_selection["family_progress"]["views"] = live_views
+    selected = attempt_coverage.selected_tasks(pub_for_selection)
     harvested = harvest_existing_verdicts(root)
 
     # Ensure every (family, task) in selected_tasks has a job entry in `jobs`
+    existing_unscoped_by_pair: dict[tuple[str, str, str, str, str], dict[str, Any]] = {}
+    for rec in cov.get("records", []):
+        if any(rec.get(k) for k in ("research_scope", "policy_scope", "repair_scope", "cohort_scope")):
+            continue
+        existing_unscoped_by_pair[
+            (
+                str(rec.get("family") or ""),
+                str(rec.get("candidate_id") or ""),
+                str(rec.get("candidate_revision") or ""),
+                str(rec.get("source_digest") or ""),
+                str(rec.get("task") or ""),
+            )
+        ] = rec
+
     selected_keys_by_pair: dict[tuple[str, str], str] = {}
     for family, selection, tasks in selected:
         cid = selection["candidate_id"]
@@ -738,11 +756,21 @@ def ensure_formulaic_attempt_coverage(
             if task_name not in all_tasks:
                 continue
             card = all_tasks[task_name]
-            binding = selection["bindings"].get("task_contracts", {}).get(task_name)
-            pin = pub.get("task_contracts", {}).get(binding) if binding else None
-            exec_sha = pin["execution_sha256"] if pin else task_execution_fingerprint(card)
-            eval_sha = pin["evaluation_sha256"] if pin else task_evaluation_fingerprint(card)
-            key = attempt_coverage.identity(sdig, crev, task_name, exec_sha, eval_sha)
+            existing_rec = existing_unscoped_by_pair.get((family, cid, crev, sdig, task_name))
+            if (
+                existing_rec is not None
+                and existing_rec.get("attempted")
+                and existing_rec.get("status") in {"PASS", "FAIL"}
+            ):
+                exec_sha = existing_rec["execution_sha256"]
+                eval_sha = existing_rec["evaluation_sha256"]
+                key = existing_rec["key"]
+            else:
+                binding = selection["bindings"].get("task_contracts", {}).get(task_name)
+                pin = pub.get("task_contracts", {}).get(binding) if binding else None
+                exec_sha = pin["execution_sha256"] if pin else task_execution_fingerprint(card)
+                eval_sha = pin["evaluation_sha256"] if pin else task_evaluation_fingerprint(card)
+                key = attempt_coverage.identity(sdig, crev, task_name, exec_sha, eval_sha)
             selected_keys_by_pair[(family, task_name)] = key
             if key not in jobs:
                 jobs[key] = {
@@ -936,9 +964,25 @@ def _run_parallel_batches(
     # Sort fast tasks first so progress is immediately visible
     def _task_weight(item: dict[str, Any]) -> int:
         t = item["task"]
-        if t in {"grid100_mlp16", "grid100_res16_tanh", "misgan_block_neural_imputer", "misgan_block_recovery"}:
+        if t in {
+            "grid100_mlp16",
+            "grid100_res16_tanh",
+            "misgan_block_neural_imputer",
+            "misgan_block_recovery",
+            "misgan_mcar_p50_recovery",
+            "misgan_mcar_p80_anchored",
+            "pacgan8_grid100",
+            "alice_spiral_bigan",
+            "cyclegan_unpaired_constellation",
+        }:
             return 3
-        if t == "ring16_bigan_continuous":
+        if t in {
+            "ring16_bigan_continuous",
+            "infogan_anisotropic_modes",
+            "pacgan_unequal_mass",
+            "cgan_overlapping_classes",
+            "cramer_energy_overlap",
+        }:
             return 2
         return 1
 

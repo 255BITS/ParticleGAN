@@ -1642,23 +1642,32 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         assert "| 0 | 0 |" in row_line
 
     # Verify all 8 selected recipes retain certified PASS/FAIL across all 50
-    # original suite tasks, independently from current-definition compatibility.
+    # original suite tasks plus all declared stretch tasks, independently from
+    # current-definition compatibility.
+    from experiments.forge.views import load_view
+
     cov_doc = read_json(ROOT / "reports/forge/attempt-coverage.json")
     full_suite_doc = read_json(ROOT / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json")
-    suite_50 = set(full_suite_doc["tests"]) | {"ring_hold"}
-    assert len(suite_50) == 50
+    stretch_tasks = {
+        a["task"]
+        for a in load_view(ROOT, "discriminator_stability")["assignments"]
+        if a["importance"] == "stretch"
+    }
+    suite_50 = set(full_suite_doc["tests"]) | {"ring_hold"} | stretch_tasks
+    expected_per_family = len(suite_50)
+    assert expected_per_family == 59
     selected_fams = {"atlas", "bcap-pure", "bispf", "e22", "k3p", "ka2", "r1r2", "release07-gan-v3"}
     unscoped_selected_records = [
         rec
         for rec in cov_doc.get("records", [])
         if rec.get("family") in selected_fams and not rfr._is_scoped_attempt(rec)
     ]
-    assert len(unscoped_selected_records) == 400
+    assert len(unscoped_selected_records) == 8 * expected_per_family
     cov_by_fam_task = {
         (rec.get("family"), rec.get("task")): rec
         for rec in unscoped_selected_records
     }
-    assert len(cov_by_fam_task) == 400
+    assert len(cov_by_fam_task) == 8 * expected_per_family
     projected = rti._project_publication_for_family_pages(ROOT, publication)
     projected_cohorts = {family["id"]: cohort for family, cohort in
                          _selected_cohorts(projected["family_progress"])}
@@ -1668,7 +1677,7 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         assert archived_display["qualification_reuse"] is False
     att_cov_md = (ROOT / "reports/forge/ATTEMPT_COVERAGE.md").read_text()
     for fam in sorted(selected_fams):
-        assert f"| {fam} | 50/50 | 0 |" in att_cov_md
+        assert f"| {fam} | {expected_per_family}/{expected_per_family} | 0 |" in att_cov_md
         fam_line = next(line for line in att_cov_md.splitlines() if line.startswith(f"| {fam} |"))
         assert "BLOCKED" not in fam_line
         for tid in sorted(suite_50):
