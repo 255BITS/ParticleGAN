@@ -352,6 +352,114 @@
       }
     },
     {
+      "importance": "stretch",
+      "order": 5,
+      "qualification_tier": 4,
+      "task": "misgan_mcar_p50_recovery",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "Independent coordinatewise MCAR p=0.50 MisGAN on the 8-mode 8D block manifold with data/mask generator pair.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
+      "importance": "stretch",
+      "order": 6,
+      "qualification_tier": 4,
+      "task": "misgan_mcar_p80_anchored",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "Extreme MCAR p=0.80 MisGAN on the 8-mode 8D block manifold with a 10% fully observed anchor subset.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
+      "importance": "stretch",
+      "order": 7,
+      "qualification_tier": 4,
+      "task": "pacgan_unequal_mass",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "PacGAN-4 packed critic on an unequal-mass 8-mode ring with 20:1 weight ratio between heavy and light modes.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
+      "importance": "stretch",
+      "order": 8,
+      "qualification_tier": 4,
+      "task": "pacgan8_grid100",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "PacGAN-8 packed critic on the 10x10 100-mode 2D Gaussian grid testing 100/100 mode coverage.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
+      "importance": "stretch",
+      "order": 9,
+      "qualification_tier": 4,
+      "task": "alice_spiral_bigan",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "ALICE cycle-consistent BiGAN (G, E, D_xz) on a 1D curved spiral manifold in 2D testing cycle reconstruction.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
+      "importance": "stretch",
+      "order": 10,
+      "qualification_tier": 4,
+      "task": "infogan_anisotropic_modes",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "InfoGAN mutual-information auxiliary head Q(c|x) on 8 anisotropic rotated Gaussian modes testing factor disentanglement.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
+      "importance": "stretch",
+      "order": 11,
+      "qualification_tier": 4,
+      "task": "cgan_overlapping_classes",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "Mirza-Osindero concat vs Miyato-Koyama projection cGAN on 4 overlapping annular rings testing class separability.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
+      "importance": "stretch",
+      "order": 12,
+      "qualification_tier": 4,
+      "task": "cramer_energy_overlap",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "Bellemare CramerGAN 16D critic embedding with surrogate energy potential on a tight 25-mode 5x5 Gaussian grid.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
+      "importance": "stretch",
+      "order": 13,
+      "qualification_tier": 4,
+      "task": "cyclegan_unpaired_constellation",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "Unpaired CycleGAN/DiscoGAN dual generators and cycle-consistency on rotated and scaled 8-mode constellations.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
       "task": "model_ae_ddgan_bimodal_chain",
       "qualification_tier": 2,
       "importance": "required",

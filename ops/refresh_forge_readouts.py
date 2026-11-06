@@ -525,7 +525,7 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
     commit_tasks_cache: dict[str, set[str]] = {}
     for family, selection, tasks in selected:
         if full_suite_names is not None:
-            available = list(full_suite_names)
+            available = sorted({*full_suite_names, *tasks})
         else:
             commit = _selected_family_source_commit(root, publication, family, selection)
             if commit not in commit_tasks_cache:
