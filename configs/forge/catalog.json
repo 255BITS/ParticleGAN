@@ -40,7 +40,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 120,
+      "forge_engine": 121,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -105,7 +105,7 @@
       "candidate_patch": 26,
       "configuration": 810,
       "driver": 405,
-      "engine_support": 120,
+      "engine_support": 121,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1551,
       "frozen_candidate_implementation": 15,
@@ -119,13 +119,13 @@
       "visualization": 23,
       "visualization_artifact": 749
     },
-    "files": 11819
+    "files": 11820
   },
   "coverage": {
-    "declared_count": 11819,
+    "declared_count": 11820,
     "missing": [],
     "stale": [],
-    "tracked_count": 11819,
+    "tracked_count": 11820,
     "unclassified": [],
     "valid": true
   },
@@ -901,7 +901,7 @@
     },
     {
       "family": "benchmark/toy_audit",
-      "git_blob": "972c79c804e10ec40d9c5a128423b5df793b16a2",
+      "git_blob": "6367d505f99cf6a1b0516e48a079c2ce35070838",
       "path": "benchmarks/toy_audit/api_conditionals.py",
       "role": "support",
       "suggested_tiers": []
@@ -915,7 +915,7 @@
     },
     {
       "family": "benchmark/toy_audit",
-      "git_blob": "5edd0c2d04dc1f47a0c4908bd6aeacb748fb1ae8",
+      "git_blob": "b2850e2f1730118373e5d60d221150d1212eb7a3",
       "path": "benchmarks/toy_audit/api_cramergan.py",
       "role": "support",
       "suggested_tiers": []
@@ -959,7 +959,7 @@
     },
     {
       "family": "benchmark/toy_audit",
-      "git_blob": "4e6e3282f0339ab607a7d37e8972c20b4762e741",
+      "git_blob": "96601762d1b23c6cd99e0c3c30978ce599245936",
       "path": "benchmarks/toy_audit/api_infogan.py",
       "role": "support",
       "suggested_tiers": []
@@ -994,7 +994,7 @@
     },
     {
       "family": "benchmark/toy_audit",
-      "git_blob": "9b9ff6dd686f41ecfdba28d3820afc689f3ed7ef",
+      "git_blob": "a3de4bad0d196e203424888af6bb0ff6230effa3",
       "path": "benchmarks/toy_audit/api_pacgan.py",
       "role": "support",
       "suggested_tiers": []
@@ -1022,7 +1022,7 @@
     },
     {
       "family": "benchmark/toy_audit",
-      "git_blob": "e26404a2f919dbb0d9bb4dbb060d26977b0774b8",
+      "git_blob": "d3eed7e9c580573605933afe52e0ab0c8e747f4c",
       "path": "benchmarks/toy_audit/api_ring16.py",
       "role": "support",
       "suggested_tiers": []
@@ -7380,7 +7380,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "57e9feaf4252dcffc889bab519c9de844385bbbe",
+      "git_blob": "34fc9dd30ad00787d5898ef8897ed6b2e1833e12",
       "path": "experiments/forge/adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7660,7 +7660,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "20b80a8c3fb8741a2c5a192ceda66ba027fea8de",
+      "git_blob": "dfca861267feb3fe8720f88772a8c432fecd06d6",
       "path": "experiments/forge/family_reports.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7716,7 +7716,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "fbc82d2a8f873705c8f24da04c55f0cdb1a26d42",
+      "git_blob": "e6dd9b9e5e53582925affcd6cb1101cacda58993",
       "path": "experiments/forge/leaderboard_contract.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7865,6 +7865,13 @@
       "family": "forge_engine",
       "git_blob": "f2d6b25e9d264454adac630c2dc946dca54abba1",
       "path": "experiments/forge/pr399_scores.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "654fccdb342908f1ff37e63c629a8b708c6fd9fd",
+      "path": "experiments/forge/precision.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
@@ -8171,7 +8178,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "c2095530c2e128c1a154de0af9aec048169f2629",
+      "git_blob": "9f1e4cbe12860ec6df6b9b809adbb5548e3ac958",
       "path": "experiments/forge/views.py",
       "role": "engine_support",
       "suggested_tiers": []

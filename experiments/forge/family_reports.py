@@ -882,6 +882,26 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
         inputs[COVERAGE.as_posix()] = file_hash(root / COVERAGE)
         inputs.update(coverage["inputs"])
     problems = load(PROBLEM_DEFINITIONS) if (root / PROBLEM_DEFINITIONS).is_file() else None
+    # A larger current suite cannot invalidate the certified older matrix or
+    # turn its missing new tests into failures. Pin the exact original scope,
+    # never copies of its rendered scores. Fixtures and clean checkouts can
+    # verify these bytes without hydrating any training artifacts.
+    from .leaderboard_contract import load_fixed_test_list
+    fixed = load_fixed_test_list(root)
+    if fixed is not None:
+        inputs[fixed["path"]] = fixed["sha256"]
+    recorded_scope = None
+    binding = (fixed or {}).get("recorded_display_scope")
+    if binding is not None:
+        relative = Path(binding["path"])
+        if relative.is_absolute() or ".." in relative.parts:
+            raise ValueError("recorded display scope must be repository-relative")
+        text = (root / relative).read_text()
+        digest = hashlib.sha256(text.encode()).hexdigest()
+        if digest != binding["sha256"]:
+            raise ValueError("recorded display scope digest changed")
+        inputs[relative.as_posix()] = digest
+        recorded_scope = {"path": relative.as_posix(), "sha256": digest, "text": text}
     progress = {"schema_version": 1, "scope": "recorded_view_progress", "qualification_input": False,
                 "qualification_reuse": False, "views": views, "diagnostic_views": [view["id"] for view in diagnostics],
                 "scoped_views": [view["id"] for view in scoped], "tiers": list(progress_tiers),
@@ -897,6 +917,8 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                 "pr399_renderer_sha256": file_hash(Path(__file__).with_name("pr399_scores.py")),
                 "policy_cloud_renderer_sha256": file_hash(Path(__file__).with_name("policy_cloud_publication.py")),
                 "documentation_loader_sha256": file_hash(Path(family_documentation.__file__))}
+    if recorded_scope is not None:
+        progress["recorded_display_scope"] = recorded_scope
     if first_full_atlas is not None:
         progress["full_original_atlas_common26"] = {**first_full_atlas, "archived_snapshot": True,
                                                    "counts_scope": "AT_FIRST_ACCEPTED_CASE"}
@@ -944,13 +966,13 @@ def _selected_cohorts(progress):
 
 
 def full_suite_tasks(progress):
-    """Distinct ordinary questions, including held tests; omit duplicate phases and stretch tasks.
+    """Distinct ordinary questions, including stretch/held tests; omit duplicate phases.
 
     This is a performance display, independent of tier qualification. A shared
     test is counted once even when several views require or hold it.
     """
     return sorted({a["task"] for view in _summed_views(progress) for a in view["assignments"]
-                   if a["importance"] in {"required", "held"}})
+                   if a["importance"] in COUNTED_OR_HELD})
 
 
 def full_suite_outcomes(cohort, names):

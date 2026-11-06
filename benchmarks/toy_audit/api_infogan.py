@@ -19,7 +19,6 @@ import torch.nn.functional as F
 from particlegan import (
     ManipulatedPrior,
     MoGParticlePrior,
-    ParticlePrior,
     Recipe,
     get_recipe,
     init,

@@ -114,7 +114,7 @@ No current selected-recipe update timings are measured. Missing timing cells rem
 
 Runtime: **cuda**. Selected configuration: [bcap-pure-adam-v2](../../../configs/forge/ideas/bcap-pure-adam-v2.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 9. Other view rows below are navigation over recorded task evidence, not recomputed qualification. Their counts follow the declared view revisions (adaptation 4, clockfree_continuous 5, discriminator_stability 14, formulation_comparison 3, host_profile_transfer 6, quality_coverage 4); the recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered.
+Recorded qualification: **tier 0**, discriminator_stability revision 9. Other view rows below are navigation over recorded task evidence, not recomputed qualification. Their counts follow the declared view revisions (adaptation 4, clockfree_continuous 5, discriminator_stability 15, formulation_comparison 3, host_profile_transfer 6, quality_coverage 4); the recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
@@ -131,7 +131,7 @@ Selection: archived_base_presentation_only. Exact original declaration-only solu
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation) | [0/3 (3 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [0/12 (12 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1 (1 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [0/0](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-4) | [0/16 (16 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation) | [0/7 (7 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-held) |
 | [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [0/4 (4 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [0/12 (12 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0/6 (6 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [0/0](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-4) | [0/22 (22 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [0/7 (7 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-held) |
-| [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [0/11 (11 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [0/18 (18 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0/1 (1 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [0/0](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | [0/30 (30 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [0/22 (22 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-held) |
+| [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [0/11 (11 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [0/18 (18 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0/1 (1 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [0/0](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | [0/30 (30 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [0/24 (24 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-held) |
 | [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [0/3 (3 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [0/12 (12 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [0/1 (1 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [0/0](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-4) | [0/16 (16 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [0/7 (7 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-held) |
 | [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [0/3 (3 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [0/12 (12 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [0/1 (1 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [0/0](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-4) | [0/16 (16 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [0/7 (7 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-held) |
 | [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [0/3 (3 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [0/12 (12 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [0/0](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-4) | [0/15 (15 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [0/7 (7 not run)](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-held) |
@@ -165,6 +165,13 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [two_pole](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | UNKNOWN | changed since run |
 | [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | [adaptation](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | UNKNOWN | changed since run |
 | [zero_tanh_smoke](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_smoke) | [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+
+Held at this tier (measured and shown, not counted):
+
+| Experiment | Held in | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [precision_gaussian_mxfp8](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) | [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [precision_gaussian_nvfp4](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) | [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-1bf9d7d34422-tier-2"></a>
 
@@ -268,6 +275,8 @@ These tests keep running and keep this recipe's recorded result, but they do not
 
 | Experiment | Held in | Recorded result | Reason | Summary | Re-entry rule |
 | --- | --- | --- | --- | --- | --- |
+| [precision_gaussian_mxfp8](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) | [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | UNKNOWN | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format MXFP8 software-reference training arithmetic? | Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass. |
+| [precision_gaussian_nvfp4](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) | [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | UNKNOWN | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format NVFP4 software-reference training arithmetic? | Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass. |
 | [img_bars4](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | Four bar pictures: BCAP and BISPF draw clean bars but only 2 of the 4. R1/R2 and GAN v3 pass it but fail Tier 1 tests and img_stripes2; under the current declarations no recipe passes both bars4 and stripes2. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
 | [img_blobs4](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | Four corner-blob pictures: BCAP covers 2 corners (24/32 clean), BISPF 3 (28/32); the test needs all 4 corners and 29/32 clean. Every recipe passing its current declaration fails or cannot run Tier 1 tests. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
 | [img_intensity2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2), [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2), [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2), [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | UNKNOWN | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | Two brightness levels: BCAP draws both but 10 of 32 pictures are off in brightness; BISPF collapses to one level. The three recipes passing its current declaration fail Tier 1 tests that BCAP and BISPF pass. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
@@ -761,9 +770,9 @@ No experiments assigned.
 
 ## discriminator_stability
 
-**discriminator_stability — revision 14**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
+**discriminator_stability — revision 15**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **11 / 18 / 1 / 0**. Held counts (measured and shown, not counted): **0 / 7 / 1 / 14**. Its highest tier, Tier 4, has only held tests, so while they are held the view never shows PASS: a recipe that passes every counted tier gets HELD.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **11 / 18 / 1 / 0**. Held counts (measured and shown, not counted): **2 / 7 / 1 / 14**. Its highest tier, Tier 4, has only held tests, so while they are held the view never shows PASS: a recipe that passes every counted tier gets HELD.
 
 Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provisional and require bounded calibration before scientific default adoption. Archived task declarations and gates retain their original identities.
 
@@ -785,6 +794,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [model_vae_categorical](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_categorical) | required | UNKNOWN | recorded definition unavailable |
 | [model_vae_hard](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_hard) | required | UNKNOWN | recorded definition unavailable |
 | [clockfree_audit_measurement_v1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | diagnostic | UNKNOWN | changed since run |
+| [precision_gaussian_fp32](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_fp32) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [precision_gaussian_mxfp8](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | UNKNOWN | recorded definition unavailable |
+| [precision_gaussian_nvfp4](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2"></a>
 
@@ -3400,6 +3412,99 @@ Declared budget: 3000 updates; timeout 600 seconds.
 
 Current measurement: mog prior (sigma 0.05); public_prior_without_output_noise; weights unbound; output noise clean.
 
+<a name="cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_fp32"></a>
+
+### precision_gaussian_fp32
+
+**precision_gaussian_fp32: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_fp32.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, discriminator, prior; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1000 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8"></a>
+
+### precision_gaussian_mxfp8
+
+**precision_gaussian_mxfp8: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_mxfp8.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, discriminator, prior; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1000 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4"></a>
+
+### precision_gaussian_nvfp4
+
+**precision_gaussian_nvfp4: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_nvfp4.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, discriminator, prior; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1000 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
 <a name="cohort-cuda-1bf9d7d34422-experiment-residual_student"></a>
 
 ### residual_student
@@ -4494,7 +4599,7 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 Runtime: **cuda**. Selected configuration: [bcap-pure · 5ea5bdbb2d71](../../../configs/forge/configurations/bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 9. Other view rows below are navigation over recorded task evidence, not recomputed qualification. Their counts follow the declared view revisions (adaptation 4, clockfree_continuous 5, discriminator_stability 14, formulation_comparison 3, host_profile_transfer 6, quality_coverage 4); the recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered.
+Recorded qualification: **tier 0**, discriminator_stability revision 9. Other view rows below are navigation over recorded task evidence, not recomputed qualification. Their counts follow the declared view revisions (adaptation 4, clockfree_continuous 5, discriminator_stability 15, formulation_comparison 3, host_profile_transfer 6, quality_coverage 4); the recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
@@ -4511,7 +4616,7 @@ Selection: historical_incumbent. Initial finite Pure BCAP round: required Tier 1
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [adaptation](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation) | [3/3](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0/12 (12 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0/1 (1 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [0/0](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-4) | [3/16 (13 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation) | [0/7 (7 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-held) |
 | [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [4/4](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0/12 (12 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0/6 (6 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [0/0](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-4) | [4/22 (18 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [0/7 (7 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-held) |
-| [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [3/11 (7 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0/18 (18 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0/1 (1 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [0/0](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-4) | [3/30 (26 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [0/22 (22 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-held) |
+| [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [3/11 (7 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0/18 (18 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0/1 (1 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [0/0](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-4) | [3/30 (26 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [0/24 (24 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-held) |
 | [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [3/3](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) | [0/12 (12 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) | [0/1 (1 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) | [0/0](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-4) | [3/16 (13 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [0/7 (7 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-held) |
 | [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [3/3](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) | [0/12 (12 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) | [0/1 (1 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | [0/0](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-4) | [3/16 (13 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [0/7 (7 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-held) |
 | [quality_coverage](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage) | [3/3](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | [0/12 (12 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | [0/0](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-3) | [0/0](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-4) | [3/15 (12 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage) | [0/7 (7 not run)](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-held) |
@@ -4545,6 +4650,13 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [two_pole](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | [adaptation](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | changed since run |
 | [unused_token_hold](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | [adaptation](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | changed since run |
 | [zero_tanh_smoke](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-zero_tanh_smoke) | [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+
+Held at this tier (measured and shown, not counted):
+
+| Experiment | Held in | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [precision_gaussian_mxfp8](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-precision_gaussian_mxfp8) | [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [precision_gaussian_nvfp4](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-precision_gaussian_nvfp4) | [discriminator_stability](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-0d83d78027c5-tier-2"></a>
 
@@ -4648,6 +4760,8 @@ These tests keep running and keep this recipe's recorded result, but they do not
 
 | Experiment | Held in | Recorded result | Reason | Summary | Re-entry rule |
 | --- | --- | --- | --- | --- | --- |
+| [precision_gaussian_mxfp8](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-precision_gaussian_mxfp8) | [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | UNKNOWN | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format MXFP8 software-reference training arithmetic? | Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass. |
+| [precision_gaussian_nvfp4](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-precision_gaussian_nvfp4) | [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | UNKNOWN | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format NVFP4 software-reference training arithmetic? | Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass. |
 | [img_bars4](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | Four bar pictures: BCAP and BISPF draw clean bars but only 2 of the 4. R1/R2 and GAN v3 pass it but fail Tier 1 tests and img_stripes2; under the current declarations no recipe passes both bars4 and stripes2. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
 | [img_blobs4](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | Four corner-blob pictures: BCAP covers 2 corners (24/32 clean), BISPF 3 (28/32); the test needs all 4 corners and 29/32 clean. Every recipe passing its current declaration fails or cannot run Tier 1 tests. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
 | [img_intensity2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | [adaptation / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage / Tier 2](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | Two brightness levels: BCAP draws both but 10 of 32 pictures are off in brightness; BISPF collapses to one level. The three recipes passing its current declaration fail Tier 1 tests that BCAP and BISPF pass. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
@@ -5141,9 +5255,9 @@ No experiments assigned.
 
 ## discriminator_stability
 
-**discriminator_stability — revision 14**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
+**discriminator_stability — revision 15**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **11 / 18 / 1 / 0**. Held counts (measured and shown, not counted): **0 / 7 / 1 / 14**. Its highest tier, Tier 4, has only held tests, so while they are held the view never shows PASS: a recipe that passes every counted tier gets HELD.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **11 / 18 / 1 / 0**. Held counts (measured and shown, not counted): **2 / 7 / 1 / 14**. Its highest tier, Tier 4, has only held tests, so while they are held the view never shows PASS: a recipe that passes every counted tier gets HELD.
 
 Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provisional and require bounded calibration before scientific default adoption. Archived task declarations and gates retain their original identities.
 
@@ -5165,6 +5279,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [model_vae_categorical](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-model_vae_categorical) | required | UNKNOWN | recorded definition unavailable |
 | [model_vae_hard](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-model_vae_hard) | required | UNKNOWN | recorded definition unavailable |
 | [clockfree_audit_measurement_v1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | changed since run |
+| [precision_gaussian_fp32](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-precision_gaussian_fp32) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [precision_gaussian_mxfp8](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-precision_gaussian_mxfp8) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | UNKNOWN | recorded definition unavailable |
+| [precision_gaussian_nvfp4](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-precision_gaussian_nvfp4) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-0d83d78027c5-discriminator_stability-tier-2"></a>
 
@@ -7794,6 +7911,99 @@ Current pass criteria:
 Declared budget: 3000 updates; timeout 600 seconds.
 
 Current measurement: mog prior (sigma 0.05); public_prior_without_output_noise; weights unbound; output noise clean.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-precision_gaussian_fp32"></a>
+
+### precision_gaussian_fp32
+
+**precision_gaussian_fp32: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_fp32.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, discriminator, prior; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1000 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-precision_gaussian_mxfp8"></a>
+
+### precision_gaussian_mxfp8
+
+**precision_gaussian_mxfp8: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_mxfp8.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, discriminator, prior; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1000 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-precision_gaussian_nvfp4"></a>
+
+### precision_gaussian_nvfp4
+
+**precision_gaussian_nvfp4: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_nvfp4.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, discriminator, prior; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1000 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
 <a name="cohort-cuda-0d83d78027c5-experiment-residual_student"></a>
 

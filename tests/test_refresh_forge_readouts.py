@@ -1630,14 +1630,18 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
             assert expected_snippet in tier1_readouts_block
         for forbidden in ("not run", "incompatible", "blocked", "preflight-blocked"):
             assert forbidden not in tier1_readouts_block
-        assert "| Required Tier 1 (11) | Diagnostic Tier 1 (1) | Total Tier 1 (12) | Tier 2 (18) | Tier 3 (6) | Total Tier 1–3 (36) |" in tier1_readouts_block
+        assert "| Required Tier 1 (11) | Stretch / diagnostic Tier 1 (4) | Total Tier 1 (15) |" in tier1_readouts_block
     else:
         assert "### Current-source selected-recipe Tier 1 readouts" not in inv_md
         assert status["current_source_measurements"]["stages"]["selected_family_readouts"]["missing_families"]
 
     view_breakdown_block = inv_md.split("<summary>Selected recipe breakdown by view", 1)[1].split("</details>", 1)[0]
+    # New stretch cells can be unmeasured without changing required-tier
+    # evidence. Check the required columns independently of the stretch column.
+    required_columns = "\n".join(" | ".join(line.split(" | ")[:7])
+                                 for line in view_breakdown_block.splitlines() if line.startswith("| ["))
     for forbidden in ("not run", "incompatible", "blocked", "diagnostic attempt"):
-        assert forbidden not in view_breakdown_block
+        assert forbidden not in required_columns
 
     full_suite_block = inv_md.split("## Full-suite results — failures included\n", 1)[1].split(
         "## Held and removed tests", 1
@@ -1654,18 +1658,19 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     ):
         row_line = next(line for line in full_suite_block.splitlines() if line.startswith(selected_row_prefix))
         assert "not run" not in row_line
-        assert "| 0 | 0 |" in row_line
+        assert "| 2 | 0 |" in row_line
 
-    # Verify all 8 selected recipes retain certified PASS/FAIL across all 50
-    # original suite tasks plus all declared stretch tasks, independently from
-    # current-definition compatibility.
+    # Verify certified PASS/FAIL for the original suite and the nine measured
+    # GAN stretch tasks. New precision tasks have no archived measurements.
     from experiments.forge.views import load_view
 
     cov_doc = read_json(ROOT / "reports/forge/attempt-coverage.json")
     full_suite_doc = read_json(ROOT / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json")
+    view = load_view(ROOT, "discriminator_stability")
+    archived_view = read_json(ROOT / view["previous_revision"]["archive"])
     stretch_tasks = {
         a["task"]
-        for a in load_view(ROOT, "discriminator_stability")["assignments"]
+        for a in archived_view["assignments"]
         if a["importance"] == "stretch"
     }
     suite_50 = set(full_suite_doc["tests"]) | {"ring_hold"} | stretch_tasks
@@ -1700,7 +1705,8 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
             assert rec is not None, f"missing attempt-coverage record for ({fam}, {tid})"
             assert rec.get("attempted") is True
             assert rec.get("status") in {"PASS", "FAIL"}, f"non-binary status for ({fam}, {tid}): {rec.get('status')}"
-            if archived_display and tid in projected_cohorts[fam]["tasks"]:
+            if (archived_display and archived_display.get("scope") == "recorded_source_formulaic_display"
+                    and tid in projected_cohorts[fam]["tasks"]):
                 cell = projected_cohorts[fam]["tasks"][tid]
                 proof = cell["recorded_formulaic_display"]
                 assert cell["status"] == rec["status"]
@@ -1731,7 +1737,14 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
             + fam_md.split(view_table_header, 1)[1]
             .split("\n## adaptation\n", 1)[0]
         )
-        current_bench_tables = "\n".join(line for line in current_bench.splitlines() if line.startswith("|"))
+        new_tasks = {"precision_gaussian_mxfp8", "precision_gaussian_nvfp4"}
+        for task_id in new_tasks:
+            new_row = next(line for line in current_bench.splitlines() if line.startswith(f"| [{task_id}]"))
+            assert "| UNKNOWN |" in new_row
+        current_bench_tables = "\n".join(
+            line for line in current_bench.splitlines()
+            if line.startswith("|") and not any(line.startswith(f"| [{task_id}]") for task_id in new_tasks)
+        )
         for forbidden_in_selected_cohort in (
             "| UNKNOWN |",
             "diagnostic attempt",
@@ -1770,7 +1783,11 @@ def test_recorded_overview_integrity_rejects_score_drift_without_current_source(
     original = rti._current_markdown(publication, ROOT, overview)
     assert "### Current-source selected-recipe Tier 1 readouts" not in original
     assert rfr._generated_pages_synced(ROOT, publication, original) is True
-    corrupted = original.replace("**[72/115]", "**[73/115]", 1)
+    import re
+    score = re.search(r"\*\*\[(\d+)/(\d+)\]", original)
+    assert score is not None
+    changed_score = f"**[{int(score.group(1)) + 1}/{score.group(2)}]"
+    corrupted = original[:score.start()] + changed_score + original[score.end():]
     assert corrupted != original
     assert rfr._generated_pages_synced(ROOT, publication, corrupted) is False
     fake_current = original + "\n### Current-source selected-recipe Tier 1 readouts\n\nFalse qualification.\n"
@@ -2050,7 +2067,8 @@ def _restore_recorded_source_cohort(root: Path) -> str:
 
     Latest-source integrity is checked separately above. These controls need
     actual original source bytes, rather than relabeling the latest checkout.
-    No training or published evidence is rewritten.
+    Use the frozen pre-precision view for these cache/tamper controls, including
+    the existing DDGAN tier calibration. No published evidence is rewritten.
     """
     import io
     import subprocess
@@ -2071,6 +2089,8 @@ def _restore_recorded_source_cohort(root: Path) -> str:
     data = subprocess.check_output(["git", "archive", revision, "--", *sorted(desired)], cwd=ROOT)
     with tarfile.open(fileobj=io.BytesIO(data)) as archive:
         archive.extractall(root, filter="data")
+    (root / "configs/forge/views/discriminator_stability.json").write_bytes(
+        (ROOT / "configs/forge/view-history/discriminator_stability-v14.json").read_bytes())
     manifest = rfr.catalog_source_manifest(root)
     assert manifest["digest"] == "2e8a97a0aa845c961de00d403fdcd1673b34b33626e4546c3138882a40e7bacf"
     _bind_readout_software_fixture(root, manifest["digest"])
@@ -2273,7 +2293,7 @@ def test_current_source_tier1_readouts_ignores_non_tier1_records_and_invalidates
         md3 = rti._current_source_tier1_readouts_markdown(
             live_inv, wt, wt / "reports/forge/technique-inventory.md"
         )
-        assert "| Required Tier 1 (11) | Diagnostic Tier 1 (1) | Total Tier 1 (12) | Tier 2 (18) | Tier 3 (6) | Total Tier 1–3 (36) |" in md3
+        assert "| Required Tier 1 (11) | Diagnostic Tier 1 (1) | Total Tier 1 (12) |" in md3
         assert "preflight-blocked" not in md3 and " blocked" not in md3
     finally:
         subprocess.run(
@@ -2698,7 +2718,8 @@ def test_refresh_attempt_coverage_delegates_to_formulaic_coverage_and_preserves_
         return {"updated": 0, "status": "ok"}
 
     monkeypatch.setattr(fc, "ensure_formulaic_attempt_coverage", _fake_ensure)
-    full_suite_rel = Path("configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json")
+    from experiments.forge.leaderboard_contract import FIXED_TEST_LIST
+    full_suite_rel = FIXED_TEST_LIST
     atomic_json(tmp_path / full_suite_rel, {"tests": ["gaussian1d_smoke"]})
     out = rfr.refresh_attempt_coverage(
         tmp_path,

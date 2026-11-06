@@ -631,5 +631,3 @@ def test_stretch_formulation_tasks_graders_and_preflight():
         obs_fail = [{"step": s, **failing_metrics} for s in ckpts]
         assert grade_result(t, {"evidence": {**base_ev, "observations": obs_pass, "live": passing_metrics}})["status"] == "PASS"
         assert grade_result(t, {"evidence": {**base_ev, "observations": obs_fail, "live": failing_metrics}})["status"] == "FAIL"
-
-

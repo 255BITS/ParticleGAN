@@ -174,7 +174,7 @@ Complete current Tier 1 measurement in: discriminator_stability. PASS and FAIL a
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [adaptation](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation) | [2/3](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-2) | [0/1](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-4) | [10/16](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
 | [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous) | [3/4](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-2) | [1/6](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-4) | [12/22](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
-| [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability) | [7/11](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | [8/18](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-2) | [0/1](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | [15/30](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability) | [8/22](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
+| [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability) | [7/11](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | [8/18](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-2) | [0/1](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | [15/30](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability) | [8/24](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
 | [formulation_comparison](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison) | [2/3](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-2) | [0/1](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-4) | [10/16](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
 | [host_profile_transfer](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer) | [2/3](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-2) | [0/1](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-4) | [10/16](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
 | [quality_coverage](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage) | [2/3](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-2) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-4) | [10/15](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
@@ -210,6 +210,13 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | [adaptation](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-1) | FAIL | matches recorded run |
 | [unused_token_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-unused_token_hold) | [adaptation](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-1) | PASS | matches recorded run |
 | [zero_tanh_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-zero_tanh_smoke) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | PASS | matches recorded run |
+
+Held at this tier (measured and shown, not counted):
+
+| Experiment | Held in | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [precision_gaussian_mxfp8](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-precision_gaussian_mxfp8) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [precision_gaussian_nvfp4](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-precision_gaussian_nvfp4) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-bc3debd3fa5e-tier-2"></a>
 
@@ -313,6 +320,8 @@ These tests keep running and keep this recipe's recorded result, but they do not
 
 | Experiment | Held in | Recorded result | Reason | Summary | Re-entry rule |
 | --- | --- | --- | --- | --- | --- |
+| [precision_gaussian_mxfp8](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-precision_gaussian_mxfp8) | [discriminator_stability / Tier 1](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | UNKNOWN | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format MXFP8 software-reference training arithmetic? | Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass. |
+| [precision_gaussian_nvfp4](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-precision_gaussian_nvfp4) | [discriminator_stability / Tier 1](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | UNKNOWN | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format NVFP4 software-reference training arithmetic? | Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass. |
 | [img_bars4](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-img_bars4) | [adaptation / Tier 2](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-2), [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-2), [formulation_comparison / Tier 2](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-2), [quality_coverage / Tier 2](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-2) | FAIL | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | Four bar pictures: BCAP and BISPF draw clean bars but only 2 of the 4. R1/R2 and GAN v3 pass it but fail Tier 1 tests and img_stripes2; under the current declarations no recipe passes both bars4 and stripes2. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
 | [img_blobs4](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-img_blobs4) | [adaptation / Tier 2](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-2), [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-2), [formulation_comparison / Tier 2](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-2), [quality_coverage / Tier 2](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-2) | FAIL | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | Four corner-blob pictures: BCAP covers 2 corners (24/32 clean), BISPF 3 (28/32); the test needs all 4 corners and 29/32 clean. Every recipe passing its current declaration fails or cannot run Tier 1 tests. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
 | [img_intensity2](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-img_intensity2) | [adaptation / Tier 2](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-2), [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-2), [formulation_comparison / Tier 2](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-2), [quality_coverage / Tier 2](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-2) | PASS | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | Two brightness levels: BCAP draws both but 10 of 32 pictures are off in brightness; BISPF collapses to one level. The three recipes passing its current declaration fail Tier 1 tests that BCAP and BISPF pass. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
@@ -806,9 +815,9 @@ No experiments assigned.
 
 ## discriminator_stability
 
-**discriminator_stability — revision 14**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
+**discriminator_stability — revision 15**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **11 / 18 / 1 / 0**. Held counts (measured and shown, not counted): **0 / 7 / 1 / 14**. Its highest tier, Tier 4, has only held tests, so while they are held the view never shows PASS: a recipe that passes every counted tier gets HELD.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **11 / 18 / 1 / 0**. Held counts (measured and shown, not counted): **2 / 7 / 1 / 14**. Its highest tier, Tier 4, has only held tests, so while they are held the view never shows PASS: a recipe that passes every counted tier gets HELD.
 
 Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provisional and require bounded calibration before scientific default adoption. Archived task declarations and gates retain their original identities.
 
@@ -830,6 +839,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [model_vae_categorical](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_categorical) | required | PASS | matches recorded run |
 | [model_vae_hard](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_hard) | required | PASS | matches recorded run |
 | [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
+| [precision_gaussian_fp32](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-precision_gaussian_fp32) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [precision_gaussian_mxfp8](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-precision_gaussian_mxfp8) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | UNKNOWN | recorded definition unavailable |
+| [precision_gaussian_nvfp4](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-precision_gaussian_nvfp4) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-2"></a>
 
@@ -4654,6 +4666,99 @@ Declared budget: 3000 updates; timeout 600 seconds.
 
 Current measurement: mog prior (sigma 0.05); public_prior_without_output_noise; weights unbound; output noise clean.
 
+<a name="cohort-cuda-bc3debd3fa5e-experiment-precision_gaussian_fp32"></a>
+
+### precision_gaussian_fp32
+
+**precision_gaussian_fp32: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_fp32.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, discriminator, prior; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1000 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-bc3debd3fa5e-experiment-precision_gaussian_mxfp8"></a>
+
+### precision_gaussian_mxfp8
+
+**precision_gaussian_mxfp8: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_mxfp8.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, discriminator, prior; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1000 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-bc3debd3fa5e-experiment-precision_gaussian_nvfp4"></a>
+
+### precision_gaussian_nvfp4
+
+**precision_gaussian_nvfp4: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_nvfp4.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, discriminator, prior; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1000 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
 <a name="cohort-cuda-bc3debd3fa5e-experiment-residual_student"></a>
 
 ### residual_student
@@ -6895,7 +7000,7 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 Runtime: **cuda**. Selected configuration: [atlas](../../../configs/forge/ideas/atlas.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 9. Other view rows below are navigation over recorded task evidence, not recomputed qualification. Their counts follow the declared view revisions (adaptation 4, clockfree_continuous 5, discriminator_stability 14, formulation_comparison 3, host_profile_transfer 6, quality_coverage 4); the recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered.
+Recorded qualification: **tier 0**, discriminator_stability revision 9. Other view rows below are navigation over recorded task evidence, not recomputed qualification. Their counts follow the declared view revisions (adaptation 4, clockfree_continuous 5, discriminator_stability 15, formulation_comparison 3, host_profile_transfer 6, quality_coverage 4); the recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
@@ -6912,7 +7017,7 @@ Selection: historical_incumbent. Current-source pre-run whole candidate choice i
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [adaptation](atlas.md#cohort-cuda-c195899a64af-adaptation) | [0/3 (3 incompatible)](atlas.md#cohort-cuda-c195899a64af-adaptation-tier-1) | [0/12 (12 incompatible)](atlas.md#cohort-cuda-c195899a64af-adaptation-tier-2) | [0/1 (1 not run)](atlas.md#cohort-cuda-c195899a64af-adaptation-tier-3) | [0/0](atlas.md#cohort-cuda-c195899a64af-adaptation-tier-4) | [0/16 (1 not run, 15 incompatible)](atlas.md#cohort-cuda-c195899a64af-adaptation) | [0/7 (7 incompatible)](atlas.md#cohort-cuda-c195899a64af-held) |
 | [clockfree_continuous](atlas.md#cohort-cuda-c195899a64af-clockfree_continuous) | [0/4 (4 incompatible)](atlas.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-1) | [0/12 (12 incompatible)](atlas.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2) | [0/6 (5 not run, 1 incompatible)](atlas.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-3) | [0/0](atlas.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-4) | [0/22 (5 not run, 17 incompatible)](atlas.md#cohort-cuda-c195899a64af-clockfree_continuous) | [0/7 (7 incompatible)](atlas.md#cohort-cuda-c195899a64af-held) |
-| [discriminator_stability](atlas.md#cohort-cuda-c195899a64af-discriminator_stability) | [0/11 (6 not run, 5 incompatible)](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) | [0/18 (5 not run, 13 incompatible)](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) | [0/1 (1 incompatible)](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-3) | [0/0](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-4) | [0/30 (11 not run, 19 incompatible)](atlas.md#cohort-cuda-c195899a64af-discriminator_stability) | [0/22 (15 not run, 7 incompatible)](atlas.md#cohort-cuda-c195899a64af-held) |
+| [discriminator_stability](atlas.md#cohort-cuda-c195899a64af-discriminator_stability) | [0/11 (6 not run, 5 incompatible)](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) | [0/18 (5 not run, 13 incompatible)](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) | [0/1 (1 incompatible)](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-3) | [0/0](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-4) | [0/30 (11 not run, 19 incompatible)](atlas.md#cohort-cuda-c195899a64af-discriminator_stability) | [0/24 (17 not run, 7 incompatible)](atlas.md#cohort-cuda-c195899a64af-held) |
 | [formulation_comparison](atlas.md#cohort-cuda-c195899a64af-formulation_comparison) | [0/3 (3 incompatible)](atlas.md#cohort-cuda-c195899a64af-formulation_comparison-tier-1) | [0/12 (12 incompatible)](atlas.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2) | [0/1 (1 incompatible)](atlas.md#cohort-cuda-c195899a64af-formulation_comparison-tier-3) | [0/0](atlas.md#cohort-cuda-c195899a64af-formulation_comparison-tier-4) | [0/16 (16 incompatible)](atlas.md#cohort-cuda-c195899a64af-formulation_comparison) | [0/7 (7 incompatible)](atlas.md#cohort-cuda-c195899a64af-held) |
 | [host_profile_transfer](atlas.md#cohort-cuda-c195899a64af-host_profile_transfer) | [0/3 (3 incompatible)](atlas.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-1) | [0/12 (12 incompatible)](atlas.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2) | [0/1 (1 incompatible)](atlas.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-3) | [0/0](atlas.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-4) | [0/16 (16 incompatible)](atlas.md#cohort-cuda-c195899a64af-host_profile_transfer) | [0/7 (7 incompatible)](atlas.md#cohort-cuda-c195899a64af-held) |
 | [quality_coverage](atlas.md#cohort-cuda-c195899a64af-quality_coverage) | [0/3 (3 incompatible)](atlas.md#cohort-cuda-c195899a64af-quality_coverage-tier-1) | [0/12 (12 incompatible)](atlas.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) | [0/0](atlas.md#cohort-cuda-c195899a64af-quality_coverage-tier-3) | [0/0](atlas.md#cohort-cuda-c195899a64af-quality_coverage-tier-4) | [0/15 (15 incompatible)](atlas.md#cohort-cuda-c195899a64af-quality_coverage) | [0/7 (7 incompatible)](atlas.md#cohort-cuda-c195899a64af-held) |
@@ -6948,6 +7053,13 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [two_pole](atlas.md#cohort-cuda-c195899a64af-experiment-two_pole) | [adaptation](atlas.md#cohort-cuda-c195899a64af-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-c195899a64af-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-c195899a64af-quality_coverage-tier-1) | BLOCKED | changed since run |
 | [unused_token_hold](atlas.md#cohort-cuda-c195899a64af-experiment-unused_token_hold) | [adaptation](atlas.md#cohort-cuda-c195899a64af-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-c195899a64af-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-c195899a64af-quality_coverage-tier-1) | BLOCKED | changed since run |
 | [zero_tanh_smoke](atlas.md#cohort-cuda-c195899a64af-experiment-zero_tanh_smoke) | [discriminator_stability](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+
+Held at this tier (measured and shown, not counted):
+
+| Experiment | Held in | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [precision_gaussian_mxfp8](atlas.md#cohort-cuda-c195899a64af-experiment-precision_gaussian_mxfp8) | [discriminator_stability](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [precision_gaussian_nvfp4](atlas.md#cohort-cuda-c195899a64af-experiment-precision_gaussian_nvfp4) | [discriminator_stability](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-c195899a64af-tier-2"></a>
 
@@ -7051,6 +7163,8 @@ These tests keep running and keep this recipe's recorded result, but they do not
 
 | Experiment | Held in | Recorded result | Reason | Summary | Re-entry rule |
 | --- | --- | --- | --- | --- | --- |
+| [precision_gaussian_mxfp8](atlas.md#cohort-cuda-c195899a64af-experiment-precision_gaussian_mxfp8) | [discriminator_stability / Tier 1](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) | UNKNOWN | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format MXFP8 software-reference training arithmetic? | Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass. |
+| [precision_gaussian_nvfp4](atlas.md#cohort-cuda-c195899a64af-experiment-precision_gaussian_nvfp4) | [discriminator_stability / Tier 1](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) | UNKNOWN | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format NVFP4 software-reference training arithmetic? | Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass. |
 | [img_bars4](atlas.md#cohort-cuda-c195899a64af-experiment-img_bars4) | [adaptation / Tier 2](atlas.md#cohort-cuda-c195899a64af-adaptation-tier-2), [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2), [formulation_comparison / Tier 2](atlas.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2), [quality_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) | BLOCKED | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | Four bar pictures: BCAP and BISPF draw clean bars but only 2 of the 4. R1/R2 and GAN v3 pass it but fail Tier 1 tests and img_stripes2; under the current declarations no recipe passes both bars4 and stripes2. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
 | [img_blobs4](atlas.md#cohort-cuda-c195899a64af-experiment-img_blobs4) | [adaptation / Tier 2](atlas.md#cohort-cuda-c195899a64af-adaptation-tier-2), [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2), [formulation_comparison / Tier 2](atlas.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2), [quality_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) | BLOCKED | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | Four corner-blob pictures: BCAP covers 2 corners (24/32 clean), BISPF 3 (28/32); the test needs all 4 corners and 29/32 clean. Every recipe passing its current declaration fails or cannot run Tier 1 tests. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
 | [img_intensity2](atlas.md#cohort-cuda-c195899a64af-experiment-img_intensity2) | [adaptation / Tier 2](atlas.md#cohort-cuda-c195899a64af-adaptation-tier-2), [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-c195899a64af-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2), [formulation_comparison / Tier 2](atlas.md#cohort-cuda-c195899a64af-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-c195899a64af-host_profile_transfer-tier-2), [quality_coverage / Tier 2](atlas.md#cohort-cuda-c195899a64af-quality_coverage-tier-2) | BLOCKED | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | Two brightness levels: BCAP draws both but 10 of 32 pictures are off in brightness; BISPF collapses to one level. The three recipes passing its current declaration fail Tier 1 tests that BCAP and BISPF pass. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
@@ -7544,9 +7658,9 @@ No experiments assigned.
 
 ## discriminator_stability
 
-**discriminator_stability — revision 14**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
+**discriminator_stability — revision 15**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **11 / 18 / 1 / 0**. Held counts (measured and shown, not counted): **0 / 7 / 1 / 14**. Its highest tier, Tier 4, has only held tests, so while they are held the view never shows PASS: a recipe that passes every counted tier gets HELD.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **11 / 18 / 1 / 0**. Held counts (measured and shown, not counted): **2 / 7 / 1 / 14**. Its highest tier, Tier 4, has only held tests, so while they are held the view never shows PASS: a recipe that passes every counted tier gets HELD.
 
 Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provisional and require bounded calibration before scientific default adoption. Archived task declarations and gates retain their original identities.
 
@@ -7568,6 +7682,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [model_vae_categorical](atlas.md#cohort-cuda-c195899a64af-experiment-model_vae_categorical) | required | UNKNOWN | recorded definition unavailable |
 | [model_vae_hard](atlas.md#cohort-cuda-c195899a64af-experiment-model_vae_hard) | required | UNKNOWN | recorded definition unavailable |
 | [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-c195899a64af-experiment-clockfree_audit_measurement_v1) | diagnostic | BLOCKED | changed since run |
+| [precision_gaussian_fp32](atlas.md#cohort-cuda-c195899a64af-experiment-precision_gaussian_fp32) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [precision_gaussian_mxfp8](atlas.md#cohort-cuda-c195899a64af-experiment-precision_gaussian_mxfp8) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | UNKNOWN | recorded definition unavailable |
+| [precision_gaussian_nvfp4](atlas.md#cohort-cuda-c195899a64af-experiment-precision_gaussian_nvfp4) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-c195899a64af-discriminator_stability-tier-2"></a>
 
@@ -11120,6 +11237,99 @@ Declared budget: 3000 updates; timeout 600 seconds.
 
 Current measurement: mog prior (sigma 0.05); public_prior_without_output_noise; weights unbound; output noise clean.
 
+<a name="cohort-cuda-c195899a64af-experiment-precision_gaussian_fp32"></a>
+
+### precision_gaussian_fp32
+
+**precision_gaussian_fp32: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_fp32.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, discriminator, prior; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1000 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-c195899a64af-experiment-precision_gaussian_mxfp8"></a>
+
+### precision_gaussian_mxfp8
+
+**precision_gaussian_mxfp8: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_mxfp8.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, discriminator, prior; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1000 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-c195899a64af-experiment-precision_gaussian_nvfp4"></a>
+
+### precision_gaussian_nvfp4
+
+**precision_gaussian_nvfp4: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_nvfp4.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](atlas.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, discriminator, prior; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1000 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
 <a name="cohort-cuda-c195899a64af-experiment-residual_student"></a>
 
 ### residual_student
@@ -13301,7 +13511,7 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 Runtime: **cuda**. Selected configuration: [atlas](../../../configs/forge/ideas/atlas.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 9. Other view rows below are navigation over recorded task evidence, not recomputed qualification. Their counts follow the declared view revisions (adaptation 4, clockfree_continuous 5, discriminator_stability 14, formulation_comparison 3, host_profile_transfer 6, quality_coverage 4); the recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered.
+Recorded qualification: **tier 0**, discriminator_stability revision 9. Other view rows below are navigation over recorded task evidence, not recomputed qualification. Their counts follow the declared view revisions (adaptation 4, clockfree_continuous 5, discriminator_stability 15, formulation_comparison 3, host_profile_transfer 6, quality_coverage 4); the recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
@@ -13318,7 +13528,7 @@ Selection: historical_incumbent. Exact executed-source parent cohort remains blo
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation) | [0/3 (3 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0/12 (12 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0/1 (1 not run)](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [0/0](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-4) | [0/16 (1 not run, 15 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-adaptation) | [0/7 (7 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-held) |
 | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [0/4 (4 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0/12 (12 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0/6 (5 not run, 1 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [0/0](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-4) | [0/22 (5 not run, 17 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [0/7 (7 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-held) |
-| [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [0/11 (7 not run, 4 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0/18 (6 not run, 12 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0/1 (1 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [0/0](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-4) | [0/30 (13 not run, 17 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [0/22 (15 not run, 7 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-held) |
+| [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [0/11 (7 not run, 4 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0/18 (6 not run, 12 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0/1 (1 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [0/0](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-4) | [0/30 (13 not run, 17 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [0/24 (17 not run, 7 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-held) |
 | [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [0/3 (3 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) | [0/12 (12 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) | [0/1 (1 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) | [0/0](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-4) | [0/16 (16 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [0/7 (7 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-held) |
 | [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [0/3 (3 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) | [0/12 (12 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) | [0/1 (1 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | [0/0](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-4) | [0/16 (16 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [0/7 (7 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-held) |
 | [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage) | [0/3 (3 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | [0/12 (12 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | [0/0](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-3) | [0/0](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-4) | [0/15 (15 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage) | [0/7 (7 incompatible)](atlas.md#cohort-cuda-0d83d78027c5-held) |
@@ -13356,6 +13566,13 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [two_pole](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | BLOCKED | changed since run |
 | [unused_token_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | BLOCKED | changed since run |
 | [zero_tanh_smoke](atlas.md#cohort-cuda-0d83d78027c5-experiment-zero_tanh_smoke) | [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+
+Held at this tier (measured and shown, not counted):
+
+| Experiment | Held in | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [precision_gaussian_mxfp8](atlas.md#cohort-cuda-0d83d78027c5-experiment-precision_gaussian_mxfp8) | [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [precision_gaussian_nvfp4](atlas.md#cohort-cuda-0d83d78027c5-experiment-precision_gaussian_nvfp4) | [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-0d83d78027c5-tier-2"></a>
 
@@ -13459,6 +13676,8 @@ These tests keep running and keep this recipe's recorded result, but they do not
 
 | Experiment | Held in | Recorded result | Reason | Summary | Re-entry rule |
 | --- | --- | --- | --- | --- | --- |
+| [precision_gaussian_mxfp8](atlas.md#cohort-cuda-0d83d78027c5-experiment-precision_gaussian_mxfp8) | [discriminator_stability / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | UNKNOWN | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format MXFP8 software-reference training arithmetic? | Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass. |
+| [precision_gaussian_nvfp4](atlas.md#cohort-cuda-0d83d78027c5-experiment-precision_gaussian_nvfp4) | [discriminator_stability / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | UNKNOWN | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format NVFP4 software-reference training arithmetic? | Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass. |
 | [img_bars4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | Four bar pictures: BCAP and BISPF draw clean bars but only 2 of the 4. R1/R2 and GAN v3 pass it but fail Tier 1 tests and img_stripes2; under the current declarations no recipe passes both bars4 and stripes2. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
 | [img_blobs4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | Four corner-blob pictures: BCAP covers 2 corners (24/32 clean), BISPF 3 (28/32); the test needs all 4 corners and 29/32 clean. Every recipe passing its current declaration fails or cannot run Tier 1 tests. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
 | [img_intensity2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | Two brightness levels: BCAP draws both but 10 of 32 pictures are off in brightness; BISPF collapses to one level. The three recipes passing its current declaration fail Tier 1 tests that BCAP and BISPF pass. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
@@ -13952,9 +14171,9 @@ No experiments assigned.
 
 ## discriminator_stability
 
-**discriminator_stability — revision 14**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
+**discriminator_stability — revision 15**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **11 / 18 / 1 / 0**. Held counts (measured and shown, not counted): **0 / 7 / 1 / 14**. Its highest tier, Tier 4, has only held tests, so while they are held the view never shows PASS: a recipe that passes every counted tier gets HELD.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **11 / 18 / 1 / 0**. Held counts (measured and shown, not counted): **2 / 7 / 1 / 14**. Its highest tier, Tier 4, has only held tests, so while they are held the view never shows PASS: a recipe that passes every counted tier gets HELD.
 
 Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provisional and require bounded calibration before scientific default adoption. Archived task declarations and gates retain their original identities.
 
@@ -13976,6 +14195,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [model_vae_categorical](atlas.md#cohort-cuda-0d83d78027c5-experiment-model_vae_categorical) | required | UNKNOWN | recorded definition unavailable |
 | [model_vae_hard](atlas.md#cohort-cuda-0d83d78027c5-experiment-model_vae_hard) | required | UNKNOWN | recorded definition unavailable |
 | [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | diagnostic | BLOCKED | changed since run |
+| [precision_gaussian_fp32](atlas.md#cohort-cuda-0d83d78027c5-experiment-precision_gaussian_fp32) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [precision_gaussian_mxfp8](atlas.md#cohort-cuda-0d83d78027c5-experiment-precision_gaussian_mxfp8) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | UNKNOWN | recorded definition unavailable |
+| [precision_gaussian_nvfp4](atlas.md#cohort-cuda-0d83d78027c5-experiment-precision_gaussian_nvfp4) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-0d83d78027c5-discriminator_stability-tier-2"></a>
 
@@ -17568,6 +17790,99 @@ Current pass criteria:
 Declared budget: 3000 updates; timeout 600 seconds.
 
 Current measurement: mog prior (sigma 0.05); public_prior_without_output_noise; weights unbound; output noise clean.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-precision_gaussian_fp32"></a>
+
+### precision_gaussian_fp32
+
+**precision_gaussian_fp32: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_fp32.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, discriminator, prior; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1000 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-precision_gaussian_mxfp8"></a>
+
+### precision_gaussian_mxfp8
+
+**precision_gaussian_mxfp8: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_mxfp8.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, discriminator, prior; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1000 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-precision_gaussian_nvfp4"></a>
+
+### precision_gaussian_nvfp4
+
+**precision_gaussian_nvfp4: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_nvfp4.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, discriminator, prior; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1000 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
 <a name="cohort-cuda-0d83d78027c5-experiment-residual_student"></a>
 

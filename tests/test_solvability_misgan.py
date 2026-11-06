@@ -30,14 +30,12 @@ from particlegan import (
     init,
     unwrap_prior,
 )
-from benchmarks.toy_audit import api_conditionals as api
 from benchmarks.toy_audit.api_conditionals import (
     CASES,
     MisGANNeuralImputerFixture,
     MisGANRecoveryFixture,
     build_mcar_p50_problem,
     build_mcar_p80_anchored_problem,
-    misgan_ppost_indices,
     score_misgan_mcar_p50_recovery,
     score_misgan_mcar_p80_anchored,
     score_misgan_neural_imputer,

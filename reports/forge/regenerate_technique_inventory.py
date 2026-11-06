@@ -3132,6 +3132,7 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                     "view_revision": view_revision,
                     "req_total": req_total,
                     "diag_total": diag_total,
+                    "stretch_total": sum(item.get("importance") in {"stretch", "held"} for item in t1_assignments),
                     "rows": rows_data,
                 }
         except Exception:
@@ -3162,6 +3163,16 @@ def _recorded_source_binary_projection(result, root: Path) -> dict | None:
             or coverage.get("formulations_modified") is not False):
         raise ValueError("recorded formulaic display requires diagnostic-only coverage")
     required = set(full_suite_tasks(progress))
+    scope = progress.get("recorded_display_scope")
+    if scope is not None:
+        text = scope.get("text")
+        if (not isinstance(text, str) or hashlib.sha256(text.encode()).hexdigest() != scope.get("sha256")
+                or progress.get("input_hashes", {}).get(scope.get("path")) != scope.get("sha256")):
+            raise ValueError("recorded display scope digest changed")
+        declaration = json.loads(text)
+        if declaration.get("schema") != "forge_fixed_test_list_v1" or not declaration.get("tests"):
+            raise ValueError("invalid recorded display scope")
+        required = set(declaration["tests"])
     if not required:
         return None
     families = {}
@@ -3233,6 +3244,9 @@ def _selected_recipe_binary_task_statuses(result, root: Path) -> dict[str, dict[
         fam_statuses: dict[str, str] = {}
         for tid in set(tasks_map) | set(ro) | all_tasks:
             rec_st = tasks_map.get(tid, {}).get("status")
+            if recorded_display and tid not in ro:
+                fam_statuses[tid] = rec_st or "UNKNOWN"
+                continue
             if recorded_display and tid in ro:
                 fam_statuses[tid] = ro[tid]
             elif ro.get(tid) in {"PASS", "FAIL"}:
@@ -3290,6 +3304,7 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
     src12 = cached["source_digest"][:12]
     req_total = cached["req_total"]
     diag_total = cached["diag_total"]
+    other_label = "Stretch / diagnostic" if cached.get("stretch_total", 0) else "Diagnostic"
     all_total = req_total + diag_total
     if binary_by_family is not None:
         t2_total = len(distinct_by_tier[2])
@@ -3301,7 +3316,7 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
             (
                 f"Matched current-source (`{src12}`, `discriminator_stability` revision {cached['view_revision']}) "
                 f"formulaic Tier 1–3 evaluation for each family's selected recipe under protocol seed 0 on "
-                f"`NVIDIA RTX A6000` ({req_total} required + {diag_total} diagnostic = {all_total} Tier 1 tests, "
+                f"`NVIDIA RTX A6000` ({req_total} required + {diag_total} {other_label.lower()} = {all_total} Tier 1 tests, "
                 f"{t2_total} Tier 2 tests, {t3_total} Tier 3 tests; {tot36_total} distinct tests total). "
                 "Every test evaluates to binary PASS or FAIL (any constructor/preflight refusal or non-passing "
                 "outcome counts as FAIL, with no third option)."
@@ -3309,7 +3324,7 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
             "",
             (
                 f"| Family | Selected recipe | Source / revision | Required Tier 1 ({req_total}) "
-                f"| Diagnostic Tier 1 ({diag_total}) | Total Tier 1 ({all_total}) | Tier 2 ({t2_total}) "
+                f"| {other_label} Tier 1 ({diag_total}) | Total Tier 1 ({all_total}) | Tier 2 ({t2_total}) "
                 f"| Tier 3 ({t3_total}) | Total Tier 1–3 ({tot36_total}) | Evidence |"
             ),
             "| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
@@ -3354,7 +3369,7 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
         (
             f"Matched current-source (`{src12}`, `discriminator_stability` revision {cached['view_revision']}) "
             f"ordinary Tier 1 readouts for each family's unchanged selected recipe under protocol seed 0 on "
-            f"`NVIDIA RTX A6000` ({req_total} required + {diag_total} diagnostic = {all_total} Tier 1 tests). "
+            f"`NVIDIA RTX A6000` ({req_total} required + {diag_total} {other_label.lower()} = {all_total} Tier 1 tests). "
             "`## Selected recipes` above retains historical recorded-source pins until a new family selection "
             "snapshot is registered; these concluded `reports/forge/records/readout-*.json` records show "
             "matched current-source Tier 1 performance side by side without regrading historical cohorts."
@@ -3362,7 +3377,7 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
         "",
         (
             f"| Family | Selected recipe | Source / revision | Required Tier 1 ({req_total}) "
-            f"| Diagnostic Tier 1 ({diag_total}) | Total Tier 1 ({all_total}) | Evidence |"
+            f"| {other_label} Tier 1 ({diag_total}) | Total Tier 1 ({all_total}) | Evidence |"
         ),
         "| --- | --- | --- | ---: | ---: | ---: | --- |",
     ]
@@ -3568,6 +3583,10 @@ def _formulaic_selected_recipe_tables(markdown: str, result, root, path) -> str:
                 continue
             family, cohort = matched
             fam_statuses = binary_by_family[family["id"]]
+            if any(fam_statuses.get(task) not in {"PASS", "FAIL"} for task in all_distinct_stretch):
+                # The family renderer already preserves archived outcomes and
+                # labels new cells not run/blocked. Do not invent binary FAILs.
+                continue
             tier_cells = []
             v_pass_total = 0
             v_tot_total = 0
@@ -3619,14 +3638,18 @@ def _formulaic_selected_recipe_tables(markdown: str, result, root, path) -> str:
                 continue
             family, _ = matched
             fam_statuses = binary_by_family[family["id"]]
-            p_all = sum(fam_statuses.get(t) == "PASS" for t in fs_tasks)
-            f_all = len(fs_tasks) - p_all
-            p_unc = sum(fam_statuses.get(t) == "PASS" for t in uncounted_fs_tasks)
-            f_unc = len(uncounted_fs_tasks) - p_unc
-            held_summary = f"{len(uncounted_fs_tasks)}: {p_unc} PASS, {f_unc} FAIL"
+            from experiments.forge.leaderboard_contract import fixed_outcomes
+            counts = fixed_outcomes(fam_statuses, fs_tasks, uncounted_fs_tasks)
+            held = counts["held"]
+            held_summary = f"{held['total']}: {held['passed']} PASS, {held['failed']} FAIL"
+            if held["not_measured"]:
+                held_summary += f", {held['not_measured']} not measured"
+            if held["total"] - held["passed"] - held["failed"] - held["not_measured"]:
+                held_summary += ", other outcomes"
+            other = ", ".join(f"{n} {status.lower()}" for status, n in counts["other"].items()) or "0"
             tuning_col = parts[7]
             lines[idx] = (
-                f"{col0} | {p_all} | **{f_all}** | 0 | 0 | {held_summary} | {len(fs_tasks)} | {tuning_col}"
+                f"{col0} | {counts['passed']} | **{counts['failed']}** | {counts['not_measured']} | {other} | {held_summary} | {len(fs_tasks)} | {tuning_col}"
             )
         elif in_view_breakdown and line.startswith("| [") and " | ↳ [" in line:
             parts = line.split(" | ")

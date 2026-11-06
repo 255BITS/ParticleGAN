@@ -42,6 +42,7 @@ from experiments.forge.contracts import (
     stable_hash,
 )
 from experiments.forge.sources import inspect_source, snapshot_source
+from experiments.forge.leaderboard_contract import FIXED_TEST_LIST
 from experiments.forge.trainer_families import CURRENT_SELECTION, current_family_candidates
 from experiments.forge.views import (
     COUNTED_OR_HELD,
@@ -512,12 +513,28 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
     pending = int(summary.get("pending", 0))
     running = int(summary.get("running", 0))
 
-    full_suite_card = root / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json"
+    full_suite_card = root / FIXED_TEST_LIST
     full_suite_names = (
         sorted({*read_json(full_suite_card)["tests"], "ring_hold"})
         if full_suite_card.is_file()
         else None
     )
+    current_scope_names = set(full_suite_names or [])
+    # This integrity stage checks the source-bound published coverage, not
+    # experiments introduced after that source was frozen. Surface new cells
+    # separately; completing them requires new compatible evidence, never a
+    # relabel or rerun of the archived source merely to refresh a report.
+    unmeasured_current_tasks = []
+    scope = publication.get("family_progress", {}).get("recorded_display_scope")
+    if scope is not None:
+        import hashlib
+        text = scope.get("text")
+        if (not isinstance(text, str) or hashlib.sha256(text.encode()).hexdigest() != scope.get("sha256")
+                or publication["family_progress"].get("input_hashes", {}).get(scope.get("path")) != scope.get("sha256")):
+            raise ValueError("recorded display scope digest changed")
+        recorded_names = sorted({*json.loads(text)["tests"], "ring_hold"})
+        unmeasured_current_tasks = sorted(set(full_suite_names or []) - set(recorded_names))
+        full_suite_names = recorded_names
     valid_statuses = {"PASS", "FAIL"} if full_suite_names is not None else attempt_coverage.DONE
 
     selected = attempt_coverage.selected_tasks(publication)
@@ -525,7 +542,7 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
     commit_tasks_cache: dict[str, set[str]] = {}
     for family, selection, tasks in selected:
         if full_suite_names is not None:
-            available = sorted({*full_suite_names, *tasks})
+            available = full_suite_names if scope is not None else sorted({*full_suite_names, *tasks})
         else:
             commit = _selected_family_source_commit(root, publication, family, selection)
             if commit not in commit_tasks_cache:
@@ -574,6 +591,9 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
         missing = sorted(set(available) - covered_by_family.get(family, set()))
         if missing:
             missing_by_family[family] = {"candidate_id": cid, "missing_tasks": missing}
+    if scope is not None:
+        unmeasured_current_tasks = sorted(name for name in current_scope_names
+            if any(name not in covered for covered in covered_by_family.values()))
 
     current = pending == 0 and running == 0 and not superseded_records and not missing_by_family
     return {
@@ -582,6 +602,7 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
         "running": running,
         "superseded_record_count": len(superseded_records),
         "missing_by_family": missing_by_family,
+        "unmeasured_current_tasks": unmeasured_current_tasks,
     }
 
 
@@ -1152,7 +1173,7 @@ def _generated_pages_synced(root: Path, inv_json: dict[str, Any], inv_md: str) -
         # Archived display scores still need an integrity check when the latest
         # source has no Tier 1 payload. A digest footer alone cannot detect a
         # changed overview score or a false source-qualification claim.
-        if (rti._recorded_source_binary_projection(inv_json, root) is not None
+        if (rti._formulaic_display_payload(inv_json, root) is not None
                 and inv_md != rti._current_markdown(inv_json, root, root / "reports/forge/technique-inventory.md")):
             return False
 
@@ -2014,7 +2035,7 @@ def refresh_attempt_coverage(
     root = Path(root).resolve()
     attempt_state_root = Path(attempt_state_root).resolve()
     attempt_state_root.mkdir(parents=True, exist_ok=True)
-    if (root / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json").is_file():
+    if (root / FIXED_TEST_LIST).is_file():
         from ops.formulaic_coverage import ensure_formulaic_attempt_coverage
 
         return ensure_formulaic_attempt_coverage(
@@ -2242,7 +2263,7 @@ def refresh_attempt_coverage(
     ]
     if bad_new:
         raise CodeChangeRequiredError(f"newly executed diagnostic attempts failed with non-gate errors: {bad_new}")
-    if (root / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json").is_file():
+    if (root / FIXED_TEST_LIST).is_file():
         from ops.formulaic_coverage import ensure_formulaic_attempt_coverage
 
         result_summary = ensure_formulaic_attempt_coverage(
