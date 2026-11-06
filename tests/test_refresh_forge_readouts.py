@@ -1587,26 +1587,41 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         "Recorded source measurement · **stale**; no current qualification",
     ):
         assert forbidden not in selected_table_lines
-    # API source maintenance does not inherit a different source cohort's
-    # newer Tier 1 claims. Preserve the certified base-cohort display scores;
-    # original measurements and the later cohort remain unchanged in evidence.
-    for expected_selected_score in (
-        "**[27/27](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 12/12 tests",
+    from reports.forge import regenerate_technique_inventory as rti
+    display = rti._formulaic_display_payload(publication, ROOT)
+    assert display is not None
+    # Keep separate frozen expectations for current-source measurements and
+    # exact selected-source coverage receipts; maintenance cannot pool them.
+    expected_selected_scores = (
         "**[24/27](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/12 tests (3 fail)",
         "**[24/27](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/12 tests (3 fail)",
-        "**[27/27](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 12/12 tests",
         "**[25/27](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/12 tests (2 fail)",
-        "**[27/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 12/12 tests",
         "**[25/27](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/12 tests (2 fail)",
         "**[17/27](families/e22.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/12 tests (5 fail)",
-        "**[109/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 31/36 tests (5 fail)",
-        "**[105/115](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** · 30/36 tests (6 fail)",
-        "**[99/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 29/36 tests (7 fail)",
         "**[59/115](families/e22.md#cohort-cuda-1bf9d7d34422)** · 14/36 tests (22 fail)",
-    ):
+    )
+    if display.get("scope") == "recorded_source_formulaic_display":
+        assert display["qualification_input"] is False and display["qualification_reuse"] is False
+        expected_selected_scores += (
+            "**[23/27](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 8/12 tests (4 fail)",
+            "**[22/27](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/12 tests (5 fail)",
+            "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 8/12 tests (4 fail)",
+            "**[83/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 20/36 tests (16 fail)",
+            "**[72/115](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** · 17/36 tests (19 fail)",
+            "**[67/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 17/36 tests (19 fail)",
+        )
+    else:
+        expected_selected_scores += (
+            "**[27/27](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 12/12 tests",
+            "**[27/27](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 12/12 tests",
+            "**[27/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 12/12 tests",
+            "**[109/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 31/36 tests (5 fail)",
+            "**[105/115](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** · 30/36 tests (6 fail)",
+            "**[99/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 29/36 tests (7 fail)",
+        )
+    for expected_selected_score in expected_selected_scores:
         assert expected_selected_score in selected_table_lines
 
-    from reports.forge import regenerate_technique_inventory as rti
     tier1_readouts_block = rti._current_source_tier1_readouts_markdown(
         publication, ROOT, ROOT / "reports/forge/technique-inventory.md")
     if tier1_readouts_block:
