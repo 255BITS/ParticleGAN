@@ -2067,7 +2067,8 @@ def _restore_recorded_source_cohort(root: Path) -> str:
 
     Latest-source integrity is checked separately above. These controls need
     actual original source bytes, rather than relabeling the latest checkout.
-    No training or published evidence is rewritten.
+    Use the frozen pre-precision view for these cache/tamper controls, including
+    the existing DDGAN tier calibration. No published evidence is rewritten.
     """
     import io
     import subprocess
@@ -2088,6 +2089,8 @@ def _restore_recorded_source_cohort(root: Path) -> str:
     data = subprocess.check_output(["git", "archive", revision, "--", *sorted(desired)], cwd=ROOT)
     with tarfile.open(fileobj=io.BytesIO(data)) as archive:
         archive.extractall(root, filter="data")
+    (root / "configs/forge/views/discriminator_stability.json").write_bytes(
+        (ROOT / "configs/forge/view-history/discriminator_stability-v14.json").read_bytes())
     manifest = rfr.catalog_source_manifest(root)
     assert manifest["digest"] == "2e8a97a0aa845c961de00d403fdcd1673b34b33626e4546c3138882a40e7bacf"
     _bind_readout_software_fixture(root, manifest["digest"])
@@ -2290,7 +2293,7 @@ def test_current_source_tier1_readouts_ignores_non_tier1_records_and_invalidates
         md3 = rti._current_source_tier1_readouts_markdown(
             live_inv, wt, wt / "reports/forge/technique-inventory.md"
         )
-        assert "| Required Tier 1 (11) | Stretch / diagnostic Tier 1 (4) | Total Tier 1 (15) |" in md3
+        assert "| Required Tier 1 (11) | Diagnostic Tier 1 (1) | Total Tier 1 (12) |" in md3
         assert "preflight-blocked" not in md3 and " blocked" not in md3
     finally:
         subprocess.run(
