@@ -32,6 +32,7 @@ from particlegan import (
 )
 from benchmarks.toy_audit.api_conditionals import (
     CASES,
+    FourierMLPDiscriminator,
     MisGANNeuralImputerFixture,
     MisGANRecoveryFixture,
     build_mcar_p50_problem,
@@ -672,14 +673,33 @@ def test_misgan_multi_family_trainer_and_prior_updates(case_id: str, family: str
         )
 
     assert fixture.recipe.name == family
-    base_prior = unwrap_prior(fixture.prior)
-    assert hasattr(base_prior, "z") and base_prior.z.requires_grad
-    z_before = base_prior.z.detach().clone()
+    assert isinstance(fixture.D_x, FourierMLPDiscriminator)
+    assert hasattr(fixture, "prior_x") and hasattr(fixture, "prior_m")
+    assert fixture.prior is fixture.prior_x
+
+    base_prior_x = unwrap_prior(fixture.prior_x)
+    base_prior_m = unwrap_prior(fixture.prior_m)
+    assert hasattr(base_prior_x, "z") and base_prior_x.z.requires_grad
+    assert hasattr(base_prior_m, "z") and base_prior_m.z.requires_grad
+    zx_before = base_prior_x.z.detach().clone()
+    zm_before = base_prior_m.z.detach().clone()
+
+    if hasattr(fixture, "prior_i") and fixture.prior_i is not None:
+        base_prior_i = unwrap_prior(fixture.prior_i)
+        assert hasattr(base_prior_i, "z") and base_prior_i.z.requires_grad
+        zi_before = base_prior_i.z.detach().clone()
+    else:
+        zi_before = None
 
     for step_idx in range(1, 5):
         stats = fixture.step()
         assert stats["step"] == step_idx
         assert all(math.isfinite(v) for k, v in stats.items() if isinstance(v, float))
 
-    z_after = unwrap_prior(fixture.prior).z.detach()
-    assert not torch.equal(z_before, z_after), f"Prior particles z did not update for {case_id} under {family}"
+    zx_after = unwrap_prior(fixture.prior_x).z.detach()
+    zm_after = unwrap_prior(fixture.prior_m).z.detach()
+    assert not torch.equal(zx_before, zx_after), f"Prior X particles z did not update for {case_id} under {family}"
+    assert not torch.equal(zm_before, zm_after), f"Prior M particles z did not update for {case_id} under {family}"
+    if zi_before is not None:
+        zi_after = unwrap_prior(fixture.prior_i).z.detach()
+        assert not torch.equal(zi_before, zi_after), f"Prior I particles z did not update for {case_id} under {family}"

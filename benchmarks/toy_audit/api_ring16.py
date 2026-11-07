@@ -401,7 +401,7 @@ class _RNGStreams:
 
 
 class BiGANGenerator(nn.Module):
-    def __init__(self, z_dim=2, out_dim=2, hidden=64, layers=2):
+    def __init__(self, z_dim=2, out_dim=2, hidden=128, layers=3):
         super().__init__()
         mods = [nn.Linear(z_dim, hidden), nn.LeakyReLU(0.2)]
         for _ in range(layers - 1):
@@ -414,30 +414,66 @@ class BiGANGenerator(nn.Module):
 
 
 class BiGANEncoder(nn.Module):
-    def __init__(self, in_dim=2, z_dim=2, hidden=64, layers=2):
+    def __init__(self, in_dim=2, z_dim=2, hidden=128, layers=3, fourier=0):
         super().__init__()
-        mods = [nn.Linear(in_dim, hidden), nn.LeakyReLU(0.2)]
+        self.in_dim = in_dim
+        self.z_dim = z_dim
+        self.fourier = fourier
+        if fourier > 0:
+            freqs = torch.pi * (2.0 ** torch.arange(fourier, dtype=torch.float32))
+            self.register_buffer("freqs", freqs)
+            feat_dim = in_dim * (1 + 2 * fourier)
+        else:
+            feat_dim = in_dim
+        mods = [nn.Linear(feat_dim, hidden), nn.LeakyReLU(0.2)]
         for _ in range(layers - 1):
             mods.extend([nn.Linear(hidden, hidden), nn.LeakyReLU(0.2)])
         mods.append(nn.Linear(hidden, z_dim))
         self.net = nn.Sequential(*mods)
 
     def forward(self, x):
-        return self.net(x)
+        if self.fourier > 0:
+            xf = x.unsqueeze(-1) * self.freqs
+            h = torch.cat([x, torch.sin(xf).flatten(1), torch.cos(xf).flatten(1)], dim=1)
+        else:
+            h = x
+        return self.net(h)
 
 
 class BiGANJointCritic(nn.Module):
-    def __init__(self, in_dim=2, z_dim=2, hidden=128, layers=2):
+    def __init__(self, in_dim=2, z_dim=2, hidden=128, layers=3, fourier=0):
         super().__init__()
-        mods = [nn.Linear(in_dim + z_dim, hidden), nn.LeakyReLU(0.2)]
+        self.in_dim = in_dim
+        self.z_dim = z_dim
+        self.fourier = fourier
+        if fourier > 0:
+            freqs = torch.pi * (2.0 ** torch.arange(fourier, dtype=torch.float32))
+            self.register_buffer("freqs", freqs)
+            feat_dim = in_dim * (1 + 2 * fourier)
+        else:
+            feat_dim = in_dim
+        mods = [nn.Linear(feat_dim + z_dim, hidden), nn.LeakyReLU(0.2)]
         for _ in range(layers - 1):
             mods.extend([nn.Linear(hidden, hidden), nn.LeakyReLU(0.2)])
         mods.append(nn.Linear(hidden, 1))
         self.net = nn.Sequential(*mods)
 
     def forward(self, x_or_pair, z=None):
-        pair = torch.cat([x_or_pair, z], dim=1) if z is not None else x_or_pair
-        return self.net(pair).squeeze(-1)
+        if z is not None:
+            x, z_code = x_or_pair, z
+            true_coords = torch.cat([x, z_code], dim=1)
+        else:
+            x, z_code = x_or_pair[:, :self.in_dim], x_or_pair[:, self.in_dim:]
+            true_coords = x_or_pair
+        if self.fourier > 0:
+            xf = x.unsqueeze(-1) * self.freqs
+            hx = torch.cat([x, torch.sin(xf).flatten(1), torch.cos(xf).flatten(1)], dim=1)
+        else:
+            hx = x
+        pair = torch.cat([hx, z_code], dim=1)
+        out = self.net(pair).squeeze(-1)
+        out._bispf_input = true_coords
+        return out
 
 
 class Ring16BiGANFixture:
@@ -449,7 +485,7 @@ class Ring16BiGANFixture:
         "particlegan.init",
     )
     sigma = 0.10
-    cycle_weight = 0.5
+    cycle_weight = 2.0
 
     def __init__(
         self,
@@ -497,9 +533,9 @@ class Ring16BiGANFixture:
         angles = torch.linspace(0, 2 * math.pi, 17, device=self.device)[:16]
         self.centers = torch.stack([3.0 * torch.cos(angles), 3.0 * torch.sin(angles)], dim=1).float()
 
-        self.G = BiGANGenerator(z_dim=self.z_dim, out_dim=2, hidden=64).to(self.device)
-        self.E = BiGANEncoder(in_dim=2, z_dim=self.z_dim, hidden=64).to(self.device)
-        self.D = BiGANJointCritic(in_dim=2, z_dim=self.z_dim, hidden=128).to(self.device)
+        self.G = BiGANGenerator(z_dim=self.z_dim, out_dim=2, hidden=128, layers=3).to(self.device)
+        self.E = BiGANEncoder(in_dim=2, z_dim=self.z_dim, hidden=128, layers=3, fourier=3).to(self.device)
+        self.D = BiGANJointCritic(in_dim=2, z_dim=self.z_dim, hidden=128, layers=3, fourier=3).to(self.device)
 
         init.deterministic_orthogonal_(self.G, seed=self.seed + 1)
         init.deterministic_orthogonal_(self.E, seed=self.seed + 2)
@@ -562,6 +598,9 @@ class Ring16BiGANFixture:
         self.penalty = self.recipe.make_critic_penalty(self.opt_d)
         self.regularizer = self.recipe.make_prior_regularizer(prior=self.prior)
         self.loss = self.recipe.make_loss()
+        if self.recipe.effective_critic_formulation == "bispf":
+            from particlegan.bispf import bind_thermal_source
+            bind_thermal_source(self.opt_d.record, self.loss, self.regularizer)
 
     def _sample_prior(self, n, generator=None):
         rng = self.latent_rng if generator is None else generator
@@ -614,7 +653,7 @@ class Ring16BiGANFixture:
             pair_real = torch.cat([real_x, z_real], dim=1)
 
             loss_joint = self.loss.joint_g_loss(self.D(pair_fake), self.D(pair_real))
-            loss_recon = F.mse_loss(self.G(z_real), real_x) + F.mse_loss(self.E(x_fake), z_fake)
+            loss_recon = F.mse_loss(self.G(z_real), real_x) + F.mse_loss(self.E(x_fake), z_fake.detach())
             reg_prior = self.recipe.prior_regularization(
                 unwrap_prior(self.prior).z, regularizer=self.regularizer, prior=self.prior
             )
@@ -741,8 +780,8 @@ class ALICESpiralBiGANFixture(Ring16BiGANFixture):
         )
 
         self.G = BiGANGenerator(z_dim=self.z_dim, out_dim=2, hidden=128, layers=3).to(self.device)
-        self.E = BiGANEncoder(in_dim=2, z_dim=self.z_dim, hidden=128, layers=3).to(self.device)
-        self.D = BiGANJointCritic(in_dim=2, z_dim=self.z_dim, hidden=128, layers=3).to(self.device)
+        self.E = BiGANEncoder(in_dim=2, z_dim=self.z_dim, hidden=128, layers=3, fourier=0).to(self.device)
+        self.D = BiGANJointCritic(in_dim=2, z_dim=self.z_dim, hidden=128, layers=3, fourier=0).to(self.device)
 
         init.deterministic_orthogonal_(self.G, seed=self.seed + 1)
         init.deterministic_orthogonal_(self.E, seed=self.seed + 2)

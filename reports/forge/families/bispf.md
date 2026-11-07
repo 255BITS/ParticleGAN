@@ -2658,7 +2658,7 @@ Current measurement: particle_cloud prior (sigma 0); public_prior_without_output
 
 **grid100_res16_tanh: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/grid100_res16_tanh.json).
 
-Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed grid100_res16_tanh bounds: modes >= 100, precision >= 0.97, min_hq_mode_mass >= 0.005, mass_tv <= 0.1, min_cov_eig_ratio >= 0.4, max_cov_eig_ratio <= 1.7.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed grid100_res16_tanh bounds: modes >= 100, precision >= 0.97, min_hq_mode_mass >= 0.005, mass_tv <= 0.1, max_mode_mass <= 0.02, min_cov_eig_ratio >= 0.4.
 
 Used by: [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4).
 
@@ -3153,9 +3153,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **misgan_mcar_p50_recovery: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/misgan_mcar_p50_recovery.json).
 
-Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed misgan_mcar_p50_recovery bounds: acc, hq, impute_rmse, mass_tv, modes, off_plane.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed misgan_mcar_p50_recovery bounds: hq, mass_tv, modes, off_plane.
 
-Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed misgan_mcar_p50_recovery bounds: acc, hq, impute_rmse, mass_tv, modes, off_plane. [Attempt evidence](../attempt-coverage.json).
+Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed misgan_mcar_p50_recovery bounds: hq, mass_tv, modes, off_plane. [Attempt evidence](../attempt-coverage.json).
 
 Used by: [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4).
 
@@ -3670,9 +3670,9 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 **pacgan8_grid100: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/pacgan8_grid100.json).
 
-Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed pacgan8_grid100 bounds: hq, mass_tv, min_cov_eig_ratio, modes.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed pacgan8_grid100 bounds: hq, min_cov_eig_ratio, modes.
 
-Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed pacgan8_grid100 bounds: hq, mass_tv, min_cov_eig_ratio, modes. [Attempt evidence](../attempt-coverage.json).
+Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed pacgan8_grid100 bounds: hq, min_cov_eig_ratio, modes. [Attempt evidence](../attempt-coverage.json).
 
 Used by: [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4).
 
@@ -3696,9 +3696,9 @@ Current measurement: mog prior (sigma 0.05); public_prior_without_output_noise; 
 
 **pacgan_unequal_mass: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/pacgan_unequal_mass.json).
 
-Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed pacgan_unequal_mass bounds: min_cov_eig_ratio, modes.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed pacgan_unequal_mass bounds: min_cov_eig_ratio.
 
-Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed pacgan_unequal_mass bounds: min_cov_eig_ratio, modes. [Attempt evidence](../attempt-coverage.json).
+Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed pacgan_unequal_mass bounds: min_cov_eig_ratio. [Attempt evidence](../attempt-coverage.json).
 
 Used by: [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4).
 
@@ -3940,9 +3940,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **ring16_bigan_continuous: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/ring16_bigan_continuous.json).
 
-Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed ring16_bigan_continuous bounds: hq, mass_tv, mode_consistency, recon_rmse.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed ring16_bigan_continuous bounds: hq, recon_rmse.
 
-Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed ring16_bigan_continuous bounds: hq, mass_tv, mode_consistency, recon_rmse. [Attempt evidence](../attempt-coverage.json).
+Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed ring16_bigan_continuous bounds: hq, recon_rmse. [Attempt evidence](../attempt-coverage.json).
 
 Used by: [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 

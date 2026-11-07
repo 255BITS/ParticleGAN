@@ -164,7 +164,7 @@ Selection: recorded_source_measurement. Recorded source-bound original measureme
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [adaptation](k3p.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](k3p.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [8/12](k3p.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1](k3p.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [0/0](k3p.md#cohort-cuda-1bf9d7d34422-adaptation-tier-4) | [11/16](k3p.md#cohort-cuda-1bf9d7d34422-adaptation) | [2/7](k3p.md#cohort-cuda-1bf9d7d34422-held) |
 | [clockfree_continuous](k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [3/4](k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [8/12](k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0/6](k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [0/0](k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-4) | [11/22](k3p.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [2/7](k3p.md#cohort-cuda-1bf9d7d34422-held) |
-| [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [9/11](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [9/18](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0/1](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [0/0](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | [18/30](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [5/24](k3p.md#cohort-cuda-1bf9d7d34422-held) |
+| [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [9/11](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [9/18](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0/1](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [0/0](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | [18/30](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [6/24](k3p.md#cohort-cuda-1bf9d7d34422-held) |
 | [formulation_comparison](k3p.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [3/3](k3p.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [8/12](k3p.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [0/1](k3p.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [0/0](k3p.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-4) | [11/16](k3p.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [2/7](k3p.md#cohort-cuda-1bf9d7d34422-held) |
 | [host_profile_transfer](k3p.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [3/3](k3p.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [8/12](k3p.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [0/1](k3p.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [0/0](k3p.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-4) | [11/16](k3p.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [2/7](k3p.md#cohort-cuda-1bf9d7d34422-held) |
 | [quality_coverage](k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [3/3](k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [8/12](k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [0/0](k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-4) | [11/15](k3p.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [2/7](k3p.md#cohort-cuda-1bf9d7d34422-held) |
@@ -298,7 +298,7 @@ Held at this tier (measured and shown, not counted):
 | [misgan_mcar_p80_anchored](k3p.md#cohort-cuda-1bf9d7d34422-experiment-misgan_mcar_p80_anchored) | [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | FAIL | recorded definition unavailable |
 | [pacgan8_grid100](k3p.md#cohort-cuda-1bf9d7d34422-experiment-pacgan8_grid100) | [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | FAIL | recorded definition unavailable |
 | [pacgan_unequal_mass](k3p.md#cohort-cuda-1bf9d7d34422-experiment-pacgan_unequal_mass) | [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | FAIL | recorded definition unavailable |
-| [ring16_bigan_continuous](k3p.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) | [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | FAIL | recorded definition unavailable |
+| [ring16_bigan_continuous](k3p.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) | [discriminator_stability](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | PASS | recorded definition unavailable |
 
 <a name="cohort-cuda-1bf9d7d34422-held"></a>
 
@@ -331,7 +331,7 @@ These tests keep running and keep this recipe's recorded result, but they do not
 | [misgan_mcar_p80_anchored](k3p.md#cohort-cuda-1bf9d7d34422-experiment-misgan_mcar_p80_anchored) | [discriminator_stability / Tier 4](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | FAIL | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | Extreme MCAR p=0.80 MisGAN on the 8-mode 8D block manifold with a 10% fully observed anchor subset. | — |
 | [pacgan8_grid100](k3p.md#cohort-cuda-1bf9d7d34422-experiment-pacgan8_grid100) | [discriminator_stability / Tier 4](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | FAIL | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | PacGAN-8 packed critic on the 10x10 100-mode 2D Gaussian grid testing 100/100 mode coverage. | — |
 | [pacgan_unequal_mass](k3p.md#cohort-cuda-1bf9d7d34422-experiment-pacgan_unequal_mass) | [discriminator_stability / Tier 4](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | FAIL | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | PacGAN-4 packed critic on an unequal-mass 8-mode ring with 20:1 weight ratio between heavy and light modes. | — |
-| [ring16_bigan_continuous](k3p.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) | [discriminator_stability / Tier 4](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | FAIL | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | Continuous 2D multimodal joint BiGAN (G, E, D) on 16-Gaussian ring held pending passing generation and reconstruction recipe. | Count again when one global recipe passes ring16_bigan_continuous under its unchanged declaration. |
+| [ring16_bigan_continuous](k3p.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) | [discriminator_stability / Tier 4](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | PASS | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | Continuous 2D multimodal joint BiGAN (G, E, D) on 16-Gaussian ring held pending passing generation and reconstruction recipe. | Count again when one global recipe passes ring16_bigan_continuous under its unchanged declaration. |
 
 <a name="cohort-cuda-1bf9d7d34422-adaptation"></a>
 
@@ -883,7 +883,7 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [grid100_res16_tanh](k3p.md#cohort-cuda-1bf9d7d34422-experiment-grid100_res16_tanh) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | FAIL | recorded definition unavailable |
 | [misgan_block_recovery](k3p.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_recovery) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | FAIL | recorded definition unavailable |
 | [misgan_block_neural_imputer](k3p.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_neural_imputer) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | FAIL | recorded definition unavailable |
-| [ring16_bigan_continuous](k3p.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | FAIL | recorded definition unavailable |
+| [ring16_bigan_continuous](k3p.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | PASS | recorded definition unavailable |
 | [misgan_mcar_p50_recovery](k3p.md#cohort-cuda-1bf9d7d34422-experiment-misgan_mcar_p50_recovery) | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | FAIL | recorded definition unavailable |
 | [misgan_mcar_p80_anchored](k3p.md#cohort-cuda-1bf9d7d34422-experiment-misgan_mcar_p80_anchored) | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | FAIL | recorded definition unavailable |
 | [pacgan_unequal_mass](k3p.md#cohort-cuda-1bf9d7d34422-experiment-pacgan_unequal_mass) | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | FAIL | recorded definition unavailable |
@@ -1211,7 +1211,7 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 | [target_shift_recovery](k3p.md#cohort-cuda-1bf9d7d34422-experiment-target_shift_recovery) | diagnostic | FAIL | recorded definition unavailable |
 | [misgan_block_recovery](k3p.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_recovery) | diagnostic | FAIL | recorded definition unavailable |
 | [misgan_block_neural_imputer](k3p.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_neural_imputer) | diagnostic | FAIL | recorded definition unavailable |
-| [ring16_bigan_continuous](k3p.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) | diagnostic | FAIL | recorded definition unavailable |
+| [ring16_bigan_continuous](k3p.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) | diagnostic | PASS | recorded definition unavailable |
 
 <a name="cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-2"></a>
 
@@ -2884,9 +2884,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **misgan_block_neural_imputer: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/misgan_block_neural_imputer.json).
 
-Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed misgan_block_neural_imputer bounds: acc, acc_lo.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed misgan_block_neural_imputer bounds: acc, acc_lo, missing_std_ratio.
 
-Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed misgan_block_neural_imputer bounds: acc, acc_lo. [Attempt evidence](../attempt-coverage.json).
+Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed misgan_block_neural_imputer bounds: acc, acc_lo, missing_std_ratio. [Attempt evidence](../attempt-coverage.json).
 
 Used by: [discriminator_stability / Tier 4](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) · [prior-ablation-full-suite-v1 / Tier 1](k3p.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -2911,9 +2911,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **misgan_block_recovery: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/misgan_block_recovery.json).
 
-Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed misgan_block_recovery bounds: acc, acc_lo, hq, mask_tv, mass_tv, modes.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed misgan_block_recovery bounds: acc_lo, hq, mass_tv, off_plane.
 
-Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed misgan_block_recovery bounds: acc, acc_lo, hq, mask_tv, mass_tv, modes. [Attempt evidence](../attempt-coverage.json).
+Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed misgan_block_recovery bounds: acc_lo, hq, mass_tv, off_plane. [Attempt evidence](../attempt-coverage.json).
 
 Used by: [discriminator_stability / Tier 4](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) · [prior-ablation-full-suite-v1 / Tier 1](k3p.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -3470,9 +3470,9 @@ Current measurement: mog prior (sigma 0.05); public_prior_without_output_noise; 
 
 **pacgan_unequal_mass: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/pacgan_unequal_mass.json).
 
-Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed pacgan_unequal_mass bounds: min_cov_eig_ratio, modes.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed pacgan_unequal_mass bounds: min_cov_eig_ratio, min_mode_mass, modes.
 
-Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed pacgan_unequal_mass bounds: min_cov_eig_ratio, modes. [Attempt evidence](../attempt-coverage.json).
+Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed pacgan_unequal_mass bounds: min_cov_eig_ratio, min_mode_mass, modes. [Attempt evidence](../attempt-coverage.json).
 
 Used by: [discriminator_stability / Tier 4](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4).
 
@@ -3698,11 +3698,11 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 ### ring16_bigan_continuous
 
-**ring16_bigan_continuous: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/ring16_bigan_continuous.json).
+**ring16_bigan_continuous: PASS**. [Current experiment declaration](../../../configs/forge/tasks/ring16_bigan_continuous.json).
 
-Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed ring16_bigan_continuous bounds: hq, mass_tv, recon_rmse.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Sustained 5/5 terminal checks on ring16_bigan_continuous.
 
-Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed ring16_bigan_continuous bounds: hq, mass_tv, recon_rmse. [Attempt evidence](../attempt-coverage.json).
+Run attempt: **PASS** (new_attempt; qualification unchanged). Sustained 5/5 terminal checks on ring16_bigan_continuous. [Attempt evidence](../attempt-coverage.json).
 
 Used by: [discriminator_stability / Tier 4](k3p.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) · [prior-ablation-full-suite-v1 / Tier 1](k3p.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 

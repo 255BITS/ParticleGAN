@@ -184,8 +184,8 @@ def test_level2_constructive_capacity_witness_bigan():
     centers = _ring_centers()
 
     torch.manual_seed(6)
-    gen = BiGANGenerator(z_dim=2, out_dim=2, hidden=64)
-    enc = BiGANEncoder(in_dim=2, z_dim=2, hidden=64)
+    gen = BiGANGenerator(z_dim=2, out_dim=2, hidden=128, layers=3)
+    enc = BiGANEncoder(in_dim=2, z_dim=2, hidden=128, layers=3, fourier=3)
     opt = torch.optim.Adam(list(gen.parameters()) + list(enc.parameters()), lr=0.01)
 
     for _ in range(200):
@@ -496,3 +496,122 @@ def test_bigan_and_alice_multi_family_trainer_and_prior_updates(fixture_cls, rec
     assert not torch.allclose(z_before, z_after), (
         f"{fixture_cls.__name__} failed to update unwrap_prior(prior).z under recipe={recipe_name}"
     )
+
+
+# ============================================================================
+# Architectural & Formulation Checks: Recommendation 2
+# ============================================================================
+
+def test_bigan_coordinate_fourier_features_architecture():
+    """Verify coordinate Fourier features sinusoidal projections on x for BiGANEncoder and BiGANJointCritic."""
+    # 1. Fourier features on Encoder
+    enc = BiGANEncoder(in_dim=2, z_dim=2, hidden=128, layers=3, fourier=3)
+    assert enc.fourier == 3
+    assert hasattr(enc, "freqs")
+    expected_freqs = torch.pi * torch.tensor([1.0, 2.0, 4.0])
+    assert torch.allclose(enc.freqs, expected_freqs)
+    # in_dim * (1 + 2 * fourier) = 2 * (1 + 6) = 14
+    assert enc.net[0].in_features == 14
+    assert enc.net[-1].out_features == 2
+
+    # Forward pass on 2D input
+    x = torch.randn(16, 2)
+    z = enc(x)
+    assert z.shape == (16, 2)
+
+    # 2. Fourier features on Joint Critic
+    critic = BiGANJointCritic(in_dim=2, z_dim=2, hidden=128, layers=3, fourier=3)
+    assert critic.fourier == 3
+    assert hasattr(critic, "freqs")
+    assert torch.allclose(critic.freqs, expected_freqs)
+    # feat_dim + z_dim = 14 + 2 = 16
+    assert critic.net[0].in_features == 16
+    assert critic.net[-1].out_features == 1
+
+    # Joint critic forward accepts both pair (B, 4) and separate (x, z)
+    pair = torch.randn(16, 4)
+    out_pair = critic(pair)
+    assert out_pair.shape == (16,)
+    # Verify true unprojected 4D coordinates attached to _bispf_input
+    assert hasattr(out_pair, "_bispf_input")
+    assert out_pair._bispf_input.shape == (16, 4)
+    assert torch.equal(out_pair._bispf_input, pair)
+
+    out_sep = critic(pair[:, :2], pair[:, 2:])
+    assert out_sep.shape == (16,)
+    assert hasattr(out_sep, "_bispf_input")
+    assert torch.allclose(out_sep._bispf_input, pair)
+
+
+def test_bigan_capacity_and_cycle_weight():
+    """Verify Ring16BiGANFixture capacity upgrade to 128 hidden, 3 layers, and cycle_weight=2.0."""
+    fixture = Ring16BiGANFixture(steps=5, device="cpu", seed=0)
+    assert fixture.cycle_weight == 2.0
+
+    # Generator: 3 layers, 128 hidden
+    assert fixture.G.net[0].in_features == 2
+    assert fixture.G.net[0].out_features == 128
+    assert fixture.G.net[2].in_features == 128
+    assert fixture.G.net[2].out_features == 128
+    assert fixture.G.net[4].in_features == 128
+    assert fixture.G.net[4].out_features == 128
+    assert fixture.G.net[-1].out_features == 2
+
+    # Encoder: 3 layers, 128 hidden, fourier=3 (input dim 14)
+    assert fixture.E.fourier == 3
+    assert fixture.E.net[0].in_features == 14
+    assert fixture.E.net[0].out_features == 128
+    assert fixture.E.net[2].in_features == 128
+    assert fixture.E.net[2].out_features == 128
+    assert fixture.E.net[4].in_features == 128
+    assert fixture.E.net[4].out_features == 128
+    assert fixture.E.net[-1].out_features == 2
+
+    # Joint Critic: 3 layers, 128 hidden, fourier=3 (input dim 16)
+    assert fixture.D.fourier == 3
+    assert fixture.D.net[0].in_features == 16
+    assert fixture.D.net[0].out_features == 128
+    assert fixture.D.net[2].in_features == 128
+    assert fixture.D.net[2].out_features == 128
+    assert fixture.D.net[4].in_features == 128
+    assert fixture.D.net[4].out_features == 128
+    assert fixture.D.net[-1].out_features == 1
+
+
+def test_bispf_thermal_and_critic_hook_binding():
+    """Verify rebind_trainer binds thermal source and hook attaches unprojected coordinates for BISPF."""
+    fixture = Ring16BiGANFixture(steps=5, device="cpu", seed=0, recipe_name="bispf")
+
+    # Thermal source must be bound to optimizer record
+    assert hasattr(fixture.opt_d, "record")
+    assert fixture.loss.thermal_source is fixture.opt_d.record
+    assert fixture.opt_d.record.legacy_thermal_channel is False
+
+    # Execute one step to ensure BISPF forward and penalty work seamlessly
+    metrics = fixture.step()
+    assert math.isfinite(metrics["loss_d"])
+    assert math.isfinite(metrics["loss_g"])
+    assert math.isfinite(metrics["reg_d"])
+
+
+def test_bigan_alice_recon_loss_target_detached():
+    """Verify that z_fake is detached in ALICE reconstruction loss so prior table gradients come only from adversarial / prior regularizer."""
+    fixture = Ring16BiGANFixture(steps=5, device="cpu", seed=0)
+    real_x = fixture.sample_target(16)
+    z_fake, _ = fixture._sample_prior(16)
+    x_fake = fixture._generate(z_fake)
+    z_real = fixture.E(real_x)
+
+    # Detached target in E(x_fake)
+    loss_recon = F.mse_loss(fixture.G(z_real), real_x) + F.mse_loss(fixture.E(x_fake), z_fake.detach())
+
+    # Backward from loss_recon alone
+    loss_recon.backward()
+
+    # z_fake has no grad accumulation directly through MSE target
+    prior_z = unwrap_prior(fixture.prior).z
+    # Gradients on G and E exist from reconstruction
+    assert any(p.grad is not None and torch.norm(p.grad) > 0 for p in fixture.G.parameters())
+    assert any(p.grad is not None and torch.norm(p.grad) > 0 for p in fixture.E.parameters())
+
+

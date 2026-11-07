@@ -58,6 +58,19 @@ STRETCH_FIXTURE_CASE_IDS = {
     "cyclegan_unpaired_constellation": "api-cyclegan-unpaired-constellation",
 }
 STRETCH_FIXTURE_TASKS = frozenset(STRETCH_FIXTURE_CASE_IDS)
+STRETCH_TASKS = frozenset(
+    {
+        "misgan_block_recovery",
+        "misgan_block_neural_imputer",
+        "misgan_mcar_p50_recovery",
+        "misgan_mcar_p80_anchored",
+        "ring16_bigan_continuous",
+        "pacgan_unequal_mass",
+        "pacgan8_grid100",
+        "grid100_mlp16",
+        "grid100_res16_tanh",
+    }
+)
 HELD_TIER34_TASKS = frozenset(
     {
         "zero_tanh_rail_escape",
@@ -613,7 +626,7 @@ def harvest_existing_verdicts(root: Path) -> dict[tuple[str, str], dict[str, Any
         for rec_path in sorted(records_dir.glob("readout-*.json")):
             try:
                 doc = read_json(rec_path)
-            except Exception:
+            except (OSError, ValueError):
                 continue
             if doc.get("lifecycle") != "concluded" or doc.get("evidence_scope") != "current":
                 continue
@@ -697,11 +710,26 @@ def ensure_formulaic_attempt_coverage(
     gpus: list[str],
     *,
     json_mode: bool = False,
+    tasks: str | list[str] | set[str] | None = None,
+    force: bool = False,
 ) -> dict[str, Any]:
     """Ensure all selected-family × suite-task cells in attempt-coverage.json have executed PASS/FAIL outcomes."""
     root = Path(root).resolve()
     attempt_state_root = Path(attempt_state_root).resolve()
     attempt_state_root.mkdir(parents=True, exist_ok=True)
+
+    task_filter: set[str] | None = None
+    if tasks is not None:
+        if isinstance(tasks, str):
+            toks = [t.strip() for t in tasks.split(",") if t.strip()]
+            if len(toks) == 1 and toks[0].lower() == "stretch":
+                task_filter = set(STRETCH_TASKS)
+            elif len(toks) == 1 and toks[0].lower() == "all":
+                task_filter = None
+            else:
+                task_filter = set(toks)
+        else:
+            task_filter = set(tasks)
 
     pub_path = root / "reports/forge/technique-inventory.json"
     cov_path = root / "reports/forge/attempt-coverage.json"
@@ -748,11 +776,11 @@ def ensure_formulaic_attempt_coverage(
         ] = rec
 
     selected_keys_by_pair: dict[tuple[str, str], str] = {}
-    for family, selection, tasks in selected:
+    for family, selection, family_tasks in selected:
         cid = selection["candidate_id"]
         crev = selection["candidate_revision"]
         sdig = selection["bindings"]["source_digest"]
-        for task_name in tasks:
+        for task_name in family_tasks:
             if task_name not in all_tasks:
                 continue
             card = all_tasks[task_name]
@@ -803,14 +831,19 @@ def ensure_formulaic_attempt_coverage(
     for (family, task_name), key in sorted(selected_keys_by_pair.items()):
         job = jobs[key]
         res_file = attempt_state_root / "attempts" / key / "result.json"
-        if job.get("attempted") and job.get("status") in {"PASS", "FAIL"}:
-            if res_file.is_file():
-                try:
-                    cached_res = read_json(res_file)
-                    if cached_res.get("execution_seconds") is not None:
-                        job["seconds"] = cached_res["execution_seconds"]
-                except Exception:
-                    pass
+        force_task = force
+        if task_filter is not None and task_name not in task_filter:
+            continue
+        if force_task:
+            res_file.unlink(missing_ok=True)
+            to_execute.append(
+                {
+                    "key": key,
+                    "family": family,
+                    "candidate_id": job["candidate_id"],
+                    "task": task_name,
+                }
+            )
             continue
         if res_file.is_file():
             try:
@@ -840,8 +873,10 @@ def ensure_formulaic_attempt_coverage(
                         "evidence": "reports/forge/attempt-coverage.json",
                     }
                     continue
-            except Exception:
+            except (OSError, ValueError):
                 pass
+        if job.get("attempted") and job.get("status") in {"PASS", "FAIL"}:
+            continue
         if (family, task_name) in harvested:
             h = harvested[(family, task_name)]
             origin_val = "executed" if h["origin"] == "new_attempt" else h["origin"]
@@ -870,7 +905,7 @@ def ensure_formulaic_attempt_coverage(
     child_tasks = [item for item in to_execute if item["task"] in CONTINUATION_PARENTS]
 
     if parent_tasks:
-        _run_parallel_batches(root, attempt_state_root, parent_tasks, gpus, json_mode=json_mode)
+        _run_parallel_batches(root, attempt_state_root, parent_tasks, gpus, json_mode=json_mode, force=force)
         for item in parent_tasks:
             key = item["key"]
             res_file = attempt_state_root / "attempts" / key / "result.json"
@@ -959,6 +994,7 @@ def _run_parallel_batches(
     gpus: list[str],
     *,
     json_mode: bool = False,
+    force: bool = False,
 ) -> None:
     gpu_list = [str(g).strip() for g in gpus if str(g).strip()] or ["0"]
     # Sort fast tasks first so progress is immediately visible
@@ -1013,6 +1049,7 @@ def _run_parallel_batches(
                 "gpu": gpu_id,
                 "log_path": str(log_path),
                 "items": bucket,
+                "force": force,
             },
         )
         env = dict(os.environ)
@@ -1038,6 +1075,7 @@ def _run_batch_cli(spec_path: Path) -> int:
     gpu_id = str(spec["gpu"])
     log_path = Path(spec["log_path"])
     items = spec["items"]
+    force = bool(spec.get("force", False))
     total = len(items)
     for idx, item in enumerate(items, 1):
         key = item["key"]
@@ -1046,12 +1084,12 @@ def _run_batch_cli(spec_path: Path) -> int:
         tname = item["task"]
         attempt_dir = attempt_state_root / "attempts" / key
         res_file = attempt_dir / "result.json"
-        if res_file.is_file():
+        if not force and res_file.is_file():
             try:
                 existing = read_json(res_file)
                 if existing.get("status") in {"PASS", "FAIL"}:
                     continue
-            except Exception:
+            except (OSError, ValueError):
                 pass
         _log(f"[GPU {gpu_id}] ({idx}/{total}) Starting {fam}/{cid} on {tname} ...")
         res = execute_single_task(root, fam, cid, tname, "cuda:0", attempt_dir)
@@ -1081,12 +1119,25 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--root", type=Path, default=REPOSITORY_ROOT)
     parser.add_argument("--attempt-state-root", type=Path, default=None)
     parser.add_argument("--gpus", default="0,1")
+    parser.add_argument(
+        "--tasks",
+        type=str,
+        default="stretch",
+        help="Optional comma-separated list of tasks, 'stretch' (default), or 'all'",
+    )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Force re-execution of tasks, ignoring cached results",
+    )
     args = parser.parse_args(argv)
     if args.run_batch is not None:
         return _run_batch_cli(args.run_batch)
     state_root = args.attempt_state_root or (args.root / "runs/forge/attempt-coverage-refresh")
     gpus = [g.strip() for g in args.gpus.split(",") if g.strip()]
-    ensure_formulaic_attempt_coverage(args.root, state_root, gpus)
+    ensure_formulaic_attempt_coverage(
+        args.root, state_root, gpus, tasks=args.tasks, force=args.force
+    )
     return 0
 
 

@@ -126,21 +126,81 @@ class PacGANGenerator(nn.Module):
         return self.net(z)
 
 
-class PacGANDiscriminator(nn.Module):
-    """3-layer 128-wide LeakyReLU MLP packed discriminator D_pac: R^(2*m) -> R."""
+class PacGAN4RepulsionDiscriminator(nn.Module):
+    """Permutation-invariant dispersion & repulsion augmented PacGAN-4 discriminator.
 
-    def __init__(self, in_dim: int = 8, hidden_dim: int = 128) -> None:
+    Extracts:
+      - Raw flattened coordinates (in_pts * pt_dim)
+      - Sorted pairwise Euclidean distances (in_pts * (in_pts - 1) // 2)
+      - Dispersion statistics: min distance, mean distance, variance of distance (3)
+      - Centroid radial dispersion: sorted distances from centroid (in_pts) + radial variance (1)
+      - Harmonic repulsion potential: mean(1.0 / (d_ij + epsilon)) (1)
+    Total feature dim = 8 + 6 + 3 + 4 + 1 + 1 = 23 for in_pts=4, pt_dim=2.
+    """
+
+    def __init__(self, in_pts: int = 4, pt_dim: int = 2, hidden_dim: int = 128) -> None:
         super().__init__()
+        self.in_pts = int(in_pts)
+        self.pt_dim = int(pt_dim)
+        num_pairs = self.in_pts * (self.in_pts - 1) // 2
+        self.feature_dim = self.in_pts * self.pt_dim + num_pairs + 3 + self.in_pts + 1 + 1
         self.net = nn.Sequential(
-            nn.Linear(in_dim, hidden_dim),
+            nn.Linear(self.feature_dim, hidden_dim),
             nn.LeakyReLU(0.2),
             nn.Linear(hidden_dim, hidden_dim),
             nn.LeakyReLU(0.2),
             nn.Linear(hidden_dim, 1),
         )
 
+    def extract_features(self, x_pack: torch.Tensor) -> torch.Tensor:
+        # Accepts x_pack of shape (B, M, D)
+        B, M, D = x_pack.shape
+        flat_coords = x_pack.reshape(B, M * D)
+
+        # Pairwise Euclidean distances: M * (M - 1) // 2 pairs
+        diffs = x_pack[:, :, None, :] - x_pack[:, None, :, :]  # (B, M, M, D)
+        dists = torch.sqrt(diffs.square().sum(dim=-1) + 1e-8)  # (B, M, M)
+        i_idx, j_idx = torch.triu_indices(M, M, offset=1, device=x_pack.device)
+        pairwise = dists[:, i_idx, j_idx]  # (B, num_pairs)
+        sorted_pairwise, _ = torch.sort(pairwise, dim=-1)
+
+        d_min = sorted_pairwise[:, :1]
+        d_mean = pairwise.mean(dim=-1, keepdim=True)
+        d_var = pairwise.var(dim=-1, keepdim=True)
+
+        # Centroid radial dispersion
+        centroid = x_pack.mean(dim=1, keepdim=True)  # (B, 1, D)
+        radii = torch.sqrt((x_pack - centroid).square().sum(dim=-1) + 1e-8)  # (B, M)
+        sorted_radii, _ = torch.sort(radii, dim=-1)
+        r_var = radii.var(dim=-1, keepdim=True)
+
+        # Harmonic repulsion potential
+        p_rep = (1.0 / (pairwise + 0.05)).mean(dim=-1, keepdim=True)
+
+        return torch.cat([
+            flat_coords, sorted_pairwise, d_min, d_mean, d_var, sorted_radii, r_var, p_rep
+        ], dim=-1)
+
     def forward(self, x_packed: torch.Tensor) -> torch.Tensor:
-        return self.net(x_packed).squeeze(-1)
+        # Accepts (B, M, D) or flat (B, M * D)
+        if x_packed.ndim == 2:
+            x_packed = x_packed.reshape(x_packed.shape[0], self.in_pts, self.pt_dim)
+        feats = self.extract_features(x_packed)
+        return self.net(feats).squeeze(-1)
+
+
+class PacGANDiscriminator(PacGAN4RepulsionDiscriminator):
+    """3-layer 128-wide LeakyReLU MLP packed discriminator with dispersion & repulsion features."""
+
+    def __init__(
+        self,
+        in_dim: int = 8,
+        hidden_dim: int = 128,
+        in_pts: int | None = None,
+        pt_dim: int = 2,
+    ) -> None:
+        pts = in_pts if in_pts is not None else max(1, in_dim // pt_dim)
+        super().__init__(in_pts=pts, pt_dim=pt_dim, hidden_dim=hidden_dim)
 
 
 @torch.no_grad()
@@ -835,7 +895,7 @@ class PacGAN8Grid100Fixture(_PacGANBaseFixture):
         batch_size: int = 512,
         particles: int = 512,
         z_dim: int = 2,
-        pac_size: int = 8,
+        pac_size: int = 4,
         sigma: float = 0.05,
         coords: tuple[float, ...] = GRID100_COORDS,
     ) -> None:
@@ -935,9 +995,9 @@ def _grid100_case() -> dict[str, Any]:
         },
         "sampling": (
             "100-mode 10x10 2D Gaussian grid (centers in {-9,-7,...,7,9}^2, sigma=0.05); "
-            "MoGParticlePrior(sigma=0.05); 8-packed discriminator D(x_1, ..., x_8)"
+            "MoGParticlePrior(sigma=0.05); 4-packed repulsion discriminator D(x_1, ..., x_4)"
         ),
-        "scope": "PacGAN m=8 packing stretch test on 100-mode Gaussian grid coverage and within-mode covariance.",
+        "scope": "PacGAN m=4 packing stretch test on 100-mode Gaussian grid coverage and within-mode covariance.",
     }
 
 

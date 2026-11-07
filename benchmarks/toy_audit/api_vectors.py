@@ -20,7 +20,7 @@ from torch import nn
 
 from particlegan import (BatchDistanceDiscriminator, GANTrainer, Recipe,
                         get_recipe, init, scale_learning_rates)
-from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator
+from lib.toy_models import SimpleMLPDiscriminator
 from benchmarks.transfer_suite import stress_tasks, vector_tasks
 from benchmarks.toy100 import accuracy, metrics as native_metrics, problems
 from .definition_quality import gaussian_metrics, ring_metrics, two_pole_metrics
@@ -46,32 +46,81 @@ class ZeroTanhGenerator(nn.Module):
         return self.net(z)
 
 
+import lib.toy_models
+
+
+class TanhRailGuard(torch.autograd.Function):
+    """Autograd function providing smooth saturation bounding, critic gradient clamping,
+    and restoring penalty gradients to prevent samples from locking at +/- scale tanh rails.
+    """
+    @staticmethod
+    def forward(ctx, u, scale=5.25, v_max=1.8, v_margin=0.4, guard_bound=5.0):
+        v = u / scale
+        abs_v = torch.abs(v)
+        sign_v = torch.sign(v)
+        excess = torch.relu(abs_v - v_max)
+        soft_excess = excess / (1.0 + excess / v_margin)
+        v_bounded = torch.where(abs_v <= v_max, v, sign_v * (v_max + soft_excess))
+        tanh_val = torch.tanh(v_bounded)
+        out = scale * tanh_val
+        ctx.save_for_backward(v, tanh_val)
+        ctx.scale = scale
+        ctx.v_max = v_max
+        ctx.v_margin = v_margin
+        ctx.guard_bound = guard_bound
+        return out
+
+    @staticmethod
+    def backward(ctx, grad_output):
+        v, tanh_val = ctx.saved_tensors
+        scale = ctx.scale
+        v_max = ctx.v_max
+        v_margin = ctx.v_margin
+        guard_bound = ctx.guard_bound
+        clipped_grad = torch.clamp(grad_output, -guard_bound, guard_bound)
+        dtanh = 1.0 - tanh_val ** 2
+        abs_v = torch.abs(v)
+        excess = torch.relu(abs_v - v_max)
+        df_dv = torch.where(abs_v <= v_max, torch.ones_like(v), 1.0 / ((1.0 + excess / v_margin) ** 2))
+        restore_thresh = 1.5
+        v_excess = torch.relu(abs_v - restore_thresh)
+        penalty_grad = 5.0 * torch.sign(v) * v_excess
+        grad_u = (clipped_grad * dtanh * df_dv) / scale + penalty_grad / scale
+        return grad_u, None, None, None, None
+
+
 class ResidualBlock(nn.Module):
-    """Residual block with 2 Linear layers and LeakyReLU(0.2)."""
-    def __init__(self, dim: int):
+    """Residual block with 2 Linear layers, LeakyReLU(0.2), and branch scaling."""
+    def __init__(self, dim: int, scale: float = 1.0):
         super().__init__()
+        self.scale = scale
         self.linear1 = nn.Linear(dim, dim)
         self.act = nn.LeakyReLU(0.2, inplace=False)
         self.linear2 = nn.Linear(dim, dim)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        return x + self.linear2(self.act(self.linear1(x)))
+        return x + self.scale * self.linear2(self.act(self.linear1(x)))
 
 
-class ResidualMLPGenerator(nn.Module):
-    """16-layer residual MLP generator with identity-initialized skip connections and scaled tanh head.
+class ScaledResidualMLPGenerator(nn.Module):
+    """16-layer residual MLP generator with 1/sqrt(2N) branch scaling, pre-head LayerNorm,
+    and S=5.25 bounded tanh head with rail saturation guard.
 
     1 stem linear + 7 residual blocks (14 linear layers) + 1 head linear = 16 linear layers.
-    Identity initialization: block.linear2 weights and biases are zeroed.
+    Branch scaling: h_{l+1} = h_l + (1/sqrt(14)) * block(h_l)
+    Pre-head normalization: nn.LayerNorm(hidden_dim) before final projection.
+    Output: S * tanh(head(norm(h)) / S) guarded against rail saturation.
     """
-    def __init__(self, z_dim: int = 2, hidden_dim: int = 128, n_blocks: int = 7, out_dim: int = 2, scale: float = 5.25):
+    def __init__(self, z_dim: int = 2, hidden_dim: int = 128, n_blocks: int = 7, out_dim: int = 2, scale: float = 5.25, use_norm: bool = True):
         super().__init__()
         self.scale = scale
+        self.res_scale = 1.0 / math.sqrt(2.0 * n_blocks)
         self.stem = nn.Sequential(
             nn.Linear(z_dim, hidden_dim),
             nn.LeakyReLU(0.2, inplace=False),
         )
-        self.blocks = nn.ModuleList([ResidualBlock(hidden_dim) for _ in range(n_blocks)])
+        self.blocks = nn.ModuleList([ResidualBlock(hidden_dim, scale=self.res_scale) for _ in range(n_blocks)])
+        self.norm = nn.LayerNorm(hidden_dim) if use_norm else nn.Identity()
         self.head = nn.Linear(hidden_dim, out_dim)
         self.init_weights()
 
@@ -85,12 +134,59 @@ class ResidualMLPGenerator(nn.Module):
         nn.init.zeros_(self.stem[0].bias)
         nn.init.orthogonal_(self.head.weight)
         nn.init.zeros_(self.head.bias)
+        if hasattr(self, "norm") and isinstance(self.norm, nn.LayerNorm):
+            nn.init.ones_(self.norm.weight)
+            nn.init.zeros_(self.norm.bias)
 
     def forward(self, z: torch.Tensor) -> torch.Tensor:
         h = self.stem(z)
         for block in self.blocks:
             h = block(h)
-        return self.scale * torch.tanh(self.head(h) / self.scale)
+        u = self.head(self.norm(h))
+        return TanhRailGuard.apply(u, self.scale)
+
+
+# Alias for backward compatibility and formulaic coverage imports
+ResidualMLPGenerator = ScaledResidualMLPGenerator
+
+
+class ScaledSimpleMLPGenerator(nn.Module):
+    """MLP generator with LayerNorm stabilization for deep (n_hidden >= 16) networks."""
+    def __init__(
+        self,
+        z_dim: int = 4,
+        hidden_dim: int = 128,
+        n_hidden: int = 3,
+        out_dim: int = 2,
+        use_norm: bool | None = None,
+    ) -> None:
+        super().__init__()
+        self.z_dim = z_dim
+        self.hidden_dim = hidden_dim
+        self.n_hidden = n_hidden
+        self.out_dim = out_dim
+        if use_norm is None:
+            use_norm = (n_hidden >= 16)
+        self.use_norm = use_norm
+
+        layers = []
+        in_dim = z_dim
+        for _ in range(n_hidden):
+            layers.append(nn.Linear(in_dim, hidden_dim))
+            if self.use_norm:
+                layers.append(nn.LayerNorm(hidden_dim))
+            layers.append(nn.LeakyReLU(0.2, inplace=False))
+            in_dim = hidden_dim
+        layers.append(nn.Linear(in_dim, out_dim))
+        self.net = nn.Sequential(*layers)
+
+    def forward(self, z: torch.Tensor) -> torch.Tensor:
+        return self.net(z)
+
+
+# Patch in lib.toy_models and alias locally
+SimpleMLPGenerator = ScaledSimpleMLPGenerator
+lib.toy_models.SimpleMLPGenerator = ScaledSimpleMLPGenerator
 
 
 # Frozen mathematical proposal definitions and actual arm initializers are

@@ -239,14 +239,20 @@ def test_level3_destructive_negative_controls_cramergan():
 # ============================================================================
 
 
-@pytest.mark.parametrize("recipe_name", ["bispf", "atlas", "bcap", "k3p", "ka2"])
+@pytest.mark.parametrize(
+    "recipe_name",
+    ["bispf", "atlas", "bcap", "k3p", "ka2", "bispf_optimized", "bcap_adam", "e22"],
+)
 def test_multi_family_execution_cramergan(recipe_name: str):
-    """Verify 4 steps of bispf, atlas (ManipulatedPrior), bcap, k3p, ka2 run cleanly and update prior.z."""
+    """Verify 4 steps of all 8 candidate families run cleanly and update prior.z."""
     if recipe_name == "atlas":
         base = ParticlePrior(num_particles=256, z_dim=2, init_std=1.0)
         prior = ManipulatedPrior(base, [NormalNoiseManipulator(sigma=0.0065)])
     elif recipe_name == "ka2":
         prior = MoGParticlePrior(num_particles=256, z_dim=2, sigma=0.10, standardize=False)
+    elif recipe_name == "e22":
+        base = ParticlePrior(num_particles=256, z_dim=2, init_std=1.0)
+        prior = ManipulatedPrior(base, [NormalNoiseManipulator(sigma=0.025)])
     else:
         prior = None
 

@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from .reproducibility import DEFAULT_SEED, construction_rng
 
-from copy import deepcopy
+from copy import copy, deepcopy
 import math
 
 import numpy as np
@@ -126,6 +126,9 @@ for _row in _CASES:
     if _row["id"].startswith(("api-mask-","api-posterior-","api-misgan-")): _row["eval_samples"]=4096
     if _row["id"] in ("api-misgan-mcar-p50-recovery", "api-misgan-mcar-p80-anchored"):
         _row["batch_size"] = 512
+        _row["default_recipe"] = "bispf"
+    if _row["id"] in ("api-misgan-block-recovery", "api-misgan-block-neural-imputer"):
+        _row["batch_size"] = 2048
         _row["default_recipe"] = "bispf"
     if _row["id"].startswith("api-sparse-"):
         _row["thresholds"]={k:v for k,v in _row["thresholds"].items() if k not in ("full_original_update_budget","terminal_observations")}
@@ -1239,6 +1242,46 @@ class _FixtureRNGStreams:
         return torch.Generator(device=self.device).manual_seed(self.fork_seed(name))
 
 
+class TemperatureSigmoid(nn.Module):
+    """Sigmoid with temperature scaling tau_m: sigmoid(x / tau_m)."""
+
+    def __init__(self, temperature: float = 0.66):
+        super().__init__()
+        self.temperature = float(temperature)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        return torch.sigmoid(x / self.temperature)
+
+
+class FourierMLPDiscriminator(nn.Module):
+    """MLP discriminator with coordinate Fourier features to resolve fine mode structures."""
+
+    def __init__(self, in_dim: int = 8, hidden_dim: int = 64, n_hidden: int = 2, fourier: int = 2):
+        super().__init__()
+        self.in_dim = in_dim
+        self.fourier = fourier
+        dim = in_dim + (2 * fourier * in_dim if fourier > 0 else 0)
+        if fourier > 0:
+            freqs = torch.pi * (2.0 ** torch.arange(fourier, dtype=torch.float32))
+            self.register_buffer("freqs", freqs)
+        else:
+            self.freqs = None
+        layers = []
+        for i in range(n_hidden):
+            layers.append(nn.Linear(dim if i == 0 else hidden_dim, hidden_dim))
+            layers.append(nn.LeakyReLU(0.2))
+        layers.append(nn.Linear(hidden_dim, 1))
+        self.net = nn.Sequential(*layers)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        if self.fourier > 0 and self.freqs is not None:
+            xf = x.unsqueeze(-1) * self.freqs
+            h = torch.cat([x, torch.sin(xf).flatten(1), torch.cos(xf).flatten(1)], dim=1)
+        else:
+            h = x
+        return self.net(h)
+
+
 class _MisGANBaseFixture:
     api_components = (
         "Recipe.make_prior",
@@ -1249,10 +1292,16 @@ class _MisGANBaseFixture:
         "scale_learning_rates",
     )
 
+    def _sample_prior_obj(self, prior, batch_size: int, generator=None):
+        if prior is None:
+            return None, None
+        gen = self.latent_rng if generator is None else generator
+        if isinstance(prior, (MoGParticlePrior, ManipulatedPrior)) or hasattr(prior, "sigma"):
+            return prior.sample(batch_size, generator=gen, noise_generator=self.noise_rng)
+        return prior.sample(batch_size, generator=gen)
+
     def _sample_prior(self, batch_size: int):
-        if isinstance(self.prior, (MoGParticlePrior, ManipulatedPrior)) or hasattr(self.prior, "sigma"):
-            return self.prior.sample(batch_size, generator=self.latent_rng, noise_generator=self.noise_rng)
-        return self.prior.sample(batch_size, generator=self.latent_rng)
+        return self._sample_prior_obj(self.prior_x, batch_size)
 
     def _make_default_recipe(self, recipe_name):
         eff_name = "bispf" if recipe_name is None else recipe_name
@@ -1268,67 +1317,204 @@ class _MisGANBaseFixture:
             return get_recipe("ka2", total_steps=self.limit)
         return sched
 
+    def _prior_role_reg_loss(self, prior, regularizer, idx: torch.Tensor) -> torch.Tensor:
+        if prior is None or idx is None:
+            return torch.zeros((), device=self.device)
+        base = unwrap_prior(prior)
+        if hasattr(self.opt_g, "set_sampled_rows") and hasattr(base, "z") and base.z.requires_grad:
+            self.opt_g.set_sampled_rows(base.z, idx)
+        loss_p = torch.zeros((), device=self.device)
+        if hasattr(base, "z") and regularizer is not None:
+            loss_p = loss_p + self.recipe.prior_regularization(
+                base.z, regularizer=regularizer, prior=prior
+            )
+        if isinstance(prior, ManipulatedPrior) and prior.has_regularizer:
+            loss_p = loss_p + prior.regularize(
+                idx=idx, generator=self.noise_rng, step=self.completed_steps
+            )
+        return loss_p
+
     def _prior_reg_loss(self, idx_g: torch.Tensor) -> torch.Tensor:
-        base_prior = unwrap_prior(self.prior)
-        if hasattr(self.opt_g, "set_sampled_rows") and hasattr(base_prior, "z") and base_prior.z.requires_grad:
-            self.opt_g.set_sampled_rows(base_prior.z, idx_g)
-        loss_prior = torch.zeros((), device=self.device)
-        if hasattr(base_prior, "z"):
-            loss_prior = loss_prior + self.recipe.prior_regularization(
-                base_prior.z, regularizer=self.regularizer, prior=self.prior
-            )
-        if isinstance(self.prior, ManipulatedPrior) and self.prior.has_regularizer:
-            loss_prior = loss_prior + self.prior.regularize(
-                idx=idx_g, generator=self.noise_rng, step=self.completed_steps
-            )
-        return loss_prior
+        return self._prior_role_reg_loss(self.prior_x, self.regularizer_x, idx_g)
+
+    @torch.no_grad()
+    def _update_ema(self, average, current, decay: float):
+        for target, source in zip(average.parameters(), current.parameters()):
+            target.lerp_(source, 1.0 - decay)
+        for target, source in zip(average.buffers(), current.buffers()):
+            target.copy_(source)
 
     def rebind_trainer(self, recipe, prior=None):
         if recipe.total_steps is None and recipe.continuous_policy is None:
             recipe = recipe.replace(total_steps=self.case["default_steps"])
         self.recipe = recipe
+
         if prior is not None:
-            self.prior = prior.to(self.device)
-            self.recipe.apply_prior_policy(self.prior)
-        elif getattr(self, "prior", None) is None:
+            self.prior_x = prior.to(self.device)
+            self.recipe.apply_prior_policy(self.prior_x)
+        elif getattr(self, "prior_x", None) is None:
             prior_recipe = self.recipe.replace(
                 prior_update="learned",
                 num_particles=self.particles,
                 z_dim=self.z_dim,
             )
-            self.prior = prior_recipe.make_prior(
+            self.prior_x = prior_recipe.make_prior(
                 sigma=0.025,
                 sigma_rel=0.0,
                 device=self.device,
                 generator=self._rng_streams.fork("constructor"),
             )
             init.deterministic_orthogonal_(
-                unwrap_prior(self.prior),
+                unwrap_prior(self.prior_x),
                 seed=self._rng_streams.fork_seed("constructor"),
             )
-            self.recipe.apply_prior_policy(self.prior)
+            self.recipe.apply_prior_policy(self.prior_x)
         else:
-            self.prior = self.prior.to(self.device)
-            self.recipe.apply_prior_policy(self.prior)
+            self.prior_x = self.prior_x.to(self.device)
+            self.recipe.apply_prior_policy(self.prior_x)
+
+        self.prior = self.prior_x
+
+        if getattr(self, "prior_m", None) is None:
+            prior_m_recipe = self.recipe.replace(
+                prior_update="learned",
+                num_particles=64,
+                z_dim=self.z_dim,
+            )
+            self.prior_m = prior_m_recipe.make_prior(
+                sigma=0.025,
+                sigma_rel=0.0,
+                device=self.device,
+                generator=self._rng_streams.fork("constructor_m"),
+            )
+            init.deterministic_orthogonal_(
+                unwrap_prior(self.prior_m),
+                seed=self._rng_streams.fork_seed("constructor_m"),
+            )
+            self.recipe.apply_prior_policy(self.prior_m)
+        else:
+            self.prior_m = self.prior_m.to(self.device)
+            self.recipe.apply_prior_policy(self.prior_m)
+
+        if hasattr(self, "G_i"):
+            if getattr(self, "prior_i", None) is None:
+                prior_i_recipe = self.recipe.replace(
+                    prior_update="learned",
+                    num_particles=64,
+                    z_dim=4,
+                )
+                self.prior_i = prior_i_recipe.make_prior(
+                    sigma=0.025,
+                    sigma_rel=0.0,
+                    device=self.device,
+                    generator=self._rng_streams.fork("constructor_i"),
+                )
+                init.deterministic_orthogonal_(
+                    unwrap_prior(self.prior_i),
+                    seed=self._rng_streams.fork_seed("constructor_i"),
+                )
+                self.recipe.apply_prior_policy(self.prior_i)
+            else:
+                self.prior_i = self.prior_i.to(self.device)
+                self.recipe.apply_prior_policy(self.prior_i)
+            self.priors = _ModuleBundle(prior_x=self.prior_x, prior_m=self.prior_m, prior_i=self.prior_i)
+        else:
+            self.prior_i = None
+            self.priors = _ModuleBundle(prior_x=self.prior_x, prior_m=self.prior_m)
 
         self.loss = self.recipe.make_loss()
-        self.regularizer = self.recipe.make_prior_regularizer(prior=self.prior)
+        self.regularizer_x = self.recipe.make_prior_regularizer(prior=self.prior_x)
+        self.regularizer_m = self.recipe.make_prior_regularizer(prior=self.prior_m)
+        self.regularizer = self.regularizer_x
+        if self.prior_i is not None:
+            self.regularizer_i = self.recipe.make_prior_regularizer(prior=self.prior_i)
+        else:
+            self.regularizer_i = None
+
+        normalized = self.recipe.optimizer_family not in ("adam", "formulation")
+        groups = [
+            {"params": [p for p in self.G_x.parameters() if p.requires_grad], "lr": self.recipe.lr, "role": "generator"},
+            {"params": [p for p in self.G_m.parameters() if p.requires_grad], "lr": self.recipe.lr, "role": "generator"},
+        ]
+        if hasattr(self, "G_i") and self.G_i is not None:
+            groups.append({"params": [p for p in self.G_i.parameters() if p.requires_grad], "lr": self.recipe.lr, "role": "generator"})
+
+        for prior_obj in (self.prior_x, self.prior_m, getattr(self, "prior_i", None)):
+            if prior_obj is None:
+                continue
+            base_p = unwrap_prior(prior_obj)
+            base_params = [p for p in base_p.parameters() if p.requires_grad]
+            base_ids = {id(p) for p in base_params}
+            router_params = [p for p in prior_obj.parameters() if p.requires_grad and id(p) not in base_ids]
+            if base_params:
+                groups.append({
+                    "params": base_params,
+                    "lr": self.recipe.lr * self.recipe.prior_lr_mult,
+                    "betas": self.recipe.prior_betas if self.recipe.prior_betas is not None else self.recipe.betas,
+                    **({"role": "prior"} if normalized else {}),
+                    **({"eps": self.recipe.prior_eps} if self.recipe.prior_eps is not None else {}),
+                })
+            if router_params:
+                groups.append({
+                    "params": router_params,
+                    "lr": self.recipe.lr,
+                    "betas": self.recipe.betas,
+                    **({"role": "router"} if normalized else {}),
+                })
+
+        from particlegan.capabilities import prior_mechanisms
+        mechanisms = prior_mechanisms(
+            self.prior_x,
+            latent_damping_max_rate=self.recipe.latent_damping_max_rate if self.recipe.prior_update == "learned" else 0.0,
+            prior_beta1=(self.recipe.prior_betas or self.recipe.betas)[0],
+        )
+        base_prior_x = unwrap_prior(self.prior_x)
+        latent_table = base_prior_x.z if (base_prior_x is not None and hasattr(base_prior_x, "z") and mechanisms["prior"]["a2_eligible"]) else None
+        self.opt_g = self.recipe.make_generator_optimizer(groups, latent_table=latent_table, modules=[self.G], foreach=False, fused=False)
+        self.opt_g.prior_mechanisms = mechanisms
+
         ema_critic = deepcopy(self.D) if self.recipe.effective_critic_formulation != "bispf" else None
-        self.opt_g, self.opt_d = self.recipe.make_optimizers(
-            self.G,
+        self.opt_d = self.recipe.make_critic_optimizer(
             self.D,
-            self.prior,
             ema_critic=ema_critic,
             foreach=False,
             fused=False,
         )
+
         self.base_rates = [
             [group["lr"] for group in self.opt_g.param_groups],
             [group["lr"] for group in self.opt_d.param_groups],
         ]
+
+        def _clone_opt_d(opt):
+            cloned = copy(opt)
+            for attr in ("recipe_optimizer_family", "critic", "record", "anchor", "recipe_optimizer_name", "prior_mechanisms"):
+                if hasattr(opt, attr):
+                    setattr(cloned, attr, getattr(opt, attr))
+            if hasattr(opt, "record"):
+                cloned.record = deepcopy(opt.record)
+            return cloned
+
         self.penalty_x = self.recipe.make_critic_penalty(self.opt_d, collect_stats=True)
+        opt_d_m = _clone_opt_d(self.opt_d)
+        self.penalty_m = self.recipe.make_critic_penalty(opt_d_m, collect_stats=True)
+        if hasattr(self, "D_i") and self.D_i is not None:
+            opt_d_i = _clone_opt_d(self.opt_d)
+            self.penalty_i = self.recipe.make_critic_penalty(opt_d_i, collect_stats=True)
+        else:
+            self.penalty_i = None
+
         if not hasattr(self.opt_d, "record"):
             _count_critic_steps(self.opt_d)
+
+        self.ema_G_x = deepcopy(self.G_x).eval().requires_grad_(False)
+        self.ema_G_m = deepcopy(self.G_m).eval().requires_grad_(False)
+        self.ema_prior_x = deepcopy(self.prior_x).eval().requires_grad_(False)
+        self.ema_prior_m = deepcopy(self.prior_m).eval().requires_grad_(False)
+        if hasattr(self, "G_i") and self.G_i is not None:
+            self.ema_G_i = deepcopy(self.G_i).eval().requires_grad_(False)
+        if getattr(self, "prior_i", None) is not None:
+            self.ema_prior_i = deepcopy(self.prior_i).eval().requires_grad_(False)
 
 
 class MisGANRecoveryFixture(_MisGANBaseFixture):
@@ -1383,12 +1569,11 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
             self.G_m = nn.Sequential(
                 nn.Linear(self.z_dim, 64), nn.LeakyReLU(0.2),
                 nn.Linear(64, 64), nn.LeakyReLU(0.2),
-                nn.Linear(64, 8), nn.Sigmoid(),
+                nn.Linear(64, 8),
+                TemperatureSigmoid(0.66),
             ).to(self.device)
-            self.D_x = nn.Sequential(
-                nn.Linear(16, 64), nn.LeakyReLU(0.2),
-                nn.Linear(64, 64), nn.LeakyReLU(0.2),
-                nn.Linear(64, 1),
+            self.D_x = FourierMLPDiscriminator(
+                in_dim=8, hidden_dim=64, n_hidden=2, fourier=2
             ).to(self.device)
             self.D_m = nn.Sequential(
                 nn.Linear(8, 64), nn.LeakyReLU(0.2),
@@ -1418,34 +1603,36 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
             self._schedule_recipe(),
             [self.opt_g, self.opt_d],
             self.base_rates,
-            self.prior,
+            self.priors,
         )
 
         self.G_x.train(); self.G_m.train(); self.D_x.train(); self.D_m.train()
         bs = int(self.recipe.batch_size or self.batch_size)
         x_real, m_real, _ = self.problem.train_batch(bs, self.data_rng)
 
-        z_x, idx_x = self._sample_prior(bs)
-        z_m, idx_m = self._sample_prior(bs)
+        z_x, idx_x = self._sample_prior_obj(self.prior_x, bs)
+        z_m, idx_m = self._sample_prior_obj(self.prior_m, bs)
         x_fake = self.G_x(z_x)
-        if isinstance(self.prior, ManipulatedPrior) and self.prior.postprocesses_generated:
-            x_fake = self.prior.postprocess_generated(x_fake)
+        if isinstance(self.prior_x, ManipulatedPrior) and self.prior_x.postprocesses_generated:
+            x_fake = self.prior_x.postprocess_generated(x_fake)
         m_fake = self.G_m(z_m)
 
-        real_dx_in = torch.cat([x_real * m_real, m_real], dim=1)
-        fake_dx_in = torch.cat([x_fake.detach() * m_fake.detach(), m_fake.detach()], dim=1)
+        real_dx_in = x_real * m_real
+        fake_dx_in = x_fake.detach() * m_fake.detach()
 
         loss_dx = self.loss.d_loss(self.D_x(real_dx_in).squeeze(-1), self.D_x(fake_dx_in).squeeze(-1))
         loss_dm = self.loss.d_loss(self.D_m(m_real).squeeze(-1), self.D_m(m_fake.detach()).squeeze(-1))
-        reg_d = self.penalty_x(self.D_x, real_dx_in, fake_dx_in)
-        loss_d = loss_dx + loss_dm + reg_d
+
+        reg_dx = self.penalty_x(self.D_x, real_dx_in, fake_dx_in)
+        reg_dm = self.penalty_m(self.D_m, m_real, m_fake.detach())
+        loss_d = loss_dx + loss_dm + reg_dx + reg_dm
 
         self.opt_d.zero_grad()
         loss_d.backward()
         self.opt_d.step()
 
         m_detached = m_fake.detach()
-        fake_gx_in = torch.cat([x_fake * m_detached, m_detached], dim=1)
+        fake_gx_in = x_fake * m_detached
 
         with torch.no_grad():
             real_dx_logits = self.D_x(real_dx_in).squeeze(-1)
@@ -1454,8 +1641,9 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
         loss_gm = self.loss.g_loss(self.D_m(m_fake).squeeze(-1), real_dm_logits)
         loss_adv = loss_gx + loss_gm
 
-        idx_g = torch.unique(torch.cat([idx_x.reshape(-1), idx_m.reshape(-1)]))
-        loss_prior = self._prior_reg_loss(idx_g)
+        loss_prior_x = self._prior_role_reg_loss(self.prior_x, self.regularizer_x, idx_x)
+        loss_prior_m = self._prior_role_reg_loss(self.prior_m, self.regularizer_m, idx_m)
+        loss_prior = loss_prior_x + loss_prior_m
         loss_g = loss_adv + loss_prior
 
         self.opt_g.zero_grad()
@@ -1465,13 +1653,22 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
             loss_g.backward()
         self.opt_g.step()
 
+        decay = float(self.recipe.ema_decay if getattr(self.recipe, "ema_decay", None) else 0.999)
+        if decay > 0.0:
+            self._update_ema(self.ema_G_x, self.G_x, decay)
+            self._update_ema(self.ema_G_m, self.G_m, decay)
+            if hasattr(self, "ema_prior_x") and self.prior_x is not None:
+                self._update_ema(self.ema_prior_x, self.prior_x, decay)
+            if hasattr(self, "ema_prior_m") and self.prior_m is not None:
+                self._update_ema(self.ema_prior_m, self.prior_m, decay)
+
         self.completed_steps += 1
         self.last_losses = dict(
             loss_g=float(loss_g.detach()),
             loss_d=float(loss_d.detach()),
             loss_gx=float(loss_gx.detach()),
             loss_gm=float(loss_gm.detach()),
-            critic_penalty=float(reg_d.detach()),
+            critic_penalty=float((reg_dx + reg_dm).detach()),
             loss_prior=float(loss_prior.detach()),
         )
         if not all(math.isfinite(v) for v in self.last_losses.values()):
@@ -1480,21 +1677,27 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
 
     @torch.no_grad()
     def observe(self, n=4096, seed=99123):
-        flags = {m: m.training for model in (self.G_x, self.G_m) for m in model.modules()}
+        models = [self.G_x, self.G_m, self.ema_G_x, self.ema_G_m]
+        flags = {m: m.training for model in models for m in model.modules()}
         try:
-            self.G_x.eval(); self.G_m.eval()
+            for model in models:
+                model.eval()
             gen = _rng(seed, device=self.device)
             noise_gen = _rng(seed + 1, device=self.device)
-            if isinstance(self.prior, (MoGParticlePrior, ManipulatedPrior)) or hasattr(self.prior, "sigma"):
-                z_x, _ = self.prior.sample(n, generator=gen, noise_generator=noise_gen)
-                z_m, _ = self.prior.sample(n, generator=gen, noise_generator=noise_gen)
+            prior_eval = getattr(self, "ema_prior_x", self.prior_x)
+            prior_m_eval = getattr(self, "ema_prior_m", self.prior_m)
+            if isinstance(prior_eval, (MoGParticlePrior, ManipulatedPrior)) or hasattr(prior_eval, "sigma"):
+                z_x, _ = prior_eval.sample(n, generator=gen, noise_generator=noise_gen)
             else:
-                z_x, _ = self.prior.sample(n, generator=gen)
-                z_m, _ = self.prior.sample(n, generator=gen)
-            x = self.G_x(z_x)
-            if isinstance(self.prior, ManipulatedPrior) and self.prior.postprocesses_generated:
-                x = self.prior.postprocess_generated(x)
-            m = self.G_m(z_m)
+                z_x, _ = prior_eval.sample(n, generator=gen)
+            if isinstance(prior_m_eval, (MoGParticlePrior, ManipulatedPrior)) or hasattr(prior_m_eval, "sigma"):
+                z_m, _ = prior_m_eval.sample(n, generator=gen, noise_generator=noise_gen)
+            else:
+                z_m, _ = prior_m_eval.sample(n, generator=gen)
+            x = self.ema_G_x(z_x)
+            if isinstance(prior_eval, ManipulatedPrior) and prior_eval.postprocesses_generated:
+                x = prior_eval.postprocess_generated(x)
+            m = self.ema_G_m(z_m)
             return self._scorer(x, m, self.problem, eval_seed=seed, use_ppost=True)
         finally:
             for mod, flag in flags.items():
@@ -1512,7 +1715,8 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
             "G_m": self.G_m.state_dict(),
             "D_x": self.D_x.state_dict(),
             "D_m": self.D_m.state_dict(),
-            "prior": self.prior.state_dict(),
+            "prior": self.prior_x.state_dict() if self.prior_x is not None else None,
+            "prior_m": self.prior_m.state_dict() if hasattr(self, "prior_m") and self.prior_m is not None else None,
             "opt_g": self.opt_g.state_dict(),
             "opt_d": self.opt_d.state_dict(),
             "last_losses": self.last_losses,
@@ -1524,11 +1728,19 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
         self.G_m.load_state_dict(state["G_m"])
         self.D_x.load_state_dict(state["D_x"])
         self.D_m.load_state_dict(state["D_m"])
-        if self.prior is not None and "prior" in state and state["prior"] is not None:
-            self.prior.load_state_dict(state["prior"])
+        if self.prior_x is not None and "prior" in state and state["prior"] is not None:
+            self.prior_x.load_state_dict(state["prior"])
+        if hasattr(self, "prior_m") and self.prior_m is not None and "prior_m" in state and state["prior_m"] is not None:
+            self.prior_m.load_state_dict(state["prior_m"])
         self.opt_g.load_state_dict(state["opt_g"])
         self.opt_d.load_state_dict(state["opt_d"])
         self.last_losses = state["last_losses"]
+        self.ema_G_x.load_state_dict(self.G_x.state_dict())
+        self.ema_G_m.load_state_dict(self.G_m.state_dict())
+        if hasattr(self, "ema_prior_x") and self.prior_x is not None:
+            self.ema_prior_x.load_state_dict(self.prior_x.state_dict())
+        if hasattr(self, "ema_prior_m") and self.prior_m is not None:
+            self.ema_prior_m.load_state_dict(self.prior_m.state_dict())
 
 
 class MisGANNeuralImputerFixture(_MisGANBaseFixture):
@@ -1583,7 +1795,8 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
             self.G_m = nn.Sequential(
                 nn.Linear(self.z_dim, 64), nn.LeakyReLU(0.2),
                 nn.Linear(64, 64), nn.LeakyReLU(0.2),
-                nn.Linear(64, 8), nn.Sigmoid(),
+                nn.Linear(64, 8),
+                TemperatureSigmoid(0.66),
             ).to(self.device)
             self.G_i = nn.Sequential(
                 nn.Linear(20, 64), nn.LeakyReLU(0.2),
@@ -1591,10 +1804,8 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
                 nn.Linear(64, 8),
             ).to(self.device)
 
-            self.D_x = nn.Sequential(
-                nn.Linear(16, 64), nn.LeakyReLU(0.2),
-                nn.Linear(64, 64), nn.LeakyReLU(0.2),
-                nn.Linear(64, 1),
+            self.D_x = FourierMLPDiscriminator(
+                in_dim=8, hidden_dim=64, n_hidden=2, fourier=2
             ).to(self.device)
             self.D_m = nn.Sequential(
                 nn.Linear(8, 64), nn.LeakyReLU(0.2),
@@ -1624,8 +1835,6 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
         self.last_losses = {}
 
     def _sample_hint(self, m: torch.Tensor) -> torch.Tensor:
-        if not self.is_anchored_mcar:
-            return m
         b = (torch.rand(m.shape, generator=self.noise_rng, device=m.device) < self.hint_rate).float()
         return b * m + 0.5 * (1.0 - b)
 
@@ -1637,7 +1846,7 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
             self._schedule_recipe(),
             [self.opt_g, self.opt_d],
             self.base_rates,
-            self.prior,
+            self.priors,
         )
 
         self.G_x.train(); self.G_m.train(); self.G_i.train()
@@ -1645,49 +1854,73 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
         bs = int(self.recipe.batch_size or self.batch_size)
         x_real, m_real, _ = self.problem.train_batch(bs, self.data_rng)
 
-        z_x, idx_x = self._sample_prior(bs)
-        z_m, idx_m = self._sample_prior(bs)
-        z_i = torch.randn(bs, 4, generator=self.latent_rng, device=self.device)
+        z_x, idx_x = self._sample_prior_obj(self.prior_x, bs)
+        z_m, idx_m = self._sample_prior_obj(self.prior_m, bs)
+        z_i, idx_i = self._sample_prior_obj(self.prior_i, bs)
 
         x_fake = self.G_x(z_x)
-        if isinstance(self.prior, ManipulatedPrior) and self.prior.postprocesses_generated:
-            x_fake = self.prior.postprocess_generated(x_fake)
+        if isinstance(self.prior_x, ManipulatedPrior) and self.prior_x.postprocesses_generated:
+            x_fake = self.prior_x.postprocess_generated(x_fake)
         m_fake = self.G_m(z_m)
 
         cond = torch.cat([x_real * m_real, m_real, z_i], dim=1)
         raw_imp = self.G_i(cond)
-        completed = m_real * x_real + (1 - m_real) * raw_imp
-        hint = self._sample_hint(m_real)
+        completed = m_real * x_real + (1.0 - m_real) * raw_imp
 
-        real_dx_in = torch.cat([x_real * m_real, m_real], dim=1)
-        fake_dx_in = torch.cat([x_fake.detach() * m_fake.detach(), m_fake.detach()], dim=1)
+        real_dx_in = x_real * m_real
+        fake_dx_in = x_fake.detach() * m_fake.detach()
 
         loss_dx = self.loss.d_loss(self.D_x(real_dx_in).squeeze(-1), self.D_x(fake_dx_in).squeeze(-1))
         loss_dm = self.loss.d_loss(self.D_m(m_real).squeeze(-1), self.D_m(m_fake.detach()).squeeze(-1))
 
-        real_di_in = torch.cat([x_fake.detach(), hint], dim=1)
-        fake_di_in = torch.cat([completed.detach(), hint], dim=1)
-        loss_di = self.loss.d_loss(self.D_i(real_di_in).squeeze(-1), self.D_i(fake_di_in).squeeze(-1))
-        reg_d = self.penalty_x(self.D_x, real_dx_in, fake_dx_in)
+        if self.is_anchored_mcar:
+            hint_fake = self._sample_hint(m_real)
+            hint_real = self._sample_hint(torch.ones_like(m_real))
+            real_di_in = torch.cat([x_fake.detach(), hint_real], dim=1)
+            fake_di_in = torch.cat([completed.detach(), hint_fake], dim=1)
+            cond_fake_gi = torch.cat([completed, hint_fake], dim=1)
+        else:
+            real_di_in = torch.cat([x_fake.detach(), m_real], dim=1)
+            fake_di_in = torch.cat([completed.detach(), m_real], dim=1)
+            cond_fake_gi = torch.cat([completed, m_real], dim=1)
 
-        loss_d = loss_dx + loss_dm + loss_di + reg_d
+        loss_di = self.loss.d_loss(self.D_i(real_di_in).squeeze(-1), self.D_i(fake_di_in).squeeze(-1))
+
+        reg_dx = self.penalty_x(self.D_x, real_dx_in, fake_dx_in)
+        reg_dm = self.penalty_m(self.D_m, m_real, m_fake.detach())
+        reg_di = self.penalty_i(self.D_i, real_di_in, fake_di_in)
+        loss_d = loss_dx + loss_dm + loss_di + reg_dx + reg_dm + reg_di
+
         self.opt_d.zero_grad()
         loss_d.backward()
         self.opt_d.step()
 
         m_detached = m_fake.detach()
-        fake_gx_in = torch.cat([x_fake * m_detached, m_detached], dim=1)
+        fake_gx_in = x_fake * m_detached
+
         with torch.no_grad():
             real_dx_logits = self.D_x(real_dx_in).squeeze(-1)
             real_dm_logits = self.D_m(m_real).squeeze(-1)
             real_di_logits = self.D_i(real_di_in).squeeze(-1)
+
         loss_gx = self.loss.g_loss(self.D_x(fake_gx_in).squeeze(-1), real_dx_logits)
         loss_gm = self.loss.g_loss(self.D_m(m_fake).squeeze(-1), real_dm_logits)
-        loss_gi = self.loss.g_loss(self.D_i(torch.cat([completed, hint], dim=1)).squeeze(-1), real_di_logits)
-        loss_adv = loss_gx + loss_gm + loss_gi
+        loss_gi = self.loss.g_loss(self.D_i(cond_fake_gi).squeeze(-1), real_di_logits)
 
-        idx_g = torch.unique(torch.cat([idx_x.reshape(-1), idx_m.reshape(-1)]))
-        loss_prior = self._prior_reg_loss(idx_g)
+        loss_div = torch.zeros((), device=self.device)
+        if not self.is_anchored_mcar:
+            z_i2, _ = self._sample_prior_obj(self.prior_i, bs)
+            raw_imp2 = self.G_i(torch.cat([x_real * m_real, m_real, z_i2], dim=1))
+            diff_z = (z_i - z_i2).abs().sum(dim=1).clamp_min(1e-4)
+            diff_x = ((raw_imp - raw_imp2) * (1.0 - m_real)).abs().sum(dim=1)
+            loss_div = - 0.1 * (diff_x / diff_z).mean()
+
+        loss_adv = loss_gx + loss_gm + loss_gi + loss_div
+
+        loss_prior_x = self._prior_role_reg_loss(self.prior_x, self.regularizer_x, idx_x)
+        loss_prior_m = self._prior_role_reg_loss(self.prior_m, self.regularizer_m, idx_m)
+        loss_prior_i = self._prior_role_reg_loss(self.prior_i, self.regularizer_i, idx_i)
+        loss_prior = loss_prior_x + loss_prior_m + loss_prior_i
         loss_g = loss_adv + loss_prior
 
         self.opt_g.zero_grad()
@@ -1697,6 +1930,18 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
             loss_g.backward()
         self.opt_g.step()
 
+        decay = float(self.recipe.ema_decay if getattr(self.recipe, "ema_decay", None) else 0.999)
+        if decay > 0.0:
+            self._update_ema(self.ema_G_x, self.G_x, decay)
+            self._update_ema(self.ema_G_m, self.G_m, decay)
+            self._update_ema(self.ema_G_i, self.G_i, decay)
+            if hasattr(self, "ema_prior_x") and self.prior_x is not None:
+                self._update_ema(self.ema_prior_x, self.prior_x, decay)
+            if hasattr(self, "ema_prior_m") and self.prior_m is not None:
+                self._update_ema(self.ema_prior_m, self.prior_m, decay)
+            if hasattr(self, "ema_prior_i") and self.prior_i is not None:
+                self._update_ema(self.ema_prior_i, self.prior_i, decay)
+
         self.completed_steps += 1
         self.last_losses = dict(
             loss_g=float(loss_g.detach()),
@@ -1704,7 +1949,7 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
             loss_gx=float(loss_gx.detach()),
             loss_gm=float(loss_gm.detach()),
             loss_gi=float(loss_gi.detach()),
-            critic_penalty=float(reg_d.detach()),
+            critic_penalty=float((reg_dx + reg_dm + reg_di).detach()),
             loss_prior=float(loss_prior.detach()),
         )
         if not all(math.isfinite(v) for v in self.last_losses.values()):
@@ -1713,35 +1958,49 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
 
     @torch.no_grad()
     def observe(self, n=4096, seed=99123):
-        flags = {m: m.training for model in (self.G_x, self.G_m, self.G_i) for m in model.modules()}
+        models = [self.G_x, self.G_m, self.G_i, self.ema_G_x, self.ema_G_m, self.ema_G_i]
+        flags = {m: m.training for model in models for m in model.modules()}
         try:
-            self.G_x.eval(); self.G_m.eval(); self.G_i.eval()
+            for model in models:
+                model.eval()
+
+            prior_i_eval = getattr(self, "ema_prior_i", self.prior_i)
 
             def predict_fn(x_q, m_q, rng, draws=16):
                 x_q = x_q.to(self.device)
                 m_q = m_q.to(self.device)
                 out_draws = []
                 for _ in range(draws):
-                    zi = torch.randn(len(x_q), 4, generator=rng, device=rng.device).to(device=self.device, dtype=x_q.dtype)
+                    if prior_i_eval is not None:
+                        if isinstance(prior_i_eval, (MoGParticlePrior, ManipulatedPrior)) or hasattr(prior_i_eval, "sigma"):
+                            zi, _ = prior_i_eval.sample(len(x_q), generator=rng, noise_generator=rng)
+                        else:
+                            zi, _ = prior_i_eval.sample(len(x_q), generator=rng)
+                    else:
+                        zi = torch.randn(len(x_q), 4, generator=rng, device=rng.device).to(device=self.device, dtype=x_q.dtype)
                     cond = torch.cat([x_q * m_q, m_q, zi], dim=1)
-                    raw = self.G_i(cond)
-                    grafted = m_q * x_q + (1 - m_q) * raw
+                    raw = self.ema_G_i(cond)
+                    grafted = m_q * x_q + (1.0 - m_q) * raw
                     out_draws.append(grafted)
                 return torch.stack(out_draws, dim=0)
 
             if self.is_anchored_mcar:
                 gen = _rng(seed, device=self.device)
                 noise_gen = _rng(seed + 1, device=self.device)
-                if isinstance(self.prior, (MoGParticlePrior, ManipulatedPrior)) or hasattr(self.prior, "sigma"):
-                    z_x, _ = self.prior.sample(n, generator=gen, noise_generator=noise_gen)
-                    z_m, _ = self.prior.sample(n, generator=gen, noise_generator=noise_gen)
+                prior_eval = getattr(self, "ema_prior_x", self.prior_x)
+                prior_m_eval = getattr(self, "ema_prior_m", self.prior_m)
+                if isinstance(prior_eval, (MoGParticlePrior, ManipulatedPrior)) or hasattr(prior_eval, "sigma"):
+                    z_x, _ = prior_eval.sample(n, generator=gen, noise_generator=noise_gen)
                 else:
-                    z_x, _ = self.prior.sample(n, generator=gen)
-                    z_m, _ = self.prior.sample(n, generator=gen)
-                x = self.G_x(z_x)
-                if isinstance(self.prior, ManipulatedPrior) and self.prior.postprocesses_generated:
-                    x = self.prior.postprocess_generated(x)
-                m = self.G_m(z_m)
+                    z_x, _ = prior_eval.sample(n, generator=gen)
+                if isinstance(prior_m_eval, (MoGParticlePrior, ManipulatedPrior)) or hasattr(prior_m_eval, "sigma"):
+                    z_m, _ = prior_m_eval.sample(n, generator=gen, noise_generator=noise_gen)
+                else:
+                    z_m, _ = prior_m_eval.sample(n, generator=gen)
+                x = self.ema_G_x(z_x)
+                if isinstance(prior_eval, ManipulatedPrior) and prior_eval.postprocesses_generated:
+                    x = prior_eval.postprocess_generated(x)
+                m = self.ema_G_m(z_m)
                 return score_misgan_mcar_p80_anchored(
                     x, m, lambda x_q, m_q, r: predict_fn(x_q, m_q, r, draws=8), self.problem, eval_seed=seed
                 )
@@ -1765,7 +2024,9 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
             "D_x": self.D_x.state_dict(),
             "D_m": self.D_m.state_dict(),
             "D_i": self.D_i.state_dict(),
-            "prior": self.prior.state_dict(),
+            "prior": self.prior_x.state_dict() if self.prior_x is not None else None,
+            "prior_m": self.prior_m.state_dict() if hasattr(self, "prior_m") and self.prior_m is not None else None,
+            "prior_i": self.prior_i.state_dict() if hasattr(self, "prior_i") and self.prior_i is not None else None,
             "opt_g": self.opt_g.state_dict(),
             "opt_d": self.opt_d.state_dict(),
             "last_losses": self.last_losses,
@@ -1779,10 +2040,24 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
         self.D_x.load_state_dict(state["D_x"])
         self.D_m.load_state_dict(state["D_m"])
         self.D_i.load_state_dict(state["D_i"])
-        if self.prior is not None and "prior" in state and state["prior"] is not None:
-            self.prior.load_state_dict(state["prior"])
+        if self.prior_x is not None and "prior" in state and state["prior"] is not None:
+            self.prior_x.load_state_dict(state["prior"])
+        if hasattr(self, "prior_m") and self.prior_m is not None and "prior_m" in state and state["prior_m"] is not None:
+            self.prior_m.load_state_dict(state["prior_m"])
+        if hasattr(self, "prior_i") and self.prior_i is not None and "prior_i" in state and state["prior_i"] is not None:
+            self.prior_i.load_state_dict(state["prior_i"])
         self.opt_g.load_state_dict(state["opt_g"])
         self.opt_d.load_state_dict(state["opt_d"])
+        self.last_losses = state["last_losses"]
+        self.ema_G_x.load_state_dict(self.G_x.state_dict())
+        self.ema_G_m.load_state_dict(self.G_m.state_dict())
+        self.ema_G_i.load_state_dict(self.G_i.state_dict())
+        if hasattr(self, "ema_prior_x") and self.prior_x is not None:
+            self.ema_prior_x.load_state_dict(self.prior_x.state_dict())
+        if hasattr(self, "ema_prior_m") and self.prior_m is not None:
+            self.ema_prior_m.load_state_dict(self.prior_m.state_dict())
+        if hasattr(self, "ema_prior_i") and self.prior_i is not None:
+            self.ema_prior_i.load_state_dict(self.prior_i.state_dict())
         self.last_losses = state["last_losses"]
 
 

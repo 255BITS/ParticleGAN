@@ -8,8 +8,8 @@ Every record identifies an attempt to run an unchanged selected or archived rese
 | bcap-pure | 59/59 | 0 | 39 FAIL, 20 PASS |
 | bispf | 59/59 | 0 | 35 FAIL, 24 PASS |
 | e22 | 59/59 | 0 | 39 FAIL, 20 PASS |
-| k3p | 59/59 | 0 | 36 FAIL, 23 PASS |
-| ka2 | 59/59 | 0 | 38 FAIL, 21 PASS |
+| k3p | 59/59 | 0 | 35 FAIL, 24 PASS |
+| ka2 | 59/59 | 0 | 37 FAIL, 22 PASS |
 | atlas selected-cloud after investigation | 3/3 | 0 | 2 ERROR, 1 FAIL |
 | r1r2 | 59/59 | 0 | 38 FAIL, 21 PASS |
 | release07-gan-v3 | 59/59 | 0 | 36 FAIL, 23 PASS |

@@ -23,7 +23,9 @@ import torch
 
 from benchmarks.toy_audit.api_pacgan import (
     GRID100_COORDS,
+    PacGAN4RepulsionDiscriminator,
     PacGAN8Grid100Fixture,
+    PacGANDiscriminator,
     PacGANGenerator,
     PacGANUnequalMassFixture,
     _grid100_centers,
@@ -428,3 +430,52 @@ def test_checkpoint_roundtrip_pacgan_fixtures() -> None:
         obs1 = f1.observe()
         obs2 = f2.observe()
         assert np.allclose(obs1["views"][0]["samples"], obs2["views"][0]["samples"])
+
+
+def test_pacgan4_repulsion_discriminator_contract_and_gradients() -> None:
+    """Verify PacGAN4RepulsionDiscriminator feature contract and exact repulsion gradients."""
+    disc = PacGAN4RepulsionDiscriminator(in_pts=4, pt_dim=2, hidden_dim=128)
+    assert disc.feature_dim == 23
+
+    # Legacy discriminator subclass contract
+    assert issubclass(PacGANDiscriminator, PacGAN4RepulsionDiscriminator)
+    disc_legacy = PacGANDiscriminator(in_dim=8, hidden_dim=128)
+    assert disc_legacy.feature_dim == 23
+    assert disc_legacy.in_pts == 4
+
+    # Shape contract: (B, 4, 2) and flat (B, 8)
+    x3d = torch.randn(5, 4, 2, requires_grad=True)
+    feats3d = disc.extract_features(x3d)
+    assert feats3d.shape == (5, 23)
+
+    out3d = disc(x3d)
+    assert out3d.shape == (5,)
+
+    x_flat = x3d.reshape(5, 8).detach().clone().requires_grad_(True)
+    out_flat = disc(x_flat)
+    assert out_flat.shape == (5,)
+    assert torch.allclose(out3d, out_flat, atol=1e-5)
+
+    # Gradient contract: backprop through harmonic repulsion separates close points
+    # Points 0 and 1 placed very close; points 2 and 3 separated
+    pts = torch.tensor([
+        [[0.0, 0.0], [0.01, 0.0], [2.0, 0.0], [0.0, 2.0]]
+    ], dtype=torch.float32, requires_grad=True)
+
+    feats = disc.extract_features(pts)
+    p_rep = feats[0, -1]  # harmonic repulsion potential
+    p_rep.backward()
+
+    # Repulsion gradient: pts[0, 0] should be pushed in negative x direction (-),
+    # pts[0, 1] should be pushed in positive x direction (+)
+    assert pts.grad is not None
+    grad_0 = pts.grad[0, 0]
+    grad_1 = pts.grad[0, 1]
+    # For potential P_rep = 1/(d + eps), grad w.r.t x_0 is -(x_0 - x_1) / (d * (d+eps)^2)
+    # Since x_0 - x_1 = -0.01 < 0, grad w.r.t x_0 is positive (meaning increasing x_0 increases potential)
+    # To reduce potential (repulsion), step in -grad direction: pushes x_0 left and x_1 right
+    assert grad_0[0] > 0, "Repulsion gradient on x_0 should oppose displacement"
+    assert grad_1[0] < 0, "Repulsion gradient on x_1 should oppose displacement"
+    # Total net internal force across all 4 particles must conserve momentum (sum to zero)
+    assert torch.allclose(pts.grad[0].sum(dim=0), torch.zeros(2), atol=1e-3), "Internal repulsion force must conserve momentum"
+
