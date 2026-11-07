@@ -1,10 +1,10 @@
 """CPU software reproductions for implicit-state-machines.md; no research verdicts.
 
-Run from the repository root:
-    CUDA_VISIBLE_DEVICES='' python -u -m reports.software-audits.reproduce_state_machines
-
-Assertions describe the audited defects. They should fail once those defects
-are fixed; this is an audit reproduction, not a permanent regression test.
+Runtime source: 9fc54fab90a7d6da39db274b651dbf824fc3929a. Follow the isolated
+worktree instructions in implicit-state-machines.md to run against that source.
+Both defects were fixed in PR #517. Assertions preserve the historical defects
+and should fail against fixed source; permanent regressions live in
+tests/test_training.py.
 """
 import json
 
