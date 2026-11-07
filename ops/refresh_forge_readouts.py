@@ -664,11 +664,22 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
                 raise CodeChangeRequiredError(f"cannot resolve selected candidate {cid}: {exc}") from exc
 
             assignments = req["view"]["assignments"]
+            fam_cov = coverage_verdicts.get(family, {})
+
+            def _is_optional_unmeasured_precision(item: dict[str, Any]) -> bool:
+                tid = item["task"]
+                return (
+                    item.get("importance") != "required"
+                    and tid not in fam_cov
+                    and bool((req["tasks"].get(tid, {}).get("execution") or {}).get("linear_precision"))
+                )
+
             t1_assignments = [item for item in assignments if int(item["qualification_tier"]) == 1]
             t1_runnable = [
                 item["task"]
                 for item in t1_assignments
                 if not req["tasks"][item["task"]].get("preflight_blockers")
+                and not _is_optional_unmeasured_precision(item)
             ]
             if not t1_runnable:
                 continue
@@ -732,7 +743,7 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
 
             t1_task_set = {item["task"] for item in t1_assignments}
             if matching and all(t in measured_statuses for t in t1_runnable):
-                for cov_tid, cov_st in coverage_verdicts.get(family, {}).items():
+                for cov_tid, cov_st in fam_cov.items():
                     if cov_tid not in t1_task_set and cov_tid not in measured_statuses:
                         t_card = req["tasks"].get(cov_tid)
                         if (
@@ -779,6 +790,7 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
                     for item in tier_assignments
                     if not req["tasks"][item["task"]].get("preflight_blockers")
                     and not _dep_blocked(item["task"])
+                    and not _is_optional_unmeasured_precision(item)
                 ]
                 unmeasured = [task for task in tier_runnable if task not in measured_statuses]
                 if unmeasured:
@@ -796,6 +808,7 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
                 not matched_attempt_ids
                 or not all(
                     (root / "reports/forge/attempts" / aid / "result.json").is_file()
+                    and (compat_matcher._load_attempt_request(aid) or {}).get("candidate_revision") == rev
                     for aid in matched_attempt_ids
                 )
             ):

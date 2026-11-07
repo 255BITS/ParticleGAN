@@ -4042,7 +4042,7 @@ Learned-MoG vector_two_broad PASS after exactly one registered operational cance
 
 ### recipe-prior-refactor-bcap-pure-v1 · readout-0df182292d888440f5fb32ce
 
-**Scope:** current; scientific; revision `3b5047770feb0fffb166a6a6f7aea02749cb69f2d2aa018374cd0d1100959872`.
+**Scope:** current; scientific; revision `21fce6ca73c85eb35e4f58b73c17e05db60619759947cca48fbb1df01d9c6237`.
 
 Ordinary re-qualification of the unchanged selected bcap-pure recipe (recipe-prior-refactor-bcap-pure-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
 
@@ -4090,7 +4090,7 @@ The single global quintic convolution-rule delta preserves all 19 incumbent BISP
 
 ### bispf-optimized-quintic-v1 · readout-143d85d4540548b0ecec1604
 
-**Scope:** current; scientific; revision `564199402b930f49e6c8862c7cd09f9198575aa32a5c35f4ea5289901f143d59`.
+**Scope:** current; scientific; revision `6db8151c1a987602f94a8b9e854b003b7176fec3c3039cde07679d8960ae9c1b`.
 
 Ordinary re-qualification of the unchanged selected bispf recipe (bispf-optimized-quintic-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
 
@@ -4266,7 +4266,7 @@ Native BISPF on the two explicitly wider architecture-portability hosts passes s
 
 ### recipe-prior-refactor-release07-gan-v3-v1 · readout-3bd45e331f5dd03701da2700
 
-**Scope:** current; scientific; revision `244bb5cd81ed6928c26c52dd98cc95a3cfdb69fc50264972df52e291d6f4ef40`.
+**Scope:** current; scientific; revision `5e8301e5d868022f59e92f0e0c0e67348bdebd00d372ace75f998abe7d469fad`.
 
 Ordinary re-qualification of the unchanged selected release07-gan-v3 recipe (recipe-prior-refactor-release07-gan-v3-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
 
@@ -4586,7 +4586,7 @@ Fresh N(0,I) latent: 5 PASS / 10 FAIL on the 15 supported sampled-MoG tests (33 
 
 ### recipe-prior-refactor-r1r2-v1 · readout-613fc91cba03a8c327465202
 
-**Scope:** current; scientific; revision `84e53bb16442a6a3d3148e2eb9a95ea59692559fc1352218ee112f2dc40b6615`.
+**Scope:** current; scientific; revision `8a77a5bd4e1f8f1c74bb516bb749e37a3170c8a80ed84cf0924d59b0b0d04bb6`.
 
 Ordinary re-qualification of the unchanged selected r1r2 recipe (recipe-prior-refactor-r1r2-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
 
@@ -5130,7 +5130,7 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0468712635<0.3; q
 
 ### atlas-particle-normal-v4 · readout-b389e250ac5b3ad0763d2c82
 
-**Scope:** current; scientific; revision `067f29bc52d5b02a768f6cc3063bb66784030104abcb66f7891d6b31491b8f92`.
+**Scope:** current; scientific; revision `3e568ed2213479cc8bbd8844796ab6f0ca4c804fa846e627563b06f556001089`.
 
 Ordinary discriminator_stability measurement of atlas-particle-normal-v4 (particles + NormalNoiseManipulator(sigma=0.0065), birth_death_cells=256, clean fixed output noise 0.0, d_guard_ratio=0.0, KA2 pre-anchor critic-only LossSurprise guard) under protocol seed 0 on NVIDIA RTX A6000 completes every required Tier 1 cell cleanly and reproduces its 11/13 required Tier 1 passes (plus clockfree_audit_measurement_v1 diagnostic PASS) for selection as the Atlas family candidate.
 
@@ -5450,7 +5450,7 @@ All six finite-update DCGAN performance tasks PASS. Observed speedups versus mat
 
 ### recipe-prior-refactor-k3p-v1 · readout-e6cf768866c160ba1338f662
 
-**Scope:** current; scientific; revision `57b4e63e98b96380eec30e9c00f9c37ada38fb4b63253b85ba8e2b1bf5c52e79`.
+**Scope:** current; scientific; revision `e3680ce98264605af83a69b7600141a633a7c42c93d95c50bc4ce762bc2c0acc`.
 
 Ordinary re-qualification of the unchanged selected k3p recipe (recipe-prior-refactor-k3p-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
 
@@ -5578,7 +5578,7 @@ Raising birth_death_cells from 128 to 256 (eliminating noisy 2-particle-per-cell
 
 ### recipe-prior-refactor-ka2-v1 · readout-efc9b823a6b391bc25754f9a
 
-**Scope:** current; scientific; revision `416d61c9326d47f2683cf060b6cf7d895d0a2eaac440dc93f134016f5a014604`.
+**Scope:** current; scientific; revision `344ea72637958be757f2e3ac043897a54cfa68667e05bf1a116397effc02a93e`.
 
 Ordinary re-qualification of the unchanged selected ka2 recipe (recipe-prior-refactor-ka2-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
 
@@ -6326,4 +6326,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `a9466a7d75861ef5322859077791b92ec3253a36244199942321ac6184c53132`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `eb110b55e1b8b6b36ebf8de090ecd430137319db3e1a2145f4c8d636fb1603ea`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

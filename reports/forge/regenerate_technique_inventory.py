@@ -3031,6 +3031,16 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                         if used:
                             used_records.append((rec_rel, rec_name))
                     fam_cov = coverage_verdicts.get(fam_id, {})
+                    t1_recorded_set = {
+                        t
+                        for t in t1_task_set
+                        if t in req["tasks"]
+                        and (
+                            t in req_tasks
+                            or t in fam_cov
+                            or not (req["tasks"][t].get("execution") or {}).get("linear_precision")
+                        )
+                    }
                     has_current_source_coverage = any(src == req["source"]["digest"] for src, _ in coverage_fps)
                     all_runnable_matched = runnable_count > 0 and runnable_matched_count == runnable_count
                     all_t1_in_coverage = (
@@ -3042,8 +3052,7 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                         and not any_t1_row_rejected
                         and all(
                             t in measured or t in fam_cov
-                            for t in t1_task_set
-                            if t in req["tasks"]
+                            for t in t1_recorded_set
                         )
                         and all(
                             (
@@ -3051,8 +3060,8 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                                 task_evaluation_fingerprint(req["tasks"][t]),
                             )
                             in coverage_fps.get((req["source"]["digest"], t), set())
-                            for t in t1_task_set
-                            if t in req["tasks"] and (req["source"]["digest"], t) in coverage_fps
+                            for t in t1_recorded_set
+                            if (req["source"]["digest"], t) in coverage_fps
                         )
                     )
                     if all_t1_in_coverage:
@@ -3099,6 +3108,10 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                                 out.append(measured[tid])
                             elif _dep_blocked(tid):
                                 out.append("BLOCKED")
+                            elif all_t1_in_coverage and (
+                                req["tasks"].get(tid, {}).get("execution") or {}
+                            ).get("linear_precision"):
+                                out.append("BLOCKED")
                             else:
                                 out.append("UNMEASURED")
                         return out
@@ -3127,13 +3140,30 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                     )
             if any_matched and len(source_digests) == 1:
                 rows_data.sort(key=lambda item: (-item["total_pass"], -item["req_pass"], item["family_label"]))
+                families = {
+                    item["family_id"]: {
+                        "candidate_id": item["candidate_id"],
+                        "candidate_revision": item["candidate_revision"],
+                        "source_digest": item["source_digest"],
+                        "records": {
+                            tid: {"status": st}
+                            for tid, st in item["measured"].items()
+                            if st in {"PASS", "FAIL"}
+                        },
+                    }
+                    for item in rows_data
+                }
                 payload = {
+                    "scope": "current_source_formulaic_display",
+                    "qualification_input": False,
+                    "qualification_reuse": False,
                     "source_digest": next(iter(source_digests)),
                     "view_revision": view_revision,
                     "req_total": req_total,
                     "diag_total": diag_total,
                     "stretch_total": sum(item.get("importance") in {"stretch", "held"} for item in t1_assignments),
                     "rows": rows_data,
+                    "families": families,
                 }
         except Exception:
             payload = None
@@ -3230,6 +3260,18 @@ def _selected_recipe_binary_task_statuses(result, root: Path) -> dict[str, dict[
     measured_by_cid = {} if recorded_display else {
         item["candidate_id"]: item.get("measured", {}) for item in cached["rows"]}
     all_tasks: set[str] = set(full_suite_tasks(progress))
+    scope = progress.get("recorded_display_scope")
+    unmeasured_scope_tasks: set[str] = set()
+    if isinstance(scope, dict) and isinstance(scope.get("text"), str):
+        try:
+            decl_tests = set(json.loads(scope["text"]).get("tests", []))
+            if decl_tests:
+                unmeasured_scope_tasks = (
+                    (set(full_suite_tasks(progress)) - decl_tests - {"ring_hold"})
+                    | {"precision_gaussian_fp32"}
+                )
+        except Exception:
+            unmeasured_scope_tasks = set()
     for view in _summed_views(progress):
         for assignment in view.get("assignments", []):
             if "task" in assignment:
@@ -3244,7 +3286,7 @@ def _selected_recipe_binary_task_statuses(result, root: Path) -> dict[str, dict[
         fam_statuses: dict[str, str] = {}
         for tid in set(tasks_map) | set(ro) | all_tasks:
             rec_st = tasks_map.get(tid, {}).get("status")
-            if recorded_display and tid not in ro:
+            if (recorded_display or tid in unmeasured_scope_tasks) and tid not in ro:
                 fam_statuses[tid] = rec_st or "UNKNOWN"
                 continue
             if recorded_display and tid in ro:
@@ -4374,6 +4416,8 @@ def _project_publication_for_family_pages(root, publication):
                     status = fam_statuses[parent_id]
                 else:
                     status = "FAIL"
+            if status not in {"PASS", "FAIL"}:
+                continue
             att_rec = original if recorded_display else (
                 attempt_records_by_family.get((fam_id, task_name)) or (
                     attempt_records_by_family.get((fam_id, parent_id)) if parent_id else None))
