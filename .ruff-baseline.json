@@ -785,11 +785,6 @@
         "`experiments.forge.api.task_formulation_context` imported but unused": 1
       }
     },
-    "tests/test_solvability_bigan.py": {
-      "F401": {
-        "`benchmarks.toy_audit.api_ring16.BiGANJointCritic` imported but unused": 1
-      }
-    },
     "tests/test_solvability_tanh.py": {
       "F401": {
         "`copy.deepcopy` imported but unused": 1

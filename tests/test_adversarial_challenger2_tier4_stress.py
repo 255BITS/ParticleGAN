@@ -27,20 +27,11 @@ import torch.nn.functional as F
 
 from particlegan import (
     ParticlePrior,
-    MoGParticlePrior,
-    get_recipe,
-    init,
-    unwrap_prior,
 )
 from benchmarks.toy_audit.api_cramergan import (
     CramerCritic,
-    CramerGenerator,
-    cramer_centers,
-    cramer_weights,
     cramer_critic_surrogate,
     cramer_generator_loss,
-    sample_cramer_target,
-    score_cramergan,
 )
 from benchmarks.toy_audit.api_conditionals import (
     FourierMLPDiscriminator,
@@ -50,14 +41,10 @@ from benchmarks.toy_audit.api_conditionals import (
 from benchmarks.toy_audit.api_ring16 import (
     BiGANGenerator,
     BiGANEncoder,
-    BiGANJointCritic,
-    Ring16BiGANFixture,
-    build_case as build_ring16_case,
 )
 from benchmarks.toy_audit.api_vectors import (
     ScaledResidualMLPGenerator,
     ScaledSimpleMLPGenerator,
-    TanhRailGuard,
 )
 
 
@@ -354,8 +341,6 @@ class TestGrid100MLP16GradientFlow:
         torch.manual_seed(808)
         # Deep 16-layer network with LayerNorm
         gen_norm = ScaledSimpleMLPGenerator(z_dim=4, hidden_dim=128, n_hidden=16, out_dim=2, use_norm=True)
-        # Deep 16-layer network without LayerNorm (prone to vanishing/exploding)
-        gen_no_norm = ScaledSimpleMLPGenerator(z_dim=4, hidden_dim=128, n_hidden=16, out_dim=2, use_norm=False)
 
         bs = 32
         z1 = torch.randn(bs, 4, requires_grad=True)

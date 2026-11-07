@@ -33,17 +33,14 @@ import itertools
 import math
 import pytest
 import torch
-from torch import nn
 import torch.nn.functional as F
 
 from benchmarks.toy_audit.api_pacgan import (
     PacGAN4RepulsionDiscriminator,
-    PacGANDiscriminator,
 )
 from benchmarks.toy_audit.api_vectors import (
     TanhRailGuard,
     ScaledResidualMLPGenerator,
-    ResidualBlock,
 )
 from benchmarks.toy_audit.api_conditionals import (
     FourierMLPDiscriminator,
@@ -623,7 +620,6 @@ class TestBiGANALICECycleConsistencyAdversarial:
         """
         torch.manual_seed(1616)
         prior = ParticlePrior(num_particles=32, z_dim=2, init_std=1.0)
-        G = BiGANGenerator(z_dim=2, out_dim=2, hidden=32, layers=2)
         E = BiGANEncoder(in_dim=2, z_dim=2, hidden=32, layers=2, fourier=2)
 
         z_fake, _ = prior.sample(16)

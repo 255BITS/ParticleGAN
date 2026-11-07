@@ -599,7 +599,7 @@ def test_bigan_alice_recon_loss_target_detached():
     fixture = Ring16BiGANFixture(steps=5, device="cpu", seed=0)
     real_x = fixture.sample_target(16)
     z_fake, _ = fixture._sample_prior(16)
-    x_fake = fixture._generate(z_fake)
+    x_fake = fixture._generate(z_fake.detach())
     z_real = fixture.E(real_x)
 
     # Detached target in E(x_fake)
@@ -610,6 +610,7 @@ def test_bigan_alice_recon_loss_target_detached():
 
     # z_fake has no grad accumulation directly through MSE target
     prior_z = unwrap_prior(fixture.prior).z
+    assert prior_z.grad is None
     # Gradients on G and E exist from reconstruction
     assert any(p.grad is not None and torch.norm(p.grad) > 0 for p in fixture.G.parameters())
     assert any(p.grad is not None and torch.norm(p.grad) > 0 for p in fixture.E.parameters())
