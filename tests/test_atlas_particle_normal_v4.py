@@ -220,7 +220,11 @@ def test_atlas_particle_normal_v4_readout_recovers_mode_hold_with_zero_regressio
     )
     # The overview projects the certified base source cohort; the later
     # source-specific readout above retains its own unchanged measurements.
-    assert "[27/27]" in atlas_top_line
+    from reports.forge import regenerate_technique_inventory as rti
+    display = rti._formulaic_display_payload(inventory, ROOT)
+    assert display is not None
+    expected = "[18/27]" if display["scope"] == "recorded_source_formulaic_display" else "[27/27]"
+    assert expected in atlas_top_line
     assert "invalid" not in atlas_top_line.lower()
 
     v3_readout = read_json(ROOT / "reports/forge/records/readout-efb8bacf93e19fc2b0d7f7bf.json")

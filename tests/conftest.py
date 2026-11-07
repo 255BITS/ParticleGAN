@@ -227,3 +227,10 @@ def _restore_device_policy():
     CUDA default device, routed ``torch.Generator`` or determinism flags behind."""
     with device_policy_scope():
         yield
+
+
+def pytest_configure(config):
+    config.addinivalue_line("markers", "tier1: Tier 1 Feature Coverage")
+    config.addinivalue_line("markers", "tier2: Tier 2 Boundary & Corner Cases")
+    config.addinivalue_line("markers", "tier3: Tier 3 Cross-Feature Combinations")
+    config.addinivalue_line("markers", "tier4: Tier 4 Real-World Application Scenarios")

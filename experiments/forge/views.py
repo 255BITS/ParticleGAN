@@ -511,7 +511,7 @@ def validate_view(view: dict, tasks: dict) -> None:
         if assignment["importance"] == "held":
             hold = assignment["hold"]
             held_parents = sorted(dep["task"] for dep in _dependencies(tasks[name])
-                                  if index[dep["task"]]["importance"] == "held")
+                                  if is_stretch(index[dep["task"]]))
             if hold["blocked_by"] != held_parents:
                 raise ValueError(f"{name}: hold blocked_by must list exactly its held prerequisites {held_parents}")
             if (hold["reason"] == "held_prerequisite") != bool(held_parents):
@@ -523,8 +523,9 @@ def validate_view(view: dict, tasks: dict) -> None:
                                      if is_stretch(index[dep["task"]]))
             if "blocked_by" in stretch and stretch["blocked_by"] != stretch_parents:
                 raise ValueError(f"{name}: stretch blocked_by must list its stretch prerequisites {stretch_parents}")
-            if stretch["reason"] in {"held_prerequisite", "stretch_prerequisite"} and not stretch_parents:
-                raise ValueError(f"{name}: stretch prerequisite reason requires a stretch prerequisite")
+            if stretch["reason"] in {"held_prerequisite", "stretch_prerequisite"}:
+                if not stretch_parents or stretch.get("blocked_by") != stretch_parents:
+                    raise ValueError(f"{name}: stretch prerequisite reason requires blocked_by listing stretch prerequisites {stretch_parents}")
         removal = assignment.get("removal")
         if removal and removal["reason"] == "phase":
             target = removal["counted_by"]
@@ -858,6 +859,90 @@ def _zero_tanh(task, evidence):
                     evaluator_result={"passed": passed, "failed_bounds": failed})
 
 
+STRETCH_EVALUATOR_KINDS = frozenset({
+    "zero_tanh_rail_escape",
+    "misgan_block_recovery",
+    "misgan_block_neural_imputer",
+    "misgan_mcar_p50_recovery",
+    "misgan_mcar_p80_anchored",
+    "pacgan_unequal_mass",
+    "pacgan8_grid100",
+    "ring16_bigan_continuous",
+    "alice_spiral_bigan",
+    "infogan_anisotropic_modes",
+    "cgan_overlapping_classes",
+    "cramer_energy_overlap",
+    "cyclegan_unpaired_constellation",
+})
+
+
+def _stretch_thresholds(task, evidence):
+    evaluation = task["evaluation"]
+    thresholds = evaluation["thresholds"]
+    raw_points = evidence.get("observations", evidence.get("curve"))
+    if not isinstance(raw_points, list) or not raw_points:
+        return _verdict("INCOMPLETE", f"missing {evaluation['kind']} observation curve")
+    points = []
+    for p in raw_points:
+        if not isinstance(p, dict):
+            return _verdict("INVALID", "observation entry must be an object")
+        nested = p.get("metrics") if isinstance(p.get("metrics"), dict) else {}
+        merged = {**nested, **{k: v for k, v in p.items() if k != "metrics"}}
+        points.append(merged)
+    try:
+        _curve(points, thresholds)
+    except ValueError as exc:
+        return _verdict("INVALID" if points else "INCOMPLETE", str(exc))
+    live = evidence.get("live")
+    if not isinstance(live, dict):
+        live = {k: v for k, v in points[-1].items() if k not in {"step", "passed", "failed_bounds"}}
+    if any(not _finite(live.get(key)) for key, _, _ in thresholds):
+        return _verdict("INCOMPLETE", "missing finite final live metrics")
+
+    def _point_failures(pt):
+        bad = []
+        for name, op, bound in thresholds:
+            val = pt.get(name)
+            ok = (val <= bound if op == "<=" else
+                  val >= bound if op == ">=" else
+                  val == bound if op == "==" else False)
+            if not ok:
+                bad.append(f"{name} {op} {bound}")
+        return bad
+
+    min_stable = int(evaluation.get("minimum_stable_checks", 1))
+    if len(points) < min_stable:
+        return _verdict("INCOMPLETE", f"requires at least {min_stable} observations, got {len(points)}")
+    tail = points[-min_stable:]
+    tail_failures = [_point_failures(pt) for pt in tail]
+    terminal_passed = sum(1 for f in tail_failures if not f)
+    failed = list(dict.fromkeys(b for f in tail_failures for b in f))
+    passed = terminal_passed == len(tail)
+    if evaluation["kind"] == "zero_tanh_rail_escape":
+        shift_step = int(task.get("execution", {}).get("shift_step", 1001))
+        recovery_deadline = int(evaluation.get("recovery_deadline", 400))
+        pre_shift = [pt for pt in points if pt.get("step") == shift_step - 1]
+        post_deadline = [pt for pt in points if int(pt.get("step", 0)) >= shift_step + recovery_deadline]
+        if pre_shift and any(_point_failures(pt) for pt in pre_shift):
+            passed = False
+            for pt in pre_shift:
+                for b in _point_failures(pt):
+                    if f"pre_shift:{b}" not in failed:
+                        failed.append(f"pre_shift:{b}")
+        if post_deadline and any(_point_failures(pt) for pt in post_deadline):
+            passed = False
+            for pt in post_deadline:
+                for b in _point_failures(pt):
+                    if b not in failed:
+                        failed.append(b)
+    status = "PASS" if passed else "FAIL"
+    reason = (f"recomputed {evaluation['kind']} gates ({terminal_passed}/{len(tail)} terminal checks passed)"
+              if passed else f"failed {evaluation['kind']} thresholds: {', '.join(failed)}")
+    return _verdict(status, reason, metrics=live,
+                    evaluator_result={"passed": passed, "terminal_passed": terminal_passed,
+                                      "minimum_stable_checks": min_stable, "failed_bounds": failed})
+
+
 def grade_result(task: dict, result: dict | None, *, diagnostic=False) -> dict:
     """Independently grade compatible raw evidence, without changing it."""
     try:
@@ -892,6 +977,11 @@ def grade_result(task: dict, result: dict | None, *, diagnostic=False) -> dict:
     sampling = grade_sampling(task, evidence)
     if sampling is not None:
         return _verdict(sampling["status"], sampling["reason"])
+    if "linear_precision" in task.get("execution", {}):
+        from .precision import grade as precision_grade
+        precision = precision_grade(task, evidence)
+        if precision is not None:
+            return _verdict(*precision)
     from .tier1_policy import is_policy_task
     if is_policy_task(task) and task["adapter"] != "clockfree_audit":
         from .tier1_policy import validate_evidence
@@ -913,7 +1003,8 @@ def grade_result(task: dict, result: dict | None, *, diagnostic=False) -> dict:
                "ring_hold": _ring, "ring_extension": _ring,
                "paired_adaptation": _adaptation, "clockfree_parity": _clockfree,
                "image_training_performance": performance_grade,
-               "zero_tanh_smoke": _zero_tanh}
+               "zero_tanh_smoke": _zero_tanh,
+               **{kind: _stretch_thresholds for kind in STRETCH_EVALUATOR_KINDS}}
     grader = graders.get(task["evaluation"]["kind"])
     if grader is None:
         return _verdict("BLOCKED", f"unsupported evaluator {task['evaluation']['kind']}")
@@ -1158,12 +1249,13 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
     if eligibility:
         blockers = [{"task_id": None, "status": "BLOCKED", "reasons": eligibility}, *blockers]
     counted = [t["qualification_tier"] for t in tiers if t["status"] not in {"HELD", "STRETCH"}]
+    non_stretch = [t for t in tiers if t["status"] != "STRETCH"]
     complete = bool(counted) and qualified_tier == counted[-1]
     counted_eligible = bool(complete and not eligibility)
     allow_held = bool(allow_held_highest_tier or view.get("eligibility", {}).get("allow_held_highest_tier"))
     status = ("BLOCKED" if eligibility else
-              "PASS" if complete and (tiers[-1]["status"] != "HELD" or allow_held) else
-              "STRETCH" if not counted and any(t["status"] == "STRETCH" for t in tiers) else
+              "PASS" if complete and (non_stretch[-1]["status"] != "HELD" or allow_held) else
+              "STRETCH" if not non_stretch and bool(tiers) else
               "HELD" if complete or not counted else
               next((t["status"] for t in tiers if t["status"] not in {"HELD", "STRETCH"} and t["qualification_tier"] > qualified_tier),
                    "INCOMPLETE"))

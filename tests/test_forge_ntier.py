@@ -556,9 +556,78 @@ def test_misgan_tasks_host_definition_particles_declared():
     from experiments.forge.planning import load_tasks
 
     tasks = load_tasks(Path("."))
-    for task_id in ("misgan_block_recovery", "misgan_block_neural_imputer"):
+    for task_id in (
+        "misgan_block_recovery",
+        "misgan_block_neural_imputer",
+        "misgan_mcar_p50_recovery",
+        "misgan_mcar_p80_anchored",
+    ):
         assert task_id in tasks
         host_def = tasks[task_id]["execution"]["host_definition"]
         assert "particles" in host_def, f"{task_id} missing particles in host_definition"
         assert host_def["particles"] == 256
 
+
+def test_stretch_formulation_tasks_graders_and_preflight():
+    """Verify all stretch formulation tasks pass preflight and grade PASS/FAIL cleanly."""
+    from experiments.forge.adapters import adapter_preflight
+    from experiments.forge.priors import RECIPE_PRIOR_CONTRACT
+    from experiments.forge.sampling import PUBLIC_PRIOR_CLEAN, executed_receipt
+    from experiments.forge.vectorprofiles import STRETCH_VECTOR_HOSTS
+    from experiments.forge.views import STRETCH_EVALUATOR_KINDS, grade_result
+    from ops.formulaic_coverage import STRETCH_FIXTURE_TASKS, adapt_candidate_for_task, load_candidate_card
+
+    tasks = load_tasks(ROOT)
+    assert STRETCH_VECTOR_HOSTS == STRETCH_FIXTURE_TASKS
+    assert STRETCH_EVALUATOR_KINDS == STRETCH_FIXTURE_TASKS | {"zero_tanh_rail_escape"}
+    for tid in sorted(STRETCH_FIXTURE_TASKS):
+        t = deepcopy(tasks[tid])
+        for cid in ("bispf-optimized-quintic-v1", "atlas-particle-normal-v4"):
+            cand = adapt_candidate_for_task(load_candidate_card(ROOT, cid), t)
+            assert adapter_preflight(t, cand, root=ROOT) == []
+
+    for tid in sorted(STRETCH_EVALUATOR_KINDS):
+        t = deepcopy(tasks[tid])
+        steps = t["execution"]["steps"]
+        obs_count = t["evaluation"].get("observations", 24)
+        thresholds = t["evaluation"]["thresholds"]
+        passing_metrics, failing_metrics = {}, {}
+        for name, op, bound in thresholds:
+            passing_metrics[name] = bound
+            failing_metrics[name] = bound - 1.0 if op == ">=" else bound + 1.0
+        ckpts = sorted({math.ceil(i * steps / obs_count) for i in range(1, obs_count + 1)})
+        if tid == "zero_tanh_rail_escape":
+            ckpts = sorted(
+                set(ckpts)
+                | {
+                    t["execution"]["shift_step"] - 1,
+                    t["execution"]["shift_step"] + t["evaluation"]["recovery_deadline"],
+                    steps,
+                }
+            )
+        base_ev = {
+            **executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean"),
+            "scoring_weights": "live",
+            "prior_policy": {
+                "contract": RECIPE_PRIOR_CONTRACT,
+                "applicability": "latent_prior",
+                "update": "learned",
+                "trainable_locations": True,
+                "regularizer": "vicreg",
+                "weight": 0.0,
+                "target_std": 1.0,
+                "eps": 1e-4,
+                "l2": 0.0,
+            },
+            "guards": {
+                "all_finite": True,
+                "optimizer_updates": {"generator": steps, "discriminator": steps, "prior": steps},
+                "hooks_exercised": True,
+                "mechanism_audit": {"requested": {}, "observed": {}},
+                "unintended_rng_deviations": 0,
+            },
+        }
+        obs_pass = [{"step": s, **passing_metrics} for s in ckpts]
+        obs_fail = [{"step": s, **failing_metrics} for s in ckpts]
+        assert grade_result(t, {"evidence": {**base_ev, "observations": obs_pass, "live": passing_metrics}})["status"] == "PASS"
+        assert grade_result(t, {"evidence": {**base_ev, "observations": obs_fail, "live": failing_metrics}})["status"] == "FAIL"

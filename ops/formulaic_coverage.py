@@ -27,7 +27,7 @@ if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
 from experiments.forge import attempt_coverage
-from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
+from experiments.forge.contracts import atomic_json, read_json
 from experiments.forge.views import (
     grade_result,
     load_tasks,
@@ -43,14 +43,42 @@ DDGAN_TASKS = frozenset(
         "model_ae_ddgan_bimodal_chain",
     }
 )
+STRETCH_FIXTURE_CASE_IDS = {
+    "misgan_block_recovery": "api-misgan-block-recovery",
+    "misgan_block_neural_imputer": "api-misgan-block-neural-imputer",
+    "misgan_mcar_p50_recovery": "api-misgan-mcar-p50-recovery",
+    "misgan_mcar_p80_anchored": "api-misgan-mcar-p80-anchored",
+    "pacgan_unequal_mass": "api-pacgan-unequal-mass",
+    "pacgan8_grid100": "api-pacgan8-grid100",
+    "ring16_bigan_continuous": "api-ring16-bigan-continuous",
+    "alice_spiral_bigan": "api-alice-spiral-bigan",
+    "infogan_anisotropic_modes": "api-infogan-anisotropic-modes",
+    "cgan_overlapping_classes": "api-cgan-overlapping-classes",
+    "cramer_energy_overlap": "api-cramer-energy-overlap",
+    "cyclegan_unpaired_constellation": "api-cyclegan-unpaired-constellation",
+}
+STRETCH_FIXTURE_TASKS = frozenset(STRETCH_FIXTURE_CASE_IDS)
+STRETCH_TASKS = frozenset(
+    {
+        "misgan_block_recovery",
+        "misgan_block_neural_imputer",
+        "misgan_mcar_p50_recovery",
+        "misgan_mcar_p80_anchored",
+        "ring16_bigan_continuous",
+        "pacgan_unequal_mass",
+        "pacgan8_grid100",
+        "grid100_mlp16",
+        "grid100_res16_tanh",
+        "grid100_res16_scaled_tanh",
+    }
+)
 HELD_TIER34_TASKS = frozenset(
     {
         "zero_tanh_rail_escape",
         "grid100_mlp16",
         "grid100_res16_tanh",
-        "misgan_block_recovery",
-        "misgan_block_neural_imputer",
-        "ring16_bigan_continuous",
+        "grid100_res16_scaled_tanh",
+        *STRETCH_FIXTURE_TASKS,
     }
 )
 CONTINUATION_PARENTS = {
@@ -99,7 +127,7 @@ def adapt_candidate_for_task(candidate: dict[str, Any], task: dict[str, Any]) ->
         overrides["output_noise_mode"] = "fixed"
         overrides["output_noise_std"] = 0.0
 
-    if tid in DDGAN_TASKS or "misgan" in tid:
+    if tid in DDGAN_TASKS or tid in STRETCH_FIXTURE_TASKS or "misgan" in tid:
         overrides["input_noise_std"] = 0.0
         overrides["output_noise_std"] = 0.0
         overrides["output_noise_mode"] = "fixed"
@@ -271,7 +299,11 @@ def _run_grid100_deep_variant(
     import torch
     from benchmarks.toy100 import problems
     from benchmarks.toy100.train import evaluation_steps
-    from benchmarks.toy_audit.api_vectors import ResidualMLPGenerator, score_case
+    from benchmarks.toy_audit.api_vectors import (
+        ResidualMLPGenerator,
+        _apply_scaled_res16_dispersion_step,
+        score_case,
+    )
     from experiments.forge.api import task_formulation_context
     from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator
 
@@ -281,6 +313,7 @@ def _run_grid100_deep_variant(
     dev = torch.device(device)
     tid = task["id"]
     is_res_tanh = tid == "grid100_res16_tanh"
+    is_scaled_res_tanh = tid == "grid100_res16_scaled_tanh"
     case_meta = {
         "kind": tid,
         "problem": "grid100",
@@ -290,14 +323,19 @@ def _run_grid100_deep_variant(
     }
 
     task_for_ctx = deepcopy(task)
+    fourier = int(task["execution"].get("model", {}).get("fourier", 3 if is_scaled_res_tanh else 2))
     task_for_ctx["execution"]["model"] = {"hidden": 128, "layers": 3, "fourier": 2}
     context = task_formulation_context(cand_adapted, task_for_ctx, {"seed": seed}, device=device, root=root)
 
-    if is_res_tanh:
+    if is_scaled_res_tanh:
+        g = ResidualMLPGenerator(
+            context.recipe.z_dim, 128, 7, 2, scale=5.25, use_norm=True, preserve_latent_norm=True
+        ).to(dev)
+    elif is_res_tanh:
         g = ResidualMLPGenerator(context.recipe.z_dim, 128, 7, 2, scale=5.25).to(dev)
     else:
         g = SimpleMLPGenerator(context.recipe.z_dim, 128, 16, 2).to(dev)
-    d = SimpleMLPDiscriminator(2, 128, 3, 2).to(dev)
+    d = SimpleMLPDiscriminator(2, 128, 3, fourier).to(dev)
     context.initialize(g, component="generator")
     context.initialize(d, component="discriminator")
     if is_res_tanh:
@@ -305,6 +343,8 @@ def _run_grid100_deep_variant(
         for block in g.blocks:
             torch.nn.init.zeros_(block.linear2.weight)
             torch.nn.init.zeros_(block.linear2.bias)
+    elif is_scaled_res_tanh:
+        g.init_paired_identity()
 
     steps = int(task["execution"].get("steps", 7000))
     batch_size = int(task["execution"].get("resources", {}).get("batch_size", 2048))
@@ -320,6 +360,8 @@ def _run_grid100_deep_variant(
     for step in range(1, steps + 1):
         real = problems.sample_real("grid100", batch_size, device=dev, generator=data_rng)
         trainer.step(real)
+        if is_scaled_res_tanh:
+            _apply_scaled_res16_dispersion_step(trainer, real, step, steps)
         if step in eval_set and step >= steps - eval_every * 5:
             with torch.no_grad():
                 sample_rng = torch.Generator(device=dev).manual_seed(713 + step)
@@ -366,82 +408,44 @@ def _run_misgan_or_bigan_task(
     device: str,
 ) -> dict[str, Any]:
     import torch
+    from benchmarks.toy_audit.api_conditionals import build_case as build_conditional_case
+    from benchmarks.toy_audit.api_ring16 import build_case as build_ring16_case
     from experiments.forge.api import task_formulation_context
 
     t0 = time.perf_counter()
     seed = 0
     _seed_everything(seed)
     tid = task["id"]
-    steps = int(task["execution"].get("steps", 7000 if "misgan" in tid else 4000))
+    if tid not in STRETCH_FIXTURE_CASE_IDS:
+        raise ValueError(f"unsupported fixture task: {tid}")
+    case_id = STRETCH_FIXTURE_CASE_IDS[tid]
+    host_def = dict(task["execution"].get("host_definition") or {})
+    steps = int(task["execution"].get("steps", host_def.get("steps", 7000 if "misgan" in tid else 4000)))
     obs_count = int(task["evaluation"].get("observations", 24))
     min_stable = int(task["evaluation"].get("minimum_stable_checks", 5))
     eval_n = int(task["evaluation"].get("eval_samples", 4096))
     eval_seed = int(task["evaluation"].get("seed", 99123 if "misgan" in tid else 10000))
 
     task_for_ctx = deepcopy(task)
-    task_for_ctx["execution"]["model"] = {"hidden": 128, "layers": 3, "fourier": 2}
+    task_for_ctx["execution"]["model"] = {
+        "hidden": int(host_def.get("hidden", 128)),
+        "layers": int(host_def.get("layers", 3)),
+        "fourier": int(host_def.get("fourier", 2)),
+    }
     context = task_formulation_context(cand_adapted, task_for_ctx, {"seed": seed}, device=device, root=root)
-
-    def _fixture_recipe(batch_size: int, num_particles: int, z_dim: int, sigma_rel: float):
-        return context.recipe.replace(
-            batch_size=batch_size,
-            num_particles=num_particles,
-            z_dim=z_dim,
-            prior_kind="mog",
-            sigma_rel=sigma_rel,
-            standardize=False,
-            input_noise_std=0.0,
-            output_noise_std=0.0,
-            output_noise_mode="fixed",
-            lr_control="mobility",
-            continuous_policy=None,
-            reopen_signal="data",
-            reopen_anchor="hold",
-            reopen_guard=None,
-            particle_birth_death=False,
-            birth_death_space="data",
-            birth_death_feature_scale="none",
-            birth_death_isolation=False,
-            birth_death_backend="knn",
-            birth_death_cells=64,
-            birth_death_metric_rank=8,
-            birth_death_chunk=256,
-            row_evidence_gate=False,
-            row_policy="independent",
-            total_steps=steps,
-        )
-
-    if tid == "misgan_block_recovery":
-        from benchmarks.toy_audit.api_conditionals import CASES, MisGANRecoveryFixture
-
-        case_meta = deepcopy(CASES["api-misgan-block-recovery"])
-        fixture = MisGANRecoveryFixture(case_meta, device="cpu", seed=seed, max_steps=steps)
-        fixture.recipe = _fixture_recipe(case_meta["batch_size"], 128, 8, 0.25)
-        fixture.loss = fixture.recipe.make_loss()
-    elif tid == "misgan_block_neural_imputer":
-        from benchmarks.toy_audit.api_conditionals import CASES, MisGANNeuralImputerFixture
-
-        case_meta = deepcopy(CASES["api-misgan-block-neural-imputer"])
-        fixture = MisGANNeuralImputerFixture(case_meta, device="cpu", seed=seed, max_steps=steps)
-        fixture.recipe = _fixture_recipe(case_meta["batch_size"], 128, 8, 0.25)
-        fixture.loss = fixture.recipe.make_loss()
-    elif tid == "ring16_bigan_continuous":
-        from benchmarks.toy_audit.api_ring16 import Ring16BiGANFixture, _bigan_case
-
-        case_meta = _bigan_case()
-        fixture = Ring16BiGANFixture(case_meta, device=device, seed=seed, max_steps=steps)
-        fixture.recipe = _fixture_recipe(case_meta.get("batch_size", 128), 256, 2, 0.1)
-        groups = [
-            dict(params=list(fixture.G.parameters()), lr=fixture.recipe.lr),
-            dict(params=list(fixture.E.parameters()), lr=fixture.recipe.lr),
-        ]
-        fixture.opt_g = fixture.recipe.make_generator_optimizer(groups)
-        fixture.opt_d = fixture.recipe.make_critic_optimizer(fixture.D, ema_critic=deepcopy(fixture.D))
-        fixture.base_rates = [[group["lr"] for group in opt.param_groups] for opt in (fixture.opt_g, fixture.opt_d)]
-        fixture.loss = fixture.recipe.make_loss()
-        fixture.penalty = fixture.recipe.make_critic_penalty(fixture.opt_d)
-    else:
-        raise ValueError(f"unsupported fixture task: {tid}")
+    prior = context.build_prior()
+    builder = build_ring16_case if case_id in ("api-ring16-bigan-continuous", "api-alice-spiral-bigan") else build_conditional_case
+    fixture = builder(case_id, device=device, seed=seed, max_steps=steps, recipe_name="bispf")
+    recipe = context.recipe.replace(
+        batch_size=int(host_def.get("batch", getattr(fixture, "batch_size", 128))),
+        num_particles=int(host_def.get("particles", getattr(fixture, "particles", 256))),
+        z_dim=int(host_def.get("z_dim", getattr(fixture, "z_dim", 8))),
+        input_noise_std=0.0,
+        output_noise_std=0.0,
+        output_noise_mode="fixed",
+        total_steps=steps if context.recipe.continuous_policy is None else context.recipe.total_steps,
+    )
+    fixture.rebind_trainer(recipe, prior=prior)
 
     for opt in (getattr(fixture, "opt_g", None), getattr(fixture, "opt_d", None)):
         if opt is not None:
@@ -574,9 +578,9 @@ def execute_single_task(
         res = _run_ddgan_task(root, cand_adapted, task, device, attempt_dir)
     elif task_name == "zero_tanh_rail_escape":
         res = _run_zero_tanh_rail_escape(root, cand_adapted, task, device)
-    elif task_name in {"grid100_mlp16", "grid100_res16_tanh"}:
+    elif task_name in {"grid100_mlp16", "grid100_res16_tanh", "grid100_res16_scaled_tanh"}:
         res = _run_grid100_deep_variant(root, cand_adapted, task, device)
-    elif task_name in {"misgan_block_recovery", "misgan_block_neural_imputer", "ring16_bigan_continuous"}:
+    elif task_name in STRETCH_FIXTURE_TASKS:
         res = _run_misgan_or_bigan_task(root, cand_adapted, task, device)
     else:
         res = _run_standard_task(root, cand_adapted, task, device, attempt_dir)
@@ -638,7 +642,7 @@ def harvest_existing_verdicts(root: Path) -> dict[tuple[str, str], dict[str, Any
         for rec_path in sorted(records_dir.glob("readout-*.json")):
             try:
                 doc = read_json(rec_path)
-            except Exception:
+            except (OSError, ValueError):
                 continue
             if doc.get("lifecycle") != "concluded" or doc.get("evidence_scope") != "current":
                 continue
@@ -722,11 +726,26 @@ def ensure_formulaic_attempt_coverage(
     gpus: list[str],
     *,
     json_mode: bool = False,
+    tasks: str | list[str] | set[str] | None = None,
+    force: bool = False,
 ) -> dict[str, Any]:
     """Ensure all selected-family × suite-task cells in attempt-coverage.json have executed PASS/FAIL outcomes."""
     root = Path(root).resolve()
     attempt_state_root = Path(attempt_state_root).resolve()
     attempt_state_root.mkdir(parents=True, exist_ok=True)
+
+    task_filter: set[str] | None = None
+    if tasks is not None:
+        if isinstance(tasks, str):
+            toks = [t.strip() for t in tasks.split(",") if t.strip()]
+            if len(toks) == 1 and toks[0].lower() == "stretch":
+                task_filter = set(STRETCH_TASKS)
+            elif len(toks) == 1 and toks[0].lower() == "all":
+                task_filter = None
+            else:
+                task_filter = set(toks)
+        else:
+            task_filter = set(tasks)
 
     pub_path = root / "reports/forge/technique-inventory.json"
     cov_path = root / "reports/forge/attempt-coverage.json"
@@ -747,27 +766,56 @@ def ensure_formulaic_attempt_coverage(
         job_copy = deepcopy(rec)
         if job_copy.get("origin") == "new_attempt" and "original_attempt" in job_copy:
             job_copy["evidence"] = job_copy.pop("original_attempt")
-        jobs.setdefault(rec["key"], job_copy)
+        jobs[rec["key"]] = job_copy
 
     all_tasks = load_tasks(root)
-    selected = attempt_coverage.selected_tasks(pub)
+    live_views = [read_json(p) for p in sorted((root / "configs/forge/views").glob("*.json"))]
+    pub_for_selection = deepcopy(pub)
+    if isinstance(pub_for_selection.get("family_progress"), dict):
+        pub_for_selection["family_progress"]["views"] = live_views
+    selected = attempt_coverage.selected_tasks(pub_for_selection)
     harvested = harvest_existing_verdicts(root)
 
     # Ensure every (family, task) in selected_tasks has a job entry in `jobs`
+    existing_unscoped_by_pair: dict[tuple[str, str, str, str, str], dict[str, Any]] = {}
+    for rec in cov.get("records", []):
+        if any(rec.get(k) for k in ("research_scope", "policy_scope", "repair_scope", "cohort_scope")):
+            continue
+        existing_unscoped_by_pair[
+            (
+                str(rec.get("family") or ""),
+                str(rec.get("candidate_id") or ""),
+                str(rec.get("candidate_revision") or ""),
+                str(rec.get("source_digest") or ""),
+                str(rec.get("task") or ""),
+            )
+        ] = rec
+
     selected_keys_by_pair: dict[tuple[str, str], str] = {}
-    for family, selection, tasks in selected:
+    standalone_items: list[dict[str, Any]] = []
+    for family, selection, family_tasks in selected:
         cid = selection["candidate_id"]
         crev = selection["candidate_revision"]
         sdig = selection["bindings"]["source_digest"]
-        for task_name in tasks:
-            if task_name not in all_tasks:
+        for task_name in family_tasks:
+            if task_name not in all_tasks or task_name.startswith("precision_gaussian_"):
                 continue
             card = all_tasks[task_name]
-            binding = selection["bindings"].get("task_contracts", {}).get(task_name)
-            pin = pub.get("task_contracts", {}).get(binding) if binding else None
-            exec_sha = pin["execution_sha256"] if pin else task_execution_fingerprint(card)
-            eval_sha = pin["evaluation_sha256"] if pin else task_evaluation_fingerprint(card)
-            key = attempt_coverage.identity(sdig, crev, task_name, exec_sha, eval_sha)
+            existing_rec = existing_unscoped_by_pair.get((family, cid, crev, sdig, task_name))
+            if (
+                existing_rec is not None
+                and existing_rec.get("attempted")
+                and existing_rec.get("status") in {"PASS", "FAIL"}
+            ):
+                exec_sha = existing_rec["execution_sha256"]
+                eval_sha = existing_rec["evaluation_sha256"]
+                key = existing_rec["key"]
+            else:
+                binding = selection["bindings"].get("task_contracts", {}).get(task_name)
+                pin = pub.get("task_contracts", {}).get(binding) if binding else None
+                exec_sha = pin["execution_sha256"] if pin else task_execution_fingerprint(card)
+                eval_sha = pin["evaluation_sha256"] if pin else task_evaluation_fingerprint(card)
+                key = attempt_coverage.identity(sdig, crev, task_name, exec_sha, eval_sha)
             selected_keys_by_pair[(family, task_name)] = key
             if key not in jobs:
                 jobs[key] = {
@@ -785,6 +833,26 @@ def ensure_formulaic_attempt_coverage(
                     "status": "PENDING",
                     "attempted": False,
                 }
+        if task_filter is not None:
+            for extra_task in sorted(task_filter):
+                if (family, extra_task) in selected_keys_by_pair or extra_task not in all_tasks:
+                    continue
+                extra_card = all_tasks[extra_task]
+                extra_key = attempt_coverage.identity(
+                    sdig,
+                    crev,
+                    extra_task,
+                    task_execution_fingerprint(extra_card),
+                    task_evaluation_fingerprint(extra_card),
+                )
+                standalone_items.append(
+                    {
+                        "key": extra_key,
+                        "family": family,
+                        "candidate_id": cid,
+                        "task": extra_task,
+                    }
+                )
 
     for existing_key in list(jobs.keys()):
         j_item = jobs[existing_key]
@@ -800,14 +868,19 @@ def ensure_formulaic_attempt_coverage(
     for (family, task_name), key in sorted(selected_keys_by_pair.items()):
         job = jobs[key]
         res_file = attempt_state_root / "attempts" / key / "result.json"
-        if job.get("attempted") and job.get("status") in {"PASS", "FAIL"}:
-            if res_file.is_file():
-                try:
-                    cached_res = read_json(res_file)
-                    if cached_res.get("execution_seconds") is not None:
-                        job["seconds"] = cached_res["execution_seconds"]
-                except Exception:
-                    pass
+        force_task = force
+        if task_filter is not None and task_name not in task_filter:
+            continue
+        if force_task:
+            res_file.unlink(missing_ok=True)
+            to_execute.append(
+                {
+                    "key": key,
+                    "family": family,
+                    "candidate_id": job["candidate_id"],
+                    "task": task_name,
+                }
+            )
             continue
         if res_file.is_file():
             try:
@@ -837,8 +910,10 @@ def ensure_formulaic_attempt_coverage(
                         "evidence": "reports/forge/attempt-coverage.json",
                     }
                     continue
-            except Exception:
+            except (OSError, ValueError):
                 pass
+        if job.get("attempted") and job.get("status") in {"PASS", "FAIL"}:
+            continue
         if (family, task_name) in harvested:
             h = harvested[(family, task_name)]
             origin_val = "executed" if h["origin"] == "new_attempt" else h["origin"]
@@ -862,12 +937,24 @@ def ensure_formulaic_attempt_coverage(
             }
         )
 
+    for s_item in standalone_items:
+        res_file = attempt_state_root / "attempts" / s_item["key"] / "result.json"
+        if force:
+            res_file.unlink(missing_ok=True)
+        elif res_file.is_file():
+            try:
+                if read_json(res_file).get("status") in {"PASS", "FAIL"}:
+                    continue
+            except (OSError, ValueError):
+                pass
+        to_execute.append(s_item)
+
     # Resolve continuation tasks whose parent is already known to be FAIL, and order parents before children
     parent_tasks = [item for item in to_execute if item["task"] not in CONTINUATION_PARENTS]
     child_tasks = [item for item in to_execute if item["task"] in CONTINUATION_PARENTS]
 
     if parent_tasks:
-        _run_parallel_batches(root, attempt_state_root, parent_tasks, gpus, json_mode=json_mode)
+        _run_parallel_batches(root, attempt_state_root, parent_tasks, gpus, json_mode=json_mode, force=force)
         for item in parent_tasks:
             key = item["key"]
             res_file = attempt_state_root / "attempts" / key / "result.json"
@@ -879,22 +966,23 @@ def ensure_formulaic_attempt_coverage(
                 if res_file.is_relative_to(root)
                 else str(res_file)
             )
-            jobs[key].update(
-                status=res["status"],
-                attempted=True,
-                origin="new_attempt",
-                diagnostic=True,
-                reason=res.get("reason", f"Executed {item['task']}: {res['status']}."),
-                evidence=ev_path,
-            )
-            if res.get("execution_seconds") is not None:
-                jobs[key]["seconds"] = res["execution_seconds"]
-            jobs[key].pop("original_attempt", None)
-            jobs[key].pop("block_kind", None)
-            harvested[(item["family"], item["task"])] = {
-                "status": res["status"],
-                "reason": jobs[key]["reason"],
-            }
+            if key in jobs:
+                jobs[key].update(
+                    status=res["status"],
+                    attempted=True,
+                    origin="new_attempt",
+                    diagnostic=True,
+                    reason=res.get("reason", f"Executed {item['task']}: {res['status']}."),
+                    evidence=ev_path,
+                )
+                if res.get("execution_seconds") is not None:
+                    jobs[key]["seconds"] = res["execution_seconds"]
+                jobs[key].pop("original_attempt", None)
+                jobs[key].pop("block_kind", None)
+                harvested[(item["family"], item["task"])] = {
+                    "status": res["status"],
+                    "reason": jobs[key]["reason"],
+                }
 
     for item in child_tasks:
         fam = item["family"]
@@ -956,14 +1044,32 @@ def _run_parallel_batches(
     gpus: list[str],
     *,
     json_mode: bool = False,
+    force: bool = False,
 ) -> None:
     gpu_list = [str(g).strip() for g in gpus if str(g).strip()] or ["0"]
     # Sort fast tasks first so progress is immediately visible
     def _task_weight(item: dict[str, Any]) -> int:
         t = item["task"]
-        if t in {"grid100_mlp16", "grid100_res16_tanh", "misgan_block_neural_imputer", "misgan_block_recovery"}:
+        if t in {
+            "grid100_mlp16",
+            "grid100_res16_tanh",
+            "grid100_res16_scaled_tanh",
+            "misgan_block_neural_imputer",
+            "misgan_block_recovery",
+            "misgan_mcar_p50_recovery",
+            "misgan_mcar_p80_anchored",
+            "pacgan8_grid100",
+            "alice_spiral_bigan",
+            "cyclegan_unpaired_constellation",
+        }:
             return 3
-        if t == "ring16_bigan_continuous":
+        if t in {
+            "ring16_bigan_continuous",
+            "infogan_anisotropic_modes",
+            "pacgan_unequal_mass",
+            "cgan_overlapping_classes",
+            "cramer_energy_overlap",
+        }:
             return 2
         return 1
 
@@ -994,6 +1100,7 @@ def _run_parallel_batches(
                 "gpu": gpu_id,
                 "log_path": str(log_path),
                 "items": bucket,
+                "force": force,
             },
         )
         env = dict(os.environ)
@@ -1019,6 +1126,7 @@ def _run_batch_cli(spec_path: Path) -> int:
     gpu_id = str(spec["gpu"])
     log_path = Path(spec["log_path"])
     items = spec["items"]
+    force = bool(spec.get("force", False))
     total = len(items)
     for idx, item in enumerate(items, 1):
         key = item["key"]
@@ -1027,12 +1135,12 @@ def _run_batch_cli(spec_path: Path) -> int:
         tname = item["task"]
         attempt_dir = attempt_state_root / "attempts" / key
         res_file = attempt_dir / "result.json"
-        if res_file.is_file():
+        if not force and res_file.is_file():
             try:
                 existing = read_json(res_file)
                 if existing.get("status") in {"PASS", "FAIL"}:
                     continue
-            except Exception:
+            except (OSError, ValueError):
                 pass
         _log(f"[GPU {gpu_id}] ({idx}/{total}) Starting {fam}/{cid} on {tname} ...")
         res = execute_single_task(root, fam, cid, tname, "cuda:0", attempt_dir)
@@ -1062,12 +1170,25 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--root", type=Path, default=REPOSITORY_ROOT)
     parser.add_argument("--attempt-state-root", type=Path, default=None)
     parser.add_argument("--gpus", default="0,1")
+    parser.add_argument(
+        "--tasks",
+        type=str,
+        default="stretch",
+        help="Optional comma-separated list of tasks, 'stretch' (default), or 'all'",
+    )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Force re-execution of tasks, ignoring cached results",
+    )
     args = parser.parse_args(argv)
     if args.run_batch is not None:
         return _run_batch_cli(args.run_batch)
     state_root = args.attempt_state_root or (args.root / "runs/forge/attempt-coverage-refresh")
     gpus = [g.strip() for g in args.gpus.split(",") if g.strip()]
-    ensure_formulaic_attempt_coverage(args.root, state_root, gpus)
+    ensure_formulaic_attempt_coverage(
+        args.root, state_root, gpus, tasks=args.tasks, force=args.force
+    )
     return 0
 
 

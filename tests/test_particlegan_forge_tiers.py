@@ -410,3 +410,24 @@ def test_particlegan_forge_stretch_tier_and_leaderboard_table(tmp_path):
     assert "| Tier 1 stretch | Tier 2 stretch | Total stretch |" in board
     assert "| — | `1/1` | **`1/1`** |" in board
 
+    # A pure STRETCH tier above a HELD tier preserves overall HELD status.
+    tasks3 = [_task("t1"), _task("h2"), _task("s3")]
+    tiers3 = [
+        TierSpec(tier=1, required=["t1"]),
+        TierSpec(tier=2, held={"h2": {
+            "reason": "unsolved",
+            "summary": "Held in Tier 2 pending a passing global recipe.",
+            "explanation": "reports/forge/problems.md#h2",
+            "reentry": "Count again when a global recipe passes h2.",
+        }}),
+        TierSpec(tier=3, stretch=["s3"]),
+    ]
+    ws3, _ = _workspace(tmp_path / "w3", _ok(), tasks=tasks3, tiers=tiers3)
+    ws3.run_task("c", "t1")
+    ws3.run_task("c", "h2")
+    ws3.run_task("c", "s3")
+    q3 = ws3.qualify("c", "v")
+    assert q3["status"] == "HELD" and not q3["eligible"] and q3["qualified_tier"] == 1
+    assert q3["held_tiers"] == [2] and q3["stretch_tiers"] == [2, 3]
+
+

@@ -112,9 +112,9 @@ def test_current_inventory_has_complete_quality_and_distinct_claim_views():
     assert len(smoke) == 11 and all(tasks[name]["adapter"] == "public_api_model_toy" for name in smoke[7:])
     assert sum(tasks[n]["execution"]["steps"] for n in smoke[1:4]) == 530
     # 0.10 restores four accuracy/settling tasks; the former hold policy is archived.
-    assert stability["revision"] == 14 and stability["previous_revision"]["revision"] == 13
+    assert stability["revision"] == 16 and stability["previous_revision"]["revision"] == 15
     assert [a["task"] for a in stability["assignments"] if a["importance"] == "diagnostic"] == [
-        "ring_hold", "clockfree_audit_measurement_v1"]
+        "ring_hold", "clockfree_audit_measurement_v1", "precision_gaussian_fp32"]
     assert next(a for a in stability["assignments"] if a["task"] == "ring_hold")["removal"]["counted_by"] == "ring_extension"
     for role, counts in (("required", [11, 18, 1, 0]), ("held", [0, 7, 1, 5])):
         assert [sum(a["qualification_tier"] == tier and a["importance"] == role
@@ -154,7 +154,7 @@ def test_default_plan_and_report_include_acquisition_smoke_without_new_views():
     assert not {"ring16_acquisition", "five_word_joint"} & {row["id"] for row in report["views"]}
     view = next(row for row in report["views"] if row["id"] == "discriminator_stability")
     smoke = next(row for row in view["tiers"] if row["qualification_tier"] == 1)
-    assert smoke["counts"] == {"required": 11, "held": 0, "ranking": 0, "diagnostic": 1}
+    assert smoke["counts"] == {"required": 11, "held": 0, "ranking": 0, "diagnostic": 2, "stretch": 2}
     reported = {row["id"]: row for row in smoke["tasks"]}
     for name, updates, timeout in (("gaussian1d_smoke", 1000, 120),
                                    ("ring16_acquisition", 1600, 300),
@@ -1020,4 +1020,27 @@ def test_stretch_assignments_and_stretch_tiers_never_block_qualification_or_pass
     }
     with pytest.raises(ValueError, match="stretch reason"):
         validate_view(bad_reason, tasks)
+
+    # A pure STRETCH tier above a HELD tier must not flip a HELD view into PASS.
+    held_plus_stretch = simple_view(("a", 1, "required"), ("b", 2, "held"), ("c", 3, "stretch"))
+    held_plus_stretch["assignments"][1]["hold"] = hold("b", reason="unsolved")
+    validate_view(held_plus_stretch, tasks)
+    hps_out = qualify(held_plus_stretch, tasks, [receipt(tasks["a"]), receipt(tasks["b"]), receipt(tasks["c"])])
+    assert hps_out["status"] == "HELD" and not hps_out["eligible"] and hps_out["counted_eligible"] is True
+    assert hps_out["qualified_tier"] == 1 and hps_out["held_tiers"] == [2] and hps_out["stretch_tiers"] == [2, 3]
+
+    # Stretch prerequisite reason requires blocked_by listing stretch prerequisites.
+    dep_tasks = {n: simple_task(n) for n in "ab"}
+    dep_tasks["b"]["dependencies"] = [{"task": "a", "kind": "gate"}]
+    dep_view = simple_view(("a", 1, "stretch"), ("b", 2, "stretch"))
+    dep_view["assignments"][1]["stretch"] = {
+        "schema": "forge_stretch_v1",
+        "reason": "stretch_prerequisite",
+        "summary": "Depends on stretch task a and therefore requires blocked_by.",
+    }
+    with pytest.raises(ValueError, match="requires blocked_by"):
+        validate_view(dep_view, dep_tasks)
+    dep_view["assignments"][1]["stretch"]["blocked_by"] = ["a"]
+    validate_view(dep_view, dep_tasks)
+
 
