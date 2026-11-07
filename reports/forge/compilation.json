@@ -2,7 +2,7 @@
   "automation_digest": "49a96b59e9f3c4ce6910d091d0e0023e528cf467bbb80c829cac547a5bc9978b",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "ec315ad224fac470636e3fe1bdb261df8acf4817362d2f0dbe0eb54e48d27986",
+  "input_digest": "02ff77f82ece15019379d2b05982bf10fa0fd548454c8d7c1b6e3f51fbe523a5",
   "input_hashes": {
     "configs/forge/cadence-studies/bispf-lazy-cadence-v1.json": "fc7302ac06b61fa093a39265d440545fdab176852a588c40b750be16adc1e58b",
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
@@ -1088,6 +1088,7 @@
     "configs/forge/tasks/grid100_affine_square_named_v1_14k.json": "6acfd6866baa4d406895e3e8a1d9a3480bebb91fdc60a4c6c36d1d0b9f3c71b8",
     "configs/forge/tasks/grid100_mlp16.json": "3eb8c1a33f42b356f3eaf7480a7ca061e229c88f741fc5c696ebd8858e263107",
     "configs/forge/tasks/grid100_release07_cloud_named_v1.json": "44cb23a72ebbc6d11547c97c6cafc08599b7f381ba73ec81f5543a0642ce87b1",
+    "configs/forge/tasks/grid100_res16_scaled_tanh.json": "e1ac4a1b9bd49ad2538bd233a504ccbd7937f1496a8eba515aae7f1ff4b11e0c",
     "configs/forge/tasks/grid100_res16_tanh.json": "16038bf7fbff4f5883bc32c05221d0e78383be1e6f7843acc9e68ad521069911",
     "configs/forge/tasks/img_bars4.json": "4786360fc4e66be0bbd1bdee42b3fcb924555d2bd0ee2a8d9198a72a5ba909e1",
     "configs/forge/tasks/img_bars4_residual16.json": "41067f9b8e951f57917ec06fec44237b208be725dffcc2a2c3209f3b4c8e5807",
@@ -1888,8 +1889,8 @@
     "reports/forge/technique-evidence/ddde64ee936114becac42863847a51e88ec0301bad9f7f69767d0a2fbc3f3d69.json": "e1cae161e72aff5f7fc727d9e2c726960e7e26858744a2c9cb5a38d05a98d7d8",
     "reports/forge/technique-evidence/e09c650155820e13454549d67238e1ea27df10061265a297c3311087afbcf921.json": "539fdf0b580d66d867d810b7f9a0b70f3cd813d348b3b50a7c576b0c9d6eab8a",
     "reports/forge/technique-evidence/manifest.json": "d4227285fb5b18e5d22e1a3fb1061ce66ee9d0e03d98cfdc93dd233774673fe2",
-    "reports/forge/technique-inventory.json": "b56fbd41c95268cded3ecad2a1727089c83b8bd519e2bc1ce3a1bba01d505c73",
-    "reports/forge/technique-inventory.md": "283dbe45410c150b5371b2ccb8a3e4cb21c783295b807e99c1a7c802f7e5b2e5",
+    "reports/forge/technique-inventory.json": "3db82ecf41a0384b4c08c07db10d92436ffbf5fe835920cccba559457a828e94",
+    "reports/forge/technique-inventory.md": "4e41b6ad51777daf129e3c07eec0d8c7e308d3c8e9ea82f025d2687765ab32b5",
     "reports/forge/technique-receipts/001093b404dc498b8f8c0125c26dc754.json": "fe780b8a8caa6bf4ec7547bc360cfeeb72ea56883a4d9ef4c0dadb3922a72cce",
     "reports/forge/technique-receipts/0031ba37faa14f999038fcfaddee07d5.json": "2fbb325d3209da742093cdb892be18f82006f33a42e2840f44330190d63fc7ae",
     "reports/forge/technique-receipts/003b3403b2354741a01033a5bab7b80b.json": "a92e30a20ce61f02dcbab668d3acdfcfb4598b91f197ae753ac6c428d4b69973",
@@ -4307,7 +4308,7 @@
   },
   "operational_lifecycle_digest": "9844d43226c3b2baf99ad27b1f3a4c32b9a6b30ad8abac68f275c54635ed3b1d",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "f53ab1d4e9162c741ac70f3635ddb61893dee53f5c9efc395284e3fee6454074",
+    "reports/forge/EXPERIMENT_MEMORY.md": "ef334f727b24775085593b9b6eb83f62d1763b78c0d003b953efca49f734ee9d",
     "reports/forge/publication-records.json": "5174449ad10c00a8d22dee09d3ef50c8fb0fc76f196d85197271ee7c0766c9d8"
   },
   "pending_readout": [

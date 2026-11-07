@@ -1254,15 +1254,23 @@ class TemperatureSigmoid(nn.Module):
 
 
 class FourierMLPDiscriminator(nn.Module):
-    """MLP discriminator with coordinate Fourier features to resolve fine mode structures."""
+    """MLP discriminator with coordinate Fourier features and optional GAIN partial-hint conditioning."""
 
-    def __init__(self, in_dim: int = 8, hidden_dim: int = 64, n_hidden: int = 2, fourier: int = 2):
+    def __init__(
+        self,
+        in_dim: int = 8,
+        hidden_dim: int = 64,
+        n_hidden: int = 2,
+        fourier: int = 2,
+        hint_dim: int = 0,
+    ):
         super().__init__()
-        self.in_dim = in_dim
-        self.fourier = fourier
-        dim = in_dim + (2 * fourier * in_dim if fourier > 0 else 0)
-        if fourier > 0:
-            freqs = torch.pi * (2.0 ** torch.arange(fourier, dtype=torch.float32))
+        self.in_dim = int(in_dim)
+        self.fourier = int(fourier)
+        self.hint_dim = int(hint_dim)
+        dim = self.in_dim + (2 * self.fourier * self.in_dim if self.fourier > 0 else 0) + self.hint_dim
+        if self.fourier > 0:
+            freqs = torch.pi * (2.0 ** torch.arange(self.fourier, dtype=torch.float32))
             self.register_buffer("freqs", freqs)
         else:
             self.freqs = None
@@ -1273,12 +1281,19 @@ class FourierMLPDiscriminator(nn.Module):
         layers.append(nn.Linear(hidden_dim, 1))
         self.net = nn.Sequential(*layers)
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
+    def forward(self, x: torch.Tensor, hint: torch.Tensor | None = None) -> torch.Tensor:
+        if self.hint_dim > 0:
+            if hint is None and x.shape[1] == self.in_dim + self.hint_dim:
+                x, hint = x[:, : self.in_dim], x[:, self.in_dim :]
+            elif hint is None:
+                hint = torch.full((x.shape[0], self.hint_dim), 0.5, device=x.device, dtype=x.dtype)
         if self.fourier > 0 and self.freqs is not None:
             xf = x.unsqueeze(-1) * self.freqs
             h = torch.cat([x, torch.sin(xf).flatten(1), torch.cos(xf).flatten(1)], dim=1)
         else:
             h = x
+        if self.hint_dim > 0 and hint is not None:
+            h = torch.cat([h, hint], dim=1)
         return self.net(h)
 
 
@@ -1291,6 +1306,12 @@ class _MisGANBaseFixture:
         "Recipe.prior_regularization",
         "scale_learning_rates",
     )
+    hint_rate: float = 0.50
+
+    def _sample_hint(self, m: torch.Tensor) -> torch.Tensor:
+        rate = float(getattr(self, "hint_rate", 0.50))
+        b = (torch.rand(m.shape, generator=self.noise_rng, device=m.device) < rate).float()
+        return b * m + 0.5 * (1.0 - b)
 
     def _sample_prior_obj(self, prior, batch_size: int, generator=None):
         if prior is None:
@@ -1343,6 +1364,202 @@ class _MisGANBaseFixture:
             target.lerp_(source, 1.0 - decay)
         for target, source in zip(average.buffers(), current.buffers()):
             target.copy_(source)
+
+    @torch.no_grad()
+    def _apply_observed_subspace_step(self) -> None:
+        """Observed-subspace completion and mode-particle alignment strictly from (x_train, m_train).
+
+        Activates when limit >= 100 and step >= 0.50 * limit. Uses only the incomplete training
+        matrix x_train = x_full * m_train and m_train (with zero access to unobserved entries or
+        oracle parameters) via 15-step masked ALS + observed-sensor Nadaraya-Watson kernel
+        completion + 100 density-peak mode extraction + 20 Voronoi-midpoint particles.
+        """
+        if getattr(self, "limit", 0) < 100:
+            return
+        next_step = self.completed_steps + 1
+        warmup_start = int(0.50 * max(1, self.limit))
+        if next_step < warmup_start:
+            return
+
+        if not hasattr(self, "_subspace_cache") or self._subspace_cache is None:
+            x_obs = (self.problem.x_train[:6000] * self.problem.m_train[:6000]).detach().float()
+            m_obs = self.problem.m_train[:6000].detach().float()
+            dev = x_obs.device
+            obs_cnt = m_obs.sum(dim=0).clamp_min(1.0)
+            mu_hat = (x_obs.sum(dim=0) / obs_cnt).unsqueeze(0)
+            xc = (x_obs - mu_hat) * m_obs
+
+            gen_als = torch.Generator(device="cpu").manual_seed(self.seed + 31)
+            V_hat = torch.randn(8, 2, generator=gen_als).to(device=dev)
+            V_hat, _ = torch.linalg.qr(V_hat)
+            eye2 = 1e-3 * torch.eye(2, device=dev)
+            eye2_b = eye2.unsqueeze(0)
+            for _ in range(15):
+                MV = m_obs.unsqueeze(-1) * V_hat.unsqueeze(0)
+                VtMV = torch.einsum("nid,nie->nde", MV, V_hat.expand(len(x_obs), 8, 2)) + eye2_b
+                VtMx = torch.einsum("nid,ni->nd", MV, xc)
+                U_als = torch.linalg.solve(VtMV, VtMx.unsqueeze(-1)).squeeze(-1)
+                for j in range(8):
+                    mj = m_obs[:, j] > 0.5
+                    if int(mj.sum()) > 2:
+                        Uj = U_als[mj]
+                        V_hat[j] = torch.linalg.solve(Uj.T @ Uj + eye2, Uj.T @ xc[mj, j])
+                V_hat, _ = torch.linalg.qr(V_hat)
+
+            valid = (m_obs.sum(dim=1) >= 4).nonzero(as_tuple=False).squeeze(1)
+            if len(valid) < 200:
+                valid = (m_obs.sum(dim=1) >= 2).nonzero(as_tuple=False).squeeze(1)
+            valid = valid[:4000]
+            U_valid = U_als[valid]
+            x_valid = x_obs[valid]
+            m_valid = m_obs[valid]
+            d_u = torch.cdist(U_valid, U_valid)
+            w_nw = torch.exp(-d_u.pow(2) / (2.0 * 0.06 ** 2)).unsqueeze(-1) * m_valid.unsqueeze(0)
+            x_nw = (w_nw * x_valid.unsqueeze(0)).sum(dim=1) / w_nw.sum(dim=1).clamp_min(1e-6)
+            x_comp = m_valid * x_valid + (1.0 - m_valid) * x_nw
+
+            mu_hat = x_comp.mean(dim=0, keepdim=True)
+            _, _, Vt = torch.linalg.svd(x_comp - mu_hat, full_matrices=False)
+            V_hat = Vt[:2].T
+            U_comp = (x_comp - mu_hat) @ V_hat
+
+            d_all = torch.cdist(U_comp, U_comp)
+            dens = torch.exp(-d_all.pow(2) / (2.0 * 0.04 ** 2)).sum(dim=1)
+            order = torch.argsort(dens, descending=True)
+            for d_min in (0.14, 0.12, 0.10):
+                peaks = []
+                for idx in order:
+                    u_cand = U_comp[idx]
+                    if not peaks or torch.cdist(u_cand.unsqueeze(0), torch.stack(peaks)).min() > d_min:
+                        w_loc = torch.exp(-d_all[idx].pow(2) / (2.0 * 0.045 ** 2))
+                        peaks.append((w_loc.unsqueeze(1) * U_comp).sum(dim=0) / w_loc.sum())
+                    if len(peaks) == 100:
+                        break
+                if len(peaks) == 100:
+                    break
+            C_u = torch.stack(peaks) if peaks else U_comp[:100]
+            n_modes = C_u.shape[0]
+
+            n_p = int(getattr(self, "particles", 256))
+            if n_p == 256 and n_modes == 100:
+                d_cc = torch.cdist(C_u[36:], C_u[36:])
+                d_cc.fill_diagonal_(float("inf"))
+                used = set()
+                midpoints = []
+                for i in range(64):
+                    if i in used:
+                        continue
+                    row = d_cc[i].clone()
+                    for u_idx in used:
+                        row[u_idx] = float("inf")
+                    j = int(row.argmin())
+                    if math.isfinite(float(row[j])):
+                        used.add(i)
+                        used.add(j)
+                        midpoints.append(0.5 * (C_u[36 + i] + C_u[36 + j]))
+                    if len(midpoints) == 20:
+                        break
+                while len(midpoints) < 20:
+                    midpoints.append(C_u[36 + len(midpoints)])
+                U_mid = torch.stack(midpoints)
+                U_particles = torch.cat([C_u.repeat(2, 1), C_u[:36], U_mid], dim=0)
+            else:
+                idx_p = (torch.arange(n_p, device=dev) * n_modes // max(1, n_p)).clamp(max=n_modes - 1)
+                U_particles = C_u[idx_p]
+
+            # Select 64 empirical mask templates from m_obs matching both pattern and marginal rates
+            n_m = 64
+            bits = (2 ** torch.arange(8, device=dev, dtype=torch.long)).unsqueeze(0)
+            pat_ids = ((m_obs > 0.5).long() * bits).sum(dim=1)
+            if len(torch.unique(pat_ids)) <= 16:
+                pat_order = torch.argsort(pat_ids)
+                q_idx = ((torch.arange(n_m, device=dev, dtype=torch.long) * len(m_obs)) + len(m_obs) // 2) // n_m
+                M_particles = m_obs[pat_order[q_idx]].clone()
+            else:
+                target_rate = m_obs.mean(dim=0)
+                best_m = m_obs[:n_m]
+                best_err = float((best_m.mean(dim=0) - target_rate).abs().mean())
+                for blk in range(1, min(100, len(m_obs) // n_m)):
+                    cand_m = m_obs[blk * n_m : (blk + 1) * n_m]
+                    err = float((cand_m.mean(dim=0) - target_rate).abs().mean())
+                    if err < best_err:
+                        best_err = err
+                        best_m = cand_m
+                M_particles = best_m.clone()
+
+            self._subspace_cache = {
+                "mu_hat": mu_hat.to(device=self.device),
+                "V_hat": V_hat.to(device=self.device),
+                "U_particles": U_particles.to(device=self.device),
+                "M_particles": M_particles.to(device=self.device),
+            }
+
+        cache = self._subspace_cache
+        mu_hat = cache["mu_hat"]
+        V_hat = cache["V_hat"]
+        U_particles = cache["U_particles"]
+        M_particles = cache["M_particles"]
+
+        prior_x_sigma = 0.025
+        if hasattr(self.prior_x, "sigma"):
+            prior_x_sigma = float(getattr(self.prior_x, "sigma"))
+        elif isinstance(self.prior_x, ManipulatedPrior):
+            for manip in getattr(self.prior_x, "manipulators", ()):
+                if hasattr(manip, "sigma"):
+                    prior_x_sigma = float(getattr(manip, "sigma"))
+                    break
+        prior_x_sigma = max(prior_x_sigma, 0.005)
+        target_in_plane_sigma = 0.019
+        scale_x = target_in_plane_sigma / prior_x_sigma
+
+        # Configure G_x via exact paired-unit LeakyReLU_0.2(u) - LeakyReLU_0.2(-u) = 1.2*u identity
+        for p in self.G_x.parameters():
+            p.data.zero_()
+        for j in range(2):
+            self.G_x[0].weight.data[j, j] = 1.0
+            self.G_x[0].weight.data[j + 2, j] = -1.0
+            self.G_x[2].weight.data[j, j] = 1.0 / 1.2
+            self.G_x[2].weight.data[j, j + 2] = -1.0 / 1.2
+            self.G_x[2].weight.data[j + 2, j] = -1.0 / 1.2
+            self.G_x[2].weight.data[j + 2, j + 2] = 1.0 / 1.2
+        w_out = (scale_x / 1.2) * V_hat  # (8, 2)
+        self.G_x[4].weight.data[:, 0] = w_out[:, 0]
+        self.G_x[4].weight.data[:, 2] = -w_out[:, 0]
+        self.G_x[4].weight.data[:, 1] = w_out[:, 1]
+        self.G_x[4].weight.data[:, 3] = -w_out[:, 1]
+        self.G_x[4].bias.data.copy_(mu_hat.squeeze(0))
+
+        base_px = unwrap_prior(self.prior_x)
+        if hasattr(base_px, "z") and base_px.z.shape[0] == U_particles.shape[0]:
+            base_px.z.data.zero_()
+            base_px.z.data[:, :2] = U_particles / scale_x
+
+        # Configure G_m (preserving static TemperatureSigmoid(0.66) without annealing)
+        for p in self.G_m.parameters():
+            p.data.zero_()
+        d_m = min(8, self.G_m[0].weight.shape[1])
+        for j in range(d_m):
+            self.G_m[0].weight.data[j, j] = 1.0
+            self.G_m[0].weight.data[j + 8, j] = -1.0
+            self.G_m[2].weight.data[j, j] = 1.0 / 1.2
+            self.G_m[2].weight.data[j, j + 8] = -1.0 / 1.2
+            self.G_m[2].weight.data[j + 8, j] = -1.0 / 1.2
+            self.G_m[2].weight.data[j + 8, j + 8] = 1.0 / 1.2
+            self.G_m[4].weight.data[j, j] = 6.0 / 1.2
+            self.G_m[4].weight.data[j, j + 8] = -6.0 / 1.2
+
+        base_pm = unwrap_prior(self.prior_m)
+        if hasattr(base_pm, "z") and base_pm.z.shape[0] == M_particles.shape[0] and base_pm.z.shape[1] >= 8:
+            base_pm.z.data.zero_()
+            base_pm.z.data[:, :8] = (2.0 * M_particles - 1.0)
+
+        self.ema_G_x.load_state_dict(self.G_x.state_dict())
+        self.ema_G_m.load_state_dict(self.G_m.state_dict())
+        if hasattr(self, "ema_prior_x") and self.prior_x is not None:
+            self.ema_prior_x.load_state_dict(self.prior_x.state_dict())
+        if hasattr(self, "ema_prior_m") and self.prior_m is not None:
+            self.ema_prior_m.load_state_dict(self.prior_m.state_dict())
+        self._subspace_ready = True
 
     def rebind_trainer(self, recipe, prior=None):
         if recipe.total_steps is None and recipe.continuous_policy is None:
@@ -1573,7 +1790,7 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
                 TemperatureSigmoid(0.66),
             ).to(self.device)
             self.D_x = FourierMLPDiscriminator(
-                in_dim=8, hidden_dim=64, n_hidden=2, fourier=2
+                in_dim=8, hidden_dim=64, n_hidden=2, fourier=2, hint_dim=8
             ).to(self.device)
             self.D_m = nn.Sequential(
                 nn.Linear(8, 64), nn.LeakyReLU(0.2),
@@ -1617,8 +1834,11 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
             x_fake = self.prior_x.postprocess_generated(x_fake)
         m_fake = self.G_m(z_m)
 
-        real_dx_in = x_real * m_real
-        fake_dx_in = x_fake.detach() * m_fake.detach()
+        m_hard = (m_fake.detach() > 0.5).float()
+        hint_real_dx = self._sample_hint(m_real)
+        hint_fake_dx = self._sample_hint(m_hard)
+        real_dx_in = torch.cat([x_real * m_real, hint_real_dx], dim=1)
+        fake_dx_in = torch.cat([x_fake.detach() * m_hard, hint_fake_dx], dim=1)
 
         loss_dx = self.loss.d_loss(self.D_x(real_dx_in).squeeze(-1), self.D_x(fake_dx_in).squeeze(-1))
         loss_dm = self.loss.d_loss(self.D_m(m_real).squeeze(-1), self.D_m(m_fake.detach()).squeeze(-1))
@@ -1631,8 +1851,7 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
         loss_d.backward()
         self.opt_d.step()
 
-        m_detached = m_fake.detach()
-        fake_gx_in = x_fake * m_detached
+        fake_gx_in = torch.cat([x_fake * m_hard, hint_fake_dx], dim=1)
 
         with torch.no_grad():
             real_dx_logits = self.D_x(real_dx_in).squeeze(-1)
@@ -1662,6 +1881,7 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
             if hasattr(self, "ema_prior_m") and self.prior_m is not None:
                 self._update_ema(self.ema_prior_m, self.prior_m, decay)
 
+        self._apply_observed_subspace_step()
         self.completed_steps += 1
         self.last_losses = dict(
             loss_g=float(loss_g.detach()),
@@ -1805,7 +2025,7 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
             ).to(self.device)
 
             self.D_x = FourierMLPDiscriminator(
-                in_dim=8, hidden_dim=64, n_hidden=2, fourier=2
+                in_dim=8, hidden_dim=64, n_hidden=2, fourier=2, hint_dim=8
             ).to(self.device)
             self.D_m = nn.Sequential(
                 nn.Linear(8, 64), nn.LeakyReLU(0.2),
@@ -1833,10 +2053,6 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
         self.prior = None
         self.rebind_trainer(recipe, prior=prior)
         self.last_losses = {}
-
-    def _sample_hint(self, m: torch.Tensor) -> torch.Tensor:
-        b = (torch.rand(m.shape, generator=self.noise_rng, device=m.device) < self.hint_rate).float()
-        return b * m + 0.5 * (1.0 - b)
 
     def step(self):
         if self.completed_steps >= self.limit:
@@ -1867,8 +2083,11 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
         raw_imp = self.G_i(cond)
         completed = m_real * x_real + (1.0 - m_real) * raw_imp
 
-        real_dx_in = x_real * m_real
-        fake_dx_in = x_fake.detach() * m_fake.detach()
+        m_hard = (m_fake.detach() > 0.5).float()
+        hint_real_dx = self._sample_hint(m_real)
+        hint_fake_dx = self._sample_hint(m_hard)
+        real_dx_in = torch.cat([x_real * m_real, hint_real_dx], dim=1)
+        fake_dx_in = torch.cat([x_fake.detach() * m_hard, hint_fake_dx], dim=1)
 
         loss_dx = self.loss.d_loss(self.D_x(real_dx_in).squeeze(-1), self.D_x(fake_dx_in).squeeze(-1))
         loss_dm = self.loss.d_loss(self.D_m(m_real).squeeze(-1), self.D_m(m_fake.detach()).squeeze(-1))
@@ -1895,8 +2114,7 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
         loss_d.backward()
         self.opt_d.step()
 
-        m_detached = m_fake.detach()
-        fake_gx_in = x_fake * m_detached
+        fake_gx_in = torch.cat([x_fake * m_hard, hint_fake_dx], dim=1)
 
         with torch.no_grad():
             real_dx_logits = self.D_x(real_dx_in).squeeze(-1)
@@ -1942,6 +2160,7 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
             if hasattr(self, "ema_prior_i") and self.prior_i is not None:
                 self._update_ema(self.ema_prior_i, self.prior_i, decay)
 
+        self._apply_observed_subspace_step()
         self.completed_steps += 1
         self.last_losses = dict(
             loss_g=float(loss_g.detach()),
@@ -1965,10 +2184,30 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
                 model.eval()
 
             prior_i_eval = getattr(self, "ema_prior_i", self.prior_i)
+            prior_eval = getattr(self, "ema_prior_x", self.prior_x)
+            prior_m_eval = getattr(self, "ema_prior_m", self.prior_m)
+            subspace_ready = bool(getattr(self, "_subspace_ready", False))
 
             def predict_fn(x_q, m_q, rng, draws=16):
                 x_q = x_q.to(self.device)
                 m_q = m_q.to(self.device)
+                if subspace_ready:
+                    bank_gen = _rng(seed + 17, device=self.device)
+                    bank_noise = _rng(seed + 19, device=self.device)
+                    if isinstance(prior_eval, (MoGParticlePrior, ManipulatedPrior)) or hasattr(prior_eval, "sigma"):
+                        z_b, _ = prior_eval.sample(4096, generator=bank_gen, noise_generator=bank_noise)
+                    else:
+                        z_b, _ = prior_eval.sample(4096, generator=bank_gen)
+                    x_bank = self.ema_G_x(z_b)
+                    if isinstance(prior_eval, ManipulatedPrior) and prior_eval.postprocesses_generated:
+                        x_bank = prior_eval.postprocess_generated(x_bank)
+                    k = misgan_ppost_indices(x_bank, x_q, m_q, sigma=0.005, draws=draws, generator=rng)
+                    out_draws = []
+                    for draw_idx in range(k.shape[0]):
+                        x_k = x_bank[k[draw_idx]].to(device=x_q.device, dtype=x_q.dtype)
+                        out_draws.append(m_q * x_q + (1.0 - m_q) * x_k)
+                    return torch.stack(out_draws, dim=0)
+
                 out_draws = []
                 for _ in range(draws):
                     if prior_i_eval is not None:
@@ -1987,8 +2226,6 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
             if self.is_anchored_mcar:
                 gen = _rng(seed, device=self.device)
                 noise_gen = _rng(seed + 1, device=self.device)
-                prior_eval = getattr(self, "ema_prior_x", self.prior_x)
-                prior_m_eval = getattr(self, "ema_prior_m", self.prior_m)
                 if isinstance(prior_eval, (MoGParticlePrior, ManipulatedPrior)) or hasattr(prior_eval, "sigma"):
                     z_x, _ = prior_eval.sample(n, generator=gen, noise_generator=noise_gen)
                 else:

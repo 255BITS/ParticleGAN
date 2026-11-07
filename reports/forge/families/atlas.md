@@ -174,7 +174,7 @@ Complete current Tier 1 measurement in: discriminator_stability. PASS and FAIL a
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [adaptation](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation) | [2/3](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-2) | [0/1](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-4) | [10/16](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
 | [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous) | [3/4](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-2) | [1/6](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-4) | [12/22](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
-| [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability) | [7/11](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | [8/18](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-2) | [0/1](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | [15/30](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability) | [8/24](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
+| [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability) | [7/11](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | [8/18](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-2) | [0/1](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | [15/30](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability) | [12/24](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
 | [formulation_comparison](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison) | [2/3](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-2) | [0/1](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-4) | [10/16](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
 | [host_profile_transfer](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer) | [2/3](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-2) | [0/1](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-4) | [10/16](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
 | [quality_coverage](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage) | [2/3](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-1) | [8/12](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-2) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-3) | [0/0](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-4) | [10/15](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage) | [5/7](atlas.md#cohort-cuda-bc3debd3fa5e-held) |
@@ -304,10 +304,10 @@ Held at this tier (measured and shown, not counted):
 | [grid100_mlp16](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-grid100_mlp16) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | changed since run |
 | [grid100_res16_tanh](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-grid100_res16_tanh) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | changed since run |
 | [infogan_anisotropic_modes](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-infogan_anisotropic_modes) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | recorded definition unavailable |
-| [misgan_block_neural_imputer](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_block_neural_imputer) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | matches recorded run |
-| [misgan_block_recovery](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_block_recovery) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | matches recorded run |
-| [misgan_mcar_p50_recovery](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_mcar_p50_recovery) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | recorded definition unavailable |
-| [misgan_mcar_p80_anchored](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_mcar_p80_anchored) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | recorded definition unavailable |
+| [misgan_block_neural_imputer](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_block_neural_imputer) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | PASS | matches recorded run |
+| [misgan_block_recovery](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_block_recovery) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | PASS | matches recorded run |
+| [misgan_mcar_p50_recovery](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_mcar_p50_recovery) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | PASS | recorded definition unavailable |
+| [misgan_mcar_p80_anchored](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_mcar_p80_anchored) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | PASS | recorded definition unavailable |
 | [pacgan8_grid100](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-pacgan8_grid100) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | recorded definition unavailable |
 | [pacgan_unequal_mass](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-pacgan_unequal_mass) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | recorded definition unavailable |
 | [ring16_bigan_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_bigan_continuous) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | matches recorded run |
@@ -337,10 +337,10 @@ These tests keep running and keep this recipe's recorded result, but they do not
 | [grid100_mlp16](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-grid100_mlp16) | [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | 16-hidden-layer 128-wide LeakyReLU MLP generator on grid100 target held pending passing recipe across all 100 modes. | Count again when one global recipe passes grid100_mlp16 under its unchanged declaration and satisfies all counted requirements. |
 | [grid100_res16_tanh](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-grid100_res16_tanh) | [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | 16-layer residual MLP with S=5.25 bounded tanh head on grid100 target held pending non-saturating passing recipe. | Count again when one global recipe passes grid100_res16_tanh under its unchanged declaration without saturation. |
 | [infogan_anisotropic_modes](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-infogan_anisotropic_modes) | [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | InfoGAN mutual-information auxiliary head Q(c\|x) on 8 anisotropic rotated Gaussian modes testing factor disentanglement. | — |
-| [misgan_block_neural_imputer](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_block_neural_imputer) | [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | 3-pair MisGAN neural imputer on ambiguous single-sensor queries held pending passing recipe without ppost fallback. | Count again when one global recipe passes misgan_block_neural_imputer under its unchanged declaration. |
-| [misgan_block_recovery](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_block_recovery) | [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | 2-pair incomplete-data MisGAN on 8D block problem held pending passing recipe for manifold recovery and ppost imputation. | Count again when one global recipe passes misgan_block_recovery under its unchanged declaration. |
-| [misgan_mcar_p50_recovery](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_mcar_p50_recovery) | [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | Independent coordinatewise MCAR p=0.50 MisGAN on the 8-mode 8D block manifold with data/mask generator pair. | — |
-| [misgan_mcar_p80_anchored](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_mcar_p80_anchored) | [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | Extreme MCAR p=0.80 MisGAN on the 8-mode 8D block manifold with a 10% fully observed anchor subset. | — |
+| [misgan_block_neural_imputer](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_block_neural_imputer) | [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | PASS | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | 3-pair MisGAN neural imputer on ambiguous single-sensor queries held pending passing recipe without ppost fallback. | Count again when one global recipe passes misgan_block_neural_imputer under its unchanged declaration. |
+| [misgan_block_recovery](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_block_recovery) | [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | PASS | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | 2-pair incomplete-data MisGAN on 8D block problem held pending passing recipe for manifold recovery and ppost imputation. | Count again when one global recipe passes misgan_block_recovery under its unchanged declaration. |
+| [misgan_mcar_p50_recovery](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_mcar_p50_recovery) | [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | PASS | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | Independent coordinatewise MCAR p=0.50 MisGAN on the 8-mode 8D block manifold with data/mask generator pair. | — |
+| [misgan_mcar_p80_anchored](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_mcar_p80_anchored) | [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | PASS | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | Extreme MCAR p=0.80 MisGAN on the 8-mode 8D block manifold with a 10% fully observed anchor subset. | — |
 | [pacgan8_grid100](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-pacgan8_grid100) | [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | PacGAN-8 packed critic on the 10x10 100-mode 2D Gaussian grid testing 100/100 mode coverage. | — |
 | [pacgan_unequal_mass](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-pacgan_unequal_mass) | [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | PacGAN-4 packed critic on an unequal-mass 8-mode ring with 20:1 weight ratio between heavy and light modes. | — |
 | [ring16_bigan_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_bigan_continuous) | [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) | FAIL | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | Continuous 2D multimodal joint BiGAN (G, E, D) on 16-Gaussian ring held pending passing generation and reconstruction recipe. | Count again when one global recipe passes ring16_bigan_continuous under its unchanged declaration. |
@@ -893,11 +893,11 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | --- | --- | --- | --- |
 | [grid100_mlp16](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-grid100_mlp16) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | FAIL | changed since run |
 | [grid100_res16_tanh](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-grid100_res16_tanh) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | FAIL | changed since run |
-| [misgan_block_recovery](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_block_recovery) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | FAIL | matches recorded run |
-| [misgan_block_neural_imputer](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_block_neural_imputer) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | FAIL | matches recorded run |
+| [misgan_block_recovery](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_block_recovery) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | PASS | matches recorded run |
+| [misgan_block_neural_imputer](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_block_neural_imputer) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | PASS | matches recorded run |
 | [ring16_bigan_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_bigan_continuous) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | FAIL | matches recorded run |
-| [misgan_mcar_p50_recovery](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_mcar_p50_recovery) | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | FAIL | recorded definition unavailable |
-| [misgan_mcar_p80_anchored](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_mcar_p80_anchored) | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | FAIL | recorded definition unavailable |
+| [misgan_mcar_p50_recovery](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_mcar_p50_recovery) | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | PASS | recorded definition unavailable |
+| [misgan_mcar_p80_anchored](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_mcar_p80_anchored) | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | PASS | recorded definition unavailable |
 | [pacgan_unequal_mass](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-pacgan_unequal_mass) | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | FAIL | recorded definition unavailable |
 | [pacgan8_grid100](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-pacgan8_grid100) | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | FAIL | recorded definition unavailable |
 | [alice_spiral_bigan](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-alice_spiral_bigan) | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | PASS | recorded definition unavailable |
@@ -1369,8 +1369,8 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 | [rotated100_14k](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-rotated100_14k) | diagnostic | FAIL | recorded definition unavailable |
 | [staggered100_14k](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-staggered100_14k) | diagnostic | FAIL | recorded definition unavailable |
 | [target_shift_recovery](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-target_shift_recovery) | diagnostic | FAIL | recorded definition unavailable |
-| [misgan_block_recovery](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_block_recovery) | diagnostic | FAIL | matches recorded run |
-| [misgan_block_neural_imputer](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_block_neural_imputer) | diagnostic | FAIL | matches recorded run |
+| [misgan_block_recovery](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_block_recovery) | diagnostic | PASS | matches recorded run |
+| [misgan_block_neural_imputer](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-misgan_block_neural_imputer) | diagnostic | PASS | matches recorded run |
 | [ring16_bigan_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_bigan_continuous) | diagnostic | FAIL | matches recorded run |
 
 <a name="cohort-cuda-bc3debd3fa5e-prior-ablation-full-suite-v1-tier-2"></a>
@@ -3793,11 +3793,11 @@ Current measurement: particle_cloud prior (sigma 0); policy_cloud_learned_parame
 
 ### misgan_block_neural_imputer
 
-**misgan_block_neural_imputer: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/misgan_block_neural_imputer.json).
+**misgan_block_neural_imputer: PASS**. [Current experiment declaration](../../../configs/forge/tasks/misgan_block_neural_imputer.json).
 
-Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. Failed misgan_block_neural_imputer bounds: acc, acc_lo, missing_std_ratio.
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. Sustained 5/5 terminal checks on misgan_block_neural_imputer.
 
-Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed misgan_block_neural_imputer bounds: acc, acc_lo, missing_std_ratio. [Attempt evidence](../attempt-coverage.json).
+Run attempt: **PASS** (new_attempt; qualification unchanged). Sustained 5/5 terminal checks on misgan_block_neural_imputer. [Attempt evidence](../attempt-coverage.json).
 
 Used by: [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) · [prior-ablation-full-suite-v1 / Tier 1](atlas.md#cohort-cuda-bc3debd3fa5e-prior-ablation-full-suite-v1-tier-1).
 
@@ -3822,11 +3822,11 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 ### misgan_block_recovery
 
-**misgan_block_recovery: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/misgan_block_recovery.json).
+**misgan_block_recovery: PASS**. [Current experiment declaration](../../../configs/forge/tasks/misgan_block_recovery.json).
 
-Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. Failed misgan_block_recovery bounds: acc, acc_lo, hq, mask_tv, mass_tv, modes.
+Test definition: **matches recorded run**. Recorded formulaic display retains its original source and task bindings. Test definition matches the recorded conditions. No current-source qualification is granted. Sustained 5/5 terminal checks on misgan_block_recovery.
 
-Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed misgan_block_recovery bounds: acc, acc_lo, hq, mask_tv, mass_tv, modes. [Attempt evidence](../attempt-coverage.json).
+Run attempt: **PASS** (new_attempt; qualification unchanged). Sustained 5/5 terminal checks on misgan_block_recovery. [Attempt evidence](../attempt-coverage.json).
 
 Used by: [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4) · [prior-ablation-full-suite-v1 / Tier 1](atlas.md#cohort-cuda-bc3debd3fa5e-prior-ablation-full-suite-v1-tier-1).
 
@@ -3853,11 +3853,11 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 ### misgan_mcar_p50_recovery
 
-**misgan_mcar_p50_recovery: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/misgan_mcar_p50_recovery.json).
+**misgan_mcar_p50_recovery: PASS**. [Current experiment declaration](../../../configs/forge/tasks/misgan_mcar_p50_recovery.json).
 
-Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed misgan_mcar_p50_recovery bounds: acc, hq, impute_rmse, mass_tv, modes, off_plane.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Sustained 5/5 terminal checks on misgan_mcar_p50_recovery.
 
-Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed misgan_mcar_p50_recovery bounds: acc, hq, impute_rmse, mass_tv, modes, off_plane. [Attempt evidence](../attempt-coverage.json).
+Run attempt: **PASS** (new_attempt; qualification unchanged). Sustained 5/5 terminal checks on misgan_mcar_p50_recovery. [Attempt evidence](../attempt-coverage.json).
 
 Used by: [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4).
 
@@ -3882,11 +3882,11 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 ### misgan_mcar_p80_anchored
 
-**misgan_mcar_p80_anchored: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/misgan_mcar_p80_anchored.json).
+**misgan_mcar_p80_anchored: PASS**. [Current experiment declaration](../../../configs/forge/tasks/misgan_mcar_p80_anchored.json).
 
-Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed misgan_mcar_p80_anchored bounds: hq, imp_acc, imp_off_plane, impute_rmse, mass_tv, modes.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Sustained 5/5 terminal checks on misgan_mcar_p80_anchored.
 
-Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed misgan_mcar_p80_anchored bounds: hq, imp_acc, imp_off_plane, impute_rmse, mass_tv, modes. [Attempt evidence](../attempt-coverage.json).
+Run attempt: **PASS** (new_attempt; qualification unchanged). Sustained 5/5 terminal checks on misgan_mcar_p80_anchored. [Attempt evidence](../attempt-coverage.json).
 
 Used by: [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4).
 
@@ -4645,9 +4645,9 @@ Current measurement: mog prior (sigma 0.05); public_prior_without_output_noise; 
 
 **pacgan_unequal_mass: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/pacgan_unequal_mass.json).
 
-Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed pacgan_unequal_mass bounds: hq, min_cov_eig_ratio, modes.
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Failed pacgan_unequal_mass bounds: min_cov_eig_ratio.
 
-Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed pacgan_unequal_mass bounds: hq, min_cov_eig_ratio, modes. [Attempt evidence](../attempt-coverage.json).
+Run attempt: **FAIL** (new_attempt; qualification unchanged). Failed pacgan_unequal_mass bounds: min_cov_eig_ratio. [Attempt evidence](../attempt-coverage.json).
 
 Used by: [discriminator_stability / Tier 4](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-4).
 

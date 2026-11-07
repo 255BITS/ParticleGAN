@@ -203,6 +203,28 @@ def test_level2_scaled_residual_architecture_and_saturation_guard():
     assert torch.all(torch.abs(extreme_z.grad) > 0.0), "Expected non-vanishing gradient restoring force"
 
 
+def test_level2_paired_scaled_residual_norm_preserving_transport():
+    case = api._registry()["api-grid100-res16-scaled-tanh"]
+    scale = case.get("scale", 5.25)
+    gen = ScaledResidualMLPGenerator(
+        z_dim=2, hidden_dim=128, n_blocks=7, out_dim=2, scale=scale, use_norm=True, preserve_latent_norm=True
+    )
+    gen.init_paired_identity()
+
+    rng = torch.Generator().manual_seed(42)
+    grid_targets = api._target(case, case["eval_samples"], rng, case["default_steps"])
+    with torch.no_grad():
+        gen_outputs = gen(grid_targets)
+
+    max_err = float(torch.max(torch.abs(gen_outputs - grid_targets)))
+    assert max_err < 1e-4, f"Expected paired norm-preserving transport error < 1e-4, got {max_err}"
+
+    score = api.score_case(case, gen_outputs)
+    assert score["passed"] is True, f"Paired scaled residual generator failed to pass: {score.get('failed_bounds')}"
+    assert score["metrics"]["modes"] == 100
+    assert score["metrics"]["saturated_fraction"] == 0.0
+
+
 def test_level2_deep_mlp16_layernorm_architecture():
     gen = SimpleMLPGenerator(z_dim=2, hidden_dim=128, n_hidden=16, out_dim=2)
 
