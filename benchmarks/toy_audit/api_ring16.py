@@ -588,13 +588,13 @@ class Ring16BiGANFixture:
         else:
             self.recipe.apply_prior_policy(self.prior)
 
-        ema_critic = deepcopy(self.D) if self.recipe.effective_critic_formulation != "bispf" else None
+        self.ema_critic = deepcopy(self.D) if self.recipe.effective_critic_formulation != "bispf" else None
         self.opt_g, self.opt_d = self.recipe.make_optimizers(
             self.G,
             self.D,
             self.prior,
             encoder=self.E,
-            ema_critic=ema_critic,
+            ema_critic=self.ema_critic,
             foreach=False,
             fused=False,
         )
@@ -699,7 +699,7 @@ class Ring16BiGANFixture:
         return score_bigan(samples, target, reconstructed, self.centers, sigma=self.sigma)
 
     def state_dict(self):
-        return {
+        return deepcopy({
             "case_id": self.case_id,
             "seed": self.seed,
             "limit": self.limit,
@@ -708,19 +708,25 @@ class Ring16BiGANFixture:
             "generator": self.G.state_dict(),
             "encoder": self.E.state_dict(),
             "critic": self.D.state_dict(),
+            "ema_critic": self.ema_critic.state_dict() if self.ema_critic is not None else None,
             "prior": self.prior.state_dict(),
+            **self.recipe.prior_regularizer_checkpoint(self.regularizer),
             "opt_g": self.opt_g.state_dict(),
             "opt_d": self.opt_d.state_dict(),
             "noise_rng": self.noise_rng.get_state(),
             "last_losses": self.last_losses,
-        }
+        })
 
     def load_state_dict(self, state):
         self.completed_steps = state["completed_steps"]
         self.G.load_state_dict(state["generator"])
         self.E.load_state_dict(state["encoder"])
         self.D.load_state_dict(state["critic"])
+        if self.ema_critic is not None and state.get("ema_critic") is not None:
+            self.ema_critic.load_state_dict(state["ema_critic"])
         self.prior.load_state_dict(state["prior"])
+        if "prior_regularizer" in state:
+            self.recipe.restore_prior_regularizer(self.regularizer, state.get("prior_regularizer"))
         self.opt_g.load_state_dict(state["opt_g"])
         self.opt_d.load_state_dict(state["opt_d"])
         if "noise_rng" in state:
