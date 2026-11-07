@@ -69,7 +69,7 @@ def test_recorded_overview_keeps_scores_and_held_passes_without_current_source_c
     for family in ("bcap-pure", "bispf", "e22"):
         passed = sum(proof["families"][family]["records"].get(name, {}).get("status") == "PASS" for name in required)
         assert f"{passed}/{len(required)}" in markdown
-    assert "pass 104 of the held or removed view requirements" in markdown
+    assert "pass 120 of the held or removed view requirements" in markdown
     assert "archived display projection" in markdown
     assert "not current-source qualification" in markdown
     assert "### Current-source selected-recipe Tier 1 readouts" not in markdown

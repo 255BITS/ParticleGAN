@@ -69,6 +69,7 @@ STRETCH_TASKS = frozenset(
         "pacgan8_grid100",
         "grid100_mlp16",
         "grid100_res16_tanh",
+        "grid100_res16_scaled_tanh",
     }
 )
 HELD_TIER34_TASKS = frozenset(
@@ -76,6 +77,7 @@ HELD_TIER34_TASKS = frozenset(
         "zero_tanh_rail_escape",
         "grid100_mlp16",
         "grid100_res16_tanh",
+        "grid100_res16_scaled_tanh",
         *STRETCH_FIXTURE_TASKS,
     }
 )
@@ -297,7 +299,11 @@ def _run_grid100_deep_variant(
     import torch
     from benchmarks.toy100 import problems
     from benchmarks.toy100.train import evaluation_steps
-    from benchmarks.toy_audit.api_vectors import ResidualMLPGenerator, score_case
+    from benchmarks.toy_audit.api_vectors import (
+        ResidualMLPGenerator,
+        _apply_scaled_res16_dispersion_step,
+        score_case,
+    )
     from experiments.forge.api import task_formulation_context
     from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator
 
@@ -307,6 +313,7 @@ def _run_grid100_deep_variant(
     dev = torch.device(device)
     tid = task["id"]
     is_res_tanh = tid == "grid100_res16_tanh"
+    is_scaled_res_tanh = tid == "grid100_res16_scaled_tanh"
     case_meta = {
         "kind": tid,
         "problem": "grid100",
@@ -316,14 +323,19 @@ def _run_grid100_deep_variant(
     }
 
     task_for_ctx = deepcopy(task)
+    fourier = int(task["execution"].get("model", {}).get("fourier", 3 if is_scaled_res_tanh else 2))
     task_for_ctx["execution"]["model"] = {"hidden": 128, "layers": 3, "fourier": 2}
     context = task_formulation_context(cand_adapted, task_for_ctx, {"seed": seed}, device=device, root=root)
 
-    if is_res_tanh:
+    if is_scaled_res_tanh:
+        g = ResidualMLPGenerator(
+            context.recipe.z_dim, 128, 7, 2, scale=5.25, use_norm=True, preserve_latent_norm=True
+        ).to(dev)
+    elif is_res_tanh:
         g = ResidualMLPGenerator(context.recipe.z_dim, 128, 7, 2, scale=5.25).to(dev)
     else:
         g = SimpleMLPGenerator(context.recipe.z_dim, 128, 16, 2).to(dev)
-    d = SimpleMLPDiscriminator(2, 128, 3, 2).to(dev)
+    d = SimpleMLPDiscriminator(2, 128, 3, fourier).to(dev)
     context.initialize(g, component="generator")
     context.initialize(d, component="discriminator")
     if is_res_tanh:
@@ -331,6 +343,8 @@ def _run_grid100_deep_variant(
         for block in g.blocks:
             torch.nn.init.zeros_(block.linear2.weight)
             torch.nn.init.zeros_(block.linear2.bias)
+    elif is_scaled_res_tanh:
+        g.init_paired_identity()
 
     steps = int(task["execution"].get("steps", 7000))
     batch_size = int(task["execution"].get("resources", {}).get("batch_size", 2048))
@@ -346,6 +360,8 @@ def _run_grid100_deep_variant(
     for step in range(1, steps + 1):
         real = problems.sample_real("grid100", batch_size, device=dev, generator=data_rng)
         trainer.step(real)
+        if is_scaled_res_tanh:
+            _apply_scaled_res16_dispersion_step(trainer, real, step, steps)
         if step in eval_set and step >= steps - eval_every * 5:
             with torch.no_grad():
                 sample_rng = torch.Generator(device=dev).manual_seed(713 + step)
@@ -562,7 +578,7 @@ def execute_single_task(
         res = _run_ddgan_task(root, cand_adapted, task, device, attempt_dir)
     elif task_name == "zero_tanh_rail_escape":
         res = _run_zero_tanh_rail_escape(root, cand_adapted, task, device)
-    elif task_name in {"grid100_mlp16", "grid100_res16_tanh"}:
+    elif task_name in {"grid100_mlp16", "grid100_res16_tanh", "grid100_res16_scaled_tanh"}:
         res = _run_grid100_deep_variant(root, cand_adapted, task, device)
     elif task_name in STRETCH_FIXTURE_TASKS:
         res = _run_misgan_or_bigan_task(root, cand_adapted, task, device)
@@ -776,12 +792,13 @@ def ensure_formulaic_attempt_coverage(
         ] = rec
 
     selected_keys_by_pair: dict[tuple[str, str], str] = {}
+    standalone_items: list[dict[str, Any]] = []
     for family, selection, family_tasks in selected:
         cid = selection["candidate_id"]
         crev = selection["candidate_revision"]
         sdig = selection["bindings"]["source_digest"]
         for task_name in family_tasks:
-            if task_name not in all_tasks:
+            if task_name not in all_tasks or task_name.startswith("precision_gaussian_"):
                 continue
             card = all_tasks[task_name]
             existing_rec = existing_unscoped_by_pair.get((family, cid, crev, sdig, task_name))
@@ -816,6 +833,26 @@ def ensure_formulaic_attempt_coverage(
                     "status": "PENDING",
                     "attempted": False,
                 }
+        if task_filter is not None:
+            for extra_task in sorted(task_filter):
+                if (family, extra_task) in selected_keys_by_pair or extra_task not in all_tasks:
+                    continue
+                extra_card = all_tasks[extra_task]
+                extra_key = attempt_coverage.identity(
+                    sdig,
+                    crev,
+                    extra_task,
+                    task_execution_fingerprint(extra_card),
+                    task_evaluation_fingerprint(extra_card),
+                )
+                standalone_items.append(
+                    {
+                        "key": extra_key,
+                        "family": family,
+                        "candidate_id": cid,
+                        "task": extra_task,
+                    }
+                )
 
     for existing_key in list(jobs.keys()):
         j_item = jobs[existing_key]
@@ -900,6 +937,18 @@ def ensure_formulaic_attempt_coverage(
             }
         )
 
+    for s_item in standalone_items:
+        res_file = attempt_state_root / "attempts" / s_item["key"] / "result.json"
+        if force:
+            res_file.unlink(missing_ok=True)
+        elif res_file.is_file():
+            try:
+                if read_json(res_file).get("status") in {"PASS", "FAIL"}:
+                    continue
+            except (OSError, ValueError):
+                pass
+        to_execute.append(s_item)
+
     # Resolve continuation tasks whose parent is already known to be FAIL, and order parents before children
     parent_tasks = [item for item in to_execute if item["task"] not in CONTINUATION_PARENTS]
     child_tasks = [item for item in to_execute if item["task"] in CONTINUATION_PARENTS]
@@ -917,22 +966,23 @@ def ensure_formulaic_attempt_coverage(
                 if res_file.is_relative_to(root)
                 else str(res_file)
             )
-            jobs[key].update(
-                status=res["status"],
-                attempted=True,
-                origin="new_attempt",
-                diagnostic=True,
-                reason=res.get("reason", f"Executed {item['task']}: {res['status']}."),
-                evidence=ev_path,
-            )
-            if res.get("execution_seconds") is not None:
-                jobs[key]["seconds"] = res["execution_seconds"]
-            jobs[key].pop("original_attempt", None)
-            jobs[key].pop("block_kind", None)
-            harvested[(item["family"], item["task"])] = {
-                "status": res["status"],
-                "reason": jobs[key]["reason"],
-            }
+            if key in jobs:
+                jobs[key].update(
+                    status=res["status"],
+                    attempted=True,
+                    origin="new_attempt",
+                    diagnostic=True,
+                    reason=res.get("reason", f"Executed {item['task']}: {res['status']}."),
+                    evidence=ev_path,
+                )
+                if res.get("execution_seconds") is not None:
+                    jobs[key]["seconds"] = res["execution_seconds"]
+                jobs[key].pop("original_attempt", None)
+                jobs[key].pop("block_kind", None)
+                harvested[(item["family"], item["task"])] = {
+                    "status": res["status"],
+                    "reason": jobs[key]["reason"],
+                }
 
     for item in child_tasks:
         fam = item["family"]
@@ -1003,6 +1053,7 @@ def _run_parallel_batches(
         if t in {
             "grid100_mlp16",
             "grid100_res16_tanh",
+            "grid100_res16_scaled_tanh",
             "misgan_block_neural_imputer",
             "misgan_block_recovery",
             "misgan_mcar_p50_recovery",

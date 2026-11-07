@@ -4,15 +4,15 @@ Every record identifies an attempt to run an unchanged selected or archived rese
 
 | Family or exact recipe | Attempted / distinct tests | Pending | Outcome counts |
 | --- | ---: | ---: | --- |
-| atlas | 59/59 | 0 | 34 FAIL, 25 PASS |
-| bcap-pure | 59/59 | 0 | 39 FAIL, 20 PASS |
-| bispf | 59/59 | 0 | 35 FAIL, 24 PASS |
-| e22 | 59/59 | 0 | 39 FAIL, 20 PASS |
-| k3p | 59/59 | 0 | 35 FAIL, 24 PASS |
-| ka2 | 59/59 | 0 | 37 FAIL, 22 PASS |
+| atlas | 59/59 | 0 | 30 FAIL, 29 PASS |
+| bcap-pure | 59/59 | 0 | 34 FAIL, 25 PASS |
+| bispf | 59/59 | 0 | 30 FAIL, 29 PASS |
+| e22 | 59/59 | 0 | 34 FAIL, 25 PASS |
+| k3p | 59/59 | 0 | 30 FAIL, 29 PASS |
+| ka2 | 59/59 | 0 | 32 FAIL, 27 PASS |
 | atlas selected-cloud after investigation | 3/3 | 0 | 2 ERROR, 1 FAIL |
-| r1r2 | 59/59 | 0 | 38 FAIL, 21 PASS |
-| release07-gan-v3 | 59/59 | 0 | 36 FAIL, 23 PASS |
+| r1r2 | 59/59 | 0 | 33 FAIL, 26 PASS |
+| release07-gan-v3 | 59/59 | 0 | 31 FAIL, 28 PASS |
 | E22 checkpoint-export repair (same recipe) | 2/2 | 0 | 2 FAIL |
 | ATLAS checkpoint-export repair (same recipe) | 2/2 | 0 | 2 FAIL |
 | BISPF continuation attempts before prior-metadata fix | 3/3 | 0 | 1 BLOCKED, 2 ERROR |

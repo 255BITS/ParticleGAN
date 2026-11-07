@@ -28,10 +28,10 @@ One row is **one test under one exact protocol**. One column is a complete recip
 
 ## Selected-recipe matrix
 
-Indexed: **1433 test/protocol rows**, **565 complete recipe/source/runtime identities**; below: **321 rows**, **9 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
+Indexed: **1434 test/protocol rows**, **565 complete recipe/source/runtime identities**; below: **322 rows**, **9 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
 
 <details>
-<summary>Open all 321 selected-protocol rows and their exact recipe identities</summary>
+<summary>Open all 322 selected-protocol rows and their exact recipe identities</summary>
 
 | Recipe | Full identity |
 | --- | --- |
@@ -116,6 +116,7 @@ Indexed: **1433 test/protocol rows**, **565 complete recipe/source/runtime ident
 | grid100_policy_cloud_coverage_as_served_v1<br>unmeasured declaration<br>`071ca2808808` | [matches](../../configs/forge/task-variants/policy_cloud_coverage_as_served_v1/grid100_policy_cloud_coverage_as_served_v1.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | grid100_policy_cloud_coverage_v1<br>unmeasured declaration<br>`15dd96808cd3` | [matches](../../configs/forge/task-variants/policy_cloud_coverage_v1/grid100_policy_cloud_coverage_v1.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | grid100_release07_cloud_named_v1<br>unmeasured declaration<br>`1b1eadaff30e` | [matches](../../configs/forge/tasks/grid100_release07_cloud_named_v1.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| grid100_res16_scaled_tanh<br>unmeasured declaration<br>`f161f9af03f6` | [matches](../../configs/forge/tasks/grid100_res16_scaled_tanh.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | grid100_res16_tanh<br>unmeasured declaration<br>`c413f1c7a613` | [matches](../../configs/forge/tasks/grid100_res16_tanh.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | grid100_res16_tanh<br>seed 0 · 7000 updates · source 2e8a97a0aa<br>`fcec61ef3c47` | [CHANGED](../../configs/forge/tasks/grid100_res16_tanh.json) | 0/9 | NO INDEXED WITNESS | [BLOCKED](technique-evidence/4eaeb2e733970936d752120f26b8987bbb676615ef791ef415d1740480eae5cf.json) | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | img_bars4<br>seed 0 · 600 updates · source a5eafc73e4<br>`09a7d60b2b2a` | [matches](../../configs/forge/tasks/img_bars4.json) | 0/9 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | [BLOCKED](technique-evidence/29979e41c9c05e3304156cf4a43ed9c9dda6953bffd0fb47096fe47d6b8af13a.json) | NOT RUN | NOT RUN | NOT RUN | NOT RUN |

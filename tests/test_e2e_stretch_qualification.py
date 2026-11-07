@@ -1191,3 +1191,99 @@ def test_tier4_e2e_grid100_deep_generator_gradient_and_rail_qualification():
     assert "metrics" in score
     assert "saturated_fraction" in score["metrics"]
     assert score["metrics"]["saturated_fraction"] <= 0.001
+
+
+@pytest.mark.tier4
+def test_tier4_e2e_bigan_default_recipe_k3p_and_ka2_support():
+    """Verify continuous BiGAN cases default to k3p with ALICE cycle_weight=2.0 and support (k3p, ka2)."""
+    from benchmarks.toy_audit.api_ring16 import (
+        ALICESpiralBiGANFixture,
+        _alice_spiral_case,
+        _bigan_case,
+        build_case as build_case_ring16,
+    )
+
+    for case_fn in (_bigan_case, _alice_spiral_case):
+        meta = case_fn()
+        assert meta["default_recipe"] == "k3p"
+        assert tuple(meta["supported_recipes"]) == ("k3p", "ka2")
+
+    f_ring = build_case_ring16("api-ring16-bigan-continuous", max_steps=4)
+    assert f_ring.recipe.name == "k3p"
+    assert f_ring.cycle_weight == 2.0
+    assert f_ring.D.fourier == 3
+    assert f_ring.D.net[0].in_features == 16
+
+    f_alice = ALICESpiralBiGANFixture(max_steps=4, device="cpu", seed=0)
+    assert f_alice.recipe.name == "k3p"
+    assert f_alice.cycle_weight == 2.0
+    assert f_alice.D.fourier == 0
+    assert f_alice.D.net[0].in_features == 4
+
+
+@pytest.mark.tier4
+def test_tier4_e2e_grid100_res16_scaled_tanh_paired_task():
+    """Verify paired grid100_res16_scaled_tanh task card, deterministic_orthogonal_ hook, and multi-step execution."""
+    import json
+    from pathlib import Path
+    from particlegan.init import deterministic_orthogonal_
+
+    root = Path(__file__).resolve().parents[1]
+    card = json.loads((root / "configs/forge/tasks/grid100_res16_scaled_tanh.json").read_text())
+    assert card["id"] == "grid100_res16_scaled_tanh"
+    assert card["execution"]["model"]["architecture"] == "scaled_residual_mlp"
+    assert card["execution"]["model"]["output_activation"] == "tanh_rail_guard"
+
+    fixture = api_vectors.build_case("api-grid100-res16-scaled-tanh", device="cpu", seed=0, recipe_name="k3p", max_steps=1)
+    assert isinstance(fixture.trainer.G, ScaledResidualMLPGenerator)
+    assert fixture.trainer.G.preserve_latent_norm is True
+
+    # Verify deterministic_orthogonal_ preserves paired identity frame without mutating buffers
+    g = ScaledResidualMLPGenerator(2, 128, 7, 2, scale=5.25, preserve_latent_norm=True)
+    deterministic_orthogonal_(g, seed=0)
+    z_in = torch.linspace(-2.0, 2.0, 32).reshape(16, 2)
+    with torch.no_grad():
+        x_out = g(z_in)
+    assert torch.isfinite(x_out).all()
+    assert float((x_out.abs() >= 0.99 * 5.25).float().mean()) <= 0.001
+
+
+@pytest.mark.tier4
+def test_tier4_e2e_misgan_hint_conditioning_without_temperature_annealing():
+    """Verify MisGAN D_x uses 8D GAIN hint conditioning and static tau=0.66 without temperature annealing."""
+    f_rec = MisGANRecoveryFixture(max_steps=6, device="cpu", seed=0)
+    f_imp = MisGANNeuralImputerFixture(max_steps=6, device="cpu", seed=0)
+
+    for fix in (f_rec, f_imp):
+        assert fix.D_x.in_dim == 8
+        assert fix.D_x.hint_dim == 8
+        assert fix.D_x.net[0].in_features == 48
+        assert fix.hint_rate == 0.50
+        tau_head = next(m for m in fix.G_m.modules() if isinstance(m, TemperatureSigmoid))
+        assert math.isclose(tau_head.temperature, 0.66, rel_tol=1e-6)
+        for _ in range(4):
+            fix.step()
+        # Temperature must remain strictly static (no annealing)
+        assert math.isclose(tau_head.temperature, 0.66, rel_tol=1e-6)
+
+
+@pytest.mark.tier4
+def test_tier4_e2e_pacgan_unequal_mass_local_knn_repulsion():
+    """Verify PacGANUnequalMassFixture applies local k-NN intra-mode dispersion and lifts min_cov_eig_ratio >= 0.20."""
+    fixture = PacGANUnequalMassFixture(max_steps=100, device="cpu", seed=0, recipe_name="bcap")
+    assert fixture.knn_repulsion_weight > 0.0
+    for _ in range(6):
+        fixture.step()
+    assert fixture._emp_peaks is not None
+    assert len(fixture._emp_peaks) == 5
+    fixture.step_count = 60
+    fixture._apply_local_knn_particle_dispersion()
+    obs = fixture.observe(n=2048, seed=42)
+    assert obs["metrics"]["modes"] == 5
+    assert obs["metrics"]["min_cov_eig_ratio"] >= 0.20
+
+
+
+
+
+

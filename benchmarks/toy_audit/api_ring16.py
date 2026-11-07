@@ -75,7 +75,8 @@ def _bigan_case():
         "default_steps": task["execution"]["steps"],
         "batch_size": task["execution"]["host_definition"]["batch"],
         "eval_samples": task["evaluation"]["eval_samples"],
-        "default_recipe": "bcap",
+        "default_recipe": "k3p",
+        "supported_recipes": ["k3p", "ka2"],
         "terminal_observations": 5,
         "evaluation_observations": 24,
         "protocol_seed": 0,
@@ -102,7 +103,8 @@ def _alice_spiral_case():
         "default_steps": task["execution"]["steps"],
         "batch_size": task["execution"]["host_definition"]["batch"],
         "eval_samples": task["evaluation"]["eval_samples"],
-        "default_recipe": "bispf",
+        "default_recipe": "k3p",
+        "supported_recipes": ["k3p", "ka2"],
         "terminal_observations": 5,
         "evaluation_observations": 24,
         "protocol_seed": 0,
@@ -486,12 +488,14 @@ class Ring16BiGANFixture:
     )
     sigma = 0.10
     cycle_weight = 2.0
+    default_recipe = "k3p"
+    supported_recipes = ("k3p", "ka2")
 
     def __init__(
         self,
         case=None,
         *,
-        recipe_name="bispf",
+        recipe_name="k3p",
         recipe=None,
         prior=None,
         device="cpu",
@@ -542,13 +546,13 @@ class Ring16BiGANFixture:
         init.deterministic_orthogonal_(self.D, seed=self.seed + 3)
 
         self.prior = None
-        self.rebind_trainer(recipe if recipe is not None else (recipe_name or "bispf"), prior=prior)
+        self.rebind_trainer(recipe if recipe is not None else (recipe_name or "k3p"), prior=prior)
         self.last_losses = {}
 
     def _resolve_recipe(self, recipe_or_name):
         if isinstance(recipe_or_name, Recipe):
             return recipe_or_name
-        name = recipe_or_name or "bispf"
+        name = recipe_or_name or "k3p"
         base = get_recipe(name)
         overrides = dict(
             batch_size=self.batch_size,
@@ -727,6 +731,8 @@ class Ring16BiGANFixture:
 class ALICESpiralBiGANFixture(Ring16BiGANFixture):
     sigma = 0.06
     cycle_weight = 2.0
+    default_recipe = "k3p"
+    supported_recipes = ("k3p", "ka2")
     theta_min = 0.5 * math.pi
     theta_max = 3.5 * math.pi
     r0 = 0.5
@@ -736,7 +742,7 @@ class ALICESpiralBiGANFixture(Ring16BiGANFixture):
         self,
         case=None,
         *,
-        recipe_name="bispf",
+        recipe_name="k3p",
         recipe=None,
         prior=None,
         device="cpu",
@@ -788,7 +794,7 @@ class ALICESpiralBiGANFixture(Ring16BiGANFixture):
         init.deterministic_orthogonal_(self.D, seed=self.seed + 3)
 
         self.prior = None
-        self.rebind_trainer(recipe if recipe is not None else (recipe_name or "bispf"), prior=prior)
+        self.rebind_trainer(recipe if recipe is not None else (recipe_name or "k3p"), prior=prior)
         self.last_losses = {}
 
     def sample_target(self, n, generator=None):
@@ -815,9 +821,9 @@ class ALICESpiralBiGANFixture(Ring16BiGANFixture):
 
 def build_case(id, *, device="cpu", seed=0, recipe_name=None, max_steps=None):
     if id == BIGAN_CASE_ID:
-        return Ring16BiGANFixture(_bigan_case(), device=device, seed=seed, recipe_name=recipe_name or "bispf", max_steps=max_steps)
+        return Ring16BiGANFixture(_bigan_case(), device=device, seed=seed, recipe_name=recipe_name or "k3p", max_steps=max_steps)
     if id == ALICE_SPIRAL_CASE_ID:
-        return ALICESpiralBiGANFixture(_alice_spiral_case(), device=device, seed=seed, recipe_name=recipe_name or "bispf", max_steps=max_steps)
+        return ALICESpiralBiGANFixture(_alice_spiral_case(), device=device, seed=seed, recipe_name=recipe_name or "k3p", max_steps=max_steps)
     if id == CURRENT_CASE_ID:
         return RingSmokeFixture(list_cases()[0], device=device, seed=seed, recipe_name=recipe_name, max_steps=max_steps)
     if id != CASE_ID:

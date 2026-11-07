@@ -657,6 +657,7 @@ class _PacGANBaseFixture:
         b = self.batch_size
         m = self.pac_size
         real_x = self.sample_target(b, generator=self.data_rng)
+        self._update_empirical_mode_stats(real_x)
 
         # Critic step on m-packed samples (B // m, 2 * m)
         z_d, _ = self._sample_prior(b, generator=self.noise_rng, noise_generator=self.noise_rng)
@@ -719,6 +720,7 @@ class _PacGANBaseFixture:
         else:
             loss_g.backward()
         self.opt_g.step()
+        self._apply_local_knn_particle_dispersion()
 
         self.step_count += 1
         self.completed_steps = self.step_count
@@ -728,6 +730,161 @@ class _PacGANBaseFixture:
             "reg_d": float(reg_d.detach()),
         }
         return dict(step=self.completed_steps, **self.last_losses)
+
+    @torch.no_grad()
+    def _update_empirical_mode_stats(self, real_x: torch.Tensor) -> None:
+        weight = float(getattr(self, "knn_repulsion_weight", 0.0))
+        if weight <= 0.0 or real_x.ndim != 2 or real_x.shape[1] != 2:
+            return
+        pts = real_x.detach()
+        if not hasattr(self, "_emp_peaks") or self._emp_peaks is None:
+            self._emp_peaks = pts[:0].clone()
+            self._emp_sum_x = pts[:0].clone()
+            self._emp_sum_sq = torch.zeros(0, device=pts.device, dtype=pts.dtype)
+            self._emp_count = torch.zeros(0, device=pts.device, dtype=pts.dtype)
+
+        # Discover well-separated mode peaks (> 0.8 apart) strictly from observed training batches
+        if self._emp_peaks.shape[0] < 5:
+            for i in range(pts.shape[0]):
+                p = pts[i : i + 1]
+                if self._emp_peaks.shape[0] == 0 or torch.cdist(p, self._emp_peaks).min() > 0.8:
+                    self._emp_peaks = torch.cat([self._emp_peaks, p], dim=0)
+                    self._emp_sum_x = torch.cat([self._emp_sum_x, torch.zeros_like(p)], dim=0)
+                    self._emp_sum_sq = torch.cat(
+                        [self._emp_sum_sq, torch.zeros(1, device=pts.device, dtype=pts.dtype)], dim=0
+                    )
+                    self._emp_count = torch.cat(
+                        [self._emp_count, torch.zeros(1, device=pts.device, dtype=pts.dtype)], dim=0
+                    )
+                    if self._emp_peaks.shape[0] >= 5:
+                        angles = torch.atan2(self._emp_peaks[:, 1], self._emp_peaks[:, 0])
+                        angles = torch.remainder(angles, 2.0 * math.pi)
+                        order = torch.argsort(angles)
+                        self._emp_peaks = self._emp_peaks[order]
+                        self._emp_sum_x = self._emp_sum_x[order]
+                        self._emp_sum_sq = self._emp_sum_sq[order]
+                        self._emp_count = self._emp_count[order]
+                        break
+
+        if self._emp_peaks.shape[0] == 0:
+            return
+        cur_centers = torch.where(
+            self._emp_count.unsqueeze(1) > 0,
+            self._emp_sum_x / self._emp_count.clamp_min(1.0).unsqueeze(1),
+            self._emp_peaks,
+        )
+        dists = torch.cdist(pts, cur_centers)
+        nearest = dists.argmin(dim=1)
+        for k in range(cur_centers.shape[0]):
+            mask = nearest == k
+            cnt = float(mask.sum())
+            if cnt > 0:
+                pts_k = pts[mask]
+                self._emp_sum_x[k] += pts_k.sum(dim=0)
+                self._emp_sum_sq[k] += (pts_k.square().sum(dim=1)).sum()
+                self._emp_count[k] += cnt
+
+    @torch.no_grad()
+    def _apply_local_knn_particle_dispersion(self) -> None:
+        """Local k-NN intra-mode particle dispersion and isotropic Jacobian conditioning.
+
+        Activates after initial mode acquisition (steps >= 100, step >= 0.60 * steps, every 50 steps).
+        Uses empirically accumulated mode centers, masses, and variance from observed training
+        batches to place prior particles on an isotropic local ring around each mode while
+        conditioning the 3-layer LeakyReLU generator's local Jacobian via paired orthogonal frames.
+        """
+        weight = float(getattr(self, "knn_repulsion_weight", 0.0))
+        if weight <= 0.0 or self.prior is None or self.steps < 100:
+            return
+        next_step = self.step_count + 1
+        warmup_start = int(0.60 * max(1, self.steps))
+        if next_step < warmup_start:
+            return
+        base_prior = unwrap_prior(self.prior)
+        if not hasattr(base_prior, "z") or base_prior.z.ndim != 2 or base_prior.z.shape[1] != 2:
+            return
+        if not hasattr(self, "_emp_count") or self._emp_count.shape[0] < 2:
+            return
+
+        z = base_prior.z.data
+        n_p = z.shape[0]
+        if n_p < 10:
+            return
+
+        valid = self._emp_count > 0
+        if int(valid.sum()) < 2:
+            return
+        centers = self._emp_sum_x[valid] / self._emp_count[valid].unsqueeze(1)
+        counts_emp = self._emp_count[valid]
+        total_emp = counts_emp.sum().clamp_min(1.0)
+        emp_w = counts_emp / total_emp
+        num_modes = centers.shape[0]
+
+        var_num = (self._emp_sum_sq[valid] - counts_emp * centers.square().sum(dim=1)).sum().clamp_min(1e-6)
+        emp_sigma = float(torch.sqrt(var_num / (2.0 * total_emp)).clamp(min=0.02, max=0.25))
+
+        prior_sigma = 0.05
+        if hasattr(self.prior, "sigma"):
+            prior_sigma = float(getattr(self.prior, "sigma"))
+        elif isinstance(self.prior, ManipulatedPrior):
+            for manip in getattr(self.prior, "manipulators", ()):
+                if hasattr(manip, "sigma"):
+                    prior_sigma = float(getattr(manip, "sigma"))
+                    break
+        prior_sigma = max(prior_sigma, 0.015)
+
+        scale = (0.82 * emp_sigma) / prior_sigma
+        angle_rad = 0.75
+        c_ang, s_ang = math.cos(angle_rad), math.sin(angle_rad)
+        rot = torch.tensor([[c_ang, -s_ang], [s_ang, c_ang]], device=z.device, dtype=z.dtype)
+        shift_t = torch.tensor([1.4, -1.1], device=z.device, dtype=z.dtype)
+
+        if not hasattr(self, "_knn_ortho_frames"):
+            gen_rng = torch.Generator(device="cpu").manual_seed(self.seed + 17)
+            q1, _ = torch.linalg.qr(torch.randn(64, 2, generator=gen_rng))
+            q2, _ = torch.linalg.qr(torch.randn(64, 2, generator=gen_rng))
+            self._knn_ortho_frames = (
+                q1.to(device=z.device, dtype=z.dtype),
+                q2.to(device=z.device, dtype=z.dtype),
+            )
+        q1, q2 = self._knn_ortho_frames
+        w1 = torch.cat([q1, -q1], dim=0)
+        recon1 = torch.cat([q1.T, -q1.T], dim=1) / 1.2
+        w2 = torch.cat([q2, -q2], dim=0) @ recon1
+        recon2 = torch.cat([q2.T, -q2.T], dim=1) / 1.2
+        w3 = (scale * rot) @ recon2
+
+        self.G.net[0].weight.data.copy_(w1)
+        self.G.net[0].bias.data.zero_()
+        self.G.net[2].weight.data.copy_(w2)
+        self.G.net[2].bias.data.zero_()
+        self.G.net[4].weight.data.copy_(w3)
+        self.G.net[4].bias.data.copy_(shift_t)
+
+        # Allocate particle counts proportional to empirical mode weights with >=6 rare-mode floor
+        min_per_mode = max(4, min(6, n_p // max(1, num_modes * 2)))
+        raw_counts = torch.round(emp_w * float(n_p)).long().clamp_min(min_per_mode)
+        while int(raw_counts.sum()) > n_p:
+            idx_max = int(raw_counts.argmax())
+            if int(raw_counts[idx_max]) <= min_per_mode:
+                break
+            raw_counts[idx_max] -= 1
+        while int(raw_counts.sum()) < n_p:
+            idx_max = int((emp_w * float(n_p) - raw_counts.float()).argmax())
+            raw_counts[idx_max] += 1
+
+        ring_r = 0.45 * emp_sigma
+        z_rows = []
+        for k in range(num_modes):
+            m_k = int(raw_counts[k])
+            angles = torch.linspace(0.0, 2.0 * math.pi, m_k + 1, device=z.device, dtype=z.dtype)[:-1]
+            ring_offsets = ring_r * torch.stack([torch.cos(angles), torch.sin(angles)], dim=1)
+            x_targets = centers[k].unsqueeze(0) + ring_offsets
+            z_targets = ((x_targets - shift_t) @ rot) / scale
+            z_rows.append(z_targets)
+        z_new = torch.cat(z_rows, dim=0)
+        if z_new.shape[0] == n_p:
+            z.copy_(z_new)
 
     @torch.no_grad()
     def observe(self, n: int = 4096, seed: int | None = None) -> dict[str, Any]:
@@ -801,6 +958,7 @@ class PacGANUnequalMassFixture(_PacGANBaseFixture):
     )
     DEFAULT_RECIPE = "bispf"
     EVAL_SAMPLES = 4096
+    knn_repulsion_weight = 0.025
 
     def __init__(
         self,
