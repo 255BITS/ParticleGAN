@@ -133,7 +133,7 @@ Selection: recorded_source_measurement. Recorded source-bound original measureme
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [adaptation](bispf.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [9/12](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-4) | [12/16](bispf.md#cohort-cuda-1bf9d7d34422-adaptation) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
 | [clockfree_continuous](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [4/4](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [9/12](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [2/6](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-4) | [15/22](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
-| [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [7/11](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [10/18](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [1/1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | [18/30](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [8/24](bispf.md#cohort-cuda-1bf9d7d34422-held) |
+| [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [7/11](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [10/18](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [1/1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | [18/30](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [9/25](bispf.md#cohort-cuda-1bf9d7d34422-held) |
 | [formulation_comparison](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [3/3](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [9/12](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [1/1](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-4) | [13/16](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
 | [host_profile_transfer](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [3/3](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [9/12](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [1/1](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-4) | [13/16](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
 | [quality_coverage](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [3/3](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [9/12](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [0/0](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-4) | [12/15](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [0/7](bispf.md#cohort-cuda-1bf9d7d34422-held) |
@@ -261,6 +261,7 @@ Held at this tier (measured and shown, not counted):
 | [cramer_energy_overlap](bispf.md#cohort-cuda-1bf9d7d34422-experiment-cramer_energy_overlap) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | PASS | recorded definition unavailable |
 | [cyclegan_unpaired_constellation](bispf.md#cohort-cuda-1bf9d7d34422-experiment-cyclegan_unpaired_constellation) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | PASS | recorded definition unavailable |
 | [grid100_mlp16](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100_mlp16) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | FAIL | recorded definition unavailable |
+| [grid100_res16_scaled_tanh](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100_res16_scaled_tanh) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | PASS | recorded definition unavailable |
 | [grid100_res16_tanh](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100_res16_tanh) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | FAIL | recorded definition unavailable |
 | [infogan_anisotropic_modes](bispf.md#cohort-cuda-1bf9d7d34422-experiment-infogan_anisotropic_modes) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | FAIL | recorded definition unavailable |
 | [misgan_block_neural_imputer](bispf.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_neural_imputer) | [discriminator_stability](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | PASS | recorded definition unavailable |
@@ -294,6 +295,7 @@ These tests keep running and keep this recipe's recorded result, but they do not
 | [cramer_energy_overlap](bispf.md#cohort-cuda-1bf9d7d34422-experiment-cramer_energy_overlap) | [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | PASS | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | Bellemare CramerGAN 16D critic embedding with surrogate energy potential on a tight 25-mode 5x5 Gaussian grid. | — |
 | [cyclegan_unpaired_constellation](bispf.md#cohort-cuda-1bf9d7d34422-experiment-cyclegan_unpaired_constellation) | [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | PASS | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | Unpaired CycleGAN/DiscoGAN dual generators and cycle-consistency on rotated and scaled 8-mode constellations. | — |
 | [grid100_mlp16](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100_mlp16) | [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | FAIL | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | 16-hidden-layer 128-wide LeakyReLU MLP generator on grid100 target held pending passing recipe across all 100 modes. | Count again when one global recipe passes grid100_mlp16 under its unchanged declaration and satisfies all counted requirements. |
+| [grid100_res16_scaled_tanh](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100_res16_scaled_tanh) | [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | PASS | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | Paired 16-layer ScaledResidualMLPGenerator + TanhRailGuard on the 10x10 100-mode Gaussian grid isolating residual depth transport from unscaled initialization explosion. | — |
 | [grid100_res16_tanh](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100_res16_tanh) | [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | FAIL | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | 16-layer residual MLP with S=5.25 bounded tanh head on grid100 target held pending non-saturating passing recipe. | Count again when one global recipe passes grid100_res16_tanh under its unchanged declaration without saturation. |
 | [infogan_anisotropic_modes](bispf.md#cohort-cuda-1bf9d7d34422-experiment-infogan_anisotropic_modes) | [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | FAIL | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | InfoGAN mutual-information auxiliary head Q(c\|x) on 8 anisotropic rotated Gaussian modes testing factor disentanglement. | — |
 | [misgan_block_neural_imputer](bispf.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_neural_imputer) | [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | PASS | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | 3-pair MisGAN neural imputer on ambiguous single-sensor queries held pending passing recipe without ppost fallback. | Count again when one global recipe passes misgan_block_neural_imputer under its unchanged declaration. |
@@ -853,9 +855,9 @@ No experiments assigned.
 
 ## discriminator_stability
 
-**discriminator_stability — revision 15**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
+**discriminator_stability — revision 16**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **11 / 18 / 1 / 0**. Held counts (measured and shown, not counted): **2 / 7 / 1 / 14**. Its highest tier, Tier 4, has only held tests, so while they are held the view never shows PASS: a recipe that passes every counted tier gets HELD.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **11 / 18 / 1 / 0**. Held counts (measured and shown, not counted): **2 / 7 / 1 / 15**. Its highest tier, Tier 4, has only held tests, so while they are held the view never shows PASS: a recipe that passes every counted tier gets HELD.
 
 Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provisional and require bounded calibration before scientific default adoption. Archived task declarations and gates retain their original identities.
 
@@ -943,6 +945,7 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [cgan_overlapping_classes](bispf.md#cohort-cuda-1bf9d7d34422-experiment-cgan_overlapping_classes) | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | PASS | recorded definition unavailable |
 | [cramer_energy_overlap](bispf.md#cohort-cuda-1bf9d7d34422-experiment-cramer_energy_overlap) | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | PASS | recorded definition unavailable |
 | [cyclegan_unpaired_constellation](bispf.md#cohort-cuda-1bf9d7d34422-experiment-cyclegan_unpaired_constellation) | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | PASS | recorded definition unavailable |
+| [grid100_res16_scaled_tanh](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100_res16_scaled_tanh) | [stretch: frontier stretch benchmark beyond the required suite](../test-dispositions-20261015/README.md#unresolved) | PASS | recorded definition unavailable |
 
 <a name="cohort-cuda-1bf9d7d34422-formulation_comparison"></a>
 
@@ -2651,6 +2654,47 @@ Both sustained coverage and independent holdout accuracy must pass.
 Declared budget: 7000 updates; timeout 3600 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-grid100_res16_scaled_tanh"></a>
+
+### grid100_res16_scaled_tanh
+
+**grid100_res16_scaled_tanh: PASS**. [Current experiment declaration](../../../configs/forge/tasks/grid100_res16_scaled_tanh.json).
+
+Test definition: **recorded definition unavailable**. Recorded formulaic display retains its original source and task bindings. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No current-source qualification is granted. Sustained 5/5 terminal checks on grid100_res16_scaled_tanh.
+
+Run attempt: **PASS** (new_attempt; qualification unchanged). Sustained 5/5 terminal checks on grid100_res16_scaled_tanh. [Attempt evidence](../attempt-coverage.json).
+
+Used by: [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.min_samples | >= 20000 |
+| coverage.min_modes | >= 100 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_precision | >= 0.75 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.all_finite | == True |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+Dependencies: grid100 (gate).
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-grid100_res16_tanh"></a>
 
