@@ -160,7 +160,7 @@
       "task": "grid100",
       "title": "A grid of 100 clusters",
       "intent": "Learn all 100 small blobs with correct locations, populations and widths, scoring the current model's clean outputs without adding evaluation noise.",
-      "problem": "BCAP/BISPF put only 24–37% of samples on target, against 97% required. Some blobs are thin or nearly empty; the best audited 7,000-update result reaches 54%, still below the gate.",
+      "problem": "BCAP/BISPF put only 24\u201337% of samples on target, against 97% required. Some blobs are thin or nearly empty; the best audited 7,000-update result reaches 54%, still below the gate.",
       "pass_summary": "No full PASS under the current clean-sampling declaration in the audited evidence.",
       "passers": [
         "Historical K3P and other recipes have PASS receipts under earlier contracts, including different priors, averaged weights or evaluation noise. Those are separate problems and do not beat this declaration.",
@@ -179,7 +179,7 @@
       "task": "rotated100",
       "title": "A rotated grid of 100 clusters",
       "intent": "Learn all 100 small blobs with correct locations, populations and widths, scoring the current model's clean outputs without adding evaluation noise.",
-      "problem": "BCAP/BISPF put only 26–27% of samples on target, against 97% required. Some blobs are thin or nearly empty; the best audited 7,000-update result reaches 51%, still below the gate.",
+      "problem": "BCAP/BISPF put only 26\u201327% of samples on target, against 97% required. Some blobs are thin or nearly empty; the best audited 7,000-update result reaches 51%, still below the gate.",
       "pass_summary": "No full PASS under the current clean-sampling declaration in the audited evidence.",
       "passers": [
         "Historical K3P and other recipes have PASS receipts under earlier contracts, including different priors, averaged weights or evaluation noise. Those are separate problems and do not beat this declaration.",
@@ -198,7 +198,7 @@
       "task": "staggered100",
       "title": "A staggered grid of 100 clusters",
       "intent": "Learn all 100 small blobs with correct locations, populations and widths, scoring the current model's clean outputs without adding evaluation noise.",
-      "problem": "BCAP/BISPF put only 30–34% of samples on target, against 97% required. Some blobs are thin or nearly empty; the best audited 7,000-update result reaches 56%, still below the gate.",
+      "problem": "BCAP/BISPF put only 30\u201334% of samples on target, against 97% required. Some blobs are thin or nearly empty; the best audited 7,000-update result reaches 56%, still below the gate.",
       "pass_summary": "No full PASS under the current clean-sampling declaration in the audited evidence.",
       "passers": [
         "Historical K3P and other recipes have PASS receipts under earlier contracts, including different priors, averaged weights or evaluation noise. Those are separate problems and do not beat this declaration.",
@@ -611,6 +611,42 @@
         {
           "label": "Task declaration",
           "path": "configs/forge/tasks/model_ae_ddgan_gaussian_chain.json"
+        }
+      ]
+    },
+    {
+      "task": "precision_gaussian_mxfp8",
+      "title": "Learn a Gaussian with 8-bit MXFP8 training arithmetic",
+      "intent": "Train from the shared deterministic initialization using Blackwell-format MXFP8 software-reference forward and backward GEMM operands; match the full scalar Gaussian law at five final checks.",
+      "problem": "No full-budget family evidence has been registered. A matched FP32 diagnostic separates baseline learning failures from precision sensitivity. Native kernel and higher-order autograd parity remain unverified.",
+      "pass_summary": "Not measured. Short software checks do not establish a quality PASS.",
+      "passers": [
+        "No compatible full-budget passing configuration is recorded."
+      ],
+      "next_step": "Run the unchanged selected family recipes through the optional Tier 1 tasks and their FP32 control under the expanded reservation budget. Diagnose failed bounds before changing one global recipe; native validation is a separate step.",
+      "evidence": [
+        {
+          "label": "Protocol, precision semantics and limitations",
+          "path": "reports/forge/precision-stretch/README.md",
+          "anchor": "precision-stretch"
+        }
+      ]
+    },
+    {
+      "task": "precision_gaussian_nvfp4",
+      "title": "Learn a Gaussian with 4-bit NVFP4 training arithmetic",
+      "intent": "Train from the shared deterministic initialization using Blackwell-format NVFP4 software-reference forward and backward GEMM operands; match the full scalar Gaussian law at five final checks.",
+      "problem": "No full-budget family evidence has been registered. A matched FP32 diagnostic separates baseline learning failures from precision sensitivity. Native kernel and higher-order autograd parity remain unverified.",
+      "pass_summary": "Not measured. Short software checks do not establish a quality PASS.",
+      "passers": [
+        "No compatible full-budget passing configuration is recorded."
+      ],
+      "next_step": "Run the unchanged selected family recipes through the optional Tier 1 tasks and their FP32 control under the expanded reservation budget. Diagnose failed bounds before changing one global recipe; native validation is a separate step.",
+      "evidence": [
+        {
+          "label": "Protocol, precision semantics and limitations",
+          "path": "reports/forge/precision-stretch/README.md",
+          "anchor": "precision-stretch"
         }
       ]
     }

@@ -339,6 +339,13 @@ For revision 14, this CPU K3P plan contains 12 execution groups and a
 4,440-second worst-case allowance, including the 300-second clock audit
 diagnostic. Review the actual plan for the intended candidate and device.
 
+Revision 15 adds optional Tier 1 [NVFP4 and MXFP8 training toys](reports/forge/precision-stretch/README.md)
+and their matched FP32 diagnostic. Required counts remain unchanged. Each new
+task reserves 300 seconds; the equivalent CPU K3P plan now reserves 5,340
+seconds. Existing campaigns retain their original caps. These are explicit
+Blackwell-format software references; native kernel and higher-order autograd
+parity remain unverified. Full-budget family results are initially unmeasured.
+
 Historical revision 8 had six required Tier 1 tasks and a 2,220-second
 required-task allowance: the 120-second scalar Gaussian can-it-pass smoke,
 three 300-second behavior tasks, the 300-second ring acquisition and the
@@ -507,9 +514,12 @@ Diagnostics remain visible without vetoing required passes. The hold and extensi
 share one uninterrupted execution; the extension cannot borrow another
 candidate's trained state or hide behind a passing ordinary hold.
 
-A view assigns each task a role (`required`, `stretch`, `held`, or `diagnostic`)
-and declares a view-level `ranking` policy (`order_by: ["qualified_tier", "candidate_id"]`,
-`metric_aggregation_allowed: false` — candidates rank by highest qualified tier,
+A view assigns each task a role (`required`, `stretch`, `held`, or `diagnostic`;
+legacy `ranking` is retained in `IMPORTANCES` only for schema compatibility)
+and declares a view-level `ranking` policy (`policy: "qualified_tier_only_with_raw_metrics"`,
+`compare_compatible_cohorts: true`, `cost_separate: true` in `configs/forge/views/*.json`,
+or `order_by: ["qualified_tier", "candidate_id"]`, `metric_aggregation_allowed: false`
+in `particlegan_forge` — candidates rank by highest qualified tier,
 never by summing raw metrics across tasks). **Stretch** (`importance: "stretch"`)
 is the single canonical role for optional, extra-credit, frontier, and held
 benchmark tasks: stretch tests are declared, run, graded, and displayed in their

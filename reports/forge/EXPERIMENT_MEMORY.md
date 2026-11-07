@@ -4042,7 +4042,7 @@ Learned-MoG vector_two_broad PASS after exactly one registered operational cance
 
 ### recipe-prior-refactor-bcap-pure-v1 · readout-0df182292d888440f5fb32ce
 
-**Scope:** current; scientific; revision `8a79796a5b142918ef5b0221d6210c89ad6f72cb9dda06685edf1475b9dac706`.
+**Scope:** current; scientific; revision `3b5047770feb0fffb166a6a6f7aea02749cb69f2d2aa018374cd0d1100959872`.
 
 Ordinary re-qualification of the unchanged selected bcap-pure recipe (recipe-prior-refactor-bcap-pure-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
 
@@ -4054,7 +4054,7 @@ Completed discriminator_stability seed-0 CUDA execution for recipe-prior-refacto
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Record and receipt provenance](records/readout-0df182292d888440f5fb32ce.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+[Evidence](../../) · [Record](records/readout-0df182292d888440f5fb32ce.json)
 
 ### forge-onboarding-anchor-ablation · readout-10242573330bec1494c7602b
 
@@ -4090,7 +4090,7 @@ The single global quintic convolution-rule delta preserves all 19 incumbent BISP
 
 ### bispf-optimized-quintic-v1 · readout-143d85d4540548b0ecec1604
 
-**Scope:** current; scientific; revision `7a5c7749fbabcf54842a7c962e07a3f075c6e644516d948ab71930d5e49baa47`.
+**Scope:** current; scientific; revision `564199402b930f49e6c8862c7cd09f9198575aa32a5c35f4ea5289901f143d59`.
 
 Ordinary re-qualification of the unchanged selected bispf recipe (bispf-optimized-quintic-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
 
@@ -4102,7 +4102,7 @@ Completed discriminator_stability seed-0 CUDA execution for bispf-optimized-quin
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Record and receipt provenance](records/readout-143d85d4540548b0ecec1604.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+[Evidence](../../) · [Record](records/readout-143d85d4540548b0ecec1604.json)
 
 ### forge-no-critic-penalty · readout-15e86dd160a1d64a04ceee04
 
@@ -4266,7 +4266,7 @@ Native BISPF on the two explicitly wider architecture-portability hosts passes s
 
 ### recipe-prior-refactor-release07-gan-v3-v1 · readout-3bd45e331f5dd03701da2700
 
-**Scope:** current; scientific; revision `2d59a00a26c55e3afe5a57f30d60b7b40076c61792e523272b3e5e546a2165d1`.
+**Scope:** current; scientific; revision `244bb5cd81ed6928c26c52dd98cc95a3cfdb69fc50264972df52e291d6f4ef40`.
 
 Ordinary re-qualification of the unchanged selected release07-gan-v3 recipe (recipe-prior-refactor-release07-gan-v3-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
 
@@ -4278,7 +4278,7 @@ Completed discriminator_stability seed-0 CUDA execution for recipe-prior-refacto
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Record and receipt provenance](records/readout-3bd45e331f5dd03701da2700.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+[Evidence](../../) · [Record](records/readout-3bd45e331f5dd03701da2700.json)
 
 ### bispf-v1 · readout-3f3f893ae724d651f1655fc9
 
@@ -4586,7 +4586,7 @@ Fresh N(0,I) latent: 5 PASS / 10 FAIL on the 15 supported sampled-MoG tests (33 
 
 ### recipe-prior-refactor-r1r2-v1 · readout-613fc91cba03a8c327465202
 
-**Scope:** current; scientific; revision `8d393a33eb289720f17ce593807a12f500eb9b72b79fb8f5cc6d4a3d7fcabbfa`.
+**Scope:** current; scientific; revision `84e53bb16442a6a3d3148e2eb9a95ea59692559fc1352218ee112f2dc40b6615`.
 
 Ordinary re-qualification of the unchanged selected r1r2 recipe (recipe-prior-refactor-r1r2-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
 
@@ -4598,7 +4598,7 @@ Completed discriminator_stability seed-0 CUDA execution for recipe-prior-refacto
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Record and receipt provenance](records/readout-613fc91cba03a8c327465202.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+[Evidence](../../) · [Record](records/readout-613fc91cba03a8c327465202.json)
 
 ### ka2-global-repair-v1 · readout-628b01d1adffd11312aff9b1
 
@@ -5130,7 +5130,7 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0468712635<0.3; q
 
 ### atlas-particle-normal-v4 · readout-b389e250ac5b3ad0763d2c82
 
-**Scope:** current; scientific; revision `f77e99523bb9037fa49c67a7258c7f8aceecd6894ed2b46f3d2d7a0c3a7d2c3d`.
+**Scope:** current; scientific; revision `067f29bc52d5b02a768f6cc3063bb66784030104abcb66f7891d6b31491b8f92`.
 
 Ordinary discriminator_stability measurement of atlas-particle-normal-v4 (particles + NormalNoiseManipulator(sigma=0.0065), birth_death_cells=256, clean fixed output noise 0.0, d_guard_ratio=0.0, KA2 pre-anchor critic-only LossSurprise guard) under protocol seed 0 on NVIDIA RTX A6000 completes every required Tier 1 cell cleanly and reproduces its 11/13 required Tier 1 passes (plus clockfree_audit_measurement_v1 diagnostic PASS) for selection as the Atlas family candidate.
 
@@ -5142,7 +5142,7 @@ On ordinary discriminator_stability Tier 1 under protocol seed 0 on NVIDIA RTX A
 
 **Next:** Promote atlas-particle-normal-v4 as the selected canonical Atlas candidate in configs/forge/selections/family-current-v1.json, register its frozen numerical snapshot and compact receipts, regenerate reports/forge/technique-inventory.md and family pages, and investigate two_pole/ring16_acquisition and joint-inference (BiGAN/DDGAN/five_word_joint) Tier 1 failures in follow-up studies.
 
-[Record and receipt provenance](records/readout-b389e250ac5b3ad0763d2c82.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+[Evidence](../../) · [Record](records/readout-b389e250ac5b3ad0763d2c82.json)
 
 ### r1r2--724b3d52fbb2172a985d1bf29890b2ef9ba2598c9f1724d93a9afa7c872cbdad · readout-b42a8f277178ec58808d6b5c
 
@@ -5450,7 +5450,7 @@ All six finite-update DCGAN performance tasks PASS. Observed speedups versus mat
 
 ### recipe-prior-refactor-k3p-v1 · readout-e6cf768866c160ba1338f662
 
-**Scope:** current; scientific; revision `28b7ad98def4a9bfba19f551a9be14bc599766dcc346c708dda288afd809e9b6`.
+**Scope:** current; scientific; revision `57b4e63e98b96380eec30e9c00f9c37ada38fb4b63253b85ba8e2b1bf5c52e79`.
 
 Ordinary re-qualification of the unchanged selected k3p recipe (recipe-prior-refactor-k3p-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
 
@@ -5462,7 +5462,7 @@ Completed discriminator_stability seed-0 CUDA execution for recipe-prior-refacto
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Record and receipt provenance](records/readout-e6cf768866c160ba1338f662.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+[Evidence](../../) · [Record](records/readout-e6cf768866c160ba1338f662.json)
 
 ### recipe-prior-refactor-ka2-v1 · readout-e6e872f73024fd6c0b2b2d42
 
@@ -5578,7 +5578,7 @@ Raising birth_death_cells from 128 to 256 (eliminating noisy 2-particle-per-cell
 
 ### recipe-prior-refactor-ka2-v1 · readout-efc9b823a6b391bc25754f9a
 
-**Scope:** current; scientific; revision `f5cfa2c6386b0321711597b143e7d51f5f2f4c3db2659a017330a15c9e908057`.
+**Scope:** current; scientific; revision `416d61c9326d47f2683cf060b6cf7d895d0a2eaac440dc93f134016f5a014604`.
 
 Ordinary re-qualification of the unchanged selected ka2 recipe (recipe-prior-refactor-ka2-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
 
@@ -5590,7 +5590,7 @@ Completed discriminator_stability seed-0 CUDA execution for recipe-prior-refacto
 
 **Next:** Retain source-bound readout and compiled Forge reports.
 
-[Record and receipt provenance](records/readout-efc9b823a6b391bc25754f9a.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+[Evidence](../../) · [Record](records/readout-efc9b823a6b391bc25754f9a.json)
 
 ### r1r2--f398f6ea70a2d101c520a1a01db90ea968bbb16736e6cec7ffc887e1dd7e241a · readout-f0dadd320f7db48cbf5d7b20
 
@@ -6326,4 +6326,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `621d9ab195913b4b1627cd1c337f164f37d7e41e781011f3acc05dbe3079c1f0`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `ec315ad224fac470636e3fe1bdb261df8acf4817362d2f0dbe0eb54e48d27986`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

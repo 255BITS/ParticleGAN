@@ -11,13 +11,18 @@ Level 3: Destructive negative controls deterministically failing on:
          - Tanh rail saturation injection (> 0.001)
          - Non-finite outputs (NaN / Inf)
 """
+import math
+
+import numpy as np
 import pytest
 import torch
-import numpy as np
 
-from benchmarks.toy_audit import api_vectors as api
-from benchmarks.toy_audit.api_vectors import ResidualMLPGenerator
 from benchmarks.toy100 import accuracy, problems
+from benchmarks.toy_audit import api_vectors as api
+from benchmarks.toy_audit.api_vectors import (
+    ResidualMLPGenerator,
+    ScaledResidualMLPGenerator,
+)
 from lib.toy_models import SimpleMLPGenerator
 
 
@@ -88,7 +93,7 @@ def test_level1_oracle_grid100_res16_tanh_200_trials():
 
 def test_level2_constructive_capacity_mlp16_identity_representation():
     case = next(c for c in api.list_cases() if c["id"] == "api-grid100-mlp16")
-    gen = SimpleMLPGenerator(z_dim=2, hidden_dim=128, n_hidden=16, out_dim=2)
+    gen = SimpleMLPGenerator(z_dim=2, hidden_dim=128, n_hidden=16, out_dim=2, use_norm=False)
 
     # Verify structural depth: 16 hidden layers (17 linear layers total)
     linears = [m for m in gen.net if isinstance(m, torch.nn.Linear)]
@@ -141,7 +146,7 @@ def test_level2_constructive_capacity_mlp16_identity_representation():
 def test_level2_constructive_capacity_res16_tanh():
     case = next(c for c in api.list_cases() if c["id"] == "api-grid100-res16-tanh")
     scale = case.get("scale", 5.25)
-    gen = ResidualMLPGenerator(z_dim=2, hidden_dim=128, n_blocks=7, out_dim=2, scale=scale)
+    gen = ResidualMLPGenerator(z_dim=2, hidden_dim=128, n_blocks=7, out_dim=2, scale=scale, use_norm=False)
 
     # Verify structural depth: 1 stem + 7 blocks * 2 linears + 1 head = 16 linear layers
     linears = [m for m in gen.modules() if isinstance(m, torch.nn.Linear)]
@@ -175,6 +180,46 @@ def test_level2_constructive_capacity_res16_tanh():
     assert score["passed"] is True, f"Residual tanh generator failed to pass: {score.get('failed_bounds')}"
     assert score["metrics"]["modes"] == 100
     assert score["metrics"]["saturated_fraction"] <= 0.001
+
+
+def test_level2_scaled_residual_architecture_and_saturation_guard():
+    case = next(c for c in api.list_cases() if c["id"] == "api-grid100-res16-tanh")
+    scale = case.get("scale", 5.25)
+    gen = ScaledResidualMLPGenerator(z_dim=2, hidden_dim=128, n_blocks=7, out_dim=2, scale=scale, use_norm=True)
+
+    # 1. Structural depth and component verification
+    linears = [m for m in gen.modules() if isinstance(m, torch.nn.Linear)]
+    assert len(linears) == 16, f"Expected 16 linear layers, got {len(linears)}"
+    assert isinstance(gen.norm, torch.nn.LayerNorm), "Expected pre-head nn.LayerNorm"
+    assert math.isclose(gen.res_scale, 1.0 / math.sqrt(14.0)), f"Expected branch scale 1/sqrt(14), got {gen.res_scale}"
+
+    # 2. Guard against tanh rail saturation under extreme pre-activations
+    extreme_z = torch.tensor([[-1000.0, 1000.0], [500.0, -500.0]], requires_grad=True)
+    out = gen(extreme_z)
+    assert torch.all(torch.abs(out / scale) < 0.99), "TanhRailGuard failed to bound output below rail saturation (0.99)"
+    loss = out.sum()
+    loss.backward()
+    assert torch.all(torch.isfinite(extreme_z.grad)), "Expected finite gradients through TanhRailGuard"
+    assert torch.all(torch.abs(extreme_z.grad) > 0.0), "Expected non-vanishing gradient restoring force"
+
+
+def test_level2_deep_mlp16_layernorm_architecture():
+    gen = SimpleMLPGenerator(z_dim=2, hidden_dim=128, n_hidden=16, out_dim=2)
+
+    # 1. Structural depth: 16 hidden layers (17 linear layers) + 16 LayerNorm layers
+    linears = [m for m in gen.net if isinstance(m, torch.nn.Linear)]
+    norms = [m for m in gen.net if isinstance(m, torch.nn.LayerNorm)]
+    assert len(linears) == 17, f"Expected 17 linear layers, got {len(linears)}"
+    assert len(norms) == 16, f"Expected 16 LayerNorm layers, got {len(norms)}"
+
+    # 2. Gradient flow across all 16 layers without exponential attenuation
+    z = torch.randn(64, 2, requires_grad=True)
+    out = gen(z)
+    loss = out.sum()
+    loss.backward()
+    assert torch.all(torch.isfinite(z.grad)), "Gradients must be finite across 16 layers"
+    grad_norm = float(z.grad.norm())
+    assert grad_norm > 0.01, f"Gradient norm {grad_norm} is severely attenuated"
 
 
 def test_level3_destructive_missing_mode():

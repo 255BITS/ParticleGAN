@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "id": "pacgan8_grid100",
+  "description": "PacGAN m=8 packed discriminator on 100-mode 10x10 2D Gaussian grid (centers in {-9,-7,...,7,9}^2, sigma=0.05) testing high-order product-measure mode coverage and within-mode covariance preservation.",
+  "adapter": "transfer_vector",
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "host": "pacgan8_grid100",
+    "steps": 4000,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.05,
+      "standardize": false
+    },
+    "protocol": "screening",
+    "produces_state": true,
+    "host_definition": {
+      "target": "100-mode 10x10 Gaussian grid",
+      "grid_coords": [-9.0, -7.0, -5.0, -3.0, -1.0, 1.0, 3.0, 5.0, 7.0, 9.0],
+      "sigma": 0.05,
+      "modes": 100,
+      "pac_size": 8,
+      "steps": 4000,
+      "batch": 512,
+      "z_dim": 2,
+      "particles": 512
+    },
+    "prior_contract": "recipe_owned_v1"
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
+    "kind": "pacgan8_grid100",
+    "eval_samples": 4096,
+    "thresholds": [
+      ["modes", ">=", 95],
+      ["hq", ">=", 0.85],
+      ["mass_tv", "<=", 0.15],
+      ["min_cov_eig_ratio", ">=", 0.15]
+    ]
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 600
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "mog_prior"
+  ],
+  "dependencies": []
+}

@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
-from experiments.forge.family_reports import _selected_cohorts, full_suite_outcomes, full_suite_tasks
+from experiments.forge.family_reports import _selected_cohorts, _summed_views, full_suite_outcomes, full_suite_tasks
 from reports.forge import regenerate_technique_inventory as inventory
 
 
@@ -33,14 +33,19 @@ def test_original_view_and_full_suite_scores_survive_source_and_word_pin_changes
         word.update(current_contract="CHANGED", changed_contract_fields=["evaluation source"],
                     coverage_reason="The word evaluator has a new source pin.")
     projected = inventory._project_publication_for_family_pages(root, publication)
-    expected = {"bcap-pure": (72, 17), "bispf": (83, 20), "atlas": (67, 22),
-                "e22": (59, 17), "release07-gan-v3": (67, 19), "k3p": (73, 21),
-                "ka2": (73, 19), "r1r2": (55, 19)}
+    proof = inventory._recorded_source_binary_projection(publication, root)
+    suite_tasks = full_suite_tasks(projected["family_progress"])
     for family, cohort in _selected_cohorts(projected["family_progress"]):
-        view_passes, suite_passes = expected[family["id"]]
-        assert (cohort["total"]["passed"], cohort["total"]["total"]) == (view_passes, 115)
-        suite = full_suite_outcomes(cohort, full_suite_tasks(projected["family_progress"]))
-        assert (suite["passed"], suite["failed"], suite["total"]) == (suite_passes, 49 - suite_passes, 49)
+        records = proof["families"][family["id"]]["records"]
+        required = [a["task"] for view in _summed_views(projected["family_progress"])
+                    for a in view["assignments"] if a["importance"] == "required"]
+        view_passes = sum(records.get(name, {}).get("status") == "PASS" for name in required)
+        assert (cohort["total"]["passed"], cohort["total"]["total"]) == (view_passes, len(required))
+        suite = full_suite_outcomes(cohort, suite_tasks)
+        suite_passes = sum(records.get(name, {}).get("status") == "PASS" for name in suite_tasks)
+        suite_failures = sum(records.get(name, {}).get("status") == "FAIL" for name in suite_tasks)
+        assert (suite["passed"], suite["failed"], suite["total"]) == (suite_passes, suite_failures, len(suite_tasks))
+        assert suite["other"] == {"UNKNOWN": 2}
         word = cohort["tasks"]["five_word_joint_smoke"]
         assert word["current_contract"] == "CHANGED"
         assert word["changed_contract_fields"] == ["evaluation source"]
@@ -58,8 +63,13 @@ def test_recorded_overview_keeps_scores_and_held_passes_without_current_source_c
     publication = read_json(ROOT / "reports/forge/technique-inventory.json")
     monkeypatch.setattr(inventory, "_concluded_current_source_tier1_payload", lambda *args: None)
     markdown = inventory._current_markdown(publication, ROOT, ROOT / "reports/forge/technique-inventory.md")
-    assert "72/115" in markdown and "83/115" in markdown and "59/115" in markdown
-    assert "pass 102 of the held or removed view requirements" in markdown
+    proof = inventory._recorded_source_binary_projection(publication, ROOT)
+    required = [a["task"] for view in _summed_views(publication["family_progress"])
+                for a in view["assignments"] if a["importance"] == "required"]
+    for family in ("bcap-pure", "bispf", "e22"):
+        passed = sum(proof["families"][family]["records"].get(name, {}).get("status") == "PASS" for name in required)
+        assert f"{passed}/{len(required)}" in markdown
+    assert "pass 104 of the held or removed view requirements" in markdown
     assert "archived display projection" in markdown
     assert "not current-source qualification" in markdown
     assert "### Current-source selected-recipe Tier 1 readouts" not in markdown

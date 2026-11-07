@@ -41,6 +41,8 @@ Passer summaries reflect the evidence audit dated **2026-10-15**. Selected-resul
 | [Reconstruct four noisy corner Gaussians and generate balanced independent modes (AE-GAN)](problems.md#model_ae_gan_multimodal) | Train a public-API multimodal AE-GAN to reconstruct four equally weighted corner Gaussians (`reconstruction_mse <= 0.025`, `reconstruction_mode_agreement >= 0.98`) while independently generating all four modes with balanced masses (`mass_tv <= 0.15`) and well-conditioned within-mode covariances (`0.10 <= eigen_ratio <= 4.0`) across the final five checks. | Yes in standalone bounded API research (`bispf-optimized-quintic-v1` CPU cohort); no ordinary selected CUDA PASS yet. |
 | [Learn four-step conditional reverse transitions and ancestral generation (DDGAN)](problems.md#model_ddgan_gaussian_chain) | Train a four-step public-API DDGAN on a 2D Gaussian forward diffusion chain so every reverse conditional transition (`t1..t4`, `q0`/`q1`) and the final ancestral marginal satisfy `projection_cdf <= 0.12`, `normalized_mean <= 0.25`, and covariance eigenvalues in `[0.65, 1.40]` across the last five checks. | No PASS under the current declaration in either ordinary selected cohorts or bounded API research. |
 | [Pair particle AE reconstruction with four-step DDGAN reverse transitions and ancestral generation](problems.md#model_ae_ddgan_gaussian_chain) | Reconstruct held-out inputs through a learned particle autoencoder and four public DDGAN reverse steps (`paired_nmse <= 0.10`, `paired_worst_axis_nrmse <= 0.25`, `paired_shuffled_gain >= 3.0`) while simultaneously passing all conditional reverse-transition and independent ancestral-chain bounds. | No complete PASS under the current declaration; paired four-step reconstruction passes while independent/conditional reverse generation fails. |
+| [Learn a Gaussian with 8-bit MXFP8 training arithmetic](problems.md#precision_gaussian_mxfp8) | Train from the shared deterministic initialization using Blackwell-format MXFP8 software-reference forward and backward GEMM operands; match the full scalar Gaussian law at five final checks. | Not measured. Short software checks do not establish a quality PASS. |
+| [Learn a Gaussian with 4-bit NVFP4 training arithmetic](problems.md#precision_gaussian_nvfp4) | Train from the shared deterministic initialization using Blackwell-format NVFP4 software-reference forward and backward GEMM operands; match the full scalar Gaussian law at five final checks. | Not measured. Short software checks do not establish a quality PASS. |
 
 <a name="gaussian1d_stability"></a>
 
@@ -327,9 +329,9 @@ Test: `grid100` · Required for qualification and included in full-suite results
 
 | Selected recipe | Result |
 | --- | --- |
-| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-grid100) |
-| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) |
-| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [PASS](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-grid100) |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-grid100) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [FAIL](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-grid100) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-grid100) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-grid100) |
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-grid100) |
@@ -360,9 +362,9 @@ Test: `rotated100` · Required for qualification and included in full-suite resu
 
 | Selected recipe | Result |
 | --- | --- |
-| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) |
-| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) |
-| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [PASS](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-rotated100) |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [FAIL](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-rotated100) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) |
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) |
@@ -393,9 +395,9 @@ Test: `staggered100` · Required for qualification and included in full-suite re
 
 | Selected recipe | Result |
 | --- | --- |
-| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) |
-| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) |
-| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [PASS](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-staggered100) |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [FAIL](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-staggered100) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) |
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) |
@@ -558,7 +560,7 @@ Test: `mode_hold` · Required for qualification and included in full-suite resul
 
 | Selected recipe | Result |
 | --- | --- |
-| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) |
 | [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) |
 | [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [PASS](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-mode_hold) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) |
@@ -626,7 +628,7 @@ Test: `ring16_acquisition` · Required for qualification and included in full-su
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) |
 | [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) |
-| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [PASS](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [FAIL](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) |
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) |
@@ -860,8 +862,8 @@ Test: `ring16_bigan_continuous` · Held for qualification; included in full-suit
 | [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [FAIL](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_bigan_continuous) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) |
-| [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) |
-| [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) |
+| [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [PASS](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) |
+| [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [PASS](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) |
 
 **What remains to solve.** Tighten joint-critic `(x, z)` local curvature regularization (`k3p` or `bcap-dualnorm`) so `G(z)` and `E(x)` contract within-mode variance without losing 16-mode coverage.
@@ -890,7 +892,7 @@ Test: `two_pole` · Required for qualification and included in full-suite result
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) |
 | [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) |
-| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [PASS](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [FAIL](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [PASS](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) |
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [PASS](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) |
@@ -923,7 +925,7 @@ Test: `five_word_joint_smoke` · Required for qualification and included in full
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) |
 | [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) |
-| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [PASS](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [FAIL](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [PASS](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) |
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [PASS](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) |
@@ -954,9 +956,9 @@ Test: `model_ae_gan_multimodal` · Required for qualification and included in fu
 
 | Selected recipe | Result |
 | --- | --- |
-| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) |
-| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) |
-| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [PASS](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_gan_multimodal) |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [FAIL](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_gan_multimodal) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [PASS](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) |
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) |
@@ -987,9 +989,9 @@ Test: `model_ddgan_gaussian_chain` · Required for qualification and included in
 
 | Selected recipe | Result |
 | --- | --- |
-| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_gaussian_chain) |
-| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_gaussian_chain) |
-| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [PASS](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ddgan_gaussian_chain) |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_gaussian_chain) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_gaussian_chain) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [FAIL](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ddgan_gaussian_chain) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_gaussian_chain) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_gaussian_chain) |
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_gaussian_chain) |
@@ -1020,9 +1022,9 @@ Test: `model_ae_ddgan_gaussian_chain` · Required for qualification and included
 
 | Selected recipe | Result |
 | --- | --- |
-| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_gaussian_chain) |
-| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_gaussian_chain) |
-| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [PASS](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_ddgan_gaussian_chain) |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_gaussian_chain) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_gaussian_chain) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [FAIL](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_ddgan_gaussian_chain) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_gaussian_chain) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_gaussian_chain) |
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_gaussian_chain) |
@@ -1032,3 +1034,67 @@ Test: `model_ae_ddgan_gaussian_chain` · Required for qualification and included
 **What remains to solve.** Align the ancestral prior and reverse chain with the encoder latent manifold at `t=1, 2` so independent ancestral sampling retains full variance (`>= 0.65`) without degrading paired reconstruction.
 
 Evidence: [AE-DDGAN public-API model report](api-model-toys/ae-ddgan.md) · [Task declaration](../../configs/forge/tasks/model_ae_ddgan_gaussian_chain.json).
+
+
+<a name="precision_gaussian_mxfp8"></a>
+
+## Learn a Gaussian with 8-bit MXFP8 training arithmetic
+
+Test: `precision_gaussian_mxfp8` · Held for qualification; included in full-suite results.
+
+**What it tests.** Train from the shared deterministic initialization using Blackwell-format MXFP8 software-reference forward and backward GEMM operands; match the full scalar Gaussian law at five final checks.
+
+**The problem.** No full-budget family evidence has been registered. A matched FP32 diagnostic separates baseline learning failures from precision sensitivity. Native kernel and higher-order autograd parity remain unverified.
+
+**Has any configuration beaten it?** Not measured. Short software checks do not establish a quality PASS.
+
+- No compatible full-budget passing configuration is recorded.
+
+**Selected recipes' recorded results:**
+
+| Selected recipe | Result |
+| --- | --- |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [NOT MEASURED](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-precision_gaussian_mxfp8) |
+| [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) |
+| [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) |
+| [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) |
+| [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) |
+| [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) |
+
+**What remains to solve.** Run the unchanged selected family recipes through the optional Tier 1 tasks and their FP32 control under the expanded reservation budget. Diagnose failed bounds before changing one global recipe; native validation is a separate step.
+
+Evidence: [Protocol, precision semantics and limitations](precision-stretch/README.md#precision-stretch).
+
+
+<a name="precision_gaussian_nvfp4"></a>
+
+## Learn a Gaussian with 4-bit NVFP4 training arithmetic
+
+Test: `precision_gaussian_nvfp4` · Held for qualification; included in full-suite results.
+
+**What it tests.** Train from the shared deterministic initialization using Blackwell-format NVFP4 software-reference forward and backward GEMM operands; match the full scalar Gaussian law at five final checks.
+
+**The problem.** No full-budget family evidence has been registered. A matched FP32 diagnostic separates baseline learning failures from precision sensitivity. Native kernel and higher-order autograd parity remain unverified.
+
+**Has any configuration beaten it?** Not measured. Short software checks do not establish a quality PASS.
+
+- No compatible full-budget passing configuration is recorded.
+
+**Selected recipes' recorded results:**
+
+| Selected recipe | Result |
+| --- | --- |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [NOT MEASURED](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-precision_gaussian_nvfp4) |
+| [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) |
+| [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) |
+| [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) |
+| [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) |
+| [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) |
+
+**What remains to solve.** Run the unchanged selected family recipes through the optional Tier 1 tasks and their FP32 control under the expanded reservation budget. Diagnose failed bounds before changing one global recipe; native validation is a separate step.
+
+Evidence: [Protocol, precision semantics and limitations](precision-stretch/README.md#precision-stretch).

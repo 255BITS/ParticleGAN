@@ -173,7 +173,33 @@ def resolve_vector_spec(task: dict, *, root: Path | str | None = None) -> dict:
     return spec
 
 
+STRETCH_VECTOR_HOSTS = frozenset({
+    "misgan_block_recovery",
+    "misgan_block_neural_imputer",
+    "misgan_mcar_p50_recovery",
+    "misgan_mcar_p80_anchored",
+    "pacgan_unequal_mass",
+    "pacgan8_grid100",
+    "ring16_bigan_continuous",
+    "alice_spiral_bigan",
+    "infogan_anisotropic_modes",
+    "cgan_overlapping_classes",
+    "cramer_energy_overlap",
+    "cyclegan_unpaired_constellation",
+})
+
+
 def vector_profile_blockers(task: dict, *, root: Path | str | None = None) -> list[str]:
+    if (task.get("adapter") == "transfer_vector"
+            and "vector_profile" not in task.get("execution", {})
+            and task.get("execution", {}).get("host") in STRETCH_VECTOR_HOSTS):
+        spec = task.get("execution", {}).get("host_definition")
+        if not isinstance(spec, dict):
+            return [f"{task.get('id', '<task>')}: missing host_definition"]
+        for key in ("z_dim", "particles", "batch", "steps"):
+            if type(spec.get(key)) is not int or spec[key] < 1:
+                return [f"{task.get('id', '<task>')}: invalid stretch vector dimension: {key}"]
+        return []
     try:
         resolve_vector_spec(task, root=root)
     except (KeyError, TypeError, ValueError, OSError) as error:

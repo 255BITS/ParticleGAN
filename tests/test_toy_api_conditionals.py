@@ -10,6 +10,12 @@ from benchmarks.toy_audit import api_conditionals as api
 from benchmarks.toy_audit.api_diagnostics import _tree_equal
 
 
+# These controls exercise ConditionalFixture and its _task oracle. Delegated
+# GAN hosts have different model/optimizer and witness contracts, exercised in
+# test_solvability_{pacgan,infogan,cgan_overlap,cramergan,cyclegan}.py.
+CONDITIONAL_CASES = [case for case in api.list_cases() if case["id"] in api.CASES]
+
+
 @pytest.fixture(autouse=True)
 def cpu_one():
     old=torch.get_num_threads();torch.set_num_threads(1)
@@ -44,7 +50,7 @@ def oracle(task):
     return predict
 
 
-@pytest.mark.parametrize("case",api.list_cases(),ids=lambda c:c["id"])
+@pytest.mark.parametrize("case",CONDITIONAL_CASES,ids=lambda c:c["id"])
 def test_actual_public_update_caps_and_read_only_observation(case):
     f=api.build_case(case["id"],recipe_name=case["default_recipe"],max_steps=2)
     baseline=api.build_case(case["id"],recipe_name=case["default_recipe"],max_steps=2)
@@ -65,7 +71,7 @@ def test_actual_public_update_caps_and_read_only_observation(case):
     with pytest.raises(RuntimeError,match="cap"):f.step()
 
 
-@pytest.mark.parametrize("case",api.list_cases(),ids=lambda c:c["id"])
+@pytest.mark.parametrize("case",CONDITIONAL_CASES,ids=lambda c:c["id"])
 def test_attainable_declared_gate_on_exact_law_witness(case):
     task=api._task(case["id"].removeprefix("api-"))
     o=task.evaluate(oracle(task),case["eval_samples"],99123)

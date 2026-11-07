@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "id": "misgan_mcar_p80_anchored",
+  "description": "3-pair MisGAN on 8D extreme MCAR p=0.80 missingness with 10% complete anchor rows and neural imputer G_i trained with GAIN partial-hint conditioning on D_i([x_imp, h]).",
+  "adapter": "transfer_vector",
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "host": "misgan_mcar_p80_anchored",
+    "steps": 4000,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "protocol": "screening",
+    "produces_state": true,
+    "host_definition": {
+      "problem": "mcar_p80_anchored",
+      "dimension": 8,
+      "pairs": 3,
+      "neural_imputer": true,
+      "gain_partial_hint": true,
+      "anchor_fraction": 0.10,
+      "steps": 4000,
+      "batch": 512,
+      "z_dim": 8,
+      "particles": 256
+    },
+    "prior_contract": "recipe_owned_v1"
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
+    "kind": "misgan_mcar_p80_anchored",
+    "eval_samples": 4096,
+    "thresholds": [
+      ["modes", ">=", 80],
+      ["hq", ">=", 0.80],
+      ["mass_tv", "<=", 0.15],
+      ["off_plane", "<=", 0.06],
+      ["imp_acc", ">=", 0.65],
+      ["imp_off_plane", "<=", 0.06],
+      ["impute_rmse", "<=", 0.18]
+    ]
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 1800
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "mog_prior"
+  ],
+  "dependencies": []
+}

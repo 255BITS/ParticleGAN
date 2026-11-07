@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "discriminator_stability",
-  "revision": 14,
+  "revision": 15,
   "goal": "discriminator_stability",
   "assignments": [
     {
@@ -352,6 +352,114 @@
       }
     },
     {
+      "importance": "stretch",
+      "order": 5,
+      "qualification_tier": 4,
+      "task": "misgan_mcar_p50_recovery",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "Independent coordinatewise MCAR p=0.50 MisGAN on the 8-mode 8D block manifold with data/mask generator pair.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
+      "importance": "stretch",
+      "order": 6,
+      "qualification_tier": 4,
+      "task": "misgan_mcar_p80_anchored",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "Extreme MCAR p=0.80 MisGAN on the 8-mode 8D block manifold with a 10% fully observed anchor subset.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
+      "importance": "stretch",
+      "order": 7,
+      "qualification_tier": 4,
+      "task": "pacgan_unequal_mass",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "PacGAN-4 packed critic on an unequal-mass 8-mode ring with 20:1 weight ratio between heavy and light modes.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
+      "importance": "stretch",
+      "order": 8,
+      "qualification_tier": 4,
+      "task": "pacgan8_grid100",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "PacGAN-8 packed critic on the 10x10 100-mode 2D Gaussian grid testing 100/100 mode coverage.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
+      "importance": "stretch",
+      "order": 9,
+      "qualification_tier": 4,
+      "task": "alice_spiral_bigan",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "ALICE cycle-consistent BiGAN (G, E, D_xz) on a 1D curved spiral manifold in 2D testing cycle reconstruction.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
+      "importance": "stretch",
+      "order": 10,
+      "qualification_tier": 4,
+      "task": "infogan_anisotropic_modes",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "InfoGAN mutual-information auxiliary head Q(c|x) on 8 anisotropic rotated Gaussian modes testing factor disentanglement.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
+      "importance": "stretch",
+      "order": 11,
+      "qualification_tier": 4,
+      "task": "cgan_overlapping_classes",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "Mirza-Osindero concat vs Miyato-Koyama projection cGAN on 4 overlapping annular rings testing class separability.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
+      "importance": "stretch",
+      "order": 12,
+      "qualification_tier": 4,
+      "task": "cramer_energy_overlap",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "Bellemare CramerGAN 16D critic embedding with surrogate energy potential on a tight 25-mode 5x5 Gaussian grid.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
+      "importance": "stretch",
+      "order": 13,
+      "qualification_tier": 4,
+      "task": "cyclegan_unpaired_constellation",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "Unpaired CycleGAN/DiscoGAN dual generators and cycle-consistency on rotated and scaled 8-mode constellations.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
       "task": "model_ae_ddgan_bimodal_chain",
       "qualification_tier": 2,
       "importance": "required",
@@ -400,6 +508,36 @@
       "qualification_tier": 1,
       "importance": "required",
       "order": 12
+    },
+    {
+      "task": "precision_gaussian_fp32",
+      "qualification_tier": 1,
+      "order": 101,
+      "importance": "diagnostic"
+    },
+    {
+      "task": "precision_gaussian_mxfp8",
+      "qualification_tier": 1,
+      "order": 102,
+      "importance": "stretch",
+      "stretch": {
+        "reason": "frontier",
+        "summary": "Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format MXFP8 software-reference training arithmetic?",
+        "explanation": "reports/forge/precision-stretch/README.md#precision-stretch",
+        "graduation": "Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass."
+      }
+    },
+    {
+      "task": "precision_gaussian_nvfp4",
+      "qualification_tier": 1,
+      "order": 103,
+      "importance": "stretch",
+      "stretch": {
+        "reason": "frontier",
+        "summary": "Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format NVFP4 software-reference training arithmetic?",
+        "explanation": "reports/forge/precision-stretch/README.md#precision-stretch",
+        "graduation": "Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass."
+      }
     }
   ],
   "eligibility": {},
@@ -412,10 +550,10 @@
     "compare_compatible_cohorts": true,
     "cost_separate": true
   },
-  "policy_change_reason": "Register AE, hard/categorical VAE, actual DDGAN chains and AE-DDGAN paired chains as public-API model tasks. Reclassified model_ddgan_gaussian_chain and model_ae_ddgan_gaussian_chain from Tier 1 to Tier 2: both 4-step diffusion chains require multi-step distribution quality across 38-42 bounds beyond the 2,500-step smoke scope of Tier 1, matching bimodal chain complexity in Tier 2. Frozen historical grades and cohorts are unchanged; calibration remains provisional.",
+  "policy_change_reason": "Archive the exact develop revision-14 policy, preserving all nine GAN formulation stretch tests and every required assignment. Add optional Blackwell-format NVFP4 and MXFP8 training toys plus their matched FP32 diagnostic at Tier 1; required qualification and historical numerical results are unchanged.",
   "previous_revision": {
-    "archive": "configs/forge/view-history/discriminator_stability-v13.json",
-    "policy_fingerprint": "766297373255342be272f0270f687ba4a1610bfaae4f087e87c157997a195c66",
-    "revision": 13
+    "archive": "configs/forge/view-history/discriminator_stability-v14.json",
+    "policy_fingerprint": "e34b913de257614e06735e027dc1867fdf78c256928317a2f29c3ea7fcdd4dd5",
+    "revision": 14
   }
 }

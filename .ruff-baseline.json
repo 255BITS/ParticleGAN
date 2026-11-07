@@ -56,11 +56,6 @@
         "`.api_model_ddgan.task_recipe` imported but unused": 1
       }
     },
-    "benchmarks/toy_audit/api_ring16.py": {
-      "F401": {
-        "`particlegan.Recipe` imported but unused": 1
-      }
-    },
     "benchmarks/toy_audit/api_run.py": {
       "F401": {
         "`textwrap` imported but unused": 1
@@ -608,15 +603,10 @@
     },
     "tests/test_forge_ntier.py": {
       "F401": {
-        "`copy.deepcopy` imported but unused": 1,
         "`experiments.forge.contracts.read_json` imported but unused": 1,
         "`experiments.forge.tier_report.TIER_NAMES` imported but unused": 1,
         "`experiments.forge.views.IMPORTANCES` imported but unused": 1,
-        "`experiments.forge.views.load_tasks` imported but unused": 1,
         "`experiments.forge.views.load_view` imported but unused": 1
-      },
-      "F811": {
-        "Redefinition of unused `load_tasks` from an earlier line: `load_tasks` redefined here": 1
       }
     },
     "tests/test_forge_ntier_challenger.py": {
@@ -793,23 +783,6 @@
     "tests/test_sigreg.py": {
       "F401": {
         "`experiments.forge.api.task_formulation_context` imported but unused": 1
-      }
-    },
-    "tests/test_solvability_bigan.py": {
-      "F401": {
-        "`benchmarks.toy_audit.api_ring16.BiGANJointCritic` imported but unused": 1,
-        "`benchmarks.toy_audit.api_ring16.Ring16BiGANFixture` imported but unused": 1,
-        "`pytest` imported but unused": 1
-      }
-    },
-    "tests/test_solvability_misgan.py": {
-      "F401": {
-        "`benchmarks.toy_audit.api_conditionals.misgan_ppost_indices` imported but unused": 1,
-        "`math` imported but unused": 1,
-        "`pytest` imported but unused": 1
-      },
-      "F541": {
-        "f-string without any placeholders": 1
       }
     },
     "tests/test_solvability_tanh.py": {
