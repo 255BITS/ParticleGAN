@@ -65,6 +65,18 @@ Code links are pinned to the audited commit so later refactors do not change the
    the most consequential cross-owner invariants. Existing tests already cover
    many failure cases; centralize transition contracts before changing behavior.
 
+### Scoped follow-ups, 2026-11-07
+
+These independent PRs are open for review. They tighten local contracts within
+the existing owners:
+
+| Target | Follow-up | Responsibility boundary |
+| --- | --- | --- |
+| Interrupted update | [PR #522](https://github.com/255BITS/ParticleGAN/pull/522): latch interruption until successful checkpoint recovery | Policy/trainer own update completion; caller owns data cursors, modes and external resources. No whole-update rollback. |
+| Serving swap/certificate | [PR #520](https://github.com/255BITS/ParticleGAN/pull/520): capture only at a completed update boundary | ParticleGAN selects coherent inference state; application owns synchronization and publication. Existing copies stay usable. |
+| Particle moves | [PR #521](https://github.com/255BITS/ParticleGAN/pull/521): prepare donor history before independent-copy writes | Copy, novel-birth and routed-split laws retain separate owners. Validation before writes does not promise a general atomic transaction. |
+| Forge execution/accounting | [PR #523](https://github.com/255BITS/ParticleGAN/pull/523): make existing submission projection and ownership explicit | Scheduling, leases, charges and scientific verdicts remain separate Forge facts; no orchestration moves into the training API. |
+
 ## How to read the inventory
 
 `Saved` means the owner exposes state that its surrounding checkpoint must carry.
