@@ -1,5 +1,8 @@
 # Implicit state-machine audit
 
+Current report location: `reports/forge/software-audits/`. The audit and
+reproduction retain their original source and script commit/path pins below.
+
 Audited `origin/develop` at `9fc54fab90a7d6da39db274b651dbf824fc3929a`, on
 `audit/implicit-state-machines`, 2026-11-06. This is a software audit, not a
 training-method comparison. No qualification results or application behavior changed.
