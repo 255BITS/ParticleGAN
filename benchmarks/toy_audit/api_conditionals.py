@@ -18,9 +18,9 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from particlegan import MoGParticlePrior, get_recipe, init, scale_learning_rates
+from particlegan import MoGParticlePrior, ParticlePrior, get_recipe, init, scale_learning_rates
 from particlegan.optim.constraint_geometry import constraint_geometry_backward
-from particlegan.priors import ManipulatedPrior, unwrap_prior
+from particlegan.priors import ManipulatedPrior, NormalNoiseManipulator, unwrap_prior
 from lib.sparse_toy import SparseMixedToy
 from lib.denoising_toy import GaussianGrid
 from lib.trajectory import Routes
@@ -126,6 +126,14 @@ _CASES = [
 ]
 for _row in _CASES:
     if _row["id"].startswith(("api-mask-","api-posterior-","api-misgan-")): _row["eval_samples"]=4096
+    if _row["id"].startswith("api-misgan-"):
+        # Preserve the standalone host's actual implementation identity: a
+        # cloud has zero storage width; its explicit normal transform supplies
+        # sampling noise. This is not the Forge positive-width MoG cohort.
+        _row["initial_prior"] = dict(
+            kind="particle_cloud", sigma=0., standardize=False, init_std=1.,
+            initializer="deterministic_orthogonal", sampling="uniform_with_replacement",
+            transform=dict(kind="normal_noise", sigma=.025, kappa_radial=1.))
     if _row["id"] in ("api-misgan-mcar-p50-recovery", "api-misgan-mcar-p80-anchored"):
         _row["batch_size"] = 512
         _row["default_recipe"] = "bispf"
@@ -1421,6 +1429,9 @@ class _MisGANBaseFixture:
                 if not isinstance(values, dict) or values.keys() != expected["penalties"][role].keys():
                     raise ValueError("penalty fields differ")
                 penalty = getattr(self, "penalty_" + role)
+                optimizer_record = state["optimizers"][role].get("regularizer", {}).get("record")
+                if optimizer_record != values["record"]:
+                    raise ValueError("optimizer and penalty copies of critic history contradict")
                 if values["record"].get("observed_steps") != steps:
                     raise ValueError("critic clock differs from the completed update count")
                 deepcopy(penalty.optimizer.record).load_state_dict(values["record"])
@@ -1531,10 +1542,6 @@ class _MisGANBaseFixture:
             loss_p = loss_p + self.recipe.prior_regularization(
                 base.z, regularizer=regularizer, prior=prior
             )
-        if isinstance(prior, ManipulatedPrior) and prior.has_regularizer:
-            loss_p = loss_p + prior.regularize(
-                idx=idx, generator=self.noise_rng, step=self.completed_steps
-            )
         return loss_p
 
     def _prior_reg_loss(self, idx_g: torch.Tensor) -> torch.Tensor:
@@ -1547,6 +1554,90 @@ class _MisGANBaseFixture:
         for target, source in zip(average.buffers(), current.buffers()):
             target.copy_(source)
 
+    def _prior_law(self, recipe):
+        law = self.case.get("initial_prior")
+        required = {"kind", "sigma", "standardize", "init_std", "initializer", "sampling", "transform"}
+        if not isinstance(law, dict) or law.keys() != required:
+            raise ValueError("MisGAN requires a complete task-owned initial_prior declaration")
+        if (law["kind"] not in ("particle_cloud", "mog")
+                or type(law["standardize"]) is not bool
+                or law["initializer"] != "deterministic_orthogonal"
+                or law["sampling"] != "uniform_with_replacement"):
+            raise ValueError("unsupported MisGAN task prior law")
+        for name in ("sigma", "init_std"):
+            if type(law[name]) not in (int, float) or not math.isfinite(law[name]) or law[name] < 0:
+                raise ValueError("invalid MisGAN task prior scale")
+        kind = "mog" if law["kind"] == "mog" else "particles"
+        # Recipe.standardize is inactive for particle storage; the cloud's
+        # actual law remains raw locations, as the task explicitly declares.
+        if recipe.prior_kind != kind or (kind == "mog" and recipe.standardize != law["standardize"]):
+            raise ValueError("MisGAN recipe/task prior storage or standardization conflict")
+        if law["kind"] == "particle_cloud" and (law["sigma"] != 0 or law["standardize"]):
+            raise ValueError("a particle cloud has sigma=0 and standardize=false")
+        if law["kind"] == "mog" and law["sigma"] <= 0:
+            raise ValueError("this MoG task requires positive storage sigma")
+        transform = law["transform"]
+        if transform is not None:
+            if (law["kind"] != "particle_cloud" or not isinstance(transform, dict)
+                    or transform.keys() != {"kind", "sigma", "kappa_radial"}
+                    or transform["kind"] != "normal_noise" or transform["kappa_radial"] != 1.
+                    or type(transform["sigma"]) not in (int, float)
+                    or not math.isfinite(transform["sigma"]) or transform["sigma"] <= 0):
+                raise ValueError("unsupported MisGAN task sampling transform")
+            if recipe.kappa_radial != transform["kappa_radial"]:
+                raise ValueError("MisGAN recipe/task radial sampling law conflict")
+        return law
+
+    def _build_task_prior(self, recipe, role, *, streams=None):
+        law = self._prior_law(recipe)
+        count, dimension, component = {
+            "x": (self.particles, self.z_dim, "constructor"),
+            "m": (64, self.z_dim, "constructor_m"),
+            "i": (64, 4, "constructor_i"),
+        }[role]
+        streams = self._rng_streams if streams is None else streams
+        options = dict(sigma=law["sigma"], sigma_rel=0., init_std=law["init_std"],
+                       standardize=law["standardize"], device=self.device,
+                       generator=streams.fork(component))
+        transform = law["transform"]
+        if transform is not None:
+            options["sigma"] = transform["sigma"]
+        prior_recipe = recipe.replace(prior_update="learned", num_particles=count, z_dim=dimension)
+        prior = prior_recipe.make_prior(**options)
+        init.deterministic_orthogonal_(unwrap_prior(prior), seed=streams.fork_seed(component))
+        return prior
+
+    def _validate_task_prior(self, prior, recipe, role):
+        from .api_contract import UnsupportedRecipeOverrides
+        if isinstance(prior, ManipulatedPrior) and prior.has_regularizer:
+            raise UnsupportedRecipeOverrides("MisGAN host lacks complete manipulator regularization context")
+        law = self._prior_law(recipe)
+        base = unwrap_prior(prior)
+        expected_class = MoGParticlePrior if law["kind"] == "mog" else ParticlePrior
+        count, dimension = {"x": (self.particles, self.z_dim), "m": (64, self.z_dim), "i": (64, 4)}[role]
+        if type(base) is not expected_class or base.z.shape != (count, dimension):
+            raise ValueError("MisGAN supplied prior storage kind, shape or capacity differs from the task")
+        if not math.isclose(float(base.init_std), law["init_std"], rel_tol=0, abs_tol=1e-12):
+            raise ValueError("MisGAN supplied prior initialization scale differs from the task")
+        if bool(getattr(base, "standardize", False)) != law["standardize"]:
+            raise ValueError("MisGAN supplied prior standardization differs from the task")
+        sigma = float(base.sigma) if isinstance(base, MoGParticlePrior) else 0.
+        if not math.isclose(sigma, law["sigma"], rel_tol=1e-6, abs_tol=1e-9):
+            raise ValueError("MisGAN supplied prior sigma differs from the task")
+        manipulators = list(prior.manipulators) if isinstance(prior, ManipulatedPrior) else []
+        transform = law["transform"]
+        if transform is None:
+            if manipulators:
+                raise ValueError("MisGAN supplied prior adds an undeclared sampling transform")
+        elif (len(manipulators) != 1 or type(manipulators[0]) is not NormalNoiseManipulator
+              or not math.isclose(manipulators[0].sigma, transform["sigma"], rel_tol=0, abs_tol=1e-12)
+              or manipulators[0].kappa_radial != transform["kappa_radial"]):
+            raise ValueError("MisGAN supplied prior sampling transform differs from the task")
+        reference = self._build_task_prior(recipe, role, streams=_FixtureRNGStreams(self.seed, self.device))
+        if (base.z.dtype != unwrap_prior(reference).z.dtype
+                or not torch.equal(base.z.detach().cpu(), unwrap_prior(reference).z.detach().cpu())):
+            raise ValueError("MisGAN supplied prior locations/dtype differ from the task's deterministic initializer")
+
     def rebind_trainer(self, recipe, prior=None):
         if self.completed_steps:
             raise ValueError("rebinding a trained MisGAN fixture requires a new execution identity")
@@ -1554,80 +1645,35 @@ class _MisGANBaseFixture:
         if (recipe.batch_size != self.batch_size or recipe.num_particles != self.particles
                 or recipe.z_dim != self.z_dim):
             raise ValueError("MisGAN recipe resources must match the explicitly declared host resources")
+        self._prior_law(recipe)
+        supplied = prior if prior is not None else getattr(self, "prior_x", None)
+        if supplied is not None:
+            self._validate_task_prior(supplied, recipe, "x")
         self.recipe = recipe
-
-        if prior is not None:
-            self.prior_x = prior.to(self.device)
-            self.recipe.apply_prior_policy(self.prior_x)
-        elif getattr(self, "prior_x", None) is None:
-            prior_recipe = self.recipe.replace(
-                prior_update="learned",
-                num_particles=self.particles,
-                z_dim=self.z_dim,
-            )
-            self.prior_x = prior_recipe.make_prior(
-                sigma=0.025,
-                sigma_rel=0.0,
-                device=self.device,
-                generator=self._rng_streams.fork("constructor"),
-            )
-            init.deterministic_orthogonal_(
-                unwrap_prior(self.prior_x),
-                seed=self._rng_streams.fork_seed("constructor"),
-            )
-            self.recipe.apply_prior_policy(self.prior_x)
+        if supplied is None:
+            self.prior_x = self._build_task_prior(recipe, "x")
         else:
-            self.prior_x = self.prior_x.to(self.device)
-            self.recipe.apply_prior_policy(self.prior_x)
-
+            self.prior_x = supplied.to(self.device)
+            if "constructor" not in self._rng_streams._counters:
+                # Validate supplied and constructed priors under the same named
+                # constructor binding, preserving subsequent stream identity.
+                self._rng_streams.fork_seed("constructor")
+                self._rng_streams.fork_seed("constructor")
+        self._validate_task_prior(self.prior_x, recipe, "x")
+        self.recipe.apply_prior_policy(self.prior_x)
         self.prior = self.prior_x
-
-        if getattr(self, "prior_m", None) is None:
-            prior_m_recipe = self.recipe.replace(
-                prior_update="learned",
-                num_particles=64,
-                z_dim=self.z_dim,
-            )
-            self.prior_m = prior_m_recipe.make_prior(
-                sigma=0.025,
-                sigma_rel=0.0,
-                device=self.device,
-                generator=self._rng_streams.fork("constructor_m"),
-            )
-            init.deterministic_orthogonal_(
-                unwrap_prior(self.prior_m),
-                seed=self._rng_streams.fork_seed("constructor_m"),
-            )
-            self.recipe.apply_prior_policy(self.prior_m)
-        else:
-            self.prior_m = self.prior_m.to(self.device)
-            self.recipe.apply_prior_policy(self.prior_m)
-
-        if hasattr(self, "G_i"):
-            if getattr(self, "prior_i", None) is None:
-                prior_i_recipe = self.recipe.replace(
-                    prior_update="learned",
-                    num_particles=64,
-                    z_dim=4,
-                )
-                self.prior_i = prior_i_recipe.make_prior(
-                    sigma=0.025,
-                    sigma_rel=0.0,
-                    device=self.device,
-                    generator=self._rng_streams.fork("constructor_i"),
-                )
-                init.deterministic_orthogonal_(
-                    unwrap_prior(self.prior_i),
-                    seed=self._rng_streams.fork_seed("constructor_i"),
-                )
-                self.recipe.apply_prior_policy(self.prior_i)
-            else:
-                self.prior_i = self.prior_i.to(self.device)
-                self.recipe.apply_prior_policy(self.prior_i)
-            self.priors = _ModuleBundle(prior_x=self.prior_x, prior_m=self.prior_m, prior_i=self.prior_i)
-        else:
-            self.prior_i = None
-            self.priors = _ModuleBundle(prior_x=self.prior_x, prior_m=self.prior_m)
+        for role in ("m", "i"):
+            if role == "i" and not hasattr(self, "G_i"):
+                self.prior_i = None
+                continue
+            bound = getattr(self, "prior_" + role, None)
+            if bound is None:
+                bound = self._build_task_prior(recipe, role)
+            self._validate_task_prior(bound, recipe, role)
+            self.recipe.apply_prior_policy(bound)
+            setattr(self, "prior_" + role, bound)
+        self.priors = _ModuleBundle(**{"prior_" + role: getattr(self, "prior_" + role)
+                                     for role in ("x", "m", "i") if getattr(self, "prior_" + role, None) is not None})
 
         self.loss = self.recipe.make_loss()
         self.loss_x = self.loss
@@ -1735,7 +1781,7 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
     ):
         if case is None:
             case = deepcopy(CASES["api-misgan-block-recovery"])
-        self.case = case
+        self.case = deepcopy(case)
         self.seed = int(seed)
         self.device = torch.device(device)
         self.completed_steps = 0
@@ -1937,7 +1983,7 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
     ):
         if case is None:
             case = deepcopy(CASES["api-misgan-block-neural-imputer"])
-        self.case = case
+        self.case = deepcopy(case)
         self.seed = int(seed)
         self.device = torch.device(device)
         self.completed_steps = 0

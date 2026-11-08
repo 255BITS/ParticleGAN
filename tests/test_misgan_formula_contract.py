@@ -231,3 +231,122 @@ def test_recipe_resources_cannot_silently_replace_host_capacity():
     recipe = get_recipe("bispf", batch_size=8, num_particles=32, z_dim=4)
     with pytest.raises(ValueError, match="explicitly declared host resources"):
         api.MisGANRecoveryFixture(recipe=recipe)
+
+
+def test_supplied_prior_matches_task_owned_wrapped_cloud_and_constructor_streams():
+    original = fixture()
+    recipe = original.recipe
+    restored = api.MisGANRecoveryFixture(
+        deepcopy(original.case), recipe=recipe, prior=deepcopy(original.prior_x),
+        batch_size=8, max_steps=3, seed=0)
+    assert state_digest(original.state_dict()) == state_digest(restored.state_dict())
+    assert original.case["initial_prior"]["kind"] == "particle_cloud"
+    assert original.case["initial_prior"]["sigma"] == 0
+    assert original.case["initial_prior"]["transform"]["sigma"] == .025
+
+
+@pytest.mark.parametrize("defect", ["kind", "capacity", "dimension", "noise_sigma", "bare_cloud",
+                                   "radial_noise", "init_scale", "initial_rows", "dtype"])
+def test_supplied_prior_law_is_checked_before_any_optimizer(defect, monkeypatch):
+    from particlegan import MoGParticlePrior, ParticlePrior, NormalNoiseManipulator
+    original = fixture()
+    supplied = deepcopy(original.prior_x)
+    if defect == "kind":
+        supplied = MoGParticlePrior(256, 8, sigma=.025, standardize=False)
+    elif defect in ("capacity", "dimension"):
+        supplied = ParticlePrior(128 if defect == "capacity" else 256, 4 if defect == "dimension" else 8)
+        supplied = supplied.manipulate(NormalNoiseManipulator(.025))
+    elif defect == "noise_sigma":
+        supplied.manipulators[0].sigma = .05
+    elif defect == "bare_cloud":
+        supplied = supplied.base
+    elif defect == "radial_noise":
+        supplied.manipulators[0].kappa_radial = .5
+    elif defect == "init_scale":
+        supplied.base.init_std = 2.
+    elif defect == "initial_rows":
+        with torch.no_grad():
+            supplied.z.add_(1.)
+    else:
+        supplied = supplied.double()
+    def forbidden(*args, **kwargs):
+        raise AssertionError("optimizer construction preceded prior-law validation")
+    monkeypatch.setattr(type(original.recipe), "make_generator_optimizer", forbidden)
+    monkeypatch.setattr(type(original.recipe), "make_critic_optimizer", forbidden)
+    before = state_digest(supplied.state_dict())
+    with pytest.raises(ValueError, match="MisGAN supplied prior"):
+        api.MisGANRecoveryFixture(deepcopy(original.case), recipe=original.recipe,
+                                 prior=supplied, batch_size=8, max_steps=3, seed=0)
+    assert state_digest(supplied.state_dict()) == before
+
+
+def test_positive_width_mog_is_its_own_explicit_task_cohort():
+    case = deepcopy(api.CASES[CASES[0]])
+    case["initial_prior"].update(kind="mog", sigma=.025, transform=None)
+    recipe = get_recipe("bispf", batch_size=8, num_particles=256, z_dim=8,
+                        prior_kind="mog", standardize=False)
+    first = api.MisGANRecoveryFixture(case, recipe=recipe, batch_size=8, max_steps=3)
+    supplied = deepcopy(first.prior_x)
+    second = api.MisGANRecoveryFixture(deepcopy(case), recipe=recipe,
+                                      prior=supplied, batch_size=8, max_steps=3)
+    assert state_digest(first.state_dict()) == state_digest(second.state_dict())
+    assert first.step() == second.step()
+    assert state_digest(first.state_dict()) == state_digest(second.state_dict())
+
+
+@pytest.mark.parametrize("defect", ["sigma", "standardize", "recipe_storage"])
+def test_mog_storage_law_and_recipe_conflicts_are_rejected(defect):
+    case = deepcopy(api.CASES[CASES[0]])
+    case["initial_prior"].update(kind="mog", sigma=.025, transform=None)
+    recipe = get_recipe("bispf", batch_size=8, num_particles=256, z_dim=8,
+                        prior_kind="mog", standardize=False)
+    original = api.MisGANRecoveryFixture(case, recipe=recipe, batch_size=8, max_steps=3)
+    supplied = deepcopy(original.prior_x)
+    if defect == "sigma":
+        supplied.set_sigma(.05)
+    elif defect == "standardize":
+        supplied.standardize = True
+    else:
+        recipe = recipe.replace(prior_kind="particles", sigma_rel=0.)
+    with pytest.raises(ValueError, match="MisGAN (supplied prior|recipe/task prior)"):
+        api.MisGANRecoveryFixture(deepcopy(case), recipe=recipe, prior=supplied,
+                                 batch_size=8, max_steps=3)
+
+
+def test_manipulator_regularizer_is_explicitly_unsupported_before_optimizer(monkeypatch):
+    from particlegan.priors import PriorManipulator
+    from benchmarks.toy_audit.api_contract import UnsupportedRecipeOverrides
+    class Regularizer(PriorManipulator):
+        def regularize(self, raw_rows, *, sampled_codes=None, indices=None, generated=None,
+                       logits=None, **context):
+            raise AssertionError("unsupported regularizer was silently invoked")
+    original = fixture()
+    supplied = deepcopy(original.prior_x).manipulate(Regularizer())
+    def forbidden(*args, **kwargs):
+        raise AssertionError("unsupported manipulator reached optimizer construction")
+    monkeypatch.setattr(type(original.recipe), "make_generator_optimizer", forbidden)
+    monkeypatch.setattr(type(original.recipe), "make_critic_optimizer", forbidden)
+    with pytest.raises(UnsupportedRecipeOverrides, match="manipulator regularization context"):
+        api.MisGANRecoveryFixture(deepcopy(original.case), recipe=original.recipe, prior=supplied,
+                                 batch_size=8, max_steps=3)
+
+
+@pytest.mark.parametrize("copy_name", ["optimizer", "penalty"])
+def test_conflicting_copies_of_critic_history_are_rejected_atomically(copy_name):
+    f = fixture(); f.step()
+    state = f.state_dict()
+    before = state_digest(state)
+    record = (state["optimizers"]["m"]["regularizer"]["record"] if copy_name == "optimizer"
+              else state["penalties"]["m"]["record"])
+    record["calls"] += 1
+    with pytest.raises(ValueError, match="invalid complete MisGAN checkpoint"):
+        f.load_state_dict(state)
+    assert state_digest(f.state_dict()) == before
+
+
+def test_caller_cannot_change_bound_task_prior_through_a_metadata_alias():
+    case = deepcopy(api.CASES[CASES[0]])
+    f = api.MisGANRecoveryFixture(case, max_steps=1)
+    before = state_digest(f.state_dict())
+    case["initial_prior"]["transform"]["sigma"] = .5
+    assert state_digest(f.state_dict()) == before
