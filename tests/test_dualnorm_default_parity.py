@@ -61,6 +61,7 @@ class LegacyDualNorm(dualnorm.NormalizedOptimizer):
             self.record.record_step(self)
 
 
+@pytest.mark.cuda
 def test_zero_smoothing_matches_legacy_public_updates_and_checkpoint_packets(monkeypatch):
     if not torch.cuda.is_available():
         pytest.skip("CUDA is required for default compatibility")

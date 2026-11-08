@@ -39,7 +39,7 @@ def test_confident_wrong_categorical_logits_keep_corrective_gradients():
 def test_continuous_inverse_loss_detaches_targets_and_weights_gradient():
     values = torch.tensor([[1., 3.]], requires_grad=True)
     target = torch.zeros_like(values, requires_grad=True)
-    loss = Recipe(joint_reconstruction_weight=2.).joint_reconstruction_loss(values, target)
+    loss = Recipe.from_dict(dict(joint_reconstruction_weight=2.)).joint_reconstruction_loss(values, target)
     assert loss.item() == 10.
     loss.backward()
     assert torch.equal(values.grad, torch.tensor([[2., 6.]]))
@@ -49,7 +49,7 @@ def test_continuous_inverse_loss_detaches_targets_and_weights_gradient():
 @pytest.mark.parametrize("value", [-1., float("nan"), float("inf"), True, "1"])
 def test_invalid_weight_rejected(value):
     with pytest.raises(ValueError):
-        Recipe(joint_reconstruction_weight=value)
+        Recipe.from_dict(dict(joint_reconstruction_weight=value))
 
 
 def build(weight):

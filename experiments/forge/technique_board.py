@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 
 from .contracts import atomic_text, file_hash, read_json, stable_hash
-from .views import task_evaluation_fingerprint, task_execution_fingerprint
+from .views import is_stretch, task_evaluation_fingerprint, task_execution_fingerprint
 
 REDUCER_VERSION = "forge-technique-board-v1"
 DEFAULT_LABELS = {
@@ -137,7 +137,7 @@ def _tier_cells(row, assignments, reason_catalog):
             (tasks if assignment["importance"] == "required" else nonrequired).append(receipt)
             if assignment["importance"] == "required":
                 required.append(status)
-            elif assignment["importance"] == "held":
+            elif is_stretch(assignment):
                 held.append(status)
         counts = _counts(required)
         cells[str(tier)] = {"passed": counts.get("PASS", 0), "total": len(required), "counts": counts,

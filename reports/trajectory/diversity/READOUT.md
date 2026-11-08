@@ -121,7 +121,10 @@ Particle DDGAN/UCD/Gaussian noise, exact bcap, particles and constant LR.
   inspected. Generated gallery references checked and exported GIFs decoded;
   no new browser rendering test was performed. Existing viewer code unchanged.
 - Summaries/configs/provenance/certificates/logs/plots/viewers are preserved in
-  this report. Raw samples, source archives and EMA checkpoints remain under
+  this report. The superseded 1k scout gallery (`scout_1k/index.html` and its
+  `viewer.html` files) is archived out of the tree; [the archive index](../../log-archive.json)
+  records each path's Git blob at [commit `82f38664e`](https://github.com/255BITS/ParticleGAN/tree/82f38664e4d6fb4aac67ed99d87887d6e6e4b357/reports/trajectory/diversity/scout_1k).
+  The 1k scout tables, plots, GIFs and summaries stay tracked. Raw samples, source archives and EMA checkpoints remain under
   ignored `results/trajectory/diversity/`. [All eight results](all_runs.json).
 
 Re-export:

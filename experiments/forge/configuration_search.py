@@ -193,6 +193,7 @@ def _resolved_recipe(candidate):
     """Use the same fixed prior and API bindings as an actual Forge request."""
     context = FormulationContext(recipe_preset=candidate.get("recipe_preset"),
         recipe_overrides=candidate.get("recipe_overrides", {}), prior=candidate.get("prior"),
+        prior_mechanism=candidate.get("prior_mechanism"),
         requires_capabilities=candidate.get("requires_capabilities", ()),
         extensions=candidate.get("extensions", {}),
         initializer=candidate.get("initializer", "deterministic_orthogonal"),
@@ -405,8 +406,9 @@ def _qualification(trial, through_tier):
     """
     required = [task for task in trial["tasks"] if task["importance"] == "required"]
     held = [task for task in trial["tasks"] if task["importance"] == "held"]
+    stretch = [task for task in trial["tasks"] if task["importance"] in {"stretch", "held"}]
     tuning = [task for task in required if task["qualification_tier"] <= through_tier]
-    held_only = {task["qualification_tier"] for task in held} - {task["qualification_tier"] for task in required}
+    held_only = {task["qualification_tier"] for task in stretch} - {task["qualification_tier"] for task in required}
     tiers, qualified_tier = [], 0
     advancing = not trial.get("submission_blockers")
     for tier in sorted({task["qualification_tier"] for task in required}):
@@ -436,6 +438,24 @@ def _qualification(trial, through_tier):
             "tiers": tiers}
 
 
+def _selected_holdout(selected, through_tier):
+    """Whether the selected configuration passed the untuned tiers above the tuning cap.
+
+    Selection uses only tiers <= ``through_tier``; required tasks above it are
+    the holdout. The claim never presents a tuning-tier PASS as independent
+    confirmation (``independent_confirmation`` stays ``not_performed``).
+    """
+    from .leaderboard_contract import INDEPENDENT_CONFIRMATION, holdout_claim
+    if selected is None:
+        return {"status": "pending", "independent_confirmation": INDEPENDENT_CONFIRMATION,
+                "claim": "No configuration is selected yet; no holdout claim."}
+    by_tier = {}
+    for task in selected["tasks"]:
+        if task["importance"] == "required":
+            by_tier.setdefault(task["qualification_tier"], []).append(task["gate_status"])
+    return holdout_claim(by_tier, through_tier)
+
+
 def _annotate_progression(summary):
     """Add reporting without changing the archived PASS-count/hash selector."""
     trials = summary["trials"]
@@ -462,6 +482,7 @@ def _annotate_progression(summary):
         "full_view_winner_candidate_id": selected["candidate_id"] if outcome == "full_winner" else None,
         "comparison_complete": summary["selection"]["selection_complete"],
         "default_adoption": False,
+        "selected_holdout": _selected_holdout(selected, summary["tuning_through_tier"]),
     }
     summary["speed_selection"] = {
         "status": "UNAVAILABLE", "selected_candidate_id": None,

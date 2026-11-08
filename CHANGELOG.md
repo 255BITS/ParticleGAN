@@ -1,5 +1,81 @@
 # Changelog
 
+## Unreleased
+
+- **Exact trainer checkpoint continuation with gradient response.** Save,
+  validate and restore gradient-coherence history when enabled, preserving the
+  next update in fresh and previously used trainers. Reject older enabled-response
+  checkpoints without that history instead of silently restarting the controller.
+- **Completed-update checkpoint boundaries.** `GANTrainer.state_dict()` and
+  `load_state_dict()` reject active updates before changing live state, including
+  calls inside the public `generator_real` callback.
+
+## 0.9.7 — 2026-11-05
+
+- **Unified `stretch` experiment role and tier-by-tier stretch leaderboard.**
+  Introduce `stretch` (`STRETCH_ROLES = {"stretch", "held"}`) across
+  `experiments.forge` and `particlegan_forge` as the canonical role unifying
+  extra-credit, optional, frontier, and held benchmark experiments. Render a
+  dedicated `## Stretch experiments` table by tier (`Tier 1 stretch` through
+  `Tier 4 stretch` plus `Total stretch`) in the
+  [technique inventory](reports/forge/technique-inventory.md) and clarify
+  view-level `ranking` versus task-assignment roles (`required`, `stretch`,
+  `diagnostic`) in [RESEARCH_GLOSSARY.md](RESEARCH_GLOSSARY.md) and
+  [EXPERIMENTATION.md](EXPERIMENTATION.md).
+
+## 0.9.6 — 2026-11-05
+
+- **Default BISPF winner (`bispf_optimized`) and Tier 1/Tier 2 qualification.**
+  `DEFAULT_RECIPE = "bispf_optimized"` (`bispf-optimized-quintic-v1`) is the
+  selected default trainer preset. All seven runnable selected families pass
+  all `27/27` required Tier 1 smoke tasks on the current source cohort, and
+  both BISPF and BCAP reach `77/78` required Tier 2 tasks (`105/115` and
+  `109/115` total across Tiers 1–3) in the refreshed
+  [technique inventory](reports/forge/technique-inventory.md).
+
+## 0.9.5 — 2026-11-05
+
+- **Explicit BISPF input domains.** Declare `input_domain="continuous"` for
+  native feature vectors of any width, or `"categorical"` for categorical
+  matrices, through the public critic penalty factory or `GANTrainer`'s
+  `penalty_options`. The default `"auto"` preserves the existing shape gates;
+  an explicit domain overrides automatic simplex detection. Small categorical
+  codebooks also stay out of the late continuous 2D thermal-freeze rule.
+  Checkpoints retain the selected domain and reject mismatched restoration.
+- **Runnable categorical examples.** The
+  [input-domain guide](docs/bispf-input-domains.md) includes a checked arithmetic
+  walkthrough, four-category GAN training with numerical quality gates and an
+  actual-training GIF, and exact checkpoint continuation. The checked CPU run
+  passes its final five observations; it supplies no Forge qualification or
+  native-model quality claim.
+
+- **One recipe selection path for new training.** Bare or partial `Recipe(...)`
+  calls now raise a migration error rather than silently selecting historical
+  KA2 settings. Use `get_recipe()` for the selected public default, or explicitly
+  select a named preset. Restore compact saved configurations with
+  `Recipe.from_dict(saved_fields)`; historical values and checkpoint semantics
+  are preserved. Fully resolved field dictionaries and `dataclasses.replace`
+  remain supported. This is an intentional constructor API break, not a change
+  to any preset, optimizer, penalty or recorded training result.
+
+## 0.9.4 — 2026-10-23
+
+- **Python 3.11+ requirement and patched build/image dependencies.** Raise
+  `requires-python` to `>=3.11`, require `setuptools>=84.2.1` in
+  `[build-system]` (`GHSA-8rrh-rw8j-w5fx`), and require `Pillow>=13.0.0,<14`
+  across the `lunar`, `images` and `experiments` optional dependency groups
+  (`CVE-2026-112900`, `CVE-2026-112393`, `CVE-2026-112403`), removing the
+  Python `< 3.11` `tomli` fallback. Core `particlegan` runtime dependencies
+  (`torch>=2.6,<3`, `numpy>=1.26,<3`) are unchanged.
+- **`UpdatePolicy` extra-state validation.** `UpdatePolicy._check_tensors`
+  validates module `_extra_state` metadata (such as `MoGParticlePrior`
+  `sigma_rel` and `standardize` fields persisted via `get_extra_state`) before
+  restoring model or optimizer state.
+- **Expanded Forge model toys and preserved diagnostic records.** Register
+  public AE, VAE and DDGAN research model toys in the Forge view-v14 inventory
+  and preserve source-bound saved-state VAE/DDGAN failure diagnostics and
+  concluded R1/R2 and stall-reach/G-idle recall archives.
+
 ## 0.9.3 — 2026-10-18
 
 - **Opt-in guarded FP64 Gram and diagnostic SVD dense profiles.** Add

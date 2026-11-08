@@ -73,7 +73,7 @@
       "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
       "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
       "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee",
-      "experiments/forge/behavior_adapters.py": "efaa4654e69c6361562a65c1f8cca3e04b05e91797ed0ce3900c70986edcbfc8",
+      "experiments/forge/behavior_adapters.py": "e1fb28dbbf9e7809bc7f3ce41739da6d12951e2216973850d7de5fc8f17459ef",
       "benchmarks/locked_shared/hosts/unipolar.py": "c166445fa2d0b8d5a02d4cfa4464782d419064b2b2ccc4273bd372cd6e1e497c",
       "benchmarks/toy100/device.py": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911"
     },
@@ -126,6 +126,13 @@
           "benchmarks/toy100/device.py"
         ]
       }
+    },
+    "integration_source_binding": {
+      "id": "pr-474-develop-integration-20261108",
+      "previous_task_commit": "528807d4b26db979c8e77d0543d266514c8e14d9",
+      "previous_task_path": "configs/forge/tasks/unipolar.json",
+      "previous_task_sha256": "792041b77120c2245eef8f57b2a354ff9f2e59ea827c52f4feb2976f08fda0db",
+      "previous_task_blob": "77cdcf10df05d88cdd374ec3177a8ab2958a1f58"
     }
   },
   "resources": {

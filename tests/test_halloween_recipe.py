@@ -162,7 +162,7 @@ def test_default_additions_preserve_archived_recipe_identity_and_packets():
     old = {k: v for k, v in old.items() if k not in additions}
     assert recipe_identity_fields(old) == recipe_identity_fields(asdict(recipe))
     assert not additions & recipe.to_dict().keys()
-    assert Recipe(**recipe.to_dict()) == recipe
+    assert Recipe.from_dict(recipe.to_dict()) == recipe
     changed = recipe.replace(d_eps=.2)
     assert recipe_identity_fields(asdict(changed)) != recipe_identity_fields(old)
 

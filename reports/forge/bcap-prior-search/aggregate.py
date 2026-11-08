@@ -6,9 +6,15 @@ from pathlib import Path
 import re
 import shutil
 import subprocess
+import sys
 from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[3]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from experiments.forge.publication_storage import RetainedMediaStore, publish_media_tree, rewrite_media_links
+
 OUT = Path(__file__).resolve().parent
 FEATURES = {"proximal": 387, "coulomb": 388, "sigreg": 389,
             "covariance": 390, "mmd": 391}
@@ -107,6 +113,7 @@ def bind_demo_links(checkout, relative, source_commit, name):
 
 def main():
     records = []
+    media_store = RetainedMediaStore(ROOT)
     for name, number in FEATURES.items():
         source = Path(f"/home/martyn/dev/ParticleGAN-prior-{name}/reports/forge/bcap-prior-search/{name}")
         result, spec = read(source / "results.json"), read(source / "spec.json")
@@ -131,24 +138,38 @@ def main():
         for file in ("audit.json", "audit.py", "execution-repair.json", "control_word_audit.json", "control_word_audit.py", "readout.md", "failure-witnesses.md", "interpretation.md", "INTERPRETATION.md", "protocol_audit.py", "protocol-audit.json", "repair_witness.py", "repair-witness.json", "saved_moments.py", "saved_moments.json", "moment-diagnostics.json", "moment-diagnostics.md", "publication-validation.json", "prior_geometry.py", "prior-geometry.json", "mps_numerical_probe.py", "mps_numerical_probe.json"):
             if (source / file).is_file():
                 shutil.copy2(source / file, dest / file)
-        if (source / "media").is_dir():
-            shutil.copytree(source / "media", dest / "media", dirs_exist_ok=True)
+        media = {}
+        if (source / "media").is_dir() and not (dest / "media").exists():
+            media = publish_media_tree(source / "media", dest / "media", media_store)
         for document in dest.glob("*.md"):
-            document.write_text(document.read_text() + (
+            content = rewrite_media_links(document.read_text(), source, document.parent, media)
+            document.write_text(content + (
                 f"\nSaved-only reproduction commands require the [{name} feature's executed checkout]"
                 f"(https://github.com/255BITS/ParticleGAN/tree/{result['source_commit']}) "
                 "and the original local archive. This aggregate branch contains reports and saved evidence; "
                 "the feature PR contains its implementation.\n"))
         checkout = source.parents[3]
         demo = Path("reports/forge") / DEMOS[name]
-        tracked = subprocess.check_output(["git", "ls-files", "-z", "--", str(demo)], cwd=checkout).decode().split("\0")
-        for relative in filter(None, tracked):
+        tracked = list(filter(None, subprocess.check_output(
+            ["git", "ls-files", "-z", "--", str(demo)], cwd=checkout).decode().split("\0")))
+        demo_media = {(checkout / relative).resolve(): media_store.retain(checkout / relative)
+                      for relative in tracked if Path(relative).suffix == ".gif"}
+        new_documents = []
+        for relative in tracked:
             file = Path(relative)
             assert file.suffix in {".md", ".py", ".json", ".gif"}, file
             target = ROOT / file
+            # Existing archives keep their original paths and exact bytes.
+            if file.suffix == ".gif" or target.exists():
+                continue
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(checkout / file, target)
-        bind_demo_links(checkout, demo / "README.md", result["source_commit"], name)
+            if file.suffix == ".md":
+                target.write_text(rewrite_media_links(
+                    target.read_text(), (checkout / file).parent, target.parent, demo_media))
+                new_documents.append(file)
+        if demo / "README.md" in new_documents:
+            bind_demo_links(checkout, demo / "README.md", result["source_commit"], name)
         search_name = f"bcap-prior-{name}-search-v1.json"
         search_source = source.parents[1] / "configuration-search" / search_name
         search_report = read(search_source)

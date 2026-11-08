@@ -163,7 +163,7 @@ def task_recipe(case, recipe_name=None, recipe=None):
     else:
         if recipe_name in (None, BASELINE):
             card = json.loads((ROOT / f"configs/forge/ideas/{BASELINE}.json").read_text())
-            base = Recipe(**card["recipe_overrides"])
+            base = Recipe.from_dict(card["recipe_overrides"])
         else:
             base = get_recipe(recipe_name)
         result = base.replace(**fields, total_steps=None if base.total_steps is None else case["default_steps"])

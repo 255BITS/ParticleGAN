@@ -29,7 +29,7 @@ def test_public_r1r2_updates_match_independent_native_adam_oracle():
     deterministic_orthogonal_(generator, seed=0)
     deterministic_orthogonal_(critic, seed=1)
     deterministic_orthogonal_(prior, seed=0)
-    recipe = Recipe(
+    recipe = Recipe.from_dict(dict(
         optimizer_family="adam", reg_arm="a_r1r2", num_particles=8, z_dim=2,
         batch_size=4, total_steps=20, prior_kind="mog", standardize=False,
         lr=.0085, d_lr_mult=1.5, prior_lr_mult=2., betas=(0., .9),
@@ -37,7 +37,7 @@ def test_public_r1r2_updates_match_independent_native_adam_oracle():
         reg_coeff_anneal_end=.2, reg_every=1, reg_anchor_weight=0., d_guard_ratio=0.,
         latent_damping_max_rate=0., direct_particle_gain=False, input_noise_std=0.,
         output_noise_std=0., prior_reg=0., prior_regularizer="none", ema_decay=0.,
-        lr_anneal_start=.2, lr_floor=.1, network_lr_floor=.1, network_lr_horizon_cap=None)
+        lr_anneal_start=.2, lr_floor=.1, network_lr_floor=.1, network_lr_horizon_cap=None))
     trainer = GANTrainer(recipe, generator, critic, prior=prior, seed=0)
     expected_g, expected_d, expected_prior = map(deepcopy, (generator, critic, prior))
     expected_opt_g = torch.optim.Adam([

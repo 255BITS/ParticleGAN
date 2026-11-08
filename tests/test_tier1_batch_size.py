@@ -18,7 +18,7 @@ import torch
 
 from benchmarks.toy_audit import tier1_batch_size as study
 
-pytestmark = pytest.mark.skipif(not torch.cuda.is_available(), reason="batch study requires CUDA")
+pytestmark = [pytest.mark.cuda, pytest.mark.skipif(not torch.cuda.is_available(), reason="batch study requires CUDA")]
 
 
 @pytest.fixture(scope="module")

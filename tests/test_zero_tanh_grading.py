@@ -28,7 +28,7 @@ def receipt(card, samples, *, earlier_samples=None):
     final = tanh_point_mass.score_samples(samples, spec, steps)
     earlier = final if earlier_samples is None else tanh_point_mass.score_samples(earlier_samples, spec, 0)
     points = [{"step": step, **(final if step == steps else earlier)} for step in schedule]
-    config = Recipe()
+    config = Recipe.from_dict({})
     prior = config.make_prior()
     return {"recipe": config.to_dict(), "evidence": {
         **executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean"),

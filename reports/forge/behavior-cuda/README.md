@@ -26,7 +26,7 @@ These short software fixtures confer no scientific qualification.
 ```sh
 CUDA_VISIBLE_DEVICES=0 CUBLAS_WORKSPACE_CONFIG=:4096:8 \
 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
-/usr/bin/python -m pytest tests/test_forge_behavior_cuda.py -q \
+/usr/bin/python -m pytest -m cuda tests/test_forge_behavior_cuda.py -q \
   --junitxml=runs/software/behavior-cuda.xml \
   > runs/software/behavior-cuda.log 2>&1
 tail -F runs/software/behavior-cuda.log

@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def r1_recipe(card="r1r2-repair-control-20261022"):
-    return Recipe(**json.loads((ROOT / "configs/forge/ideas" / (card + ".json")).read_text())["recipe_overrides"])
+    return Recipe.from_dict(json.loads((ROOT / "configs/forge/ideas" / (card + ".json")).read_text())["recipe_overrides"])
 
 
 @pytest.fixture(autouse=True)
@@ -52,7 +52,7 @@ def test_native_adam_split_is_bit_exact_per_parameter_and_state(dtype, card):
     split, split_critic = recipe.make_optimizers(split_g, split_d, split_prior,
         encoder=split_e, separate_encoder_groups=True, foreach=False, fused=False)
     assert type(combined) is type(split) is torch.optim.Adam
-    assert len(combined.param_groups) == 2
+    assert len(combined.param_groups) == 3
     assert [group["role"] for group in split.param_groups] == ["generator", "encoder", "prior"]
     assert split.param_groups[0]["lr"] == split.param_groups[1]["lr"]
     assert split.param_groups[0]["betas"] == split.param_groups[1]["betas"]
@@ -79,9 +79,10 @@ def test_default_keeps_legacy_groups_and_optimizer_checkpoint_layout():
     default, _ = recipe.make_optimizers(g, d, prior, encoder=e, foreach=False)
     explicit, _ = recipe.make_optimizers(g, d, prior, encoder=e,
         separate_encoder_groups=False, foreach=False)
-    assert len(default.param_groups) == 2
-    assert [id(p) for p in default.param_groups[0]["params"]] == [id(p) for p in (*g.parameters(), *e.parameters())]
-    assert default.param_groups[1]["params"] == [prior.z]
+    assert len(default.param_groups) == 3
+    assert [id(p) for p in default.param_groups[0]["params"]] == [id(p) for p in g.parameters()]
+    assert default.param_groups[1]["params"] == list(e.parameters())
+    assert default.param_groups[2]["params"] == [prior.z]
     assert all("role" not in group for group in default.param_groups)
     assert state_digest(default.state_dict()) == state_digest(explicit.state_dict())
     restored, _ = recipe.make_optimizers(g, d, prior, encoder=e, foreach=False)

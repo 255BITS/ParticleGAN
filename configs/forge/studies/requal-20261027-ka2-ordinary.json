@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 500000,
+    "candidate_budget_seconds": 100000,
+    "id": "stale-family-requal-20261027"
+  },
+  "candidate": "recipe-prior-refactor-ka2-v1",
+  "competing_explanation": "Develop updates since the Oct 10 recipe-prior refactor altered undeclared behavior or stream draws, so recorded verdicts no longer describe the current source.",
+  "control": {
+    "candidate_id": "bispf-optimized-quintic-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "mean_error_sigma",
+    "op": ">",
+    "phase": "final",
+    "task_id": "gaussian1d_smoke",
+    "threshold": 0.2
+  },
+  "hypothesis": "Ordinary re-qualification of the unchanged selected ka2 recipe on the current develop source reproduces its recorded discriminator_stability outcomes.",
+  "id": "requal-20261027-ka2-ordinary",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "mean_error_sigma",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "gaussian1d_smoke",
+    "threshold": 0.2
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "scope": "exact_pre_refactor_selected_leader_settings",
+        "source_commit": "03466efa4de8271b9a2c964406dc6f4f0f260792"
+      },
+      "path": "reports/forge/recipe-prior-refactor/baseline.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 2,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

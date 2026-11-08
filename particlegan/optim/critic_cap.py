@@ -55,26 +55,35 @@ class CriticCapOptimizer(NormalizedOptimizer):
         self.critic_cap_stats['probes'] += 1
         return values
 
+    def _clear_pending(self):
+        super()._clear_pending()
+        self._cap_panels.clear()
+
     @torch.no_grad()
     def step(self, closure=None):
-        if closure is not None or not self._cap_panels:
-            raise ValueError('finite cap step requires the paired critic penalty first')
-        parameters = [p for g in self.param_groups for p in g['params']]
-        originals = [p.detach().clone() for p in parameters]
-        try:
+        """Measure, base-update, then halve to the cap; failures abort panels.
+
+        Any failure (missing panel, probe, base update or trial) calls
+        ``abort_pending()``, so the optimizer stays checkpointable and the next
+        step can bind fresh panels. A failed trial restores the pre-step
+        parameters; a failed base update is not rolled back.
+        """
+        context = {}
+
+        def check():
+            if closure is not None or not self._cap_panels:
+                raise ValueError('finite cap step requires the paired critic penalty first')
             before = self._measure()
-        except Exception:
-            self._cap_panels.clear()
-            raise
-        bounds = [max(kappa, v) for v, (_, kappa) in zip(before, self._cap_panels)]
-        prior_lr_max = self.record.lr_max
-        result = super().step()
-        proposed = [p.detach().clone() for p in parameters]
-        displacements = [new-old for new, old in zip(proposed, originals)]
-        accepted = False
-        scale = 0.
-        after = before
-        try:
+            context.update(before=before, prior_lr_max=self.record.lr_max,
+                           bounds=[max(kappa, v) for v, (_, kappa) in zip(before, self._cap_panels)])
+
+        def adjust(parameters, originals):
+            before, bounds = context['before'], context['bounds']
+            proposed = [p.detach().clone() for p in parameters]
+            displacements = [new-old for new, old in zip(proposed, originals)]
+            accepted = False
+            scale = 0.
+            after = before
             for trial in range(9):
                 alpha = 2. ** -trial
                 # Preserve an accepted full step bitwise, including zero updates.
@@ -102,14 +111,10 @@ class CriticCapOptimizer(NormalizedOptimizer):
             # The base call owns one clock; its LR observation reflects the
             # accepted finite fraction rather than the rejected full proposal.
             self.record.lr_last = scale * max(float(g['lr']) for g in self.param_groups)
-            self.record.lr_max = max(prior_lr_max, self.record.lr_last)
-        except Exception:
-            for p, old in zip(parameters, originals):
-                p.copy_(old)
-            raise
-        finally:
-            self._cap_panels.clear()
-        return result
+            self.record.lr_max = max(context['prior_lr_max'], self.record.lr_last)
+
+        return self._propose_adjust_commit(lambda: super(CriticCapOptimizer, self).step(),
+                                           adjust, check=check)
 
     def state_dict(self):
         if self._cap_panels:

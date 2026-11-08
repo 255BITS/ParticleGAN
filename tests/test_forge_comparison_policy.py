@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
-from test_forge_current_technique_inventory import ROOT, evidence, publication
+from test_forge_current_technique_inventory import ROOT, evidence, publication  # noqa: F401
 
 
 def test_actual_registered_dispositions_are_a_valid_comparison_projection():
@@ -83,7 +83,7 @@ def test_projection_rejects_changed_evidence_or_missing_original(change):
         publication._comparison_projection(actual, projected, comparison)
 
 
-def test_explicit_cached_comparison_preserves_registered_rows_without_regrading(evidence):
+def test_explicit_cached_comparison_preserves_registered_rows_without_regrading(evidence):  # noqa: F811
     root, manifest = evidence
     publication.publish_current(root)
     original = read_json(root / 'reports/forge/technique-inventory.json')['rows']
@@ -203,3 +203,137 @@ def test_diagnostic_study_does_not_require_an_ordinary_qualifying_row(scope):
     studies = [{'request': {'candidate': {'id': 'diagnostic'}, 'view': {'id': 'view', 'evidence_scope': scope},
                             'execution_backend': 'cuda'}}]
     publication._validate_recorded_study_projection(studies, {'rows': []}, 'view', 'cuda')
+
+
+def test_additive_view_revision_is_valid_comparison_projection_and_retains_added_tasks():
+    actual_view = read_json(ROOT / 'configs/forge/views/discriminator_stability.json')
+    recorded_view = read_json(ROOT / 'configs/forge/view-history/discriminator_stability-v9.json')
+    publication._validate_comparison_policy(actual_view, recorded_view)
+
+    actual, projected, comparison = comparison_fixture()
+    actual['status_reasons'] = {'added-reason': ['new task failure reason']}
+    actual['rows'][0]['bindings']['task_contracts']['added_tier1'] = 'added-contract'
+    actual['rows'][0]['tasks'].append({'task_id': 'added_tier1', 'status': 'PASS', 'reasons_sha256': 'added-reason'})
+    projected['rows'][0]['bindings']['task_contracts']['added_tier1'] = 'added-contract'
+    comparison['added_actual_tasks'] = ['added_tier1']
+    comparison['verified_evaluator_lineage'] = {'family': {'acquire': 'a-source-refresh'}}
+    actual['rows'][0]['bindings']['task_contracts']['acquire'] = 'a-source-refresh'
+    projected['rows'][0]['bindings']['task_contracts']['acquire'] = 'a-source-refresh'
+
+    publication._comparison_projection(actual, projected, comparison)
+    carried = [t for t in projected['rows'][0]['nonrequired_tasks'] if t['task_id'] == 'added_tier1']
+    assert carried == [{'task_id': 'added_tier1', 'status': 'PASS', 'reasons_sha256': 'added-reason'}]
+    assert projected['status_reasons']['added-reason'] == ['new task failure reason']
+    assert projected['rows'][0]['qualified_tier'] == 1
+
+    # Unauthorized extra task contract without added_actual_tasks must fail closed.
+    bad_actual, bad_projected, bad_comparison = comparison_fixture()
+    bad_actual['rows'][0]['bindings']['task_contracts']['sneaky'] = 'x'
+    bad_projected['rows'][0]['bindings']['task_contracts']['sneaky'] = 'x'
+    with pytest.raises(ValueError, match='comparison projection changes recorded task contracts'):
+        publication._comparison_projection(bad_actual, bad_projected, bad_comparison)
+
+
+def test_evaluator_revision_lineage_accepts_source_only_refresh_and_rejects_gate_change():
+    from experiments.forge.views import load_tasks, task_evaluation_fingerprint
+    recorded = read_json(ROOT / 'reports/forge/technique-inventory.json')
+    live_two_pole = load_tasks(ROOT)['two_pole']
+    live_eval = task_evaluation_fingerprint(live_two_pole)
+    k3p_ref = next(row['bindings']['task_contracts'] for row in recorded['rows'] if row['trainer_family'] == 'k3p')
+    ref_eval = recorded['task_contracts'][k3p_ref['two_pole']]['evaluation_sha256']
+    assert ref_eval != live_eval
+    assert publication._evaluator_revision_reaches(ROOT, live_two_pole, ref_eval) is True
+
+    tampered = deepcopy(live_two_pole)
+    tampered['execution']['steps'] += 1
+    assert publication._evaluator_revision_reaches(ROOT, tampered, ref_eval) is False
+
+    tampered_gate = deepcopy(live_two_pole)
+    tampered_gate['evaluation']['thresholds'][0][2] = 0.99
+    assert publication._evaluator_revision_reaches(ROOT, tampered_gate, ref_eval) is False
+
+
+def test_candidate_roster_requires_frozen_source_and_cannot_combine_with_declaration_registration(tmp_path):
+    with pytest.raises(ValueError, match='declaration roster requires exact frozen source reconstruction'):
+        publication.regenerate(tmp_path, candidate_roster=['atlas-particle-normal-v4'])
+    with pytest.raises(ValueError, match='cannot combine --declaration-registration and --candidate'):
+        publication.regenerate(
+            tmp_path,
+            source_commit='HEAD',
+            declaration_registration=Path('reg.json'),
+            candidate_roster=['atlas-particle-normal-v4'],
+        )
+    with pytest.raises(ValueError, match='declaration roster requires exact frozen source reconstruction'):
+        publication.publish_current(tmp_path, candidate_roster=['atlas-particle-normal-v4'])
+
+
+def test_comparison_contracts_match_is_idempotent_after_additive_row_is_published():
+    actual, projected, comparison = comparison_fixture()
+    comparison['policy']['assignments'] = [
+        {'task': 'acquire', 'qualification_tier': 1},
+        {'task': 'held', 'qualification_tier': 2},
+        {'task': 'hold', 'qualification_tier': 3},
+    ]
+    comparison['added_actual_tasks'] = ['added_tier1']
+    # Simulate re-running comparison projection once reference_task_contracts
+    # already comes from a published later-revision row containing added_tier1.
+    comparison['reference_task_contracts']['family']['added_tier1'] = 'added-contract'
+    actual['rows'][0]['bindings']['task_contracts']['added_tier1'] = 'added-contract'
+    actual['rows'][0]['tasks'].append({'task_id': 'added_tier1', 'status': 'PASS'})
+    projected['rows'][0]['bindings']['task_contracts']['added_tier1'] = 'added-contract'
+
+    assert publication._comparison_contracts_match(projected['rows'][0], comparison) is True
+    publication._comparison_projection(actual, projected, comparison)
+    assert any(t['task_id'] == 'added_tier1' and t['status'] == 'PASS'
+               for t in projected['rows'][0]['nonrequired_tasks'])
+
+    # Divergent added-task contract digest must still fail closed.
+    bad_row = deepcopy(projected['rows'][0])
+    bad_row['bindings']['task_contracts']['added_tier1'] = 'tampered-added-contract'
+    assert publication._comparison_contracts_match(bad_row, comparison) is False
+
+    # Missing a required comparison-policy task in reference must also fail closed.
+    incomplete_comparison = deepcopy(comparison)
+    incomplete_comparison['reference_task_contracts']['family'].pop('acquire')
+    assert publication._comparison_contracts_match(projected['rows'][0], incomplete_comparison) is False
+
+
+def test_measured_candidates_at_source_discovers_non_study_ordinary_attempts(tmp_path):
+    manifests = {'src-digest': {'origin_commit': 'a' * 40, 'digest': 'src-digest', 'files': {}}}
+    attempts = tmp_path / 'reports/forge/attempts'
+    for name, request in [
+        ('01_ordinary_non_study', {
+            'candidate': {'id': 'non-study-cand'},
+            'view': {'id': 'discriminator_stability'},
+            'execution_backend': 'cuda',
+            'source': {'digest': 'src-digest', 'origin_commit': 'a' * 40},
+        }),
+        ('02_diagnostic', {
+            'candidate': {'id': 'diag-only-cand'},
+            'view': {'id': 'discriminator_stability', 'evidence_scope': 'research_diagnostic'},
+            'execution_backend': 'cuda',
+            'source': {'digest': 'src-digest', 'origin_commit': 'a' * 40},
+        }),
+        ('03_other_commit', {
+            'candidate': {'id': 'other-commit-cand'},
+            'view': {'id': 'discriminator_stability'},
+            'execution_backend': 'cuda',
+            'source': {'digest': 'src-digest', 'origin_commit': 'b' * 40},
+        }),
+    ]:
+        atomic_json(attempts / name / 'request.json', {'request': request})
+
+    studies = [{
+        'request': {
+            'candidate': {'id': 'study-cand'},
+            'view': {'id': 'discriminator_stability'},
+            'execution_backend': 'cuda',
+        }
+    }]
+    measured = publication._measured_candidates_at_source(
+        tmp_path, manifests, studies, 'discriminator_stability', 'cuda'
+    )
+    assert measured == {'study-cand', 'non-study-cand'}
+
+
+

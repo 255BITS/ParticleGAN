@@ -114,9 +114,9 @@ tail -F runs/api/dogfood/toy/parity.log
 tail -F runs/api/dogfood/denoising/jobs.log
 tail -F runs/api/dogfood/cifar/smoke-jobs.log
 
-OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 .venv/bin/python -m pytest -q
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 .venv/bin/python -m pytest -m "cuda or not cuda" -q
 RUN_CUDA_IMAGE_TESTS=1 CUDA_VISIBLE_DEVICES=1 OMP_NUM_THREADS=1 \
-  .venv/bin/python -m pytest -q tests/test_cifar_resume.py
+  .venv/bin/python -m pytest -m cuda -q tests/test_cifar_resume.py
 ```
 
 `config-audit.log`, `defaults-parity.log`, `wheel.log`, and `wheel-loop.log`

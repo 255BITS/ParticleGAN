@@ -4,15 +4,15 @@ Every record identifies an attempt to run an unchanged selected or archived rese
 
 | Family or exact recipe | Attempted / distinct tests | Pending | Outcome counts |
 | --- | ---: | ---: | --- |
-| atlas | 35/35 | 0 | 35 BLOCKED |
-| bcap-pure | 35/35 | 0 | 4 BLOCKED, 14 FAIL, 17 PASS |
-| bispf | 41/41 | 0 | 9 BLOCKED, 12 FAIL, 20 PASS |
-| e22 | 35/35 | 0 | 35 BLOCKED |
-| k3p | 35/35 | 0 | 4 BLOCKED, 15 FAIL, 16 PASS |
-| ka2 | 35/35 | 0 | 4 BLOCKED, 16 FAIL, 15 PASS |
+| atlas | 60/60 | 0 | 29 FAIL, 31 PASS |
+| bcap-pure | 60/60 | 0 | 34 FAIL, 26 PASS |
+| bispf | 60/60 | 0 | 30 FAIL, 30 PASS |
+| e22 | 60/60 | 0 | 34 FAIL, 26 PASS |
+| k3p | 60/60 | 0 | 30 FAIL, 30 PASS |
+| ka2 | 60/60 | 0 | 32 FAIL, 28 PASS |
 | atlas selected-cloud after investigation | 3/3 | 0 | 2 ERROR, 1 FAIL |
-| r1r2 | 35/35 | 0 | 4 BLOCKED, 17 FAIL, 14 PASS |
-| release07-gan-v3 | 35/35 | 0 | 4 BLOCKED, 17 FAIL, 14 PASS |
+| r1r2 | 60/60 | 0 | 33 FAIL, 27 PASS |
+| release07-gan-v3 | 60/60 | 0 | 31 FAIL, 29 PASS |
 | E22 checkpoint-export repair (same recipe) | 2/2 | 0 | 2 FAIL |
 | ATLAS checkpoint-export repair (same recipe) | 2/2 | 0 | 2 FAIL |
 | BISPF continuation attempts before prior-metadata fix | 3/3 | 0 | 1 BLOCKED, 2 ERROR |
@@ -59,12 +59,6 @@ These cover the three previously empty Atlas policy cells, three current BISPF c
 
 | Family / recipe | Test | Outcome | Updates / saved observations | Cause |
 | --- | --- | --- | --- | --- |
-| bispf current unbound task | grid100_14k | BLOCKED | 0 / — | checkpoint parent grid100: FAIL |
-| bispf current unbound task | grid100_14k | BLOCKED | 0 / — | checkpoint parent grid100: FAIL |
-| bispf current unbound task | rotated100_14k | BLOCKED | 0 / — | checkpoint parent rotated100: FAIL |
-| bispf current unbound task | rotated100_14k | BLOCKED | 0 / — | checkpoint parent rotated100: FAIL |
-| bispf current unbound task | staggered100_14k | BLOCKED | 0 / — | checkpoint parent staggered100: FAIL |
-| bispf current unbound task | staggered100_14k | BLOCKED | 0 / — | checkpoint parent staggered100: FAIL |
 | atlas selected-cloud after investigation | clockfree_audit | FAIL | 24 / — | step_label changed the update or common-prefix state |
 | atlas selected-cloud after investigation | gaussian1d_acquisition | ERROR | 1000 / 24 | ValueError: Out of range float values are not JSON compliant: nan |
 | atlas selected-cloud after investigation | ring16_acquisition | ERROR | 1600 / 96 | ValueError: Out of range float values are not JSON compliant: nan |
@@ -85,24 +79,16 @@ The checkpoint hasher now preserves diagnostic NaN/Inf values while retaining ev
 | bispf | BISPF rebuilt checkpoints + matched-prior 14k diagnostics | grid100 | FAIL | 7000 | coverage, sustained live accuracy, or independent holdout failed |
 | bispf | BISPF rebuilt checkpoints + matched-prior 14k diagnostics | rotated100 | FAIL | 7000 | coverage, sustained live accuracy, or independent holdout failed |
 | bispf | BISPF rebuilt checkpoints + matched-prior 14k diagnostics | staggered100 | FAIL | 7000 | coverage, sustained live accuracy, or independent holdout failed |
-| bispf | BISPF rebuilt checkpoints + matched-prior 14k diagnostics | grid100_14k | FAIL | 14000 | coverage, sustained live accuracy, or independent holdout failed |
 | bispf | BISPF continuation attempts before prior-metadata fix | grid100_14k | ERROR | — | ValueError: invalid context checkpoint schema |
-| bispf | BISPF rebuilt checkpoints + matched-prior 14k diagnostics | rotated100_14k | FAIL | 14000 | coverage, sustained live accuracy, or independent holdout failed |
+| bispf | BISPF rebuilt checkpoints + matched-prior 14k diagnostics | grid100_14k | FAIL | 14000 | coverage, sustained live accuracy, or independent holdout failed |
 | bispf | BISPF continuation attempts before prior-metadata fix | rotated100_14k | ERROR | — | ValueError: invalid context checkpoint schema |
-| bispf | BISPF rebuilt checkpoints + matched-prior 14k diagnostics | staggered100_14k | FAIL | 14000 | coverage, sustained live accuracy, or independent holdout failed |
+| bispf | BISPF rebuilt checkpoints + matched-prior 14k diagnostics | rotated100_14k | FAIL | 14000 | coverage, sustained live accuracy, or independent holdout failed |
 | bispf | BISPF continuation attempts before prior-metadata fix | staggered100_14k | BLOCKED | 0 | checkpoint parent staggered100: unavailable |
+| bispf | BISPF rebuilt checkpoints + matched-prior 14k diagnostics | staggered100_14k | FAIL | 14000 | coverage, sustained live accuracy, or independent holdout failed |
 | e22 | E22 checkpoint-export repair (same recipe) | gaussian1d_acquisition_tier1_policy_selected_cloud_v1 | FAIL | 1000 | recomputed complete live curve and terminal suffix |
 | e22 | E22 checkpoint-export repair (same recipe) | ring16_acquisition_tier1_policy_selected_cloud_v1 | FAIL | 1600 | recomputed complete live curve and terminal suffix |
 
 Continuation checks still require a complete own checkpoint, matching recipe and RNG identity, unchanged 7k scheduling horizon, exact prefix restoration and the full 14k update count. Ordinary qualification rejects the explicitly marked diagnostic continuation receipts.
-
-## Results recovered from existing uninterrupted runs
-
-These task results reuse their producer's already measured observations. No new training or sampling was performed. Original refused-start receipts remain linked in each certificate; ordinary qualification is unchanged.
-
-| Family | Test | Result | Passing extension checks | Evidence |
-| --- | --- | --- | ---: | --- |
-| bispf | ring_extension | PASS | 300/300 | [Verified saved run](grouped-evidence/4ee70c2cf634f45fbef5072e8689ed2a366f695603ad175fa4905dd19d9e04e8.json) |
 
 ## Attempted blockers and incomplete runs
 
@@ -167,56 +153,11 @@ These are recorded start attempts, not missing runs. A source or formulation cha
 | G-only coherent mean (original seed0) | vector_two_broad | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
 | G-only coherent mean (original seed0) | vector_unequal_mass | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
 | G-only coherent mean (original seed0) | vector_unequal_width | BLOCKED | G-gradient response is declared only for the original ordinary Gaussian host |
-| atlas | ae_gan_hold | BLOCKED | ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | clockfree_audit | BLOCKED | clockfree_audit: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | clockfree_audit_measurement_v1 | BLOCKED | clockfree_audit_measurement_v1: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | cover_leftover | BLOCKED | cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: BLOCKED |
-| atlas | five_word_joint_smoke | BLOCKED | five_word_joint_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | gaussian1d_smoke | BLOCKED | gaussian1d_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | gaussian1d_stability | BLOCKED | checkpoint parent gaussian1d_smoke: BLOCKED |
-| atlas | grid100 | BLOCKED | grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | grid100_14k | BLOCKED | checkpoint parent grid100: BLOCKED |
-| atlas | img_bars4 | BLOCKED | img_bars4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | img_blobs4 | BLOCKED | img_blobs4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | img_intensity2 | BLOCKED | img_intensity2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | img_stripes2 | BLOCKED | img_stripes2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | mid_scale_identity | BLOCKED | mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | mode_hold | BLOCKED | mode_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | residual_student | BLOCKED | residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | ring16_acquisition | BLOCKED | ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | ring_extension | BLOCKED | checkpoint parent ring_hold: BLOCKED |
-| atlas | ring_hold | BLOCKED | ring_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | rotated100 | BLOCKED | rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | rotated100_14k | BLOCKED | checkpoint parent rotated100: BLOCKED |
-| atlas | staggered100 | BLOCKED | staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | staggered100_14k | BLOCKED | checkpoint parent staggered100: BLOCKED |
-| atlas | target_shift_recovery | BLOCKED | target_shift_recovery: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | trajectory | BLOCKED | trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | two_pole | BLOCKED | two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | unipolar | BLOCKED | unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | unused_token_hold | BLOCKED | unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | vector_anisotropic | BLOCKED | vector_anisotropic: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | vector_overlap | BLOCKED | vector_overlap: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | vector_spiral | BLOCKED | vector_spiral: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | vector_two_broad | BLOCKED | vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | vector_unequal_mass | BLOCKED | vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| atlas | vector_unequal_width | BLOCKED | vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
 | atlas selected-cloud after investigation | gaussian1d_acquisition_tier1_policy_selected_cloud_v1 | ERROR | ValueError: Out of range float values are not JSON compliant: nan |
 | atlas selected-cloud after investigation | ring16_acquisition_tier1_policy_selected_cloud_v1 | ERROR | ValueError: Out of range float values are not JSON compliant: nan |
 | bcap-default-baseline-direction-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: INCOMPLETE |
 | bcap-default-baseline-direction-v1 | gaussian1d_stability | ERROR | ValueError: named-stream checkpoint identity mismatch |
 | bcap-default-baseline-direction-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
-| bcap-pure | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
-| bispf | grid100_14k | BLOCKED | checkpoint parent grid100: FAIL |
-| bispf | rotated100_14k | BLOCKED | checkpoint parent rotated100: FAIL |
-| bispf | staggered100_14k | BLOCKED | checkpoint parent staggered100: FAIL |
-| bispf current unbound task | grid100_14k | BLOCKED | checkpoint parent grid100: FAIL |
-| bispf current unbound task | grid100_14k | BLOCKED | checkpoint parent grid100: FAIL |
-| bispf current unbound task | rotated100_14k | BLOCKED | checkpoint parent rotated100: FAIL |
-| bispf current unbound task | rotated100_14k | BLOCKED | checkpoint parent rotated100: FAIL |
-| bispf current unbound task | staggered100_14k | BLOCKED | checkpoint parent staggered100: FAIL |
-| bispf current unbound task | staggered100_14k | BLOCKED | checkpoint parent staggered100: FAIL |
 | cell-quota-dualnorm-cross-v1 | ae_gan_hold | BLOCKED | Cell objective requires the public GANTrainer path |
 | cell-quota-dualnorm-cross-v1 | cover_leftover | BLOCKED | Cell objective requires the public GANTrainer path |
 | cell-quota-dualnorm-cross-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: BLOCKED |
@@ -259,47 +200,10 @@ These are recorded start attempts, not missing runs. A source or formulation cha
 | confidence-lr-finite-cap-gaussian-v1 | five_word_joint_smoke | TIMEOUT | original task wall-time limit exhausted |
 | confidence-lr-finite-cap-gaussian-v1 | gaussian1d_stability | BLOCKED | checkpoint parent gaussian1d_smoke: FAIL |
 | confidence-lr-finite-cap-gaussian-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
-| e22 | ae_gan_hold | BLOCKED | ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | clockfree_audit | BLOCKED | clockfree_audit: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | clockfree_audit_measurement_v1 | BLOCKED | clockfree_audit_measurement_v1: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | cover_leftover | BLOCKED | cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: BLOCKED |
-| e22 | five_word_joint_smoke | BLOCKED | five_word_joint_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | gaussian1d_smoke | BLOCKED | gaussian1d_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | gaussian1d_stability | BLOCKED | checkpoint parent gaussian1d_smoke: BLOCKED |
-| e22 | grid100 | BLOCKED | grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | grid100_14k | BLOCKED | checkpoint parent grid100: BLOCKED |
-| e22 | img_bars4 | BLOCKED | img_bars4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | img_blobs4 | BLOCKED | img_blobs4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | img_intensity2 | BLOCKED | img_intensity2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | img_stripes2 | BLOCKED | img_stripes2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | mid_scale_identity | BLOCKED | mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | mode_hold | BLOCKED | mode_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | residual_student | BLOCKED | residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | ring16_acquisition | BLOCKED | ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | ring_extension | BLOCKED | checkpoint parent ring_hold: BLOCKED |
-| e22 | ring_hold | BLOCKED | ring_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | rotated100 | BLOCKED | rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | rotated100_14k | BLOCKED | checkpoint parent rotated100: BLOCKED |
-| e22 | staggered100 | BLOCKED | staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | staggered100_14k | BLOCKED | checkpoint parent staggered100: BLOCKED |
-| e22 | target_shift_recovery | BLOCKED | target_shift_recovery: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | trajectory | BLOCKED | trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | two_pole | BLOCKED | two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | unipolar | BLOCKED | unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | unused_token_hold | BLOCKED | unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | vector_anisotropic | BLOCKED | vector_anisotropic: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | vector_overlap | BLOCKED | vector_overlap: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | vector_spiral | BLOCKED | vector_spiral: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | vector_two_broad | BLOCKED | vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | vector_unequal_mass | BLOCKED | vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
-| e22 | vector_unequal_width | BLOCKED | vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation |
 | generator-confidence-lr-bcap-direction-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
 | generator-idle-ema-bcap-direction-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: INCOMPLETE |
 | generator-idle-ema-bcap-direction-v1 | gaussian1d_stability | BLOCKED | checkpoint parent gaussian1d_smoke: INCOMPLETE |
 | generator-idle-ema-bcap-direction-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
-| k3p | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
-| ka2 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
 | kinetic-local-dualnorm-g-history-bank8-u-v1 | ae_gan_hold | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
 | kinetic-local-dualnorm-g-history-bank8-u-v1 | cover_leftover | BLOCKED | Original task source binding unavailable; do not port the formulation: particlegan/kinetic_transport.py |
 | kinetic-local-dualnorm-g-history-bank8-u-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: BLOCKED |
@@ -391,8 +295,6 @@ These are recorded start attempts, not missing runs. A source or formulation cha
 | positive-evidence-lr-gaussian-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: TIMEOUT |
 | positive-evidence-lr-gaussian-v1 | five_word_joint_smoke | TIMEOUT | original task wall-time limit exhausted |
 | positive-evidence-lr-gaussian-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
-| r1r2 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
-| release07-gan-v3 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |
 | signed-confidence-lr-gaussian-v1 | five_word_joint_hold | BLOCKED | checkpoint parent five_word_joint_smoke: TIMEOUT |
 | signed-confidence-lr-gaussian-v1 | five_word_joint_smoke | TIMEOUT | original task wall-time limit exhausted |
 | signed-confidence-lr-gaussian-v1 | ring_extension | BLOCKED | checkpoint parent ring_hold: FAIL |

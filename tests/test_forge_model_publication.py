@@ -9,6 +9,7 @@ import pytest
 
 from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
 from experiments.forge.model_toy_publication import PUBLICATION, PROTOCOL, load_publication
+from recipe_entrypoint_compat import frozen_restoration_source
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -69,7 +70,9 @@ def test_reporting_adapter_accepts_only_the_frozen_science(tmp_path, monkeypatch
     repair = read_json(runner.REPORTING_REPAIR)
     for name, patch in repair["reporting_only_changes"].items():
         assert source["files"][name] == patch["frozen_sha256"]
-        assert file_hash(ROOT / name) == patch["repaired_sha256"]
+        # Replay the already-recorded reporting repair against exact original
+        # bytes. Current constructor-migration bytes are not admitted by it.
+        frozen_restoration_source(ROOT, name, patch["repaired_sha256"])
         source["files"][name] = patch["repaired_sha256"]
     if changed_core:
         source["files"]["particlegan/recipes.py"] = "changed-core-code"
@@ -83,6 +86,18 @@ def test_reporting_adapter_accepts_only_the_frozen_science(tmp_path, monkeypatch
     error = ValueError if changed_core else FileExistsError
     with pytest.raises(error, match="scientific source" if changed_core else None):
         runner.main()
+
+    current = deepcopy(source)
+    changed = []
+    for name, patch in repair["reporting_only_changes"].items():
+        actual = file_hash(ROOT / name)
+        if actual != patch["repaired_sha256"]:
+            current["files"][name] = actual
+            changed.append(name)
+    if changed:
+        monkeypatch.setattr(sources, "inspect_source", lambda *a, **k: current)
+        with pytest.raises(ValueError, match="reporting adapter bytes differ"):
+            runner.main()
 
 
 def test_recall_keeps_blocked_prefixes_separate_from_full_results(publication, monkeypatch):

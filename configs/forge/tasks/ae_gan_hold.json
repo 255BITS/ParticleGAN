@@ -66,7 +66,7 @@
       "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
       "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
       "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee",
-      "experiments/forge/behavior_adapters.py": "efaa4654e69c6361562a65c1f8cca3e04b05e91797ed0ce3900c70986edcbfc8",
+      "experiments/forge/behavior_adapters.py": "e1fb28dbbf9e7809bc7f3ce41739da6d12951e2216973850d7de5fc8f17459ef",
       "benchmarks/locked_shared/hosts/ae_gan_hold.py": "3d2f45e3542e177d008a8fe4e1fcef49117909b39ef2fe5855e0e8883e5abeff",
       "benchmarks/toy100/device.py": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911"
     },
@@ -141,6 +141,13 @@
           "benchmarks/toy100/device.py"
         ]
       }
+    },
+    "integration_source_binding": {
+      "id": "pr-474-develop-integration-20261108",
+      "previous_task_commit": "528807d4b26db979c8e77d0543d266514c8e14d9",
+      "previous_task_path": "configs/forge/tasks/ae_gan_hold.json",
+      "previous_task_sha256": "5ceb818cfc0914e7e5d54a69bfa06c386284ac1795e86821b7b2388b9bb997b3",
+      "previous_task_blob": "ed11564445be34f64d98341809556df93c17d0eb"
     }
   },
   "resources": {

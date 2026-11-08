@@ -20,11 +20,11 @@ class PolynomialCritic(nn.Module):
 
 
 def recipe(**changes):
-    return Recipe(optimizer_family="adam", reg_arm="a_r1r2", num_particles=8, z_dim=2,
+    return Recipe.from_dict(dict(optimizer_family="adam", reg_arm="a_r1r2", num_particles=8, z_dim=2,
                   batch_size=4, total_steps=8, prior_kind="mog", standardize=False,
                   reg_anchor_weight=0., d_guard_ratio=0., latent_damping_max_rate=0.,
                   direct_particle_gain=False, input_noise_std=0., output_noise_std=0.,
-                  prior_reg=0., prior_regularizer="none", ema_decay=0., **changes)
+                  prior_reg=0., prior_regularizer="none", ema_decay=0., **changes))
 
 
 def trainer(config):
@@ -127,7 +127,7 @@ def test_default_identity_and_paired_training_are_exactly_unchanged():
 
 def test_r1_only_factory_roundtrip_resume_and_recipe_mismatch_are_strict():
     config = recipe(reg_fake_weight=0., reg_coeff=2., reg_coeff_end=.2)
-    assert Recipe(**config.to_dict()) == config
+    assert Recipe.from_dict(config.to_dict()) == config
     assert config.to_dict()["reg_fake_weight"] == 0.
     current = trainer(config)
     assert current.penalty.regularizer.real_weight == 1.

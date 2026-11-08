@@ -10,6 +10,7 @@ from experiments.forge.api import task_formulation_context
 from experiments.forge.model_toy_adapter import ModelToyExecutionError, preflight, run, validate_task
 from experiments.forge.state import state_digest
 from experiments.forge.views import grade_result
+from recipe_entrypoint_compat import model_source_blockers
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -25,12 +26,14 @@ def task(name="model_vae_hard"):
 def test_objective_adaptation_preserves_the_global_trainer_and_prior_policy():
     for path in sorted((ROOT / "configs/forge/tasks").glob("model_*.json")):
         value = json.loads(path.read_text())
-        assert preflight(value, candidate(), root=ROOT) == []
+        # Changed restoration syntax is a new source cohort, even though the
+        # selected recipe below is unchanged. Never rebind a frozen task hash.
+        assert preflight(value, candidate(), root=ROOT) == model_source_blockers(ROOT, value)
         context = task_formulation_context(candidate(), value, {"seed": 0}, device="cpu")
         assert context.recipe.optimizer_convolution_rule == "quintic"
         assert context.recipe.lr == .012
         assert context.recipe.prior_regularizer == "sbnp"
-        assert context.recipe.prior_reg == .01
+        assert context.recipe.prior_reg == .02
         assert context.recipe.prior_update == "learned"
         assert context.recipe.encoder_mode == value["execution"]["recipe_fields"]["encoder_mode"]
 
