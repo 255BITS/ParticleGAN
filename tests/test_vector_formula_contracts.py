@@ -10,6 +10,7 @@ import torch
 
 from benchmarks.toy_audit import api_vectors as api
 from tests.test_toy_api_vectors import assert_nested_equal
+from particlegan import get_recipe
 
 
 @pytest.fixture(autouse=True)
@@ -128,3 +129,106 @@ def test_soft_bounded_tanh_is_the_derivative_of_its_forward():
     observed = torch.autograd.grad(api.TanhRailGuard.apply(one), one)[0]
     expected = 1 - torch.tanh(one / 5.25).square()
     torch.testing.assert_close(observed, expected)
+
+
+def test_task_profiles_cannot_replace_requested_trainer_fields():
+    case = small_case("api-vector-two-broad")
+    case["spec"].update(lr=9., d_lr_mult=8., prior_lr_mult=7., prior_reg=6.,
+                        betas=[.1, .2], ema_decay=.3)
+    case["recipe_overrides"] = {"lr": 100., "loss": "relativistic"}
+    fixture = api.VectorFixture(case, recipe_name="bispf", max_steps=1)
+    expected = get_recipe("bispf", num_particles=case["particles"],
+                          z_dim=case["z_dim"], batch_size=case["batch_size"],
+                          total_steps=case["default_steps"])
+    assert fixture.recipe == expected
+
+
+def test_scaled_metadata_declares_the_clean_law_actually_sampled(monkeypatch):
+    case = small_case("api-grid100-res16-scaled-tanh")
+    fixture = api.VectorFixture(case, recipe_name="bispf", max_steps=1)
+    original = fixture.trainer.sample
+    flags = []
+    def sample(*args, **kwargs):
+        flags.append(kwargs["output_noise"])
+        return original(*args, **kwargs)
+    monkeypatch.setattr(fixture.trainer, "sample", sample)
+    fixture.observe(n=32)
+    assert flags and not any(flags)
+    assert "without additive output noise" in fixture.metadata["sampling"]
+
+
+def test_intact_ka2_default_caller_is_blocked_before_optimizers_are_built(monkeypatch):
+    from benchmarks.toy_audit.api_contract import UnsupportedRecipeOverrides
+    def optimizer_forbidden(*args, **kwargs):
+        raise AssertionError("unsupported candidate reached optimizer construction")
+    monkeypatch.setattr(api.Recipe, "make_optimizers", optimizer_forbidden)
+    case = api._registry()["api-reserved-alternating-critic-updates"]
+    assert case["default_recipe"] == "ka2"
+    with pytest.raises(UnsupportedRecipeOverrides, match="intact recipe"):
+        api.VectorFixture(case, recipe_name="auto", max_steps=1)
+
+
+def test_caller_checkpoint_restore_is_explicitly_unsupported_and_never_mutates():
+    from benchmarks.toy_audit.api_contract import UnsupportedRecipeOverrides
+    case = small_case("api-reserved-alternating-critic-updates")
+    fixture = api.VectorFixture(case, recipe_name="bispf", max_steps=3)
+    fixture.step()
+    before = fixture.state_dict()
+    assert before["checkpoint_scope"] == "export_only_no_resume"
+    assert fixture.metadata["checkpoint_capabilities"] == dict(
+        state_export="diagnostic_only", resume=False, exact_continuation=False)
+    assert set(before["caller"]["penalty"]) == {"coeff", "last_stats", "cooler"}
+    corrupt = deepcopy(before)
+    corrupt["caller"]["generator"]["net.0.weight"].add_(2)
+    corrupt["caller"]["latent_rng"] = torch.ones(1, dtype=torch.uint8)
+    with pytest.raises(UnsupportedRecipeOverrides, match="complete checkpoint restore is unsupported"):
+        fixture.load_state_dict(corrupt)
+    assert_nested_equal(before, fixture.state_dict())
+
+
+def test_required_checkpoint_contract_blocks_caller_before_construction(monkeypatch):
+    from benchmarks.toy_audit import api_contract
+    case = small_case("api-reserved-alternating-critic-updates")
+    case.update(provider="api_vectors", checkpoint_required=True)
+    def optimizer_forbidden(*args, **kwargs):
+        raise AssertionError("missing checkpoint capability reached optimizer construction")
+    monkeypatch.setattr(api.Recipe, "make_optimizers", optimizer_forbidden)
+    with pytest.raises(api_contract.UnsupportedRecipeOverrides, match="checkpoint continuation"):
+        api_contract.build(case, recipe_name="bispf", max_steps=1)
+    with pytest.raises(api_contract.UnsupportedRecipeOverrides, match="checkpoint continuation"):
+        api.VectorFixture(case, recipe_name="bispf", max_steps=1)
+
+
+def test_original_caller_default_is_a_blocked_receipt_without_training(tmp_path):
+    from benchmarks.toy_audit import api_run
+    case = api._registry()["api-reserved-alternating-critic-updates"]
+    case["provider"] = "api_vectors"
+    result = api_run.run_case(case, tmp_path / "blocked-ka2", recipe_name="auto", steps=1)
+    assert case["default_recipe"] == "ka2"
+    assert result["status"] == "BLOCKED" and result["verdict"] == "FAIL"
+    assert result["completed_updates"] == 0 and result["artifacts"] == {}
+    assert result["checkpoint_capabilities"] == case["checkpoint_capabilities"]
+    assert "intact recipe mechanisms" in result["failed_bounds"][0]
+
+
+def test_fixed_penalty_question_requires_matching_explicit_recipe():
+    from benchmarks.toy_audit.api_contract import UnsupportedRecipeOverrides
+    case = small_case("api-stress-r1-r2")
+    with pytest.raises(UnsupportedRecipeOverrides, match="explicitly declared matching recipe"):
+        api.VectorFixture(case, recipe_name="auto", max_steps=1)
+    declared = get_recipe("k3p", num_particles=case["particles"], z_dim=case["z_dim"],
+                          batch_size=case["batch_size"], total_steps=case["default_steps"],
+                          reg_arm=case["penalty_arm"], reg_coeff=case["spec"]["reg_coeff"])
+    fixture = api.VectorFixture(case, recipe=declared, max_steps=1)
+    assert fixture.recipe == declared
+    fixture.step()
+
+
+def test_supplied_complete_recipe_is_retained_without_task_tuning():
+    case = small_case("api-reserved-alternating-critic-updates")
+    declared = get_recipe("ka2", num_particles=case["particles"], z_dim=case["z_dim"],
+                          batch_size=case["batch_size"], total_steps=case["default_steps"],
+                          input_noise_std=0., output_noise_std=0., latent_damping_max_rate=0.)
+    fixture = api.VectorFixture(case, recipe=declared, max_steps=1)
+    assert fixture.recipe == declared
+    assert fixture.step()["g"] == 1
