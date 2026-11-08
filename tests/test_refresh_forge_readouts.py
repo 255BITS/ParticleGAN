@@ -1616,58 +1616,36 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     assert corrected > 0
     assert cov_doc == coverage_before
 
-    for fam_page_name in (
-        "atlas.md",
-        "bcap-pure.md",
-        "bcap-dualnorm.md",
-        "bispf.md",
-        "e22.md",
-        "k3p.md",
-        "ka2.md",
-        "r1r2.md",
-        "release07-gan-v3.md",
-    ):
-        fam_md = (ROOT / "reports/forge/families" / fam_page_name).read_text()
+    from experiments.forge.family_reports import full_suite_tasks
+    required_tasks = set(full_suite_tasks(publication["family_progress"]))
+    for family_id, original_cohort in original_cohorts.items():
+        family = selected[family_id][0]
+        fam_md = (ROOT / family["page"]).read_text()
         view_table_header = (
             "| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Tier 4 tests | Total distinct tests | Held (measured, not counted) |"
         )
-        current_bench = (
-            view_table_header
-            + fam_md.split(view_table_header, 1)[1]
-            .split("\n## adaptation\n", 1)[0]
-        )
-        new_tasks = {"precision_gaussian_mxfp8", "precision_gaussian_nvfp4"}
-        for task_id in new_tasks:
-            new_row = next(line for line in current_bench.splitlines() if line.startswith(f"| [{task_id}]"))
-            assert "| UNKNOWN |" in new_row
-        current_bench_tables = "\n".join(
-            line for line in current_bench.splitlines()
-            if line.startswith("|") and not any(line.startswith(f"| [{task_id}]") for task_id in new_tasks)
-        )
-        for forbidden_in_selected_cohort in (
-            "| UNKNOWN |",
-            "diagnostic attempt",
-            "not run)",
-            "blocked)",
-        ):
-            assert forbidden_in_selected_cohort not in current_bench_tables, (
-                fam_page_name,
-                forbidden_in_selected_cohort,
-            )
-        if tier1_readouts_block:
-            assert "recorded definition unavailable" not in current_bench_tables
-        for forbidden_in_selected_prose in (
-            "native model variants require an explicit profile",
-            "only zero_tanh_smoke is routed",
-            "unsupported vector target declaration",
-            "no compatible result",
-            "DDGAN caller-owned transition host",
-            "Run attempt: **BLOCKED**",
-        ):
-            assert forbidden_in_selected_prose not in current_bench, (
-                fam_page_name,
-                forbidden_in_selected_prose,
-            )
+        current_bench = fam_md.split(view_table_header, 1)[1].split("\n## adaptation\n", 1)[0]
+        seen = set()
+        status_index = None
+        for line in current_bench.splitlines():
+            if line.startswith("| ") and not line.startswith(("| [", "| ---")):
+                headers = [cell.strip() for cell in line.split("|")[1:-1]]
+                status_index = headers.index("Recorded result") if "Recorded result" in headers else None
+            if not line.startswith("| ["):
+                continue
+            task_id = line.split("](", 1)[0].removeprefix("| [")
+            if task_id not in original_cohort["tasks"]:
+                continue
+            cells = [cell.strip() for cell in line.split("|")[1:-1]]
+            assert status_index is not None and len(cells) > status_index
+            assert cells[status_index] == original_cohort["tasks"][task_id]["status"], (family_id, task_id, line)
+            seen.add(task_id)
+        # Gaps and operational outcomes must remain visible, never filled with
+        # diagnostic grades to satisfy an all-binary/no-unknown display rule.
+        assert required_tasks <= seen, (family_id, sorted(required_tasks - seen))
+        for task_id in ("precision_gaussian_mxfp8", "precision_gaussian_nvfp4"):
+            assert original_cohort["tasks"][task_id]["status"] == "UNKNOWN"
+            assert task_id in seen
 
 
 
