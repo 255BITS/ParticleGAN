@@ -152,7 +152,11 @@ def test_zero_recipe_bloat():
     assert "loss_surprise_threshold" not in field_names
     assert "loss_surprise_cooldown" not in field_names
     # Recipe field count invariant
-    assert len(field_names) == 118
+    # Independently declared objectives may extend the schema; loss-surprise
+    # still contributes no public recipe fields.
+    additions = ('reg_real_weight', 'reg_fake_weight', 'joint_reconstruction_weight')
+    assert set(additions) <= field_names
+    assert len(field_names - set(additions)) == 118
 
 
 def test_policy_loss_surprise_integration():
