@@ -57,6 +57,14 @@ def test_correctly_measured_formula_failure_is_complete_evidence(current_cell):
     assert report["missing_by_family"] == {}
 
 
+def test_faithful_current_diagnostic_measures_the_formula_without_qualification_credit(current_cell):
+    root, original, save = current_cell
+    save({**original, "diagnostic": True})
+    report = refresh.check_attempt_coverage(root)
+    assert report["current"] is True
+    assert report["qualification_reuse"] is False
+
+
 def test_unmeasured_optional_precision_stays_visible_without_blocking_required_completion(current_cell):
     root, _, _ = current_cell
     from reports.forge import regenerate_technique_inventory as inventory
