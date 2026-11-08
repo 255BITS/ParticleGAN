@@ -322,12 +322,20 @@
       "particlegan/recipe_compat.py": "c7ae20184485bfbc171e3669d659663e943c7a893895af21bc8f80adc3f3307d",
       "particlegan/conditional_score.py": "322182379f46871c525a17a99fa5b16f6201374409c4fa454906c4de1698178a"
     },
-    "integration_source_binding": {
+    "evaluator_revision": {
       "id": "pr-460-develop-integration-20261108",
       "previous_task_commit": "8b7f3c3e54f3b91ffce77d9e39040d9023caedd1",
       "previous_task_path": "configs/forge/tasks/ddgan_repair_bimodal_chain_wall_v2.json",
       "previous_task_sha256": "c8d7b6542e2d9a91d41fa86b9c747adf46feb19887a618eea18615ce7df9ea5b",
-      "previous_task_blob": "c13f787ff45d5eb3866f1210a544ef78b48119d8"
+      "previous_task_blob": "c13f787ff45d5eb3866f1210a544ef78b48119d8",
+      "change": "Bind future executions to integrated provider/adapter bytes. Original research task/source/seed/initialization, receipts and verdicts stay archived at the original PR head. No original attempt is relabelled or regraded.",
+      "previous_revision": null,
+      "previous_source_sha256": {
+        "benchmarks/toy_audit/api_model_ddgan.py": "ce775bb6b43459b2a8ef4a004e380ca692a7041a365bc143d8b80d7a0b5d913c",
+        "particlegan/policy.py": "4eb130cb5982c8333eec1abac6829c76b8aeea8f4ce87bc90b06b805c7dede0c",
+        "particlegan/recipe_compat.py": "24a1978f65cd25d1a032e30f0a9c5495791802b096393f15cc45f53b7f752248"
+      },
+      "qualification_input": false
     }
   },
   "resources": {
