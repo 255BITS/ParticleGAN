@@ -1,5 +1,11 @@
 # What actually worked: Forge leaderboard work, 2026-10-02 to 2026-10-15
 
+<!-- superseded-banner: generated -->
+> Historical review with follow-ups through 2026-10-16. Counts and recommendations below describe those dates.
+> See the [current technique inventory](technique-inventory.md) for current status.
+> Concluded negative studies retain their evidence in the immutable readouts linked below; their trainer patches
+> are not adopted. The longer-budget adoption is tracked separately in [PR #440](https://github.com/255BITS/ParticleGAN/pull/440).
+
 *Follow-up experiments: round 1 in §6, round 2 (2026-10-16) in §7, decisions needed in §7.6.*
 
 A read-only review of the work since the Forge leaderboard was centralised (#232, 2026-10-02): about 190 PRs (#219 to #423) and the local experiment directories under `/ml2/hypergan`. Five independent reviewers each covered one area: the BCAP selected recipe, BCAP research recipes, Atlas/E22, the other families plus test and harness changes, and a test-by-test pass matrix built from `attempt-coverage.json`. The key claims were then re-checked against the PRs and the code. No experiments were run for this review.
@@ -423,3 +429,16 @@ Not verified for this review:
 - Leaderboard-row gains and losses are protocol-matched, not causally matched.
 - The PR399 history rows' Tier 1 gaps are largely constructor refusals.
 - The K3P "about 81/152 if its Tier 2 counted" figure is an estimate.
+
+
+## Preserved follow-up evidence (integration, 2026-11-08)
+
+- [PR #425: Try a learning schedule driven by training progress rather than step labels.](https://github.com/255BITS/ParticleGAN/blob/1399d3c6c255a8ea72dc392b37b8c3b9d9c7187e/reports/forge/dig-20261015/horizon-clock.md)
+- [PR #426: Test whether the prior tether alone explains BISPF mode retention.](https://github.com/255BITS/ParticleGAN/blob/1ded1c70b4a4c945f1f1352afd42281955c373fb/reports/forge/dig-20261015/bispf-ablation.md)
+- [PR #427: Test a cell-based objective that trades mode retention against ring density.](https://github.com/255BITS/ParticleGAN/blob/7595f0ae219e7dba09270abc6d75ff49d8d8008c/reports/forge/dig-20261015/cell-quota-probe.md)
+- [PR #429: Test whether limiting the prior tether improves the BCAP trade-off.](https://github.com/255BITS/ParticleGAN/blob/474ee2a9729f3a2120a270b60a0e948466880807/reports/forge/dig-20261015/relative-tether.md)
+- [PR #431: Check that the BISPF and BCAP baseline results reproduce on a common source.](https://github.com/255BITS/ParticleGAN/blob/62711fe540c44e83da8a6ed3e7a5c64fe9c9bc93/reports/forge/dig2-20261016/bispf-refresh.md)
+- [PR #432: Expose a loophole in a proposed clock-free training audit.](https://github.com/255BITS/ParticleGAN/blob/92e4eeff00f4f166e043db6fc9386a0cebc29d0a/reports/forge/dig2-20261016/clock-audit-measured.md)
+- [PR #433: Test whether a longer ring-training budget is enough.](https://github.com/255BITS/ParticleGAN/blob/c8b732f87e24e61414dacbaaf42493ffb44a9f03/reports/forge/dig2-20261016/ring16-cap.md)
+- [PR #434: Check whether apparent training failures are actually runtime-limit hits.](https://github.com/255BITS/ParticleGAN/blob/ea51ecf0b4f9eb2dc256b68c973b1ac23d57cc32/reports/forge/dig2-20261016/wallclock-reruns.md)
+- [PR #435: Find which critic changes help BISPF keep learned modes.](https://github.com/255BITS/ParticleGAN/blob/febb161a15c34901fe3962c6b5068bde4c8934e8/reports/forge/dig2-20261016/harmonic-link.md)
