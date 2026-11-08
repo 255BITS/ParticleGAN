@@ -178,46 +178,19 @@
       "task": "img_intensity2"
     },
     {
-      "hold": {
-        "blocked_by": [],
-        "explanation": "reports/forge/test-dispositions-20261015/README.md#grid100",
-        "previous_importance": "required",
-        "reason": "unsolved",
-        "reentry": "Count again when one global recipe has an ordinary PASS on this unchanged declaration (clean sampling, live weights, five final checks and the 100,000-sample holdout) and still passes every counted Tier 1 and Tier 2 test. A diagnostic PASS only triggers a review.",
-        "schema": "forge_hold_v1",
-        "summary": "100 tiny blobs on a grid: BCAP puts 24% and BISPF 37% of samples on target; 97% is required (a perfect sampler scores 98.9%). The best 7,000-update result under this clean-sampling declaration is 54%, and none passes."
-      },
-      "importance": "held",
+      "importance": "required",
       "order": 16,
       "qualification_tier": 2,
       "task": "grid100"
     },
     {
-      "hold": {
-        "blocked_by": [],
-        "explanation": "reports/forge/test-dispositions-20261015/README.md#rotated100",
-        "previous_importance": "required",
-        "reason": "unsolved",
-        "reentry": "Count again when one global recipe has an ordinary PASS on this unchanged declaration (clean sampling, live weights, five final checks and the 100,000-sample holdout) and still passes every counted Tier 1 and Tier 2 test. A diagnostic PASS only triggers a review. In practice it returns with grid100.",
-        "schema": "forge_hold_v1",
-        "summary": "The same 100-blob test rotated by 25 degrees: BCAP 26% and BISPF 27% of samples on target against 97%. The best 7,000-update result under this clean-sampling declaration is 51%, and none passes."
-      },
-      "importance": "held",
+      "importance": "required",
       "order": 17,
       "qualification_tier": 2,
       "task": "rotated100"
     },
     {
-      "hold": {
-        "blocked_by": [],
-        "explanation": "reports/forge/test-dispositions-20261015/README.md#staggered100",
-        "previous_importance": "required",
-        "reason": "unsolved",
-        "reentry": "Count again when one global recipe has an ordinary PASS on this unchanged declaration (clean sampling, live weights, five final checks and the 100,000-sample holdout) and still passes every counted Tier 1 and Tier 2 test. A diagnostic PASS only triggers a review. In practice it returns with grid100.",
-        "schema": "forge_hold_v1",
-        "summary": "The same 100-blob test with alternate rows shifted: BCAP 30% and BISPF 34% of samples on target against 97%. The best 7,000-update result under this clean-sampling declaration is 56%, and none passes."
-      },
-      "importance": "held",
+      "importance": "required",
       "order": 18,
       "qualification_tier": 2,
       "task": "staggered100"
@@ -340,17 +313,17 @@
   "eligibility": {},
   "goal": "host_profile_transfer",
   "id": "formulation_comparison",
-  "policy_change_reason": "Test dispositions 2026-10-15 (reports/forge/test-dispositions-20261015/README.md). The ten Tier 2 tests (four vector density, three image and three 100-blob tests) are held: still declared, run and shown, but not counted until one global recipe passes them together with every counted test. ring_hold leaves the count as a phase of ring_extension, the single counted ring endurance verdict. Diagnostic variants, gates and earlier grades are unchanged; revision 1 is archived.",
+  "policy_change_reason": "0.10 convergence policy: accurate acquisition, Gaussian settling and post-acquisition endurance/recovery are required even when no current recipe passes. The owner explicitly restores these requirements; their previous holds are archived, not satisfied or regraded. Task protocols, numerical bounds, recipe/source selections and historical qualifications remain unchanged.",
   "previous_revision": {
-    "archive": "configs/forge/view-history/formulation_comparison-v1.json",
-    "policy_fingerprint": "9109179b94cf8c673dbb6d9a496b5264b44fcf5be0fb2cd124d2895f77eeffd1",
-    "revision": 1
+    "archive": "configs/forge/view-history/formulation_comparison-v2.json",
+    "policy_fingerprint": "b0532147d576450ca98f63d4878d62c7a6d0553c2cfaef91db45850b7be0e5e8",
+    "revision": 2
   },
   "ranking": {
     "compare_compatible_cohorts": true,
     "cost_separate": true,
     "policy": "qualified_tier_only_with_raw_metrics"
   },
-  "revision": 2,
+  "revision": 3,
   "schema_version": 1
 }

@@ -62,14 +62,16 @@ of its `bcap` preset, so this card explicitly binds DualNorm and those rates.
 Task architecture, prior, initialization, actual data batches, sampling law,
 budgets and evaluation cadence remain task-owned.
 
-The [bounded example](../configs/forge/searches/bcap-dualnorm-smoothing-tier1-v2.json)
+The [bounded example](../configs/forge/searches/bcap-dualnorm-smoothing-tier1-v3.json)
 declares three positive scales `1e-5`, `1e-4`, `1e-3`, one whole configuration per
-trial, protocol seed `0`, current Tier 1 and CUDA. It reserves at most 7,560
-seconds, 2,520 per candidate, including the existing diagnostic. It is unexecuted;
+trial, protocol seed `0`, current Tier 1 and CUDA. The view-v17 example reserves
+at most 41,760 seconds, 13,920 per candidate, including the precision stretch tests,
+diagnostics and full operational wall-clock ceilings. The v1 and v2 examples retain
+their original scopes and budgets. All three examples are unexecuted;
 the values illustrate the search interface and are not selected defaults.
 
 ```sh
-python -m experiments.forge search plan bcap-dualnorm-smoothing-tier1-v2
+python -m experiments.forge search plan bcap-dualnorm-smoothing-tier1-v3
 ```
 
 Planning launches no training. Execution remains explicit through the ordinary
@@ -108,7 +110,7 @@ quality gates; the original actual-training GIFs and scientific metrics remain
 in PR #344.
 
 ```sh
-CUDA_VISIBLE_DEVICES=0 python -m pytest -q \
+CUDA_VISIBLE_DEVICES=0 python -m pytest -q -m cuda \
   tests/test_dualnorm_smoothing.py tests/test_dualnorm_default_parity.py \
   tests/test_dualnorm_optimizers.py
 python -m pytest -q tests/test_forge_dualnorm_smoothing_search.py

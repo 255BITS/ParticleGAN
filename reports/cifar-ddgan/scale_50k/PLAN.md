@@ -7,31 +7,31 @@ and our learned128D particles. Neither uses pretrained generator weights.
 
 Both retain frozen ResNet18 + pixel D, joint timestep/class UCD, 20,000 particles,
 Gaussian step noise, T=4, the existing posterior, Rp logistic, bcap, unique-row
-VICReg, constant learning rates, batch64, EMA .995 and seed24002. No seed sweep.
+VICReg, constant learning rates, batch 64, EMA .995 and seed 24002. No seed sweep.
 The upstream architecture uses PixelNorm in its particle mapping; this removes
 radial information at G input, but gradients still reach the learned particle
 coordinates. The particle table and its regularizer remain unchanged.
 
 The new generator retains upstream adaptive GroupNorm, BigGAN residual blocks,
-FIR resampling, positional timestep embedding, attention at16 plus the middle
+FIR resampling, positional timestep embedding, attention at 16 plus the middle
 block, residual input pyramid, width multipliers[1,2,2,2], two encoder and three
-decoder blocks per resolution, z embedding256, and n_mlp4. Class embeddings are
+decoder blocks per resolution, z embedding 256, and n_mlp4. Class embeddings are
 added to the processed timestep embedding. Native upstream PyTorch FIR runs on
 CUDA without a custom extension. Source commit and licenses are recorded in
 lib/ddgan_ncsnpp/UPSTREAM.md. This is an architecture adaptation, not an exact
 reproduction of the paper's training recipe.
 
-50k updates represent64 epoch-equivalents for each optimizer,128 total real-data
+50k updates represent 64 epoch-equivalents for each optimizer,128 total real-data
 pass equivalents because G and D draw separate batches with replacement.
-Evaluation:5k diagnostic samples every10k updates; final50k samples. Rank using
-final50k FID and compare diagnostic curves only at matching sample counts.
+Evaluation: 5k diagnostic samples every 10k updates; final 50k samples. Rank using
+final 50k FID and compare diagnostic curves only at matching sample counts.
 Compare equal updates and GPU training time; architecture compute differs.
 
 Configs: configs/cifar_ddgan/scale_50k/{unet32,ncsnpp128}.yaml.
-Preflight:100-update runs of both full-size architectures on their target GPUs.
+Preflight: 100-update runs of both full-size architectures on their target GPUs.
 Full runs are left uninterrupted until both finish. No intermediate manual
 metric inspection or adaptive hyperparameter changes. Defaults stay at the
-previous measured10k winner until completed evidence supports promotion.
+previous measured 10k winner until completed evidence supports promotion.
 
 Launch:
 ```

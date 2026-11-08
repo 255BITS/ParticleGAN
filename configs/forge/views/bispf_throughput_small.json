@@ -1,0 +1,38 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "img_stripes2"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "img_bars4"
+    }
+  ],
+  "eligibility": {},
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "bispf_throughput_small",
+  "policy_change_reason": "Presentation only: scope this BISPF execution diagnostic to the BISPF family page. Preserve original revision1 bytes, frozen requests, task contracts, all numerical results and zero ordinary qualification credit.",
+  "previous_revision": {
+    "archive": "configs/forge/view-history/bispf_throughput_small-v1.json",
+    "policy_fingerprint": "cd642095ff4c8d14618242be0903b1d75a46e384f4314f3d330f4269d27c750e",
+    "revision": 1
+  },
+  "ranking": {
+    "cost_separate": true,
+    "policy": "diagnostic_outcomes_only"
+  },
+  "reporting": {
+    "families": [
+      "bispf"
+    ],
+    "family_totals": false
+  },
+  "revision": 2,
+  "schema_version": 1
+}

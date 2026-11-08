@@ -320,3 +320,16 @@ def test_ring_group_job_is_scheduled_through_a_removed_phase(tmp_path):
         jobs_ran, reason, _ = q._eligible(state("FAIL"), submission)
         assert jobs_ran == [] and "mode_hold: FAIL" in reason
     assert not (tmp_path / "queue").exists()
+
+
+def test_queue_state_context_skips_redundant_disk_write_when_unchanged(tmp_path, monkeypatch):
+    from experiments.forge import queue as queue_mod
+    q = Queue(tmp_path)
+    with q.state() as state:
+        state["campaigns"]["c1"] = {"definition": {"id": "c1"}, "spent_seconds": 0.0, "reserved_seconds": 0.0, "paused": False}
+    writes = []
+    orig_atomic = queue_mod.atomic_json
+    monkeypatch.setattr(queue_mod, "atomic_json", lambda path, data: (writes.append(path), orig_atomic(path, data)))
+    with q.state() as state:
+        _ = state["campaigns"]["c1"]
+    assert writes == []

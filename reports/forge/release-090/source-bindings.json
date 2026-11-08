@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "id": "release-090-word-checkpoint-source-binding-v1",
+  "scope": "current_task_source_binding_metadata_only",
+  "pre_refresh_task_declaration_commit": "00976bc98fd8a89a0e17db5fbd0d7b0afdfe2791",
+  "source_member": "particlegan/policy.py",
+  "previous_bound_source": {
+    "commit": "555a42c5a0bc37436a3885d75d20a503ff76995f",
+    "sha256": "f3af6679aea15e3c2693605a8d020fb175dd9afe1f48f05ca0565a33599cee4e"
+  },
+  "current_bound_source": {
+    "commit": "00976bc98fd8a89a0e17db5fbd0d7b0afdfe2791",
+    "sha256": "7b904bec09c4bbcfaa59b74465102489e5b45456f5725441b6538da6adf2accc"
+  },
+  "runtime_change": "Checkpoint validation probes preserve the live BISPF thermal cache; the training update law is unchanged.",
+  "tasks": [
+    {
+      "path": "configs/forge/tasks/five_word_joint_smoke.json",
+      "previous_sha256": "e08fb1405013d7ea1792e4536d1a93e5722348de9bfe712e3d4e8686baa0421e",
+      "current_sha256": "2b5225e4d0c6ea30698b4c6cdb374b796883f8c804ab884beaa97f74f6a1d54c",
+      "only_source_and_revision_metadata_changed": true
+    },
+    {
+      "path": "configs/forge/tasks/five_word_joint_hold.json",
+      "previous_sha256": "d74c3ad2985901b4520427ed0e475de060c518c5a1bd5e3ec89967999893888f",
+      "current_sha256": "188894eb648ae88da2cb1fc4c585b8986f5d8577b82a495502db3d792411ea70",
+      "only_source_and_revision_metadata_changed": true
+    }
+  ],
+  "preserved_historical_policy_variants": {
+    "configs/forge/task-variants/policy_cloud_coverage_v1/five_word_joint_hold_policy_cloud_coverage_v1.json": "a877b0e7472a7e0b2c2a688be28f2dbc8a78f7be255dbb6d22e7b7d91eeb5b53",
+    "configs/forge/task-variants/policy_cloud_coverage_v1/five_word_joint_smoke_policy_cloud_coverage_v1.json": "4d610b7bcf14e45fea5d3e42e44521a1ac9710f4d8848d68f47bcc903d1b0ec4"
+  },
+  "qualification_input": false,
+  "qualification_regraded": false,
+  "automatic_cross_source_reuse": false,
+  "identity_note": "Current task evaluation/source identities change. Existing scientific results, candidate selections and receipt source identities are not rewritten or requalified.",
+  "validation": {
+    "original_task_fields_and_previous_revision_preserved": true,
+    "historical_variant_bytes_preserved": true
+  },
+  "scientific_training_launched": false,
+  "software_validation": {
+    "test_files": [
+      "tests/test_forge_views.py",
+      "tests/test_forge_word_metadata_migration.py",
+      "tests/test_sigreg.py",
+      "tests/test_recipe_prior_task_migration.py"
+    ],
+    "passed": 122,
+    "skipped_cuda": 5,
+    "forge_memory_status": "CURRENT",
+    "scope": "Existing bounded software tests; no new research execution or qualification."
+  }
+}

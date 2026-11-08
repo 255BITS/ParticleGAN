@@ -79,7 +79,7 @@ def test_cpu_input_polar_is_bitwise_native(dtype, smoothing, shape):
     assert torch.equal(actual, expected)
 
 
-@pytest.mark.parametrize("device", ["cpu", "cuda:0"])
+@pytest.mark.parametrize("device", ["cpu", pytest.param("cuda:0", marks=pytest.mark.cuda)])
 def test_roles_history_sampled_rows_and_resume(device):
     if device.startswith("cuda") and not torch.cuda.is_available():
         pytest.skip("CUDA unavailable")
@@ -133,7 +133,7 @@ def test_roles_history_sampled_rows_and_resume(device):
 
 
 @pytest.mark.parametrize("kind", [nn.Conv2d, nn.ConvTranspose2d])
-@pytest.mark.parametrize("device", ["cpu", "cuda:0"])
+@pytest.mark.parametrize("device", ["cpu", pytest.param("cuda:0", marks=pytest.mark.cuda)])
 def test_grouped_convolution_cpu_reference_and_resume(kind, device):
     if device.startswith("cuda") and not torch.cuda.is_available():
         pytest.skip("CUDA unavailable")
@@ -179,7 +179,7 @@ def words(backend, device):
     return context, WordFixture(device=device, seed=0, recipe_name=None, max_steps=20001, components=context)
 
 
-@pytest.mark.parametrize("device", ["cpu", "cuda:0"])
+@pytest.mark.parametrize("device", ["cpu", pytest.param("cuda:0", marks=pytest.mark.cuda)])
 def test_public_word_active_backend_exact_resume_and_named_streams(device):
     if device.startswith("cuda") and not torch.cuda.is_available():
         pytest.skip("CUDA unavailable")
@@ -202,6 +202,7 @@ def test_public_word_active_backend_exact_resume_and_named_streams(device):
     assert fixture.opt_g.constraint_geometry_stats["steps"] == 5
 
 
+@pytest.mark.cuda
 def test_rank_deficient_cuda_cpu_polar_uses_full_cpu_reference():
     if not torch.cuda.is_available():
         pytest.skip("CUDA unavailable")

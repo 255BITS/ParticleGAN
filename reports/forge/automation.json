@@ -1,57 +1,59 @@
 {
   "attempt_outcomes": {
-    "cancelled": 1,
-    "completed": 69
+    "cancelled": 2,
+    "completed": 1591,
+    "error": 55,
+    "invalid_receipt": 96
   },
   "component_timing": {
-    "measured_attempts": 22,
+    "measured_attempts": 824,
     "scope": "Exclusive phases in instrumented adapters; missing phase timing is not zero.",
     "seconds": {
-      "evaluation": 68.42078059531923,
-      "sampling": 0.769850275319186,
-      "training_updates": 659.339497676352
+      "evaluation": 857.5559782350247,
+      "sampling": 182.48532976916613,
+      "training_updates": 101051.42545919881
     },
-    "unmeasured_attempts": 48
+    "unmeasured_attempts": 920
   },
   "concurrency": {
-    "mean_active_workers": 0.003959117879063414,
-    "measured_attempts": 68,
-    "missing_interval_attempts": 2,
-    "observation_window_seconds": 304161.2448194027,
+    "mean_active_workers": 0.04056770341542691,
+    "measured_attempts": 1645,
+    "missing_interval_attempts": 99,
+    "observation_window_seconds": 2896983.4810373783,
     "peak_distinct_gpu_devices": 2,
-    "peak_workers": 2,
+    "peak_workers": 6,
     "scope": "Actual supervised-attempt intervals; this is process occupancy, not GPU kernel utilization."
   },
   "cost_to_qualify": {
-    "maximum_seconds": 17.334850379033014,
-    "mean_seconds": 17.334850379033014,
-    "measured_outcomes": 1,
-    "median_seconds": 17.334850379033014,
-    "outcomes": 1,
+    "maximum_seconds": null,
+    "mean_seconds": null,
+    "measured_outcomes": 0,
+    "median_seconds": null,
+    "outcomes": 0,
     "unknown_cost_outcomes": 0
   },
   "cost_to_reject": {
-    "maximum_seconds": 86.35670835815836,
-    "mean_seconds": 10.509261490061666,
-    "measured_outcomes": 18,
-    "median_seconds": 5.5470435855095275,
-    "outcomes": 18,
+    "maximum_seconds": 2117.165756800052,
+    "mean_seconds": 1354.6574752208107,
+    "measured_outcomes": 5,
+    "median_seconds": 857.6828726229869,
+    "outcomes": 5,
     "unknown_cost_outcomes": 0
   },
   "execution_error_rate": {
-    "denominator": 70,
-    "fraction": 0.014285714285714285,
-    "numerator": 1
+    "denominator": 1744,
+    "fraction": 0.03268348623853211,
+    "numerator": 57
   },
-  "execution_jobs_avoided": 245,
+  "execution_jobs_avoided": 63,
   "flops": {
     "kind": "unavailable",
     "value": null
   },
   "incomplete_task_rate": {
-    "denominator": 70,
-    "fraction": 0.014285714285714285,
-    "numerator": 1
+    "denominator": 1752,
+    "fraction": 0.0884703196347032,
+    "numerator": 155
   },
   "limits": [
     "Cost-to-outcome uses owned incremental paid costs. Evidence costs may overlap across requests and are not additive spending.",
@@ -60,24 +62,24 @@
   ],
   "memory": {
     "cuda_peak_allocated_bytes": {
-      "maximum_bytes": 175847936,
-      "measured_attempts": 19
+      "maximum_bytes": 3126556160,
+      "measured_attempts": 1315
     },
     "cuda_peak_reserved_bytes": {
-      "maximum_bytes": 226492416,
-      "measured_attempts": 19
+      "maximum_bytes": 3655335936,
+      "measured_attempts": 1315
     },
     "maximum_reaped_child_peak_rss_bytes": {
-      "maximum_bytes": 2168516608,
-      "measured_attempts": 68
+      "maximum_bytes": 3404402688,
+      "measured_attempts": 1645
     },
     "process_peak_rss_bytes": {
-      "maximum_bytes": 2168516608,
-      "measured_attempts": 67
+      "maximum_bytes": 3404402688,
+      "measured_attempts": 1636
     },
     "supervisor_peak_rss_bytes": {
-      "maximum_bytes": 868331520,
-      "measured_attempts": 68
+      "maximum_bytes": 8757907456,
+      "measured_attempts": 1645
     }
   },
   "memory_scope": "Process-lifetime RSS and PyTorch allocator peaks have distinct scopes; none is whole-host or whole-device memory.",
@@ -86,54 +88,18 @@
   "qualification_units": [
     {
       "attempt_ids": [
-        "fafc3da7cecf4b1780bbaedf66141092"
+        "002dcdd1918a433786bc1b7253c492e6",
+        "10ffa79853034264b944a0da626a99ff",
+        "3e32d034c6d74848945fc163f0365fae",
+        "48537eb0efbb40f0a14cb349c6fe3fdb",
+        "7b921455802944aa9020d1960bd2ea61",
+        "ce7f17c7f6e04750b30f0d742fdf5944",
+        "f33ca58d224c4e3fbec1fba7ee4de4ea"
       ],
-      "avoided_execution_jobs": 2,
+      "avoided_execution_jobs": 21,
       "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold"
-      ],
-      "candidate_revision": "ef50ff6fb20723ab9340fbb8d1a6c8abd45cb2e2950250578a13dd36207113b5",
-      "evidence_wall_seconds": 7.371452854000381,
-      "incremental_paid_seconds": 7.371452854000381,
-      "qualified_tier": 0,
-      "rejected_tier": 1,
-      "request_ids": [
-        "acde0787eb4675361a9ef0b8"
-      ],
-      "status": "FAIL",
-      "through_tier": 1,
-      "view": "discriminator_stability"
-    },
-    {
-      "attempt_ids": [
-        "2dcfab451e2b4c2087c4c2dcdcfddb44"
-      ],
-      "avoided_execution_jobs": 2,
-      "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold"
-      ],
-      "candidate_revision": "8c2186b8233422534e7d854e115a44d0ed3b88bbce04097814c85f402df8f3b8",
-      "evidence_wall_seconds": 4.800435357999959,
-      "incremental_paid_seconds": 4.800435357999959,
-      "qualified_tier": 0,
-      "rejected_tier": 1,
-      "request_ids": [
-        "397c486fb1b97b0f8e581b42"
-      ],
-      "status": "FAIL",
-      "through_tier": 1,
-      "view": "discriminator_stability"
-    },
-    {
-      "attempt_ids": [
-        "3e1d8ca0f47a4954b41119cbe605548e"
-      ],
-      "avoided_execution_jobs": 22,
-      "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold",
+        "gaussian1d_stability",
+        "five_word_joint_hold",
         "trajectory",
         "residual_student",
         "unipolar",
@@ -152,30 +118,34 @@
         "img_intensity2",
         "grid100",
         "rotated100",
-        "staggered100",
-        "ring_hold",
-        "ring_extension"
+        "staggered100"
       ],
-      "candidate_revision": "2a97b74e933cc5199847bc89b917f6643d9fd82f8deb2a8490d29b63fba718ce",
-      "evidence_wall_seconds": 5.581290133995935,
-      "incremental_paid_seconds": 5.581290133995935,
+      "candidate_revision": "3084339840eabf288376d3896a23e6586a8eaa4f51e6d914fa32d9f0fe2320f4",
+      "evidence_wall_seconds": 857.6828726229869,
+      "incremental_paid_seconds": 857.6828726229869,
       "qualified_tier": 0,
       "rejected_tier": 1,
       "request_ids": [
-        "fa2212d2788972d08f4361b3"
+        "939944e2492bc891ccaf04ad"
       ],
       "status": "FAIL",
-      "through_tier": 3,
+      "through_tier": 2,
       "view": "discriminator_stability"
     },
     {
       "attempt_ids": [
-        "b86f62c3e4f84a43b85d366e4cc43824"
+        "0e386457921d483b90a36903359cece5",
+        "297a41250ca349adb369963316292162",
+        "6069108176db4632af970bfabf5e6ee4",
+        "85c2e2a5433b40029c905d934c38b349",
+        "9111fe0d836c4a3f813478f9f4f306b8",
+        "a73d8a7b6b0f4a88ab5bb10b245e539d",
+        "f3d4c01d90d24b3086a808728dfbb91f"
       ],
-      "avoided_execution_jobs": 22,
+      "avoided_execution_jobs": 21,
       "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold",
+        "gaussian1d_stability",
+        "five_word_joint_hold",
         "trajectory",
         "residual_student",
         "unipolar",
@@ -194,30 +164,34 @@
         "img_intensity2",
         "grid100",
         "rotated100",
-        "staggered100",
-        "ring_hold",
-        "ring_extension"
+        "staggered100"
       ],
-      "candidate_revision": "b5ae40d1428d03591c42cb5cddb8adea5042caaa34c8ea2b131565c0ccca72e9",
-      "evidence_wall_seconds": 5.425771753012668,
-      "incremental_paid_seconds": 5.425771753012668,
+      "candidate_revision": "72331ecdefe3524174489d502899cbae201bdd196ce0c465883d235bbd3a49b7",
+      "evidence_wall_seconds": 840.751981865018,
+      "incremental_paid_seconds": 840.751981865018,
       "qualified_tier": 0,
       "rejected_tier": 1,
       "request_ids": [
-        "f4e7f793f73f5ecf280e959e"
+        "91181e6d4e6e99e9dac03174"
       ],
       "status": "FAIL",
-      "through_tier": 3,
+      "through_tier": 2,
       "view": "discriminator_stability"
     },
     {
       "attempt_ids": [
-        "df1794ebea6444c5a10c2a953843257d"
+        "37f490e1c22749b396bb341b45220378",
+        "7176f2d6b3584865b8cba41ad0ddcff4",
+        "8724f8fa1fe34f909425518d7e9a45b2",
+        "a028529ce6604146b6f375212cd73429",
+        "a3b2db5542554e908bdec43160b7d7fa",
+        "b13caad3fccc4a20b3b58ebeac4b66d9",
+        "e2055ee1d89b4fb3b51329e79cdd8df4"
       ],
-      "avoided_execution_jobs": 22,
+      "avoided_execution_jobs": 21,
       "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold",
+        "gaussian1d_stability",
+        "five_word_joint_hold",
         "trajectory",
         "residual_student",
         "unipolar",
@@ -236,516 +210,633 @@
         "img_intensity2",
         "grid100",
         "rotated100",
-        "staggered100",
-        "ring_hold",
-        "ring_extension"
+        "staggered100"
       ],
-      "candidate_revision": "d5341d8d12528f9e34030480544dd84fa7b933eed8474ff19e568dfb56b26cbc",
-      "evidence_wall_seconds": 5.508408382942434,
-      "incremental_paid_seconds": 5.508408382942434,
+      "candidate_revision": "1c462fc648ce2cbbdbe7711f2dbe7932e4c6e7cb52bf582bd58edbd00e820e24",
+      "evidence_wall_seconds": 847.1702798650076,
+      "incremental_paid_seconds": 847.1702798650076,
       "qualified_tier": 0,
       "rejected_tier": 1,
       "request_ids": [
-        "f2ef545b54285551f616bbdd"
+        "8e53b09acc90939c1f7b1e26"
       ],
       "status": "FAIL",
-      "through_tier": 3,
+      "through_tier": 2,
       "view": "discriminator_stability"
     },
     {
-      "attempt_ids": [
-        "c0178716dd3c4d5695b391919bf9ab81"
-      ],
-      "avoided_execution_jobs": 2,
-      "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold"
-      ],
-      "candidate_revision": "39dc1cc8e516f8127e732edea196f82243ff8cdff4ed761020f0f802a3bcaf0f",
-      "evidence_wall_seconds": 5.974550719001854,
-      "incremental_paid_seconds": 5.974550719001854,
+      "attempt_ids": [],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "126a196fb9b0bca2fb4836c8fd8a23ab02ef28cf24e6068342f97302a2061ec3",
+      "evidence_wall_seconds": null,
+      "incremental_paid_seconds": 412.7152245680045,
       "qualified_tier": 0,
-      "rejected_tier": 1,
+      "rejected_tier": null,
       "request_ids": [
-        "ac458f106e3b9533fe224b77"
+        "9fe616345413b89697318e2e"
       ],
-      "status": "FAIL",
-      "through_tier": 1,
+      "status": "INCOMPLETE",
+      "through_tier": 2,
       "view": "discriminator_stability"
     },
     {
-      "attempt_ids": [
-        "33bc62d63509425e9f7237ef19ee7374"
-      ],
-      "avoided_execution_jobs": 22,
-      "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold",
-        "trajectory",
-        "residual_student",
-        "unipolar",
-        "cover_leftover",
-        "mid_scale_identity",
-        "mode_hold",
-        "vector_two_broad",
-        "vector_unequal_mass",
-        "vector_unequal_width",
-        "vector_anisotropic",
-        "vector_overlap",
-        "vector_spiral",
-        "img_stripes2",
-        "img_bars4",
-        "img_blobs4",
-        "img_intensity2",
-        "grid100",
-        "rotated100",
-        "staggered100",
-        "ring_hold",
-        "ring_extension"
-      ],
-      "candidate_revision": "aa9e200be9f520bf97e8d3408829b852188c80e2b64aa6f02430f58eaec117c9",
-      "evidence_wall_seconds": 7.827370991988573,
-      "incremental_paid_seconds": 7.827370991988573,
+      "attempt_ids": [],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "52bcfbda682fdbe578d1c0c352a31673659d5679d685e8aa4d21931940790e56",
+      "evidence_wall_seconds": null,
+      "incremental_paid_seconds": 2427.4541690320766,
       "qualified_tier": 0,
-      "rejected_tier": 1,
+      "rejected_tier": null,
       "request_ids": [
-        "6aecf10df94ba76bd23bb42f"
+        "d230f0c0f73df6ec0dbece1e"
       ],
-      "status": "FAIL",
-      "through_tier": 3,
+      "status": "INCOMPLETE",
+      "through_tier": 2,
       "view": "discriminator_stability"
     },
     {
       "attempt_ids": [
-        "87f406b78184409396a26f61680a5da0"
-      ],
-      "avoided_execution_jobs": 22,
-      "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold",
-        "trajectory",
-        "residual_student",
-        "unipolar",
-        "cover_leftover",
-        "mid_scale_identity",
-        "mode_hold",
-        "vector_two_broad",
-        "vector_unequal_mass",
-        "vector_unequal_width",
-        "vector_anisotropic",
-        "vector_overlap",
-        "vector_spiral",
-        "img_stripes2",
-        "img_bars4",
-        "img_blobs4",
-        "img_intensity2",
-        "grid100",
-        "rotated100",
-        "staggered100",
-        "ring_hold",
-        "ring_extension"
-      ],
-      "candidate_revision": "0a2b2de1a8a75005f8f76ca17130010f477c520425761cff04dd2a4f81f2bc3a",
-      "evidence_wall_seconds": 5.811797589994967,
-      "incremental_paid_seconds": 5.811797589994967,
-      "qualified_tier": 0,
-      "rejected_tier": 1,
-      "request_ids": [
-        "4c44c5be3985e85540a24a9d"
-      ],
-      "status": "FAIL",
-      "through_tier": 3,
-      "view": "discriminator_stability"
-    },
-    {
-      "attempt_ids": [
-        "0142b29ed9154d9fbf065c2934545c0c"
-      ],
-      "avoided_execution_jobs": 22,
-      "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold",
-        "trajectory",
-        "residual_student",
-        "unipolar",
-        "cover_leftover",
-        "mid_scale_identity",
-        "mode_hold",
-        "vector_two_broad",
-        "vector_unequal_mass",
-        "vector_unequal_width",
-        "vector_anisotropic",
-        "vector_overlap",
-        "vector_spiral",
-        "img_stripes2",
-        "img_bars4",
-        "img_blobs4",
-        "img_intensity2",
-        "grid100",
-        "rotated100",
-        "staggered100",
-        "ring_hold",
-        "ring_extension"
-      ],
-      "candidate_revision": "2a6cb4b3f19e57bb16599e23df1a83750b1e992634c6428dacd711f0269c83d1",
-      "evidence_wall_seconds": 5.459934226993937,
-      "incremental_paid_seconds": 5.459934226993937,
-      "qualified_tier": 0,
-      "rejected_tier": 1,
-      "request_ids": [
-        "35563aa1d745b00ba0051f50"
-      ],
-      "status": "FAIL",
-      "through_tier": 3,
-      "view": "discriminator_stability"
-    },
-    {
-      "attempt_ids": [
-        "8ff64e32bf294e5597d8deb036527075"
-      ],
-      "avoided_execution_jobs": 2,
-      "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold"
-      ],
-      "candidate_revision": "ff171334c936fd2a0bc7ad4e4beb25ba6582bc35e3baf2042db7345738705493",
-      "evidence_wall_seconds": 5.456266971013974,
-      "incremental_paid_seconds": 5.456266971013974,
-      "qualified_tier": 0,
-      "rejected_tier": 1,
-      "request_ids": [
-        "1f92bc90b3948253f7d3723c"
-      ],
-      "status": "FAIL",
-      "through_tier": 1,
-      "view": "discriminator_stability"
-    },
-    {
-      "attempt_ids": [
-        "2a719ec706924f0ab120961cd58f7582"
-      ],
-      "avoided_execution_jobs": 2,
-      "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold"
-      ],
-      "candidate_revision": "158a5e917e91a158e45de1e37434b11e2469a8e39fbca5b99edac6069c7764aa",
-      "evidence_wall_seconds": 5.51279703702312,
-      "incremental_paid_seconds": 5.51279703702312,
-      "qualified_tier": 0,
-      "rejected_tier": 1,
-      "request_ids": [
-        "eab9a2dfe43a0b31556df609"
-      ],
-      "status": "FAIL",
-      "through_tier": 1,
-      "view": "discriminator_stability"
-    },
-    {
-      "attempt_ids": [
-        "813505867f5348bfbe113791d78ce0c5"
-      ],
-      "avoided_execution_jobs": 22,
-      "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold",
-        "trajectory",
-        "residual_student",
-        "unipolar",
-        "cover_leftover",
-        "mid_scale_identity",
-        "mode_hold",
-        "vector_two_broad",
-        "vector_unequal_mass",
-        "vector_unequal_width",
-        "vector_anisotropic",
-        "vector_overlap",
-        "vector_spiral",
-        "img_stripes2",
-        "img_bars4",
-        "img_blobs4",
-        "img_intensity2",
-        "grid100",
-        "rotated100",
-        "staggered100",
-        "ring_hold",
-        "ring_extension"
-      ],
-      "candidate_revision": "7bb7527f2fa60cf20120b07fae977f953e66716f31a40ba180240c35a376d803",
-      "evidence_wall_seconds": 5.876473599986639,
-      "incremental_paid_seconds": 5.876473599986639,
-      "qualified_tier": 0,
-      "rejected_tier": 1,
-      "request_ids": [
-        "ea6deb2d5f05519b0f422f69"
-      ],
-      "status": "FAIL",
-      "through_tier": 3,
-      "view": "discriminator_stability"
-    },
-    {
-      "attempt_ids": [
-        "ea66e44192c048eaa97f8595c5e55508"
-      ],
-      "avoided_execution_jobs": 22,
-      "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold",
-        "trajectory",
-        "residual_student",
-        "unipolar",
-        "cover_leftover",
-        "mid_scale_identity",
-        "mode_hold",
-        "vector_two_broad",
-        "vector_unequal_mass",
-        "vector_unequal_width",
-        "vector_anisotropic",
-        "vector_overlap",
-        "vector_spiral",
-        "img_stripes2",
-        "img_bars4",
-        "img_blobs4",
-        "img_intensity2",
-        "grid100",
-        "rotated100",
-        "staggered100",
-        "ring_hold",
-        "ring_extension"
-      ],
-      "candidate_revision": "724a672468491e40b3f214c3b44b8913b9317266346527139da7a1de750d8d44",
-      "evidence_wall_seconds": 5.347339480998926,
-      "incremental_paid_seconds": 5.347339480998926,
-      "qualified_tier": 0,
-      "rejected_tier": 1,
-      "request_ids": [
-        "14fd1b0dcf6cbcd237a98055"
-      ],
-      "status": "FAIL",
-      "through_tier": 3,
-      "view": "discriminator_stability"
-    },
-    {
-      "attempt_ids": [
-        "0184ca1327794ab58168d853ce0ad978",
-        "275efc25a9e34f25824d502e7f9c20b6",
-        "297db233ae0d459caf35e6aa60f3d0d5",
-        "2ff413e61d794dec8e3ce91c90ad16a2",
-        "4d69405651764ab6b700c6b1e37844db",
-        "b9e3dadcca1b4a4099814d1c5150db6b",
-        "bf43170e7806426c906d8f0134a7287c",
-        "bfd92d6f12174f8289903745f545e83c",
-        "df2a9933e92b4c59a1c872ab189be7b0"
-      ],
-      "avoided_execution_jobs": 14,
-      "avoided_tasks": [
-        "vector_two_broad",
-        "vector_unequal_mass",
-        "vector_unequal_width",
-        "vector_anisotropic",
-        "vector_overlap",
-        "vector_spiral",
-        "img_stripes2",
-        "img_bars4",
-        "img_blobs4",
-        "img_intensity2",
-        "grid100",
-        "rotated100",
-        "staggered100",
-        "ring_hold",
-        "ring_extension"
-      ],
-      "candidate_revision": "18096544dede6a02e09e34be118d13e5554caa5aba4216980dbb442e91761312",
-      "evidence_wall_seconds": 86.35670835815836,
-      "incremental_paid_seconds": 86.35670835815836,
-      "qualified_tier": 1,
-      "rejected_tier": 2,
-      "request_ids": [
-        "b4cb56bd10358df6b6705ce7"
-      ],
-      "status": "FAIL",
-      "through_tier": 3,
-      "view": "discriminator_stability"
-    },
-    {
-      "attempt_ids": [
-        "299aba837ed24be8a61b0b48074fc7a1"
-      ],
-      "avoided_execution_jobs": 22,
-      "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold",
-        "trajectory",
-        "residual_student",
-        "unipolar",
-        "cover_leftover",
-        "mid_scale_identity",
-        "mode_hold",
-        "vector_two_broad",
-        "vector_unequal_mass",
-        "vector_unequal_width",
-        "vector_anisotropic",
-        "vector_overlap",
-        "vector_spiral",
-        "img_stripes2",
-        "img_bars4",
-        "img_blobs4",
-        "img_intensity2",
-        "grid100",
-        "rotated100",
-        "staggered100",
-        "ring_hold",
-        "ring_extension"
-      ],
-      "candidate_revision": "e356a8bd7091ac1e130819a62c362fe3b40a5119a4c457793faa889abd9785c7",
-      "evidence_wall_seconds": 5.449001096014399,
-      "incremental_paid_seconds": 5.449001096014399,
-      "qualified_tier": 0,
-      "rejected_tier": 1,
-      "request_ids": [
-        "d4e7405c151d01d615dc92d5"
-      ],
-      "status": "FAIL",
-      "through_tier": 3,
-      "view": "discriminator_stability"
-    },
-    {
-      "attempt_ids": [
-        "b766e89d1a0843ba9af94f2ce94e4273"
-      ],
-      "avoided_execution_jobs": 2,
-      "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold"
-      ],
-      "candidate_revision": "87d849138dd0ae385260a77223e9a70a7c2a8a112733b2312f556b462cc164e9",
-      "evidence_wall_seconds": 5.255199994000577,
-      "incremental_paid_seconds": 5.255199994000577,
-      "qualified_tier": 0,
-      "rejected_tier": 1,
-      "request_ids": [
-        "043465ae751e26417aad2e9a"
-      ],
-      "status": "FAIL",
-      "through_tier": 1,
-      "view": "discriminator_stability"
-    },
-    {
-      "attempt_ids": [
-        "3c6a84341114445da149f04ab7541f01",
-        "6c44b7cbaff34277a9da6bb0ccb98321",
-        "bcaebd15d92841d0b99aec185a446a46"
+        "0aa6e1e160f64e96bf6782cc38a14ce4",
+        "237f05a0cce7467b8e011e4d3f2bda10",
+        "30b3c8c200de40b38920ecc9a3fe98f1",
+        "46ef9ca2646b4b4fa84eb510171bba7f",
+        "49101978fa1e4196858deeda931615b5",
+        "4f9bd2fe69034904a3b9606ff8b3380a",
+        "54cc309d7e1f419c9e76ff2ee1699ad0",
+        "580095874fe24343bec83280b8a8adfa",
+        "5ca9596b366f4a2380a29c99444e43c2",
+        "5d9ef548748947d9bcbe7835ea50705d",
+        "657f76ece11f4a93808cdf74122582b3",
+        "65fca230122942adb13799a109265b28",
+        "83072537e6d04bf98127afbaf881f145",
+        "862fa10e540b45e48ee94d7c0640470e",
+        "9a659042827a4e2db5362bb72300f24c",
+        "a13f9ff98cb64153823f07f6535198ab",
+        "b96c7236866b4610a9b55e55785517c3",
+        "beecdfb118ad414982a2a6ad618993df",
+        "c7508d7af21e411db3617d7007bbcadf",
+        "cdd253025d03437e8b3c8f32ec15baa8",
+        "d4a0d6e34cbf493a81381bc19545bd1b",
+        "d60ade0394994dc3844b4256c85d1356",
+        "ecf90065f1584256a12020060e3074fb",
+        "f04a263a1b84483e9aa240cb3cbdba1e",
+        "f0f2a7596c4d4cdbad9e26fdf48af123",
+        "f0f5faceee6c471d848c4b748a936318",
+        "f3fb0738b3ac4dda9495dd9f76fce883",
+        "fdf80041b38942e99cacd2e2874a8e0d"
       ],
       "avoided_execution_jobs": 0,
       "avoided_tasks": [],
-      "candidate_revision": "7c08dcbf6b2e1a90368368ba328f3597a260381ca68b67f2ac28904050ce3ee1",
-      "evidence_wall_seconds": 17.334850379033014,
-      "incremental_paid_seconds": 17.334850379033014,
-      "qualified_tier": 1,
-      "rejected_tier": null,
-      "request_ids": [
-        "f5103684e4a70ca14892d2fe"
-      ],
-      "status": "PASS",
-      "through_tier": 1,
-      "view": "discriminator_stability"
-    },
-    {
-      "attempt_ids": [
-        "b686547339464e94a60fd692675f1545"
-      ],
-      "avoided_execution_jobs": 2,
-      "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold"
-      ],
-      "candidate_revision": "059128df90e1bcb0af7f4596f5f9dd034686b171c24177f080a2b971e0f79fe2",
-      "evidence_wall_seconds": 9.51561203901656,
-      "incremental_paid_seconds": 9.51561203901656,
-      "qualified_tier": 0,
-      "rejected_tier": 1,
-      "request_ids": [
-        "9073785ce55366058c397caf"
-      ],
-      "status": "FAIL",
-      "through_tier": 1,
-      "view": "discriminator_stability"
-    },
-    {
-      "attempt_ids": [
-        "3c6a84341114445da149f04ab7541f01",
-        "6c44b7cbaff34277a9da6bb0ccb98321",
-        "8f6e156ef20f47ae939597d0fdcfde65",
-        "bcaebd15d92841d0b99aec185a446a46"
-      ],
-      "avoided_execution_jobs": 19,
-      "avoided_tasks": [
-        "residual_student",
-        "unipolar",
-        "cover_leftover",
-        "mid_scale_identity",
-        "mode_hold",
-        "vector_two_broad",
-        "vector_unequal_mass",
-        "vector_unequal_width",
-        "vector_anisotropic",
-        "vector_overlap",
-        "vector_spiral",
-        "img_stripes2",
-        "img_bars4",
-        "img_blobs4",
-        "img_intensity2",
-        "grid100",
-        "rotated100",
-        "staggered100",
-        "ring_hold",
-        "ring_extension"
-      ],
-      "candidate_revision": "7c08dcbf6b2e1a90368368ba328f3597a260381ca68b67f2ac28904050ce3ee1",
-      "evidence_wall_seconds": 23.971146613999736,
-      "incremental_paid_seconds": 6.636296234966721,
+      "candidate_revision": "9b869d8e95bc0ea145098ba5a3e6059fb135050b033cab71695ba625e51dccc0",
+      "evidence_wall_seconds": 2117.165756800052,
+      "incremental_paid_seconds": 2117.165756800052,
       "qualified_tier": 1,
       "rejected_tier": 2,
       "request_ids": [
-        "8b14a136693890e59481ab01"
+        "18db7f924ff2bc1a9534defc"
       ],
       "status": "FAIL",
-      "through_tier": 3,
+      "through_tier": 2,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "4c33fa871d84961a929bbfd21b0f147320e1bf8ccfb5c844792e03d19cd7d834",
+      "evidence_wall_seconds": null,
+      "incremental_paid_seconds": 380.0308015550545,
+      "qualified_tier": 0,
+      "rejected_tier": null,
+      "request_ids": [
+        "c389f29413be479a85b02012"
+      ],
+      "status": "INCOMPLETE",
+      "through_tier": 2,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "0466b9b84f6e4a30a36cf1d3e2357443",
+        "04bdce86bf5d450eba77e030b4d2c8cd",
+        "107a60b7168444b38b3b068a9a854176",
+        "115487721ecf4269ba1c51c6b3b269a5",
+        "13cabd9c88fa4df4af186e641c046a86",
+        "14e55ba8ae4c4ad89a11d76a2ae06852",
+        "152ce7ced8e74275aa47a5f2f5e99611",
+        "16ffa34a053140d58da0562f7e4e4549",
+        "534748cbd1f24ee4a8208a9ab38e23a2",
+        "695263469b104ddba700b66ea0843ec8",
+        "6b9cd00388eb4e6a8efd644d3683fd8a",
+        "6cbe082f020e4c9d96899be0cb5844e9",
+        "6e582d69d3304e1f8ff273bc4a0e58d8",
+        "73d292e48415468da02e005da548bff1",
+        "748a747f7f984e89af34f775f29974cb",
+        "790b9b08584543a3812a737baa6716e7",
+        "79830b7ba76b4b208ea60e24cd639d41",
+        "7adf20f3b4744284b2636fa3d864f2f0",
+        "7f561abdc9bb4f5e988478c32c32ad18",
+        "9172df1376154c82881abf383128869e",
+        "9a11c54209454bc5ba5afe4aa7787423",
+        "d275d224e2b54812a55b58fc0f443101",
+        "d62e9931a8b94bb88c54c9d02186ef33",
+        "d8804dfc19204afca81615bd73da90f3",
+        "d953893876524a4f966ef148e83118bd",
+        "e2308cfc7fa94052b16dcfe5bd3b9f6e",
+        "e8ce58b245764b2ba335538ce6b8caed",
+        "fe106cd86a9047a7ba63ed3f2c1cf447"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "bd5a3bd25bb702a6d2602883df4c1644d3605ed373fee205e54ac15abd12f58b",
+      "evidence_wall_seconds": 2110.5164849509893,
+      "incremental_paid_seconds": 2110.5164849509893,
+      "qualified_tier": 1,
+      "rejected_tier": 2,
+      "request_ids": [
+        "b753104f4c26be878788ceae"
+      ],
+      "status": "FAIL",
+      "through_tier": 2,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "77765918f0b8e49975abeef0068a12cef5c452594aa5d8f94003f0eaedfd3f52",
+      "evidence_wall_seconds": null,
+      "incremental_paid_seconds": 2134.6957291659783,
+      "qualified_tier": 0,
+      "rejected_tier": null,
+      "request_ids": [
+        "1feb8851f8e55c6d4a6a498b"
+      ],
+      "status": "INCOMPLETE",
+      "through_tier": 2,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "51786f37adc7cbd5d6ac2d1943e7838af3076ef066cb727f87a3425ae1079e6b",
+      "evidence_wall_seconds": null,
+      "incremental_paid_seconds": 370.95823934095097,
+      "qualified_tier": 0,
+      "rejected_tier": null,
+      "request_ids": [
+        "28227d24a22bdaa74e241edb"
+      ],
+      "status": "INCOMPLETE",
+      "through_tier": 2,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "589de06395db614a222a31d5969b521a8ce6560ca155439b937772898fd6f2d7",
+      "evidence_wall_seconds": null,
+      "incremental_paid_seconds": 389.80075419609784,
+      "qualified_tier": 0,
+      "rejected_tier": null,
+      "request_ids": [
+        "2ab2d2a9c693bdabdcd37c75"
+      ],
+      "status": "INCOMPLETE",
+      "through_tier": 2,
       "view": "discriminator_stability"
     }
   ],
   "queue_available": true,
   "queue_locations": [
-    "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/fresh-checkout-v2/runs/forge",
-    "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/fresh-checkout/runs/forge",
-    "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/implementation-pilot",
-    "/home/martyn/dev/ParticleGAN/runs/forge"
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue",
+    "/nvme/dev/particlegan/ParticleGAN/runs/forge"
   ],
-  "receipt_issues": [],
+  "receipt_issues": [
+    {
+      "attempt_id": "037b39c9b7be4cca9270cd9bd5e6844f",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "0cf45d6c288747b7a26fc158d60b87b5",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "0e91e77f8f4b4170b955eea7d911bfe5",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "0efe4617d31b44faa313c56fec8c0483",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "106d7160eef94f6faf1a3c07b32b5b57",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "126f66ff2db84a6180a8ec209ef0de05",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "12700f3f2d1246d38eb0523bb6353c90",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "185a6fef9e344f08b4068e83be208753",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "1a2e0d8b9690413ca1abe6d4c2391602",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "1a42788f09fd4a03b10707b5705110cd",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "1edde443fe3748199fa3f5353c8a6c4b",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "20b7cdd05cd24eafbdcd579c83c602ef",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "21a1567e12a145a8874c526916a9ddd9",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "245e086f845f41f4a5425560362fb3bb",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "24c1108ac40e4ea1adcc2ca091a7afed",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "299b4a4f2ec84366a50673013a6fda67",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "2cd10b81810c4a34a2b92f9c5c9c33b7",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "2ec0d8ec5d58429ab2b94e7c125fd2b4",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "3579b61c0b9d4673b0cfc1452b2896da",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "368edac25bd243f789dee9e833cf3d4a",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "3812d61d1e76414f8fbbd295003c609a",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "3b8960cccfc6487c93351e6f5bd5fbfd",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "40d539d69aae4995a61fc5b1d2c2e051",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "4103340079024971b8345f8b564c66be",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "41ef6a0ea6904f2dbafc1312bca86103",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "4466aef9cc6e48a588ebb340d1d97c19",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "454b28fd04c14c7fae6ae90f19b781b4",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "471d9d34b80d43a98b901d1cafb22397",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "50c063aa36824eb3807cdd4c7367d0a7",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "52d28f090d4647a287146e94dc270c03",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "553ef1ff258c46eeb7bc60c50d2a7913",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "5848124df1584846baf3299b0471185d",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "598d9c3a588b47b7a8db7af2378f7a56",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "5d05cc11ddcc4c86a1567680d2b9cff2",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "5d8d7b1853f9455ab35200999d159890",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "62c8d8120ea04acc8999a0b765d45f18",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "6903ccea0e51448ebd820962dd6cd3e5",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "6b41d0bd262d46b88ab8c9d5383889ca",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "6e8471cc62bf4d5cad871feaa63dc50f",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "6f8d2bc6180f4b18a3762dd18c1f08d1",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "7452e0ef15624105942e72e36df4d499",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "750dc1f2d85d46e6b960cb5312190fe3",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "76f2af217f104fd5b3c11b2cc98fc7c4",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "796062ccb3e3448085a86220644dde8d",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "7c528445840c40a8aead49acb88e6ba1",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "7f8d547e9c0742eeb83a7f89e35126d8",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "800f097527524ca6ac5fcd40e98c7c4b",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "82d11d2231dd4183a20fcfa99dcc3ed7",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "86a7dcb1092c4940a35cc2c37f3b10c7",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "86f2bfd66cdc48ebb834dd8c865acf99",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "89e24f25e3fc418b9ed883ccb0f1d081",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "8a741af82a8043f5b7c653b04f04862f",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "8a75b86292ea41b5ac5d63add2b99974",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "8d15c4e4b282457995754f796714cf0a",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "90078ba1ab1e4009917c50413912c57f",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "91c33b1514f0445fba4c72b3ba6e2806",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "9380729848c74f0d8c6e69a47339811b",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "95f0da07a8794e84979bc05b9ca3b1d4",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "9858af61a6e540828eb0f732b428e109",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "9a5f3d6109a9488dbf3183982c71422c",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "9acfcc9ef2534fbbb36b5a2639708cb4",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "9c5d95f842b94e4c9ea06c8527b12de1",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "9c99421afb1e421e9434191cc0c9c0e4",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "a01aef0c61f7485198e1501cbe51e95d",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "a80139e06a2c4120bf92674cc7575c95",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "a8e0f7096e8b49edb7bae6321fa038ad",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "a90dcd247bfe41d8835b203587ace920",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "aae21bc5e6224255bd1ed88f933dbb39",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "aecb2e0c358c4df283da66d26776efd3",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "b899acc300f64f288b59586f2dc34113",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "ba5f0d02a5df497192e11ff3eed857f4",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "bb3db37824904b80a764a28107b1a4c5",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "bec2cc8950db47e0a1c28ee683804cae",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "c49accd871314626afaa94a6865f0c26",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "c5f7a7e316454373b3eb7715dc3fc2cd",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "c809ca5679694c8998e135ade239f375",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "c9056a2cfa434cc2836fb6d4f026ccf5",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "c9896f98924548cc8fd0f7ccd02192fa",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "cf196eec16eb49888a2a768fa713738b",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "d27a3951369e4b79b49d2b11e6e59a15",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "d587d5d6961d4668ade305337e6bb2aa",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "d64983d119d645c9a392915b3bd2eaef",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "d80376880e8747ee80c8eca21348ea7d",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "dae51d6bc3f847979c669935ab857535",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "ddf01643dda941a3bab99297d2a44747",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "dfb7fe00029147b08301a61590822e15",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "e3036f964309446e82b059d8348fa90e",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "e6e7b81e898c41a1942d09793455a925",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "e77fa1a7e3b945409d328c9a085bee00",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "e788e57581684950bcd3adcd3bf73c4a",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "f0a90d578dba44fa85bef2a948b78aa8",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "f5f384df3e364b4cafbc2e4d4d398949",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "f7f99b7e49f44163b05d11c1f93c9c87",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "fae88edbda7a49aebdff4c555dd1beaf",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "fcf270c33afb4488a1441ddabde10d85",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "fd900d2601794c1492fae600ca6f5cd3",
+      "reason": "Task result compatibility key does not match its immutable request."
+    },
+    {
+      "attempt_id": "368edac25bd243f789dee9e833cf3d4a",
+      "reason": "Retry lacks a valid prior receipt and explicit repair authorization."
+    },
+    {
+      "attempt_id": "d80376880e8747ee80c8eca21348ea7d",
+      "reason": "Retry lacks a valid prior receipt and explicit repair authorization."
+    }
+  ],
   "requests_with_unavailable_cap": 0,
   "reuse": {
-    "evidence_uses": 32,
-    "reused_evidence_uses": 3,
-    "submitted_execution_demands": 277,
-    "unique_evidence_jobs": 29
+    "evidence_uses": 77,
+    "reused_evidence_uses": 0,
+    "submitted_execution_demands": 362,
+    "unique_evidence_jobs": 77
   },
   "schema_version": 1,
   "scope": "recorded current Forge receipts; historical imports are excluded",
   "spend": {
-    "attempts": 70,
-    "known_wall_seconds": 1215.4411803991388,
+    "attempts": 1955,
+    "known_wall_seconds": 140363.3359455959,
     "scope": "Unique paid attempts, including retries; grouped predicates and subscribers are not charged again.",
-    "unknown_cost_attempts": 0,
-    "wall_seconds": 1215.4411803991388
+    "unknown_cost_attempts": 14,
+    "wall_seconds": null
   },
   "task_gate_counts": {
-    "FAIL": 39,
-    "INCOMPLETE": 1,
-    "PASS": 30
+    "BLOCKED": 6,
+    "FAIL": 713,
+    "INCOMPLETE": 59,
+    "INVALID": 96,
+    "PASS": 878
   },
-  "tasks_avoided": 256,
+  "tasks_avoided": 63,
   "tier_rejections": {
-    "1": 16,
+    "1": 3,
     "2": 2
   }
 }

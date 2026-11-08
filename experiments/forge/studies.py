@@ -56,7 +56,7 @@ def validate_study(study):
     scope = study["scope"]
     if (not isinstance(scope, dict) or set(scope) - {"view", "through_tier", "execution_backend", "cuda_model"}
             or {"view", "through_tier", "execution_backend"} - scope.keys()
-            or type(scope["through_tier"]) is not int or scope["through_tier"] not in (1, 2, 3)
+            or type(scope["through_tier"]) is not int or isinstance(scope["through_tier"], bool) or scope["through_tier"] < 1
             or scope["execution_backend"] not in {"cpu", "cuda"}):
         raise ValueError("study scope must select a view, tier and CPU/CUDA cohort; task bindings are generated")
     identifier(scope["view"], "study view")

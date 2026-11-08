@@ -167,7 +167,7 @@ def _recorded_qualification(request, assignments, rows):
         if not required:
             # A held-only tier neither passes nor stops progression; any other
             # tier without a required task has no recorded qualification rule.
-            if any(a["qualification_tier"] == tier and a["importance"] == "held" for a in assignments):
+            if any(a["qualification_tier"] == tier and a["importance"] in {"stretch", "held"} for a in assignments):
                 continue
             return {"status": "UNAVAILABLE", "qualified_tier": None, "task_statuses": statuses}
         if all(value == "PASS" for value in required):
@@ -276,7 +276,7 @@ def summarize_automation(root: Path, queue_root: Path | None = None) -> dict:
         request = entry["request"]
         if diagnostic_evidence_scope(request) or request.get("promotion"):
             continue
-        if type(request.get("through_tier")) is not int or request["through_tier"] not in (1, 2, 3):
+        if type(request.get("through_tier")) is not int or isinstance(request.get("through_tier"), bool) or request["through_tier"] < 1:
             unavailable_caps += 1
             continue
         assignments = [a for a in request["view"]["assignments"] if a["qualification_tier"] <= request["through_tier"]]

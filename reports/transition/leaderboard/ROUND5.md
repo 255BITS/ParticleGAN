@@ -1,5 +1,8 @@
 # Class scale 6: better consistency, weaker distribution fit
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current leaderboard for this goal: [reports/transition/leaderboard/README.md](README.md); overall status: [reports/forge/technique-inventory.md](../../forge/technique-inventory.md); goal index: [reports/leaderboard-index.json](../../leaderboard-index.json). Results below are preserved as recorded.
+
 The new class-6/context-2 run scores **0.11996 joint SW1**, fifth of ten. It does
 not beat the **0.10027** marginal-critic leader. Against class-8/context-2, SW1
 worsens **12.6%**, residual improves **15.0%**, and coverage improves **12.1%**

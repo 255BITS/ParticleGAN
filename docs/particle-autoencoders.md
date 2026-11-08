@@ -40,7 +40,7 @@ All inherit the current shared training defaults; their convergence with those
 defaults is not established by the historical studies above. `reconstruction_weight=1`
 and `observation_sigma=.03` are explicit caller settings, not automatic losses.
 The observation sigma is distinct from latent prior sigma. Complete settings
-roundtrip through `recipe.to_dict()` and `Recipe(**config)`.
+roundtrip through `recipe.to_dict()` and `Recipe.from_dict(config)`.
 
 ## A runnable reconstruction step
 

@@ -2,29 +2,46 @@ name: Tests
 
 on:
   push:
-    branches: [master]
+    branches: [master, develop]
+  pull_request:
+    branches: [master, develop]
   workflow_dispatch:
   workflow_call:
+    inputs:
+      source_ref:
+        description: Immutable source commit validated by the release workflow
+        required: false
+        type: string
+        default: ""
 
 permissions:
   contents: read
 
+# Replace obsolete PR checks; keep each branch, manual and release run independent.
+concurrency:
+  group: particlegan-tests-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   cpu-tests:
-    name: CPU / Python ${{ matrix.python }}
-    # Run branch CI only on master, including manual/reusable calls.
-    # Tagged master releases use this workflow through release.yml.
+    name: CPU / Python ${{ matrix.python }} / shard ${{ matrix.shard }}
+    # Push and PR triggers already filter branches. Apply the same scope to
+    # manual dispatches while preserving immutable-source release checks.
     if: >-
-      (github.event_name == 'release' &&
-       github.event.release.target_commitish == 'master') ||
-      (github.event_name != 'pull_request' &&
-       github.ref == 'refs/heads/master')
+      github.event_name != 'workflow_dispatch' ||
+      github.ref == 'refs/heads/develop' ||
+      github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
-        python: ["3.10", "3.11", "3.12"]
+        include:
+          - {python: "3.11", shard: 0}
+          - {python: "3.12", shard: 0}
+          - {python: "3.12", shard: 1}
+          - {python: "3.12", shard: 2}
+          - {python: "3.12", shard: 3}
     env:
       CUDA_VISIBLE_DEVICES: ""
       MPLBACKEND: Agg
@@ -35,6 +52,7 @@ jobs:
         with:
           # Source-bound software tests replay exact published ancestor bytes.
           fetch-depth: 0
+          ref: ${{ inputs.source_ref || github.sha }}
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
@@ -46,11 +64,34 @@ jobs:
         run: python -m pip install -e '.[dev,experiments,images,lunar]'
       - name: Validate dependency installation
         run: python -m pip check
+      - name: Check reviewed lint baseline
+        if: matrix.python == '3.12' && matrix.shard == 0
+        run: python scripts/check_lint.py
       - name: Test numerical kernels and experiment workflows
         if: matrix.python == '3.12'
-        run: python -m pytest -q --ignore=tests/test_e22_routed_caption_late_phase_renderer.py
+        run: >-
+          python scripts/ci_pytest.py run --index ${{ matrix.shard }} --count 4
+          --receipt /tmp/pytest-shard-${{ matrix.shard }}.json --
+          -q --durations=25 -o faulthandler_timeout=600
+          --ignore=tests/test_e22_routed_caption_late_phase_renderer.py
+      # The minimum supported Python runs one deterministic quarter of the same
+      # suite. Its receipt stays local: release coverage is checked on 3.12.
+      - name: Test one suite shard on the minimum supported Python
+        if: matrix.python == '3.11'
+        run: >-
+          python scripts/ci_pytest.py run --index ${{ matrix.shard }} --count 4
+          --receipt /tmp/pytest-py311-shard-${{ matrix.shard }}.json --
+          -q --durations=25 -o faulthandler_timeout=600
+          --ignore=tests/test_e22_routed_caption_late_phase_renderer.py
+      - name: Save collection coverage receipt
+        if: always() && matrix.python == '3.12'
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-shard-${{ matrix.shard }}
+          path: /tmp/pytest-shard-${{ matrix.shard }}.json
+          if-no-files-found: error
       - name: Test bounded late-phase renderer in a fresh process
-        if: matrix.python == '3.12'
+        if: matrix.python == '3.12' && matrix.shard == 0
         run: timeout --signal=INT --kill-after=5s 60s python -m pytest -q tests/test_e22_routed_caption_late_phase_renderer.py
       - name: Exercise the complete Lunar pipeline and GIF exports
         if: matrix.python == '3.11'
@@ -58,6 +99,7 @@ jobs:
           SDL_VIDEODRIVER: dummy
         run: python -u examples/fast_lander.py --smoke --out /tmp/lunar-smoke
       - name: Build and smoke-test installed wheel outside checkout
+        if: matrix.shard == 0
         run: |
           python -m pip wheel --no-deps . --wheel-dir /tmp/particlegan-wheel
           python -m pip install --no-deps --target /tmp/particlegan-installed /tmp/particlegan-wheel/*.whl
@@ -91,7 +133,7 @@ jobs:
               BatchDistanceDiscriminator, DDGAN, LinearSkipDiscriminator,
               E22Policy, UpdatePolicy, ParticleRows, ScalarHeadFeatures,
               RoutedRows, RoutedBatch, RoutedCandidate, RoutedExecution,
-              DEFAULT_RECIPE, MoGParticlePrior, ParticlePrior, Recipe, get_recipe,
+              DEFAULT_RECIPE, MoGParticlePrior, ParticlePrior, Recipe, get_recipe, get_recipe_fields,
           )
 
           assert particlegan.__file__.startswith('/tmp/particlegan-installed/')
@@ -99,8 +141,12 @@ jobs:
           assert MoGParticlePrior(sigma=0.1).sample(2)[0].shape == (2, 4)
           assert DDGAN().steps == 4
           default = get_recipe()
+          assert DEFAULT_RECIPE == "bispf_optimized"
+          assert default.optimizer_svd_backend == "batched"
+          assert default.training_precision == "bf16_channels_last"
           assert default == get_recipe(DEFAULT_RECIPE)
-          assert Recipe(**default.to_dict()) == default
+          assert Recipe(**get_recipe_fields()) == default
+          assert Recipe.from_dict(default.to_dict()) == default
           assert get_recipe('gan') == default
           e22 = get_recipe('e22', num_particles=32, z_dim=2, batch_size=8)
           assert e22.name == 'e22' and e22.total_steps is None
@@ -120,20 +166,78 @@ jobs:
           assert sum(p.numel() for p in LinearSkipDiscriminator().parameters()) == 10467
           assert sum(p.numel() for p in BatchDistanceDiscriminator().parameters()) == 19013
           PY
-          PYTHONPATH=/tmp/particlegan-installed python -c "from particlegan import get_recipe; recipe = get_recipe(model='ddgan', prior_kind='mog', sigma_rel=.025, num_particles=8); assert recipe.model == 'ddgan' and recipe.lr == .00425; assert recipe.make_prior().sigma > 0"
+          PYTHONPATH=/tmp/particlegan-installed python -c "from particlegan import get_recipe; recipe = get_recipe(model='ddgan', prior_kind='mog', sigma_rel=.025, num_particles=8); assert recipe.model == 'ddgan' and recipe.lr == get_recipe().lr; assert recipe.make_prior().sigma > 0"
+
+  base-wheel:
+    name: Base wheel without optional dependencies
+    if: >-
+      github.event_name != 'workflow_dispatch' ||
+      github.ref == 'refs/heads/develop' ||
+      github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_ref || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build the wheel and install only its base requirements
+        run: |
+          python -m pip wheel --no-deps . --wheel-dir /tmp/particlegan-base-wheel
+          python -m venv /tmp/particlegan-base-env
+          /tmp/particlegan-base-env/bin/python -m pip install 'torch>=2.6,<3' --index-url https://download.pytorch.org/whl/cpu
+          /tmp/particlegan-base-env/bin/python -m pip install /tmp/particlegan-base-wheel/*.whl
+          /tmp/particlegan-base-env/bin/python -m pip check
+      - name: Import both public packages outside the checkout
+        working-directory: /tmp
+        run: |
+          /tmp/particlegan-base-env/bin/python - <<'PY'
+          import importlib.util
+          from typing import get_type_hints
+
+          assert importlib.util.find_spec('matplotlib') is None
+          assert importlib.util.find_spec('PIL') is None
+          import particlegan
+          import particlegan_forge
+          from particlegan import ManipulatedPrior, ParticlePrior
+          from particlegan_forge import NamedStreams, TaskSpec, render_training_gif
+
+          for package in (particlegan, particlegan_forge):
+              assert package.__file__.startswith('/tmp/particlegan-base-env/')
+          assert get_type_hints(ParticlePrior.manipulate)['return'] is ManipulatedPrior
+          assert ParticlePrior(num_particles=8).sample(2)[0].shape == (2, 4)
+          assert NamedStreams().generator('data').device.type == 'cpu'
+          assert callable(TaskSpec) and callable(render_training_gif)
+          PY
+          /tmp/particlegan-base-env/bin/python -m particlegan_forge --help
 
   distributions:
     name: Build release distributions
-    needs: cpu-tests
+    needs: [cpu-tests, base-wheel]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_ref || github.sha }}
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Install packaging tools
         run: python -m pip install build twine
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: pytest-shard-*
+          path: /tmp/pytest-shards
+          merge-multiple: true
+      - name: Require complete nonoverlapping regression coverage
+        run: python scripts/ci_pytest.py check /tmp/pytest-shards/*.json
       - name: Build source archive and wheel
         run: python -m build
       - name: Keep research artifacts outside release distributions
@@ -146,7 +250,9 @@ jobs:
           for wheel in Path('dist').glob('*.whl'):
               with zipfile.ZipFile(wheel) as archive:
                   roots = {name.split('/')[0] for name in archive.namelist()}
-              assert all(root == 'particlegan' or root.endswith('.dist-info') for root in roots), roots
+              # particlegan_forge is the documented external tier API (EXPERIMENTATION.md).
+              packages = {'particlegan', 'particlegan_forge'}
+              assert all(root in packages or root.endswith('.dist-info') for root in roots), roots
           research = {'reports', 'results', 'experiments', 'benchmarks', 'lib', 'configs', 'data', 'runs', 'artifacts'}
           for source in Path('dist').glob('*.tar.gz'):
               with tarfile.open(source) as archive:

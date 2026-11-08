@@ -265,5 +265,13 @@ def test_holding_or_removing_tests_keeps_the_committed_selected_universe():
                 assignment.update(importance="held", hold={"reason": "no_global_recipe"})
     assert counted["family_progress"]["views"] != uncounted["family_progress"]["views"]
     universe = runner.selected_tasks(publication)
-    assert universe and {len(tasks) for _, _, tasks in universe} == {35}
+    # View v15 appends two precision stretch tasks to the original 50-task
+    # union. The FP32 diagnostic does not enter this counted/stretch universe.
+    old = read_json(Path(__file__).resolve().parents[1] /
+                    "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json")
+    view = read_json(Path(__file__).resolve().parents[1] / "configs/forge/views/discriminator_stability.json")
+    expected = set(old["tests"]) | {"ring_hold"} | {a["task"] for a in view["assignments"] if a["importance"] == "stretch"}
+    # View17 replaces only the ring task; historical ring1600 evidence is not a ring6400 attempt.
+    expected = (expected - {"ring16_acquisition"}) | {"ring16_acquisition_6400"}
+    assert universe and all(set(tasks) == expected for _, _, tasks in universe)
     assert runner.selected_tasks(counted) == runner.selected_tasks(uncounted) == universe

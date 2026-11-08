@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "record_id": "r1r2-pr401-concluded-archive-v1",
+  "record_type": "family_context",
+  "candidate_id": "r1r2-pr401-concluded-archive",
+  "candidate_revision": "2cf7b0a4c796e29ace6cca12d2e553ad67211b5c",
+  "evidence_scope": "historical",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "goal": "discriminator_stability",
+  "mechanism_class": "concluded_research_archive",
+  "lifecycle": "concluded",
+  "hypothesis": "Historical R1/R2 global recipe repairs preserve the original task/protocol gates; this reporting archive proposes no new experiment.",
+  "conclusion": "All 34 complete measured revisions fail Ring16. Strongest complete repairs retain 5/6 ordinary tasks plus clock PASS; original scheduled baseline has 5/6 plus clock FAIL. Energy-U and frozen-prior energy both fail covariance/HQ on all 96 saved Ring16 panels. All original acquisition/endpoint distinctions and sources remain unchanged; MMD is unmeasured deferred preparation.",
+  "next_action": "Retain the stronger measured control and negative findings; stop these exact repairs. Accept compact evidence-only replacement before closing original mixed PR #401. Defer MMD runtime and paid execution; no budget change, qualification reuse or rerun.",
+  "source": {
+    "path": "reports/forge/r1r2-concluded-archive/README.md",
+    "sha256": "a4e18cccd6a0210c388bc51be518b686e1402c04728fb15be9567dc9bf4b2f15"
+  },
+  "provenance": {
+    "archive_source_commit": "2cf7b0a4c796e29ace6cca12d2e553ad67211b5c",
+    "archive_ref": "refs/heads/archive/pr401-2cf7b0a4c796e29ace6cca12d2e553ad67211b5c",
+    "archive_index": {
+      "path": "reports/forge/r1r2-concluded-archive/archive.json",
+      "sha256": "f3ce1b0068f568dcaedd6ba30bdd5a0ca6088c22917092142a7dae97f3e820b0"
+    },
+    "scope": "Display-only aggregate context; no task-result or live runtime import. Executed sources and per-certificate initialization/prior/stream identities remain authoritative.",
+    "recorded_aggregate_cost": {
+      "unique_attempts": 238,
+      "wall_seconds": 7168.248061007995,
+      "cap_seconds": 8000,
+      "overlap": "Includes earlier phases; do not add overlapping publication totals."
+    },
+    "cleanup_training_updates": 0,
+    "cleanup_sampling_draws": 0,
+    "cleanup_paid_seconds": 0,
+    "mmd_trained_results": 0
+  },
+  "task_results": []
+}

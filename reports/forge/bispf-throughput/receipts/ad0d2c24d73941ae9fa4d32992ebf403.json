@@ -1,0 +1,208 @@
+{
+  "attempt_id": "ad0d2c24d73941ae9fa4d32992ebf403",
+  "attempt_status": "completed",
+  "campaign_id": "bispf-throughput-endurance-v1",
+  "candidate_id": "bispf-throughput-v1",
+  "candidate_revision": "5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d",
+  "certificate_validated": true,
+  "cost_owner": {
+    "campaign": "bispf-throughput-endurance-v1",
+    "request": "c94a79c33ae1c6e6512aaaf2",
+    "revision": "5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d"
+  },
+  "evidence_scope": "published_summary",
+  "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+  "provenance": {
+    "canonical_result_hash": "1fb2bd86f0ae698c4a70887c90b6161f453f70c769d054fc2968bf6bc6bb569f",
+    "original_files": {
+      "evidence": {
+        "path": "reports/forge/attempts/ad0d2c24d73941ae9fa4d32992ebf403/evidence.json",
+        "sha256": "b22fcb5748012ec8e097cfca7c03206452533f1a9f03a518692a9946d7502d55"
+      },
+      "request": {
+        "path": "reports/forge/attempts/ad0d2c24d73941ae9fa4d32992ebf403/request.json",
+        "sha256": "f536e1aa920fec309464f32752c12900443e0369efcf2c06034f3c6a774e6616"
+      },
+      "result": {
+        "path": "reports/forge/attempts/ad0d2c24d73941ae9fa4d32992ebf403/result.json",
+        "sha256": "dfeef94fc49b0d43dec337bb23cf4a506e4221e7b1b81e1361b624c02c118a12"
+      }
+    },
+    "source_digest": "014d8783a85da5a2814e278d59f2e6749620d79fafdbb884cea66a0183e022f8",
+    "source_origin_commit": "bbd95834c3854d31397a6004977036b2d35af358"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "request_id": "c94a79c33ae1c6e6512aaaf2",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.8",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "summary_version": "forge-technique-receipt-summary-v1",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "compatibility_key": "b8a2c2057aa29cc83f245efeec26bec282323ffddc9e7a15f9a30fe0469eeb71",
+      "cost": {
+        "adapter_loop_seconds": 104.43783826706931,
+        "charged_task": "ring_hold",
+        "completed_steps": 3282,
+        "device": "1",
+        "execution_seconds": 110.29372970596887,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 3282,
+          "generator": 3282,
+          "prior": 3282
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 102.67902952211443,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 2082,
+              "seconds": 1.0115313602145761
+            },
+            "sampling": {
+              "calls": 2082,
+              "seconds": 0.7782356920652092
+            },
+            "training_updates": {
+              "calls": 3282,
+              "seconds": 100.88926246983465
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "wall_seconds": 110.29372970596887
+      },
+      "evaluator_summary": {},
+      "execution_path": "public_trainer",
+      "gate_status": "PASS",
+      "metrics": {
+        "confirmation_checks": 200,
+        "converged_step": 1782,
+        "convergence": "first consecutive qualifying window; operational quality criterion",
+        "first_hold_failure": null,
+        "frozen_toy_verdicts_unchanged": true,
+        "hold": "the next updates, disjoint from confirmation; no restart after failure",
+        "hold_budget": 1200,
+        "hold_budget_complete": true,
+        "hold_checks": 1200,
+        "longest_settling_streak": 200,
+        "min_hq": 0.9,
+        "modes": 8,
+        "name": "first_convergence_then_hold_v1",
+        "settling_budget": 4800,
+        "settling_checks": 582,
+        "settling_failures": 5,
+        "start_step": 1200,
+        "status": "PASS",
+        "training_feedback": false
+      },
+      "raw_status": "completed",
+      "reason": "recomputed first-convergence hold",
+      "reasons": [
+        "recomputed first-convergence hold"
+      ],
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "status": "PASS",
+      "task_id": "ring_hold"
+    },
+    {
+      "api_version": "forge-api-v1",
+      "compatibility_key": "b8a2c2057aa29cc83f245efeec26bec282323ffddc9e7a15f9a30fe0469eeb71",
+      "cost": {
+        "adapter_loop_seconds": 104.43783826706931,
+        "charged_task": "ring_hold",
+        "completed_steps": 3282,
+        "device": "1",
+        "execution_seconds": 110.29372970596887,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 3282,
+          "generator": 3282,
+          "prior": 3282
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 102.67902952211443,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 2082,
+              "seconds": 1.0115313602145761
+            },
+            "sampling": {
+              "calls": 2082,
+              "seconds": 0.7782356920652092
+            },
+            "training_updates": {
+              "calls": 3282,
+              "seconds": 100.88926246983465
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "wall_seconds": 0
+      },
+      "evaluator_summary": {},
+      "execution_path": "public_trainer",
+      "gate_status": "PASS",
+      "metrics": {
+        "confirmation_checks": 200,
+        "converged_step": 1782,
+        "convergence": "first consecutive qualifying window; operational quality criterion",
+        "extension_checks": 300,
+        "extension_passing": 300,
+        "first_hold_failure": null,
+        "frozen_toy_verdicts_unchanged": true,
+        "hold": "the next updates, disjoint from confirmation; no restart after failure",
+        "hold_budget": 1200,
+        "hold_budget_complete": true,
+        "hold_checks": 1200,
+        "longest_settling_streak": 200,
+        "min_hq": 0.9,
+        "modes": 8,
+        "name": "first_convergence_then_hold_v1",
+        "settling_budget": 4800,
+        "settling_checks": 582,
+        "settling_failures": 5,
+        "start_step": 1200,
+        "status": "PASS",
+        "training_feedback": false
+      },
+      "raw_status": "completed",
+      "reason": "recomputed every extension observation without selecting another window",
+      "reasons": [
+        "recomputed every extension observation without selecting another window"
+      ],
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "status": "PASS",
+      "task_id": "ring_extension"
+    }
+  ]
+}

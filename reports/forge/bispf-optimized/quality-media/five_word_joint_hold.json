@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "9d2e399b9ca6af8afc82aa9a3d1d5d1666843e42a0009865f28263f3ff27555a",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 25,
+  "observations_sha256": "fb076576be43bebe4cb7027debce5b7be1686f7f44100385d58209be4524656c",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    15,
+    18,
+    21,
+    24
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/ebb0483217144ba8b956d045b1458ef4/observed-records.pt": "67c8489e17302e63bee12179cfb949245aa7ca51f8a3b67ac3250a7da2ef66c6"
+  },
+  "task_id": "five_word_joint_hold"
+}

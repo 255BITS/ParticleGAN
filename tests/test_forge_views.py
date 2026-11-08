@@ -107,24 +107,18 @@ def test_current_inventory_has_complete_quality_and_distinct_claim_views():
     assert all(a["task"] != variant["task"] for a in stability["assignments"] + quality["assignments"])
     smoke = [a["task"] for a in stability["assignments"]
              if a["qualification_tier"] == 1 and a["importance"] == "required"]
-    assert smoke == ["gaussian1d_smoke", "two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition_6400",
-                     "five_word_joint_smoke"]
+    assert smoke[:7] == ["gaussian1d_smoke", "two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition_6400",
+                     "five_word_joint_smoke", "zero_tanh_smoke"]
+    assert len(smoke) == 11 and all(tasks[name]["adapter"] == "public_api_model_toy" for name in smoke[7:])
     assert sum(tasks[n]["execution"]["steps"] for n in smoke[1:4]) == 530
-    # Revision 11 (test dispositions 2026-10-15) holds 11 Tier 2 tests and removes
-    # ring_hold from the count as a phase of ring_extension; revision 12 (adopt
-    # 2026-10-16) swaps the counted ring16 for ring16_acquisition_6400 only.
-    assert stability["revision"] == 12 and stability["previous_revision"]["revision"] == 11
-    previous = json.loads((ROOT / "configs/forge/view-history/discriminator_stability-v11.json").read_text())
-    assert previous["revision"] == 11 and previous["previous_revision"]["revision"] == 9
-    swapped = [dict(a, task="ring16_acquisition_6400") if a["task"] == "ring16_acquisition" else a
-               for a in previous["assignments"]]
-    assert swapped == stability["assignments"]
+    # 0.10 restores four accuracy/settling tasks; the former hold policy is archived.
+    assert stability["revision"] == 17 and stability["previous_revision"]["revision"] == 16
     assert [a["task"] for a in stability["assignments"] if a["importance"] == "diagnostic"] == [
-        "ring_hold", "clockfree_audit_measurement_v1"]
+        "ring_hold", "clockfree_audit_measurement_v1", "precision_gaussian_fp32"]
     assert next(a for a in stability["assignments"] if a["task"] == "ring_hold")["removal"]["counted_by"] == "ring_extension"
-    for role, counts in (("required", [6, 10, 1]), ("held", [0, 11, 0])):
+    for role, counts in (("required", [11, 18, 1, 0]), ("held", [0, 7, 1, 5])):
         assert [sum(a["qualification_tier"] == tier and a["importance"] == role
-                    for a in stability["assignments"]) for tier in (1, 2, 3)] == counts
+                    for a in stability["assignments"]) for tier in (1, 2, 3, 4)] == counts
     archived = json.loads((ROOT / "configs/forge/view-history/discriminator_stability-v9.json").read_text())
     validate_view(archived, tasks)
     assert [sum(a["qualification_tier"] == tier and a["importance"] == "required"
@@ -160,7 +154,7 @@ def test_default_plan_and_report_include_acquisition_smoke_without_new_views():
     assert not {"ring16_acquisition", "five_word_joint"} & {row["id"] for row in report["views"]}
     view = next(row for row in report["views"] if row["id"] == "discriminator_stability")
     smoke = next(row for row in view["tiers"] if row["qualification_tier"] == 1)
-    assert smoke["counts"] == {"required": 6, "held": 0, "ranking": 0, "diagnostic": 1}
+    assert smoke["counts"] == {"required": 11, "held": 0, "ranking": 0, "diagnostic": 2, "stretch": 2}
     reported = {row["id"]: row for row in smoke["tasks"]}
     for name, updates, timeout in (("gaussian1d_smoke", 1000, 120),
                                    ("ring16_acquisition_6400", 6400, 1200),
@@ -283,6 +277,17 @@ def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer
                 blockers = task_preflight(deepcopy(task), candidate, {}, root=ROOT, tasks=tasks)
                 assert f"{task['id']}: evaluator source changed; revise the task definition: {path}" in blockers
                 continue
+            if path in {"benchmarks/toy_audit/api_model_ae.py",
+                        "benchmarks/toy_audit/api_model_ddgan.py",
+                        "benchmarks/toy_audit/api_model_vae.py"}:
+                from recipe_entrypoint_compat import frozen_restoration_source
+                frozen_restoration_source(ROOT, path, digest)
+                if hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != digest:
+                    from experiments.forge.preflight import task_preflight
+                    candidate = json.loads((ROOT / "configs/forge/ideas/k3p.json").read_text())
+                    blockers = task_preflight(deepcopy(task), candidate, {}, root=ROOT, tasks=tasks)
+                    assert f"{task['id']}: evaluator source changed; revise the task definition: {path}" in blockers
+                continue
             assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == digest
     if missing_history:
         pytest.skip("frozen legacy-card source pins need archived commit(s) " + ", ".join(sorted(c[:12] for c in missing_history))
@@ -355,24 +360,21 @@ def test_current_clock_view_preserves_historical_policy_and_first_tier_budget():
     historical = json.loads(path.read_text())
     current = load_view(ROOT, "clockfree_continuous")
     validate_view(historical, tasks)
-    assert current["revision"] == 4 and historical["revision"] == 2
+    assert current["revision"] == 5 and historical["revision"] == 2
     assert current["eligibility"] == historical["eligibility"]
     assert current["calibration"] == historical["calibration"]
     assignments = {a["task"]: a for a in current["assignments"]}
     assert assignments["clockfree_audit_measurement_v1"]["qualification_tier"] == 1
     assert assignments["clockfree_audit"]["qualification_tier"] == 3
-    # Revision 4 (test dispositions 2026-10-15) counts the clock claim once, at
-    # Tier 1; the Tier 3 copy stays assigned as the gate of the held 14k tests.
-    assert assignments["clockfree_audit"]["importance"] == "diagnostic"
-    assert {key: assignments["clockfree_audit"]["removal"][key] for key in ("reason", "counted_by")} == {
-        "reason": "duplicate", "counted_by": "clockfree_audit_measurement_v1"}
+    # Required continuations require their existing strict audit gate to count too.
+    assert assignments["clockfree_audit"]["importance"] == "required"
+    assert "removal" not in assignments["clockfree_audit"]
     for name in ("grid100_14k", "rotated100_14k", "staggered100_14k", "target_shift_recovery"):
-        assert assignments[name]["importance"] == "held" and assignments[name]["qualification_tier"] == 3
-    assert [assignments[name]["hold"]["blocked_by"] for name in ("grid100_14k", "rotated100_14k", "staggered100_14k")] == [
-        ["grid100"], ["rotated100"], ["staggered100"]]
+        assert assignments[name]["importance"] == "required" and assignments[name]["qualification_tier"] == 3
+    assert all("hold" not in assignments[name] for name in ("grid100_14k", "rotated100_14k", "staggered100_14k"))
     previous = json.loads((ROOT / current["previous_revision"]["archive"]).read_text())
-    assert previous["revision"] == 3
-    assert next(a for a in previous["assignments"] if a["task"] == "clockfree_audit")["importance"] == "required"
+    assert previous["revision"] == 4
+    assert next(a for a in previous["assignments"] if a["task"] == "clockfree_audit")["importance"] == "diagnostic"
     assert next(a for a in historical["assignments"] if a["task"] == "clockfree_audit")["qualification_tier"] == 1
     # Shared execution groups reserve their maximum timeout once.
     def ceiling(view, tier=None):
@@ -924,7 +926,8 @@ def test_duplicate_removal_names_an_earlier_counted_task_with_the_same_grader():
 
 def test_duplicate_rule_accepts_the_clock_audit_copy_but_not_a_different_density_test():
     all_tasks = load_tasks(ROOT)
-    clock = load_view(ROOT, "clockfree_continuous")
+    clock = json.loads((ROOT / "configs/forge/view-history/clockfree_continuous-v4.json").read_text())
+    validate_view(clock, all_tasks)
     assert next(a for a in clock["assignments"] if a["task"] == "clockfree_audit")["removal"]["counted_by"] == (
         "clockfree_audit_measurement_v1")
     quality = load_view(ROOT, "quality_coverage")
@@ -948,3 +951,96 @@ def test_previous_revision_names_its_exact_archive():
         bad["previous_revision"].update(change)
         with pytest.raises(ValueError, match=match):
             validate_view(bad, tasks)
+
+
+def test_qualify_exposes_counted_eligible_and_continuous_check_summary():
+    from experiments.forge.views import check_summary
+    tasks = {n: simple_task(n) for n in "ab"}
+    view = simple_view(("a", 1, "required"), ("b", 2, "held"))
+    view["assignments"][1]["hold"] = hold("b")
+    res_a = receipt(tasks["a"])
+    res_b = receipt(tasks["b"], final=2.)
+    default_out = qualify(view, tasks, [res_a, res_b])
+    assert default_out["status"] == "HELD"
+    assert default_out["eligible"] is False
+    assert default_out["counted_eligible"] is True
+    allowed_out = qualify(view, tasks, [res_a, res_b], allow_held_highest_tier=True)
+    assert allowed_out["status"] == "PASS"
+    assert allowed_out["eligible"] is True
+    assert allowed_out["counted_eligible"] is True
+    summary = check_summary({"evaluator_result": {"checks": {"c1": True, "c2": False, "c3": True, "c4": True}}})
+    assert summary == {"passed_checks": 3, "total_checks": 4, "check_pass_rate": 0.75}
+
+
+def test_stretch_assignments_and_stretch_tiers_never_block_qualification_or_pass():
+    from experiments.forge.views import is_stretch, stretch_note
+    tasks = {n: simple_task(n) for n in "abc"}
+    view = simple_view(("a", 1, "required"), ("b", 2, "stretch"), ("c", 2, "stretch"))
+    view["assignments"][2]["stretch"] = {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "Frontier extra-credit benchmark task for multi-tier stretch validation.",
+    }
+    validate_view(view, tasks)
+    assert is_stretch("stretch") and is_stretch("held") and not is_stretch("required")
+    assert is_stretch(view["assignments"][1]) and stretch_note(view["assignments"][2])["reason"] == "frontier"
+
+    # Even when stretch tasks fail or are not run, a passing required tier qualifies the view as PASS.
+    result = qualify(view, tasks, [receipt(tasks["a"]), receipt(tasks["b"], final=2.)])
+    assert result["status"] == "PASS" and result["eligible"] is True and result["qualified_tier"] == 1
+    assert result["tiers"][1]["status"] == "STRETCH"
+    assert result["tiers"][1]["stretch_total"] == 2 and result["tiers"][1]["stretch_passed"] == 0
+    assert (result["stretch_total"], result["stretch_passed"]) == (2, 0)
+    assert result["stretch_tasks"] == ["b", "c"] and result["stretch_tiers"] == [2]
+
+    # When stretch tasks pass, stretch_passed increments without altering required totals.
+    both_pass = qualify(view, tasks, [receipt(tasks["a"]), receipt(tasks["b"]), receipt(tasks["c"])])
+    assert both_pass["status"] == "PASS" and (both_pass["stretch_total"], both_pass["stretch_passed"]) == (2, 2)
+    assert (both_pass["required_total"], both_pass["required_passed"]) == (1, 1)
+
+    # A stretch-only view reports STRETCH and is not eligible for required qualification.
+    stretch_only = simple_view(("b", 1, "stretch"))
+    validate_view(stretch_only, tasks)
+    so_out = qualify(stretch_only, tasks, [receipt(tasks["b"])])
+    assert so_out["status"] == "STRETCH" and not so_out["eligible"] and so_out["qualified_tier"] == 0
+
+    # Invalid stretch metadata is rejected.
+    bad_role = deepcopy(view)
+    bad_role["assignments"][0]["stretch"] = {"reason": "frontier"}
+    with pytest.raises(ValueError, match="requires importance stretch"):
+        validate_view(bad_role, tasks)
+    missing_summary = deepcopy(view)
+    missing_summary["assignments"][1]["stretch"] = {"reason": "frontier"}
+    with pytest.raises(ValueError, match="stretch metadata needs at least"):
+        validate_view(missing_summary, tasks)
+    bad_reason = deepcopy(view)
+    bad_reason["assignments"][1]["stretch"] = {
+        "reason": "invalid_reason",
+        "summary": "Frontier extra-credit benchmark task for multi-tier stretch validation.",
+    }
+    with pytest.raises(ValueError, match="stretch reason"):
+        validate_view(bad_reason, tasks)
+
+    # A pure STRETCH tier above a HELD tier must not flip a HELD view into PASS.
+    held_plus_stretch = simple_view(("a", 1, "required"), ("b", 2, "held"), ("c", 3, "stretch"))
+    held_plus_stretch["assignments"][1]["hold"] = hold("b", reason="unsolved")
+    validate_view(held_plus_stretch, tasks)
+    hps_out = qualify(held_plus_stretch, tasks, [receipt(tasks["a"]), receipt(tasks["b"]), receipt(tasks["c"])])
+    assert hps_out["status"] == "HELD" and not hps_out["eligible"] and hps_out["counted_eligible"] is True
+    assert hps_out["qualified_tier"] == 1 and hps_out["held_tiers"] == [2] and hps_out["stretch_tiers"] == [2, 3]
+
+    # Stretch prerequisite reason requires blocked_by listing stretch prerequisites.
+    dep_tasks = {n: simple_task(n) for n in "ab"}
+    dep_tasks["b"]["dependencies"] = [{"task": "a", "kind": "gate"}]
+    dep_view = simple_view(("a", 1, "stretch"), ("b", 2, "stretch"))
+    dep_view["assignments"][1]["stretch"] = {
+        "schema": "forge_stretch_v1",
+        "reason": "stretch_prerequisite",
+        "summary": "Depends on stretch task a and therefore requires blocked_by.",
+    }
+    with pytest.raises(ValueError, match="requires blocked_by"):
+        validate_view(dep_view, dep_tasks)
+    dep_view["assignments"][1]["stretch"]["blocked_by"] = ["a"]
+    validate_view(dep_view, dep_tasks)
+
+

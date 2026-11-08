@@ -1,5 +1,8 @@
 # Formulation defaults: behavioral leaderboard
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current leaderboard for this goal: [reports/forge/technique-inventory.md](../../forge/technique-inventory.md); goal index: [reports/leaderboard-index.json](../../leaderboard-index.json). Results below are preserved as recorded.
+
 **Historical comparison with per-host training settings.** Use the
 [primary unadjusted leaderboard](../unadjusted/README.md) to select a shared
 default. This page's adjusted 19/19 result is not eligible for that competition.

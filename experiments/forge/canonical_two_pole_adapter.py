@@ -327,7 +327,7 @@ def construct_owner(root, binding, *, source_guard):
         json.loads(_source(root, TASK_PATH)), json.loads(_source(root, PROTOCOL_PATH)))
     if binding != expected:
         raise ValueError("forged effective Recipe or owner contract before model construction")
-    recipe = Recipe(**binding["recipe"])
+    recipe = Recipe.from_dict(binding["recipe"])
     if (canonical(asdict(recipe)) != canonical(binding["recipe"])
             or canonical(recipe.to_dict()) != canonical(binding["recipe_serialized"])):
         raise ValueError("actual complete public Recipe differs before model construction")

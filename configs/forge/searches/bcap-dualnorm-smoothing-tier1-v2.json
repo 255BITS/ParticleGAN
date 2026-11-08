@@ -2,10 +2,10 @@
   "base_candidate": "bcap-dualnorm-smoothed-v1",
   "campaign": {
     "accept_shared_cost_transfer": false,
-    "budget_seconds": 10260,
-    "candidate_budget_seconds": 3420,
+    "budget_seconds": 18360,
+    "candidate_budget_seconds": 6120,
     "id": "bcap-dualnorm-smoothing-tier1-v2",
-    "purpose": "Unexecuted bounded search example: three complete global recipes, original Tier1 tasks and diagnostic, no higher-tier spend, retries, seed variations or adoption. Revision of v1 for discriminator_stability revision 12: the counted ring16 is ring16_acquisition_6400 (declared 1,200 s), so the Tier1 ceiling is 3,420 s per candidate; v1 is kept unchanged.",
+    "purpose": "Unexecuted bounded search example: three complete global recipes on view-v15 Tier 1, including the optional precision toys and FP32 diagnostic. Planning only; no seed variations, retries, higher-tier spend, or default adoption.",
     "schema_version": 1
   },
   "cuda_model": "NVIDIA RTX A6000",

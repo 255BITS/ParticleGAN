@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "499e9532b97b791fdc0364df8cf6ee0d2c472508e2f678e3dce13578bd6d9dd9",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "31e3b2ba3e01932ab0d5718663f57fa014ed00ca09a7fa17461195cc1136d6fc",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-fastpath-alternatives-v1/91832bb54bc74d1abc42a8576d9fc7e7/observed-images.pt": "448a0931a9c079570b195debed109cd3cb353245b7e5635899dfb480be191a29"
+  },
+  "task_id": "img_bars4_w64_optimizer_diagnostic"
+}

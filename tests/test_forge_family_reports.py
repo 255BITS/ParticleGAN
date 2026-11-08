@@ -1039,10 +1039,11 @@ def test_full_suite_keeps_held_failures_and_deduplicates_shared_tests(report):
     assert full_suite_outcomes(cohort, names) == {
         "passed": 2, "failed": 1, "other": {"UNKNOWN": 1}, "total": 4}
     text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
-    headline, subset = text.split("<summary>Qualification subset", 1)
-    assert "| 2 | **1** | 1 not measured | 4 |" in headline
-    assert "A held FAIL is still a failure" in headline and "3/3" not in headline
-    assert "[3/3]" in subset and "[Problem list:" in headline
+    selected, full_suite = text.split("## Full-suite results — failures included", 1)
+    assert "| 2 | **1** | 1 | 0 | " in full_suite and " | 4 | " in full_suite
+    assert "A held FAIL is still a failure" in full_suite
+    assert "[3/3]" in selected and "[Problem list:" in full_suite
+    assert "<details>" not in selected and "<summary>Qualification subset" not in text
 
 
 def test_full_suite_never_borrows_diagnostic_passes_or_calls_errors_failures(report):
@@ -1079,7 +1080,7 @@ def test_problem_page_explains_intent_failures_and_scoped_passers(report):
     assert_anchored_links_resolve(root, pages)
 
 
-def test_real_selected_bispf_headline_includes_all_eleven_held_failures():
+def test_real_selected_bispf_headline_keeps_all_eleven_failures_after_restoring_gates():
     import json
     root = Path(__file__).resolve().parents[1]
     publication = json.loads((root / "reports/forge/technique-inventory.json").read_text())
@@ -1087,10 +1088,10 @@ def test_real_selected_bispf_headline_includes_all_eleven_held_failures():
     progress = publication["family_progress"]
     cohort = next(cohort for family, cohort in _selected_cohorts(progress) if family["id"] == "bispf")
     counts = full_suite_outcomes(cohort, full_suite_tasks(progress))
-    # Revision 12 counts ring16_acquisition_6400, which the recorded BISPF cohort never ran: its
-    # recorded 1,600-update ring16 PASS no longer counts, so it is UNKNOWN, not FAIL.
-    assert counts == {"passed": 16, "failed": 11, "other": {"UNKNOWN": 6}, "total": 33}
-    assert cohort["tasks"]["ring16_acquisition_6400"]["status"] == "UNKNOWN"
+    # New model-mode research keeps its own source; it cannot fill eight new
+    # cells in the previously selected whole recipe's ordinary evidence. The
+    # 6,400-update ring revision likewise cannot reuse its 1,600-update PASS.
+    assert counts == {"passed": 17, "failed": 11, "other": {"UNKNOWN": 33}, "total": 61}
     definitions = json.loads((root / "reports/forge/problem-definitions.json").read_text())
     described = {item["task"] for item in definitions["problems"]}
     held = {a["task"] for view in progress["views"] for a in view["assignments"]
@@ -1099,3 +1100,48 @@ def test_real_selected_bispf_headline_includes_all_eleven_held_failures():
     failed = {name for _, cohort in _selected_cohorts(progress) for name in full_suite_tasks(progress)
               if cohort["tasks"][name]["status"] == "FAIL"}
     assert failed <= described
+
+
+def test_comparison_projection_labels_actual_execution_policy_separately(report):
+    root, publication = report
+    publication['rows'][0]['executed_policy_qualification'] = {
+        'view_revision': 11, 'qualified_tier': 3, 'status': 'PASS'}
+    publication['family_progress'] = build_progress(root, publication)
+    pages = generated_pages(root, publication)
+    family_page = pages[root / 'reports/forge/families/k3p.md']
+    assert 'Comparison policy: alpha revision 1, **tier 0**' in family_page
+    assert 'Actual executed-policy qualification: **tier 3**, alpha revision 11 (PASS)' in family_page
+    assert 'no qualification reuse' in family_page
+    overview = render_leaderboard(root, publication, root / 'reports/forge/technique-inventory.md')
+    assert 'comparison policy revision 1, tier 0; actual executed-policy qualification **tier 3**, revision 11 (PASS)' in overview
+
+
+def test_stretch_experiments_table_renders_tier_columns_and_supports_stretch_role(report):
+    root, publication = report
+    # Without stretch or held tasks, the stretch table is absent.
+    generate(report)
+    no_stretch_text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    assert "## Stretch experiments" not in no_stretch_text
+
+    # Mark 'failed' as stretch (frontier) and 'missing' as held.
+    uncount(root, "alpha", {
+        "failed": ("stretch", "stretch", {
+            "schema": "forge_stretch_v1",
+            "reason": "frontier",
+            "summary": "Fixture: failed is a frontier stretch task in Tier 2.",
+        }),
+        "missing": ("held", "hold", hold_note("missing", "unsolved")),
+    })
+    cohort = generate(report)
+    assert score(cohort["total"]) == "3/3"
+    assert score(cohort["views"][0]["held"]) == "0/2 (1 not run)"
+    text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    assert "## Stretch experiments" in text
+    stretch_sec = text.split("## Stretch experiments", 1)[1].split("\n## ", 1)[0]
+    assert "| Family / selected recipe | Tier 1 stretch | Tier 2 stretch | Tier 3 stretch | Total stretch |" in stretch_sec
+    assert "**2 stretch view assignments** across **2 distinct stretch tests**" in stretch_sec
+    assert "[0/1](families/k3p.md#" in stretch_sec
+    assert "[0/2 (1 not run)](families/k3p.md#" in stretch_sec
+    family_page = generated_pages(root, publication)[root / "reports/forge/families/k3p.md"]
+    assert "stretch: frontier stretch benchmark beyond the required suite" in family_page
+

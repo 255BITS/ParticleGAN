@@ -1,0 +1,845 @@
+{
+  "findings": {
+    "benchmarks/locked_shared/host_reference.py": {
+      "F401": {
+        "`json` imported but unused": 1
+      }
+    },
+    "benchmarks/locked_shared/hosts/ae_gan_hold.py": {
+      "F401": {
+        "`benchmarks.legacy.grad_regularizers.GradRegularizer` imported but unused": 1,
+        "`benchmarks.legacy.recipe.get_recipe` imported but unused": 1
+      }
+    },
+    "benchmarks/locked_shared/hosts/residual_student.py": {
+      "F401": {
+        "`..trajectory.PAIRINGS` imported but unused": 1
+      }
+    },
+    "benchmarks/locked_shared/mode_hold.py": {
+      "F401": {
+        "`torch.nn` imported but unused": 1
+      }
+    },
+    "benchmarks/locked_shared/recorded_recipes.py": {
+      "F401": {
+        "`benchmarks.legacy.recipe.LegacyRecipe` imported but unused": 1
+      }
+    },
+    "benchmarks/routed_conditioning/spatial_damping.py": {
+      "F401": {
+        "`particlegan.RoutedBatch` imported but unused": 1
+      }
+    },
+    "benchmarks/smart_descent/study.py": {
+      "F401": {
+        "`math` imported but unused": 1
+      }
+    },
+    "benchmarks/toy100/affine_replay.py": {
+      "F401": {
+        "`torch` imported but unused": 1
+      }
+    },
+    "benchmarks/toy100/train.py": {
+      "F401": {
+        "`benchmarks.legacy.recipe.get_recipe` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/api_gaussian1d.py": {
+      "F401": {
+        "`.gaussian1d_quality` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/api_model_ae_ddgan.py": {
+      "F401": {
+        "`.api_model_ddgan.task_recipe` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/api_run.py": {
+      "F401": {
+        "`textwrap` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/api_sources/circle.py": {
+      "F401": {
+        "`torch.nn.functional` imported but unused": 1,
+        "`torch.nn` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/api_sources/misgan.py": {
+      "F401": {
+        "`math` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/api_sources/sprite.py": {
+      "F401": {
+        "`hashlib` imported but unused": 1,
+        "`json` imported but unused": 1,
+        "`pathlib.Path` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/batch_toy_media.py": {
+      "F401": {
+        "`math` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/check_source_family_parity.py": {
+      "F401": {
+        "`copy.deepcopy` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/prior_proximal_smoke.py": {
+      "F821": {
+        "Undefined name `restored`": 1
+      }
+    },
+    "benchmarks/toy_audit/proposal.py": {
+      "F841": {
+        "Local variable `result` is assigned to but never used": 1
+      }
+    },
+    "benchmarks/toy_audit/recent_toy_media.py": {
+      "F401": {
+        "`numpy` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/render.py": {
+      "F401": {
+        "`benchmarks.transfer_suite.vector_tasks.target_scale` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/replay.py": {
+      "F401": {
+        "`json` imported but unused": 1,
+        "`os` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/source_conditional_capture.py": {
+      "F401": {
+        "`copy.deepcopy` imported but unused": 1,
+        "`hashlib` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/source_cuda_observation_report.py": {
+      "F841": {
+        "Local variable `real` is assigned to but never used": 1
+      }
+    },
+    "benchmarks/toy_audit/source_demos.py": {
+      "F401": {
+        "`copy.deepcopy` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/source_family_media.py": {
+      "F401": {
+        "`hashlib` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/source_family_report.py": {
+      "F401": {
+        "`numpy` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/source_family_training.py": {
+      "F401": {
+        "`copy.deepcopy` imported but unused": 1,
+        "`importlib.util` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/source_paired_transport_report.py": {
+      "F401": {
+        "`copy.deepcopy` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/source_routed_ring_training.py": {
+      "F841": {
+        "Local variable `final_state` is assigned to but never used": 1
+      }
+    },
+    "benchmarks/toy_audit/tier1_batch_size.py": {
+      "F401": {
+        "`experiments.forge.contracts.stable_hash` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_audit/tier1_prior_duration.py": {
+      "F401": {
+        "`copy.deepcopy` imported but unused": 1
+      }
+    },
+    "benchmarks/toy_suite.py": {
+      "F401": {
+        "`benchmarks.toy100.train.make_trainer` imported but unused": 1
+      }
+    },
+    "benchmarks/transfer_suite/compare_formulations.py": {
+      "F401": {
+        "`.compare_defaults.read` imported but unused": 1
+      }
+    },
+    "benchmarks/transfer_suite/public_default_verification.py": {
+      "F401": {
+        "`benchmarks.legacy.recipe.get_recipe` imported but unused": 1
+      }
+    },
+    "benchmarks/transfer_suite/shared_adapter_search.py": {
+      "F401": {
+        "`benchmarks.legacy.recipe.get_recipe` imported but unused": 1
+      }
+    },
+    "benchmarks/transfer_suite/shared_batch_feature_search.py": {
+      "F401": {
+        "`benchmarks.legacy.recipe.get_recipe` imported but unused": 1
+      }
+    },
+    "benchmarks/transfer_suite/shared_discriminator_search.py": {
+      "F401": {
+        "`benchmarks.legacy.recipe.get_recipe` imported but unused": 1
+      }
+    },
+    "benchmarks/transfer_suite/shared_ensemble_search.py": {
+      "F401": {
+        "`benchmarks.legacy.recipe.get_recipe` imported but unused": 1
+      }
+    },
+    "benchmarks/transfer_suite/shared_norm_structure_search.py": {
+      "F401": {
+        "`benchmarks.legacy.recipe.get_recipe` imported but unused": 1
+      }
+    },
+    "benchmarks/transfer_suite/shared_pointnorm_research.py": {
+      "F401": {
+        "`torch` imported but unused": 1
+      }
+    },
+    "benchmarks/transfer_suite/shared_pointnorm_search.py": {
+      "F401": {
+        "`benchmarks.legacy.recipe.get_recipe` imported but unused": 1
+      }
+    },
+    "benchmarks/transfer_suite/shared_schedule_search.py": {
+      "F401": {
+        "`benchmarks.legacy.recipe.get_recipe` imported but unused": 1
+      }
+    },
+    "benchmarks/transfer_suite/smooth_critic_research.py": {
+      "F401": {
+        "`math` imported but unused": 1
+      }
+    },
+    "benchmarks/transfer_suite/toy100_compatibility.py": {
+      "F401": {
+        "`benchmarks.legacy.recipe.get_recipe` imported but unused": 1
+      }
+    },
+    "examples/e22_routed_caption_late_phase.py": {
+      "F821": {
+        "Undefined name `p`": 1
+      }
+    },
+    "examples/e22_routed_caption_untied.py": {
+      "F821": {
+        "Undefined name `p`": 1
+      }
+    },
+    "examples/e22_routed_g_clean.py": {
+      "F402": {
+        "Import `time` from an earlier line shadowed by loop variable": 1
+      }
+    },
+    "examples/e22_routed_support.py": {
+      "F401": {
+        "`e22_routed_sites.checkpoint` imported but unused": 1,
+        "`e22_routed_sites.restore` imported but unused": 1,
+        "`e22_routed_sites.warmup` imported but unused": 1
+      }
+    },
+    "examples/five_modes.py": {
+      "F401": {
+        "`numpy` imported but unused": 1
+      },
+      "F541": {
+        "f-string without any placeholders": 1
+      }
+    },
+    "examples/run_e22_routed_game_stationarity.py": {
+      "F401": {
+        "`copy.deepcopy` imported but unused": 1,
+        "`sys` imported but unused": 1
+      }
+    },
+    "experiments/analyze_mog_noise.py": {
+      "F841": {
+        "Local variable `atoms` is assigned to but never used": 1
+      }
+    },
+    "experiments/audit_mog_overlap.py": {
+      "F401": {
+        "`csv` imported but unused": 1
+      }
+    },
+    "experiments/evaluate_gym_transition.py": {
+      "F401": {
+        "`hashlib` imported but unused": 1
+      }
+    },
+    "experiments/forge/canonical_mog_adapter.py": {
+      "F401": {
+        "`torch` imported but unused": 1
+      }
+    },
+    "experiments/forge/canonical_two_pole_case.py": {
+      "F401": {
+        "`importlib.metadata` imported but unused": 1,
+        "`platform` imported but unused": 1
+      }
+    },
+    "experiments/forge/native3_repaired_publication_memory.py": {
+      "F401": {
+        "`.native3_publication_memory.PARENT_DIRECTORY` imported but unused": 1,
+        "`.native3_publication_memory.PARENT_FILES` imported but unused": 1,
+        "`.native3_publication_memory.PARENT_METADATA_PAID` imported but unused": 1,
+        "`.native3_publication_memory.PARENT_METADATA_PATH` imported but unused": 1,
+        "`.native3_publication_memory.PARENT_METADATA_PIN_PATH` imported but unused": 1,
+        "`.native3_publication_memory.PARENT_METADATA_SHA` imported but unused": 1
+      }
+    },
+    "experiments/forge/research_attempts.py": {
+      "F401": {
+        "`collections.defaultdict` imported but unused": 1
+      }
+    },
+    "experiments/forge/runtime.py": {
+      "F401": {
+        "`os` imported but unused": 1
+      }
+    },
+    "experiments/forge/scaling_profile.py": {
+      "F401": {
+        "`.contracts.stable_hash` imported but unused": 1
+      }
+    },
+    "experiments/forge/search_space.py": {
+      "F841": {
+        "Local variable `family` is assigned to but never used": 1
+      }
+    },
+    "experiments/forge/tier1_media.py": {
+      "F401": {
+        "`.clockfree.learning_state` imported but unused": 1
+      }
+    },
+    "experiments/metric_recon.py": {
+      "F401": {
+        "`typing.Tuple` imported but unused": 1
+      }
+    },
+    "experiments/train_100gaussians.py": {
+      "F401": {
+        "`experiments.train_denoising.json_safe` imported but unused": 1,
+        "`json` imported but unused": 1
+      }
+    },
+    "experiments/train_cifar_ddgan.py": {
+      "F401": {
+        "`numpy` imported but unused": 1
+      }
+    },
+    "experiments/train_mog_autoencoder.py": {
+      "F401": {
+        "`numpy` imported but unused": 1
+      }
+    },
+    "lib/ddgan_ncsnpp/dense_layer.py": {
+      "F401": {
+        "`numpy` imported but unused": 1,
+        "`torch.nn.functional` imported but unused": 1
+      }
+    },
+    "lib/ddgan_ncsnpp/up_or_down_sampling.py": {
+      "F841": {
+        "Local variable `outC` is assigned to but never used": 1
+      }
+    },
+    "lib/denoising_toy.py": {
+      "F401": {
+        "`particlegan.diffusion.DrawSource` imported but unused": 1
+      }
+    },
+    "lib/gym_control.py": {
+      "F401": {
+        "`hashlib` imported but unused": 1
+      }
+    },
+    "lib/gym_gan_control.py": {
+      "F401": {
+        "`lib.gym_state_control.control_action_details` imported but unused": 1,
+        "`lib.gym_state_control.predict_state_control` imported but unused": 1,
+        "`lib.gym_state_control.state_control_action` imported but unused": 1
+      }
+    },
+    "lib/gym_state_control.py": {
+      "F401": {
+        "`lib.gym_transition.contact_record` imported but unused": 1
+      }
+    },
+    "lib/lunar_artifacts.py": {
+      "F401": {
+        "`PIL.ImageDraw` imported but unused": 1
+      }
+    },
+    "lib/sparse_metrics.py": {
+      "F401": {
+        "`typing.Optional` imported but unused": 1
+      }
+    },
+    "particlegan/mean_transport.py": {
+      "F401": {
+        "`.output_moments.FIT_CHUNK` imported but unused": 1,
+        "`.output_moments.FixedOutputMoment` imported but unused": 1,
+        "`.output_moments.OutputProjection` imported but unused": 1
+      }
+    },
+    "tests/fixtures/extra-adam-hosts/mode_hold.py": {
+      "F401": {
+        "`torch.nn` imported but unused": 1
+      }
+    },
+    "tests/k3p_scenarios.py": {
+      "F841": {
+        "Local variable `anchor` is assigned to but never used": 1
+      }
+    },
+    "tests/test_api_tier5_adversarial.py": {
+      "F401": {
+        "`benchmarks.toy_audit.api_sources.misgan` imported but unused": 1,
+        "`numpy` imported but unused": 1
+      }
+    },
+    "tests/test_bispf.py": {
+      "F401": {
+        "`particlegan.BISPFLossAdapter` imported but unused": 1
+      }
+    },
+    "tests/test_bispf_declared_gates.py": {
+      "F401": {
+        "`dataclasses.asdict` imported but unused": 1
+      }
+    },
+    "tests/test_compare_defaults.py": {
+      "F401": {
+        "`particlegan.get_recipe` imported but unused": 1
+      }
+    },
+    "tests/test_core_inventory_study_reconstruction.py": {
+      "F401": {
+        "`pathlib.Path` imported but unused": 1,
+        "`test_forge_configuration_search.checkout` imported but unused": 1
+      },
+      "F811": {
+        "Redefinition of unused `checkout` from an earlier line: `checkout` redefined here": 1
+      }
+    },
+    "tests/test_coulomb_prior.py": {
+      "F401": {
+        "`particlegan.Recipe` imported but unused": 1
+      }
+    },
+    "tests/test_denoising_api.py": {
+      "F401": {
+        "`particlegan.learning_rate_scale` imported but unused": 1
+      }
+    },
+    "tests/test_e22_routed_caption_accuracy.py": {
+      "F401": {
+        "`copy.deepcopy` imported but unused": 1
+      }
+    },
+    "tests/test_e22_routed_caption_flow.py": {
+      "F401": {
+        "`copy.deepcopy` imported but unused": 1
+      }
+    },
+    "tests/test_e22_routed_caption_normalization.py": {
+      "F401": {
+        "`dataclasses.asdict` imported but unused": 1
+      }
+    },
+    "tests/test_e22_routed_convergence_rotated_teacher.py": {
+      "F401": {
+        "`examples.e22_routed_convergence_neutral` imported but unused": 1
+      }
+    },
+    "tests/test_forge_api.py": {
+      "F401": {
+        "`particlegan.prior_mechanisms` imported but unused": 1
+      }
+    },
+    "tests/test_forge_cadence_study.py": {
+      "F401": {
+        "`test_forge_configuration_search.checkout` imported but unused": 1
+      },
+      "F811": {
+        "Redefinition of unused `checkout` from an earlier line: `checkout` redefined here": 23
+      }
+    },
+    "tests/test_forge_calibration_diagnostics.py": {
+      "F401": {
+        "`test_forge_promotion.setup` imported but unused": 1
+      },
+      "F811": {
+        "Redefinition of unused `promotion_setup` from an earlier line: `promotion_setup` redefined here": 2
+      }
+    },
+    "tests/test_forge_calibration_feasibility.py": {
+      "F401": {
+        "`test_forge_calibration_lane.setup` imported but unused": 1,
+        "`test_forge_promotion.setup` imported but unused": 1
+      },
+      "F811": {
+        "Redefinition of unused `lane_setup` from an earlier line: `lane_setup` redefined here": 2,
+        "Redefinition of unused `promotion_setup` from an earlier line: `promotion_setup` redefined here": 6
+      }
+    },
+    "tests/test_forge_calibration_imports.py": {
+      "F401": {
+        "`test_forge_promotion.setup` imported but unused": 1
+      },
+      "F811": {
+        "Redefinition of unused `promotion_setup` from an earlier line: `promotion_setup` redefined here": 1
+      }
+    },
+    "tests/test_forge_calibration_lane.py": {
+      "F401": {
+        "`test_forge_promotion.setup` imported but unused": 1
+      },
+      "F811": {
+        "Redefinition of unused `promotion_setup` from an earlier line: `promotion_setup` redefined here": 1
+      }
+    },
+    "tests/test_forge_decision_contracts.py": {
+      "F401": {
+        "`test_forge_planning.checkout` imported but unused": 1
+      },
+      "F811": {
+        "Redefinition of unused `checkout` from an earlier line: `checkout` redefined here": 5
+      }
+    },
+    "tests/test_forge_direct_particle_tuning.py": {
+      "F401": {
+        "`test_forge_configuration_search.checkout` imported but unused": 1,
+        "`test_forge_configuration_search.spec` imported but unused": 1
+      },
+      "F811": {
+        "Redefinition of unused `checkout` from an earlier line: `checkout` redefined here": 5,
+        "Redefinition of unused `spec` from an earlier line: `spec` redefined here": 5
+      }
+    },
+    "tests/test_forge_dispositions.py": {
+      "F401": {
+        "`experiments.forge.contracts.atomic_json` imported but unused": 1
+      }
+    },
+    "tests/test_forge_dualnorm_smoothing_search.py": {
+      "F401": {
+        "`test_forge_configuration_search.checkout` imported but unused": 1,
+        "`test_forge_configuration_search.spec` imported but unused": 1
+      },
+      "F402": {
+        "Import `spec` from an earlier line shadowed by loop variable": 1
+      },
+      "F811": {
+        "Redefinition of unused `checkout` from an earlier line: `checkout` redefined here": 6,
+        "Redefinition of unused `spec` from an earlier line: `spec` redefined here": 4
+      }
+    },
+    "tests/test_forge_family_documentation.py": {
+      "F401": {
+        "`pathlib.Path` imported but unused": 1
+      }
+    },
+    "tests/test_forge_gaussian_smoke.py": {
+      "F401": {
+        "`experiments.forge.gaussian_tasks.bounds` imported but unused": 1,
+        "`experiments.forge.views.grade_result` imported but unused": 1
+      }
+    },
+    "tests/test_forge_grouped_evidence.py": {
+      "F401": {
+        "`experiments.forge.views.grade_result` imported but unused": 1
+      }
+    },
+    "tests/test_forge_model_toys.py": {
+      "F401": {
+        "`torch` imported but unused": 1
+      }
+    },
+    "tests/test_forge_native3_passive_publications.py": {
+      "F841": {
+        "Local variable `cut` is assigned to but never used": 1
+      }
+    },
+    "tests/test_forge_native3_repaired_passive_publications.py": {
+      "F841": {
+        "Local variable `new` is assigned to but never used": 1
+      }
+    },
+    "tests/test_forge_native_profiles.py": {
+      "F401": {
+        "`experiments.forge.nativeprofiles.resolve_host_initialization` imported but unused": 1,
+        "`experiments.forge.nativeprofiles.task_from_profile` imported but unused": 1
+      }
+    },
+    "tests/test_forge_ntier.py": {
+      "F401": {
+        "`experiments.forge.contracts.read_json` imported but unused": 1,
+        "`experiments.forge.tier_report.TIER_NAMES` imported but unused": 1,
+        "`experiments.forge.views.IMPORTANCES` imported but unused": 1,
+        "`experiments.forge.views.load_view` imported but unused": 1
+      }
+    },
+    "tests/test_forge_ntier_challenger.py": {
+      "F401": {
+        "`experiments.forge.family_reports._table_header` imported but unused": 1,
+        "`experiments.forge.tier_report.TIER_NAMES` imported but unused": 1,
+        "`experiments.forge.views.IMPORTANCES` imported but unused": 1,
+        "`pathlib.Path` imported but unused": 1
+      }
+    },
+    "tests/test_forge_passive_publications.py": {
+      "F841": {
+        "Local variable `cut` is assigned to but never used": 2,
+        "Local variable `first` is assigned to but never used": 1
+      }
+    },
+    "tests/test_forge_planning.py": {
+      "F401": {
+        "`copy.deepcopy` imported but unused": 1
+      }
+    },
+    "tests/test_forge_research_diagnostics.py": {
+      "F401": {
+        "`test_forge_calibration.current` imported but unused": 1,
+        "`test_forge_knowledge.setup` imported but unused": 1,
+        "`test_forge_planning.checkout` imported but unused": 1
+      },
+      "F811": {
+        "Redefinition of unused `calibration_current` from an earlier line: `calibration_current` redefined here": 1,
+        "Redefinition of unused `checkout` from an earlier line: `checkout` redefined here": 1,
+        "Redefinition of unused `knowledge_setup` from an earlier line: `knowledge_setup` redefined here": 3
+      }
+    },
+    "tests/test_forge_sampling.py": {
+      "F401": {
+        "`experiments.forge.sampling.BEHAVIOR_POLICIES` imported but unused": 1,
+        "`experiments.forge.sampling.grade_sampling` imported but unused": 1
+      }
+    },
+    "tests/test_forge_scaling.py": {
+      "F401": {
+        "`json` imported but unused": 1,
+        "`test_forge_configuration_search.checkout` imported but unused": 1
+      },
+      "F811": {
+        "Redefinition of unused `checkout` from an earlier line: `checkout` redefined here": 1
+      }
+    },
+    "tests/test_forge_scaling_export.py": {
+      "F401": {
+        "`copy.deepcopy` imported but unused": 1,
+        "`pathlib.Path` imported but unused": 1
+      }
+    },
+    "tests/test_forge_scaling_publication.py": {
+      "F401": {
+        "`experiments.forge.contracts.file_hash` imported but unused": 1
+      }
+    },
+    "tests/test_forge_search_space.py": {
+      "F401": {
+        "`test_forge_configuration_search.checkout` imported but unused": 1
+      },
+      "F811": {
+        "Redefinition of unused `checkout` from an earlier line: `checkout` redefined here": 8
+      }
+    },
+    "tests/test_forge_shared_leases.py": {
+      "F401": {
+        "`subprocess` imported but unused": 1,
+        "`sys` imported but unused": 1
+      }
+    },
+    "tests/test_forge_studies.py": {
+      "F401": {
+        "`test_forge_configuration_search.checkout` imported but unused": 1,
+        "`test_forge_configuration_search.spec` imported but unused": 1
+      },
+      "F811": {
+        "Redefinition of unused `checkout` from an earlier line: `checkout` redefined here": 15,
+        "Redefinition of unused `spec` from an earlier line: `spec` redefined here": 3
+      }
+    },
+    "tests/test_forge_telemetry.py": {
+      "F841": {
+        "Local variable `result` is assigned to but never used": 1
+      }
+    },
+    "tests/test_forge_tier1_policy_coverage.py": {
+      "F401": {
+        "`experiments.forge.contracts.atomic_json` imported but unused": 1
+      }
+    },
+    "tests/test_forge_tier5_adversarial.py": {
+      "F401": {
+        "`copy.deepcopy` imported but unused": 1,
+        "`experiments.forge.tier_report.TIER_NAMES` imported but unused": 1,
+        "`experiments.forge.views.HOLD_REASONS` imported but unused": 1,
+        "`experiments.forge.views.IMPORTANCES` imported but unused": 1,
+        "`pathlib.Path` imported but unused": 1
+      },
+      "F541": {
+        "f-string without any placeholders": 1
+      },
+      "F841": {
+        "Local variable `tasks` is assigned to but never used": 4
+      }
+    },
+    "tests/test_forge_word_joint.py": {
+      "F401": {
+        "`benchmarks.toy_audit.api_images.score_words` imported but unused": 1,
+        "`benchmarks.toy_audit.api_images.word_bank` imported but unused": 1,
+        "`types.SimpleNamespace` imported but unused": 1
+      }
+    },
+    "tests/test_forge_workers.py": {
+      "F401": {
+        "`os` imported but unused": 1,
+        "`pytest` imported but unused": 1
+      }
+    },
+    "tests/test_generator_step_publication.py": {
+      "F401": {
+        "`subprocess` imported but unused": 1
+      }
+    },
+    "tests/test_gram_svd_diagnostic_profile.py": {
+      "F401": {
+        "`particlegan.optim.dualnorm.polar_factor` imported but unused": 1
+      }
+    },
+    "tests/test_gym_control_training.py": {
+      "F401": {
+        "`lib.gym_control.predict_control` imported but unused": 1
+      }
+    },
+    "tests/test_mog.py": {
+      "F401": {
+        "`numpy` imported but unused": 1
+      }
+    },
+    "tests/test_prior_feature_integration.py": {
+      "F401": {
+        "`particlegan.Recipe` imported but unused": 1
+      }
+    },
+    "tests/test_prior_manipulator_provenance.py": {
+      "F401": {
+        "`copy.deepcopy` imported but unused": 1
+      }
+    },
+    "tests/test_recent_toy_media.py": {
+      "F401": {
+        "`pathlib.Path` imported but unused": 1
+      }
+    },
+    "tests/test_safe_fast_2d.py": {
+      "F401": {
+        "`lib.safe_fast_landing.evaluate_policy` imported but unused": 1
+      }
+    },
+    "tests/test_shared_default_search.py": {
+      "F401": {
+        "`benchmarks.locked_shared.recorded_recipes.GAN_V1` imported but unused": 1,
+        "`particlegan.get_recipe` imported but unused": 1
+      }
+    },
+    "tests/test_shared_profile_search.py": {
+      "F401": {
+        "`particlegan.get_recipe` imported but unused": 1
+      }
+    },
+    "tests/test_sigreg.py": {
+      "F401": {
+        "`experiments.forge.api.task_formulation_context` imported but unused": 1
+      }
+    },
+    "tests/test_solvability_tanh.py": {
+      "F401": {
+        "`copy.deepcopy` imported but unused": 1
+      }
+    },
+    "tests/test_source_bound_board.py": {
+      "F401": {
+        "`experiments.forge.source_bound_board.main_board_rows` imported but unused": 1
+      }
+    },
+    "tests/test_sparse.py": {
+      "F401": {
+        "`lib.sparse_models.JointCritic` imported but unused": 1,
+        "`lib.sparse_models.XOnlyCritic` imported but unused": 1,
+        "`torch.nn` imported but unused": 1
+      }
+    },
+    "tests/test_swappable_priors.py": {
+      "F401": {
+        "`json` imported but unused": 1,
+        "`particlegan.DEFAULT_RECIPE` imported but unused": 1
+      }
+    },
+    "tests/test_toy_api_conditionals.py": {
+      "F401": {
+        "`copy.deepcopy` imported but unused": 1
+      },
+      "F841": {
+        "Local variable `radius` is assigned to but never used": 1
+      }
+    },
+    "tests/test_toy_api_diagnostics.py": {
+      "F401": {
+        "`copy.deepcopy` imported but unused": 1
+      }
+    },
+    "tests/test_toy_api_model_ddgan.py": {
+      "F401": {
+        "`benchmarks.toy_audit.api_model_ddgan.CASES` imported but unused": 1
+      }
+    },
+    "tests/test_toy_api_model_vae.py": {
+      "F401": {
+        "`copy.deepcopy` imported but unused": 1
+      }
+    },
+    "tests/test_toy_forge_selection_readiness.py": {
+      "F401": {
+        "`pathlib.Path` imported but unused": 1
+      }
+    },
+    "tests/test_toy_suite.py": {
+      "F401": {
+        "`particlegan.get_recipe` imported but unused": 1
+      }
+    },
+    "tests/test_training.py": {
+      "F401": {
+        "`particlegan.learning_rate_scale` imported but unused": 1
+      }
+    },
+    "tests/test_transfer_output_rng.py": {
+      "F401": {
+        "`particlegan.get_recipe` imported but unused": 1
+      }
+    }
+  },
+  "rules": "F,E9",
+  "schema_version": 1
+}

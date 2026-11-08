@@ -206,12 +206,15 @@ class Queue:
     def state(self):
         with file_lock(self.root / "queue.lock"):
             path = self.root / "queue" / "state.json"
-            state = read_json(path) if path.exists() else {
+            existed = path.exists()
+            state = read_json(path) if existed else {
                 "schema_version": 1, "campaigns": {}, "submissions": {}, "jobs": {}, "events": [], "charges": [],
             }
             state.setdefault("charges", [])
+            before = canonical(state) if existed else None
             yield state
-            atomic_json(path, state)
+            if not existed or canonical(state) != before:
+                atomic_json(path, state)
 
     def event(self, state, event, **fields):
         # Submitters append to the locked inbox; only the collector emits streams.
@@ -250,7 +253,8 @@ class Queue:
             if stable_hash(campaign) != stable_hash(expected):
                 raise ValueError("promotion campaign differs from frozen budgets/policy")
         else:
-            validate_screening_submission(request)
+            validate_screening_submission(request,
+                root=self.report_root.parent.parent if self.report_root else None, campaign=campaign)
         from .sampling import validate_request_sampling
         validate_request_sampling(request, task_ids=task_ids)
         from .hostprofiles import validate_request_host_profiles
@@ -258,8 +262,8 @@ class Queue:
         identifier(campaign["id"], "campaign")
         positive_number(campaign["budget_seconds"], "campaign budget_seconds")
         positive_number(campaign["candidate_budget_seconds"], "candidate_budget_seconds")
-        if request["through_tier"] not in (1, 2, 3):
-            raise ValueError("through_tier must be 1, 2 or 3")
+        if not isinstance(request["through_tier"], int) or isinstance(request["through_tier"], bool) or request["through_tier"] < 1:
+            raise ValueError("through_tier must be an integer >= 1")
         # Campaign is part of request identity, but not scientific compatibility.
         request = {**request, "campaign_id": campaign["id"], "queue_root": str(self.root)}
         request_id = stable_hash(request)[:24]
@@ -499,6 +503,7 @@ class Queue:
             free = [slot for slot in free if device_key(slot["device"]) not in exclusive]
             pending = sorted(state["submissions"].items(), key=lambda kv: (
                 -(kv[1]["request"].get("priority", 0) + (time.time() - kv[1]["submitted_at"]) / 300), kv[0]))
+            open_cache: dict[tuple[str | None, str | None], str | None] = {}
             for request_id, entry in pending:
                 if request_filter is not None and request_id != request_filter:
                     continue
@@ -507,10 +512,15 @@ class Queue:
                     continue
                 if self.report_root:
                     from .lifecycle import ensure_open
-                    try:
-                        ensure_open(self.report_root.parent.parent, request)
-                    except ValueError as error:
-                        entry.update(status="blocked", reason=str(error), lifecycle="awaiting_readout")
+                    open_key = (request.get("candidate", {}).get("id"), request.get("candidate_revision"))
+                    if open_key not in open_cache:
+                        try:
+                            ensure_open(self.report_root.parent.parent, request)
+                            open_cache[open_key] = None
+                        except ValueError as error:
+                            open_cache[open_key] = str(error)
+                    if open_cache[open_key] is not None:
+                        entry.update(status="blocked", reason=open_cache[open_key], lifecycle="awaiting_readout")
                         continue
                 if campaign_filter and request["campaign_id"] != campaign_filter:
                     continue
@@ -550,7 +560,9 @@ class Queue:
                             entry.update(status="blocked", reason="resource: no currently available configured device satisfies task memory/device requirements",
                                          lifecycle="awaiting_readout")
                         continue
-                    seconds = job["definition"]["budget_seconds"]
+                    from .wallclock import reservation_seconds, resolve_policy
+                    wallclock_policy = resolve_policy(request.get("wallclock_policy", "default"))
+                    seconds = reservation_seconds(job["definition"], wallclock_policy)
                     ok, reason = self._available_budget(state, request, seconds, job_key=key)
                     if not ok:
                         entry.update(status="blocked", reason="resource: " + reason, lifecycle="awaiting_readout")
@@ -564,7 +576,8 @@ class Queue:
                               "token": uuid.uuid4().hex, "started_at": time.time(), "pid": None,
                               "host_reservation": needed, "host_capacity_at_claim": capacity}
                     resolved = {"schema_version": 1, "request_id": request_id, "request": request,
-                                "job": job["definition"], "worker": worker}
+                                "job": job["definition"], "worker": worker,
+                                "wallclock_policy": wallclock_policy, "reservation_seconds": seconds}
                     prerequisites = {}
                     for member in job["definition"].get("task_ids", [job["definition"]["task_id"]]):
                         for dependency in request["tasks"][member].get("dependencies", []):
@@ -594,7 +607,8 @@ class Queue:
                     self.event(state, "claimed", request=request_id, campaign=request["campaign_id"],
                                candidate=request["candidate"]["id"], task=job["definition"]["task_id"],
                                attempt=attempt, worker=attempt, gpu=worker["device"],
-                               budget_seconds=seconds, log=str(directory / "run.log"))
+                               budget_seconds=seconds, declared_budget_seconds=job["definition"]["budget_seconds"],
+                               log=str(directory / "run.log"))
                     return resolved
             return None
 

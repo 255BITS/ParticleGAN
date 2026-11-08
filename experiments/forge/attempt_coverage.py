@@ -35,7 +35,7 @@ import uuid
 
 from .contracts import atomic_json, atomic_text, file_hash, file_lock, read_json, stable_hash
 from .queue import device_slots, process_identity, lease_held
-from .views import task_execution_fingerprint, task_evaluation_fingerprint
+from .views import COUNTED_OR_HELD, task_execution_fingerprint, task_evaluation_fingerprint
 
 REPORT = Path("reports/forge/attempt-coverage.json")
 WORKER = Path(__file__).with_name("attempt_worker.py")
@@ -61,7 +61,7 @@ def selected_tasks(publication):
         row = publication["rows"][current["row_index"]]
         names = {v["id"] for v in current["views"]}
         tasks = sorted({a["task"] for v in publication["family_progress"]["views"] if v["id"] in names
-                        for a in v["assignments"] if a["importance"] in {"required", "held"} or "removal" in a})
+                        for a in v["assignments"] if a["importance"] in COUNTED_OR_HELD or "removal" in a})
         result.append((family["id"], row, tasks))
     return result
 

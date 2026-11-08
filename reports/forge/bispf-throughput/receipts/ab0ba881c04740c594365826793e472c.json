@@ -1,0 +1,104 @@
+{
+  "attempt_id": "ab0ba881c04740c594365826793e472c",
+  "attempt_status": "completed",
+  "campaign_id": "bispf-throughput-performance-control-v1",
+  "candidate_id": "bispf-optimized-quintic-v1",
+  "candidate_revision": "fbc1bf4bda35c195efe7830c359d1851febdbca85b4257b4415d66187ed3d248",
+  "certificate_validated": true,
+  "cost_owner": {
+    "campaign": "bispf-throughput-performance-control-v1",
+    "request": "11c5d6e3942604ee7ffff46e",
+    "revision": "fbc1bf4bda35c195efe7830c359d1851febdbca85b4257b4415d66187ed3d248"
+  },
+  "evidence_scope": "published_summary",
+  "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+  "provenance": {
+    "canonical_result_hash": "5e63da79d7cbb66378d45a2ae996859cf440af737ee03eaa5c07aa90d7b043d2",
+    "original_files": {
+      "evidence": {
+        "path": "reports/forge/attempts/ab0ba881c04740c594365826793e472c/evidence.json",
+        "sha256": "2123c196f48366efc4452b8734a7486b3f87d35ada35ba09d374b662ec218bab"
+      },
+      "request": {
+        "path": "reports/forge/attempts/ab0ba881c04740c594365826793e472c/request.json",
+        "sha256": "aa6c2fdb48e26a66f10bae5ed454f58c7a019779acc2c6291cd6923ff766b9c3"
+      },
+      "result": {
+        "path": "reports/forge/attempts/ab0ba881c04740c594365826793e472c/result.json",
+        "sha256": "777758656ba3ea3c0b95bef1a42739d8dcc5493d7ffaab896ae24cf7a917e6c8"
+      }
+    },
+    "source_digest": "014d8783a85da5a2814e278d59f2e6749620d79fafdbb884cea66a0183e022f8",
+    "source_origin_commit": "bbd95834c3854d31397a6004977036b2d35af358"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "request_id": "11c5d6e3942604ee7ffff46e",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.8",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "summary_version": "forge-technique-receipt-summary-v1",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "616cc81c9be17de915ae748da6a31061ed7b60a3a18891ded2298b2782b1be4d",
+      "cost": {
+        "adapter_seconds": 3.502007298055105,
+        "charged_task": "dcgan_performance_b64",
+        "device": "1",
+        "execution_seconds": 9.406848747981712,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 4.51051512605045,
+        "wall_seconds": 9.406848747981712
+      },
+      "evaluator_summary": {},
+      "execution_path": "public_trainer",
+      "gate_status": "PASS",
+      "metrics": {
+        "completed_updates": 13,
+        "finite_update_fraction": 1.0,
+        "first_update_ms": 611.9510610587895,
+        "images_per_second": 696.0184928204295,
+        "measured_updates": 10,
+        "parameter_count_discriminator": 2765568,
+        "parameter_count_generator": 3806080,
+        "peak_allocated_mib": 558.2177734375,
+        "peak_reserved_mib": 634.0,
+        "total_wall_seconds": 3.418050987063907,
+        "update_ms_median": 91.82009397773072,
+        "update_ms_p95": 93.37771344580688,
+        "warmup_ms_median": 92.72662398871034
+      },
+      "raw_status": "completed",
+      "reason": "complete finite public-trainer timing budget; diagnostic performance evidence only",
+      "reasons": [
+        "complete finite public-trainer timing budget; diagnostic performance evidence only"
+      ],
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "training_update_measurement",
+        "scoring_weights": "live"
+      },
+      "status": "PASS",
+      "task_id": "dcgan_performance_b64"
+    }
+  ]
+}

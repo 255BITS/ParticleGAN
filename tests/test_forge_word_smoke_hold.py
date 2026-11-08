@@ -99,15 +99,22 @@ def test_task_policy_preserves_old_sustained_definition_and_checked_budgets():
     assert smoke["evaluation"]["thresholds"] == hold["evaluation"]["thresholds"] == old["evaluation"]["thresholds"]
     assert hold["dependencies"] == [dict(task="five_word_joint_smoke", kind="checkpoint")]
     campaign = read_json(ROOT / "configs/forge/campaigns/technique-inventory-word-split-v1.json")
-    # The historical campaign was reserved for view revision 9 (1,600-update ring16, 300 s);
-    # revision 10 requires the 6,400-update ring16 (1,200 s) and its own adopt-20261016 campaigns.
-    archived = read_json(ROOT / "configs/forge/view-history/discriminator_stability-v9.json")
     groups = {tasks[a["task"]]["execution"].get("execution_group", a["task"]):
-              tasks[a["task"]]["resources"]["timeout_seconds"] for a in archived["assignments"]}
-    assert campaign["candidate_budget_seconds"] == sum(groups.values()) == 46620
-    current = {tasks[a["task"]]["execution"].get("execution_group", a["task"]):
-               tasks[a["task"]]["resources"]["timeout_seconds"] for a in view["assignments"]}
-    assert sum(current.values()) == 46620 - 300 + 1200
+              tasks[a["task"]]["resources"]["timeout_seconds"] for a in view["assignments"]}
+    assert campaign["candidate_budget_seconds"] == 46620
+    # The original campaign keeps its old allowance. New model-mode tasks add
+    # an explicit reservation; they cannot silently fit the historical cap.
+    assert sum(groups.values()) == 75120
+    assert sum(value for key, value in groups.items() if key.startswith("precision_gaussian_")) == 900
+    initial = read_json(ROOT / "reports/forge/precision-stretch/initial-view-v14.json")
+    initial_keys = {tasks[a["task"]]["execution"].get("execution_group", a["task"]) for a in initial["assignments"]}
+    historical_groups = dict(groups)
+    historical_groups["ring16_acquisition"] = historical_groups.pop("ring16_acquisition_6400") - 900
+    original_groups = {key: value for key, value in historical_groups.items() if key in initial_keys and not key.startswith("model_")}
+    assert sum(original_groups.values()) == 58440
+
+
+@pytest.mark.cuda
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="word ladder execution requires CUDA")
@@ -132,6 +139,9 @@ def test_cuda_bounded_public_word_draws_preserve_streams_and_save_complete_state
         purposes = {b["purpose"] for b in state["streams"]["manifest"]["bindings"].values()}
         assert {"generated_words", "paired_reconstruction", "word_confirmation", "word_reconstruction_confirmation"} <= purposes
     execute(device=DEVICE)
+
+
+@pytest.mark.cuda
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="external-horizon restoration requires CUDA")

@@ -94,12 +94,16 @@
     },
     {
       "candidates": [
-        "atlas"
+        "atlas",
+        "atlas-particle-normal-v1",
+        "atlas-particle-normal-v2",
+        "atlas-particle-normal-v3",
+        "atlas-particle-normal-v4"
       ],
-      "canonical_candidate": "atlas",
+      "canonical_candidate": "atlas-particle-normal-v4",
       "id": "atlas",
       "label": "Atlas",
-      "rationale": "Policy-aware Atlas formulation; unsupported frozen hosts remain blocked.",
+      "rationale": "Policy-aware Atlas formulation. The selected particle + additive normal noise (sigma=0.0065) candidate unlocks generator-network, VAE and vector hosts under clean fixed serving; historical particle-cloud and noisy-serving cohorts remain separate.",
       "tags": [
         "adaptive-training-policy",
         "adversarial-training",
@@ -630,9 +634,10 @@
     },
     {
       "candidates": [
-        "bispf-v1"
+        "bispf-v1",
+        "bispf-v2"
       ],
-      "canonical_candidate": "bispf-v1",
+      "canonical_candidate": "bispf-v2",
       "id": "bispf",
       "label": "BISPF",
       "rationale": "Born-Infeld Sinkhorn Particle Flow: Elastic Born-Infeld transport-chord critic penalty with zero-mean logit gauge, degree-of-freedom-aware SBNP prior regularizer, and scale-free Harmonic Mode Capture thermal cooling under constant learning rates.",

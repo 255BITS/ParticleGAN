@@ -1,0 +1,2443 @@
+{
+  "attempt_ids": [
+    "0513f65929764393a3aeda21d0860cc5",
+    "1400cc33fe294c2e8df0ca45904397d8",
+    "3e6d41d7611d413a8d344e275e636565",
+    "41f1571b596546429eea0f2b23340eae",
+    "5de681acb1d3401781ce5360af61cc6f",
+    "5e0bf53078264b949ee9797451ab838b",
+    "6addaadee3b24b299ecedcd8f4d75524",
+    "7b4fa62ffb944c1e854db88d8697e5ba",
+    "8fe984f008194448bc524dec0462536e",
+    "9ca679d6ed5c4529aed60e4b928675cd",
+    "a9caf8336193433c8f5ee0ba4a9269cb",
+    "bcbab35e086d4e41a4e01339b0829f2a",
+    "c08349c21b8449f88cf7e48e693c5bae",
+    "f9b0fb99ecb6421889dd81e398afb55b",
+    "fa67fddfe9824bd084dd7d68caf8f55c"
+  ],
+  "candidate_id": "atlas-particle-normal-v4",
+  "candidate_revision": "79e308b48506dccbf888516575643268a7499751b98b7d9802fbf7c56b2ad186",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "schedule_free",
+    "scoring_weights": "live"
+  },
+  "comparison": "Superseded by clean reverified full-suite diagnostic study atlas-particle-normal-replication-study-v4-reverified (readout-7d006be1a0b6c61317f6db5f or current v4 reverified readout) at revision efebaebc63fb on commit 6261a5458c1f (24/38 PASS, 0 INCOMPLETE).",
+  "conclusion": "Cancelled partial diagnostic run of atlas-particle-normal-v4 on pre-fix commit 6c895b5924d0 (clockfree_audit INCOMPLETE before public_components/zero_tanh_smoke fix in 6261a5458c1f).",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "0513f65929764393a3aeda21d0860cc5",
+        "1400cc33fe294c2e8df0ca45904397d8",
+        "3e6d41d7611d413a8d344e275e636565",
+        "41f1571b596546429eea0f2b23340eae",
+        "5de681acb1d3401781ce5360af61cc6f",
+        "5e0bf53078264b949ee9797451ab838b",
+        "6addaadee3b24b299ecedcd8f4d75524",
+        "7b4fa62ffb944c1e854db88d8697e5ba",
+        "8fe984f008194448bc524dec0462536e",
+        "9ca679d6ed5c4529aed60e4b928675cd",
+        "a9caf8336193433c8f5ee0ba4a9269cb",
+        "bcbab35e086d4e41a4e01339b0829f2a",
+        "c08349c21b8449f88cf7e48e693c5bae",
+        "f9b0fb99ecb6421889dd81e398afb55b",
+        "fa67fddfe9824bd084dd7d68caf8f55c"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "9bbd82f8794a59b69ff7e282c54c4912994032196d4a2815de5a52d2ea3b6915",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "request_missing_evidence",
+      "observed": {
+        "falsifier": {
+          "satisfied": false,
+          "value": 0.044351566408295184
+        },
+        "prediction": {
+          "satisfied": null,
+          "value": null
+        }
+      },
+      "outcome": "incomplete",
+      "provenance": [
+        {
+          "attempt_id": "0513f65929764393a3aeda21d0860cc5",
+          "producer_request_id": "ae74e6765a36b693da688de8",
+          "producer_study_id": "atlas-particle-normal-replication-study-v4",
+          "result_hash": "86029c227353b43262a4f9dd322bf6d515a94976759dd748b77728764359c9a6",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "1400cc33fe294c2e8df0ca45904397d8",
+          "producer_request_id": "ae74e6765a36b693da688de8",
+          "producer_study_id": "atlas-particle-normal-replication-study-v4",
+          "result_hash": "65db09315afdfff10bee36dd0ebf82387e3974978ed02bf23ba4dcf5e0705512",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "3e6d41d7611d413a8d344e275e636565",
+          "producer_request_id": "ae74e6765a36b693da688de8",
+          "producer_study_id": "atlas-particle-normal-replication-study-v4",
+          "result_hash": "588d5d2a4e4eec69db23cf2dc2295f07dd0afc48a2db68001b0856dc0e2ef793",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "41f1571b596546429eea0f2b23340eae",
+          "producer_request_id": "ae74e6765a36b693da688de8",
+          "producer_study_id": "atlas-particle-normal-replication-study-v4",
+          "result_hash": "41ee915a46e9d44bd561550d350fbb44eed65bd8f2f702942fca9ae0fcf2b4dc",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "5de681acb1d3401781ce5360af61cc6f",
+          "producer_request_id": "ae74e6765a36b693da688de8",
+          "producer_study_id": "atlas-particle-normal-replication-study-v4",
+          "result_hash": "b1a409df4e6c236b0cd906fcb7b4c20906e0bc1c22ac614c6a6a9b5d54991787",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "5e0bf53078264b949ee9797451ab838b",
+          "producer_request_id": "ae74e6765a36b693da688de8",
+          "producer_study_id": "atlas-particle-normal-replication-study-v4",
+          "result_hash": "a5ea15165b8be4fe6a69710fa8ac749b647cd8630ffe989e3fa294c41d6574cc",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "6addaadee3b24b299ecedcd8f4d75524",
+          "producer_request_id": "ae74e6765a36b693da688de8",
+          "producer_study_id": "atlas-particle-normal-replication-study-v4",
+          "result_hash": "4382c7ceb8561d5d5376768c95363474dd7b44718927e8c1102f8a65161f0854",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "7b4fa62ffb944c1e854db88d8697e5ba",
+          "producer_request_id": "ae74e6765a36b693da688de8",
+          "producer_study_id": "atlas-particle-normal-replication-study-v4",
+          "result_hash": "2ff749a48e84d9973465e708fccbbd4ebcd741ab343431eef3790290996d4f3c",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "8fe984f008194448bc524dec0462536e",
+          "producer_request_id": "ae74e6765a36b693da688de8",
+          "producer_study_id": "atlas-particle-normal-replication-study-v4",
+          "result_hash": "f8448b2c7f3bb7ce95e3d1079c08f1baa9fd25dddaff47537c0ec588248ebd32",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "9ca679d6ed5c4529aed60e4b928675cd",
+          "producer_request_id": "ae74e6765a36b693da688de8",
+          "producer_study_id": "atlas-particle-normal-replication-study-v4",
+          "result_hash": "4290333eb4a362b52e127b718ad4a06d2bf44610ddc5ca1f973d3b3933e965fc",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "a9caf8336193433c8f5ee0ba4a9269cb",
+          "producer_request_id": "ae74e6765a36b693da688de8",
+          "producer_study_id": "atlas-particle-normal-replication-study-v4",
+          "result_hash": "9fca03f42c06653f4d0580f43b611abb2d2bd5c21dc0662622233a43f3c97242",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "bcbab35e086d4e41a4e01339b0829f2a",
+          "producer_request_id": "ae74e6765a36b693da688de8",
+          "producer_study_id": "atlas-particle-normal-replication-study-v4",
+          "result_hash": "2b93597c77c6c571e9665769b3bb58ce01f5761c7faf8ac69d3676964a5e83f1",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "c08349c21b8449f88cf7e48e693c5bae",
+          "producer_request_id": "ae74e6765a36b693da688de8",
+          "producer_study_id": "atlas-particle-normal-replication-study-v4",
+          "result_hash": "c297544bedab3e52dafdc9457482e432473b9130619279e5763e4dff19815863",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "f9b0fb99ecb6421889dd81e398afb55b",
+          "producer_request_id": "ae74e6765a36b693da688de8",
+          "producer_study_id": "atlas-particle-normal-replication-study-v4",
+          "result_hash": "27089769c8e0d088ea9f6d36063ee396efa7f4264f8635f836191acd3bded9e0",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "fa67fddfe9824bd084dd7d68caf8f55c",
+          "producer_request_id": "ae74e6765a36b693da688de8",
+          "producer_study_id": "atlas-particle-normal-replication-study-v4",
+          "result_hash": "b95781d9b5942bc29e2daca5203993d385ca7deb4aced1d38c5898dd855c731a",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "9f3a11ca05ed8e54e6973e28717cfe0ee126933b8a15091203ada66109ea10ad",
+        "contract_sha256": "9bbd82f8794a59b69ff7e282c54c4912994032196d4a2815de5a52d2ea3b6915",
+        "control_binding_sha256": "2f552b74b1b9e8f97ef5903c9baf1c3ef1431e51bb0c977fd06e32ecc465f7b7",
+        "policy_fingerprint": "66bc967e16ec477f0184cc59cbbef7b33ab3ae37f7fecff62f2a167ed2f6c214",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "bde91690161042f1b91911ab1bf9173ea882d8c32d5c0e249dfb53e38d0330f5"
+      },
+      "study_id": "atlas-particle-normal-replication-study-v4",
+      "study_sha256": "bde91690161042f1b91911ab1bf9173ea882d8c32d5c0e249dfb53e38d0330f5"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "prior-ablation-full-suite-v1",
+  "hypothesis": "Guarding LossSurprise.decide against critic-only SettledReopenGuard witnesses (witness_roles == {'critic'}, where the critic ladder has stepped down while the generator ladder remains unsettled at full rate s=1.0) prevents premature step-35 critic re-empowerment on N=12 mode_hold, recovering 8/8 mode_hold and unblocking ring_hold, ring_extension, and target_shift_recovery while retaining birth_death_cells=256 and NormalNoiseManipulator(sigma=0.0065) to preserve all 6/6 vector, 4/4 image, 2/2 VAE, and 2/2 clockfree passes for >= 24 PASS / 0 INCOMPLETE with zero task regressions relative to both atlas-particle-normal-v2 and atlas-particle-normal-v3 under protocol seed 0.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Mark revision 79e308b48506 superseded by efebaebc63fb and retain clean reverified v4 evidence.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "prior_mechanism": {
+    "kind": "particles",
+    "manipulators": [
+      {
+        "kind": "normal_noise",
+        "sigma": 0.0065
+      }
+    ],
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "0513f65929764393a3aeda21d0860cc5",
+        "result_hash": "86029c227353b43262a4f9dd322bf6d515a94976759dd748b77728764359c9a6",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "1400cc33fe294c2e8df0ca45904397d8",
+        "result_hash": "65db09315afdfff10bee36dd0ebf82387e3974978ed02bf23ba4dcf5e0705512",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "3e6d41d7611d413a8d344e275e636565",
+        "result_hash": "588d5d2a4e4eec69db23cf2dc2295f07dd0afc48a2db68001b0856dc0e2ef793",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "41f1571b596546429eea0f2b23340eae",
+        "result_hash": "41ee915a46e9d44bd561550d350fbb44eed65bd8f2f702942fca9ae0fcf2b4dc",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "5de681acb1d3401781ce5360af61cc6f",
+        "result_hash": "b1a409df4e6c236b0cd906fcb7b4c20906e0bc1c22ac614c6a6a9b5d54991787",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "5e0bf53078264b949ee9797451ab838b",
+        "result_hash": "a5ea15165b8be4fe6a69710fa8ac749b647cd8630ffe989e3fa294c41d6574cc",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "6addaadee3b24b299ecedcd8f4d75524",
+        "result_hash": "4382c7ceb8561d5d5376768c95363474dd7b44718927e8c1102f8a65161f0854",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "7b4fa62ffb944c1e854db88d8697e5ba",
+        "result_hash": "2ff749a48e84d9973465e708fccbbd4ebcd741ab343431eef3790290996d4f3c",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "8fe984f008194448bc524dec0462536e",
+        "result_hash": "f8448b2c7f3bb7ce95e3d1079c08f1baa9fd25dddaff47537c0ec588248ebd32",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "9ca679d6ed5c4529aed60e4b928675cd",
+        "result_hash": "4290333eb4a362b52e127b718ad4a06d2bf44610ddc5ca1f973d3b3933e965fc",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "a9caf8336193433c8f5ee0ba4a9269cb",
+        "result_hash": "9fca03f42c06653f4d0580f43b611abb2d2bd5c21dc0662622233a43f3c97242",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "bcbab35e086d4e41a4e01339b0829f2a",
+        "result_hash": "2b93597c77c6c571e9665769b3bb58ce01f5761c7faf8ac69d3676964a5e83f1",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "c08349c21b8449f88cf7e48e693c5bae",
+        "result_hash": "c297544bedab3e52dafdc9457482e432473b9130619279e5763e4dff19815863",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "f9b0fb99ecb6421889dd81e398afb55b",
+        "result_hash": "27089769c8e0d088ea9f6d36063ee396efa7f4264f8635f836191acd3bded9e0",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "fa67fddfe9824bd084dd7d68caf8f55c",
+        "result_hash": "b95781d9b5942bc29e2daca5203993d385ca7deb4aced1d38c5898dd855c731a",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-828f21ff6556847d8f000678",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/attempts/0513f65929764393a3aeda21d0860cc5/result.json"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 400000,
+      "candidate_budget_seconds": 100000,
+      "id": "atlas-prior-repair-campaign-v4"
+    },
+    "candidate": "atlas-particle-normal-v4",
+    "competing_explanation": "If blocking critic-only LossSurprise reopens (witness_roles == {'critic'}) while holding birth_death_cells=256 and NormalNoiseManipulator(sigma=0.0065) fixed fails to recover mode_hold (modes == 8) alongside all 6 vector passes (component_covariance_error <= 0.85) and >= 24 PASS overall, then mode_hold's 7/8 regression in v3 was caused by equilibrium kernel width at sigma=0.0065 rather than premature critic-only LossSurprise reopening.",
+    "control": {
+      "candidate_id": "atlas-particle-normal-v2",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "mean_error_sigma",
+      "op": ">",
+      "phase": "final",
+      "task_id": "gaussian1d_smoke",
+      "threshold": 0.2
+    },
+    "hypothesis": "Guarding LossSurprise.decide against critic-only SettledReopenGuard witnesses (witness_roles == {'critic'}, where the critic ladder has stepped down while the generator ladder remains unsettled at full rate s=1.0) prevents premature step-35 critic re-empowerment on N=12 mode_hold, recovering 8/8 mode_hold and unblocking ring_hold, ring_extension, and target_shift_recovery while retaining birth_death_cells=256 and NormalNoiseManipulator(sigma=0.0065) to preserve all 6/6 vector, 4/4 image, 2/2 VAE, and 2/2 clockfree passes for >= 24 PASS / 0 INCOMPLETE with zero task regressions relative to both atlas-particle-normal-v2 and atlas-particle-normal-v3 under protocol seed 0.",
+    "id": "atlas-particle-normal-replication-study-v4",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "modes",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "mode_hold",
+      "threshold": 8
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "candidate_revision": "c7e4c12988d060ec0bb8d903651ffbae3d2537e4d5b360a3bfa75a6e860de9fb",
+          "record_id": "readout-9f0d62f87d1ff351cfef7f98"
+        },
+        "path": "reports/forge/records/readout-9f0d62f87d1ff351cfef7f98.json",
+        "selector": [],
+        "use": "motivation_only"
+      },
+      {
+        "identity": {
+          "candidate_revision": "de4379506c30e147385182dfd8cdc61133024f4636c2ecbf07cea1c509cc2cc0",
+          "record_id": "readout-4dc982d111099c9b0f33a18e"
+        },
+        "path": "reports/forge/records/readout-4dc982d111099c9b0f33a18e.json",
+        "selector": [],
+        "use": "motivation_only"
+      },
+      {
+        "identity": {
+          "candidate_revision": "4e3279bde6957fc95c5ba573328f9b9379a0c737ad5a7f06f637105b74e7ddf0",
+          "record_id": "readout-efb8bacf93e19fc2b0d7f7bf"
+        },
+        "path": "reports/forge/records/readout-efb8bacf93e19fc2b0d7f7bf.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "prior-ablation-full-suite-v1"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "atlas-particle-normal-replication-study-v4",
+  "study_sha256": "bde91690161042f1b91911ab1bf9173ea882d8c32d5c0e249dfb53e38d0330f5",
+  "task_results": [
+    {
+      "compatibility_key": "2c277995e6ddb4cc8168a192b010acb7ce854d01704362569afc116bb4dd6586",
+      "cost": {
+        "adapter_loop_seconds": 11.754822736023925,
+        "adapter_seconds": 15.388523558998713,
+        "charged_task": "model_vae_hard",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 21.42006989699439,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "encoder": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "runner_seconds": 16.493355840997538,
+        "wall_seconds": 21.42006989699439
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.875,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 1050,
+          "first_pass_step": 350,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 17,
+          "passing_suffix": 8,
+          "stable_from_seconds": null,
+          "stable_from_step": 850
+        },
+        "metric_checks": {
+          "decoder_mean_hq": {
+            "margin": 0.15000000000000002,
+            "metric": "decoder_mean_hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 1.0
+          },
+          "decoder_mean_mass_tv": {
+            "margin": 0.144384765625,
+            "metric": "decoder_mean_mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.005615234375
+          },
+          "decoder_mean_modes": {
+            "margin": 0,
+            "metric": "decoder_mean_modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 2,
+            "value": 2
+          },
+          "elbo_identity_error": {
+            "margin": 9.999999999955592e-05,
+            "metric": "elbo_identity_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.0001,
+            "value": 4.440892098500626e-16
+          },
+          "kl_identity_error": {
+            "margin": 9.992381382707408e-06,
+            "metric": "kl_identity_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1e-05,
+            "value": 7.618617292592944e-09
+          },
+          "likelihood_hq": {
+            "margin": 0.14877929687500002,
+            "metric": "likelihood_hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.998779296875
+          },
+          "likelihood_mass_tv": {
+            "margin": 0.143408203125,
+            "metric": "likelihood_mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.006591796875
+          },
+          "likelihood_modes": {
+            "margin": 0,
+            "metric": "likelihood_modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 2,
+            "value": 2
+          },
+          "posterior_mutual_information": {
+            "margin": 0.7339511441433779,
+            "metric": "posterior_mutual_information",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 1.033951144143378
+          },
+          "posterior_noise_variance_ratio": {
+            "margin": 0.1990993738174438,
+            "metric": "posterior_noise_variance_ratio",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.2,
+            "value": 1.0009006261825562
+          },
+          "reconstruction_mse": {
+            "margin": 0.04752558758306228,
+            "metric": "reconstruction_mse",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.05,
+            "value": 0.0024744124169377257
+          },
+          "shuffle_reconstruction_ratio": {
+            "margin": 894.4221870256932,
+            "metric": "shuffle_reconstruction_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 5.0,
+            "value": 899.4221870256932
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "aggregate_effective_components": 2.8121551428678178,
+        "decoder_mean_hq": 1.0,
+        "decoder_mean_mass_tv": 0.005615234375,
+        "decoder_mean_modes": 2,
+        "elbo_identity_error": 4.440892098500626e-16,
+        "kl_identity_error": 7.618617292592944e-09,
+        "kl_nats": 2.7725887298583984,
+        "likelihood_hq": 0.998779296875,
+        "likelihood_mass_tv": 0.006591796875,
+        "likelihood_modes": 2,
+        "negative_elbo_nats": 0.34669713155858606,
+        "posterior_effective_components": 1.0,
+        "posterior_mutual_information": 1.033951144143378,
+        "posterior_noise_variance_ratio": 1.0009006261825562,
+        "posterior_pair_rms": 0.027061477303504944,
+        "reconstruction_mse": 0.0024744124169377257,
+        "shuffle_reconstruction_ratio": 899.4221870256932,
+        "shuffled_reconstruction_mse": 2.225541427645661,
+        "step": 1200
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "model_vae_hard"
+    },
+    {
+      "compatibility_key": "e45b881db547380a99bc80ac65038aef53636bdd9fca4e587c4ee7127439b685",
+      "cost": {
+        "adapter_seconds": 2.9497544649930205,
+        "charged_task": "ae_gan_hold",
+        "device": "0",
+        "execution_seconds": 8.93980598100461,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 4.102626248990418,
+        "wall_seconds": 8.93980598100461
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.292,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 73,
+          "first_pass_step": 32,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 22,
+          "passing_suffix": 22,
+          "stable_from_seconds": null,
+          "stable_from_step": 32
+        },
+        "metric_checks": {
+          "hold": {
+            "margin": 0.34890816991683093,
+            "metric": "hold",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.35,
+            "value": 0.001091830083169043
+          },
+          "recon_mse": {
+            "margin": 0.04002478364855051,
+            "metric": "recon_mse",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.05,
+            "value": 0.00997521635144949
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "hold": 0.001091830083169043,
+        "recon_mse": 0.00997521635144949
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "compatibility_key": "ea2151d83b0eee429a3a01237dfd30cb4267355d2f8d13b58c8e668c1f825a95",
+      "cost": {
+        "charged_task": "clockfree_audit",
+        "device": "1",
+        "execution_seconds": 4.687296323012561,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "wall_seconds": 4.687296323012561
+      },
+      "evaluator_summary": {},
+      "gate_status": "INCOMPLETE",
+      "raw_status": "cancelled",
+      "reason": "request cancelled",
+      "task_id": "clockfree_audit"
+    },
+    {
+      "compatibility_key": "b35f593a874e94cf53d39ba853e6ed89a41b5b82a6581046d9f5fc97bc7386fc",
+      "cost": {
+        "adapter_reported_inclusive_seconds": 1.8477863650186919,
+        "adapter_seconds": 1.8594681179965846,
+        "charged_task": "clockfree_audit_measurement_v1",
+        "completed_updates": 24,
+        "component_timing": "unavailable; legacy elapsed time includes evaluation and sampling",
+        "device": "1",
+        "execution_seconds": 8.007842232007533,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 3.0173425349930767,
+        "wall_seconds": 8.007842232007533
+      },
+      "evaluator_summary": {},
+      "gate_status": "PASS",
+      "metrics": {
+        "parity_comparisons": 4
+      },
+      "raw_status": "completed",
+      "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "compatibility_key": "5d1a48fa53473b93e683d741a806c8943d46cc51204d3c7d404e0468ca776ec6",
+      "cost": {
+        "adapter_loop_seconds": 23.794738550001057,
+        "adapter_seconds": 24.130560440011322,
+        "charged_task": "gaussian1d_smoke",
+        "completed_steps": 1000,
+        "device": "0",
+        "execution_seconds": 29.89347299397923,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 22.401575396041153,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 1.718208811013028
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.2884329770167824
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 20.394933608011343
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 25.206399231014075,
+        "wall_seconds": 29.89347299397923
+      },
+      "evaluator_summary": {
+        "first_confirmed_step": 167,
+        "observations": 24,
+        "passing_observations": 10
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "cdf_ks": 0.07102741596206602,
+        "finite_fraction": 1.0,
+        "mean": 1.9778242167958524,
+        "mean_error_sigma": 0.044351566408295184,
+        "sample_count": 4096,
+        "std": 0.5006621963660187,
+        "std_ratio": 1.0013243927320374,
+        "step": 1000
+      },
+      "raw_status": "completed",
+      "reason": "any scheduled full pass with independent same-state confirmation",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "compatibility_key": "c1993abf8de4de258b75224a01ec10d79ff6315e89b214c6405854510a6fcfe9",
+      "cost": {
+        "adapter_loop_seconds": 17.185321294004098,
+        "adapter_seconds": 20.606779146997724,
+        "charged_task": "model_ae_gan_multimodal",
+        "completed_steps": 1200,
+        "device": "1",
+        "execution_seconds": 26.620164966006996,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "encoder": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "runner_seconds": 21.74234257597709,
+        "wall_seconds": 26.620164966006996
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "component_center_rms_sigma": {
+            "margin": 0.42889537691168367,
+            "metric": "component_center_rms_sigma",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.5711046230883163
+          },
+          "component_max_eigen_ratio": {
+            "margin": 2.8309736251831055,
+            "metric": "component_max_eigen_ratio",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 4.0,
+            "value": 1.1690263748168945
+          },
+          "component_min_eigen_ratio": {
+            "margin": 0.03989175856113433,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.1,
+            "value": 0.13989175856113434
+          },
+          "mass_tv": {
+            "margin": -0.044824218750000006,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.15,
+            "value": 0.19482421875
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 4,
+            "value": 4
+          },
+          "precision": {
+            "margin": 0.09804687499999998,
+            "metric": "precision",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 0.998046875
+          },
+          "reconstruction_mode_agreement": {
+            "margin": 0.020000000000000018,
+            "metric": "reconstruction_mode_agreement",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.98,
+            "value": 1.0
+          },
+          "reconstruction_mse": {
+            "margin": 0.020618324261158706,
+            "metric": "reconstruction_mse",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.025,
+            "value": 0.004381675738841295
+          }
+        },
+        "passed": false,
+        "shortfall": 0.03735351562500001,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_center_rms_sigma": 0.5711046230883163,
+        "component_max_eigen_ratio": 1.1690263748168945,
+        "component_min_eigen_ratio": 0.13989175856113434,
+        "mass_tv": 0.19482421875,
+        "modes": 4,
+        "precision": 0.998046875,
+        "reconstruction_mode_agreement": 1.0,
+        "reconstruction_mse": 0.004381675738841295,
+        "sample_count": 4096,
+        "step": 1200
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "model_ae_gan_multimodal"
+    },
+    {
+      "compatibility_key": "2820de8dedaee4d2f8147923d0068c9eb8df8d9aa7c1bcf70a5973c52445a447",
+      "cost": {
+        "adapter_loop_seconds": 30.161579935986083,
+        "adapter_seconds": 34.641228800988756,
+        "charged_task": "model_ddgan_gaussian_chain",
+        "completed_steps": 2500,
+        "device": "0",
+        "execution_seconds": 41.47176388799562,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 2500,
+          "encoder": 0,
+          "generator": 2500,
+          "prior": 2500
+        },
+        "runner_seconds": 35.851617848995375,
+        "wall_seconds": 41.47176388799562
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "final_covariance_eigen_max": {
+            "margin": 0.10126383811880668,
+            "metric": "final_covariance_eigen_max",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.4,
+            "value": 1.2987361618811932
+          },
+          "final_covariance_eigen_min": {
+            "margin": 0.11810724411937201,
+            "metric": "final_covariance_eigen_min",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.65,
+            "value": 0.768107244119372
+          },
+          "final_normalized_mean": {
+            "margin": -0.08672222036333643,
+            "metric": "final_normalized_mean",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.25,
+            "value": 0.33672222036333643
+          },
+          "final_projection_cdf": {
+            "margin": -0.04950773102359418,
+            "metric": "final_projection_cdf",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.12,
+            "value": 0.16950773102359418
+          },
+          "panel_count": {
+            "margin": 0,
+            "metric": "panel_count",
+            "op": "==",
+            "status": "PASS",
+            "threshold": 8,
+            "value": 8
+          },
+          "samples_per_panel": {
+            "margin": 0,
+            "metric": "samples_per_panel",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 2048,
+            "value": 2048
+          },
+          "t1_q0_covariance_eigen_max": {
+            "margin": -0.22538790678859333,
+            "metric": "t1_q0_covariance_eigen_max",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 1.4,
+            "value": 1.6253879067885932
+          },
+          "t1_q0_covariance_eigen_min": {
+            "margin": -0.37902044236614313,
+            "metric": "t1_q0_covariance_eigen_min",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.65,
+            "value": 0.2709795576338569
+          },
+          "t1_q0_normalized_mean": {
+            "margin": -0.16766899971518423,
+            "metric": "t1_q0_normalized_mean",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.25,
+            "value": 0.41766899971518423
+          },
+          "t1_q0_projection_cdf": {
+            "margin": -0.1546500566016381,
+            "metric": "t1_q0_projection_cdf",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.12,
+            "value": 0.2746500566016381
+          },
+          "t1_q1_covariance_eigen_max": {
+            "margin": -0.013723401176336525,
+            "metric": "t1_q1_covariance_eigen_max",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 1.4,
+            "value": 1.4137234011763364
+          },
+          "t1_q1_covariance_eigen_min": {
+            "margin": 0.19781869519350814,
+            "metric": "t1_q1_covariance_eigen_min",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.65,
+            "value": 0.8478186951935082
+          },
+          "t1_q1_normalized_mean": {
+            "margin": -0.23870701451133364,
+            "metric": "t1_q1_normalized_mean",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.25,
+            "value": 0.48870701451133364
+          },
+          "t1_q1_projection_cdf": {
+            "margin": -0.14191876945894266,
+            "metric": "t1_q1_projection_cdf",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.12,
+            "value": 0.26191876945894266
+          },
+          "t2_q0_covariance_eigen_max": {
+            "margin": 0.40577766045362396,
+            "metric": "t2_q0_covariance_eigen_max",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.4,
+            "value": 0.994222339546376
+          },
+          "t2_q0_covariance_eigen_min": {
+            "margin": -0.13073848985087577,
+            "metric": "t2_q0_covariance_eigen_min",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.65,
+            "value": 0.5192615101491243
+          },
+          "t2_q0_normalized_mean": {
+            "margin": -0.2786167927837272,
+            "metric": "t2_q0_normalized_mean",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.25,
+            "value": 0.5286167927837272
+          },
+          "t2_q0_projection_cdf": {
+            "margin": -0.12309412901740113,
+            "metric": "t2_q0_projection_cdf",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.12,
+            "value": 0.24309412901740113
+          },
+          "t2_q1_covariance_eigen_max": {
+            "margin": 0.49511180179794756,
+            "metric": "t2_q1_covariance_eigen_max",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.4,
+            "value": 0.9048881982020524
+          },
+          "t2_q1_covariance_eigen_min": {
+            "margin": 0.018724380985772004,
+            "metric": "t2_q1_covariance_eigen_min",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.65,
+            "value": 0.668724380985772
+          },
+          "t2_q1_normalized_mean": {
+            "margin": 0.09489345348769265,
+            "metric": "t2_q1_normalized_mean",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.15510654651230735
+          },
+          "t2_q1_projection_cdf": {
+            "margin": 0.03898244186271682,
+            "metric": "t2_q1_projection_cdf",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.12,
+            "value": 0.08101755813728317
+          },
+          "t3_q0_covariance_eigen_max": {
+            "margin": 0.42656730282824573,
+            "metric": "t3_q0_covariance_eigen_max",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.4,
+            "value": 0.9734326971717542
+          },
+          "t3_q0_covariance_eigen_min": {
+            "margin": 0.21409781407906237,
+            "metric": "t3_q0_covariance_eigen_min",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.65,
+            "value": 0.8640978140790624
+          },
+          "t3_q0_normalized_mean": {
+            "margin": 0.15373078508436328,
+            "metric": "t3_q0_normalized_mean",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.09626921491563674
+          },
+          "t3_q0_projection_cdf": {
+            "margin": 0.06755634495712337,
+            "metric": "t3_q0_projection_cdf",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.12,
+            "value": 0.052443655042876625
+          },
+          "t3_q1_covariance_eigen_max": {
+            "margin": 0.42661429005289486,
+            "metric": "t3_q1_covariance_eigen_max",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.4,
+            "value": 0.973385709947105
+          },
+          "t3_q1_covariance_eigen_min": {
+            "margin": 0.25033545397837687,
+            "metric": "t3_q1_covariance_eigen_min",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.65,
+            "value": 0.9003354539783769
+          },
+          "t3_q1_normalized_mean": {
+            "margin": 0.2058612487522689,
+            "metric": "t3_q1_normalized_mean",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.044138751247731076
+          },
+          "t3_q1_projection_cdf": {
+            "margin": 0.08724182765388688,
+            "metric": "t3_q1_projection_cdf",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.12,
+            "value": 0.03275817234611311
+          },
+          "t4_q0_covariance_eigen_max": {
+            "margin": 0.3662541074998893,
+            "metric": "t4_q0_covariance_eigen_max",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.4,
+            "value": 1.0337458925001106
+          },
+          "t4_q0_covariance_eigen_min": {
+            "margin": 0.34296056992618207,
+            "metric": "t4_q0_covariance_eigen_min",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.65,
+            "value": 0.9929605699261821
+          },
+          "t4_q0_normalized_mean": {
+            "margin": 0.20219191741641676,
+            "metric": "t4_q0_normalized_mean",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.047808082583583246
+          },
+          "t4_q0_projection_cdf": {
+            "margin": 0.08859017067031305,
+            "metric": "t4_q0_projection_cdf",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.12,
+            "value": 0.031409829329686945
+          },
+          "t4_q1_covariance_eigen_max": {
+            "margin": 0.38000925563120247,
+            "metric": "t4_q1_covariance_eigen_max",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.4,
+            "value": 1.0199907443687974
+          },
+          "t4_q1_covariance_eigen_min": {
+            "margin": 0.30393734815999796,
+            "metric": "t4_q1_covariance_eigen_min",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.65,
+            "value": 0.953937348159998
+          },
+          "t4_q1_normalized_mean": {
+            "margin": 0.18530415847046658,
+            "metric": "t4_q1_normalized_mean",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.06469584152953342
+          },
+          "t4_q1_projection_cdf": {
+            "margin": 0.07921291182914758,
+            "metric": "t4_q1_projection_cdf",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.12,
+            "value": 0.040787088170852415
+          }
+        },
+        "passed": false,
+        "shortfall": 0.2092540560398444,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "final_covariance_eigen_max": 1.2987361618811932,
+        "final_covariance_eigen_min": 0.768107244119372,
+        "final_normalized_mean": 0.33672222036333643,
+        "final_projection_cdf": 0.16950773102359418,
+        "panel_count": 8,
+        "samples_per_panel": 2048,
+        "step": 2500,
+        "t1_q0_covariance_eigen_max": 1.6253879067885932,
+        "t1_q0_covariance_eigen_min": 0.2709795576338569,
+        "t1_q0_normalized_mean": 0.41766899971518423,
+        "t1_q0_projection_cdf": 0.2746500566016381,
+        "t1_q1_covariance_eigen_max": 1.4137234011763364,
+        "t1_q1_covariance_eigen_min": 0.8478186951935082,
+        "t1_q1_normalized_mean": 0.48870701451133364,
+        "t1_q1_projection_cdf": 0.26191876945894266,
+        "t2_q0_covariance_eigen_max": 0.994222339546376,
+        "t2_q0_covariance_eigen_min": 0.5192615101491243,
+        "t2_q0_normalized_mean": 0.5286167927837272,
+        "t2_q0_projection_cdf": 0.24309412901740113,
+        "t2_q1_covariance_eigen_max": 0.9048881982020524,
+        "t2_q1_covariance_eigen_min": 0.668724380985772,
+        "t2_q1_normalized_mean": 0.15510654651230735,
+        "t2_q1_projection_cdf": 0.08101755813728317,
+        "t3_q0_covariance_eigen_max": 0.9734326971717542,
+        "t3_q0_covariance_eigen_min": 0.8640978140790624,
+        "t3_q0_normalized_mean": 0.09626921491563674,
+        "t3_q0_projection_cdf": 0.052443655042876625,
+        "t3_q1_covariance_eigen_max": 0.973385709947105,
+        "t3_q1_covariance_eigen_min": 0.9003354539783769,
+        "t3_q1_normalized_mean": 0.044138751247731076,
+        "t3_q1_projection_cdf": 0.03275817234611311,
+        "t4_q0_covariance_eigen_max": 1.0337458925001106,
+        "t4_q0_covariance_eigen_min": 0.9929605699261821,
+        "t4_q0_normalized_mean": 0.047808082583583246,
+        "t4_q0_projection_cdf": 0.031409829329686945,
+        "t4_q1_covariance_eigen_max": 1.0199907443687974,
+        "t4_q1_covariance_eigen_min": 0.953937348159998,
+        "t4_q1_normalized_mean": 0.06469584152953342,
+        "t4_q1_projection_cdf": 0.040787088170852415,
+        "worst_transition_cdf": 0.2746500566016381
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "model_ddgan_gaussian_chain"
+    },
+    {
+      "compatibility_key": "129814d1fd7dd7e15b4fdc63ea68348e4cbd29fb6953277e00cf7117ee714d4a",
+      "cost": {
+        "adapter_loop_seconds": 35.473127473000204,
+        "adapter_seconds": 41.574543155002175,
+        "charged_task": "model_ae_ddgan_gaussian_chain",
+        "completed_steps": 2500,
+        "device": "1",
+        "execution_seconds": 47.651954746979754,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 2500,
+          "encoder": 2500,
+          "generator": 2500,
+          "prior": 2500
+        },
+        "runner_seconds": 42.68905008601723,
+        "wall_seconds": 47.651954746979754
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "final_covariance_eigen_max": {
+            "margin": 0.8904996472764404,
+            "metric": "final_covariance_eigen_max",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.4,
+            "value": 0.5095003527235595
+          },
+          "final_covariance_eigen_min": {
+            "margin": -0.22741968304336335,
+            "metric": "final_covariance_eigen_min",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.65,
+            "value": 0.42258031695663667
+          },
+          "final_normalized_mean": {
+            "margin": 0.19573955305505636,
+            "metric": "final_normalized_mean",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.05426044694494363
+          },
+          "final_projection_cdf": {
+            "margin": 0.0001420005667327473,
+            "metric": "final_projection_cdf",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.12,
+            "value": 0.11985799943326725
+          },
+          "paired_nmse": {
+            "margin": 0.08530808675816492,
+            "metric": "paired_nmse",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.1,
+            "value": 0.01469191324183508
+          },
+          "paired_reverse_steps": {
+            "margin": 0,
+            "metric": "paired_reverse_steps",
+            "op": "==",
+            "status": "PASS",
+            "threshold": 4,
+            "value": 4
+          },
+          "paired_shuffled_gain": {
+            "margin": 131.66658740346244,
+            "metric": "paired_shuffled_gain",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 3.0,
+            "value": 134.66658740346244
+          },
+          "paired_worst_axis_nrmse": {
+            "margin": 0.11672327266717888,
+            "metric": "paired_worst_axis_nrmse",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.13327672733282112
+          },
+          "panel_count": {
+            "margin": 0,
+            "metric": "panel_count",
+            "op": "==",
+            "status": "PASS",
+            "threshold": 8,
+            "value": 8
+          },
+          "samples_per_panel": {
+            "margin": 0,
+            "metric": "samples_per_panel",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 2048,
+            "value": 2048
+          },
+          "t1_q0_covariance_eigen_max": {
+            "margin": -0.5501852785573589,
+            "metric": "t1_q0_covariance_eigen_max",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 1.4,
+            "value": 1.9501852785573588
+          },
+          "t1_q0_covariance_eigen_min": {
+            "margin": -0.04066625224537246,
+            "metric": "t1_q0_covariance_eigen_min",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.65,
+            "value": 0.6093337477546276
+          },
+          "t1_q0_normalized_mean": {
+            "margin": -1.7598770981478418,
+            "metric": "t1_q0_normalized_mean",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.25,
+            "value": 2.0098770981478418
+          },
+          "t1_q0_projection_cdf": {
+            "margin": -0.4749868068527474,
+            "metric": "t1_q0_projection_cdf",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.12,
+            "value": 0.5949868068527474
+          },
+          "t1_q1_covariance_eigen_max": {
+            "margin": 0.5663534502341513,
+            "metric": "t1_q1_covariance_eigen_max",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.4,
+            "value": 0.8336465497658486
+          },
+          "t1_q1_covariance_eigen_min": {
+            "margin": -0.08729798963431634,
+            "metric": "t1_q1_covariance_eigen_min",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.65,
+            "value": 0.5627020103656837
+          },
+          "t1_q1_normalized_mean": {
+            "margin": 0.09923677516605733,
+            "metric": "t1_q1_normalized_mean",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.15076322483394267
+          },
+          "t1_q1_projection_cdf": {
+            "margin": -0.009236118868389043,
+            "metric": "t1_q1_projection_cdf",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.12,
+            "value": 0.12923611886838904
+          },
+          "t2_q0_covariance_eigen_max": {
+            "margin": 0.5015040757724832,
+            "metric": "t2_q0_covariance_eigen_max",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.4,
+            "value": 0.8984959242275167
+          },
+          "t2_q0_covariance_eigen_min": {
+            "margin": 0.06206654579898918,
+            "metric": "t2_q0_covariance_eigen_min",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.65,
+            "value": 0.7120665457989892
+          },
+          "t2_q0_normalized_mean": {
+            "margin": 0.195060564944549,
+            "metric": "t2_q0_normalized_mean",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.054939435055451
+          },
+          "t2_q0_projection_cdf": {
+            "margin": 0.05820810808267318,
+            "metric": "t2_q0_projection_cdf",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.12,
+            "value": 0.06179189191732681
+          },
+          "t2_q1_covariance_eigen_max": {
+            "margin": 0.6509203249370253,
+            "metric": "t2_q1_covariance_eigen_max",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.4,
+            "value": 0.7490796750629746
+          },
+          "t2_q1_covariance_eigen_min": {
+            "margin": -0.025933612160382258,
+            "metric": "t2_q1_covariance_eigen_min",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.65,
+            "value": 0.6240663878396178
+          },
+          "t2_q1_normalized_mean": {
+            "margin": 0.10481731503306849,
+            "metric": "t2_q1_normalized_mean",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.1451826849669315
+          },
+          "t2_q1_projection_cdf": {
+            "margin": 0.018029003458857606,
+            "metric": "t2_q1_projection_cdf",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.12,
+            "value": 0.10197099654114239
+          },
+          "t3_q0_covariance_eigen_max": {
+            "margin": 0.46036813378873875,
+            "metric": "t3_q0_covariance_eigen_max",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.4,
+            "value": 0.9396318662112612
+          },
+          "t3_q0_covariance_eigen_min": {
+            "margin": 0.26052156905828583,
+            "metric": "t3_q0_covariance_eigen_min",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.65,
+            "value": 0.9105215690582859
+          },
+          "t3_q0_normalized_mean": {
+            "margin": 0.07654568366856337,
+            "metric": "t3_q0_normalized_mean",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.17345431633143663
+          },
+          "t3_q0_projection_cdf": {
+            "margin": 0.04656911743922315,
+            "metric": "t3_q0_projection_cdf",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.12,
+            "value": 0.07343088256077684
+          },
+          "t3_q1_covariance_eigen_max": {
+            "margin": 0.4409381325586892,
+            "metric": "t3_q1_covariance_eigen_max",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.4,
+            "value": 0.9590618674413107
+          },
+          "t3_q1_covariance_eigen_min": {
+            "margin": 0.2538833713821411,
+            "metric": "t3_q1_covariance_eigen_min",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.65,
+            "value": 0.9038833713821411
+          },
+          "t3_q1_normalized_mean": {
+            "margin": 0.2151643798645998,
+            "metric": "t3_q1_normalized_mean",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.03483562013540019
+          },
+          "t3_q1_projection_cdf": {
+            "margin": 0.08264567445117643,
+            "metric": "t3_q1_projection_cdf",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.12,
+            "value": 0.037354325548823564
+          },
+          "t4_q0_covariance_eigen_max": {
+            "margin": 0.36578762900778794,
+            "metric": "t4_q0_covariance_eigen_max",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.4,
+            "value": 1.034212370992212
+          },
+          "t4_q0_covariance_eigen_min": {
+            "margin": 0.34318727276292404,
+            "metric": "t4_q0_covariance_eigen_min",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.65,
+            "value": 0.9931872727629241
+          },
+          "t4_q0_normalized_mean": {
+            "margin": 0.19871385619205903,
+            "metric": "t4_q0_normalized_mean",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.05128614380794098
+          },
+          "t4_q0_projection_cdf": {
+            "margin": 0.0896216933143803,
+            "metric": "t4_q0_projection_cdf",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.12,
+            "value": 0.030378306685619694
+          },
+          "t4_q1_covariance_eigen_max": {
+            "margin": 0.3823782629517303,
+            "metric": "t4_q1_covariance_eigen_max",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.4,
+            "value": 1.0176217370482696
+          },
+          "t4_q1_covariance_eigen_min": {
+            "margin": 0.30196781480672175,
+            "metric": "t4_q1_covariance_eigen_min",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.65,
+            "value": 0.9519678148067218
+          },
+          "t4_q1_normalized_mean": {
+            "margin": 0.22214750312614642,
+            "metric": "t4_q1_normalized_mean",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.02785249687385357
+          },
+          "t4_q1_projection_cdf": {
+            "margin": 0.09454910643906217,
+            "metric": "t4_q1_projection_cdf",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.12,
+            "value": 0.025450893560937826
+          }
+        },
+        "passed": false,
+        "shortfall": 0.12039522634914639,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "final_covariance_eigen_max": 0.5095003527235595,
+        "final_covariance_eigen_min": 0.42258031695663667,
+        "final_normalized_mean": 0.05426044694494363,
+        "final_projection_cdf": 0.11985799943326725,
+        "paired_nmse": 0.01469191324183508,
+        "paired_reverse_steps": 4,
+        "paired_shuffled_gain": 134.66658740346244,
+        "paired_worst_axis_nrmse": 0.13327672733282112,
+        "panel_count": 8,
+        "samples_per_panel": 2048,
+        "step": 2500,
+        "t1_q0_covariance_eigen_max": 1.9501852785573588,
+        "t1_q0_covariance_eigen_min": 0.6093337477546276,
+        "t1_q0_normalized_mean": 2.0098770981478418,
+        "t1_q0_projection_cdf": 0.5949868068527474,
+        "t1_q1_covariance_eigen_max": 0.8336465497658486,
+        "t1_q1_covariance_eigen_min": 0.5627020103656837,
+        "t1_q1_normalized_mean": 0.15076322483394267,
+        "t1_q1_projection_cdf": 0.12923611886838904,
+        "t2_q0_covariance_eigen_max": 0.8984959242275167,
+        "t2_q0_covariance_eigen_min": 0.7120665457989892,
+        "t2_q0_normalized_mean": 0.054939435055451,
+        "t2_q0_projection_cdf": 0.06179189191732681,
+        "t2_q1_covariance_eigen_max": 0.7490796750629746,
+        "t2_q1_covariance_eigen_min": 0.6240663878396178,
+        "t2_q1_normalized_mean": 0.1451826849669315,
+        "t2_q1_projection_cdf": 0.10197099654114239,
+        "t3_q0_covariance_eigen_max": 0.9396318662112612,
+        "t3_q0_covariance_eigen_min": 0.9105215690582859,
+        "t3_q0_normalized_mean": 0.17345431633143663,
+        "t3_q0_projection_cdf": 0.07343088256077684,
+        "t3_q1_covariance_eigen_max": 0.9590618674413107,
+        "t3_q1_covariance_eigen_min": 0.9038833713821411,
+        "t3_q1_normalized_mean": 0.03483562013540019,
+        "t3_q1_projection_cdf": 0.037354325548823564,
+        "t4_q0_covariance_eigen_max": 1.034212370992212,
+        "t4_q0_covariance_eigen_min": 0.9931872727629241,
+        "t4_q0_normalized_mean": 0.05128614380794098,
+        "t4_q0_projection_cdf": 0.030378306685619694,
+        "t4_q1_covariance_eigen_max": 1.0176217370482696,
+        "t4_q1_covariance_eigen_min": 0.9519678148067218,
+        "t4_q1_normalized_mean": 0.02785249687385357,
+        "t4_q1_projection_cdf": 0.025450893560937826,
+        "worst_transition_cdf": 0.5949868068527474
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "model_ae_ddgan_gaussian_chain"
+    },
+    {
+      "compatibility_key": "24956913f0e589dcd146a12e0e6f9ead51a328cbfdc2e5808c75a5094f1f0c83",
+      "cost": {
+        "adapter_loop_seconds": 155.39236326800892,
+        "adapter_seconds": 155.5878402070084,
+        "charged_task": "five_word_joint_smoke",
+        "completed_steps": 20001,
+        "device": "0",
+        "execution_seconds": 161.66744150800514,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "new_optimizer_updates": 20001,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 147.3791870121786,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.5862274539540522
+            },
+            "sampling": {
+              "calls": 0,
+              "seconds": 0
+            },
+            "training_updates": {
+              "calls": 20001,
+              "seconds": 146.79295955822454
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 156.7378159009968,
+        "wall_seconds": 161.66744150800514
+      },
+      "evaluator_summary": {
+        "confirmed_checks": 0,
+        "endpoint_passed": false,
+        "first_confirmed_step": null,
+        "observations": 24,
+        "passing_observations": 0
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.0,
+        "mass_berry": 0.0,
+        "mass_grape": 0.0,
+        "mass_lemon": 0.0,
+        "mass_melon": 0.0,
+        "mass_tv": 1.0,
+        "minimum_reconstruction_token_probability": 0.0,
+        "modes": 0,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 0.0,
+        "reconstruction_exact": 0,
+        "reconstruction_nll": 22.461374315140677,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "raw_status": "completed",
+      "reason": "any scheduled full joint pass plus independent same-state confirmation",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "compatibility_key": "ff4820a3270e527601e4e25468cacd6d0ddf5c4ae38c56a199f1d6a25d25c27f",
+      "cost": {
+        "adapter_loop_seconds": 18.621325785992667,
+        "adapter_seconds": 18.905755882005906,
+        "charged_task": "zero_tanh_smoke",
+        "completed_steps": 1000,
+        "device": "1",
+        "execution_seconds": 24.873346359992865,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 18.190696596022462,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.012319062952883542
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.01759131607832387
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 18.160786216991255
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 20.155233288998716,
+        "wall_seconds": 24.873346359992865
+      },
+      "evaluator_summary": {
+        "passed": true
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "mean_abs_error": 0.0014876634813845158,
+        "p99_abs_error": 0.006786678917706013,
+        "rms_error": 0.0020000163931399584,
+        "sample_count": 4096,
+        "saturated_fraction": 0.0,
+        "step": 1000
+      },
+      "raw_status": "completed",
+      "reason": "recomputed origin point-mass contraction gates",
+      "task_id": "zero_tanh_smoke"
+    },
+    {
+      "compatibility_key": "046759e5fb499e09077a080424329a462ce4fc437e0893c927defcd14ff0b014",
+      "cost": {
+        "adapter_seconds": 1.7425972360069863,
+        "charged_task": "unused_token_hold",
+        "device": "1",
+        "execution_seconds": 7.939835784985917,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 3.025203336001141,
+        "wall_seconds": 7.939835784985917
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.875,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 175,
+          "first_pass_step": 142,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 8,
+          "passing_suffix": 8,
+          "stable_from_seconds": null,
+          "stable_from_step": 142
+        },
+        "metric_checks": {
+          "concept_move": {
+            "margin": 0.05912538766860964,
+            "metric": "concept_move",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9091253876686096
+          },
+          "unused_hold": {
+            "margin": 0.14889782047830524,
+            "metric": "unused_hold",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9988978204783052
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "concept_move": 0.9091253876686096,
+        "unused_hold": 0.9988978204783052
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "compatibility_key": "6d96c666431098790ea2b9fc6a37d807a8a35357fd7dda733dc02d5674e80412",
+      "cost": {
+        "adapter_seconds": 1.0229148780053947,
+        "charged_task": "two_pole",
+        "device": "1",
+        "execution_seconds": 7.1085427590005565,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.2661792110011447,
+        "wall_seconds": 7.1085427590005565
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": 0.996290497481823,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.0037095025181770325
+          },
+          "mean_abs": {
+            "margin": -0.29758282443508505,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.3,
+            "value": 0.002417175564914942
+          }
+        },
+        "passed": false,
+        "shortfall": 0.4959713740584751,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.0037095025181770325,
+        "mean_abs": 0.002417175564914942
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole"
+    },
+    {
+      "compatibility_key": "3cbaf0c229c66c5413363f7e94341c45ad084962839029dda64bfd303985d513",
+      "cost": {
+        "adapter_loop_seconds": 32.220553234015824,
+        "adapter_seconds": 32.52128572599031,
+        "charged_task": "ring16_acquisition",
+        "completed_steps": 1600,
+        "device": "1",
+        "execution_seconds": 38.6672917130054,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1600,
+          "generator": 1600,
+          "prior": 1600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 31.33134045120096,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 96,
+              "seconds": 1.9577234215976205
+            },
+            "sampling": {
+              "calls": 96,
+              "seconds": 0.07219327418715693
+            },
+            "training_updates": {
+              "calls": 1600,
+              "seconds": 29.30142375541618
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 33.773752163979225,
+        "wall_seconds": 38.6672917130054
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": 1017,
+          "minimum_stable_checks": 5,
+          "observations": 96,
+          "passing_observations": 13,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": 0.22997104693204162,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.6200289530679584
+          },
+          "component_min_eigen_ratio": {
+            "margin": -0.07304590344429016,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.15,
+            "value": 0.07695409655570984
+          },
+          "hq": {
+            "margin": 0.11313476562500002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.963134765625
+          },
+          "mass_tv": {
+            "margin": 0.10849609375,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.04150390625
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 16,
+            "value": 16
+          },
+          "sample_count": {
+            "margin": 0,
+            "metric": "sample_count",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 4096,
+            "value": 4096
+          }
+        },
+        "passed": false,
+        "shortfall": 0.08116211493810017,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.5178713137283921,
+        "component_core_covariance_errors": [
+          0.4949086606502533,
+          0.41638949513435364,
+          0.67568039894104,
+          0.638531506061554,
+          0.8009305596351624,
+          0.5617459416389465,
+          0.3365158140659332,
+          0.4320947825908661,
+          0.6332590579986572,
+          0.6143408417701721,
+          0.4909268021583557,
+          0.5102590322494507,
+          0.587965190410614,
+          0.15742094814777374,
+          0.41469520330429077,
+          0.5202767848968506
+        ],
+        "component_core_eigen_ratios": [
+          0.3004815876483917,
+          0.5150609016418457,
+          1.0489187240600586,
+          0.12860892713069916,
+          0.07695409655570984,
+          0.22022292017936707,
+          0.5383715629577637,
+          0.3889884650707245,
+          0.1865590214729309,
+          0.1406271755695343,
+          0.30919167399406433,
+          0.27842316031455994,
+          0.4419407546520233,
+          0.9019458889961243,
+          0.4584166705608368,
+          1.4322751760482788
+        ],
+        "component_core_min_eigen_ratio": 0.07695409655570984,
+        "component_counts": [
+          265,
+          241,
+          295,
+          246,
+          209,
+          274,
+          259,
+          235,
+          246,
+          276,
+          293,
+          234,
+          225,
+          281,
+          242,
+          275
+        ],
+        "component_covariance_error": 0.6200289530679584,
+        "component_covariance_errors": [
+          0.4949086606502533,
+          0.41638949513435364,
+          0.67568039894104,
+          0.638531506061554,
+          0.8009305596351624,
+          0.42081159353256226,
+          0.8603960871696472,
+          0.4320947825908661,
+          0.8327654600143433,
+          0.6143408417701721,
+          0.5299155116081238,
+          0.5102590322494507,
+          0.587965190410614,
+          0.15742094814777374,
+          0.41469520330429077,
+          1.5333579778671265
+        ],
+        "component_mass": [
+          0.064697265625,
+          0.058837890625,
+          0.072021484375,
+          0.06005859375,
+          0.051025390625,
+          0.06689453125,
+          0.063232421875,
+          0.057373046875,
+          0.06005859375,
+          0.0673828125,
+          0.071533203125,
+          0.05712890625,
+          0.054931640625,
+          0.068603515625,
+          0.05908203125,
+          0.067138671875
+        ],
+        "component_min_eigen_ratio": 0.07695409655570984,
+        "component_resolved": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "component_spill": [
+          0.0,
+          0.0,
+          0.06779661029577255,
+          0.0,
+          0.0047846888191998005,
+          0.03284671530127525,
+          0.050193049013614655,
+          0.0,
+          0.08536585420370102,
+          0.0,
+          0.07167235761880875,
+          0.0,
+          0.06666667014360428,
+          0.05338078364729881,
+          0.0,
+          0.13090908527374268
+        ],
+        "covariance_error": 0.017754577100276947,
+        "hq": 0.963134765625,
+        "hq_component_counts": [
+          265,
+          241,
+          275,
+          246,
+          208,
+          265,
+          246,
+          235,
+          225,
+          276,
+          272,
+          234,
+          210,
+          266,
+          242,
+          239
+        ],
+        "mass_tv": 0.04150390625,
+        "max_component_spill": 0.13090908527374268,
+        "mean_error": 0.017784085124731064,
+        "min_hq_mass_ratio": 0.8125,
+        "min_mass_ratio": 0.81640625,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.01912788224413202,
+        "target_mass": [
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625
+        ],
+        "target_scale": 3.0029242038726807
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "compatibility_key": "c0a34fedb32e1bf8a680667a15caf54dc05e1b2c8367967e5a178a725b27a8d8",
+      "cost": {
+        "adapter_loop_seconds": 9.104510585981188,
+        "adapter_seconds": 12.654306985990843,
+        "charged_task": "model_ae_reconstruction",
+        "completed_steps": 1200,
+        "device": "1",
+        "execution_seconds": 18.982878364011412,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 0,
+          "encoder": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "runner_seconds": 13.845896771003027,
+        "wall_seconds": 18.982878364011412
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.7083333333333334,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 850,
+          "first_pass_step": 50,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 23,
+          "passing_suffix": 12,
+          "stable_from_seconds": null,
+          "stable_from_step": 650
+        },
+        "metric_checks": {
+          "reconstruction_mode_agreement": {
+            "margin": 0.020000000000000018,
+            "metric": "reconstruction_mode_agreement",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.98,
+            "value": 1.0
+          },
+          "reconstruction_mse": {
+            "margin": 0.01924246745184064,
+            "metric": "reconstruction_mse",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.025,
+            "value": 0.005757532548159361
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "component_center_rms_sigma": 8.877565899504708,
+        "component_max_eigen_ratio": 95.59078979492188,
+        "component_min_eigen_ratio": 5.977247714996338,
+        "mass_tv": 0.24609375,
+        "modes": 4,
+        "precision": 0.127197265625,
+        "reconstruction_mode_agreement": 1.0,
+        "reconstruction_mse": 0.005757532548159361,
+        "sample_count": 4096,
+        "step": 1200
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "model_ae_reconstruction"
+    },
+    {
+      "compatibility_key": "dc53e2fdde2d4ffbd894ece8f39f98fa58944aa83bb70bd8e04035f4abdcc8cc",
+      "cost": {
+        "adapter_loop_seconds": 12.325532290997216,
+        "adapter_seconds": 16.184789489983814,
+        "charged_task": "model_vae_categorical",
+        "completed_steps": 1200,
+        "device": "1",
+        "execution_seconds": 23.091994027985493,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "encoder": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "runner_seconds": 17.312817445024848,
+        "wall_seconds": 23.091994027985493
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.375,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 450,
+          "first_pass_step": 250,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 20,
+          "passing_suffix": 20,
+          "stable_from_seconds": null,
+          "stable_from_step": 250
+        },
+        "metric_checks": {
+          "decoder_mean_hq": {
+            "margin": 0.14804687500000002,
+            "metric": "decoder_mean_hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.998046875
+          },
+          "decoder_mean_mass_tv": {
+            "margin": 0.143896484375,
+            "metric": "decoder_mean_mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.006103515625
+          },
+          "decoder_mean_modes": {
+            "margin": 0,
+            "metric": "decoder_mean_modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 2,
+            "value": 2
+          },
+          "elbo_identity_error": {
+            "margin": 0.0001,
+            "metric": "elbo_identity_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.0001,
+            "value": 0.0
+          },
+          "kl_identity_error": {
+            "margin": 9.38487224060424e-06,
+            "metric": "kl_identity_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1e-05,
+            "value": 6.151277593957616e-07
+          },
+          "likelihood_hq": {
+            "margin": 0.13901367187500002,
+            "metric": "likelihood_hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.989013671875
+          },
+          "likelihood_mass_tv": {
+            "margin": 0.139013671875,
+            "metric": "likelihood_mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.010986328125
+          },
+          "likelihood_modes": {
+            "margin": 0,
+            "metric": "likelihood_modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 2,
+            "value": 2
+          },
+          "posterior_mutual_information": {
+            "margin": 0.3934128077648971,
+            "metric": "posterior_mutual_information",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 0.6934128077648971
+          },
+          "posterior_noise_variance_ratio": {
+            "margin": 0.1966964721679687,
+            "metric": "posterior_noise_variance_ratio",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.2,
+            "value": 1.0033035278320312
+          },
+          "reconstruction_mse": {
+            "margin": 0.04716829503292194,
+            "metric": "reconstruction_mse",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.05,
+            "value": 0.0028317049670780617
+          },
+          "shuffle_reconstruction_ratio": {
+            "margin": 786.5237015373336,
+            "metric": "shuffle_reconstruction_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 5.0,
+            "value": 791.5237015373336
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "aggregate_effective_components": 8.982333647784944,
+        "decoder_mean_hq": 0.998046875,
+        "decoder_mean_mass_tv": 0.006103515625,
+        "decoder_mean_modes": 2,
+        "elbo_identity_error": 0.0,
+        "kl_identity_error": 6.151277593957616e-07,
+        "kl_nats": 1.2707418203353882,
+        "likelihood_hq": 0.989013671875,
+        "likelihood_mass_tv": 0.010986328125,
+        "likelihood_modes": 2,
+        "negative_elbo_nats": -0.7581580548877804,
+        "posterior_effective_components": 4.489974006231494,
+        "posterior_mutual_information": 0.6934128077648971,
+        "posterior_noise_variance_ratio": 1.0033035278320312,
+        "posterior_pair_rms": 0.028012113645672798,
+        "reconstruction_mse": 0.0028317049670780617,
+        "shuffle_reconstruction_ratio": 791.5237015373336,
+        "shuffled_reconstruction_mse": 2.241361597203281,
+        "step": 1200
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "model_vae_categorical"
+    }
+  ]
+}

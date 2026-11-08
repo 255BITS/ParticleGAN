@@ -2,6 +2,166 @@
 
 ## Unreleased
 
+- **Exact trainer checkpoint continuation with gradient response.** Save,
+  validate and restore gradient-coherence history when enabled, preserving the
+  next update in fresh and previously used trainers. Reject older enabled-response
+  checkpoints without that history instead of silently restarting the controller.
+- **Completed-update checkpoint boundaries.** `GANTrainer.state_dict()` and
+  `load_state_dict()` reject active updates before changing live state, including
+  calls inside the public `generator_real` callback.
+
+## 0.9.7 — 2026-11-05
+
+- **Unified `stretch` experiment role and tier-by-tier stretch leaderboard.**
+  Introduce `stretch` (`STRETCH_ROLES = {"stretch", "held"}`) across
+  `experiments.forge` and `particlegan_forge` as the canonical role unifying
+  extra-credit, optional, frontier, and held benchmark experiments. Render a
+  dedicated `## Stretch experiments` table by tier (`Tier 1 stretch` through
+  `Tier 4 stretch` plus `Total stretch`) in the
+  [technique inventory](reports/forge/technique-inventory.md) and clarify
+  view-level `ranking` versus task-assignment roles (`required`, `stretch`,
+  `diagnostic`) in [RESEARCH_GLOSSARY.md](RESEARCH_GLOSSARY.md) and
+  [EXPERIMENTATION.md](EXPERIMENTATION.md).
+
+## 0.9.6 — 2026-11-05
+
+- **Default BISPF winner (`bispf_optimized`) and Tier 1/Tier 2 qualification.**
+  `DEFAULT_RECIPE = "bispf_optimized"` (`bispf-optimized-quintic-v1`) is the
+  selected default trainer preset. All seven runnable selected families pass
+  all `27/27` required Tier 1 smoke tasks on the current source cohort, and
+  both BISPF and BCAP reach `77/78` required Tier 2 tasks (`105/115` and
+  `109/115` total across Tiers 1–3) in the refreshed
+  [technique inventory](reports/forge/technique-inventory.md).
+
+## 0.9.5 — 2026-11-05
+
+- **Explicit BISPF input domains.** Declare `input_domain="continuous"` for
+  native feature vectors of any width, or `"categorical"` for categorical
+  matrices, through the public critic penalty factory or `GANTrainer`'s
+  `penalty_options`. The default `"auto"` preserves the existing shape gates;
+  an explicit domain overrides automatic simplex detection. Small categorical
+  codebooks also stay out of the late continuous 2D thermal-freeze rule.
+  Checkpoints retain the selected domain and reject mismatched restoration.
+- **Runnable categorical examples.** The
+  [input-domain guide](docs/bispf-input-domains.md) includes a checked arithmetic
+  walkthrough, four-category GAN training with numerical quality gates and an
+  actual-training GIF, and exact checkpoint continuation. The checked CPU run
+  passes its final five observations; it supplies no Forge qualification or
+  native-model quality claim.
+
+- **One recipe selection path for new training.** Bare or partial `Recipe(...)`
+  calls now raise a migration error rather than silently selecting historical
+  KA2 settings. Use `get_recipe()` for the selected public default, or explicitly
+  select a named preset. Restore compact saved configurations with
+  `Recipe.from_dict(saved_fields)`; historical values and checkpoint semantics
+  are preserved. Fully resolved field dictionaries and `dataclasses.replace`
+  remain supported. This is an intentional constructor API break, not a change
+  to any preset, optimizer, penalty or recorded training result.
+
+## 0.9.4 — 2026-10-23
+
+- **Python 3.11+ requirement and patched build/image dependencies.** Raise
+  `requires-python` to `>=3.11`, require `setuptools>=84.2.1` in
+  `[build-system]` (`GHSA-8rrh-rw8j-w5fx`), and require `Pillow>=13.0.0,<14`
+  across the `lunar`, `images` and `experiments` optional dependency groups
+  (`CVE-2026-112900`, `CVE-2026-112393`, `CVE-2026-112403`), removing the
+  Python `< 3.11` `tomli` fallback. Core `particlegan` runtime dependencies
+  (`torch>=2.6,<3`, `numpy>=1.26,<3`) are unchanged.
+- **`UpdatePolicy` extra-state validation.** `UpdatePolicy._check_tensors`
+  validates module `_extra_state` metadata (such as `MoGParticlePrior`
+  `sigma_rel` and `standardize` fields persisted via `get_extra_state`) before
+  restoring model or optimizer state.
+- **Expanded Forge model toys and preserved diagnostic records.** Register
+  public AE, VAE and DDGAN research model toys in the Forge view-v14 inventory
+  and preserve source-bound saved-state VAE/DDGAN failure diagnostics and
+  concluded R1/R2 and stall-reach/G-idle recall archives.
+
+## 0.9.3 — 2026-10-18
+
+- **Opt-in guarded FP64 Gram and diagnostic SVD dense profiles.** Add
+  `optimizer_dense_profile="gram_fp64_guarded_v1"` and
+  `optimizer_dense_profile="gram_fp64_svd_diagnostic_v2"` for FP32 dense
+  DualNorm matrices: FP64 Gram/`eigh` with the original FP32 cutoff, absolute
+  `.001` smoothing, a guard on the factors actually used, and device-local
+  FP64 SVD fallback (`gram_fp64_svd_diagnostic_v2`) when the Gram rank cutoff
+  is ambiguous. Wide matrices (`rows < columns`) orient along the shorter
+  dimension `(rows, rows)` before forming the Gram matrix. Default, convolution,
+  vector and prior laws are unchanged. Selected checkpoints require the same
+  profile. See the [contract and evidence](reports/gram-profile/README.md) and
+  [diagnostic SVD profile docs](docs/gram-svd-diagnostic-profile.md).
+
+## 0.9.2 — 2026-10-18
+
+- **SBNP prior regularizer degree-of-freedom guard in high-dimensional latents.**
+  `SBNPPriorRegularizer` and `sbnp_regularization_loss` now only include the
+  latent dimension `d` in `min_dof = 2 * k_nn + (d if d <= 4 else 0)` when
+  operating in the `d <= 4` full-covariance regime. High-dimensional latents
+  (`d > 4`, where only marginal variance floor, normalized off-diagonal
+  covariance Frobenius norm, and `k_nn` repulsion are evaluated) remain active
+  at standard batch sizes (`n = 16, 32, 64`) and when `num_particles > 1024`
+  passes sampled unique batch rows from `GANTrainer._step`.
+
+## 0.9.1 — 2026-10-17
+
+- **Faster BISPF execution is the public default.** `bispf_optimized`,
+  `get_recipe()` and model-family factories now select batched convolution
+  updates and BF16/channels-last training for supported CUDA convolutional
+  networks. Parameters, optimizer arithmetic, losses and sampling stay FP32.
+  CPU, nonconvolutional and small networks retain their previous precision;
+  CUDA devices without native BF16 support also use FP32 network execution.
+- **Matched throughput:** 2.15× at 256×256 DCGAN, 2.14× at batch 64 and about
+  2.3× on the small Forge image tasks versus the 0.9.0 quintic default.
+  The six DCGAN workloads improve 1.02–2.15×, with a 1.66× geometric mean.
+  All 19 incumbent numerical passes and 11 existing failures are preserved.
+  Separate endurance controls pass; current revision-12 Tier 3 remains
+  blocked by existing required failures. This owner-directed default choice
+  adds no calibration or natural-image quality claim. See the
+  [source-bound readout](reports/forge/bispf-throughput/README.md).
+- **Restoration:** persist and restore complete recipe fields. To select the
+  0.9.0 execution policy explicitly, use
+  `get_recipe("bispf_optimized", optimizer_svd_backend="native", training_precision="float32")`.
+  Native and batched optimizer checkpoints reject mismatched backends; CUDA
+  graphs are disposable and rebuilt after restoration. Other named trainer
+  presets and bare `Recipe()` retain their earlier settings.
+
+## 0.9.0 — 2026-10-17
+
+- **Optimized BISPF is the public recipe default.** `get_recipe()`, `"gan"`
+  and model-family factories now select `"bispf_optimized"`, matching the
+  selected Forge recipe: non-saturating loss, Born-Infeld critic penalty,
+  SBNP prior regularization and zero-momentum DualNorm at constant rates.
+  Large annotated CUDA convolution kernels use the quintic update; CPU,
+  tiny kernels, dense matrices and sampled prior rows keep their native laws.
+  The owner-directed promotion adds no calibration or robustness credit.
+  Existing `"bcap"`, `"bispf"`, `"ka2"` and other explicit presets remain
+  available; `Recipe(**saved_fields)` retains its restoration semantics.
+- **Dependency-light recipe fields.** `get_recipe_fields` exposes resolved
+  preset settings for applications such as HyperGAN without constructing
+  networks or optimizer state.
+- **Module ownership for custom optimizer groups.**
+  `recipe.make_generator_optimizer(groups, modules=...)` binds convolution
+  layouts from ordinary PyTorch modules while preserving caller learning rates
+  and prior roles. Frozen parameters are excluded from this module-bound path;
+  no architecture-specific training wrapper is required.
+- **Complete BISPF observer checkpoints.** Normalized and plain-Adam BISPF
+  optimizers now save transport residual/data-scale moving averages and the
+  exact thermal scale, fixing divergence after restoring a training checkpoint.
+  Earlier packets that omitted these moments fail with a compatibility error
+  directing callers to their original package source. New formulation-optimizer
+  packets also retain the exact thermal scale; historical formulation packets
+  keep their earlier reconstruction behavior. BCAP and KA2 observer formats
+  remain unchanged.
+- **Measured optimization scope:** the frozen optimization cohort preserves
+  all 19 passing task verdicts and its 11 existing failures. The current
+  overview's 81/81 counts repeated view requirements from 18 distinct tests.
+  Wide synthetic image diagnostics exercise the accelerated path; these do
+  not establish CIFAR quality or transformer acceleration. See the
+  [complete readout](reports/forge/bispf-optimized/README.md).
+- **Release checks use the validated tagged commit.** Develop/master pull
+  requests and pushes run CPU CI; published releases run the complete existing
+  matrix and package checks regardless of the release target branch label.
+  The publisher uploads only the artifacts produced by those checks.
+
 - **Learned-noise floor release:** exclude the noise group's own stationarity
   scale from the model/table settlement gate, preventing clamped noise from
   holding its floor high indefinitely. E22 and `e22_routed` share this repair;
@@ -69,8 +229,8 @@
   `exp(log_sigma)` falls below the physical floor while `log_sigma` is at or
   above its log floor. The initial gradient stays active; ordinary floor
   gradients, native FP64 behavior and checkpoint parameter layout are retained.
-- **KA2 is the default critic formulation** ([docs](docs/ka2.md)); it replaces
-  K3P. Loss, optimizers, schedules and noise are unchanged. The critic penalty
+- **Explicit KA2 critic formulation** ([docs](docs/ka2.md)) replaces
+  K3P for the retained KA2 preset. Loss, optimizers, schedules and noise are unchanged. The critic penalty
   is RMS R1 plus a fake cap for its first 799 calls, then an even blend with
   one-sided caps and an EMA-critic gradient anchor. The anchor's gate and the
   EMA critic's decay (`reg_anchor_min_decay`, default .9, replacing

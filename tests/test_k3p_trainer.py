@@ -503,6 +503,7 @@ def test_generator_optimizer_direct_particles():
     from particlegan.k3p import DirectParticleResponse
     recipe = _recipe()
     results = []
+    checkpoint = final_state = None
     for use_factory in (True, False):
         torch.manual_seed(0)
         particles = nn.Parameter(torch.randn(16, 2))
@@ -513,6 +514,8 @@ def test_generator_optimizer_direct_particles():
             opt = torch.optim.Adam([particles], lr=1e-2, betas=(0.0, 0.999))
             resp = DirectParticleResponse([particles], torch.zeros(particles.numel()),
                                           betas=recipe.direct_particle_betas)
+        response = opt.direct_response if use_factory else resp
+        assert response.state_dict() == {"started": False, "step_count": 0}
         for step in range(5):
             opt.zero_grad()
             (particles - torch.tensor([1.0, -1.0]) * step).square().sum().backward()
@@ -521,17 +524,32 @@ def test_generator_optimizer_direct_particles():
             else:
                 with resp.around(opt):
                     opt.step()
+            assert response.state_dict() == {"started": True, "step_count": step + 1}
+            if use_factory and step == 1:
+                checkpoint = particles.detach().clone(), copy.deepcopy(opt.state_dict())
         results.append(particles.detach().clone())
+        if use_factory:
+            final_state = copy.deepcopy(opt.state_dict())
     assert torch.equal(*results)
-    assert opt_state_direct(recipe) == {"started": True}
 
-
-def opt_state_direct(recipe):
-    particles = nn.Parameter(torch.randn(4, 2))
-    opt = recipe.make_generator_optimizer([particles], direct_particles=[particles])
-    particles.sum().backward()
+    # The response clock and gradient history must resume with the Adam state.
+    saved_particles, saved_optimizer = checkpoint
+    particles = nn.Parameter(saved_particles)
+    opt = recipe.make_generator_optimizer([particles], direct_particles=[particles],
+                                          lr=1e-2, betas=(0.0, 0.999))
+    opt.load_state_dict(saved_optimizer)
+    assert opt.direct_response.state_dict() == {"started": True, "step_count": 2}
+    assert torch.equal(opt.direct_history, saved_optimizer["regularizer"]["direct"]["history"])
+    opt.zero_grad(set_to_none=True)
     opt.step()
-    return opt.state_dict()["regularizer"]["direct"]["state"]
+    assert opt.direct_response.step_count == 2  # No gradient consumes no response update.
+    for step in range(2, 5):
+        opt.zero_grad()
+        (particles - torch.tensor([1.0, -1.0]) * step).square().sum().backward()
+        opt.step()
+    assert torch.equal(particles, results[0])
+    assert opt.direct_response.state_dict() == {"started": True, "step_count": 5}
+    assert torch.equal(opt.direct_history, final_state["regularizer"]["direct"]["history"])
 
 
 def test_api_doc_example_runs():

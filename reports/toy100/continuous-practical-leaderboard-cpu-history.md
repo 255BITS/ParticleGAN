@@ -1,5 +1,10 @@
 # Stability after confirmed convergence
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../forge/technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 [PR140/PR143 reproduction audit](pr140-pr143-repro-audit/README.md): MKL CPU-vendor
 dispatch explains the previous discrepancy. With the diagnostic dispatch
 override, all 2,400 update records and 240 quality checks match each submission

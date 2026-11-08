@@ -6,6 +6,7 @@ cannot establish that an unmeasured completion will pass or authorize training.
 """
 from __future__ import annotations
 
+from collections import Counter
 from itertools import product
 from pathlib import Path
 import math
@@ -197,6 +198,15 @@ def _bound_published(root, profile, config, config_path, criteria, criteria_path
     return saved, path, issues
 
 
+def _observed_error_rates(matrix):
+    """Observed false-accept/false-reject estimates with exact 95% Clopper-Pearson bounds."""
+    from .calibration import clopper_pearson
+    counts = Counter(row["classification"] for row in matrix)
+    return {"false_accept": clopper_pearson(counts["false_accept"], counts["false_accept"] + counts["true_reject"]),
+            "false_reject": clopper_pearson(counts["false_reject"], counts["false_reject"] + counts["true_accept"]),
+            "note": "Point estimates decide the frozen criteria; bounds describe their uncertainty. None means no paired lineage."}
+
+
 def preflight(root: Path, profile: str) -> dict:
     """Inspect bound recorded decisions without changing their frozen meaning.
 
@@ -231,6 +241,7 @@ def preflight(root: Path, profile: str) -> dict:
                                  "sha256": file_hash(published_path), "qualification_input": False}
                                 if published_path else {"scope": "current_original_reducer", "qualification_input": False}),
             "observed_criteria_status": evaluated["adoption"], "complete": evaluated["complete"],
+            "observed_error_rates": _observed_error_rates(evaluated["matrix"]),
             "receipt_issues": issues,
             "matrix_decisions": [{"lineage": row["id"], "smoke": row["smoke"]["decision"],
                                   "reference": row["reference"]["decision"]} for row in evaluated["matrix"]],

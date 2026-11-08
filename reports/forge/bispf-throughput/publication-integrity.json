@@ -1,0 +1,16 @@
+{
+  "public_default_unchanged": true,
+  "refresh_receipt": {
+    "input_digest": "6128182838c15b4413b652d53800941d149e8467433d4984219c04a204134c2f",
+    "json": "/mnt/ml7tb/ParticleGAN-bispf-throughput/reports/forge/technique-inventory.json",
+    "qualification_regraded": false,
+    "qualification_reuse": false,
+    "report": "/mnt/ml7tb/ParticleGAN-bispf-throughput/reports/forge/technique-inventory.md",
+    "rows": 9,
+    "scientific_rows_preserved": true,
+    "training_launched": false
+  },
+  "schema": "bispf_throughput_publication_integrity_v1",
+  "scientific_rows_unchanged": true,
+  "selection_file_unchanged": true
+}

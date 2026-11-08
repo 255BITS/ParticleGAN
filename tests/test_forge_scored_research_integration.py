@@ -24,9 +24,13 @@ def test_canonical_board_keeps_scored_research_and_existing_navigation():
     assert publication == original
     assert first == second == page.read_text()
     lines = first.splitlines()
-    selected = lines.index("## Selected recipes")
-    assert ("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements | Tier 3 requirements"
-            " | Total view requirements |") in lines[selected:selected + 6]
+    header = ("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements | Tier 3 requirements"
+              " | Tier 4 requirements | Total view requirements |")
+    assert next(line for line in lines if line.startswith("|")) == header
+    selected, full_suite = first.split("## Full-suite results — failures included", 1)
+    assert "<details>" not in selected and "<summary>Qualification subset" not in first
+    assert "## Selected recipes" in selected
+    assert "A held FAIL is still a failure" in full_suite
     details = {f["id"]: render_family(ROOT, publication, f)
                for f in publication["family_progress"]["families"] if f["id"] in {"atlas", "bcap-pure"}}
     for heading in (
@@ -54,10 +58,8 @@ def test_canonical_board_keeps_scored_research_and_existing_navigation():
 
 def test_research_tiers_preserve_partial_coverage_and_each_failed_retention():
     rows = tier_rows(ROOT, ROOT / "reports/forge/technique-inventory.md")
-    # Backfilled research, strict audit, actual deeper diagnostics and the adopt 2026-10-16 row.
-    assert len(rows["bcap-pure"]) == 22
-    assert "1/7 (4 blocked)" in rows["bcap-pure"][-2]
-    assert "Adopt:" in rows["bcap-pure"][-1] and "7/29 (21 not run)" in rows["bcap-pure"][-1]
+    assert len(rows["bcap-pure"]) == 22  # Backfilled research, strict audit and actual deeper diagnostics.
+    assert "1/7 (4 diagnostic attempts)" in rows["bcap-pure"][-2]
     # Seed-only studies are excluded from the backfill and listed separately, still unrun.
     assert not any("research seed" in row for row in rows["bcap-pure"])
     paired = [row for row in historical_seed_rows(ROOT, ROOT / "reports/forge/technique-inventory.md")["bcap-pure"]

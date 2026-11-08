@@ -1,0 +1,139 @@
+{
+  "attempt_id": "13db8680122b40feb676546c6c0eb051",
+  "attempt_status": "completed",
+  "campaign_id": "bispf-throughput-quality-v1",
+  "candidate_id": "bispf-throughput-v1",
+  "candidate_revision": "5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d",
+  "certificate_validated": true,
+  "cost_owner": {
+    "campaign": "bispf-throughput-quality-v1",
+    "request": "8a415d710a71e5715c2296fb",
+    "revision": "5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d"
+  },
+  "evidence_scope": "published_summary",
+  "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+  "provenance": {
+    "canonical_result_hash": "9f69b3b2eb91436840e161bb6c97969a6e03e288e99bdc9731de4cc905322b5f",
+    "original_files": {
+      "evidence": {
+        "path": "reports/forge/attempts/13db8680122b40feb676546c6c0eb051/evidence.json",
+        "sha256": "cc310fcb9c3f0cba93f9e85f211014d9735c5c5bffae461e99bdbd4f5f69bfcf"
+      },
+      "request": {
+        "path": "reports/forge/attempts/13db8680122b40feb676546c6c0eb051/request.json",
+        "sha256": "543cc3b14467401fac5aa13315854e93386c35d8cb214b67f695658b8ee23d6d"
+      },
+      "result": {
+        "path": "reports/forge/attempts/13db8680122b40feb676546c6c0eb051/result.json",
+        "sha256": "4cf977ccf6221400c383060388e67a18ccda2d46a790208dc4a7c4e2526e1ab7"
+      }
+    },
+    "source_digest": "014d8783a85da5a2814e278d59f2e6749620d79fafdbb884cea66a0183e022f8",
+    "source_origin_commit": "bbd95834c3854d31397a6004977036b2d35af358"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "request_id": "8a415d710a71e5715c2296fb",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.8",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "summary_version": "forge-technique-receipt-summary-v1",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "69a5296b56a1b263cbc8d183f7cb2f3b413ec754dbe576a2bd03a9031096aad1",
+      "cost": {
+        "adapter_seconds": 9.913069447036833,
+        "charged_task": "unipolar",
+        "device": "0",
+        "execution_seconds": 15.672701244009659,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 10.94751460198313,
+        "wall_seconds": 15.672701244009659
+      },
+      "device": "cuda:0",
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.46,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 184,
+          "first_pass_step": 67,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 20,
+          "passing_suffix": 18,
+          "stable_from_seconds": null,
+          "stable_from_step": 117
+        },
+        "metric_checks": {
+          "cover": {
+            "margin": 0.13912113145554417,
+            "metric": "cover",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9891211314555441
+          },
+          "neu_hold": {
+            "margin": 0.14547128612175586,
+            "metric": "neu_hold",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9954712861217558
+          },
+          "off_caption": {
+            "margin": 0.049864473940269,
+            "metric": "off_caption",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.05,
+            "value": 0.000135526059731005
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "execution_path": "public_components",
+      "gate_status": "PASS",
+      "metrics": {
+        "cover": 0.9891211314555441,
+        "neu_hold": 0.9954712861217558,
+        "off_caption": 0.000135526059731005
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live"
+      },
+      "status": "PASS",
+      "task_id": "unipolar"
+    }
+  ]
+}

@@ -132,7 +132,7 @@ def cohort_rows(value):
                          "label": SERVED_LABEL if cohort is SERVED else LABEL, "scope": own[0]["cohort_scope"],
                          "records": records, "shared": len(shared),
                          "requirements": {str(tier): {name for name in records if reporting_tier(name) == tier}
-                                          for tier in (1, 2, 3)}})
+                                          for tier in sorted(TIERS)}})
     return rows
 
 
@@ -836,7 +836,7 @@ def publish(root, state_root):
     pairs = training_state_pairs(jobs, states)
     trained = {(job["owning_family"], job["measurement_law"], job["parent_task"]): job for job in jobs
                if job.get("directory") and job["status"] in {"PASS", "FAIL"} and job.get("origin") != "reused_execution"}
-    order = [name for tier in (1, 2, 3) for name in TIERS[tier]]
+    order = [name for tier in sorted(TIERS) for name in TIERS[tier]]
     for path, text in certificates:
         atomic_text(path, text)
     media = render_cohort_media(root, REPORT_DIRECTORY, trained, families=FAMILIES, laws=("clean", "as_served"),
@@ -1137,7 +1137,7 @@ def render_readme(value, results, thresholds=None):
         lines += [f'<a name="{family}"></a>', "", f"## {family}", "",
                   "| Tier | Test | Clean (learned noise removed) | As served (learned noise kept) | Notes | Key metrics against bounds |",
                   "| ---: | --- | --- | --- | --- | --- |"]
-        for tier in (1, 2, 3):
+        for tier in sorted(TIERS):
             for parent in TIERS[tier]:
                 clean, served = _status_pair(index, family, parent)
                 if clean is None:
@@ -1159,7 +1159,7 @@ def render_readme(value, results, thresholds=None):
               "both laws (one refusal fills both rows). Atlas and E22 control an independent table of "
               "interchangeable sample rows; each of these tests needs rows bound to something else.", "",
               "| Tier | Test | Why Atlas/E22 cannot run it faithfully |", "| ---: | --- | --- |"]
-    for tier in (1, 2, 3):
+    for tier in sorted(TIERS):
         for parent in TIERS[tier]:
             if parent in COVERAGE.blocked_hosts:
                 reason = COVERAGE.blocked_hosts[parent]

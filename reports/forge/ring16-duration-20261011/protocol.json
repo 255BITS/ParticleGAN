@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "id": "ring16-duration-20261011",
+  "scope": "archived_public_api_task_only_duration_diagnostic",
+  "qualification_input": false,
+  "parent_archive": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010",
+  "parent_source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+  "parent_snapshot": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/snapshots/a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+  "seed": 0,
+  "task": "ring16_acquisition",
+  "parent_updates": 1600,
+  "max_total_updates": 6400,
+  "trainer_delta": "none; exact saved trainer/prior/optimizers/streams; only public extend_execution raises external cap",
+  "retained_contract": "one archived global recipe per family, deterministic initializer, target/data law, architecture, MoG sigma .1/256 particles, batch128, clean live sampling, thresholds and original 400-update schedule",
+  "evaluation": {
+    "observations_per_1600_block": 96,
+    "samples": 4096,
+    "minimum_terminal_passes": 5,
+    "thresholds": [
+      [
+        "sample_count",
+        ">=",
+        4096
+      ],
+      [
+        "modes",
+        ">=",
+        16
+      ],
+      [
+        "mass_tv",
+        "<=",
+        0.15
+      ],
+      [
+        "hq",
+        ">=",
+        0.85
+      ],
+      [
+        "component_covariance_error",
+        "<=",
+        0.85
+      ],
+      [
+        "component_min_eigen_ratio",
+        ">=",
+        0.15
+      ]
+    ]
+  },
+  "budget": {
+    "continuations": 3,
+    "additional_updates": 14400,
+    "reserved_seconds": 1800,
+    "rounds": 1,
+    "retries": 0
+  },
+  "prediction": "At least one family obtains five consecutive terminal full-gate passes by6400 unchanged updates.",
+  "falsifier": "All three fail the complete terminal gate at6400.",
+  "stopping_rule": "Complete every declared cap even if acquisition occurs earlier; no retries, seed variation or automatic continuation.",
+  "controls": "Exact archived1600 parent grades; existing source-bound ring oracle/destructive scorer controls; no altered gates.",
+  "scientific_limits": "Audit checkpoints supply no ordinary prerequisite; this separately scoped user-requested duration study preserves original FAIL grades and grants no ordinary qualification or default adoption.",
+  "prior_evidence": [
+    "reports/forge/EXPERIMENT_MEMORY.md",
+    "reports/forge/recipe-prior-refactor/publication/results.json",
+    "reports/forge/tier1-prior-duration/README.md"
+  ],
+  "runs": [
+    {
+      "family": "r1r2",
+      "attempt_id": "a54bc96e82f34c9e98e7fa1f1d268a33",
+      "parent_certificates": {
+        "evidence": "3d65598873aa0b4efddfc15a5ebc9942b9f84e478ad6d4532325d98884578b8c",
+        "request": "e664c10fbe4d1d922daa8aea75683858a9e0bf0238b5dfe7c963cfbdec6b91ab",
+        "result": "d5c5ce3efc347b47552afd75535d9ea8e06acdf358edb7b6e0d235a9ecdd2df2"
+      },
+      "parent_checkpoint_sha256": "8897396157ecb7e0daf6e9899c93c840a873a73ca0ed527312196bab2ba799cd",
+      "timeout_seconds": 600
+    },
+    {
+      "family": "ka2",
+      "attempt_id": "5c7cd28c88684764b85cc9bcc4d5a5e3",
+      "parent_certificates": {
+        "evidence": "81e38cd1ffcba649b0f7237206a7a2ff4ea4d4a71778c51c3e37938cd39db440",
+        "request": "814f54e2635bad00512ef4685939af6c579e113d5f3a6c9f28999c45fe7be9f5",
+        "result": "2be9a84e2b1ed09cdf2a73314d1ffd5687a274f45784267dc2a8b46b50d8b6d2"
+      },
+      "parent_checkpoint_sha256": "81a48c04152782f3c41a2ac1d7aea1f4d09b74dd8ec9f954ce41b46126f3e04e",
+      "timeout_seconds": 600
+    },
+    {
+      "family": "k3p",
+      "attempt_id": "8dcd5de8cab147149e8f2bc3c13a2230",
+      "parent_certificates": {
+        "evidence": "3fe31d1651cac127937112ca2a74c50d906c19d3a344af9f8c34d5aa7bbe7011",
+        "request": "727428aed6aa2dca004371813a825e7fd9a5d39b1f35262a002b333b9ee0fcbb",
+        "result": "2188e913e6b8291cba751e038941216dd30dea5494e3956d08192a6d7a2f4672"
+      },
+      "parent_checkpoint_sha256": "c356b9550468ecdfcafc5b82a4cc5ae250e5991083ee192e80b2572d1afd38f5",
+      "timeout_seconds": 600
+    }
+  ]
+}

@@ -57,7 +57,7 @@ TIERS = {
     3: ('clockfree_audit', 'grid100_14k', 'rotated100_14k', 'staggered100_14k',
         'ring_hold', 'ring_extension', 'target_shift_recovery'),
 }
-PARENTS = tuple(name for tier in (1, 2, 3) for name in TIERS[tier])
+PARENTS = tuple(name for tier in sorted(TIERS) for name in TIERS[tier])
 SOURCES = TIER1_SOURCES + (
     'experiments/forge/policy_coverage.py', 'experiments/forge/policy_gaussian.py',
     'experiments/forge/gaussian_tasks.py', 'experiments/forge/adaptation.py',
@@ -151,7 +151,7 @@ def reporting_tier(parent):
 
 def _assignments(task_for):
     return [{'task': task_for(name), 'qualification_tier': tier, 'importance': 'required', 'order': order}
-            for order, (tier, name) in enumerate((tier, name) for tier in (1, 2, 3) for name in TIERS[tier])]
+            for order, (tier, name) in enumerate((tier, name) for tier in sorted(TIERS) for name in TIERS[tier])]
 
 
 def view_declaration():
