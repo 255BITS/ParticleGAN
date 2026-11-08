@@ -1,5 +1,11 @@
 # Forge zero pass test review
 
+<!-- superseded-banner: generated -->
+> Historical audit of 2026-10-15. Recommendations and counts below belong to the pinned snapshot.
+> Later dispositions are in [the test disposition report](../test-dispositions-20261015/README.md);
+> current status is in the [technique inventory](../technique-inventory.md).
+> The extraction now reads the frozen snapshot directly, so `--check` remains reproducible on later checkouts.
+
 Keep the useful coverage and density tests. Change how composite tests, incompatible formulations and checkpoint dependencies are presented. Consolidate `ring_extension` into the endurance result instead of counting the same uninterrupted run as another independent test.
 
 At develop snapshot [`17df086e92e4`](https://github.com/255BITS/ParticleGAN/tree/17df086e92e4ae700a7676993238094191d24dee), **18 of the 35 distinct required tests have no PASS in the eight selected family cohorts**. For these 18, the recommendations are **11 keep, 6 modify and 1 remove as a separate counted test**. All 18 are reviewed individually below. The seven separate policy questions and 17 other variants visible in the family index are also covered individually.

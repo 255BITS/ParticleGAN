@@ -9,6 +9,7 @@ import hashlib
 import json
 from pathlib import Path
 import sys
+import subprocess
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
@@ -27,10 +28,16 @@ def encoded(value):
     return json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n"
 
 
+def frozen_bytes(path):
+    """Read the immutable publication named by this dated audit."""
+    relative = path.relative_to(ROOT).as_posix()
+    return subprocess.check_output(["git", "show", f"{SNAPSHOT}:{relative}"], cwd=ROOT)
+
+
 def collect():
     inventory_path = ROOT / "reports/forge/technique-inventory.json"
     attempts_path = ROOT / "reports/forge/attempt-coverage.json"
-    inventory, attempts = read(inventory_path), read(attempts_path)
+    inventory, attempts = json.loads(frozen_bytes(inventory_path)), json.loads(frozen_bytes(attempts_path))
     progress = inventory["family_progress"]
     excluded = set(progress["diagnostic_views"] + progress["scoped_views"])
     assignments = {}
@@ -53,7 +60,7 @@ def collect():
     rows = []
     for task_id in zero:
         declaration_path = ROOT / progress["task_paths"][task_id]
-        declaration = read(declaration_path)
+        declaration = json.loads(frozen_bytes(declaration_path))
         source_paths.append(declaration_path)
         records = [record for record in attempts["records"] if record["task"] == task_id]
         selected_rows = {}
@@ -100,13 +107,19 @@ def collect():
             "other_indexed_selected_zero": sum(r["scope"] == "indexed_variant" for r in rows),
             "backfill": attempts["summary"],
         },
-        "inputs": {str(p.relative_to(ROOT)): digest(p) for p in sorted(source_paths)},
+        "inputs": {str(p.relative_to(ROOT)): hashlib.sha256(frozen_bytes(p)).hexdigest() for p in sorted(source_paths)},
         "tasks": rows,
     }
 
 
 def recheck_ring(directory):
     """Recompute the existing gate, preserving the original BLOCKED index entry."""
+    sources = ("experiments/forge/views.py",
+               "reports/toy100/gap-fill-20260925/sources/k3p/convergence_gate.py",
+               "configs/forge/tasks/ring_extension.json", "reports/forge/attempt-coverage.json")
+    if any((ROOT / name).read_bytes() != frozen_bytes(ROOT / name) for name in sources):
+        raise SystemExit(f"Ring recheck requires evaluator, task and receipts from {SNAPSHOT}; "
+                         "use the original snapshot and exact archived run, without training.")
     sys.path.insert(0, str(ROOT))
     from experiments.forge.views import _ring
     raw_path, result_path = directory / "raw.json", directory / "result.json"
