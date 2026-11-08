@@ -1602,12 +1602,14 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     )
     if display.get("scope") == "recorded_source_formulaic_display":
         assert display["qualification_input"] is False and display["qualification_reuse"] is False
+        # The replacement ring6400 task cannot inherit the old ring1600 PASS
+        # from BCAP/BISPF; all archived scientific rows remain untouched.
         expected_selected_scores += (
-            "**[23/27](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 8/12 tests (4 fail)",
-            "**[22/27](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/12 tests (5 fail)",
+            "**[22/27](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/12 tests (5 fail)",
+            "**[21/27](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 6/12 tests (6 fail)",
             "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 8/12 tests (4 fail)",
-            "**[83/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 20/36 tests (16 fail)",
-            "**[72/115](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** · 17/36 tests (19 fail)",
+            "**[82/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 19/36 tests (17 fail)",
+            "**[71/115](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** · 16/36 tests (20 fail)",
             "**[67/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 17/36 tests (19 fail)",
         )
     else:
@@ -1658,6 +1660,8 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     ):
         row_line = next(line for line in full_suite_block.splitlines() if line.startswith(selected_row_prefix))
         assert "not run" not in row_line
+        # This dated fixed suite retains its original ring1600 record and
+        # denominator; ring6400 is a separate current-view cell below.
         assert "| 2 | 0 |" in row_line
 
     # Verify certified PASS/FAIL for the original suite and the ten measured
@@ -1736,7 +1740,7 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
             + fam_md.split(view_table_header, 1)[1]
             .split("\n## adaptation\n", 1)[0]
         )
-        new_tasks = {"precision_gaussian_mxfp8", "precision_gaussian_nvfp4"}
+        new_tasks = {"precision_gaussian_mxfp8", "precision_gaussian_nvfp4", "ring16_acquisition_6400"}
         for task_id in new_tasks:
             new_row = next(line for line in current_bench.splitlines() if line.startswith(f"| [{task_id}]"))
             assert "| UNKNOWN |" in new_row

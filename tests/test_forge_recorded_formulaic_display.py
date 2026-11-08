@@ -45,7 +45,11 @@ def test_original_view_and_full_suite_scores_survive_source_and_word_pin_changes
         suite_passes = sum(records.get(name, {}).get("status") == "PASS" for name in suite_tasks)
         suite_failures = sum(records.get(name, {}).get("status") == "FAIL" for name in suite_tasks)
         assert (suite["passed"], suite["failed"], suite["total"]) == (suite_passes, suite_failures, len(suite_tasks))
-        assert suite["other"] == {"UNKNOWN": 2}
+        # The two precision toys and new ring6400 task have no matching
+        # recorded measurement; ring1600 results cannot fill the new task.
+        assert suite["other"] == {"UNKNOWN": 3}
+        assert "ring16_acquisition_6400" not in records
+        assert cohort["tasks"]["ring16_acquisition_6400"]["status"] == "UNKNOWN"
         word = cohort["tasks"]["five_word_joint_smoke"]
         assert word["current_contract"] == "CHANGED"
         assert word["changed_contract_fields"] == ["evaluation source"]
