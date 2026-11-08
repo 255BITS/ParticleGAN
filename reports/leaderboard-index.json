@@ -320,6 +320,11 @@
       "goal": "api-toy-contract",
       "current": "reports/toy_audit/api_contract/LEADERBOARD.md",
       "description": "Sorted results of the public-API toy test contract registry."
+    },
+    {
+      "goal": "vaegan_coverage",
+      "current": "reports/forge/leaderboards/vaegan_coverage.md",
+      "description": "Scoped hard/categorical VAEGAN coverage study under the original source and protocol."
     }
   ],
   "not_leaderboards": [
