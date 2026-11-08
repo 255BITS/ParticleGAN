@@ -37,7 +37,9 @@ example therefore gets a new v3 declaration; its v2 identity remains unchanged.
 
 Set `FORGE_WALLCLOCK_POLICY=declared` to use declared limits for new claims. A
 claimed job retains its recorded policy. Scoped policy-cloud intake keeps its
-existing declared limits and original cohort identity.
+existing declared limits and original cohort identity. Historical BCAP phase2/phase3
+orchestration also binds `declared` explicitly, preserving its original per-arm
+reservations for planning, resolution and freezing.
 
 No research training, sampling or unchanged experiment rerun was performed for
 this integration. The [single current inventory](../technique-inventory.md)
