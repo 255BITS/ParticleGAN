@@ -56,11 +56,6 @@
         "`.api_model_ddgan.task_recipe` imported but unused": 1
       }
     },
-    "benchmarks/toy_audit/api_run.py": {
-      "F401": {
-        "`textwrap` imported but unused": 1
-      }
-    },
     "benchmarks/toy_audit/api_sources/circle.py": {
       "F401": {
         "`torch.nn.functional` imported but unused": 1,
