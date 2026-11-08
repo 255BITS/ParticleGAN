@@ -13,7 +13,7 @@ from benchmarks.toy_audit.gaussian1d_quality import sample_target, score_samples
 from experiments.forge import adapters
 from experiments.forge.state import state_digest
 from experiments.forge.views import grade_result
-from particlegan import GANTrainer, MoGParticlePrior
+from particlegan import GANTrainer, MoGParticlePrior, get_recipe, init
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -63,6 +63,31 @@ def test_public_trainer_scalar_mog_and_observer_isolation():
     assert view["kind"] == "bar" and len(view["bin_centers"]) == len(view["samples"])
     assert fixture.trainer.sample(16, output_noise=False).shape == (16, 1)
     assert view["xlim"] == [-2., 5.]
+
+
+@pytest.mark.parametrize("family", ["k3p", "bispf"])
+def test_scalar_initial_prior_law_is_task_bound_without_trainer_tuning(family):
+    task = json.loads(api_gaussian1d.TASK_PATH.read_text())
+    host, law = task["execution"]["host_definition"], task["execution"]["prior"]
+    metadata = case()
+    assert "recipe_overrides" not in metadata
+    fixture = api_gaussian1d.build_case(api_gaussian1d.CASE_ID, recipe_name=family, max_steps=1)
+    expected = get_recipe(family, num_particles=host["particles"], z_dim=host["z_dim"],
+                          batch_size=host["batch"], total_steps=host["steps"],
+                          prior_kind=law["kind"], sigma_rel=0., standardize=law["standardize"])
+    assert fixture.recipe == expected
+    prior = fixture.trainer.prior
+    assert isinstance(prior, MoGParticlePrior)
+    assert prior.z.shape == (host["particles"], host["z_dim"])
+    assert prior.standardize is law["standardize"] is False
+    assert torch.equal(prior.sigma, prior.sigma.new_tensor(law["sigma"]))
+    assert prior.sigma_rel == 0.
+    reference = expected.make_prior(init_std=.5, sigma=law["sigma"])
+    init.deterministic_orthogonal_(reference, seed=2)
+    assert torch.equal(prior.z, reference.z)
+    actual, indices = prior.sample(32, generator=torch.Generator().manual_seed(19))
+    declared, declared_indices = reference.sample(32, generator=torch.Generator().manual_seed(19))
+    assert torch.equal(indices, declared_indices) and torch.equal(actual, declared)
 
 
 def test_forge_scalar_adapter_and_incomplete_short_protocol(tmp_path):

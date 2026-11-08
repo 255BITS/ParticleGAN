@@ -6,7 +6,6 @@ from pathlib import Path
 
 import numpy as np
 
-from . import gaussian1d_quality
 from .api_vectors import VectorFixture, _case, _digest, _law
 
 TASK_PATH = Path(__file__).resolve().parents[2] / "configs/forge/tasks/gaussian1d_acquisition.json"
@@ -28,8 +27,8 @@ def list_cases():
         task_sha256=hashlib.sha256(TASK_PATH.read_bytes()).hexdigest(),
         law=law, law_sha256=_digest(law), protocol_seed=0,
         evaluation_observations=24, terminal_observations=5,
-        recipe_overrides=dict(prior_kind="mog", sigma_rel=0., standardize=prior["standardize"]),
-        prior_options=dict(sigma=prior["sigma"]), profile=dict(init_std=.5),
+        prior_options=dict(prior_kind=prior["kind"], sigma=prior["sigma"],
+                           sigma_rel=0., standardize=prior["standardize"]), profile=dict(init_std=.5),
         initialization=dict(generator="deterministic_orthogonal seed0", discriminator="deterministic_orthogonal seed1", prior="deterministic_orthogonal R2Normal init_std=.5"),
         sampling="Live public GANTrainer.sample(output_noise=False); uniformly sampled learned MoG locations with fixed sigma=.025 latent Gaussian noise; standardize=False; no EMA.",
         scope="Acquire N(2, .5^2) in 1,000 updates from deterministic initialization; exact Gaussian CDF, location and width gates must pass at five terminal checks. Tier 1 remains provisional; this standalone API cohort grants no whole-view qualification.",
