@@ -31,7 +31,7 @@ The retired runner cannot be revived by `--force`, a direct task call or an inte
 
 The new controls test the scientific boundary, rather than just exercising a successful code path: damaging the measured neural imputer changes its predictions; its evaluator cannot call ppost; disabling an optimizer prevents hidden model/prior writes; importing providers cannot change a shared architecture; automatic derivatives match finite differences and a zero upstream signal; and fresh-object continuation preserves complete owned state. Software prefixes and constructive/oracle controls confer no full-budget learned-quality credit.
 
-For lint, three control-flow false positives in frozen reproduction sources are exempted only by exact path, message and source SHA-256. Their source bytes are preserved. The remaining reviewed redefinitions are imported pytest fixtures, not blanket permission for new redefinitions. The engineering PR reduces the reviewed baseline from 302 to 297 findings; integration removes one further resolved unused-import exemption (296 remain).
+For lint, three control-flow false positives in frozen reproduction sources are exempted only by exact path, message and source SHA-256. Their source bytes are preserved. The remaining reviewed redefinitions are imported pytest fixtures, not blanket permission for new redefinitions. The engineering PR reduces the reviewed baseline from 302 to 297 findings; integration removes two further resolved unused-import exemptions (295 remain).
 
 ## Remaining scientific questions
 
@@ -39,4 +39,17 @@ These repairs do not supply a winning global recipe, accepted screen calibration
 
 Before new formulation work, query Forge recall, check the unresolved problems, preregister one substantive recipe delta with an explicit control and finite budget, and retain every required regression. Keep task architecture, initial prior law, data sequence, sampling, budget and evaluation cadence fixed across candidates. Do not run seed-only searches or tune against a confirmation task after seeing its result.
 
-Raw software verification logs stay under the ignored local directory `runs/software/audit-repairs-2026-11-08/`. The final integrated verification and merge links are recorded with the publication repair; component PR descriptions retain their own exact validation scopes.
+## Software verification
+
+The integrated CPU checks used Python 3.12.14 / Torch 2.14.0+cu130 with CUDA hidden and one Torch/BLAS thread. The local scopes overlap and must not be added as independent observations.
+
+| Integrated check | Result |
+| --- | --- |
+| Core recipe, initializer, gate and admission contracts | 268 passed; 1 CUDA test deselected |
+| Vector/MisGAN providers and public-API contracts after final provider fixes | 210 passed |
+| Publication, exact producer verification and generated navigation | 34 passed |
+| Final producer emission, consumer acceptance and interpreter-coverage policy | 69 passed |
+| Minimum base installed-wheel continuation | Passed in isolated Python 3.11.16 / Torch 2.6.0+cpu / NumPy 1.26.0 |
+| Reviewed lint baseline | Current; 295 findings, no additions; new undefined names cannot be baselined |
+
+Full interpreter, packaging and collection-coverage results are GitHub checks on the integration PR. Raw software verification logs stay under the ignored local directory `runs/software/audit-repairs-2026-11-08/`. Component PR descriptions retain their own exact validation scopes. These are software checks, not new learned-quality qualifications or evidence of accepted calibration.

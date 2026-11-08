@@ -40,7 +40,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 122,
+      "forge_engine": 123,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -105,7 +105,7 @@
       "candidate_patch": 26,
       "configuration": 810,
       "driver": 405,
-      "engine_support": 122,
+      "engine_support": 123,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1551,
       "frozen_candidate_implementation": 15,
@@ -119,13 +119,13 @@
       "visualization": 23,
       "visualization_artifact": 750
     },
-    "files": 11826
+    "files": 11827
   },
   "coverage": {
-    "declared_count": 11826,
+    "declared_count": 11827,
     "missing": [],
     "stale": [],
-    "tracked_count": 11826,
+    "tracked_count": 11827,
     "unclassified": [],
     "valid": true
   },
@@ -7380,7 +7380,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "34fc9dd30ad00787d5898ef8897ed6b2e1833e12",
+      "git_blob": "fb3d13b707be4f90c338e5912720d0b72bbc47bf",
       "path": "experiments/forge/adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7772,6 +7772,13 @@
     },
     {
       "family": "forge_engine",
+      "git_blob": "b200f5315d36283008ad841bbe3d1eca604aaaea",
+      "path": "experiments/forge/observations.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
       "git_blob": "c8ce541122c2429c687c0acc5fb9a63423e63dd0",
       "path": "experiments/forge/optimizer_diagnostics.py",
       "role": "engine_support",
@@ -7919,7 +7926,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "e4b179d95d2157e9914a2532509cdde6062322d2",
+      "git_blob": "1e57752f44d921ca8c215043c46e6bfcf264a1f2",
       "path": "experiments/forge/queue.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7968,7 +7975,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "b67b9d74d227796fea7d4336fbb25e4d2180b54a",
+      "git_blob": "01a913c527f4a8eebbfada9e2b581392d2ebb156",
       "path": "experiments/forge/runtime.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -14238,7 +14245,7 @@
     },
     {
       "family": "report/project",
-      "git_blob": "150ea61bf465271bc8aef069a86c442e862f35e9",
+      "git_blob": "7d3af6c02a983e4eb21cb9a69560b7443bc72e3d",
       "path": "reports/gpt-audit-remediation-2026-11-08.md",
       "role": "narrative",
       "suggested_tiers": []

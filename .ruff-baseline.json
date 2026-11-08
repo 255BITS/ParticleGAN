@@ -289,11 +289,6 @@
         "`collections.defaultdict` imported but unused": 1
       }
     },
-    "experiments/forge/runtime.py": {
-      "F401": {
-        "`os` imported but unused": 1
-      }
-    },
     "experiments/forge/scaling_profile.py": {
       "F401": {
         "`.contracts.stable_hash` imported but unused": 1
