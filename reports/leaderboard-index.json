@@ -320,6 +320,11 @@
       "goal": "api-toy-contract",
       "current": "reports/toy_audit/api_contract/LEADERBOARD.md",
       "description": "Sorted results of the public-API toy test contract registry."
+    },
+    {
+      "goal": "misgan-bispf-research-v1",
+      "current": "reports/forge/misgan-bispf/LEADERBOARD.md",
+      "description": "Scoped four-mode MisGAN recovery and neural imputation study; original 100-mode tasks stay separate."
     }
   ],
   "not_leaderboards": [

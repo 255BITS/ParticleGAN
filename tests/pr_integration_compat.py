@@ -7,8 +7,9 @@ import subprocess
 
 
 def before_pr_integration(root, current, relative):
-    binding = current.get("evaluation", {}).get("integration_source_binding")
-    if binding is None:
+    evaluation = current.get("evaluation", {})
+    binding = evaluation.get("evaluator_revision")
+    if not isinstance(binding, dict) or "-develop-integration-20261108" not in binding.get("id", ""):
         return current
     root = Path(root)
     raw = subprocess.check_output(["git", "show", binding["previous_task_commit"] + ":" + relative], cwd=root)
@@ -28,7 +29,10 @@ def before_pr_integration(root, current, relative):
     for path, expected in row["sources_after"].items():
         assert sha256((root / path).read_bytes()).hexdigest() == expected
     restored = deepcopy(current)
-    restored["evaluation"].pop("integration_source_binding")
+    if "evaluator_revision" in previous["evaluation"]:
+        restored["evaluation"]["evaluator_revision"] = previous["evaluation"]["evaluator_revision"]
+    else:
+        restored["evaluation"].pop("evaluator_revision")
     restored["evaluation"]["sources"] = previous["evaluation"]["sources"]
     if receipt["pr"] == 461 and current["id"] in ("model_vae_hard", "model_vae_categorical"):
         assert restored["execution"].pop("transport_consumer") == "output_marginal_v1"
@@ -40,8 +44,8 @@ def before_pr_integration(root, current, relative):
 def source_before_pr_integration(root, relative, member):
     root = Path(root)
     task = json.loads((root / relative).read_text())
-    binding = task.get("evaluation", {}).get("integration_source_binding")
-    if binding:
+    binding = task.get("evaluation", {}).get("evaluator_revision", {})
+    if isinstance(binding, dict) and "-develop-integration-20261108" in binding.get("id", ""):
         task = before_pr_integration(root, task, relative)
         return task["evaluation"]["sources"][member]
     return sha256((root / member).read_bytes()).hexdigest()

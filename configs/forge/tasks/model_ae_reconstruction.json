@@ -117,22 +117,29 @@
       "particlegan/policy.py": "be442dcf21f03a5d1cd364177724fc15560df8cbf401c85bd4630f62f5ea9535"
     },
     "evaluator_revision": {
-      "id": "review-policy-source-binding-20261025",
-      "change": "Bind the review-stage particlegan/policy.py refresh for future execution: ManipulatedPrior output postprocessing in ServedModel/UpdatePolicy (identity for plain priors), the declared row_evidence_statistic trainer option (default 'sphericity' is the legacy law) and router-parameter ownership labels for manipulated priors. Plain-prior hosts execute the same operations. Architecture, data/target/prior/sampling laws, initialization, budgets, cadence and numerical gates are unchanged. Earlier source-bound receipts and verdicts retain their original identities; this refresh grants no reuse or pass credit.",
-      "previous_task_commit": "82f38664e4d6fb4aac67ed99d87887d6e6e4b357",
-      "previous_task_path": "configs/forge/tasks/model_ae_reconstruction.json",
-      "previous_task_sha256": "4ead437cbc6c345b2c7f0bf4ba2781a0fda8bee17ca0e24f0a8ca7d1f828eae0",
-      "previous_task_blob": "a901999e25b4c200e6a043dfe7f6b55615044426",
-      "previous_source_sha256": {
-        "particlegan/policy.py": "4eb130cb5982c8333eec1abac6829c76b8aeea8f4ce87bc90b06b805c7dede0c"
-      }
-    },
-    "integration_source_binding": {
       "id": "pr-462-develop-integration-20261108",
       "previous_task_commit": "528807d4b26db979c8e77d0543d266514c8e14d9",
       "previous_task_path": "configs/forge/tasks/model_ae_reconstruction.json",
       "previous_task_sha256": "99d10d8f3fcbadff3bf2a1a1c62a8e211c7d4790fb607b8fe1b4fcea976f6b20",
-      "previous_task_blob": "6b05ce5cb0dc0d49e3f5f085c0fc0cddee1104f6"
+      "previous_task_blob": "6b05ce5cb0dc0d49e3f5f085c0fc0cddee1104f6",
+      "change": "Bind future executions to integrated provider/adapter bytes. Original research task/source/seed/initialization, receipts and verdicts stay archived at the original PR head. No original attempt is relabelled or regraded.",
+      "previous_revision": {
+        "id": "review-policy-source-binding-20261025",
+        "change": "Bind the review-stage particlegan/policy.py refresh for future execution: ManipulatedPrior output postprocessing in ServedModel/UpdatePolicy (identity for plain priors), the declared row_evidence_statistic trainer option (default 'sphericity' is the legacy law) and router-parameter ownership labels for manipulated priors. Plain-prior hosts execute the same operations. Architecture, data/target/prior/sampling laws, initialization, budgets, cadence and numerical gates are unchanged. Earlier source-bound receipts and verdicts retain their original identities; this refresh grants no reuse or pass credit.",
+        "previous_task_commit": "82f38664e4d6fb4aac67ed99d87887d6e6e4b357",
+        "previous_task_path": "configs/forge/tasks/model_ae_reconstruction.json",
+        "previous_task_sha256": "4ead437cbc6c345b2c7f0bf4ba2781a0fda8bee17ca0e24f0a8ca7d1f828eae0",
+        "previous_task_blob": "a901999e25b4c200e6a043dfe7f6b55615044426",
+        "previous_source_sha256": {
+          "particlegan/policy.py": "4eb130cb5982c8333eec1abac6829c76b8aeea8f4ce87bc90b06b805c7dede0c"
+        }
+      },
+      "previous_source_sha256": {
+        "benchmarks/toy_audit/api_contract.py": "08a5eac1a186a22c09f47d324f69772af1f1922832383d372488ecb7091eb75d",
+        "benchmarks/toy_audit/api_model_ae.py": "8919030be6eac142bb8c6f95d8672505eee90aebaa7a7a91d32bed39f4ae16b8",
+        "experiments/forge/model_toy_adapter.py": "714be671402d345a7a33be0d43f18c02da0b9cd30dbbc04dc04b465fe434bd54"
+      },
+      "qualification_input": false
     }
   },
   "resources": {
