@@ -82,6 +82,7 @@ def build_readiness(root=ROOT, *, view_id="quality_coverage", backend=None, cand
         task_rows = q.get("tasks", [])
         if q and {t["task_id"] for t in task_rows if t["importance"] == "required"} != required:
             raise ValueError("qualification omitted a required declared task")
+        # A HELD view (its highest tier is held) is never a screen pass.
         screen_pass = row["status"] == "PASS" and q.get("status") == "PASS" and q.get("eligible") is True
         request = _resolve(root, view_id, row) if row.get("candidate_revision") is not None else None
         if screen_pass and request is None:
@@ -114,6 +115,7 @@ def build_readiness(root=ROOT, *, view_id="quality_coverage", backend=None, cand
                 "source_digest", "source_origin_commit")},
             "protocol_sha256": stable_hash(bindings.get("protocol")),
             "task_statuses": status_map, "tiers": deepcopy(q.get("tiers", [])),
+            "held_total": q.get("held_total", 0), "held_passed": q.get("held_passed", 0),
             "status_reason_refs": reason_keys, "preflight_blockers": row.get("preflight_blockers", row.get("blockers", [])),
             "attempt_ids": row.get("attempt_ids", [])}
         rows.append(item)

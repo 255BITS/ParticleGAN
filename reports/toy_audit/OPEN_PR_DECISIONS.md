@@ -1,5 +1,10 @@
 # Current toy PR decisions
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../forge/technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 Reviewed 2026-10-02T03:27:49.159754+00:00: **50 toy-problem PRs**, including 49 from the complete 138-open-PR starting inventory and newly opened PR231. The final 134-open inventory contains 46 retained problem proposals with unchanged reviewed heads. Exact source evidence and heads are in [the decision receipt](open-pr-disposition.json). Original catalog and quality scores remain historical inputs.
 
 **PR224, PR226, PR227 and PR231 merged into develop.** PR224 keeps the intended strict-XFAIL controller instability; PR226 keeps its bounded odd-force diagnostic. PR227 includes [signed repair PR230](https://github.com/255BITS/ParticleGAN/pull/230), guided support, rotated failure and a separate zero-update stationarity unit. PR231 adds whole-FiLM conditioning sensitivity and retains the negative real G-rate bypass. Each merged proposal passed its current Python matrix/release build and relevant focused integration checks.

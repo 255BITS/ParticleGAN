@@ -1,0 +1,36 @@
+{
+  "actual_training_gifs": [
+    "reports/toy_audit/api_contract/model_modes/media/api-model-ddgan-gaussian-chain.gif",
+    "reports/toy_audit/api_contract/model_modes/media/api-model-ae-ddgan-gaussian-chain.gif"
+  ],
+  "analysis_code": "reports/forge/ddgan-failure-investigation/diagnose.py",
+  "analysis_code_sha256": "e1a3a9e812dc568ed94e9774427708899f4469695d2415d049ee8ab423488b52",
+  "base_commit": "8c6c133843739347b344dc32b9f1f92ac69dd2a4",
+  "diagnostic_protocol": {
+    "backend": "cpu",
+    "contexts_per_step": 8,
+    "gradient_units": "negative per-example non-saturating loss gradient with respect to x_prev, before batch-mean 1/n",
+    "samples_per_panel": 4096,
+    "seed": 0,
+    "threads": 1,
+    "training_updates": 0
+  },
+  "new_gif_rendered": false,
+  "next_hypothesis": "Distinguish critic tracking lag and conditional representation weaknesses using a separately proposed fixed-task, one-global-recipe comparison; current local output gradients do not identify optimizer update direction.",
+  "original_evidence_unchanged": true,
+  "original_execution_commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+  "original_publication": "reports/toy_audit/api_contract/model_modes/publication.json",
+  "qualification_input": false,
+  "raw_log": "/nvme/dev/particlegan/artifacts/ddgan-failure-diagnosis/diagnostic-v3.log",
+  "results_sha256": "04797aacd93a340062e3c1db9ddd7cc8cc822c746fcbba7efddefe4f82fd81a5",
+  "reuse_for_qualification": false,
+  "schema": "ddgan_saved_state_investigation_v1",
+  "scope": "exploratory saved-state follow-up; initial evidence and final states were inspected before the analysis implementation; not blind preregistration or independent validation",
+  "source_manifest": "reports/forge/api-model-toys/execution-source.json",
+  "stopping_rule": "Stop after both saved endpoint analyses; no new training, continuation, seed sweep, gate change, tier change or promotion.",
+  "task_ids": [
+    "model_ae_ddgan_gaussian_chain",
+    "model_ddgan_gaussian_chain"
+  ],
+  "trainer_delta": "none; zero updates and no optimizer construction"
+}

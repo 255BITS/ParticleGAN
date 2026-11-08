@@ -17,7 +17,7 @@ import traceback
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=("prepare", "prepare_policy", "supervise", "execute"))
+    parser.add_argument("mode", choices=("prepare", "prepare_policy", "supervise", "execute", "reuse_group"))
     parser.add_argument("path", type=Path)
     args = parser.parse_args()
     spec = json.loads(args.path.read_text())
@@ -31,10 +31,12 @@ def main():
         from experiments.forge.sources import snapshot_source
         from experiments.forge.views import load_tasks
         # The inventory spans several views; retain exact source-owned cards.
+        # A scoped cohort intake names its own committed view explicitly.
         tasks = load_tasks(Path(spec["source_root"]))
         for item in spec.get("requests", [spec]):
             request = resolve_idea(Path(spec["source_root"]), item["candidate_id"],
-                                   view_id="clockfree_continuous", through_tier=3, execution_backend="cuda")
+                                   view_id=item.get("view_id", "clockfree_continuous"),
+                                   through_tier=3, execution_backend="cuda")
             snapshot = snapshot_source(Path(spec["source_root"]),
                                        Path(item["output"]).parents[1] / "source", request["source"])
             request["source"]["snapshot_path"] = str(snapshot)
@@ -58,6 +60,16 @@ def main():
         atomic_json(Path(spec["output"]), request)
         return
     directory = args.path.parent
+    if args.mode == "reuse_group":
+        # Only orchestration comes from the updated worker. The isolated frozen
+        # package still supplies every scientific grader and source check.
+        import importlib.util
+        name = "experiments.forge.grouped_evidence"
+        module_spec = importlib.util.spec_from_file_location(name, Path(__file__).with_name("grouped_evidence.py"))
+        module = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(module)
+        atomic_json(directory / "result.json", module.grade_saved_group(spec["parent"], spec["child"]))
+        return
     if args.mode == "supervise":
         from experiments.forge.worker import stop_group
         with file_lock(directory / "execution.lock", blocking=False) as lease:
@@ -112,12 +124,14 @@ def main():
                 if mismatched:
                     raise CapabilityError(["Original task source binding unavailable; do not port the formulation: " +
                                            ", ".join(mismatched)])
-                raw = run_task(request, {"task_id": spec["task"], "prerequisites": spec.get("prerequisites", {})},
+                raw = run_task(request, {"task_id": spec["task"], "prerequisites": spec.get("prerequisites", {}),
+                                       "diagnostic_continuation": spec.get("diagnostic_continuation") is True},
                                directory, spec["device"])
                 atomic_json(directory / "raw.json", raw)
                 cost = raw.get("cost", {})
                 result["updates"] = cost.get("completed_steps", cost.get("completed_updates", raw.get("raw", {}).get("steps")))
-                result["grade"] = grade_result(task, raw)
+                result["grade"] = (grade_result(task, raw, diagnostic=True) if spec.get("diagnostic_continuation")
+                                   else grade_result(task, raw))
                 result["status"] = result["grade"]["status"]
                 result["reason"] = "; ".join(result["grade"].get("reasons", []))
                 result["raw_sha256"] = __import__("hashlib").sha256((directory / "raw.json").read_bytes()).hexdigest()

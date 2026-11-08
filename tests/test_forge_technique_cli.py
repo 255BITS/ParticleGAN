@@ -1,4 +1,7 @@
 from experiments.forge.__main__ import parser
+import json
+
+import pytest
 
 
 def test_inventory_cli_defaults_discover_all_techniques_through_all_tiers():
@@ -41,3 +44,43 @@ def test_inventory_compiles_boards_once_after_all_attempts(monkeypatch, tmp_path
     monkeypatch.setattr(cli, "emit", lambda result: None)
     cli.main(["--root", str(tmp_path), "inventory", "run", "--gpus", "cpu"])
     assert events == ["receipt", "receipt", "receipt", "compile"]
+
+
+def test_view_and_goal_cli_flags_are_interchangeable_and_probe_runs_without_study(capsys):
+    from experiments.forge import __main__ as cli
+    assert parser().parse_args(["board", "--view", "quality_coverage"]).goal == "quality_coverage"
+    assert parser().parse_args(["plan", "k3p", "--goal", "quality_coverage"]).view == "quality_coverage"
+    assert parser().parse_args(["recall", "--view", "discriminator_stability"]).goal == "discriminator_stability"
+    rc = cli.main(["probe", "k3p", "--task", "gaussian1d_acquisition", "--override", "lr=0.0005"])
+    assert rc == 0
+    out = capsys.readouterr().out
+    assert '"cohort": "exploratory_probe"' in out
+    assert '"training_launched": false' in out
+
+
+@pytest.mark.parametrize("full_provenance", [False, True])
+def test_recall_cli_full_provenance_is_explicit(tmp_path, monkeypatch, capsys, full_provenance):
+    from experiments.forge import __main__ as cli, knowledge
+    from experiments.forge.contracts import atomic_json
+
+    source = {"digest": "frozen-source", "origin_commit": "frozen-commit",
+              "files": {"scientific-source.py": "a" * 64}}
+    atomic_json(tmp_path / "reports/forge/records/negative.json", {
+        "schema_version": 1, "record_id": "negative", "candidate_id": "candidate",
+        "source": source, "conclusion": "Failed the held quality gate.",
+        "evidence_scope": "historical", "task_results": [],
+    })
+    monkeypatch.setattr(knowledge, "freshness", lambda root: {"status": "CURRENT"})
+    arguments = ["--root", str(tmp_path), "recall", "--query", "candidate"]
+    if full_provenance:
+        arguments.append("--full-provenance")
+    assert cli.main(arguments) == 0
+    output = json.loads(capsys.readouterr().out)
+    assert output["matches_total"] == output["shown"] == 1
+    match = output["matches"][0]
+    assert match["conclusion"] == "Failed the held quality gate."
+    assert match["exact_identity_match"] and match["source"]["digest"] == "frozen-source"
+    if full_provenance:
+        assert match["source"] == source
+    else:
+        assert "files" not in match["source"] and match["source"]["file_count"] == 1

@@ -1,0 +1,64 @@
+{
+  "campaign": {
+    "budget_seconds": 400000,
+    "candidate_budget_seconds": 100000,
+    "id": "atlas-prior-repair-campaign-v3"
+  },
+  "candidate": "atlas-particle-normal-v3",
+  "competing_explanation": "If raising birth_death_cells from 128 to 256 and NormalNoiseManipulator sigma from 0.005 to 0.0065 fails to bring vector_unequal_mass and vector_unequal_width below component_covariance_error <= 0.85 or regresses enumerated image, VAE, AE, or behavioral tasks below 23 PASS, then the vector covariance errors stem from critic/generator equilibrium shrinkage rather than under-populated 2-particle-per-cell FeatureCellBirthDeath resampling and rare-mode local noise support.",
+  "control": {
+    "candidate_id": "atlas-particle-normal-v2",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "mean_error_sigma",
+    "op": ">",
+    "phase": "final",
+    "task_id": "gaussian1d_smoke",
+    "threshold": 0.2
+  },
+  "hypothesis": "Raising birth_death_cells from 128 to 256 eliminates under-populated 2-particle-per-cell FeatureCellBirthDeath resampling noise on N=256 vector transfer tasks while refining N=20000 cell resolution, and raising NormalNoiseManipulator sigma from 0.005 to 0.0065 sustains rare-mass and multi-scale intra-mode covariance, flipping both vector_unequal_mass and vector_unequal_width to PASS (6/6 vector tasks) and raising full-suite score to >= 23 PASS / 0 INCOMPLETE on prior-ablation-full-suite-v1 under protocol seed 0.",
+  "id": "atlas-particle-normal-replication-study-v3",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "vector_unequal_mass",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_revision": "c7e4c12988d060ec0bb8d903651ffbae3d2537e4d5b360a3bfa75a6e860de9fb",
+        "record_id": "readout-9f0d62f87d1ff351cfef7f98"
+      },
+      "path": "reports/forge/records/readout-9f0d62f87d1ff351cfef7f98.json",
+      "selector": [],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "candidate_revision": "de4379506c30e147385182dfd8cdc61133024f4636c2ecbf07cea1c509cc2cc0",
+        "record_id": "readout-4dc982d111099c9b0f33a18e"
+      },
+      "path": "reports/forge/records/readout-4dc982d111099c9b0f33a18e.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "prior-ablation-full-suite-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

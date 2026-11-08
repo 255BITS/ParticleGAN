@@ -1,0 +1,151 @@
+{
+  "candidate_id": "archive:pr320:network-spectral-cap",
+  "candidate_revision": "c4627fb14619ca0bcd1b8d904e7796d0834a4e8a",
+  "conclusion": "Fixed G/D spectral cap scale .1 improves Gaussian shape but fails continuous learning in all three timing arms. Past extrapolation passes 43/96 stationary checks (41/72 retention), first five-pass window at update 3875, and 17/48 shifted checks (8/24 retention), ending shifted KS .03837; all acquisition and reacquisition suffixes are zero. Every ring arm passes 0/240 checks, versus original alternating control acquisition PASS and 144/144 retention. Stop this exact global recipe; prior sampled-row normalization was unchanged, so this does not evaluate a combined prior/network repair. Nine CUDA trials use 30000 new updates, 362.226751 loop seconds and zero scientific retries. This is a task-only diagnostic, not ordinary qualification.",
+  "cross_cohort_pooling": false,
+  "evidence_scope": "historical",
+  "goal": "discriminator_stability",
+  "hypothesis": "Preserving small G/D gradient singular values at fixed nominal rates repairs Gaussian acquisition, retention and target-shift response while the prior retains row-normalized learning.",
+  "lifecycle": "concluded",
+  "mechanism_class": "network_spectral_cap",
+  "next_action": "Retain the archived findings and original source; stop these exact revisions. Any successor needs its own substantive hypothesis, frozen protocol and finite budget. No training or default adoption follows from this archive.",
+  "provenance": {
+    "actual_cost": {
+      "new_training_loop_seconds": 362.2267510399688,
+      "new_training_updates": 30000,
+      "scientific_retries": 0
+    },
+    "archive_status": "recall_only_unmerged_branch",
+    "budget": {
+      "new_training_updates": 30000,
+      "new_trials": 9,
+      "per_shift_trial_seconds": 300,
+      "per_stationary_trial_seconds": 600,
+      "reserved_seconds": 4500,
+      "retries": 0
+    },
+    "bulk_archive": {
+      "bytes": 33779339,
+      "immutable": true,
+      "path": "artifacts/gaussian-network-magnitude-v1.tar.gz",
+      "sha256": "f8c15e2eda12c906c5996c7a9bdb1a7c30d281cc5c2257f93bcf9dd71886cdc9"
+    },
+    "control_contract": "PR317 archived controls only, retained under original source/recipe/initialization/stream identities in control-reuse.json; no new control cost. Task/source/recipe hashes remain in protocol.json.",
+    "default_adoption": false,
+    "documents": {
+      "reports/forge/gaussian-network-magnitude/alternating-ring16_acquisition-stationary.gif": {
+        "archive_commit": "c4627fb14619ca0bcd1b8d904e7796d0834a4e8a",
+        "git_blob": "fbb17186e71ca6db9189d16a1fd0c349b14399c0",
+        "path": "reports/forge/gaussian-network-magnitude/alternating-ring16_acquisition-stationary.gif",
+        "sha256": "e0f5b030d8b88ad1bee7ec49cf455607a92c6faa03174999aed7f40694469fd6",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/c4627fb14619ca0bcd1b8d904e7796d0834a4e8a/reports/forge/gaussian-network-magnitude/alternating-ring16_acquisition-stationary.gif"
+      },
+      "reports/forge/gaussian-network-magnitude/control-reuse.json": {
+        "archive_commit": "c4627fb14619ca0bcd1b8d904e7796d0834a4e8a",
+        "git_blob": "0bbc929c692b0ff7b04a540ff24ce1c92e925a8d",
+        "path": "reports/forge/gaussian-network-magnitude/control-reuse.json",
+        "sha256": "5ee5f1b89ae5f10c5d0f34fd358f94ea3774005399e6f92defa3c7bbcfecb009",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/c4627fb14619ca0bcd1b8d904e7796d0834a4e8a/reports/forge/gaussian-network-magnitude/control-reuse.json"
+      },
+      "reports/forge/gaussian-network-magnitude/extrapolation_from_past-gaussian1d_acquisition-shift.gif": {
+        "archive_commit": "c4627fb14619ca0bcd1b8d904e7796d0834a4e8a",
+        "git_blob": "90f09e6da405b170655b9abd1b41b56bc5c95f4e",
+        "path": "reports/forge/gaussian-network-magnitude/extrapolation_from_past-gaussian1d_acquisition-shift.gif",
+        "sha256": "4202b226d6ca2103257a39dbc875b458cb347b3684c084e86eb8f178c8a7699a",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/c4627fb14619ca0bcd1b8d904e7796d0834a4e8a/reports/forge/gaussian-network-magnitude/extrapolation_from_past-gaussian1d_acquisition-shift.gif"
+      },
+      "reports/forge/gaussian-network-magnitude/extrapolation_from_past-gaussian1d_acquisition-stationary.gif": {
+        "archive_commit": "c4627fb14619ca0bcd1b8d904e7796d0834a4e8a",
+        "git_blob": "b065549bc4a789bd3a9c17f077e1adcebce31345",
+        "path": "reports/forge/gaussian-network-magnitude/extrapolation_from_past-gaussian1d_acquisition-stationary.gif",
+        "sha256": "2252682538dd8e1a6bb3e7bd83e9b86c3bd6776cb1d1ceaa0f2a133b8e68e506",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/c4627fb14619ca0bcd1b8d904e7796d0834a4e8a/reports/forge/gaussian-network-magnitude/extrapolation_from_past-gaussian1d_acquisition-stationary.gif"
+      },
+      "reports/forge/gaussian-network-magnitude/protocol.json": {
+        "archive_commit": "c4627fb14619ca0bcd1b8d904e7796d0834a4e8a",
+        "git_blob": "17312bd1b7121746c9f6a44c520a3ddc2f334dae",
+        "path": "reports/forge/gaussian-network-magnitude/protocol.json",
+        "sha256": "bd3ab3141ae30538667bfe43d3eebfce38124038cdc138e1159fb4ee77b43f59",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/c4627fb14619ca0bcd1b8d904e7796d0834a4e8a/reports/forge/gaussian-network-magnitude/protocol.json"
+      },
+      "reports/forge/gaussian-network-magnitude/provenance.json": {
+        "archive_commit": "c4627fb14619ca0bcd1b8d904e7796d0834a4e8a",
+        "git_blob": "ba041eca87d08710a4da61073f8efc76738e5ff4",
+        "path": "reports/forge/gaussian-network-magnitude/provenance.json",
+        "sha256": "b679dda1b3ab5165c0caf654b3cd8239ed8d664b7700072dd42f29a8550aa1da",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/c4627fb14619ca0bcd1b8d904e7796d0834a4e8a/reports/forge/gaussian-network-magnitude/provenance.json"
+      },
+      "reports/forge/gaussian-network-magnitude/restore-proof.json": {
+        "archive_commit": "c4627fb14619ca0bcd1b8d904e7796d0834a4e8a",
+        "git_blob": "d90be4ac2e8d69629d4be70319a56f8948ce9505",
+        "path": "reports/forge/gaussian-network-magnitude/restore-proof.json",
+        "sha256": "3d750c11aa70b83fe5bb6a785851613c8214ab410b74d37443de4d6da45dc1c1",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/c4627fb14619ca0bcd1b8d904e7796d0834a4e8a/reports/forge/gaussian-network-magnitude/restore-proof.json"
+      },
+      "reports/forge/gaussian-network-magnitude/results.json": {
+        "archive_commit": "c4627fb14619ca0bcd1b8d904e7796d0834a4e8a",
+        "git_blob": "6d2eee5590baeccdc840f0d945cda72757c1b420",
+        "path": "reports/forge/gaussian-network-magnitude/results.json",
+        "sha256": "9f20c38a041a78f466ff165d804b5eacf6f4334f71d8805a62219bf1937131d5",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/c4627fb14619ca0bcd1b8d904e7796d0834a4e8a/reports/forge/gaussian-network-magnitude/results.json"
+      },
+      "reports/forge/gaussian-network-magnitude/verification.json": {
+        "archive_commit": "c4627fb14619ca0bcd1b8d904e7796d0834a4e8a",
+        "git_blob": "79d4a872b80e37f31b83f68261bd13b5101670f3",
+        "path": "reports/forge/gaussian-network-magnitude/verification.json",
+        "sha256": "e85c67b7071b1bcadd6f74576fa326e2c721ccddebe5abd14b0a199f7882aeaf",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/c4627fb14619ca0bcd1b8d904e7796d0834a4e8a/reports/forge/gaussian-network-magnitude/verification.json"
+      }
+    },
+    "initializer": "public deterministic initializer; exact initial model/optimizer/RNG and prior state hashes pinned in protocol.json and verification.json",
+    "prior": {
+      "kind": "mog",
+      "locations": 256,
+      "sigma": 0.1,
+      "standardize": false,
+      "uniform_weights": true,
+      "update": "learned; original sampled-row unit normalization; regularizer inherited unchanged"
+    },
+    "protocol_seed": 0,
+    "protocol_sha256": "bd3ab3141ae30538667bfe43d3eebfce38124038cdc138e1159fb4ee77b43f59",
+    "raw_location": "runs/api/gaussian-network-magnitude-v1",
+    "reuse_eligible": false,
+    "sampling": "clean live public GANTrainer.sample; uniform learned MoG locations and fixed latent noise; noEMA",
+    "source_commit": "4335e2bd4806e218d0d6e544973c53078d344c1a",
+    "source_head": "c4627fb14619ca0bcd1b8d904e7796d0834a4e8a",
+    "source_pr": 320,
+    "source_pr_url": "https://github.com/255BITS/ParticleGAN/pull/320",
+    "task_budget": {
+      "checks_per_original_cadence_block": 24,
+      "gaussian_acquisition_deadline": 1000,
+      "gaussian_shift_at": 4000,
+      "ring_acquisition_deadline": 1600,
+      "samples_per_check": 4096,
+      "shift_reacquisition_deadline": 5000,
+      "shift_updates": 2000,
+      "stationary_updates": 4000
+    },
+    "trainer_delta": {
+      "alternating": "G/D spectral cap scale0.1, prior rownorm unchanged; timing alternating",
+      "extrapolation_from_past": "G/D spectral cap scale0.1, prior rownorm unchanged; timing extrapolation_from_past",
+      "simultaneous": "G/D spectral cap scale0.1, prior rownorm unchanged; timing simultaneous"
+    },
+    "verified_by_forge": false
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "archive-pr320-network-spectral-cap-c4627fb14619",
+  "record_type": "family_context",
+  "reuse": false,
+  "schema_version": 1,
+  "source": {
+    "archive_commit": "c4627fb14619ca0bcd1b8d904e7796d0834a4e8a",
+    "git_blob": "a15055949310044bcecf8dcf56ea3676dda4d6df",
+    "path": "reports/forge/gaussian-network-magnitude/README.md",
+    "sha256": "3ee45ae34491b48f704a05a235762aeb310adfe142165c1ef9fe056e8f6c5ff3",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/c4627fb14619ca0bcd1b8d904e7796d0834a4e8a/reports/forge/gaussian-network-magnitude/README.md"
+  },
+  "task_results": [],
+  "task_results_note": "Recall only. Original numerical results retain their archived source, recipe, task and protocol identities. This record fills no current task cell and carries no qualification or additional cost.",
+  "trainer_family": "bcap-dualnorm"
+}

@@ -11,7 +11,7 @@ from particlegan.recipe_schedules import apply_training_schedules, cosine_value
 
 
 def plain_recipe(**changes):
-    return Recipe(**{
+    return Recipe.from_dict({
         "name": "independently-named-baseline", "optimizer_family": "adam", "reg_arm": "a_r1r2",
         "num_particles": 8, "z_dim": 2, "batch_size": 4, "total_steps": 20,
         "standardize": False, "lr": .0002, "d_lr_mult": 1., "prior_lr_mult": 1.,
@@ -165,7 +165,7 @@ def test_default_recipe_dicts_and_components_remain_legacy_compatible():
     for name in ("ka2", "k3p", "e22"):
         recipe = get_recipe(name)
         assert not fields & recipe.to_dict().keys()
-        assert Recipe(**recipe.to_dict()) == recipe
+        assert Recipe.from_dict(recipe.to_dict()) == recipe
     renamed = plain_recipe(name="anything-the-caller-chooses")
     assert renamed.to_dict()["optimizer_family"] == "adam"
     assert renamed.beta2_end == .99 and renamed.reg_coeff_end == .1
@@ -179,7 +179,7 @@ def test_inactive_nondefault_schedule_fractions_survive_roundtrip_and_later_acti
     recipe = plain_recipe(beta2_end=None, reg_coeff_end=None, **fractions)
     packet = recipe.to_dict()
     assert all(packet[key] == value for key, value in fractions.items())
-    restored = Recipe(**packet)
+    restored = Recipe.from_dict(packet)
     assert restored == recipe
     activated = restored.replace(beta2_end=.99, reg_coeff_end=.1)
     trainer = make_trainer(activated)

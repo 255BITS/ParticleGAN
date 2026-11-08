@@ -1,5 +1,10 @@
 # GPU formulation search
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../forge/technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 The user authorizes a faster search for a better GAN formulation, starting from
 `constraints_simple_regularization` with CPU initialization and CUDA training.
 The full native GPU reference remains 16/22; no new formulation is qualified.

@@ -102,11 +102,121 @@ def _probe(recipe, name):
             "synthetic_state": True, "training_evidence": False, "measurements": measurements}
 
 
+class _PenaltyCadenceAudit:
+    """Compact observations of existing scalar state; never evaluate a model.
+
+    Hosts observe penalties both before and after the optimizer step. A passive
+    post-step hook records which applied calls that step completed, so an
+    application can be labelled with its actual one-based critic update in both
+    cases. Counters from the controller remain separate from host observations:
+    a host may report only the last of several penalty calls on a shared critic.
+    """
+    _RANGES = {"s_thermal": "_thermal_scale", "ema_residual": "ema_residual",
+               "ema_data_scale": "ema_data_scale"}
+
+    def __init__(self, recipe, optimizer):
+        self.recipe, self.optimizer = recipe, optimizer
+        self.resets = -1
+        self.reset("attachment")
+        self._step_hook = optimizer.register_step_post_hook(self._after_step)
+        record = getattr(optimizer, "record", None)
+        if record is not None:
+            self._load_record = record.load_state_dict
+            record.load_state_dict = self._after_record_load
+
+    def _counter(self, name):
+        value = getattr(getattr(self.optimizer, "record", None), name, None)
+        # Do not call item(), coerce tensors, or add device synchronization.
+        return value if type(value) is int and value >= 0 else None
+
+    def reset(self, reason):
+        """Start a local span; restored lifetime counters are never new calls."""
+        self.resets += 1
+        self.start_reason = reason
+        self.start_steps = self._counter("observed_steps")
+        self.start_calls = self._counter("calls")
+        self.completed_calls = self.start_calls
+        self.observations = dict(calls=0, applied=0, skipped=0, unavailable=0)
+        self.first_application = self.last_application = None
+        self.unlabelled_applications = 0
+        self.phases = {}
+        self.ranges = {name: dict(count=0, min=None, max=None, last=None,
+                                  unavailable=0, nonfinite=0)
+                       for name in self._RANGES}
+
+    def _after_step(self, optimizer, args, kwargs):
+        self.completed_calls = self._counter("calls")
+
+    def _after_record_load(self, state):
+        # The public optimizers restore their controller after Torch's own
+        # optimizer post-load hooks. Observe the actual completed restoration.
+        result = self._load_record(state)
+        self.reset("controller_state_restored")
+        return result
+
+    def observe(self, stats):
+        self.observations["calls"] += 1
+        applied = stats.get("applied")
+        status = "applied" if applied is True else "skipped" if applied is False else "unavailable"
+        self.observations[status] += 1
+        if applied is True:
+            steps, calls = self._counter("observed_steps"), self._counter("calls")
+            update = None
+            if steps is not None and calls is not None and self.completed_calls is not None:
+                if calls > self.completed_calls:  # Observed before its optimizer step.
+                    update = steps + 1
+                elif calls == self.completed_calls and steps > 0:
+                    update = steps  # Observed after its optimizer step.
+            if update is None:
+                self.unlabelled_applications += 1
+            else:
+                if self.first_application is None:
+                    self.first_application = update
+                self.last_application = update
+        phase = stats.get("phase")
+        if isinstance(phase, str):
+            self.phases[phase] = self.phases.get(phase, 0) + 1
+        record = getattr(self.optimizer, "record", None)
+        for name, attribute in self._RANGES.items():
+            value = stats.get(name, getattr(record, attribute, None))
+            row = self.ranges[name]
+            if type(value) not in (int, float):
+                row["unavailable"] += 1
+            elif not math.isfinite(value):
+                row["nonfinite"] += 1
+            else:
+                row["count"] += 1
+                row["min"] = value if row["min"] is None else min(row["min"], value)
+                row["max"] = value if row["max"] is None else max(row["max"], value)
+                row["last"] = value
+
+    def receipt(self):
+        steps, calls = self._counter("observed_steps"), self._counter("calls")
+        def delta(start, end):
+            return end - start if start is not None and end is not None and end >= start else None
+        return dict(schema_version=1, scope="audit_window", start_reason=self.start_reason,
+            resets=self.resets, update_clock="one_based_critic_optimizer_update",
+            configured=dict(k=self.recipe.reg_every, base_coefficient=self.recipe.reg_coeff,
+                effective_coefficient=self.recipe.reg_coeff * self.recipe.reg_every,
+                coefficient_scope="initial_recipe_before_any_schedule",
+                scheduled_end_base_coefficient=self.recipe.reg_coeff_end),
+            observations=deepcopy(self.observations),
+            optimizer=dict(observed_steps_start=self.start_steps, observed_steps_end=steps,
+                observed_steps_in_window=delta(self.start_steps, steps),
+                applied_record_calls_start=self.start_calls, applied_record_calls_end=calls,
+                applied_record_calls_in_window=delta(self.start_calls, calls)),
+            first_application_update=self.first_application,
+            last_application_update=self.last_application,
+            application_updates_unavailable=self.unlabelled_applications,
+            phase_counts=deepcopy(self.phases), ranges=deepcopy(self.ranges))
+
+
 class MechanismAudit:
     """Instance-local observation; wrapped methods return the original result."""
     def __init__(self, recipe, critic_optimizer, generator_optimizers):
         self.recipe = recipe
         self.critic_optimizer = critic_optimizer
+        self.penalty_cadence = _PenaltyCadenceAudit(recipe, critic_optimizer)
         self.rows = {name: dict(requested=False, enabled=False, calls=0, eligible=0, applied=0)
                      for name in NAMES}
         penalty = self.rows["critic_penalty"]
@@ -154,6 +264,8 @@ class MechanismAudit:
         mechanism.begin = begin
 
     def observe_penalty(self, stats):
+        stats = stats if isinstance(stats, dict) else {}
+        self.penalty_cadence.observe(stats)
         penalty = self.rows["critic_penalty"]
         penalty["calls"] += 1
         applied = stats.get("applied") is True
@@ -188,7 +300,8 @@ class MechanismAudit:
                 calls=steps, eligible=steps, applied=steps,
                 reason='Actual original-training-panel finite cap checked on every critic update',
                 stats=deepcopy(stats))
-        return {"schema_version": 1, "mechanisms": rows}
+        return {"schema_version": 1, "mechanisms": rows,
+                "penalty_cadence": self.penalty_cadence.receipt()}
 
 
 def mechanism_blockers(audit):

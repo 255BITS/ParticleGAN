@@ -1,0 +1,33 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "mode_hold"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "ring_hold"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 2,
+      "qualification_tier": 1,
+      "task": "ring_extension"
+    }
+  ],
+  "eligibility": {},
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "bispf_throughput_endurance",
+  "policy_change_reason": "Explicit source-bound preservation diagnostic for the two incumbent numerical endurance passes under unchanged task protocols. Current revision12 restores four failed Tier2 requirements, so this independent diagnostic grants no current-policy qualification and changes no ordinary gate. Passing own mode_hold evidence remains mandatory.",
+  "ranking": {
+    "cost_separate": true,
+    "policy": "diagnostic_outcomes_only"
+  },
+  "revision": 1,
+  "schema_version": 1
+}

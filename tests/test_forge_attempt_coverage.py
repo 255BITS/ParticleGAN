@@ -24,7 +24,11 @@ def test_coverage_retains_qualified_numerator_and_original_missing_counts():
     before = deepcopy(tasks)
     result = _count(tasks)
     assert result["passed"] == 1 and result["not_run"] == 3 and result["incompatible"] == 1
-    assert score(result) == "1/5 (1 not run, 1 incompatible, 1 blocked, 1 diagnostic attempts)"
+    # One attempt reads "1 diagnostic attempt", as "1 error" and "1 timeout" already do.
+    assert score(result) == "1/5 (1 not run, 1 incompatible, 1 blocked, 1 diagnostic attempt)"
+    tasks.append(dict(status="UNKNOWN", execution_recorded=False, run_attempt=dict(status="PASS", attempted=True)))
+    assert score(_count(tasks)) == "1/6 (1 not run, 1 incompatible, 1 blocked, 2 diagnostic attempts)"
+    tasks.pop()
     assert tasks == before
 
 
@@ -85,6 +89,9 @@ def test_checkpoint_parent_failure_remains_a_blocker_but_failed_gate_does_not():
     assert runner.dependency_blockers(job, state) == []
     job["dependencies"][0]["kind"] = "checkpoint"
     assert runner.dependency_blockers(job, state) == ["checkpoint parent parent: FAIL"]
+    job["diagnostic_continuation"] = True
+    assert runner.dependency_blockers(job, state) == [
+        "checkpoint parent parent: certified artifact binding unavailable to this attempt"]
 
 
 def test_uninterrupted_hold_cannot_be_restarted_from_a_passing_scalar(tmp_path):
@@ -179,3 +186,90 @@ def test_unbound_current_task_attempt_keeps_old_request_and_refuses_bound_replac
     atomic_json(root / "reports/forge/technique-inventory.json", publication)
     with pytest.raises(ValueError, match="cannot replace a recorded task binding"):
         prepare(root, directory)
+
+
+def test_checkpoint_repair_freezes_allowed_bytes_without_mutating_original(tmp_path):
+    from experiments.forge.checkpoint_recovery import repaired_source
+    from experiments.forge.contracts import file_hash, stable_hash
+    baseline = tmp_path / "baseline"
+    state_file = baseline / "experiments/forge/state.py"
+    state_file.parent.mkdir(parents=True)
+    state_file.write_text("# original checkpoint exporter\n")
+    model = baseline / "particlegan/recipes.py"
+    model.parent.mkdir()
+    model.write_text("# unchanged original formulation\n")
+    manifest = dict(schema_version=1, origin_commit="unused", files={
+        "experiments/forge/state.py": file_hash(state_file), "particlegan/recipes.py": file_hash(model)})
+    manifest["digest"] = stable_hash(manifest["files"])
+    current = Path(__file__).resolve().parents[1] / "experiments/forge/state.py"
+    frozen, repair = repaired_source(baseline, manifest, tmp_path / "runs", {"experiments/forge/state.py": file_hash(current)})
+    assert file_hash(frozen / "experiments/forge/state.py") == file_hash(current)
+    assert file_hash(state_file) == manifest["files"]["experiments/forge/state.py"]
+    assert file_hash(frozen / "particlegan/recipes.py") == file_hash(model)
+    assert repair["digest"] != manifest["digest"]
+    with pytest.raises(ValueError, match="cannot modify formulation sources"):
+        repaired_source(baseline, manifest, tmp_path / "runs", {"particlegan/recipes.py": file_hash(model)})
+
+
+def test_prior_ownership_repair_keeps_distribution_and_actual_recipe():
+    from experiments.forge.checkpoint_recovery import align_prior_contracts
+    parent = dict(id="parent", execution=dict(prior=dict(kind="mog", sigma=.025, standardize=False),
+                                              prior_contract="recipe_owned_v1"))
+    child = dict(id="child", execution=dict(continuation_of="parent",
+        prior=dict(kind="mog", sigma=.025, standardize=False, learnable=True)))
+    request = dict(candidate=dict(resolved_recipe=dict(prior_update="learned")), tasks=dict(parent=parent, child=child))
+    recipe = deepcopy(request["candidate"])
+    align_prior_contracts(request, ["child"])
+    assert request["candidate"] == recipe
+    assert child["execution"]["prior"] == parent["execution"]["prior"]
+    assert child["execution"]["prior_contract"] == "recipe_owned_v1"
+    assert request["task_metadata_repairs"]["child"]["original_execution"] != request["task_metadata_repairs"]["child"]["repaired_execution"]
+    child["execution"]["prior"]["learnable"] = True
+    request["candidate"]["resolved_recipe"]["prior_update"] = "frozen"
+    with pytest.raises(ValueError, match="preserve the actual learned prior"):
+        align_prior_contracts(request, ["child"])
+
+
+def test_selected_universe_keeps_held_and_removed_tasks_and_drops_plain_diagnostics():
+    note = {"explanation": "reports/forge/test-dispositions-20261015/README.md#x"}
+    views = [{"id": "counted", "assignments": [
+        {"task": "kept", "importance": "required"}, {"task": "held", "importance": "held", "hold": note},
+        {"task": "removed", "importance": "diagnostic", "removal": note},
+        {"task": "probe", "importance": "diagnostic"}]},
+        {"id": "other", "assignments": [{"task": "elsewhere", "importance": "required"}]}]
+    publication = {"rows": [{"candidate_id": "one"}], "family_progress": {"views": views, "families": [
+        {"id": "family", "current_cohort_anchor": "a", "cohorts": [{"anchor": "a", "row_index": 0,
+                                                                    "views": [{"id": "counted"}]}]}]}}
+    assert runner.selected_tasks(publication) == [("family", {"candidate_id": "one"}, ["held", "kept", "removed"])]
+
+
+def test_holding_or_removing_tests_keeps_the_committed_selected_universe():
+    publication = read_json(Path(__file__).resolve().parents[1] / "reports/forge/technique-inventory.json")
+    counted, uncounted = deepcopy(publication), deepcopy(publication)
+    for view in counted["family_progress"]["views"]:
+        for assignment in view["assignments"]:
+            if assignment["importance"] == "held" or "removal" in assignment:
+                assignment.pop("hold", None)
+                assignment.pop("removal", None)
+                assignment["importance"] = "required"
+    for view in uncounted["family_progress"]["views"]:
+        for assignment in view["assignments"]:
+            # The decided dispositions: fifteen held tests and two removed from the count.
+            if assignment["importance"] != "required":
+                continue
+            if assignment["task"] in {"ring_hold", "clockfree_audit"}:
+                assignment.update(importance="diagnostic", removal={"reason": "phase"})
+            elif assignment["task"].startswith(("vector_un", "vector_aniso", "vector_overlap", "img_b", "img_i",
+                                                "grid100", "rotated100", "staggered100", "gaussian1d_stability",
+                                                "target_shift")):
+                assignment.update(importance="held", hold={"reason": "no_global_recipe"})
+    assert counted["family_progress"]["views"] != uncounted["family_progress"]["views"]
+    universe = runner.selected_tasks(publication)
+    # View v15 appends two precision stretch tasks to the original 50-task
+    # union. The FP32 diagnostic does not enter this counted/stretch universe.
+    old = read_json(Path(__file__).resolve().parents[1] /
+                    "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json")
+    view = read_json(Path(__file__).resolve().parents[1] / "configs/forge/views/discriminator_stability.json")
+    expected = set(old["tests"]) | {"ring_hold"} | {a["task"] for a in view["assignments"] if a["importance"] == "stretch"}
+    assert universe and all(set(tasks) == expected for _, _, tasks in universe)
+    assert runner.selected_tasks(counted) == runner.selected_tasks(uncounted) == universe

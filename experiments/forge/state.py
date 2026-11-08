@@ -2,6 +2,7 @@
 import hashlib
 import json
 import math
+import struct
 
 import torch
 
@@ -24,8 +25,9 @@ def require_same_formulation(original, current):
 
 def require_consistent_rng(state):
     from .api import TRAINER_STREAM_BINDINGS
+    from .priors import prior_uses_noise_stream
     required = set(TRAINER_STREAM_BINDINGS)
-    if state["prior"]["kind"] != "mog":
+    if not prior_uses_noise_stream(state["prior"]):
         required.remove("prior_noise_generator")
     if set(state["trainer"]["streams"]) != required:
         raise ValueError("public trainer RNG checkpoint is incomplete")
@@ -80,6 +82,10 @@ def state_digest(value):
             digest.update((b"L" if isinstance(item, list) else b"U") + len(item).to_bytes(8, "big"))
             for child in item:
                 write(child)
+        elif type(item) is float and not math.isfinite(item):
+            # Policy diagnostics retain source-defined NaN/Inf sentinels.
+            # Hash their exact IEEE representation; health checks remain separate.
+            digest.update(b"F" + struct.pack("!d", item))
         elif item is None or type(item) in (str, int, float, bool):
             digest.update(b"S")
             payload = json.dumps([type(item).__name__, item], allow_nan=False).encode()

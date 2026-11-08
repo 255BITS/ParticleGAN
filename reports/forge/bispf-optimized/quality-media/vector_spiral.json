@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "377458f39de79d90b675048f609724ee89676a855db285aa0b3b326a61e923cb",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "e08b9b397325577faa821cf272b1099e1061f7037a523c3297293d3b4d85eb53",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/01c3537f395745d2aa12970ed46509f9/observed-samples.pt": "4efcbf11f9e947cf0a3e15ab544266a4436fba3675569c051588f35724422f1f"
+  },
+  "task_id": "vector_spiral"
+}

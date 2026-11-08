@@ -10,6 +10,9 @@ from types import SimpleNamespace
 from typing import NamedTuple
 import torch
 
+from ._stats import adam_moment_states
+from .drift_variants import drift_features
+
 
 class _LatentApplication(NamedTuple):
     radius: torch.Tensor
@@ -29,24 +32,25 @@ class DataDriftController:
 
     def __init__(self, variant="dv1"):
         self.variant = variant
-        if variant in ("dv10", "dv11", "dv12"):
+        features = drift_features(variant)
+        if features.latent_bandwidth:
             self.latent_bandwidth = None
-        if variant == "dv11":
+        if features.support_trust:
             self.support_mean = self.support_variance = None
             self.support_score = 0.0
             self.support_trust = 1.0
-        if variant == "dv12":
+        if features.local_support:
             self.latent_applications = []
         self.mobility = 1.0
         self.game_trust = 1.0
         self.game_ratio = 1.0
         self.payoff_error = 0.0
-        if variant in ("dv8", "dv9"):
+        if features.pair:
             self.pair_mean = self.pair_variance = None
             self.pair_score = self.pair_drive = 0.0
-        if variant in ("dv2", "dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
+        if features.data_memory:
             self.data_memory = 0.0
-        if variant in ("dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
+        if features.fast_reference:
             self.fast_reference = None
             self.fast_mean_variance = self.slow_mean_variance = self.mean_covariance = None
         self.alignment = 0.0
@@ -59,6 +63,11 @@ class DataDriftController:
         self.updates = 0
         self.reopens = 0
         self.closed = False
+
+    @property
+    def features(self):
+        """``DriftFeatures`` of ``variant`` (derived, never checkpointed)."""
+        return drift_features(self.variant)
 
     @property
     def latent_applications(self):
@@ -139,7 +148,7 @@ class DataDriftController:
         Running coordinate spread makes the width follow ordinary prior learning
         without an acquisition clock or an evaluator horizon.
         """
-        if self.variant not in ("dv10", "dv11", "dv12"):
+        if not self.features.latent_bandwidth:
             return
         if hasattr(prior, "log_mass"):
             width = getattr(prior, "_mass_width", None)
@@ -154,12 +163,12 @@ class DataDriftController:
             self.latent_bandwidth.lerp_(width, .01)
 
     def perturb_latent(self, latent, stream, prior=None, record=False):
-        if self.variant not in ("dv10", "dv11", "dv12"):
+        if not self.features.latent_bandwidth:
             return latent
         noise = torch.randn(latent.shape, device=latent.device, dtype=latent.dtype, generator=stream)
-        trust = self.support_trust if self.variant == "dv11" else 1.
+        trust = self.support_trust if self.features.support_trust else 1.
         displacement = self.latent_bandwidth * trust * noise
-        if self.variant == "dv12":
+        if self.features.local_support:
             if prior is None:
                 raise ValueError("local support requires the corresponding prior")
             with torch.no_grad():
@@ -194,7 +203,7 @@ class DataDriftController:
     @torch.no_grad()
     def observe_support(self, generator, critic, latent, sigma_out, stream):
         """Probe full latent width even while its applied width is suppressed."""
-        if self.variant != "dv11":
+        if not self.features.support_trust:
             return
         modes = [(m, m.training) for root in (generator, critic) for m in root.modules()]
         try:
@@ -238,7 +247,7 @@ class DataDriftController:
         var = features.var(0, unbiased=False).clamp_min(1e-6)
         if self.reference is None:
             self.reference, self.variance = mean.clone(), var.clone()
-        if self.variant in ("dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
+        if self.features.fast_reference:
             batch_variance = var / len(x)
             if self.fast_reference is None:
                 self.fast_reference = mean.clone()
@@ -269,13 +278,13 @@ class DataDriftController:
         return self._advance_mobility()
 
     def _advance_mobility(self):
-        if self.variant in ("dv2", "dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
+        if self.features.data_memory:
             memory_speed = .05 if self.data_drive > self.data_memory else .005
             self.data_memory += memory_speed * (self.data_drive - self.data_memory)
         target = max(self.data_drive, min(1., max(0., self.alignment / .2)))
-        if self.variant in ("dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
+        if self.features.payoff:
             target = max(self.data_drive, min(1., self.payoff_error ** 2))
-        if self.variant == "dv8":
+        if self.features.pair_target:
             target = max(target, self.pair_drive)
         speed = .05 if target > self.mobility else .005
         self.mobility += speed * (target - self.mobility)
@@ -288,13 +297,13 @@ class DataDriftController:
         return self.current_scales()
 
     def current_scales(self):
-        prior_mobility = max(self.mobility, self.pair_drive) if self.variant == "dv9" else self.mobility
+        prior_mobility = max(self.mobility, self.pair_drive) if self.features.pair_prior else self.mobility
         return ((.01 + .99 * self.mobility) * self.game_trust,
                 (.05 + .95 * prior_mobility) * self.game_trust)
 
     @torch.no_grad()
     def observe_pair(self, real, fake):
-        if self.variant not in ("dv8", "dv9"):
+        if not self.features.pair:
             return
         def features(x):
             u = ((x.flatten(1) - self.location) / self.scale) @ self.projection
@@ -313,22 +322,22 @@ class DataDriftController:
 
     def critic_scale(self):
         # Separate game balance acts even before the KA2 reference exists.
-        return 1. / (1. + self.payoff_error ** 2) if self.variant in ("dv7", "dv8", "dv9", "dv10", "dv11", "dv12") else 1.
+        return 1. / (1. + self.payoff_error ** 2) if self.features.critic_balance else 1.
 
     def observe_game(self, record):
-        if self.variant not in ("dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
+        if not self.features.game_trust:
             return
         ratio = 1.0
         if record.sur_base and record.last_sur is not None:
             ratio = record.last_sur / record.sur_base
         self.game_ratio = ratio
-        evidence = self.data_drive if self.variant in ("dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12") else self.data_memory
+        evidence = self.data_drive if self.features.drive_evidence else self.data_memory
         unexplained = max(0., ratio - 1.) * (1. - evidence)
         self.game_trust = 1. / (1. + unexplained * unexplained)
 
     @torch.no_grad()
     def observe_generator(self, generator, loss_gan=None, loss_discriminator=None):
-        if self.variant in ("dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
+        if self.features.payoff:
             error = max(0., float(loss_gan - loss_discriminator) / math.log(2.))
             self.payoff_error += .02 * (error - self.payoff_error)
         values = [p.grad.detach().flatten() for p in generator.parameters() if p.grad is not None]
@@ -342,7 +351,7 @@ class DataDriftController:
         self.previous_gradient = gradient.clone()
 
     def diagnostics(self):
-        return {**({"latent_applications": self.latent_applications} if self.variant == "dv12" else {}), **({"support_score": self.support_score, "support_trust": self.support_trust, "applied_latent_bandwidth": None if self.latent_bandwidth is None else (self.latent_bandwidth * self.support_trust).tolist()} if self.variant == "dv11" else {}), **({"latent_bandwidth": self.latent_bandwidth.tolist()} if self.variant in ("dv10", "dv11", "dv12") and self.latent_bandwidth is not None else {}), **({"pair_score": self.pair_score, "pair_drive": self.pair_drive} if self.variant in ("dv8", "dv9") else {}), **({"data_memory": self.data_memory} if self.variant in ("dv2", "dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12") else {}), **{k: getattr(self, k) for k in ("payoff_error", "game_trust", "game_ratio", "variant", "mobility", "alignment", "data_score", "data_drive", "last_cosine", "updates", "reopens", "closed")}}
+        return {**({"latent_applications": self.latent_applications} if self.features.local_support else {}), **({"support_score": self.support_score, "support_trust": self.support_trust, "applied_latent_bandwidth": None if self.latent_bandwidth is None else (self.latent_bandwidth * self.support_trust).tolist()} if self.features.support_trust else {}), **({"latent_bandwidth": self.latent_bandwidth.tolist()} if self.features.latent_bandwidth and self.latent_bandwidth is not None else {}), **({"pair_score": self.pair_score, "pair_drive": self.pair_drive} if self.features.pair else {}), **({"data_memory": self.data_memory} if self.features.data_memory else {}), **{k: getattr(self, k) for k in ("payoff_error", "game_trust", "game_ratio", "variant", "mobility", "alignment", "data_score", "data_drive", "last_cosine", "updates", "reopens", "closed")}}
 
     def state_dict(self):
         return deepcopy({("latent_applications" if name == "_latent_application_records" else name):
@@ -353,7 +362,7 @@ class DataDriftController:
         keys = {"latent_applications" if name == "_latent_application_records" else name for name in self.__dict__}
         if not isinstance(state, dict) or set(state) != keys or state["variant"] != self.variant:
             raise ValueError("incompatible continuous controller state")
-        if self.variant in ("dv10", "dv11", "dv12"):
+        if self.features.latent_bandwidth:
             bandwidth = state["latent_bandwidth"]
             current = self.latent_bandwidth
             if bandwidth is not None and (not isinstance(bandwidth, torch.Tensor)
@@ -717,7 +726,7 @@ class SequentialSettleTest(SettleTest):
         one host sync."""
         nb = len(self.r_b)
         if not (self.r_b or self.r_2b):
-            return torch.empty(0, dtype=torch.float64), torch.empty(0, dtype=torch.float64)
+            return torch.empty(0, dtype=torch.float64, device='cpu'), torch.empty(0, dtype=torch.float64, device='cpu')
         values = torch.stack(self.r_b + self.r_2b)
         if self.rows is not None:
             if self.exclude is not None:
@@ -763,8 +772,8 @@ class SequentialSettleTest(SettleTest):
         return dict(verdict=(1 if t > crit else -1 if t < -crit else 0), n=n, mean=mean, t=t,
                     log_bf=float("nan"))
 
-    def _conclude(self, sb, s2, tested_b, step, early):
-        """Map the two scale verdicts to a decision (table rule of SettleTest) and act on it."""
+    def _table_decision(self, sb, s2, tested_b):
+        """``(vb, v2, decision)``: the SettleTest table rule, release rule and descent hold."""
         vb, v2 = sb["verdict"], s2["verdict"]
         v2 = 0 if v2 is None else v2
         if vb is None:
@@ -787,37 +796,53 @@ class SequentialSettleTest(SettleTest):
             decision = "inconclusive"
         if decision == "stationary" and self.hold_descent:
             decision = "held"           # off-support mass above the FDR budget: descent is deferred
-        self.counts[decision] += 1
-        if early:
-            self.counts["early"] += 1
-        if decision in ("stationary", "drift"):
-            sign = -1 if decision == "stationary" else 1
-            evidence_scale = 2 * tested_b if vb != sign and v2 == sign else tested_b
-            at_ceiling = self.s == 1.0
-            self.s = self.s * self.GAMMA if sign < 0 else min(1.0, self.s / self.GAMMA)
-            if decision == "drift" and at_ceiling and self.rows is not None:
-                self.b *= 4 if v2 == 1 else 2
-            elif self.last_decisive == -sign and self.last_decisive_scale == evidence_scale:
-                self.counts["reversal"] += 1
-                self.b = 2 * evidence_scale
-            elif vb == 0 and v2 != 0:
-                self.b = max(self.B0, self.b)
-            else:
-                self.b = max(self.B0, self.b / 2)
-            self.last_decisive = sign
-            self.last_decisive_scale = evidence_scale
-            if sign < 0:
-                self.b_anchor = evidence_scale
-        elif decision in ("mixed", "inconclusive"):
-            self.b *= 2
+        return vb, v2, decision
+
+    def _apply_decisive(self, decision, vb, v2, tested_b):
+        """Move s and b for an accepted STATIONARY (-1) or DRIFT (+1) decision; return its sign."""
+        sign = -1 if decision == "stationary" else 1
+        evidence_scale = 2 * tested_b if vb != sign and v2 == sign else tested_b
+        at_ceiling = self.s == 1.0
+        self.s = self.s * self.GAMMA if sign < 0 else min(1.0, self.s / self.GAMMA)
+        if decision == "drift" and at_ceiling and self.rows is not None:
+            self.b *= 4 if v2 == 1 else 2
+        elif self.last_decisive == -sign and self.last_decisive_scale == evidence_scale:
+            self.counts["reversal"] += 1
+            self.b = 2 * evidence_scale
+        elif vb == 0 and v2 != 0:
+            self.b = max(self.B0, self.b)
+        else:
+            self.b = max(self.B0, self.b / 2)
+        self.last_decisive = sign
+        self.last_decisive_scale = evidence_scale
+        if sign < 0:
+            self.b_anchor = evidence_scale
+        return sign
+
+    def _record_decision(self, sb, s2, vb, v2, tested_b, step, early, decision):
         self.last = dict(decision=decision, step=step, tested_b=tested_b, verdict_b=vb, verdict_2b=v2,
                          evidence_scale=(2 * tested_b if vb == 0 and v2 != 0 else tested_b),
                          t_b=sb["t"], t_2b=s2["t"], mean_r_b=sb["mean"], mean_r_2b=s2["mean"],
                          n_b=sb["n"], n_2b=s2["n"], early=bool(early),
                          log_bf_b=sb["log_bf"], log_bf_2b=s2["log_bf"])
         self.log = (self.log + [[step, decision, self.s, self.b]])[-8:]
+
+    def _close_window(self):
         self.r_b, self.r_2b, self.blocks = [], [], []
         self.blocks_in_window = 0
+
+    def _conclude(self, sb, s2, tested_b, step, early):
+        """Map the two scale verdicts to a decision (table rule of SettleTest) and act on it."""
+        vb, v2, decision = self._table_decision(sb, s2, tested_b)
+        self.counts[decision] += 1
+        if early:
+            self.counts["early"] += 1
+        if decision in ("stationary", "drift"):
+            self._apply_decisive(decision, vb, v2, tested_b)
+        elif decision in ("mixed", "inconclusive"):
+            self.b *= 2
+        self._record_decision(sb, s2, vb, v2, tested_b, step, early, decision)
+        self._close_window()
         return decision
 
     def _look(self, step):
@@ -990,12 +1015,12 @@ class OptimizerSurprise:
     @staticmethod
     @torch.no_grad()
     def group_q(optimizer, group):
+        # Not _stats.adam_surprise_ratio: this is the elementwise mean of
+        # |g| / (sqrt(v_hat) + eps) (Adam's own step / lr at beta1 = 0), not a
+        # ratio of RMS values, so the two statistics differ numerically.
         beta2 = group["betas"][1]
         total, count = None, 0
-        for p in group["params"]:
-            st = optimizer.state.get(p)
-            if p.grad is None or not st or "exp_avg_sq" not in st:
-                continue
+        for p, st in adam_moment_states(optimizer, group):
             t = float(st["step"])
             if t < 1:
                 continue
@@ -1010,7 +1035,7 @@ class OptimizerSurprise:
         if q is not None:
             self.pending[key] = q
 
-    def decide(self, step=None, *, guard=None, network=None):
+    def decide(self, step=None, *, guard=None, network=None, loss_surprised=False):
         """Fold this update's observations in; return True when a re-open fires."""
         if not self.pending:
             return False
@@ -1034,7 +1059,7 @@ class OptimizerSurprise:
         self.last_ratio = ratio
         self.last_ratios = {key: math.exp(value) for key, value in zip(keys, logs)}
         calm = ratio < self.CALM
-        permitted = True if guard is None else guard.observe(ratio, self.CALM, step, network)
+        permitted = True if guard is None else guard.observe(ratio, self.CALM, step, network, loss_surprised=loss_surprised)
         self.since_calm = 0 if calm else self.since_calm + 1
         if self.since_fire is not None:
             self.since_fire += 1
@@ -1093,7 +1118,7 @@ class SettledReopenGuard:
         self.excursion = None
         self.epoch_rebases = 0
 
-    def observe(self, ratio, calm_level, step, network):
+    def observe(self, ratio, calm_level, step, network, loss_surprised=False):
         network = {} if network is None else network
         if ratio < calm_level:
             self.calm_network = deepcopy(network)
@@ -1102,7 +1127,7 @@ class SettledReopenGuard:
         if self.excursion is None:
             witness = {**self.calm_network, **network}
             self.excursion = {"step": step, "network": deepcopy(witness)}
-        return bool(self.excursion["network"])
+        return bool(self.excursion["network"]) or loss_surprised
 
     def after_fire(self):
         # A re-open restores every ladder to its ceiling. It supplies no
@@ -1165,3 +1190,129 @@ class SettledReopenGuard:
         self.check_state(state, roles=roles, completed_steps=completed_steps,
                          anchor_started=anchor_started)
         self.__dict__.update(deepcopy({key: value for key, value in state.items() if key != "schema"}))
+
+
+class LossSurprise:
+    """Critic loss surprise detector for abrupt distribution shift recovery.
+
+    Tracks short-term running loss L_fast against a calm equilibrium baseline
+    L_calm with variance var_calm. While calm (z < 1.5), the baseline adapts
+    slowly to track the game's equilibrium loss. When an abrupt distribution
+    shift occurs, critic loss jumps, producing z = (L_fast - L_calm) / sigma_calm > 3.5.
+    A confirmation streak of 2 consecutive steps triggers a re-open, while the
+    baseline is frozen during excursions. The detector remains quiet at equilibrium
+    and stays disarmed for a cooldown period after firing.
+    """
+
+    ALPHA_FAST = 0.5
+    ALPHA_SLOW = 0.01
+    Z_THRESH = 3.5
+    Z_CALM = 1.5
+    CONFIRMATION_STREAK = 2
+    COOLDOWN = 16
+    MIN_VAR = 5e-6
+
+    def __init__(self):
+        self.fast = None
+        self.calm = None
+        self.var_calm = 0.01
+        self.streak = 0
+        self.armed = True
+        self.since_calm = 0
+        self.since_fire = None
+        self.fires = 0
+        self.last_z = 0.0
+        self.pending_loss = None
+
+    def observe(self, loss: float):
+        if not math.isfinite(loss):
+            return
+        self.pending_loss = float(loss)
+
+    def decide(self, step=None, *, guard=None):
+        if self.pending_loss is None:
+            return False
+        loss = self.pending_loss
+        self.pending_loss = None
+
+        if self.calm is None:
+            self.calm = loss
+            self.fast = loss
+            self.var_calm = max(self.MIN_VAR, 0.01)
+            return False
+
+        self.fast += self.ALPHA_FAST * (loss - self.fast)
+        sigma = math.sqrt(max(self.MIN_VAR, self.var_calm))
+        z = (self.fast - self.calm) / sigma
+        self.last_z = z
+
+        calm = z < self.Z_CALM
+        self.since_calm = 0 if calm else self.since_calm + 1
+        if self.since_fire is not None:
+            self.since_fire += 1
+
+        witness_roles = set()
+        if guard is not None:
+            for witness in getattr(guard, "calm_network", {}).values():
+                if isinstance(witness, dict) and "role" in witness:
+                    witness_roles.add(witness["role"])
+            excursion = getattr(guard, "excursion", None)
+            if isinstance(excursion, dict) and isinstance(excursion.get("network"), dict):
+                for witness in excursion["network"].values():
+                    if isinstance(witness, dict) and "role" in witness:
+                        witness_roles.add(witness["role"])
+        permitted = not (
+            guard is not None
+            and getattr(guard, "ka2_anchor_started", None) is False
+            and witness_roles == {"critic"}
+        )
+
+        if calm or not self.armed or not permitted:
+            delta = loss - self.calm
+            self.calm += self.ALPHA_SLOW * delta
+            self.var_calm = (1.0 - self.ALPHA_SLOW) * self.var_calm + self.ALPHA_SLOW * (delta * delta)
+            self.var_calm = max(self.MIN_VAR, self.var_calm)
+
+        fire = False
+        if self.armed:
+            if permitted and z > self.Z_THRESH:
+                self.streak += 1
+            else:
+                self.streak = 0
+
+            if self.streak >= self.CONFIRMATION_STREAK:
+                fire = True
+                self.fires += 1
+                self.armed = False
+                self.streak = 0
+                self.since_fire = 0
+                self.calm = self.fast
+                if guard is not None:
+                    guard.after_fire()
+        elif calm and self.since_fire is not None and self.since_fire >= self.COOLDOWN:
+            self.armed = True
+
+        return fire
+
+    @property
+    def is_surprised(self):
+        return self.last_z > self.Z_THRESH or self.streak > 0
+
+    def state_dict(self):
+        return deepcopy({
+            "fast": self.fast,
+            "calm": self.calm,
+            "var_calm": self.var_calm,
+            "streak": self.streak,
+            "armed": self.armed,
+            "since_calm": self.since_calm,
+            "since_fire": self.since_fire,
+            "fires": self.fires,
+            "last_z": self.last_z,
+            "pending_loss": self.pending_loss,
+        })
+
+    def load_state_dict(self, state):
+        if not isinstance(state, dict):
+            raise ValueError("incompatible loss-surprise state")
+        self.__dict__.update(deepcopy(state))

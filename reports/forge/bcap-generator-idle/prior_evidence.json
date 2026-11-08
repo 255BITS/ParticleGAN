@@ -1,0 +1,27 @@
+{
+  "purpose": "Motivation-only links to the closed PRs behind this comparison; neither was scored under this protocol.",
+  "pull_requests": [
+    {
+      "claim": "Skip the G and prior step when the batch-mean critic gap is within generator_idle_se standard errors of zero; planned value 1.0.",
+      "head_branch": "cursor/generator-idle-constant-lr-427d",
+      "head_sha": "9c9a220d82396d1b3e10e9524188517b9f3a1678",
+      "number": 366,
+      "repository": "255BITS/ParticleGAN",
+      "scored": false,
+      "state": "CLOSED",
+      "title": "Opt-in generator idle rule for constant-LR stay (unscored)"
+    },
+    {
+      "claim": "Constant-LR stay test on develop 1ababbb with anneal forced off: suite 13/22, priority 2/8, pre-shift stay 81/120, long hold not converged.",
+      "cohort": "toy100 batch-feature-init no-anneal A6000 note; different recipe and protocol",
+      "head_branch": "cursor/batch-feature-zero-no-anneal-note-fca5",
+      "head_sha": "09de76e5cb744ebd71d94e260e237f5a049ff5bb",
+      "number": 279,
+      "repository": "255BITS/ParticleGAN",
+      "scored": false,
+      "state": "CLOSED",
+      "title": "Note the constant-LR stay failure"
+    }
+  ],
+  "schema_version": 1
+}

@@ -384,7 +384,7 @@ class AEFixture:
     def __init__(self,case,seed,max_steps):
         self.case,self.limit=case,case["default_steps"] if max_steps is None else max_steps
         if type(self.limit) is not int or not 0<self.limit<=case["default_steps"]: raise ValueError("invalid execution cap")
-        self.recipe=get_recipe("ae_gan",total_steps=250,num_particles=12,z_dim=2,batch_size=64,lr=.002,input_noise_std=0.,output_noise_std=0.,sigma_rel=.025)
+        self.recipe=get_recipe("ae_gan",trainer=case["default_recipe"],total_steps=250,num_particles=12,z_dim=2,batch_size=64,lr=.002,input_noise_std=0.,output_noise_std=0.,sigma_rel=.025)
         with construction_rng(seed, "cpu"):
             self.E=nn.Sequential(nn.Linear(2,32),nn.LeakyReLU(.2),nn.Linear(32,4))
             self.G=nn.Sequential(nn.Linear(2,32),nn.LeakyReLU(.2),nn.Linear(32,2))

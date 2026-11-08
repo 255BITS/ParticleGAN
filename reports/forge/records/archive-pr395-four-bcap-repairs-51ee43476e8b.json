@@ -1,0 +1,332 @@
+{
+  "candidate_id": "archive:pr395:four-bcap-repairs",
+  "candidate_revision": "51ee43476e8bfa64f0eb55f630fe3b0086dddd9b",
+  "conclusion": "No global winner. Fresh control passes 6/6 required Tier1 and 9/21 Tier2. Late annealing is 5/6, half G/E motion 4/6, prior smoothing .01 5/6; all 21 Tier2 cells for each are BLOCKED/unmeasured, not measured failures. Weak critic damping .05 passes 6/6 and 8/21, adding zero passes and losing the original word-hold gate. That legacy hold uses unequal acquired prefixes (control 834->4834, hybrid 1667->5667), so it is a separate original-gate cohort, not a same-clock causal comparison; other 20 Tier2 tasks match complete budgets/consumed streams and retain the same eight passes. Gaussian hybrid stationary/shift checks improve 2->15/72 and 0->3/24, but full gates fail. 77 paid attempts, 6773.287376 seconds, zero execution retries. Stop these four revisions; current selected recipe, qualifications and gates remain unchanged.",
+  "cross_cohort_pooling": false,
+  "evidence_scope": "historical",
+  "goal": "discriminator_stability",
+  "hypothesis": "Four fixed global BCAP recipe changes must retain all Tier1 gates and every matched control Tier2 pass while adding at least one complete Tier2 repair.",
+  "lifecycle": "concluded",
+  "mechanism_class": "four_bcap_repairs",
+  "next_action": "Retain the archived findings and original source; stop these exact revisions. Any successor needs its own substantive hypothesis, frozen protocol and finite budget. No training or default adoption follows from this archive.",
+  "provenance": {
+    "accounting": {
+      "charged_seconds": 6773.287376104054,
+      "execution_retries": 0,
+      "paid_attempts": 77
+    },
+    "archive_status": "recall_only_unmerged_branch",
+    "arm_bindings": {
+      "control": {
+        "candidate_id": "bcap-tier2-round6-control-v1",
+        "candidate_revision": "bd5a3bd25bb702a6d2602883df4c1644d3605ed373fee205e54ac15abd12f58b",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+        "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+        "study_id": "bcap-tier2-round6-control-v1-study"
+      },
+      "half_network": {
+        "candidate_id": "bcap-tier2-round6-half-network-v1",
+        "candidate_revision": "3084339840eabf288376d3896a23e6586a8eaa4f51e6d914fa32d9f0fe2320f4",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+        "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+        "study_id": "bcap-tier2-round6-half-network-v1-study"
+      },
+      "late_anneal": {
+        "candidate_id": "bcap-tier2-round6-late-anneal-v1",
+        "candidate_revision": "1c462fc648ce2cbbdbe7711f2dbe7932e4c6e7cb52bf582bd58edbd00e820e24",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+        "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+        "study_id": "bcap-tier2-round6-late-anneal-v1-study"
+      },
+      "prior_smoothing": {
+        "candidate_id": "bcap-tier2-round6-prior-smoothing-v1",
+        "candidate_revision": "72331ecdefe3524174489d502899cbae201bdd196ce0c465883d235bbd3a49b7",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+        "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+        "study_id": "bcap-tier2-round6-prior-smoothing-v1-study"
+      },
+      "zero_damping": {
+        "candidate_id": "bcap-tier2-round6-zero-damping-v1",
+        "candidate_revision": "9b869d8e95bc0ea145098ba5a3e6059fb135050b033cab71695ba625e51dccc0",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+        "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+        "study_id": "bcap-tier2-round6-zero-damping-v1-study"
+      }
+    },
+    "budget": {
+      "campaign_ceiling_seconds": 220000,
+      "full_reservation_seconds": 215100,
+      "no_scientific_retries": true,
+      "per_arm_reservation_seconds": 43020
+    },
+    "bulk_archive": {
+      "bulk_in_git": false,
+      "executed_terminal_queue_state_sha256": "7fb01e50d4d452be8dc6752eb0c06865cf266992dbde80c63fb741a1fed7aa8d",
+      "original_file_manifest": {
+        "bytes": 1128396375,
+        "files": 2832,
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/original-files.json",
+        "sha256": "ce1a43e0d68eb1c8696e9ee66842c212d4b82a2a2ab6336900ae526bd0b32612"
+      },
+      "paid_attempts": 77,
+      "restoration": "Verify original-files.json and its members; restore attempt-envelopes under reports/forge/attempts and external queue artifacts at their recorded absolute root. Use executed-terminal-queue-state.json as queue/queue/state.json for the pre-readout publication. Check out the executed source commit for run.py publish; no training rerun is required.",
+      "root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011",
+      "schema_version": 1,
+      "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+      "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22"
+    },
+    "default_adoption": false,
+    "documents": {
+      "reports/forge/bcap-tier2-round6/STUDY.md": {
+        "archive_commit": "51ee43476e8bfa64f0eb55f630fe3b0086dddd9b",
+        "git_blob": "895bb9e455929f658525ac8a7f559930658c357d",
+        "path": "reports/forge/bcap-tier2-round6/STUDY.md",
+        "sha256": "ddf1618243b81d83752c9dc74e53b5501b4a5c5986e61d57fe0430908e621534",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/51ee43476e8bfa64f0eb55f630fe3b0086dddd9b/reports/forge/bcap-tier2-round6/STUDY.md"
+      },
+      "reports/forge/bcap-tier2-round6/archive.json": {
+        "archive_commit": "51ee43476e8bfa64f0eb55f630fe3b0086dddd9b",
+        "git_blob": "6ea46b38ea7cd49d48700046c7711268dca1aa34",
+        "path": "reports/forge/bcap-tier2-round6/archive.json",
+        "sha256": "52e20daee41e6e58dd3e49dd2d45b0ff80223911004fef8d894a933a97719f53",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/51ee43476e8bfa64f0eb55f630fe3b0086dddd9b/reports/forge/bcap-tier2-round6/archive.json"
+      },
+      "reports/forge/bcap-tier2-round6/audit.json": {
+        "archive_commit": "51ee43476e8bfa64f0eb55f630fe3b0086dddd9b",
+        "git_blob": "1869f8202859ed9ae1726dc2ca5eb3713231cf99",
+        "path": "reports/forge/bcap-tier2-round6/audit.json",
+        "sha256": "5886c1fb56dbf53a1a0d1b544999723f5601bf148f0fed8c88fa030b14ba0fa1",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/51ee43476e8bfa64f0eb55f630fe3b0086dddd9b/reports/forge/bcap-tier2-round6/audit.json"
+      },
+      "reports/forge/bcap-tier2-round6/media/control-ring16_acquisition.gif": {
+        "archive_commit": "51ee43476e8bfa64f0eb55f630fe3b0086dddd9b",
+        "git_blob": "5331191b5df623caeb090b4212295f86b1ec5f55",
+        "path": "reports/forge/bcap-tier2-round6/media/control-ring16_acquisition.gif",
+        "sha256": "e362faa8ebcc5ee2c79bf1735d5c890b291a532d5eeab3b16ce93e1558294e1a",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/51ee43476e8bfa64f0eb55f630fe3b0086dddd9b/reports/forge/bcap-tier2-round6/media/control-ring16_acquisition.gif"
+      },
+      "reports/forge/bcap-tier2-round6/media/half_network-ring16_acquisition.gif": {
+        "archive_commit": "51ee43476e8bfa64f0eb55f630fe3b0086dddd9b",
+        "git_blob": "7749ec9c495ca2382c64f7446e3ebb074b9a328c",
+        "path": "reports/forge/bcap-tier2-round6/media/half_network-ring16_acquisition.gif",
+        "sha256": "c1e045e1ec5457d6b8fceb84a58fda29d22878f9d1d273b895b84ae471a4d350",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/51ee43476e8bfa64f0eb55f630fe3b0086dddd9b/reports/forge/bcap-tier2-round6/media/half_network-ring16_acquisition.gif"
+      },
+      "reports/forge/bcap-tier2-round6/media/index.json": {
+        "archive_commit": "51ee43476e8bfa64f0eb55f630fe3b0086dddd9b",
+        "git_blob": "6af4703ad6fa9d7af622e2811d35dd90275e6446",
+        "path": "reports/forge/bcap-tier2-round6/media/index.json",
+        "sha256": "21164f5e6a77978c367816e00b40c76dd4477a53d2f87125d8e0a01978b5cc96",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/51ee43476e8bfa64f0eb55f630fe3b0086dddd9b/reports/forge/bcap-tier2-round6/media/index.json"
+      },
+      "reports/forge/bcap-tier2-round6/media/late_anneal-ring16_acquisition.gif": {
+        "archive_commit": "51ee43476e8bfa64f0eb55f630fe3b0086dddd9b",
+        "git_blob": "3d47267f9b17318416d2518d33377dae427ea210",
+        "path": "reports/forge/bcap-tier2-round6/media/late_anneal-ring16_acquisition.gif",
+        "sha256": "60e69db410323e118e4528b569998cbe39b68a90d139fc47a3adf3271d2a5755",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/51ee43476e8bfa64f0eb55f630fe3b0086dddd9b/reports/forge/bcap-tier2-round6/media/late_anneal-ring16_acquisition.gif"
+      },
+      "reports/forge/bcap-tier2-round6/media/prior_smoothing-ring16_acquisition.gif": {
+        "archive_commit": "51ee43476e8bfa64f0eb55f630fe3b0086dddd9b",
+        "git_blob": "fc2f5714ebcefaf463ed0391a8438f76f4549220",
+        "path": "reports/forge/bcap-tier2-round6/media/prior_smoothing-ring16_acquisition.gif",
+        "sha256": "99d01b71b161357472e0bebc08d3ddb5d712a2047c6217f8875ec70801b8fe39",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/51ee43476e8bfa64f0eb55f630fe3b0086dddd9b/reports/forge/bcap-tier2-round6/media/prior_smoothing-ring16_acquisition.gif"
+      },
+      "reports/forge/bcap-tier2-round6/media/zero_damping-five_word_joint_hold.gif": {
+        "archive_commit": "51ee43476e8bfa64f0eb55f630fe3b0086dddd9b",
+        "git_blob": "c6701c95d4a9783d0358480825428606f6bad7f1",
+        "path": "reports/forge/bcap-tier2-round6/media/zero_damping-five_word_joint_hold.gif",
+        "sha256": "2c416f5f846c8914cb8892b6a70a4f22ad7c1438b41f84567cb1846785245e56",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/51ee43476e8bfa64f0eb55f630fe3b0086dddd9b/reports/forge/bcap-tier2-round6/media/zero_damping-five_word_joint_hold.gif"
+      },
+      "reports/forge/bcap-tier2-round6/readouts.json": {
+        "archive_commit": "51ee43476e8bfa64f0eb55f630fe3b0086dddd9b",
+        "git_blob": "3f7ccdcce1a2854ee5cce35dcc041e75a07f6929",
+        "path": "reports/forge/bcap-tier2-round6/readouts.json",
+        "sha256": "f9a4706f36d82a9e46de4594970381ed75e95a1d9ebe0dc275324e7a8753cd8a",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/51ee43476e8bfa64f0eb55f630fe3b0086dddd9b/reports/forge/bcap-tier2-round6/readouts.json"
+      },
+      "reports/forge/bcap-tier2-round6/registration.json": {
+        "archive_commit": "51ee43476e8bfa64f0eb55f630fe3b0086dddd9b",
+        "git_blob": "e63e2b3c056ff42a85d9543f8ecb2516f10fc4e0",
+        "path": "reports/forge/bcap-tier2-round6/registration.json",
+        "sha256": "fc49f9b7f0f658e4732f9595012667ce6414cbeef7024b104afb5a75d0dda5aa",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/51ee43476e8bfa64f0eb55f630fe3b0086dddd9b/reports/forge/bcap-tier2-round6/registration.json"
+      },
+      "reports/forge/bcap-tier2-round6/results.json": {
+        "archive_commit": "51ee43476e8bfa64f0eb55f630fe3b0086dddd9b",
+        "git_blob": "d9550ada5d3efac0e66fc8eb5753f308a1134e08",
+        "path": "reports/forge/bcap-tier2-round6/results.json",
+        "sha256": "f124858db6ab781e68861e508064f077ed4e873bcd4cce02735f48be38b08196",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/51ee43476e8bfa64f0eb55f630fe3b0086dddd9b/reports/forge/bcap-tier2-round6/results.json"
+      },
+      "reports/forge/bcap-tier2-round6/spec.json": {
+        "archive_commit": "51ee43476e8bfa64f0eb55f630fe3b0086dddd9b",
+        "git_blob": "9d32a736743dda877f9843a7efc0b5df1efc6328",
+        "path": "reports/forge/bcap-tier2-round6/spec.json",
+        "sha256": "541b93fed9a6eafd01dbf25864a597971c6acf24183dd0d7ca48411bdd2a3797",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/51ee43476e8bfa64f0eb55f630fe3b0086dddd9b/reports/forge/bcap-tier2-round6/spec.json"
+      },
+      "reports/forge/bcap-tier2-round6/validation.json": {
+        "archive_commit": "51ee43476e8bfa64f0eb55f630fe3b0086dddd9b",
+        "git_blob": "78ff41185df493e94f4a9af8cfcba063bbcb2128",
+        "path": "reports/forge/bcap-tier2-round6/validation.json",
+        "sha256": "b614380aef0e75f11efe7655629571e4f34b3cc6f27245d2538ad89349ca1264",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/51ee43476e8bfa64f0eb55f630fe3b0086dddd9b/reports/forge/bcap-tier2-round6/validation.json"
+      }
+    },
+    "historical_validation": "Original 368 focused checks; post-merge 530 plus 414 publication checks. Seven upstream publication failures are retained in validation.json, not repaired or reclassified by this archive.",
+    "initializer": "Protocol seed 0 and public deterministic initializer for learned tasks; original fixed identity/zero fixtures remain their separate declared task cohorts. Per-task contract identities are pinned in registration.json.",
+    "original_required_counts": {
+      "control": {
+        "1": {
+          "PASS": 6
+        },
+        "2": {
+          "FAIL": 12,
+          "PASS": 9
+        }
+      },
+      "half_network": {
+        "1": {
+          "FAIL": 2,
+          "PASS": 4
+        },
+        "2": {
+          "BLOCKED": 21
+        }
+      },
+      "late_anneal": {
+        "1": {
+          "FAIL": 1,
+          "PASS": 5
+        },
+        "2": {
+          "BLOCKED": 21
+        }
+      },
+      "prior_smoothing": {
+        "1": {
+          "FAIL": 1,
+          "PASS": 5
+        },
+        "2": {
+          "BLOCKED": 21
+        }
+      },
+      "zero_damping": {
+        "1": {
+          "PASS": 6
+        },
+        "2": {
+          "FAIL": 13,
+          "PASS": 8
+        }
+      }
+    },
+    "prepared_commit": "3f9846cb7cb276dfbd0802b6eb4c100a8b75ac41",
+    "prior": "Learned locations, VICReg selected with zero weight, prior_l2 zero; initial distributions/capacities and sampling remain task-owned.",
+    "protocol_seed": 0,
+    "reuse_eligible": false,
+    "sampling": "Original task-owned clean live sampling; constructor/data/training-noise/evaluation streams isolated and checkpointed.",
+    "source_commit": "18b0487bf8761b89cd9ddf36d0a66b787512dd98",
+    "source_digest": "63b30232a88eda86e7c8ffb00e20764b6e523f81a5bf651656c48eca187eac22",
+    "source_head": "51ee43476e8bfa64f0eb55f630fe3b0086dddd9b",
+    "source_pr": 395,
+    "source_pr_url": "https://github.com/255BITS/ParticleGAN/pull/395",
+    "task_contracts": {
+      "ae_gan_hold": "d3e0863de318470b53b6398cb19ca89c6a19f52fcc24a7631e0576a301c9fa2f",
+      "clockfree_audit_measurement_v1": "19089f0b1c7637cdc366d4bfa23266b92e4fcc921a1bb1aa7ad4a2d39a7f7c1c",
+      "cover_leftover": "08a11eae6035079a06168a2a64f4da9051cc4d31eebb291f2a9f9758e8cf0550",
+      "five_word_joint_hold": "8e606ae6e2951b046adce4abadeb95796798af52fab868eb96cba44b4d66498b",
+      "five_word_joint_smoke": "3a994ac66e09aa546f72ea34fc8c19a0784dc749eb4b31d4086f34628c1aeb68",
+      "gaussian1d_smoke": "309df4253a10df7d05cd8a706ed226edf982aa05dcda4abbf91358ddd39f4540",
+      "gaussian1d_stability": "b4c6fd6ddc7c43f957c0df6f2a9ea060eed7bb260f59ce488f36524029248dde",
+      "grid100": "b46b6ab2bf117b59dc17596014eb51965d6c9882668982ed4cb7a0248ca9b221",
+      "img_bars4": "5903eac436234e1ec586f21eb88265b4b0f431eacfac1732eaa6bf91a61890d8",
+      "img_blobs4": "ae85ec1422a4b184b4a23900dd08b3ea99a7c15b3af6ab1ca756ab276f6846ff",
+      "img_intensity2": "4d48656ca9ab281441c29b6ebfabd65f7bf591fa5a20657143af1e8d1db07941",
+      "img_stripes2": "bb3ae5307e947a19983229789920419aa1c32f73244eca7892cfeb4da1714d07",
+      "mid_scale_identity": "e6ee7705d7e45a4ab86de5d21610c36a69415a0f1ff7f652a558a4e09a6d78d2",
+      "mode_hold": "9fc3ad36ad4f2961524e5baa3cd3b82e48c1fd44523a7d6f769ca20a07d8eee9",
+      "residual_student": "12f3054a56e06073c979111ecbe531a3c3ff7a4b669b74f6d12b1ef53ff986c2",
+      "ring16_acquisition": "311b3016a6909866154d3d27008093862b433cc1fd07ec3083f4d50efc01c4e8",
+      "rotated100": "04c4d651e6a88deff8d9b0b80b3d4fe1765070bb122b2e595dc6e13f826fefea",
+      "staggered100": "f9f4962633615bcb793738e332216f537117897e7cb5f1a15ecaf18f61216082",
+      "trajectory": "a4339de0b20ae0ac5e8c50fa7c6f7813bb7404c9126310ebb78ff2e7657fc546",
+      "two_pole": "ca18f8ccd2b29f34a240d6b20a8392c39b715adc76319b55c4aa3d00df001bca",
+      "unipolar": "d3e7803c7eaa04b264301c40c616aa801332b04ffd706a026ec185101aa6224a",
+      "unused_token_hold": "89342762fb475a474f6dca9278ab42db5ff9da7957adce08f8d36e2e4b11e61e",
+      "vector_anisotropic": "66e405776365e5018e50ba44a4644739aaf36c58f6d9ccad9a0caa27bcf68ec2",
+      "vector_overlap": "9241a1869e7f7fff669411060d45716b7d5458d46682558feef6ef4669cf0183",
+      "vector_spiral": "93c2103e18a5b6d78debb4b12f8a12a949225243b193d330c1374981d621862a",
+      "vector_two_broad": "82739da4c7631c8a1307023a49ddb3252aedade109796b9372c5e1a4dec2b85b",
+      "vector_unequal_mass": "69bc897f7d9f169349e8bcc431073b91949c85b00641e996699ad3ccded67146",
+      "vector_unequal_width": "1a92ac57ebdd94cfa8c8213d3c3982a3041951140c38d2217706ae7cd21f5d3b"
+    },
+    "trainer_delta": {
+      "control": {},
+      "half_network": {
+        "d_lr_mult": {
+          "candidate": 3.0,
+          "control": 1.5
+        },
+        "lr": {
+          "candidate": 0.006,
+          "control": 0.012
+        },
+        "prior_lr_mult": {
+          "candidate": 5.0,
+          "control": 2.5
+        }
+      },
+      "late_anneal": {
+        "lr_floor": {
+          "candidate": 0.1,
+          "control": 1.0
+        },
+        "network_lr_floor": {
+          "candidate": 0.2,
+          "control": 1.0
+        }
+      },
+      "prior_smoothing": {
+        "optimizer_prior_smoothing": {
+          "candidate": 0.01,
+          "control": 0.001
+        }
+      },
+      "zero_damping": {
+        "reg_zero_coeff": {
+          "candidate": 0.05,
+          "control": 0.0
+        }
+      }
+    },
+    "verified_by_forge": false,
+    "view": "discriminator_stability@9",
+    "word_hold_contract": "Control prefix 834+4000 vs hybrid 1667+4000, saved horizon 20000. Every arm restores its own verified producer; equal complete-stream consumption is unverified. Kept solely as original acquired-prefix gate evidence."
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "archive-pr395-four-bcap-repairs-51ee43476e8b",
+  "record_type": "family_context",
+  "reuse": false,
+  "schema_version": 1,
+  "source": {
+    "archive_commit": "51ee43476e8bfa64f0eb55f630fe3b0086dddd9b",
+    "git_blob": "68e6a758eb4731d7ac654927b2624c55cdaa0316",
+    "path": "reports/forge/bcap-tier2-round6/README.md",
+    "sha256": "68eabb67fb9275545fc6ac668800c6510e14a589f03a0379fa90afbfd9521f3f",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/51ee43476e8bfa64f0eb55f630fe3b0086dddd9b/reports/forge/bcap-tier2-round6/README.md"
+  },
+  "task_results": [],
+  "task_results_note": "Recall only. Original numerical results retain their archived source, recipe, task and protocol identities. This record fills no current task cell and carries no qualification or additional cost.",
+  "trainer_family": "bcap-dualnorm"
+}

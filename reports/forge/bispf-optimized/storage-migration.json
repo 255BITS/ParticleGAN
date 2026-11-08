@@ -1,0 +1,10 @@
+{
+  "schema": "bispf_local_artifact_migration_v1",
+  "original": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized",
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/bispf-optimized-20261016",
+  "files": 155744,
+  "bytes": 17136146110,
+  "copy": "rsync -a; transport validates transferred file checksums; subsequent metadata dry run has no differences",
+  "same_relative_paths_and_sizes": true,
+  "timestamp": 1792210946.8857794
+}

@@ -1,0 +1,25 @@
+{
+  "gif_sha256": "0ef6951729c918fd6945e3dd8bb004e1c8e25b53a23d8c41117635312b6aed05",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 2082,
+  "observations_sha256": "410d1df9a58365eeed6df22aaf34c4b36b02b65a99aa037e4466c9e4ae36bf39",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    260,
+    520,
+    780,
+    1040,
+    1301,
+    1561,
+    1821,
+    2081
+  ],
+  "source_inputs": {},
+  "task_id": "ring_hold"
+}

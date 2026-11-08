@@ -1,0 +1,110 @@
+{
+  "artifact_manifest_sha256": "979e2395e83a863f4c1f8c97d010b6a52c0ca478ba058068ec355696675fa709",
+  "candidate_revision": "45e5304bd6d19af271e0d2072cf1c5d36a3cf8cbcbf45e9eada0218c8ad0782b",
+  "compatibility_key": "30e52f3898f4a70ada6fbb89a532e92ee4fa33ddc5ebeffb8fdc74f6d8b22cb9",
+  "continuity": {
+    "max_total_steps": 7500,
+    "mode": "uninterrupted",
+    "original_schedule_horizon": 1200,
+    "resume_count": 0,
+    "run_id": "783a8fd768f05061ac2261d3aff6724998a8eba6cb590e0cd1a78b530223216f"
+  },
+  "execution_group": "ring_endurance",
+  "grade": {
+    "gate_status": "PASS",
+    "metrics": {
+      "confirmation_checks": 200,
+      "converged_step": 1400,
+      "convergence": "first consecutive qualifying window; operational quality criterion",
+      "extension_checks": 300,
+      "extension_passing": 300,
+      "first_hold_failure": null,
+      "frozen_toy_verdicts_unchanged": true,
+      "hold": "the next updates, disjoint from confirmation; no restart after failure",
+      "hold_budget": 1200,
+      "hold_budget_complete": true,
+      "hold_checks": 1200,
+      "longest_settling_streak": 200,
+      "min_hq": 0.9,
+      "modes": 8,
+      "name": "first_convergence_then_hold_v1",
+      "settling_budget": 4800,
+      "settling_checks": 200,
+      "settling_failures": 0,
+      "start_step": 1200,
+      "status": "PASS",
+      "training_feedback": false
+    },
+    "reasons": [
+      "recomputed every extension observation without selecting another window"
+    ],
+    "status": "PASS"
+  },
+  "grader_source_sha256": "88f8bd4ae5aa1b51129247eb00edcb9cb78918a92ad552036f5b1bfcbf30dfc5",
+  "optimizer_updates_added": 0,
+  "original_attempt": "/ml2/hypergan/attempt-fill-20261015/attempts/bf5d13ff3aeb4cba98d07373963839d8/result.json",
+  "parent_grade": {
+    "gate_status": "PASS",
+    "metrics": {
+      "confirmation_checks": 200,
+      "converged_step": 1400,
+      "convergence": "first consecutive qualifying window; operational quality criterion",
+      "first_hold_failure": null,
+      "frozen_toy_verdicts_unchanged": true,
+      "hold": "the next updates, disjoint from confirmation; no restart after failure",
+      "hold_budget": 1200,
+      "hold_budget_complete": true,
+      "hold_checks": 1200,
+      "longest_settling_streak": 200,
+      "min_hq": 0.9,
+      "modes": 8,
+      "name": "first_convergence_then_hold_v1",
+      "settling_budget": 4800,
+      "settling_checks": 200,
+      "settling_failures": 0,
+      "start_step": 1200,
+      "status": "PASS",
+      "training_feedback": false
+    },
+    "reasons": [
+      "recomputed first-convergence hold"
+    ],
+    "status": "PASS"
+  },
+  "previous_attempt": {
+    "attempt_id": "36bc31bae9234fc4a7d16b37b28ffab0",
+    "evidence": "/ml2/hypergan/attempt-fill-20261015/attempts/36bc31bae9234fc4a7d16b37b28ffab0/result.json",
+    "reason": "checkpoint parent ring_hold: certified artifact binding unavailable to this attempt",
+    "result_sha256": "029180961699f497bce702da9fa6cb045dcdaca77ad5d14a8044965eec680f93",
+    "status": "BLOCKED"
+  },
+  "producer": {
+    "attempt_id": "bf5d13ff3aeb4cba98d07373963839d8",
+    "candidate_revision": "45e5304bd6d19af271e0d2072cf1c5d36a3cf8cbcbf45e9eada0218c8ad0782b",
+    "key": "87661e1bba3b3e5f10d163ff55a333d4446191dc866c412bc6d5474f1dac4692",
+    "result_sha256": "53e2c58da68eed428b80346ea1c866b8bc3b02b688a6c51e07ee20feb53e82aa",
+    "source_digest": "fafd661541083840ae55fe9b4b282aa575f68f5f6652ecbe7b6e8e234ae36d8f",
+    "task": "ring_hold"
+  },
+  "producer_updates": 2900,
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "raw_sha256": "ac5df3aa92268a513ee830cdc5f7c6ad9779ed3a044ff645c925dd875ba1812d",
+  "request_sha256": "311f001a7981f1b8cf05d1eea77e40389387785f452895d700b2f7078e3c14a8",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.18.1",
+      "torch": "2.13.0+cu126"
+    },
+    "python": "3.12.13",
+    "system": "Linux"
+  },
+  "sampling_draws_added": 0,
+  "schema": "forge_grouped_evidence_v1",
+  "source_digest": "fafd661541083840ae55fe9b4b282aa575f68f5f6652ecbe7b6e8e234ae36d8f",
+  "task": "ring_extension",
+  "task_key": "6bb7b781a448fcc68310d4d572233bd0272a901b4f946c12bd101c59481cc62b"
+}

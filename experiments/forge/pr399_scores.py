@@ -13,6 +13,8 @@ PINS = {'reports/forge/test-performance-evidence/pr399-retained-successor-nonatl
 def publications(root):
     """Validate byte pins and source identities before displaying archived scores."""
     inputs = Inputs(root)
+    if not (inputs.root / SUPPLEMENTAL).is_file():
+        return []  # No display index: nothing to show, as for the other optional display inputs.
     registry = inputs.read(SUPPLEMENTAL)
     indexed = {p["path"]: p["sha256"] for p in registry["publications"]}
     packets = []

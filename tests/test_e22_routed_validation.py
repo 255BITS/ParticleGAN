@@ -7,8 +7,8 @@ from torch.utils.checkpoint import checkpoint, set_checkpoint_early_stop
 from particlegan import RoutedRows
 
 
-DEVICES = ["cpu", pytest.param("cuda:0", marks=pytest.mark.skipif(
-    not torch.cuda.is_available(), reason="CUDA required"))]
+DEVICES = ["cpu", pytest.param("cuda:0", marks=[pytest.mark.cuda, pytest.mark.skipif(
+    not torch.cuda.is_available(), reason="CUDA required")])]
 
 
 class Router(nn.Module):
@@ -33,6 +33,9 @@ def assert_closed(execution):
     assert execution._perturb_fn is None and execution._validation_checks is None
     with pytest.raises(ValueError, match="only during"):
         execution.finish()
+
+
+@pytest.mark.cuda
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required")

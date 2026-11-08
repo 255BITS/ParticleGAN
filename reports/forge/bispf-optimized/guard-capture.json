@@ -1,0 +1,308 @@
+{
+  "actual_failed_example": {
+    "absolute_smoothing": 0.001,
+    "artifact": {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step004-call005.pt",
+      "sha256": "791cf5f14f426e503da6b475145fbc6ed6f1c882b8b2ccc65025ce3284bc3961"
+    },
+    "frobenius_norm": 150443.890625,
+    "native_input_dtype_rank_cutoff_retained": 270,
+    "offset": 0,
+    "orthogonality_at32": 9.45890998840332,
+    "parameter": "main.14.weight",
+    "relation_at32": 0.05023366957902908,
+    "scope": "One actual update 4 matrix, not a population bound. Native FP32 cutoff is computed using 512 \u00d7 FP32 epsilon \u00d7largest singular value; CPU float64 SVD diagnoses its spectrum.",
+    "shape": [
+      512,
+      512
+    ],
+    "singular_max_float64_cpu": 96028.80269195052,
+    "singular_min_float64_cpu": 1.3675889631584634e-07,
+    "total_singular_values": 512
+  },
+  "artifacts": {
+    "continuation": {
+      "declaration": {
+        "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-capture-v1/declaration.json",
+        "sha256": "c7422506a72e327112a12e04148efe914b6e4ce41659dec2e5e3f3bc9a2d61bc"
+      },
+      "result": {
+        "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-capture-v1/result.json",
+        "sha256": "c4b551c8e95a01882c4cd03c53bf4b80ec945ef6603ab9b9ba9ed90604e61b48"
+      }
+    },
+    "replay": {
+      "declaration": {
+        "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/declaration.json",
+        "sha256": "e250eef9203ad62bb9884d650b990e0ec838832eeba12670f1496ac1714386bb"
+      },
+      "result": {
+        "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/result.json",
+        "sha256": "6d976b42b43d7dd5b597b69545821a6d8dda4b786781ef2e1c8902de6fe4c82a"
+      }
+    }
+  },
+  "budget": {
+    "capture_round_seconds": 240,
+    "completed_continuation_charge": 60,
+    "observed_declaration_to_receipt_seconds": {
+      "continuation": 13.564143419265747,
+      "replay": 33.71416759490967
+    },
+    "paid_retries": 0,
+    "replay_hard_timeout_seconds": 180,
+    "timing_scope": "Filesystem declaration-to-receipt intervals include run setup and training, omit process teardown; these are not complete-update latency measurements."
+  },
+  "continuation": {
+    "checkpoint_metadata_rewritten": false,
+    "continued_update": 14,
+    "failed_offsets": 0,
+    "finding": "All polar guards pass at update 14. This negative finding does not explain the measured early 4\u201313 failures, so a distinct read-only replay instrumentation question was declared.",
+    "original_update": 13,
+    "passed": true,
+    "public_external_allowance_extension": true,
+    "public_restore": true
+  },
+  "failed_batch_artifacts": [
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step004-call001.pt",
+      "sha256": "49f4a3ec57b78b878345a183eccb1415f31713a41c4c635d092cabd3ee413d8d"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step004-call004.pt",
+      "sha256": "c17fbbb0838763a76944ee4a43d816197ccd5d5f2e178b754f1ad6049710c2a1"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step004-call005.pt",
+      "sha256": "791cf5f14f426e503da6b475145fbc6ed6f1c882b8b2ccc65025ce3284bc3961"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step005-call014.pt",
+      "sha256": "4f3677f151401f9d755ff7a3a7f78827f7ba90419399f53e7708bc25133e4789"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step005-call017.pt",
+      "sha256": "a65ee6c84a463adf31742777c1caa494d9bc78846436a2b1697406477ef32ec0"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step005-call018.pt",
+      "sha256": "dd49e9d3c39c7f6729335b5004bf3c0751525fae3afb1be7d465ae13709731ea"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step006-call027.pt",
+      "sha256": "c3bd84aece1fc537418987d2789e9696aec020f8f956540feab008360b68f8a6"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step006-call030.pt",
+      "sha256": "ff429940dbb75bd8acfe7554a17b92141e33e1debfe1ff73deff7eb15d91c148"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step006-call031.pt",
+      "sha256": "656a1889e1a1ddc432551c6d461803500aeb4eb91e6131065b2c7abb7bc3c100"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step007-call040.pt",
+      "sha256": "e09a4a3ae0798b535bbb71d5ccd1280a4f88849356fd71316af197d53d41cf7f"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step007-call043.pt",
+      "sha256": "536bc305acdfdfbe77f13f3b8e9514acc0c88b4ed474a9bc34c924f3d1c6ffac"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step007-call044.pt",
+      "sha256": "5fcebc2d34ecc828de71999fe11cf52d316f2302eec0a8f4c1a1459b80c839ce"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step008-call053.pt",
+      "sha256": "8c216669d00e0550e7e0f6c5d8e1643dfa29236eba1a5ec00587afb62384eeaf"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step008-call056.pt",
+      "sha256": "1dd412deef0bd3d3ccb0e3da35d2b07c0d4e7eb36df87f02a2516fddc04063ed"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step008-call057.pt",
+      "sha256": "09163adbd7c45cdf42734fc36bd47b398b391140293c1520e873047575121fea"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step009-call069.pt",
+      "sha256": "c52654eed17607250701557dec50e3de7e59af90a0a834a50800e0eb31196b1f"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step009-call070.pt",
+      "sha256": "80ae7dad1360f44f3fa1547cfd5053c71a9dbcf57a2a9cd89febc372055f8a15"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step010-call082.pt",
+      "sha256": "c02bc6611fa7ab9c6a2d42f6381dac4182693eccac1a190a71da9e5f5d11f4a2"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step010-call083.pt",
+      "sha256": "4230e0a97839fd6adc56daac0238c52356ff1a14566a2f366d086f2a543c4bc9"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step011-call095.pt",
+      "sha256": "74351430fbcfa976e916c46c949b887df7e4f6f161ec7d9a43289485705f0d75"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step011-call096.pt",
+      "sha256": "af4f028c94838c3ef06d5ef8ac40ba018275308290a6529aaf04d3c0c8bce9a3"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step012-call108.pt",
+      "sha256": "0df9be39c6f6f2d909bf5c5bf1a0551d9adbb8fff3ffdc5dab21bbc455d9bb8f"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step012-call109.pt",
+      "sha256": "628fc82f41ed06cda37746583450d515cad460a7278b708c433614c770946d3c"
+    },
+    {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step013-call122.pt",
+      "sha256": "0c3a5f880110ac3aa71a0f7fc9f8c7394b533cac0481fdb266cceb21b36ffe70"
+    }
+  ],
+  "replay": {
+    "failed_full_batches": 24,
+    "failed_offsets": 328,
+    "finding": "The second critic 512\u00d7512 layer was missed by one-representative-per-shape profiling. Full parameter and spatial-offset identity is required for causal guard inspection.",
+    "helper_calls": 130,
+    "independent_float32_guard_mask_mismatches": 0,
+    "instrumented_updates": "4\u201313",
+    "original_updates": 13,
+    "parity": {
+      "batch_sequence_sha256": true,
+      "final_parameter_sha256": true,
+      "initial_model_sha256": true,
+      "initial_parameter_sha256": true,
+      "initialization_sha256": true
+    },
+    "passed": true,
+    "per_parameter": {
+      "critic:main.0.weight": {
+        "both": 0,
+        "calls": 10,
+        "failed": 0,
+        "max_orthogonality": 0.000831448589451611,
+        "max_relation": 7.961393748701084e-07,
+        "orthogonality_only": 0,
+        "relation_only": 0
+      },
+      "critic:main.11.weight": {
+        "both": 122,
+        "calls": 10,
+        "failed": 135,
+        "max_orthogonality": 6.860157012939453,
+        "max_relation": 0.01128930039703846,
+        "orthogonality_only": 2,
+        "relation_only": 11
+      },
+      "critic:main.14.weight": {
+        "both": 124,
+        "calls": 10,
+        "failed": 160,
+        "max_orthogonality": 9.627691268920898,
+        "max_relation": 0.05023366957902908,
+        "orthogonality_only": 0,
+        "relation_only": 36
+      },
+      "critic:main.2.weight": {
+        "both": 26,
+        "calls": 10,
+        "failed": 33,
+        "max_orthogonality": 3.6038269996643066,
+        "max_relation": 0.007648490369319916,
+        "orthogonality_only": 6,
+        "relation_only": 1
+      },
+      "critic:main.5.weight": {
+        "both": 0,
+        "calls": 10,
+        "failed": 0,
+        "max_orthogonality": 0.0005116699612699449,
+        "max_relation": 0.00012989707465749234,
+        "orthogonality_only": 0,
+        "relation_only": 0
+      },
+      "critic:main.8.weight": {
+        "both": 0,
+        "calls": 10,
+        "failed": 0,
+        "max_orthogonality": 1.2613912986125797e-05,
+        "max_relation": 0.000460427108919248,
+        "orthogonality_only": 0,
+        "relation_only": 0
+      },
+      "generator:main.0.weight": {
+        "both": 0,
+        "calls": 10,
+        "failed": 0,
+        "max_orthogonality": 0.00035194485099054873,
+        "max_relation": 0.0002276429149787873,
+        "orthogonality_only": 0,
+        "relation_only": 0
+      },
+      "generator:main.12.weight": {
+        "both": 0,
+        "calls": 10,
+        "failed": 0,
+        "max_orthogonality": 2.1612175260088407e-05,
+        "max_relation": 2.7730254714697367e-06,
+        "orthogonality_only": 0,
+        "relation_only": 0
+      },
+      "generator:main.15.weight": {
+        "both": 0,
+        "calls": 10,
+        "failed": 0,
+        "max_orthogonality": 0.0006859286804683506,
+        "max_relation": 1.8762578974929056e-06,
+        "orthogonality_only": 0,
+        "relation_only": 0
+      },
+      "generator:main.18.weight": {
+        "both": 0,
+        "calls": 10,
+        "failed": 0,
+        "max_orthogonality": 4.711328074336052e-07,
+        "max_relation": 2.718195162287884e-07,
+        "orthogonality_only": 0,
+        "relation_only": 0
+      },
+      "generator:main.3.weight": {
+        "both": 0,
+        "calls": 10,
+        "failed": 0,
+        "max_orthogonality": 0.00010971352458000183,
+        "max_relation": 0.00011736241140170023,
+        "orthogonality_only": 0,
+        "relation_only": 0
+      },
+      "generator:main.6.weight": {
+        "both": 0,
+        "calls": 10,
+        "failed": 0,
+        "max_orthogonality": 2.9764823921141215e-05,
+        "max_relation": 2.2379932488547638e-05,
+        "orthogonality_only": 0,
+        "relation_only": 0
+      },
+      "generator:main.9.weight": {
+        "both": 0,
+        "calls": 10,
+        "failed": 0,
+        "max_orthogonality": 4.3949945393251255e-05,
+        "max_relation": 4.230530521454057e-06,
+        "orthogonality_only": 0,
+        "relation_only": 0
+      }
+    }
+  },
+  "schema": "bispf_actual_polar_guard_readout_v1",
+  "scope": "Guard-cause diagnosis only; no replacement latency or quality evidence, qualification, recipe selection or promotion.",
+  "source_composition": {
+    "continuation_harness_commit": "f239ba2df",
+    "core_commit": "4d70a8039",
+    "proof": "Each immutable declaration binds 159 actual source hashes; original H core plus the added harness. Harness bytes are preserved by the named Git commits.",
+    "replay_harness_commit": "82de24e08"
+  }
+}

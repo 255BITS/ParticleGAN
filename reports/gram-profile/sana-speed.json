@@ -1,0 +1,89 @@
+{
+  "schema": "actual-PR-Sana-speed-summary-v1",
+  "PG_head": "90ae663551dd0fa35749d56e1859f276a4d09587",
+  "starting_step": 500,
+  "stopping_step": 503,
+  "guardian": {
+    "status": "completed",
+    "exit_code": 0,
+    "elapsed_seconds": 268.26661868400697,
+    "remaining_group": []
+  },
+  "native": {
+    "default": {
+      "full_step_seconds": [
+        19.52801230599289,
+        18.97788776399102
+      ],
+      "median_full_step_seconds": 19.252950034991954,
+      "median_G_seconds": 17.779966576003062,
+      "median_D_seconds": 0.0055133954956545494,
+      "q_before": [
+        0.3151614927962793,
+        0.7495538572434483
+      ],
+      "q_after": [
+        0.31401577291344906,
+        0.7478541414595373
+      ],
+      "warmup_full_step_seconds": 19.45568617999379
+    },
+    "gram_fp64_guarded_v1": {
+      "full_step_seconds": [
+        10.036402641999302,
+        10.039055064000422
+      ],
+      "median_full_step_seconds": 10.037728852999862,
+      "median_G_seconds": 8.546526108002581,
+      "median_D_seconds": 0.012723931497021113,
+      "q_before": [
+        0.3151614927962793,
+        0.7495538572434483
+      ],
+      "q_after": [
+        0.3140158981775808,
+        0.7478553852092519
+      ],
+      "warmup_full_step_seconds": 10.05198446700524
+    }
+  },
+  "frozen": {
+    "default": {
+      "median_seconds": 17.10042888949829,
+      "guard_warmup": {
+        "guard_call_count": 0,
+        "cumulative_python_seconds": 0,
+        "profiler_restored": true,
+        "scope": "warmup only; Python cumulative inclusive of existing GPU waits; not exclusive CUDA or additive cost"
+      }
+    },
+    "gram_fp64_guarded_v1": {
+      "median_seconds": 8.488812389492523,
+      "guard_warmup": {
+        "guard_call_count": 112,
+        "cumulative_python_seconds": 2.034745603,
+        "profiler_restored": true,
+        "scope": "warmup only; Python cumulative inclusive of existing GPU waits; not exclusive CUDA or additive cost"
+      }
+    }
+  },
+  "artifacts": {
+    "guardian.json": "3db8198e9168240d7365d581626d9dc4076f43307eead5274db4aeea57b5debb",
+    "native/result.json": "793ddd4de294089350b21197d79b8795319088369b2d646f73ef273020dbcfda",
+    "native/frozen-result.json": "29db78be6ae08deaaae75e1b7e6e33a7f63a09cc50f133ae775d484f647f8782"
+  },
+  "native_speedup": 1.9180583891980747,
+  "frozen_speedup": 2.0144665831777893,
+  "max_temperature_c": 70.0,
+  "max_power_w": 226.89,
+  "peak_RSS_GiB": 8.976081848144531,
+  "peak_reserved_GiB": 15.166015625,
+  "scope": "Matched disposable native Sana600M FP32 CP500-derived numerical-source cohorts. B2/H1000/G8e-5/D.01536; warm501, measured502/503. Public timers synchronize optimizer boundaries. No checkpoint export or original long-run restart; no quality/convergence claim.",
+  "guard_timing": "Included in complete public G step and full training step. Warmup cProfile112 calls2.034745603s is cumulative Python including GPU waits, not exclusive CUDA or additive.",
+  "hold": "Explicit numerical variant. Prior21 default leaf fidelity holds unchanged; branches inactive on frozen sample; three updates do not qualify long trajectories.",
+  "postflight": "Owned PGID3293676 absent, only authorized resident3196, both device leases available; postflight51C/31365MiB free.",
+  "independent_saved_JSON_source_audit": {
+    "sha256": "02ccf8006e957afc01d35ffed21961f30e8200784255e2cc024ee75c643876f1",
+    "outcome": "PASS in bounded recorded scope; no tensor/GPU replay"
+  }
+}

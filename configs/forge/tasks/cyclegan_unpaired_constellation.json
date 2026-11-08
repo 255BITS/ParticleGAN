@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "id": "cyclegan_unpaired_constellation",
+  "description": "Unpaired 2D domain translation and mode-level bijection (G_xy, G_yx, D_y, D_x) between an 8-mode ring (R=2.5, sigma=0.08) and an 8-mode square-perimeter constellation ({-2, 0, +2}^2 \\ {(0, 0)}, sigma=0.08) with cycle-consistency regularization (Zhu et al. ICCV 2017; Kim et al. ICML 2017).",
+  "adapter": "transfer_vector",
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "host": "cyclegan_unpaired_constellation",
+    "steps": 3500,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.08,
+      "standardize": false
+    },
+    "protocol": "screening",
+    "produces_state": true,
+    "host_definition": {
+      "target": "8-mode ring <-> 8-mode square-perimeter constellation",
+      "radius_x": 2.5,
+      "square_extent_y": 2.0,
+      "sigma": 0.08,
+      "modes": 8,
+      "steps": 3500,
+      "batch": 256,
+      "z_dim": 2,
+      "particles": 256
+    },
+    "prior_contract": "recipe_owned_v1"
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
+    "kind": "cyclegan_unpaired_constellation",
+    "eval_samples": 4096,
+    "thresholds": [
+      ["modes_y", ">=", 7],
+      ["modes_x", ">=", 7],
+      ["hq_y", ">=", 0.85],
+      ["hq_x", ">=", 0.85],
+      ["mass_tv_y", "<=", 0.15],
+      ["cycle_rmse", "<=", 0.12],
+      ["bijection_ber", "<=", 0.15]
+    ]
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 600
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "mog_prior"
+  ],
+  "dependencies": []
+}

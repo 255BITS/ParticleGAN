@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 819. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 886. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -11,6 +11,8 @@ Records: 819. Inventory coverage: incomplete. Unresolved import items: 7.
 - [discriminator_stability](technique-inventory.md)
 - [formulation_comparison](leaderboards/formulation_comparison.md)
 - [host_profile_transfer](leaderboards/host_profile_transfer.md)
+- [policy_cloud_coverage](technique-inventory.md)
+- [policy_cloud_coverage_as_served](technique-inventory.md)
 - [quality_coverage](leaderboards/quality_coverage.md)
 - [tier1_policy_coverage](technique-inventory.md)
 
@@ -18,9 +20,41 @@ Records: 819. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Pending readouts
 
-k3p-global-repair-v1, ka2-global-repair-v1, r1r2-global-repair-v1
+bcap--148a58dc4036cfc2d71a10b427582aeea304b4ac70874ff2fe7ec02f31cee561, bcap--17c9d255a2f8e1adfc1e4ec686e3cee3c7e3fd40fc7979328d4e1955cc2d29a1, bcap--263d190ebb4c40ddb21337a16a598f5ffcca4639031b3b70aaa3036aec67b31e, bcap--655141ae1d99b0b08dcbac36abbb6f135473d47d389f2ec9d41d9aa6d1201fbe, bcap--6c72e4aaf8ffe22be663a6e041971cc22bbee9402bb0095c4935aa167b6ccb03, bcap--8a9884cad1e87d5d950d8dff3d4901a787e8f94fc99b00e83877fdf6e1a932c2, bcap--90dcc2c3039f9f4c7ed2b1de03dec0c75cec2e9d386de0bb302f90a5f923de23, bcap--a3675bf5a89a136bd4c64b5577021215c1e118aca2971e274b6d23ded6ac55a9, bcap--c89e202b7830cfc38743c25fc1b34ca8ceef3f113c4f091017cac7c843972da3, bcap--ccfa83125643932bdfc88a2178a94ec019a2687d7915dae1ed0d6852925f603d, bcap--e8c9fcd62a13b748b0a1c97543b828ee618833ea45789681323a37c9c300d773, bcap--f0163dead110803a0e982cacfa2589918cd7345eea1655c76a3e3f21b0037887, bcap-original-horizon-diagnostics-v1, bcap-tier2-round6-control-v1, bcap-tier2-round6-half-network-v1, bcap-tier2-round6-late-anneal-v1, bcap-tier2-round6-prior-smoothing-v1, bcap-tier2-round6-zero-damping-v1, constraint_geometry-control-v1, constraint_geometry-nonascent-v1, five-word-joint-ka2-v1, hydraulic-output-travel-v1, information_geometry_spectral_half_v1, kinetic_transport_sliced_v1, thermodynamic-bcap-optimism-v1
 
 ## Experiment and family records
+
+### api-model-ddgan-failure-investigation · api-model-ddgan-failure-investigation-v1
+
+**Scope:** historical; family_context; revision `e1a3a9e812dc568ed94e9774427708899f4469695d2415d049ee8ab423488b52`.
+
+Distinguish errors in low-noise conditional generation, unusual fixed contexts, high-noise kernel masking and the saved critic local correction field.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `saved_state_failure_analysis`.
+
+
+
+Both saved Gaussian chains have low-noise conditional mismatches at central and fresh marginal contexts (step-1 median CDF errors 0.265 DDGAN, 0.301 AE-DDGAN). At step 4, analytic reverse noise supplies about 99 percent of transition variance; vanilla clean CDF error 0.271 can coexist with reverse CDF error 0.033. Local per-example output gradients oppose mean correction on 7/8 vanilla and 4/8 composed fixed panels; this does not identify parameter-step direction or a temporal cause. Original generation FAILs, paired reconstruction subgate PASS and blocked deeper runs remain unchanged.
+
+**Next:** Propose a separate bounded stationary-generator critic-fit diagnostic before changing a trainer. Preserve one global recipe, original gates and all failures; no new training, continuation, seed sweep or default promotion in this investigation.
+
+[Evidence](../../reports/forge/ddgan-failure-investigation/README.md) · [Record](records/api-model-ddgan-failure-investigation-v1.json)
+
+### api-model-vae-failure-investigation · api-model-vae-failure-investigation-v1
+
+**Scope:** historical; family_context; revision `94f596832d94bce175b5d4d6653b3584e17f6dbae570113717d570deb431a9b4`.
+
+Hard routing leaves more uniform-prior rows weakly constrained by reconstruction; those rows account for larger independent-generation errors.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `saved_state_failure_analysis`.
+
+
+
+All archived final metrics reproduce exactly with zero updates. All 183 hard decoder-mean misses arise from 12 low-usage rows; the passing categorical control has the same association with 26 misses from seven low-usage rows. Hard ELBO prior gradients reach 4/16 rows versus 16/16 for categorical; adversarial and SBNP reach all rows. This supports a final-state coverage association but cannot establish the cause of the unsaved update-1000/1100 failures. Original hard FAIL/categorical PASS and all gates remain unchanged.
+
+**Next:** Retain both outcomes. Propose one reconstruction-coverage mechanism across both unchanged VAE tasks with saved scheduled checkpoints before another causal experiment. No unchanged rerun, seed sweep, gate change or default promotion.
+
+[Evidence](../../reports/forge/vae-failure-investigation/README.md) · [Record](records/api-model-vae-failure-investigation-v1.json)
 
 ### pr155-e22-api-and-original-review-gaps · archive-pr155-current-api-and-review-gaps-183242edb5fb
 
@@ -645,6 +679,86 @@ Yes, within the generated routed E22 FP32 fixture: growing shared training noise
 **Next:** If the routed or Supra latent-coverage question is picked up again, test expanded noise support on the actual frozen Supra teacher as one declared delta. Do not repeat the generated cohort and do not change defaults.
 
 [Evidence](../../reports/forge/continuous-baseline-20261003/OPEN_TOY_PR_REVIEW.md) · [Record](records/archive-pr261-routed-latent-noise-coverage-7943dda321c1.json)
+
+### archive:pr320:network-spectral-cap · archive-pr320-network-spectral-cap-c4627fb14619
+
+**Scope:** historical; family_context; revision `c4627fb14619ca0bcd1b8d904e7796d0834a4e8a`.
+
+Preserving small G/D gradient singular values at fixed nominal rates repairs Gaussian acquisition, retention and target-shift response while the prior retains row-normalized learning.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `network_spectral_cap`.
+
+
+
+Fixed G/D spectral cap scale .1 improves Gaussian shape but fails continuous learning in all three timing arms. Past extrapolation passes 43/96 stationary checks (41/72 retention), first five-pass window at update 3875, and 17/48 shifted checks (8/24 retention), ending shifted KS .03837; all acquisition and reacquisition suffixes are zero. Every ring arm passes 0/240 checks, versus original alternating control acquisition PASS and 144/144 retention. Stop this exact global recipe; prior sampled-row normalization was unchanged, so this does not evaluate a combined prior/network repair. Nine CUDA trials use 30000 new updates, 362.226751 loop seconds and zero scientific retries. This is a task-only diagnostic, not ordinary qualification.
+
+**Next:** Retain the archived findings and original source; stop these exact revisions. Any successor needs its own substantive hypothesis, frozen protocol and finite budget. No training or default adoption follows from this archive.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/c4627fb14619ca0bcd1b8d904e7796d0834a4e8a/reports/forge/gaussian-network-magnitude/README.md) · [Record](records/archive-pr320-network-spectral-cap-c4627fb14619.json)
+
+### archive:pr360:hydraulic-winner · archive-pr360-hydraulic-winner-bbac181e1281
+
+**Scope:** historical; family_context; revision `bbac181e128160a1e5770b60490ba99ebaffbf01`.
+
+Bound joint G/prior output travel on the direction-blend BCAP winner; compare real-spacing radius with a gap-adaptive radius, preserving every original task gate and the five winner passes in the 17-cell diagnostic scope.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `hydraulic_winner`.
+
+
+
+Latest 17-public-trainer-task winner follow-up: travel and gap-adaptive each pass 4/17 versus archived winner 5/17, gain zero gates, and respectively lose ring16_acquisition and vector_spiral. Gaussian stationary/shift retention improves 2/72 and 0/24 to 71/72 and 23/24 (travel), or 68/72 and 22/24 (gap); full retention FAIL remains. Grid100 precision rises .24072 -> .49586/.6343 but native full shape/density gates fail. Travel exactly reproduces archived v1 on the bound hosts; direction blend is inactive there, not a fresh matched control. Both prespecified endpoint predictions are observed, but the global decision stops both revisions. 34 complete cells, zero retries, 5159.621962 paid seconds within 64000 ceiling. Earlier rounds retain separate source identities; no ordinary qualification or default change.
+
+**Next:** Retain the archived findings and original source; stop these exact revisions. Any successor needs its own substantive hypothesis, frozen protocol and finite budget. No training or default adoption follows from this archive.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/reports/forge/bcap-physics/hydraulic/winner/README.md) · [Record](records/archive-pr360-hydraulic-winner-bbac181e1281.json)
+
+### archive:pr395:four-bcap-repairs · archive-pr395-four-bcap-repairs-51ee43476e8b
+
+**Scope:** historical; family_context; revision `51ee43476e8bfa64f0eb55f630fe3b0086dddd9b`.
+
+Four fixed global BCAP recipe changes must retain all Tier1 gates and every matched control Tier2 pass while adding at least one complete Tier2 repair.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `four_bcap_repairs`.
+
+
+
+No global winner. Fresh control passes 6/6 required Tier1 and 9/21 Tier2. Late annealing is 5/6, half G/E motion 4/6, prior smoothing .01 5/6; all 21 Tier2 cells for each are BLOCKED/unmeasured, not measured failures. Weak critic damping .05 passes 6/6 and 8/21, adding zero passes and losing the original word-hold gate. That legacy hold uses unequal acquired prefixes (control 834->4834, hybrid 1667->5667), so it is a separate original-gate cohort, not a same-clock causal comparison; other 20 Tier2 tasks match complete budgets/consumed streams and retain the same eight passes. Gaussian hybrid stationary/shift checks improve 2->15/72 and 0->3/24, but full gates fail. 77 paid attempts, 6773.287376 seconds, zero execution retries. Stop these four revisions; current selected recipe, qualifications and gates remain unchanged.
+
+**Next:** Retain the archived findings and original source; stop these exact revisions. Any successor needs its own substantive hypothesis, frozen protocol and finite budget. No training or default adoption follows from this archive.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/51ee43476e8bfa64f0eb55f630fe3b0086dddd9b/reports/forge/bcap-tier2-round6/README.md) · [Record](records/archive-pr395-four-bcap-repairs-51ee43476e8b.json)
+
+### bcap-stall-reach-base-v1 · archive-pr397-stall-reach-critic-read-de93dbf48cab
+
+**Scope:** historical; family_context; revision `de93dbf48cabe6bb2913b3eccf93029655da5db9`.
+
+Closed PR #107 stall reach rebuilt on the BCAP direction-blend leader (opt-in generator_critic_read="stall_reach"): the generator reads the critic through a 2d+1 axis stencil of width max(.15,.5 min(u,1/u))/kappa, .5/kappa after 50 consecutive u>=.6 critic updates, converting mode_hold FAIL to a sustained PASS while keeping all six Tier 1 gates.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `generator_critic_read_stencil`.
+
+
+
+Falsified at Tier 1. Against its fresh matched leader control (same source cbba593bb98d, seed 0, deterministic_orthogonal, revision 9), stall_reach passes 4/6 Tier 1 versus 5/6: ring16_acquisition is lost (terminal suffix 0/5, 14/16 modes, HQ .530 versus control suffix 26, 16 modes, HQ .961, first pass 1184). Under BCAP the critic's input slope sits near its cap, so the saturation-only stall rule (PR #107's G trust factor has no current counterpart) latches: 1545/1600 ring16 updates are stalled and the wide read is on for 1597/1600, pinning the width at .5. Both arms' five_word_joint_smoke are INCOMPLETE at the 900 s allowance (control 17501/20001 updates under host CPU contention; stall_reach 10834, about 1.6x per-update cost from the 341-point read). All 21 Tier 2 tasks are BLOCKED for both arms; mode_hold is unmeasured. Public-API ring8 toy (after the review fix making its particle table deterministic): off path PASS (7 modes, HQ .917), stall_reach FAIL (6 modes, HQ .747, 1093/1200 stalled); both arms oscillate, so the toy only supports the ring16 result. PR #397 was closed unmerged; the option, its tests and the toy code are not on develop.
+
+**Next:** Do not re-run or tune this rule (widths, windows). A successor needs a stall signal that is selective under BCAP's saturated slope and a constant-cost read (a few random or antithetic directions, not every axis); register it as a new idea with a fresh control and screen it on ring8/ring16 toys first.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/de93dbf48cabe6bb2913b3eccf93029655da5db9/reports/forge/stall-reach/README.md) · [Record](records/archive-pr397-stall-reach-critic-read-de93dbf48cab.json)
+
+### bcap-generator-idle-base-v1 · archive-pr398-generator-idle-se-835e93900c21
+
+**Scope:** historical; family_context; revision `835e93900c2103eef24ed4b62e18fcdbf19e41bf`.
+
+Closed PR #366 generator idle rule rebuilt on the recipe factories (opt-in generator_idle_se=1.0): skipping the G/prior step while the critic's paired real-fake gap is within one standard error of zero stops the constant-rate BCAP leader drifting during holds, repairing gaussian1d_stability and mode_hold without losing any control pass.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `generator_step_idle_gate`.
+
+
+
+Falsified at Tier 1. Against its matched BCAP leader control (source digest 2ffc95c341a7, seed 0, deterministic_orthogonal, revision 9), generator_idle_se=1.0 loses ring16_acquisition PASS->FAIL (terminal suffix 0/5, final component_covariance_error 3.09991 vs limit .85; control .496567, suffix 26) after skipping only 5/1600 G steps, so all 21 Tier 2 cells are BLOCKED. The control's five_word_joint_smoke was INCOMPLETE (19168/20001 updates at the 900 s allowance under shared-GPU contention; no retry). Idle fraction: gaussian1d_smoke 42.9%, ae_gan_hold 25.6%, five_word_joint_smoke 54.6%, two_pole 1.2%, unused_token_hold 0%, ring16 0.3%. Off-ladder diagnostic (separate cohort, no credit): gaussian1d_stability improves (stationary 2->14/72, shifted hold 0->6/24, std_ratio .662->.865, cdf_ks .321->.127) but mean_error_sigma worsens .255->.312 and the gate stays FAIL; mode_hold is unchanged FAIL because the rule never idles (0/1200). PR #398 was closed unmerged; the option and its tests are not on develop.
+
+**Next:** Do not sweep the threshold or re-run this rule. A successor must change the idle signal (it never fires on mode_hold and fires about half the time on easy holds), registered as a new structural idea with a fresh matched control.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/README.md) · [Record](records/archive-pr398-generator-idle-se-835e93900c21.json)
 
 ### bcap-default-baseline-direction-v1 · bcap-default-baseline-concluded-context-v1
 
@@ -3702,6 +3816,22 @@ Administrative abandoned: Concluded preregistered full-native FAIL. Training out
 
 [Evidence](../../) · [Record](records/lifecycle-1fdc4834581ce2e17a87e8e7.json)
 
+### atlas-particle-normal-v4 · lifecycle-6c54ed3e24538152abaee6dc
+
+**Scope:** administrative; administrative; revision `79e308b48506dccbf888516575643268a7499751b98b7d9802fbf7c56b2ad186`.
+
+None
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `structural`.
+
+
+
+Administrative superseded: Pre-fix partial run on commit 6c895b5924d0 superseded by clean reverified v4 execution at efebaebc63fb on commit 6261a5458c1f.
+
+**Next:** See successor atlas-particle-normal-v4@efebaebc63fbb814b384b2009aedaf06465137a061cb9fe618b83c9a326f82dd.
+
+[Evidence](../../) · [Record](records/lifecycle-6c54ed3e24538152abaee6dc.json)
+
 ### k3p-bcap-matched-v1 · lifecycle-78a4ebc4a9d5f08ddeab2fa9
 
 **Scope:** administrative; administrative; revision `5db772f81cafe59b642b5707e600380fb49c3d42623b5c769e03dd677bbbfafd`.
@@ -3846,6 +3976,22 @@ Smoothing 1e-4 repairs serial Gaussian acquisition and Ring16 passes in all four
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/6d3d5b21144d85061fce6349b706e9c2800b0f96/reports/forge/smooth-polar-factorial/README.md) · [Record](records/pr344-smoothed-dualnorm-1e-4-context-v1.json)
 
+### r1r2-pr401-concluded-archive · r1r2-pr401-concluded-archive-v1
+
+**Scope:** historical; family_context; revision `2cf7b0a4c796e29ace6cca12d2e553ad67211b5c`.
+
+Historical R1/R2 global recipe repairs preserve the original task/protocol gates; this reporting archive proposes no new experiment.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `concluded_research_archive`.
+
+
+
+All 34 complete measured revisions fail Ring16. Strongest complete repairs retain 5/6 ordinary tasks plus clock PASS; original scheduled baseline has 5/6 plus clock FAIL. Energy-U and frozen-prior energy both fail covariance/HQ on all 96 saved Ring16 panels. All original acquisition/endpoint distinctions and sources remain unchanged; MMD is unmeasured deferred preparation.
+
+**Next:** Retain the stronger measured control and negative findings; stop these exact repairs. Accept compact evidence-only replacement before closing original mixed PR #401. Defer MMD runtime and paid execution; no budget change, qualification reuse or rerun.
+
+[Evidence](../../reports/forge/r1r2-concluded-archive/README.md) · [Record](records/r1r2-pr401-concluded-archive-v1.json)
+
 ### k3p-r1r2-matched-v1 · readout-0297c36f9f2d9c5feb45b3cb
 
 **Scope:** calibration_diagnostic; scientific; revision `3bff4e5835a30fd018893f3b3cb1b612c5ba28d39e62247b61b728b38987b85e`.
@@ -3860,7 +4006,23 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 
 **Next:** Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.
 
-[Evidence](../../reports/forge/attempts/11d3d8b814674fd0841217c7e4304c38/result.json) · [Record](records/readout-0297c36f9f2d9c5feb45b3cb.json)
+[Record and receipt provenance](records/readout-0297c36f9f2d9c5feb45b3cb.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### bispf-prior-fresh-gaussian-v1 · readout-030ba1dfffb896ffe7ef8768
+
+**Scope:** research_diagnostic; scientific; revision `373a307163ee384dbed023239eda5b56bdce641eef92a5e8a5f87c8d3b54019c`.
+
+Replacing table codes with fresh N(0, I) latents of the same dimension loses sampled-latent passes that the learned BISPF default holds.
+
+**Observed:** {'INCOMPLETE': 15}; wall seconds 51.643; mechanism `structural`.
+
+
+
+Cancelled: every attempt crashed at prior construction (Recipe rejected fresh_gaussian during replace(prior_update=learned)); repaired and rerun as prior-ablation-a3-fresh-gaussian-r2. INCOMPLETE receipts preserved.
+
+**Next:** Superseded by prior-ablation-a3-fresh-gaussian-r2.
+
+[Record and receipt provenance](records/readout-030ba1dfffb896ffe7ef8768.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### forge-no-critic-penalty · readout-060e7be73e2832e314b9573f
 
@@ -3876,7 +4038,23 @@ Learned-MoG vector_two_broad PASS after exactly one registered operational cance
 
 **Next:** Retain cancelled receipt/cost and final scientific pass. Do not repeat this scientific PASS or promote from one reference. Complete host-provenance review before choosing further bounded calibration cells.
 
-[Evidence](../../reports/forge/attempts/661bd9830be94225891954f5fb690342/result.json) · [Record](records/readout-060e7be73e2832e314b9573f.json)
+[Record and receipt provenance](records/readout-060e7be73e2832e314b9573f.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### recipe-prior-refactor-bcap-pure-v1 · readout-0df182292d888440f5fb32ce
+
+**Scope:** current; scientific; revision `21fce6ca73c85eb35e4f58b73c17e05db60619759947cca48fbb1df01d9c6237`.
+
+Ordinary re-qualification of the unchanged selected bcap-pure recipe (recipe-prior-refactor-bcap-pure-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
+
+**Observed:** {'INCOMPLETE': 1, 'PASS': 20}; wall seconds 2134.696; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.004353; model_ae_gan_multimodal: modes=4, precision=0.99512, mass_tv=0.080078
+
+Completed discriminator_stability seed-0 CUDA execution for recipe-prior-refactor-bcap-pure-v1 (FAIL 7, PASS 7). Ordinary current-source seed-0 CUDA measurement recorded; archived historical pins remain intact.
+
+**Next:** Retain source-bound readout and compiled Forge reports.
+
+[Evidence](../../) · [Record](records/readout-0df182292d888440f5fb32ce.json)
 
 ### forge-onboarding-anchor-ablation · readout-10242573330bec1494c7602b
 
@@ -3892,7 +4070,39 @@ The public EMA-anchor ablation failed two_pole after 80 fixed-seed CPU updates: 
 
 **Next:** Stop this ablation at tier 1. Keep its frozen FAIL receipt as onboarding and fail-fast evidence; do not promote it or spend on downstream tasks. A scientific anchor comparison would require one explicitly bounded compatible parent/ablation design after the initial gate calibration gaps are addressed.
 
-[Evidence](../../reports/forge/attempts/c0178716dd3c4d5695b391919bf9ab81/result.json) · [Record](records/readout-10242573330bec1494c7602b.json)
+[Record and receipt provenance](records/readout-10242573330bec1494c7602b.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### bispf-optimized-quintic-v1 · readout-10ed0ff3f18514315a760f4a
+
+**Scope:** current; scientific; revision `8d941696e5e05607c763bccefbcbe34694996370bb6f1b03d70f514be6273def`.
+
+The single global quintic convolution-rule delta preserves every incumbent BISPF pass on the unchanged ordinary task suite while reducing large-image update latency; direct wide-image diagnostics independently test the accelerated path.
+
+**Observed:** {'FAIL': 11, 'PASS': 19}; wall seconds 3155.051; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0036687
+
+The single global quintic convolution-rule delta preserves all 19 incumbent BISPF passes across the complete 30-task ordinary suite, with all 11 historical failures retained and no pass regressions. Both ring phases pass every 1200 hold and 300 extension check; actual 3282 updates satisfy the fixed first-convergence stop rule under the maximum 7500-update allowance. All jobs finish without cancellation or retry.
+
+**Next:** Review the complete same-source performance matrix and direct wide-channel diagnostics together with this preserved full ordinary pass set before selecting one whole BISPF measurement row. Retain all failures, archived controls, exact source identities and unknown performance contention. No public-default adoption or natural-image quality claim follows automatically.
+
+[Evidence](../../reports/forge/bispf-optimized/README.md) · [Record](records/readout-10ed0ff3f18514315a760f4a.json)
+
+### bispf-optimized-quintic-v1 · readout-143d85d4540548b0ecec1604
+
+**Scope:** current; scientific; revision `6db8151c1a987602f94a8b9e854b003b7176fec3c3039cde07679d8960ae9c1b`.
+
+Ordinary re-qualification of the unchanged selected bispf recipe (bispf-optimized-quintic-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
+
+**Observed:** {'INCOMPLETE': 1, 'PASS': 20}; wall seconds 2427.454; mechanism `structural`.
+
+ring16_acquisition: modes=16, hq=0.9519, mass_tv=0.092041
+
+Completed discriminator_stability seed-0 CUDA execution for bispf-optimized-quintic-v1 (FAIL 6, PASS 8). Ordinary current-source seed-0 CUDA measurement recorded; archived historical pins remain intact.
+
+**Next:** Retain source-bound readout and compiled Forge reports.
+
+[Evidence](../../) · [Record](records/readout-143d85d4540548b0ecec1604.json)
 
 ### forge-no-critic-penalty · readout-15e86dd160a1d64a04ceee04
 
@@ -3908,7 +4118,7 @@ Corrected-source smoke matrix: two_pole FAIL, unused_token_hold FAIL, ae_gan_hol
 
 **Next:** Keep ordinary qualification stopped and retain this frozen cohort. The two-cell learned-MoG GPU pilot is registered but must wait for the requested joint device window. Collect deeper independent references only through explicit diagnostic selections, then evaluate the unchanged calibration criteria before adoption.
 
-[Evidence](../../reports/forge/attempts/04e834fc82f24061af71572dce3a22d8/result.json) · [Record](records/readout-15e86dd160a1d64a04ceee04.json)
+[Record and receipt provenance](records/readout-15e86dd160a1d64a04ceee04.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p-a2-off-native-diagnostic · readout-170dc0a68d5b68737b370a5f
 
@@ -3926,6 +4136,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 
 [Evidence](../../reports/forge/technique-receipts/b86f62c3e4f84a43b85d366e4cc43824.json) · [Record](records/readout-170dc0a68d5b68737b370a5f.json)
 
+### bispf-optimized-quintic-v1 · readout-1d42b97bbb8f1366a766a233
+
+**Scope:** current; scientific; revision `97cff463de780cdb270a5cb968799379fe2eef3bbad671fd59df0c3d9515eeb0`.
+
+Ordinary re-qualification of the unchanged selected BISPF recipe on the current develop source, reusing the compatible prior-ablation A1 evidence; the recorded discriminator_stability outcomes are reproduced.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 4, 'INCOMPLETE': 3, 'PASS': 6}; wall seconds 1300.973; mechanism `structural`.
+
+
+
+Ordinary discriminator_stability revision-14 re-qualification stops at Tier 1: six API model toys fail or crash, zero_tanh_smoke is unsupported, five-word smoke hit its 900 s wall clock. No new inventory row registered; revision-9 qualification retained. See reports/prior-ablation-2026-10-25/README.md.
+
+**Next:** Repair the Tier 1 execution defects or hold the API model toys before re-qualifying.
+
+[Record and receipt provenance](records/readout-1d42b97bbb8f1366a766a233.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
 ### k3p-bcap-matched-v1 · readout-21b533460c29dd5049aa64df
 
 **Scope:** current; scientific; revision `18096544dede6a02e09e34be118d13e5554caa5aba4216980dbb442e91761312`.
@@ -3941,6 +4167,22 @@ Fixed matched BCap passed all 3 smoke requirements and the first 5/19 quality re
 **Next:** Stop this frozen failed cohort; do not continue mode hold or infer native/shape quality from cloud behavioral passes. Investigate the saved mode-hold state under a separately bounded hypothesis before new training; calibration and policy-aware tasks remain required for adoption and broader comparisons.
 
 [Evidence](../../reports/forge/technique-receipts/0184ca1327794ab58168d853ce0ad978.json) · [Record](records/readout-21b533460c29dd5049aa64df.json)
+
+### recipe-prior-refactor-r1r2-v1 · readout-271e0b4766487e5e23d59018
+
+**Scope:** current; scientific; revision `4717b4b13aba2f8a4f523a5b8c66863b60d55c5d05f4bfa2dd6a238a829a86a7`.
+
+Ordinary re-qualification of the unchanged selected r1r2 recipe on the current develop source reproduces its recorded discriminator_stability outcomes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 3, 'INCOMPLETE': 5, 'PASS': 5}; wall seconds 236.071; mechanism `structural`.
+
+ring16_acquisition: modes=16, hq=0.84424, mass_tv=0.051514
+
+Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 core Tier 1 verdicts (5 PASS, ring16_acquisition FAIL, clockfree_audit_measurement_v1 FAIL) and stops at Tier 1; revision-9 qualification retained.
+
+**Next:** Retain revision-9 qualification in technique-inventory; address ring16_acquisition and clockfree_audit_measurement_v1 in family follow-up.
+
+[Record and receipt provenance](records/readout-271e0b4766487e5e23d59018.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### forge-no-critic-penalty · readout-28f0c9140b4cfeef57f23dd2
 
@@ -3972,7 +4214,7 @@ Joined host-profile diagnostic: 3 PASS and 2 FAIL across five cells for 156.2837
 
 **Next:** Preserve this control and do not fill its remaining quality cells or extend the failed 7k parent. A separately registered A2-off native diagnostic changes one substantive factor while preserving seed/init/MoG width and full gates; reuse this certified grid result without another control launch. Do not infer a cause or a positive lineage from this single run.
 
-[Evidence](../../reports/forge/attempts/49d41e284fde41698212677403ca5d67/result.json) · [Record](records/readout-2c2eb24207b627b2ad26ea18.json)
+[Record and receipt provenance](records/readout-2c2eb24207b627b2ad26ea18.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### forge-onboarding-anchor-ablation · readout-2c30cecb0a3f37d001ce3b28
 
@@ -3988,7 +4230,55 @@ Corrected-source smoke matrix: two_pole FAIL, unused_token_hold PASS, ae_gan_hol
 
 **Next:** Keep ordinary qualification stopped and retain this frozen cohort. The two-cell learned-MoG GPU pilot is registered but must wait for the requested joint device window. Collect deeper independent references only through explicit diagnostic selections, then evaluate the unchanged calibration criteria before adoption.
 
-[Evidence](../../reports/forge/attempts/9cd112e7346b45ed8cb241e1498685ad/result.json) · [Record](records/readout-2c30cecb0a3f37d001ce3b28.json)
+[Record and receipt provenance](records/readout-2c30cecb0a3f37d001ce3b28.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### bispf-optimized-quintic-v1 · readout-322bc05e8bb593d80d65cb36
+
+**Scope:** research_diagnostic; scientific; revision `fbc1bf4bda35c195efe7830c359d1851febdbca85b4257b4415d66187ed3d248`.
+
+Measure update throughput and preserve the sustained stripe PASS on unchanged small-image task contracts. Retain the held bars outcome.
+
+**Observed:** {'FAIL': 1, 'PASS': 1}; wall seconds 55.034; mechanism `structural`.
+
+img_bars4: modes=2, hq=0.96875; img_stripes2: modes=2, hq=1
+
+Original small-image controls retain stripes PASS and bars FAIL at the unchanged 600-update budget.
+
+**Next:** Preserve these exact controls and do not repeat unchanged experiments.
+
+[Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-322bc05e8bb593d80d65cb36.json)
+
+### bispf-v2 · readout-3721266a32807c156725dfc8
+
+**Scope:** research_diagnostic; scientific; revision `34571ac88b53ec2ad8c9dead16a5b23ba3bb408dcd2f2cf3d8c6d8c290d93eef`.
+
+Measure incumbent native BISPF on explicit width64 architecture-portability variants of stripes2 and bars4. These new larger-capacity task identities retain the original target, numerical gates, prior and 600-update budget and provide the actual native control for a later matched optimized solver comparison.
+
+**Observed:** {'FAIL': 1, 'PASS': 1}; wall seconds 145.379; mechanism `structural`.
+
+img_bars4_w64_optimizer_diagnostic: modes=4, hq=0.90625; img_stripes2_w64_optimizer_diagnostic: modes=2, hq=1
+
+Native BISPF on the two explicitly wider architecture-portability hosts passes stripes (HQ1,2 modes,14 terminal passing checks) and fails bars (endpoint HQ0.90625,4 modes but only2 terminal passing checks versus5 required). Both arms complete600 updates and24 observations with finite states and seed0 public initialization.
+
+**Next:** Retain both native outcomes as controls. Quintic passes both wider tasks and proceeds to separately frozen full performance and ordinary quality; Frobenius regresses stripes and stops. No default adoption follows.
+
+[Record and receipt provenance](records/readout-3721266a32807c156725dfc8.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### recipe-prior-refactor-release07-gan-v3-v1 · readout-3bd45e331f5dd03701da2700
+
+**Scope:** current; scientific; revision `5e8301e5d868022f59e92f0e0c0e67348bdebd00d372ace75f998abe7d469fad`.
+
+Ordinary re-qualification of the unchanged selected release07-gan-v3 recipe (recipe-prior-refactor-release07-gan-v3-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
+
+**Observed:** {'FAIL': 4, 'PASS': 10}; wall seconds 389.801; mechanism `structural`.
+
+
+
+Completed discriminator_stability seed-0 CUDA execution for recipe-prior-refactor-release07-gan-v3-v1 (FAIL 4, PASS 10). Ordinary current-source seed-0 CUDA measurement recorded; archived historical pins remain intact.
+
+**Next:** Retain source-bound readout and compiled Forge reports.
+
+[Evidence](../../) · [Record](records/readout-3bd45e331f5dd03701da2700.json)
 
 ### bispf-v1 · readout-3f3f893ae724d651f1655fc9
 
@@ -4006,6 +4296,70 @@ Born-Infeld Sinkhorn Particle Flow (BISPF, bispf-v1) passes 6/6 required Tier 1 
 
 [Evidence](../../reports/forge/bispf/README.md) · [Record](records/readout-3f3f893ae724d651f1655fc9.json)
 
+### recipe-prior-refactor-release07-gan-v3-v1 · readout-40767bea377ac807d62a047a
+
+**Scope:** research_diagnostic; scientific; revision `af91a2d7a18e4a328dc19baedc201f2d690a135aff5df6ea7a9d59cb29c9e7ca`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 65.293; mechanism `structural`.
+
+
+
+All six declared DCGAN mock-data performance workloads completed their finite public-trainer execution budgets (3 warmup + 10 measured updates, seed 0). Diagnostic execution evidence only; no image-quality, qualification or default-adoption claim.
+
+**Next:** Use the published scaling measurements to budget larger-image pilots; restore verifiable contention telemetry before paired timing claims. Profile complete-update components before changing recipes. Keep the default unchanged and require separate quality evidence for adoption.
+
+[Evidence](../../reports/forge/scaling-receipts/dcgan-performance-cloud-v2/release07-gan-v3-dcgan_performance_b64-01718bbf7d27ee3b.json) · [Record](records/readout-40767bea377ac807d62a047a.json)
+
+### atlas-particle-normal-v4 · readout-423f82f13ee30c0a95fd266a
+
+**Scope:** research_diagnostic; scientific; revision `efebaebc63fbb814b384b2009aedaf06465137a061cb9fe618b83c9a326f82dd`.
+
+Guarding LossSurprise.decide against KA2 pre-anchor critic-only SettledReopenGuard witnesses (guard.ka2_anchor_started is False and witness_roles == {'critic'}, where the critic ladder has stepped down during Phase A acquisition while the generator ladder remains unsettled at full rate s=1.0) prevents premature step-35 critic re-empowerment on N=12 mode_hold while preserving post-anchor equilibrium shift detection, recovering 8/8 mode_hold and unblocking ring_hold, ring_extension, and target_shift_recovery while retaining birth_death_cells=256 and NormalNoiseManipulator(sigma=0.0065) to preserve all 6/6 vector, 4/4 image, 2/2 VAE, and 2/2 clockfree passes for >= 24 PASS / 0 INCOMPLETE with zero task regressions relative to both atlas-particle-normal-v2 and atlas-particle-normal-v3 under protocol seed 0.
+
+**Observed:** {'FAIL': 14, 'PASS': 24}; wall seconds 4407.023; mechanism `structural`.
+
+img_blobs4_residual16: modes=4, hq=0.96875; img_intensity2: modes=2, hq=1
+
+Guarding LossSurprise.decide against KA2 pre-anchor critic-only SettledReopenGuard witnesses (guard.ka2_anchor_started is False and witness_roles == {'critic'}) prevented the premature step-35 critic reopen on N=12 mode_hold while preserving post-anchor equilibrium shift detection across CPU and CUDA, recovering mode_hold (8/8 modes, hq=0.9998) and unblocking ring_hold, ring_extension, and target_shift_recovery for 24 PASS, 14 FAIL, 0 INCOMPLETE across all 38 executable tasks (6 prerequisite-deferred, 4 shared_pending unrouted adapters) with zero task regressions relative to both atlas-particle-normal-v2 and atlas-particle-normal-v3.
+
+**Next:** Investigate adaptive per-population cell budgeting so N=256 rare-mode vector hosts avoid under-resolved k=7 kNN turnover without doubling K=256 FeatureCellBirthDeath cells on N=20000 100-mode tasks (grid100, rotated100, staggered100), and investigate joint-inference stability for BiGAN/DDGAN/five_word_joint hosts.
+
+[Record and receipt provenance](records/readout-423f82f13ee30c0a95fd266a.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### bispf-optimized-quintic-v1 · readout-44a844de0b6e23e430a12858
+
+**Scope:** research_diagnostic; scientific; revision `52bcfbda682fdbe578d1c0c352a31673659d5679d685e8aa4d21931940790e56`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 61.564; mechanism `structural`.
+
+
+
+Completed dcgan_performance seed-0 CUDA execution for bispf-optimized-quintic-v1 (PASS 6). Diagnostic performance/research scope only; no qualification credit.
+
+**Next:** Retain source-bound readout and compiled Forge reports.
+
+[Record and receipt provenance](records/readout-44a844de0b6e23e430a12858.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### e22 · readout-454e20c82f89cc56488e7f98
+
+**Scope:** research_diagnostic; scientific; revision `c2c710554730bb558077ac74b96b10fc306098725e2004abe1b5c91362c5f6f4`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 82.367; mechanism `structural`.
+
+
+
+All six declared DCGAN mock-data performance workloads completed their finite public-trainer execution budgets (3 warmup + 10 measured updates, seed 0). Diagnostic execution evidence only; no image-quality, qualification or default-adoption claim.
+
+**Next:** Use the published scaling measurements to budget larger-image pilots; restore verifiable contention telemetry before paired timing claims. Profile complete-update components before changing recipes. Keep the default unchanged and require separate quality evidence for adoption.
+
+[Evidence](../../reports/forge/scaling-receipts/dcgan-performance-cloud-v2/e22-dcgan_performance_b64-82b8a8a97ca180b5.json) · [Record](records/readout-454e20c82f89cc56488e7f98.json)
+
 ### ka2--8d6bb101262f49dcef37111b37ab781ca09652b47ad95e783ccea4dfbec680b4 · readout-457f93f65c1e6782fba74306
 
 **Scope:** current; scientific; revision `8ff7b28082062dbb985e5b9ceb2f5cda878c7afc57ca55b9b00221e5dd2e80e3`.
@@ -4020,7 +4374,39 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
-[Evidence](../../reports/forge/attempts/0d93422aa0ff4852bba4f0de4a1e6926/result.json) · [Record](records/readout-457f93f65c1e6782fba74306.json)
+[Record and receipt provenance](records/readout-457f93f65c1e6782fba74306.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### bispf-optimized-quintic-v1 · readout-464567d128031fee54c42252
+
+**Scope:** research_diagnostic; scientific; revision `fbc1bf4bda35c195efe7830c359d1851febdbca85b4257b4415d66187ed3d248`.
+
+Matched original-quintic control for the throughput recipe on the two unchanged wide-image tasks, comparing the exercised precision and optimizer execution changes.
+
+**Observed:** {'PASS': 2}; wall seconds 45.999; mechanism `structural`.
+
+img_bars4_w64_optimizer_diagnostic: modes=4, hq=1; img_stripes2_w64_optimizer_diagnostic: modes=2, hq=1
+
+Both unchanged width 64 image controls PASS their complete 600-update sustained gates.
+
+**Next:** Retain the source-bound controls and actual-training GIFs; do not rerun unchanged arms.
+
+[Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-464567d128031fee54c42252.json)
+
+### bispf-optimized-v3 · readout-47d84c98f42853a07d20becb
+
+**Scope:** current; scientific; revision `e38fbbdd10585f61ef6ff2a694e2087746956511dff55afa441fbb63497267c6`.
+
+The frozen CUDA-graph augmented-polar BISPF optimizer version 3 reduces DCGAN update latency while preserving every incumbent counted task pass: all six Tier 1 tasks, all ten counted Tier 2 tasks, the counted ring endurance verdict, and the separate clock and ring-hold diagnostic passes. The complete unchanged held task set remains measured and visible; no original result is replaced or inherited.
+
+**Observed:** {'PASS': 1}; wall seconds 23.453; mechanism `structural`.
+
+
+
+Stop this numerical-backend revision: graph acceleration improves the 64-pixel profile but misses the declared 256-pixel target. The ordinary quality study was started prematurely and canceled after one completed smoke pass, giving no full qualification.
+
+**Next:** Retain the rejected solver and partial costs under their original identities. Test separately declared optimizer-rule alternatives with direct wide-channel controls before an ordinary full study or selection.
+
+[Record and receipt provenance](records/readout-47d84c98f42853a07d20becb.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p · readout-4bd94051f203bbbb28a3e7a6
 
@@ -4036,7 +4422,23 @@ The first Forge CPU smoke pilot failed two_pole after 80 updates: mean_abs 0.106
 
 **Next:** Preserve this exact negative result, investigate smoke transfer predictiveness in Phase D, and continue software/multi-GPU verification without weakening this gate to turn the result into a pass.
 
-[Evidence](../../reports/forge/attempts/b766e89d1a0843ba9af94f2ce94e4273/result.json) · [Record](records/readout-4bd94051f203bbbb28a3e7a6.json)
+[Record and receipt provenance](records/readout-4bd94051f203bbbb28a3e7a6.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### atlas-particle-normal-v2 · readout-4dc982d111099c9b0f33a18e
+
+**Scope:** research_diagnostic; scientific; revision `de4379506c30e147385182dfd8cdc61133024f4636c2ecbf07cea1c509cc2cc0`.
+
+Re-executing atlas-particle-normal-v2 on the repaired source tree (with profile-scoped AE task snapshot sources, restored UpdatePolicy conditional row-semantics validation, restored Recipe optimizer parameter deduplication, and SettleTest/FeatureCellBirthDeath diagnostic step-stamp sanitization) reproduces >= 22 PASS / 0 INCOMPLETE on prior-ablation-full-suite-v1 under protocol seed 0.
+
+**Observed:** {'FAIL': 16, 'PASS': 22}; wall seconds 3278.971; mechanism `structural`.
+
+img_stripes2_residual16: modes=2, hq=0.96875
+
+Re-verified atlas-particle-normal-v2 on the repaired source tree (profile-scoped AE task snapshot sources, restored UpdatePolicy conditional row-semantics validation, restored Recipe optimizer parameter deduplication, clean non-policy transfer_behavior serve_average/capability bindings, and active SettleTest/FeatureCellBirthDeath diagnostic step-stamp sanitization). Deterministically achieves 22 PASS, 16 FAIL, 0 INCOMPLETE across 38 executed tasks on prior-ablation-full-suite-v1 under protocol seed 0 (NVIDIA RTX A6000), observing clockfree_audit parity_comparisons=4 >= 4 and avoiding gaussian1d_smoke falsifier.
+
+**Next:** Address 100-mode clean-covariance deficits (grid100/staggered100/rotated100) and non-schedule joint BiGAN critic balance on five_word_joint_smoke in a dedicated follow-up mechanism study.
+
+[Record and receipt provenance](records/readout-4dc982d111099c9b0f33a18e.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### forge-no-critic-penalty · readout-4e04059eb9f631a2e406447e
 
@@ -4052,7 +4454,7 @@ The ordinary fresh-checkout two_pole attempt failed its slope bound (grad_med1.2
 
 **Next:** Retain all nine cheap-cell outcomes and costs. Keep ordinary qualification stopped. Review the exact historical/public-host parity differences before deeper reference spending; reserve the required GPU window and register only justified missing reference cells. Do not tune thresholds or treat unmeasured reference labels as failures.
 
-[Evidence](../../reports/forge/attempts/6f24cc4b4c814096bacc4fcc47110a98/result.json) · [Record](records/readout-4e04059eb9f631a2e406447e.json)
+[Record and receipt provenance](records/readout-4e04059eb9f631a2e406447e.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p--370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6 · readout-4e44570c882c7d07bbddc813
 
@@ -4068,7 +4470,39 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
-[Evidence](../../reports/forge/attempts/3472d2f10e984168a3cb9877d287d069/result.json) · [Record](records/readout-4e44570c882c7d07bbddc813.json)
+[Record and receipt provenance](records/readout-4e44570c882c7d07bbddc813.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### recipe-prior-refactor-k3p-v1 · readout-4f82f909f64b3d97917d6b1a
+
+**Scope:** current; scientific; revision `9e38108414dd84e7f5374086d86b08764ecc4553fbd329768438e9b71c900194`.
+
+Ordinary re-qualification of the unchanged selected k3p recipe on the current develop source reproduces its recorded discriminator_stability outcomes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 2, 'INCOMPLETE': 4, 'PASS': 5}; wall seconds 251.421; mechanism `structural`.
+
+five_word_joint_smoke: modes=5, mass_tv=0.018945
+
+Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 core Tier 1 verdicts (5 PASS, ring16_acquisition FAIL, clockfree_audit_measurement_v1 FAIL) and stops at Tier 1; revision-9 qualification retained.
+
+**Next:** Retain revision-9 qualification in technique-inventory; address ring16_acquisition and clockfree_audit_measurement_v1 in family follow-up.
+
+[Record and receipt provenance](records/readout-4f82f909f64b3d97917d6b1a.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### recipe-prior-refactor-r1r2-v1 · readout-5449c98aa6ac41a9138a74e6
+
+**Scope:** research_diagnostic; scientific; revision `4c33fa871d84961a929bbfd21b0f147320e1bf8ccfb5c844792e03d19cd7d834`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 60.253; mechanism `structural`.
+
+
+
+Completed dcgan_performance seed-0 CUDA execution for recipe-prior-refactor-r1r2-v1 (PASS 6). Diagnostic performance/research scope only; no qualification credit.
+
+**Next:** Retain source-bound readout and compiled Forge reports.
+
+[Record and receipt provenance](records/readout-5449c98aa6ac41a9138a74e6.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### forge-onboarding-anchor-ablation · readout-5470a57cf1a74abc896c8a55
 
@@ -4084,7 +4518,7 @@ Registered mode-hold diagnostic FAIL: 5/8 modes, HQ .992919921875, zero passing 
 
 **Next:** Conclude this mode-only diagnostic. Preserve the negative in memory; do not fill this exact calibration profile solely for adoption, since all three smoke predicates fail and the unchanged criteria require a positive with no false rejection. A new justified profile or independently compatible positive reference is needed; no general downstream or universal algorithm claim.
 
-[Evidence](../../reports/forge/attempts/eac540ccfe564a5ab396abdd545ab013/result.json) · [Record](records/readout-5470a57cf1a74abc896c8a55.json)
+[Record and receipt provenance](records/readout-5470a57cf1a74abc896c8a55.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### ka2 · readout-56577544c52c17aa60639d19
 
@@ -4116,7 +4550,7 @@ Reject the one-factor A2-off diagnostic on the named affine grid100 learned-MoG 
 
 **Next:** Keep A2 in the reference and preserve this negative in memory. Do not extend this failed parent, rerun its control or launch a seed/width sweep. Further calibration needs a supported new hypothesis or compatible saved positive evidence; no qualification or default adoption.
 
-[Evidence](../../reports/forge/attempts/d4d633052321469e82caff90210ef309/result.json) · [Record](records/readout-5830d399b6741ce7b3a2b992.json)
+[Record and receipt provenance](records/readout-5830d399b6741ce7b3a2b992.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### r1r2--abf642c42c5346ad096c29202e4716db535c393c113478552133c1c22761ddbd · readout-5bc30fee4d41b69294b1e32e
 
@@ -4134,6 +4568,38 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.0085, 'reg_coeff': 1.0,
 
 [Evidence](../../reports/forge/technique-receipts/3c6a84341114445da149f04ab7541f01.json) · [Record](records/readout-5bc30fee4d41b69294b1e32e.json)
 
+### bispf-prior-fresh-gaussian-v1 · readout-5ed4195bb58c87dc84a60827
+
+**Scope:** research_diagnostic; scientific; revision `535d9c1c86a6b34cd606465d32a8071e842e37015d4641da4c7e90c281e7c78b`.
+
+Replacing table codes with fresh N(0, I) latents of the same dimension loses sampled-latent passes that the learned BISPF default holds.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 10, 'PASS': 5}; wall seconds 1433.143; mechanism `structural`.
+
+vector_unequal_width: hq=0.84082, mass_tv=0.024658; vector_unequal_mass: hq=0.89111, mass_tv=0.092139
+
+Fresh N(0,I) latent: 5 PASS / 10 FAIL on the 15 supported sampled-MoG tests (33 blocked by design); identical verdicts to the frozen table; loses ring16_acquisition (hq 0.53) and mode_hold (hq 0.50) vs learned. See reports/prior-ablation-2026-10-25/README.md.
+
+**Next:** Stop; the learned table beats an ordinary Gaussian latent on this suite.
+
+[Record and receipt provenance](records/readout-5ed4195bb58c87dc84a60827.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### recipe-prior-refactor-r1r2-v1 · readout-613fc91cba03a8c327465202
+
+**Scope:** current; scientific; revision `8a77a5bd4e1f8f1c74bb516bb749e37a3170c8a80ed84cf0924d59b0b0d04bb6`.
+
+Ordinary re-qualification of the unchanged selected r1r2 recipe (recipe-prior-refactor-r1r2-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
+
+**Observed:** {'FAIL': 4, 'PASS': 10}; wall seconds 380.031; mechanism `structural`.
+
+
+
+Completed discriminator_stability seed-0 CUDA execution for recipe-prior-refactor-r1r2-v1 (FAIL 4, PASS 10). Ordinary current-source seed-0 CUDA measurement recorded; archived historical pins remain intact.
+
+**Next:** Retain source-bound readout and compiled Forge reports.
+
+[Evidence](../../) · [Record](records/readout-613fc91cba03a8c327465202.json)
+
 ### ka2-global-repair-v1 · readout-628b01d1adffd11312aff9b1
 
 **Scope:** current; scientific; revision `71a50b7b10fdc6307c92b781224e73625f670377ffeb4a31b9f3abe4b34be108`.
@@ -4148,7 +4614,23 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0363295227<0.3; q
 
 **Next:** Initial complete candidate rejected. Its subsequent separately bounded global coupled-rate search is concluded; no automatic paid continuation or default adoption.
 
-[Evidence](../../reports/forge/attempts/e2fcaf0f2965415db4c7234a024d3031/result.json) · [Record](records/readout-628b01d1adffd11312aff9b1.json)
+[Record and receipt provenance](records/readout-628b01d1adffd11312aff9b1.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### bispf-pure-global-v1 · readout-6675da6b575648d03b2182e9
+
+**Scope:** research_diagnostic; scientific; revision `418fb58baf87609c9d8a8e95d60af662e1fe025f891dac4ccf81de16515f9b7b`.
+
+Disabling every declared BISPF shape/step gate (one pure global recipe) loses some of the selected recipe's passes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 18, 'INCOMPLETE': 3, 'PASS': 13}; wall seconds 2744.178; mechanism `structural`.
+
+
+
+Shape/step gates off: 13 PASS / 18 FAIL of 49; loses ring16_acquisition (sustained window), mode_hold, ring_extension, img_stripes2 and the five-word smoke (wall clock). See reports/prior-ablation-2026-10-25/README.md.
+
+**Next:** Stop; keep the declared gates in the default recipe and investigate which single gate carries ring16/mode_hold.
+
+[Record and receipt provenance](records/readout-6675da6b575648d03b2182e9.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p-no-output-noise-diagnostic · readout-6c0c2c5c6610ecfe73fe315d
 
@@ -4166,6 +4648,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.130
 
 [Evidence](../../reports/forge/technique-receipts/813505867f5348bfbe113791d78ce0c5.json) · [Record](records/readout-6c0c2c5c6610ecfe73fe315d.json)
 
+### bispf-v2 · readout-7450f3d30d639bad8e4f25e5
+
+**Scope:** research_diagnostic; scientific; revision `e558bd3a50a3746df01baaf4759aaae09b48f465012d157796b76602cd2ce2e0`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 170.099; mechanism `structural`.
+
+
+
+All six declared DCGAN mock-data performance workloads completed their finite public-trainer execution budgets (3 warmup + 10 measured updates, seed 0). Diagnostic execution evidence only; no image-quality, qualification or default-adoption claim.
+
+**Next:** Use the published scaling measurements to budget larger-image pilots; restore verifiable contention telemetry before paired timing claims. Profile complete-update components before changing recipes. Keep the default unchanged and require separate quality evidence for adoption.
+
+[Evidence](../../reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bispf-dcgan_performance_b64-8980e3805d46c8aa.json) · [Record](records/readout-7450f3d30d639bad8e4f25e5.json)
+
 ### forge-no-critic-penalty · readout-75d5cdc5a88167d59ceff1b2
 
 **Scope:** calibration_diagnostic; scientific; revision `5bbe11c14ddca9d5334589d6901e38838d627fdecee94d6bd6aa86e1f1e76125`.
@@ -4180,7 +4678,7 @@ Registered mode-hold diagnostic FAIL: 0/8 modes, HQ 0, zero passing observations
 
 **Next:** Conclude this mode-only diagnostic. Preserve the negative in memory; do not fill this exact calibration profile solely for adoption, since all three smoke predicates fail and the unchanged criteria require a positive with no false rejection. A new justified profile or independently compatible positive reference is needed; no general downstream or universal algorithm claim.
 
-[Evidence](../../reports/forge/attempts/6d10bbf90f1b4233a73034391599ecdb/result.json) · [Record](records/readout-75d5cdc5a88167d59ceff1b2.json)
+[Record and receipt provenance](records/readout-75d5cdc5a88167d59ceff1b2.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p · readout-7650981f9a48a164aebbd631
 
@@ -4196,7 +4694,87 @@ The explicit published residual16 intensity host passed all sustained/terminal r
 
 **Next:** Bind published vector/native architecture and initialization policies explicitly through shared public components before expanding the full reference matrix. Keep this positive, prior failures and costs in separate compatible cohorts. Register any further diagnostic narrowly; no automatic control/reference sweep or adoption is justified by one image pass.
 
-[Evidence](../../reports/forge/attempts/e13557902b3544a081defbcac092c136/result.json) · [Record](records/readout-7650981f9a48a164aebbd631.json)
+[Record and receipt provenance](records/readout-7650981f9a48a164aebbd631.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### atlas-particle-normal-v1 · readout-78b2f38e0f8c24f678b47fa2
+
+**Scope:** research_diagnostic; scientific; revision `119e0a54eeb8727fbc823acf61cf2cfa364a63a69bed6b46d1cefcbb8f49d1cf`.
+
+Swapping MoGParticlePrior for a technique-owned unstandardized ParticlePrior plus NormalNoiseManipulator (sigma=0.005) unblocks public_trainer execution across the 48-task full suite while keeping the public atlas preset recipe fixed under protocol seed 0.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 12, 'PASS': 6}; wall seconds 3631.847; mechanism `structural`.
+
+vector_unequal_mass: hq=0.99146, mass_tv=0.014307; vector_anisotropic: hq=0.97925, mass_tv=0.005778
+
+Full-suite diagnostic (prior-ablation-full-suite-v1, seed 0, deterministic_orthogonal): technique-owned prior_mechanism (unstandardized ParticlePrior + NormalNoiseManipulator sigma=0.005, deterministic sigma=0.0 on enumerated image tasks) with unchanged atlas preset recipe unblocked all 25 public_trainer tasks (19 executed, 6 continuations gated by parent clean-variance verdicts, 23 non-policy/unrouted hosts blocked). Both study signatures confirmed: grid100 precision=0.99737 (>=0.95, 100/100 modes, mass_tv=0.02576, center_rms_sigma=0.13426; rotated100 precision=0.9993, staggered100 precision=0.9969) and gaussian1d_smoke mean_error_sigma=0.0052 (<=0.20 PASS). Total 6 PASS (gaussian1d_smoke, vector_two_broad, vector_anisotropic mass_tv=0.0058, vector_overlap, vector_spiral, img_stripes2 hq=1.0000), 12 FAIL, 1 runtime BLOCKED (zero_tanh_smoke), 29 preflight/dependency not run.
+
+**Next:** Test a clean-training Atlas study (output_noise_mode='fixed', output_noise_std=0.0 paired with prior_mechanism NormalNoiseManipulator sigma=0.005 and min(birth_death_cells, num_particles // 2) cell cap) so the generator carries full within-mode variance under clean evaluation without altering row-local particle transport.
+
+[Record and receipt provenance](records/readout-78b2f38e0f8c24f678b47fa2.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### bispf-throughput-v1 · readout-7a4fda449cb2e080c1aebf91
+
+**Scope:** research_diagnostic; scientific; revision `5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d`.
+
+Preserve both incumbent width64 image passes under the unchanged full numerical gates, using one declared throughput recipe. Performance does not imply quality.
+
+**Observed:** {'PASS': 2}; wall seconds 35.621; mechanism `structural`.
+
+img_bars4_w64_optimizer_diagnostic: modes=4, hq=1; img_stripes2_w64_optimizer_diagnostic: modes=2, hq=1
+
+Both width 64 image tasks PASS all original sustained gates at 600 updates: HQ 1,2 stripe modes and 4 bar modes, with passing suffixes 12 and 9.
+
+**Next:** Retain this positive diagnostic beside ordinary quality and the completed performance matrix; no natural-image quality or automatic promotion claim.
+
+[Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-7a4fda449cb2e080c1aebf91.json)
+
+### bispf-optimized-quintic-v1 · readout-7b017c8ed900b677ebf6bf55
+
+**Scope:** research_diagnostic; scientific; revision `97cff463de780cdb270a5cb968799379fe2eef3bbad671fd59df0c3d9515eeb0`.
+
+Re-qualification: the unchanged selected BISPF recipe on develop (after the review RNG-contract and declared-gate fixes) reproduces its recorded full-suite outcomes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 16, 'INCOMPLETE': 2, 'PASS': 20}; wall seconds 3203.035; mechanism `structural`.
+
+grid100: precision=0.30497, center_rms_sigma=1.4971, mass_tv=0.17028, radial_ks=0.42394
+
+Re-qualification on develop source b4d7f2c42: all 29 recorded PASS/FAIL verdicts reproduced (18 PASS, 11 FAIL); new: clockfree_audit PASS, target_shift_recovery and four API model toys FAIL. 19 PASS / 16 FAIL / 7 blocked / 5 not run / 2 incomplete of 49. See reports/prior-ablation-2026-10-25/README.md.
+
+**Next:** Keep as the default recipe; register a structural idea that combines learned precision with frozen-table mass evenness on the native grids.
+
+[Record and receipt provenance](records/readout-7b017c8ed900b677ebf6bf55.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### recipe-prior-refactor-k3p-v1 · readout-7bbb55d0ca2d3c3b99f56d10
+
+**Scope:** research_diagnostic; scientific; revision `126a196fb9b0bca2fb4836c8fd8a23ab02ef28cf24e6068342f97302a2061ec3`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 59.095; mechanism `structural`.
+
+
+
+Completed dcgan_performance seed-0 CUDA execution for recipe-prior-refactor-k3p-v1 (PASS 6). Diagnostic performance/research scope only; no qualification credit.
+
+**Next:** Retain source-bound readout and compiled Forge reports.
+
+[Record and receipt provenance](records/readout-7bbb55d0ca2d3c3b99f56d10.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### atlas-particle-normal-v1 · readout-7ede56c9affbd90cbf1159f2
+
+**Scope:** research_diagnostic; scientific; revision `5818d9b925e94cd23f9c7e68ad425cef0b26d5fa993d6ece28f0f7bb3a954810`.
+
+Swapping MoGParticlePrior for a technique-owned unstandardized ParticlePrior plus NormalNoiseManipulator (sigma=0.005) unblocks public_trainer execution across the 48-task full suite while keeping the public atlas preset recipe fixed under protocol seed 0.
+
+**Observed:** {'FAIL': 10, 'PASS': 11}; wall seconds 2876.824; mechanism `structural`.
+
+img_blobs4_residual16: modes=4, hq=1; img_intensity2: modes=2, hq=0.96875
+
+Atlas particle-normal prior replication study executed 21 of 48 tasks in research_diagnostic scope under seed 0: 11 passed, 10 failed, 27 tasks unexecuted due to preflight blockers. Prediction on grid100 observed (precision >= 0.95); falsifier avoided (mean_error_sigma <= 0.20). Overall study outcome is incomplete; qualified_tier 0 grants no production qualification or merge authorization.
+
+**Next:** Resolve behavior adapter evaluator source hash mismatches in preflight checkers, execute unblocked tasks to complete study scope, and address intra-mode covariance scaling.
+
+[Record and receipt provenance](records/readout-7ede56c9affbd90cbf1159f2.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d · readout-813a2ad71ca3580b4a8d46c1
 
@@ -4212,7 +4790,39 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
-[Evidence](../../reports/forge/attempts/9007daae982e4bc3b8c9f4019d48bd26/result.json) · [Record](records/readout-813a2ad71ca3580b4a8d46c1.json)
+[Record and receipt provenance](records/readout-813a2ad71ca3580b4a8d46c1.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### atlas-particle-normal-v4 · readout-828f21ff6556847d8f000678
+
+**Scope:** research_diagnostic; scientific; revision `79e308b48506dccbf888516575643268a7499751b98b7d9802fbf7c56b2ad186`.
+
+Guarding LossSurprise.decide against critic-only SettledReopenGuard witnesses (witness_roles == {'critic'}, where the critic ladder has stepped down while the generator ladder remains unsettled at full rate s=1.0) prevents premature step-35 critic re-empowerment on N=12 mode_hold, recovering 8/8 mode_hold and unblocking ring_hold, ring_extension, and target_shift_recovery while retaining birth_death_cells=256 and NormalNoiseManipulator(sigma=0.0065) to preserve all 6/6 vector, 4/4 image, 2/2 VAE, and 2/2 clockfree passes for >= 24 PASS / 0 INCOMPLETE with zero task regressions relative to both atlas-particle-normal-v2 and atlas-particle-normal-v3 under protocol seed 0.
+
+**Observed:** {'FAIL': 6, 'INCOMPLETE': 1, 'PASS': 8}; wall seconds 471.024; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0099752
+
+Cancelled partial diagnostic run of atlas-particle-normal-v4 on pre-fix commit 6c895b5924d0 (clockfree_audit INCOMPLETE before public_components/zero_tanh_smoke fix in 6261a5458c1f).
+
+**Next:** Mark revision 79e308b48506 superseded by efebaebc63fb and retain clean reverified v4 evidence.
+
+[Record and receipt provenance](records/readout-828f21ff6556847d8f000678.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### bispf-optimized-frobenius-v1 · readout-85a714c5fc9c0b038c400b22
+
+**Scope:** research_diagnostic; scientific; revision `c6dadb65374f5c93fe3922c2e10e32b5964105d4dc13ff80b97773c85b9f1aff`.
+
+The global frobenius rule retains the native BISPF pass set on both unchanged width-64 image tasks, including a positive stripes acquisition pass, under the same seed, public initializer, data sequence, prior, sampling, 600 updates and 24 checks.
+
+**Observed:** {'FAIL': 2}; wall seconds 29.708; mechanism `structural`.
+
+img_stripes2_w64_optimizer_diagnostic: modes=1, hq=0.96875; img_bars4_w64_optimizer_diagnostic: modes=2, hq=0.8125
+
+Frobenius convolution rule fails both width64 image gates at600 updates: stripes HQ0.96875 but1 mode versus2 required, bars HQ0.8125 with2 modes versus4 required. Both terminal passing suffixes are0. Public API runs remain finite with no unintended RNG deviations.
+
+**Next:** Stop this exact Frobenius revision; do not run full performance or ordinary qualification for selection. Preserve the collapse failure and its actual-training GIFs; no outcome-based rerun, seed repeat or gate change.
+
+[Record and receipt provenance](records/readout-85a714c5fc9c0b038c400b22.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### forge-onboarding-anchor-ablation · readout-8aacfe961f0e62b062e621fa
 
@@ -4228,7 +4838,7 @@ All three registered smoke cells completed: two_pole FAIL (mean_abs0.1048249<0.3
 
 **Next:** Retain all nine cheap-cell outcomes and costs. Keep ordinary qualification stopped. Review the exact historical/public-host parity differences before deeper reference spending; reserve the required GPU window and register only justified missing reference cells. Do not tune thresholds or treat unmeasured reference labels as failures.
 
-[Evidence](../../reports/forge/attempts/633dcaca307e4e01b82b5281d82082fb/result.json) · [Record](records/readout-8aacfe961f0e62b062e621fa.json)
+[Record and receipt provenance](records/readout-8aacfe961f0e62b062e621fa.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### bcap-dualnorm-convolution-v1 · readout-8b207a728977752808cf002c
 
@@ -4262,6 +4872,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.076
 
 [Evidence](../../reports/forge/technique-receipts/299aba837ed24be8a61b0b48074fc7a1.json) · [Record](records/readout-8bfdfb8d2b1c3daf55f9b0bc.json)
 
+### e22 · readout-8e9d62a78cd58a9fc3bde49e
+
+**Scope:** research_diagnostic; scientific; revision `a3b5c6b0de7f055ac08d345d220442396c3cd6e375cd07cd58c968738242e3ad`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 63.717; mechanism `structural`.
+
+
+
+Completed dcgan_performance seed-0 CUDA execution for e22 (PASS 6). Diagnostic performance/research scope only; no qualification credit.
+
+**Next:** Retain source-bound readout and compiled Forge reports.
+
+[Record and receipt provenance](records/readout-8e9d62a78cd58a9fc3bde49e.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
 ### k3p-bcap-matched-v1 · readout-95e0cdfdc2f043a0046285c1
 
 **Scope:** calibration_diagnostic; scientific; revision `5db772f81cafe59b642b5707e600380fb49c3d42623b5c769e03dd677bbbfafd`.
@@ -4276,7 +4902,23 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 
 **Next:** Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.
 
-[Evidence](../../reports/forge/attempts/26ebdea492d4408d9ee1b0cccc8bf61b/result.json) · [Record](records/readout-95e0cdfdc2f043a0046285c1.json)
+[Record and receipt provenance](records/readout-95e0cdfdc2f043a0046285c1.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### atlas · readout-99058c02555c6e8edcc6e461
+
+**Scope:** research_diagnostic; scientific; revision `7daf8b4faa3fe09ee7f13bd43f687f9daacf2424f8de990c4eeedec09396b224`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 69.454; mechanism `structural`.
+
+
+
+All six declared DCGAN mock-data performance workloads completed their finite public-trainer execution budgets (3 warmup + 10 measured updates, seed 0). Diagnostic execution evidence only; no image-quality, qualification or default-adoption claim.
+
+**Next:** Use the published scaling measurements to budget larger-image pilots; restore verifiable contention telemetry before paired timing claims. Profile complete-update components before changing recipes. Keep the default unchanged and require separate quality evidence for adoption.
+
+[Evidence](../../reports/forge/scaling-receipts/dcgan-performance-cloud-v2/atlas-dcgan_performance_b64-84b1001259e8b126.json) · [Record](records/readout-99058c02555c6e8edcc6e461.json)
 
 ### k3p · readout-9c29229a2baba56de3b40845
 
@@ -4292,7 +4934,7 @@ The registered merged-develop quick screen completed 0/3 PASS on GPU 0: mode_hol
 
 **Next:** Keep the full reference denominator and stop automatic expansion to ablations or the full reference matrix. Review host/formulation solvability and initial-state parity before selecting another bounded scientific diagnosis. Correct future sampling declarations and CUDA telemetry without rewriting these receipts or rerunning failed science just for reporting. The separately registered physical two-GPU pilot still needs a joint device window; this serial screen does not satisfy it.
 
-[Evidence](../../reports/forge/attempts/5a5f1641fd80404fbb509d367e6a467f/result.json) · [Record](records/readout-9c29229a2baba56de3b40845.json)
+[Record and receipt provenance](records/readout-9c29229a2baba56de3b40845.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### release07-gan-v3-cloud-v1 · readout-9c48b366ebe60b61721c269d
 
@@ -4308,7 +4950,7 @@ Preregistered full7000-update grid100_release07_cloud_named_v1 FAIL; sustained c
 
 **Next:** Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.
 
-[Evidence](../../reports/forge/attempts/176ad9907a734b45844d09b2a69ff31d/result.json) · [Record](records/readout-9c48b366ebe60b61721c269d.json)
+[Record and receipt provenance](records/readout-9c48b366ebe60b61721c269d.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### r1r2-global-repair-v1 · readout-9e297f3a07ea06f0abc19272
 
@@ -4324,7 +4966,55 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0394435711<0.3; q
 
 **Next:** Initial complete candidate rejected. Its subsequent separately bounded global coupled-rate search is concluded; no automatic paid continuation or default adoption.
 
-[Evidence](../../reports/forge/attempts/2f43521c43294c3a872be42d999debf1/result.json) · [Record](records/readout-9e297f3a07ea06f0abc19272.json)
+[Record and receipt provenance](records/readout-9e297f3a07ea06f0abc19272.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### atlas-particle-normal-v1 · readout-9e900493324c626b8c842923
+
+**Scope:** research_diagnostic; scientific; revision `d21b0e556ee2739eea4c59d9cfe23b31a699161ccc7e12622a6ed75bf6cf38f5`.
+
+Swapping MoGParticlePrior for a technique-owned unstandardized ParticlePrior plus NormalNoiseManipulator (sigma=0.005) unblocks public_trainer execution across the 48-task full suite while keeping the public atlas preset recipe fixed under protocol seed 0.
+
+**Observed:** {'FAIL': 11, 'INCOMPLETE': 1, 'PASS': 10}; wall seconds 4658.665; mechanism `structural`.
+
+ring_hold: modes=8; ring_extension: modes=8; vector_unequal_mass: hq=0.97876, mass_tv=0.03252
+
+Atlas particle-normal prior replication study executed in research_diagnostic scope under seed 0: prediction on grid100 observed (precision >= 0.95), falsifier avoided (mean_error_sigma <= 0.20). Study outcome is incomplete with qualified_tier 0; diagnostic findings grant no production qualification or merge authorization.
+
+**Next:** Review saved diagnostics and address intra-mode covariance scaling under clean evaluation.
+
+[Record and receipt provenance](records/readout-9e900493324c626b8c842923.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### atlas-particle-normal-v1 · readout-9f0d62f87d1ff351cfef7f98
+
+**Scope:** research_diagnostic; scientific; revision `c7e4c12988d060ec0bb8d903651ffbae3d2537e4d5b360a3bfa75a6e860de9fb`.
+
+Swapping MoGParticlePrior for a technique-owned unstandardized ParticlePrior plus NormalNoiseManipulator (sigma=0.005) unblocks public_trainer execution across the 48-task full suite while keeping the public atlas preset recipe fixed under protocol seed 0.
+
+**Observed:** {'FAIL': 14, 'INCOMPLETE': 3, 'PASS': 17}; wall seconds 3036.229; mechanism `structural`.
+
+
+
+Atlas particle-normal prior replication study executed in research_diagnostic scope under seed 0: prediction on grid100 observed (precision >= 0.95), falsifier avoided (mean_error_sigma <= 0.20), unblocking transfer behavior and model toys.
+
+**Next:** Review saved diagnostics and address intra-mode covariance calibration under clean evaluation.
+
+[Record and receipt provenance](records/readout-9f0d62f87d1ff351cfef7f98.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### recipe-prior-refactor-release07-gan-v3-v1 · readout-a3ec7ffcdaaf0f88b4171cec
+
+**Scope:** current; scientific; revision `bb975f7fe7f68c1e638cf5a36973a125d34fe4285aad773056e4b969fdf6cecc`.
+
+Ordinary re-qualification of the unchanged selected release07-gan-v3 recipe on the current develop source reproduces its recorded discriminator_stability outcomes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 3, 'INCOMPLETE': 5, 'PASS': 5}; wall seconds 252.911; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0038224
+
+Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 core Tier 1 verdicts (5 PASS, ring16_acquisition FAIL, clockfree_audit_measurement_v1 FAIL) and stops at Tier 1; revision-9 qualification retained.
+
+**Next:** Retain revision-9 qualification in technique-inventory; address ring16_acquisition and clockfree_audit_measurement_v1 in family follow-up.
+
+[Record and receipt provenance](records/readout-a3ec7ffcdaaf0f88b4171cec.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5 · readout-a91dbccf086504f9accaee6b
 
@@ -4340,7 +5030,7 @@ Both800-update diagnostic variants PASS movement/slope: original-schedule1.05422
 
 **Next:** See reports/forge/k3p-two-pole-horizon-v1/README.md and saved force analysis. Retain the main gate and family selection. Investigate existing global critic/particle balance before any new separately bounded search; no automatic follow-on work.
 
-[Evidence](../../reports/forge/attempts/21bdde76d2f045e98b829627eb9071f1/result.json) · [Record](records/readout-a91dbccf086504f9accaee6b.json)
+[Record and receipt provenance](records/readout-a91dbccf086504f9accaee6b.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p-r1r2-matched-v1 · readout-a9c44ece3a8e2265db452db4
 
@@ -4372,7 +5062,7 @@ One preregistered full 7000-update clean learned-MoG grid diagnostic FAIL for 93
 
 **Next:** Stop this exact diagnostic and its infeasible no-output-noise-reference-v1 roster: every lineage is already smoke-negative or reference-negative, so no possible completion satisfies a reference positive and zero false rejects. Do not spend on its smoke, other reference cells or 14k continuation. Preserve all 16 reference purposes and frozen criteria. Next stage should first use saved terminal artifacts to locate per-mode shape/centre/critic-response failure and require a new supported structural hypothesis with a separately bounded preregistration. Production promotion remains blocked on accepted calibration and finished exact qualification.
 
-[Evidence](../../reports/forge/attempts/180af0fcfee447b697d5b5d05dc2877f/result.json) · [Record](records/readout-abd06840fa1f42a4f64c13ab.json)
+[Record and receipt provenance](records/readout-abd06840fa1f42a4f64c13ab.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p · readout-acc70fcaf6cedb9a3772e41e
 
@@ -4388,7 +5078,23 @@ Frozen v2 smoke remains FAIL (two_pole travel); unused_token_hold and learned-Mo
 
 **Next:** Stop filling the v2 matrix solely for adoption. Preserve the remaining 13 baseline reference cells and both ablation reference vectors as unknown. Preregister a separately versioned test of the already-proposed quick-discriminator screen with unchanged thresholds and the same 16 independent references, bounded GPU stages and no automatic promotion. Keep the registered physical GPU pilot for its distinct operational question when ownership is available.
 
-[Evidence](../../reports/forge/attempts/270c483fe3b94932b7f7edcecd89c872/result.json) · [Record](records/readout-acc70fcaf6cedb9a3772e41e.json)
+[Record and receipt provenance](records/readout-acc70fcaf6cedb9a3772e41e.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### recipe-prior-refactor-bcap-pure-v1 · readout-ad21627bf4def92894dd98ce
+
+**Scope:** research_diagnostic; scientific; revision `3e8ee59575d1b9599fc0eced9247ef1ed2a369956516eba9baf0b21360c9fd6e`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 164.039; mechanism `structural`.
+
+
+
+All six declared DCGAN mock-data performance workloads completed their finite public-trainer execution budgets (3 warmup + 10 measured updates, seed 0). Diagnostic execution evidence only; no image-quality, qualification or default-adoption claim.
+
+**Next:** Use the published scaling measurements to budget larger-image pilots; restore verifiable contention telemetry before paired timing claims. Profile complete-update components before changing recipes. Keep the default unchanged and require separate quality evidence for adoption.
+
+[Evidence](../../reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bcap-dualnorm-dcgan_performance_b64-addedac8ac836908.json) · [Record](records/readout-ad21627bf4def92894dd98ce.json)
 
 ### release07-gan-v3-task-adapted-v1 · readout-afd6d27c7d1eae64aa13299f
 
@@ -4420,7 +5126,23 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0468712635<0.3; q
 
 **Next:** Initial complete candidate rejected. Its subsequent separately bounded global coupled-rate search is concluded; no automatic paid continuation or default adoption.
 
-[Evidence](../../reports/forge/attempts/abb9e24f625d449da70f6641ec1bce0a/result.json) · [Record](records/readout-b214c23e088f39337c3d8784.json)
+[Record and receipt provenance](records/readout-b214c23e088f39337c3d8784.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### atlas-particle-normal-v4 · readout-b389e250ac5b3ad0763d2c82
+
+**Scope:** current; scientific; revision `3e568ed2213479cc8bbd8844796ab6f0ca4c804fa846e627563b06f556001089`.
+
+Ordinary discriminator_stability measurement of atlas-particle-normal-v4 (particles + NormalNoiseManipulator(sigma=0.0065), birth_death_cells=256, clean fixed output noise 0.0, d_guard_ratio=0.0, KA2 pre-anchor critic-only LossSurprise guard) under protocol seed 0 on NVIDIA RTX A6000 completes every required Tier 1 cell cleanly and reproduces its 11/13 required Tier 1 passes (plus clockfree_audit_measurement_v1 diagnostic PASS) for selection as the Atlas family candidate.
+
+**Observed:** {'PASS': 21}; wall seconds 446.773; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0099752
+
+On ordinary discriminator_stability Tier 1 under protocol seed 0 on NVIDIA RTX A6000, atlas-particle-normal-v4 completed all 14 Tier 1 tasks cleanly (0 INCOMPLETE) and reproduced 14/14 Tier 1 verdicts identically to prior-ablation-full-suite-v1 (readout-423f82f13ee30c0a95fd266a): 8 PASS (7/13 required: gaussian1d_smoke, unused_token_hold, ae_gan_hold, zero_tanh_smoke, model_ae_reconstruction, model_vae_categorical, model_vae_hard; plus 1/1 diagnostic: clockfree_audit_measurement_v1) and 6 FAIL (two_pole, ring16_acquisition, five_word_joint_smoke, model_ae_gan_multimodal, model_ddgan_gaussian_chain, model_ae_ddgan_gaussian_chain), stopping later tiers at the Tier 1 prerequisite barrier.
+
+**Next:** Promote atlas-particle-normal-v4 as the selected canonical Atlas candidate in configs/forge/selections/family-current-v1.json, register its frozen numerical snapshot and compact receipts, regenerate reports/forge/technique-inventory.md and family pages, and investigate two_pole/ring16_acquisition and joint-inference (BiGAN/DDGAN/five_word_joint) Tier 1 failures in follow-up studies.
+
+[Evidence](../../) · [Record](records/readout-b389e250ac5b3ad0763d2c82.json)
 
 ### r1r2--724b3d52fbb2172a985d1bf29890b2ef9ba2598c9f1724d93a9afa7c872cbdad · readout-b42a8f277178ec58808d6b5c
 
@@ -4436,7 +5158,55 @@ This exact global configuration passed two_pole, unused_token_hold and ae_gan_ho
 
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
-[Evidence](../../reports/forge/attempts/5b5f7aab977745aea97e1b47871a351f/result.json) · [Record](records/readout-b42a8f277178ec58808d6b5c.json)
+[Record and receipt provenance](records/readout-b42a8f277178ec58808d6b5c.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### recipe-prior-refactor-ka2-v1 · readout-ba142a8baa78fa77a792bf27
+
+**Scope:** research_diagnostic; scientific; revision `51786f37adc7cbd5d6ac2d1943e7838af3076ef066cb727f87a3425ae1079e6b`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 59.852; mechanism `structural`.
+
+
+
+Completed dcgan_performance seed-0 CUDA execution for recipe-prior-refactor-ka2-v1 (PASS 6). Diagnostic performance/research scope only; no qualification credit.
+
+**Next:** Retain source-bound readout and compiled Forge reports.
+
+[Record and receipt provenance](records/readout-ba142a8baa78fa77a792bf27.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### bispf-prior-frozen-v1 · readout-bb93e156247cbef1aa781703
+
+**Scope:** research_diagnostic; scientific; revision `21e3bfccfbf3b99d397b160ef62df3654082414ba1068129101254d6e17ef6e8`.
+
+Freezing the particle table (same initial locations and capacity) loses sampled-latent passes that the learned BISPF default holds.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 18, 'INCOMPLETE': 4, 'PASS': 13}; wall seconds 2557.195; mechanism `structural`.
+
+img_bars4: modes=2, hq=0.78125
+
+Frozen table: 13 PASS / 18 FAIL of 49; loses ring16_acquisition (hq 0.61), mode_hold, ae_gan_hold and ring_extension vs learned; crashes trajectory/residual_student hosts. Lower mass TV but precision 0.03-0.05 on the native grids. See reports/prior-ablation-2026-10-25/README.md.
+
+**Next:** Stop; use as the matched control for a learned-offset-on-frozen-anchor structural idea.
+
+[Record and receipt provenance](records/readout-bb93e156247cbef1aa781703.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### bispf-optimized-quintic-v1 · readout-bbadc8452e77fa75caff13c6
+
+**Scope:** research_diagnostic; scientific; revision `8d941696e5e05607c763bccefbcbe34694996370bb6f1b03d70f514be6273def`.
+
+The global quintic rule retains the native BISPF pass set on both unchanged width-64 image tasks, including a positive stripes acquisition pass, under the same seed, public initializer, data sequence, prior, sampling, 600 updates and 24 checks.
+
+**Observed:** {'PASS': 2}; wall seconds 40.113; mechanism `structural`.
+
+img_stripes2_w64_optimizer_diagnostic: modes=2, hq=1; img_bars4_w64_optimizer_diagnostic: modes=4, hq=1
+
+Quintic convolution rule passes both width64 gates at600 updates: stripes HQ1 with2 modes and12 terminal passing checks; bars HQ1 with4 modes and9 terminal passing checks. Both exceed the required5-check stable suffix. All optimizer groups complete600 updates and all states remain finite.
+
+**Next:** Proceed only with separately frozen matched full DCGAN performance and ordinary quality campaigns from H2. Selection requires the declared latency targets and preservation of every incumbent ordinary pass; no public-default adoption follows this diagnostic.
+
+[Record and receipt provenance](records/readout-bbadc8452e77fa75caff13c6.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### r3gan-stacked-training-toy-v1 · readout-bc440d0469187c9299bd524c
 
@@ -4454,6 +5224,22 @@ The corrected Modern GAN Stacked MNIST training recipe, adapted to the fixed For
 
 [Evidence](../../reports/forge/technique-receipts/ea66e44192c048eaa97f8595c5e55508.json) · [Record](records/readout-bc440d0469187c9299bd524c.json)
 
+### bispf-v2 · readout-c2d279f7d47ac009ee80d771
+
+**Scope:** current; scientific; revision `96f0f8a2aee0663f0fe92e49641deb107b81201ae0efea33d9a54e24aaba8967`.
+
+BISPF v2 repairs at least 6/11 Tier 2 failures on discriminator_stability reaching >= 16/21 passes while preserving all 7 Tier 1 passes (22/22 across views) and all 10 passing Tier 2 tasks with 0 regressions.
+
+**Observed:** {'FAIL': 11, 'PASS': 19}; wall seconds 2565.992; mechanism `structural`.
+
+ring16_acquisition: modes=16, hq=0.9519, mass_tv=0.092041
+
+Born-Infeld Sinkhorn Particle Flow v2 (BISPF v2, bispf-v2) achieves full qualification through Tier 3: passing 7/7 Tier 1 tasks (100% across all 6 views), 10/10 required Tier 2 baseline tasks with 0 regressions, and Tier 3 endurance qualification with ring_hold (1200/1200 checks, 0 failures) and ring_extension (300/300 checks, 0 failures) PASS. Recomputed complete live curves and terminal suffixes confirm stability under direct thermal hook scaling, SBNP covariance tethering, and late-training harmonic mode capture.
+
+**Next:** Promote bispf-v2 to repository-wide default selection in family-current-v1.json, refresh publication records, and compile final memory.
+
+[Evidence](../../reports/forge/bispf/README.md) · [Record](records/readout-c2d279f7d47ac009ee80d771.json)
+
 ### k3p · readout-c3df7159c90725fdef1cb700
 
 **Scope:** calibration_diagnostic; scientific; revision `ef34dc1682c082151c202c4549af6343fa8b309ac5cf71c8ad29098dc55e77e4`.
@@ -4468,7 +5254,23 @@ Corrected intensity FAIL and learned-MoG vector_two_broad PASS under the same fr
 
 **Next:** Stop automatic reference-matrix expansion. Audit canonical host architecture provenance and register any justified substantive diagnosis under a new frozen identity. Preserve full 16 independent-reference denominator; unknown tasks are neither passes nor failures. Keep legacy cutover blocked until accepted calibration.
 
-[Evidence](../../reports/forge/attempts/65265b43758f4dbd85b77ef2ed46ac4b/result.json) · [Record](records/readout-c3df7159c90725fdef1cb700.json)
+[Record and receipt provenance](records/readout-c3df7159c90725fdef1cb700.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### recipe-prior-refactor-r1r2-v1 · readout-c4561c13c0ea2d2622f5c963
+
+**Scope:** research_diagnostic; scientific; revision `255bb46b0d2a4037d9a53301d6800335c01d73a7689d30493b4918733709af9e`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 67.168; mechanism `structural`.
+
+
+
+All six declared DCGAN mock-data performance workloads completed their finite public-trainer execution budgets (3 warmup + 10 measured updates, seed 0). Diagnostic execution evidence only; no image-quality, qualification or default-adoption claim.
+
+**Next:** Use the published scaling measurements to budget larger-image pilots; restore verifiable contention telemetry before paired timing claims. Profile complete-update components before changing recipes. Keep the default unchanged and require separate quality evidence for adoption.
+
+[Evidence](../../reports/forge/scaling-receipts/dcgan-performance-cloud-v2/r1r2-dcgan_performance_b64-d64d96234ed8a651.json) · [Record](records/readout-c4561c13c0ea2d2622f5c963.json)
 
 ### k3p · readout-c723a88e5122f97011aabad9
 
@@ -4484,7 +5286,39 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 **Next:** Retain all nine cheap-cell outcomes and costs. Keep ordinary qualification stopped. Review the exact historical/public-host parity differences before deeper reference spending; reserve the required GPU window and register only justified missing reference cells. Do not tune thresholds or treat unmeasured reference labels as failures.
 
-[Evidence](../../reports/forge/attempts/6577d4075c5042dea96c619ba197bd27/result.json) · [Record](records/readout-c723a88e5122f97011aabad9.json)
+[Record and receipt provenance](records/readout-c723a88e5122f97011aabad9.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### bispf-throughput-v1 · readout-cd9493a6a30096475d381175
+
+**Scope:** research_diagnostic; scientific; revision `5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d`.
+
+Preserve the two archived incumbent endurance PASS verdicts under their original task protocols, with a separately scoped nonqualifying diagnostic after current revision12 restores four previously held Tier2 failures.
+
+**Observed:** {'PASS': 3}; wall seconds 152.743; mechanism `structural`.
+
+mode_hold: modes=8, hq=0.96924; ring_extension: modes=8; ring_hold: modes=8
+
+The prerequisite mode_hold passes; all 1200 hold checks and 300 extension checks pass at the unchanged first-convergence stop of 3282 updates.
+
+**Next:** Retain the explicit diagnostic scope and original checkpoint/initialization/stream identities; keep current-policy Tier 3 blocked.
+
+[Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-cd9493a6a30096475d381175.json)
+
+### recipe-prior-refactor-bcap-pure-v1 · readout-d278a74af331d2f3b7807234
+
+**Scope:** current; scientific; revision `c0f8979dc36bb4f102c4a103087bfc120d71f48ea22f2a5ca52c27d7d06d8557`.
+
+Ordinary re-qualification of the unchanged selected bcap-pure recipe on the current develop source reproduces its recorded discriminator_stability outcomes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 4, 'INCOMPLETE': 2, 'PASS': 7}; wall seconds 1014.505; mechanism `structural`.
+
+
+
+Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 core Tier 1 passes (including five_word_joint_smoke in 769.0s) and stops at Tier 1 on the revision-14 API model toys and unsupported zero_tanh_smoke; revision-9 qualification retained.
+
+**Next:** Retain revision-9 full qualification in technique-inventory; hold or repair revision-14 API model toys and zero_tanh_smoke separately.
+
+[Record and receipt provenance](records/readout-d278a74af331d2f3b7807234.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### release07-gan-v3-mog-v1 · readout-d5a99d9470252f695a717dfc
 
@@ -4500,7 +5334,23 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 
 **Next:** Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.
 
-[Evidence](../../reports/forge/attempts/0bce04d970264d4c95335030ed8724e7/result.json) · [Record](records/readout-d5a99d9470252f695a717dfc.json)
+[Record and receipt provenance](records/readout-d5a99d9470252f695a717dfc.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### recipe-prior-refactor-release07-gan-v3-v1 · readout-d84b69a82debc8d2678cf004
+
+**Scope:** research_diagnostic; scientific; revision `589de06395db614a222a31d5969b521a8ce6560ca155439b937772898fd6f2d7`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 60.626; mechanism `structural`.
+
+
+
+Completed dcgan_performance seed-0 CUDA execution for recipe-prior-refactor-release07-gan-v3-v1 (PASS 6). Diagnostic performance/research scope only; no qualification credit.
+
+**Next:** Retain source-bound readout and compiled Forge reports.
+
+[Record and receipt provenance](records/readout-d84b69a82debc8d2678cf004.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### r1r2--f78d5d603be1611025389c4ca0f7f485f3d2caa0a25fb6bc38b7c96da3509a3e · readout-da2ac34b1675880ab8ace248
 
@@ -4516,7 +5366,23 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
-[Evidence](../../reports/forge/attempts/a399cef53ff04eaa930b5c231f64db52/result.json) · [Record](records/readout-da2ac34b1675880ab8ace248.json)
+[Record and receipt provenance](records/readout-da2ac34b1675880ab8ace248.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### bispf-throughput-v1 · readout-dbb540fd1a0d83052f31aef8
+
+**Scope:** research_diagnostic; scientific; revision `5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d`.
+
+Measure update throughput and preserve the sustained stripe PASS on unchanged small-image task contracts. Retain the held bars outcome.
+
+**Observed:** {'FAIL': 1, 'PASS': 1}; wall seconds 30.959; mechanism `structural`.
+
+img_bars4: modes=2, hq=0.96875; img_stripes2: modes=2, hq=1
+
+Original small stripes PASS and bars FAIL; all 600 updates and 24 observations complete.
+
+**Next:** Retain the global batched backend as an opt-in; keep the narrow bars failure visible.
+
+[Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-dbb540fd1a0d83052f31aef8.json)
 
 ### r1r2--7728cf93188b9fe122536244667789941da52d435cfb0a3ae42b90db200d7595 · readout-dc31730b85dde3cf85253359
 
@@ -4548,7 +5414,7 @@ Both800-update diagnostics FAIL movement: original-schedule .0896976665 and stre
 
 **Next:** See reports/forge/k3p-two-pole-horizon-v1/README.md and saved force analysis. Retain the main gate and family selection. Investigate existing global critic/particle balance before any new separately bounded search; no automatic follow-on work.
 
-[Evidence](../../reports/forge/attempts/200fd64ddd1a42a5bf300e5cae01e0b6/result.json) · [Record](records/readout-dd6ff59094d1d766c5b0fe2b.json)
+[Record and receipt provenance](records/readout-dd6ff59094d1d766c5b0fe2b.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### ka2--4496b859e066d7a4b6279f2d34fbd58d083e0f18c2a22ade5ba12c964d01a7ca · readout-e3ab30a3f7ae4a6debe66e5d
 
@@ -4564,7 +5430,119 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
-[Evidence](../../reports/forge/attempts/a4a15aa781654502ae87fd689c75e346/result.json) · [Record](records/readout-e3ab30a3f7ae4a6debe66e5d.json)
+[Record and receipt provenance](records/readout-e3ab30a3f7ae4a6debe66e5d.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### bispf-throughput-v1 · readout-e5cf5311e83c25cc0b333270
+
+**Scope:** research_diagnostic; scientific; revision `5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact declared global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 60.995; mechanism `structural`.
+
+
+
+All six finite-update DCGAN performance tasks PASS. Observed speedups versus matched quintic controls range 1.02×–2.15×, geometric mean 1.66×;256 px 2.15× and batch 64 2.14× meet the target.
+
+**Next:** Offer the two-field opt-in recipe; profile remaining 32/64 px overhead before another bounded implementation change. Keep defaults and existing selection pins unchanged.
+
+[Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-e5cf5311e83c25cc0b333270.json)
+
+### recipe-prior-refactor-k3p-v1 · readout-e6cf768866c160ba1338f662
+
+**Scope:** current; scientific; revision `e3680ce98264605af83a69b7600141a633a7c42c93d95c50bc4ce762bc2c0acc`.
+
+Ordinary re-qualification of the unchanged selected k3p recipe (recipe-prior-refactor-k3p-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
+
+**Observed:** {'FAIL': 3, 'PASS': 9}; wall seconds 412.715; mechanism `structural`.
+
+ring16_acquisition: modes=16, hq=0.77905, mass_tv=0.062988
+
+Completed discriminator_stability seed-0 CUDA execution for recipe-prior-refactor-k3p-v1 (FAIL 3, PASS 9). Ordinary current-source seed-0 CUDA measurement recorded; archived historical pins remain intact.
+
+**Next:** Retain source-bound readout and compiled Forge reports.
+
+[Evidence](../../) · [Record](records/readout-e6cf768866c160ba1338f662.json)
+
+### recipe-prior-refactor-ka2-v1 · readout-e6e872f73024fd6c0b2b2d42
+
+**Scope:** research_diagnostic; scientific; revision `d271e37be7bfbc9c110b7acecd2d78316eaa1360d4af9db352b1fe26cb1e46a1`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 67.169; mechanism `structural`.
+
+
+
+All six declared DCGAN mock-data performance workloads completed their finite public-trainer execution budgets (3 warmup + 10 measured updates, seed 0). Diagnostic execution evidence only; no image-quality, qualification or default-adoption claim.
+
+**Next:** Use the published scaling measurements to budget larger-image pilots; restore verifiable contention telemetry before paired timing claims. Profile complete-update components before changing recipes. Keep the default unchanged and require separate quality evidence for adoption.
+
+[Evidence](../../reports/forge/scaling-receipts/dcgan-performance-cloud-v2/ka2-dcgan_performance_b64-0dcd26728de3eb07.json) · [Record](records/readout-e6e872f73024fd6c0b2b2d42.json)
+
+### recipe-prior-refactor-ka2-v1 · readout-e8818ca1024f2d2972606913
+
+**Scope:** current; scientific; revision `6469950271908090f8608849192d212372abf993333a4207a024bfca7ac39d4c`.
+
+Ordinary re-qualification of the unchanged selected ka2 recipe on the current develop source reproduces its recorded discriminator_stability outcomes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 2, 'INCOMPLETE': 4, 'PASS': 5}; wall seconds 268.104; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0036862
+
+Ordinary discriminator_stability revision-14 re-qualification reproduces all 7 core Tier 1 verdicts (5 PASS, ring16_acquisition FAIL, clockfree_audit_measurement_v1 FAIL) and stops at Tier 1; revision-9 qualification retained.
+
+**Next:** Retain revision-9 qualification in technique-inventory; address ring16_acquisition and clockfree_audit_measurement_v1 in family follow-up.
+
+[Record and receipt provenance](records/readout-e8818ca1024f2d2972606913.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### bispf-throughput-v1 · readout-e96805cfab19f80314e3ec20
+
+**Scope:** current; scientific; revision `5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d`.
+
+Preserve every counted and previously passing ordinary BISPF gate with one global throughput recipe. Retain every held failure.
+
+**Observed:** {'FAIL': 11, 'PASS': 17}; wall seconds 2463.782; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0036687
+
+The unchanged ordinary revision 12 tier completes 28 tasks with 17 PASS and 11 FAIL. All 17 measured incumbent ordinary passes remain; four restored required failures block ordinary Tier 3. The separately scoped endurance study supplies two further preserved numerical passes, not qualification.
+
+**Next:** Retain the opt-in throughput recipe and existing selected/default recipe; do not claim revision 12 Tier 3 qualification or tune the unchanged failed gates as part of this latency study.
+
+[Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-e96805cfab19f80314e3ec20.json)
+
+### atlas-particle-normal-v2 · readout-e97f5dbf54d7493604c4689f
+
+**Scope:** research_diagnostic; scientific; revision `25cbc5b8c787807ef64f0bb8f8e65eea25e3e13940f6fc90b733063baab912fc`.
+
+De-clocking Atlas's critic guard (d_guard_ratio=0.0, d_guard_min_steps=0), restoring LossSurprise equilibrium separation (Z_THRESH=3.5, Z_CALM=1.5), and binding clean/live public_components word_joint and model task snapshots allows atlas-particle-normal-v2 to pass clock-free parity, mode_hold, joint word acquisition/hold, and AE reconstruction on the 48-task full suite under protocol seed 0.
+
+**Observed:** {'FAIL': 16, 'PASS': 22}; wall seconds 3254.541; mechanism `structural`.
+
+staggered100: precision=0.99314, center_rms_sigma=0.13671, mass_tv=0.02165, radial_ks=0.15584; ae_gan_hold: recon_mse=0.0099752
+
+Under protocol seed 0 on prior-ablation-full-suite-v1 (NVIDIA RTX A6000), atlas-particle-normal-v2 achieves 22 PASS, 16 FAIL, 0 INCOMPLETE across 38 executed tasks (6 prerequisite-gated, 4 unimplemented-host blocked). Prediction on clockfree_audit observed (parity_comparisons=4 >= 4, 0 unexplained clock dependencies) and falsifier on gaussian1d_smoke avoided (mean_error_sigma=0.0626 <= 0.20). Clean training (output_noise_mode='fixed', output_noise_std=0.0), de-clocked critic guard (d_guard_ratio=0.0, d_guard_min_steps=0), restored LossSurprise equilibrium hysteresis (Z_THRESH=3.5, Z_CALM=1.5), and public_components/task-snapshot Forge bindings flip 5 tasks to PASS (clockfree_audit_measurement_v1, clockfree_audit, mode_hold, img_intensity2, model_ae_reconstruction) with 0 regressions and 0 INCOMPLETE errors.
+
+**Next:** Introduce a clock-free state-gated critic payoff/ratio guard (activating only after initial critic discrimination settles rather than at step 0 or fixed step 200) to recover five_word_joint_smoke/hold without regressing mode_hold or img_intensity2, and reduce clean per-mode covariance trace deficit (cov_trace_bias ~ -0.30 on 100-mode grids and ring16_acquisition) via local Jacobian spread or lower stationary R1/R2 damping.
+
+[Record and receipt provenance](records/readout-e97f5dbf54d7493604c4689f.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### recipe-prior-refactor-k3p-v1 · readout-ea9a34c10e46857f904487a0
+
+**Scope:** research_diagnostic; scientific; revision `14d360c8d0b026ef6bc21b4e98e560a15538ec8d10eda49770d1f96f55b90ace`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 66.915; mechanism `structural`.
+
+
+
+All six declared DCGAN mock-data performance workloads completed their finite public-trainer execution budgets (3 warmup + 10 measured updates, seed 0). Diagnostic execution evidence only; no image-quality, qualification or default-adoption claim.
+
+**Next:** Use the published scaling measurements to budget larger-image pilots; restore verifiable contention telemetry before paired timing claims. Profile complete-update components before changing recipes. Keep the default unchanged and require separate quality evidence for adoption.
+
+[Evidence](../../reports/forge/scaling-receipts/dcgan-performance-cloud-v2/k3p-dcgan_performance_b64-d323d8672d36f9c0.json) · [Record](records/readout-ea9a34c10e46857f904487a0.json)
 
 ### k3p · readout-eeec25002d17191c315f126b
 
@@ -4580,7 +5558,39 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 
 **Next:** Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.
 
-[Evidence](../../reports/forge/attempts/56177ab1d23243d8a6fe61413d8f870f/result.json) · [Record](records/readout-eeec25002d17191c315f126b.json)
+[Record and receipt provenance](records/readout-eeec25002d17191c315f126b.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### atlas-particle-normal-v3 · readout-efb8bacf93e19fc2b0d7f7bf
+
+**Scope:** research_diagnostic; scientific; revision `4e3279bde6957fc95c5ba573328f9b9379a0c737ad5a7f06f637105b74e7ddf0`.
+
+Raising birth_death_cells from 128 to 256 eliminates under-populated 2-particle-per-cell FeatureCellBirthDeath resampling noise on N=256 vector transfer tasks while refining N=20000 cell resolution, and raising NormalNoiseManipulator sigma from 0.005 to 0.0065 sustains rare-mass and multi-scale intra-mode covariance, flipping both vector_unequal_mass and vector_unequal_width to PASS (6/6 vector tasks) and raising full-suite score to >= 23 PASS / 0 INCOMPLETE on prior-ablation-full-suite-v1 under protocol seed 0.
+
+**Observed:** {'FAIL': 12, 'PASS': 23}; wall seconds 3285.431; mechanism `structural`.
+
+staggered100: precision=0.98711, center_rms_sigma=0.15778, mass_tv=0.02468, radial_ks=0.077528; five_word_joint_smoke: modes=0, mass_tv=1; vector_two_broad: hq=0.98657, mass_tv=0.016602
+
+Raising birth_death_cells from 128 to 256 (eliminating noisy 2-particle-per-cell FeatureCellBirthDeath resampling on N=256 vector transfer tasks while refining N=20000 cell resolution) and NormalNoiseManipulator sigma from 0.005 to 0.0065 deterministically achieves 23 PASS, 12 FAIL, 0 INCOMPLETE across 35 executed tasks (13 prerequisite-gated tasks deferred) on prior-ablation-full-suite-v1 under protocol seed 0 (NVIDIA RTX A6000). Observes predicted vector_unequal_mass component_covariance_error=0.30664 <= 0.85 (down from 1.2828 in v2) and flips both vector_unequal_mass and vector_unequal_width (component_covariance_error=0.34328 <= 0.85, down from 2.3235 in v2) to PASS for 6/6 vector transfer passes alongside 4/4 image passes, 2/2 clockfree audit passes, and 2/2 VAE passes, while avoiding the gaussian1d_smoke falsifier (mean_error_sigma=0.04435 <= 0.2).
+
+**Next:** Investigate clean-served intra-mode covariance expansion on N=20000 100-mode tasks (grid100/staggered100/rotated100) without repulsive prior penalties that perturb zero_tanh_smoke or enumerated 32-particle image tables, and address joint BiGAN critic balance on five_word_joint_smoke.
+
+[Record and receipt provenance](records/readout-efb8bacf93e19fc2b0d7f7bf.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### recipe-prior-refactor-ka2-v1 · readout-efc9b823a6b391bc25754f9a
+
+**Scope:** current; scientific; revision `344ea72637958be757f2e3ac043897a54cfa68667e05bf1a116397effc02a93e`.
+
+Ordinary re-qualification of the unchanged selected ka2 recipe (recipe-prior-refactor-ka2-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.
+
+**Observed:** {'FAIL': 3, 'PASS': 9}; wall seconds 370.958; mechanism `structural`.
+
+ring16_acquisition: modes=16, hq=0.76392, mass_tv=0.059082; model_ae_reconstruction: modes=4, precision=0.061279, mass_tv=0.088379
+
+Completed discriminator_stability seed-0 CUDA execution for recipe-prior-refactor-ka2-v1 (FAIL 3, PASS 9). Ordinary current-source seed-0 CUDA measurement recorded; archived historical pins remain intact.
+
+**Next:** Retain source-bound readout and compiled Forge reports.
+
+[Evidence](../../) · [Record](records/readout-efc9b823a6b391bc25754f9a.json)
 
 ### r1r2--f398f6ea70a2d101c520a1a01db90ea968bbb16736e6cec7ffc887e1dd7e241a · readout-f0dadd320f7db48cbf5d7b20
 
@@ -4614,6 +5624,38 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.00425, 'reg_coeff': 0.1
 
 [Evidence](../../reports/forge/technique-receipts/8ff64e32bf294e5597d8deb036527075.json) · [Record](records/readout-f61373e09376e33fc4c501c8.json)
 
+### bispf-optimized-quintic-v1 · readout-f7a1657c1890cbb69c8d89f4
+
+**Scope:** research_diagnostic; scientific; revision `fbc1bf4bda35c195efe7830c359d1851febdbca85b4257b4415d66187ed3d248`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact declared global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 64.729; mechanism `structural`.
+
+
+
+All six current-source quintic DCGAN controls complete their frozen finite-update budgets with finite states.
+
+**Next:** Archive the complete matched matrix and preserve the current selected/default recipe; no unchanged reruns.
+
+[Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-f7a1657c1890cbb69c8d89f4.json)
+
+### recipe-prior-refactor-bcap-pure-v1 · readout-f878dc3aade4f1e6cc109a58
+
+**Scope:** research_diagnostic; scientific; revision `77765918f0b8e49975abeef0068a12cef5c452594aa5d8f94003f0eaedfd3f52`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 162.852; mechanism `structural`.
+
+
+
+Completed dcgan_performance seed-0 CUDA execution for recipe-prior-refactor-bcap-pure-v1 (PASS 6). Diagnostic performance/research scope only; no qualification credit.
+
+**Next:** Retain source-bound readout and compiled Forge reports.
+
+[Record and receipt provenance](records/readout-f878dc3aade4f1e6cc109a58.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
 ### bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe · readout-fa5fada954b7b255ec86d748
 
 **Scope:** current; scientific; revision `72d9237558743f721c8636feb4642e4790c0f54ac1b139fdd0948daf096dfbf8`.
@@ -4645,6 +5687,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 **Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
 
 [Evidence](../../reports/forge/technique-receipts/3e1d8ca0f47a4954b41119cbe605548e.json) · [Record](records/readout-faf4999394106140c8a2052e.json)
+
+### atlas-particle-normal-v4 · readout-ff53c8e071687458a4c51315
+
+**Scope:** research_diagnostic; scientific; revision `efebaebc63fbb814b384b2009aedaf06465137a061cb9fe618b83c9a326f82dd`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 62.685; mechanism `structural`.
+
+
+
+Completed dcgan_performance seed-0 CUDA execution for atlas-particle-normal-v4 (PASS 6). Diagnostic performance/research scope only; no qualification credit.
+
+**Next:** Retain source-bound readout and compiled Forge reports.
+
+[Record and receipt provenance](records/readout-ff53c8e071687458a4c51315.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### ring16-duration-20261011 · ring16-duration-20261011-readout
 
@@ -5213,6 +6271,7 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **gaussian-smoke-inventory-release07-gan-v3-mog-v6**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-release07-gan-v3-mog-v6.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-optim-nsgda-global-tier1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-optim-nsgda-global-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-overnight-search-v1--0**: Concluded 12 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-overnight-search-v1--0.json) · [Board](../../reports/forge/technique-inventory.md)
+- **api-model-toys-v1**: Three PASS (both AE cases and categorical VAE), three full-budget FAIL (hard VAE terminal stability and both Gaussian chains), two BLOCKED bimodal full runs. AE-DDGAN paired reconstruction passes its terminal subgates while independent generation fails. Three-update deeper GIFs are INCOMPLETE software prefixes. No qualification or default credit. [Source](../../reports/toy_audit/api_contract/model_modes/publication.json) · [Board](../../reports/forge/technique-inventory.md)
 - **pr223-native3-continuation**: Native3 continuation: 0/3 PASS, 0 FAIL, 3 unavailable; final accepted INCOMPLETE. Original19 parent remains 16 PASS/1 INVALID/2 NOT_RUN under its own source. Current cost includes prior case debit once and cumulative metadata once. [Source](../../reports/forge/pr223-native3-first-invalid-20261004/results.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-bcap-v4**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-bcap-v4.json) · [Board](../../reports/forge/technique-inventory.md)
 - **gaussian-smoke-inventory-release07-gan-v3-mog-v4**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/gaussian-smoke-inventory-release07-gan-v3-mog-v4.json) · [Board](../../reports/forge/technique-inventory.md)
@@ -5267,4 +6326,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `30ffb04b975a45f5beaf9a0fb3559f6e0c4759c7d0cb130e23e9482e7d66836a`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `eb110b55e1b8b6b36ebf8de090ecd430137319db3e1a2145f4c8d636fb1603ea`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

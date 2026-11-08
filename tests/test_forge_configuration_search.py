@@ -419,6 +419,22 @@ def test_pure_selector_lexicographic_counts_qualified_and_pending():
     assert search.select_configuration(trials, 1)["selection_kind"] == "pending"
 
 
+
+def test_held_tiers_never_complete_a_full_view_or_break_progression():
+    def trial(*rows):
+        return {"tasks": [{"task": name, "qualification_tier": tier, "importance": role, "gate_status": status}
+                          for name, tier, role, status in rows]}
+    top = search._qualification(trial(("a", 1, "required", "PASS"), ("b", 2, "required", "PASS"),
+                                      ("c", 3, "held", "FAIL")), 3)
+    assert top["qualified_tier"] == 2 and not top["full_view_qualified"]
+    assert top["required_total"] == top["required_passed"] == 2 and (top["held_total"], top["held_passed"]) == (1, 0)
+    middle = search._qualification(trial(("a", 1, "required", "PASS"), ("b", 2, "held", "FAIL"),
+                                         ("c", 3, "required", "PASS")), 3)
+    assert middle["qualified_tier"] == 3 and middle["full_view_qualified"]
+    assert [row["tier"] for row in middle["tiers"]] == [1, 3]
+    legacy = search._qualification(trial(("a", 1, "required", "PASS"), ("b", 2, "required", "PASS")), 2)
+    assert legacy["full_view_qualified"] and "held_total" not in legacy
+
 def test_git_metadata_advance_without_scientific_drift_reuses_requests(checkout, spec, monkeypatch):
     from experiments.forge import planning
     real = planning.inspect_source
@@ -507,11 +523,27 @@ def test_existing_positive_floor_round_retains_all_configuration_identities():
     assert before == {path: path.read_bytes() for path in paths}
 
 
-def test_actual_context_recipe_matches_frozen_card_and_report(checkout, spec):
+@pytest.mark.parametrize("base_overrides", [
+    {}, {"ebi_beta": 30.0, "kappa_radial": 1.0},
+    {"ebi_beta": 15.0}, {"kappa_radial": 2.0}, {"ebi_beta": 15.0, "kappa_radial": 2.0},
+], ids=["implicit-defaults", "explicit-defaults", "ebi-nondefault", "radial-nondefault", "both-nondefault"])
+def test_actual_context_recipe_matches_frozen_card_and_report(checkout, spec, base_overrides):
+    base_path = checkout / "configs/forge/ideas/base.json"
+    base = read_json(base_path)
+    base["recipe_overrides"].update(base_overrides)
+    atomic_json(base_path, base)
     planned = search.plan_search(checkout, checkout / "runs", spec)
     for trial in planned["trials"]:
         card = trial["declaration"]
-        assert stable_hash(card["resolved_configuration_recipe"]) == stable_hash(trial["resolved_recipe"])
+        # Full frozen cards retain the added fields; legacy runtime packets
+        # omit only their original default values. Compare the entire expected
+        # packet independently of the production compatibility projector.
+        expected_packet = deepcopy(card["resolved_configuration_recipe"])
+        for name, default in (("ebi_beta", 30.0), ("kappa_radial", 1.0), ("generator_gradient_response", "none")):
+            assert expected_packet[name] == base_overrides.get(name, default)
+            if expected_packet[name] == default:
+                expected_packet.pop(name)
+        assert stable_hash(expected_packet) == stable_hash(trial["resolved_recipe"])
         assert trial["configuration_id"] == search.configuration_id(card, resolved_recipe=trial["resolved_recipe"])
         assert card["prior"] == planned["base_declaration"]["prior"]
         assert trial["resolved_recipe"]["prior_kind"] == "mog"

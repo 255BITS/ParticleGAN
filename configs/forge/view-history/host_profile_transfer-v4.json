@@ -1,0 +1,241 @@
+{
+  "assignments": [
+    {
+      "importance": "required",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "two_pole"
+    },
+    {
+      "importance": "required",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "unused_token_hold"
+    },
+    {
+      "importance": "required",
+      "order": 2,
+      "qualification_tier": 1,
+      "task": "ae_gan_hold"
+    },
+    {
+      "importance": "required",
+      "order": 0,
+      "qualification_tier": 2,
+      "task": "trajectory"
+    },
+    {
+      "importance": "required",
+      "order": 1,
+      "qualification_tier": 2,
+      "task": "residual_student"
+    },
+    {
+      "importance": "required",
+      "order": 2,
+      "qualification_tier": 2,
+      "task": "unipolar"
+    },
+    {
+      "importance": "required",
+      "order": 3,
+      "qualification_tier": 2,
+      "task": "cover_leftover"
+    },
+    {
+      "importance": "required",
+      "order": 4,
+      "qualification_tier": 2,
+      "task": "mid_scale_identity"
+    },
+    {
+      "importance": "required",
+      "order": 5,
+      "qualification_tier": 2,
+      "task": "mode_hold"
+    },
+    {
+      "importance": "required",
+      "order": 6,
+      "qualification_tier": 2,
+      "task": "vector_two_broad"
+    },
+    {
+      "importance": "required",
+      "order": 7,
+      "qualification_tier": 2,
+      "task": "vector_unequal_mass"
+    },
+    {
+      "importance": "required",
+      "order": 8,
+      "qualification_tier": 2,
+      "task": "vector_unequal_width"
+    },
+    {
+      "importance": "required",
+      "order": 9,
+      "qualification_tier": 2,
+      "task": "vector_anisotropic"
+    },
+    {
+      "importance": "required",
+      "order": 10,
+      "qualification_tier": 2,
+      "task": "vector_overlap"
+    },
+    {
+      "importance": "required",
+      "order": 11,
+      "qualification_tier": 2,
+      "task": "vector_spiral"
+    },
+    {
+      "importance": "required",
+      "order": 12,
+      "qualification_tier": 2,
+      "task": "img_stripes2"
+    },
+    {
+      "importance": "required",
+      "order": 13,
+      "qualification_tier": 2,
+      "task": "img_bars4"
+    },
+    {
+      "importance": "required",
+      "order": 14,
+      "qualification_tier": 2,
+      "task": "img_blobs4"
+    },
+    {
+      "importance": "required",
+      "order": 15,
+      "qualification_tier": 2,
+      "task": "img_intensity2"
+    },
+    {
+      "importance": "required",
+      "order": 16,
+      "qualification_tier": 2,
+      "task": "grid100"
+    },
+    {
+      "importance": "required",
+      "order": 17,
+      "qualification_tier": 2,
+      "task": "rotated100"
+    },
+    {
+      "importance": "required",
+      "order": 18,
+      "qualification_tier": 2,
+      "task": "staggered100"
+    },
+    {
+      "importance": "required",
+      "order": 0,
+      "qualification_tier": 3,
+      "task": "ring_hold"
+    },
+    {
+      "importance": "required",
+      "order": 1,
+      "qualification_tier": 3,
+      "task": "ring_extension"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 19,
+      "qualification_tier": 2,
+      "task": "img_intensity2_residual16"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 20,
+      "qualification_tier": 2,
+      "task": "vector_two_broad_published"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 21,
+      "qualification_tier": 2,
+      "task": "vector_unequal_mass_published"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 22,
+      "qualification_tier": 2,
+      "task": "vector_unequal_width_published"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 23,
+      "qualification_tier": 2,
+      "task": "vector_anisotropic_published"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 24,
+      "qualification_tier": 2,
+      "task": "vector_overlap_published"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 25,
+      "qualification_tier": 2,
+      "task": "vector_spiral_published"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 26,
+      "qualification_tier": 2,
+      "task": "img_stripes2_residual16"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 27,
+      "qualification_tier": 2,
+      "task": "img_bars4_residual16"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 28,
+      "qualification_tier": 2,
+      "task": "img_blobs4_residual16"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 29,
+      "qualification_tier": 2,
+      "task": "grid100_affine_square_named_v1"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 30,
+      "qualification_tier": 2,
+      "task": "rotated100_affine_square_named_v1"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 31,
+      "qualification_tier": 2,
+      "task": "staggered100_affine_square_named_v1"
+    }
+  ],
+  "calibration": {
+    "adoption_blocker": "Host-profile transfer and full current-cohort positive/negative reference calibration remain required; no archived pass is imported.",
+    "status": "provisional"
+  },
+  "eligibility": {},
+  "goal": "host_profile_transfer",
+  "id": "host_profile_transfer",
+  "policy_change_reason": "Opt-in host transfer study. Preserve original stability assignments and expose explicit published image/vector architecture and native architecture/initialization variants as diagnostics. Profiled 14k continuations remain separately declared with their original clock-free audit prerequisite; default views retain original hosts.",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "qualified_tier_only_with_raw_metrics"
+  },
+  "revision": 4,
+  "schema_version": 1
+}

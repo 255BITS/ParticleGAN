@@ -15,7 +15,7 @@ from experiments.forge.api import CapabilityError
 from experiments.forge.state import state_digest
 
 
-pytestmark = pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA policy check requires GPU")
+pytestmark = [pytest.mark.cuda, pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA policy check requires GPU")]
 DEVICE = "cuda:0"
 
 

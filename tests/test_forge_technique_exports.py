@@ -253,6 +253,15 @@ def frozen_checkout(receipt):
     (root / "particlegan").mkdir()
     (root / "particlegan/__init__.py").write_text("")
     (root / "particlegan/fixture.py").write_text("VALUE = 1\n")
+    # Frozen publication asks the executed catalog which evaluator files it
+    # owns before overlaying reports. This miniature source has one task and
+    # one evaluator, so declare that inventory alongside the fake reducer.
+    (code / "views.py").write_text('''
+from .contracts import file_hash
+def load_tasks(root):
+    evaluator = 'reports/helpers/evaluator.py'
+    return {'toy': {'evaluation': {'sources': {evaluator: file_hash(root / evaluator)}}}}
+''')
     helper = root / "reports/helpers/evaluator.py"
     atomic_text(helper, "threshold = 1\n")
     atomic_json(root / "configs/forge/ideas/new-technique.json", {"id": "new-technique"})
@@ -264,7 +273,8 @@ from .sources import inspect_source
 def write_report(root, goal, *, execution_backend, output_prefix):
     assert VALUE == 1, "loaded live model instead of frozen model"
     source = inspect_source(root, ["reports/helpers/evaluator.py"])
-    result = {"rows": [{"attempt_ids": ["attempt-one"], "imported_value": VALUE,
+    result = {"rows": [{"candidate_id": "new-technique", "candidate_revision": "revision-one",
+                       "attempt_ids": ["attempt-one"], "imported_value": VALUE,
                        "tiers": {"1": {"passed": 0, "total": 3}},
                        "bindings": {"source_digest": source["digest"], "source_origin_commit": source["origin_commit"]}}],
               "provenance": {"view_sha256": "stable-view", "reducer_sha256": "stable-reducer"}}

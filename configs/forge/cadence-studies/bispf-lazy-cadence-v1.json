@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "bispf-lazy-cadence-v1",
+  "base_candidate": "bispf-throughput-v1",
+  "trainer_family": "bispf",
+  "view": "discriminator_stability",
+  "through_tier": 3,
+  "coverage_view": "lazy_cadence_coverage",
+  "lanes": [
+    "coverage"
+  ],
+  "execution_backend": "cuda",
+  "cuda_model": "NVIDIA RTX A6000",
+  "protocol": "screening",
+  "intervals": [
+    1,
+    4,
+    8,
+    16
+  ],
+  "control_interval": 1,
+  "hypothesis": "One global BISPF public lazy policy at reg_every 4, 8 or 16 preserves every measured eager-control PASS across the unchanged tiered tasks, including held tests, with the base coefficient fixed and the built-in k-fold strength compensation. This measures coupled application-clock controller behavior, not isolated gradient frequency. Any matched PASS-to-FAIL falsifies preservation for that interval; unavailable evidence cannot pass. No seed study, per-task tuning, scientific default adoption or automatic qualification.",
+  "campaign": {
+    "id": "bispf-lazy-cadence-v1",
+    "budget_seconds": 186480,
+    "candidate_budget_seconds": 46620
+  }
+}

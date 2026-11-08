@@ -1,5 +1,10 @@
 # Current Tier 1 measurement round
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 The completed round measured **26 PASS and 45 FAIL**, with **six explicit
 no-attempt policy blockers**, across eleven fixed recipes. All 71 numerical
 results have [actual-training GIFs and provenance](media.json). Total charged

@@ -1,5 +1,10 @@
 # 22-toy results and continuous stability
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../forge/technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 ## Gap-filled leaderboard — September 25, 2026
 
 **Selected research/launcher base: [K3P](k3p-base/README.md), with 22/22 declared toy passes, plus a

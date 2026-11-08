@@ -2,42 +2,77 @@
 
 Read this before proposing or running an experiment. Forge records ideas,
 checks cheap prerequisites before spending on larger tests, and compares exact
-candidate revisions through goal-specific leaderboards.
+candidate revisions through goal-specific leaderboards. Terms such as *view*,
+*tier* and *held test*, and the family acronyms (BISPF, BCAP, K3P, KA2, E22, …), are
+defined in the [research glossary](RESEARCH_GLOSSARY.md).
 
-Start with the [compiled experiment memory](reports/forge/EXPERIMENT_MEMORY.md)
-and the [current technique leaderboard](reports/forge/technique-inventory.md).
-For BCAP repair ideas, also read the completed
-[five-theory comparison](reports/forge/bcap-physics/README.md), including its
-source-bound readouts and unresolved gates.
-The subsequent [round-two readout](reports/forge/bcap-physics/round2/README.md)
-records a scoped sustained unequal-mass repair and remaining failures.
-The [round-three readout](reports/forge/bcap-physics/round3/README.md) adds two
-sustained conditional identity repairs while preserving the remaining failures.
-The [round-four readout](reports/forge/bcap-physics/round4/README.md) isolates a
-smaller conditional repair and measures composition, finite overshoot and tails.
-The [round-five readout](reports/forge/bcap-physics/round5/README.md) measures a
-combined conditional/rare repair and a width repair with rare/native regressions.
-The [implementation plan](docs/better-experiment-automation-plan-2026-09-28.md)
-defines the migration and adoption criteria.
-The [Forge preparation review map](docs/forge-integration-review-map.md) records
-the six agent-research changes and their software acceptance. Use its linked
-operating guides for recall, bounded decisions, policy execution and artifact
-retrieval; scientific calibration and release qualification remain separate.
-For a new research question or host, follow the
-[experiment creation guide](docs/forge-new-experiment.md), with worked ring and
-joint BiGAN examples, scorer controls, registration and artifact publication.
+## Quickstart
+
+Run every command from the repository root in the project's Python environment
+(`python -m pip install -e '.[experiments,dev]'`). Every step except `run`
+launches no training. `discriminator_stability` is the default view (goal).
+
+```bash
+# 1. Recall: what has been tried, what failed, what is in flight (no training)
+python -m experiments.forge recall --query "<topic>" --goal discriminator_stability
+
+# 2. New: scaffold one idea from a parent idea, plus its companion study.
+#    Writes configs/forge/ideas/<id>.json and configs/forge/studies/<id>-study.json;
+#    edit changed_factors, mechanism_rationale and recipe_overrides before planning.
+python -m experiments.forge new --id my-idea --parent <parent-idea-id> \
+  --goal discriminator_stability --hypothesis "<one falsifiable sentence>"
+
+# 3. Plan: exact tasks, evidence reuse and worst-case cost; writes nothing
+python -m experiments.forge plan my-idea --study my-idea-study --show-boundaries
+
+# 4. Run: freeze, enqueue and drain through the declared tier cap
+#    (--gpus 0,1 for physical GPUs, --gpus cpu for the CPU cohort)
+python -m experiments.forge run my-idea --study my-idea-study --gpus 0
+python -m experiments.forge queue            # active/blocked requests, costs, log paths
+python -m experiments.forge logs --follow    # tail the timestamped event stream
+
+# 5. Board: regrade the goal over compatible evidence (no launches)
+python -m experiments.forge board --goal discriminator_stability --candidate my-idea
+
+# 6. Readout: conclude the study; required before reusing or modifying the candidate
+python -m experiments.forge readout my-idea --study my-idea-study \
+  --conclusion "..." --comparison "..." --next-action "..."
+```
+
+Parent ids are the file names under `configs/forge/ideas/` (for example
+`bispf-optimized-v1`, `ka2` or `k3p`). Each command's `--help` lists its
+options. `python -m experiments.forge --help` lists the other commands
+(`probe`, `study`, `enqueue`, `drain`, `techniques`, `compile`, …), which the
+sections below describe.
+
+## Read first
+
+- The [current technique leaderboard](reports/forge/technique-inventory.md) is the
+  single current status page. Stretch and held experiments appear in its dedicated
+  `## Stretch experiments` table by tier as well as in the `## Full-suite results — failures included`
+  table; the required qualification subset is separate.
+- The [problem list](reports/forge/problems.md) explains each outstanding question:
+  what it tests, what fails and which configurations have passed it.
+- The [compiled experiment memory](reports/forge/EXPERIMENT_MEMORY.md) is a
+  reference index. Query it with `recall` instead of reading it in full.
+- For a new research question or host, follow the
+  [experiment creation guide](docs/forge-new-experiment.md). It has worked ring and
+  joint BiGAN examples, scorer controls, registration and artifact publication.
+
 Register ordinary new questions as required Tier 1 tasks in the existing
-`discriminator_stability` view. Revise that view and check its full reservation
-budget; create a separate view only for an explicitly different claim or
+`discriminator_stability` view, or assign frontier/extra-credit/optional questions
+with `importance: "stretch"` in their appropriate tier (`1`–`4`). Revise that view and check its full reservation
+budget. Create a separate view only for an explicitly different claim or
 diagnostic scope. Preserving an old denominator alone is not a reason for a new
 view. Historical receipts and pinned view revisions keep their original results.
+Keep bulk execution logs out of the repository, as [`AGENTS.md`](AGENTS.md) requires.
 
-For the combined E22/Atlas/Forge API, read
-[the develop integration notes](reports/forge/DEVELOP_INTEGRATION.md). Presets,
-external budgets and policy serving remain explicit; current Forge task
-definitions block E22/Atlas policy cohorts before reservation until separate
-policy-aware tasks are frozen. Keep bulk execution logs outside Git as required
-by [`AGENTS.md`](AGENTS.md).
+**`particlegan_forge`** is a separate, namespaced package that ships in the wheel.
+Its purpose is to expose Forge's task, tier and contract vocabulary (`TaskSpec`,
+`TierView`, named RNG streams, training-GIF rendering) to code outside this
+repository. The experiment workflow above runs through `python -m experiments.forge`.
+Treat `particlegan_forge` as the external tier API, and do not mix its registries
+with the repository's `configs/forge/` declarations.
 
 ## Readiness and scope
 
@@ -94,12 +129,13 @@ experimental receipts [unbound](reports/forge/import-gaps.json); a later written
 sensitivity assertion is separately preserved. That research is still developing;
 import its receipts when available using the existing framework.
 
-Incoming E22/KA2 changes the public API and model of record. Its inspected
-positives use particle clouds and noisy state-selected serving. Follow the
-[pinned compatibility checklist](reports/forge/UPSTREAM_E22_COMPATIBILITY.md)
-when that API lands in develop, preserving MoG support, named streams, external
-budgets and complete policy checkpoints. Current receipts retain their frozen
-source and formulation identity.
+E22/KA2 is available through the [public API](docs/api.md), including the E22
+preset and `E22Policy`. The inspected positives in the
+[historical integration checklist](reports/forge/UPSTREAM_E22_COMPATIBILITY.md)
+use particle clouds and noisy state-selected serving. Preserve their frozen
+source, formulation, prior and sampling identities; they do not supply evidence
+for a different MoG or clean-live task. MoG support, named streams, external
+budgets and complete policy checkpoints remain required integration contracts.
 
 Run commands from the repository root in the project's Python environment.
 The [registered formulation comparison](reports/forge/studies/FORMULATION_COMPARISON_V1.md)
@@ -125,7 +161,10 @@ automatic matrix filling, tuning, seed study, continuation or promotion follows.
 
 The history, recall, compile, validate, and board commands launch no training.
 Recall includes source-bound concluded configuration and policy publications as
-non-qualifying summaries. [Research memory freshness](docs/forge-research-memory.md)
+non-qualifying summaries. It returns compact source identity pins and a file
+count by default. Add `recall --full-provenance` when the complete source-file
+hash manifest is needed; stored records retain their full provenance.
+[Research memory freshness](docs/forge-research-memory.md)
 is visible in plans; `forge compile --check` checks it without artifact hydration.
 Use `forge compile --summaries-only` to refresh recall after a reporting or source
 merge while preserving published qualifications and telemetry. Inspect missing
@@ -285,11 +324,34 @@ Scheduling policy changes request identity, but does not enter scientific job
 compatibility or grant qualification. Reuse still requires the exact recipe,
 task, source, prior, initialization, sampling and runtime bindings.
 
-The current six-task Tier 1 reserves up to 2,220 seconds: the 120-second
-scalar Gaussian can-it-pass smoke, three existing 300-second behavior tasks,
-the 300-second ring acquisition and the 900-second confirmed word smoke.
-The explicit `tier1-word-smoke-v1` campaign caps required-smoke campaign and
-candidate reservations at that amount. Its Gaussian task requires any passing
+Use the [generated tier guide](reports/forge/EXPERIMENTS_BY_TIER.md#discriminator_stability)
+and [registered view](configs/forge/views/discriminator_stability.json) for the
+current tasks, roles and allowances. Revision 14 declares 11 required Tier 1
+tasks whose individual timeout allowances sum to 4,140 seconds. This sum is not
+an execution reservation: the read-only plan resolves grouped execution, reuse,
+unsupported hosts and candidate-specific bindings before admission.
+
+```sh
+python -m experiments.forge plan k3p --through-tier 1 --device cpu
+```
+
+For revision 14, this CPU K3P plan contains 12 execution groups and a
+4,440-second worst-case allowance, including the 300-second clock audit
+diagnostic. Review the actual plan for the intended candidate and device.
+
+Revision 15 adds optional Tier 1 [NVFP4 and MXFP8 training toys](reports/forge/precision-stretch/README.md)
+and their matched FP32 diagnostic. Required counts remain unchanged. Each new
+task reserves 300 seconds; the equivalent CPU K3P plan now reserves 5,340
+seconds. Existing campaigns retain their original caps. These are explicit
+Blackwell-format software references; native kernel and higher-order autograd
+parity remain unverified. Full-budget family results are initially unmeasured.
+
+Historical revision 8 had six required Tier 1 tasks and a 2,220-second
+required-task allowance: the 120-second scalar Gaussian can-it-pass smoke,
+three 300-second behavior tasks, the 300-second ring acquisition and the
+900-second confirmed word smoke. The registered `tier1-word-smoke-v1` campaign
+retains its revision-8 campaign and candidate caps of 2,220 seconds; it does not
+budget the expanded current Tier 1. Its Gaussian task requires any passing
 scheduled state plus independent same-state confirmation, and completes all
 1,000 updates. The continuing Gaussian retention/target-shift task is required
 Tier 2 with its own passing smoke checkpoint dependency and 600-second allowance.
@@ -302,11 +364,11 @@ must pass. Its allowance is 300 seconds, and its recipe, prior, architecture,
 optimizer histories, streams and original 20,000-update schedule horizon remain
 unchanged. The original sustained `five_word_joint_acquisition` declaration and
 its evidence remain historical. See the [split readout](reports/forge/five-word-tier-split/README.md).
-Revision 8 has required counts 6/21/2; its full through-Tier-2 reservation is
+Revision 8 had required counts 6/21/2; its full through-Tier-2 reservation was
 42,720 seconds per candidate (43,020 including the optional 300-second clock
-audit diagnostic). The new default `technique-inventory-word-split-v1` campaign
-reserves 46,620 seconds per family through Tier 3, including the diagnostic,
-and 326,340 seconds for the seven selected families. Historical campaigns,
+audit diagnostic). The revision-8 `technique-inventory-word-split-v1` campaign
+retains 46,620 seconds per family through Tier 3, including the diagnostic,
+and 326,340 seconds for its seven-family roster. Historical campaigns,
 including `tier1-gaussian-smoke-v1` and `tier1-acquisition-v2`, remain unchanged. Revision 3's `tier1-acquisition-v1` retains its
 2,100-second cap; historical `smoke.json` retains its 900-second cap. Neither
 covers the complete revision-4 Tier 1.
@@ -409,16 +471,40 @@ Older snapshots retain their recorded execution contract.
 
 ## Tiers and views
 
-| Qualification tier | Current stability profile (revision 8) | Purpose |
-| --- | --- | --- |
-| 1: smoke | `gaussian1d_smoke`, `two_pole`, `unused_token_hold`, `ae_gan_hold`, `ring16_acquisition`, `five_word_joint_smoke`; 23,131 total host updates, up to 2,220 reserved seconds | Behavior, finite-state, intended-update, mechanism and confirmed acquisition checks; placement remains provisional |
-| 2: quality | 21 hosts, including own-checkpoint Gaussian stability, five-word hold and three 7,000-update native coverage/accuracy gates | Require sustained live quality and continued learning across families |
-| 3: endurance | Own-state ring hold and extension; reserve up to 7,500 total updates | Detect late failure after acquisition |
+Current assignments are generated from the
+[registered views](configs/forge/views/) in the
+[tier guide](reports/forge/EXPERIMENTS_BY_TIER.md). The
+[`discriminator_stability` revision-14 profile](reports/forge/EXPERIMENTS_BY_TIER.md#discriminator_stability)
+declares:
 
-The current required denominator is 6/21/2. Revision 7's 6/20/2, revision 3's 5/19/2 and revision 2's
-published 3/19/2 results remain historical evidence; adding acquisition requirements
-does not regrade them or transfer API demonstrations into Forge qualification.
-The expanded smoke profile needs calibration before scientific adoption.
+| Qualification tier | Required and other assignments | Purpose |
+| --- | --- | --- |
+| 1: smoke | 11 required, 1 diagnostic | Behavior, finite-state, mechanism, confirmed acquisition and model-family checks; placement remains provisional |
+| 2: quality | 18 required, 7 held | Sustained live quality and continued learning across families |
+| 3: endurance | 1 required, 1 held, 1 diagnostic removed from the count | Late failure after acquisition; `ring_extension` counts the shared ring run once |
+| 4: stress_and_formulations | 5 held | Smaller-network accuracy, masked-observation recovery and joint BiGAN questions |
+
+The counted denominator is 11/18/1 for Tiers 1–3; Tier 4 has no counted
+requirements. Revision 11's 6/10/1, revision 9's 6/21/2, revision 7's 6/20/2,
+revision 3's 5/19/2 and revision 2's published 3/19/2 results remain historical
+evidence. Adding requirements or holding tests does not regrade those results
+or transfer API demonstrations into Forge qualification. Calibration remains
+provisional. Check the generated guide and a read-only plan after any view change.
+
+At the [2026-10-15 test dispositions](reports/forge/test-dispositions-20261015/README.md), the six ordinary
+views counted 81 view requirements (Tier 1/2/3): adaptation 3/9/0 (revision 3), clockfree_continuous 4/9/1
+(revision 4), discriminator_stability 6/10/1 (revision 11), formulation_comparison 3/9/1 (revision 2),
+host_profile_transfer 3/9/1 (revision 5) and quality_coverage 3/9/0 (revision 3). At those revisions, held in all six at Tier 2:
+`vector_unequal_mass`, `vector_unequal_width`, `vector_anisotropic`, `vector_overlap`, `img_bars4`,
+`img_blobs4`, `img_intensity2`, `grid100`, `rotated100` and `staggered100`. Also held: `gaussian1d_stability`
+(discriminator_stability, Tier 2), `target_shift_recovery` (adaptation and clockfree_continuous, Tier 3) and
+`grid100_14k`, `rotated100_14k` and `staggered100_14k` (clockfree_continuous, Tier 3, behind their held 7k
+parents). Removed from the count: `ring_hold` (a phase of `ring_extension` in the four ring views) and
+`clockfree_audit` (a duplicate of `clockfree_audit_measurement_v1` in clockfree_continuous). At that point,
+adaptation counted the same tests as quality_coverage and reported `HELD` while
+`target_shift_recovery` was held. These are pinned historical dispositions; use
+the generated tier guide for subsequent revisions and current roles.
+`tier1_policy_coverage` remains a separate scope.
 
 All required lower-tier tasks must pass before higher-tier work is eligible.
 Failed, missing, invalid, and blocked evidence stop higher-tier spending after
@@ -428,8 +514,46 @@ Diagnostics remain visible without vetoing required passes. The hold and extensi
 share one uninterrupted execution; the extension cannot borrow another
 candidate's trained state or hide behind a passing ordinary hold.
 
+A view assigns each task a role (`required`, `stretch`, `held`, or `diagnostic`;
+legacy `ranking` is retained in `IMPORTANCES` only for schema compatibility)
+and declares a view-level `ranking` policy (`policy: "qualified_tier_only_with_raw_metrics"`,
+`compare_compatible_cohorts: true`, `cost_separate: true` in `configs/forge/views/*.json`,
+or `order_by: ["qualified_tier", "candidate_id"]`, `metric_aggregation_allowed: false`
+in `particlegan_forge` — candidates rank by highest qualified tier,
+never by summing raw metrics across tasks). **Stretch** (`importance: "stretch"`)
+is the single canonical role for optional, extra-credit, frontier, and held
+benchmark tasks: stretch tests are declared, run, graded, and displayed in their
+own **`## Stretch experiments`** leaderboard table by tier (`Tier 1 stretch`–`Tier 4 stretch`,
+`Total stretch`) as well as in `## Full-suite results — failures included`, and
+they never block tier qualification or view-level `PASS`. A view can also mark a
+previously required test as **held** (role `held`, the backwards-compatible alias
+of `stretch` that carries a disposition note): it is
+still declared, run, graded and shown in the stretch and full-suite tables, but it is not counted, and it never blocks
+progress or becomes a next task. Its `hold` (or `stretch`) note in the view gives the reason
+(`no_global_recipe`, `unsolved`, `frontier`, `extra_credit`, `optional`, or `held_prerequisite` / `stretch_prerequisite` with the parents in
+`blocked_by`), a plain-language summary, an explanation link and the rule for
+counting it again. A test **removed from the count** stays assigned as
+`diagnostic` with a `removal` note (`phase`, `duplicate`, `superseded` or
+`ill_posed`); a phase or duplicate names the counted test that carries its
+question in `counted_by`; a duplicate must have the same evaluation declaration as the
+counted test. A counted test may depend on a removed one only when that removed test
+is a phase of it: the same uninterrupted run and tier, with the counted test
+continuing the phase's own saved state (a checkpoint dependency). The phase still
+gates its counted test, whose grader replays it, and the phase's own prerequisites
+must be counted, so a stretch, held, or diagnostic test never decides a counted verdict.
+A tier with only stretch tasks has status `STRETCH` and never blocks view-level `PASS`;
+a tier with only legacy held tasks has status `HELD` and neither passes nor stops later
+tiers. A view reports `PASS` when every counted tier passes and its highest non-stretch
+tier is counted. If every counted tier passes but the highest non-stretch tier is held, or
+nothing is counted in a held-only view, the view reports `HELD`, which is never eligible; a counted
+failure still reports as a failure. These notes are view policy: changing a
+summary, re-entry rule or link needs a new archived revision. Apply a recorded set of decisions with
+`python -m experiments.forge test-dispositions check|apply --registry <file>`;
+`check` writes nothing and exits 1 on drift, and `apply` archives each old revision
+byte for byte before writing, so a second apply changes nothing.
+
 The [experiments by tier report](reports/forge/EXPERIMENTS_BY_TIER.md) lists the
-current task assignments for every view, including required, ranking and
+current task assignments for every view, including required, stretch, held, and
 diagnostic roles, declared budgets, dependencies and tasks unassigned to any
 view. Regenerate it after adding tasks or changing tier placement:
 
@@ -557,6 +681,12 @@ no complete smoke pass has no qualified winner. Later tiers remain untouched
 during selection, and the provisional screen still requires calibration before
 scientific ranking or default adoption.
 
+For matched lazy-regularization comparisons, use the reusable
+[cadence study workflow](docs/forge-cadence-studies.md). It varies only
+`reg_every`, retains the kernel's built-in strength compensation, records actual
+penalty activity and generates a paired metric report. Explicit cross-tier
+coverage is a separate diagnostic scope and supplies no ordinary qualification.
+
 ```sh
 # Read-only cost/coverage plan, then explicit gated execution.
 python -m experiments.forge inventory plan --through-tier 3
@@ -599,10 +729,12 @@ API results while retaining the registered scientific rows and family selections
 It verifies the immutable evidence snapshots and exact archived policy, launches
 no training and does not regrade receipts. New required cells remain unknown
 until compatible ordinary evidence is explicitly registered.
-The default command selects that safe publication refresh automatically when
-the declared view is newer than the registered evidence policy. The explicit
-flag remains available; advancing qualification still requires the source and
-policy options above.
+The default command selects that safe publication refresh automatically only
+when the registered view itself (`discriminator_stability`) is newer than the
+registered evidence policy; a revision of any other view would take the ordinary
+publishing path. Always pass `--refresh-publication` after a view revision, for
+example after holding a test or removing one from the count. Advancing
+qualification still requires the source and policy options above.
 
 The original default inventory campaign has explicit reservation ceilings for
 its 12-technique roster. New techniques require checking the expanded plan and
@@ -610,9 +742,9 @@ a new immutable campaign ID with adequate budgets. The Modern GAN recipe uses
 its own one-candidate campaign; it does not rerun unchanged techniques. New ordinary
 requests finish runnable tasks in a tier, then apply required failures to higher
 tiers. Frozen requests without the new policy retain fail-fast behavior; unsupported
-techniques reserve no training resources. Required denominators are 6/21/2
-for the current revision-8 `discriminator_stability` view, including unknown and blocked
-cells. The current publication retains its recorded revision 7 (6/20/2) until
+techniques reserve no training resources. Current counted denominators, including
+unknown and blocked cells, follow the [registered view and tier guide](#tiers-and-views).
+The publication retains its recorded revision 9 qualification (6/21/2) until
 ordinary evidence explicitly advances it; earlier revision-2 3/19/2 cohorts
 retain their original outcomes in its companion JSON and immutable snapshots.
 A zero passes/total cell alone does not establish a scientific failure.
@@ -659,6 +791,9 @@ python -m experiments.forge retier discriminator_stability \
 ```
 
 This creates a view revision and recomputes eligibility without launching jobs.
+It first copies the live revision byte for byte to
+`configs/forge/view-history/<view>-v<revision>.json`, refuses if a different file is
+already there, and records that archive in the new revision's `previous_revision`.
 Existing campaigns retain their pinned view. Changing the task's steps, prior,
 sampling, or thresholds instead changes scientific compatibility. Do not shorten
 `benchmarks.toy100 --steps` to claim a preserved prefix: that option also changes
@@ -779,6 +914,52 @@ an explicit classification. Generated Forge records and boards never become
 historical mapper inputs. Keep bulk checkpoints/samples in their declared durable
 location; unavailable local artifacts remain evidence gaps.
 
+For documentation and software maintenance, check retained publications and
+refresh compiled reports without training:
+
+```sh
+# Read-only integrity check under the publications' original source bindings.
+python ops/refresh_forge_readouts.py --check --reports-only
+# Rebuild report displays from retained evidence without changing source pins.
+python ops/refresh_forge_readouts.py --reports-only
+# Separately inspect gaps against the current source and declarations.
+python ops/refresh_forge_readouts.py --check
+```
+
+`--check --reports-only` verifies retained publication integrity and reports
+current-source measurement gaps separately. Its `CURRENT` result preserves the
+recorded cohort; it grants no evidence for changed software. Package or adapter
+changes can leave the strict current-source check at `NEEDS_REFRESH` while the
+original publication remains intact. Preserve the original results, source pins,
+budgets and qualifications. Do not rerun unchanged experiments, rewrite their
+source bindings or transfer qualification merely to make a cleanup merge current.
+
+Strict `--check` launches no training and exits `0` when readouts and compiled
+reports match the current source and declarations, `1` when evidence or reporting
+gaps remain, and `2` when code or declaration changes are required (such as
+preflight blockers, corrupt manifests, unregistered `family-current-v1.json`
+snapshot edits, or non-gate `ERROR`/`INCOMPLETE` task outcomes).
+`--reports-only` without `--check` rebuilds report displays and leaves unavailable
+current-source measurements explicit; a partial result can remain `NEEDS_REFRESH`.
+
+For a separately authorized and budgeted new-source evaluation, the execution
+command is:
+
+```sh
+python ops/refresh_forge_readouts.py --gpus 0,1 --scaling-gpu auto
+```
+
+Running without `--check` or `--reports-only` drains stale stages end to end.
+`--scaling-gpu auto` inspects `nvidia-smi` to select a GPU from `--gpus` with zero
+external compute processes so all 48 DCGAN performance cells share one
+`Contention: clear` hardware cohort and matched comparison key per task. The
+publisher regenerates `technique-inventory.{json,md}` when committed
+`technique-evidence/manifest.json` snapshots already satisfy `family-current-v1.json`,
+preserves historical `family-current-v1.json` pins under their original frozen
+sources, preserves committed goal leaderboards on clean checkouts where ignored
+`reports/forge/attempts/*` envelopes are absent, and seals clean-checkout-safe
+`EXPERIMENT_MEMORY.md` and `compilation.json` manifests.
+
 ## Calibrate a screen before adopting it
 
 `calibrate` replays saved evidence without training. Follow the
@@ -806,6 +987,21 @@ producer. Diagnostic jobs use a separate queue namespace: their outcomes cannot
 qualify ordinary candidates. Record a readout after this work as usual.
 Start from the [diagnostic contract template](configs/forge/calibration-lane-template.json)
 and replace its placeholders with the frozen profile and selected lineage.
+
+User-authorized coverage diagnostics can rebuild missing checkpoints and continue
+after a producer's numerical quality FAIL. The bounded `attempt_coverage` runner
+uses an explicit `checkpoint-repairs.json` plan in its state directory. It keeps
+the original recipe, seed, prior distribution, schedule, observations and update
+budgets. A continuation still needs its complete own checkpoint, verified files,
+matching static context and RNGs, and exact restored prefix. It runs on its
+producer's GPU. A missing or incomplete state is rebuilt rather than relabeled.
+These receipts explicitly mark `diagnostic_continuation`; ordinary grading rejects
+them for qualification and the original parent FAIL remains recorded.
+
+Native continuation cards must inherit their producer's `recipe_owned_v1` prior
+contract. Legacy `learnable=true` metadata may be aligned only when the resolved
+recipe already learns that same prior and its complete initial distribution is
+unchanged. The repair freezes a new request and retains the earlier error receipt.
 
 An accepted calibration is a verified report with frozen criteria and compatible
 source/task/prior/RNG/runtime evidence. Editing a status field cannot approve it.
@@ -843,3 +1039,31 @@ python -m experiments.forge promotion report <registration-id>
 This is the sole fixed-seed screening exception. Every registered outcome counts;
 there is no in-stage tuning, seed selection or live-to-EMA scoring switch.
 Registration and submission revalidate the finished candidate and calibration.
+
+## History
+
+These are earlier guidance and readouts, oldest material first. They keep their original
+sources and results. The [technique leaderboard](reports/forge/technique-inventory.md)
+supersedes their status statements.
+
+- **BCAP repair series.** Read these before proposing a BCAP repair:
+  - the [five-theory comparison](reports/forge/bcap-physics/README.md): source-bound readouts and unresolved gates;
+  - [round two](reports/forge/bcap-physics/round2/README.md): a scoped, sustained unequal-mass repair;
+  - [round three](reports/forge/bcap-physics/round3/README.md): two sustained conditional identity repairs;
+  - [round four](reports/forge/bcap-physics/round4/README.md): a smaller conditional repair, with composition, finite overshoot and tails;
+  - [round five](reports/forge/bcap-physics/round5/README.md): a combined conditional/rare repair, and a width repair with rare/native regressions.
+- The [implementation plan](docs/better-experiment-automation-plan-2026-09-28.md)
+  defines the migration and adoption criteria.
+- The [Forge preparation review map](docs/forge-integration-review-map.md) records
+  the six agent-research changes and their software acceptance. Its linked
+  operating guides cover recall, bounded decisions, policy execution and artifact
+  retrieval. Scientific calibration and release qualification remain separate.
+- The [develop integration notes](reports/forge/DEVELOP_INTEGRATION.md) describe the
+  combined E22/Atlas/Forge API. Presets, external budgets and policy serving remain
+  explicit. Current Forge task definitions block E22/Atlas policy cohorts before
+  reservation until separate policy-aware tasks are frozen.
+- The [API model-mode research](reports/forge/api-model-toys/README.md) adds AE,
+  hard/categorical VAE, full DDGAN chains and AE-DDGAN composition tasks to the
+  existing tier view. Its fixed BISPF CPU research cohort, source-bound numerical
+  results and actual-training GIFs remain separate from ordinary whole-suite
+  qualification and from older AE/VAE/DDGAN studies.

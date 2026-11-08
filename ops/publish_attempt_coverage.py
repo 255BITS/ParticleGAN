@@ -50,7 +50,7 @@ def main():
         raise ValueError("publication requires a drained batch")
     changed = run("git", "diff", "--name-only", "HEAD", cwd=root).splitlines()
     exact = {publication, "reports/forge/technique-inventory.md", "reports/forge/EXPERIMENTS_BY_TIER.md",
-             "reports/forge/attempt-coverage.json", "reports/forge/ATTEMPT_COVERAGE.md"}
+             "reports/forge/attempt-coverage.json", "reports/forge/ATTEMPT_COVERAGE.md", "reports/forge/test-performance.md"}
     if any(path not in exact and not (path.startswith("reports/forge/families/") and path.endswith(".md")) for path in changed):
         raise ValueError("publisher found changes outside generated attempt reports")
     branch = run("git", "branch", "--show-current", cwd=root)

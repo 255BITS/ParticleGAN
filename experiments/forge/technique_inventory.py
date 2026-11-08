@@ -115,9 +115,10 @@ def _prepare(root, queue_root, *, view_id, through_tier, execution_backend, cuda
         row["submission_status"] = "BLOCKED" if blockers else "READY"
         row["candidate_budget_covers_declared_ceiling"] = (
             definition["candidate_budget_seconds"] >= row["declared_worst_case_seconds"])
+        max_tier = max([through_tier] + [t["qualification_tier"] for t in row["tasks"]])
         row["required_tier_totals"] = {
             str(tier): sum(t["qualification_tier"] == tier and t["importance"] == "required"
-                           for t in row["tasks"]) for tier in (1, 2, 3)}
+                           for t in row["tasks"]) for tier in range(1, max_tier + 1)}
         for task in row["tasks"]:
             saved = state.get("jobs", {}).get(by_task[task["task"]]["compatibility_key"], {})
             receipt = next((r for r in (saved.get("result") or {}).get("task_results", [])

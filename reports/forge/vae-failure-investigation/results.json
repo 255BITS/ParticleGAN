@@ -1,0 +1,907 @@
+{
+  "analysis_source_sha256": "94f596832d94bce175b5d4d6653b3584e17f6dbae570113717d570deb431a9b4",
+  "cpu_seconds": 0.8657755760000003,
+  "execution_commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+  "optimizer_updates": 0,
+  "protocol_sha256": "562533488d56afca673e89853eb26cfe858132cfb1a0a39ba5b9bd390c33a55e",
+  "qualification_input": false,
+  "results": {
+    "categorical": {
+      "archived_verdict": "PASS",
+      "final_failed_bounds": [],
+      "final_observation_exactly_reproduced": true,
+      "gradient_panel": {
+        "batch_size": 64,
+        "cosine": {
+          "adversarial:prior_regularization": {
+            "decoder": null,
+            "encoder": null,
+            "prior": -0.6008179518163498
+          },
+          "adversarial:variational": {
+            "decoder": -0.8813068633460746,
+            "encoder": null,
+            "prior": -0.4056402849314533
+          },
+          "variational:prior_regularization": {
+            "decoder": null,
+            "encoder": null,
+            "prior": -0.02974699721512032
+          }
+        },
+        "terms": {
+          "adversarial": {
+            "gradient_norms": {
+              "decoder": 0.08135048534218459,
+              "encoder": 0.0,
+              "prior": 0.00273836016722211
+            },
+            "prior_row_gradient_norms": [
+              0.00035122461849823594,
+              0.0007512080483138561,
+              0.0005595612456090748,
+              0.0015741493552923203,
+              8.496463851770386e-05,
+              0.0008000532980076969,
+              0.00041617880924604833,
+              0.00033999589504674077,
+              0.0002908038441091776,
+              0.00028058758471161127,
+              0.000807185482699424,
+              0.0005516130477190018,
+              0.0004360482271295041,
+              0.0005457196966744959,
+              0.0009194107260555029,
+              0.0007946051773615181
+            ],
+            "prior_rows_with_nonzero_gradient": 16,
+            "weighted_objective_value": 0.6809170842170715
+          },
+          "prior_regularization": {
+            "gradient_norms": {
+              "decoder": 0.0,
+              "encoder": 0.0,
+              "prior": 0.001051864298427045
+            },
+            "prior_row_gradient_norms": [
+              0.0003480057930573821,
+              7.604208076372743e-05,
+              0.00031398169812746346,
+              0.00018869101768359542,
+              0.00033194784191437066,
+              9.158535249298438e-05,
+              0.0001552588801132515,
+              0.0003258748911321163,
+              0.00010097642370965332,
+              0.0004135384224355221,
+              0.00014250088133849204,
+              0.00035870648571290076,
+              0.00010822843614732847,
+              0.0003660126531030983,
+              0.0003045164921786636,
+              0.00016693166980985552
+            ],
+            "prior_rows_with_nonzero_gradient": 16,
+            "weighted_objective_value": 0.0014465682907029986
+          },
+          "variational": {
+            "gradient_norms": {
+              "decoder": 0.08364741186759805,
+              "encoder": 0.004874619654847575,
+              "prior": 0.008826163659129261
+            },
+            "prior_row_gradient_norms": [
+              0.0011109784245491028,
+              7.302671790742493e-16,
+              4.033572622574866e-06,
+              0.007864891551434994,
+              0.0012596723390743136,
+              1.339858085591672e-10,
+              0.0006474112742580473,
+              0.0005769809940829873,
+              1.936219575782161e-07,
+              0.0028699275571852922,
+              0.00017363134247716516,
+              0.0001009604093269445,
+              2.4581288016634062e-05,
+              0.0014090888435021043,
+              2.1751283441062697e-08,
+              0.0014861261006444693
+            ],
+            "prior_rows_with_nonzero_gradient": 16,
+            "weighted_objective_value": -0.0005619043367914855
+          }
+        }
+      },
+      "input_binding": {
+        "archived_verdict": "PASS",
+        "checkpoint_sha256": "856b73d974adc6a3cc692f7ec56bae48b385ba7f17b3179cc1cbdd7fb288be4d",
+        "receipt_sha256": "6ac59fc435bb1de4a58671ede61ce2b189bbb212e4fe67d3395961719afd22e3",
+        "recipe_sha256": "572d4f2c2b7d6d31a12cda9557a49e6a9116e0381da6bc427f1a6722b926adfa",
+        "scientific_sources_sha256": "57a7f8a9a0b8d67d689bf301ed18ae26dcb87dc2faaa8efb153c0f42a46a05c5"
+      },
+      "optimizer_updates": 0,
+      "parameter_gradients_unchanged": true,
+      "reproduced_final_metrics": {
+        "aggregate_effective_components": 8.58007458474775,
+        "decoder_mean_hq": 0.99365234375,
+        "decoder_mean_mass_tv": 0.009765625,
+        "decoder_mean_modes": 2,
+        "elbo_identity_error": 4.440892098500626e-16,
+        "kl_identity_error": 4.910334274743633e-07,
+        "kl_nats": 1.316622018814087,
+        "likelihood_hq": 0.985595703125,
+        "likelihood_mass_tv": 0.014404296875,
+        "likelihood_modes": 2,
+        "negative_elbo_nats": 0.3309417414005633,
+        "posterior_effective_components": 4.288627629166566,
+        "posterior_mutual_information": 0.6934758245232868,
+        "posterior_noise_variance_ratio": 0.9955912828445435,
+        "posterior_pair_rms": 0.03460557758808136,
+        "reconstruction_mse": 0.0037706026532764924,
+        "shuffle_reconstruction_ratio": 592.3989743751856,
+        "shuffled_reconstruction_mse": 2.233701144577348
+      },
+      "row_attribution": {
+        "association_prediction_supported": true,
+        "decoder_bad_draws": 26,
+        "effectively_unvisited": {
+          "decoder_bad_draws": 25,
+          "decoder_bad_rate": 0.030902348458766937,
+          "draws": 809,
+          "likelihood_bad_draws": 52,
+          "mean_center_distance": 0.10453465580940247,
+          "rows": 3
+        },
+        "high_usage": {
+          "decoder_bad_draws": 0,
+          "decoder_bad_rate": 0.0,
+          "draws": 2276,
+          "likelihood_bad_draws": 0,
+          "mean_center_distance": 0.03757624328136444,
+          "rows": 9
+        },
+        "likelihood_bad_draws": 59,
+        "low_usage": {
+          "decoder_bad_draws": 26,
+          "decoder_bad_rate": 0.014285714365541935,
+          "draws": 1820,
+          "likelihood_bad_draws": 59,
+          "mean_center_distance": 0.09855622798204422,
+          "rows": 7
+        },
+        "low_usage_share_of_decoder_errors": 1.0,
+        "posterior_prior_tv": 0.46069204807281494,
+        "rows": [
+          {
+            "center_distance": 0.04629571735858917,
+            "center_mode": 0,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              -1.4820834398269653,
+              -0.042688291519880295
+            ],
+            "decoder_modes": [
+              230,
+              0
+            ],
+            "likelihood_bad_draws": 0,
+            "posterior_mass": 0.12653663754463196,
+            "prior_draws": 230,
+            "row": 0
+          },
+          {
+            "center_distance": 0.11069725453853607,
+            "center_mode": 1,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              1.6106971502304077,
+              0.00015348568558692932
+            ],
+            "decoder_modes": [
+              0,
+              254
+            ],
+            "likelihood_bad_draws": 5,
+            "posterior_mass": 1.2128016791529677e-15,
+            "prior_draws": 254,
+            "row": 1
+          },
+          {
+            "center_distance": 0.11906824260950089,
+            "center_mode": 0,
+            "decoder_bad_draws": 1,
+            "decoder_center": [
+              -1.3849027156829834,
+              -0.030493643134832382
+            ],
+            "decoder_modes": [
+              256,
+              0
+            ],
+            "likelihood_bad_draws": 4,
+            "posterior_mass": 4.45732002845034e-05,
+            "prior_draws": 256,
+            "row": 2
+          },
+          {
+            "center_distance": 0.06369426846504211,
+            "center_mode": 1,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              1.5635271072387695,
+              0.004611548036336899
+            ],
+            "decoder_modes": [
+              0,
+              248
+            ],
+            "likelihood_bad_draws": 0,
+            "posterior_mass": 0.11791151762008667,
+            "prior_draws": 248,
+            "row": 3
+          },
+          {
+            "center_distance": 0.04112677648663521,
+            "center_mode": 0,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              -1.4857569932937622,
+              -0.03858171030879021
+            ],
+            "decoder_modes": [
+              244,
+              0
+            ],
+            "likelihood_bad_draws": 0,
+            "posterior_mass": 0.08346843719482422,
+            "prior_draws": 244,
+            "row": 4
+          },
+          {
+            "center_distance": 0.14908018708229065,
+            "center_mode": 1,
+            "decoder_bad_draws": 25,
+            "decoder_center": [
+              1.6487947702407837,
+              0.009220566600561142
+            ],
+            "decoder_modes": [
+              0,
+              279
+            ],
+            "likelihood_bad_draws": 47,
+            "posterior_mass": 4.66364780127293e-10,
+            "prior_draws": 279,
+            "row": 5
+          },
+          {
+            "center_distance": 0.027352744713425636,
+            "center_mode": 1,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              1.5269757509231567,
+              -0.004525642842054367
+            ],
+            "decoder_modes": [
+              0,
+              260
+            ],
+            "likelihood_bad_draws": 0,
+            "posterior_mass": 0.07424075901508331,
+            "prior_draws": 260,
+            "row": 6
+          },
+          {
+            "center_distance": 0.026925135403871536,
+            "center_mode": 0,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              -1.5012420415878296,
+              -0.02689647302031517
+            ],
+            "decoder_modes": [
+              270,
+              0
+            ],
+            "likelihood_bad_draws": 0,
+            "posterior_mass": 0.03472767397761345,
+            "prior_draws": 270,
+            "row": 7
+          },
+          {
+            "center_distance": 0.08772009611129761,
+            "center_mode": 1,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              1.5876597166061401,
+              0.003254074603319168
+            ],
+            "decoder_modes": [
+              0,
+              265
+            ],
+            "likelihood_bad_draws": 1,
+            "posterior_mass": 1.4779534467379563e-06,
+            "prior_draws": 265,
+            "row": 8
+          },
+          {
+            "center_distance": 0.05724813789129257,
+            "center_mode": 0,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              -1.4592236280441284,
+              -0.04018254205584526
+            ],
+            "decoder_modes": [
+              241,
+              0
+            ],
+            "likelihood_bad_draws": 0,
+            "posterior_mass": 0.10492457449436188,
+            "prior_draws": 241,
+            "row": 9
+          },
+          {
+            "center_distance": 0.010707592591643333,
+            "center_mode": 1,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              1.499412178993225,
+              -0.01069144532084465
+            ],
+            "decoder_modes": [
+              0,
+              258
+            ],
+            "likelihood_bad_draws": 0,
+            "posterior_mass": 0.14528603851795197,
+            "prior_draws": 258,
+            "row": 10
+          },
+          {
+            "center_distance": 0.10728669166564941,
+            "center_mode": 0,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              -1.396443486213684,
+              -0.028044309467077255
+            ],
+            "decoder_modes": [
+              244,
+              0
+            ],
+            "likelihood_bad_draws": 2,
+            "posterior_mass": 0.00399362575262785,
+            "prior_draws": 244,
+            "row": 11
+          },
+          {
+            "center_distance": 0.06221459433436394,
+            "center_mode": 1,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              1.561982274055481,
+              0.0053715333342552185
+            ],
+            "decoder_modes": [
+              0,
+              246
+            ],
+            "likelihood_bad_draws": 0,
+            "posterior_mass": 0.0005405076663009822,
+            "prior_draws": 246,
+            "row": 12
+          },
+          {
+            "center_distance": 0.052631981670856476,
+            "center_mode": 0,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              -1.4709559679031372,
+              -0.04389270767569542
+            ],
+            "decoder_modes": [
+              248,
+              0
+            ],
+            "likelihood_bad_draws": 0,
+            "posterior_mass": 0.14093327522277832,
+            "prior_draws": 248,
+            "row": 13
+          },
+          {
+            "center_distance": 0.053826551884412766,
+            "center_mode": 0,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              -1.4491677284240723,
+              -0.017702486366033554
+            ],
+            "decoder_modes": [
+              276,
+              0
+            ],
+            "likelihood_bad_draws": 0,
+            "posterior_mass": 1.0059297750331098e-07,
+            "prior_draws": 276,
+            "row": 14
+          },
+          {
+            "center_distance": 0.01220384519547224,
+            "center_mode": 1,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              1.5076227188110352,
+              -0.00953037291765213
+            ],
+            "decoder_modes": [
+              0,
+              277
+            ],
+            "likelihood_bad_draws": 0,
+            "posterior_mass": 0.16739079356193542,
+            "prior_draws": 277,
+            "row": 15
+          }
+        ]
+      },
+      "state_sha256": "630beef963dc555a7ac79e9b13232a3018cd7cb34c7c759b839f187fb2c3fcea",
+      "state_unchanged": true,
+      "training_rng_unchanged": true
+    },
+    "hard": {
+      "archived_verdict": "FAIL",
+      "final_failed_bounds": [],
+      "final_observation_exactly_reproduced": true,
+      "gradient_panel": {
+        "batch_size": 64,
+        "cosine": {
+          "adversarial:prior_regularization": {
+            "decoder": null,
+            "encoder": null,
+            "prior": -0.5133829114015032
+          },
+          "adversarial:variational": {
+            "decoder": -0.3985001533996976,
+            "encoder": null,
+            "prior": -0.3026167772252074
+          },
+          "variational:prior_regularization": {
+            "decoder": null,
+            "encoder": null,
+            "prior": 0.48112200305037117
+          }
+        },
+        "terms": {
+          "adversarial": {
+            "gradient_norms": {
+              "decoder": 0.06973177956318385,
+              "encoder": 0.0,
+              "prior": 0.012039672253623466
+            },
+            "prior_row_gradient_norms": [
+              0.0006467646453529596,
+              0.003795009106397629,
+              0.005687597673386335,
+              0.006790482439100742,
+              0.00016272412904072553,
+              0.002502757590264082,
+              0.002209907630458474,
+              0.0006585927330888808,
+              0.0019397423602640629,
+              0.0004878236504737288,
+              0.0031277642119675875,
+              0.000820788147393614,
+              0.0029065206181257963,
+              0.0010090912692248821,
+              0.0013892573770135641,
+              0.0037699921522289515
+            ],
+            "prior_rows_with_nonzero_gradient": 16,
+            "weighted_objective_value": 0.6779857873916626
+          },
+          "prior_regularization": {
+            "gradient_norms": {
+              "decoder": 0.0,
+              "encoder": 0.0,
+              "prior": 0.00042423601570084826
+            },
+            "prior_row_gradient_norms": [
+              0.0001258815755136311,
+              4.61403324152343e-05,
+              0.00014963964349590242,
+              7.827378431102261e-05,
+              9.19132653507404e-05,
+              5.0101174565497786e-05,
+              0.00014505012950394303,
+              8.144337334670126e-05,
+              8.566094766138121e-05,
+              0.00011984908633166924,
+              0.00017552192730363458,
+              0.0001017458998830989,
+              6.137815216789022e-05,
+              0.00012692913878709078,
+              4.8200618039118126e-05,
+              9.893529204418883e-05
+            ],
+            "prior_rows_with_nonzero_gradient": 16,
+            "weighted_objective_value": 0.0010399181628599763
+          },
+          "variational": {
+            "gradient_norms": {
+              "decoder": 0.1704871859865181,
+              "encoder": 0.5003494795873972,
+              "prior": 0.037744119581447765
+            },
+            "prior_row_gradient_norms": [
+              0.006122378632426262,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.020902547985315323,
+              0.018906911835074425,
+              0.0,
+              0.0,
+              0.0,
+              0.024346400052309036
+            ],
+            "prior_rows_with_nonzero_gradient": 4,
+            "weighted_objective_value": 0.0029933443292975426
+          }
+        }
+      },
+      "input_binding": {
+        "archived_verdict": "FAIL",
+        "checkpoint_sha256": "450ae89384b09af931b5e6bc65b558e74464c2d7a3c258b0a50aa83b8a10a3e9",
+        "receipt_sha256": "a5c0f1035bbddbddc8693c3120484e26a9266fec3505ffb97dc5fac462ad063b",
+        "recipe_sha256": "c0a7a80ad3c2158db0c87b5d362bf33f6e32d0f88f606754f3dd46efe822505b",
+        "scientific_sources_sha256": "57a7f8a9a0b8d67d689bf301ed18ae26dcb87dc2faaa8efb153c0f42a46a05c5"
+      },
+      "optimizer_updates": 0,
+      "parameter_gradients_unchanged": true,
+      "reproduced_final_metrics": {
+        "aggregate_effective_components": 4.357929291878556,
+        "decoder_mean_hq": 0.955322265625,
+        "decoder_mean_mass_tv": 0.070068359375,
+        "decoder_mean_modes": 2,
+        "elbo_identity_error": 1.3322676295501878e-15,
+        "kl_identity_error": 7.618617292592944e-09,
+        "kl_nats": 2.7725889682769775,
+        "likelihood_hq": 0.9150390625,
+        "likelihood_mass_tv": 0.0849609375,
+        "likelihood_modes": 2,
+        "negative_elbo_nats": 3.7974167579843803,
+        "posterior_effective_components": 1.0,
+        "posterior_mutual_information": 1.4719970114891407,
+        "posterior_noise_variance_ratio": 1.0051920413970947,
+        "posterior_pair_rms": 0.03137028217315674,
+        "reconstruction_mse": 0.005580060080720941,
+        "shuffle_reconstruction_ratio": 423.58843838508824,
+        "shuffled_reconstruction_mse": 2.3636489356875527
+      },
+      "row_attribution": {
+        "association_prediction_supported": true,
+        "decoder_bad_draws": 183,
+        "effectively_unvisited": {
+          "decoder_bad_draws": 136,
+          "decoder_bad_rate": 0.06529044359922409,
+          "draws": 2083,
+          "likelihood_bad_draws": 239,
+          "mean_center_distance": 0.12461651116609573,
+          "rows": 8
+        },
+        "high_usage": {
+          "decoder_bad_draws": 0,
+          "decoder_bad_rate": 0.0,
+          "draws": 983,
+          "likelihood_bad_draws": 8,
+          "mean_center_distance": 0.08537128567695618,
+          "rows": 4
+        },
+        "likelihood_bad_draws": 348,
+        "low_usage": {
+          "decoder_bad_draws": 183,
+          "decoder_bad_rate": 0.05878573656082153,
+          "draws": 3113,
+          "likelihood_bad_draws": 340,
+          "mean_center_distance": 0.12180111557245255,
+          "rows": 12
+        },
+        "low_usage_share_of_decoder_errors": 1.0,
+        "posterior_prior_tv": 0.72900390625,
+        "rows": [
+          {
+            "center_distance": 0.09066923707723618,
+            "center_mode": 0,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              -1.4917267560958862,
+              -0.09029099345207214
+            ],
+            "decoder_modes": [
+              253,
+              0
+            ],
+            "likelihood_bad_draws": 0,
+            "posterior_mass": 0.18505859375,
+            "prior_draws": 253,
+            "row": 0
+          },
+          {
+            "center_distance": 0.1797019988298416,
+            "center_mode": 1,
+            "decoder_bad_draws": 81,
+            "decoder_center": [
+              1.6697124242782593,
+              0.05908048152923584
+            ],
+            "decoder_modes": [
+              0,
+              280
+            ],
+            "likelihood_bad_draws": 105,
+            "posterior_mass": 0.0,
+            "prior_draws": 280,
+            "row": 1
+          },
+          {
+            "center_distance": 0.16526682674884796,
+            "center_mode": 1,
+            "decoder_bad_draws": 10,
+            "decoder_center": [
+              1.527259111404419,
+              0.16300326585769653
+            ],
+            "decoder_modes": [
+              0,
+              260
+            ],
+            "likelihood_bad_draws": 42,
+            "posterior_mass": 0.0,
+            "prior_draws": 260,
+            "row": 2
+          },
+          {
+            "center_distance": 0.14203786849975586,
+            "center_mode": 1,
+            "decoder_bad_draws": 19,
+            "decoder_center": [
+              1.642030119895935,
+              0.0014830827713012695
+            ],
+            "decoder_modes": [
+              0,
+              245
+            ],
+            "likelihood_bad_draws": 37,
+            "posterior_mass": 0.005615234375,
+            "prior_draws": 245,
+            "row": 3
+          },
+          {
+            "center_distance": 0.11432944238185883,
+            "center_mode": 0,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              -1.5711833238601685,
+              -0.08946594595909119
+            ],
+            "decoder_modes": [
+              270,
+              0
+            ],
+            "likelihood_bad_draws": 4,
+            "posterior_mass": 0.004638671875,
+            "prior_draws": 270,
+            "row": 4
+          },
+          {
+            "center_distance": 0.16656069457530975,
+            "center_mode": 1,
+            "decoder_bad_draws": 42,
+            "decoder_center": [
+              1.6617823839187622,
+              0.03960965573787689
+            ],
+            "decoder_modes": [
+              0,
+              258
+            ],
+            "likelihood_bad_draws": 62,
+            "posterior_mass": 0.0,
+            "prior_draws": 258,
+            "row": 5
+          },
+          {
+            "center_distance": 0.17112118005752563,
+            "center_mode": 1,
+            "decoder_bad_draws": 28,
+            "decoder_center": [
+              1.6066120862960815,
+              0.13385187089443207
+            ],
+            "decoder_modes": [
+              0,
+              249
+            ],
+            "likelihood_bad_draws": 60,
+            "posterior_mass": 0.008056640625,
+            "prior_draws": 249,
+            "row": 6
+          },
+          {
+            "center_distance": 0.03719278424978256,
+            "center_mode": 0,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              -1.5209752321243286,
+              -0.03071388602256775
+            ],
+            "decoder_modes": [
+              266,
+              0
+            ],
+            "likelihood_bad_draws": 0,
+            "posterior_mass": 0.002685546875,
+            "prior_draws": 266,
+            "row": 7
+          },
+          {
+            "center_distance": 0.10691498219966888,
+            "center_mode": 1,
+            "decoder_bad_draws": 1,
+            "decoder_center": [
+              1.6061325073242188,
+              -0.012911409139633179
+            ],
+            "decoder_modes": [
+              0,
+              285
+            ],
+            "likelihood_bad_draws": 8,
+            "posterior_mass": 0.0,
+            "prior_draws": 285,
+            "row": 8
+          },
+          {
+            "center_distance": 0.08490365743637085,
+            "center_mode": 0,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              -1.5441977977752686,
+              -0.07249265909194946
+            ],
+            "decoder_modes": [
+              242,
+              0
+            ],
+            "likelihood_bad_draws": 0,
+            "posterior_mass": 0.0,
+            "prior_draws": 242,
+            "row": 9
+          },
+          {
+            "center_distance": 0.11844266206026077,
+            "center_mode": 1,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              1.5699113607406616,
+              0.0956089198589325
+            ],
+            "decoder_modes": [
+              0,
+              245
+            ],
+            "likelihood_bad_draws": 6,
+            "posterior_mass": 0.23486328125,
+            "prior_draws": 245,
+            "row": 10
+          },
+          {
+            "center_distance": 0.05142078548669815,
+            "center_mode": 0,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              -1.5229874849319458,
+              -0.045996442437171936
+            ],
+            "decoder_modes": [
+              228,
+              0
+            ],
+            "likelihood_bad_draws": 0,
+            "posterior_mass": 0.30224609375,
+            "prior_draws": 228,
+            "row": 11
+          },
+          {
+            "center_distance": 0.12611867487430573,
+            "center_mode": 1,
+            "decoder_bad_draws": 1,
+            "decoder_center": [
+              1.6254953145980835,
+              0.012523740530014038
+            ],
+            "decoder_modes": [
+              0,
+              255
+            ],
+            "likelihood_bad_draws": 17,
+            "posterior_mass": 0.0,
+            "prior_draws": 255,
+            "row": 12
+          },
+          {
+            "center_distance": 0.06265707314014435,
+            "center_mode": 0,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              -1.5285269021987915,
+              -0.05578641593456268
+            ],
+            "decoder_modes": [
+              230,
+              0
+            ],
+            "likelihood_bad_draws": 0,
+            "posterior_mass": 0.0,
+            "prior_draws": 230,
+            "row": 13
+          },
+          {
+            "center_distance": 0.10480821877717972,
+            "center_mode": 0,
+            "decoder_bad_draws": 1,
+            "decoder_center": [
+              -1.6024439334869385,
+              -0.022136032581329346
+            ],
+            "decoder_modes": [
+              273,
+              0
+            ],
+            "likelihood_bad_draws": 5,
+            "posterior_mass": 0.0,
+            "prior_draws": 273,
+            "row": 14
+          },
+          {
+            "center_distance": 0.08095245063304901,
+            "center_mode": 1,
+            "decoder_bad_draws": 0,
+            "decoder_center": [
+              1.578023076057434,
+              0.02158007025718689
+            ],
+            "decoder_modes": [
+              0,
+              257
+            ],
+            "likelihood_bad_draws": 2,
+            "posterior_mass": 0.2568359375,
+            "prior_draws": 257,
+            "row": 15
+          }
+        ]
+      },
+      "state_sha256": "76a037a0e97749af974a2c53713fdbe442962e64226fbb60db798d84a6345ad4",
+      "state_unchanged": true,
+      "training_rng_unchanged": true
+    }
+  },
+  "reused_original_training_gifs": true,
+  "runtime": {
+    "device": "cpu",
+    "threads": 1,
+    "torch": "2.14.0+cu130"
+  },
+  "schema": "vae_saved_failure_analysis_v1"
+}

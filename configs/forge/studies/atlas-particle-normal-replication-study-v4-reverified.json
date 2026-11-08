@@ -1,0 +1,73 @@
+{
+  "campaign": {
+    "budget_seconds": 400000,
+    "candidate_budget_seconds": 100000,
+    "id": "atlas-prior-repair-campaign-v4"
+  },
+  "candidate": "atlas-particle-normal-v4",
+  "competing_explanation": "If blocking KA2 pre-anchor critic-only LossSurprise reopens (guard.ka2_anchor_started is False and witness_roles == {'critic'}) while holding birth_death_cells=256 and NormalNoiseManipulator(sigma=0.0065) fixed fails to recover mode_hold (modes == 8) alongside all 6 vector passes (component_covariance_error <= 0.85) and >= 24 PASS overall, then mode_hold's 7/8 regression in v3 was caused by equilibrium kernel width at sigma=0.0065 rather than premature pre-anchor critic-only LossSurprise reopening.",
+  "control": {
+    "candidate_id": "atlas-particle-normal-v2",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "mean_error_sigma",
+    "op": ">",
+    "phase": "final",
+    "task_id": "gaussian1d_smoke",
+    "threshold": 0.2
+  },
+  "hypothesis": "Guarding LossSurprise.decide against KA2 pre-anchor critic-only SettledReopenGuard witnesses (guard.ka2_anchor_started is False and witness_roles == {'critic'}, where the critic ladder has stepped down during Phase A acquisition while the generator ladder remains unsettled at full rate s=1.0) prevents premature step-35 critic re-empowerment on N=12 mode_hold while preserving post-anchor equilibrium shift detection, recovering 8/8 mode_hold and unblocking ring_hold, ring_extension, and target_shift_recovery while retaining birth_death_cells=256 and NormalNoiseManipulator(sigma=0.0065) to preserve all 6/6 vector, 4/4 image, 2/2 VAE, and 2/2 clockfree passes for >= 24 PASS / 0 INCOMPLETE with zero task regressions relative to both atlas-particle-normal-v2 and atlas-particle-normal-v3 under protocol seed 0.",
+  "id": "atlas-particle-normal-replication-study-v4-reverified",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "modes",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "mode_hold",
+    "threshold": 8
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_revision": "c7e4c12988d060ec0bb8d903651ffbae3d2537e4d5b360a3bfa75a6e860de9fb",
+      "record_id": "readout-9f0d62f87d1ff351cfef7f98"
+      },
+      "path": "reports/forge/records/readout-9f0d62f87d1ff351cfef7f98.json",
+      "selector": [],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "candidate_revision": "de4379506c30e147385182dfd8cdc61133024f4636c2ecbf07cea1c509cc2cc0",
+        "record_id": "readout-4dc982d111099c9b0f33a18e"
+      },
+      "path": "reports/forge/records/readout-4dc982d111099c9b0f33a18e.json",
+      "selector": [],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "candidate_revision": "4e3279bde6957fc95c5ba573328f9b9379a0c737ad5a7f06f637105b74e7ddf0",
+        "record_id": "readout-efb8bacf93e19fc2b0d7f7bf"
+      },
+      "path": "reports/forge/records/readout-efb8bacf93e19fc2b0d7f7bf.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "prior-ablation-full-suite-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

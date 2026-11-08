@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "615b5eeceeb9c755fae0c17c9dc8c136d08af973d9a2ed7f6bf360190e56fd58",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "1c6bf2da8f47b6426a4559289a6260ca626c381ed1459e8ece2f646014ab74c7",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/04219fc2d9d14cfdbb51fb86c841ec85/constraint_geometry-scored-outputs.pt": "288e14e97bc3b463d42c3101bbc0fac3debefedc82362e9a9b1555f89d2de758"
+  },
+  "task_id": "residual_student"
+}

@@ -24,7 +24,7 @@ D .000125, particles .0016. The latter G/D rates come from the
 This changes the G/D ratio and absolute particle LR too; it does not isolate
 which individual rate matters. Width changes affect both G and D.
 
-All other settings are held fixed: seed 24002; batch64; T=4;
+All other settings are held fixed: seed 24002; batch 64; T=4;
 alpha_bar=[1,.9,.5,.05,.0001]; learned latent table 20k x128; Gaussian reverse
 noise; Rp logistic; candidate-only bcap coeff/kappa1 every step; UCD CE .02;
 unique-row VICReg1; Adam (0,.999); EMA .995; cosine decay after 60% to a .05
@@ -60,7 +60,7 @@ Actual checkpoints/source archives remain under `results/cifar_ddgan/`.
 ## Diagnostics and next hypothesis
 
 The interim UCD32 probe found candidate-gradient norms roughly .004–.012,
-well below the bcap threshold1. Changing z changes G outputs; its effect is
+well below the bcap threshold 1. Changing z changes G outputs; its effect is
 smaller at cleaner steps. A separate t=4 probe found large time shifts and
 about 71% of channels in the later D blocks almost always on one side of the
 activation. This suggests testing feature normalization; it does not prove
@@ -76,7 +76,7 @@ smoke path before running the next pair.
 A second scaling issue to revisit separately: for iid unit Gaussian particles,
 the expected off-diagonal covariance term in the existing VICReg implementation
 is approximately (latent_dim-1)/(unique_batch_rows-1). Going from toy dim4/batch256
-to image dim128/batch64 changes this from ~.012 to ~2.0. Preserving coefficient1
+to image dim128/batch64 changes this from ~.012 to ~2.0. Preserving coefficient 1
 therefore preserves the formula, not its relative scale. This round deliberately
 held it fixed; no conclusion about the best image particle regularization yet.
 
