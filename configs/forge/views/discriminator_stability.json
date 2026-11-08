@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "discriminator_stability",
-  "revision": 15,
+  "revision": 16,
   "goal": "discriminator_stability",
   "assignments": [
     {
@@ -460,6 +460,18 @@
       }
     },
     {
+      "importance": "stretch",
+      "order": 14,
+      "qualification_tier": 4,
+      "task": "grid100_res16_scaled_tanh",
+      "stretch": {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "Paired 16-layer ScaledResidualMLPGenerator + TanhRailGuard on the 10x10 100-mode Gaussian grid isolating residual depth transport from unscaled initialization explosion.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved"
+      }
+    },
+    {
       "task": "model_ae_ddgan_bimodal_chain",
       "qualification_tier": 2,
       "importance": "required",
@@ -550,10 +562,10 @@
     "compare_compatible_cohorts": true,
     "cost_separate": true
   },
-  "policy_change_reason": "Archive the exact develop revision-14 policy, preserving all nine GAN formulation stretch tests and every required assignment. Add optional Blackwell-format NVFP4 and MXFP8 training toys plus their matched FP32 diagnostic at Tier 1; required qualification and historical numerical results are unchanged.",
+  "policy_change_reason": "Archive the exact develop revision-15 policy, preserving all required, held, and stretch assignments. Add paired Tier 4 stretch task grid100_res16_scaled_tanh alongside unnormalized grid100_mlp16 and grid100_res16_tanh; required qualification and historical numerical results are unchanged.",
   "previous_revision": {
-    "archive": "configs/forge/view-history/discriminator_stability-v14.json",
-    "policy_fingerprint": "e34b913de257614e06735e027dc1867fdf78c256928317a2f29c3ea7fcdd4dd5",
-    "revision": 14
+    "archive": "configs/forge/view-history/discriminator_stability-v15.json",
+    "policy_fingerprint": "ad156a02a8d44077d707f1324959b0b865824411ca08d9b5d5098ae7d1a69497",
+    "revision": 15
   }
 }

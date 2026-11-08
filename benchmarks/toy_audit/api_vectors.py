@@ -18,7 +18,7 @@ import numpy as np
 import torch
 from torch import nn
 
-from particlegan import (BatchDistanceDiscriminator, GANTrainer, Recipe,
+from particlegan import (BatchDistanceDiscriminator, GANTrainer,
                         get_recipe, init, scale_learning_rates)
 from lib.toy_models import SimpleMLPDiscriminator
 from benchmarks.transfer_suite import stress_tasks, vector_tasks
@@ -859,7 +859,7 @@ def _registry():
 
 def list_cases():
     """Independent metadata copies; default budgets do not follow short overrides."""
-    return [deepcopy(record) for cid, record in _registry().items() if cid != "api-grid100-res16-scaled-tanh"]
+    return [deepcopy(record) for record in _registry().values()]
 
 
 def _bounds(metrics, bounds):

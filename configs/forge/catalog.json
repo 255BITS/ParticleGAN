@@ -92,7 +92,7 @@
       "report/toy100/shared22": 201,
       "report/toy100/simpler22": 180,
       "report/toy100/torch214-gpu-check": 10,
-      "report/toy_audit": 589,
+      "report/toy_audit": 592,
       "report/trajectory": 167,
       "report/transfer_suite": 341,
       "report/transfer_suite/anisotropic_core_metric": 2,
@@ -112,20 +112,20 @@
       "frozen_driver": 28,
       "frozen_evaluator_or_audit": 2,
       "frozen_support": 28,
-      "narrative": 972,
-      "structured_evidence": 5065,
+      "narrative": 973,
+      "structured_evidence": 5066,
       "support": 1557,
       "support_artifact": 52,
       "visualization": 23,
-      "visualization_artifact": 749
+      "visualization_artifact": 750
     },
-    "files": 11820
+    "files": 11823
   },
   "coverage": {
-    "declared_count": 11820,
+    "declared_count": 11823,
     "missing": [],
     "stale": [],
-    "tracked_count": 11820,
+    "tracked_count": 11823,
     "unclassified": [],
     "valid": true
   },
@@ -901,7 +901,7 @@
     },
     {
       "family": "benchmark/toy_audit",
-      "git_blob": "6367d505f99cf6a1b0516e48a079c2ce35070838",
+      "git_blob": "000673c4a41b1768e38a21f6b6ff89b03426d993",
       "path": "benchmarks/toy_audit/api_conditionals.py",
       "role": "support",
       "suggested_tiers": []
@@ -994,7 +994,7 @@
     },
     {
       "family": "benchmark/toy_audit",
-      "git_blob": "a3de4bad0d196e203424888af6bb0ff6230effa3",
+      "git_blob": "b392158030dae0b66c329d9c0151e6625e95cd06",
       "path": "benchmarks/toy_audit/api_pacgan.py",
       "role": "support",
       "suggested_tiers": []
@@ -1022,7 +1022,7 @@
     },
     {
       "family": "benchmark/toy_audit",
-      "git_blob": "d3eed7e9c580573605933afe52e0ab0c8e747f4c",
+      "git_blob": "602ddea4eaf1110902045ee54733b82b6f7c76c0",
       "path": "benchmarks/toy_audit/api_ring16.py",
       "role": "support",
       "suggested_tiers": []
@@ -1066,7 +1066,7 @@
     },
     {
       "family": "benchmark/toy_audit",
-      "git_blob": "42d8cc8561652750a1dd9a2389301b005d27da7d",
+      "git_blob": "09d7654fee68850e0b7a9ef69a72420ef2cb8b98",
       "path": "benchmarks/toy_audit/api_vectors.py",
       "role": "support",
       "suggested_tiers": []
@@ -76236,6 +76236,27 @@
       "family": "report/toy_audit",
       "git_blob": "b9da498f8deea7adfb559e7cfb1aaccf78dcd118",
       "path": "reports/toy_audit/api_contract/api-grid100-mlp16/receipt.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "2145051335796a9dd1aa95e8169431deee7365dc",
+      "path": "reports/toy_audit/api_contract/api-grid100-res16-scaled-tanh/goal.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "0aa345baa942b04aa1d1b9047c55f4da5c7c6a65",
+      "path": "reports/toy_audit/api_contract/api-grid100-res16-scaled-tanh/readout.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "055b95f3bd0da529f86d9842756ad6bef83852d4",
+      "path": "reports/toy_audit/api_contract/api-grid100-res16-scaled-tanh/receipt.json",
       "role": "structured_evidence",
       "suggested_tiers": []
     },
