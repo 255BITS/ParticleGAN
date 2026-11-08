@@ -102,7 +102,7 @@ class ComponentSpans:
     @contextmanager
     def attach(self):
         """Install only in the explicitly labelled component replay."""
-        import particlegan.bispf as bispf
+        import particlegan._bispf.transport as bispf_transport
         import particlegan.optim.dualnorm as dualnorm
         import particlegan.training as training
         original_build = FormulationContext.build_trainer
@@ -113,7 +113,7 @@ class ComponentSpans:
                 return trainer
             stack.enter_context(patch.object(FormulationContext, "build_trainer", build))
             for owner, attr, label, matrix in (
-                    (bispf, "sinkhorn_coupling", "critic.sinkhorn", False),
+                    (bispf_transport, "sinkhorn_coupling", "critic.sinkhorn", False),
                     (dualnorm, "polar_factor", lambda: self.stage + ".optimizer." +
                      ("fallback_polar" if self.newton_depth else "polar"), True),
                     (torch.linalg, "svd", lambda: self.stage + ".optimizer.svd", True),

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "id": "infogan_anisotropic_modes",
+  "description": "Variational mutual information InfoGAN (G([z, c_disc, c_cont]), D(x), Q(c|x)) on 8 rotated anisotropic 2D Gaussians arranged on a ring (R=3.0, sigma_parallel=0.25, sigma_perp=0.05).",
+  "adapter": "transfer_vector",
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "host": "infogan_anisotropic_modes",
+    "steps": 3500,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.05,
+      "standardize": false
+    },
+    "protocol": "screening",
+    "produces_state": true,
+    "host_definition": {
+      "target": "8-mode rotated anisotropic Gaussian ring",
+      "radius": 3.0,
+      "sigma_parallel": 0.25,
+      "sigma_perp": 0.05,
+      "modes": 8,
+      "steps": 3500,
+      "batch": 256,
+      "z_dim": 2,
+      "particles": 256
+    },
+    "prior_contract": "recipe_owned_v1"
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
+    "kind": "infogan_anisotropic_modes",
+    "eval_samples": 4096,
+    "observations": 24,
+    "minimum_stable_checks": 5,
+    "thresholds": [
+      ["modes", ">=", 8],
+      ["hq", ">=", 0.85],
+      ["mass_tv", "<=", 0.12],
+      ["discrete_nmi", ">=", 0.85],
+      ["q_acc", ">=", 0.90],
+      ["continuous_r2", ">=", 0.65]
+    ]
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 600
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "mog_prior"
+  ],
+  "dependencies": []
+}

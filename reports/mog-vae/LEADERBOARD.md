@@ -1,5 +1,8 @@
 # Particle VAE toy leaderboard
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current leaderboard for this goal: [reports/mog-vae/stability/LEADERBOARD.md](stability/LEADERBOARD.md); overall status: [reports/forge/technique-inventory.md](../forge/technique-inventory.md); goal index: [reports/leaderboard-index.json](../leaderboard-index.json). Results below are preserved as recorded.
+
 Twelve prespecified configurations; one shared seed; final online weights at 6,000 updates.
 Generation uses 100k decoder means G(z). Rank: coverage, then HQ, then SW1. Width should approach 1.
 This rank is generation-focused; reconstruction and posterior usefulness have separate tradeoffs.

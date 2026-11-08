@@ -89,7 +89,7 @@ def test_gaussian_elbo_dimensions_and_constant_kl():
 @pytest.mark.parametrize('name', ['ae_gan', 'vae_gan', 'ae_ddgan'])
 def test_recipe_roundtrip_and_optimizer_encoder(name):
     recipe = get_recipe(name, num_particles=3, z_dim=2)
-    assert Recipe(**recipe.to_dict()) == recipe
+    assert Recipe.from_dict(recipe.to_dict()) == recipe
     p = recipe.make_prior()
     e, g, d = nn.Linear(2, 2), nn.Linear(2, 2), nn.Linear(2, 1)
     # A shared module appears only once even if included in G and encoder.

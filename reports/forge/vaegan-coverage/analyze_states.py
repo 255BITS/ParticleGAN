@@ -29,7 +29,7 @@ def analyze(directory):
             continue
         original_sha = file_hash(path)
         saved = torch.load(path, weights_only=False, map_location='cpu')
-        recipe = Recipe(**saved['policy']['recipe'])
+        recipe = Recipe.from_dict(saved['policy']['recipe'])
         def mlp(out):
             # Construction is isolated from the caller's global RNG below.
             return nn.Sequential(nn.Linear(2, 32), nn.LeakyReLU(.2), nn.Linear(32, out))

@@ -12,11 +12,13 @@ logit(Beta(k, k)), sd s_k = sqrt(2 psi'(k)). Evidence S_i accumulates over a
 sign-consistent, local excursion; p_i = exp(-z_i^2 / 2) (Rayleigh tail of the
 meander endpoint), Benjamini-Hochberg at q over particles with n_i >= 2,
 soft-thresholded exponentiated step beta_i, Bernoulli deaths (1 - e^-beta) and
-single-clone births (e^-beta - 1), paired by rank; unmatched deaths clone
-normalisation parents drawn with weight e^-beta. Row moves copy the parent's
-latent (+ the package's latent jitter), EMA latent, Adam/AMSGrad rows and A2
-history. All randomness comes from a private stream; no training stream,
-parameter or optimizer state is touched except by an executed move.
+single-clone births (e^-beta - 1), paired by rank. Unmatched deaths and births
+clone nothing: they stay pending until a certified partner is realised (no
+normalisation parents; the ``normalised`` counter is kept at 0 for checkpoint
+and receipt compatibility). Row moves copy the parent's latent (+ the package's
+latent jitter), EMA latent, Adam/AMSGrad rows and A2 history. All randomness
+comes from a private stream; no training stream, parameter or optimizer state
+is touched except by an executed move.
 """
 import math
 from copy import deepcopy
@@ -25,6 +27,9 @@ from dataclasses import dataclass, field
 from typing import Callable
 
 import torch
+
+from ._stats import bh_rejections
+from .drift_variants import drift_features
 
 
 @dataclass
@@ -185,7 +190,8 @@ class ScalarHeadFeatures:
 def _knn(query, points, k, exclude=None, chunk=2048, shortlist_dtype=None):
     """Exact k smallest distances (ascending) and indices from each query row
     to ``points``; ``exclude[i]`` (optional) is a point index skipped for query i.
-    Shortlist 2k+2 candidates with the matmul cdist (optionally in a cheaper dtype), then recompute exactly."""
+    Shortlist 2k+2 candidates with the matmul cdist (optionally in a cheaper dtype), then recompute exactly.
+    Chunked and recomputed exactly, so it is not the dense ``_stats.knn_excluding_self``."""
     m = min(len(points) - (exclude is not None), 2 * k + 2)
     ds, ids = [], []
     points_short = points if shortlist_dtype is None else points.to(shortlist_dtype)
@@ -241,7 +247,8 @@ class ParticleBirthDeath:
 
     Q = .05          # BH false-discovery rate per evaluation; dimension-test level
 
-    def __init__(self, rows, seed, *, space="data", isolation=False, feature_scale="none"):
+    def __init__(self, rows, seed, *, space="data", isolation=False, feature_scale="none",
+                 cells=None):
         if not isinstance(rows, ParticleRows):
             raise TypeError("particle birth/death requires an explicit ParticleRows contract")
         if space not in ("data", "critic") or feature_scale not in ("none", "std"):
@@ -254,12 +261,15 @@ class ParticleBirthDeath:
             raise ValueError("birth_death_space='critic' needs an explicit critic-feature callback")
         self.rows = rows
         self.N = n = rows.table.shape[0]
-        self.k = min(math.ceil((math.log2(n / self.Q) + 1) / 2), n - 2)
-        if self.k < 4:
-            raise ValueError("particle_birth_death needs at least 6 particles")
-        if isolation and self.k >= (n + 1) // 2:
-            raise ValueError("birth/death isolation needs enough particles for leave-one-out neighbours in its reference half")
-        self.s_k = math.sqrt(2. * float(torch.polygamma(1, torch.tensor(float(self.k), dtype=torch.float64))))
+        d_z = rows.table.shape[1] if rows.table.ndim >= 2 else 0
+        self.k = min(math.ceil((math.log2(max(n, 1) / self.Q) + 1) / 2), max(1, n - 2))
+        self.capacity_bypassed = self.N <= 2 * self.k + d_z
+        if not self.capacity_bypassed:
+            if self.k < 4:
+                raise ValueError("particle_birth_death needs at least 6 particles")
+            if isolation and self.k >= (n + 1) // 2:
+                raise ValueError("birth/death isolation needs enough particles for leave-one-out neighbours in its reference half")
+        self.s_k = math.sqrt(2. * float(torch.polygamma(1, torch.tensor(float(max(1, self.k)), dtype=torch.float64))))
         self.dry_run = False   # test hook: evaluate, never move
         device, dtype = rows.table.device, rows.table.dtype
         self.reservoir = None  # [N, D_out], allocated on the first batch
@@ -275,6 +285,7 @@ class ParticleBirthDeath:
         self.space = space
         self.isolation = isolation
         self.feature_scale = feature_scale
+        self.cells = cells
         self.iso_log = []       # [step, flagged rows, acted] of the latest evaluations (diagnostics only)
         self.sample_shape = None
         if self.space == "critic":
@@ -334,11 +345,12 @@ class ParticleBirthDeath:
     @torch.no_grad()
     def _jitter(self, latent, noise):
         c = self.rows.controller
-        if c is None or c.variant not in ("dv10", "dv11", "dv12"):
+        features = None if c is None else drift_features(c.variant)
+        if features is None or not features.latent_bandwidth:
             return torch.zeros_like(latent)
-        trust = c.support_trust if c.variant == "dv11" else 1.
+        trust = c.support_trust if features.support_trust else 1.
         displacement = c.latent_bandwidth * trust * noise
-        if c.variant == "dv12":
+        if features.local_support:
             radius = self._nearest_other(latent, self.rows.table.detach())
             norm = displacement.norm(dim=1)
             displacement = displacement * (radius / norm.clamp_min(1e-20)).clamp_max(1.).unsqueeze(1)
@@ -394,12 +406,11 @@ class ParticleBirthDeath:
         null = score(R2).sort().values
         s = score(q)
         p = (1. + (len(null) - torch.searchsorted(null, s)).double()) / (1. + len(null))
-        m = len(p)
         ps = p.sort().values
-        passed = (ps <= torch.arange(1, m + 1, device=p.device, dtype=p.dtype) * self.Q / m).nonzero()
-        if not len(passed):
-            return torch.zeros(m, dtype=torch.bool, device=p.device)
-        return p <= ps[int(passed[-1])]
+        j = bh_rejections(ps, self.Q)
+        if not j:
+            return torch.zeros(len(p), dtype=torch.bool, device=p.device)
+        return p <= ps[j - 1]
 
     @torch.no_grad()
     def _isolation_pick(self, flagged, child):
@@ -460,6 +471,11 @@ class ParticleBirthDeath:
     def maybe_apply(self, sigma_out):
         """Run one evaluation (and its moves) when the reservoir has turned over."""
         self.moved_rows = None
+        d_z = self.rows.table.shape[1] if self.rows.table.ndim >= 2 else 0
+        if self.capacity_bypassed or self.N <= 2 * self.k + d_z:
+            return None
+        if self.cells is not None and self.N <= self.cells:
+            return None
         if not self.ready():
             return None
         self.rows_since_eval = 0
@@ -555,11 +571,8 @@ class ParticleBirthDeath:
         discover = torch.zeros_like(eligible)
         zstar = None
         if m:
-            pe = p[eligible].sort().values
-            ranks = torch.arange(1, m + 1, device=pe.device, dtype=pe.dtype)
-            passed = (pe <= ranks * self.Q / m).nonzero()
-            if len(passed):
-                j = int(passed[-1]) + 1
+            j = bh_rejections(p[eligible].sort().values, self.Q)
+            if j:
                 cutoff = j * self.Q / m
                 zstar = math.sqrt(-2. * math.log(cutoff))
                 discover = eligible & (p <= cutoff)
@@ -578,17 +591,12 @@ class ParticleBirthDeath:
         deaths = deaths[beta[deaths].argsort(descending=True, stable=True)]
         births = births[beta[births].argsort(stable=True)]
         pairs = min(len(deaths), len(births))
-        child, parent = [deaths[:pairs]], [births[:pairs]]
-        rest = deaths[pairs:]
-        normalised = 0
         # BD-PAIR FIX: evidence-certified transport only (st3 paired design).
-        # The normalisation-parent rule clones neutral rows into dead sites;
-        # native evidence shows neutral parents are ~85% of all moves and
-        # precision/coverage fall with them. Unmatched deaths wait for a
+        # The former normalisation-parent rule cloned neutral rows into dead
+        # sites; native evidence shows neutral parents are ~85% of all moves
+        # and precision/coverage fall with them. Unmatched deaths wait for a
         # certified deficit birth instead of taking a neutral parent.
-        if len(rest):
-            normalised = 0
-        child, parent = torch.cat(child), torch.cat(parent)
+        child, parent = deaths[:pairs], births[:pairs]
         waited_deaths = len(deaths) - len(child)
         waited_births = len(births) - pairs
         self.pending.zero_()
@@ -607,7 +615,7 @@ class ParticleBirthDeath:
         last.update(eligible=m, discoveries=int(discover.sum()), zstar=zstar,
                     excess=int((discover & (beta > 0)).sum()), deficit=int((discover & (beta < 0)).sum()),
                     realised_deaths=len(deaths), realised_births=len(births), matched=pairs,
-                    normalised=normalised, waited_deaths=waited_deaths, waited_births=waited_births,
+                    normalised=0, waited_deaths=waited_deaths, waited_births=waited_births,
                     moves=0 if self.dry_run else len(child), mean_abs_x=float(x[finite].abs().mean()) if bool(finite.any()) else None)
         if self.dry_run:
             return last
@@ -641,7 +649,6 @@ class ParticleBirthDeath:
             self.n[moved] = 0
             c["moves"] += len(child)
             c["matched"] += pairs
-            c["normalised"] += normalised
         return last
 
     @torch.no_grad()

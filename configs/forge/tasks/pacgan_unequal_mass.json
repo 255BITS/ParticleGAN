@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "id": "pacgan_unequal_mass",
+  "description": "PacGAN m=4 packed discriminator on 5-mode 2D Gaussian ring (R=2.0, sigma=0.08) with unequal mode weights (0.40, 0.30, 0.20, 0.08, 0.02) testing rare 2% mode survival without within-mode covariance collapse.",
+  "adapter": "transfer_vector",
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "host": "pacgan_unequal_mass",
+    "steps": 3000,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.05,
+      "standardize": false
+    },
+    "protocol": "screening",
+    "produces_state": true,
+    "host_definition": {
+      "target": "5-mode unequal-mass Gaussian ring",
+      "radius": 2.0,
+      "sigma": 0.08,
+      "modes": 5,
+      "weights": [0.4, 0.3, 0.2, 0.08, 0.02],
+      "pac_size": 4,
+      "steps": 3000,
+      "batch": 256,
+      "z_dim": 2,
+      "particles": 256
+    },
+    "prior_contract": "recipe_owned_v1"
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
+    "kind": "pacgan_unequal_mass",
+    "eval_samples": 4096,
+    "thresholds": [
+      ["modes", "==", 5],
+      ["min_mode_mass", ">=", 0.01],
+      ["mass_tv", "<=", 0.1],
+      ["hq", ">=", 0.88],
+      ["min_cov_eig_ratio", ">=", 0.2]
+    ]
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 600
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "mog_prior"
+  ],
+  "dependencies": []
+}

@@ -117,6 +117,20 @@ def _authorized_tasks(request):
 
 
 def _bindings(candidate, tasks, protocol, root):
+    """Actual public-API bindings; per-task memoized inside a bound resolution cache.
+
+    The memo key includes the candidate id and every declared override value
+    (``planning._binding_sig``), so declarations differing only in a tunable
+    value never share a cached binding.
+    """
+    from .resolution_scope import active
+    cache = active(root)
+    if cache is not None:
+        return cache.bindings(candidate, tasks, protocol, root, _resolve_bindings)
+    return _resolve_bindings(candidate, tasks, protocol, root)
+
+
+def _resolve_bindings(candidate, tasks, protocol, root):
     from .api import task_formulation_context
     result = {name: {} for name in ("recipe", "prior", "initialization", "budget", "sampling", "host", "evaluation", "task_identity")}
     for name, task in sorted(tasks.items()):
@@ -124,7 +138,12 @@ def _bindings(candidate, tasks, protocol, root):
         ownership = receipt["field_ownership"]
         result["recipe"][name] = {key: field["value"] for key, field in ownership["recipe_fields"].items()
                                  if field["status"] == "effective"}
-        result["prior"][name] = ownership["task_contract"]["prior"]["value"]
+        prior_contract = ownership["task_contract"]["prior"]
+        if "technique_mechanism" in prior_contract:
+            result["prior"][name] = {"task_prior": prior_contract["value"],
+                                     "technique_mechanism": prior_contract["technique_mechanism"]["value"]}
+        else:
+            result["prior"][name] = prior_contract["value"]
         result["initialization"][name] = deepcopy(ownership["task_contract"]["initialization"])
         result["budget"][name] = {"execution": ownership["task_contract"]["budget"]["value"],
                                  "resources": deepcopy(task["resources"])}

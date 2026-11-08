@@ -1,11 +1,15 @@
 """A goal-only registration correction retains strict legacy admission."""
 from copy import deepcopy
+import ast
 import hashlib
 import json
 from pathlib import Path
 import subprocess
 
+import pytest
+
 from experiments.forge.contracts import file_hash, read_json
+from pr_integration_compat import before_pr_integration
 from experiments.forge.decision_contracts import validate_legacy_admission
 from experiments.forge.planning import candidate_revision_for, resolve_idea
 
@@ -18,10 +22,64 @@ RECEIPT_SOURCE_MEMBER = "experiments/forge/behavior_adapters.py"
 POLICY_CHECKPOINT_REFRESH = "mog-policy-extra-state-source-binding-v1"
 POLICY_SOURCE_MEMBER = "particlegan/policy.py"
 POLICY_MIGRATION = "reports/forge/api-model-toys/policy-checkpoint-migration.json"
+REVIEW_POLICY_REFRESH = "review-policy-source-binding-20261025"
+CLEANUP_WORD_REFRESH = "cleanup-word-adapter-imports-source-binding-v1"
+CLEANUP_WORD_PARENT = "a1e8073ae8352d3aff25f04bb51446454e873d90"
+WORD_SOURCE_MEMBER = "experiments/forge/word_adapter.py"
+
+
+def _before_cleanup_word_source_refresh(current, relative):
+    """Peel the source-only import cleanup, retaining the exact original card."""
+    current = before_pr_integration(ROOT, current, relative)
+    revision = current["evaluation"]["evaluator_revision"]
+    if revision["id"] != CLEANUP_WORD_REFRESH:
+        return current, file_hash(ROOT / relative)
+    assert revision["previous_task_commit"] == CLEANUP_WORD_PARENT
+    assert revision["previous_task_path"] == relative
+    previous_bytes = subprocess.check_output([
+        "git", "show", revision["previous_task_commit"] + ":" + relative], cwd=ROOT)
+    assert hashlib.sha256(previous_bytes).hexdigest() == revision["previous_task_sha256"]
+    assert _git_blob(previous_bytes) == revision["previous_task_blob"]
+    previous = json.loads(previous_bytes)
+    sources = previous["evaluation"]["sources"]
+    assert revision["previous_source_sha256"] == {WORD_SOURCE_MEMBER: sources[WORD_SOURCE_MEMBER]}
+    assert revision["previous_revision"] == previous["evaluation"]["evaluator_revision"]
+    assert current["evaluation"]["sources"] == {
+        **sources, WORD_SOURCE_MEMBER: file_hash(ROOT / WORD_SOURCE_MEMBER)}
+    restored = deepcopy(current)
+    restored["evaluation"]["sources"] = sources
+    restored["evaluation"]["evaluator_revision"] = revision["previous_revision"]
+    assert restored == previous
+    return previous, revision["previous_task_sha256"]
+
+
+def _before_review_policy_source_refresh(current, relative):
+    """Peel the review-stage policy.py rebinding; return (previous card, its sha256)."""
+    current, current_sha256 = _before_cleanup_word_source_refresh(current, relative)
+    revision = current["evaluation"]["evaluator_revision"]
+    if revision["id"] != REVIEW_POLICY_REFRESH:
+        return current, current_sha256
+    assert revision["previous_task_path"] == relative
+    previous_bytes = subprocess.check_output([
+        "git", "show", revision["previous_task_commit"] + ":" + relative], cwd=ROOT)
+    assert hashlib.sha256(previous_bytes).hexdigest() == revision["previous_task_sha256"]
+    assert _git_blob(previous_bytes) == revision["previous_task_blob"]
+    previous = json.loads(previous_bytes)
+    sources = previous["evaluation"]["sources"]
+    assert revision["previous_revision"] == previous["evaluation"]["evaluator_revision"]
+    assert revision["previous_source_sha256"] == {POLICY_SOURCE_MEMBER: sources[POLICY_SOURCE_MEMBER]}
+    assert current["evaluation"]["sources"] == {
+        **sources, POLICY_SOURCE_MEMBER: file_hash(ROOT / POLICY_SOURCE_MEMBER)}
+    restored = deepcopy(current)
+    restored["evaluation"]["sources"] = sources
+    restored["evaluation"]["evaluator_revision"] = revision["previous_revision"]
+    assert restored == previous
+    return previous, revision["previous_task_sha256"]
 
 
 def _before_policy_checkpoint_source_refresh(current, relative):
     """Peel only the additive layer, preserving the exact upstream source pins."""
+    current, current_sha256 = _before_review_policy_source_refresh(current, relative)
     revision = current["evaluation"]["evaluator_revision"]
     if revision["id"] != POLICY_CHECKPOINT_REFRESH:
         return current
@@ -39,10 +97,9 @@ def _before_policy_checkpoint_source_refresh(current, relative):
     assert revision["previous_revision"] == previous["evaluation"]["evaluator_revision"]
     assert revision["previous_source_sha256"] == {POLICY_SOURCE_MEMBER: sources[POLICY_SOURCE_MEMBER]}
     assert sources[POLICY_SOURCE_MEMBER] == binding["previous_policy_sha256"]
-    assert binding["current_policy_sha256"] == file_hash(ROOT / POLICY_SOURCE_MEMBER)
     assert current["evaluation"]["sources"] == {
         **sources, POLICY_SOURCE_MEMBER: binding["current_policy_sha256"]}
-    assert file_hash(ROOT / relative) == binding["current_task_sha256"]
+    assert current_sha256 == binding["current_task_sha256"]
     restored = deepcopy(current)
     restored["evaluation"]["sources"] = sources
     restored["evaluation"]["evaluator_revision"] = revision["previous_revision"]
@@ -167,7 +224,8 @@ def test_policy_checkpoint_binding_is_additive_and_preserves_exact_original_sour
         assert _git_blob(original_bytes) == binding["original_blob"]
         assert json.loads(original_bytes)["evaluation"]["sources"] == binding["original_sources"]
         current = read_json(ROOT / relative)
-        assert current["evaluation"]["evaluator_revision"]["id"] == POLICY_CHECKPOINT_REFRESH
+        before_cleanup, _ = _before_cleanup_word_source_refresh(current, relative)
+        assert before_cleanup["evaluation"]["evaluator_revision"]["id"] == REVIEW_POLICY_REFRESH
         upstream = _before_policy_checkpoint_source_refresh(current, relative)
         assert upstream["evaluation"]["evaluator_revision"]["id"] == binding["additive_previous_revision_id"] == RECEIPT_SOURCE_REFRESH
         original = json.loads(original_bytes)
@@ -175,3 +233,46 @@ def test_policy_checkpoint_binding_is_additive_and_preserves_exact_original_sour
         restored["evaluation"]["sources"] = original["evaluation"]["sources"]
         restored["evaluation"]["evaluator_revision"] = original["evaluation"]["evaluator_revision"]
         assert restored == original
+
+
+def test_word_cleanup_binding_changes_only_duplicate_import_source_provenance():
+    previous_source = subprocess.check_output([
+        "git", "show", CLEANUP_WORD_PARENT + ":" + WORD_SOURCE_MEMBER], cwd=ROOT)
+    previous_tree = ast.parse(previous_source)
+    seen, unique = set(), []
+    for node in previous_tree.body:
+        if isinstance(node, (ast.Import, ast.ImportFrom)):
+            identity = ast.dump(node, include_attributes=False)
+            if identity in seen:
+                continue
+            seen.add(identity)
+        unique.append(node)
+    assert len(previous_tree.body) - len(unique) == 2
+    previous_tree.body = unique
+    current_tree = ast.parse((ROOT / WORD_SOURCE_MEMBER).read_bytes())
+    assert ast.dump(previous_tree, include_attributes=False) == ast.dump(current_tree, include_attributes=False)
+    for task in ("five_word_joint_smoke", "five_word_joint_hold"):
+        relative = f"configs/forge/tasks/{task}.json"
+        current = read_json(ROOT / relative)
+        assert current["evaluation"]["evaluator_revision"]["id"] == CLEANUP_WORD_REFRESH
+        previous, _ = _before_cleanup_word_source_refresh(current, relative)
+        assert previous["evaluation"]["sources"][WORD_SOURCE_MEMBER] == hashlib.sha256(previous_source).hexdigest()
+        legacy = f"configs/forge/tasks/recipe-prior-refactor-legacy-{task}.json"
+        archived = subprocess.check_output(["git", "show", CLEANUP_WORD_PARENT + ":" + legacy], cwd=ROOT)
+        assert (ROOT / legacy).read_bytes() == archived
+
+
+@pytest.mark.parametrize("task_id", ["five_word_joint_smoke", "five_word_joint_hold"])
+def test_word_cleanup_preflight_admits_current_source_and_rejects_tampering(task_id):
+    from experiments.forge.word_adapter import word_preflight
+
+    task = read_json(ROOT / f"configs/forge/tasks/{task_id}.json")
+    candidate = read_json(ROOT / "configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json")
+    candidate["recipe_overrides"].update(prior_regularizer="sigreg", prior_reg=.001)
+    assert word_preflight(task, candidate, root=ROOT) == []
+    tampered = deepcopy(task)
+    tampered["evaluation"]["sources"][WORD_SOURCE_MEMBER] = "0" * 64
+    assert word_preflight(tampered, candidate, root=ROOT) == [
+        "word source binding differs: " + WORD_SOURCE_MEMBER]
+    with pytest.raises(AssertionError):
+        _before_cleanup_word_source_refresh(tampered, f"configs/forge/tasks/{task_id}.json")

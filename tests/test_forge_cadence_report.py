@@ -194,3 +194,12 @@ def test_markdown_escapes_cells_and_links_existing_board_only(summary):
     assert "statistical noninferiority" in text
     assert "speed ranking" in text
     assert "/archive/progress.log" in text
+
+
+def test_stretch_role_accepted_in_cadence_report(summary):
+    for trial in summary["trials"]:
+        trial["tasks"][1]["importance"] = "stretch"
+    report = build_report(summary)
+    assert report["complete"]
+    assert report["trials"][0]["tiers"]["2"]["held"]["denominator"] == 1
+

@@ -6,17 +6,17 @@ import torch
 from torch import nn
 
 from particlegan import GANTrainer, get_recipe
-from particlegan.bispf import _LAST_THERMAL_SCALE
+from particlegan.bispf import _LEGACY_THERMAL_CHANNEL
 from particlegan.init import deterministic_orthogonal_
 
 
 @pytest.fixture(autouse=True)
 def isolated_thermal_cache():
-    previous = dict(_LAST_THERMAL_SCALE)
-    _LAST_THERMAL_SCALE.clear()
+    previous = dict(_LEGACY_THERMAL_CHANNEL)
+    _LEGACY_THERMAL_CHANNEL.clear()
     yield
-    _LAST_THERMAL_SCALE.clear()
-    _LAST_THERMAL_SCALE.update(previous)
+    _LEGACY_THERMAL_CHANNEL.clear()
+    _LEGACY_THERMAL_CHANNEL.update(previous)
 
 
 def equal(left, right):
@@ -88,8 +88,26 @@ def test_exact_thermal_value_and_device_state_restore(family):
     restored = trainer(family)
     restored.opt_d.load_state_dict(saved)
     assert restored.opt_d.record._thermal_scale == .00001
-    assert _LAST_THERMAL_SCALE[torch.device("cpu")] == .00001
+    # A trainer's readers are bound to its own record; it does not publish to
+    # the process-wide legacy channel used by unbound caller-owned components.
+    assert restored.prior_regularizer.thermal_source is restored.opt_d.record
+    assert torch.device("cpu") not in _LEGACY_THERMAL_CHANNEL
     equal(saved, restored.opt_d.state_dict())
+
+
+@pytest.mark.parametrize("family", [None, "adam", "formulation"])
+def test_caller_owned_optimizer_restore_keeps_legacy_thermal_channel(family):
+    live = trainer(family)
+    live.opt_d.record._thermal_scale = .00001
+    saved = live.opt_d.state_dict()
+    options = {} if family is None else {"optimizer_family": family}
+    recipe = get_recipe("bispf_optimized" if family is None else "bispf", **options)
+    critic = nn.Sequential(nn.Conv2d(1, 2, 1), nn.Tanh(), nn.Flatten(), nn.Linear(32, 1))
+    deterministic_orthogonal_(critic, seed=0)
+    optimizer = recipe.make_critic_optimizer(critic)
+    optimizer.load_state_dict(saved)
+    assert optimizer.record._thermal_scale == .00001
+    assert _LEGACY_THERMAL_CHANNEL[torch.device("cpu")] == .00001
 
 
 def test_historical_formulation_packet_retains_earlier_thermal_reconstruction():
@@ -137,10 +155,10 @@ def test_validation_probe_does_not_change_live_thermal_cache(family):
     live.opt_d.record._thermal_scale = .2
     saved = live.opt_d.state_dict()
     live.opt_d.record._thermal_scale = .8
-    _LAST_THERMAL_SCALE[torch.device("cpu")] = .8
+    _LEGACY_THERMAL_CHANNEL[torch.device("cpu")] = .8
     _validate_optimizer_state(live.opt_d, saved)
     assert live.opt_d.record._thermal_scale == .8
-    assert _LAST_THERMAL_SCALE == {torch.device("cpu"): .8}
+    assert _LEGACY_THERMAL_CHANNEL == {torch.device("cpu"): .8}
 
 
 @pytest.mark.parametrize("family", [None, "adam", "formulation"])
@@ -150,9 +168,9 @@ def test_late_rng_rejection_preserves_live_state_and_thermal_cache(family):
     saved = live.state_dict()
     saved["streams"]["eval_generator"] = torch.zeros(1, dtype=torch.uint8)
     live.opt_d.record._thermal_scale = .8
-    _LAST_THERMAL_SCALE[torch.device("cpu")] = .8
+    _LEGACY_THERMAL_CHANNEL[torch.device("cpu")] = .8
     before = live.state_dict()
     with pytest.raises(ValueError, match="invalid checkpoint RNG state"):
         live.load_state_dict(saved)
     equal(before, live.state_dict())
-    assert _LAST_THERMAL_SCALE == {torch.device("cpu"): .8}
+    assert _LEGACY_THERMAL_CHANNEL == {torch.device("cpu"): .8}

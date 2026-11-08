@@ -46,7 +46,7 @@ GAN_V3_FIELDS: dict[str, Any] = {
 
 def legacy_recipe(fields: Mapping[str, Any]) -> Recipe:
     """``Recipe`` from an archived (pre-K3P) field dict; missing K3P fields are neutral."""
-    return Recipe(**{**PRE_K3P_FIELDS, **fields})
+    return Recipe.from_dict({**PRE_K3P_FIELDS, **fields})
 
 
 def gan_v3_recipe(name: str = "gan", **overrides) -> Recipe:

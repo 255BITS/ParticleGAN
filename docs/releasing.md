@@ -24,7 +24,7 @@ manual and release runs remain independent and are not canceled by PR updates.
   process. Before building distributions, CI verifies that the shard receipts
   collected the same suite and cover every test exactly once.
 - Python 3.11 runs the Lunar smoke pipeline and GIF exports.
-- Python 3.10, 3.11 and 3.12 each build and smoke-test a wheel outside the
+- Python 3.11 and 3.12 each build and smoke-test a wheel outside the
   checkout, including public recipe restoration and checkpoint examples.
 - After every matrix job passes, CI builds a source archive and wheel, checks
   their contents, metadata and README with Twine, and saves the distributions.
@@ -90,7 +90,7 @@ managed through the existing PyPI account associated with 255labs.xyz.
    python -m venv /tmp/particlegan-release-smoke
    /tmp/particlegan-release-smoke/bin/python -m pip install particlegan==0.9.0
    cd /tmp
-   /tmp/particlegan-release-smoke/bin/python -c 'from particlegan import DEFAULT_RECIPE, get_recipe, Recipe; r = get_recipe(); assert DEFAULT_RECIPE == "bispf_optimized"; assert Recipe(**r.to_dict()) == r'
+   /tmp/particlegan-release-smoke/bin/python -c 'from particlegan import DEFAULT_RECIPE, get_recipe, Recipe; r = get_recipe(); assert DEFAULT_RECIPE == "bispf_optimized"; assert Recipe.from_dict(r.to_dict()) == r'
    ```
 
    Also run the prepared HyperGAN training/resume smoke using the released

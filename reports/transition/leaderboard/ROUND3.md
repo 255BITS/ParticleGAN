@@ -1,5 +1,8 @@
 # Geometry/time scaling: better consistency, no new score leader
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current leaderboard for this goal: [reports/transition/leaderboard/README.md](README.md); overall status: [reports/forge/technique-inventory.md](../../forge/technique-inventory.md); goal index: [reports/leaderboard-index.json](../../leaderboard-index.json). Results below are preserved as recorded.
+
 Increasing G geometry/time scale from 1 to 4 at class scale 8 reduces held-out
 transition residual by **28.8%**, but joint SW1 worsens **1.2%** to **0.10692**.
 Overall coverage is nearly unchanged. The marginal-critic model remains the
