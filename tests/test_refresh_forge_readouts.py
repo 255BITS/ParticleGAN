@@ -2298,6 +2298,21 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         # The following task/runtime tamper controls use their exact recorded
         # source cohort, independently of the latest checkout tested above.
         recorded_digest = _restore_recorded_source_cohort(wt)
+        # The complete old view remains incomplete: Atlas has no compatible
+        # ordinary Tier 2 observations. Diagnostic coverage must not fill those
+        # gaps. Scope the software controls below to the retained Tier 1 rows,
+        # rather than inventing later-tier measurements or qualification.
+        full_view_status = rfr.check_selected_family_readouts(wt)
+        assert full_view_status["current"] is False
+        atlas_gap, = full_view_status["missing_families"]
+        assert atlas_gap["family"] == "atlas"
+        assert atlas_gap["unmeasured_tier1"] == []
+        assert atlas_gap["unmeasured_tier2"]
+        view_path = wt / "configs/forge/views/discriminator_stability.json"
+        software_view = read_json(view_path)
+        software_view["assignments"] = [item for item in software_view["assignments"]
+                                        if int(item["qualification_tier"]) == 1]
+        atomic_json(view_path, software_view)
         rti._CURRENT_SOURCE_TIER1_CACHE.clear()
         probed_req = planning.resolve_idea(
             wt, "atlas-particle-normal-v4", view_id="discriminator_stability", through_tier=1,
@@ -2318,7 +2333,10 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         atlas_rec = read_json(atlas_rec_path)
         for row in atlas_rec["task_results"]:
             assert not (wt / "reports/forge/attempts" / row["_attempt_id"]).exists()
-            assert row["compatibility_key"] != probed_compat[row["task_id"]]
+            # Out-of-scope historical rows remain present, without supplying
+            # measurements to this Tier 1 software compatibility control.
+            if row["task_id"] in probed_compat:
+                assert row["compatibility_key"] != probed_compat[row["task_id"]]
         overview_path.write_text(rti._current_markdown(wt_inv, wt, overview_path))
         assert rfr.check_selected_family_readouts(wt)["current"] is True
 
