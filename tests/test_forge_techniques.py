@@ -76,7 +76,7 @@ def test_r1r2_repair_controls_are_structural_and_default_signatures_stay_sparse(
     assert not recipe_field_active("joint_reconstruction_weight", modern, task=scalar)
     assert recipe_field_active("reg_fake_weight", modern, task=scalar)
     assert not recipe_field_active("reg_fake_weight", modern, task=ae)
-    assert not recipe_field_active("reg_fake_weight", Recipe(), task=scalar)
+    assert not recipe_field_active("reg_fake_weight", Recipe.from_dict({}), task=scalar)
 
 
 def test_k3p_floor_cannot_disable_the_blended_penalty_phase():

@@ -254,6 +254,7 @@ def test_word_cleanup_binding_changes_only_duplicate_import_source_provenance():
     for task in ("five_word_joint_smoke", "five_word_joint_hold"):
         relative = f"configs/forge/tasks/{task}.json"
         current = read_json(ROOT / relative)
+        current = before_pr_integration(ROOT, current, relative)
         assert current["evaluation"]["evaluator_revision"]["id"] == CLEANUP_WORD_REFRESH
         previous, _ = _before_cleanup_word_source_refresh(current, relative)
         assert previous["evaluation"]["sources"][WORD_SOURCE_MEMBER] == hashlib.sha256(previous_source).hexdigest()

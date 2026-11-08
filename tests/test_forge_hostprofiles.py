@@ -31,6 +31,15 @@ def native_tasks(continuation=False):
 
 
 
+
+def without_new_neutral_controls(recipe):
+    """Independent expected legacy packet; declared active values remain."""
+    result = deepcopy(recipe)
+    for name, default in (('reg_real_weight', 1.0), ('reg_fake_weight', 1.0), ('joint_reconstruction_weight', 0.0)):
+        if result.get(name, default) == default:
+            result.pop(name, None)
+    return result
+
 def bind_candidate(req):
     from dataclasses import asdict
     from experiments.forge.api import FormulationContext
@@ -525,7 +534,7 @@ def test_central_revision_helper_preserves_the_existing_planning_formula(tmp_pat
     # These later default-valued Recipe fields were absent from the original
     # packet schema. Compare to that explicit legacy formula, independently of
     # the production compatibility projector.
-    legacy_recipe = deepcopy(candidate["resolved_recipe"])
+    legacy_recipe = without_new_neutral_controls(candidate["resolved_recipe"])
     assert legacy_recipe.pop("ebi_beta") == 30.0
     assert legacy_recipe.pop("kappa_radial") == 1.0
     assert legacy_recipe.pop("generator_gradient_response") == "none"
@@ -549,7 +558,7 @@ def test_nondefault_recipe_additions_remain_in_scientific_revision(tmp_path, fie
     req["candidate"]["recipe_overrides"][field] = value
     bind_candidate(req)
     candidate = req["candidate"]
-    expected_recipe = deepcopy(candidate["resolved_recipe"])
+    expected_recipe = without_new_neutral_controls(candidate["resolved_recipe"])
     expected_recipe.pop(default_other)
     expected_recipe.pop("generator_gradient_response", None)
     assert expected_recipe[field] == value
