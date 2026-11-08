@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def receipts():
     return [json.loads(path.read_text()) for path in sorted(
-        (ROOT / "reports/software-audits").glob("pr*-update-boundary-source-binding.json"))]
+        (ROOT / "reports/forge/software-audits").glob("pr*-update-boundary-source-binding.json"))]
 
 
 def before_update_boundary_refresh(current, relative):
