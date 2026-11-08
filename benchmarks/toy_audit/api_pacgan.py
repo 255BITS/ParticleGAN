@@ -831,7 +831,7 @@ class _PacGANBaseFixture:
                 if hasattr(manip, "sigma"):
                     prior_sigma = float(getattr(manip, "sigma"))
                     break
-        prior_sigma = max(prior_sigma, 0.015)
+        prior_sigma = max(prior_sigma, 0.005)
 
         scale = (0.82 * emp_sigma) / prior_sigma
         angle_rad = 0.75

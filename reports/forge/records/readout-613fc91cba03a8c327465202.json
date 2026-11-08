@@ -16,7 +16,7 @@
     "fae88edbda7a49aebdff4c555dd1beaf"
   ],
   "candidate_id": "recipe-prior-refactor-r1r2-v1",
-  "candidate_revision": "84e53bb16442a6a3d3148e2eb9a95ea59692559fc1352218ee112f2dc40b6615",
+  "candidate_revision": "8a77a5bd4e1f8f1c74bb516bb749e37a3170c8a80ed84cf0924d59b0b0d04bb6",
   "claim_contract": {
     "sampling_law": "task_declared",
     "schedule": "scheduled",
@@ -278,7 +278,7 @@
     "tuning_through_tier": 3
   },
   "source": {
-    "digest": "0a1dcd6192a8f524eb19bc2d77bd35dcfecfd62d401833c1a1bea251dbd1e002",
+    "digest": "9cc0515fd4e7b966f3ecac95b78445e588f354a7659b885259f0bc8ab7ce48fc",
     "files": {
       "benchmarks/__init__.py": "5b3d047f10122eef719de3126e7424b671376d0c1b4392208a5f487f15eed0f7",
       "benchmarks/gan_v3.py": "55dd4d6ab5068cfd921b02c1492b3ddf9cbb6a7c76c503c5f3d9ce1660a9399b",
@@ -374,30 +374,30 @@
       "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
       "benchmarks/toy_audit/__init__.py": "30dbbd092746095414a291a135065be420088a8f14170b94d643d403a0bd12c9",
       "benchmarks/toy_audit/api_cgan_overlap.py": "00a2184c17bc06a4d1c0fb25b04317d054c61005130ed754ac592333180d761c",
-      "benchmarks/toy_audit/api_conditionals.py": "25b4bbd7e47a7b64d4b2db9f1812da19b8cbbffcdeb9d013c0e4a74875790699",
+      "benchmarks/toy_audit/api_conditionals.py": "bc4e6477c15bd5a3efd921dd544ee4de5214bd49420e16c78dc680fd8d5ec96f",
       "benchmarks/toy_audit/api_contract.py": "08a5eac1a186a22c09f47d324f69772af1f1922832383d372488ecb7091eb75d",
-      "benchmarks/toy_audit/api_cramergan.py": "cfbb2c22a0cd0107df48a9d92445416ab9cadf18a2cd8f993009520a6cfe4627",
+      "benchmarks/toy_audit/api_cramergan.py": "932f056ec157a651ad031f644856a8c4bad23883c6dcd2425e3d825df648dfec",
       "benchmarks/toy_audit/api_cyclegan.py": "501038a059c8af658504111869bdca1fc98993745b62b0ab1cfc971f71458d2e",
       "benchmarks/toy_audit/api_diagnostics.py": "c7d6f008dd7f195b2bff82b4dc7fdbb8348c8470c10c6691f2d0399942465629",
       "benchmarks/toy_audit/api_family_search.py": "fcbf0473c8eee55e01aa0fc96ea10efd4801b53ff514e90ba3ad8977593d03e1",
       "benchmarks/toy_audit/api_gaussian1d.py": "b76befd43a1b1c797952950d6bbf50375cd4c6ba082927112ec3b96ca65c70de",
       "benchmarks/toy_audit/api_images.py": "954572cd04d8646111f43c6aa9e5f46274e4c44d23f8d274a6c80b94f184321d",
-      "benchmarks/toy_audit/api_infogan.py": "a0d5b931da44fec5aedcc6eccac20f410df3f2eac6e214d5750f8704ae5bbc14",
+      "benchmarks/toy_audit/api_infogan.py": "77715ebb6035862192027f20789f5a1c493bcd93d7d46633961746929fbb97d1",
       "benchmarks/toy_audit/api_model_ae.py": "f0259487079a948592e5cdb918eadb97f42f982bba9abb95c60e5763e2328387",
       "benchmarks/toy_audit/api_model_ae_ddgan.py": "eceef3d8fce50e71f87e86796c9a9da6e0e439de141da9f1930883318a78533b",
       "benchmarks/toy_audit/api_model_ddgan.py": "8b86cd0e0b2307361050ec8c74d74db7042ddba0b4c68c4b2027aa7c9f232528",
       "benchmarks/toy_audit/api_model_vae.py": "039d875d92757e4eadff279cb2f41656d9533a2c70561720aca48e8084f79b0b",
-      "benchmarks/toy_audit/api_pacgan.py": "7183db671feec27457f7bd765e526bffa7eb68bda68172f6931140c3c2c24428",
+      "benchmarks/toy_audit/api_pacgan.py": "dd9f7f3109fdaf99e178dd7b0713f48d4e934f7be5458ca411ba8339c4d36516",
       "benchmarks/toy_audit/api_publish.py": "4334ac384c2766d85bd10ece19cee3ba88be67e39f151a414efcac188ecae2de",
       "benchmarks/toy_audit/api_readout.py": "7026a342e5325e19086bcd23e89fee74d871464cef3d727c1fd7d80c8649a414",
       "benchmarks/toy_audit/api_reframe.py": "7254d231c609edd4186893ee75706924cbbf7359dac951381b2226d9f8ce8065",
-      "benchmarks/toy_audit/api_ring16.py": "eef3f3b052bb284e8b1a597c49cd8cc4fe978aeadebc406cdcb121a56b05c8cc",
+      "benchmarks/toy_audit/api_ring16.py": "2878e91737139746afa801a84e0d22a96e69e0b8e2f025964580e81061aa6656",
       "benchmarks/toy_audit/api_run.py": "b5f1e130e6daa4cfbf172b9beb13ab1e691c8fadba59d1aec58f74368df475d3",
       "benchmarks/toy_audit/api_sources/__init__.py": "622170cc5a621286b1b46dc9e0e0199ec451e08e3c404c857268a0e5a4de9e30",
       "benchmarks/toy_audit/api_sources/circle.py": "540eaa74918c1e218d31eb0d18a62e35bdefdd5eb89d8e0d9ed7f288dd9c6e13",
       "benchmarks/toy_audit/api_sources/misgan.py": "d701ef0f12178ad6965fa52136bd6f4fdc4f7fe3b61d0af6aff8944f02c19516",
       "benchmarks/toy_audit/api_sources/sprite.py": "53f0cca3e2c7481c89dc6e014444841b4fa17f66a430fcc046c6fb57e96a77c7",
-      "benchmarks/toy_audit/api_vectors.py": "e531ece103966a874bcf6360c8989ce6cc0238ea336e74b6bfcecf91821d3e92",
+      "benchmarks/toy_audit/api_vectors.py": "da3389b93babb5c9f08543cd55689f74fbf8826cd911e280e1cdc5d28fba9a0c",
       "benchmarks/toy_audit/base.py": "b71ee452eba35f2db64ed6b0a923edffc7a3d0a9946db54cae979ccb54b66063",
       "benchmarks/toy_audit/batch_toy_media.py": "4c71ce4a7fa86e97c60887ec65c8b6a84a795cefe0306c80e92e4f340e9bde15",
       "benchmarks/toy_audit/canonical_selection.py": "b4ca13f7d4ad41b6532ffa7ee063ed2acf0a6f3e43dd9e5562164386d6e67790",
@@ -1305,7 +1305,7 @@
       "experiments/forge/__init__.py": "5716a43a13f31b3c0987233e7b6e063c311a3b3f9bced2ffcd5c6af6565b7355",
       "experiments/forge/__main__.py": "b7c23b7270df67bd62ce81b26ecdf9afc11fda3532cc94366841512e84653dd1",
       "experiments/forge/adaptation.py": "24b0cffe645b99c2a7d9ae298b32bdda1086d0035aebed6d6a925269f05b29ee",
-      "experiments/forge/adapters.py": "45bddb429921152ffc33b7df82962b41d743b66561d87189266fe1c0b5f63764",
+      "experiments/forge/adapters.py": "9466ba304bd61d0b084f159d2d251cd6916ff7248861462fa6aee55ee347953c",
       "experiments/forge/api.py": "00cbfa57a8c84dac8dad4553711464751f09a7232b78c6ae29cdb33c44f7098f",
       "experiments/forge/archived_recipe_readers.py": "94a323cfb731b174ad82eeb11750847f81fcace78cbd897797ad8fc354540d4a",
       "experiments/forge/artifact_resolver.py": "0397f9d89539e59e1f966220c9a675d5255e13167a778fa35a8eab0ad9bccd7b",
@@ -1345,7 +1345,7 @@
       "experiments/forge/evaluate.py": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df",
       "experiments/forge/execution_policy.py": "920b51c509e5afa41ba35dafc34371645956fe601112fe4a1e9b377ec13e7665",
       "experiments/forge/family_documentation.py": "0fc88bb3f343d7d8e0d236aa8e976e43695ab24f9b3dea7b0c93b5949c2db78f",
-      "experiments/forge/family_reports.py": "ed586bcd04a9eb61e8215598ce1222a5f916da5bd51bd37d80ec020d0bac9578",
+      "experiments/forge/family_reports.py": "e322c998a8d4f5531f971df4b28436b4c1a533a484c460468fba2a758bb86577",
       "experiments/forge/gaussian_tasks.py": "536863c58e7fcc35583b1ea5c890e6fd7093802f23f58fb36dacb5bdd7054619",
       "experiments/forge/grouped_evidence.py": "092bed1aa4a1a2c097d82b76464c7fd25a3cb98a5da749badde5185009dbf2ba",
       "experiments/forge/history.py": "85880c2d83f3f45cdfc9b54834d29c5b8ae1c11e4edad527009938a95282bffe",
@@ -1353,7 +1353,7 @@
       "experiments/forge/imageprofiles.py": "6f667f11b68e2d14f8610444c5fbd58bc87b080b50d0ad4b29f496e989bfc470",
       "experiments/forge/initialization.py": "c2674617c306e24337f1dbbf910d2110b7c852557b9c3e43b47f7fe1dce26634",
       "experiments/forge/knowledge.py": "b292a7036f4edd41eba184a2e3f7be60e49d821f03006b0bb76926737cbe91ae",
-      "experiments/forge/leaderboard_contract.py": "b8f16a5a07c6f6058f670eed1d0aa538d4c68c2e84a74cae68f2a765d02575a5",
+      "experiments/forge/leaderboard_contract.py": "d03c22cc21a280f2793ccf5adfc5e0c25509bade2a9e9753b391f35b393d75c2",
       "experiments/forge/lifecycle.py": "1e3b93d4dd56f212bb4943a20fb681ed87b436302b390662b35622d20655cab6",
       "experiments/forge/mechanisms.py": "8e76953fd6df27646ed4e4da2827cccc811be76b3974cafbdd17128e01b10a2d",
       "experiments/forge/model_toy_adapter.py": "714be671402d345a7a33be0d43f18c02da0b9cd30dbbc04dc04b465fe434bd54",
@@ -1375,6 +1375,7 @@
       "experiments/forge/policy_gaussian.py": "078c341d3ab1bb793166a134384c5687081f11d0c9c4e5f6b5f189d97a88666e",
       "experiments/forge/policy_publication.py": "e1979089cef132b94018aa343d00eab89fe277ecb191b7a96aed4b1ebb40ae47",
       "experiments/forge/pr399_scores.py": "ef43922822361add100c0608cb00685b60f055cdf9f44f4736fb2580574ffb38",
+      "experiments/forge/precision.py": "99a9f0910c9f9587f2c49b48013a437ff6288bff06dfbddaddd364333046473c",
       "experiments/forge/preflight.py": "22b69480187d5a5595490ea356deb63f44e14039389c576984b6d4217aafa90e",
       "experiments/forge/priors.py": "99f2e11e2425dc406673ff3f63973f062b2feea113231f3775fad1ad3f5ed595",
       "experiments/forge/promotion.py": "313c5d5c1a23907399899d25c1dc0984e1b70d257d29c9675837a22936b051da",
@@ -1418,7 +1419,7 @@
       "experiments/forge/transfer_cadence.py": "7b4f61062ead145603e08182ab8ca1d6f8739f6570ebf6387171d1f8319f537a",
       "experiments/forge/two_pole_observer.py": "452036923c18aa459601ee83b1fb781bfbd5c9e777ccf22612aabb15a4c9b006",
       "experiments/forge/vectorprofiles.py": "a13fd4e8d894e9fda29bb9ab4ace64eea88c7d4d5b3d256663987c96c8c7020e",
-      "experiments/forge/views.py": "a158e0abea9c0e3eec59bedf2bb930d25ed529bf07415447615d08f2d3b5d1fb",
+      "experiments/forge/views.py": "14026b01157d7c8034220e3c9e52e32a2ab0ad00356c1a607f4078c8ec8b6d25",
       "experiments/forge/word_adapter.py": "35ee665b3fe841636952d78c252208e32da5768d5eecf1a132de6aa489fed125",
       "experiments/forge/word_tasks.py": "79dd0d4c04989e07e168347255c0db3adc62cc5d0b657c27b9b71b0055761814",
       "experiments/forge/worker.py": "1b274827279313381f5b92e550b71fb575804c4abe60a02a549247970b99753a",
@@ -1529,7 +1530,7 @@
       "lib/vendor/concept_slider_core/reference.py": "c5ef81e49826a8b9065f1b1ab11b03f3fccce7a93c9de8d31b897f668f48b833",
       "lib/vicreg_loss.py": "16eaf1f57450d8b81de801fe3c1d9e0f28b8842c8669a23bfa4a5f20db5b6cf8",
       "lib/yue2_particle_toy.py": "3614955db1eb00cd7113022915ed9c4f22a1c053f80e79dbba9e7528252cb808",
-      "particlegan/__init__.py": "c532abc7f6e0a16d19f1264921464a647ed777c1fec2ea5d9a5923b2e2139a58",
+      "particlegan/__init__.py": "fcfe9c4dd56ae58f9cb68b765e2185ba3bc8a8b22f8b13154239a102740b9ba9",
       "particlegan/_bispf/__init__.py": "30901eab7006010aaf29fc695b38461d8429e581e863dfabedce1f6ff413f0a7",
       "particlegan/_bispf/critic.py": "a843636662f973a700438288afe3470acf98dd4ded7f900501a27c5bc9cc97f1",
       "particlegan/_bispf/engine.py": "2fa6574a93e20088e6d63e638eb2d53a1e362fcf156b0253161ba8fe572e0e93",
@@ -1563,7 +1564,7 @@
       "particlegan/feature_reference.py": "e0c3a6d600d136f02f8bf3df4aab6bad4816506ef94519f7800153aded18fd0b",
       "particlegan/gan_loss.py": "f73cc593aef5d7507dc1a468ee261cc186c8dbfbee3a0aad769b6e252c2c143f",
       "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
-      "particlegan/gradient_response.py": "a83a9415e1cc60337d33f6eeec9db314df8f2cf6a8b08d5933f9734ec38cb3bc",
+      "particlegan/gradient_response.py": "2417e7154ade03dc91fc692fbd53ea0d154fa4f4a5db2fac8e8f3c956e5e1f56",
       "particlegan/init.py": "3534ff23efa413cdf8b4125b91e0d30671d873b3e2958547d4e744b750454b9b",
       "particlegan/initial_mmd.py": "4c3f949cc2ec307b5860f03721114a504b8634e35620d20c7d3431eb7539968a",
       "particlegan/k3p.py": "0cbb09526d22a14e6df35c5a3dc94e21158d93d3fec882a41f82445668952564",
@@ -1571,6 +1572,7 @@
       "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee",
       "particlegan/latent_geometry.py": "ff23493141f2352ad858a5f410c842653101936e3de81bc94110a8a165b2fe8f",
       "particlegan/latent_lineage.py": "ddfa6d7e94040179d8183e3dd3f48ef523c41223f2a8a45221c34fd8b9fd05f6",
+      "particlegan/low_precision.py": "8f9f4e5040e984feec6434cfb227eca2851aa47ef40d8b3b6dbce1c66360e7dd",
       "particlegan/mean_transport.py": "9a3cce37435c32186838e47c8e3f5b1c1ddc0a9aeb7e6c5c380972ef9a3e0208",
       "particlegan/moment_tether.py": "b2ae60a4322e788e6eeb0113eff9dd0260c91285680715f9b7f835e1561af587",
       "particlegan/optim/__init__.py": "34d32360b434685d6b88e346ffc68445759c889bac3fbe30c0d30d65eec5bc19",
@@ -1596,14 +1598,14 @@
       "particlegan/row_evidence.py": "f5814ed469089c74c9d9cbc21ffd1f72c102a409b9fe1591e8230e42427b04c2",
       "particlegan/sigreg.py": "96bac4b2344f9d505a7d767ecfbb58ab06442e2a1de1a48ea479baa2288e048b",
       "particlegan/tensorflow_adam.py": "37f1192e48b84907446d8f676c62631bf87ff450b2a2e6b63e7489adc33e24e9",
-      "particlegan/training.py": "05272bd524b9c2c0812d4e9db912970fbdaa90eabba7763a1e251058dab007fe",
+      "particlegan/training.py": "e8bc8cd5e24b40dea15c5ab699fc3d8bf50c1b71073bea2c1e15cb7300877085",
       "particlegan/vicreg_loss.py": "177a68b98036e4725cacf6bc0d95277111184c0dcb9566d3f7fc1527046cefda",
       "reports/forge/k3p-two-pole-horizon-v1/prepare.py": "bb0ef441a18b71ca9aef0781bc4f0600f0ed320e2dfbb96042484e21ebf33c6c",
       "reports/forge/k3p-two-pole-horizon-v1/run.py": "a09e93c791c5b9c4dc6145ea3483b4e97ad8707aabfc46215713303e70924341",
       "reports/toy100/gap-fill-20260925/sources/k3p/convergence_gate.py": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0",
       "reports/transfer_suite/unadjusted/leading_profile.json": "38327c94dd8c1ad2729ab07a5866191d2c4ec05b3acb841498d5abd786d691dd"
     },
-    "origin_commit": "9904e51f74061b931c29a8662fb39a9422175a8a",
+    "origin_commit": "07df6f4956085c0d4c0bceaaee48e8b8ef3126bb",
     "schema_version": 1
   },
   "study": {
@@ -1704,7 +1706,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "acc0233e376d1819eb49747a4425a24cb697d82ae043948e7cc30ab36c139ca4",
+      "compatibility_key": "f09a1fd1c97bfc92b96aaa6738a70e9c3c7d883f0f636ade6b9b8aca2cda4e96",
       "cost": {
         "adapter_loop_seconds": 37.291383488016436,
         "adapter_seconds": 43.33544181898469,
@@ -6783,7 +6785,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "d0208864f101ca03e9759dd1cb555a9f554a9240824d51ce7beb3d33ba5f7b16",
+      "compatibility_key": "fddfb09f3e394915be8768ed65c117c4c6cae931f08d8948aac6d49cf8dbefad",
       "cost": {
         "adapter_seconds": 0.8018346820026636,
         "charged_task": "two_pole",
@@ -7238,7 +7240,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "0063dd3692958d4b8f05e5f7bb4a7c5f1a46dc06d19fe361b198ad5bbc990353",
+      "compatibility_key": "f3572d3ba20fe1ce4631a84bcc847f10b652bd9dc0dbca7886a2e33b4f0e1e26",
       "cost": {
         "adapter_loop_seconds": 27.502691850997508,
         "adapter_seconds": 31.790549886994995,
@@ -10465,7 +10467,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "c5401881cc9659d978d5dd95f92c8f11c15e298c0bcf947aab002aba521a1a12",
+      "compatibility_key": "51c6a7ff20b93f16312551054bad6b522ebb80ee442c52dfc1ecefbee2b75684",
       "cost": {
         "adapter_loop_seconds": 8.763803074980387,
         "adapter_seconds": 9.009368105005706,
@@ -12411,7 +12413,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "c78fdf8fc09c2e5928842cb6a9ae8be398b280d24d9ba1e3dea319d36fd20564",
+      "compatibility_key": "b1a49d34bd733950fd18695694458d0e8b095fb9092c6d1ad2ac7d861dbfbd34",
       "cost": {
         "adapter_loop_seconds": 9.7640679590113,
         "adapter_seconds": 13.345880524982931,
@@ -14828,7 +14830,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "eb7ac41979ee91cbecb9e2f5e0a0963bb91049e44b2c0c0c2d28bb04859abc43",
+      "compatibility_key": "e8753f431d0e281e99eba41247914ade1dccba090acdf3911a705c0e15215180",
       "cost": {
         "adapter_loop_seconds": 20.95318412198685,
         "adapter_seconds": 24.339512544014724,
@@ -16893,7 +16895,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "e54b04b48993bb0dd35086d3d2c15c35f81f45178e197d153e2614f356137981",
+      "compatibility_key": "babf6c182362655e729f5da269f569c86728a7ccdfd442a5a6b648ff48735724",
       "cost": {
         "adapter_reported_inclusive_seconds": 1.1295674620196223,
         "adapter_seconds": 1.1376754289958626,
@@ -17143,7 +17145,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "f83d40be4d5cfb0d8f6223f3a39d4f26cd3e690cacf93306f52082148c76671c",
+      "compatibility_key": "65da337307a36a5596cbf980217ce637f71605fdda774eec8ed7f72ab6e60461",
       "cost": {
         "adapter_loop_seconds": 9.645149810006842,
         "adapter_seconds": 9.945208737015491,
@@ -19825,7 +19827,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "455f6ecdb528cdc83ef77ad0d9a488a2bbc7bdf4f9415faeb2657acdd76fc543",
+      "compatibility_key": "87e731b7fa2454140341d6e8d94c5d5d8c607b848fd937e044466c1b7eccb2a1",
       "cost": {
         "adapter_loop_seconds": 13.297945875994628,
         "adapter_seconds": 13.550446281995391,
@@ -40956,7 +40958,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "1fd307e8059b425d3a72d1d3fbf410103c9f5240975017a05a94aa73fbc2812e",
+      "compatibility_key": "2c7b1aa2bcafcc05659f2f33e2e084a7fda9516d999d71e0810bdbf850928a3a",
       "cost": {
         "adapter_loop_seconds": 15.117318356002215,
         "adapter_seconds": 18.70081053400645,
@@ -43374,7 +43376,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "67d8054646a10f9cc81dd29e0657330baeaecc28f65945a9de86d47b14ff7fe6",
+      "compatibility_key": "ac12e9fddb6f4496784d1a8b917aae59538f0ee870360309584f0e366bff1783",
       "cost": {
         "adapter_loop_seconds": 111.31370015800348,
         "adapter_seconds": 111.51175473100739,
@@ -46587,7 +46589,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "6006abb46619c567cfc353b4432758fc2a388a4b4a0e07d80dfd56a6fb77dd69",
+      "compatibility_key": "082217d965daa40cd32f27ff3a67e99776e1f1da2e95b7651182adcd4d96feee",
       "cost": {
         "adapter_loop_seconds": 14.194299693976063,
         "adapter_seconds": 17.662935792002827,
@@ -50691,7 +50693,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "a48c23b9fbcd27e1602f9ac19e5693d59dd49dd77027b4deb156e843b90764de",
+      "compatibility_key": "dd2e613e80de0fe7a1eb07cee70271a6bb2af66a4cebc456fec7b40c37a2c824",
       "cost": {
         "adapter_seconds": 2.271229898004094,
         "charged_task": "ae_gan_hold",
@@ -52974,7 +52976,7 @@
         "schedule": "scheduled",
         "scoring_weights": "live"
       },
-      "compatibility_key": "f71b1c7435f3dd4f540d214c7c4b6813fa8b01f4049a03bc3c5983f5f5e94961",
+      "compatibility_key": "ebfe60b2a5e5f00381d47f7d2050dce9f0c7f765a80fc68c44f890f5fefdd796",
       "cost": {
         "adapter_seconds": 1.409879851009464,
         "charged_task": "unused_token_hold",

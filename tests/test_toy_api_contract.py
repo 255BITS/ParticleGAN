@@ -127,6 +127,7 @@ def test_executable_inventory_retains_every_historical_question_and_pr231():
     gan_stretch = {
         "api-alice-spiral-bigan", "api-cgan-overlapping-classes",
         "api-cramer-energy-overlap", "api-cyclegan-unpaired-constellation",
+        "api-grid100-res16-scaled-tanh",
         "api-infogan-anisotropic-modes", "api-misgan-mcar-p50-recovery",
         "api-misgan-mcar-p80-anchored", "api-pacgan-unequal-mass", "api-pacgan8-grid100",
     }
@@ -134,6 +135,6 @@ def test_executable_inventory_retains_every_historical_question_and_pr231():
     historical = {name: case for name, case in cases.items()
                   if case["provider"] not in api_contract.MODEL_PROVIDERS and name not in gan_stretch}
     assert len(historical) == 186
-    assert len(cases) == 203  # Eight model/encoding cases and nine GAN stretch cases.
+    assert len(cases) == 204  # Eight model/encoding cases and ten GAN stretch cases.
     assert all(case["evaluation_observations"] >= case.get("terminal_observations", 5)
                for case in cases.values())
