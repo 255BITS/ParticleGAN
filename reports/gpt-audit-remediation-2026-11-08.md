@@ -27,6 +27,8 @@ Public-API vector and MisGAN checkpoint versions change where the old implementa
 
 Caller-owned vector paths without a complete restore owner explicitly export diagnostic-only state and refuse a required checkpoint capability. They cannot present that artifact as a resumable checkpoint. MisGAN standalone particle-cloud storage and its normal-noise transform are declared separately from a positive-width MoG case; supplied priors must match the actual task law and initialization.
 
+Archived critic-balance and generator-step coordinator checks load the exact original eight task cards with source/blob/digest provenance. Their bounded current-API optimizer controls are explicit separate software cohorts. The active family-search resolver follows the same recipe ownership as the executed vector provider; it no longer reports hidden task-specific trainer overrides as the resolved recipe. Frozen coordinator sources and scientific evidence pins are preserved.
+
 The retired runner cannot be revived by `--force`, a direct task call or an internal batch spec. New research measurements require normal frozen Forge study admission, the declared protocol and budgets. A publication refresh reads retained evidence and adds no training. Retained-publication integrity and current-source measurement coverage have separate status fields.
 
 The new controls test the scientific boundary, rather than just exercising a successful code path: damaging the measured neural imputer changes its predictions; its evaluator cannot call ppost; disabling an optimizer prevents hidden model/prior writes; importing providers cannot change a shared architecture; automatic derivatives match finite differences and a zero upstream signal; and fresh-object continuation preserves complete owned state. Software prefixes and constructive/oracle controls confer no full-budget learned-quality credit.
@@ -49,6 +51,7 @@ The integrated CPU checks used Python 3.12.14 / Torch 2.14.0+cu130 with CUDA hid
 | Vector/MisGAN providers and public-API contracts after final provider fixes | 210 passed |
 | Publication, exact producer verification and generated navigation | 34 passed |
 | Final producer emission, consumer acceptance and interpreter-coverage policy | 69 passed |
+| Archived coordinator boundaries and current family-search recipe ownership | 341 passed |
 | Minimum base installed-wheel continuation | Passed in isolated Python 3.11.16 / Torch 2.6.0+cpu / NumPy 1.26.0 |
 | Reviewed lint baseline | Current; 295 findings, no additions; new undefined names cannot be baselined |
 

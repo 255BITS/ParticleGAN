@@ -936,7 +936,7 @@
     },
     {
       "family": "benchmark/toy_audit",
-      "git_blob": "dc24c71a4ff5af46dd33bcb7616f8a4609bb92cf",
+      "git_blob": "10bf7547fa3c62d668b56e4876bdd15558ca5b52",
       "path": "benchmarks/toy_audit/api_family_search.py",
       "role": "driver",
       "suggested_tiers": [
@@ -14245,7 +14245,7 @@
     },
     {
       "family": "report/project",
-      "git_blob": "7d3af6c02a983e4eb21cb9a69560b7443bc72e3d",
+      "git_blob": "750b61d331446a86d93d0ca7b0839276347a2d02",
       "path": "reports/gpt-audit-remediation-2026-11-08.md",
       "role": "narrative",
       "suggested_tiers": []
