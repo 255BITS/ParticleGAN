@@ -314,14 +314,16 @@ def test_prior_mechanisms_coupled_negative_cases():
 # =============================================================================
 
 def test_recipe_schema_exact_118_fields():
+    """The frozen 118-field contract admits only these neutral additions."""
+    additions = ('conditional_energy_weight', 'conditional_energy_samples')
     fields_dict = get_recipe_fields()
-    field_names = tuple(fields_dict.keys())
-    assert len(field_names) == 118, f"Expected 118 fields, found {len(field_names)}"
-    assert field_names == FROZEN_RECIPE_FIELDS
-
-    recipe_fields = tuple(f.name for f in dataclasses.fields(Recipe))
-    assert len(recipe_fields) == 118
-    assert recipe_fields == FROZEN_RECIPE_FIELDS
+    field_names = tuple(fields_dict)
+    assert len(field_names) == 118 + len(additions)
+    assert tuple(name for name in field_names if name not in additions) == FROZEN_RECIPE_FIELDS
+    assert tuple(field.name for field in dataclasses.fields(Recipe)) == field_names
+    from particlegan.recipe_compat import SEARCH_RECIPE_DEFAULTS
+    for name in additions:
+        assert fields_dict[name] == SEARCH_RECIPE_DEFAULTS[name]
 
 
 def test_atlas_preset_default_values_and_swapped_prior():
@@ -377,7 +379,7 @@ module = importlib.util.module_from_spec(spec)
 sys.modules[spec.name] = module
 spec.loader.exec_module(module)
 fields_atlas = module.get_recipe_fields('atlas')
-assert len(fields_atlas) == 118
+assert len(fields_atlas) == 120
 assert 'torch' not in sys.modules
 """
     res = subprocess.run([sys.executable, "-I", "-c", script, str(source)], capture_output=True, text=True)
