@@ -5915,6 +5915,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `c9f87d2a4aa4fdbe1e94a31c5c4ce24f437e0621de3e4accb1e028b8f8169a2e`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `df2af4246f0fe78784c4550ad324a5b2050443afee2bfd020fb4bc08e7bcfa4d`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `873cad217d60770ac91b6592fa57e9a16b2894e1ec39e85bc5b8cd0c78b0bfbd`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `35da6eaa1cb9de1054474dad5284676940a33bc2f3729fcbfb4af11fc8d4a51b`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
