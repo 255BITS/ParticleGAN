@@ -21,6 +21,10 @@ from particlegan.optim import convolution_quintic
 from particlegan.optim.convolution_frobenius import frobenius_direction
 
 
+# Every test here runs on the GPU (autouse fixture below): opt in with -m cuda.
+pytestmark = pytest.mark.cuda
+
+
 @pytest.fixture(autouse=True)
 def cuda_contract():
     if not torch.cuda.is_available():

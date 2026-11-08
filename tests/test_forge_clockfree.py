@@ -69,8 +69,8 @@ def test_clock_grader_rejects_claim_only_hashes_or_changed_artifacts(probe, tmp_
 
 def test_source_audit_keeps_unknown_extensions_and_periodic_releases_visible():
     from particlegan import Recipe
-    recipe = Recipe(critic_formulation="k3p", lr_floor=1, network_lr_floor=1, input_noise_std=0,
-                    output_noise_warmup=0, d_guard_min_steps=0, reg_every=2).to_dict()
+    recipe = Recipe.from_dict(dict(critic_formulation="k3p", lr_floor=1, network_lr_floor=1, input_noise_std=0,
+                    output_noise_warmup=0, d_guard_min_steps=0, reg_every=2)).to_dict()
     audit = source_audit(recipe, {"unreviewed": True})
     assert len(audit["unexplained_clock_dependencies"]) == 2
 
@@ -117,3 +117,24 @@ def test_clock_proof_requires_actual_optimizer_updates(probe, tmp_path):
     raw["evidence"]["artifact_manifest"] = manifest_artifacts(root)
     raw["evidence"]["comparisons"] = _comparisons(proof)
     assert grade_result(task, raw)["status"] == "INVALID"
+
+
+def test_ka2_formulation_survives_all_clock_perturbations(probe, tmp_path):
+    """Assert KA2 passes clock probes with 0 unexplained dependencies and 4 parity passes."""
+    task, request = probe
+    request["candidate"]["recipe_overrides"]["critic_formulation"] = "ka2"
+    raw = run_clockfree(request, task, tmp_path, "cpu")
+    grade = grade_result(task, raw)
+    assert grade["status"] == "PASS", grade
+    assert grade["metrics"]["parity_comparisons"] == 4
+    assert raw["evidence"]["source_audit"]["unexplained_clock_dependencies"] == []
+
+
+def test_ka2_second_moment_readiness_boundary():
+    """Assert exact boundary transition: update 799 in warmup, update 800 in blend."""
+    from particlegan.ka2 import READINESS_THRESHOLD, _optimizer_moment_readiness
+    # Under beta2 = 0.999, 800 steps corresponds to 1 - 0.999^800 ~ 0.55085
+    assert _optimizer_moment_readiness(None, step=799) < READINESS_THRESHOLD
+    assert _optimizer_moment_readiness(None, step=800) >= READINESS_THRESHOLD
+    assert pytest.approx(READINESS_THRESHOLD, abs=1e-5) == 1.0 - (0.999 ** 800)
+

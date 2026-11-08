@@ -17,6 +17,13 @@ from .diffusion import DDGAN
 from .discriminators import BatchDistanceDiscriminator, LinearSkipDiscriminator
 from .gan_loss import GANLoss
 from .particle_prior import GaussianPrior, MoGParticlePrior, ParticlePrior, calibrate_mog_sigma
+from .priors import (
+    AdditiveNormalManipulator,
+    ManipulatedPrior,
+    NormalNoiseManipulator,
+    PriorManipulator,
+    unwrap_prior,
+)
 from .policy import E22Policy, ServedModel, StepNoise, UpdatePolicy
 from .recipes import (
     DEFAULT_RECIPE,
@@ -35,7 +42,9 @@ from .vicreg_loss import ParticleRegularizer
 from .coulomb_prior import CoulombPriorRegularizer
 from .sigreg import SIGReg
 from .initial_mmd import InitialMMDRegularizer
+from .low_precision import EmulatedLinear, emulate_linear_training_
 from .bispf import (
+    BISPFGates,
     BISPFCriticAdam,
     BISPFCriticPenalty,
     BISPFEngine,
@@ -49,6 +58,7 @@ from .bispf import (
 from . import init
 
 __all__ = [
+    "EmulatedLinear", "emulate_linear_training_",
     "disable_autograd_multithreading", "serial_autograd",
     "init",
     "TensorFlowV1Adam",
@@ -58,9 +68,10 @@ __all__ = [
     "RoutedBatch", "RoutedCandidate", "RoutedExecution", "RoutedRows",
     "E22Policy", "UpdatePolicy", "ServedModel", "StepNoise",
     "ParticlePrior", "MoGParticlePrior", "calibrate_mog_sigma", "GaussianPrior", "GANLoss",
+    "NormalNoiseManipulator", "AdditiveNormalManipulator", "ManipulatedPrior", "PriorManipulator", "unwrap_prior",
     "CoulombPriorRegularizer", "ParticleRegularizer", "InitialMMDRegularizer", "SIGReg",
     "StratifiedBlueNoisePrior", "SBNPPriorRegularizer", "ContinuousThermalCooler", "BISPFEngine", "BISPFLossAdapter",
-    "BISPFStepRecord", "BISPFCriticAdam", "BISPFCriticPenalty", "SinkhornRelativisticLoss",
+    "BISPFStepRecord", "BISPFCriticAdam", "BISPFCriticPenalty", "SinkhornRelativisticLoss", "BISPFGates",
     "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",
     "conditional_energy_score",
     "DEFAULT_RECIPE", "Recipe", "NetworkLRTransition", "DataDriftController", "get_recipe", "get_recipe_fields", "learning_rate_scale", "learning_rate_scales", "scale_learning_rates", "GANTrainer", "InputNoise",

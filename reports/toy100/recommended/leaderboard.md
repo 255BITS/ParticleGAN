@@ -1,5 +1,8 @@
 # 100-Gaussian toy gate: PASS
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current leaderboard for this goal: [reports/forge/technique-inventory.md](../../forge/technique-inventory.md); goal index: [reports/leaderboard-index.json](../../leaderboard-index.json). Results below are preserved as recorded.
+
 Scope: **all declared problems**. Verdicts use complete live-weight curves at the stated training budget. A PASS needs five consecutive passing postinitial checks at the end; all 100 modes, sample quality, mode mass, and per-mode shape are evaluated by the toy metrics.
 
 | Problem | Status | Final modes | Final HQ | Mass TV | Cov eig ratio | Radial ratio | First 100 modes | First full quality | Stable from | Confirmed | Budget / elapsed | Reason |

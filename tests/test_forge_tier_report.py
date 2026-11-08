@@ -581,3 +581,24 @@ def test_committed_tier_report_matches_current_declarations_and_artifacts(tmp_pa
     assert (root / REPORT_PATH).read_text() == render_markdown(build_report(root), root, root / REPORT_PATH), (
         "Regenerate with: python -m experiments.forge experiments-by-tier "
         "--output reports/forge/EXPERIMENTS_BY_TIER.md")
+
+
+def test_stretch_only_top_tier_reports_stretch_not_held(inventory):
+    path = inventory / "configs/forge/views/stability.json"
+    definition = read_json(path)
+    for item in definition["assignments"]:
+        if item["task"] == "endurance":
+            item["importance"] = "stretch"
+            item["stretch"] = {
+                "schema": "forge_stretch_v1",
+                "reason": "frontier",
+                "summary": "Fixture: endurance is a frontier stretch task in Tier 3.",
+            }
+    atomic_json(path, definition)
+    result = build_report(inventory)
+    assert tier(result, "stability", 3)["counts"]["stretch"] == 1
+    document = render_markdown(result, inventory, inventory / "reports/forge/EXPERIMENTS_BY_TIER.md")
+    stability_sec = document.split("## stability", 1)[1].split("\n## ", 1)[0]
+    assert "this tier's status is STRETCH and never blocks view-level PASS or later tiers." in stability_sec
+    assert "never shows PASS" not in stability_sec
+

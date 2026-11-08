@@ -165,11 +165,11 @@
     "scoring_weights": "live",
     "sources": {
       "benchmarks/toy_audit/api_contract.py": "08a5eac1a186a22c09f47d324f69772af1f1922832383d372488ecb7091eb75d",
-      "benchmarks/toy_audit/api_model_vae.py": "f68de91a706fc93970d325ba1738337649aac62df84d3a0617468635b07d7ac7",
+      "benchmarks/toy_audit/api_model_vae.py": "039d875d92757e4eadff279cb2f41656d9533a2c70561720aca48e8084f79b0b",
       "benchmarks/toy_audit/api_run.py": "b5f1e130e6daa4cfbf172b9beb13ab1e691c8fadba59d1aec58f74368df475d3",
       "benchmarks/toy_audit/reproducibility.py": "5f29fd7f9579be894e97bf4ad93bee8c77aeff104437b5d4e6dc4a4303935891",
       "experiments/forge/model_toy_adapter.py": "714be671402d345a7a33be0d43f18c02da0b9cd30dbbc04dc04b465fe434bd54",
-      "particlegan/policy.py": "4eb130cb5982c8333eec1abac6829c76b8aeea8f4ce87bc90b06b805c7dede0c"
+      "particlegan/policy.py": "be442dcf21f03a5d1cd364177724fc15560df8cbf401c85bd4630f62f5ea9535"
     },
     "gate_policy": {
       "id": "api-model-vae-v1",
@@ -187,7 +187,25 @@
       "exact_optimizer_updates": true,
       "mechanism_exercised": true
     },
-    "eval_samples": 4096
+    "eval_samples": 4096,
+    "evaluator_revision": {
+      "id": "review-policy-source-binding-20261025",
+      "change": "Bind the review-stage particlegan/policy.py refresh for future execution: ManipulatedPrior output postprocessing in ServedModel/UpdatePolicy (identity for plain priors), the declared row_evidence_statistic trainer option (default 'sphericity' is the legacy law) and router-parameter ownership labels for manipulated priors. Plain-prior hosts execute the same operations. Architecture, data/target/prior/sampling laws, initialization, budgets, cadence and numerical gates are unchanged. Earlier source-bound receipts and verdicts retain their original identities; this refresh grants no reuse or pass credit.",
+      "previous_task_commit": "82f38664e4d6fb4aac67ed99d87887d6e6e4b357",
+      "previous_task_path": "configs/forge/tasks/model_vae_categorical.json",
+      "previous_task_sha256": "6fea5d7391a40fbdd59d9bb8733a3562300ea4139c9b39391aeefde24f69b161",
+      "previous_task_blob": "2fb6131183e93b6b40041b213dcea03c5513fb67",
+      "previous_source_sha256": {
+        "particlegan/policy.py": "4eb130cb5982c8333eec1abac6829c76b8aeea8f4ce87bc90b06b805c7dede0c"
+      }
+    },
+    "integration_source_binding": {
+      "id": "pr-460-develop-integration-20261108",
+      "previous_task_commit": "528807d4b26db979c8e77d0543d266514c8e14d9",
+      "previous_task_path": "configs/forge/tasks/model_vae_categorical.json",
+      "previous_task_sha256": "b56b8f2fa767934b51c71b733bd3bfce805150c23ff1170923c1b46a6c750a04",
+      "previous_task_blob": "e805c35270819a42096ac650c8fe3a55db599268"
+    }
   },
   "resources": {
     "gpus": 1,

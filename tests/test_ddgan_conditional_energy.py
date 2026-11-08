@@ -71,13 +71,13 @@ def test_energy_objective_checkpoint_replay_and_matched_data_streams(geometry):
     {"conditional_energy_samples": 2.5}])
 def test_recipe_rejects_invalid_energy_settings(kwargs):
     with pytest.raises(ValueError):
-        Recipe(**kwargs)
+        Recipe.from_dict(kwargs)
 
 
 def test_disabled_energy_fields_preserve_archived_recipe_packets():
-    assert "conditional_energy_weight" not in Recipe().to_dict()
-    assert "conditional_energy_samples" not in Recipe().to_dict()
-    assert Recipe(conditional_energy_weight=1.).to_dict()["conditional_energy_weight"] == 1.
+    assert "conditional_energy_weight" not in Recipe.from_dict({}).to_dict()
+    assert "conditional_energy_samples" not in Recipe.from_dict({}).to_dict()
+    assert Recipe.from_dict(dict(conditional_energy_weight=1.)).to_dict()["conditional_energy_weight"] == 1.
 
 
 def test_target_is_fixed_and_nonfinite_predictions_fail_finite_guard():
@@ -113,7 +113,7 @@ def test_auxiliary_uses_independent_same_context_draws_and_no_analytic_posterior
         return original(xt, z, t)
     monkeypatch.setattr(fixture.G, "forward", recorded)
     fixture.step()
-    assert [len(xt) for xt, _, _ in calls] == [64, 64, 512]
+    assert [len(xt) for xt, _, _ in calls] == [64, 64, 64, 512]
     xt, z, t = calls[-1]
     torch.testing.assert_close(xt.reshape(64, 8, 2), calls[1][0][:, None].expand(64, 8, 2))
     torch.testing.assert_close(t.reshape(64, 8), calls[1][2][:, None].expand(64, 8))

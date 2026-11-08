@@ -30,7 +30,7 @@ def test_bcap_public_preset_contains_only_requested_training_mechanisms():
     assert recipe.d_guard_ratio == recipe.reg_anchor_weight == recipe.latent_damping_max_rate == 0.
     assert recipe.direct_particle_gain is recipe.amsgrad is False
     assert recipe.prior_reg == recipe.ema_decay == recipe.input_noise_std == recipe.output_noise_std == recipe.output_noise_warmup == 0.
-    assert Recipe(**recipe.to_dict()) == recipe
+    assert Recipe.from_dict(recipe.to_dict()) == recipe
 
 
 def test_bcap_adam_retains_the_exact_historical_preset_under_an_explicit_name():
@@ -42,7 +42,7 @@ def test_bcap_adam_retains_the_exact_historical_preset_under_an_explicit_name():
                           d_lr_mult=1.5, prior_lr_mult=2.5, loss="non_saturating",
                           optimizer_smoothing=.001, optimizer_convolution="per_offset",
                           constraint_geometry_mode="direction_blend") == get_recipe("bcap")
-    assert Recipe(**recipe.to_dict()) == recipe
+    assert Recipe.from_dict(recipe.to_dict()) == recipe
 
 
 @pytest.mark.parametrize("preset,generator_type,critic_type", [
@@ -86,12 +86,12 @@ def test_constant_rate_preset_never_computes_cosine(monkeypatch, preset):
 
 
 def test_new_bcap_label_does_not_reinterpret_historical_fixed_arm_recipes():
-    old = Recipe(reg_arm="b_cap")
+    old = Recipe.from_dict(dict(reg_arm="b_cap"))
     assert old.critic_formulation == old.effective_critic_formulation == "k3p"
     assert old.optimizer_family == "formulation"
     assert old.d_guard_ratio == 5. and old.direct_particle_gain is True
     with pytest.raises(ValueError, match="plain optimizer"):
-        Recipe(critic_formulation="bcap", reg_arm="b_cap")
+        Recipe.from_dict(dict(critic_formulation="bcap", reg_arm="b_cap"))
     with pytest.raises(ValueError, match="reg_arm='b_cap'"):
         get_recipe("bcap", reg_arm="a_r1r2")
 
@@ -186,7 +186,7 @@ def test_historical_bcap_checkpoint_reconstructs_saved_recipe_and_cannot_load_as
     with pytest.raises(ValueError, match="recipe"):
         current.load_state_dict(saved)
     _assert_state_equal(before, current.state_dict())
-    restored = _trainer(Recipe(**saved["recipe"]))
+    restored = _trainer(Recipe.from_dict(saved["recipe"]))
     restored.load_state_dict(saved)
     historical.step(_batch())
     restored.step(_batch())

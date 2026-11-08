@@ -56,7 +56,7 @@ def make(*, backend='auto', n=1024, width=2, quarter=False, callback=False):
             config.pop(key)
     if quarter:
         config.update(lr=.0010625, prior_lr_mult=8., d_lr_mult=4.)
-    trainer = GANTrainer(Recipe(**config),G,D,prior=prior,seed=SEED,serial_backward=True)
+    trainer = GANTrainer(Recipe.from_dict(config),G,D,prior=prior,seed=SEED,serial_backward=True)
     if callback:
         trainer.policy.generation = lambda model,latent: model(latent)
     return trainer

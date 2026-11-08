@@ -167,7 +167,7 @@ def _recorded_qualification(request, assignments, rows):
         if not required:
             # A held-only tier neither passes nor stops progression; any other
             # tier without a required task has no recorded qualification rule.
-            if any(a["qualification_tier"] == tier and a["importance"] == "held" for a in assignments):
+            if any(a["qualification_tier"] == tier and a["importance"] in {"stretch", "held"} for a in assignments):
                 continue
             return {"status": "UNAVAILABLE", "qualified_tier": None, "task_statuses": statuses}
         if all(value == "PASS" for value in required):

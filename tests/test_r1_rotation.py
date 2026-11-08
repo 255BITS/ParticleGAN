@@ -22,7 +22,7 @@ PRE_R1 = dict(E22, reopen_signal="none", reopen_anchor="hold")  # E22 before R1 
 
 def _recipe(options):
     # These are resolved E22 packets, not overrides of the public GAN default.
-    return Recipe(**dict(options, num_particles=512, z_dim=2, batch_size=64))
+    return Recipe.from_dict(dict(options, num_particles=512, z_dim=2, batch_size=64))
 
 
 def _trainer(recipe, seed=0):

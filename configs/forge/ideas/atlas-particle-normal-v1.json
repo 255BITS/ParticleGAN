@@ -1,0 +1,52 @@
+{
+  "api_changes": [
+    "particlegan/priors.py",
+    "particlegan/recipes.py",
+    "particlegan/training.py"
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Declare technique-owned prior_mechanism swapping task MoGParticlePrior for unstandardized ParticlePrior wrapped with NormalNoiseManipulator (sigma=0.005 on stochastic tasks, deterministic sigma=0.0 on enumerated particle-cloud image tasks)",
+    "Train clean by overriding recipe_overrides with output_noise_mode='fixed' and output_noise_std=0.0, matching public clean evaluation (sampling_law='public_prior_without_output_noise') and compelling generator Jacobian expansion to match target mode covariance"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "schedule_free",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "atlas-particle-normal-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "MoG standardization couples all rows through batch/table moments, breaking feature-cell locality and independent birth/death transport. Replacing MoGParticlePrior with an unstandardized ParticlePrior plus an additive NormalNoiseManipulator (sigma=0.005, matched to the unclustered particle Voronoi cell scale so BoundedLatentGeometry sorted-rank neighbor windows stay intact) preserves strict identity row Jacobians (row_local_gradients=True, a2_eligible=True) and isolated prior_noise_generator draws.",
+  "parent": "atlas",
+  "prior_art": [
+    "docs/atlas.md",
+    "docs/e22.md",
+    "reports/develop-gates-20261001/atlas19-replay.json"
+  ],
+  "prior_mechanism": {
+    "kind": "particles",
+    "manipulators": [
+      {
+        "kind": "normal_noise",
+        "sigma": 0.005
+      }
+    ],
+    "standardize": false
+  },
+  "recipe_overrides": {
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0
+  },
+  "recipe_preset": "atlas",
+  "requires_capabilities": [
+    "particle_cloud",
+    "a2",
+    "named_rng",
+    "policy_controls",
+    "policy_serving"
+  ],
+  "schema_version": 3,
+  "trainer_family": "atlas"
+}

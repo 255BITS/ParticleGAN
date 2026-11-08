@@ -1,5 +1,11 @@
 # Fast GAN Convergence: Transferable Notes
 
+These notes describe historical toy campaigns. The
+[100-Gaussian example](../examples/100gaussians.py) explicitly pins
+`get_recipe("ka2")` to preserve its recorded configuration. The current package
+default is `bispf_optimized`; current results and qualification limits are in the
+[technique inventory](../reports/forge/technique-inventory.md).
+
 Notes from a ~300-run optimization campaign on the `examples/100gaussians.py`
 benchmark (100-mode Gaussian grid, σ=0.03, learnable particle prior). The
 campaign took the example from *never converging* (≈90/100 modes, 30% of
@@ -179,28 +185,28 @@ All measured in this setting; several contradict common defaults:
    is real and sudden.
 6. Only then consider exotic optimizers, capacity, batch size — expect flat.
 
-## Reference: the winning configuration (this repo)
+## Historical reference configurations
 
-`examples/100gaussians.py` defaults. A later 420-run study of the penalty's
+The original campaign informed the historical example. A later 420-run study of the penalty's
 *centering* (`FINDINGS.md`) replaced the campaign's zero-centered penalty with a one-sided
 cap, `relu(‖∇ₓD‖ − 1)²` on reals and fakes at coeff 1.0, and doubled the base
 LR: the cap damps the game just as well (any sample-point penalty does) but
 leaves D usable slope below the cap, which buys sharper modes at an honest
 core width — 100/100 modes and hq 0.986 at 7k steps, core σ ratio 0.866,
 zero collapses over 5 seeds, bar (100 modes & hq ≥ 0.9) crossed by ~5.5k.
-The example now trains the recipe's critic penalty (KA2, which starts as RMS
+The example explicitly selects `get_recipe("ka2")`, whose critic penalty starts as RMS
 R1 plus a fake-side cap and then blends in one-sided caps with an EMA-critic
-anchor). The shipped example trains 7k steps with a delayed cosine anneal for a
-stable endpoint.
+anchor. This KA2 runner retains 7k steps and a delayed cosine anneal; it is
+separate from the cap-only study above and the current BISPF default.
 
 | Ingredient | Value | Why |
 |---|---|---|
 | Objective | RpGAN (relativistic pairing, logistic) | LR headroom, mode balance (§6) |
-| Gradient penalty | recipe default critic penalty (KA2), coeff 1, κ 1, every step | damps oscillation; enables sharp D without flattening it (§2, §3; FINDINGS.md) |
+| Gradient penalty | explicit KA2 preset, coeff 1, κ 1, every step | damps oscillation; enables sharp D without flattening it (§2, §3; FINDINGS.md) |
 | D input | Fourier features, K = 2 | resolve σ=0.03 structure from step 1 (§3) |
-| z_dim | 2 (recipe default; data is 2-D) | prior + penalty supply transport (§5) |
+| z_dim | 2 (KA2 preset; data is 2-D) | prior + penalty supply transport (§5) |
 | Optimizers | recipe optimizers (`make_optimizers`), betas (0, 0.999) | sparse particle table (§4) |
-| LRs | G/D 4.25e-3, prior ×2, D ×1 (`get_recipe("gan")`) | mild TTUR only (§7) |
+| LRs | G/D 4.25e-3, prior ×2, D ×1 (`get_recipe("ka2")`) | mild TTUR only (§7) |
 | EMA | 0.995 on G *and* prior, eval-only | sits on the equilibrium (§2) |
 | LR schedule | full LR for 60% of run, cosine to 5% floor | stable endpoint (§2) |
 | Particles | 20,000 for 100 modes | fewer decisively hurts (§7) |

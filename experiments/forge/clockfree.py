@@ -16,31 +16,38 @@ from .state import require_consistent_rng, require_optimizer_steps, state_digest
 
 
 ALLOWED_STATE = ["parameters_and_ema", "optimizer_moments_and_bias_correction",
-                 "observed_gradients_and_row_visit_history", "named_training_rng"]
+                 "observed_gradients_and_row_visit_history",
+                 "continuous_policy_statistics_and_fifo_reservoirs", "named_training_rng"]
 
 
 def source_audit(recipe, extensions):
     """Conservative declaration for the shipped scalar API; unknown hooks block."""
     dependencies = []
-    if recipe.get("continuous_policy") is not None:
-        dependencies.append("continuous policy lifecycle needs a separate reviewed clock/state audit")
-    elif recipe["lr_floor"] != 1 or recipe["network_lr_floor"] not in (None, 1):
+    continuous = recipe.get("continuous_policy")
+    if continuous is not None:
+        if continuous != "dv12" or recipe.get("total_steps") is not None or recipe.get("lr_control") != "stationarity":
+            dependencies.append("continuous policy lifecycle needs a separate reviewed clock/state audit")
+    elif (recipe["lr_floor"] != 1 or recipe["network_lr_floor"] not in (None, 1)
+          or (recipe.get("lr_schedule") == "exponential" and recipe.get("lr_decay_rate", 0.96) != 1)):
         dependencies.append("learning-rate annealing depends on completed steps and horizon")
+    if recipe.get("beta2_end") is not None or recipe.get("reg_coeff_end") is not None:
+        dependencies.append("optimizer or penalty schedule depends on completed steps and horizon")
     if recipe["input_noise_std"]:
         dependencies.append("input-noise annealing depends on completed steps and horizon")
     if recipe["output_noise_std"] and recipe["output_noise_warmup"]:
         dependencies.append("output-noise warmup depends on completed steps and horizon")
     if recipe["reg_coeff"] and recipe["reg_every"] != 1:
         dependencies.append("lazy critic penalty uses a periodic update counter")
-    if recipe["reg_coeff"] and recipe.get("reg_arm") is None and recipe.get("critic_formulation", "ka2") == "ka2":
-        dependencies.append("KA2 switches from pure A to blended penalty at call 800")
     if recipe["d_guard_ratio"] and recipe["d_guard_min_steps"]:
         dependencies.append("critic guard releases at a fixed minimum update count")
     if extensions:
         dependencies.append("additional formulation bindings need an explicit clock/state audit")
     root = Path(__file__).resolve().parents[2]
-    files = ["particlegan/training.py", "particlegan/recipes.py", "particlegan/k3p.py", "particlegan/ka2.py",
-             "particlegan/policy.py", "particlegan/continuous.py",
+    files = ["particlegan/training.py", "particlegan/recipes.py", "particlegan/recipe_schedules.py",
+             "particlegan/k3p.py", "particlegan/ka2.py", "particlegan/policy.py", "particlegan/continuous.py",
+             "particlegan/birth_death.py", "particlegan/feature_cells.py", "particlegan/feature_policy.py",
+             "particlegan/feature_reference.py", "particlegan/latent_geometry.py", "particlegan/mean_transport.py",
+             "particlegan/row_evidence.py", "particlegan/priors.py",
              "particlegan/grad_regularizers.py", "experiments/forge/clockfree.py",
              "experiments/forge/api.py", "experiments/forge/rng.py"]
     return {"source_sha256": {name: file_hash(root / name) for name in files},
@@ -54,8 +61,51 @@ def learning_state(state):
     stream_names = state["streams"]["manifest"]["bindings"]
     named = {key: value for key, value in state["streams"]["states"].items()
              if stream_names[key]["family"] != "eval"}
-    return {"trainer": {key: value for key, value in trainer.items()
-                        if key not in {"recipe", "completed_steps", "max_steps", "streams"}},
+    cleaned_trainer = {key: value for key, value in trainer.items()
+                       if key not in {"recipe", "completed_steps", "max_steps", "streams"}}
+    if "lr_settle" in cleaned_trainer:
+        def _sanitize_settle(obj):
+            if isinstance(obj, dict):
+                out = {}
+                for k, v in obj.items():
+                    if k in ("last_look", "last") and isinstance(v, dict):
+                        out[k] = {lk: lv for lk, lv in v.items() if lk != "step"}
+                    elif k == "log" and isinstance(v, list):
+                        out[k] = [row[1:] if isinstance(row, list) and len(row) == 4 else row for row in v]
+                    else:
+                        out[k] = _sanitize_settle(v)
+                return out
+            if isinstance(obj, list):
+                return [_sanitize_settle(x) for x in obj]
+            if isinstance(obj, tuple):
+                return tuple(_sanitize_settle(x) for x in obj)
+            return obj
+        cleaned_trainer["lr_settle"] = _sanitize_settle(cleaned_trainer["lr_settle"])
+    if isinstance(cleaned_trainer.get("birth_death"), dict):
+        bd = dict(cleaned_trainer["birth_death"])
+        if isinstance(bd.get("iso_log"), list):
+            bd["iso_log"] = [row[1:] if isinstance(row, list) and len(row) == 3 else row for row in bd["iso_log"]]
+        if isinstance(bd.get("last"), dict):
+            last = {k: v for k, v in bd["last"].items() if k not in ("step", "eval_seconds")}
+            if isinstance(last.get("mean_transport"), dict):
+                last["mean_transport"] = {k: v for k, v in last["mean_transport"].items() if k != "step"}
+            if isinstance(last.get("paired_average"), dict):
+                last["paired_average"] = {k: v for k, v in last["paired_average"].items() if k != "step"}
+            bd["last"] = last
+        if isinstance(bd.get("paired_average"), dict):
+            bd["paired_average"] = {k: v for k, v in bd["paired_average"].items() if k != "step"}
+        cleaned_trainer["birth_death"] = bd
+    if isinstance(cleaned_trainer.get("surprise"), dict):
+        surprise = dict(cleaned_trainer["surprise"])
+        if isinstance(surprise.get("log"), list):
+            surprise["log"] = [row[1:] if isinstance(row, list) and len(row) == 2 else row for row in surprise["log"]]
+        cleaned_trainer["surprise"] = surprise
+    if isinstance(cleaned_trainer.get("reopen_guard"), dict):
+        guard = dict(cleaned_trainer["reopen_guard"])
+        if isinstance(guard.get("excursion"), dict):
+            guard["excursion"] = {k: v for k, v in guard["excursion"].items() if k != "step"}
+        cleaned_trainer["reopen_guard"] = guard
+    return {"trainer": cleaned_trainer,
             "training_rng": named}
 
 
@@ -113,7 +163,7 @@ def run_clockfree(request, task, output, device):
     for name in ("reference", "step_label", "horizon", "evaluation_cadence", "restart"):
         if name != "reference":
             context, trainer, data = construct()
-            restored = (torch.load(directory / "initial.pt", map_location=device, weights_only=True)
+            restored = (torch.load(directory / "initial.pt", map_location="cpu", weights_only=True)
                         if name == "restart" else deepcopy(initial))
             context.load_state_dict(restored)
         proof["branch_initial"][name] = context.state_dict()
