@@ -490,6 +490,15 @@ remains caller-owned. Evaluation cannot borrow a training stream.
   and device, with the same parameter freezing, before loading. Save your data-loader position or separate data RNG
   alongside it. Loading on CPU first works for a compatible CUDA trainer:
   `trainer.load_state_dict(torch.load(path, map_location="cpu", weights_only=True))`.
+  Save and restore only between completed updates. Both methods raise
+  `RuntimeError` during an active trainer step or policy hook sequence, including
+  inside `generator_real` callbacks, before changing live state.
+  When `generator_gradient_response` is enabled, the checkpoint also includes
+  its float64 gradient history, normalization weights, gain diagnostics and
+  applied-step count. Older checkpoints that enabled this response but omitted
+  its history cannot resume exactly and raise `ValueError`; use their original
+  source or start a new run. Checkpoints with response `none` retain their
+  existing schema and compatibility.
 
 For scheduled recipes, `total_steps` fixes every schedule horizon. By default it is also
 the execution bound. After restoring a checkpoint with its original bound, call
@@ -1025,6 +1034,16 @@ training autocast. Smaller, CPU and nonconvolutional networks retain their
 original execution, as do CUDA devices without native BF16 support. This is a numerical trainer change requiring its own
 quality evidence. Caller-owned component loops do not acquire autocast merely
 by carrying this field; they must explicitly implement the declared policy.
+
+`emulate_linear_training_(module, "nvfp4" | "mxfp8")` is a separate opt-in
+software reference for Blackwell-format Linear forward and backward operands.
+Assign its return value if the root is itself a Linear. It preserves FP32
+master parameters, uses BF16 GEMM outputs and checkpoints private stochastic
+rounding streams. It provides no native speed, storage or kernel-parity claim;
+second derivatives use explicit straight-through quantizer surrogates. The
+[4-bit/8-bit stretch protocol](../reports/forge/precision-stretch/README.md)
+defines the format/scaling rules, higher-precision operations, gates and native
+validation still needed. Existing precision settings and recipes are unchanged.
 
 The public BISPF default selects both policies:
 

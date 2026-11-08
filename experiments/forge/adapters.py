@@ -7,6 +7,7 @@ evaluators. Their effective recipe and sampling law travel with every receipt.
 from __future__ import annotations
 
 from copy import deepcopy
+import hashlib
 import json
 import math
 from pathlib import Path
@@ -107,6 +108,11 @@ def adapter_preflight(task, candidate, *, root=None):
         if blockers:
             return blockers
     if adapter == "transfer_vector":
+        from .precision import validate as validate_precision
+        try:
+            validate_precision(task)
+        except (ValueError, TypeError, KeyError) as error:
+            blockers.append(str(error))
         if task["evaluation"].get("kind") in {"gaussian_smoke", "gaussian_stability"}:
             from .gaussian_tasks import validate_task
             try:
@@ -502,16 +508,20 @@ def _vector(request, task, output, device, *, retain_scored_outputs=True):
     context = _context(request, task, device, {"num_particles": spec["particles"],
                        "z_dim": spec["z_dim"], "batch_size": spec["batch"]})
     g, d = build_vector_models(context, spec)
+    from . import precision
+    precision.prepare(context, task, g, d)
     trainer = context.build_trainer(g, d, max_steps=task["execution"]["steps"])
+    precision_initial = precision.initial_parameters(g, d) if "linear_precision" in task["execution"] else None
     host_receipt = _host_receipt(spec, task["execution"].get("vector_profile"), g, d)
     spec["thresholds"] = task["evaluation"]["thresholds"]
     run = _Run(context, trainer, output, task)
     data = context.streams.generator("data", component="target", purpose="training", device="cpu")
     observations, records = [], []
     checkpoints = set(_checkpoints(task))
+    batch_digest = hashlib.sha256()
     def evaluate():
         samples = run.sample(4096).cpu()
-        if retain_scored_outputs:
+        if retain_scored_outputs or precision_initial is not None:
             records.append({"step": step, "samples": samples.detach().clone()})
         if contract != "fixed_v1":
             return metric_uncertainty.score_vector(samples, spec, step, contract=contract)
@@ -520,12 +530,20 @@ def _vector(request, task, output, device, *, retain_scored_outputs=True):
             metrics = metric_uncertainty.with_vector_noise_floor(metrics, spec, step, len(samples))
         return metrics
     for step in range(1, task["execution"]["steps"] + 1):
-        run.step(sample_target(spec, context.recipe.batch_size, data, step - 1).to(device))
+        target_batch = sample_target(spec, context.recipe.batch_size, data, step - 1)
+        if precision_initial is not None:
+            batch_digest.update(target_batch.numpy().tobytes())
+        run.step(target_batch.to(device))
         if step in checkpoints:
             row = run.evaluate(evaluate)
             observations.append({"step": step, **row})
             _event("observation", task=task["id"], step=step, metrics=metric_uncertainty.compact(row))
     evidence = {"observations": observations, "live": observations[-1], "host": host_receipt}
+    if precision_initial is not None:
+        evidence["linear_precision"] = precision.receipt(task, g, d)
+        evidence["initial_parameters"] = precision_initial
+        evidence["batch_sequence_sha256"] = batch_digest.hexdigest()
+        evidence["actual_training_gif"] = precision.render(task, records, observations, output)
     if plain_vector:
         evidence["evaluation_contract"] = metric_uncertainty.evaluation_contract(contract)
     if retain_scored_outputs:

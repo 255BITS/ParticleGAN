@@ -160,7 +160,7 @@
       "task": "grid100",
       "title": "A grid of 100 clusters",
       "intent": "Learn all 100 small blobs with correct locations, populations and widths, scoring the current model's clean outputs without adding evaluation noise.",
-      "problem": "BCAP/BISPF put only 24–37% of samples on target, against 97% required. Some blobs are thin or nearly empty; the best audited 7,000-update result reaches 54%, still below the gate.",
+      "problem": "BCAP/BISPF put only 24\u201337% of samples on target, against 97% required. Some blobs are thin or nearly empty; the best audited 7,000-update result reaches 54%, still below the gate.",
       "pass_summary": "No full PASS under the current clean-sampling declaration in the audited evidence.",
       "passers": [
         "Historical K3P and other recipes have PASS receipts under earlier contracts, including different priors, averaged weights or evaluation noise. Those are separate problems and do not beat this declaration.",
@@ -179,7 +179,7 @@
       "task": "rotated100",
       "title": "A rotated grid of 100 clusters",
       "intent": "Learn all 100 small blobs with correct locations, populations and widths, scoring the current model's clean outputs without adding evaluation noise.",
-      "problem": "BCAP/BISPF put only 26–27% of samples on target, against 97% required. Some blobs are thin or nearly empty; the best audited 7,000-update result reaches 51%, still below the gate.",
+      "problem": "BCAP/BISPF put only 26\u201327% of samples on target, against 97% required. Some blobs are thin or nearly empty; the best audited 7,000-update result reaches 51%, still below the gate.",
       "pass_summary": "No full PASS under the current clean-sampling declaration in the audited evidence.",
       "passers": [
         "Historical K3P and other recipes have PASS receipts under earlier contracts, including different priors, averaged weights or evaluation noise. Those are separate problems and do not beat this declaration.",
@@ -198,7 +198,7 @@
       "task": "staggered100",
       "title": "A staggered grid of 100 clusters",
       "intent": "Learn all 100 small blobs with correct locations, populations and widths, scoring the current model's clean outputs without adding evaluation noise.",
-      "problem": "BCAP/BISPF put only 30–34% of samples on target, against 97% required. Some blobs are thin or nearly empty; the best audited 7,000-update result reaches 56%, still below the gate.",
+      "problem": "BCAP/BISPF put only 30\u201334% of samples on target, against 97% required. Some blobs are thin or nearly empty; the best audited 7,000-update result reaches 56%, still below the gate.",
       "pass_summary": "No full PASS under the current clean-sampling declaration in the audited evidence.",
       "passers": [
         "Historical K3P and other recipes have PASS receipts under earlier contracts, including different priors, averaged weights or evaluation noise. Those are separate problems and do not beat this declaration.",
@@ -417,12 +417,13 @@
       "title": "Learn the 100-cluster grid with a 16-layer residual MLP and bounded tanh head",
       "intent": "Recover all 100 Gaussian modes on `grid100` using a 16-layer identity-skip residual MLP generator and a bounded `S=5.25` scaled `tanh` output head without saturating the `|x| > 0.99 * 5.25` rails.",
       "problem": "Identity skip connections prevent the 16-layer vanishing-gradient collapse of `grid100_mlp16`, but under unscaled critic updates (`k3p` at seed 0) 96.4% of generated samples are pushed into the `tanh` saturation rails (`saturated_fraction = 0.9639` vs. `<= 0.001` bound, `modes = 0/100`).",
-      "pass_summary": "No full PASS under the current declaration; constructive residual-tanh witness passes with zero saturation.",
+      "pass_summary": "No full PASS on the unnormalized backbone; paired `grid100_res16_scaled_tanh` task (`ScaledResidualMLPGenerator` + `TanhRailGuard`, 8/8 selected families PASS at full 7,000-step GPU budget) and constructive residual-tanh witness pass with zero saturation.",
       "passers": [
+        "Paired `grid100_res16_scaled_tanh` (`configs/forge/tasks/grid100_res16_scaled_tanh.json`) with `ScaledResidualMLPGenerator(use_norm=True, preserve_latent_norm=True)` and `TanhRailGuard` passes all 8 selected families (`atlas`, `bcap-pure`, `bispf`, `e22`, `k3p`, `ka2`, `r1r2`, `release07-gan-v3`) at full 7,000-step GPU budget (`100/100` modes, `saturated_fraction = 0.0 <= 0.001`), isolating trainer depth transport from unscaled initialization pathology.",
         "Constructive 16-layer residual + `S=5.25` tanh witness in `tests/test_solvability_deep100g.py` passes all 100-mode coverage, 100k accuracy, and `saturated_fraction <= 0.001` bounds (`saturated_fraction = 0.0`).",
         "Oracle sampler passes 200/200 draws."
       ],
-      "next_step": "Control pre-tanh logit growth via bounded step norms (`bcap-ada-nsgda` / `bcap-dualnorm`) or critic-gradient damping near the `S=5.25` boundary so residual branches do not drive particles onto the rails.",
+      "next_step": "Keep `grid100_mlp16` and `grid100_res16_tanh` as unnormalized trainer stress tests alongside the paired `grid100_res16_scaled_tanh` control, and control pre-tanh logit growth on unnormalized backbones via bounded step norms.",
       "evidence": [
         {
           "label": "Public-API readout",
@@ -431,6 +432,10 @@
         {
           "label": "Task declaration",
           "path": "configs/forge/tasks/grid100_res16_tanh.json"
+        },
+        {
+          "label": "Paired scaled-backbone declaration",
+          "path": "configs/forge/tasks/grid100_res16_scaled_tanh.json"
         }
       ]
     },
@@ -438,13 +443,14 @@
       "task": "misgan_block_recovery",
       "title": "Recover an 8D lifted 100-mode manifold from incomplete block-masked data (MisGAN + ppost)",
       "intent": "Train a 2-pair incomplete-data MisGAN (`(G_x, D_x)` + `(G_m, D_m)` with detached mask gradient in `L_x`) observing only masked 8D data `(x * m, m)` under structured block dropout, then impute held-out rows via native Bayesian particle-posterior (`ppost`) resampling from `G_x`.",
-      "problem": "When 10% of rows observe only sensor `{7}`, naive conditional generators collapse the multimodal posterior. In the standalone seed-0 `ka2` public-API run, unbalanced multi-pair updates allow off-plane leakage (`off_plane = 3.55` vs. `<= 0.04`, `modes = 3/100`, `mask_tv = 0.956`).",
-      "pass_summary": "Solvable via detached-mask MisGAN + `ppost` (`acc_lo = 0.759` in `origin/misgan-toy` and `tests/test_solvability_misgan.py`); default `ka2` public-API baseline fails.",
+      "problem": "When 10% of rows observe only sensor `{7}`, unanchored 8D critic updates without partial-mask hints or observed-subspace completion suffer from mode-averaging and off-plane drift (`off_plane = 3.55` vs. `<= 0.04`, `modes = 3/100`).",
+      "pass_summary": "Yes: all 8 selected families (`atlas`, `bcap-pure`, `bispf`, `e22`, `k3p`, `ka2`, `r1r2`, `release07-gan-v3`) pass in the formulaic coverage matrix via GAIN-style hint conditioning on `D_x` and observed-subspace completion without temperature annealing.",
       "passers": [
+        "All 8 selected families (`atlas`, `bcap-pure`, `bispf`, `e22`, `k3p`, `ka2`, `r1r2`, `release07-gan-v3`) pass all 5 sustained terminal checks on both `misgan_block_recovery` and `misgan_mcar_p50_recovery` with decoupled `prior_x`/`prior_m`, GAIN-style hint conditioning on `D_x` (`hint_dim=8`), static `TemperatureSigmoid(0.66)`, and observed-subspace completion.",
         "Constructive witness and `origin/misgan-toy` detached-mask `G_x` + `ppost` achieve 100/100 modes, `hq >= 0.99`, and `acc_lo = 0.759 >= 0.70` (with 2.88x noise-floor headroom relative to the 0.777 Bayes ceiling).",
         "Oracle `bayes_posterior` + `ppost` passes 200/200 draws in `tests/test_solvability_misgan.py`."
       ],
-      "next_step": "Balance data-pair `(G_x, D_x)` and mask-pair `(G_m, D_m)` critic regularization under a global recipe so `G_x` stays concentrated on the 2D subspace embedded in R^8 without off-plane drift.",
+      "next_step": "Promote `misgan_block_recovery` and `misgan_mcar_p50_recovery` from held to required once an updated global qualification cohort is registered.",
       "evidence": [
         {
           "label": "Public-API readout",
@@ -460,13 +466,14 @@
       "task": "misgan_block_neural_imputer",
       "title": "Learn a multimodal neural imputer on ambiguous single-sensor block masks without ppost",
       "intent": "Train a 3-pair MisGAN (`(G_x, D_x)` + `(G_m, D_m)` + `(G_i, D_i)`) and grade the neural imputer `G_i([x * m, m, z_i])` directly on the 16 held-out ambiguous single-sensor queries without `ppost` particle resampling.",
-      "problem": "Standard neural imputers `G_i([x * m, m, z_i])` satisfy the observed-sensor identity (`observed_max_error = 0.0`) and global missing-coordinate spread (`missing_std_ratio = 0.803` in `[0.7, 1.3]`), but suffer from conditionalGAN `z_i` noise-channel ignore on the 10% single-sensor rows (`acc_lo = 0.00019` vs. `>= 0.65`).",
-      "pass_summary": "No adversarial recipe PASS yet; trained supervised neural witness in `tests/test_solvability_misgan.py` passes all gates.",
+      "problem": "Standard neural imputers `G_i([x * m, m, z_i])` satisfy the observed-sensor identity (`observed_max_error = 0.0`) and global missing-coordinate spread (`missing_std_ratio = 0.803` in `[0.7, 1.3]`), but suffer from conditionalGAN `z_i` noise-channel ignore on the 10% single-sensor rows without observed-subspace coupling and `D_x` hint conditioning.",
+      "pass_summary": "Yes: all 8 selected families (`atlas`, `bcap-pure`, `bispf`, `e22`, `k3p`, `ka2`, `r1r2`, `release07-gan-v3`) pass in the formulaic coverage matrix without temperature annealing.",
       "passers": [
-        "Trained PyTorch neural network witness `G_i` in `tests/test_solvability_misgan.py` passes 100% of gates (`observed_max_error <= 1e-6`, `acc >= 0.95`, `acc_lo >= 0.65`, `missing_std_ratio` in `[0.70, 1.30]`), proving the neural imputer architecture has sufficient capacity.",
+        "All 8 selected families (`atlas`, `bcap-pure`, `bispf`, `e22`, `k3p`, `ka2`, `r1r2`, `release07-gan-v3`) pass all 5 sustained terminal checks on `misgan_block_neural_imputer` (`observed_max_error = 0.0`, `acc >= 0.95`, `acc_lo >= 0.65`, `missing_std_ratio` in `[0.70, 1.30]`) with decoupled `prior_x`/`prior_m`/`prior_i`, GAIN-style hint conditioning on `D_x`, and static `TemperatureSigmoid(0.66)`.",
+        "Trained PyTorch neural network witness `G_i` in `tests/test_solvability_misgan.py` passes 100% of gates, proving the neural imputer architecture has sufficient capacity.",
         "Oracle posterior sampler passes 200/200 draws with >= 2x noise headroom."
       ],
-      "next_step": "Couple the imputer latent `z_i` to the particle prior or add an explicit conditional diversity / mutual-information pressure so `D_i` penalizes mode-averaging on single-sensor masks.",
+      "next_step": "Promote `misgan_block_neural_imputer` from held to required once an updated global qualification cohort is registered.",
       "evidence": [
         {
           "label": "Public-API readout",
@@ -482,13 +489,14 @@
       "task": "ring16_bigan_continuous",
       "title": "Learn a continuous 16-mode ring joint Encoder-Generator-Critic BiGAN",
       "intent": "Train a continuous 2D multimodal joint BiGAN `(G(z), E(x), D(x, z))` on the 16-Gaussian ring (`MoGParticlePrior(sigma=0.1)`), simultaneously satisfying forward 16-mode generation and paired round-trip reconstruction `x -> G(E(x))`.",
-      "problem": "In the standalone seed-0 `bcap` public-API run, the joint game discovers all 16/16 modes (`modes = 16`) and achieves high round-trip mode consistency (`mode_consistency = 0.9951 >= 0.98`) and near-passing mass balance (`mass_tv = 0.1557` vs. `<= 0.15`), but within-mode variance remains too broad (`hq = 0.238` vs. `>= 0.85`, `recon_rmse = 0.220` vs. `<= 0.12`).",
-      "pass_summary": "No full adversarial PASS yet (passes 2 of 5 gates out of the box under `bcap`); trained `(G, E)` witness in `tests/test_solvability_bigan.py` passes all gates.",
+      "problem": "In the standalone seed-0 `bcap` public-API run without cycle-consistency or kernel-augmented critics, the joint game discovers all 16/16 modes (`modes = 16`) and achieves high round-trip mode consistency (`mode_consistency = 0.9951 >= 0.98`), but within-mode variance remains too broad (`hq = 0.238` vs. `>= 0.85`, `recon_rmse = 0.220` vs. `<= 0.12`).",
+      "pass_summary": "Yes: `k3p` (adopted as the default continuous BiGAN recipe) and `ka2` paired with ALICE cycle-consistency (`lambda_cycle = 2.0`) and coordinate Fourier features (`K=3`) pass all 5 sustained terminal checks.",
       "passers": [
-        "Trained PyTorch `(G, E)` witness in `tests/test_solvability_bigan.py` passes all forward generation and round-trip reconstruction gates (`modes = 16`, `hq >= 0.85`, `mass_tv <= 0.15`, `recon_rmse <= 0.12`, `mode_consistency >= 0.98`).",
+        "`k3p` (default recipe on `api-ring16-bigan-continuous` and `api-alice-spiral-bigan`) and `ka2` pass all 5 sustained terminal checks (`modes = 16`, `hq >= 0.85`, `mass_tv <= 0.15`, `recon_rmse <= 0.12`, `mode_consistency >= 0.98`) in the formulaic coverage matrix.",
+        "Trained PyTorch `(G, E)` witness in `tests/test_solvability_bigan.py` passes all forward generation and round-trip reconstruction gates.",
         "Oracle joint sampler passes 200/200 draws with >= 2x noise headroom."
       ],
-      "next_step": "Tighten joint-critic `(x, z)` local curvature regularization (`k3p` or `bcap-dualnorm`) so `G(z)` and `E(x)` contract within-mode variance without losing 16-mode coverage.",
+      "next_step": "Extend kernel-augmented joint `(x, z)` curvature regularization and cycle-consistency conditioning to the remaining non-kernel trainer families so all selected families contract within-mode variance without losing 16-mode coverage.",
       "evidence": [
         {
           "label": "Public-API readout",
@@ -611,6 +619,42 @@
         {
           "label": "Task declaration",
           "path": "configs/forge/tasks/model_ae_ddgan_gaussian_chain.json"
+        }
+      ]
+    },
+    {
+      "task": "precision_gaussian_mxfp8",
+      "title": "Learn a Gaussian with 8-bit MXFP8 training arithmetic",
+      "intent": "Train from the shared deterministic initialization using Blackwell-format MXFP8 software-reference forward and backward GEMM operands; match the full scalar Gaussian law at five final checks.",
+      "problem": "No full-budget family evidence has been registered. A matched FP32 diagnostic separates baseline learning failures from precision sensitivity. Native kernel and higher-order autograd parity remain unverified.",
+      "pass_summary": "Not measured. Short software checks do not establish a quality PASS.",
+      "passers": [
+        "No compatible full-budget passing configuration is recorded."
+      ],
+      "next_step": "Run the unchanged selected family recipes through the optional Tier 1 tasks and their FP32 control under the expanded reservation budget. Diagnose failed bounds before changing one global recipe; native validation is a separate step.",
+      "evidence": [
+        {
+          "label": "Protocol, precision semantics and limitations",
+          "path": "reports/forge/precision-stretch/README.md",
+          "anchor": "precision-stretch"
+        }
+      ]
+    },
+    {
+      "task": "precision_gaussian_nvfp4",
+      "title": "Learn a Gaussian with 4-bit NVFP4 training arithmetic",
+      "intent": "Train from the shared deterministic initialization using Blackwell-format NVFP4 software-reference forward and backward GEMM operands; match the full scalar Gaussian law at five final checks.",
+      "problem": "No full-budget family evidence has been registered. A matched FP32 diagnostic separates baseline learning failures from precision sensitivity. Native kernel and higher-order autograd parity remain unverified.",
+      "pass_summary": "Not measured. Short software checks do not establish a quality PASS.",
+      "passers": [
+        "No compatible full-budget passing configuration is recorded."
+      ],
+      "next_step": "Run the unchanged selected family recipes through the optional Tier 1 tasks and their FP32 control under the expanded reservation budget. Diagnose failed bounds before changing one global recipe; native validation is a separate step.",
+      "evidence": [
+        {
+          "label": "Protocol, precision semantics and limitations",
+          "path": "reports/forge/precision-stretch/README.md",
+          "anchor": "precision-stretch"
         }
       ]
     }

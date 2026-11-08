@@ -160,3 +160,4 @@ dist/
 # Local prior feature software checks and execution artifacts.
 runs/prior-coulomb/
 /runs/prior-mmd/
+/runs/test_m3/

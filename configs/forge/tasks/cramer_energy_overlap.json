@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "id": "cramer_energy_overlap",
+  "description": "CramerGAN two-sample unbiased energy distance (Bellemare et al., NeurIPS 2017) on 9-mode 3x3 overlapping heterogeneous-mass 2D Gaussian mixture.",
+  "adapter": "transfer_vector",
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "host": "cramer_energy_overlap",
+    "steps": 3000,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.1,
+      "standardize": false
+    },
+    "protocol": "screening",
+    "produces_state": true,
+    "host_definition": {
+      "target": "9-mode 3x3 overlapping heterogeneous-mass 2D Gaussian mixture",
+      "centers": [
+        [-1.5, -1.5],
+        [-1.5, 0.0],
+        [-1.5, 1.5],
+        [0.0, -1.5],
+        [0.0, 0.0],
+        [0.0, 1.5],
+        [1.5, -1.5],
+        [1.5, 0.0],
+        [1.5, 1.5]
+      ],
+      "weights": [0.18, 0.08, 0.18, 0.08, 0.16, 0.08, 0.10, 0.06, 0.08],
+      "sigma": 0.16,
+      "modes": 9,
+      "steps": 3000,
+      "batch": 256,
+      "z_dim": 2,
+      "particles": 256,
+      "embed_dim": 16
+    },
+    "prior_contract": "recipe_owned_v1"
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
+    "kind": "cramer_energy_overlap",
+    "eval_samples": 4096,
+    "thresholds": [
+      ["modes", "==", 9],
+      ["hq", ">=", 0.88],
+      ["mass_tv", "<=", 0.10],
+      ["energy_distance", "<=", 0.06],
+      ["min_cov_eig_ratio", ">=", 0.35]
+    ]
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 600
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "mog_prior"
+  ],
+  "dependencies": []
+}

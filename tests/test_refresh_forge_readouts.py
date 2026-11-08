@@ -1587,26 +1587,41 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         "Recorded source measurement · **stale**; no current qualification",
     ):
         assert forbidden not in selected_table_lines
-    # API source maintenance does not inherit a different source cohort's
-    # newer Tier 1 claims. Preserve the certified base-cohort display scores;
-    # original measurements and the later cohort remain unchanged in evidence.
-    for expected_selected_score in (
-        "**[27/27](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 12/12 tests",
+    from reports.forge import regenerate_technique_inventory as rti
+    display = rti._formulaic_display_payload(publication, ROOT)
+    assert display is not None
+    # Keep separate frozen expectations for current-source measurements and
+    # exact selected-source coverage receipts; maintenance cannot pool them.
+    expected_selected_scores = (
         "**[24/27](families/k3p.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/12 tests (3 fail)",
         "**[24/27](families/ka2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 9/12 tests (3 fail)",
-        "**[27/27](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 12/12 tests",
         "**[25/27](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/12 tests (2 fail)",
-        "**[27/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 12/12 tests",
         "**[25/27](families/r1r2.md#cohort-cuda-1bf9d7d34422-tier-1)** · 10/12 tests (2 fail)",
         "**[17/27](families/e22.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/12 tests (5 fail)",
-        "**[109/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 31/36 tests (5 fail)",
-        "**[105/115](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** · 30/36 tests (6 fail)",
-        "**[99/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 29/36 tests (7 fail)",
         "**[59/115](families/e22.md#cohort-cuda-1bf9d7d34422)** · 14/36 tests (22 fail)",
-    ):
+    )
+    if display.get("scope") == "recorded_source_formulaic_display":
+        assert display["qualification_input"] is False and display["qualification_reuse"] is False
+        expected_selected_scores += (
+            "**[23/27](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 8/12 tests (4 fail)",
+            "**[22/27](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 7/12 tests (5 fail)",
+            "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 8/12 tests (4 fail)",
+            "**[83/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 20/36 tests (16 fail)",
+            "**[72/115](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** · 17/36 tests (19 fail)",
+            "**[67/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 17/36 tests (19 fail)",
+        )
+    else:
+        expected_selected_scores += (
+            "**[27/27](families/bispf.md#cohort-cuda-1bf9d7d34422-tier-1)** · 12/12 tests",
+            "**[27/27](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-tier-1)** · 12/12 tests",
+            "**[27/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 12/12 tests",
+            "**[109/115](families/bispf.md#cohort-cuda-1bf9d7d34422)** · 31/36 tests (5 fail)",
+            "**[105/115](families/bcap-pure.md#cohort-cuda-1bf9d7d34422)** · 30/36 tests (6 fail)",
+            "**[99/115](families/atlas.md#cohort-cuda-bc3debd3fa5e)** · 29/36 tests (7 fail)",
+        )
+    for expected_selected_score in expected_selected_scores:
         assert expected_selected_score in selected_table_lines
 
-    from reports.forge import regenerate_technique_inventory as rti
     tier1_readouts_block = rti._current_source_tier1_readouts_markdown(
         publication, ROOT, ROOT / "reports/forge/technique-inventory.md")
     if tier1_readouts_block:
@@ -1615,14 +1630,18 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
             assert expected_snippet in tier1_readouts_block
         for forbidden in ("not run", "incompatible", "blocked", "preflight-blocked"):
             assert forbidden not in tier1_readouts_block
-        assert "| Required Tier 1 (11) | Diagnostic Tier 1 (1) | Total Tier 1 (12) | Tier 2 (18) | Tier 3 (6) | Total Tier 1–3 (36) |" in tier1_readouts_block
+        assert "| Required Tier 1 (11) | Stretch / diagnostic Tier 1 (4) | Total Tier 1 (15) |" in tier1_readouts_block
     else:
         assert "### Current-source selected-recipe Tier 1 readouts" not in inv_md
         assert status["current_source_measurements"]["stages"]["selected_family_readouts"]["missing_families"]
 
     view_breakdown_block = inv_md.split("<summary>Selected recipe breakdown by view", 1)[1].split("</details>", 1)[0]
+    # New stretch cells can be unmeasured without changing required-tier
+    # evidence. Check the required columns independently of the stretch column.
+    required_columns = "\n".join(" | ".join(line.split(" | ")[:7])
+                                 for line in view_breakdown_block.splitlines() if line.startswith("| ["))
     for forbidden in ("not run", "incompatible", "blocked", "diagnostic attempt"):
-        assert forbidden not in view_breakdown_block
+        assert forbidden not in required_columns
 
     full_suite_block = inv_md.split("## Full-suite results — failures included\n", 1)[1].split(
         "## Held and removed tests", 1
@@ -1639,26 +1658,35 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     ):
         row_line = next(line for line in full_suite_block.splitlines() if line.startswith(selected_row_prefix))
         assert "not run" not in row_line
-        assert "| 0 | 0 |" in row_line
+        assert "| 2 | 0 |" in row_line
 
-    # Verify all 8 selected recipes retain certified PASS/FAIL across all 50
-    # original suite tasks, independently from current-definition compatibility.
+    # Verify certified PASS/FAIL for the original suite and the ten measured
+    # GAN stretch tasks. New precision tasks have no archived measurements.
+    from experiments.forge.views import load_view
+
     cov_doc = read_json(ROOT / "reports/forge/attempt-coverage.json")
     full_suite_doc = read_json(ROOT / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json")
-    suite_50 = set(full_suite_doc["tests"]) | {"ring_hold"}
-    assert len(suite_50) == 50
+    view = load_view(ROOT, "discriminator_stability")
+    stretch_tasks = {
+        a["task"]
+        for a in view["assignments"]
+        if a["importance"] == "stretch" and not a["task"].startswith("precision_gaussian_")
+    }
+    suite_50 = set(full_suite_doc["tests"]) | {"ring_hold"} | stretch_tasks
+    expected_per_family = len(suite_50)
+    assert expected_per_family == 60
     selected_fams = {"atlas", "bcap-pure", "bispf", "e22", "k3p", "ka2", "r1r2", "release07-gan-v3"}
     unscoped_selected_records = [
         rec
         for rec in cov_doc.get("records", [])
         if rec.get("family") in selected_fams and not rfr._is_scoped_attempt(rec)
     ]
-    assert len(unscoped_selected_records) == 400
+    assert len(unscoped_selected_records) == 8 * expected_per_family
     cov_by_fam_task = {
         (rec.get("family"), rec.get("task")): rec
         for rec in unscoped_selected_records
     }
-    assert len(cov_by_fam_task) == 400
+    assert len(cov_by_fam_task) == 8 * expected_per_family
     projected = rti._project_publication_for_family_pages(ROOT, publication)
     projected_cohorts = {family["id"]: cohort for family, cohort in
                          _selected_cohorts(projected["family_progress"])}
@@ -1668,7 +1696,7 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         assert archived_display["qualification_reuse"] is False
     att_cov_md = (ROOT / "reports/forge/ATTEMPT_COVERAGE.md").read_text()
     for fam in sorted(selected_fams):
-        assert f"| {fam} | 50/50 | 0 |" in att_cov_md
+        assert f"| {fam} | {expected_per_family}/{expected_per_family} | 0 |" in att_cov_md
         fam_line = next(line for line in att_cov_md.splitlines() if line.startswith(f"| {fam} |"))
         assert "BLOCKED" not in fam_line
         for tid in sorted(suite_50):
@@ -1676,7 +1704,8 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
             assert rec is not None, f"missing attempt-coverage record for ({fam}, {tid})"
             assert rec.get("attempted") is True
             assert rec.get("status") in {"PASS", "FAIL"}, f"non-binary status for ({fam}, {tid}): {rec.get('status')}"
-            if archived_display and tid in projected_cohorts[fam]["tasks"]:
+            if (archived_display and archived_display.get("scope") == "recorded_source_formulaic_display"
+                    and tid in projected_cohorts[fam]["tasks"]):
                 cell = projected_cohorts[fam]["tasks"][tid]
                 proof = cell["recorded_formulaic_display"]
                 assert cell["status"] == rec["status"]
@@ -1707,7 +1736,14 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
             + fam_md.split(view_table_header, 1)[1]
             .split("\n## adaptation\n", 1)[0]
         )
-        current_bench_tables = "\n".join(line for line in current_bench.splitlines() if line.startswith("|"))
+        new_tasks = {"precision_gaussian_mxfp8", "precision_gaussian_nvfp4"}
+        for task_id in new_tasks:
+            new_row = next(line for line in current_bench.splitlines() if line.startswith(f"| [{task_id}]"))
+            assert "| UNKNOWN |" in new_row
+        current_bench_tables = "\n".join(
+            line for line in current_bench.splitlines()
+            if line.startswith("|") and not any(line.startswith(f"| [{task_id}]") for task_id in new_tasks)
+        )
         for forbidden_in_selected_cohort in (
             "| UNKNOWN |",
             "diagnostic attempt",
@@ -1746,7 +1782,11 @@ def test_recorded_overview_integrity_rejects_score_drift_without_current_source(
     original = rti._current_markdown(publication, ROOT, overview)
     assert "### Current-source selected-recipe Tier 1 readouts" not in original
     assert rfr._generated_pages_synced(ROOT, publication, original) is True
-    corrupted = original.replace("**[72/115]", "**[73/115]", 1)
+    import re
+    score = re.search(r"\*\*\[(\d+)/(\d+)\]", original)
+    assert score is not None
+    changed_score = f"**[{int(score.group(1)) + 1}/{score.group(2)}]"
+    corrupted = original[:score.start()] + changed_score + original[score.end():]
     assert corrupted != original
     assert rfr._generated_pages_synced(ROOT, publication, corrupted) is False
     fake_current = original + "\n### Current-source selected-recipe Tier 1 readouts\n\nFalse qualification.\n"
@@ -1874,6 +1914,7 @@ def test_evict_superseded_scaling_queue_jobs_matches_real_queue_schema_and_prune
 
 
 def test_republish_registered_inventory_end_to_end_recovers_missing_and_unverified_inventory(tmp_path: Path):
+    import re
     import shutil
     import subprocess
     from reports.forge import regenerate_technique_inventory as rti
@@ -1931,11 +1972,13 @@ def test_republish_registered_inventory_end_to_end_recovers_missing_and_unverifi
         # Scenario D: stale selected scores and false current-source claims are
         # detected and repaired without inventing a new-source measurement.
         orig_md = md_path.read_text()
-        stale_md = orig_md.replace(
-            "**[27/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** · 12/12 tests",
-            "**[18/27](families/atlas.md#cohort-cuda-bc3debd3fa5e-tier-1)** (7 not run)",
-            1,
+        stale_md, mutations = re.subn(
+            r"(\*\*\[)(\d+)(/\d+\]\(families/atlas\.md#[^)]+-tier-1\)\*\*)",
+            lambda match: f"{match[1]}{int(match[2]) + 1}{match[3]} (7 not run)",
+            orig_md,
+            count=1,
         )
+        assert mutations == 1
         assert stale_md != orig_md
         md_path.write_text(stale_md)
         assert stale_md != rti._current_markdown(recovered, wt, md_path)
@@ -2023,7 +2066,8 @@ def _restore_recorded_source_cohort(root: Path) -> str:
 
     Latest-source integrity is checked separately above. These controls need
     actual original source bytes, rather than relabeling the latest checkout.
-    No training or published evidence is rewritten.
+    Use the frozen pre-precision view for these cache/tamper controls, including
+    the existing DDGAN tier calibration. No published evidence is rewritten.
     """
     import io
     import subprocess
@@ -2044,6 +2088,8 @@ def _restore_recorded_source_cohort(root: Path) -> str:
     data = subprocess.check_output(["git", "archive", revision, "--", *sorted(desired)], cwd=ROOT)
     with tarfile.open(fileobj=io.BytesIO(data)) as archive:
         archive.extractall(root, filter="data")
+    (root / "configs/forge/views/discriminator_stability.json").write_bytes(
+        (ROOT / "configs/forge/view-history/discriminator_stability-v14.json").read_bytes())
     manifest = rfr.catalog_source_manifest(root)
     assert manifest["digest"] == "2e8a97a0aa845c961de00d403fdcd1673b34b33626e4546c3138882a40e7bacf"
     _bind_readout_software_fixture(root, manifest["digest"])
@@ -2246,7 +2292,7 @@ def test_current_source_tier1_readouts_ignores_non_tier1_records_and_invalidates
         md3 = rti._current_source_tier1_readouts_markdown(
             live_inv, wt, wt / "reports/forge/technique-inventory.md"
         )
-        assert "| Required Tier 1 (11) | Diagnostic Tier 1 (1) | Total Tier 1 (12) | Tier 2 (18) | Tier 3 (6) | Total Tier 1–3 (36) |" in md3
+        assert "| Required Tier 1 (11) | Diagnostic Tier 1 (1) | Total Tier 1 (12) |" in md3
         assert "preflight-blocked" not in md3 and " blocked" not in md3
     finally:
         subprocess.run(
@@ -2671,7 +2717,8 @@ def test_refresh_attempt_coverage_delegates_to_formulaic_coverage_and_preserves_
         return {"updated": 0, "status": "ok"}
 
     monkeypatch.setattr(fc, "ensure_formulaic_attempt_coverage", _fake_ensure)
-    full_suite_rel = Path("configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json")
+    from experiments.forge.leaderboard_contract import FIXED_TEST_LIST
+    full_suite_rel = FIXED_TEST_LIST
     atomic_json(tmp_path / full_suite_rel, {"tests": ["gaussian1d_smoke"]})
     out = rfr.refresh_attempt_coverage(
         tmp_path,

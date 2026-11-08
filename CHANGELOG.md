@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+- **Exact trainer checkpoint continuation with gradient response.** Save,
+  validate and restore gradient-coherence history when enabled, preserving the
+  next update in fresh and previously used trainers. Reject older enabled-response
+  checkpoints without that history instead of silently restarting the controller.
+- **Completed-update checkpoint boundaries.** `GANTrainer.state_dict()` and
+  `load_state_dict()` reject active updates before changing live state, including
+  calls inside the public `generator_real` callback.
+
 ## 0.9.7 — 2026-11-05
 
 - **Unified `stretch` experiment role and tier-by-tier stretch leaderboard.**

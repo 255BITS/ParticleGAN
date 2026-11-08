@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "id": "misgan_mcar_p50_recovery",
+  "description": "2-pair incomplete-data MisGAN on 8D MCAR p=0.5 coordinate-wise dropout (resampling empty masks); recovers 2D 100-mode manifold, 8D subspace, MCAR coordinate observation rate and ppost Bayesian imputation.",
+  "adapter": "transfer_vector",
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "host": "misgan_mcar_p50_recovery",
+    "steps": 4000,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "protocol": "screening",
+    "produces_state": true,
+    "host_definition": {
+      "problem": "mcar_p50",
+      "dimension": 8,
+      "pairs": 2,
+      "detached_mask_gradient": true,
+      "imputation": "ppost",
+      "steps": 4000,
+      "batch": 512,
+      "z_dim": 8,
+      "particles": 256
+    },
+    "prior_contract": "recipe_owned_v1"
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
+    "kind": "misgan_mcar_p50_recovery",
+    "eval_samples": 4096,
+    "thresholds": [
+      ["modes", ">=", 90],
+      ["hq", ">=", 0.85],
+      ["mass_tv", "<=", 0.12],
+      ["off_plane", "<=", 0.05],
+      ["mask_tv", "<=", 0.05],
+      ["acc", ">=", 0.90],
+      ["impute_rmse", "<=", 0.12]
+    ]
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 1800
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "mog_prior"
+  ],
+  "dependencies": []
+}

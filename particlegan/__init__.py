@@ -41,6 +41,7 @@ from .vicreg_loss import ParticleRegularizer
 from .coulomb_prior import CoulombPriorRegularizer
 from .sigreg import SIGReg
 from .initial_mmd import InitialMMDRegularizer
+from .low_precision import EmulatedLinear, emulate_linear_training_
 from .bispf import (
     BISPFGates,
     BISPFCriticAdam,
@@ -56,6 +57,7 @@ from .bispf import (
 from . import init
 
 __all__ = [
+    "EmulatedLinear", "emulate_linear_training_",
     "disable_autograd_multithreading", "serial_autograd",
     "init",
     "TensorFlowV1Adam",
