@@ -1,5 +1,10 @@
 # Unadjusted ParticleGAN default leaderboard
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../../forge/technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 For the **22-toy recipe and GPU results**, see the
 [current comparison](../../toy100/continuous-practical-leaderboard.md): the
 recorded CPU winner is 22/22; its GPU control is 16/22. This page retains the

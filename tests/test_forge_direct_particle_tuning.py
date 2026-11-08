@@ -63,12 +63,12 @@ def test_direct_moment_activation_changes_require_structural_idea(checkout, spec
 
 
 def test_direct_beta_axis_requires_an_actual_direct_optimizer(checkout, spec):
-    recipe = Recipe()
+    recipe = Recipe.from_dict({})
     direct = {'adapter': 'transfer_behavior', 'id': 'two_pole', 'execution': {'host': 'two_pole'}}
     assert recipe_field_active('direct_particle_betas', recipe, task=direct)
     assert not recipe_field_active('direct_particle_betas', recipe, task={'adapter': 'word_joint'})
-    plain = Recipe(optimizer_family='adam', reg_arm='a_r1r2', d_guard_ratio=0,
-                   reg_anchor_weight=0, latent_damping_max_rate=0, direct_particle_gain=False)
+    plain = Recipe.from_dict(dict(optimizer_family='adam', reg_arm='a_r1r2', d_guard_ratio=0,
+                   reg_anchor_weight=0, latent_damping_max_rate=0, direct_particle_gain=False))
     assert not recipe_field_active('direct_particle_betas', plain, task=direct)
     validate_same_technique(recipe, recipe.replace(direct_particle_betas=(0, .999)))
     spec['grid'] = {'direct_particle_betas': [[0., .99]]}
@@ -88,8 +88,8 @@ def _analysis_module():
 @pytest.mark.parametrize('beta2', [.9, .99, .999])
 def test_zero_origin_displacement_bound_contains_public_optimizer_with_changing_gradients(beta2):
     bound = _analysis_module().displacement_bound
-    recipe = Recipe(critic_formulation='k3p', lr=.0006, total_steps=80,
-                    direct_particle_betas=(0, beta2), network_lr_horizon_cap=None)
+    recipe = Recipe.from_dict(dict(critic_formulation='k3p', lr=.0006, total_steps=80,
+                    direct_particle_betas=(0, beta2), network_lr_horizon_cap=None))
     particles = torch.nn.Parameter(torch.zeros(12, 1, dtype=torch.float64))
     optimizer = recipe.make_generator_optimizer([particles], direct_particles=[particles])
     # Synthetic externally supplied gradients cover decay, sign reversals and

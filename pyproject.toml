@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "particlegan"
-version = "0.9.4"
+version = "0.9.7"
 description = "Composable PyTorch primitives for learnable particle priors, GANs, and DDGAN"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -15,7 +15,7 @@ dependencies = [
 
 [project.urls]
 Repository = "https://github.com/255BITS/ParticleGAN"
-Documentation = "https://github.com/255BITS/ParticleGAN/blob/v0.9.4/docs/api.md"
+Documentation = "https://github.com/255BITS/ParticleGAN/blob/v0.9.7/docs/api.md"
 
 [project.optional-dependencies]
 mog = ["scipy>=1.10,<2"]
@@ -27,7 +27,7 @@ experiments = [
     "POT>=0.9.5,<0.10",
     "scipy>=1.10,<2",
 ]
-dev = ["pytest>=8,<10"]
+dev = ["pytest>=8,<10", "ruff==0.17.2"]
 gym = ["gymnasium[box2d]==1.2.3", "numpy>=1.26,<3"]
 lunar = ["gymnasium[box2d]==1.2.3", "numpy>=1.26,<3", "rich>=13,<15", "Pillow>=13.0.0,<14", "imageio>=2,<3"]
 images = ["torchvision>=0.21,<1", "Pillow>=13.0.0,<14", "torch-fidelity==0.3.0", "scipy>=1.10,<1.18", "tqdm>=4.60,<5"]
@@ -40,5 +40,9 @@ namespaces = false
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = [".", "tests"]
-addopts = "-ra"
-markers = ["cuda: requires an explicitly admitted CUDA device"]
+# CUDA tests are opt-in: they are deselected by default so a workstation run
+# never competes with queued GPU experiments. Run them with
+#   CUDA_VISIBLE_DEVICES=<gpu> python -m pytest -m cuda
+# (a later -m on the command line replaces this default selection).
+addopts = "-ra -m 'not cuda'"
+markers = ["cuda: requires an explicitly admitted CUDA device; deselected by default, opt in with -m cuda"]

@@ -64,12 +64,24 @@ jobs:
         run: python -m pip install -e '.[dev,experiments,images,lunar]'
       - name: Validate dependency installation
         run: python -m pip check
+      - name: Check reviewed lint baseline
+        if: matrix.python == '3.12' && matrix.shard == 0
+        run: python scripts/check_lint.py
       - name: Test numerical kernels and experiment workflows
         if: matrix.python == '3.12'
         run: >-
           python scripts/ci_pytest.py run --index ${{ matrix.shard }} --count 4
           --receipt /tmp/pytest-shard-${{ matrix.shard }}.json --
-          -q --durations=25 -o faulthandler_timeout=180
+          -q --durations=25 -o faulthandler_timeout=600
+          --ignore=tests/test_e22_routed_caption_late_phase_renderer.py
+      # The minimum supported Python runs one deterministic quarter of the same
+      # suite. Its receipt stays local: release coverage is checked on 3.12.
+      - name: Test one suite shard on the minimum supported Python
+        if: matrix.python == '3.11'
+        run: >-
+          python scripts/ci_pytest.py run --index ${{ matrix.shard }} --count 4
+          --receipt /tmp/pytest-py311-shard-${{ matrix.shard }}.json --
+          -q --durations=25 -o faulthandler_timeout=600
           --ignore=tests/test_e22_routed_caption_late_phase_renderer.py
       - name: Save collection coverage receipt
         if: always() && matrix.python == '3.12'
@@ -134,7 +146,7 @@ jobs:
           assert default.training_precision == "bf16_channels_last"
           assert default == get_recipe(DEFAULT_RECIPE)
           assert Recipe(**get_recipe_fields()) == default
-          assert Recipe(**default.to_dict()) == default
+          assert Recipe.from_dict(default.to_dict()) == default
           assert get_recipe('gan') == default
           e22 = get_recipe('e22', num_particles=32, z_dim=2, batch_size=8)
           assert e22.name == 'e22' and e22.total_steps is None
@@ -156,9 +168,58 @@ jobs:
           PY
           PYTHONPATH=/tmp/particlegan-installed python -c "from particlegan import get_recipe; recipe = get_recipe(model='ddgan', prior_kind='mog', sigma_rel=.025, num_particles=8); assert recipe.model == 'ddgan' and recipe.lr == get_recipe().lr; assert recipe.make_prior().sigma > 0"
 
+  base-wheel:
+    name: Base wheel without optional dependencies
+    if: >-
+      github.event_name != 'workflow_dispatch' ||
+      github.ref == 'refs/heads/develop' ||
+      github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_ref || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build the wheel and install only its base requirements
+        run: |
+          python -m pip wheel --no-deps . --wheel-dir /tmp/particlegan-base-wheel
+          python -m venv /tmp/particlegan-base-env
+          /tmp/particlegan-base-env/bin/python -m pip install 'torch>=2.6,<3' --index-url https://download.pytorch.org/whl/cpu
+          /tmp/particlegan-base-env/bin/python -m pip install /tmp/particlegan-base-wheel/*.whl
+          /tmp/particlegan-base-env/bin/python -m pip check
+      - name: Import both public packages outside the checkout
+        working-directory: /tmp
+        run: |
+          /tmp/particlegan-base-env/bin/python - <<'PY'
+          import importlib.util
+          from typing import get_type_hints
+
+          assert importlib.util.find_spec('matplotlib') is None
+          assert importlib.util.find_spec('PIL') is None
+          import particlegan
+          import particlegan_forge
+          from particlegan import ManipulatedPrior, ParticlePrior
+          from particlegan_forge import NamedStreams, TaskSpec, render_training_gif
+
+          for package in (particlegan, particlegan_forge):
+              assert package.__file__.startswith('/tmp/particlegan-base-env/')
+          assert get_type_hints(ParticlePrior.manipulate)['return'] is ManipulatedPrior
+          assert ParticlePrior(num_particles=8).sample(2)[0].shape == (2, 4)
+          assert NamedStreams().generator('data').device.type == 'cpu'
+          assert callable(TaskSpec) and callable(render_training_gif)
+          PY
+          /tmp/particlegan-base-env/bin/python -m particlegan_forge --help
+
   distributions:
     name: Build release distributions
-    needs: cpu-tests
+    needs: [cpu-tests, base-wheel]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -189,7 +250,9 @@ jobs:
           for wheel in Path('dist').glob('*.whl'):
               with zipfile.ZipFile(wheel) as archive:
                   roots = {name.split('/')[0] for name in archive.namelist()}
-              assert all(root == 'particlegan' or root.endswith('.dist-info') for root in roots), roots
+              # particlegan_forge is the documented external tier API (EXPERIMENTATION.md).
+              packages = {'particlegan', 'particlegan_forge'}
+              assert all(root in packages or root.endswith('.dist-info') for root in roots), roots
           research = {'reports', 'results', 'experiments', 'benchmarks', 'lib', 'configs', 'data', 'runs', 'artifacts'}
           for source in Path('dist').glob('*.tar.gz'):
               with tarfile.open(source) as archive:

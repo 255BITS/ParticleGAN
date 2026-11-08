@@ -57,10 +57,14 @@ def test_scoped_adapter_reaches_subprocess_program_and_restores_on_failure(tmp_p
             assert {name: defaults[name] for name in module.INACTIVE_DEFAULTS} == module.INACTIVE_DEFAULTS
             receipt = json.loads((tmp_path / "adapter-receipt.json").read_text())
             checked = receipt["checked_inactive_defaults"]
-            assert len(checked) == 15
+            # 19 archived/review defaults plus the two later scalar defaults.
+            assert len(checked) == 21
+            assert checked["ebi_beta"] == 30.0 and checked["kappa_radial"] == 1.0
             assert checked["training_precision"] == "float32"
-            assert {name: defaults[name] for name in checked} == checked
-            assert imported.NEW_INACTIVE_FIELDS == {**fields, **checked}
+            assert checked["bispf_gate_overrides"] == [] and defaults["bispf_gate_overrides"] == ()
+            as_json = lambda value: json.loads(json.dumps(value))  # the receipt is JSON
+            assert as_json({name: defaults[name] for name in checked}) == checked
+            assert as_json(imported.NEW_INACTIVE_FIELDS) == {**fields, **checked}
             # The subprocess keeps current code but asks the original task
             # questions in a private checkout; no live declarations are edited.
             assert imported.ROOT == tmp_path / "legacy-question-source"
@@ -75,3 +79,19 @@ def test_scoped_adapter_reaches_subprocess_program_and_restores_on_failure(tmp_p
     assert imported.ROOT == ROOT
     assert imported.NEW_INACTIVE_FIELDS is fields
     assert original_path.read_bytes() == original
+
+
+@pytest.mark.parametrize("field,value", [("ebi_beta", 15.0), ("kappa_radial", 2.0)])
+def test_scoped_adapter_refuses_nondefault_metadata(tmp_path, monkeypatch, field, value):
+    from dataclasses import replace
+    import particlegan
+    from conftest import _archived_inactive_comparison_scope
+    from tests.archived_forge_contracts import COMMITS
+
+    changed = replace(particlegan.Recipe.from_dict({}), **{field: value})
+    monkeypatch.setattr(particlegan, "Recipe", SimpleNamespace(from_dict=lambda fields: changed))
+    imported = SimpleNamespace(__file__=str(ROOT / helper().INACTIVE), ROOT=ROOT,
+        DEVELOP=COMMITS["bcap_legacy_questions"], NEW_INACTIVE_FIELDS={})
+    with pytest.raises(AssertionError, match=field):
+        with _archived_inactive_comparison_scope(imported, tmp_path):
+            pytest.fail("nondefault recipe metadata was discarded")

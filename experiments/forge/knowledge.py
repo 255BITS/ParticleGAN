@@ -365,10 +365,10 @@ def _historical_row(record: dict) -> dict:
 
 
 def _current_request(root: Path, idea_id: str, view_id: str, execution_backend="cuda", cuda_model=None) -> dict:
-    from .planning import _ACTIVE_CACHE, load_idea, resolve_idea
-    idea = (_ACTIVE_CACHE.get_idea_ref(idea_id)
-            if _ACTIVE_CACHE is not None and Path(root).resolve() == _ACTIVE_CACHE.root
-            else load_idea(root, idea_id))
+    from .planning import load_idea, resolve_idea
+    from .resolution_scope import active
+    cache = active(root)
+    idea = cache.get_idea_ref(idea_id) if cache is not None else load_idea(root, idea_id)
     # Reconstruct the declared question. The resolver retains the full view's
     # tasks regardless of this authorization cap, so qualification is unchanged.
     through_tier = idea.get("decision_contract", {}).get("scope", {}).get("through_tier", 3)
@@ -665,7 +665,17 @@ def in_flight_work(root: Path, query: str = "", goal: str | None = None) -> list
     return items
 
 
-def recall(root: Path, query: str = "", goal: str | None = None, *, include_in_flight: bool = False) -> list[dict]:
+def _recall_source(source, *, full_provenance: bool):
+    """Keep source identity readable without copying a complete file manifest."""
+    if full_provenance or not isinstance(source, dict) or "files" not in source:
+        return deepcopy(source)
+    compact = {key: deepcopy(value) for key, value in source.items() if key != "files"}
+    compact["file_count"] = len(source["files"])
+    return compact
+
+
+def recall(root: Path, query: str = "", goal: str | None = None, *, include_in_flight: bool = False,
+           full_provenance: bool = False) -> list[dict]:
     """Search normalized records; missing goal tags remain visible as unknown."""
     records, _ = _memory_records(Path(root))
     words = re.findall(r"[a-z0-9_]+", query.lower())
@@ -693,7 +703,8 @@ def recall(root: Path, query: str = "", goal: str | None = None, *, include_in_f
         matches.append({"record_id": record["record_id"], "candidate_id": record.get("candidate_id"),
                         "candidate_revision": record.get("candidate_revision"), "evidence_scope": record.get("evidence_scope"),
                         "hypothesis": record.get("hypothesis"), "conclusion": record.get("conclusion"),
-                        "next_action": record.get("next_action"), "source": record.get("source"),
+                        "next_action": record.get("next_action"),
+                        "source": _recall_source(record.get("source"), full_provenance=full_provenance),
                         "cost": record.get("recorded_cost") or _cost(record.get("task_results", [])), "match_score": score,
                         "exact_identity_match": exact, "study_id": record.get("study_id"),
                         "qualification_input": record.get("qualification_input", record.get("evidence_scope") == "current"),
@@ -714,7 +725,8 @@ def recall(root: Path, query: str = "", goal: str | None = None, *, include_in_f
                 "hypothesis": item.get("hypothesis"),
                 "conclusion": None,
                 "next_action": f"In-flight ({item['kind']}: {item.get('status')})",
-                "source": item.get("source") or item.get("queue_root"),
+                "source": _recall_source(item.get("source") or item.get("queue_root"),
+                                         full_provenance=full_provenance),
                 "cost": _cost([]),
                 "match_score": 0,
                 "exact_identity_match": False,
@@ -730,6 +742,18 @@ def _link(source) -> str:
     if isinstance(source, dict):
         return source.get("url") or "../../" + source.get("path", "")
     return "../../" + str(source or "")
+
+
+def _evidence_navigation(record: dict) -> str:
+    """Use durable provenance for raw receipts, independent of local hydration."""
+    source = record.get("source")
+    path = source.get("path", "") if isinstance(source, dict) else str(source or "")
+    record_link = f"records/{record['record_id']}.json"
+    if path.startswith("reports/forge/attempts/") and not (isinstance(source, dict) and source.get("url")):
+        return (f"[Record and receipt provenance]({record_link}) · "
+                "[Original artifact retrieval](../../docs/forge-artifact-resolver.md). "
+                "Original receipt availability is separate from this record.")
+    return f"[Evidence]({_link(source)}) · [Record]({record_link})"
 
 
 def _cell(value) -> str:
@@ -795,14 +819,12 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
         previous = read_json(output / "compilation.json") if (output / "compilation.json").is_file() else {}
         records, conflicts = _memory_records(root)
         boards = []
-        from . import planning, sources, views
+        from . import planning, sources
         orig_inspect = sources.inspect_source
         orig_planning_inspect = planning.inspect_source
-        orig_load_tasks = views.load_tasks
         orig_attempts = _attempts
         orig_records = _records
         source_cache: dict = {}
-        tasks_cache: dict = {}
         attempts_cache: dict = {}
         records_cache: dict = {}
 
@@ -811,12 +833,6 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
             if key not in source_cache:
                 source_cache[key] = orig_inspect(r, extra_paths)
             return dict(source_cache[key])
-
-        def cached_load_tasks(r: Path | str):
-            key = str(Path(r).resolve())
-            if key not in tasks_cache:
-                tasks_cache[key] = orig_load_tasks(r)
-            return tasks_cache[key]
 
         def cached_attempts(r: Path):
             key = str(Path(r).resolve())
@@ -835,7 +851,6 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
         if not summaries_only:
             sources.inspect_source = cached_inspect
             planning.inspect_source = cached_inspect
-            views.load_tasks = cached_load_tasks
             globals()["_attempts"] = cached_attempts
             globals()["_records"] = cached_records
         try:
@@ -871,7 +886,6 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
             if not summaries_only:
                 sources.inspect_source = orig_inspect
                 planning.inspect_source = orig_planning_inspect
-                views.load_tasks = orig_load_tasks
                 globals()["_attempts"] = orig_attempts
                 globals()["_records"] = orig_records
         gaps = _gaps(root)
@@ -959,7 +973,7 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
                       _metric_excerpt(rows), "",
                       str(record.get("conclusion", "Conclusion pending.")), "",
                       f"**Next:** {record.get('next_action', 'Readout pending.')}", "",
-                      f"[Evidence]({_link(record.get('source'))}) · [Record](records/{record['record_id']}.json)", ""]
+                      _evidence_navigation(record), ""]
         closed_partial = any(record.get("lifecycle") == "closed_partial_cut" for record in publication_records)
         lines += ["## Compact publications and closed partial cuts" if closed_partial else "## Concluded compact publications", "",
                   "These study and trial projections preserve recorded outcomes, unknowns and source cohorts. "
@@ -990,6 +1004,29 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
                 "memory": "reports/forge/EXPERIMENT_MEMORY.md", "conflicts": manifest["conflicts"]}
 
 
+def readout_selection_claim(root: Path, candidate: dict, view: dict, task_results: list) -> dict | None:
+    """Selection-versus-holdout claim for a candidate descending from a registered search.
+
+    Returns None when no ancestor came from a configuration search. Otherwise
+    the claim states whether the required tasks above the search's tuning tier
+    (the untuned holdout) passed; tuning-tier passes are never independent
+    confirmation. Missing results count as not measured.
+    """
+    from .leaderboard_contract import holdout_claim, selection_lineage
+    lineage = selection_lineage(root, candidate)
+    if not lineage.get("search_id"):
+        return None
+    statuses = {}
+    for row in task_results:
+        statuses[row.get("task_id")] = row.get("gate_status", "UNKNOWN")
+    by_tier = {}
+    for assignment in view.get("assignments", []):
+        if assignment.get("importance") == "required":
+            by_tier.setdefault(assignment["qualification_tier"], []).append(
+                statuses.get(assignment["task"], "UNKNOWN"))
+    return {**lineage, **holdout_claim(by_tier, lineage.get("tuning_through_tier"))}
+
+
 def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, next_action: str, *, study_id=None) -> dict:
     """Publish a readout for one exact attempted revision, then update memory."""
     root = Path(root)
@@ -1003,6 +1040,14 @@ def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, nex
     states = _queue_states(root, attempts)
     study_request = None
     from .studies import frozen_declaration, selected_study_id
+    if study_id is not None and (study_id.endswith(".json") or "/" in study_id):
+        study_path = (root / study_id).resolve() if not Path(study_id).is_absolute() else Path(study_id)
+        if study_path.exists():
+            import json
+            try:
+                study_id = json.loads(study_path.read_text()).get("id", study_id)
+            except Exception:
+                pass
     selected = [a for a in attempts if a["request"].get("candidate", {}).get("id") == candidate_id
                 and (requested_revision is None or a["request"]["candidate_revision"].startswith(requested_revision))
                 and (study_id is None or a["request"].get("study", {}).get("id") == study_id)]
@@ -1034,6 +1079,7 @@ def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, nex
               "goal": study.get("scope", {}).get("view", study.get("view")) if study else candidate.get("goal"),
               "hypothesis": study["hypothesis"] if study else candidate.get("hypothesis", "See immutable candidate declaration."),
               "mechanism_class": candidate.get("mechanism_class", "unknown"), "prior": candidate.get("prior"),
+              **({"prior_mechanism": candidate["prior_mechanism"]} if candidate.get("prior_mechanism") is not None else {}),
               "claim_contract": candidate.get("claim_contract"),
               "source": {"path": selected[0]["source"]},
               "task_results": [row for attempt in selected for row in attempt["task_results"]],
@@ -1058,6 +1104,10 @@ def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, nex
     elif candidate.get("decision_contract") is not None:
         from .decision_contracts import concluded_outcomes
         record["decision_outcomes"] = concluded_outcomes(selected)
+    claim = readout_selection_claim(root, candidate, (study_request or selected[0]["request"]).get("view", {}),
+                                    record["task_results"])
+    if claim is not None:
+        record["selection_claim"] = claim
     with file_lock(root / "runs/forge/readout.lock"), ExitStack() as locks:
         for location in sorted(states):
             locks.enter_context(file_lock(Path(location) / "queue.lock"))

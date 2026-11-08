@@ -388,7 +388,6 @@ def test_bispf_continuous_thermal_cooling_and_reheating():
         tau_cooling=0.020,
         s_min=1e-5,
         ema_decay=0.90,  # Responsive EMA for unit test
-        eps_smooth=0.001,
     )
 
     # 1. Initial high residual -> s_thermal = 1.0
@@ -993,7 +992,7 @@ def test_bispf_fast_attack_reheating():
 
 def test_bispf_dense_multimode_rownorm_linearization():
     """Verify Born-Infeld DualNorm rownorm inversion scales update norm linearly in dense multi-mode regimes."""
-    from particlegan.bispf import SinkhornRelativisticLoss, _LAST_THERMAL_SCALE
+    from particlegan.bispf import SinkhornRelativisticLoss, _LEGACY_THERMAL_CHANNEL
 
     loss_fn = SinkhornRelativisticLoss()
     fake_logits = torch.full((2048, 1), -5.0, requires_grad=True)
@@ -1002,7 +1001,7 @@ def test_bispf_dense_multimode_rownorm_linearization():
     real_logits._bispf_input = torch.randn(2048, 2)
 
     # Set thermal scale to 0.10
-    _LAST_THERMAL_SCALE[fake_logits.device] = 0.10
+    _LEGACY_THERMAL_CHANNEL[fake_logits.device] = 0.10
     try:
         loss = loss_fn.g_loss(fake_logits, real_logits)
         grad = torch.autograd.grad(loss, fake_logits)[0]
@@ -1013,7 +1012,7 @@ def test_bispf_dense_multimode_rownorm_linearization():
         step_norm = (grad / denom).norm(dim=1).mean().item()
         assert abs(step_norm - 0.10) < 0.02, f"DualNorm step norm should be linearized to ~0.10, got {step_norm}"
     finally:
-        _LAST_THERMAL_SCALE.clear()
+        _LEGACY_THERMAL_CHANNEL.clear()
 
 
 def test_bispf_image_scale_dim():
@@ -1035,7 +1034,7 @@ def test_bispf_image_scale_dim():
 
 def test_bispf_1d_continuous_flow_cooler_with_fast_attack():
     """Verify 1D flows engage thermal cooling after step 500 and immediately re-heat upon shock."""
-    from particlegan.bispf import _BISPFPenaltyKernel, _LAST_THERMAL_SCALE
+    from particlegan.bispf import _BISPFPenaltyKernel, _LEGACY_THERMAL_CHANNEL
 
     kernel = _BISPFPenaltyKernel(tau_cooling=0.020, s_min=1e-5)
     kernel.record.calls = 600
@@ -1052,16 +1051,16 @@ def test_bispf_1d_continuous_flow_cooler_with_fast_attack():
 
     try:
         _, _ = kernel.penalty(Dummy1DCritic(), xr, xf, step=0, collect_stats=True)
-        scale_damped = _LAST_THERMAL_SCALE.get(xr.device, 1.0)
+        scale_damped = _LEGACY_THERMAL_CHANNEL.get(xr.device, 1.0)
         assert scale_damped < 0.20, f"1D flow should cool to < 0.20, got {scale_damped}"
 
         # Non-stationary shift shock
         xf_shock = xr + 4.0
         _, _ = kernel.penalty(Dummy1DCritic(), xr, xf_shock, step=1, collect_stats=True)
-        scale_shock = _LAST_THERMAL_SCALE.get(xr.device, 0.0)
+        scale_shock = _LEGACY_THERMAL_CHANNEL.get(xr.device, 0.0)
         assert scale_shock == 1.0, f"1D flow must re-heat instantly to 1.0 on shock, got {scale_shock}"
     finally:
-        _LAST_THERMAL_SCALE.clear()
+        _LEGACY_THERMAL_CHANNEL.clear()
 
 
 def test_sbnp_regularizer_defaults_and_unweighted_scale():

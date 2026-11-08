@@ -130,7 +130,7 @@ def task_recipe(case, recipe_name=None, recipe=None):
         name = recipe_name if recipe_name not in (None, "auto") else DEFAULT_RECIPE
         if name == DEFAULT_RECIPE:
             candidate = json.loads((ROOT / f"configs/forge/ideas/{DEFAULT_RECIPE}.json").read_text())
-            recipe = Recipe(**candidate["recipe_overrides"])
+            recipe = Recipe.from_dict(candidate["recipe_overrides"])
         else:
             recipe = get_recipe(name)
     if not isinstance(recipe, Recipe):

@@ -1,5 +1,10 @@
 # ParticleGAN GPU leaderboard: one pinned GPU (2026-09-24, 22:42 MT)
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../forge/technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 **Source sha:** PR #139 `codex/epsilon-gan-followup` at
 **`adafbe3f9d38f8991b2f9e3756393a77e7fe5470`** (head as of 21:26 MT, "Add probe-fast.py").
 That commit is tooling only (a faster probe with identical receipts), not a new base. It sits on top

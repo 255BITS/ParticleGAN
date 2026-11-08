@@ -137,7 +137,7 @@ from particlegan import GANTrainer, Recipe
 
 fields = json.loads(Path("configs/100gaussians/atlas.json").read_text())
 fields.update(num_particles=N, z_dim=Z, batch_size=B)
-recipe = Recipe(**fields)
+recipe = Recipe.from_dict(fields)
 # Supply your initialized G, D, prior, and data stream.
 trainer = GANTrainer(recipe, G, D, prior=prior, serial_backward=True)
 trainer.step(real_batch)

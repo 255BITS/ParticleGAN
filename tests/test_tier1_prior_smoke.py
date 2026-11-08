@@ -10,7 +10,7 @@ from experiments.forge.api import task_formulation_context
 from experiments.forge.state import state_digest
 from experiments.forge.vectorprofiles import build_vector_models
 
-pytestmark = pytest.mark.skipif(not torch.cuda.is_available(), reason="prior study requires CUDA")
+pytestmark = [pytest.mark.cuda, pytest.mark.skipif(not torch.cuda.is_available(), reason="prior study requires CUDA")]
 
 
 def test_oracles_and_shape_impostors_separate_full_and_smoke_questions():

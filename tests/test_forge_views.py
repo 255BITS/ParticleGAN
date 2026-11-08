@@ -109,14 +109,14 @@ def test_current_inventory_has_complete_quality_and_distinct_claim_views():
              if a["qualification_tier"] == 1 and a["importance"] == "required"]
     assert smoke[:7] == ["gaussian1d_smoke", "two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition",
                      "five_word_joint_smoke", "zero_tanh_smoke"]
-    assert len(smoke) == 13 and all(tasks[name]["adapter"] == "public_api_model_toy" for name in smoke[7:])
+    assert len(smoke) == 11 and all(tasks[name]["adapter"] == "public_api_model_toy" for name in smoke[7:])
     assert sum(tasks[n]["execution"]["steps"] for n in smoke[1:4]) == 530
     # 0.10 restores four accuracy/settling tasks; the former hold policy is archived.
-    assert stability["revision"] == 14 and stability["previous_revision"]["revision"] == 13
+    assert stability["revision"] == 16 and stability["previous_revision"]["revision"] == 15
     assert [a["task"] for a in stability["assignments"] if a["importance"] == "diagnostic"] == [
-        "ring_hold", "clockfree_audit_measurement_v1"]
+        "ring_hold", "clockfree_audit_measurement_v1", "precision_gaussian_fp32"]
     assert next(a for a in stability["assignments"] if a["task"] == "ring_hold")["removal"]["counted_by"] == "ring_extension"
-    for role, counts in (("required", [13, 16, 1, 0]), ("held", [0, 7, 1, 5])):
+    for role, counts in (("required", [11, 18, 1, 0]), ("held", [0, 7, 1, 5])):
         assert [sum(a["qualification_tier"] == tier and a["importance"] == role
                     for a in stability["assignments"]) for tier in (1, 2, 3, 4)] == counts
     archived = json.loads((ROOT / "configs/forge/view-history/discriminator_stability-v9.json").read_text())
@@ -154,7 +154,7 @@ def test_default_plan_and_report_include_acquisition_smoke_without_new_views():
     assert not {"ring16_acquisition", "five_word_joint"} & {row["id"] for row in report["views"]}
     view = next(row for row in report["views"] if row["id"] == "discriminator_stability")
     smoke = next(row for row in view["tiers"] if row["qualification_tier"] == 1)
-    assert smoke["counts"] == {"required": 13, "held": 0, "ranking": 0, "diagnostic": 1}
+    assert smoke["counts"] == {"required": 11, "held": 0, "ranking": 0, "diagnostic": 2, "stretch": 2}
     reported = {row["id"]: row for row in smoke["tasks"]}
     for name, updates, timeout in (("gaussian1d_smoke", 1000, 120),
                                    ("ring16_acquisition", 1600, 300),
@@ -276,6 +276,17 @@ def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer
                 candidate = json.loads((ROOT / "configs/forge/ideas/k3p.json").read_text())
                 blockers = task_preflight(deepcopy(task), candidate, {}, root=ROOT, tasks=tasks)
                 assert f"{task['id']}: evaluator source changed; revise the task definition: {path}" in blockers
+                continue
+            if path in {"benchmarks/toy_audit/api_model_ae.py",
+                        "benchmarks/toy_audit/api_model_ddgan.py",
+                        "benchmarks/toy_audit/api_model_vae.py"}:
+                from recipe_entrypoint_compat import frozen_restoration_source
+                frozen_restoration_source(ROOT, path, digest)
+                if hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != digest:
+                    from experiments.forge.preflight import task_preflight
+                    candidate = json.loads((ROOT / "configs/forge/ideas/k3p.json").read_text())
+                    blockers = task_preflight(deepcopy(task), candidate, {}, root=ROOT, tasks=tasks)
+                    assert f"{task['id']}: evaluator source changed; revise the task definition: {path}" in blockers
                 continue
             assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == digest
     if missing_history:
@@ -959,3 +970,77 @@ def test_qualify_exposes_counted_eligible_and_continuous_check_summary():
     assert allowed_out["counted_eligible"] is True
     summary = check_summary({"evaluator_result": {"checks": {"c1": True, "c2": False, "c3": True, "c4": True}}})
     assert summary == {"passed_checks": 3, "total_checks": 4, "check_pass_rate": 0.75}
+
+
+def test_stretch_assignments_and_stretch_tiers_never_block_qualification_or_pass():
+    from experiments.forge.views import is_stretch, stretch_note
+    tasks = {n: simple_task(n) for n in "abc"}
+    view = simple_view(("a", 1, "required"), ("b", 2, "stretch"), ("c", 2, "stretch"))
+    view["assignments"][2]["stretch"] = {
+        "schema": "forge_stretch_v1",
+        "reason": "frontier",
+        "summary": "Frontier extra-credit benchmark task for multi-tier stretch validation.",
+    }
+    validate_view(view, tasks)
+    assert is_stretch("stretch") and is_stretch("held") and not is_stretch("required")
+    assert is_stretch(view["assignments"][1]) and stretch_note(view["assignments"][2])["reason"] == "frontier"
+
+    # Even when stretch tasks fail or are not run, a passing required tier qualifies the view as PASS.
+    result = qualify(view, tasks, [receipt(tasks["a"]), receipt(tasks["b"], final=2.)])
+    assert result["status"] == "PASS" and result["eligible"] is True and result["qualified_tier"] == 1
+    assert result["tiers"][1]["status"] == "STRETCH"
+    assert result["tiers"][1]["stretch_total"] == 2 and result["tiers"][1]["stretch_passed"] == 0
+    assert (result["stretch_total"], result["stretch_passed"]) == (2, 0)
+    assert result["stretch_tasks"] == ["b", "c"] and result["stretch_tiers"] == [2]
+
+    # When stretch tasks pass, stretch_passed increments without altering required totals.
+    both_pass = qualify(view, tasks, [receipt(tasks["a"]), receipt(tasks["b"]), receipt(tasks["c"])])
+    assert both_pass["status"] == "PASS" and (both_pass["stretch_total"], both_pass["stretch_passed"]) == (2, 2)
+    assert (both_pass["required_total"], both_pass["required_passed"]) == (1, 1)
+
+    # A stretch-only view reports STRETCH and is not eligible for required qualification.
+    stretch_only = simple_view(("b", 1, "stretch"))
+    validate_view(stretch_only, tasks)
+    so_out = qualify(stretch_only, tasks, [receipt(tasks["b"])])
+    assert so_out["status"] == "STRETCH" and not so_out["eligible"] and so_out["qualified_tier"] == 0
+
+    # Invalid stretch metadata is rejected.
+    bad_role = deepcopy(view)
+    bad_role["assignments"][0]["stretch"] = {"reason": "frontier"}
+    with pytest.raises(ValueError, match="requires importance stretch"):
+        validate_view(bad_role, tasks)
+    missing_summary = deepcopy(view)
+    missing_summary["assignments"][1]["stretch"] = {"reason": "frontier"}
+    with pytest.raises(ValueError, match="stretch metadata needs at least"):
+        validate_view(missing_summary, tasks)
+    bad_reason = deepcopy(view)
+    bad_reason["assignments"][1]["stretch"] = {
+        "reason": "invalid_reason",
+        "summary": "Frontier extra-credit benchmark task for multi-tier stretch validation.",
+    }
+    with pytest.raises(ValueError, match="stretch reason"):
+        validate_view(bad_reason, tasks)
+
+    # A pure STRETCH tier above a HELD tier must not flip a HELD view into PASS.
+    held_plus_stretch = simple_view(("a", 1, "required"), ("b", 2, "held"), ("c", 3, "stretch"))
+    held_plus_stretch["assignments"][1]["hold"] = hold("b", reason="unsolved")
+    validate_view(held_plus_stretch, tasks)
+    hps_out = qualify(held_plus_stretch, tasks, [receipt(tasks["a"]), receipt(tasks["b"]), receipt(tasks["c"])])
+    assert hps_out["status"] == "HELD" and not hps_out["eligible"] and hps_out["counted_eligible"] is True
+    assert hps_out["qualified_tier"] == 1 and hps_out["held_tiers"] == [2] and hps_out["stretch_tiers"] == [2, 3]
+
+    # Stretch prerequisite reason requires blocked_by listing stretch prerequisites.
+    dep_tasks = {n: simple_task(n) for n in "ab"}
+    dep_tasks["b"]["dependencies"] = [{"task": "a", "kind": "gate"}]
+    dep_view = simple_view(("a", 1, "stretch"), ("b", 2, "stretch"))
+    dep_view["assignments"][1]["stretch"] = {
+        "schema": "forge_stretch_v1",
+        "reason": "stretch_prerequisite",
+        "summary": "Depends on stretch task a and therefore requires blocked_by.",
+    }
+    with pytest.raises(ValueError, match="requires blocked_by"):
+        validate_view(dep_view, dep_tasks)
+    dep_view["assignments"][1]["stretch"]["blocked_by"] = ["a"]
+    validate_view(dep_view, dep_tasks)
+
+

@@ -13,18 +13,12 @@ import math
 from dataclasses import dataclass, replace
 
 import torch
+from ._stats import group_means
 from .output_moments import (OutputProjection,FixedOutputMoment,OutputObservation,fit_projection,
     freeze_moment,odd_witness,POLICY as OUTPUT_MEAN_POLICY,PROJECTION_POLICY,FIT_CHUNK,MAX_RANK)
 
 Q = .05
 POLICY = OUTPUT_MEAN_POLICY
-
-
-def group_means(values, groups, count):
-    counts = torch.bincount(groups, minlength=count)
-    sums = torch.zeros(count, values.shape[1], dtype=torch.float64, device=values.device)
-    sums.index_add_(0, groups, values.double())
-    return sums / counts.clamp_min(1)[:, None], counts
 
 
 
@@ -180,10 +174,15 @@ def propose_pairs(snapshot, fixed, fast, ema, *, earlier_ordinary, reserved_rows
     total = len(ordered)
     ordered = ordered[:budget]
     children, parents, gains = children[ordered], parents[ordered], gains[ordered]
-    assert len(torch.unique(children)) == len(children)
-    assert len(torch.unique(parents)) == len(parents)
-    assert not bool(torch.isin(children, parents).any())
-    assert not bool(reserved[children].any() | reserved[parents].any())
+    # Invariants of the construction above; explicit so they also hold under python -O.
+    if len(torch.unique(children)) != len(children):
+        raise RuntimeError("proposed transport pairs repeat a child row")
+    if len(torch.unique(parents)) != len(parents):
+        raise RuntimeError("proposed transport pairs repeat a parent row")
+    if bool(torch.isin(children, parents).any()):
+        raise RuntimeError("a proposed transport child is also a parent")
+    if bool(reserved[children].any() | reserved[parents].any()):
+        raise RuntimeError("a proposed transport pair uses a reserved row")
     return CandidatePairs(children, parents, gains, int(legal.sum()), total,
                           protected.nonzero().flatten(), budget, earlier_ordinary)
 

@@ -5,7 +5,7 @@ import torch
 from benchmarks.toy_audit import tier1_prior_duration as study
 from experiments.forge.state import state_digest
 
-pytestmark = pytest.mark.skipif(not torch.cuda.is_available(), reason="duration study requires CUDA")
+pytestmark = [pytest.mark.cuda, pytest.mark.skipif(not torch.cuda.is_available(), reason="duration study requires CUDA")]
 
 
 def test_execution_extension_preserves_all_training_state():

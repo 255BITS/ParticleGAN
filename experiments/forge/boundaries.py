@@ -25,7 +25,7 @@ TUNABLE_FIELDS = frozenset({
     "lr", "d_lr_mult", "prior_lr_mult", "betas", "prior_betas", "d_betas", "d_eps", "prior_eps",
     "direct_particle_betas", "eps", "amsgrad", "lr_decay_rate", "lr_decay_steps",
     "optimizer_momentum", "optimizer_adam_lr", "optimizer_smoothing",
-    "reg_coeff", "reg_coeff_end", "reg_coeff_anneal_end", "reg_kappa", "reg_every", "prior_reg",
+    "reg_coeff", "reg_coeff_end", "reg_coeff_anneal_end", "reg_kappa", "reg_every", "ebi_beta", "prior_reg",
     "prior_reg_target_std", "prior_reg_eps", "prior_l2", "prior_proximal_strength",
     "prior_coulomb_softening", "prior_coulomb_confinement", "prior_coulomb_neighbors",
     "kinetic_transport_weight", "kinetic_transport_local_weight",
@@ -44,7 +44,7 @@ TECHNIQUE_RECIPE_FIELDS = frozenset({
     "reopen_anchor", "reopen_guard", "row_evidence_null", "birth_death_isolation",
     "birth_death_feature_scale", "birth_death_backend", "birth_death_parent_policy",
     "constraint_geometry_mode", "row_policy", "optimizer_family", "optimizer_convolution", "loss_labels", "adam_variant", "lr_schedule", "lr_decay_staircase",
-    "critic_step_mode",
+    "critic_step_mode", "bispf_shape_gates", "bispf_gate_overrides", "prior_code_law", "generator_gradient_response",
 })
 HYPERPARAMETER_RECIPE_FIELDS = TUNABLE_FIELDS | {
     "prior_sigreg_projections", "prior_sigreg_knots",
@@ -55,6 +55,7 @@ HYPERPARAMETER_RECIPE_FIELDS = TUNABLE_FIELDS | {
     "input_noise_anneal_end", "output_noise_std", "output_noise_warmup",
     "routing_temperature", "observation_sigma", "reconstruction_weight", "serve_average",
     "birth_death_cells", "birth_death_metric_rank", "birth_death_chunk",
+    "kappa_radial",
 }
 RECIPE_FIELD_OWNERS = {
     **dict.fromkeys(TASK_RECIPE_FIELDS, "task"),
@@ -71,7 +72,7 @@ class RecipeFieldSpec:
     default: object
 
 
-_DEFAULT_RECIPE = Recipe()
+_DEFAULT_RECIPE = Recipe.from_dict({})
 RECIPE_FIELD_SPECS: dict[str, RecipeFieldSpec] = {
     field.name: RecipeFieldSpec(
         name=field.name,
@@ -225,11 +226,20 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
     prior = execution.get("prior")
     if not isinstance(prior, dict) or prior.get("kind") not in {"mog", "particle_cloud"}:
         raise ValueError("ownership receipt requires the task's explicit prior")
-    expected_prior = {"prior_kind": "mog" if prior["kind"] == "mog" else "particles",
-                      "sigma_rel": 0., "standardize": prior["standardize"]}
+    mechanism = (candidate or {}).get("prior_mechanism")
+    if mechanism is not None and resolved_recipe.get("encoder_mode", "none") == "none":
+        from .priors import prior_code_path, resolve_prior_mechanism
+        effective_prior = resolve_prior_mechanism(mechanism, prior)
+        expected_prior = {"prior_kind": "mog" if effective_prior["kind"] == "mog" else "particles",
+                          "sigma_rel": 0., "standardize": effective_prior["standardize"]}
+    else:
+        effective_prior = None
+        expected_prior = {"prior_kind": "mog" if prior["kind"] == "mog" else "particles",
+                          "sigma_rel": 0., "standardize": prior["standardize"]}
     for name, value in expected_prior.items():
         if resolved_recipe[name] != value:
-            raise ValueError(f"effective Recipe {name} contradicts task-owned prior")
+            label = "technique-owned prior_mechanism" if effective_prior is not None else "task-owned prior"
+            raise ValueError(f"effective Recipe {name} contradicts {label}")
     resources = _resources(task)
     for name, (value, _) in resources.items():
         if resolved_recipe[name] != value:
@@ -251,9 +261,14 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
         source = _reference_source(candidate, name, value, extension_recipe_bindings)
         status = "metadata" if name == "name" else "effective"
         if name in expected_prior:
-            source = ("task.execution.prior.kind" if name == "prior_kind" else
-                      "task.execution.prior.standardize" if name == "standardize" else
-                      "public prior binding: absolute task sigma replaces relative calibration")
+            if effective_prior is not None and name in {"prior_kind", "standardize"}:
+                owner = "technique"
+                source = ("candidate.prior_mechanism.kind" if name == "prior_kind"
+                          else "candidate.prior_mechanism.standardize")
+            else:
+                source = ("task.execution.prior.kind" if name == "prior_kind" else
+                          "task.execution.prior.standardize" if name == "standardize" else
+                          "public prior binding: absolute task sigma replaces relative calibration")
         elif name == "total_steps":
             if value is None:
                 owner, source = "technique", "schedule-free technique; task.execution.steps bounds execution separately"
@@ -314,7 +329,11 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
     if recipe_owned_prior(task):
         prior_record["update_policy"] = _record(resolved_recipe["prior_update"], "technique", "Recipe.prior_update")
         prior_record["contract"] = execution["prior_contract"]
-    prior_record["code_path"] = "MoGParticlePrior" if prior["kind"] == "mog" else "ParticlePrior"
+    if effective_prior is not None:
+        prior_record["technique_mechanism"] = _record(effective_prior, "technique", "candidate.prior_mechanism")
+        prior_record["code_path"] = prior_code_path(effective_prior)
+    else:
+        prior_record["code_path"] = "MoGParticlePrior" if prior["kind"] == "mog" else "ParticlePrior"
     if not prior_binding["latent_table_controls"]:
         prior_record["declared_code_path"] = prior_record["code_path"]
         prior_record["code_path"] = None

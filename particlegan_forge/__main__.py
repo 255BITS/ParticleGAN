@@ -11,6 +11,10 @@ from .contracts import json_safe
 from .tiers import ForgeWorkspace
 
 
+DEVICE_CHOICES = ("cpu", "cuda", "auto")
+DEVICE_HELP = "Receipt cohort device; run, board and compile resolve it identically (default: cpu)"
+
+
 def _emit(payload):
     print(json.dumps(json_safe(payload), indent=2, sort_keys=True, allow_nan=False))
 
@@ -18,25 +22,25 @@ def _emit(payload):
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(description="particlegan_forge Tier API CLI")
     p.add_argument("--root", type=Path, default=Path.cwd(), help="Project workspace root")
-    p.add_argument("--queue-root", type=Path, default=None, help="Operational queue root (default: <root>/runs/forge)")
+    p.add_argument("--queue-root", type=Path, default=None, help="Operational queue root (default: <root>/runs/particlegan_forge)")
     p.add_argument("--provider", type=str, default=None, help="Optional Python module registering adapters (e.g. particlestream.tier1)")
 
     sub = p.add_subparsers(dest="command", required=True)
-    sub.add_parser("validate", help="Validate workspace tasks, views, and candidates")
+    sub.add_parser("validate", help="Validate configs/particlegan_forge tasks, views, and candidates")
 
     run_p = sub.add_parser("run", help="Run a candidate through a tier cap and compile reports")
     run_p.add_argument("candidate", help="Candidate ID")
     run_p.add_argument("--view", required=True, help="View ID")
     run_p.add_argument("--through-tier", type=int, default=1, help="Max qualification tier to execute")
-    run_p.add_argument("--device", default="cpu", choices=("cpu", "cuda"))
+    run_p.add_argument("--device", default="cpu", choices=DEVICE_CHOICES, help=DEVICE_HELP)
 
     board_p = sub.add_parser("board", help="Show qualification status for all candidates on a view")
     board_p.add_argument("--view", required=True, help="View ID")
-    board_p.add_argument("--device", default=None, choices=("cpu", "cuda"))
+    board_p.add_argument("--device", default="cpu", choices=DEVICE_CHOICES, help=DEVICE_HELP)
 
-    comp_p = sub.add_parser("compile", help="Regenerate leaderboard, EXPERIMENTS_BY_TIER.md, and EXPERIMENT_MEMORY.md")
+    comp_p = sub.add_parser("compile", help="Regenerate reports/particlegan_forge/{leaderboard,EXPERIMENTS_BY_TIER,EXPERIMENT_MEMORY}.md")
     comp_p.add_argument("--view", default=None, help="Primary view ID")
-    comp_p.add_argument("--device", default=None, choices=("cpu", "cuda"))
+    comp_p.add_argument("--device", default="cpu", choices=DEVICE_CHOICES, help=DEVICE_HELP)
 
     retier_p = sub.add_parser("retier", help="Move a task to a new tier and archive the previous view revision")
     retier_p.add_argument("view", help="View ID")

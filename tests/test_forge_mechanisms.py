@@ -9,7 +9,7 @@ from experiments.forge.mechanisms import MechanismAudit, _ScalarCritic, mechanis
 
 
 def fixture():
-    recipe = Recipe()
+    recipe = Recipe.from_dict({})
     critic = _ScalarCritic()
     optimizer = recipe.make_critic_optimizer(critic, ema_critic=deepcopy(critic))
     audit = MechanismAudit(recipe, optimizer, [])
@@ -48,7 +48,7 @@ def test_disabled_or_impossible_application_counts_are_rejected():
 
 
 def test_observers_preserve_public_optimizer_updates_exactly():
-    recipe = Recipe(d_guard_min_steps=0)
+    recipe = Recipe.from_dict(dict(d_guard_min_steps=0))
     left, right = _ScalarCritic(), _ScalarCritic()
     left_d = recipe.make_critic_optimizer(left, ema_critic=deepcopy(left))
     right_d = recipe.make_critic_optimizer(right, ema_critic=deepcopy(right))

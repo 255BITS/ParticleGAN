@@ -21,7 +21,7 @@ from types import SimpleNamespace
 import torch
 from torch import nn
 
-from .continuous import DataDriftController, OptimizerSurprise, SettledReopenGuard, StationarityLR
+from .continuous import DataDriftController, LossSurprise, OptimizerSurprise, SettledReopenGuard, StationarityLR
 from .recipes import Recipe, learning_rate_scales
 
 
@@ -133,6 +133,10 @@ class ServedModel:
     default, exactly as in ``GANTrainer.sample``.  The private sampling stream
     starts from the policy's evaluation RNG state and never advances a
     training stream.  Module parameters are frozen and modules are in eval.
+    A ``ManipulatedPrior`` whose manipulators postprocess generator outputs
+    has that postprocessing applied last (after optional output noise) in
+    ``generate``/``sample`` and ``routed_forward``, as in ``GANTrainer``'s
+    critic and generator paths and the birth/death row generator.
     """
 
     def __init__(self, models, table, controller, *, source, output_sigma,
@@ -164,6 +168,8 @@ class ServedModel:
         if output_noise and self.output_sigma != 0:
             y = y + self.output_sigma * torch.randn(
                 y.shape, generator=stream, device=y.device, dtype=y.dtype)
+        if getattr(self.prior, "postprocesses_generated", False):
+            y = self.prior.postprocess_generated(y)
         return y
 
     def _sampling_stream(self, generator):
@@ -233,6 +239,8 @@ class ServedModel:
             y = self.routing.forward(self.models, context, candidate, perturb_fn=perturb_fn)
             if output_noise and self.output_sigma != 0:
                 y = y + self.output_sigma * torch.randn(y.shape, device=y.device, dtype=y.dtype, generator=stream)
+            if getattr(self.prior, "postprocesses_generated", False):
+                y = self.prior.postprocess_generated(y)
             return y
 
 
@@ -282,6 +290,14 @@ class UpdatePolicy:
     observations, gradient evidence or counterfactual probes.
     Conditional loops with row controls disabled can use ``UpdatePolicy``
     without a routed row contract.
+
+    ``row_evidence_statistic`` declares the independent-row evidence gate's
+    test statistic (``particlegan.row_evidence``). The default
+    ``"sphericity"`` keeps the legacy trajectory of every qualified
+    row-evidence recipe; ``"hotelling"`` is a declared candidate (full
+    covariance T^2, float64 n x d x d accumulators). It is a trainer option,
+    not a recipe field, and the row-evidence checkpoint configuration records
+    it, so a mismatched resume is rejected.
     """
 
     _STREAMS = ("latent_generator", "penalty_generator", "eval_generator", "noise_generator")
@@ -292,7 +308,7 @@ class UpdatePolicy:
                  roles=None, generation=None, critic_features=None, encoder=None,
                  router=None, row_semantics="independent", seed=0, streams=None,
                  penalty=None, schedule=None, routed_rows=None,
-                 allow_shared_training_streams=False):
+                 allow_shared_training_streams=False, row_evidence_statistic="sphericity"):
         if not isinstance(recipe, Recipe):
             raise TypeError("recipe must be a Recipe")
         if not isinstance(generator, nn.Module) or not isinstance(critic, nn.Module):
@@ -308,6 +324,7 @@ class UpdatePolicy:
         if prior is not None and table.requires_grad != (recipe.prior_update == "learned"):
             raise ValueError("prior learning state contradicts Recipe.prior_update")
         self.table, self.device, self.dtype = table, table.device, table.dtype
+        self.num_particles = recipe.num_particles
         if not table.is_floating_point():
             raise ValueError("table must use a floating dtype")
         self.row_policy = getattr(recipe, "row_policy", "independent")
@@ -403,11 +420,20 @@ class UpdatePolicy:
         self.routed_control = None
         self.surprise = (OptimizerSurprise() if self.lr_settle is not None and recipe.reopen_signal == "optimizer"
                          else None)
+        self.loss_surprise = (LossSurprise() if self.lr_settle is not None and recipe.reopen_signal == "optimizer"
+                              else None)
         self.reopen_guard = None if recipe.reopen_guard is None else SettledReopenGuard()
         if self.reopen_guard is not None:
             self.reopen_guard.observe_epoch(self._loss_epoch(), self.surprise)
         self.birth_death = None
         self.row_evidence = None
+        # Declared trainer option (review finding #11): the row-evidence test statistic. "sphericity" is the
+        # legacy law of every qualified row-evidence recipe; "hotelling" is the full-covariance T^2 candidate.
+        if row_evidence_statistic not in ("sphericity", "hotelling"):
+            raise ValueError("row_evidence_statistic must be sphericity or hotelling")
+        if row_evidence_statistic != "sphericity" and (
+                not recipe.row_evidence_gate or self.row_policy == "routed_paired"):
+            raise ValueError("row_evidence_statistic applies only to the independent-row row_evidence_gate")
         if self.row_policy == "routed_paired":
             self.routed_control = routed_rows.bind(
                 models=self._training_modules(), averaged_models=self._average_modules(),
@@ -427,25 +453,32 @@ class UpdatePolicy:
                             and group["params"][0] in row_parameters):
                         tester.rows = len(table)
         elif recipe.particle_birth_death:
-            from .birth_death import ParticleRows, ParticleBirthDeath, ScalarHeadFeatures
-            features = critic_features
-            if recipe.birth_death_space == "critic" and features is None:
-                features = ScalarHeadFeatures(self.D)
-            rows = ParticleRows(table=table, optimizer=self.table_optimizer,
-                                averaged_table=self.averaged_table,
-                                generate=lambda latent: self._clean_generate(self.G, latent),
-                                critic_features=features,
-                                evaluation_modules=tuple(module for module in (self.G, encoder, router)
-                                                         if module is not None),
-                                controller=self.controller, completed_steps=lambda: self.completed_steps,
-                                semantics=row_semantics)
-            self.birth_death = ParticleBirthDeath(
-                rows, seed + 6, space=recipe.birth_death_space,
-                isolation=recipe.birth_death_isolation,
-                feature_scale=recipe.birth_death_feature_scale)
+            cells = recipe.birth_death_cells if recipe.birth_death_backend != "knn" else None
+            if cells is not None and len(table) <= cells:
+                self.birth_death = None
+            else:
+                from .birth_death import ParticleRows, ParticleBirthDeath, ScalarHeadFeatures
+                features = critic_features
+                if recipe.birth_death_space == "critic" and features is None:
+                    features = ScalarHeadFeatures(self.D)
+                rows = ParticleRows(table=table, optimizer=self.table_optimizer,
+                                    averaged_table=self.averaged_table,
+                                    generate=lambda latent: self._postprocess_generated(
+                                        self._clean_generate(self.G, latent)),
+                                    critic_features=features,
+                                    evaluation_modules=tuple(module for module in (self.G, encoder, router)
+                                                             if module is not None),
+                                    controller=self.controller, completed_steps=lambda: self.completed_steps,
+                                    semantics=row_semantics)
+                self.birth_death = ParticleBirthDeath(
+                    rows, seed + 6, space=recipe.birth_death_space,
+                    isolation=recipe.birth_death_isolation,
+                    feature_scale=recipe.birth_death_feature_scale,
+                    cells=cells)
         if recipe.row_evidence_gate and self.routed_control is None:
             from .row_evidence import RowEvidence
-            self.row_evidence = RowEvidence(table, null=recipe.row_evidence_null)
+            self.row_evidence = RowEvidence(table, null=recipe.row_evidence_null,
+                                            statistic=row_evidence_statistic)
         self.penalty = None
         if penalty is None and hasattr(self.opt_d, "record"):
             penalty = recipe.make_critic_penalty(self.opt_d)
@@ -645,15 +678,21 @@ class UpdatePolicy:
                 reopen = self.controller.data_score > 3.
             elif recipe.reopen_signal == "optimizer":
                 self.controller.observe_blind()
+                loss_reopen = False
+                if self.loss_surprise is not None:
+                    loss_reopen = self.loss_surprise.decide(self.completed_steps, guard=self.reopen_guard)
+                loss_surprised = self.loss_surprise is not None and self.loss_surprise.is_surprised
                 if self.reopen_guard is None:
-                    reopen = self.surprise.decide(self.completed_steps)
+                    opt_reopen = self.surprise.decide(self.completed_steps)
                 else:
-                    reopen = self.surprise.decide(self.completed_steps, guard=self.reopen_guard,
-                                                  network=self._contracted_network())
+                    opt_reopen = self.surprise.decide(self.completed_steps, guard=self.reopen_guard,
+                                                      network=self._contracted_network(),
+                                                      loss_surprised=loss_surprised)
+                reopen = opt_reopen or loss_reopen
                 if reopen:
                     self._reopen_moments()
                 if recipe.reopen_anchor == "release":
-                    self._anchor_release(reopen)
+                    self._anchor_release(opt_reopen)
             else:
                 self.controller.observe_blind()
                 reopen = False
@@ -744,6 +783,8 @@ class UpdatePolicy:
             if self._table_location is not None and self._table_location[0] == "generator":
                 generator = SimpleNamespace(parameters=lambda: (p for p in self.G.parameters() if p is not self.table))
             self.controller.observe_generator(generator, loss_gan.detach(), loss_critic.detach())
+        if self.loss_surprise is not None:
+            self.loss_surprise.observe(float(loss_gan.detach().cpu()))
         self._hot = self._z_before = None
         tester = self._table_tester()
         if self.routed_control is not None and self._routed_controls_enabled:
@@ -816,7 +857,9 @@ class UpdatePolicy:
             if event and event.get("moves") and self.lr_settle is not None:
                 self._routed_rebase()
         elif self.birth_death is not None:
-            if self._feature_selection is not None and self._feature_selection.state["actual_backend"] == "feature_cells":
+            if getattr(self.birth_death, "cells", None) is not None and len(self.table) <= self.birth_death.cells:
+                event = None
+            elif self._feature_selection is not None and self._feature_selection.state["actual_backend"] == "feature_cells":
                 event = self.birth_death.maybe_apply(self._feature_selection.facade, self.last_output_sigma)
             else:
                 event = self.birth_death.maybe_apply(self.last_output_sigma)
@@ -982,6 +1025,12 @@ class UpdatePolicy:
     def _clean_generate(self, model, latent):
         return model(latent) if self.generation is None else self.generation(model, latent)
 
+    def _postprocess_generated(self, generated):
+        """Manipulator output postprocessing; identity for plain priors."""
+        if getattr(self.prior, "postprocesses_generated", False):
+            return self.prior.postprocess_generated(generated)
+        return generated
+
     def observe_sampled_rows(self, rows):
         """Record generator-side prior draws for row-local optimizer updates.
 
@@ -1010,7 +1059,8 @@ class UpdatePolicy:
         if rows is not None and not averaged and self._phase == "generator":
             self.observe_sampled_rows(rows)
         if self.controller is not None:
-            if self._feature_selection is not None and self._feature_selection.state["actual_backend"] == "feature_cells":
+            if (self.birth_death is not None and self._feature_selection is not None
+                    and self._feature_selection.state["actual_backend"] == "feature_cells"):
                 latent = self.birth_death.perturb_latent(
                     latent, stream, self.controller, prior=self._prior_view(averaged), rows=rows,
                     record=stream is self.noise_generator)
@@ -1082,7 +1132,8 @@ class UpdatePolicy:
             self._fast = None
 
     def _serve_settled(self):
-        if self._feature_selection is not None and self._feature_selection.state["actual_backend"] == "feature_cells":
+        if (self.birth_death is not None and self._feature_selection is not None
+                and self._feature_selection.state["actual_backend"] == "feature_cells"):
             return self.birth_death.paired_average_eligible(self.completed_steps)
         tester = self._table_tester()
         return tester is not None and getattr(tester, "last_decisive", 0) == -1
@@ -1227,6 +1278,7 @@ class UpdatePolicy:
                                  else self.row_evidence.state_dict()),
                 "routing": None if self.routed_control is None else self.routed_control.state_dict(),
                 **({} if self.surprise is None else {"surprise": self.surprise.state_dict()}),
+                **({} if self.loss_surprise is None else {"loss_surprise": self.loss_surprise.state_dict()}),
                 **({} if self.reopen_guard is None else {"reopen_guard": self.reopen_guard.state_dict()}),
                 "streams": {name: getattr(self, name).get_state() for name in self._STREAMS},
                 "cpu_rng": torch.get_rng_state(),
@@ -1272,7 +1324,11 @@ class UpdatePolicy:
             validator = copy(self)
             validator._fast = None
             expected = validator.state_dict()
-        allowed = (set(expected), set(expected) - {"routing"}) if self.routed_control is None else (set(expected),)
+        allowed = [set(expected)]
+        if self.routed_control is None:
+            allowed.append(set(expected) - {"routing"})
+        if self.loss_surprise is not None:
+            allowed.extend([s - {"loss_surprise"} for s in list(allowed)])
         if not isinstance(state, dict) or set(state) not in allowed or state.get("schema") != 1:
             raise ValueError("invalid UpdatePolicy checkpoint schema")
         saved_recipe = state.get("recipe")
@@ -1361,6 +1417,8 @@ class UpdatePolicy:
             self.routed_control.check_state(routing)
         if self.surprise is not None:
             deepcopy(self.surprise).load_state_dict(state["surprise"])
+        if self.loss_surprise is not None and "loss_surprise" in state:
+            deepcopy(self.loss_surprise).load_state_dict(state["loss_surprise"])
         if self.reopen_guard is not None:
             self.reopen_guard.check_state(state["reopen_guard"], roles=self.roles,
                                           completed_steps=state["completed_steps"],
@@ -1410,6 +1468,8 @@ class UpdatePolicy:
             self.routed_control.load_state_dict(state["routing"])
         if self.surprise is not None:
             self.surprise.load_state_dict(state["surprise"])
+        if self.loss_surprise is not None and "loss_surprise" in state:
+            self.loss_surprise.load_state_dict(state["loss_surprise"])
         if self.reopen_guard is not None:
             self.reopen_guard.load_state_dict(state["reopen_guard"], roles=self.roles,
                                               completed_steps=state["completed_steps"],

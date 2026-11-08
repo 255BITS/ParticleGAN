@@ -137,7 +137,7 @@ class FeatureSelection:
     def _controls(self, selection):
         policy = self.policy
         actual = selection['actual_backend']
-        birth = (_FeatureBackend(self.facade, self.seed) if actual == 'feature_cells'
+        birth = (_FeatureBackend(self.facade, self.seed) if (actual == 'feature_cells' and self.reference_birth_death is not None)
                  else self.reference_birth_death)
         settle = (None if policy.lr_settle is None else StationarityLR(
             policy.optimizers, prior_param=policy.table, release_rule=policy.recipe.table_release_rule))
@@ -234,7 +234,7 @@ class FeatureSelection:
         current_shape = self.state['output_shape']
         if current_shape is not None and shape != current_shape:
             raise ValueError('checkpoint output shape differs from the resolved policy')
-        birth_state = state['birth_death']
+        birth_state = state.get('birth_death')
         if isinstance(birth_state, dict):
             fifo_shape = birth_state.get('sample_shape')
             if shape is None:
@@ -246,8 +246,8 @@ class FeatureSelection:
         controls = self._controls(expected)
         birth, settle = controls
         if birth is not None and expected['actual_backend'] == 'feature_cells':
-            birth.check_state(state['birth_death'])
-            birth.check_paired_average_step(state['birth_death'], steps)
+            birth.check_state(birth_state)
+            birth.check_paired_average_step(birth_state, steps)
         return dict(selection=expected, controls=controls, bases=bases)
 
     def commit_restore(self, prepared):
@@ -256,7 +256,7 @@ class FeatureSelection:
 
     def sampler_snapshot(self):
         birth = self.policy.birth_death
-        if self.state['actual_backend'] != 'feature_cells':
+        if birth is None or self.state['actual_backend'] != 'feature_cells':
             return None
         return dict(rows=birth.N, degree=birth.lineage.degree, neighbors=birth.lineage.neighbors.clone(),
                     rank=birth.latent_geometry.rank, chunk=birth.latent_geometry.chunk,
@@ -268,7 +268,10 @@ class FeatureSelection:
     def saved_served_source(self, state):
         if state['backend_selection']['actual_backend'] != 'feature_cells':
             return None
+        birth_state = state.get('birth_death')
+        if birth_state is None:
+            return None
         birth = FeatureCellBirthDeath(self.facade, self.seed)
-        birth.load_state_dict(state['birth_death'])
+        birth.load_state_dict(birth_state)
         eligible = birth.paired_average_eligible(state['completed_steps'])
         return 'averaged' if self.policy.recipe.serve_average > 0 and eligible else 'fast'

@@ -96,7 +96,7 @@ def test_invalid_weight_rejected(weight):
 
 
 def test_factory_requires_initialized_reference_and_weight_applies_once():
-    recipe = Recipe(prior_regularizer="initial_mmd", prior_reg=.3, prior_l2=.2)
+    recipe = Recipe.from_dict(dict(prior_regularizer="initial_mmd", prior_reg=.3, prior_l2=.2))
     with pytest.raises(ValueError, match="after public initialization"):
         recipe.make_prior_regularizer()
     prior = recipe.make_prior()
@@ -114,7 +114,7 @@ def test_factory_requires_initialized_reference_and_weight_applies_once():
 @pytest.mark.parametrize("settings", [dict(prior_reg=0), dict(prior_update="frozen", prior_reg=.1)])
 def test_disabled_or_frozen_factory_has_no_reference_work(settings, monkeypatch):
     monkeypatch.setattr(InitialMMDRegularizer, "from_priors", lambda *a, **kw: pytest.fail("reference captured"))
-    recipe = Recipe(prior_regularizer="initial_mmd", **settings)
+    recipe = Recipe.from_dict(dict(prior_regularizer="initial_mmd", **settings))
     regularizer = recipe.make_prior_regularizer()
     rows = torch.full((2, 2), float("nan"), requires_grad=True)
     assert regularizer(rows).item() == 0

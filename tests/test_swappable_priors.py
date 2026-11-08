@@ -31,7 +31,7 @@ from particlegan.priors import (
 
 ROOT = Path(__file__).resolve().parents[1]
 
-FROZEN_112_RECIPE_FIELDS = (
+FROZEN_RECIPE_FIELDS = (
     "name",
     "critic_formulation",
     "model",
@@ -58,6 +58,7 @@ FROZEN_112_RECIPE_FIELDS = (
     "reg_coeff",
     "reg_kappa",
     "reg_every",
+    "ebi_beta",
     "critic_step_mode",
     "prior_reg",
     "prior_update",
@@ -93,6 +94,7 @@ FROZEN_112_RECIPE_FIELDS = (
     "observation_sigma",
     "reconstruction_weight",
     "kinetic_transport_weight",
+    "generator_gradient_response",
     "kinetic_transport_local_weight",
     "kinetic_transport_projections",
     "amsgrad",
@@ -144,6 +146,10 @@ FROZEN_112_RECIPE_FIELDS = (
     "lr_decay_rate",
     "lr_decay_steps",
     "lr_decay_staircase",
+    "bispf_shape_gates",
+    "bispf_gate_overrides",
+    "prior_code_law",
+    "kappa_radial",
 )
 
 
@@ -203,17 +209,18 @@ def assert_nested_allclose(left, right, atol: float = 1e-6, rtol: float = 1e-5):
 # Group 1: Zero Recipe Bloat & Schema Invariance
 # -----------------------------------------------------------------------------
 
-def test_recipe_fields_exact_112_tuple_invariance():
-    """AC1 Gate 1: Ensure get_recipe_fields() matches the exact 112-tuple schema without additions."""
+def test_recipe_fields_exact_tuple_invariance():
+    """AC1 Gate 1: get_recipe_fields() matches the exact declared schema (112 fields plus the two
+    BISPF gate fields and the declared prior_code_law); prior manipulators add no recipe fields."""
     fields_dict = get_recipe_fields()
     field_names = tuple(fields_dict.keys())
-    assert len(field_names) == 112, f"Expected exactly 112 recipe fields, found {len(field_names)}"
-    assert field_names == FROZEN_112_RECIPE_FIELDS
+    assert len(field_names) == 118, f"Expected exactly 118 recipe fields, found {len(field_names)}"
+    assert field_names == FROZEN_RECIPE_FIELDS
 
-    # Assert Recipe dataclass itself has identical 112 fields
+    # Assert Recipe dataclass itself has identical 118 fields
     recipe_fields = tuple(f.name for f in dataclasses.fields(Recipe))
-    assert len(recipe_fields) == 112
-    assert recipe_fields == FROZEN_112_RECIPE_FIELDS
+    assert len(recipe_fields) == 118
+    assert recipe_fields == FROZEN_RECIPE_FIELDS
 
 
 def test_recipe_no_toplevel_torch_import():
@@ -233,11 +240,11 @@ spec.loader.exec_module(module)
 
 # Resolve fields across multiple presets without torch
 fields_ka2 = module.get_recipe_fields('ka2')
-assert len(fields_ka2) == 112
+assert len(fields_ka2) == 118
 fields_bcap = module.get_recipe_fields('bcap')
-assert len(fields_bcap) == 112
+assert len(fields_bcap) == 118
 fields_bispf = module.get_recipe_fields('bispf_optimized')
-assert len(fields_bispf) == 112
+assert len(fields_bispf) == 118
 
 assert 'torch' not in sys.modules, 'torch leaked into sys.modules'
 assert 'particlegan' not in sys.modules, 'particlegan leaked into sys.modules'
@@ -248,10 +255,10 @@ assert 'particlegan' not in sys.modules, 'particlegan leaked into sys.modules'
 
 @pytest.mark.parametrize("preset", ["ka2", "bcap", "bispf", "bispf_optimized", "e22"])
 def test_recipe_serialization_roundtrip(preset):
-    """Verify Recipe.to_dict() and Recipe(**recipe.to_dict()) roundtrips cleanly without data loss."""
+    """Verify Recipe.to_dict() and Recipe.from_dict(recipe.to_dict()) roundtrips cleanly without data loss."""
     recipe = get_recipe(preset)
     as_dict = recipe.to_dict()
-    reconstructed = Recipe(**as_dict)
+    reconstructed = Recipe.from_dict(as_dict)
     assert reconstructed == recipe
     assert get_recipe_fields(preset) == dataclasses.asdict(recipe)
 
@@ -366,7 +373,7 @@ def test_stratified_sampling_manipulator_permutation_and_cursor():
 def test_simplex_routing_manipulator_invariants_and_gradients():
     """Verify SimplexRoutingManipulator mode weight normalization and gradient flow."""
     K = 5
-    m = SimplexRoutingManipulator(num_modes=K, temperature=0.3)
+    m = SimplexRoutingManipulator(num_modes=K, temperature=0.3, z_dim=4)
     base = ParticlePrior(num_particles=16, z_dim=4)
 
     codes = torch.randn(8, 4, requires_grad=True)
@@ -466,8 +473,8 @@ def test_optimizer_parameter_roles_all_recipes(preset):
         assert "generator" in policy.roles[0]
 
 
-def test_frozen_prior_with_trainable_manipulators():
-    """Verify that prior_update='frozen' leaves prior.base.z out of optimizers while training manipulators."""
+def test_frozen_prior_freezes_manipulator_parameters():
+    """prior_update='frozen' freezes the whole prior: table and manipulator (router) parameters."""
     recipe = get_recipe("bcap", prior_update="frozen", num_particles=32, z_dim=4, batch_size=8)
     gen = nn.Sequential(nn.Linear(4, 8), nn.Tanh(), nn.Linear(8, 2))
     disc = nn.Sequential(nn.Linear(2, 8), nn.Tanh(), nn.Linear(8, 1))
@@ -476,17 +483,16 @@ def test_frozen_prior_with_trainable_manipulators():
     prior = recipe.make_prior(manipulators=[m_train])
 
     assert prior.base.z.requires_grad is False
-    assert m_train.matrix.requires_grad is True
+    assert m_train.matrix.requires_grad is True  # make_prior does not bind the update policy
 
     opt_g, opt_d = recipe.make_optimizers(gen, disc, prior)
 
-    # prior.base.z must NOT be in opt_g
-    assert not any(p is prior.base.z for g in opt_g.param_groups for p in g["params"])
-
-    # m_train.matrix MUST be in opt_g under role='router'
-    router_groups = [g for g in opt_g.param_groups if any(p is m_train.matrix for p in g["params"])]
-    assert len(router_groups) == 1
-    assert router_groups[0]["role"] == "router"
+    # Neither the table nor the router may train under a frozen prior policy.
+    assert m_train.matrix.requires_grad is False
+    trained = {id(p) for g in opt_g.param_groups for p in g["params"]}
+    assert id(prior.base.z) not in trained
+    assert id(m_train.matrix) not in trained
+    assert not any(g.get("role") == "router" for g in opt_g.param_groups)
 
 
 # -----------------------------------------------------------------------------

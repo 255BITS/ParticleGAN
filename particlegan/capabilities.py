@@ -12,15 +12,16 @@ def prior_capabilities(prior):
     Unknown modules remain usable by component APIs, but do not acquire an A2
     capability merely by having an attribute called ``z``.
     """
-    base = getattr(prior, "base", prior)
+    from .priors import ManipulatedPrior, unwrap_prior
+    base = unwrap_prior(prior)
     known = type(base) in (ParticlePrior, MoGParticlePrior)
     mog = type(base) is MoGParticlePrior
     learned = known and hasattr(base, "z") and base.z.requires_grad
     standardize = mog and getattr(base, "standardize", False)
     base_row_local = bool(known and not standardize)
-    manipulator_row_local = True
-    if hasattr(prior, "manipulators"):
-        manipulator_row_local = all(getattr(m, "row_local_gradients", True) for m in prior.manipulators)
+    # The single row-locality rule (ManipulatedPrior.row_local_gradients reads it).
+    manipulator_row_local = (not isinstance(prior, ManipulatedPrior)
+                             or all(m.row_local_gradients for m in prior.manipulators))
     row_local = bool(base_row_local and manipulator_row_local)
     a2_eligible = bool(learned and row_local)
     return {
