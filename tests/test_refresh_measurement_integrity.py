@@ -6,6 +6,7 @@ from types import SimpleNamespace
 import pytest
 
 from experiments.forge import api
+from experiments.forge import views
 from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
 from experiments.forge.publication_integrity import CORRECTIONS, IDENTITY_FIELDS, load_corrections
 from experiments.forge.sampling import validate_declaration
@@ -23,10 +24,13 @@ def current_cell(tmp_path, monkeypatch):
     runtime = {"python": "test-python", "packages": {"torch": "test-torch"}}
     compute = {"backend": "cpu", "threads": 1, "model": "test-cpu"}
     candidate, revision, source = "candidate", "a" * 64, "b" * 64
+    protocol = {"seed": 0}
+    science = {"runtime": runtime, "compute": compute, "protocol": protocol, "seed": 0,
+               "task_initializers": {task["id"]: task["execution"]["initializer"]}}
+    job = {"task_id": task["id"], "science": science, "compatibility_key": stable_hash(science)}
     request = {"candidate": {"id": candidate}, "candidate_revision": revision,
-               "source": {"digest": source}, "runtime": runtime, "protocol": {"seed": 0},
-               "tasks": {task["id"]: task}, "jobs": [{"task_id": task["id"],
-                    "science": {"runtime": runtime, "compute": compute}}]}
+               "source": {"digest": source}, "runtime": runtime, "protocol": protocol,
+               "tasks": {task["id"]: task}, "jobs": [job]}
     sampling = validate_declaration(task, required=True)
     sampling["scoring_weights"] = task["evaluation"].get("scoring_weights", "live")
     record = {"family": "family", "candidate_id": candidate, "candidate_revision": revision,
@@ -34,7 +38,9 @@ def current_cell(tmp_path, monkeypatch):
               "diagnostic": False, "execution_sha256": refresh.task_execution_fingerprint(task),
               "evaluation_sha256": refresh.task_evaluation_fingerprint(task), "runtime": runtime,
               "observed_contract": {"schema_version": 1, "resolved_recipe": recipe,
-                                    "runtime": runtime, "compute": compute, "sampling": sampling}}
+                                    "runtime": runtime, "compute": compute, "sampling": sampling,
+                                    "protocol": protocol, "initializer": task["execution"]["initializer"],
+                                    "execution": task["execution"], "evaluation": task["evaluation"]}}
     record["key"] = stable_hash([record[field] for field in IDENTITY_FIELDS])
     monkeypatch.setattr(refresh, "current_family_candidates", lambda root: [
         {"family": "family", "candidate_id": candidate}])
@@ -42,6 +48,24 @@ def current_cell(tmp_path, monkeypatch):
     monkeypatch.setattr(inventory, "_resolve_idea_for_readout_check", lambda *args, **kwargs: request)
     monkeypatch.setattr(api, "task_formulation_context", lambda *args, **kwargs:
                         SimpleNamespace(recipe=SimpleNamespace(to_dict=lambda: recipe)))
+    # This fixture tests receipt consumption, not the Gaussian scientific gate.
+    # The producer grade is independently called; missing/full-budget evidence
+    # and grades are varied below without executing a scientific experiment.
+    monkeypatch.setattr(views, "grade_result", lambda task, raw, **kwargs:
+                        {"status": "FAIL" if raw.get("evidence", {}).get("completed_steps") == 1000
+                         else "INCOMPLETE"})
+    producer = {"schema_version": 1, "attempt_id": "producer", "candidate_revision": revision,
+                "task_results": [{"task_id": task["id"], "compatibility_key": job["compatibility_key"],
+                                  "gate_status": "FAIL", "raw_status": "completed",
+                                  "observed_contract": deepcopy(record["observed_contract"])}],
+                "raw": {"attempt_status": "completed", "result": {"evidence": {"completed_steps": 1000},
+                         "recipe": recipe, "initializer": task["execution"]["initializer"], "rng": {"seed": 0}}}}
+    directory = tmp_path / "reports/forge/attempts/producer"
+    atomic_json(directory / "request.json", {"request": request})
+    atomic_json(directory / "result.json", producer)
+    atomic_json(directory / "evidence.json", {"result_hash": stable_hash(producer),
+                                               "source": request["source"], "runtime": runtime})
+    record["producer"] = {"attempt_id": "producer", "result_hash": stable_hash(producer)}
 
     def save(value):
         atomic_json(tmp_path / COVERAGE, {"summary": {"pending": 0, "running": 0}, "records": [value]})
@@ -79,7 +103,8 @@ def test_unmeasured_optional_precision_stays_visible_without_blocking_required_c
     assert report["optional_precision_tasks"] == ["optional-precision"]
 
 
-@pytest.mark.parametrize("missing", ["resolved_recipe", "sampling", "runtime", "compute"])
+@pytest.mark.parametrize("missing", ["resolved_recipe", "sampling", "runtime", "compute", "protocol",
+                                    "initializer", "execution", "evaluation"])
 def test_declared_identity_cannot_replace_missing_observed_witnesses(current_cell, missing):
     root, original, save = current_cell
     record = deepcopy(original)
@@ -89,6 +114,89 @@ def test_declared_identity_cannot_replace_missing_observed_witnesses(current_cel
     assert report["current"] is False
     assert report["faithful_measured_cells"] == 0
     assert report["gap_examples"]
+
+
+@pytest.mark.parametrize("field,value", [("initializer", "supplied"), ("protocol", {"seed": 1})])
+def test_other_initialization_or_seed_cannot_satisfy_current_contract(current_cell, field, value):
+    root, original, save = current_cell
+    record = deepcopy(original)
+    record["observed_contract"][field] = value
+    save(record)
+    report = refresh.check_attempt_coverage(root)
+    assert report["current"] is False
+    assert report["faithful_measured_cells"] == 0
+
+
+def test_missing_or_mutated_producer_does_not_certify_displayed_failure(current_cell):
+    root, original, save = current_cell
+    save({key: value for key, value in original.items() if key != "producer"})
+    assert refresh.check_attempt_coverage(root)["invalid_record_counts"]["missing_or_invalid_producer_receipt"] == 1
+    save(original)
+    result_path = root / "reports/forge/attempts/producer/result.json"
+    result = read_json(result_path)
+    result["task_results"][0]["gate_status"] = "PASS"
+    atomic_json(result_path, result)
+    assert refresh.check_attempt_coverage(root)["invalid_record_counts"]["invalid_producer_certificate"] == 1
+
+
+def test_certified_display_label_cannot_replace_full_budget_producer_grade(current_cell):
+    root, original, save = current_cell
+    directory = root / "reports/forge/attempts/producer"
+    result = read_json(directory / "result.json")
+    result["raw"]["result"]["evidence"]["completed_steps"] = 500
+    atomic_json(directory / "result.json", result)
+    certificate = read_json(directory / "evidence.json")
+    certificate["result_hash"] = stable_hash(result)
+    atomic_json(directory / "evidence.json", certificate)
+    record = deepcopy(original)
+    record["producer"]["result_hash"] = stable_hash(result)
+    save(record)
+    report = refresh.check_attempt_coverage(root)
+    assert report["current"] is False
+    assert report["invalid_record_counts"]["producer_grade_mismatch_or_incomplete"] == 1
+
+
+def test_producer_actual_applied_recipe_cannot_be_replaced_by_a_matching_witness(current_cell):
+    root, original, save = current_cell
+    directory = root / "reports/forge/attempts/producer"
+    result = read_json(directory / "result.json")
+    result["raw"]["result"]["recipe"]["lr"] *= 2
+    atomic_json(directory / "result.json", result)
+    certificate = read_json(directory / "evidence.json")
+    certificate["result_hash"] = stable_hash(result)
+    atomic_json(directory / "evidence.json", certificate)
+    record = deepcopy(original)
+    record["producer"]["result_hash"] = stable_hash(result)
+    save(record)
+    report = refresh.check_attempt_coverage(root)
+    assert report["current"] is False
+    assert report["invalid_record_counts"]["producer_applied_contract_mismatch_or_missing"] == 1
+
+
+def test_frozen_independent_grading_certificate_must_bind_raw_evidence(current_cell):
+    root, original, save = current_cell
+    directory = root / "reports/forge/attempts/producer"
+    frozen = read_json(directory / "request.json")
+    frozen["request"]["requires_independent_grading"] = True
+    atomic_json(directory / "request.json", frozen)
+    result = read_json(directory / "result.json")
+    result["raw"]["grading"] = {"source_digest": original["source_digest"], "raw_hash": "stale",
+                                  "grades": {original["task"]: {"status": "FAIL"}}}
+    atomic_json(directory / "result.json", result)
+    certificate = read_json(directory / "evidence.json")
+    certificate["result_hash"] = stable_hash(result)
+    atomic_json(directory / "evidence.json", certificate)
+    record = deepcopy(original)
+    record["producer"]["result_hash"] = stable_hash(result)
+    save(record)
+    assert refresh.check_attempt_coverage(root)["invalid_record_counts"]["invalid_producer_grading_certificate"] == 1
+    result["raw"]["grading"]["raw_hash"] = stable_hash(result["raw"]["result"])
+    atomic_json(directory / "result.json", result)
+    certificate["result_hash"] = stable_hash(result)
+    atomic_json(directory / "evidence.json", certificate)
+    record["producer"]["result_hash"] = stable_hash(result)
+    save(record)
+    assert refresh.check_attempt_coverage(root)["current"] is True
 
 
 @pytest.mark.parametrize("field", ["source_digest", "candidate_revision", "execution_sha256", "evaluation_sha256"])

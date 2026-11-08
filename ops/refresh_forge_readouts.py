@@ -614,6 +614,86 @@ def check_retained_diagnostic_integrity(root: Path) -> dict[str, Any]:
     }
 
 
+def _coverage_producer_errors(root: Path, record: dict, request: dict, task: dict, job: dict) -> list[str]:
+    """Verify the witness against its durable producer, never a display label.
+
+    Producer receipts retain their original bytes. Reading and independently
+    grading current-source raw evidence does not rewrite a historical result.
+    Task graders own full-budget/cadence/stopping requirements; a generic step
+    comparison would incorrectly accept partial traces or reject valid stops.
+    """
+    from experiments.forge.views import grade_result
+
+    producer = record.get("producer", {})
+    if not isinstance(producer, dict):
+        return ["missing_or_invalid_producer_receipt"]
+    try:
+        attempt_id = identifier(producer.get("attempt_id"), "producer attempt")
+        directory = root / "reports/forge/attempts" / attempt_id
+        resolved = read_json(directory / "request.json")
+        result = read_json(directory / "result.json")
+        certificate = read_json(directory / "evidence.json")
+    except (OSError, ValueError, TypeError):
+        return ["missing_or_invalid_producer_receipt"]
+    if not all(isinstance(value, dict) for value in (resolved, result, certificate)):
+        return ["missing_or_invalid_producer_receipt"]
+    frozen = resolved.get("request", resolved)
+    digest = stable_hash(result)
+    if (producer.get("result_hash") != digest or certificate.get("result_hash") != digest
+            or certificate.get("source") != frozen.get("source")
+            or certificate.get("runtime") != frozen.get("runtime")
+            or result.get("attempt_id") != attempt_id
+            or result.get("candidate_revision") != request["candidate_revision"]
+            or result.get("retry_of") != resolved.get("retry_of")):
+        return ["invalid_producer_certificate"]
+    if (any(frozen.get(key) != request.get(key) for key in
+            ("candidate_revision", "runtime", "protocol"))
+            or frozen.get("source", {}).get("digest") != request["source"]["digest"]
+            or frozen.get("candidate", {}).get("id") != request["candidate"]["id"]):
+        return ["stale_producer_contract"]
+    name = task["id"]
+    frozen_task = frozen.get("tasks", {}).get(name)
+    if (not frozen_task or task_execution_fingerprint(frozen_task) != task_execution_fingerprint(task)
+            or task_evaluation_fingerprint(frozen_task) != task_evaluation_fingerprint(task)):
+        return ["stale_producer_task"]
+    producer_jobs = [item for item in frozen.get("jobs", [])
+                     if name in item.get("task_ids", [item.get("task_id")])]
+    if (len(producer_jobs) != 1 or not job.get("science")
+            or job.get("compatibility_key") != stable_hash(job["science"])
+            or producer_jobs[0].get("science") != job["science"]
+            or producer_jobs[0].get("compatibility_key") != job["compatibility_key"]):
+        return ["producer_job_mismatch"]
+    rows = [row for row in result.get("task_results", []) if row.get("task_id") == name]
+    if (len(rows) != 1 or rows[0].get("compatibility_key") != job["compatibility_key"]
+            or rows[0].get("observed_contract") != record["observed_contract"]
+            or rows[0].get("gate_status") != record["status"]
+            or rows[0].get("raw_status") != "completed"):
+        return ["producer_observation_mismatch"]
+    raw = result.get("raw", {})
+    raw_result = raw.get("result", {})
+    if raw.get("attempt_status") != "completed" or not isinstance(raw_result, dict) or not raw_result:
+        return ["missing_completed_producer_evidence"]
+    member_raw = raw_result.get("task_results", {}).get(name, raw_result)
+    applied = member_raw.get("applied", member_raw)
+    recipe = applied.get("recipe_serialized", applied.get("recipe"))
+    if (not recipe or stable_hash(recipe) != stable_hash(record["observed_contract"]["resolved_recipe"])
+            or applied.get("initializer") != record["observed_contract"]["initializer"]
+            or applied.get("rng", {}).get("seed") != request["protocol"]["seed"]):
+        return ["producer_applied_contract_mismatch_or_missing"]
+    if frozen.get("requires_independent_grading"):
+        grading = raw.get("grading", {})
+        if (grading.get("raw_hash") != stable_hash(raw_result)
+                or grading.get("source_digest") != request["source"]["digest"]):
+            return ["invalid_producer_grading_certificate"]
+        grade = grading.get("grades", {}).get(name, {})
+    else:
+        continuation = member_raw.get("evidence", {}).get("continuity", {}).get("diagnostic_continuation") is True
+        grade = grade_result(task, member_raw, diagnostic=continuation)
+    if not isinstance(grade, dict) or grade.get("gate_status", grade.get("status")) != record["status"]:
+        return ["producer_grade_mismatch_or_incomplete"]
+    return []
+
+
 def _coverage_observation_errors(root: Path, record: dict, request: dict, task: dict, job: dict) -> list[str]:
     """Compare observed execution witnesses to the current frozen contract.
 
@@ -621,6 +701,7 @@ def _coverage_observation_errors(root: Path, record: dict, request: dict, task: 
     declarations cannot be copied into a row to reconstruct missing observations.
     """
     from experiments.forge.api import task_formulation_context
+    from experiments.forge.initialization import task_initializer
     from experiments.forge.publication_integrity import coverage_disposition, IDENTITY_FIELDS
     from experiments.forge.sampling import validate_declaration
 
@@ -649,6 +730,22 @@ def _coverage_observation_errors(root: Path, record: dict, request: dict, task: 
     if not job:
         return errors + ["missing_current_job_binding"]
     science = job.get("science", {})
+    protocol = request.get("protocol")
+    if (not protocol or type(protocol.get("seed")) is not int
+            or witness.get("protocol") != protocol
+            or science.get("protocol") != protocol or science.get("seed") != protocol["seed"]):
+        errors.append("protocol_seed_mismatch_or_missing")
+    try:
+        initializer = task_initializer(task, request["candidate"])
+    except (ValueError, KeyError, TypeError):
+        errors.append("unresolved_declared_initializer")
+    else:
+        if (witness.get("initializer") != initializer
+                or science.get("task_initializers", {}).get(task["id"]) != initializer):
+            errors.append("initializer_mismatch_or_missing")
+    for field in ("execution", "evaluation"):
+        if not task.get(field) or witness.get(field) != task[field]:
+            errors.append(field + "_contract_mismatch_or_missing")
     runtime = science.get("runtime", request.get("runtime"))
     compute = science.get("compute")
     if not runtime or witness.get("runtime") != runtime or record.get("runtime") != runtime:
@@ -674,6 +771,8 @@ def _coverage_observation_errors(root: Path, record: dict, request: dict, task: 
                 errors.append("resolved_recipe_mismatch")
         except (ValueError, KeyError, TypeError, RuntimeError) as exc:
             errors.append("unresolved_recipe:" + type(exc).__name__)
+    if not errors:
+        errors.extend(_coverage_producer_errors(root, record, request, task, job))
     return errors
 
 
