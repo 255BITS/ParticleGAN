@@ -27,7 +27,7 @@ if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
 from experiments.forge import attempt_coverage
-from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
+from experiments.forge.contracts import atomic_json, read_json
 from experiments.forge.views import (
     grade_result,
     load_tasks,

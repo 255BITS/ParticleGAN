@@ -1660,22 +1660,21 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         assert "not run" not in row_line
         assert "| 2 | 0 |" in row_line
 
-    # Verify certified PASS/FAIL for the original suite and the nine measured
+    # Verify certified PASS/FAIL for the original suite and the ten measured
     # GAN stretch tasks. New precision tasks have no archived measurements.
     from experiments.forge.views import load_view
 
     cov_doc = read_json(ROOT / "reports/forge/attempt-coverage.json")
     full_suite_doc = read_json(ROOT / "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json")
     view = load_view(ROOT, "discriminator_stability")
-    archived_view = read_json(ROOT / view["previous_revision"]["archive"])
     stretch_tasks = {
         a["task"]
-        for a in archived_view["assignments"]
-        if a["importance"] == "stretch"
+        for a in view["assignments"]
+        if a["importance"] == "stretch" and not a["task"].startswith("precision_gaussian_")
     }
     suite_50 = set(full_suite_doc["tests"]) | {"ring_hold"} | stretch_tasks
     expected_per_family = len(suite_50)
-    assert expected_per_family == 59
+    assert expected_per_family == 60
     selected_fams = {"atlas", "bcap-pure", "bispf", "e22", "k3p", "ka2", "r1r2", "release07-gan-v3"}
     unscoped_selected_records = [
         rec
