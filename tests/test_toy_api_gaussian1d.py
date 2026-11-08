@@ -2,6 +2,8 @@
 from copy import deepcopy
 from pathlib import Path
 import json
+import subprocess
+import sys
 
 import numpy as np
 import pytest
@@ -115,3 +117,18 @@ def test_forge_preflight_rejects_wrong_scalar_target_or_missing_scorer():
     assert any("scalar scorer" in message for message in adapters.adapter_preflight(missing, candidate))
     task["execution"]["host_definition"]["covariances"] = [[[0.]]]
     assert any("positive sigma" in message for message in adapters.adapter_preflight(task, candidate))
+
+
+def test_declared_scorer_is_bound_before_execution_in_a_fresh_process():
+    # Parent imports must not accidentally supply a scorer missing from a new receipt.
+    code = """
+from hashlib import sha256
+from pathlib import Path
+from benchmarks.toy_audit import api_gaussian1d, api_run
+case = api_gaussian1d.list_cases()[0]
+assert case['sample_evaluator'] == 'benchmarks.toy_audit.gaussian1d_quality:score_samples'
+path = 'benchmarks/toy_audit/gaussian1d_quality.py'
+assert api_run.source_identity()['files_sha256'][path] == sha256(Path(path).read_bytes()).hexdigest()
+"""
+    subprocess.run([sys.executable, "-c", code], cwd=ROOT, check=True,
+                   capture_output=True, text=True, timeout=30)

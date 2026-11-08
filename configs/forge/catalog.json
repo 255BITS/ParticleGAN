@@ -901,7 +901,7 @@
     },
     {
       "family": "benchmark/toy_audit",
-      "git_blob": "957af6779bd0165a61d4b5a1047a715dd6fc6412",
+      "git_blob": "c20fca9058d45a9393b6b3a71d38e0cfc5f86f2f",
       "path": "benchmarks/toy_audit/api_conditionals.py",
       "role": "support",
       "suggested_tiers": []
@@ -945,7 +945,7 @@
     },
     {
       "family": "benchmark/toy_audit",
-      "git_blob": "68836d0ff4a3db540104ccabe944c602f7b241e6",
+      "git_blob": "24402e9e8a98b1e0685ca66888c31a021f91597d",
       "path": "benchmarks/toy_audit/api_gaussian1d.py",
       "role": "support",
       "suggested_tiers": []
@@ -1022,7 +1022,7 @@
     },
     {
       "family": "benchmark/toy_audit",
-      "git_blob": "602ddea4eaf1110902045ee54733b82b6f7c76c0",
+      "git_blob": "93f0613387ea50504a7ec99f50b89a777af6ceab",
       "path": "benchmarks/toy_audit/api_ring16.py",
       "role": "support",
       "suggested_tiers": []
@@ -14245,7 +14245,7 @@
     },
     {
       "family": "report/project",
-      "git_blob": "750b61d331446a86d93d0ca7b0839276347a2d02",
+      "git_blob": "d11b220e04e07e8fa2e2986e02bc6cef73ff72e2",
       "path": "reports/gpt-audit-remediation-2026-11-08.md",
       "role": "narrative",
       "suggested_tiers": []

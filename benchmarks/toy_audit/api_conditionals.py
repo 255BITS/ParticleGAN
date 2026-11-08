@@ -1390,6 +1390,9 @@ class _MisGANBaseFixture:
         expected = self._checkpoint_state(allow_interrupted=True)
         if not isinstance(state, dict) or state.get("version") != MISGAN_VERSION:
             raise ValueError("incomplete historical MisGAN checkpoint; resume with its original source")
+        # Optimizer loaders may retain tensor references. Restoring must not
+        # let subsequent training mutate the caller's saved snapshot.
+        state = deepcopy(state)
         if state.keys() != expected.keys():
             raise ValueError("invalid MisGAN checkpoint fields")
         for key in ("case_id", "case", "seed", "limit", "recipe", "device", "requires_grad", "base_rates",

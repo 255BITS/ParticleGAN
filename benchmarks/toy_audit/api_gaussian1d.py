@@ -6,6 +6,7 @@ from pathlib import Path
 
 import numpy as np
 
+from . import gaussian1d_quality  # Bind the declared scorer before source capture.
 from .api_vectors import VectorFixture, _case, _digest, _law
 
 TASK_PATH = Path(__file__).resolve().parents[2] / "configs/forge/tasks/gaussian1d_acquisition.json"
@@ -23,7 +24,7 @@ def list_cases():
         task["description"], steps=spec["steps"], batch=spec["batch"], evaluation=4096,
         default_recipe="k3p", particles=spec["particles"], z_dim=spec["z_dim"],
         metric_family="gaussian1d_acquisition", spec=spec, thresholds=spec["thresholds"],
-        sample_evaluator="benchmarks.toy_audit.gaussian1d_quality:score_samples",
+        sample_evaluator=gaussian1d_quality.__name__ + ":score_samples",
         task_sha256=hashlib.sha256(TASK_PATH.read_bytes()).hexdigest(),
         law=law, law_sha256=_digest(law), protocol_seed=0,
         evaluation_observations=24, terminal_observations=5,

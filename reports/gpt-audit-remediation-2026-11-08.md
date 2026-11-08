@@ -18,6 +18,7 @@ The [technique inventory](forge/technique-inventory.md) remains the single curre
 | A8: undeclared surrogate update | The bounded tanh head uses the exact automatic derivative of its forward map, without clipping the upstream gradient or injecting a restoring force. Declared BISPF shape/call-count rules remain part of that recipe; this repair does not silently redefine BISPF. | [#529](https://github.com/255BITS/ParticleGAN/pull/529) |
 | Engineering followups | Added MIT distribution metadata, complete Python 3.11/3.12 test sharding and an actual minimum-dependency installed-wheel continuation check. Undefined-name findings cannot be accepted by updating the lint baseline. | [#533](https://github.com/255BITS/ParticleGAN/pull/533) |
 | Prospective measurement provenance | Future supported runs emit actual execution witnesses and certified per-attempt coverage exports. Missing or incompatible recipe, initialization, runtime, sampling or serving observations remain gaps; numerical grades are unchanged. | [#534](https://github.com/255BITS/ParticleGAN/pull/534) |
+| Continuation and prior-law followups | Complete versioned BiGAN/ALICE checkpoints, independent loaded MisGAN snapshots, and task-owned Gaussian/ring MoG declarations. Unsupported manual-host mechanisms refuse execution; noise-free bounded software cohorts remain separate from the original questions. | [#535](https://github.com/255BITS/ParticleGAN/pull/535) |
 
 ## Evidence and compatibility
 
@@ -29,11 +30,13 @@ Caller-owned vector paths without a complete restore owner explicitly export dia
 
 Archived critic-balance and generator-step coordinator checks load the exact original eight task cards with source/blob/digest provenance. Their bounded current-API optimizer controls are explicit separate software cohorts. The active family-search resolver follows the same recipe ownership as the executed vector provider; it no longer reports hidden task-specific trainer overrides as the resolved recipe. Frozen coordinator sources and scientific evidence pins are preserved.
 
+Followup adversarial controls require fresh-object continuation without manually transferring RNGs and verify that later training cannot mutate the input checkpoint. BiGAN/ALICE hosts refuse declared mechanisms they cannot execute before constructing optimizers. Their supported noise-free software cohorts establish continuation behavior only. Moving task-owned MoG fields into the prior declaration preserves the Gaussian/ring target protocol while keeping trainer-specific tuning removed; a transformed particle cloud is not silently substituted for a required MoG.
+
 The retired runner cannot be revived by `--force`, a direct task call or an internal batch spec. New research measurements require normal frozen Forge study admission, the declared protocol and budgets. A publication refresh reads retained evidence and adds no training. Retained-publication integrity and current-source measurement coverage have separate status fields.
 
 The new controls test the scientific boundary, rather than just exercising a successful code path: damaging the measured neural imputer changes its predictions; its evaluator cannot call ppost; disabling an optimizer prevents hidden model/prior writes; importing providers cannot change a shared architecture; automatic derivatives match finite differences and a zero upstream signal; and fresh-object continuation preserves complete owned state. Software prefixes and constructive/oracle controls confer no full-budget learned-quality credit.
 
-For lint, three control-flow false positives in frozen reproduction sources are exempted only by exact path, message and source SHA-256. Their source bytes are preserved. The remaining reviewed redefinitions are imported pytest fixtures, not blanket permission for new redefinitions. The engineering PR reduces the reviewed baseline from 302 to 297 findings; integration removes two further resolved unused-import exemptions (295 remain).
+For lint, three control-flow false positives in frozen reproduction sources are exempted only by exact path, message and source SHA-256. Their source bytes are preserved. The remaining reviewed redefinitions are imported pytest fixtures, not blanket permission for new redefinitions. The engineering PR reduces the reviewed baseline from 302 to 297 findings; integration removes three further resolved unused-import exemptions (294 remain).
 
 ## Remaining scientific questions
 
@@ -52,7 +55,13 @@ The integrated CPU checks used Python 3.12.14 / Torch 2.14.0+cu130 with CUDA hid
 | Publication, exact producer verification and generated navigation | 34 passed |
 | Final producer emission, consumer acceptance and interpreter-coverage policy | 69 passed |
 | Archived coordinator boundaries and current family-search recipe ownership | 341 passed |
+| Integrated adversarial and MisGAN continuation/snapshot controls | 111 passed |
+| BiGAN/ALICE checkpoint, activation-boundary and task-law controls | 55 passed |
+| Model source-admission controls | 39 passed; 5 CUDA tests deselected |
+| Bounded BiGAN/ALICE CUDA continuation | Exact next update, full state, all seven streams and independent input snapshots passed on RTX A6000 |
 | Minimum base installed-wheel continuation | Passed in isolated Python 3.11.16 / Torch 2.6.0+cpu / NumPy 1.26.0 |
-| Reviewed lint baseline | Current; 295 findings, no additions; new undefined names cannot be baselined |
+| Reviewed lint baseline | Current; 294 findings, no additions; new undefined names cannot be baselined |
 
 Full interpreter, packaging and collection-coverage results are GitHub checks on the integration PR. Raw software verification logs stay under the ignored local directory `runs/software/audit-repairs-2026-11-08/`. Component PR descriptions retain their own exact validation scopes. These are software checks, not new learned-quality qualifications or evidence of accepted calibration.
+
+The CUDA control used the explicit noise-free K3P software cohort (batch 16, 32 particles, seed 0), Torch 2.14.0 / CUDA 13.0 on RTX A6000. Deterministic algorithms were enabled and TF32 disabled. It checked both BiGAN and ALICE across deliberate advances of every named stream, fresh restoration and the next update; CPU/CUDA global RNGs remained unchanged. It grants no learned-quality or original-task qualification credit.

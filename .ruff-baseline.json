@@ -46,11 +46,6 @@
         "`benchmarks.legacy.recipe.get_recipe` imported but unused": 1
       }
     },
-    "benchmarks/toy_audit/api_gaussian1d.py": {
-      "F401": {
-        "`.gaussian1d_quality` imported but unused": 1
-      }
-    },
     "benchmarks/toy_audit/api_model_ae_ddgan.py": {
       "F401": {
         "`.api_model_ddgan.task_recipe` imported but unused": 1
