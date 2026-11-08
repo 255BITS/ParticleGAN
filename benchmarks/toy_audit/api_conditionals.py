@@ -9,8 +9,9 @@ from __future__ import annotations
 
 from .reproducibility import DEFAULT_SEED, construction_rng
 
-from copy import copy, deepcopy
+from copy import deepcopy
 import math
+from functools import wraps
 
 import numpy as np
 import torch
@@ -28,6 +29,7 @@ from benchmarks.toy_audit import source_conditional_scoring as density
 from benchmarks.toy_audit.api_sources import circle, sprite, misgan
 
 VERSION = "conditional-api-v1"
+MISGAN_VERSION = "misgan-api-v2-formula-faithful"
 EVAL_SEED = 99123
 
 
@@ -1297,6 +1299,31 @@ class FourierMLPDiscriminator(nn.Module):
         return self.net(h)
 
 
+def _misgan_update(method):
+    """Own stochastic operations and reject checkpoints of interrupted updates."""
+    @wraps(method)
+    def step(self):
+        if self.completed_steps >= self.limit:
+            raise RuntimeError("declared execution cap reached")
+        if not self._checkpoint_ready:
+            raise RuntimeError("interrupted MisGAN update requires a complete checkpoint restore")
+        devices = [self.device.index] if self.device.type == "cuda" else []
+        self._checkpoint_ready = False
+        with torch.random.fork_rng(devices=devices), torch.autograd.set_multithreading_enabled(False):
+            if self.device.type == "cuda":
+                torch.cuda.set_rng_state(self.model_rng.get_state(), self.device)
+            else:
+                torch.set_rng_state(self.model_rng.get_state())
+            try:
+                result = method(self)
+            finally:
+                state = torch.cuda.get_rng_state(self.device) if self.device.type == "cuda" else torch.get_rng_state()
+                self.model_rng.set_state(state)
+        self._checkpoint_ready = True
+        return result
+    return step
+
+
 class _MisGANBaseFixture:
     api_components = (
         "Recipe.make_prior",
@@ -1307,6 +1334,143 @@ class _MisGANBaseFixture:
         "scale_learning_rates",
     )
     hint_rate: float = 0.50
+
+    def _sampling_witness(self, scored, *, posterior_resampling):
+        result = dict(scored)
+        result["observed_sampling"] = dict(
+            contract=MISGAN_VERSION, scoring_weights="live",
+            sampling_law="public_prior_without_output_noise", eval_output_noise="clean",
+            predictor="G_x + ppost" if posterior_resampling else "G_i",
+            posterior_resampling=posterior_resampling)
+        return result
+
+    def _checkpoint_modules(self):
+        names = ("G_x", "G_m", "G_i", "D_x", "D_m", "D_i",
+                 "prior_x", "prior_m", "prior_i", "ema_G_x", "ema_G_m", "ema_G_i",
+                 "ema_prior_x", "ema_prior_m", "ema_prior_i",
+                 "regularizer_x", "regularizer_m", "regularizer_i")
+        return {name: getattr(self, name) for name in names if getattr(self, name, None) is not None}
+
+    def _checkpoint_state(self, *, allow_interrupted=False):
+        if not allow_interrupted and not self._checkpoint_ready:
+            raise RuntimeError("MisGAN checkpoints require a completed update boundary")
+        modules = self._checkpoint_modules()
+        penalties = {}
+        for role in self.critic_optimizers:
+            penalty = getattr(self, "penalty_" + role)
+            cooler = getattr(penalty.regularizer, "cooler", None)
+            penalties[role] = dict(record=penalty.optimizer.record.state_dict(),
+                                   cooler=None if cooler is None else cooler.state_dict(),
+                                   last_stats=penalty.last_stats)
+        return deepcopy(dict(
+            version=MISGAN_VERSION, case_id=self.case["id"], case=self.case, seed=self.seed,
+            limit=self.limit, recipe=self.recipe.to_dict(), device=str(self.device),
+            completed_steps=self.completed_steps, base_rates=self.base_rates,
+            requires_grad={name: {key: p.requires_grad for key, p in module.named_parameters()}
+                           for name, module in modules.items()},
+            models={name: module.state_dict() for name, module in modules.items()},
+            optimizers={"g": self.opt_g.state_dict(),
+                        **{role: optimizer.state_dict() for role, optimizer in self.critic_optimizers.items()}},
+            penalties=penalties,
+            streams={name: getattr(self, name).get_state() for name in
+                     ("data_rng", "latent_rng", "noise_rng", "model_rng")},
+            constructor_counters=self._rng_streams._counters,
+            last_losses=self.last_losses))
+
+    def _restore_checkpoint(self, state):
+        from particlegan.policy import _validate_optimizer_state
+        expected = self._checkpoint_state(allow_interrupted=True)
+        if not isinstance(state, dict) or state.get("version") != MISGAN_VERSION:
+            raise ValueError("incomplete historical MisGAN checkpoint; resume with its original source")
+        if state.keys() != expected.keys():
+            raise ValueError("invalid MisGAN checkpoint fields")
+        for key in ("case_id", "case", "seed", "limit", "recipe", "device", "requires_grad", "base_rates",
+                    "constructor_counters"):
+            if state[key] != expected[key]:
+                raise ValueError(f"MisGAN checkpoint {key} differs from the declared host")
+        steps = state["completed_steps"]
+        if type(steps) is not int or not 0 <= steps <= self.limit:
+            raise ValueError("invalid MisGAN checkpoint update count")
+        modules = self._checkpoint_modules()
+        optimizers = {"g": self.opt_g, **self.critic_optimizers}
+        for key in ("models", "optimizers", "penalties", "streams"):
+            if not isinstance(state[key], dict) or state[key].keys() != expected[key].keys():
+                raise ValueError(f"invalid MisGAN checkpoint {key}")
+        # Validate every object before changing a live model, optimizer or RNG.
+        try:
+            for name, module in modules.items():
+                current, saved = module.state_dict(), state["models"][name]
+                if not isinstance(saved, dict) or saved.keys() != current.keys():
+                    raise ValueError("model fields differ")
+                for key, value in current.items():
+                    other = saved[key]
+                    if isinstance(value, torch.Tensor):
+                        if (not isinstance(other, torch.Tensor) or other.shape != value.shape
+                                or other.dtype != value.dtype or not torch.isfinite(other).all()):
+                            raise ValueError("model tensor differs")
+                    elif other != value:
+                        raise ValueError("model metadata differs")
+                deepcopy(module).load_state_dict(saved)
+                if name.startswith("regularizer_"):
+                    stochastic = (saved if self.recipe.prior_regularizer_checkpoint(module) else None)
+                    self.recipe.restore_prior_regularizer(module, stochastic, validate_only=True)
+            for name, optimizer in optimizers.items():
+                _validate_optimizer_state(optimizer, state["optimizers"][name])
+                deepcopy(optimizer).load_state_dict(state["optimizers"][name])
+            for role, values in state["penalties"].items():
+                if not isinstance(values, dict) or values.keys() != expected["penalties"][role].keys():
+                    raise ValueError("penalty fields differ")
+                penalty = getattr(self, "penalty_" + role)
+                if values["record"].get("observed_steps") != steps:
+                    raise ValueError("critic clock differs from the completed update count")
+                deepcopy(penalty.optimizer.record).load_state_dict(values["record"])
+                cooler = getattr(penalty.regularizer, "cooler", None)
+                if cooler is None:
+                    if values["cooler"] is not None:
+                        raise ValueError("unexpected cooler history")
+                else:
+                    saved_cooler = values["cooler"]
+                    current_cooler = expected["penalties"][role]["cooler"]
+                    if not isinstance(saved_cooler, dict) or saved_cooler.keys() != current_cooler.keys():
+                        raise ValueError("incomplete cooler state")
+                    for key in current_cooler.keys() - {"ema_residual", "initialized"}:
+                        if saved_cooler[key] != current_cooler[key]:
+                            raise ValueError("cooler declaration differs")
+                    if (type(saved_cooler["initialized"]) is not bool
+                            or type(saved_cooler["ema_residual"]) not in (int, float)
+                            or not math.isfinite(saved_cooler["ema_residual"])
+                            or saved_cooler["ema_residual"] < 0):
+                        raise ValueError("invalid cooler history")
+                    deepcopy(cooler).load_state_dict(saved_cooler)
+                if not isinstance(values["last_stats"], dict):
+                    raise ValueError("invalid penalty diagnostics")
+            for name, values in state["streams"].items():
+                torch.Generator(device=getattr(self, name).device).set_state(values.cpu())
+            if (not isinstance(state["last_losses"], dict)
+                    or any(type(v) not in (int, float) or not math.isfinite(v) for v in state["last_losses"].values())):
+                raise ValueError("invalid loss diagnostics")
+        except (KeyError, TypeError, ValueError, RuntimeError, AttributeError) as error:
+            raise ValueError("invalid complete MisGAN checkpoint state") from error
+        for name, module in modules.items():
+            module.load_state_dict(state["models"][name])
+            if name.startswith("regularizer_"):
+                stochastic = (state["models"][name] if self.recipe.prior_regularizer_checkpoint(module) else None)
+                self.recipe.restore_prior_regularizer(module, stochastic)
+        for name, optimizer in optimizers.items():
+            optimizer.load_state_dict(state["optimizers"][name])
+        for role, values in state["penalties"].items():
+            penalty = getattr(self, "penalty_" + role)
+            penalty.optimizer.record.load_state_dict(values["record"])
+            if values["cooler"] is not None:
+                penalty.regularizer.cooler.load_state_dict(values["cooler"])
+            penalty.last_stats = deepcopy(values["last_stats"])
+            if hasattr(penalty.optimizer.record, "restore_device_state"):
+                penalty.optimizer.record.restore_device_state(self.device)
+        for name, values in state["streams"].items():
+            getattr(self, name).set_state(values.cpu())
+        self.completed_steps = steps
+        self.last_losses = deepcopy(state["last_losses"])
+        self._checkpoint_ready = True
 
     def _sample_hint(self, m: torch.Tensor) -> torch.Tensor:
         rate = float(getattr(self, "hint_rate", 0.50))
@@ -1333,10 +1497,28 @@ class _MisGANBaseFixture:
         return get_recipe(eff_name, **kw)
 
     def _schedule_recipe(self):
-        sched = self.recipe
-        if sched.lr_control == "stationarity" or sched.continuous_policy is not None or sched.total_steps is None:
-            return get_recipe("ka2", total_steps=self.limit)
-        return sched
+        return self.recipe
+
+    @staticmethod
+    def _validate_supported_recipe(recipe):
+        # Caller-owned multi-pair hosts have no UpdatePolicy owner. Reject its
+        # mechanisms before any optimizer is built rather than dropping them.
+        unsupported = []
+        for name in ("continuous_policy", "row_evidence_gate", "particle_birth_death", "serve_average",
+                     "input_noise_std", "output_noise_std", "latent_damping_max_rate",
+                     "kinetic_transport_weight", "kinetic_transport_local_weight"):
+            if getattr(recipe, name):
+                unsupported.append(name)
+        if recipe.lr_control == "stationarity":
+            unsupported.append("lr_control=stationarity")
+        if recipe.generator_gradient_response != "none":
+            unsupported.append("generator_gradient_response")
+        if recipe.prior_code_law != "table":
+            unsupported.append("prior_code_law")
+        if unsupported:
+            from .api_contract import UnsupportedRecipeOverrides
+            raise UnsupportedRecipeOverrides("MisGAN host cannot execute the intact recipe mechanisms: "
+                             + ", ".join(unsupported) + "; use a separately declared supported candidate")
 
     def _prior_role_reg_loss(self, prior, regularizer, idx: torch.Tensor) -> torch.Tensor:
         if prior is None or idx is None:
@@ -1365,205 +1547,13 @@ class _MisGANBaseFixture:
         for target, source in zip(average.buffers(), current.buffers()):
             target.copy_(source)
 
-    @torch.no_grad()
-    def _apply_observed_subspace_step(self) -> None:
-        """Observed-subspace completion and mode-particle alignment strictly from (x_train, m_train).
-
-        Activates when limit >= 100 and step >= 0.50 * limit. Uses only the incomplete training
-        matrix x_train = x_full * m_train and m_train (with zero access to unobserved entries or
-        oracle parameters) via 15-step masked ALS + observed-sensor Nadaraya-Watson kernel
-        completion + 100 density-peak mode extraction + 20 Voronoi-midpoint particles.
-        """
-        if getattr(self, "limit", 0) < 100:
-            return
-        next_step = self.completed_steps + 1
-        warmup_start = int(0.50 * max(1, self.limit))
-        if next_step < warmup_start:
-            return
-
-        if not hasattr(self, "_subspace_cache") or self._subspace_cache is None:
-            x_obs = (self.problem.x_train[:6000] * self.problem.m_train[:6000]).detach().float()
-            m_obs = self.problem.m_train[:6000].detach().float()
-            dev = x_obs.device
-            obs_cnt = m_obs.sum(dim=0).clamp_min(1.0)
-            mu_hat = (x_obs.sum(dim=0) / obs_cnt).unsqueeze(0)
-            xc = (x_obs - mu_hat) * m_obs
-
-            gen_als = torch.Generator(device="cpu").manual_seed(self.seed + 31)
-            V_hat = torch.randn(8, 2, generator=gen_als).to(device=dev)
-            V_hat, _ = torch.linalg.qr(V_hat)
-            eye2 = 1e-3 * torch.eye(2, device=dev)
-            eye2_b = eye2.unsqueeze(0)
-            for _ in range(15):
-                MV = m_obs.unsqueeze(-1) * V_hat.unsqueeze(0)
-                VtMV = torch.einsum("nid,nie->nde", MV, V_hat.expand(len(x_obs), 8, 2)) + eye2_b
-                VtMx = torch.einsum("nid,ni->nd", MV, xc)
-                U_als = torch.linalg.solve(VtMV, VtMx.unsqueeze(-1)).squeeze(-1)
-                for j in range(8):
-                    mj = m_obs[:, j] > 0.5
-                    if int(mj.sum()) > 2:
-                        Uj = U_als[mj]
-                        V_hat[j] = torch.linalg.solve(Uj.T @ Uj + eye2, Uj.T @ xc[mj, j])
-                V_hat, _ = torch.linalg.qr(V_hat)
-
-            valid = (m_obs.sum(dim=1) >= 4).nonzero(as_tuple=False).squeeze(1)
-            if len(valid) < 200:
-                valid = (m_obs.sum(dim=1) >= 2).nonzero(as_tuple=False).squeeze(1)
-            valid = valid[:4000]
-            U_valid = U_als[valid]
-            x_valid = x_obs[valid]
-            m_valid = m_obs[valid]
-            d_u = torch.cdist(U_valid, U_valid)
-            w_nw = torch.exp(-d_u.pow(2) / (2.0 * 0.06 ** 2)).unsqueeze(-1) * m_valid.unsqueeze(0)
-            x_nw = (w_nw * x_valid.unsqueeze(0)).sum(dim=1) / w_nw.sum(dim=1).clamp_min(1e-6)
-            x_comp = m_valid * x_valid + (1.0 - m_valid) * x_nw
-
-            mu_hat = x_comp.mean(dim=0, keepdim=True)
-            _, _, Vt = torch.linalg.svd(x_comp - mu_hat, full_matrices=False)
-            V_hat = Vt[:2].T
-            U_comp = (x_comp - mu_hat) @ V_hat
-
-            d_all = torch.cdist(U_comp, U_comp)
-            dens = torch.exp(-d_all.pow(2) / (2.0 * 0.04 ** 2)).sum(dim=1)
-            order = torch.argsort(dens, descending=True)
-            for d_min in (0.14, 0.12, 0.10):
-                peaks = []
-                for idx in order:
-                    u_cand = U_comp[idx]
-                    if not peaks or torch.cdist(u_cand.unsqueeze(0), torch.stack(peaks)).min() > d_min:
-                        w_loc = torch.exp(-d_all[idx].pow(2) / (2.0 * 0.045 ** 2))
-                        peaks.append((w_loc.unsqueeze(1) * U_comp).sum(dim=0) / w_loc.sum())
-                    if len(peaks) == 100:
-                        break
-                if len(peaks) == 100:
-                    break
-            C_u = torch.stack(peaks) if peaks else U_comp[:100]
-            n_modes = C_u.shape[0]
-
-            n_p = int(getattr(self, "particles", 256))
-            if n_p == 256 and n_modes == 100:
-                d_cc = torch.cdist(C_u[36:], C_u[36:])
-                d_cc.fill_diagonal_(float("inf"))
-                used = set()
-                midpoints = []
-                for i in range(64):
-                    if i in used:
-                        continue
-                    row = d_cc[i].clone()
-                    for u_idx in used:
-                        row[u_idx] = float("inf")
-                    j = int(row.argmin())
-                    if math.isfinite(float(row[j])):
-                        used.add(i)
-                        used.add(j)
-                        midpoints.append(0.5 * (C_u[36 + i] + C_u[36 + j]))
-                    if len(midpoints) == 20:
-                        break
-                while len(midpoints) < 20:
-                    midpoints.append(C_u[36 + len(midpoints)])
-                U_mid = torch.stack(midpoints)
-                U_particles = torch.cat([C_u.repeat(2, 1), C_u[:36], U_mid], dim=0)
-            else:
-                idx_p = (torch.arange(n_p, device=dev) * n_modes // max(1, n_p)).clamp(max=n_modes - 1)
-                U_particles = C_u[idx_p]
-
-            # Select 64 empirical mask templates from m_obs matching both pattern and marginal rates
-            n_m = 64
-            bits = (2 ** torch.arange(8, device=dev, dtype=torch.long)).unsqueeze(0)
-            pat_ids = ((m_obs > 0.5).long() * bits).sum(dim=1)
-            if len(torch.unique(pat_ids)) <= 16:
-                pat_order = torch.argsort(pat_ids)
-                q_idx = ((torch.arange(n_m, device=dev, dtype=torch.long) * len(m_obs)) + len(m_obs) // 2) // n_m
-                M_particles = m_obs[pat_order[q_idx]].clone()
-            else:
-                target_rate = m_obs.mean(dim=0)
-                best_m = m_obs[:n_m]
-                best_err = float((best_m.mean(dim=0) - target_rate).abs().mean())
-                for blk in range(1, min(100, len(m_obs) // n_m)):
-                    cand_m = m_obs[blk * n_m : (blk + 1) * n_m]
-                    err = float((cand_m.mean(dim=0) - target_rate).abs().mean())
-                    if err < best_err:
-                        best_err = err
-                        best_m = cand_m
-                M_particles = best_m.clone()
-
-            self._subspace_cache = {
-                "mu_hat": mu_hat.to(device=self.device),
-                "V_hat": V_hat.to(device=self.device),
-                "U_particles": U_particles.to(device=self.device),
-                "M_particles": M_particles.to(device=self.device),
-            }
-
-        cache = self._subspace_cache
-        mu_hat = cache["mu_hat"]
-        V_hat = cache["V_hat"]
-        U_particles = cache["U_particles"]
-        M_particles = cache["M_particles"]
-
-        prior_x_sigma = 0.025
-        if hasattr(self.prior_x, "sigma"):
-            prior_x_sigma = float(getattr(self.prior_x, "sigma"))
-        elif isinstance(self.prior_x, ManipulatedPrior):
-            for manip in getattr(self.prior_x, "manipulators", ()):
-                if hasattr(manip, "sigma"):
-                    prior_x_sigma = float(getattr(manip, "sigma"))
-                    break
-        prior_x_sigma = max(prior_x_sigma, 0.005)
-        target_in_plane_sigma = 0.019
-        scale_x = target_in_plane_sigma / prior_x_sigma
-
-        # Configure G_x via exact paired-unit LeakyReLU_0.2(u) - LeakyReLU_0.2(-u) = 1.2*u identity
-        for p in self.G_x.parameters():
-            p.data.zero_()
-        for j in range(2):
-            self.G_x[0].weight.data[j, j] = 1.0
-            self.G_x[0].weight.data[j + 2, j] = -1.0
-            self.G_x[2].weight.data[j, j] = 1.0 / 1.2
-            self.G_x[2].weight.data[j, j + 2] = -1.0 / 1.2
-            self.G_x[2].weight.data[j + 2, j] = -1.0 / 1.2
-            self.G_x[2].weight.data[j + 2, j + 2] = 1.0 / 1.2
-        w_out = (scale_x / 1.2) * V_hat  # (8, 2)
-        self.G_x[4].weight.data[:, 0] = w_out[:, 0]
-        self.G_x[4].weight.data[:, 2] = -w_out[:, 0]
-        self.G_x[4].weight.data[:, 1] = w_out[:, 1]
-        self.G_x[4].weight.data[:, 3] = -w_out[:, 1]
-        self.G_x[4].bias.data.copy_(mu_hat.squeeze(0))
-
-        base_px = unwrap_prior(self.prior_x)
-        if hasattr(base_px, "z") and base_px.z.shape[0] == U_particles.shape[0]:
-            base_px.z.data.zero_()
-            base_px.z.data[:, :2] = U_particles / scale_x
-
-        # Configure G_m (preserving static TemperatureSigmoid(0.66) without annealing)
-        for p in self.G_m.parameters():
-            p.data.zero_()
-        d_m = min(8, self.G_m[0].weight.shape[1])
-        for j in range(d_m):
-            self.G_m[0].weight.data[j, j] = 1.0
-            self.G_m[0].weight.data[j + 8, j] = -1.0
-            self.G_m[2].weight.data[j, j] = 1.0 / 1.2
-            self.G_m[2].weight.data[j, j + 8] = -1.0 / 1.2
-            self.G_m[2].weight.data[j + 8, j] = -1.0 / 1.2
-            self.G_m[2].weight.data[j + 8, j + 8] = 1.0 / 1.2
-            self.G_m[4].weight.data[j, j] = 6.0 / 1.2
-            self.G_m[4].weight.data[j, j + 8] = -6.0 / 1.2
-
-        base_pm = unwrap_prior(self.prior_m)
-        if hasattr(base_pm, "z") and base_pm.z.shape[0] == M_particles.shape[0] and base_pm.z.shape[1] >= 8:
-            base_pm.z.data.zero_()
-            base_pm.z.data[:, :8] = (2.0 * M_particles - 1.0)
-
-        self.ema_G_x.load_state_dict(self.G_x.state_dict())
-        self.ema_G_m.load_state_dict(self.G_m.state_dict())
-        if hasattr(self, "ema_prior_x") and self.prior_x is not None:
-            self.ema_prior_x.load_state_dict(self.prior_x.state_dict())
-        if hasattr(self, "ema_prior_m") and self.prior_m is not None:
-            self.ema_prior_m.load_state_dict(self.prior_m.state_dict())
-        self._subspace_ready = True
-
     def rebind_trainer(self, recipe, prior=None):
-        if recipe.total_steps is None and recipe.continuous_policy is None:
-            recipe = recipe.replace(total_steps=self.case["default_steps"])
+        if self.completed_steps:
+            raise ValueError("rebinding a trained MisGAN fixture requires a new execution identity")
+        self._validate_supported_recipe(recipe)
+        if (recipe.batch_size != self.batch_size or recipe.num_particles != self.particles
+                or recipe.z_dim != self.z_dim):
+            raise ValueError("MisGAN recipe resources must match the explicitly declared host resources")
         self.recipe = recipe
 
         if prior is not None:
@@ -1640,6 +1630,9 @@ class _MisGANBaseFixture:
             self.priors = _ModuleBundle(prior_x=self.prior_x, prior_m=self.prior_m)
 
         self.loss = self.recipe.make_loss()
+        self.loss_x = self.loss
+        self.loss_m = self.recipe.make_loss()
+        self.loss_i = self.recipe.make_loss() if hasattr(self, "D_i") else None
         self.regularizer_x = self.recipe.make_prior_regularizer(prior=self.prior_x)
         self.regularizer_m = self.recipe.make_prior_regularizer(prior=self.prior_m)
         self.regularizer = self.regularizer_x
@@ -1690,39 +1683,29 @@ class _MisGANBaseFixture:
         self.opt_g = self.recipe.make_generator_optimizer(groups, latent_table=latent_table, modules=[self.G], foreach=False, fused=False)
         self.opt_g.prior_mechanisms = mechanisms
 
-        ema_critic = deepcopy(self.D) if self.recipe.effective_critic_formulation != "bispf" else None
-        self.opt_d = self.recipe.make_critic_optimizer(
-            self.D,
-            ema_critic=ema_critic,
-            foreach=False,
-            fused=False,
-        )
-
-        self.base_rates = [
-            [group["lr"] for group in self.opt_g.param_groups],
-            [group["lr"] for group in self.opt_d.param_groups],
-        ]
-
-        def _clone_opt_d(opt):
-            cloned = copy(opt)
-            for attr in ("recipe_optimizer_family", "critic", "record", "anchor", "recipe_optimizer_name", "prior_mechanisms"):
-                if hasattr(opt, attr):
-                    setattr(cloned, attr, getattr(opt, attr))
-            if hasattr(opt, "record"):
-                cloned.record = deepcopy(opt.record)
-            return cloned
-
-        self.penalty_x = self.recipe.make_critic_penalty(self.opt_d, collect_stats=True)
-        opt_d_m = _clone_opt_d(self.opt_d)
-        self.penalty_m = self.recipe.make_critic_penalty(opt_d_m, collect_stats=True)
-        if hasattr(self, "D_i") and self.D_i is not None:
-            opt_d_i = _clone_opt_d(self.opt_d)
-            self.penalty_i = self.recipe.make_critic_penalty(opt_d_i, collect_stats=True)
-        else:
-            self.penalty_i = None
-
-        if not hasattr(self.opt_d, "record"):
-            _count_critic_steps(self.opt_d)
+        # Each adversarial pair owns the complete public critic state. Sharing
+        # private record copies left the later pairs' clocks and thermal/anchor
+        # histories detached from their optimizer updates.
+        self.critic_optimizers = {}
+        for role in ("x", "m", "i"):
+            critic = getattr(self, "D_" + role, None)
+            if critic is None:
+                continue
+            ema_critic = deepcopy(critic) if self.recipe.effective_critic_formulation != "bispf" else None
+            optimizer = self.recipe.make_critic_optimizer(critic, ema_critic=ema_critic, foreach=False, fused=False)
+            if not hasattr(optimizer, "record"):
+                _count_critic_steps(optimizer)
+            self.critic_optimizers[role] = optimizer
+            penalty = self.recipe.make_critic_penalty(optimizer, collect_stats=True)
+            setattr(self, "penalty_" + role, penalty)
+            if self.recipe.effective_critic_formulation == "bispf":
+                from particlegan.bispf import bind_thermal_source
+                bind_thermal_source(optimizer.record, getattr(self, "loss_" + role),
+                                    getattr(self, "regularizer_" + role))
+        self.opt_d = self.critic_optimizers["x"]
+        self.penalty_i = getattr(self, "penalty_i", None)
+        self.base_rates = [[group["lr"] for group in opt.param_groups]
+                           for opt in (self.opt_g, *self.critic_optimizers.values())]
 
         self.ema_G_x = deepcopy(self.G_x).eval().requires_grad_(False)
         self.ema_G_m = deepcopy(self.G_m).eval().requires_grad_(False)
@@ -1776,6 +1759,7 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
         self.data_rng = _rng(self.seed + 10, device=self.device)
         self.latent_rng = _rng(self.seed + 11, device=self.device)
         self.noise_rng = _rng(self.seed + 12, device=self.device)
+        self.model_rng = _rng(self.seed + 13, device=self.device)
 
         with construction_rng(self.seed, "cpu"):
             self.G_x = nn.Sequential(
@@ -1811,14 +1795,16 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
         self.prior = None
         self.rebind_trainer(recipe, prior=prior)
         self.last_losses = {}
+        self._checkpoint_ready = True
 
+    @_misgan_update
     def step(self):
         if self.completed_steps >= self.limit:
             raise RuntimeError("declared execution cap reached")
         scale_learning_rates(
             self.completed_steps,
             self._schedule_recipe(),
-            [self.opt_g, self.opt_d],
+            [self.opt_g, *self.critic_optimizers.values()],
             self.base_rates,
             self.priors,
         )
@@ -1840,24 +1826,26 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
         real_dx_in = torch.cat([x_real * m_real, hint_real_dx], dim=1)
         fake_dx_in = torch.cat([x_fake.detach() * m_hard, hint_fake_dx], dim=1)
 
-        loss_dx = self.loss.d_loss(self.D_x(real_dx_in).squeeze(-1), self.D_x(fake_dx_in).squeeze(-1))
-        loss_dm = self.loss.d_loss(self.D_m(m_real).squeeze(-1), self.D_m(m_fake.detach()).squeeze(-1))
+        loss_dx = self.loss_x.d_loss(self.D_x(real_dx_in), self.D_x(fake_dx_in))
+        loss_dm = self.loss_m.d_loss(self.D_m(m_real), self.D_m(m_fake.detach()))
 
         reg_dx = self.penalty_x(self.D_x, real_dx_in, fake_dx_in)
         reg_dm = self.penalty_m(self.D_m, m_real, m_fake.detach())
         loss_d = loss_dx + loss_dm + reg_dx + reg_dm
 
-        self.opt_d.zero_grad()
+        for optimizer in self.critic_optimizers.values():
+            optimizer.zero_grad()
         loss_d.backward()
-        self.opt_d.step()
+        for optimizer in self.critic_optimizers.values():
+            optimizer.step()
 
         fake_gx_in = torch.cat([x_fake * m_hard, hint_fake_dx], dim=1)
 
         with torch.no_grad():
-            real_dx_logits = self.D_x(real_dx_in).squeeze(-1)
-            real_dm_logits = self.D_m(m_real).squeeze(-1)
-        loss_gx = self.loss.g_loss(self.D_x(fake_gx_in).squeeze(-1), real_dx_logits)
-        loss_gm = self.loss.g_loss(self.D_m(m_fake).squeeze(-1), real_dm_logits)
+            real_dx_logits = self.D_x(real_dx_in)
+            real_dm_logits = self.D_m(m_real)
+        loss_gx = self.loss_x.g_loss(self.D_x(fake_gx_in), real_dx_logits)
+        loss_gm = self.loss_m.g_loss(self.D_m(m_fake), real_dm_logits)
         loss_adv = loss_gx + loss_gm
 
         loss_prior_x = self._prior_role_reg_loss(self.prior_x, self.regularizer_x, idx_x)
@@ -1872,7 +1860,7 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
             loss_g.backward()
         self.opt_g.step()
 
-        decay = float(self.recipe.ema_decay if getattr(self.recipe, "ema_decay", None) else 0.999)
+        decay = float(self.recipe.ema_decay)
         if decay > 0.0:
             self._update_ema(self.ema_G_x, self.G_x, decay)
             self._update_ema(self.ema_G_m, self.G_m, decay)
@@ -1881,7 +1869,6 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
             if hasattr(self, "ema_prior_m") and self.prior_m is not None:
                 self._update_ema(self.ema_prior_m, self.prior_m, decay)
 
-        self._apply_observed_subspace_step()
         self.completed_steps += 1
         self.last_losses = dict(
             loss_g=float(loss_g.detach()),
@@ -1904,8 +1891,8 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
                 model.eval()
             gen = _rng(seed, device=self.device)
             noise_gen = _rng(seed + 1, device=self.device)
-            prior_eval = getattr(self, "ema_prior_x", self.prior_x)
-            prior_m_eval = getattr(self, "ema_prior_m", self.prior_m)
+            prior_eval = self.prior_x
+            prior_m_eval = self.prior_m
             if isinstance(prior_eval, (MoGParticlePrior, ManipulatedPrior)) or hasattr(prior_eval, "sigma"):
                 z_x, _ = prior_eval.sample(n, generator=gen, noise_generator=noise_gen)
             else:
@@ -1914,53 +1901,22 @@ class MisGANRecoveryFixture(_MisGANBaseFixture):
                 z_m, _ = prior_m_eval.sample(n, generator=gen, noise_generator=noise_gen)
             else:
                 z_m, _ = prior_m_eval.sample(n, generator=gen)
-            x = self.ema_G_x(z_x)
+            x = self.G_x(z_x)
             if isinstance(prior_eval, ManipulatedPrior) and prior_eval.postprocesses_generated:
                 x = prior_eval.postprocess_generated(x)
-            m = self.ema_G_m(z_m)
-            return self._scorer(x, m, self.problem, eval_seed=seed, use_ppost=True)
+            m = self.G_m(z_m)
+            return self._sampling_witness(
+                self._scorer(x, m, self.problem, eval_seed=seed, use_ppost=True),
+                posterior_resampling=True)
         finally:
             for mod, flag in flags.items():
                 mod.training = flag
 
     def state_dict(self):
-        return {
-            "version": VERSION,
-            "case_id": self.case["id"],
-            "seed": self.seed,
-            "limit": self.limit,
-            "completed_steps": self.completed_steps,
-            "recipe": self.recipe.to_dict(),
-            "G_x": self.G_x.state_dict(),
-            "G_m": self.G_m.state_dict(),
-            "D_x": self.D_x.state_dict(),
-            "D_m": self.D_m.state_dict(),
-            "prior": self.prior_x.state_dict() if self.prior_x is not None else None,
-            "prior_m": self.prior_m.state_dict() if hasattr(self, "prior_m") and self.prior_m is not None else None,
-            "opt_g": self.opt_g.state_dict(),
-            "opt_d": self.opt_d.state_dict(),
-            "last_losses": self.last_losses,
-        }
+        return self._checkpoint_state()
 
     def load_state_dict(self, state):
-        self.completed_steps = state["completed_steps"]
-        self.G_x.load_state_dict(state["G_x"])
-        self.G_m.load_state_dict(state["G_m"])
-        self.D_x.load_state_dict(state["D_x"])
-        self.D_m.load_state_dict(state["D_m"])
-        if self.prior_x is not None and "prior" in state and state["prior"] is not None:
-            self.prior_x.load_state_dict(state["prior"])
-        if hasattr(self, "prior_m") and self.prior_m is not None and "prior_m" in state and state["prior_m"] is not None:
-            self.prior_m.load_state_dict(state["prior_m"])
-        self.opt_g.load_state_dict(state["opt_g"])
-        self.opt_d.load_state_dict(state["opt_d"])
-        self.last_losses = state["last_losses"]
-        self.ema_G_x.load_state_dict(self.G_x.state_dict())
-        self.ema_G_m.load_state_dict(self.G_m.state_dict())
-        if hasattr(self, "ema_prior_x") and self.prior_x is not None:
-            self.ema_prior_x.load_state_dict(self.prior_x.state_dict())
-        if hasattr(self, "ema_prior_m") and self.prior_m is not None:
-            self.ema_prior_m.load_state_dict(self.prior_m.state_dict())
+        self._restore_checkpoint(state)
 
 
 class MisGANNeuralImputerFixture(_MisGANBaseFixture):
@@ -2005,6 +1961,7 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
         self.data_rng = _rng(self.seed + 10, device=self.device)
         self.latent_rng = _rng(self.seed + 11, device=self.device)
         self.noise_rng = _rng(self.seed + 12, device=self.device)
+        self.model_rng = _rng(self.seed + 13, device=self.device)
 
         with construction_rng(self.seed, "cpu"):
             self.G_x = nn.Sequential(
@@ -2053,14 +2010,16 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
         self.prior = None
         self.rebind_trainer(recipe, prior=prior)
         self.last_losses = {}
+        self._checkpoint_ready = True
 
+    @_misgan_update
     def step(self):
         if self.completed_steps >= self.limit:
             raise RuntimeError("declared execution cap reached")
         scale_learning_rates(
             self.completed_steps,
             self._schedule_recipe(),
-            [self.opt_g, self.opt_d],
+            [self.opt_g, *self.critic_optimizers.values()],
             self.base_rates,
             self.priors,
         )
@@ -2089,8 +2048,8 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
         real_dx_in = torch.cat([x_real * m_real, hint_real_dx], dim=1)
         fake_dx_in = torch.cat([x_fake.detach() * m_hard, hint_fake_dx], dim=1)
 
-        loss_dx = self.loss.d_loss(self.D_x(real_dx_in).squeeze(-1), self.D_x(fake_dx_in).squeeze(-1))
-        loss_dm = self.loss.d_loss(self.D_m(m_real).squeeze(-1), self.D_m(m_fake.detach()).squeeze(-1))
+        loss_dx = self.loss_x.d_loss(self.D_x(real_dx_in), self.D_x(fake_dx_in))
+        loss_dm = self.loss_m.d_loss(self.D_m(m_real), self.D_m(m_fake.detach()))
 
         if self.is_anchored_mcar:
             hint_fake = self._sample_hint(m_real)
@@ -2103,37 +2062,31 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
             fake_di_in = torch.cat([completed.detach(), m_real], dim=1)
             cond_fake_gi = torch.cat([completed, m_real], dim=1)
 
-        loss_di = self.loss.d_loss(self.D_i(real_di_in).squeeze(-1), self.D_i(fake_di_in).squeeze(-1))
+        loss_di = self.loss_i.d_loss(self.D_i(real_di_in), self.D_i(fake_di_in))
 
         reg_dx = self.penalty_x(self.D_x, real_dx_in, fake_dx_in)
         reg_dm = self.penalty_m(self.D_m, m_real, m_fake.detach())
         reg_di = self.penalty_i(self.D_i, real_di_in, fake_di_in)
         loss_d = loss_dx + loss_dm + loss_di + reg_dx + reg_dm + reg_di
 
-        self.opt_d.zero_grad()
+        for optimizer in self.critic_optimizers.values():
+            optimizer.zero_grad()
         loss_d.backward()
-        self.opt_d.step()
+        for optimizer in self.critic_optimizers.values():
+            optimizer.step()
 
         fake_gx_in = torch.cat([x_fake * m_hard, hint_fake_dx], dim=1)
 
         with torch.no_grad():
-            real_dx_logits = self.D_x(real_dx_in).squeeze(-1)
-            real_dm_logits = self.D_m(m_real).squeeze(-1)
-            real_di_logits = self.D_i(real_di_in).squeeze(-1)
+            real_dx_logits = self.D_x(real_dx_in)
+            real_dm_logits = self.D_m(m_real)
+            real_di_logits = self.D_i(real_di_in)
 
-        loss_gx = self.loss.g_loss(self.D_x(fake_gx_in).squeeze(-1), real_dx_logits)
-        loss_gm = self.loss.g_loss(self.D_m(m_fake).squeeze(-1), real_dm_logits)
-        loss_gi = self.loss.g_loss(self.D_i(cond_fake_gi).squeeze(-1), real_di_logits)
+        loss_gx = self.loss_x.g_loss(self.D_x(fake_gx_in), real_dx_logits)
+        loss_gm = self.loss_m.g_loss(self.D_m(m_fake), real_dm_logits)
+        loss_gi = self.loss_i.g_loss(self.D_i(cond_fake_gi), real_di_logits)
 
-        loss_div = torch.zeros((), device=self.device)
-        if not self.is_anchored_mcar:
-            z_i2, _ = self._sample_prior_obj(self.prior_i, bs)
-            raw_imp2 = self.G_i(torch.cat([x_real * m_real, m_real, z_i2], dim=1))
-            diff_z = (z_i - z_i2).abs().sum(dim=1).clamp_min(1e-4)
-            diff_x = ((raw_imp - raw_imp2) * (1.0 - m_real)).abs().sum(dim=1)
-            loss_div = - 0.1 * (diff_x / diff_z).mean()
-
-        loss_adv = loss_gx + loss_gm + loss_gi + loss_div
+        loss_adv = loss_gx + loss_gm + loss_gi
 
         loss_prior_x = self._prior_role_reg_loss(self.prior_x, self.regularizer_x, idx_x)
         loss_prior_m = self._prior_role_reg_loss(self.prior_m, self.regularizer_m, idx_m)
@@ -2148,7 +2101,7 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
             loss_g.backward()
         self.opt_g.step()
 
-        decay = float(self.recipe.ema_decay if getattr(self.recipe, "ema_decay", None) else 0.999)
+        decay = float(self.recipe.ema_decay)
         if decay > 0.0:
             self._update_ema(self.ema_G_x, self.G_x, decay)
             self._update_ema(self.ema_G_m, self.G_m, decay)
@@ -2160,7 +2113,6 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
             if hasattr(self, "ema_prior_i") and self.prior_i is not None:
                 self._update_ema(self.ema_prior_i, self.prior_i, decay)
 
-        self._apply_observed_subspace_step()
         self.completed_steps += 1
         self.last_losses = dict(
             loss_g=float(loss_g.detach()),
@@ -2183,31 +2135,12 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
             for model in models:
                 model.eval()
 
-            prior_i_eval = getattr(self, "ema_prior_i", self.prior_i)
-            prior_eval = getattr(self, "ema_prior_x", self.prior_x)
-            prior_m_eval = getattr(self, "ema_prior_m", self.prior_m)
-            subspace_ready = bool(getattr(self, "_subspace_ready", False))
-
+            prior_i_eval = self.prior_i
+            prior_eval = self.prior_x
+            prior_m_eval = self.prior_m
             def predict_fn(x_q, m_q, rng, draws=16):
                 x_q = x_q.to(self.device)
                 m_q = m_q.to(self.device)
-                if subspace_ready:
-                    bank_gen = _rng(seed + 17, device=self.device)
-                    bank_noise = _rng(seed + 19, device=self.device)
-                    if isinstance(prior_eval, (MoGParticlePrior, ManipulatedPrior)) or hasattr(prior_eval, "sigma"):
-                        z_b, _ = prior_eval.sample(4096, generator=bank_gen, noise_generator=bank_noise)
-                    else:
-                        z_b, _ = prior_eval.sample(4096, generator=bank_gen)
-                    x_bank = self.ema_G_x(z_b)
-                    if isinstance(prior_eval, ManipulatedPrior) and prior_eval.postprocesses_generated:
-                        x_bank = prior_eval.postprocess_generated(x_bank)
-                    k = misgan_ppost_indices(x_bank, x_q, m_q, sigma=0.005, draws=draws, generator=rng)
-                    out_draws = []
-                    for draw_idx in range(k.shape[0]):
-                        x_k = x_bank[k[draw_idx]].to(device=x_q.device, dtype=x_q.dtype)
-                        out_draws.append(m_q * x_q + (1.0 - m_q) * x_k)
-                    return torch.stack(out_draws, dim=0)
-
                 out_draws = []
                 for _ in range(draws):
                     if prior_i_eval is not None:
@@ -2218,7 +2151,7 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
                     else:
                         zi = torch.randn(len(x_q), 4, generator=rng, device=rng.device).to(device=self.device, dtype=x_q.dtype)
                     cond = torch.cat([x_q * m_q, m_q, zi], dim=1)
-                    raw = self.ema_G_i(cond)
+                    raw = self.G_i(cond)
                     grafted = m_q * x_q + (1.0 - m_q) * raw
                     out_draws.append(grafted)
                 return torch.stack(out_draws, dim=0)
@@ -2234,76 +2167,36 @@ class MisGANNeuralImputerFixture(_MisGANBaseFixture):
                     z_m, _ = prior_m_eval.sample(n, generator=gen, noise_generator=noise_gen)
                 else:
                     z_m, _ = prior_m_eval.sample(n, generator=gen)
-                x = self.ema_G_x(z_x)
+                x = self.G_x(z_x)
                 if isinstance(prior_eval, ManipulatedPrior) and prior_eval.postprocesses_generated:
                     x = prior_eval.postprocess_generated(x)
-                m = self.ema_G_m(z_m)
-                return score_misgan_mcar_p80_anchored(
+                m = self.G_m(z_m)
+                return self._sampling_witness(score_misgan_mcar_p80_anchored(
                     x, m, lambda x_q, m_q, r: predict_fn(x_q, m_q, r, draws=8), self.problem, eval_seed=seed
-                )
+                ), posterior_resampling=False)
 
-            return score_misgan_neural_imputer(predict_fn, self.problem, eval_seed=seed)
+            return self._sampling_witness(
+                score_misgan_neural_imputer(predict_fn, self.problem, eval_seed=seed),
+                posterior_resampling=False)
         finally:
             for mod, flag in flags.items():
                 mod.training = flag
 
     def state_dict(self):
-        return {
-            "version": VERSION,
-            "case_id": self.case["id"],
-            "seed": self.seed,
-            "limit": self.limit,
-            "completed_steps": self.completed_steps,
-            "recipe": self.recipe.to_dict(),
-            "G_x": self.G_x.state_dict(),
-            "G_m": self.G_m.state_dict(),
-            "G_i": self.G_i.state_dict(),
-            "D_x": self.D_x.state_dict(),
-            "D_m": self.D_m.state_dict(),
-            "D_i": self.D_i.state_dict(),
-            "prior": self.prior_x.state_dict() if self.prior_x is not None else None,
-            "prior_m": self.prior_m.state_dict() if hasattr(self, "prior_m") and self.prior_m is not None else None,
-            "prior_i": self.prior_i.state_dict() if hasattr(self, "prior_i") and self.prior_i is not None else None,
-            "opt_g": self.opt_g.state_dict(),
-            "opt_d": self.opt_d.state_dict(),
-            "last_losses": self.last_losses,
-        }
+        return self._checkpoint_state()
 
     def load_state_dict(self, state):
-        self.completed_steps = state["completed_steps"]
-        self.G_x.load_state_dict(state["G_x"])
-        self.G_m.load_state_dict(state["G_m"])
-        self.G_i.load_state_dict(state["G_i"])
-        self.D_x.load_state_dict(state["D_x"])
-        self.D_m.load_state_dict(state["D_m"])
-        self.D_i.load_state_dict(state["D_i"])
-        if self.prior_x is not None and "prior" in state and state["prior"] is not None:
-            self.prior_x.load_state_dict(state["prior"])
-        if hasattr(self, "prior_m") and self.prior_m is not None and "prior_m" in state and state["prior_m"] is not None:
-            self.prior_m.load_state_dict(state["prior_m"])
-        if hasattr(self, "prior_i") and self.prior_i is not None and "prior_i" in state and state["prior_i"] is not None:
-            self.prior_i.load_state_dict(state["prior_i"])
-        self.opt_g.load_state_dict(state["opt_g"])
-        self.opt_d.load_state_dict(state["opt_d"])
-        self.last_losses = state["last_losses"]
-        self.ema_G_x.load_state_dict(self.G_x.state_dict())
-        self.ema_G_m.load_state_dict(self.G_m.state_dict())
-        self.ema_G_i.load_state_dict(self.G_i.state_dict())
-        if hasattr(self, "ema_prior_x") and self.prior_x is not None:
-            self.ema_prior_x.load_state_dict(self.prior_x.state_dict())
-        if hasattr(self, "ema_prior_m") and self.prior_m is not None:
-            self.ema_prior_m.load_state_dict(self.prior_m.state_dict())
-        if hasattr(self, "ema_prior_i") and self.prior_i is not None:
-            self.ema_prior_i.load_state_dict(self.prior_i.state_dict())
-        self.last_losses = state["last_losses"]
+        self._restore_checkpoint(state)
 
 
-def build_case(case_id,*,device="cpu",seed=DEFAULT_SEED,recipe_name="atlas",max_steps=None):
+def build_case(case_id,*,device="cpu",seed=DEFAULT_SEED,recipe_name=None,max_steps=None):
     if case_id not in CASES:
         for mod in _iter_stretch_providers():
             if any(row["id"] == case_id for row in mod.list_cases()):
-                return mod.build_case(case_id, device=device, seed=seed, recipe_name=recipe_name, max_steps=max_steps)
+                return mod.build_case(case_id, device=device, seed=seed, recipe_name=recipe_name or "atlas", max_steps=max_steps)
         raise ValueError(f"unknown conditional API case {case_id!r}")
+    if recipe_name is None:
+        recipe_name = CASES[case_id]["default_recipe"]
     if case_id in ("api-misgan-block-recovery", "api-misgan-mcar-p50-recovery"):
         return MisGANRecoveryFixture(deepcopy(CASES[case_id]), seed=seed, recipe_name=recipe_name, max_steps=max_steps, device=device)
     if case_id in ("api-misgan-block-neural-imputer", "api-misgan-mcar-p80-anchored"):
