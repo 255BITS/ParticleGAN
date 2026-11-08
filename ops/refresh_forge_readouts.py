@@ -2049,11 +2049,16 @@ def refresh_attempt_coverage(
     attempt_state_root = Path(attempt_state_root).resolve()
     attempt_state_root.mkdir(parents=True, exist_ok=True)
     if (root / FIXED_TEST_LIST).is_file():
-        from ops.formulaic_coverage import ensure_formulaic_attempt_coverage
-
-        return ensure_formulaic_attempt_coverage(
-            root, attempt_state_root, pair_gpus, json_mode=json_mode
+        from ops.formulaic_coverage import (
+            RetiredCoverageExecutionError, ensure_formulaic_attempt_coverage,
         )
+
+        try:
+            return ensure_formulaic_attempt_coverage(
+                root, attempt_state_root, pair_gpus, json_mode=json_mode
+            )
+        except RetiredCoverageExecutionError as error:
+            raise CodeChangeRequiredError(str(error)) from error
 
     publication = read_json(root / "reports/forge/technique-inventory.json")
     existing_cov = (
