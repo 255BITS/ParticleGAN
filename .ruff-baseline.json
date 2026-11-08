@@ -89,11 +89,6 @@
         "`copy.deepcopy` imported but unused": 1
       }
     },
-    "benchmarks/toy_audit/prior_proximal_smoke.py": {
-      "F821": {
-        "Undefined name `restored`": 1
-      }
-    },
     "benchmarks/toy_audit/proposal.py": {
       "F841": {
         "Local variable `result` is assigned to but never used": 1
@@ -230,16 +225,6 @@
     "benchmarks/transfer_suite/toy100_compatibility.py": {
       "F401": {
         "`benchmarks.legacy.recipe.get_recipe` imported but unused": 1
-      }
-    },
-    "examples/e22_routed_caption_late_phase.py": {
-      "F821": {
-        "Undefined name `p`": 1
-      }
-    },
-    "examples/e22_routed_caption_untied.py": {
-      "F821": {
-        "Undefined name `p`": 1
       }
     },
     "examples/e22_routed_g_clean.py": {
@@ -532,7 +517,7 @@
       },
       "F811": {
         "Redefinition of unused `checkout` from an earlier line: `checkout` redefined here": 5,
-        "Redefinition of unused `spec` from an earlier line: `spec` redefined here": 5
+        "Redefinition of unused `spec` from an earlier line: `spec` redefined here": 4
       }
     },
     "tests/test_forge_dispositions.py": {
@@ -550,7 +535,7 @@
       },
       "F811": {
         "Redefinition of unused `checkout` from an earlier line: `checkout` redefined here": 6,
-        "Redefinition of unused `spec` from an earlier line: `spec` redefined here": 4
+        "Redefinition of unused `spec` from an earlier line: `spec` redefined here": 3
       }
     },
     "tests/test_forge_family_documentation.py": {
