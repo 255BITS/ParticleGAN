@@ -56,8 +56,6 @@ from .bispf import (
 )
 from .priors import (
     GhostFreeDeMixingManipulator,
-    ManipulatedPrior,
-    PriorManipulator,
     SimplexRoutingManipulator,
     SobolevWavefrontManipulator,
     SplatCarrierManipulator,
@@ -101,7 +99,7 @@ __all__ = [
     "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",
     "DEFAULT_RECIPE", "Recipe", "NetworkLRTransition", "DataDriftController", "get_recipe", "get_recipe_fields", "learning_rate_scale", "learning_rate_scales", "scale_learning_rates", "GANTrainer", "InputNoise",
     "BatchDistanceDiscriminator", "LinearSkipDiscriminator",
-    "PriorManipulator", "ManipulatedPrior", "StratifiedSamplingManipulator", "SimplexRoutingManipulator",
+    "StratifiedSamplingManipulator", "SimplexRoutingManipulator",
     "GhostFreeDeMixingManipulator", "SobolevWavefrontManipulator", "SplatCarrierManipulator",
     "sobolev_filter_2d", "SobolevGradFilter", "WavefrontManifoldPrior",
     "GhostFreeSimplexMixer", "DifferentiableSplatCarrierBasis", "ResidualConvBlock", "SimplexWavefrontGenerator",

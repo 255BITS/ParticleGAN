@@ -21,8 +21,9 @@ import time
 
 import pytest
 import torch
-import torch.nn as nn
 import torch.nn.functional as F
+from test_swappable_priors import FROZEN_RECIPE_FIELDS
+from torch import nn
 
 from particlegan import (
     GANTrainer,
@@ -42,9 +43,6 @@ from particlegan.tomographic import (
     evaluate_tomographic_constraints,
     symmetric_log_odds,
 )
-
-from test_swappable_priors import FROZEN_RECIPE_FIELDS
-
 
 # -----------------------------------------------------------------------------
 # Group 1: Mathematical Invariants of symmetric_log_odds
