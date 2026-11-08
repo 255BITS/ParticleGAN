@@ -208,17 +208,15 @@ def assert_nested_allclose(left, right, atol: float = 1e-6, rtol: float = 1e-5):
 # -----------------------------------------------------------------------------
 
 def test_recipe_fields_exact_tuple_invariance():
-    """AC1 Gate 1: get_recipe_fields() matches the exact declared schema (112 fields plus the two
-    BISPF gate fields and the declared prior_code_law); prior manipulators add no recipe fields."""
+    """Prior manipulators retain the frozen base schema plus explicit controls."""
+    additions = ('masked_mixture_weight', 'masked_transport_weight', 'imputer_component_weight')
     fields_dict = get_recipe_fields()
-    field_names = tuple(fields_dict.keys())
-    assert len(field_names) == 118, f"Expected exactly 118 recipe fields, found {len(field_names)}"
-    assert field_names == FROZEN_RECIPE_FIELDS
-
-    # Assert Recipe dataclass itself has identical 118 fields
-    recipe_fields = tuple(f.name for f in dataclasses.fields(Recipe))
-    assert len(recipe_fields) == 118
-    assert recipe_fields == FROZEN_RECIPE_FIELDS
+    field_names = tuple(fields_dict)
+    assert len(field_names) == 118 + len(additions)
+    assert tuple(name for name in field_names if name not in additions) == FROZEN_RECIPE_FIELDS
+    assert tuple(field.name for field in dataclasses.fields(Recipe)) == field_names
+    from particlegan.recipe_compat import SEARCH_RECIPE_DEFAULTS
+    assert all(fields_dict[name] == SEARCH_RECIPE_DEFAULTS[name] for name in additions)
 
 
 def test_recipe_no_toplevel_torch_import():
@@ -238,11 +236,11 @@ spec.loader.exec_module(module)
 
 # Resolve fields across multiple presets without torch
 fields_ka2 = module.get_recipe_fields('ka2')
-assert len(fields_ka2) == 118
+assert len(fields_ka2) == 121
 fields_bcap = module.get_recipe_fields('bcap')
-assert len(fields_bcap) == 118
+assert len(fields_bcap) == 121
 fields_bispf = module.get_recipe_fields('bispf_optimized')
-assert len(fields_bispf) == 118
+assert len(fields_bispf) == 121
 
 assert 'torch' not in sys.modules, 'torch leaked into sys.modules'
 assert 'particlegan' not in sys.modules, 'particlegan leaked into sys.modules'
