@@ -54,8 +54,8 @@ def test_malformed_precision_never_falls_back_to_unquantized_training(policy):
 
 
 def test_new_stretch_tasks_stay_visible_without_invalidating_archived_coverage():
-    from ops.refresh_forge_readouts import check_attempt_coverage
-    coverage = check_attempt_coverage(ROOT)
+    from ops.refresh_forge_readouts import check_retained_diagnostic_integrity
+    coverage = check_retained_diagnostic_integrity(ROOT)
     assert coverage["current"] is True
     assert coverage["missing_by_family"] == {}
     assert coverage["unmeasured_current_tasks"] == ["precision_gaussian_mxfp8", "precision_gaussian_nvfp4"]

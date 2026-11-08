@@ -331,7 +331,8 @@ def test_published_check_keeps_source_drift_separate_and_rejects_broken_original
         "status": "NEEDS_REFRESH", "scope": "current_source_measurements", "source_digest": "latest-source",
         "stale_stages": ["scaling_performance", "selected_family_readouts"],
         "stages": {
-            "queue": {"current": True}, "attempt_coverage": {"current": True},
+            "queue": {"current": True}, "attempt_coverage": {"current": False},
+            "retained_diagnostic_integrity": {"current": True},
             "compiled_reports": {"current": broken_stage != "compiled_reports"},
             "scaling_performance": {"current": False, "stale_source_cells": 48,
                                     "published_source_current": broken_stage != "scaling_performance"},
@@ -519,7 +520,7 @@ def test_check_attempt_coverage_flags_superseded_selected_records_and_ignores_sc
             ],
         },
     )
-    stale = rfr.check_attempt_coverage(tmp_path)
+    stale = rfr.check_retained_diagnostic_integrity(tmp_path)
     assert stale["current"] is False
     assert stale["superseded_record_count"] == 1
     assert stale["missing_by_family"] == {
@@ -566,7 +567,7 @@ def test_check_attempt_coverage_flags_superseded_selected_records_and_ignores_sc
             ],
         },
     )
-    fresh = rfr.check_attempt_coverage(tmp_path)
+    fresh = rfr.check_retained_diagnostic_integrity(tmp_path)
     assert fresh["current"] is True
     assert fresh["superseded_record_count"] == 0
     assert fresh["missing_by_family"] == {}
@@ -743,9 +744,9 @@ def test_live_repository_forge_readouts_are_current_and_source_clean():
     assert report["stages"]["published_scaling_performance"]["missing_cells"] == 0
     assert report["stages"]["published_scaling_performance"]["unavailable_cells"] == 0
     assert report["stages"]["published_scaling_performance"]["table_cohorts"] == 1
-    assert report["stages"]["attempt_coverage"]["pending"] == 0
-    assert report["stages"]["attempt_coverage"]["superseded_record_count"] == 0
-    assert report["stages"]["attempt_coverage"]["missing_by_family"] == {}
+    assert report["stages"]["retained_diagnostic_integrity"]["pending"] == 0
+    assert report["stages"]["retained_diagnostic_integrity"]["superseded_record_count"] == 0
+    assert report["stages"]["retained_diagnostic_integrity"]["missing_by_family"] == {}
     assert report["stages"]["registered_selected_publications"]["current"] is True
     assert report["stages"]["compiled_reports"]["unknown_performance_rows"] == 0
     assert report["stages"]["compiled_reports"]["selected_diagnostic_rows_present"] is True
@@ -1675,6 +1676,11 @@ def test_recorded_overview_integrity_rejects_score_drift_without_current_source(
     from reports.forge import regenerate_technique_inventory as rti
 
     publication = read_json(ROOT / "reports/forge/technique-inventory.json")
+    # Renderer-only fixture uses the inspected reducer; no saved source pin or
+    # scientific qualification is edited to make a maintenance branch current.
+    from experiments.forge.contracts import file_hash
+    publication["provenance"]["publication_reducer_sha256"] = file_hash(
+        ROOT / "reports/forge/regenerate_technique_inventory.py")
     monkeypatch.setattr(rti, "_concluded_current_source_tier1_payload", lambda *args: None)
     monkeypatch.setattr(family_reports, "generated_pages", lambda root, pub: {})
     overview = ROOT / "reports/forge/technique-inventory.md"
@@ -1682,9 +1688,9 @@ def test_recorded_overview_integrity_rejects_score_drift_without_current_source(
     assert "### Current-source selected-recipe Tier 1 readouts" not in original
     assert rfr._generated_pages_synced(ROOT, publication, original) is True
     import re
-    score = re.search(r"\*\*\[(\d+)/(\d+)\]", original)
+    score = re.search(r"\*\*\[(\d+)([^/\]]*)/(\d+)\]", original)
     assert score is not None
-    changed_score = f"**[{int(score.group(1)) + 1}/{score.group(2)}]"
+    changed_score = f"**[{int(score.group(1)) + 1}{score.group(2)}/{score.group(3)}]"
     corrupted = original[:score.start()] + changed_score + original[score.end():]
     assert corrupted != original
     assert rfr._generated_pages_synced(ROOT, publication, corrupted) is False
