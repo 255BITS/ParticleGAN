@@ -158,10 +158,18 @@ def test_thread_restore_survives_a_test_that_stubs_the_torch_module(monkeypatch)
 def test_minimum_supported_python_ci_job_runs_pytest():
     workflow = yaml.safe_load((ROOT / ".github/workflows/tests.yml").read_text())
     job = workflow["jobs"]["cpu-tests"]
-    assert {"python": "3.11", "shard": 0} in job["strategy"]["matrix"]["include"]
+    matrix = job["strategy"]["matrix"]["include"]
+    assert {(item["python"], item["shard"]) for item in matrix} == {
+        (version, shard) for version in ("3.11", "3.12") for shard in range(4)
+    }
     runs = [step for step in job["steps"] if "scripts/ci_pytest.py run" in step.get("run", "")]
-    conditions = {step.get("if") for step in runs}
-    assert "matrix.python == '3.11'" in conditions and "matrix.python == '3.12'" in conditions
-    # Only the complete 3.12 shard set feeds the release coverage receipt check.
+    assert len(runs) == 1 and "if" not in runs[0]
+    assert "--count 4" in runs[0]["run"]
+    assert "${{ matrix.python }}" in runs[0]["run"]
+    # Both complete interpreter suites must feed separate release coverage checks.
     uploads = [step for step in job["steps"] if step.get("uses", "").startswith("actions/upload-artifact")]
-    assert all("3.12" in step.get("if", "") for step in uploads)
+    assert uploads and all(step.get("if") == "always()" for step in uploads)
+    assert all("${{ matrix.python }}" in step["with"]["path"] for step in uploads)
+    checks = "\n".join(step.get("run", "") for step in workflow["jobs"]["distributions"]["steps"])
+    for version in ("3.11", "3.12"):
+        assert f"scripts/ci_pytest.py check /tmp/pytest-shards/pytest-{version}-shard-*.json" in checks

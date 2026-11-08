@@ -79,9 +79,9 @@ def test_direct_beta_axis_requires_an_actual_direct_optimizer(checkout, spec):
 
 def _analysis_module():
     path = Path(__file__).resolve().parents[1] / 'reports/forge/k3p-global-tier1-v3/direct-rate-analysis.py'
-    spec = importlib.util.spec_from_file_location('direct_rate_analysis', path)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+    module_spec = importlib.util.spec_from_file_location('direct_rate_analysis', path)
+    module = importlib.util.module_from_spec(module_spec)
+    module_spec.loader.exec_module(module)
     return module
 
 
