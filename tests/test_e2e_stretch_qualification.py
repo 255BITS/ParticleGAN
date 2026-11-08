@@ -502,8 +502,8 @@ def test_tier1_grid100_residual_block_scaling_invariance():
 
 
 @pytest.mark.tier1
-def test_tier1_grid100_tanh_anti_saturation_rail_penalty():
-    """F14: Verify TanhRailGuard bounds outputs below saturation rail and provides restoring backward gradients."""
+def test_tier1_grid100_soft_bounded_tanh_exact_derivative():
+    """F14: The soft-bounded head has no backward-only training mechanism."""
     scale = 5.25
     u_safe = torch.tensor([[0.0, 1.0], [2.0, -3.0], [4.5, -4.5]], requires_grad=True)
     out_safe = TanhRailGuard.apply(u_safe, scale)
@@ -517,6 +517,8 @@ def test_tier1_grid100_tanh_anti_saturation_rail_penalty():
     out_extreme.sum().backward()
     assert torch.all(torch.isfinite(u_extreme.grad))
     assert torch.all(torch.abs(u_extreme.grad) > 0.0)
+    u = torch.tensor([10.], dtype=torch.float64, requires_grad=True)
+    torch.testing.assert_close(torch.autograd.grad(TanhRailGuard.apply(u) * 0., u)[0], torch.zeros_like(u))
 
 
 @pytest.mark.tier1
