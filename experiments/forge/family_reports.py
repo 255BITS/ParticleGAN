@@ -606,6 +606,8 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
     policy_cloud = load_records(root, load)
     support = load(COVERAGE_PREFLIGHT) if (root / COVERAGE_PREFLIGHT).is_file() else None
     attempt_path = Path("reports/forge/attempt-coverage.json")
+    from .publication_integrity import load_corrections
+    evidence_corrections = load_corrections(root, load)
     run_attempts = {}
     attempt_summary = None
     if (root / attempt_path).is_file():
@@ -623,6 +625,9 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
             if attempt["status"] not in {"PENDING", "RUNNING", "PASS", "FAIL", "INCOMPLETE", "INVALID",
                                          "ERROR", "TIMEOUT", "BLOCKED", "INTERRUPTED"}:
                 raise ValueError("invalid run-attempt status")
+            attempt = deepcopy(attempt)
+            if attempt["key"] in evidence_corrections:
+                attempt["evidence_correction"] = deepcopy(evidence_corrections[attempt["key"]])
             run_attempts[key] = attempt
     followup = Path("reports/forge/actual-missing-diagnostics-20261014/results.json")
     diagnostic_executions = set()
@@ -1117,18 +1122,33 @@ def render_problem_list(root, publication, page):
              "| Problem | What it tests | Has any configuration passed? |",
              "| --- | --- | --- |"]
     for item in definitions:
+        passers = [family["label"] for family, cohort in selected
+                   if cohort["tasks"].get(item["task"], {}).get("status") == "PASS"]
+        summary = ("Selected recorded PASS: " + ", ".join(passers) + "." if passers else
+                   "No selected recorded PASS; see exact outcomes and dated diagnostic evidence below.")
         lines.append("| " + link(root, page, item["title"], PROBLEM_PAGE.as_posix(), item["task"]) +
-                     f" | {cell(item['intent'])} | "
-                     f"{cell(item['pass_summary'])} |")
+                     f" | {cell(item['intent'])} | {cell(summary)} |")
     for item in definitions:
         task = item["task"]
         lines += ["", f'<a name="{task}"></a>', "", f"## {item['title']}", "",
                   f"Test: `{task}` · " + ("Held for qualification; included in full-suite results." if task in held else
                                           "Required for qualification and included in full-suite results."), "",
                   "**What it tests.** " + item["intent"], "",
-                  "**The problem.** " + item["problem"], "",
-                  "**Has any configuration beaten it?** " + item["pass_summary"], ""]
+                  "**Historical diagnosis" + (" (" + registry["evidence_date"] + ")" if registry.get("evidence_date") else "") +
+                  ".** " + item["problem"], "",
+                  "**Historical passer evidence.** " + item["pass_summary"], ""]
         lines += ["- " + passer for passer in item["passers"]]
+        corrections = {}
+        for _, cohort in selected:
+            entry = cohort["tasks"].get(task, {})
+            correction = entry.get("evidence_correction") or entry.get("run_attempt", {}).get("evidence_correction")
+            if correction:
+                corrections[correction["id"]] = correction
+        for correction in corrections.values():
+            lines += ["", "**Scope correction for retained diagnostic observations.** " +
+                      correction["reason"] + " Original outcomes remain archived; they do not establish the "
+                      "declared unassisted recipe/task claim. " +
+                      link(root, page, "Exact observation identities", correction["registry"]) + "."]
         lines += ["", "**Selected recipes' recorded results:**", "",
                   "| Selected recipe | Result |", "| --- | --- |"]
         for family, cohort in selected:
@@ -1137,7 +1157,7 @@ def render_problem_list(root, publication, page):
             result_label = "NOT MEASURED" if status == "UNKNOWN" else status
             lines.append("| " + link(root, page, family["label"], family["page"], cohort["anchor"]) +
                          " | " + link(root, page, result_label, family["page"], cohort["anchor"] + "-experiment-" + task) + " |")
-        lines += ["", "**What remains to solve.** " + item["next_step"], "",
+        lines += ["", "**Recommendation from the dated diagnosis.** " + item["next_step"], "",
                   "Evidence: " + " · ".join(link(root, page, ref["label"], ref["path"], ref.get("anchor"))
                                                for ref in item["evidence"]) + ".", ""]
     return "\n".join(lines)
@@ -1154,7 +1174,9 @@ def _diagnostic_passers(selected, task):
     """Selected recipes whose separate diagnostic run passes a task their recorded result does not."""
     return [family["label"] for family, cohort in selected
             if cohort["tasks"][task]["status"] != "PASS"
-            and cohort["tasks"][task].get("run_attempt", {}).get("status") == "PASS"]
+            and cohort["tasks"][task].get("run_attempt", {}).get("status") == "PASS"
+            and not (cohort["tasks"][task].get("evidence_correction")
+                     or cohort["tasks"][task].get("run_attempt", {}).get("evidence_correction"))]
 
 
 def _uncounted_disclosure(summed, selected):
@@ -1355,6 +1377,10 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
              "For example, BCAP's selected recipe uses DualNorm; Confidence LR, Finite critic cap and Positive evidence "
              "are separate BCAP research recipes, with their own scores.", "",
              "Click a count for its gates, measurements and evidence. Required lower tiers must pass before advancing.", "",
+             "Counts describe screening and selection evidence. Scientific superiority or public-default adoption "
+             "requires report-bound accepted calibration and independently frozen confirmation evidence. Software "
+             "repairs grant neither; unmeasured confirmation remains unmeasured. Tuning effort and task holdout "
+             "disclosures accompany the full-suite comparison below.", "",
              "## Selected recipes", "",
              "Passes / required-view instances for one selected recipe per family. Shared tests count once in every view "
              f"that requires them: **{counted} means {counted} counted view requirements, including repeated tests**, "
@@ -1363,9 +1389,16 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
               "**Held and removed tests** below. " if uncounted else "") +
              "These totals project recorded task outcomes onto the current requirements; historical qualifications "
              "keep their original policy revisions. Held failures remain visible in the "
-             "full-suite results below; separate diagnostic runs appear below.", "",
-             *_table_header(tiers=report_tiers, selected=True)]
+             "full-suite results below; separate diagnostic runs appear below.", ""]
     selected = list(_selected_cohorts(progress))
+    from .publication_integrity import CORRECTIONS
+    if (root / CORRECTIONS).is_file():
+        lines += ["**Scientific scope corrections (2026-11-08):** assisted or recipe-adapted coverage remains "
+                  "archived diagnostic evidence under its exact original identity. It does not replace an ordinary "
+                  "selected-cohort grade. Constructor refusals, blocked dependencies, execution errors and missing "
+                  "measurements retain their recorded status and earn no pass credit. " +
+                  link(root, page, "Source-bound correction registry", CORRECTIONS.as_posix()) + ".", ""]
+    lines += _table_header(tiers=report_tiers, selected=True)
     for family, cohort in selected:
         name = family["label"]
         if cohort["backend"] != "cuda" or (len(family["cohorts"]) > 1 and not family.get("current_cohort_anchor")):
@@ -1909,6 +1942,12 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                       "Test definition: **" + _definition_label(result) + "**. " + cell(result["coverage_reason"]) +
                       " " + cell(result["reason"]), ""]
             attempt = result.get("run_attempt")
+            correction = result.get("evidence_correction") or (attempt or {}).get("evidence_correction")
+            if correction:
+                lines += ["**Scientific scope correction:** " + cell(correction["reason"]) + " " +
+                          "The original observation remains recorded below as an archived diagnostic; it does not "
+                          "establish faithful execution of this selected recipe/task contract. " +
+                          link(root, page, "Source-bound correction", correction["registry"]) + ".", ""]
             if attempt and attempt.get("attempted"):
                 lines += ["Run attempt: **" + cell(attempt["status"]) + "** (" +
                           cell(attempt.get("origin")) + "; qualification unchanged). " +

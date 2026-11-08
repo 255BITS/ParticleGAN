@@ -119,9 +119,11 @@ def test_adding_unmeasured_stretch_tasks_preserves_source_bound_display_records(
     assert display and statuses
     assert display["qualification_input"] is False
     assert display["qualification_reuse"] is False
+    from experiments.forge.family_reports import _selected_cohorts
+    cohorts = {family["id"]: cohort for family, cohort in _selected_cohorts(publication["family_progress"])}
     for family, observed in display["families"].items():
-        for name, record in observed["records"].items():
-            assert statuses[family][name] == record["status"]
+        for name in observed["records"]:
+            assert statuses[family][name] == cohorts[family]["tasks"][name]["status"]
         for name in ("precision_gaussian_nvfp4", "precision_gaussian_mxfp8"):
             assert name not in observed["records"]
             assert statuses[family][name] not in {"PASS", "FAIL"}
