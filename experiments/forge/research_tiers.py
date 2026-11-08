@@ -36,47 +36,59 @@ def _attempt_registry(path, modified):
     return read_json(path)["records"]
 
 
-def _row(root, page, label, target, tasks, requirements, *, scope=None, selected_family=None, policy_scope=None, repair_scope=None):
+def attempt_count(tasks, attempts, required, *, fill):
+    """Count one research row's required tests, filling unmeasured cells.
+
+    These are explicitly nonqualifying research rows. New same-source
+    attempts fill previously unmeasured research cells (``fill``), never
+    overwrite an archived verdict or a selected-family qualification result.
+    """
+    outcomes = {task: tasks.get(task) for task in required}
+    if fill:
+        for task in required:
+            if outcomes[task] in {None, "UNKNOWN", "NOT_RUN"} and attempts.get(task, {}).get("status") in {"PASS", "FAIL"}:
+                outcomes[task] = attempts[task]["status"]
+    value = {"passed": sum(outcomes[task] == "PASS" for task in required), "total": len(required),
+             "not_run": sum(tasks.get(task) in {None, "UNKNOWN", "NOT_RUN"} for task in required),
+             "incompatible": sum(tasks.get(task) == "BLOCKED" for task in required)}
+    if attempts:
+        coverage = {}
+        for task in required:
+            if outcomes[task] in {"PASS", "FAIL"}:
+                continue
+            attempt = attempts.get(task, {})
+            status = (outcomes[task] if outcomes[task] in {"ERROR", "INVALID", "INCOMPLETE"}
+                      else attempt.get("status", outcomes[task]))
+            key = ("queued" if status == "PENDING" else "running" if status == "RUNNING" else
+                   "errors" if status in {"ERROR", "INVALID"} else
+                   "timeouts" if status == "TIMEOUT" else
+                   "incomplete_attempts" if status == "INCOMPLETE" else
+                   "interrupted_attempts" if status == "INTERRUPTED" else
+                   "incompatible" if status == "BLOCKED" and (not attempt or attempt.get("block_kind") == "incompatible") else
+                   "blocked" if status == "BLOCKED" else
+                   "diagnostic_attempts" if attempt.get("attempted") else "not_run")
+            coverage[key] = coverage.get(key, 0) + 1
+        value["attempt_coverage"] = coverage
+    return value
+
+
+def _row(root, page, label, target, tasks, requirements, *, scope=None, selected_family=None, policy_scope=None,
+         repair_scope=None, records=None):
     from .family_reports import score
     registry = Path(root) / "reports/forge/attempt-coverage.json"
     attempts = {}
-    if registry.is_file() and (scope or selected_family or policy_scope or repair_scope):
+    if records is not None:
+        attempts = dict(records)  # A cohort publication supplies its own records.
+    elif registry.is_file() and (scope or selected_family or policy_scope or repair_scope):
         attempts = {r.get("parent_task", r["task"]): r for r in _attempt_registry(registry, registry.stat().st_mtime_ns)
                     if (scope and r.get("research_scope") == scope)
                     or (selected_family and r.get("family") == selected_family)
                     or (policy_scope and r.get("policy_scope") == policy_scope)
                     or (repair_scope and r.get("repair_scope") == repair_scope)}
+    fill = bool(scope or policy_scope or repair_scope or records is not None)
+
     def count(required):
-        # These are explicitly nonqualifying research rows. New same-source
-        # attempts fill previously unmeasured research cells, never overwrite an
-        # archived verdict or a selected-family qualification result.
-        outcomes = {task: tasks.get(task) for task in required}
-        if scope or policy_scope or repair_scope:
-            for task in required:
-                if outcomes[task] in {None, "UNKNOWN", "NOT_RUN"} and attempts.get(task, {}).get("status") in {"PASS", "FAIL"}:
-                    outcomes[task] = attempts[task]["status"]
-        value = {"passed": sum(outcomes[task] == "PASS" for task in required), "total": len(required),
-                 "not_run": sum(tasks.get(task) in {None, "UNKNOWN", "NOT_RUN"} for task in required),
-                 "incompatible": sum(tasks.get(task) == "BLOCKED" for task in required)}
-        if attempts:
-            coverage = {}
-            for task in required:
-                if outcomes[task] in {"PASS", "FAIL"}:
-                    continue
-                attempt = attempts.get(task, {})
-                status = (outcomes[task] if outcomes[task] in {"ERROR", "INVALID", "INCOMPLETE"}
-                          else attempt.get("status", outcomes[task]))
-                key = ("queued" if status == "PENDING" else "running" if status == "RUNNING" else
-                       "errors" if status in {"ERROR", "INVALID"} else
-                       "timeouts" if status == "TIMEOUT" else
-                       "incomplete_attempts" if status == "INCOMPLETE" else
-                       "interrupted_attempts" if status == "INTERRUPTED" else
-                       "incompatible" if status == "BLOCKED" and (not attempt or attempt.get("block_kind") == "incompatible") else
-                       "blocked" if status == "BLOCKED" else
-                       "diagnostic_attempts" if attempt.get("attempted") else "not_run")
-                coverage[key] = coverage.get(key, 0) + 1
-            value["attempt_coverage"] = coverage
-        return value
+        return attempt_count(tasks, attempts, required, fill=fill)
     if set(tasks) - set().union(*map(set, requirements.values())):
         raise ValueError("research result has no recorded tier assignment")
     counts = []
@@ -165,6 +177,28 @@ def checkpoint_repair_rows(root, page):
     return rows
 
 
+def policy_cohort_rows(root, page):
+    """One row per family and scoring law of the policy-cloud cohorts.
+
+    Records come only from the cohort's own committed publication
+    (``policy_cloud_publication.RECORDS``); the live attempt service rewrites
+    attempt-coverage.json, so cohort records never live there. The clean and
+    as-served laws are separate rows (clean first). A law-independent record
+    (one run for both laws) enters both rows with its single verdict, and the
+    as-served row says how many verdicts it shares.
+    """
+    from .policy_cloud_publication import anchor, cohort_rows, load_records, row_label
+    registry = Path(root) / "reports/forge/attempt-coverage.json"
+    if registry.is_file() and any(r.get("cohort_scope") for r in _attempt_registry(registry, registry.stat().st_mtime_ns)):
+        raise ValueError("policy-cloud cohort records belong to their own publication, not attempt-coverage.json")
+    value = load_records(root)
+    rows = {}
+    for row in cohort_rows(value) if value is not None else []:
+        rows.setdefault(row["family"], []).append(_row(root, page, row_label(row), anchor(row["family"]), {},
+                                                       row["requirements"], records=row["records"]))
+    return rows
+
+
 def tier_rows(root, page):
     """Rows keyed by owning family; no modification of selected publication data."""
     rows = {}
@@ -239,6 +273,8 @@ def tier_rows(root, page):
                 selected_family=record["family"] if record["label"].startswith("Unchanged selected recipe:") else None,
                 policy_scope=policy))
     for family, additions in checkpoint_repair_rows(root, page).items():
+        rows.setdefault(family, []).extend(additions)
+    for family, additions in policy_cohort_rows(root, page).items():
         rows.setdefault(family, []).extend(additions)
     registry = Path(root) / "reports/forge/attempt-coverage.json"
     if registry.is_file():

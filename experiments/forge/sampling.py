@@ -16,6 +16,8 @@ GENERATED_AND_RECONSTRUCTED = "generated_and_reconstructed_prior_with_scheduled_
 JOINT_WORDS_CLEAN = "generated_and_paired_reconstructed_prior_without_output_noise"
 PARTICLES_AND_GRADIENT = "learned_particles_and_critic_gradient"
 PARAMETER_MEASUREMENT = "learned_parameter_measurement"
+TRAINING_UPDATE_MEASUREMENT = "training_update_measurement"
+MODEL_TOY_CLEAN = "task_model_kernel_and_posterior_without_serving_noise"
 
 # A scheduled policy remains the same policy when its configured amplitude is
 # zero. Prior kernels remain governed by execution.prior, never by this field.
@@ -27,11 +29,29 @@ POLICIES = {
     JOINT_WORDS_CLEAN: "clean",
     PARTICLES_AND_GRADIENT: "not_applied_to_measurement",
     PARAMETER_MEASUREMENT: "not_applied_to_measurement",
+    TRAINING_UPDATE_MEASUREMENT: "not_applied_to_measurement",
+    MODEL_TOY_CLEAN: "clean",
 }
 # Scoped selected-policy laws cannot impersonate the original clean/live laws.
-POLICIES.update({"tier1_selected_" + law: noise for law, noise in list(POLICIES.items())})
+# Each registered policy cohort has its own prefix (see tier1_policy cohorts).
+POLICY_LAW_PREFIXES = ("tier1_selected_", "policy_cloud_")
+POLICIES.update({prefix + law: noise for prefix in POLICY_LAW_PREFIXES for law, noise in list(POLICIES.items())})
+# The as-served measurement keeps the formulation's learned output noise
+# exactly as GANTrainer serves it: GANTrainer.sample(output_noise=True) at the
+# measured state (learned sigma with its policy floor), drawn from the isolated
+# evaluation stream. Only clean sample laws have an as-served counterpart, and
+# each name exists only under a registered as-served cohort prefix, so no
+# ordinary task or clean cohort can declare it.
+SERVED_LEARNED_NOISE = "learned_as_served"
+AS_SERVED_LAWS = {PUBLIC_PRIOR_CLEAN: "public_prior_with_learned_output_noise",
+                  ENUMERATED_PRIOR_CLEAN: "enumerated_prior_with_learned_output_noise"}
+AS_SERVED_LAW_PREFIXES = ("policy_cloud_as_served_",)
+POLICIES.update({prefix + law: SERVED_LEARNED_NOISE
+                 for prefix in AS_SERVED_LAW_PREFIXES for law in AS_SERVED_LAWS.values()})
 
 ADAPTER_POLICIES = {
+    "public_api_model_toy": MODEL_TOY_CLEAN,
+    "dcgan_performance_v1": TRAINING_UPDATE_MEASUREMENT,
     "word_joint": JOINT_WORDS_CLEAN,
     "transfer_vector": PUBLIC_PRIOR_CLEAN,
     "transfer_image": ENUMERATED_PRIOR_CLEAN,
@@ -72,12 +92,14 @@ def executed_receipt(sampling_law: str, *, eval_output_noise: str) -> dict:
 
 def expected_policy(task: dict) -> dict:
     """One central binding of implemented adapter/host paths to their policies."""
-    if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
+    from .tier1_policy import task_cohort
+    cohort = task_cohort(task)
+    if cohort is not None:
         from .tier1_policy import validate
         parent = validate(task)
         original = expected_policy(parent)
-        return executed_receipt("tier1_selected_" + original["sampling_law"],
-                                eval_output_noise=original["eval_output_noise"])
+        return executed_receipt(cohort.sampling_law(original["sampling_law"]),
+                                eval_output_noise=cohort.eval_output_noise(original["eval_output_noise"]))
     adapter = task.get("adapter")
     if adapter == "transfer_behavior":
         host = task.get("execution", {}).get("host", task.get("id"))

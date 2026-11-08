@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "id": "cgan_overlapping_classes",
+  "description": "Conditional GAN with Projection Discriminator / UCD on 4 overlapping 2D Gaussian classes (sigma=0.35), testing preservation of within-class variance and central overlap density against AC-GAN boundary repulsion.",
+  "adapter": "transfer_vector",
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "host": "cgan_overlapping_classes",
+    "steps": 3000,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "protocol": "screening",
+    "produces_state": true,
+    "host_definition": {
+      "target": "4 overlapping 2D Gaussian classes",
+      "centers": [
+        [-0.50, -0.50],
+        [-0.50, 0.50],
+        [0.50, -0.50],
+        [0.50, 0.50]
+      ],
+      "sigma": 0.35,
+      "num_classes": 4,
+      "steps": 3000,
+      "batch": 256,
+      "z_dim": 2,
+      "particles": 256
+    },
+    "prior_contract": "recipe_owned_v1"
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
+    "kind": "cgan_overlapping_classes",
+    "eval_samples": 4096,
+    "thresholds": [
+      ["classes_covered", "==", 4],
+      ["class_mass_tv", "<=", 0.08],
+      ["mean_center_err", "<=", 0.12],
+      ["min_cov_eig_ratio", ">=", 0.60],
+      ["max_cov_eig_ratio", "<=", 1.50],
+      ["overlap_density_ratio", ">=", 0.55]
+    ]
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 600
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "mog_prior"
+  ],
+  "dependencies": []
+}

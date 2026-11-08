@@ -15,7 +15,8 @@ def source_namespace():
     private = Path(__file__).with_name("family_reports.py")
     path = private if private.is_file() else maintained
     tree = ast.parse(path.read_text())
-    functions = {"_atlas_evidence_navigation", "_full_original_atlas_status", "cell", "number", "link", "_count"}
+    functions = {"_atlas_evidence_navigation", "_full_original_atlas_status", "cell", "number", "link", "_count",
+                 "_incompatible"}
     assignments = {"ATLAS_EVIDENCE_REPORTS", "FULL_ORIGINAL_ATLAS_CONFIG_SHA256", "COMPLETE"}
     selected = [node for node in tree.body if
                 isinstance(node, ast.FunctionDef) and node.name in functions or

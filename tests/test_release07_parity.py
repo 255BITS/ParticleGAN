@@ -72,7 +72,7 @@ def _current_release_recipe(released):
     assert fields.pop("loss_type") == "logistic"
     assert fields.pop("gan_mode") == "rp"
     assert fields.pop("reg_method") == "autograd"
-    return Recipe(**fields, **NEUTRAL_K3P_FIELDS)
+    return Recipe.from_dict(dict(**fields, **NEUTRAL_K3P_FIELDS))
 
 
 def _assert_equal(left, right):

@@ -8,8 +8,8 @@ from particlegan import Recipe
 
 @pytest.mark.parametrize('active', ['global', 'local'])
 def test_only_enabled_transport_term_is_called_and_resumes(monkeypatch, active):
-    recipe=Recipe(kinetic_transport_weight=float(active=='global'),
-                  kinetic_transport_local_weight=float(active=='local'))
+    recipe=Recipe.from_dict(dict(kinetic_transport_weight=float(active=='global'),
+                  kinetic_transport_local_weight=float(active=='local')))
     disabled='kinetic_transport_local_loss' if active=='global' else 'kinetic_transport_loss'
     def forbidden(*_args):
         raise AssertionError('disabled transport signal was called')
@@ -28,7 +28,7 @@ def test_only_enabled_transport_term_is_called_and_resumes(monkeypatch, active):
 
 
 def test_disabled_transport_has_no_panel_or_hook_requirement():
-    recipe=Recipe()
+    recipe=Recipe.from_dict({})
     value=torch.tensor(3.)
     consumer=OutputMarginalTransport(recipe)
     assert consumer.add(value,None,None) is value

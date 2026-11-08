@@ -9,8 +9,8 @@ import torch
 from particlegan.continuous import DataDriftController
 
 
-DEVICES = ["cpu", pytest.param("cuda:0", marks=pytest.mark.skipif(
-    not torch.cuda.is_available(), reason="CUDA required"))]
+DEVICES = ["cpu", pytest.param("cuda:0", marks=[pytest.mark.cuda, pytest.mark.skipif(
+    not torch.cuda.is_available(), reason="CUDA required")])]
 METRICS = ("radius_min", "radius_mean", "radius_max", "perturbation_rms", "clipped_fraction")
 LEGACY_KEYS = ("variant", "latent_bandwidth", "latent_applications", "mobility", "game_trust",
                "game_ratio", "payoff_error", "data_memory", "fast_reference", "fast_mean_variance",

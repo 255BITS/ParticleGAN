@@ -8,11 +8,11 @@ from experiments.forge import trainer_families as families
 from experiments.forge.contracts import atomic_json, read_json, stable_hash
 from experiments.forge.views import load_view, load_tasks, task_execution_fingerprint, task_evaluation_fingerprint
 from reports.forge import regenerate_technique_inventory as publication
-from test_forge_trainer_families import study
+from test_forge_trainer_families import study  # noqa: F401
 
 
 @pytest.fixture
-def retained(study):
+def retained(study):  # noqa: F811
     root, rows, catalogs, _, _, _ = study
     selected = rows[0]
     selected.update(trainer_family="r1r2", attempt_ids=["retained-attempt"])
@@ -154,3 +154,71 @@ def test_stale_main_table_label_preserves_recorded_score_cells(retained):
     old_cells = next(line for line in normal.splitlines() if line.startswith("| **")).split(" | ")[1:]
     new_cells = next(line for line in labeled.splitlines() if line.startswith("| **")).split(" | ")[1:]
     assert old_cells == new_cells
+
+
+def test_stale_label_follows_displayed_configuration_family(retained):
+    """A family row showing another configuration family's stale measurement is labeled."""
+    from experiments.forge.family_reports import render_leaderboard
+    root, row, _, _, _, _ = retained
+    _, metadata, _ = call(retained)
+    row["selection"] = metadata
+    row["trainer_family"] = "bcap-dualnorm"
+    count = {"passed": 0, "total": 6, "executed": 6, "incomplete": 0}
+    cohort = {"anchor": "original", "backend": "cuda", "views": [], "configuration_family": "bcap-dualnorm",
+              "total": count, "tiers": {str(i): count for i in range(1, 4)}}
+    family = {"id": "bcap-pure", "label": "BCAP", "page": "reports/forge/families/bcap-pure.md",
+              "current_cohort_anchor": "original", "cohorts": [cohort], "tags": []}
+    configurations = [{"id": "bcap-dualnorm", "label": "BCAP dualnorm",
+                       "page": "reports/forge/families/bcap-dualnorm.md"}]
+    result = {"rows": [row], "family_progress": {"families": [family], "configuration_families": configurations},
+              "provenance": {"input_digest": "fixture"}}
+    page = root / "reports/forge/technique-inventory.md"
+    normal = render_leaderboard(root, result, page)
+    labeled = publication._stale_measurement_labels(normal, result, root, page)
+    old = next(line for line in normal.splitlines() if line.startswith("| **"))
+    new = next(line for line in labeled.splitlines() if line.startswith("| **"))
+    first = new.split(" | ")[0]
+    assert "(families/bcap-dualnorm.md)" in first
+    assert first.endswith("<br>Recorded source measurement · **stale**; no current qualification")
+    assert old.split(" | ")[1:] == new.split(" | ")[1:]
+    row["selection"] = {**metadata, "freshness": None}
+    assert publication._stale_measurement_labels(normal, result, root, page).splitlines() == normal.splitlines()
+
+
+def test_recorded_scope_retains_published_pin_across_additive_live_tier1_tasks(retained):
+    root, row, pin, catalogs, _, reports = retained
+    # Restore two_pole to its recorded bytes so the ONLY drift is an added required Tier 1 task,
+    # and simulate a comparison-projected snapshot whose policy_fingerprint is older than origin's view.
+    subprocess.run(["git", "checkout", "--", "configs/forge/tasks/two_pole.json"], cwd=root, check=True)
+    actual_origin_fp = reports[0][1]["policy_fingerprint"]
+    reports[0][1]["policy_fingerprint"] = "9" * 64
+    reports[0][1]["comparison_policy_projection"] = {"actual_policy_fingerprint": actual_origin_fp}
+
+    # Add a brand-new required Tier 1 task to the live view.
+    added_task = read_json(root / "configs/forge/tasks/two_pole.json")
+    added_task["id"] = "added_tier1_gate"
+    atomic_json(root / "configs/forge/tasks/added_tier1_gate.json", added_task)
+    live_view_path = root / "configs/forge/views/discriminator_stability.json"
+    live_view = read_json(live_view_path)
+    live_view["revision"] += 1
+    live_view["assignments"].append({
+        "task": "added_tier1_gate",
+        "qualification_tier": 1,
+        "importance": "required",
+        "order": max(a["order"] for a in live_view["assignments"]) + 10,
+    })
+    atomic_json(live_view_path, live_view)
+
+    with pytest.raises(ValueError, match="every required Tier 1"):
+        families._current_pin(root, "r1r2", [row], pin, view_id="discriminator_stability", catalogs=catalogs)
+    with publication._retain_recorded_measurements(root, reports) as proofs:
+        same, meta = families._current_pin(root, "r1r2", [row], pin, view_id="discriminator_stability", catalogs=catalogs)
+        assert same == row
+        assert meta["selection_kind"] == "recorded_source_measurement" and meta["freshness"] == "stale"
+        assert [x["task"] for x in proofs[0]["contract_drift"]] == ["added_tier1_gate"]
+        assert "every required Tier 1" in proofs[0]["live_guard_error"]
+        # An unpublished new pin missing the added required Tier 1 task still fails closed.
+        unrecorded_pin = {**deepcopy(pin), "reason": "Unpublished incomplete candidate"}
+        with pytest.raises(ValueError, match="every required Tier 1"):
+            families._current_pin(root, "r1r2", [row], unrecorded_pin, view_id="discriminator_stability", catalogs=catalogs)
+

@@ -1,5 +1,8 @@
 # Conditioning challenge
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current leaderboard for this goal: [reports/transition/leaderboard/README.md](README.md); overall status: [reports/forge/technique-inventory.md](../../forge/technique-inventory.md); goal index: [reports/leaderboard-index.json](../../leaderboard-index.json). Results below are preserved as recorded.
+
 The new best MoG score is **0.14179 joint SW1**, a **43.3% reduction** from the
 established 0.24999 baseline. It uses three generators, one explicit-class joint
 critic and generator class-input gain 4. G parameters, data and update budget

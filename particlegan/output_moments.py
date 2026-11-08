@@ -7,18 +7,12 @@ No fit RNG, d*d covariance, Jacobian or retained generated N*d array is used.
 from dataclasses import dataclass
 import math
 import torch
+from ._stats import group_means
 Q=.05
 POLICY='even_linear_output_group_radial_clip_unit_residual_EB_3K_plus_3_v1'
 PROJECTION_POLICY='even_streamed_varying_axes_if_d_le8_else_top8_marginal_variance_stable_v1'
 FIT_CHUNK=256
 MAX_RANK=8
-
-def group_means(values, groups, count):
-    counts = torch.bincount(groups, minlength=count)
-    sums = torch.zeros(count, values.shape[1], dtype=torch.float64, device=values.device)
-    sums.index_add_(0, groups, values.double())
-    return sums / counts.clamp_min(1)[:, None], counts
-
 
 @dataclass(frozen=True)
 class OutputProjection:
@@ -157,7 +151,9 @@ def odd_witness(snapshot,fixed,odd_features,odd_raw):
     variance_penalty=(2*variance*t/len(values)).sqrt()
     range_penalty=(7/3)*known_range*t/(len(values)-1)
     lcb=mean-variance_penalty-range_penalty
-    assert bool((values.abs()<=2*fixed.radius+1e-10).all())
+    if not bool((values.abs()<=2*fixed.radius+1e-10).all()):
+        # Invariant of the radial clip; checked explicitly so it also holds under python -O.
+        raise RuntimeError('odd witness scalar exceeds twice the frozen moment radius')
     return dict(result,valid=True,fires=bool(lcb>0),reason=None,mean=float(mean),variance_ddof1=float(variance),
         radius=fixed.radius,known_range=known_range,variance_penalty=float(variance_penalty),range_penalty=float(range_penalty),
         lower_bound=float(lcb),zero_direction_observations=int((fixed.directions[groups].norm(dim=1)==0).sum()),

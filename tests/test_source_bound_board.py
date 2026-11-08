@@ -28,13 +28,15 @@ def test_rendered_main_board_matches_machine_source_and_preserves_selection():
     publication=json.loads((ROOT/'reports/forge/technique-inventory.json').read_text());before=deepcopy(publication)
     text=render_leaderboard(ROOT,publication,ROOT/'reports/forge/technique-inventory.md')
     assert publication==before
-    assert text.index('| Family / view | Tier 1') < text.index('G-only coherent mean')
-    row=next(line for line in text.splitlines() if line.startswith('| ↳ †') and 'G-only coherent mean' in line)
-    assert '[1(*)/6]' in row and '[0(*)/21]' in row and '[0(*)/2]' in row and '[1(*)/29]' in row
+    assert text.index('| Family / selected recipe | Tier 1') < text.index('G-only coherent mean')
+    # Research rows have their own table, and each count names its unrun or refused tests.
+    row=next(line for line in text.splitlines() if line.startswith('| [BCAP]') and 'G-only coherent mean' in line)
+    assert '[1/6 (5 incompatible)]' in row and '[0/21 (19 incompatible, 1 blocked)]' in row
+    assert '[0/2 (1 incompatible, 1 blocked)]' in row and '[1/29 (25 incompatible, 2 blocked)]' in row
     family=next(f for f in publication['family_progress']['families'] if f['id']=='bcap-pure')
     detail=render_family(ROOT,publication,family)
     assert '1 of 2 benchmark tasks' in detail and '27 of 29 required unique benchmark tasks' in detail
     assert '69 of 72 observation checks' in detail and '35 of 72 observation checks' in detail
     assert '20 of 24 observation checks' in detail and '12 of 24 observation checks' in detail
     assert '**FAIL**' in detail and 'not separate Tier3 benchmark passes' in detail
-    assert 'required-view instances' in text and 'not distinct training runs' in text
+    assert 'required-view instances' in text and 'including repeated tests' in text

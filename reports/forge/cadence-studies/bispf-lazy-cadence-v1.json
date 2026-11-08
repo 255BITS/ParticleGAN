@@ -1,0 +1,3148 @@
+{
+  "artifact_kind": "forge_cadence_comparison_v1",
+  "cost_note": "New-paid cost is campaign-wide and shared across lane reports; never add it across lanes. Observed evidence cost retains its original attempt scope. Neither cost is a speed ranking.",
+  "declared_worst_case_seconds": 186480,
+  "default_adoption": false,
+  "hypothesis": "One global BISPF public lazy policy at reg_every 4, 8 or 16 preserves every measured eager-control PASS across the unchanged tiered tasks, including held tests, with the base coefficient fixed and the built-in k-fold strength compensation. This measures coupled application-clock controller behavior, not isolated gradient frequency. Any matched PASS-to-FAIL falsifies preservation for that interval; unavailable evidence cannot pass. No seed study, per-task tuning, scientific default adoption or automatic qualification.",
+  "interpretation": "Public lazy policy including application-clock controllers; internal k-fold strength compensation. Base coefficient, optimizer updates and task protocols remain fixed.",
+  "lanes": {
+    "coverage": {
+      "axis": "reg_every",
+      "complete": false,
+      "control_candidate_id": "bispf--4c6f55c30113154ee5f9345b0f41b76d6b2c02c6a50c0ffd9b4fa18b586e9792",
+      "control_value": 1,
+      "cost": {},
+      "diagnostic_scope": true,
+      "evidence_scope": "research_diagnostic",
+      "leaderboard": "reports/forge/technique-inventory.md",
+      "limitations": [
+        "Fixed-seed measured pass preservation is not statistical noninferiority.",
+        "Raw metric deltas have no inferred common scale or improvement direction.",
+        "Charged worker wall time is cost, not a speed measurement."
+      ],
+      "logs": "/home/martyn/dev/ParticleGAN/runs/forge/events.jsonl",
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cuda": {
+              "autograd_multithreading_enabled": false,
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "bb52868450b556a0457b6aaf484f777b14703f3aa22a60781fc36bfa5ea6b381"
+      },
+      "qualification_credit": false,
+      "qualification_note": "Comparison readout only; diagnostic coverage grants no ordinary qualification.",
+      "recommendation": {
+        "candidate_ids": [],
+        "reason": "Finish or repair unavailable matched evidence before selecting a cadence.",
+        "status": "incomplete"
+      },
+      "schema_version": 1,
+      "study_id": "bispf-lazy-cadence-v1-coverage",
+      "trials": [
+        {
+          "attempt_ids": [],
+          "cadence": null,
+          "candidate_id": "bispf--4c6f55c30113154ee5f9345b0f41b76d6b2c02c6a50c0ffd9b4fa18b586e9792",
+          "complete": false,
+          "configuration_id": "4c6f55c30113154ee5f9345b0f41b76d6b2c02c6a50c0ffd9b4fa18b586e9792",
+          "cost": {
+            "wall_seconds": 0.0
+          },
+          "counts_consistent": true,
+          "full_view_qualified": false,
+          "logs": null,
+          "missing_cells": [],
+          "pairs": [
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "ae_gan_hold",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "diagnostic",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "clockfree_audit_measurement_v1",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "five_word_joint_smoke",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "gaussian1d_smoke",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "ring16_acquisition",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "two_pole",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "unused_token_hold",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "cover_leftover",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "five_word_joint_hold",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "gaussian1d_stability",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "grid100",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "img_bars4",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "img_blobs4",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "img_intensity2",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "img_stripes2",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "mid_scale_identity",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "mode_hold",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "residual_student",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "rotated100",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "staggered100",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "trajectory",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "unipolar",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_anisotropic",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_overlap",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_spiral",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_two_broad",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_unequal_mass",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_unequal_width",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "ring_extension",
+              "tier": 3,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "diagnostic",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "ring_hold",
+              "tier": 3,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            }
+          ],
+          "pass_preserving": false,
+          "provenance": {
+            "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+            "runtime_cohort": {
+              "compute_profiles": {
+                "cuda": {
+                  "autograd_multithreading_enabled": false,
+                  "backend": "cuda",
+                  "compute_capability": "8.6",
+                  "deterministic": true,
+                  "driver": "610.57.04",
+                  "model": "NVIDIA RTX A6000",
+                  "tf32": false,
+                  "threads": 1
+                }
+              },
+              "execution_backend": "cuda",
+              "runtime": {
+                "implementation": "CPython",
+                "machine": "x86_64",
+                "packages": {
+                  "numpy": "2.5.2",
+                  "scipy": "1.17.1",
+                  "torch": "2.14.0"
+                },
+                "python": "3.12.13",
+                "system": "Linux"
+              }
+            },
+            "source_digest": "bb52868450b556a0457b6aaf484f777b14703f3aa22a60781fc36bfa5ea6b381"
+          },
+          "qualification_credit": false,
+          "recomputed_counts": {
+            "UNKNOWN": 30
+          },
+          "regressions": [],
+          "repairs": [],
+          "tiers": {
+            "1": {
+              "diagnostic": {
+                "denominator": 1,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 1
+                },
+                "unavailable": 1
+              },
+              "held": {
+                "denominator": 0,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {},
+                "unavailable": 0
+              },
+              "required": {
+                "denominator": 6,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 6
+                },
+                "unavailable": 6
+              }
+            },
+            "2": {
+              "diagnostic": {
+                "denominator": 0,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {},
+                "unavailable": 0
+              },
+              "held": {
+                "denominator": 7,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 7
+                },
+                "unavailable": 7
+              },
+              "required": {
+                "denominator": 14,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 14
+                },
+                "unavailable": 14
+              }
+            },
+            "3": {
+              "diagnostic": {
+                "denominator": 1,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 1
+                },
+                "unavailable": 1
+              },
+              "held": {
+                "denominator": 0,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {},
+                "unavailable": 0
+              },
+              "required": {
+                "denominator": 1,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 1
+                },
+                "unavailable": 1
+              }
+            }
+          },
+          "unavailable": [
+            "ae_gan_hold",
+            "clockfree_audit_measurement_v1",
+            "five_word_joint_smoke",
+            "gaussian1d_smoke",
+            "ring16_acquisition",
+            "two_pole",
+            "unused_token_hold",
+            "cover_leftover",
+            "five_word_joint_hold",
+            "gaussian1d_stability",
+            "grid100",
+            "img_bars4",
+            "img_blobs4",
+            "img_intensity2",
+            "img_stripes2",
+            "mid_scale_identity",
+            "mode_hold",
+            "residual_student",
+            "rotated100",
+            "staggered100",
+            "trajectory",
+            "unipolar",
+            "vector_anisotropic",
+            "vector_overlap",
+            "vector_spiral",
+            "vector_two_broad",
+            "vector_unequal_mass",
+            "vector_unequal_width",
+            "ring_extension",
+            "ring_hold"
+          ],
+          "value": 1
+        },
+        {
+          "attempt_ids": [],
+          "cadence": null,
+          "candidate_id": "bispf--fb52b14b8b32c3d05cdfaead95e2803c99f9a1f69be8551c3fdbf357d0d0c9c2",
+          "complete": false,
+          "configuration_id": "fb52b14b8b32c3d05cdfaead95e2803c99f9a1f69be8551c3fdbf357d0d0c9c2",
+          "cost": {
+            "wall_seconds": 0.0
+          },
+          "counts_consistent": true,
+          "full_view_qualified": false,
+          "logs": null,
+          "missing_cells": [],
+          "pairs": [
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "ae_gan_hold",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "diagnostic",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "clockfree_audit_measurement_v1",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "five_word_joint_smoke",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "gaussian1d_smoke",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "ring16_acquisition",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "two_pole",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "unused_token_hold",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "cover_leftover",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "five_word_joint_hold",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "gaussian1d_stability",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "grid100",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "img_bars4",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "img_blobs4",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "img_intensity2",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "img_stripes2",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "mid_scale_identity",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "mode_hold",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "residual_student",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "rotated100",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "staggered100",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "trajectory",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "unipolar",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_anisotropic",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_overlap",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_spiral",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_two_broad",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_unequal_mass",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_unequal_width",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "ring_extension",
+              "tier": 3,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "diagnostic",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "ring_hold",
+              "tier": 3,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            }
+          ],
+          "pass_preserving": false,
+          "provenance": {
+            "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+            "runtime_cohort": {
+              "compute_profiles": {
+                "cuda": {
+                  "autograd_multithreading_enabled": false,
+                  "backend": "cuda",
+                  "compute_capability": "8.6",
+                  "deterministic": true,
+                  "driver": "610.57.04",
+                  "model": "NVIDIA RTX A6000",
+                  "tf32": false,
+                  "threads": 1
+                }
+              },
+              "execution_backend": "cuda",
+              "runtime": {
+                "implementation": "CPython",
+                "machine": "x86_64",
+                "packages": {
+                  "numpy": "2.5.2",
+                  "scipy": "1.17.1",
+                  "torch": "2.14.0"
+                },
+                "python": "3.12.13",
+                "system": "Linux"
+              }
+            },
+            "source_digest": "bb52868450b556a0457b6aaf484f777b14703f3aa22a60781fc36bfa5ea6b381"
+          },
+          "qualification_credit": false,
+          "recomputed_counts": {
+            "UNKNOWN": 30
+          },
+          "regressions": [],
+          "repairs": [],
+          "tiers": {
+            "1": {
+              "diagnostic": {
+                "denominator": 1,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 1
+                },
+                "unavailable": 1
+              },
+              "held": {
+                "denominator": 0,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {},
+                "unavailable": 0
+              },
+              "required": {
+                "denominator": 6,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 6
+                },
+                "unavailable": 6
+              }
+            },
+            "2": {
+              "diagnostic": {
+                "denominator": 0,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {},
+                "unavailable": 0
+              },
+              "held": {
+                "denominator": 7,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 7
+                },
+                "unavailable": 7
+              },
+              "required": {
+                "denominator": 14,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 14
+                },
+                "unavailable": 14
+              }
+            },
+            "3": {
+              "diagnostic": {
+                "denominator": 1,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 1
+                },
+                "unavailable": 1
+              },
+              "held": {
+                "denominator": 0,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {},
+                "unavailable": 0
+              },
+              "required": {
+                "denominator": 1,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 1
+                },
+                "unavailable": 1
+              }
+            }
+          },
+          "unavailable": [
+            "ae_gan_hold",
+            "clockfree_audit_measurement_v1",
+            "five_word_joint_smoke",
+            "gaussian1d_smoke",
+            "ring16_acquisition",
+            "two_pole",
+            "unused_token_hold",
+            "cover_leftover",
+            "five_word_joint_hold",
+            "gaussian1d_stability",
+            "grid100",
+            "img_bars4",
+            "img_blobs4",
+            "img_intensity2",
+            "img_stripes2",
+            "mid_scale_identity",
+            "mode_hold",
+            "residual_student",
+            "rotated100",
+            "staggered100",
+            "trajectory",
+            "unipolar",
+            "vector_anisotropic",
+            "vector_overlap",
+            "vector_spiral",
+            "vector_two_broad",
+            "vector_unequal_mass",
+            "vector_unequal_width",
+            "ring_extension",
+            "ring_hold"
+          ],
+          "value": 4
+        },
+        {
+          "attempt_ids": [],
+          "cadence": null,
+          "candidate_id": "bispf--45cdec61b8ecefcf7575a17d3f53982591dc7a2b58a487ca6fcf53632dd86a70",
+          "complete": false,
+          "configuration_id": "45cdec61b8ecefcf7575a17d3f53982591dc7a2b58a487ca6fcf53632dd86a70",
+          "cost": {
+            "wall_seconds": 0.0
+          },
+          "counts_consistent": true,
+          "full_view_qualified": false,
+          "logs": null,
+          "missing_cells": [],
+          "pairs": [
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "ae_gan_hold",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "diagnostic",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "clockfree_audit_measurement_v1",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "five_word_joint_smoke",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "gaussian1d_smoke",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "ring16_acquisition",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "two_pole",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "unused_token_hold",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "cover_leftover",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "five_word_joint_hold",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "gaussian1d_stability",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "grid100",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "img_bars4",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "img_blobs4",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "img_intensity2",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "img_stripes2",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "mid_scale_identity",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "mode_hold",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "residual_student",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "rotated100",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "staggered100",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "trajectory",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "unipolar",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_anisotropic",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_overlap",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_spiral",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_two_broad",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_unequal_mass",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_unequal_width",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "ring_extension",
+              "tier": 3,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "diagnostic",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "ring_hold",
+              "tier": 3,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            }
+          ],
+          "pass_preserving": false,
+          "provenance": {
+            "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+            "runtime_cohort": {
+              "compute_profiles": {
+                "cuda": {
+                  "autograd_multithreading_enabled": false,
+                  "backend": "cuda",
+                  "compute_capability": "8.6",
+                  "deterministic": true,
+                  "driver": "610.57.04",
+                  "model": "NVIDIA RTX A6000",
+                  "tf32": false,
+                  "threads": 1
+                }
+              },
+              "execution_backend": "cuda",
+              "runtime": {
+                "implementation": "CPython",
+                "machine": "x86_64",
+                "packages": {
+                  "numpy": "2.5.2",
+                  "scipy": "1.17.1",
+                  "torch": "2.14.0"
+                },
+                "python": "3.12.13",
+                "system": "Linux"
+              }
+            },
+            "source_digest": "bb52868450b556a0457b6aaf484f777b14703f3aa22a60781fc36bfa5ea6b381"
+          },
+          "qualification_credit": false,
+          "recomputed_counts": {
+            "UNKNOWN": 30
+          },
+          "regressions": [],
+          "repairs": [],
+          "tiers": {
+            "1": {
+              "diagnostic": {
+                "denominator": 1,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 1
+                },
+                "unavailable": 1
+              },
+              "held": {
+                "denominator": 0,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {},
+                "unavailable": 0
+              },
+              "required": {
+                "denominator": 6,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 6
+                },
+                "unavailable": 6
+              }
+            },
+            "2": {
+              "diagnostic": {
+                "denominator": 0,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {},
+                "unavailable": 0
+              },
+              "held": {
+                "denominator": 7,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 7
+                },
+                "unavailable": 7
+              },
+              "required": {
+                "denominator": 14,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 14
+                },
+                "unavailable": 14
+              }
+            },
+            "3": {
+              "diagnostic": {
+                "denominator": 1,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 1
+                },
+                "unavailable": 1
+              },
+              "held": {
+                "denominator": 0,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {},
+                "unavailable": 0
+              },
+              "required": {
+                "denominator": 1,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 1
+                },
+                "unavailable": 1
+              }
+            }
+          },
+          "unavailable": [
+            "ae_gan_hold",
+            "clockfree_audit_measurement_v1",
+            "five_word_joint_smoke",
+            "gaussian1d_smoke",
+            "ring16_acquisition",
+            "two_pole",
+            "unused_token_hold",
+            "cover_leftover",
+            "five_word_joint_hold",
+            "gaussian1d_stability",
+            "grid100",
+            "img_bars4",
+            "img_blobs4",
+            "img_intensity2",
+            "img_stripes2",
+            "mid_scale_identity",
+            "mode_hold",
+            "residual_student",
+            "rotated100",
+            "staggered100",
+            "trajectory",
+            "unipolar",
+            "vector_anisotropic",
+            "vector_overlap",
+            "vector_spiral",
+            "vector_two_broad",
+            "vector_unequal_mass",
+            "vector_unequal_width",
+            "ring_extension",
+            "ring_hold"
+          ],
+          "value": 8
+        },
+        {
+          "attempt_ids": [],
+          "cadence": null,
+          "candidate_id": "bispf--a76d0a397597dc8741c3c902e2eb9bf02246ad880a1a0f2aaf9de572fc183d23",
+          "complete": false,
+          "configuration_id": "a76d0a397597dc8741c3c902e2eb9bf02246ad880a1a0f2aaf9de572fc183d23",
+          "cost": {
+            "wall_seconds": 0.0
+          },
+          "counts_consistent": true,
+          "full_view_qualified": false,
+          "logs": null,
+          "missing_cells": [],
+          "pairs": [
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "ae_gan_hold",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "diagnostic",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "clockfree_audit_measurement_v1",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "five_word_joint_smoke",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "gaussian1d_smoke",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "ring16_acquisition",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "two_pole",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "unused_token_hold",
+              "tier": 1,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "cover_leftover",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "five_word_joint_hold",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "gaussian1d_stability",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "grid100",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "img_bars4",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "img_blobs4",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "img_intensity2",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "img_stripes2",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "mid_scale_identity",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "mode_hold",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "residual_student",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "rotated100",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "staggered100",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "trajectory",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "unipolar",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_anisotropic",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_overlap",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_spiral",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_two_broad",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_unequal_mass",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "held",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "vector_unequal_width",
+              "tier": 2,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "required",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "ring_extension",
+              "tier": 3,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            },
+            {
+              "cadence": null,
+              "candidate_attempt_id": null,
+              "candidate_status": "UNKNOWN",
+              "control_attempt_id": null,
+              "control_status": "UNKNOWN",
+              "importance": "diagnostic",
+              "metric_deltas": [],
+              "regression": false,
+              "repair": false,
+              "status": "UNAVAILABLE",
+              "task": "ring_hold",
+              "tier": 3,
+              "unavailable_metrics": [],
+              "unavailable_reasons": [
+                "candidate gate is UNKNOWN",
+                "control gate is UNKNOWN",
+                "no paired finite scalar metrics"
+              ]
+            }
+          ],
+          "pass_preserving": false,
+          "provenance": {
+            "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+            "runtime_cohort": {
+              "compute_profiles": {
+                "cuda": {
+                  "autograd_multithreading_enabled": false,
+                  "backend": "cuda",
+                  "compute_capability": "8.6",
+                  "deterministic": true,
+                  "driver": "610.57.04",
+                  "model": "NVIDIA RTX A6000",
+                  "tf32": false,
+                  "threads": 1
+                }
+              },
+              "execution_backend": "cuda",
+              "runtime": {
+                "implementation": "CPython",
+                "machine": "x86_64",
+                "packages": {
+                  "numpy": "2.5.2",
+                  "scipy": "1.17.1",
+                  "torch": "2.14.0"
+                },
+                "python": "3.12.13",
+                "system": "Linux"
+              }
+            },
+            "source_digest": "bb52868450b556a0457b6aaf484f777b14703f3aa22a60781fc36bfa5ea6b381"
+          },
+          "qualification_credit": false,
+          "recomputed_counts": {
+            "UNKNOWN": 30
+          },
+          "regressions": [],
+          "repairs": [],
+          "tiers": {
+            "1": {
+              "diagnostic": {
+                "denominator": 1,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 1
+                },
+                "unavailable": 1
+              },
+              "held": {
+                "denominator": 0,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {},
+                "unavailable": 0
+              },
+              "required": {
+                "denominator": 6,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 6
+                },
+                "unavailable": 6
+              }
+            },
+            "2": {
+              "diagnostic": {
+                "denominator": 0,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {},
+                "unavailable": 0
+              },
+              "held": {
+                "denominator": 7,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 7
+                },
+                "unavailable": 7
+              },
+              "required": {
+                "denominator": 14,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 14
+                },
+                "unavailable": 14
+              }
+            },
+            "3": {
+              "diagnostic": {
+                "denominator": 1,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 1
+                },
+                "unavailable": 1
+              },
+              "held": {
+                "denominator": 0,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {},
+                "unavailable": 0
+              },
+              "required": {
+                "denominator": 1,
+                "fail": 0,
+                "pass": 0,
+                "statuses": {
+                  "UNKNOWN": 1
+                },
+                "unavailable": 1
+              }
+            }
+          },
+          "unavailable": [
+            "ae_gan_hold",
+            "clockfree_audit_measurement_v1",
+            "five_word_joint_smoke",
+            "gaussian1d_smoke",
+            "ring16_acquisition",
+            "two_pole",
+            "unused_token_hold",
+            "cover_leftover",
+            "five_word_joint_hold",
+            "gaussian1d_stability",
+            "grid100",
+            "img_bars4",
+            "img_blobs4",
+            "img_intensity2",
+            "img_stripes2",
+            "mid_scale_identity",
+            "mode_hold",
+            "residual_student",
+            "rotated100",
+            "staggered100",
+            "trajectory",
+            "unipolar",
+            "vector_anisotropic",
+            "vector_overlap",
+            "vector_spiral",
+            "vector_two_broad",
+            "vector_unequal_mass",
+            "vector_unequal_width",
+            "ring_extension",
+            "ring_hold"
+          ],
+          "value": 16
+        }
+      ]
+    }
+  },
+  "logs": "/home/martyn/dev/ParticleGAN/runs/forge/events.jsonl",
+  "schema_version": 1,
+  "stage": "planned",
+  "study_id": "bispf-lazy-cadence-v1",
+  "training_launched": false
+}

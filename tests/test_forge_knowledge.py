@@ -1,4 +1,5 @@
 from copy import deepcopy
+import json
 from pathlib import Path
 
 import pytest
@@ -275,6 +276,75 @@ def test_recall_returns_useful_negative_history_and_unknown_goal(setup):
     assert result[0]["goal_applicability"] == "unknown"
 
 
+def test_recall_compacts_source_manifests_without_changing_identity_or_records(setup):
+    root, _ = setup
+    record = historical(root)
+    record["source"] = {"digest": "frozen-source-digest", "origin_commit": "frozen-commit",
+                        "schema_version": 1, "snapshot_path": "/original/source/snapshot",
+                        "files": {f"frozen/scientific-source-{i}.py": "a" * 64 for i in range(1500)}}
+    path = root / "reports/forge/records/history-a.json"
+    atomic_json(path, record)
+    original = path.read_bytes()
+
+    compact = knowledge.recall(root, "idea", "discriminator_stability")[0]
+    full = knowledge.recall(root, "idea", "discriminator_stability", full_provenance=True)[0]
+
+    assert compact["exact_identity_match"] and full["exact_identity_match"]
+    assert compact["source"]["file_count"] == 1500
+    assert "files" not in compact["source"]
+    assert full["source"] == record["source"]
+    assert all(compact["source"][key] == value for key, value in record["source"].items() if key != "files")
+    assert {key: value for key, value in compact.items() if key != "source"} == {
+        key: value for key, value in full.items() if key != "source"}
+    assert "late failure" in compact["conclusion"] and compact["qualification_input"] is False
+    assert len(json.dumps(compact)) < 2000
+    assert len(json.dumps(full)) > 100000
+    assert path.read_bytes() == original
+
+
+@pytest.mark.parametrize("scope", ["current", "research_diagnostic"])
+def test_memory_receipt_navigation_is_durable_and_independent_of_local_artifacts(setup, scope):
+    root, _ = setup
+    record = historical(root)
+    record["evidence_scope"] = scope
+    original_path = "reports/forge/attempts/local-only-attempt/result.json"
+    record["source"] = {"path": original_path}
+    record_path = root / "reports/forge/records/history-a.json"
+    atomic_json(record_path, record)
+    original = record_path.read_bytes()
+    guide = root / "docs/forge-artifact-resolver.md"
+    guide.parent.mkdir()
+    guide.write_text("# Retrieve exact original evidence\n")
+
+    knowledge.compile_memory(root, summaries_only=True)
+    memory_path = root / "reports/forge/EXPERIMENT_MEMORY.md"
+    clean_memory = memory_path.read_bytes()
+    markdown = clean_memory.decode()
+    assert "[Record and receipt provenance](records/history-a.json)" in markdown
+    assert "[Original artifact retrieval](../../docs/forge-artifact-resolver.md)" in markdown
+    assert "Original receipt availability is separate" in markdown
+    assert original_path not in markdown
+
+    # A restored ignored envelope must not alter the published navigation or verdict.
+    atomic_json(root / original_path, {"local": "hydrated original"})
+    atomic_json(root / "runs/forge/a-campaign/local-only-attempt/result.json", {"local": "worker result"})
+    knowledge.compile_memory(root, summaries_only=True)
+    assert memory_path.read_bytes() == clean_memory
+    assert record_path.read_bytes() == original
+
+
+def test_memory_keeps_pinned_external_evidence_links(setup):
+    root, _ = setup
+    record = historical(root)
+    record["source"] = {"path": "reports/forge/attempts/pinned/result.json",
+                        "url": "https://example.org/frozen-commit/result.json", "sha256": "a" * 64}
+    atomic_json(root / "reports/forge/records/history-a.json", record)
+    knowledge.compile_memory(root, summaries_only=True)
+    markdown = (root / "reports/forge/EXPERIMENT_MEMORY.md").read_text()
+    assert "[Evidence](https://example.org/frozen-commit/result.json)" in markdown
+    assert "[Record](records/history-a.json)" in markdown
+
+
 def test_readout_is_bound_to_exact_revision_and_updates_memory(setup):
     root, request = setup
     save_attempt(root, request, final=2.)
@@ -382,3 +452,57 @@ def test_stopped_readout_persists_concluded_and_retry_needs_new_readout(setup):
     assert row["lifecycle"] == "awaiting_readout"
     knowledge.readout(root, "idea", "both tasks complete", "comparison", "next")
     assert knowledge.board(root, "stability")["current_rows"][0]["pending_readout"] is False
+
+
+def test_held_view_shows_its_held_count_beside_the_status_and_a_held_next_action(setup):
+    root, request = setup
+    request["view"]["assignments"][1].update(importance="held", hold={
+        "schema": "forge_hold_v1", "previous_importance": "required", "reason": "unsolved", "blocked_by": [],
+        "summary": "Fixture: quality is measured and shown, but not counted.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#quality",
+        "reentry": "Count quality again when one global recipe passes it."})
+    atomic_json(root / "configs/forge/views/stability.json", request["view"])
+    save_attempt(root, request)
+    row = knowledge.board(root, "stability")["current_rows"][0]
+    assert (row["status"], row["qualified_tier"]) == ("HELD", 1)
+    assert row["held"] == {"total": 1, "passed": 0}
+    assert knowledge.held_note(row) == "; 1 held (0 pass, not counted)"
+    assert knowledge.held_note({key: value for key, value in row.items() if key != "held"}) == ""
+    markdown = knowledge._board_markdown({"view": "stability", "view_revision": 1, "ranking_note": "Note.", "rows": [row]})
+    assert "| NOT_RUN 1, PASS 1; 1 held (0 pass, not counted) |" in markdown
+    assert "shows HELD, never PASS" in knowledge._next_action("HELD", False)
+    assert knowledge._next_action("HELD", True) == "Publish an explanation, comparison, and next action."
+    assert knowledge._next_action("FAIL", False) == "Run the next eligible task within an explicit budget."
+
+
+def test_summaries_only_compile_filters_concluded_candidates_from_pending_readout(tmp_path):
+    atomic_json(tmp_path / "reports/forge/compilation.json", {
+        "input_digest": "prev-digest",
+        "pending_readout": ["already-concluded", "still-pending"],
+        "scientific_source_digests": ["src-1"],
+    })
+    atomic_json(tmp_path / "reports/forge/records/readout-done.json", {
+        "schema_version": 1,
+        "record_id": "readout-done",
+        "candidate_id": "already-concluded",
+        "lifecycle": "concluded",
+        "task_results": [],
+    })
+    out = knowledge.compile_memory(tmp_path, summaries_only=True)
+    assert out["pending_readout"] == ["still-pending"]
+
+
+def test_in_flight_work_surfaces_open_studies_and_active_queue_submissions(tmp_path):
+    atomic_json(tmp_path / "configs/forge/studies/active-study.json", {
+        "schema_version": 1,
+        "id": "active-study",
+        "candidate": "k3p",
+        "control": "bcap",
+        "status": "ready",
+        "hypothesis": "test in-flight visibility",
+        "scope": {"view": "discriminator_stability", "through_tier": 1, "task_ids": ["smoke"]},
+    })
+    items = knowledge.in_flight_work(tmp_path, query="k3p", goal="discriminator_stability")
+    assert any(item["kind"] == "open_study" and item["study_id"] == "active-study" for item in items)
+    with_inflight = knowledge.recall(tmp_path, query="k3p", goal="discriminator_stability", include_in_flight=True)
+    assert any(row["evidence_scope"] == "in_flight" and row["study_id"] == "active-study" for row in with_inflight)

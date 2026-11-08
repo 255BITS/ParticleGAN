@@ -113,7 +113,7 @@ def test_frozen_training_and_checkpoint_resume_preserve_locations_and_all_stream
 
 
 def test_regularizer_weight_and_l2_are_applied_once_with_declared_settings():
-    recipe = Recipe(prior_reg=.3, prior_l2=.2, prior_reg_target_std=.7, prior_reg_eps=1e-3)
+    recipe = Recipe.from_dict(dict(prior_reg=.3, prior_l2=.2, prior_reg_target_std=.7, prior_reg_eps=1e-3))
     rows = torch.tensor([[.1, -.1], [.2, .3], [.3, -.2]], requires_grad=True)
     actual = recipe.prior_regularization(rows)
     expected = .3 * ParticleRegularizer(target_std=.7, eps=1e-3)(rows) + .2 * rows.square().mean()
@@ -125,14 +125,14 @@ def test_regularizer_weight_and_l2_are_applied_once_with_declared_settings():
                                      dict(prior_update="frozen", prior_reg=.3, prior_l2=.2)])
 def test_disabled_or_frozen_regularizer_does_no_auxiliary_work(settings, monkeypatch):
     monkeypatch.setattr(ParticleRegularizer, "forward", lambda *args: pytest.fail("disabled prior penalty evaluated"))
-    recipe = Recipe(**settings)
+    recipe = Recipe.from_dict(settings)
     rows = torch.full((2, 2), float("nan"), requires_grad=True)
     assert recipe.prior_regularization(rows).item() == 0
 
 
 def test_zero_factory_short_circuits_nonfinite_rows():
     rows = torch.full((2, 2), float("nan"), requires_grad=True)
-    for loss in (ParticleRegularizer(weight=0)(rows), Recipe().prior_regularization(rows)):
+    for loss in (ParticleRegularizer(weight=0)(rows), Recipe.from_dict({}).prior_regularization(rows)):
         assert loss.item() == 0
         assert torch.equal(torch.autograd.grad(loss, rows)[0], torch.zeros_like(rows))
 
@@ -232,7 +232,7 @@ def test_toy100_factory_preserves_initialization_and_frozen_locations():
 
 
 def test_gaussian_prior_has_no_location_policy_or_optimizer_group():
-    recipe = Recipe(prior_update="frozen")
+    recipe = Recipe.from_dict(dict(prior_update="frozen"))
     assert len(recipe.make_optimizers(nn.Linear(2, 2), nn.Linear(2, 1), GaussianPrior(2))[0].param_groups) == 1
 
 
@@ -241,7 +241,7 @@ def test_gaussian_prior_has_no_location_policy_or_optimizer_group():
     dict(prior_reg_target_std=float("nan")), dict(prior_update="frozen", row_evidence_gate=True)])
 def test_invalid_policy_or_regularizer_rejected_before_construction(settings):
     with pytest.raises(ValueError):
-        Recipe(**settings)
+        Recipe.from_dict(settings)
 
 
 def test_factory_and_raw_latent_optimizer_cannot_override_frozen_policy():
@@ -291,8 +291,8 @@ def test_frozen_guard_requires_exact_zero_and_complete_network_budgets():
     t = task()
     t["execution"]["steps"] = 4
     t["evaluation"]["guards"] = dict(optimizer_roles=["generator", "discriminator", "prior"], exact_optimizer_updates=True)
-    frozen = Recipe(prior_update="frozen").make_prior()
-    evidence = dict(prior_policy=prior_policy_receipt(Recipe(prior_update="frozen"), frozen),
+    frozen = Recipe.from_dict(dict(prior_update="frozen")).make_prior()
+    evidence = dict(prior_policy=prior_policy_receipt(Recipe.from_dict(dict(prior_update="frozen")), frozen),
         guards=dict(optimizer_updates=dict(generator=4, discriminator=4, prior=0)))
     assert expected_prior_updates(t, evidence, 4) == 0
     assert _guards(t, evidence) is None
@@ -315,7 +315,7 @@ def test_legacy_host_keeps_original_prior_weight_and_task_learning_policy():
 
 @pytest.mark.parametrize("policy", ["learned", "frozen"])
 def test_policy_proof_cannot_lie_about_actual_recipe_in_either_direction(policy):
-    recipe = Recipe(prior_update=policy, num_particles=12, z_dim=2)
+    recipe = Recipe.from_dict(dict(prior_update=policy, num_particles=12, z_dim=2))
     rows = recipe.make_prior()
     evidence = dict(prior_policy=prior_policy_receipt(recipe, rows))
     assert validate_prior_policy(task(), evidence, asdict(recipe)) is None
@@ -332,7 +332,7 @@ def test_specialized_frozen_reducers_preserve_network_budgets(name):
     else:
         from test_forge_word_smoke_hold import evidence
         from experiments.forge.word_tasks import grade
-    recipe = Recipe(prior_update="frozen", num_particles=12, z_dim=2)
+    recipe = Recipe.from_dict(dict(prior_update="frozen", num_particles=12, z_dim=2))
     raw = evidence()
     raw["prior_policy"] = prior_policy_receipt(recipe, recipe.make_prior())
     raw["guards"]["optimizer_updates"]["prior"] = 0

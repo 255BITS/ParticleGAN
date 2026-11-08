@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "id": "ring16-schedule-20261011",
+  "scope": "archived_public_api_task_only_full_schedule_comparison",
+  "qualification_input": false,
+  "seed": 0,
+  "parent_archive": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010",
+  "parent_snapshot": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/snapshots/a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+  "parent_source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+  "baseline_report": "reports/forge/ring16-duration-20261011/results.json",
+  "baseline_report_sha256": "c46c30cd31f15e258673a0f3b99135ce4c6b8411bb5e4d0186d7a0f7a266554f",
+  "max_total_updates": 6400,
+  "trainer_delta": {
+    "total_steps": [
+      400,
+      6400
+    ],
+    "network_lr_horizon_cap": {
+      "r1r2": [
+        null,
+        null
+      ],
+      "ka2": [
+        1600,
+        null
+      ],
+      "k3p": [
+        1600,
+        null
+      ]
+    },
+    "prior_update": "unchanged learned",
+    "prior_regularizer": "unchanged VICReg with weight0, prior_l2=0",
+    "coupled_effects": "Stretch G/D and prior LR schedules; KA2/K3P input/output noise schedules and R1/R2 beta2/penalty schedules follow the longer horizon. Fixed KA2 call800 switch and guard minimum200 remain fixed."
+  },
+  "fixed_contract": "Archived source/runtime, one global recipe per family, deterministic public initialization seed0, identical model/prior tensors, same target and actual batch sequence, architecture, prior sigma .1/256 particles, batch128,6400 updates,384 observations at original cadence,4096 clean live samples, thresholds and5 terminal passes.",
+  "restart_contract": "New schedule runs from scratch. Match the saved baseline serialization/reconstruction boundary at update1600 without resetting optimizers, counters or streams.",
+  "evaluation": {
+    "observations_per_1600_block": 96,
+    "samples": 4096,
+    "minimum_terminal_passes": 5,
+    "thresholds": [
+      [
+        "sample_count",
+        ">=",
+        4096
+      ],
+      [
+        "modes",
+        ">=",
+        16
+      ],
+      [
+        "mass_tv",
+        "<=",
+        0.15
+      ],
+      [
+        "hq",
+        ">=",
+        0.85
+      ],
+      [
+        "component_covariance_error",
+        "<=",
+        0.85
+      ],
+      [
+        "component_min_eigen_ratio",
+        ">=",
+        0.15
+      ]
+    ]
+  },
+  "budget": {
+    "new_runs": 3,
+    "new_host_updates": 19200,
+    "reserved_seconds": 2700,
+    "rounds": 1,
+    "retries": 0
+  },
+  "prediction": "At least one stretched schedule achieves five consecutive terminal full-gate passes and improves covariance compared with its own saved baseline.",
+  "falsifier": "All three new schedules fail their full terminal gate or regress compared with their own baseline.",
+  "stopping_rule": "Complete all6400 updates on each run even after an early passing window; no retries, seed repeats or automatic next stage.",
+  "controls": "Source-bound saved6400-update baseline without rerunning it; numerical oracle/destructive scorer controls remain frozen.",
+  "scientific_limits": "Bundled schedule intervention does not isolate LR from noise, penalty or optimizer schedules. This archived-source ring-only diagnostic grants no ordinary qualification, configured standard or public default adoption.",
+  "prior_evidence": [
+    "reports/forge/EXPERIMENT_MEMORY.md",
+    "reports/forge/ring16-duration-20261011/results.json",
+    "reports/forge/records/ring16-restart-diagnostic-v1.json"
+  ],
+  "runs": [
+    {
+      "family": "r1r2",
+      "attempt_id": "a54bc96e82f34c9e98e7fa1f1d268a33",
+      "parent_certificates": {
+        "evidence": "3d65598873aa0b4efddfc15a5ebc9942b9f84e478ad6d4532325d98884578b8c",
+        "request": "e664c10fbe4d1d922daa8aea75683858a9e0bf0238b5dfe7c963cfbdec6b91ab",
+        "result": "d5c5ce3efc347b47552afd75535d9ea8e06acdf358edb7b6e0d235a9ecdd2df2"
+      },
+      "parent_checkpoint_sha256": "8897396157ecb7e0daf6e9899c93c840a873a73ca0ed527312196bab2ba799cd",
+      "timeout_seconds": 900,
+      "candidate_declaration": "declarations/r1r2-candidate.json",
+      "candidate_sha256": "625f954350b5b276fff677a79fbcceae1ed77e9c423eda504315ee7830692c2a",
+      "task_declaration": "declarations/r1r2-task.json",
+      "task_sha256": "a8ce73f5843b449fbe6d7f1b4835edfa144443d9e6f1fcf97043cbbe43fe8185",
+      "baseline_raw": "runs/api/ring16-duration-20261011/r1r2",
+      "baseline_final_checkpoint_sha256": "ebabe625390939e45dc45e37eb7581b040997d55f806c101b9cc3ccea03d1a0e"
+    },
+    {
+      "family": "ka2",
+      "attempt_id": "5c7cd28c88684764b85cc9bcc4d5a5e3",
+      "parent_certificates": {
+        "evidence": "81e38cd1ffcba649b0f7237206a7a2ff4ea4d4a71778c51c3e37938cd39db440",
+        "request": "814f54e2635bad00512ef4685939af6c579e113d5f3a6c9f28999c45fe7be9f5",
+        "result": "2be9a84e2b1ed09cdf2a73314d1ffd5687a274f45784267dc2a8b46b50d8b6d2"
+      },
+      "parent_checkpoint_sha256": "81a48c04152782f3c41a2ac1d7aea1f4d09b74dd8ec9f954ce41b46126f3e04e",
+      "timeout_seconds": 900,
+      "candidate_declaration": "declarations/ka2-candidate.json",
+      "candidate_sha256": "03c9ca97af7234782e2a794318362f931d5325990a0604df66a08a2060f7af7c",
+      "task_declaration": "declarations/ka2-task.json",
+      "task_sha256": "64cbd8fd054994076acf0caf727f30959861080b19201c2b0556582e199cf553",
+      "baseline_raw": "runs/api/ring16-duration-20261011/ka2",
+      "baseline_final_checkpoint_sha256": "ba751d1543f0047cbc445cf6a1d73d536de61617e2fab4e7d7648958cab71e95"
+    },
+    {
+      "family": "k3p",
+      "attempt_id": "8dcd5de8cab147149e8f2bc3c13a2230",
+      "parent_certificates": {
+        "evidence": "3fe31d1651cac127937112ca2a74c50d906c19d3a344af9f8c34d5aa7bbe7011",
+        "request": "727428aed6aa2dca004371813a825e7fd9a5d39b1f35262a002b333b9ee0fcbb",
+        "result": "2188e913e6b8291cba751e038941216dd30dea5494e3956d08192a6d7a2f4672"
+      },
+      "parent_checkpoint_sha256": "c356b9550468ecdfcafc5b82a4cc5ae250e5991083ee192e80b2572d1afd38f5",
+      "timeout_seconds": 900,
+      "candidate_declaration": "declarations/k3p-candidate.json",
+      "candidate_sha256": "da76d0de5bd3d44b764fe95f7f3722d90fd2e833ef8868d21c540d978d7fa1d0",
+      "task_declaration": "declarations/k3p-task.json",
+      "task_sha256": "57f63d14be0e6a6a115faeba898561e3fee4b6c8bf9e40a351f2f94b79421642",
+      "baseline_raw": "runs/api/ring16-duration-20261011/k3p",
+      "baseline_final_checkpoint_sha256": "a3f174cc66ae3f026aee2017fce6018e91949a988eb8c139deb81547540ebcd1"
+    }
+  ]
+}

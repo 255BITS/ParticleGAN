@@ -20,6 +20,7 @@ SCREENING_SEED = 0
 FIELDS = {"schema_version", "id", "qualification_view", "candidate_revision", "seeds", "tasks",
           "controls", "budgets", "scoring_weights", "aggregation", "acceptance", "no_tuning",
           "early_stop", "execution_backend", "cuda_model"}
+OPTIONAL_FIELDS = {"allow_held_highest_tier"}
 ACCEPTANCE = {"candidate": "all_pass", "controls": "match_declared", "missing": "reject", "conflicts": "reject"}
 
 
@@ -28,8 +29,13 @@ def _block(message):
 
 
 def _validate(contract):
-    if not isinstance(contract, dict) or set(contract) != FIELDS or contract.get("schema_version") != 1:
+    if (not isinstance(contract, dict)
+            or not FIELDS.issubset(contract)
+            or set(contract) - FIELDS - OPTIONAL_FIELDS
+            or contract.get("schema_version") != 1):
         _block("promotion contract has missing or unsupported fields")
+    if "allow_held_highest_tier" in contract and type(contract["allow_held_highest_tier"]) is not bool:
+        _block("allow_held_highest_tier must be a boolean")
     identifier(contract["id"], "registration id")
     identifier(contract["qualification_view"], "qualification view")
     seeds = contract["seeds"]
@@ -114,7 +120,7 @@ def _registration_identity(artifact):
     return canonical(value)
 
 
-def _finished(root, request):
+def _finished(root, request, *, allow_held_highest_tier=False):
     """Require real regraded evidence and its concluded readout, not a stamp."""
     if request["view"].get("calibration", {}).get("status") not in ("accepted", "PASS"):
         _block("promotion requires accepted view calibration; provisional screens cannot establish a default")
@@ -138,7 +144,11 @@ def _finished(root, request):
         if not attempt.get("superseded_by"):
             selected.extend(rows)
         bound[attempt["attempt_id"]] = attempt["result_hash"]
-    qualification = views.qualify(request["view"], request["tasks"], selected, candidate=request["candidate"])
+    qualification = views.qualify(request["view"], request["tasks"], selected, candidate=request["candidate"],
+                                  allow_held_highest_tier=allow_held_highest_tier)
+    if qualification["status"] == "HELD":
+        # Counted tiers may all pass, but the view's highest tier is held: never a PASS.
+        _block("the qualifying view's highest tier is held (measured, not counted); a held view cannot qualify a candidate")
     if qualification["status"] != "PASS" or not qualification["eligible"]:
         _block("candidate has not passed every applicable qualification gate")
     records, conflicts = knowledge._records(root)
@@ -197,7 +207,8 @@ def register(root: Path, candidate_id: str, contract_path: Path) -> dict:
     candidate = _resolve(root, candidate_id, contract)
     if candidate["candidate_revision"] != contract["candidate_revision"]:
         _block("candidate revision differs from the preregistered finished revision")
-    qualification = _finished(root, candidate)
+    qualification = _finished(root, candidate,
+                              allow_held_highest_tier=bool(contract.get("allow_held_highest_tier")))
     subjects = {candidate_id: {"role": "candidate", "base_request": candidate,
                  "expected_statuses": {task: "PASS" for task in contract["tasks"]}}}
     for control in contract["controls"]:
@@ -268,6 +279,7 @@ def _request(artifact, subject_id, seed):
     candidate = request["candidate"]
     context = FormulationContext(recipe_preset=candidate.get("recipe_preset"),
         recipe_overrides=candidate.get("recipe_overrides", {}), prior=candidate["prior"],
+        prior_mechanism=candidate.get("prior_mechanism"),
         seed=seed, requires_capabilities=candidate.get("requires_capabilities", ()),
         extensions=candidate.get("extensions", {}), initializer=candidate.get("initializer", "deterministic_orthogonal"),
         execution_path=candidate.get("execution_path", "public_trainer"))
@@ -300,7 +312,8 @@ def plan_promotion(root: Path, registration_id: str, queue_root: Path, *, freeze
         fresh = _resolve(root, name, artifact["contract"])
         if _signature(fresh) != subject["signature"]:
             _block("source, formulation, scoring, tasks, runtime or protocol changed since registration; in-stage tuning is forbidden")
-        if subject["role"] == "candidate" and _finished(root, fresh) != artifact["qualification"]:
+        if subject["role"] == "candidate" and _finished(
+                root, fresh, allow_held_highest_tier=bool(artifact["contract"].get("allow_held_highest_tier"))) != artifact["qualification"]:
             _block("qualification or calibrated gate acceptance changed since registration")
     requests = [_request(artifact, name, seed) for name in artifact["subjects"] for seed in artifact["contract"]["seeds"]]
     if freeze_source:
@@ -309,7 +322,7 @@ def plan_promotion(root: Path, registration_id: str, queue_root: Path, *, freeze
     return requests
 
 
-def validate_screening_submission(request: dict) -> None:
+def validate_screening_submission(request: dict, *, root=None, campaign=None) -> None:
     """Enforce the fixed v1 screening draw at the queue's mutation boundary.
 
     The source-controlled v1 protocol declares seed zero. A new seed is never
@@ -336,7 +349,8 @@ def validate_screening_submission(request: dict) -> None:
         _block("seed-only screening ideas are forbidden")
     context = FormulationContext(recipe_preset=candidate.get("recipe_preset"),
         recipe_overrides=candidate.get("recipe_overrides", {}),
-        prior=candidate.get("prior"), seed=SCREENING_SEED,
+        prior=candidate.get("prior"), prior_mechanism=candidate.get("prior_mechanism"),
+        seed=SCREENING_SEED,
         requires_capabilities=candidate.get("requires_capabilities", ()),
         extensions=candidate.get("extensions", {}), initializer=candidate.get("initializer", "deterministic_orthogonal"),
         execution_path=candidate.get("execution_path", "public_trainer"))
@@ -349,20 +363,45 @@ def validate_screening_submission(request: dict) -> None:
     research_diagnostic = request.get("view", {}).get("evidence_scope") == "research_diagnostic"
     if research_diagnostic:
         views.validate_view(request["view"], request.get("tasks", {}))
-        from .studies import contract_for
-        contract = contract_for(request)
-        from .decision_contracts import validate_shape
-        if candidate.get("schema_version") not in (2, 3) or not isinstance(contract, dict):
-            _block("research diagnostics require a ready v2 bounded decision_contract")
-        validate_shape(contract)
-        review = request.get("study_review" if "study" in request else "decision_review", {})
-        admission = request.get("study_admission" if "study" in request else "decision_admission")
-        if (contract.get("status") != "ready" or review.get("status") != "READY"
-                or admission != review.get("receipt") or not review.get("receipt")
-                or request.get("through_tier") != 1 or contract["scope"]["view"] != request["view"]["id"]
-                or contract["scope"]["through_tier"] != 1
-                or set(contract["scope"]["task_ids"]) != {item["task"] for item in request["view"]["assignments"]}):
-            _block("research diagnostics require exact ready bounded scope and decision admission")
+        search_plan = request.get("search_plan")
+        registered_search = (candidate.get("schema_version") == 3 and candidate.get("configuration_id")
+                             and isinstance(search_plan, dict)
+                             and isinstance(search_plan.get("declaration"), dict)
+                             and search_plan["declaration"].get("schema_version") == 2)
+        if registered_search:
+            if root is None or campaign is None or type(request.get("through_tier")) is not int or request["through_tier"] != 1:
+                _block("research diagnostic searches require repository-bound registration, budgets and tier-1 scope")
+            # A caller-supplied search_plan is insufficient. Recheck the exact
+            # registered finite grid, source, task/view bindings and campaign.
+            from .decision_contracts import validate_registered_search
+            validate_registered_search(root, request, campaign)
+        else:
+            from .studies import contract_for
+            contract = contract_for(request)
+            from .decision_contracts import validate_shape
+            # Performance compares the exact selected recipe, including immutable
+            # legacy declarations such as Atlas/E22. Its new bounded study owns the
+            # question; converting the recipe card solely to admit it would change
+            # the selected identity. Queue.submit independently verifies this study
+            # against repository declarations before this screening check.
+            from .scaling_adapter import is_performance_task
+            study = request.get("study", {})
+            performance_study = (isinstance(study, dict) and study.get("schema_version") == 1
+                                 and study.get("status") == "ready" and study.get("candidate") == candidate.get("id")
+                                 and bool(request.get("tasks"))
+                                 and all(is_performance_task(task) for task in request["tasks"].values()))
+            if ((candidate.get("schema_version") not in (2, 3) and not performance_study)
+                    or not isinstance(contract, dict)):
+                _block("research diagnostics require a ready v2 bounded decision_contract")
+            validate_shape(contract)
+            review = request.get("study_review" if "study" in request else "decision_review", {})
+            admission = request.get("study_admission" if "study" in request else "decision_admission")
+            if (contract.get("status") != "ready" or review.get("status") != "READY"
+                    or admission != review.get("receipt") or not review.get("receipt")
+                    or request.get("through_tier") != 1 or contract["scope"]["view"] != request["view"]["id"]
+                    or contract["scope"]["through_tier"] != 1
+                    or set(contract["scope"]["task_ids"]) != {item["task"] for item in request["view"]["assignments"]}):
+                _block("research diagnostics require exact ready bounded scope and decision admission")
     for job in jobs:
         science = job.get("science", {})
         marker_ok = (science.get("evidence_use") == "research_diagnostic" if research_diagnostic
@@ -401,7 +440,8 @@ def validate_submission(root: Path, request: dict) -> dict:
         fresh = _resolve(root, name, artifact["contract"])
         if _signature(fresh) != subject["signature"]:
             _block("promotion source, formulation, scoring, tasks or runtime changed before submission")
-        if subject["role"] == "candidate" and _finished(root, fresh) != artifact["qualification"]:
+        if subject["role"] == "candidate" and _finished(
+                root, fresh, allow_held_highest_tier=bool(artifact["contract"].get("allow_held_highest_tier"))) != artifact["qualification"]:
             _block("promotion qualification evidence changed before submission")
     expected = _request(artifact, declaration.get("subject"), declaration.get("seed"))
     received = deepcopy(request)
@@ -463,7 +503,8 @@ def summarize_promotion(root: Path, registration_id: str) -> dict:
             if _signature(fresh) != subject["signature"]:
                 blockers.append("current source/formulation differs from the registered finished candidate")
             elif subject["role"] == "candidate":
-                current_qualification = _finished(root, fresh)
+                current_qualification = _finished(
+                    root, fresh, allow_held_highest_tier=bool(artifact["contract"].get("allow_held_highest_tier")))
                 if current_qualification != artifact["qualification"]:
                     blockers.append("qualification evidence or concluded readout changed after registration")
     except (CapabilityError, ValueError, FileNotFoundError) as error:

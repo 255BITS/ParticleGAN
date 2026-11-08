@@ -25,8 +25,9 @@ def require_same_formulation(original, current):
 
 def require_consistent_rng(state):
     from .api import TRAINER_STREAM_BINDINGS
+    from .priors import prior_uses_noise_stream
     required = set(TRAINER_STREAM_BINDINGS)
-    if state["prior"]["kind"] != "mog":
+    if not prior_uses_noise_stream(state["prior"]):
         required.remove("prior_noise_generator")
     if set(state["trainer"]["streams"]) != required:
         raise ValueError("public trainer RNG checkpoint is incomplete")

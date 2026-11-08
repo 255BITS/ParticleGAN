@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "865b3e59055382dad08f1551ce53de9f00a1430dcb5cc3170c3d62745d1b43f0",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "b9f92dbcbd610f6b83cd7d14eabfe03c41627b972a0e4d270707380ed175b0e3",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/d9651820d35d460ab836ec1559294b99/constraint_geometry-scored-outputs.pt": "2ab2a4e76c4a2cdea2de4b3c6b0df59038a7c331bbce531ea419653b59363126"
+  },
+  "task_id": "unipolar"
+}

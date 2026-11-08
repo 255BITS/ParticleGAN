@@ -1,0 +1,376 @@
+{
+  "attempt_ids": [
+    "91832bb54bc74d1abc42a8576d9fc7e7",
+    "f99acd5cd1314fca9520b91931441c98"
+  ],
+  "candidate_id": "bispf-v2",
+  "candidate_revision": "34571ac88b53ec2ad8c9dead16a5b23ba3bb408dcd2f2cf3d8c6d8c290d93eef",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Exact H2 native control for the two new width64 task identities; original width12 quality evidence is motivation only. Both alternatives share the wider architecture, initial model/prior, named streams, data law, sampling, update and evaluation budgets. No ordinary qualification credit.",
+  "conclusion": "Native BISPF on the two explicitly wider architecture-portability hosts passes stripes (HQ1,2 modes,14 terminal passing checks) and fails bars (endpoint HQ0.90625,4 modes but only2 terminal passing checks versus5 required). Both arms complete600 updates and24 observations with finite states and seed0 public initialization.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "91832bb54bc74d1abc42a8576d9fc7e7",
+        "f99acd5cd1314fca9520b91931441c98"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "55b37e737155da3e77f544fb49418fd42ea1caf6b7100eb6f5b6b3b68f27f256",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "review_saved_diagnostics",
+      "observed": {
+        "falsifier": {
+          "satisfied": false,
+          "value": 1.0
+        },
+        "prediction": {
+          "satisfied": true,
+          "value": 1.0
+        }
+      },
+      "outcome": "prediction_observed",
+      "provenance": [
+        {
+          "attempt_id": "91832bb54bc74d1abc42a8576d9fc7e7",
+          "producer_request_id": "038fcea2d85eb37ea19546bf",
+          "producer_study_id": "bispf-fastpath-alternatives-native-v1",
+          "result_hash": "7d9c5dc30a00c3060ae63d264be585705d812a8543b56ff36e262121bfe91008",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "f99acd5cd1314fca9520b91931441c98",
+          "producer_request_id": "038fcea2d85eb37ea19546bf",
+          "producer_study_id": "bispf-fastpath-alternatives-native-v1",
+          "result_hash": "d91121934c003d21d56a3b6d1a6cc10a241f5ebd5c51b144743c2b62a11e87a0",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "72ffa7e88fa52160f2ffe8e8ab5658a3be0828bdfcfb7f17183f6b20fc4d1360",
+        "contract_sha256": "55b37e737155da3e77f544fb49418fd42ea1caf6b7100eb6f5b6b3b68f27f256",
+        "control_binding_sha256": "3bdec326eec9befafc5e635ab09819d05367573748d960b38201a969b4e06b49",
+        "policy_fingerprint": "1f7397ed90f686616c7254136629b9dba731a6e48f40b63a799eeb7e2d2d0b8b",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "2e2e3420eab92e646e02f4c788215443cb344838173026c3ce8c80c37b5dd353"
+      },
+      "study_id": "bispf-fastpath-alternatives-native-v1",
+      "study_sha256": "2e2e3420eab92e646e02f4c788215443cb344838173026c3ce8c80c37b5dd353"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "bispf_fastpath_quality",
+  "hypothesis": "Measure incumbent native BISPF on explicit width64 architecture-portability variants of stripes2 and bars4. These new larger-capacity task identities retain the original target, numerical gates, prior and 600-update budget and provide the actual native control for a later matched optimized solver comparison.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Retain both native outcomes as controls. Quintic passes both wider tasks and proceeds to separately frozen full performance and ordinary quality; Frobenius regresses stripes and stops. No default adoption follows.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "91832bb54bc74d1abc42a8576d9fc7e7",
+        "result_hash": "7d9c5dc30a00c3060ae63d264be585705d812a8543b56ff36e262121bfe91008",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "f99acd5cd1314fca9520b91931441c98",
+        "result_hash": "d91121934c003d21d56a3b6d1a6cc10a241f5ebd5c51b144743c2b62a11e87a0",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-3721266a32807c156725dfc8",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/attempts/91832bb54bc74d1abc42a8576d9fc7e7/result.json"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 1800,
+      "candidate_budget_seconds": 600,
+      "id": "bispf-fastpath-alternatives-v1"
+    },
+    "candidate": "bispf-v2",
+    "competing_explanation": "Width64 changes capacity and initialization dimensions, so original width12 outcomes do not transfer. It is an explicit host portability control, not a speed comparison with width12 or ordinary quality qualification. All six native/optimized arms must use the same wider architecture and data/prior/seed/budget/scoring laws. Retain any native failure and optimizer failure; no outcome-based gate changes, task pruning, retries or seed repeats.",
+    "control": {
+      "candidate_id": "bispf-v2",
+      "task_map": {
+        "img_bars4_w64_optimizer_diagnostic": "img_bars4",
+        "img_stripes2_w64_optimizer_diagnostic": "img_stripes2"
+      }
+    },
+    "falsifier": {
+      "metric": "hq",
+      "op": "<",
+      "phase": "final",
+      "task_id": "img_stripes2_w64_optimizer_diagnostic",
+      "threshold": 0.9
+    },
+    "hypothesis": "Measure incumbent native BISPF on explicit width64 architecture-portability variants of stripes2 and bars4. These new larger-capacity task identities retain the original target, numerical gates, prior and 600-update budget and provide the actual native control for a later matched optimized solver comparison.",
+    "id": "bispf-fastpath-alternatives-native-v1",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "hq",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "img_stripes2_w64_optimizer_diagnostic",
+      "threshold": 0.9
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "candidate_id": "bispf-v2",
+          "candidate_revision": "96f0f8a2aee0663f0fe92e49641deb107b81201ae0efea33d9a54e24aaba8967"
+        },
+        "path": "reports/forge/records/readout-c2d279f7d47ac009ee80d771.json",
+        "selector": [],
+        "use": "motivation_only"
+      },
+      {
+        "identity": {
+          "schema": "bispf_fastpath_scorer_controls_v1"
+        },
+        "path": "reports/forge/bispf-optimized/fastpath-scorer-controls.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "bispf_fastpath_quality"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "bispf-fastpath-alternatives-native-v1",
+  "study_sha256": "2e2e3420eab92e646e02f4c788215443cb344838173026c3ce8c80c37b5dd353",
+  "task_results": [
+    {
+      "compatibility_key": "0705c91f01d5fde4050ec563e4ba51415ed31d43a1d163ff893dd2995b967cf0",
+      "cost": {
+        "adapter_loop_seconds": 66.97014703392051,
+        "adapter_seconds": 67.30823016003706,
+        "charged_task": "img_bars4_w64_optimizer_diagnostic",
+        "completed_steps": 600,
+        "device": "0",
+        "execution_seconds": 73.06305101502221,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 66.64289955957793,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.02022507938090712
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.010538502829149365
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 66.61213597736787
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 68.69004637596663,
+        "wall_seconds": 73.06305101502221
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": 575,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 2,
+          "passing_suffix": 2,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": 0.006249999999999978,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 0.90625
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 4,
+            "value": 4
+          }
+        },
+        "passed": false,
+        "shortfall": 0.0,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "distribution_tv": 0.125,
+        "hq": 0.90625,
+        "mean_rmse": 0.043056923896074295,
+        "mode_fractions": [
+          0.34375,
+          0.25,
+          0.125,
+          0.28125
+        ],
+        "modes": 4,
+        "quality_mode_fractions": [
+          0.28125,
+          0.25,
+          0.125,
+          0.25
+        ],
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "img_bars4_w64_optimizer_diagnostic"
+    },
+    {
+      "compatibility_key": "3b94137e73db530ff37e5f4945b492270131cfc29a65a24b6696173173dba486",
+      "cost": {
+        "adapter_loop_seconds": 66.38112650893163,
+        "adapter_seconds": 66.707847638987,
+        "charged_task": "img_stripes2_w64_optimizer_diagnostic",
+        "completed_steps": 600,
+        "device": "0",
+        "execution_seconds": 72.31610971409827,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 66.06910269171931,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.03071148123126477
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.010246568941511214
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 66.02814464154653
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 68.01528536493424,
+        "wall_seconds": 72.31610971409827
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.625,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 375,
+          "first_pass_step": 275,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 14,
+          "passing_suffix": 14,
+          "stable_from_seconds": null,
+          "stable_from_step": 275
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": 0.09999999999999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 1.0
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 2,
+            "value": 2
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "distribution_tv": 0.1875,
+        "hq": 1.0,
+        "mean_rmse": 0.00022395487758331,
+        "mode_fractions": [
+          0.6875,
+          0.3125
+        ],
+        "modes": 2,
+        "quality_mode_fractions": [
+          0.6875,
+          0.3125
+        ],
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "img_stripes2_w64_optimizer_diagnostic"
+    }
+  ]
+}

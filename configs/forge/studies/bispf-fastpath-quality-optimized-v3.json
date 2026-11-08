@@ -1,0 +1,71 @@
+{
+  "campaign": {
+    "budget_seconds": 1200,
+    "candidate_budget_seconds": 600,
+    "id": "bispf-fastpath-quality-v1"
+  },
+  "candidate": "bispf-optimized-v3",
+  "competing_explanation": "Finite polar iteration and omission of native hard rank masking can change trained behavior despite small numerical residuals, and width 64 changes the task capacity relative to the original width 12 hosts. Independently grade all four declared native/optimized arms under their unchanged sustained gates, retain native and optimized failures, and make no natural-image or ordinary qualification claim. Lower latency on mock data does not establish image quality. No paid retries, seed repeats, outcome-based task pruning or gate changes are authorized.",
+  "control": {
+    "candidate_id": "bispf-v2",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "hq",
+    "op": "<",
+    "phase": "final",
+    "task_id": "img_stripes2_w64_optimizer_diagnostic",
+    "threshold": 0.9
+  },
+  "hypothesis": "The frozen optimized BISPF solver version 3 (bounded 32-iteration augmented polar with guarded CUDA graph blocks) passes the unchanged sustained fidelity and mode-coverage gates on both explicit width 64 stripe and bar tasks while preserving every native BISPF pass on those same wider hosts. Architecture, initial models/prior, target law and batches, sampling, 600-update budget and 24-observation cadence remain identical across arms. Ordinary tiny-image passes alone cannot establish the exercised fast-path claim.",
+  "id": "bispf-fastpath-quality-optimized-v3",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "hq",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "img_stripes2_w64_optimizer_diagnostic",
+    "threshold": 0.9
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_id": "bispf-v2",
+        "candidate_revision": "96f0f8a2aee0663f0fe92e49641deb107b81201ae0efea33d9a54e24aaba8967"
+      },
+      "path": "reports/forge/records/readout-c2d279f7d47ac009ee80d771.json",
+      "selector": [],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "schema": "bispf_fastpath_scorer_controls_v1"
+      },
+      "path": "reports/forge/bispf-optimized/fastpath-scorer-controls.json",
+      "selector": [],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "schema": "forge_bispf_optimizer_profile_readout_v1"
+      },
+      "path": "reports/forge/bispf-optimized/profiling.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bispf_fastpath_quality"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

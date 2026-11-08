@@ -545,6 +545,9 @@ def test_malformed_recovery_state_is_rejected_without_mutating_served_or_trainin
     assert_tree_equal(served_before, owner.served_snapshot())
 
 
+@pytest.mark.cuda
+
+
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA is unavailable")
 def test_cuda_external_loop_native_parity_and_exact_resume_at_particle_event(monkeypatch):
     from examples.e22_external_loop import make_loop, update

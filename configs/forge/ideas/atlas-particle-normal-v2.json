@@ -1,0 +1,57 @@
+{
+  "api_changes": [
+    "particlegan/continuous.py",
+    "particlegan/priors.py",
+    "particlegan/recipes.py",
+    "particlegan/training.py"
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Declare technique-owned prior_mechanism swapping task MoGParticlePrior for unstandardized ParticlePrior wrapped with NormalNoiseManipulator (sigma=0.005 on stochastic tasks, deterministic sigma=0.0 on enumerated particle-cloud image and discrete-vocabulary tasks)",
+    "Train clean by overriding recipe_overrides with output_noise_mode='fixed' and output_noise_std=0.0, matching public clean evaluation (sampling_law='public_prior_without_output_noise') and compelling generator Jacobian expansion to match target mode covariance",
+    "De-clock critic guard by overriding d_guard_ratio=0.0 and d_guard_min_steps=0 so the schedule-free dv12 continuous policy has zero fixed step-count releases while preserving unthrottled early critic acquisition"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "schedule_free",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "atlas-particle-normal-v2",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "MoG standardization couples all rows through batch/table moments, breaking feature-cell locality and independent birth/death transport. Replacing MoGParticlePrior with an unstandardized ParticlePrior plus an additive NormalNoiseManipulator (sigma=0.005, matched to the unclustered particle Voronoi cell scale so BoundedLatentGeometry sorted-rank neighbor windows stay intact) preserves strict identity row Jacobians (row_local_gradients=True, a2_eligible=True) and isolated prior_noise_generator draws, while removing the 200-step scheduled critic guard makes the full dv12 continuous policy strictly clock-free without throttling initial critic acquisition.",
+  "parent": "atlas-particle-normal-v1",
+  "prior_art": [
+    "docs/atlas.md",
+    "docs/e22.md",
+    "reports/develop-gates-20261001/atlas19-replay.json",
+    "reports/forge/records/readout-9f0d62f87d1ff351cfef7f98.json"
+  ],
+  "prior_mechanism": {
+    "kind": "particles",
+    "manipulators": [
+      {
+        "kind": "normal_noise",
+        "sigma": 0.005
+      }
+    ],
+    "standardize": false
+  },
+  "recipe_overrides": {
+    "d_guard_min_steps": 0,
+    "d_guard_ratio": 0.0,
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0
+  },
+  "recipe_preset": "atlas",
+  "requires_capabilities": [
+    "particle_cloud",
+    "a2",
+    "named_rng",
+    "policy_controls",
+    "policy_serving"
+  ],
+  "schema_version": 3,
+  "trainer_family": "atlas"
+}

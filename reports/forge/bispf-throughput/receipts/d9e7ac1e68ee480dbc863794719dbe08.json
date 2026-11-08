@@ -1,0 +1,158 @@
+{
+  "attempt_id": "d9e7ac1e68ee480dbc863794719dbe08",
+  "attempt_status": "completed",
+  "campaign_id": "bispf-throughput-wide-v1",
+  "candidate_id": "bispf-optimized-quintic-v1",
+  "candidate_revision": "fbc1bf4bda35c195efe7830c359d1851febdbca85b4257b4415d66187ed3d248",
+  "certificate_validated": true,
+  "cost_owner": {
+    "campaign": "bispf-throughput-wide-v1",
+    "request": "83e18399bb549364b20f350d",
+    "revision": "fbc1bf4bda35c195efe7830c359d1851febdbca85b4257b4415d66187ed3d248"
+  },
+  "evidence_scope": "published_summary",
+  "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+  "provenance": {
+    "canonical_result_hash": "d3bfe6ffc14f9fc8409d9343afde62ec35298b8a5f029f45a67024af31b8e06c",
+    "original_files": {
+      "evidence": {
+        "path": "reports/forge/attempts/d9e7ac1e68ee480dbc863794719dbe08/evidence.json",
+        "sha256": "7451717a4fa9e6036e32846fe5067394d3e817acf706e7f47c82d9184574f19f"
+      },
+      "request": {
+        "path": "reports/forge/attempts/d9e7ac1e68ee480dbc863794719dbe08/request.json",
+        "sha256": "e20b9d9f31499742a9a4b61e70e9fdc0572b9626894720d9b2fab89cae70ae5f"
+      },
+      "result": {
+        "path": "reports/forge/attempts/d9e7ac1e68ee480dbc863794719dbe08/result.json",
+        "sha256": "8cfbe02078120db9f92c8d1bd167abb32c0c5659967fe1f22a8d784e8ca8ea58"
+      }
+    },
+    "source_digest": "014d8783a85da5a2814e278d59f2e6749620d79fafdbb884cea66a0183e022f8",
+    "source_origin_commit": "bbd95834c3854d31397a6004977036b2d35af358"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "request_id": "83e18399bb549364b20f350d",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.8",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "summary_version": "forge-technique-receipt-summary-v1",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "e4d0e3a190e5aee3faedced06ef299cf7a52bdf1a54e6c447d0236f0fe468f64",
+      "cost": {
+        "adapter_loop_seconds": 16.591130212997086,
+        "adapter_seconds": 17.082218375988305,
+        "charged_task": "img_stripes2_w64_optimizer_diagnostic",
+        "completed_steps": 600,
+        "device": "0",
+        "execution_seconds": 23.277299675974064,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 16.246468759141862,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.022074051201343536
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.011763419839553535
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 16.212631288100965
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 18.152997178025544,
+        "wall_seconds": 23.277299675974064
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.7083333333333334,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 425,
+          "first_pass_step": 325,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 12,
+          "passing_suffix": 12,
+          "stable_from_seconds": null,
+          "stable_from_step": 325
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": 0.09999999999999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 1.0
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 2,
+            "value": 2
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "execution_path": "public_trainer",
+      "gate_status": "PASS",
+      "metrics": {
+        "distribution_tv": 0.15625,
+        "hq": 1.0,
+        "mean_rmse": 2.3709274046268547e-06,
+        "modes": 2,
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "enumerated_prior_without_output_noise"
+      },
+      "status": "PASS",
+      "task_id": "img_stripes2_w64_optimizer_diagnostic"
+    }
+  ]
+}

@@ -55,7 +55,7 @@ def make(*, guard="settled", reg_every=1):
     for key in ("birth_death_cells", "birth_death_metric_rank", "birth_death_chunk",
                 "birth_death_parent_policy"):
         config.pop(key)
-    return GANTrainer(Recipe(**config), G, D, prior=prior, seed=314159,
+    return GANTrainer(Recipe.from_dict(config), G, D, prior=prior, seed=314159,
                       serial_backward=True, optimizer_options={"foreach": False})
 
 

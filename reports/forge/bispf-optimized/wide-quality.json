@@ -1,0 +1,1809 @@
+{
+  "attempt_summaries": [
+    {
+      "attempt_id": "91832bb54bc74d1abc42a8576d9fc7e7",
+      "attempt_status": "completed",
+      "campaign_id": "bispf-fastpath-alternatives-v1",
+      "candidate_id": "bispf-v2",
+      "candidate_revision": "34571ac88b53ec2ad8c9dead16a5b23ba3bb408dcd2f2cf3d8c6d8c290d93eef",
+      "certificate_validated": true,
+      "cost_owner": {
+        "campaign": "bispf-fastpath-alternatives-v1",
+        "request": "038fcea2d85eb37ea19546bf",
+        "revision": "34571ac88b53ec2ad8c9dead16a5b23ba3bb408dcd2f2cf3d8c6d8c290d93eef"
+      },
+      "evidence_scope": "published_summary",
+      "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+      "provenance": {
+        "canonical_result_hash": "7d9c5dc30a00c3060ae63d264be585705d812a8543b56ff36e262121bfe91008",
+        "original_files": {
+          "evidence": {
+            "path": "reports/forge/attempts/91832bb54bc74d1abc42a8576d9fc7e7/evidence.json",
+            "sha256": "ad0a907c246f541a4845b2e844f2e1778a7ba6425cd24537439496b6c651d429"
+          },
+          "request": {
+            "path": "reports/forge/attempts/91832bb54bc74d1abc42a8576d9fc7e7/request.json",
+            "sha256": "7c26410cbd093d0ead60495045a33ff6c17fccb58d5601b2954eeaf03e6e9da3"
+          },
+          "result": {
+            "path": "reports/forge/attempts/91832bb54bc74d1abc42a8576d9fc7e7/result.json",
+            "sha256": "4950e97bcc6581a3765e94ad6a496b3362b6a95b50e8ac067a33806b697b5727"
+          }
+        },
+        "source_digest": "c82ed2dc712e4c9ebda80678e453635bd8a16dc74fae1450234ed368aa956213",
+        "source_origin_commit": "d9d72d53761c898bce20102e1995fc3d899c1447"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "request_id": "038fcea2d85eb37ea19546bf",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "schema_version": 1,
+      "summary_version": "forge-technique-receipt-summary-v1",
+      "task_results": [
+        {
+          "api_version": "forge-api-v1",
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "compatibility_key": "0705c91f01d5fde4050ec563e4ba51415ed31d43a1d163ff893dd2995b967cf0",
+          "cost": {
+            "adapter_loop_seconds": 66.97014703392051,
+            "adapter_seconds": 67.30823016003706,
+            "charged_task": "img_bars4_w64_optimizer_diagnostic",
+            "completed_steps": 600,
+            "device": "0",
+            "execution_seconds": 73.06305101502221,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 600,
+              "generator": 600,
+              "prior": 600
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 66.64289955957793,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.02022507938090712
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.010538502829149365
+                },
+                "training_updates": {
+                  "calls": 600,
+                  "seconds": 66.61213597736787
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 68.69004637596663,
+            "wall_seconds": 73.06305101502221
+          },
+          "evaluator_summary": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": 575,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 2,
+              "passing_suffix": 2,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "metric_checks": {
+              "hq": {
+                "margin": 0.006249999999999978,
+                "metric": "hq",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.9,
+                "value": 0.90625
+              },
+              "modes": {
+                "margin": 0,
+                "metric": "modes",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 4,
+                "value": 4
+              }
+            },
+            "passed": false,
+            "shortfall": 0.0,
+            "status": "FAIL"
+          },
+          "execution_path": "public_trainer",
+          "gate_status": "FAIL",
+          "metrics": {
+            "distribution_tv": 0.125,
+            "hq": 0.90625,
+            "mean_rmse": 0.043056923896074295,
+            "modes": 4,
+            "step": 600
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "sampling": {
+            "eval_output_noise": "clean",
+            "sampling_contract_version": 1,
+            "sampling_law": "enumerated_prior_without_output_noise"
+          },
+          "status": "FAIL",
+          "task_id": "img_bars4_w64_optimizer_diagnostic"
+        }
+      ]
+    },
+    {
+      "attempt_id": "d11a77cc46fe426aadfa1a6631c546f3",
+      "attempt_status": "completed",
+      "campaign_id": "bispf-fastpath-alternatives-v1",
+      "candidate_id": "bispf-optimized-frobenius-v1",
+      "candidate_revision": "c6dadb65374f5c93fe3922c2e10e32b5964105d4dc13ff80b97773c85b9f1aff",
+      "certificate_validated": true,
+      "cost_owner": {
+        "campaign": "bispf-fastpath-alternatives-v1",
+        "request": "ad4a14bec0e50939e7605f21",
+        "revision": "c6dadb65374f5c93fe3922c2e10e32b5964105d4dc13ff80b97773c85b9f1aff"
+      },
+      "evidence_scope": "published_summary",
+      "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+      "provenance": {
+        "canonical_result_hash": "eb74220e90accfc698b5c667edec266b776f91ed0e7f0f9c64a18e50134a5ee2",
+        "original_files": {
+          "evidence": {
+            "path": "reports/forge/attempts/d11a77cc46fe426aadfa1a6631c546f3/evidence.json",
+            "sha256": "3c308f2b8b91e8fc6d5c54d58e6cc79efa85c2f6c9ecb4276599b4c210a11ec1"
+          },
+          "request": {
+            "path": "reports/forge/attempts/d11a77cc46fe426aadfa1a6631c546f3/request.json",
+            "sha256": "f9023cc575edcf76f89d9b886e9d2d0c07e4c702f567d6ec2cee57d76fe3476e"
+          },
+          "result": {
+            "path": "reports/forge/attempts/d11a77cc46fe426aadfa1a6631c546f3/result.json",
+            "sha256": "7cfb8d0dc865d39727c33acde1514a3d1dbbc91dffeff0c467358e9580fd7620"
+          }
+        },
+        "source_digest": "c82ed2dc712e4c9ebda80678e453635bd8a16dc74fae1450234ed368aa956213",
+        "source_origin_commit": "d9d72d53761c898bce20102e1995fc3d899c1447"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "request_id": "ad4a14bec0e50939e7605f21",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "schema_version": 1,
+      "summary_version": "forge-technique-receipt-summary-v1",
+      "task_results": [
+        {
+          "api_version": "forge-api-v1",
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "compatibility_key": "24c937bd4f8ad5561f196dff4c2c25f1cd5fce1d6f737c919b0797c96b9d6938",
+          "cost": {
+            "adapter_loop_seconds": 8.78295837494079,
+            "adapter_seconds": 9.135159029974602,
+            "charged_task": "img_bars4_w64_optimizer_diagnostic",
+            "completed_steps": 600,
+            "device": "0",
+            "execution_seconds": 14.82745244097896,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 600,
+              "generator": 600,
+              "prior": 600
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 8.499257582472637,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.01849289273377508
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.007703770650550723
+                },
+                "training_updates": {
+                  "calls": 600,
+                  "seconds": 8.473060919088311
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 10.470599423977546,
+            "wall_seconds": 14.82745244097896
+          },
+          "evaluator_summary": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "metric_checks": {
+              "hq": {
+                "margin": -0.08750000000000002,
+                "metric": "hq",
+                "op": ">=",
+                "status": "FAIL",
+                "threshold": 0.9,
+                "value": 0.8125
+              },
+              "modes": {
+                "margin": -2,
+                "metric": "modes",
+                "op": ">=",
+                "status": "FAIL",
+                "threshold": 4,
+                "value": 2
+              }
+            },
+            "passed": false,
+            "shortfall": 0.2986111111111111,
+            "status": "FAIL"
+          },
+          "execution_path": "public_trainer",
+          "gate_status": "FAIL",
+          "metrics": {
+            "distribution_tv": 0.375,
+            "hq": 0.8125,
+            "mean_rmse": 0.09519217908382416,
+            "modes": 2,
+            "step": 600
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "sampling": {
+            "eval_output_noise": "clean",
+            "sampling_contract_version": 1,
+            "sampling_law": "enumerated_prior_without_output_noise"
+          },
+          "status": "FAIL",
+          "task_id": "img_bars4_w64_optimizer_diagnostic"
+        }
+      ]
+    },
+    {
+      "attempt_id": "1902c3ab92d14b7590efd8c5751d4019",
+      "attempt_status": "completed",
+      "campaign_id": "bispf-fastpath-alternatives-v1",
+      "candidate_id": "bispf-optimized-quintic-v1",
+      "candidate_revision": "8d941696e5e05607c763bccefbcbe34694996370bb6f1b03d70f514be6273def",
+      "certificate_validated": true,
+      "cost_owner": {
+        "campaign": "bispf-fastpath-alternatives-v1",
+        "request": "62f797b1e9f3076a2c63c7b3",
+        "revision": "8d941696e5e05607c763bccefbcbe34694996370bb6f1b03d70f514be6273def"
+      },
+      "evidence_scope": "published_summary",
+      "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+      "provenance": {
+        "canonical_result_hash": "8a253e2fecdae7006eaff458f01b731ab4932a6cdc32aaf6fe257128abcb1281",
+        "original_files": {
+          "evidence": {
+            "path": "reports/forge/attempts/1902c3ab92d14b7590efd8c5751d4019/evidence.json",
+            "sha256": "6032d44e3d3b319efa25785692167bff74935cecde73596fc792c1675f8c698e"
+          },
+          "request": {
+            "path": "reports/forge/attempts/1902c3ab92d14b7590efd8c5751d4019/request.json",
+            "sha256": "ffa7464c91a10e49dc435f02a19d61f16f6c213ebc41b06fda0fa0688f7b6210"
+          },
+          "result": {
+            "path": "reports/forge/attempts/1902c3ab92d14b7590efd8c5751d4019/result.json",
+            "sha256": "399b48749fa29b946c12dc467cda774b9e94263c2c92487d99fe661990a32052"
+          }
+        },
+        "source_digest": "c82ed2dc712e4c9ebda80678e453635bd8a16dc74fae1450234ed368aa956213",
+        "source_origin_commit": "d9d72d53761c898bce20102e1995fc3d899c1447"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "request_id": "62f797b1e9f3076a2c63c7b3",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "schema_version": 1,
+      "summary_version": "forge-technique-receipt-summary-v1",
+      "task_results": [
+        {
+          "api_version": "forge-api-v1",
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "compatibility_key": "25348fb841cb0ad459274b9963bde59a094f0dc96da33261e829fc71e54cebf7",
+          "cost": {
+            "adapter_loop_seconds": 13.903822129010223,
+            "adapter_seconds": 14.241988215013407,
+            "charged_task": "img_stripes2_w64_optimizer_diagnostic",
+            "completed_steps": 600,
+            "device": "0",
+            "execution_seconds": 20.168321941047907,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 600,
+              "generator": 600,
+              "prior": 600
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 13.61651210731361,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.019377479911781847
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.008129088091664016
+                },
+                "training_updates": {
+                  "calls": 600,
+                  "seconds": 13.589005539310165
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 15.578304013004526,
+            "wall_seconds": 20.168321941047907
+          },
+          "evaluator_summary": {
+            "attempted": true,
+            "confirmation_fraction": 0.7083333333333334,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 425,
+              "first_pass_step": 325,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 12,
+              "passing_suffix": 12,
+              "stable_from_seconds": null,
+              "stable_from_step": 325
+            },
+            "metric_checks": {
+              "hq": {
+                "margin": 0.09999999999999998,
+                "metric": "hq",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.9,
+                "value": 1.0
+              },
+              "modes": {
+                "margin": 0,
+                "metric": "modes",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 2,
+                "value": 2
+              }
+            },
+            "passed": true,
+            "shortfall": 0.0,
+            "status": "PASS"
+          },
+          "execution_path": "public_trainer",
+          "gate_status": "PASS",
+          "metrics": {
+            "distribution_tv": 0.15625,
+            "hq": 1.0,
+            "mean_rmse": 2.3709274046268547e-06,
+            "modes": 2,
+            "step": 600
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "sampling": {
+            "eval_output_noise": "clean",
+            "sampling_contract_version": 1,
+            "sampling_law": "enumerated_prior_without_output_noise"
+          },
+          "status": "PASS",
+          "task_id": "img_stripes2_w64_optimizer_diagnostic"
+        }
+      ]
+    },
+    {
+      "attempt_id": "63fe579365654297972e5ee55c5bd970",
+      "attempt_status": "completed",
+      "campaign_id": "bispf-fastpath-alternatives-v1",
+      "candidate_id": "bispf-optimized-frobenius-v1",
+      "candidate_revision": "c6dadb65374f5c93fe3922c2e10e32b5964105d4dc13ff80b97773c85b9f1aff",
+      "certificate_validated": true,
+      "cost_owner": {
+        "campaign": "bispf-fastpath-alternatives-v1",
+        "request": "ad4a14bec0e50939e7605f21",
+        "revision": "c6dadb65374f5c93fe3922c2e10e32b5964105d4dc13ff80b97773c85b9f1aff"
+      },
+      "evidence_scope": "published_summary",
+      "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+      "provenance": {
+        "canonical_result_hash": "345af3265897ff39fd4b8e886474bb84b2946cc2a1494bd6becbda8b5a1e067e",
+        "original_files": {
+          "evidence": {
+            "path": "reports/forge/attempts/63fe579365654297972e5ee55c5bd970/evidence.json",
+            "sha256": "1e59ccf08a1bf840da43417c959e7c7ffaf2b2f3118b052cb7d0dd8e26088cd9"
+          },
+          "request": {
+            "path": "reports/forge/attempts/63fe579365654297972e5ee55c5bd970/request.json",
+            "sha256": "121e3b2b00451a5bac3286141af024065b8aa7e81498f2acf29fceb561fd8245"
+          },
+          "result": {
+            "path": "reports/forge/attempts/63fe579365654297972e5ee55c5bd970/result.json",
+            "sha256": "7a00446c0b002a0a7f62e66213cf22e2d6a3d7551b086eaf1266fd3604f20e3b"
+          }
+        },
+        "source_digest": "c82ed2dc712e4c9ebda80678e453635bd8a16dc74fae1450234ed368aa956213",
+        "source_origin_commit": "d9d72d53761c898bce20102e1995fc3d899c1447"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "request_id": "ad4a14bec0e50939e7605f21",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "schema_version": 1,
+      "summary_version": "forge-technique-receipt-summary-v1",
+      "task_results": [
+        {
+          "api_version": "forge-api-v1",
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "compatibility_key": "2e55864bd248545c82cbeafdb46b75cc7fceee25c269d08134b8780cfbe07639",
+          "cost": {
+            "adapter_loop_seconds": 8.669790305080824,
+            "adapter_seconds": 9.006514242035337,
+            "charged_task": "img_stripes2_w64_optimizer_diagnostic",
+            "completed_steps": 600,
+            "device": "0",
+            "execution_seconds": 14.880459002102725,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 600,
+              "generator": 600,
+              "prior": 600
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 8.383003414957784,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.018391299759969115
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.007650135084986687
+                },
+                "training_updates": {
+                  "calls": 600,
+                  "seconds": 8.356961980112828
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 10.367399428971112,
+            "wall_seconds": 14.880459002102725
+          },
+          "evaluator_summary": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "metric_checks": {
+              "hq": {
+                "margin": 0.06874999999999998,
+                "metric": "hq",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.9,
+                "value": 0.96875
+              },
+              "modes": {
+                "margin": -1,
+                "metric": "modes",
+                "op": ">=",
+                "status": "FAIL",
+                "threshold": 2,
+                "value": 1
+              }
+            },
+            "passed": false,
+            "shortfall": 0.25,
+            "status": "FAIL"
+          },
+          "execution_path": "public_trainer",
+          "gate_status": "FAIL",
+          "metrics": {
+            "distribution_tv": 0.5,
+            "hq": 0.96875,
+            "mean_rmse": 0.0429074689745903,
+            "modes": 1,
+            "step": 600
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "sampling": {
+            "eval_output_noise": "clean",
+            "sampling_contract_version": 1,
+            "sampling_law": "enumerated_prior_without_output_noise"
+          },
+          "status": "FAIL",
+          "task_id": "img_stripes2_w64_optimizer_diagnostic"
+        }
+      ]
+    },
+    {
+      "attempt_id": "f99acd5cd1314fca9520b91931441c98",
+      "attempt_status": "completed",
+      "campaign_id": "bispf-fastpath-alternatives-v1",
+      "candidate_id": "bispf-v2",
+      "candidate_revision": "34571ac88b53ec2ad8c9dead16a5b23ba3bb408dcd2f2cf3d8c6d8c290d93eef",
+      "certificate_validated": true,
+      "cost_owner": {
+        "campaign": "bispf-fastpath-alternatives-v1",
+        "request": "038fcea2d85eb37ea19546bf",
+        "revision": "34571ac88b53ec2ad8c9dead16a5b23ba3bb408dcd2f2cf3d8c6d8c290d93eef"
+      },
+      "evidence_scope": "published_summary",
+      "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+      "provenance": {
+        "canonical_result_hash": "d91121934c003d21d56a3b6d1a6cc10a241f5ebd5c51b144743c2b62a11e87a0",
+        "original_files": {
+          "evidence": {
+            "path": "reports/forge/attempts/f99acd5cd1314fca9520b91931441c98/evidence.json",
+            "sha256": "dd343b18bf7e8ec46d27962633ea8bfe3dcfac60a06b63390c17004be94a309b"
+          },
+          "request": {
+            "path": "reports/forge/attempts/f99acd5cd1314fca9520b91931441c98/request.json",
+            "sha256": "6e57f3293c1062d67c9f0ba82797a825b523801321fb036e8d6ca91a32fd73a7"
+          },
+          "result": {
+            "path": "reports/forge/attempts/f99acd5cd1314fca9520b91931441c98/result.json",
+            "sha256": "2a2e764dc3a5e76fb371b9ce5a79abef73d72b9362128942b250918f49599ca0"
+          }
+        },
+        "source_digest": "c82ed2dc712e4c9ebda80678e453635bd8a16dc74fae1450234ed368aa956213",
+        "source_origin_commit": "d9d72d53761c898bce20102e1995fc3d899c1447"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "request_id": "038fcea2d85eb37ea19546bf",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "schema_version": 1,
+      "summary_version": "forge-technique-receipt-summary-v1",
+      "task_results": [
+        {
+          "api_version": "forge-api-v1",
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "compatibility_key": "3b94137e73db530ff37e5f4945b492270131cfc29a65a24b6696173173dba486",
+          "cost": {
+            "adapter_loop_seconds": 66.38112650893163,
+            "adapter_seconds": 66.707847638987,
+            "charged_task": "img_stripes2_w64_optimizer_diagnostic",
+            "completed_steps": 600,
+            "device": "0",
+            "execution_seconds": 72.31610971409827,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 600,
+              "generator": 600,
+              "prior": 600
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 66.06910269171931,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.03071148123126477
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.010246568941511214
+                },
+                "training_updates": {
+                  "calls": 600,
+                  "seconds": 66.02814464154653
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 68.01528536493424,
+            "wall_seconds": 72.31610971409827
+          },
+          "evaluator_summary": {
+            "attempted": true,
+            "confirmation_fraction": 0.625,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 375,
+              "first_pass_step": 275,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 14,
+              "passing_suffix": 14,
+              "stable_from_seconds": null,
+              "stable_from_step": 275
+            },
+            "metric_checks": {
+              "hq": {
+                "margin": 0.09999999999999998,
+                "metric": "hq",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.9,
+                "value": 1.0
+              },
+              "modes": {
+                "margin": 0,
+                "metric": "modes",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 2,
+                "value": 2
+              }
+            },
+            "passed": true,
+            "shortfall": 0.0,
+            "status": "PASS"
+          },
+          "execution_path": "public_trainer",
+          "gate_status": "PASS",
+          "metrics": {
+            "distribution_tv": 0.1875,
+            "hq": 1.0,
+            "mean_rmse": 0.00022395487758331,
+            "modes": 2,
+            "step": 600
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "sampling": {
+            "eval_output_noise": "clean",
+            "sampling_contract_version": 1,
+            "sampling_law": "enumerated_prior_without_output_noise"
+          },
+          "status": "PASS",
+          "task_id": "img_stripes2_w64_optimizer_diagnostic"
+        }
+      ]
+    },
+    {
+      "attempt_id": "4e81143249764fc7b7b402ebda745d6d",
+      "attempt_status": "completed",
+      "campaign_id": "bispf-fastpath-alternatives-v1",
+      "candidate_id": "bispf-optimized-quintic-v1",
+      "candidate_revision": "8d941696e5e05607c763bccefbcbe34694996370bb6f1b03d70f514be6273def",
+      "certificate_validated": true,
+      "cost_owner": {
+        "campaign": "bispf-fastpath-alternatives-v1",
+        "request": "62f797b1e9f3076a2c63c7b3",
+        "revision": "8d941696e5e05607c763bccefbcbe34694996370bb6f1b03d70f514be6273def"
+      },
+      "evidence_scope": "published_summary",
+      "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+      "provenance": {
+        "canonical_result_hash": "e0c7b16a6ee375b72188bb36a0a49f149dac2e9b0065950b63fde27dc8943489",
+        "original_files": {
+          "evidence": {
+            "path": "reports/forge/attempts/4e81143249764fc7b7b402ebda745d6d/evidence.json",
+            "sha256": "6fffc008b892fdcb62d41bf6d5433ca9393157a87cb10e6a060493178949cc9d"
+          },
+          "request": {
+            "path": "reports/forge/attempts/4e81143249764fc7b7b402ebda745d6d/request.json",
+            "sha256": "1beefea8014326a44068b11550ee56933c041c3f41569e0146adf5997ffd125f"
+          },
+          "result": {
+            "path": "reports/forge/attempts/4e81143249764fc7b7b402ebda745d6d/result.json",
+            "sha256": "f5f0721b9a7f61ff17335956d8f871048d774e2b7a725cf87532008bf63ac60b"
+          }
+        },
+        "source_digest": "c82ed2dc712e4c9ebda80678e453635bd8a16dc74fae1450234ed368aa956213",
+        "source_origin_commit": "d9d72d53761c898bce20102e1995fc3d899c1447"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "request_id": "62f797b1e9f3076a2c63c7b3",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "schema_version": 1,
+      "summary_version": "forge-technique-receipt-summary-v1",
+      "task_results": [
+        {
+          "api_version": "forge-api-v1",
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "compatibility_key": "eb668fc4284508c9571d8f14d75f23a602652d24253f4663ff2c507cb36c562b",
+          "cost": {
+            "adapter_loop_seconds": 13.757805482018739,
+            "adapter_seconds": 14.248002069070935,
+            "charged_task": "img_bars4_w64_optimizer_diagnostic",
+            "completed_steps": 600,
+            "device": "0",
+            "execution_seconds": 19.944213793962263,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 600,
+              "generator": 600,
+              "prior": 600
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 13.47063424915541,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.018833434442058206
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.00797316583339125
+                },
+                "training_updates": {
+                  "calls": 600,
+                  "seconds": 13.44382764887996
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 15.606506404932588,
+            "wall_seconds": 19.944213793962263
+          },
+          "evaluator_summary": {
+            "attempted": true,
+            "confirmation_fraction": 0.8333333333333334,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 500,
+              "first_pass_step": 400,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 9,
+              "passing_suffix": 9,
+              "stable_from_seconds": null,
+              "stable_from_step": 400
+            },
+            "metric_checks": {
+              "hq": {
+                "margin": 0.09999999999999998,
+                "metric": "hq",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.9,
+                "value": 1.0
+              },
+              "modes": {
+                "margin": 0,
+                "metric": "modes",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 4,
+                "value": 4
+              }
+            },
+            "passed": true,
+            "shortfall": 0.0,
+            "status": "PASS"
+          },
+          "execution_path": "public_trainer",
+          "gate_status": "PASS",
+          "metrics": {
+            "distribution_tv": 0.1875,
+            "hq": 1.0,
+            "mean_rmse": 0.00024228607071563601,
+            "modes": 4,
+            "step": 600
+          },
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "sampling": {
+            "eval_output_noise": "clean",
+            "sampling_contract_version": 1,
+            "sampling_law": "enumerated_prior_without_output_noise"
+          },
+          "status": "PASS",
+          "task_id": "img_bars4_w64_optimizer_diagnostic"
+        }
+      ]
+    }
+  ],
+  "budget": {
+    "arms": 6,
+    "candidate_reservation_seconds": 600,
+    "paid_retries": 0,
+    "per_arm_seconds": 300,
+    "reservation_seconds": 1800,
+    "reserved_seconds": 0,
+    "spent_seconds": 215.19960790721234
+  },
+  "campaign": "bispf-fastpath-alternatives-v1",
+  "candidate_interpretation": {
+    "bispf-optimized-frobenius-v1": {
+      "eligible_for_further_comparison": false,
+      "native_pass_regressions": [
+        "img_stripes2_w64_optimizer_diagnostic"
+      ],
+      "stripes_positive": false
+    },
+    "bispf-optimized-quintic-v1": {
+      "eligible_for_further_comparison": true,
+      "native_pass_regressions": [],
+      "stripes_positive": true
+    }
+  },
+  "comparisons": {
+    "img_bars4_w64_optimizer_diagnostic": {
+      "final_data_stream_sha256": true,
+      "initial_public_prior": true,
+      "initial_rng_sha256": true,
+      "initialization_sha256": true,
+      "task_contract": true
+    },
+    "img_stripes2_w64_optimizer_diagnostic": {
+      "final_data_stream_sha256": true,
+      "initial_public_prior": true,
+      "initial_rng_sha256": true,
+      "initialization_sha256": true,
+      "task_contract": true
+    }
+  },
+  "concluded_studies": [
+    {
+      "decision_outcomes": [
+        "prediction_observed"
+      ],
+      "record": "reports/forge/records/readout-3721266a32807c156725dfc8.json",
+      "sha256": "c8ef1472c7567309af305e7f43c12f409fe274859632b2870203178407e5d666",
+      "study": "bispf-fastpath-alternatives-native-v1"
+    },
+    {
+      "decision_outcomes": [
+        "prediction_observed"
+      ],
+      "record": "reports/forge/records/readout-85a714c5fc9c0b038c400b22.json",
+      "sha256": "f0fbdb0eb17efcc48ded116e5cfdb1b80e1a9d3e5ec636f801a87b3fcd46d4c3",
+      "study": "bispf-optimized-frobenius-v1-wide"
+    },
+    {
+      "decision_outcomes": [
+        "prediction_observed"
+      ],
+      "record": "reports/forge/records/readout-bbadc8452e77fa75caff13c6.json",
+      "sha256": "1bb2d81dcce58147d55ed25b88dbf1fa5c28279da433f3bf2bb3a2f181cd433c",
+      "study": "bispf-optimized-quintic-v1-wide"
+    }
+  ],
+  "decision_contract_caveat": "The frozen automatic prediction checks endpoint HQ only. Frobenius therefore records prediction_observed despite one-mode collapse and the sustained numerical FAIL. Its actual gates and native positive regression require stopping this revision; the archived automatic outcome is retained unchanged.",
+  "optimizer_updates_added_by_publication": 0,
+  "publisher_sha256": "c923432154fbfd75c6af1a858bee20a286d5cdaa36fd5c7d809f3576a0cc772d",
+  "qualification_reuse": false,
+  "rows": [
+    {
+      "actual_fastpath_scope": "CUDA width64 generator and width64/128 critic convolutions; dense/prior native",
+      "attempt": "d11a77cc46fe426aadfa1a6631c546f3",
+      "candidate": "bispf-optimized-frobenius-v1",
+      "canonical_result_sha256": "eb74220e90accfc698b5c667edec266b776f91ed0e7f0f9c64a18e50134a5ee2",
+      "completed_steps": 600,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "convolution_rule": "frobenius",
+      "final_data_stream_sha256": "b86eba7d4012a66f33e4d708c747089226a5161c698e3289dce5a32a30d83947",
+      "guards": {
+        "all_finite": true,
+        "unintended_rng_deviations": 0
+      },
+      "initial_public_prior": {
+        "initial_state_sha256": "04fe4ff6d0ee5e6fe3ec2cdf2bde0bd2370a660835c24939cd2ebab31f8b7647",
+        "initializer": "deterministic_orthogonal_named_parameters_v1",
+        "parameter_seeds": {
+          "z": 6640234621280078221
+        }
+      },
+      "initial_rng_sha256": "1615dcc3e0c4713630714fc1982be56d17970a566de5824a5027ee30c3b461a3",
+      "initialization_sha256": "4a44467fa98d98d340c2950f9b8c9b063b4e97ac50c5647bbe764f78c26ccc06",
+      "media": {
+        "optimizer_updates_added": 0,
+        "path": "reports/forge/bispf-optimized/wide-media/bispf-optimized-frobenius-v1/img_bars4_w64_optimizer_diagnostic.gif",
+        "receipt": {
+          "path": "/home/martyn/dev/ParticleGAN-bispf-optimized/reports/forge/bispf-optimized/wide-media/bispf-optimized-frobenius-v1/img_bars4_w64_optimizer_diagnostic.json",
+          "sha256": "065648ee3ab1ec499dd6b39e5bf1fc8f88fa1d1cb9582dec6d10cf5dff1f24aa"
+        },
+        "sampling_draws_added": 0,
+        "sha256": "06dc6bf0c703160c3030d0c7bca06a28355e735d4ec893290a1a971f48ea36de"
+      },
+      "metrics": {
+        "distribution_tv": 0.375,
+        "hq": 0.8125,
+        "mean_rmse": 0.09519217908382416,
+        "modes": 2,
+        "step": 600
+      },
+      "observations": 24,
+      "optimizer_updates": {
+        "discriminator": 600,
+        "generator": 600,
+        "prior": 600
+      },
+      "raw_artifacts": {
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "3c042ba43249a49ffa80376e082d6d298afd00376e47bbb4eb24120bf898e468",
+                "size": 1419275
+              }
+            },
+            "schema_version": 1,
+            "sha256": "9e9227f2418fd84d86ffce30ec5ab251ef74b519c379b0b03e88a4405f609a85",
+            "total_bytes": 1419275
+          },
+          "artifact_root": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-fastpath-alternatives-v1/d11a77cc46fe426aadfa1a6631c546f3/provenance",
+          "bytes": 1419275,
+          "completed_steps": 600,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"enumerated_samples\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "b86eba7d4012a66f33e4d708c747089226a5161c698e3289dce5a32a30d83947",
+            "[\"eval\",\"live\",\"enumerated_samples\",\"cuda:0\"]": "0614a849d36daec7e44214f00063111587d655d573be162a0fe3f99ecd96f181",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "2bd56f40a43d3b952b22604582d0857a578084ee4c9dc9d3801047802f60d2f6",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "433977353c74fca5e3ab0e7d2382867e230290f394ac4b9c9496af1eb23cc419",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a32f36a210008f43c0b6994fe98a43dbb59ee66c51f44103e1d686461e086c77"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "3c042ba43249a49ffa80376e082d6d298afd00376e47bbb4eb24120bf898e468",
+          "state_sha256": "be4757b4e15d5b0f7f62fdbe4620f1f4455e3fba7c74acf5bb73790793065f3e"
+        },
+        "root": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-fastpath-alternatives-v1/d11a77cc46fe426aadfa1a6631c546f3",
+        "saved_observer_outputs": {
+          "bytes": 239299,
+          "kind": "scored_image_samples_v1",
+          "observation_count": 24,
+          "optimizer_updates_added": 0,
+          "path": "observed-images.pt",
+          "sampling_draws_added": 0,
+          "sha256": "00640effb30b6b951141a56dcdf6962845e8029ddfcff231b2483aa98ac7829c"
+        }
+      },
+      "request": "ad4a14bec0e50939e7605f21",
+      "sampling_law": "enumerated_prior_without_output_noise",
+      "status": "FAIL",
+      "task": "img_bars4_w64_optimizer_diagnostic",
+      "task_contract": "61269ad8a000d39f4ea1e1e8d6ef8268b015c1956c6e2896eda919189c5fc1af",
+      "wall_seconds": 14.82745244097896
+    },
+    {
+      "actual_fastpath_scope": "CUDA width64 generator and width64/128 critic convolutions; dense/prior native",
+      "attempt": "63fe579365654297972e5ee55c5bd970",
+      "candidate": "bispf-optimized-frobenius-v1",
+      "canonical_result_sha256": "345af3265897ff39fd4b8e886474bb84b2946cc2a1494bd6becbda8b5a1e067e",
+      "completed_steps": 600,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "convolution_rule": "frobenius",
+      "final_data_stream_sha256": "b86eba7d4012a66f33e4d708c747089226a5161c698e3289dce5a32a30d83947",
+      "guards": {
+        "all_finite": true,
+        "unintended_rng_deviations": 0
+      },
+      "initial_public_prior": {
+        "initial_state_sha256": "04fe4ff6d0ee5e6fe3ec2cdf2bde0bd2370a660835c24939cd2ebab31f8b7647",
+        "initializer": "deterministic_orthogonal_named_parameters_v1",
+        "parameter_seeds": {
+          "z": 6640234621280078221
+        }
+      },
+      "initial_rng_sha256": "1615dcc3e0c4713630714fc1982be56d17970a566de5824a5027ee30c3b461a3",
+      "initialization_sha256": "4a44467fa98d98d340c2950f9b8c9b063b4e97ac50c5647bbe764f78c26ccc06",
+      "media": {
+        "optimizer_updates_added": 0,
+        "path": "reports/forge/bispf-optimized/wide-media/bispf-optimized-frobenius-v1/img_stripes2_w64_optimizer_diagnostic.gif",
+        "receipt": {
+          "path": "/home/martyn/dev/ParticleGAN-bispf-optimized/reports/forge/bispf-optimized/wide-media/bispf-optimized-frobenius-v1/img_stripes2_w64_optimizer_diagnostic.json",
+          "sha256": "29cf77c3cd126d7fb6821ded7067aa59e0ff9a719287d68a3cfacfce487fbacf"
+        },
+        "sampling_draws_added": 0,
+        "sha256": "1d7f87a0a87bd4411d9fc40d5bd772aadd861f21483ac66d8bfa337189485afb"
+      },
+      "metrics": {
+        "distribution_tv": 0.5,
+        "hq": 0.96875,
+        "mean_rmse": 0.0429074689745903,
+        "modes": 1,
+        "step": 600
+      },
+      "observations": 24,
+      "optimizer_updates": {
+        "discriminator": 600,
+        "generator": 600,
+        "prior": 600
+      },
+      "raw_artifacts": {
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "a0d07eef3bb7f6f4ad3d62b275daf93b234b89859cd7c7c790c7a34b871af2e5",
+                "size": 1419275
+              }
+            },
+            "schema_version": 1,
+            "sha256": "358a8a4d5e44775d96f60126f6956e74048a4d12e1a0d5f0d5c40902b02de16c",
+            "total_bytes": 1419275
+          },
+          "artifact_root": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-fastpath-alternatives-v1/63fe579365654297972e5ee55c5bd970/provenance",
+          "bytes": 1419275,
+          "completed_steps": 600,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"enumerated_samples\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "b86eba7d4012a66f33e4d708c747089226a5161c698e3289dce5a32a30d83947",
+            "[\"eval\",\"live\",\"enumerated_samples\",\"cuda:0\"]": "0614a849d36daec7e44214f00063111587d655d573be162a0fe3f99ecd96f181",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "2bd56f40a43d3b952b22604582d0857a578084ee4c9dc9d3801047802f60d2f6",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "433977353c74fca5e3ab0e7d2382867e230290f394ac4b9c9496af1eb23cc419",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a32f36a210008f43c0b6994fe98a43dbb59ee66c51f44103e1d686461e086c77"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "a0d07eef3bb7f6f4ad3d62b275daf93b234b89859cd7c7c790c7a34b871af2e5",
+          "state_sha256": "84a5c16067f36c9651c329f9673c16695ea1d337da1a8172e060147eb380eac0"
+        },
+        "root": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-fastpath-alternatives-v1/63fe579365654297972e5ee55c5bd970",
+        "saved_observer_outputs": {
+          "bytes": 226115,
+          "kind": "scored_image_samples_v1",
+          "observation_count": 24,
+          "optimizer_updates_added": 0,
+          "path": "observed-images.pt",
+          "sampling_draws_added": 0,
+          "sha256": "78e7158789e712ee7d35929fc7d2a46223c1b0c7c03d70df8ef7115705edc3b9"
+        }
+      },
+      "request": "ad4a14bec0e50939e7605f21",
+      "sampling_law": "enumerated_prior_without_output_noise",
+      "status": "FAIL",
+      "task": "img_stripes2_w64_optimizer_diagnostic",
+      "task_contract": "79b706f60b08c69a3c52f38904e520abf329d6c359d5c0f2e8b86c875fcc0b2f",
+      "wall_seconds": 14.880459002102725
+    },
+    {
+      "actual_fastpath_scope": "CUDA width64 generator and width64/128 critic convolutions; dense/prior native",
+      "attempt": "4e81143249764fc7b7b402ebda745d6d",
+      "candidate": "bispf-optimized-quintic-v1",
+      "canonical_result_sha256": "e0c7b16a6ee375b72188bb36a0a49f149dac2e9b0065950b63fde27dc8943489",
+      "completed_steps": 600,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 500,
+        "first_pass_step": 400,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 9,
+        "passing_suffix": 9,
+        "stable_from_seconds": null,
+        "stable_from_step": 400
+      },
+      "convolution_rule": "quintic",
+      "final_data_stream_sha256": "b86eba7d4012a66f33e4d708c747089226a5161c698e3289dce5a32a30d83947",
+      "guards": {
+        "all_finite": true,
+        "unintended_rng_deviations": 0
+      },
+      "initial_public_prior": {
+        "initial_state_sha256": "04fe4ff6d0ee5e6fe3ec2cdf2bde0bd2370a660835c24939cd2ebab31f8b7647",
+        "initializer": "deterministic_orthogonal_named_parameters_v1",
+        "parameter_seeds": {
+          "z": 6640234621280078221
+        }
+      },
+      "initial_rng_sha256": "1615dcc3e0c4713630714fc1982be56d17970a566de5824a5027ee30c3b461a3",
+      "initialization_sha256": "4a44467fa98d98d340c2950f9b8c9b063b4e97ac50c5647bbe764f78c26ccc06",
+      "media": {
+        "optimizer_updates_added": 0,
+        "path": "reports/forge/bispf-optimized/wide-media/bispf-optimized-quintic-v1/img_bars4_w64_optimizer_diagnostic.gif",
+        "receipt": {
+          "path": "/home/martyn/dev/ParticleGAN-bispf-optimized/reports/forge/bispf-optimized/wide-media/bispf-optimized-quintic-v1/img_bars4_w64_optimizer_diagnostic.json",
+          "sha256": "5ff699f958995caa02d8a49a6527f0fa38a799bd980f5450c1b704a05adbff10"
+        },
+        "sampling_draws_added": 0,
+        "sha256": "d50cb12f3f18c7d86eb2217aee002687ce40a314f57c649c335666cd32022225"
+      },
+      "metrics": {
+        "distribution_tv": 0.1875,
+        "hq": 1.0,
+        "mean_rmse": 0.00024228607071563601,
+        "modes": 4,
+        "step": 600
+      },
+      "observations": 24,
+      "optimizer_updates": {
+        "discriminator": 600,
+        "generator": 600,
+        "prior": 600
+      },
+      "raw_artifacts": {
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "c13a0ff9840b52cd53232415b40df5d928e22b103aedd52363330fe3ab9c59a0",
+                "size": 1419275
+              }
+            },
+            "schema_version": 1,
+            "sha256": "355b661ffe823eb6e3b3e8a755c239dacc121b8eb80651ab8c24c1b2ccbc88a7",
+            "total_bytes": 1419275
+          },
+          "artifact_root": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-fastpath-alternatives-v1/4e81143249764fc7b7b402ebda745d6d/provenance",
+          "bytes": 1419275,
+          "completed_steps": 600,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"enumerated_samples\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "b86eba7d4012a66f33e4d708c747089226a5161c698e3289dce5a32a30d83947",
+            "[\"eval\",\"live\",\"enumerated_samples\",\"cuda:0\"]": "0614a849d36daec7e44214f00063111587d655d573be162a0fe3f99ecd96f181",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "2bd56f40a43d3b952b22604582d0857a578084ee4c9dc9d3801047802f60d2f6",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "433977353c74fca5e3ab0e7d2382867e230290f394ac4b9c9496af1eb23cc419",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a32f36a210008f43c0b6994fe98a43dbb59ee66c51f44103e1d686461e086c77"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "c13a0ff9840b52cd53232415b40df5d928e22b103aedd52363330fe3ab9c59a0",
+          "state_sha256": "8d500f7307d181d5dc6007c7383318d6f042af1cf16cdca609c6426e31f06f60"
+        },
+        "root": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-fastpath-alternatives-v1/4e81143249764fc7b7b402ebda745d6d",
+        "saved_observer_outputs": {
+          "bytes": 239299,
+          "kind": "scored_image_samples_v1",
+          "observation_count": 24,
+          "optimizer_updates_added": 0,
+          "path": "observed-images.pt",
+          "sampling_draws_added": 0,
+          "sha256": "cdb428cb8e8aed47fc65740a0b197ad1e4eaa1bd6ee76d9eaf5c964bcaa33298"
+        }
+      },
+      "request": "62f797b1e9f3076a2c63c7b3",
+      "sampling_law": "enumerated_prior_without_output_noise",
+      "status": "PASS",
+      "task": "img_bars4_w64_optimizer_diagnostic",
+      "task_contract": "61269ad8a000d39f4ea1e1e8d6ef8268b015c1956c6e2896eda919189c5fc1af",
+      "wall_seconds": 19.944213793962263
+    },
+    {
+      "actual_fastpath_scope": "CUDA width64 generator and width64/128 critic convolutions; dense/prior native",
+      "attempt": "1902c3ab92d14b7590efd8c5751d4019",
+      "candidate": "bispf-optimized-quintic-v1",
+      "canonical_result_sha256": "8a253e2fecdae7006eaff458f01b731ab4932a6cdc32aaf6fe257128abcb1281",
+      "completed_steps": 600,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 425,
+        "first_pass_step": 325,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 12,
+        "passing_suffix": 12,
+        "stable_from_seconds": null,
+        "stable_from_step": 325
+      },
+      "convolution_rule": "quintic",
+      "final_data_stream_sha256": "b86eba7d4012a66f33e4d708c747089226a5161c698e3289dce5a32a30d83947",
+      "guards": {
+        "all_finite": true,
+        "unintended_rng_deviations": 0
+      },
+      "initial_public_prior": {
+        "initial_state_sha256": "04fe4ff6d0ee5e6fe3ec2cdf2bde0bd2370a660835c24939cd2ebab31f8b7647",
+        "initializer": "deterministic_orthogonal_named_parameters_v1",
+        "parameter_seeds": {
+          "z": 6640234621280078221
+        }
+      },
+      "initial_rng_sha256": "1615dcc3e0c4713630714fc1982be56d17970a566de5824a5027ee30c3b461a3",
+      "initialization_sha256": "4a44467fa98d98d340c2950f9b8c9b063b4e97ac50c5647bbe764f78c26ccc06",
+      "media": {
+        "optimizer_updates_added": 0,
+        "path": "reports/forge/bispf-optimized/wide-media/bispf-optimized-quintic-v1/img_stripes2_w64_optimizer_diagnostic.gif",
+        "receipt": {
+          "path": "/home/martyn/dev/ParticleGAN-bispf-optimized/reports/forge/bispf-optimized/wide-media/bispf-optimized-quintic-v1/img_stripes2_w64_optimizer_diagnostic.json",
+          "sha256": "5a6423c1d0e41a16534f13e9bfec17e399072e7215f22e281d94c74fc998b4b5"
+        },
+        "sampling_draws_added": 0,
+        "sha256": "33aa6a9b12e15bb3fbb340e9f73db40759c8150d741474bb35b2706be35b48c7"
+      },
+      "metrics": {
+        "distribution_tv": 0.15625,
+        "hq": 1.0,
+        "mean_rmse": 2.3709274046268547e-06,
+        "modes": 2,
+        "step": 600
+      },
+      "observations": 24,
+      "optimizer_updates": {
+        "discriminator": 600,
+        "generator": 600,
+        "prior": 600
+      },
+      "raw_artifacts": {
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "8547af03586fcd2c5b19bff91733540d281890107afeb9f40f79ec3e5ac54d3d",
+                "size": 1419275
+              }
+            },
+            "schema_version": 1,
+            "sha256": "035f7ccb754dc386e3b4c693bddbb67e66dc74c46648a3b281beb478b1ac308d",
+            "total_bytes": 1419275
+          },
+          "artifact_root": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-fastpath-alternatives-v1/1902c3ab92d14b7590efd8c5751d4019/provenance",
+          "bytes": 1419275,
+          "completed_steps": 600,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"enumerated_samples\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "b86eba7d4012a66f33e4d708c747089226a5161c698e3289dce5a32a30d83947",
+            "[\"eval\",\"live\",\"enumerated_samples\",\"cuda:0\"]": "0614a849d36daec7e44214f00063111587d655d573be162a0fe3f99ecd96f181",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "2bd56f40a43d3b952b22604582d0857a578084ee4c9dc9d3801047802f60d2f6",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "433977353c74fca5e3ab0e7d2382867e230290f394ac4b9c9496af1eb23cc419",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a32f36a210008f43c0b6994fe98a43dbb59ee66c51f44103e1d686461e086c77"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "8547af03586fcd2c5b19bff91733540d281890107afeb9f40f79ec3e5ac54d3d",
+          "state_sha256": "04e9c693459de89421f39aee5b72d6ded754d5709ad125f31c67f0666d0aed92"
+        },
+        "root": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-fastpath-alternatives-v1/1902c3ab92d14b7590efd8c5751d4019",
+        "saved_observer_outputs": {
+          "bytes": 226115,
+          "kind": "scored_image_samples_v1",
+          "observation_count": 24,
+          "optimizer_updates_added": 0,
+          "path": "observed-images.pt",
+          "sampling_draws_added": 0,
+          "sha256": "5fee9f1ed2505a299debe6b57946d76ce8191b9d382f7fd5d2040ec1bff68340"
+        }
+      },
+      "request": "62f797b1e9f3076a2c63c7b3",
+      "sampling_law": "enumerated_prior_without_output_noise",
+      "status": "PASS",
+      "task": "img_stripes2_w64_optimizer_diagnostic",
+      "task_contract": "79b706f60b08c69a3c52f38904e520abf329d6c359d5c0f2e8b86c875fcc0b2f",
+      "wall_seconds": 20.168321941047907
+    },
+    {
+      "actual_fastpath_scope": "CUDA width64 generator and width64/128 critic convolutions; dense/prior native",
+      "attempt": "91832bb54bc74d1abc42a8576d9fc7e7",
+      "candidate": "bispf-v2",
+      "canonical_result_sha256": "7d9c5dc30a00c3060ae63d264be585705d812a8543b56ff36e262121bfe91008",
+      "completed_steps": 600,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": 575,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 2,
+        "passing_suffix": 2,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "convolution_rule": "polar",
+      "final_data_stream_sha256": "b86eba7d4012a66f33e4d708c747089226a5161c698e3289dce5a32a30d83947",
+      "guards": {
+        "all_finite": true,
+        "unintended_rng_deviations": 0
+      },
+      "initial_public_prior": {
+        "initial_state_sha256": "04fe4ff6d0ee5e6fe3ec2cdf2bde0bd2370a660835c24939cd2ebab31f8b7647",
+        "initializer": "deterministic_orthogonal_named_parameters_v1",
+        "parameter_seeds": {
+          "z": 6640234621280078221
+        }
+      },
+      "initial_rng_sha256": "1615dcc3e0c4713630714fc1982be56d17970a566de5824a5027ee30c3b461a3",
+      "initialization_sha256": "4a44467fa98d98d340c2950f9b8c9b063b4e97ac50c5647bbe764f78c26ccc06",
+      "media": {
+        "optimizer_updates_added": 0,
+        "path": "reports/forge/bispf-optimized/wide-media/bispf-v2/img_bars4_w64_optimizer_diagnostic.gif",
+        "receipt": {
+          "path": "/home/martyn/dev/ParticleGAN-bispf-optimized/reports/forge/bispf-optimized/wide-media/bispf-v2/img_bars4_w64_optimizer_diagnostic.json",
+          "sha256": "7851d52f9c8cff0c62d75f51059ba74db161bcb2b1e789625778bca3e345e79a"
+        },
+        "sampling_draws_added": 0,
+        "sha256": "499e9532b97b791fdc0364df8cf6ee0d2c472508e2f678e3dce13578bd6d9dd9"
+      },
+      "metrics": {
+        "distribution_tv": 0.125,
+        "hq": 0.90625,
+        "mean_rmse": 0.043056923896074295,
+        "modes": 4,
+        "step": 600
+      },
+      "observations": 24,
+      "optimizer_updates": {
+        "discriminator": 600,
+        "generator": 600,
+        "prior": 600
+      },
+      "raw_artifacts": {
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "3aca8a24d5b317a46a45d7bf813033189eeaf9f3aa51c9be1aabb68fb2233440",
+                "size": 1419211
+              }
+            },
+            "schema_version": 1,
+            "sha256": "bcb9435e31b1b5b3d57891edf6a3f68a5693b872d96d642f2f043748d00ae943",
+            "total_bytes": 1419211
+          },
+          "artifact_root": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-fastpath-alternatives-v1/91832bb54bc74d1abc42a8576d9fc7e7/provenance",
+          "bytes": 1419211,
+          "completed_steps": 600,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"enumerated_samples\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "b86eba7d4012a66f33e4d708c747089226a5161c698e3289dce5a32a30d83947",
+            "[\"eval\",\"live\",\"enumerated_samples\",\"cuda:0\"]": "0614a849d36daec7e44214f00063111587d655d573be162a0fe3f99ecd96f181",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "2bd56f40a43d3b952b22604582d0857a578084ee4c9dc9d3801047802f60d2f6",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "433977353c74fca5e3ab0e7d2382867e230290f394ac4b9c9496af1eb23cc419",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a32f36a210008f43c0b6994fe98a43dbb59ee66c51f44103e1d686461e086c77"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "3aca8a24d5b317a46a45d7bf813033189eeaf9f3aa51c9be1aabb68fb2233440",
+          "state_sha256": "8c15a6f962af267c30d10ce4c1a97ae451be62e3ebf9cb3d098e1420eac87fe3"
+        },
+        "root": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-fastpath-alternatives-v1/91832bb54bc74d1abc42a8576d9fc7e7",
+        "saved_observer_outputs": {
+          "bytes": 239299,
+          "kind": "scored_image_samples_v1",
+          "observation_count": 24,
+          "optimizer_updates_added": 0,
+          "path": "observed-images.pt",
+          "sampling_draws_added": 0,
+          "sha256": "448a0931a9c079570b195debed109cd3cb353245b7e5635899dfb480be191a29"
+        }
+      },
+      "request": "038fcea2d85eb37ea19546bf",
+      "sampling_law": "enumerated_prior_without_output_noise",
+      "status": "FAIL",
+      "task": "img_bars4_w64_optimizer_diagnostic",
+      "task_contract": "61269ad8a000d39f4ea1e1e8d6ef8268b015c1956c6e2896eda919189c5fc1af",
+      "wall_seconds": 73.06305101502221
+    },
+    {
+      "actual_fastpath_scope": "CUDA width64 generator and width64/128 critic convolutions; dense/prior native",
+      "attempt": "f99acd5cd1314fca9520b91931441c98",
+      "candidate": "bispf-v2",
+      "canonical_result_sha256": "d91121934c003d21d56a3b6d1a6cc10a241f5ebd5c51b144743c2b62a11e87a0",
+      "completed_steps": 600,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 375,
+        "first_pass_step": 275,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 14,
+        "passing_suffix": 14,
+        "stable_from_seconds": null,
+        "stable_from_step": 275
+      },
+      "convolution_rule": "polar",
+      "final_data_stream_sha256": "b86eba7d4012a66f33e4d708c747089226a5161c698e3289dce5a32a30d83947",
+      "guards": {
+        "all_finite": true,
+        "unintended_rng_deviations": 0
+      },
+      "initial_public_prior": {
+        "initial_state_sha256": "04fe4ff6d0ee5e6fe3ec2cdf2bde0bd2370a660835c24939cd2ebab31f8b7647",
+        "initializer": "deterministic_orthogonal_named_parameters_v1",
+        "parameter_seeds": {
+          "z": 6640234621280078221
+        }
+      },
+      "initial_rng_sha256": "1615dcc3e0c4713630714fc1982be56d17970a566de5824a5027ee30c3b461a3",
+      "initialization_sha256": "4a44467fa98d98d340c2950f9b8c9b063b4e97ac50c5647bbe764f78c26ccc06",
+      "media": {
+        "optimizer_updates_added": 0,
+        "path": "reports/forge/bispf-optimized/wide-media/bispf-v2/img_stripes2_w64_optimizer_diagnostic.gif",
+        "receipt": {
+          "path": "/home/martyn/dev/ParticleGAN-bispf-optimized/reports/forge/bispf-optimized/wide-media/bispf-v2/img_stripes2_w64_optimizer_diagnostic.json",
+          "sha256": "18a6de9afd68f58567cdbc9ba25493e13172b188dc5bdd187987e5ce3f16f9c7"
+        },
+        "sampling_draws_added": 0,
+        "sha256": "7324d6ee3eb676a69f82e6ce17fef24fc24343311441467f9e80b89bcef6f87f"
+      },
+      "metrics": {
+        "distribution_tv": 0.1875,
+        "hq": 1.0,
+        "mean_rmse": 0.00022395487758331,
+        "modes": 2,
+        "step": 600
+      },
+      "observations": 24,
+      "optimizer_updates": {
+        "discriminator": 600,
+        "generator": 600,
+        "prior": 600
+      },
+      "raw_artifacts": {
+        "provenance_checkpoint": {
+          "artifact_manifest": {
+            "file_count": 1,
+            "files": {
+              "provenance-state.pt": {
+                "sha256": "21732e252b3f83399b2f794221811e2d3b0989f0911290d3a60e2f4fbdc8ed4a",
+                "size": 1419211
+              }
+            },
+            "schema_version": 1,
+            "sha256": "a2cdb424787181c7ed4b34628712d57aa15d8c3a7b90bf1e0038283737cd9825",
+            "total_bytes": 1419211
+          },
+          "artifact_root": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-fastpath-alternatives-v1/f99acd5cd1314fca9520b91931441c98/provenance",
+          "bytes": 1419211,
+          "completed_steps": 600,
+          "named_stream_keys": [
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]",
+            "[\"eval\",\"live\",\"enumerated_samples\",\"cuda:0\"]",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]"
+          ],
+          "named_stream_state_sha256": {
+            "[\"data\",\"target\",\"training\",\"cuda:0\"]": "b86eba7d4012a66f33e4d708c747089226a5161c698e3289dce5a32a30d83947",
+            "[\"eval\",\"live\",\"enumerated_samples\",\"cuda:0\"]": "0614a849d36daec7e44214f00063111587d655d573be162a0fe3f99ecd96f181",
+            "[\"eval\",\"sampler\",\"samples\",\"cuda:0\"]": "67f4fe1695d60941392cab68f7e509c408a926520b4d41e4d85ed622b82f3fe6",
+            "[\"eval\",\"target\",\"reference\",\"cuda:0\"]": "c241199bd530cd0d419c66a810b36dd14c66e508cbdd27f4f3bb1eb61260cd82",
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": "2bd56f40a43d3b952b22604582d0857a578084ee4c9dc9d3801047802f60d2f6",
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": "433977353c74fca5e3ab0e7d2382867e230290f394ac4b9c9496af1eb23cc419",
+            "[\"init\",\"prior\",\"locations\",\"cuda:0\"]": "c6c895466da96de4600bab10450fde28cf1bc981c4a31285f8d57af83d00a44e",
+            "[\"noise\",\"critic\",\"input\",\"cuda:0\"]": "355c95213318666d7a9677e2ff87c2907ec3023569ffb4af87035311861c6ac3",
+            "[\"noise\",\"generator\",\"output\",\"cuda:0\"]": "1f94d64989ee76502af2a88845775153918ae1e747651addf4d76146b1a43602",
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cuda:0\"]": "c8dbf6971343450f1cb750d68c4bc506541851a3d49a4ea0415e5f051a7496e6",
+            "[\"noise\",\"penalty\",\"training\",\"cuda:0\"]": "e22601e6f2de31d2e59093f0384bd30127a8ca6aa0267b8ff5f319f4a3480376",
+            "[\"noise\",\"prior\",\"gaussian\",\"cuda:0\"]": "941f0e41e945d71c69af5992ebb0585b2c785ce8e85ffda7f8355950d8b4ba6c",
+            "[\"prior\",\"latent\",\"indices\",\"cuda:0\"]": "a32f36a210008f43c0b6994fe98a43dbb59ee66c51f44103e1d686461e086c77"
+          },
+          "optimizer_updates_added": 0,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sampling_draws_added": 0,
+          "schema_version": 1,
+          "sha256": "21732e252b3f83399b2f794221811e2d3b0989f0911290d3a60e2f4fbdc8ed4a",
+          "state_sha256": "a5381c94f4a46c598c3059c1bee8845bc7be92aeda94c3ac01ca0a1695cb8fa9"
+        },
+        "root": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-fastpath-alternatives-v1/f99acd5cd1314fca9520b91931441c98",
+        "saved_observer_outputs": {
+          "bytes": 226115,
+          "kind": "scored_image_samples_v1",
+          "observation_count": 24,
+          "optimizer_updates_added": 0,
+          "path": "observed-images.pt",
+          "sampling_draws_added": 0,
+          "sha256": "75e3a1610a014a6893f12e1c2ed96ef51741910ce9d0258d990b4ffdf092aa73"
+        }
+      },
+      "request": "038fcea2d85eb37ea19546bf",
+      "sampling_law": "enumerated_prior_without_output_noise",
+      "status": "PASS",
+      "task": "img_stripes2_w64_optimizer_diagnostic",
+      "task_contract": "79b706f60b08c69a3c52f38904e520abf329d6c359d5c0f2e8b86c875fcc0b2f",
+      "wall_seconds": 72.31610971409827
+    }
+  ],
+  "sampling_draws_added_by_publication": 0,
+  "schema": "bispf_fastpath_quality_readout_v1",
+  "scope": "Architecture portability diagnostic, not ordinary qualification or natural-image quality",
+  "source_commit": "d9d72d53761c898bce20102e1995fc3d899c1447",
+  "source_digest": "c82ed2dc712e4c9ebda80678e453635bd8a16dc74fae1450234ed368aa956213"
+}

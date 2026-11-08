@@ -1,0 +1,64 @@
+{
+  "campaign": {
+    "budget_seconds": 400000,
+    "candidate_budget_seconds": 100000,
+    "id": "atlas-prior-repair-campaign-v2-reverified"
+  },
+  "candidate": "atlas-particle-normal-v2",
+  "competing_explanation": "If mode_hold, clockfree_audit, img_intensity2, or model_ae_reconstruction regress after restoring source_files isolation, UpdatePolicy row-semantics validation, Recipe optimizer parameter deduplication, and active SettleTest/FeatureCellBirthDeath clock-free state sanitization, then the earlier v2 readout depended on unisolated snapshot or policy side effects rather than the declared recipe.",
+  "control": {
+    "candidate_id": "atlas-particle-normal-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "mean_error_sigma",
+    "op": ">",
+    "phase": "final",
+    "task_id": "gaussian1d_smoke",
+    "threshold": 0.2
+  },
+  "hypothesis": "Re-executing atlas-particle-normal-v2 on the repaired source tree (with profile-scoped AE task snapshot sources, restored UpdatePolicy conditional row-semantics validation, restored Recipe optimizer parameter deduplication, and SettleTest/FeatureCellBirthDeath diagnostic step-stamp sanitization) reproduces >= 22 PASS / 0 INCOMPLETE on prior-ablation-full-suite-v1 under protocol seed 0.",
+  "id": "atlas-particle-normal-replication-study-v2-reverified",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "parity_comparisons",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "clockfree_audit",
+    "threshold": 4
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_revision": "c7e4c12988d060ec0bb8d903651ffbae3d2537e4d5b360a3bfa75a6e860de9fb",
+        "record_id": "readout-9f0d62f87d1ff351cfef7f98"
+      },
+      "path": "reports/forge/records/readout-9f0d62f87d1ff351cfef7f98.json",
+      "selector": [],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "candidate_revision": "25cbc5b8c787807ef64f0bb8f8e65eea25e3e13940f6fc90b733063baab912fc",
+        "record_id": "readout-e97f5dbf54d7493604c4689f"
+      },
+      "path": "reports/forge/records/readout-e97f5dbf54d7493604c4689f.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "prior-ablation-full-suite-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

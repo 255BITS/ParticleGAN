@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "id": "adaptation",
+  "revision": 2,
+  "goal": "adaptation",
+  "assignments": [
+    {
+      "task": "two_pole",
+      "qualification_tier": 1,
+      "importance": "required",
+      "order": 0
+    },
+    {
+      "task": "unused_token_hold",
+      "qualification_tier": 1,
+      "importance": "required",
+      "order": 1
+    },
+    {
+      "task": "ae_gan_hold",
+      "qualification_tier": 1,
+      "importance": "required",
+      "order": 2
+    },
+    {
+      "task": "trajectory",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 0
+    },
+    {
+      "task": "residual_student",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 1
+    },
+    {
+      "task": "unipolar",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 2
+    },
+    {
+      "task": "cover_leftover",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 3
+    },
+    {
+      "task": "mid_scale_identity",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 4
+    },
+    {
+      "task": "mode_hold",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 5
+    },
+    {
+      "task": "vector_two_broad",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 6
+    },
+    {
+      "task": "vector_unequal_mass",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 7
+    },
+    {
+      "task": "vector_unequal_width",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 8
+    },
+    {
+      "task": "vector_anisotropic",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 9
+    },
+    {
+      "task": "vector_overlap",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 10
+    },
+    {
+      "task": "vector_spiral",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 11
+    },
+    {
+      "task": "img_stripes2",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 12
+    },
+    {
+      "task": "img_bars4",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 13
+    },
+    {
+      "task": "img_blobs4",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 14
+    },
+    {
+      "task": "img_intensity2",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 15
+    },
+    {
+      "task": "grid100",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 16
+    },
+    {
+      "task": "rotated100",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 17
+    },
+    {
+      "task": "staggered100",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 18
+    },
+    {
+      "task": "target_shift_recovery",
+      "qualification_tier": 3,
+      "importance": "required",
+      "order": 0
+    }
+  ],
+  "eligibility": {},
+  "calibration": {
+    "status": "provisional",
+    "adoption_blocker": "Phase D historical calibration remains required"
+  },
+  "ranking": {
+    "policy": "qualified_tier_only_with_raw_metrics",
+    "compare_compatible_cohorts": true,
+    "cost_separate": true
+  },
+  "policy_change_reason": "Make existing tier-only ordering explicit; metric ranking needs separately predeclared metrics and directions."
+}

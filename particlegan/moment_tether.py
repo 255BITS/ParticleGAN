@@ -29,6 +29,26 @@ def capture_initial_moments(prior):
                               torch.tensor(len(prior.z), dtype=torch.int64, device=prior.z.device))
 
 
+def pooled_reference_moments(references):
+    """Pooled ``(mean, covariance, count)`` of priors' initial moment references.
+
+    One reference is returned as stored. Several are pooled with their
+    original row counts, including the scatter of their means about the pooled
+    mean. ``count`` is the stored int64 count tensor (summed when pooling).
+    """
+    if len(references) == 1:
+        prior = references[0]
+        return prior.moment_tether_mean, prior.moment_tether_covariance, prior.moment_tether_count
+    count = sum(prior.moment_tether_count for prior in references)
+    mean = sum(prior.moment_tether_mean * prior.moment_tether_count
+               for prior in references) / count
+    scatter = sum((prior.moment_tether_count - 1) * prior.moment_tether_covariance
+                  + prior.moment_tether_count * torch.outer(prior.moment_tether_mean - mean,
+                                                           prior.moment_tether_mean - mean)
+                  for prior in references)
+    return mean, scatter / (count - 1).clamp_min(1), count
+
+
 class MomentTetherRegularizer(nn.Module):
     """Dimension-averaged squared mean and full covariance discrepancies.
 
@@ -52,17 +72,8 @@ class MomentTetherRegularizer(nn.Module):
 
     def reference_moments(self):
         """Pool multiple tables with their original counts, including mean shifts."""
-        if len(self.references) == 1:
-            prior = self.references[0]
-            return prior.moment_tether_mean, prior.moment_tether_covariance
-        count = sum(prior.moment_tether_count for prior in self.references)
-        mean = sum(prior.moment_tether_mean * prior.moment_tether_count
-                   for prior in self.references) / count
-        scatter = sum((prior.moment_tether_count - 1) * prior.moment_tether_covariance
-                      + prior.moment_tether_count * torch.outer(prior.moment_tether_mean - mean,
-                                                               prior.moment_tether_mean - mean)
-                      for prior in self.references)
-        return mean, scatter / (count - 1).clamp_min(1)
+        mean, covariance, _ = pooled_reference_moments(self.references)
+        return mean, covariance
 
     def forward(self, rows):
         if self.weight == 0:

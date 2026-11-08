@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "276edf9e1dc812998157abfa67a7d390a10c4757c8231884cda435cc978a7bfb",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "b5fad3b6b898b4f120b6e8d298a2cdbbee2ed4433762b7b162077cdb791fc9db",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/0d2f7899cd3b4751935da9c75ae5717e/constraint_geometry-scored-outputs.pt": "9fe26d40708e2b25f16a75e5c207c462d44e6f184c5ca45cacb2dceaffde4ac4"
+  },
+  "task_id": "two_pole"
+}

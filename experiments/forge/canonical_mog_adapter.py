@@ -430,7 +430,7 @@ def construct_owner(root, binding, *, device, source_guard):
         raise ValueError("original float32 CPU1 runtime required")
     rng_before = state_digest(dict(cpu=torch.get_rng_state(),
         cuda=torch.cuda.get_rng_state(device) if torch.device(device).type == "cuda" else None))
-    recipe = Recipe(**binding["recipe"])
+    recipe = Recipe.from_dict(binding["recipe"])
     if canonical(asdict(recipe)) != canonical(binding["recipe"]) or (
             canonical(recipe.to_dict()) != canonical(binding["recipe_serialized"])):
         raise ValueError("actual complete public Recipe differs before model construction")
