@@ -8,6 +8,8 @@ import subprocess
 
 import pytest
 
+from update_boundary_source_bindings import before_update_boundary_refresh, previous_policy_hash
+
 from experiments.forge.contracts import file_hash, read_json
 from experiments.forge.decision_contracts import validate_legacy_admission
 from experiments.forge.planning import candidate_revision_for, resolve_idea
@@ -29,9 +31,10 @@ WORD_SOURCE_MEMBER = "experiments/forge/word_adapter.py"
 
 def _before_cleanup_word_source_refresh(current, relative):
     """Peel the source-only import cleanup, retaining the exact original card."""
+    current, current_sha256 = before_update_boundary_refresh(current, relative)
     revision = current["evaluation"]["evaluator_revision"]
     if revision["id"] != CLEANUP_WORD_REFRESH:
-        return current, file_hash(ROOT / relative)
+        return current, current_sha256
     assert revision["previous_task_commit"] == CLEANUP_WORD_PARENT
     assert revision["previous_task_path"] == relative
     previous_bytes = subprocess.check_output([
@@ -67,7 +70,7 @@ def _before_review_policy_source_refresh(current, relative):
     assert revision["previous_revision"] == previous["evaluation"]["evaluator_revision"]
     assert revision["previous_source_sha256"] == {POLICY_SOURCE_MEMBER: sources[POLICY_SOURCE_MEMBER]}
     assert current["evaluation"]["sources"] == {
-        **sources, POLICY_SOURCE_MEMBER: file_hash(ROOT / POLICY_SOURCE_MEMBER)}
+        **sources, POLICY_SOURCE_MEMBER: previous_policy_hash()}
     restored = deepcopy(current)
     restored["evaluation"]["sources"] = sources
     restored["evaluation"]["evaluator_revision"] = revision["previous_revision"]
@@ -252,6 +255,7 @@ def test_word_cleanup_binding_changes_only_duplicate_import_source_provenance():
     for task in ("five_word_joint_smoke", "five_word_joint_hold"):
         relative = f"configs/forge/tasks/{task}.json"
         current = read_json(ROOT / relative)
+        current, _ = before_update_boundary_refresh(current, relative)
         assert current["evaluation"]["evaluator_revision"]["id"] == CLEANUP_WORD_REFRESH
         previous, _ = _before_cleanup_word_source_refresh(current, relative)
         assert previous["evaluation"]["sources"][WORD_SOURCE_MEMBER] == hashlib.sha256(previous_source).hexdigest()
