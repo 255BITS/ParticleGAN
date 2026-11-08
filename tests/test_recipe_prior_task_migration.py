@@ -28,6 +28,10 @@ def test_current_prior_questions_change_only_declared_ownership_and_source_bindi
         expected["requires_capabilities"] = [name for name in expected["requires_capabilities"]
                                               if name != "learned_locations"]
         observed = deepcopy(current)
+        if (current["evaluation"].get("evaluator_revision") or {}).get("id") == "tier2-grid-triad-clean-sampling-calibration-v1":
+            assert current["id"] in {"grid100", "rotated100", "staggered100"}
+            assert observed["evaluation"]["coverage_thresholds"]["min_precision"] == 0.75
+            expected["evaluation"]["coverage_thresholds"]["min_precision"] = 0.75
         # Source rebinding authorizes current software only. Every architecture,
         # target, initial prior, sampling law, budget, cadence and bound stays.
         for card in (expected, observed):

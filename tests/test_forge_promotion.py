@@ -509,3 +509,23 @@ def test_certified_infrastructure_retry_keeps_cost_and_history_without_poisoning
              and c["seed"] == requests[0]["protocol"]["seed"]]
     assert all(len(c["outcomes"]) == 2 for c in cells)
     assert all(next(o for o in c["outcomes"] if o["attempt_id"] == "infra-old")["superseded_by"] == "stage-0" for c in cells)
+
+
+def test_promotion_allows_held_highest_tier_only_when_explicitly_authorized(setup):
+    root, path, contract, _ = setup
+    view_path = root / "configs/forge/views/stability.json"
+    view = read_json(view_path)
+    view["assignments"][1].update(importance="held", hold={
+        "schema": "forge_hold_v1", "previous_importance": "required", "reason": "no_global_recipe",
+        "blocked_by": [], "summary": "Fixture: quality is measured and shown, not counted.",
+        "explanation": "reports/forge/test-dispositions-20261015/README.md#quality",
+        "reentry": "Count quality again when one global recipe passes it.",
+    })
+    atomic_json(view_path, view)
+    with pytest.raises(CapabilityError, match="highest tier is held"):
+        promotion.register(root, "finished", path)
+    contract["allow_held_highest_tier"] = True
+    atomic_json(path, contract)
+    artifact = promotion.register(root, "finished", path)
+    assert artifact["qualification"]["qualification"]["status"] == "PASS"
+    assert artifact["qualification"]["qualification"]["counted_eligible"] is True

@@ -182,7 +182,7 @@ def test_recipe_factories_resolve_overrides_and_filter_frozen_parameters():
                         reg_coeff=.3, prior_reg=.4, betas=[0., .9])
     assert recipe.total_steps == 7000 and recipe.num_classes == 4
     assert recipe.betas == (0., .9)
-    assert Recipe(**recipe.to_dict()) == recipe
+    assert Recipe.from_dict(recipe.to_dict()) == recipe
     prior = recipe.make_prior()
     assert prior.z.shape == (8, 2)
     critic_opt = recipe.make_critic_optimizer(nn.Linear(2, 1), ema_critic=nn.Linear(2, 1))
@@ -212,7 +212,7 @@ def test_explicit_component_choices_preserve_shared_defaults():
     ddgan = get_recipe(model='ddgan', conditioning='ucd', num_classes=2)
     assert (ddgan.model, ddgan.conditioning, ddgan.num_classes) == ('ddgan', 'ucd', 2)
     assert ddgan.lr == default.lr and ddgan.reg_coeff == default.reg_coeff
-    assert Recipe(**ddgan.to_dict()) == ddgan
+    assert Recipe.from_dict(ddgan.to_dict()) == ddgan
 
 
 def test_delayed_cosine_endpoints():

@@ -36,6 +36,9 @@ DEFAULTS = {
     'data_dir': '/home/martyn/dev/ParticleGAN/data',
     'fid_cache': '/home/martyn/dev/ParticleGAN/results/cifar_ddgan/fid_cache',
     'out_dir': 'runs/cifar_particle_ddgan/default',
+    # Opt-in matched prior controls (Recipe.prior_update / Recipe.prior_code_law).
+    # Defaults keep the original learned-table trajectory bit for bit.
+    'prior_update': 'learned', 'prior_code_law': 'table',
 }
 
 
@@ -70,7 +73,8 @@ def training_recipe(cfg):
                       sigma_rel=cfg['sigma_rel'], routing_temperature=cfg['temperature'],
                       batch_size=cfg['batch_size'], total_steps=cfg['steps'], lr=cfg['lr'],
                       d_lr_mult=cfg['d_lr'] / cfg['lr'], prior_lr_mult=cfg['prior_lr'] / cfg['lr'],
-                      ema_decay=cfg['ema'], reg_every=4)
+                      ema_decay=cfg['ema'], reg_every=4,
+                      prior_update=cfg['prior_update'], prior_code_law=cfg['prior_code_law'])
 
 
 def validate(cfg):
@@ -94,6 +98,8 @@ def validate(cfg):
             raise ValueError(f'{key} must be finite and positive')
     if not 0 <= cfg['ema'] < 1:
         raise ValueError('invalid EMA decay')
+    if cfg['prior_code_law'] != 'table' and cfg['arm'] == 'bounded':
+        raise ValueError('fresh Gaussian codes have no table rows for the bounded encoder arm')
 
 
 @torch.no_grad()
@@ -270,7 +276,11 @@ def train(cfg):
     e = ImageRoutingEncoder(cfg['z_dim'], cfg['width']).cuda()
     recipe = training_recipe(cfg)
     # The recipe builds the table; R2 init recalibrates its spacing on the CPU.
-    prior = init.deterministic_orthogonal_(recipe.make_prior(generator=rng(cfg['seed'] + 1, 'cpu'))).cuda()
+    # Controls initialize the same trainable table, then bind the recipe's freezing/code law.
+    table_recipe = recipe.replace(prior_update='learned', prior_code_law='table')
+    prior = init.deterministic_orthogonal_(table_recipe.make_prior(generator=rng(cfg['seed'] + 1, 'cpu'))).cuda()
+    if recipe.prior_update != 'learned':
+        recipe.apply_prior_policy(prior)
     for module, seed in ((g, 0), (d, 1), (e, 2)):
         init.deterministic_orthogonal_(module, seed=seed)
     og, od = recipe.make_optimizers(g, d, prior, encoder=e, ema_critic=copy.deepcopy(d), fused=True)

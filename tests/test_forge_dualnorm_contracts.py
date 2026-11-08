@@ -144,6 +144,7 @@ def test_hybrid_isolation_rates_preserve_native_adam_incumbent():
                 assert recipe["prior_lr_mult"] == 1
 
 
+@pytest.mark.cuda
 @pytest.mark.parametrize("family", ["dualnorm", "particle_rownorm_only"])
 def test_behavioral_prior_uses_latest_g_draw_and_preserves_unsampled_rows(family, cuda_behavior_contract):
     from experiments.forge.behavior_adapters import BehaviorComponents

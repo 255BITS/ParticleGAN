@@ -34,6 +34,54 @@ def _seconds(value):
             and math.isfinite(value) and value >= 0 else None)
 
 
+def _binomial_cdf(k, n, p):
+    """P(X <= k) for X ~ Binomial(n, p)."""
+    return sum(math.comb(n, i) * p ** i * (1 - p) ** (n - i) for i in range(k + 1))
+
+
+def clopper_pearson(successes, trials, level=0.95):
+    """Exact two-sided Clopper-Pearson interval for a binomial proportion.
+
+    Returns None when ``trials`` is zero (no denominator, no estimate). The
+    bounds solve P(X >= k | lower) = alpha/2 and P(X <= k | upper) = alpha/2 by
+    bisection on the exact binomial CDF; e.g. 0/2 gives [0, 0.8419].
+    """
+    if type(successes) is not int or type(trials) is not int or not 0 <= successes <= trials:
+        raise ValueError("Clopper-Pearson requires integer 0 <= successes <= trials")
+    if trials == 0:
+        return None
+    alpha = 1 - level
+
+    def solve(predicate):
+        low, high = 0.0, 1.0
+        for _ in range(200):
+            middle = (low + high) / 2
+            low, high = (middle, high) if predicate(middle) else (low, middle)
+        return (low + high) / 2
+
+    lower = 0.0 if successes == 0 else solve(lambda p: 1 - _binomial_cdf(successes - 1, trials, p) < alpha / 2)
+    upper = 1.0 if successes == trials else solve(lambda p: _binomial_cdf(successes, trials, p) > alpha / 2)
+    return {"method": "clopper_pearson", "level": level, "successes": successes, "trials": trials,
+            "estimate": successes / trials, "lower": lower, "upper": upper}
+
+
+def _bounds_text(name, interval, threshold):
+    if interval is None:
+        return f"{name}: no paired lineages (no estimate); threshold ≤ {threshold}."
+    return (f"{name}: {interval['successes']}/{interval['trials']} = {interval['estimate']:.3f} "
+            f"(95% Clopper-Pearson [{interval['lower']:.3f}, {interval['upper']:.3f}]); threshold ≤ {threshold}. "
+            "The point estimate alone decides the frozen criterion; the interval shows how little "
+            "a small lineage count constrains the true rate.")
+
+
+def bounds_lines(stats, criteria):
+    """Readout lines placing each error-rate estimate next to its exact 95% bounds."""
+    return [_bounds_text("False accepts (smoke PASS, reference FAIL)", stats.get("false_accept_ci95"),
+                         criteria["maximum_false_accept_fraction"]),
+            _bounds_text("False rejects (smoke FAIL, reference PASS)", stats.get("false_reject_ci95"),
+                         criteria["maximum_false_reject_fraction"])]
+
+
 def _task_cost(root, task, sources):
     """Enrich cost only through an exactly hashed snapshot, never a label join."""
     cost = task.get("cost", {})
@@ -150,6 +198,9 @@ def _stats(rows):
             **{name: counts[name] for name in ("true_accept", "false_accept", "true_reject", "false_reject", "unknown")},
             "false_accept_fraction": counts["false_accept"] / neg if neg else None,
             "false_reject_fraction": counts["false_reject"] / pos if pos else None,
+            # Exact uncertainty next to each point estimate; thresholds still apply to the estimate.
+            "false_accept_ci95": clopper_pearson(counts["false_accept"], neg),
+            "false_reject_ci95": clopper_pearson(counts["false_reject"], pos),
             "blocked_lineages": sum(bool(r["smoke"]["blocked_tasks"] + r["reference"]["blocked_tasks"]) for r in rows),
             "incomplete_lineages": sum(bool(r["smoke"]["error_or_incomplete_tasks"] + r["reference"]["error_or_incomplete_tasks"]) for r in rows),
             "reference_unknown_lineages": sum(r["reference"]["decision"] == "UNKNOWN" for r in rows),
@@ -701,6 +752,8 @@ def calibrate(root: Path, profile: str = "initial") -> dict:
                 value = diagnostic["cost"]["wall_seconds"]
                 seconds = "unknown" if value is None else f"{value:.3f}"
                 lines.append(f"| {row['id']} | All declared diagnostics (grouped/retry costs counted once) | — | {seconds} |")
+        lines += ["", "Error rates with exact 95% bounds (paired lineages only):", ""]
+        lines += [f"- {line}" for cohort in output["cohorts"] for line in bounds_lines(cohort["stats"], criteria)]
         lines += ["", output["recommendation"], "", "Complete raw evidence and costs are required; unknown/incompatible cells remain in the denominator."]
         atomic_text(directory / (profile + ".md"), "\n".join(lines) + "\n")
         return output
@@ -739,6 +792,10 @@ def calibrate(root: Path, profile: str = "initial") -> dict:
                    else f"unknown ({row[part]['cost']['known_task_count']}/{row[part]['cost']['required_task_count']} timed)"
                    for part in ("smoke", "reference")]
         lines.append("| " + " | ".join(values) + " |")
+    lines += ["", "Error rates with exact 95% bounds, per prior/runtime cohort (paired lineages only):", ""]
+    for cohort in cohorts:
+        lines += [f"- `{cohort['prior_cohort']}` / `{cohort['runtime_cohort']}`: {line}"
+                  for line in bounds_lines(cohort["stats"], criteria)]
     lines += ["", "```json", json.dumps(output["descriptive_totals_not_pooled_adoption"], indent=2), "```", "",
               output["recommendation"], "", "Exact cards, fixture/package links, missing-cost lists and per-cohort acceptance checks are in the adjacent JSON."]
     atomic_text(directory / (profile + ".md"), "\n".join(lines) + "\n")

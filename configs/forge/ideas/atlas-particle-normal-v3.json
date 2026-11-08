@@ -1,0 +1,59 @@
+{
+  "api_changes": [
+    "particlegan/continuous.py",
+    "particlegan/priors.py",
+    "particlegan/recipes.py",
+    "particlegan/training.py"
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Raise birth_death_cells from 128 to 256 so FeatureCellBirthDeath (active only when N > birth_death_cells) does not perform noisy 2-particle-per-cell resampling on N=256 vector tasks while increasing N=20000 multi-mode cell resolution from 128 to 256 cells",
+    "Raise NormalNoiseManipulator sigma from 0.005 to 0.0065 on stochastic tasks (retaining deterministic sigma=0.0 on enumerated particle-cloud image and discrete-vocabulary tasks) to preserve intra-mode covariance support on rare-mass and multi-scale components",
+    "Retain clean training (output_noise_mode='fixed', output_noise_std=0.0) and clock-free critic acquisition (d_guard_ratio=0.0, d_guard_min_steps=0) from atlas-particle-normal-v2"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "schedule_free",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "atlas-particle-normal-v3",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "In FeatureCellBirthDeath.maybe_apply, birth-death triggers whenever N > birth_death_cells. At atlas's preset birth_death_cells=128, N=256 vector transfer tasks activate 128-cell resampling with only 2 particles per cell (and 1 real sample per cell at batch_size=128), producing discrete cell-count sampling noise and inter-mode outlier clones that inflate component_covariance_error above 0.85 on vector_unequal_mass (1.283) and vector_unequal_width (2.324). Raising birth_death_cells to 256 cleanly bypasses under-populated 2-particle/cell resampling at N<=256 while providing finer 256-cell partitioning at N=20000, and pairing it with NormalNoiseManipulator(sigma=0.0065) maintains sufficient local intra-mode support on rare (2% mass) and multi-scale components without perturbing enumerated image tables or requiring non-zero prior repulsion.",
+  "parent": "atlas-particle-normal-v2",
+  "prior_art": [
+    "docs/atlas.md",
+    "docs/e22.md",
+    "reports/develop-gates-20261001/atlas19-replay.json",
+    "reports/forge/records/readout-9f0d62f87d1ff351cfef7f98.json",
+    "reports/forge/records/readout-4dc982d111099c9b0f33a18e.json"
+  ],
+  "prior_mechanism": {
+    "kind": "particles",
+    "manipulators": [
+      {
+        "kind": "normal_noise",
+        "sigma": 0.0065
+      }
+    ],
+    "standardize": false
+  },
+  "recipe_overrides": {
+    "birth_death_cells": 256,
+    "d_guard_min_steps": 0,
+    "d_guard_ratio": 0.0,
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0
+  },
+  "recipe_preset": "atlas",
+  "requires_capabilities": [
+    "particle_cloud",
+    "a2",
+    "named_rng",
+    "policy_controls",
+    "policy_serving"
+  ],
+  "schema_version": 3,
+  "trainer_family": "atlas"
+}

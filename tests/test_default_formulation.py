@@ -42,7 +42,7 @@ def test_bcap_optimizers_and_losses_bind_the_selected_leader():
     assert isinstance(trainer.loss, GANLoss)
     result = trainer.step(torch.randn(8, 2))
     assert torch.equal(result['loss_g'], result['loss_gan'] + 0. * result['prior_regularization'])
-    assert Recipe(**trainer.state_dict()['recipe']) == recipe
+    assert Recipe.from_dict(trainer.state_dict()['recipe']) == recipe
 
 
 @pytest.mark.parametrize('options', [dict(prior_kind='mog', sigma_rel=.025),

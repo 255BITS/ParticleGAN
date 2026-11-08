@@ -22,6 +22,7 @@ from benchmarks.toy100.device import host_device
 
 from benchmarks.locked_shared import baseline
 from benchmarks.smart_descent import study, evaluate
+from .metric_uncertainty import compact
 from .protocol import (SELECTION, digest, reference_evidence, required_tasks, requirements, selection_key,
                        summarize, test_verdict, validate_manifest)
 
@@ -98,7 +99,15 @@ def run_episode(spec, card, *, ablation="none", fixed=False, allow_reserved=Fals
     options = dict(ablation=ablation, fixed=fixed)
     if "allow_reserved" in inspect.signature(runner).parameters:
         options["allow_reserved"] = allow_reserved
-    return runner(spec, card, **options)
+    result = runner(spec, card, **options)
+    # Reporting only: oracle noise floors next to each gate metric. The frozen
+    # runners' metric values, convergence and verdict inputs are untouched.
+    from .metric_uncertainty import annotate_image_episode, annotate_vector_episode
+    if spec["runner"] == "vector":
+        annotate_vector_episode(result, spec)
+    elif spec["runner"] == "image":
+        annotate_image_episode(result, spec)
+    return result
 
 
 def render(report, output):
@@ -206,7 +215,7 @@ def run(output, *, generations=2, population=6):
                                    action_records=len(result.get("actions", [])))
         save()
         print(json.dumps(dict(event="DONE", candidate=row["name"], task=name,
-                              status=test_verdict(spec, result)["status"], live=result.get("live"),
+                              status=test_verdict(spec, result)["status"], live=compact(result.get("live")),
                               seconds=result.get("seconds"), error=result.get("error"))), flush=True)
     fit_tasks = [s for s in declared["tasks"] if s["phase"] == "fit"]
     required = [s for s in fit_tasks if s["tier"] == "required"]

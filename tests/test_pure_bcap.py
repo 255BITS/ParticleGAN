@@ -146,8 +146,9 @@ def test_every_initial_tier1_host_binds_the_loss_and_its_own_prior_without_extra
         assert recipe.reg_arm == "b_cap"
         assert recipe.lr_floor == recipe.resolved_network_lr_floor == 1.
         assert recipe.beta2_end is recipe.reg_coeff_end is recipe.continuous_policy is None
-        assert recipe.d_guard_ratio == recipe.reg_anchor_weight == recipe.latent_damping_max_rate == 0.
-        assert recipe.input_noise_std == recipe.output_noise_std == recipe.prior_reg == recipe.ema_decay == 0.
+        expected_noise = 0.5 if task["adapter"] == "word_joint" else 0.
+        assert recipe.input_noise_std == expected_noise
+        assert recipe.output_noise_std == recipe.prior_reg == recipe.ema_decay == 0.
         assert recipe.direct_particle_gain is False
         assert context.prior_config["kind"] == task["execution"]["prior"]["kind"]
         assert context.prior_config["sigma"] == task["execution"]["prior"]["sigma"]

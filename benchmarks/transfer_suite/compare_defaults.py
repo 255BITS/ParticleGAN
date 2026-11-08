@@ -29,6 +29,7 @@ from .formulations import axes
 from .linear_skip_refinement_research import constructor as skip_constructor
 from .smooth_critic_research import constructor as smooth_constructor
 from .protocol import test_verdict
+from .metric_uncertainty import compact
 from benchmarks.gan_v3 import legacy_dict
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -258,7 +259,7 @@ def run(arm, output, tasks=None):
         write(output / 'index.json', dict(records=records))
         print(json.dumps(dict(event='DONE', arm=arm, task=name, status=verdict['status'],
                               passing_suffix=verdict.get('convergence', {}).get('passing_suffix'),
-                              live=result.get('live'), ema_status=ema['status'], error=result.get('error'))), flush=True)
+                              live=compact(result.get('live')), ema_status=ema['status'], error=result.get('error'))), flush=True)
     suite.verify_source(protocol)
 
 

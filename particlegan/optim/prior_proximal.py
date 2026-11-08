@@ -40,8 +40,8 @@ class _PriorProximal:
             raise ValueError("construct prior proximal optimizer after all latent tables are initialized")
         super().add_param_group(group)
 
-    @torch.no_grad()
-    def step(self, closure=None):
+    def _proximal_pending(self, closure):
+        """Validate the step and return its (table, rows, fraction) restorations; mutates nothing."""
         if closure is not None:
             raise ValueError("prior proximal update requires explicit backward and row ownership")
         pending = []
@@ -61,6 +61,17 @@ class _PriorProximal:
                 raise ValueError("prior proximal learning-rate times strength must be finite")
             if scaled_strength and rows.numel():
                 pending.append((table, rows, scaled_strength / (1. + scaled_strength)))
+        return pending
+
+    @torch.no_grad()
+    def step(self, closure=None):
+        # A rejected precheck is a step that will not happen: discard the caller-bound inputs
+        # (sampled rows, protected losses of a direction-blend base) so the next step binds afresh.
+        try:
+            pending = self._proximal_pending(closure)
+        except BaseException:
+            self.abort_pending()
+            raise
         result = super().step()
         # lerp is the stable equivalent of (z_base + lr*lambda*z_initial) /
         # (1 + lr*lambda), with no work/rounding when the scheduled rate is zero.

@@ -52,6 +52,8 @@ def archived_cases(names, monkeypatch):
         case.pop("comparison_version", None)
         if case["provider"] == "api_vectors":
             case.pop("initialization", None)
+        if case.get("kind") == "native100" and isinstance(case.get("thresholds", {}).get("native"), dict):
+            case["thresholds"]["native"]["min_precision"] = 0.97
     # Archived coordinators verify their original hard-coded case hashes.
     # Their parser tests retain the old seed without modifying live defaults.
     monkeypatch.setattr(api_contract, "discover", lambda: deepcopy(cards))

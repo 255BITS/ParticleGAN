@@ -490,6 +490,15 @@ remains caller-owned. Evaluation cannot borrow a training stream.
   and device, with the same parameter freezing, before loading. Save your data-loader position or separate data RNG
   alongside it. Loading on CPU first works for a compatible CUDA trainer:
   `trainer.load_state_dict(torch.load(path, map_location="cpu", weights_only=True))`.
+  Save and restore only between completed updates. Both methods raise
+  `RuntimeError` during an active trainer step or policy hook sequence, including
+  inside `generator_real` callbacks, before changing live state.
+  When `generator_gradient_response` is enabled, the checkpoint also includes
+  its float64 gradient history, normalization weights, gain diagnostics and
+  applied-step count. Older checkpoints that enabled this response but omitted
+  its history cannot resume exactly and raise `ValueError`; use their original
+  source or start a new run. Checkpoints with response `none` retain their
+  existing schema and compatibility.
 
 For scheduled recipes, `total_steps` fixes every schedule horizon. By default it is also
 the execution bound. After restoring a checkpoint with its original bound, call
@@ -916,7 +925,7 @@ Adam moment surprise ([how it works](ka2.md)). `reg_coeff`, `reg_kappa` and `reg
 strength, cap and lazy interval. It recomputes D on detached inputs and builds
 gradients only for the critic's parameters.
 
-`Recipe(reg_arm="a_r1r2")` selects the fixed zero-centered squared L2
+`get_recipe("ka2", reg_arm="a_r1r2")` selects the fixed zero-centered squared L2
 gradient penalty on real and fake inputs. `reg_arm="b_cap"` selects the fixed
 one-sided L2 cap, `relu(norm(grad D) - reg_kappa) ** 2`, on both. Each uses
 `reg_coeff / 2` times the sum of the two mean penalties, with autograd and the
@@ -945,8 +954,8 @@ Transport weights remain zero, `critic_step_mode="none"`, and
 `optimizer_svd_backend="native"`. Use
 `get_recipe("bcap", constraint_geometry_mode="none")` for the earlier winning
 DualNorm recipe. Pin `trainer="bcap"` on a model family to select these settings;
-the shared default is optimized BISPF. The dataclass `Recipe()`
-retains its KA2 field defaults for saved-configuration restoration.
+the shared default is optimized BISPF. `Recipe()` and partial constructors are
+disabled. Use `get_recipe()` for new runs and `Recipe.from_dict(saved_fields)` for checkpoint restoration.
 Each setting can be overridden explicitly.
 `optimizer_svd_backend="newton_schulz"` selects a separate numerical backend
 for annotated per-offset convolutions. It requires full DualNorm, positive
@@ -963,7 +972,7 @@ cutoff; finite iterations and floating-point rounding also differ. This option
 is a declared trainer change requiring its own quality evidence. Its checkpoints
 bind solver version 3 and reject earlier experimental solver states. CUDA graph
 caches are disposable execution state and are rebuilt after restoration. Native
-remains the bare `Recipe()` default.
+remains the explicit `get_recipe("ka2")` backend.
 
 `optimizer_svd_backend="batched"` is the `bispf_optimized` CUDA execution backend for
 per-offset DualNorm convolutions. Channel matrices with both dimensions at
@@ -1026,6 +1035,16 @@ original execution, as do CUDA devices without native BF16 support. This is a nu
 quality evidence. Caller-owned component loops do not acquire autocast merely
 by carrying this field; they must explicitly implement the declared policy.
 
+`emulate_linear_training_(module, "nvfp4" | "mxfp8")` is a separate opt-in
+software reference for Blackwell-format Linear forward and backward operands.
+Assign its return value if the root is itself a Linear. It preserves FP32
+master parameters, uses BF16 GEMM outputs and checkpoints private stochastic
+rounding streams. It provides no native speed, storage or kernel-parity claim;
+second derivatives use explicit straight-through quantizer surrogates. The
+[4-bit/8-bit stretch protocol](../reports/forge/precision-stretch/README.md)
+defines the format/scaling rules, higher-precision operations, gates and native
+validation still needed. Existing precision settings and recipes are unchanged.
+
 The public BISPF default selects both policies:
 
 ```python
@@ -1037,7 +1056,7 @@ previous = get_recipe("bispf_optimized", optimizer_svd_backend="native",
 
 See the [source-bound throughput study](../reports/forge/bispf-throughput/README.md)
 for measured workload limits and quality gates. Save resolved fields and restore
-them with `Recipe(**saved_fields)`; do not resolve a new default when resuming.
+them with `Recipe.from_dict(saved_fields)`; do not resolve a new default when resuming.
 
 `optimizer_convolution_rule="quintic"` selects a separately declared hybrid
 optimizer: large CUDA per-offset channel matrices use five fixed FP32 polynomial
@@ -1081,7 +1100,7 @@ alternatives and improving on that study's relativistic/smoothing-1e-5 control's
 and original source, task and scoring contracts retain their meaning.
 `get_recipe("bcap_adam")` preserves the earlier native `torch.optim.Adam`
 preset with betas `(0, .999)`, G/D LR `.00425` and prior LR `.0085`.
-Restore old checkpoints with `Recipe(**saved_fields)`; recipe labels also
+Restore old checkpoints with `Recipe.from_dict(saved_fields)`; recipe labels also
 belong to checkpoint identity. An omitted saved geometry mode resolves to
 `none`; loading that checkpoint into the new active preset is a recipe mismatch,
 rejected before live state mutation. Save the resolved recipe and complete
@@ -1230,7 +1249,7 @@ get_recipe("e22_routed", **overrides) # Conditional dense-bank paired adaptation
 recipe.replace(**overrides)   # A new immutable Recipe.
 recipe.to_dict()              # Restorable fields; compatible defaults stay implicit.
 get_recipe_fields(**overrides) # Plain complete fields; validate with Recipe before training.
-Recipe(**resolved_dict)       # Restore explicit fields from a saved run.
+Recipe.from_dict(resolved_dict)       # Restore explicit fields from a saved run.
 ```
 
 `get_recipe(name="gan", *, trainer=None, **overrides)` selects components without constructing a
@@ -1244,7 +1263,7 @@ DEFAULT_RECIPE = "bispf_optimized"
 ```
 
 The selector affects `get_recipe()`, `get_recipe("gan")` and all model-family
-recipes. Explicit presets and `Recipe(**saved_fields)` remain independent of
+recipes. Explicit presets and `Recipe.from_dict(saved_fields)` remain independent of
 it. Save resolved recipes, rather than resolving the current default when
 resuming. The selected recipe matches the complete
 [`bispf-throughput-v1` candidate](../configs/forge/ideas/bispf-throughput-v1.json),
@@ -1262,14 +1281,15 @@ are `1`, so rates stay constant. Batched SVD handles small CUDA convolution
 kernels; larger quintic kernels use CUDA graphs. Supported wide convolutional
 networks use BF16/channels-last training. CPU and dense transformer matrices
 retain the native polar/SVD rule; transformer
-throughput is a separate profiling question. `get_recipe("bispf")`,
-`get_recipe("bcap")` and bare `Recipe()` preserve their earlier meanings.
+throughput is a separate profiling question. `get_recipe("bispf")` and
+`get_recipe("bcap")` retain their explicit presets; `Recipe.from_dict` preserves
+historical snapshots without selecting a new default.
 
 `get_recipe_fields(name="gan", trainer=None, **overrides)` returns all declarative
 fields without constructing or validating runtime components. Configuration
 tools may load `particlegan/recipes.py` directly without importing Torch;
 ordinary `from particlegan import ...` still imports the runtime package.
-Preset and field names are checked, while `Recipe(**fields)` validates values.
+Preset and field names are checked, while `Recipe.from_dict(fields)` validates values.
 Persist the returned complete fields with the run so later defaults cannot
 change its training method.
 
@@ -1294,7 +1314,7 @@ critic-feature birth/death, learned output noise and served averaging; it
 requires no research JSON or training horizon.
 Unknown names
 and fields are rejected. Restore a complete saved configuration with
-`Recipe(**saved_fields)`; use `recipe.replace(name="my-run")` to label a run.
+`Recipe.from_dict(saved_fields)`; use `recipe.replace(name="my-run")` to label a run.
 
 | Name | Components and dimensions |
 | --- | --- |
@@ -1437,6 +1457,26 @@ The previous K3P critic replays through
 
 The following loop and Adam controller descriptions use the explicit KA2 recipe.
 The default optimized BISPF recipe also uses the protected-backward contract below.
+
+For BISPF, declare a native continuous feature vector with
+`recipe.make_critic_penalty(opt_d, input_domain="continuous")`, or pass
+`penalty_options={"input_domain": "continuous"}` to `GANTrainer`. The declaration
+retains the continuous RMS gradient norm, smooth Born–Infeld cap, gradient floor
+and logit gauge at widths such as 1024 or 4096. It uses the existing continuous
+law and keeps the native tensor shape. Explicit `"categorical"` selects the
+categorical law for `[batch, categories]` matrices, including small vocabularies.
+The default `"auto"` preserves the declared shape gates: with default gates,
+matrices of width at least 170 use the categorical law; lower widths and image
+tensors keep their existing behavior. Explicit declarations take precedence over
+the automatic simplex gate, including when disabled. Other shape gates retain
+their settings. This is a data-domain declaration, not an empirical quality
+qualification. `GANTrainer` checkpoints bind `penalty_options` and refuse a
+different declaration on restore. Component-loop callers must save and check
+their selected penalty options along with the recipe and optimizer state.
+
+See the [input-domain walkthrough and runnable categorical example](bispf-input-domains.md)
+for the gradient-norm arithmetic, data representation, measured training outputs
+and checkpoint continuation.
 
 ```python
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
@@ -1748,7 +1788,7 @@ then restore them. The recipe stores hyperparameters, not the generator class:
 from particlegan import Recipe
 
 state = torch.load("model.pt", map_location=device, weights_only=True)
-recipe = Recipe(**state["recipe"])
+recipe = Recipe.from_dict(state["recipe"])
 G = nn.Sequential(nn.Linear(recipe.z_dim, 64), nn.LeakyReLU(0.2),
                   nn.Linear(64, 2)).to(device)
 prior = recipe.make_prior().to(device)

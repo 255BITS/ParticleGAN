@@ -75,7 +75,12 @@ class ConstraintGeometryOptimizer(NormalizedOptimizer):
         parameters = self._parameters()
         normals = []
         for loss in losses:
-            gradients = torch.autograd.grad(loss, parameters, retain_graph=True, allow_unused=True)
+            # Frozen parameters (requires_grad=False) cannot enter autograd.grad;
+            # their protected normal component is exactly zero.
+            trainable = [p for p in parameters if p.requires_grad]
+            computed = iter(torch.autograd.grad(loss, trainable, retain_graph=True, allow_unused=True)
+                            if trainable else ())
+            gradients = [next(computed) if p.requires_grad else None for p in parameters]
             pieces = []
             for parameter, gradient in zip(parameters, gradients):
                 piece = torch.zeros_like(parameter) if gradient is None else gradient.detach().clone()
@@ -94,14 +99,31 @@ class ConstraintGeometryOptimizer(NormalizedOptimizer):
             self._protected = None
             raise ValueError("nonfinite constraint_geometry protected gradient")
 
+    def _clear_pending(self):
+        super()._clear_pending()
+        self._protected = None
+
     @torch.no_grad()
     def step(self, closure=None):
+        """Base DualNorm update, then this class's displacement adjustment.
+
+        Subclasses customize ``_check_step`` and ``_adjust_step`` instead of
+        overriding ``step``. Any failure (check, base update or adjustment)
+        calls ``abort_pending()``; a failed adjustment also restores the
+        pre-step parameters, a failed base update is not rolled back (see
+        ``NormalizedOptimizer._propose_adjust_commit``).
+        """
+        return self._propose_adjust_commit(lambda: super(ConstraintGeometryOptimizer, self).step(),
+                                           self._adjust_step, check=lambda: self._check_step(closure))
+
+    def _check_step(self, closure):
+        """Reject a step whose protected losses were not bound by backward."""
         if closure is not None or self._protected is None:
             raise ValueError("constraint_geometry step requires explicit protected-loss backward")
-        parameters = self._parameters()
-        originals = [p.detach().clone() for p in parameters]
+
+    def _adjust_step(self, parameters, originals):
+        """Project the base displacement onto the protected non-ascent cone."""
         normals = self._protected
-        result = super().step()
         displacement = torch.cat([(p - old).flatten() for p, old in zip(parameters, originals)])
         projected = project_nonascent(displacement, normals)
         before = normals.double() @ displacement.double()
@@ -121,8 +143,6 @@ class ConstraintGeometryOptimizer(NormalizedOptimizer):
         applied = torch.cat([(p - old).flatten() for p, old in zip(parameters, originals)])
         after = normals.double() @ applied.double()
         stats["max_derivative_after"] = max(stats["max_derivative_after"], float(after.max()))
-        self._protected = None
-        return result
 
     def state_dict(self):
         result = super().state_dict()

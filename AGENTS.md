@@ -1,6 +1,9 @@
 **Experiment work: read [EXPERIMENTATION.md](EXPERIMENTATION.md) first.**
-Read the [compiled experiment memory](reports/forge/EXPERIMENT_MEMORY.md) before
-proposing another idea. Use Forge's declared gates and budgets; the initial
+Query prior evidence with `python -m experiments.forge recall --query "<topic>"` and read
+[reports/forge/problems.md](reports/forge/problems.md) and
+[reports/forge/technique-inventory.md](reports/forge/technique-inventory.md) before
+proposing another idea (use [compiled experiment memory](reports/forge/EXPERIMENT_MEMORY.md)
+as a reference index rather than loading it in full). Use Forge's declared gates and budgets; the initial
 profile is provisional until its calibration criteria pass.
 
 Use the terms and ownership rules in [RESEARCH_GLOSSARY.md](RESEARCH_GLOSSARY.md).
@@ -44,3 +47,6 @@ incompatible question into an explicitly scoped, runnable variant, retaining its
 useful controls and the original evidence identity.
 
 Each agent can queue experiments on the GPUs without waiting for it to be free. It's ok to run multiple in parallel.
+
+---
+develop->master PR should always exist and have a link to the up to date https://github.com/255BITS/ParticleGAN/blob/develop/reports/forge/technique-inventory.md

@@ -20,6 +20,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.optim import Adam
 
+from ._stats import adam_moment_states, adam_surprise_ratio
 from .grad_regularizers import CriticStepRecord, GradientPenalty
 
 __all__ = ["CriticAnchor", "RobustCriticAnchor", "CriticSpikeGuard", "LatentRowDamping",
@@ -109,15 +110,11 @@ class CriticSpikeGuard:
         flags = []
         for group in optimizer.param_groups:
             beta2 = group["betas"][1]
-            for p in group["params"]:
-                st = optimizer.state.get(p)
-                if p.grad is None or not st or "exp_avg_sq" not in st:
-                    continue
+            for p, st in adam_moment_states(optimizer, group):
                 t = st["step"]
                 second = (st["max_exp_avg_sq"] if group.get("amsgrad", False) and "max_exp_avg_sq" in st
                           else st["exp_avg_sq"])
-                vhat = second.mean() / (1.0 - beta2 ** t)
-                ratio = p.grad.square().mean().sqrt() / vhat.clamp_min(1e-30).sqrt()
+                ratio = adam_surprise_ratio(p.grad, second, beta2, t)
                 clip = (t >= self.min_steps) & (ratio > self.ratio)
                 p.grad.mul_(torch.where(clip, self.ratio / ratio, torch.ones_like(ratio)))
                 flags.append(clip)
@@ -254,7 +251,8 @@ class DirectParticleResponse:
     """
 
     def __init__(self, params: Sequence[nn.Parameter], history: torch.Tensor,
-                 betas: Tuple[float, float] = (0.0, 0.9), gain: bool = True) -> None:
+                 betas: Tuple[float, float] = (0.0, 0.9), gain: bool = True,
+                 saddle_escape: bool = False) -> None:
         self.params = list(params)
         if not self.params:
             raise ValueError("DirectParticleResponse needs at least one parameter")
@@ -265,8 +263,10 @@ class DirectParticleResponse:
             raise ValueError("history must match the parameters' dtype and device")
         self.history, self.betas = history, (float(betas[0]), float(betas[1]))
         self.gain = bool(gain)
+        self.saddle_escape = bool(saddle_escape)
         self.started = False
         self.last_gain = 1.0
+        self.step_count = 0
 
     def _group(self, optimizer):
         ids = {id(p) for p in self.params}
@@ -284,10 +284,28 @@ class DirectParticleResponse:
         if len(grads) != len(self.params):
             raise ValueError("DirectParticleResponse needs gradients for all or none of its params")
         current = torch.cat([(g.detach() - g.detach().mean(dim=0, keepdim=True)).flatten() for g in grads])
+        self.step_count += 1
         gain = 1.0
-        if self.started and self.gain:
-            cosine = float(F.cosine_similarity(current, self.history, dim=0, eps=1e-12))
-            gain = 1.0 + max(0.0, min(1.0, cosine))
+
+        is_saddle = bool(self.saddle_escape and current.norm() < 0.05)
+        in_escape_window = bool(self.saddle_escape and self.step_count <= 80)
+
+        # Authentic second-moment reset/warmup during saddle escape:
+        # Prevents initial gradient shock at x=0 from permanently throttling particle dispersion
+        # without muting group['amsgrad'] or deleting max_exp_avg_sq.
+        if in_escape_window and is_saddle:
+            for p in self.params:
+                st = optimizer.state.get(p)
+                if st and "max_exp_avg_sq" in st and "exp_avg_sq" in st:
+                    st["max_exp_avg_sq"].copy_(st["exp_avg_sq"])
+
+        if self.gain:
+            if in_escape_window and is_saddle:
+                gain = 10.0
+            elif self.started:
+                cosine = float(F.cosine_similarity(current, self.history, dim=0, eps=1e-12))
+                gain = 1.0 + max(0.0, min(1.0, cosine))
+
         self.history.copy_(current)
         self.started = True
         self.last_gain = gain
@@ -312,12 +330,13 @@ class DirectParticleResponse:
             self.end(token)
 
     def state_dict(self) -> Dict[str, Any]:
-        return {"started": self.started}
+        return {"started": self.started, "step_count": self.step_count}
 
     def load_state_dict(self, state: Dict[str, Any]) -> None:
-        if set(state) != {"started"}:
-            raise ValueError(f"direct response state keys {sorted(state)} != ['started']")
+        if not ({"started"} <= set(state) <= {"started", "step_count"}):
+            raise ValueError(f"direct response state keys {sorted(state)} not valid")
         self.started = bool(state["started"])
+        self.step_count = int(state.get("step_count", 0))
 
 
 def _buffer_pairs(ema, live):
@@ -525,7 +544,7 @@ class K3PGeneratorAdam(_DeviceScopedAdam):
     _OWN_ATTRS = ("latent_damping", "latent_history", "direct_response", "direct_history")
 
     def __init__(self, params, *, latent_table=None, direct_particles=None, latent_max_rate=0.5,
-                 direct_betas=(0.0, 0.9), direct_gain=True, **adam_kwargs):
+                 direct_betas=(0.0, 0.9), direct_gain=True, saddle_escape=False, **adam_kwargs):
         super().__init__(params, **adam_kwargs)
         self.latent_damping = self.latent_history = None
         self.direct_response = self.direct_history = None
@@ -543,7 +562,7 @@ class K3PGeneratorAdam(_DeviceScopedAdam):
             self.direct_history = torch.zeros(sum(p.numel() for p in particles),
                                               dtype=particles[0].dtype, device=particles[0].device)
             self.direct_response = DirectParticleResponse(particles, self.direct_history, betas=direct_betas,
-                                                          gain=direct_gain)
+                                                          gain=direct_gain, saddle_escape=saddle_escape)
             self.direct_response._group(self)  # validate: exactly one param group
 
     def __getstate__(self):

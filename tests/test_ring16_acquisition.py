@@ -14,7 +14,7 @@ from experiments.forge.views import load_tasks, load_view
 from particlegan import GANTrainer, MoGParticlePrior
 
 ROOT = Path(__file__).resolve().parents[1]
-pytestmark = pytest.mark.skipif(not torch.cuda.is_available(), reason="ring16 tests require CUDA")
+pytestmark = [pytest.mark.cuda, pytest.mark.skipif(not torch.cuda.is_available(), reason="ring16 tests require CUDA")]
 
 
 @pytest.fixture(autouse=True)

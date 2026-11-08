@@ -151,7 +151,7 @@ def test_public_penalty_maps_nested_condition_and_noise_wrappers_to_ema():
             self.child, self.scale = child, scale
         def forward(self, value):
             return self.child(value) * self.scale
-    recipe = Recipe(num_particles=12, z_dim=2)
+    recipe = Recipe.from_dict(dict(num_particles=12, z_dim=2))
     critic = nn.Sequential(nn.Linear(2, 4), nn.Softplus(), nn.Linear(4, 1))
     optimizer = recipe.make_critic_optimizer(critic, ema_critic=deepcopy(critic))
     penalty = recipe.make_critic_penalty(optimizer)
@@ -190,7 +190,7 @@ def test_standardized_mog_requires_explicitly_disabling_inapplicable_a2():
                                                 recipe_overrides={"latent_damping_max_rate": 0}))
     assert trainer.latent_damping is None
     assert not context.receipt()["prior_mechanisms"]["a2"]["requested"]
-    recipe = Recipe(prior_kind="mog", standardize=True, num_particles=12, z_dim=2)
+    recipe = Recipe.from_dict(dict(prior_kind="mog", standardize=True, num_particles=12, z_dim=2))
     prior = recipe.make_prior(sigma=.1)
     with pytest.raises(ValueError, match="required A2"):
         GANTrainer(recipe, nn.Linear(2, 2), nn.Linear(2, 1), prior=prior)
@@ -245,7 +245,7 @@ def test_zero_sigma_equivalence_preserves_index_and_noise_streams():
 def test_public_zero_sigma_mog_matches_cloud_updates_with_a2():
     torch.manual_seed(14)
     g, d = nn.Linear(2, 2), nn.Linear(2, 1)
-    r = Recipe(num_particles=12, z_dim=2, total_steps=4, input_noise_std=0, output_noise_std=0)
+    r = Recipe.from_dict(dict(num_particles=12, z_dim=2, total_steps=4, input_noise_std=0, output_noise_std=0))
     cloud = ParticlePrior(12, 2, generator=torch.Generator().manual_seed(10))
     mog = MoGParticlePrior(12, 2, sigma=0, standardize=False, generator=torch.Generator().manual_seed(10))
     a = GANTrainer(r, deepcopy(g), deepcopy(d), prior=cloud)
@@ -390,7 +390,7 @@ def test_unsupported_fields_and_capabilities_block_before_model_construction():
 
 
 def test_atom_checkpoint_uses_schema_four_with_original_default_streams():
-    trainer = GANTrainer(Recipe(num_particles=8, z_dim=2, total_steps=3), nn.Linear(2, 2), nn.Linear(2, 1))
+    trainer = GANTrainer(Recipe.from_dict(dict(num_particles=8, z_dim=2, total_steps=3)), nn.Linear(2, 2), nn.Linear(2, 1))
     state = trainer.state_dict()
     assert state["schema"] == 4
     assert set(state["streams"]) == {"latent_generator", "penalty_generator", "eval_generator", "noise_generator"}
@@ -399,7 +399,7 @@ def test_atom_checkpoint_uses_schema_four_with_original_default_streams():
 
 
 def test_execution_extension_changes_only_allowance_and_rejects_reset():
-    trainer = GANTrainer(Recipe(num_particles=8, z_dim=2, total_steps=3), nn.Linear(2, 2), nn.Linear(2, 1))
+    trainer = GANTrainer(Recipe.from_dict(dict(num_particles=8, z_dim=2, total_steps=3)), nn.Linear(2, 2), nn.Linear(2, 1))
     before = trainer.state_dict()
     trainer.extend_execution(6)
     after = trainer.state_dict()

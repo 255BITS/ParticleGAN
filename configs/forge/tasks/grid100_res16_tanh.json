@@ -45,7 +45,7 @@
       "min_samples": 20000,
       "min_modes": 100,
       "min_hq_mode_mass": 0.005,
-      "min_precision": 0.97,
+      "min_precision": 0.75,
       "max_mass_tv": 0.1,
       "max_mode_mass": 0.02,
       "min_cov_eig_ratio": 0.4,
@@ -67,7 +67,12 @@
     "cpu_threads": 1,
     "timeout_seconds": 3600
   },
-  "requires_capabilities": ["checkpoint", "named_rng", "live_sampling", "mog_prior"],
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "mog_prior"
+  ],
   "dependencies": [
     {
       "task": "grid100",

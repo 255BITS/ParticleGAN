@@ -16,6 +16,9 @@ from experiments.forge.word_adapter import run_word
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.mark.cuda
+
+
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="word provenance fixture requires CUDA")
 def test_cuda_word_certifies_models_optimizers_policy_and_consumed_streams(tmp_path, monkeypatch):
     device = os.environ.get("PARTICLEGAN_TEST_CUDA_DEVICE", "cuda:0")
