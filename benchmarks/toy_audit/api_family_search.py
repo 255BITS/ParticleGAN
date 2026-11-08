@@ -76,24 +76,25 @@ def proof_bindings(case, family):
             "sampling_sha256": digest(case["sampling"]), "source_files_sha256": _manifest(paths)}
 
 
-def host_recipe_options(case):
-    """Disclose frozen fixture adaptations; these are never search dimensions."""
+def host_recipe_options(case, family="atlas"):
+    """Bind task resources and prior law, leaving trainer choices to the recipe."""
     if case["provider"] == "api_images" and not case.get("query"):
         return dict(z_dim=case["z_dim"], num_particles=32, prior_kind="particles", sigma_rel=0,
                     batch_size=case["batch_size"])
     if case["provider"] == "api_vectors" and not case.get("caller_owned") and not case.get("penalty_arm"):
         options = dict(num_particles=case["particles"], z_dim=case["z_dim"], batch_size=case["batch_size"])
-        options.update({key: (tuple(value) if key == "betas" else value)
-                        for key, value in case.get("spec", {}).items()
-                        if key in {"lr", "d_lr_mult", "prior_lr_mult", "prior_reg", "betas", "ema_decay"}})
-        options.update(case.get("recipe_overrides", {}))
+        if get_recipe(family).continuous_policy is None:
+            options["total_steps"] = case["default_steps"]
+        if case.get("prior_options", {}).get("prior_kind") == "mog":
+            options.update(prior_kind="mog", standardize=case["prior_options"].get("standardize", False),
+                           sigma_rel=case["prior_options"].get("sigma_rel", 0.025))
         return options
     raise contract.UnsupportedRecipeOverrides("host has no declared policy-family tuning contract")
 
 
 def resolved_recipe(case, family, knobs):
     contract.validate_recipe_overrides(case, family, knobs)
-    return api_run.json_value(get_recipe(family, **{**host_recipe_options(case), **knobs}).to_dict())
+    return api_run.json_value(get_recipe(family, **{**host_recipe_options(case, family), **knobs}).to_dict())
 
 
 def _source(cases):
@@ -234,7 +235,7 @@ def plan_study(spec, *, cases=None):
                 except ValueError as error:
                     blockers.append(str(error))
                 rows.append({**item, "case_sha256": digest(case), "status": "BLOCKED" if blockers else "UNKNOWN",
-                             "fixed_host_recipe_options": api_run.json_value({key: value for key, value in host_recipe_options(case).items()
+                             "fixed_host_recipe_options": api_run.json_value({key: value for key, value in host_recipe_options(case, family).items()
                                                                              if key not in TUNING_FIELDS}),
                              "resolved_recipe_sha256": digest(resolved_recipe(case, family, knobs)),
                              "blockers": blockers, "original_gate": None, "study_gate": None,

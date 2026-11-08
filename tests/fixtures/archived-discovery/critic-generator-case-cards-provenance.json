@@ -1,0 +1,52 @@
+{
+  "case_sha256": {
+    "api-grid100": "93ca5686f7358c701c58b34798b8e1f784a339c958a0fe8e1c9f90af4867f279",
+    "api-rotated100": "6e06e5ba492950d3f8063a27f82bf3d51e75574148235495cc1b331b7fb30754",
+    "api-staggered100": "9ba09451032b3741df8a30c936bd81cc31038866dd2f4d0eb92966e48b292f48",
+    "api-vector-anisotropic": "2ec941011f8398672ce85b1d4df41c6e22dce2e0f98354a75f1d9a6794d4e1b6",
+    "api-vector-two-broad": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+    "api-vector-unequal-mass": "e29a36b2461a986a28ca950df869a4926f258b2bfca32bd46bc8b2188aebf32e",
+    "image-develop-img_bars4-source-transpose12": "d3145a02dd5e98155b006bf3e99899003707fe8fcf62318ba55fcd2fc6374b4d",
+    "image-develop-img_intensity2-source-transpose12": "e9fa47de6adbb31f083c0333b0c7c41352d2b890b16539d47839d3f9720c5dfb"
+  },
+  "fixture": "critic-generator-case-cards.json",
+  "method": "Run the original api_contract.discover with only api_images and api_vectors selected in an isolated extraction of the pinned Git source; retain the eight declared cells without editing their metadata; verify every digest against both frozen coordinators",
+  "schema_version": 1,
+  "scope": "Exact archived coordinator discovery cards for software protocol tests only; zero model constructions, training updates or qualification credit",
+  "sha256": "dd968094c07d6a75b2adc56cce83e9c97f50066979653871fa616a76a53becea",
+  "source_commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad",
+  "source_files": {
+    "benchmarks/toy100/accuracy.py": {
+      "git_blob": "09dde01848d548cb838bc72182429fbeb27e9d72",
+      "sha256": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2"
+    },
+    "benchmarks/toy100/metrics.py": {
+      "git_blob": "c1e4b9fc38de6301d2f1c3d6c10205bf257b6bee",
+      "sha256": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b"
+    },
+    "benchmarks/toy100/problems.py": {
+      "git_blob": "115f83ac0ee93dc386cfe3ecd67e03cdf5b5ffa8",
+      "sha256": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d"
+    },
+    "benchmarks/toy_audit/api_contract.py": {
+      "git_blob": "29f6b1059f2e103268c58fdb8ca0f61f0c063e92",
+      "sha256": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28"
+    },
+    "benchmarks/toy_audit/api_images.py": {
+      "git_blob": "b8839efbdb5624616d38ad42661184d243b6ef74",
+      "sha256": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491"
+    },
+    "benchmarks/toy_audit/api_vectors.py": {
+      "git_blob": "990fa77853e7d211acb1a56f2534ca7f854c7c95",
+      "sha256": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af"
+    },
+    "benchmarks/transfer_suite/stress_tasks.py": {
+      "git_blob": "76fdaae60cc25fae7ebee2374c4ddf5a990f7d06",
+      "sha256": "3342e717db338cb6b7ebf5a95c01c51e4be855a564490f34f240b2a0b2e8c7e4"
+    },
+    "benchmarks/transfer_suite/vector_tasks.py": {
+      "git_blob": "0c5e558f66210085f481f3f0ff99817e9e9b4e41",
+      "sha256": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+    }
+  }
+}
