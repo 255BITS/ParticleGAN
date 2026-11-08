@@ -918,6 +918,7 @@ def build_progress(root: Path, publication: dict, *, selection_card: dict | None
                 "problem_definitions": problems,
                 "input_hashes": dict(sorted(inputs.items())),
                 "renderer_sha256": file_hash(Path(__file__)),
+                "integrity_renderer_sha256": file_hash(Path(__file__).with_name("publication_integrity.py")),
                 "research_renderer_sha256": file_hash(Path(__file__).with_name("research_tiers.py")),
                 "pr399_renderer_sha256": file_hash(Path(__file__).with_name("pr399_scores.py")),
                 "policy_cloud_renderer_sha256": file_hash(Path(__file__).with_name("policy_cloud_publication.py")),
