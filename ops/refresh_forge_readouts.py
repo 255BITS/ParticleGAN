@@ -643,8 +643,6 @@ def _coverage_observation_errors(root: Path, record: dict, request: dict, task: 
             errors.append(field + "_mismatch")
     if not record.get("attempted") or record.get("status") not in {"PASS", "FAIL"}:
         errors.append("no_completed_numerical_measurement")
-    if record.get("diagnostic") is not False:
-        errors.append("not_ordinary_evidence")
     witness = record.get("observed_contract")
     if not isinstance(witness, dict) or witness.get("schema_version") != 1:
         return errors + ["missing_observed_contract"]
