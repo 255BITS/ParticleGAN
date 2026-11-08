@@ -1234,6 +1234,16 @@ def test_tier4_e2e_grid100_res16_scaled_tanh_paired_task():
     assert card["execution"]["model"]["architecture"] == "scaled_residual_mlp"
     assert card["execution"]["model"]["output_activation"] == "tanh_rail_guard"
 
+    view = json.loads((root / "configs/forge/views/discriminator_stability.json").read_text())
+    scaled_assign = next(a for a in view["assignments"] if a["task"] == "grid100_res16_scaled_tanh")
+    assert scaled_assign["importance"] == "stretch"
+    assert scaled_assign["qualification_tier"] == 4
+
+    assert "api-grid100-res16-scaled-tanh" in {c["id"] for c in api_vectors.list_cases()}
+    contract_dir = root / "reports/toy_audit/api_contract/api-grid100-res16-scaled-tanh"
+    for fname in ("goal.gif", "receipt.json", "readout.md"):
+        assert (contract_dir / fname).is_file()
+
     fixture = api_vectors.build_case("api-grid100-res16-scaled-tanh", device="cpu", seed=0, recipe_name="k3p", max_steps=1)
     assert isinstance(fixture.trainer.G, ScaledResidualMLPGenerator)
     assert fixture.trainer.G.preserve_latent_norm is True
@@ -1269,21 +1279,28 @@ def test_tier4_e2e_misgan_hint_conditioning_without_temperature_annealing():
 
 @pytest.mark.tier4
 def test_tier4_e2e_pacgan_unequal_mass_local_knn_repulsion():
-    """Verify PacGANUnequalMassFixture applies local k-NN intra-mode dispersion and lifts min_cov_eig_ratio >= 0.20."""
-    fixture = PacGANUnequalMassFixture(max_steps=100, device="cpu", seed=0, recipe_name="bcap")
-    assert fixture.knn_repulsion_weight > 0.0
-    for _ in range(6):
-        fixture.step()
-    assert fixture._emp_peaks is not None
-    assert len(fixture._emp_peaks) == 5
-    fixture.step_count = 60
-    fixture._apply_local_knn_particle_dispersion()
-    obs = fixture.observe(n=2048, seed=42)
-    assert obs["metrics"]["modes"] == 5
-    assert obs["metrics"]["min_cov_eig_ratio"] >= 0.20
+    """Verify PacGANUnequalMassFixture applies local k-NN intra-mode dispersion across both standard and low-sigma priors."""
+    from particlegan import ManipulatedPrior, NormalNoiseManipulator, ParticlePrior
 
-
-
-
-
+    for recipe_name, custom_prior in (
+        ("bcap", None),
+        ("atlas", ManipulatedPrior(ParticlePrior(256, 2, init_std=0.5), [NormalNoiseManipulator(sigma=0.0065)])),
+    ):
+        fixture = PacGANUnequalMassFixture(
+            max_steps=100,
+            device="cpu",
+            seed=0,
+            recipe_name=recipe_name,
+            prior=custom_prior,
+        )
+        assert fixture.knn_repulsion_weight > 0.0
+        for _ in range(6):
+            fixture.step()
+        assert fixture._emp_peaks is not None
+        assert len(fixture._emp_peaks) == 5
+        fixture.step_count = 60
+        fixture._apply_local_knn_particle_dispersion()
+        obs = fixture.observe(n=2048, seed=42)
+        assert obs["metrics"]["modes"] == 5
+        assert obs["metrics"]["min_cov_eig_ratio"] >= 0.20
 
