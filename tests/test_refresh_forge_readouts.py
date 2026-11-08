@@ -2637,46 +2637,8 @@ def test_refresh_attempt_coverage_delegates_to_formulaic_coverage_and_preserves_
         )
     ]
 
-    # Verify _run_grid100_deep_variant runs with each candidate's real recipe (not stripped MoG)
-    import experiments.forge.api as forge_api
-
-    captured_recipes = {}
-    orig_task_formulation_context = forge_api.task_formulation_context
-
-    def _wrapped_task_formulation_context(*args, **kwargs):
-        ctx = orig_task_formulation_context(*args, **kwargs)
-        captured_recipes["prior_kind"] = ctx.recipe.prior_kind
-        captured_recipes["lr_control"] = ctx.recipe.lr_control
-        captured_recipes["particle_birth_death"] = ctx.recipe.particle_birth_death
-        captured_recipes["serve_average"] = ctx.recipe.serve_average
-        captured_recipes["birth_death_cells"] = ctx.recipe.birth_death_cells
-        captured_recipes["reopen_guard"] = ctx.recipe.reopen_guard
-        raise RuntimeError("stop_after_recipe_capture")
-
-    monkeypatch.setattr(forge_api, "task_formulation_context", _wrapped_task_formulation_context)
-    tasks = fc.load_tasks(ROOT)
-    for cid, expected_cells, expected_reopen in (
-        ("atlas-particle-normal-v4", 256, "settled"),
-        ("e22", 64, None),
-    ):
-        captured_recipes.clear()
-        cand = fc.adapt_candidate_for_task(fc.load_candidate_card(ROOT, cid), tasks["grid100_mlp16"])
-        with pytest.raises(RuntimeError, match="stop_after_recipe_capture"):
-            fc._run_grid100_deep_variant(ROOT, cand, tasks["grid100_mlp16"], "cpu")
-        assert captured_recipes["prior_kind"] == "particles"
-        assert captured_recipes["lr_control"] == "stationarity"
-        assert captured_recipes["particle_birth_death"] is True
-        assert captured_recipes["serve_average"] == 4.0
-        assert captured_recipes["birth_death_cells"] == expected_cells
-        assert captured_recipes["reopen_guard"] == expected_reopen
-
-
-
-
-
-
-
-
-
-
-
+    # Coverage refresh cannot use the old unregistered path to change a recipe.
+    for cid in ("atlas-particle-normal-v4", "e22"):
+        card = fc.load_candidate_card(ROOT, cid)
+        for task in ({"id": "grid100_mlp16"}, {"id": "model_ddgan_gaussian_chain"}):
+            assert fc.adapt_candidate_for_task(card, task) == card
