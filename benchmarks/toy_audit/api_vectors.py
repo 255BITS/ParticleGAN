@@ -18,7 +18,7 @@ import numpy as np
 import torch
 from torch import nn
 
-from particlegan import (BatchDistanceDiscriminator, GANTrainer,
+from particlegan import (BatchDistanceDiscriminator, GANTrainer, Recipe,
                         get_recipe, init, scale_learning_rates)
 from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator
 from benchmarks.transfer_suite import stress_tasks, vector_tasks
@@ -26,7 +26,7 @@ from benchmarks.toy100 import accuracy, metrics as native_metrics, problems
 from .definition_quality import gaussian_metrics, ring_metrics, two_pole_metrics
 from .vector_quality import projection_ks
 
-VERSION = "toy-public-api-vectors-v3-formula-faithful"
+VERSION = "toy-public-api-vectors-v4-intact-recipes"
 DEFAULT_EVAL = 4096
 PROJECTION_KS_MAX = .06
 
@@ -551,6 +551,7 @@ def _case(identifier, legacy, title, goal, *, kind="vector", steps=1200,
                 eval_samples=evaluation, default_recipe=default_recipe,
                 sampling="public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
                 initialization="Public deterministic_orthogonal_ for networks and R2 prior locations; native100 retains its identity affine generator, and two-pole retains its identity/zero/stored-weight controls.",
+                checkpoint_capabilities=dict(state_export="complete", resume=True, exact_continuation=True),
                 scope="A per-observation gate is not full-budget or sustained convergence; no historical verdict is replaced.") | extra
 
 
@@ -597,8 +598,11 @@ def _registry():
             cadence=dict(d_every=spec.get("d_every", 1), g_every=spec.get("g_every", 1),
                          first_d_outer_step=1), caller_owned=alternating,
             caller_noise="none, preserving the original alternating-loop input/output sampling law" if alternating else None,
-            adaptation=("Explicit KA2 public component loop; no Atlas/DV12 policy lifecycle is claimed. Original half-frequency D cadence is preserved."
-                        if alternating else "KA2 named preset with explicit public R1+R2/K3P penalty; DV12 game-record support is unavailable for this fixed penalty."
+            checkpoint_scope="export_only_no_resume" if alternating else "complete_public_trainer",
+            checkpoint_capabilities=dict(state_export="diagnostic_only", resume=False, exact_continuation=False)
+                if alternating else dict(state_export="complete", resume=True, exact_continuation=True),
+            adaptation=("Half-frequency D component loop. The unchanged requested recipe must be supported; the original KA2 default is blocked while noise/A2 owners are unavailable. State export is diagnostic only; restore is unsupported."
+                        if alternating else "Fixed R1+R2 question requires an explicitly supplied matching recipe; the unchanged KA2 default is blocked."
                         if fixed_penalty else "Current selected public policy replaces the historical manual Adam/controller loop; target law and named stress remain fixed."),
             penalty_arm=spec["reg_arm"] if fixed_penalty else None,
             limitations=spec["limitations"])
@@ -723,7 +727,7 @@ def _registry():
         profile=dict(init_std=2.88),
         prior_options=dict(prior_kind="mog", sigma=0.025, standardize=False),
         thresholds={"native": deepcopy(native_metrics.REQUIREMENTS), "accuracy": deepcopy(accuracy.LIMITS), "saturated_fraction": 0.001},
-        sampling="public served latent law, including enabled DV12/feature-cell perturbation, plus output noise; diagnostics remove additive output noise only",
+        sampling="clean live public prior law without additive output noise; enabled public prior perturbations retain their declared law",
         law=dict(kind="equal100_gaussian", problem="grid100", sigma=0.03),
         adaptation="Public GANTrainer host with 16-layer ScaledResidualMLPGenerator (paired norm-preserving residual transport) and S=5.25 TanhRailGuard head."
     )
@@ -923,7 +927,7 @@ class VectorFixture:
     """Caller-owned data/phase state around one current public trainer."""
     api_components = ("particlegan.Recipe", "particlegan.GANTrainer", "particlegan.ParticlePrior")
 
-    def __init__(self, case, *, device="cpu", seed=DEFAULT_SEED, recipe_name="atlas", max_steps=None, recipe_overrides=None):
+    def __init__(self, case, *, device="cpu", seed=DEFAULT_SEED, recipe_name="atlas", max_steps=None, recipe_overrides=None, recipe=None):
         self.metadata = deepcopy(case)
         self.case_id = case["id"]
         self.device = torch.device(device)
@@ -936,32 +940,51 @@ class VectorFixture:
             raise ValueError("seed must be a nonnegative integer")
         if recipe_name == "auto":
             recipe_name = case["default_recipe"]
-        if case.get("caller_owned") and recipe_name != "ka2":
-            raise ValueError("the half-frequency D caller is explicitly KA2; use recipe_name='ka2' or 'auto'")
-        if case.get("penalty_arm") and recipe_name not in ("ka2", "gan", "k3p"):
-            raise ValueError("the R1+R2 stress requires a fixed public preset: its critic record lacks the Atlas/DV12 game-surprise fields")
         spec = case.get("spec", {})
+        # The task binds only resources and the initial prior/data law. Rates,
+        # losses, penalties, optimizers, regularization and noise stay owned by
+        # the requested recipe or an explicitly supplied complete Recipe.
         options = dict(num_particles=case["particles"], z_dim=case["z_dim"], batch_size=case["batch_size"])
-        for source, destination in (("lr", "lr"), ("d_lr_mult", "d_lr_mult"), ("prior_lr_mult", "prior_lr_mult"),
-                                    ("prior_reg", "prior_reg"), ("betas", "betas"), ("ema_decay", "ema_decay")):
-            if source in spec:
-                options[destination] = tuple(spec[source]) if source == "betas" else spec[source]
-        # Explicit named penalty stress stays its actual R1+R2 law. Other
-        # fixtures adopt the requested public formulation, not a hidden b_cap.
-        if case.get("penalty_arm"):
-            options.update(reg_arm=case["penalty_arm"], reg_coeff=spec["reg_coeff"])
-        if recipe_name in ("ka2", "k3p", "gan"):
-            options["total_steps"] = case["default_steps"]
+        from .api_contract import UnsupportedRecipeOverrides, validate_recipe_overrides
+        if case.get("checkpoint_required") and not case["checkpoint_capabilities"]["exact_continuation"]:
+            raise UnsupportedRecipeOverrides("this task requires exact checkpoint continuation; the half-frequency caller supports diagnostic state export only")
+        if recipe is not None:
+            if not isinstance(recipe, Recipe) or recipe_overrides:
+                raise ValueError("a supplied complete Recipe cannot be mixed with tuning overrides")
+            if any(getattr(recipe, field) != value for field, value in options.items()):
+                raise ValueError("supplied Recipe resources differ from the declared task")
+            prior_options = case.get("prior_options", {})
+            if (recipe.prior_kind != prior_options.get("prior_kind", "particles")
+                    or ("standardize" in prior_options and recipe.standardize != prior_options["standardize"])):
+                raise ValueError("supplied Recipe initial prior law differs from the declared task")
+            self.recipe_overrides = {}
+            self.recipe = recipe
+        else:
+            self.recipe_overrides = validate_recipe_overrides({**case, "provider": "api_vectors"}, recipe_name, recipe_overrides)
+            if get_recipe(recipe_name).continuous_policy is None:
+                options["total_steps"] = case["default_steps"]
+            if case.get("prior_options", {}).get("prior_kind") == "mog":
+                options.update(prior_kind="mog", standardize=case["prior_options"].get("standardize", False),
+                               sigma_rel=case["prior_options"].get("sigma_rel", 0.025))
+            options.update(self.recipe_overrides)
+            self.recipe = get_recipe(recipe_name, **options)
+        if case.get("penalty_arm") and (self.recipe.reg_arm != case["penalty_arm"]
+                                        or self.recipe.reg_coeff != spec["reg_coeff"]):
+            raise UnsupportedRecipeOverrides("The fixed R1+R2 question requires an explicitly declared matching recipe; the host cannot replace its penalty")
         if case.get("caller_owned"):
-            options.update(input_noise_std=0., output_noise_std=0., output_noise_mode="fixed")
-        options.update(case.get("recipe_overrides", {}))
-        from .api_contract import validate_recipe_overrides
-        self.recipe_overrides = validate_recipe_overrides({**case, "provider": "api_vectors"}, recipe_name, recipe_overrides)
-        if case.get("prior_options", {}).get("prior_kind") == "mog":
-            options.update(prior_kind="mog", standardize=case["prior_options"].get("standardize", False),
-                           sigma_rel=case["prior_options"].get("sigma_rel", 0.025))
-        options.update(self.recipe_overrides)
-        self.recipe = get_recipe(recipe_name, **options)
+            unsupported = [name for name in (
+                "continuous_policy", "row_evidence_gate", "particle_birth_death", "serve_average",
+                "input_noise_std", "output_noise_std", "latent_damping_max_rate",
+                "kinetic_transport_weight", "kinetic_transport_local_weight") if getattr(self.recipe, name)]
+            if self.recipe.lr_control == "stationarity":
+                unsupported.append("lr_control=stationarity")
+            for name, inactive in (("output_noise_mode", "fixed"), ("generator_gradient_response", "none"),
+                                   ("constraint_geometry_mode", "none"), ("prior_code_law", "table"),
+                                   ("model", "gan"), ("training_precision", "float32"), ("encoder_mode", "none")):
+                if getattr(self.recipe, name) != inactive:
+                    unsupported.append(name)
+            if unsupported:
+                raise UnsupportedRecipeOverrides("half-frequency caller cannot execute the intact recipe mechanisms: " + ", ".join(unsupported))
         data_device = "cpu" if case["kind"] in ("vector", "two_pole", "zero_tanh", "zero_tanh_rail_escape") else self.device
         self.data_rng = torch.Generator(device=data_device).manual_seed(seed)
         self.generator_data_rng = torch.Generator(device=data_device).manual_seed(seed + 101)
@@ -1052,6 +1075,9 @@ class VectorFixture:
         self.penalty = self.recipe.make_critic_penalty(self.opt_d)
         self.regularizer = self.recipe.make_prior_regularizer(prior=self.prior)
         self.latent_rng = torch.Generator(device=self.device).manual_seed(self.seed + 1)
+        if self.recipe.effective_critic_formulation == "bispf":
+            from particlegan.bispf import bind_thermal_source
+            bind_thermal_source(self.opt_d.record, self.loss, self.regularizer)
         self.base_rates = [[group["lr"] for group in optimizer.param_groups] for optimizer in (self.opt_g, self.opt_d)]
         self.update_counts = dict(g=0, d=0)
 
@@ -1084,9 +1110,12 @@ class VectorFixture:
             self.critic.requires_grad_(False)
             try:
                 self.opt_g.zero_grad(set_to_none=True)
-                fake = self.generator(self.prior.sample(self.recipe.batch_size, generator=self.latent_rng)[0])
+                latent, indices = self.prior.sample(self.recipe.batch_size, generator=self.latent_rng)
+                fake = self.generator(latent)
+                if hasattr(self.opt_g, "set_sampled_rows") and self.prior.z.requires_grad:
+                    self.opt_g.set_sampled_rows(self.prior.z, indices)
                 value = self.loss.g_loss(self.critic(fake), self.critic(real_g)) + self.recipe.prior_regularization(
-                    self.prior.z, regularizer=self.regularizer)
+                    self.prior.z, regularizer=self.regularizer, prior=self.prior)
                 value.backward(); self.opt_g.step(); self.update_counts["g"] += 1
             finally:
                 self.critic.requires_grad_(True)
@@ -1174,23 +1203,35 @@ class VectorFixture:
     def state_dict(self):
         state = dict(version=VERSION, case_id=self.case_id, recipe=self.recipe.to_dict(),
                      seed=self.seed, case_sha256=_digest(self.metadata),
+                     checkpoint_scope=self.metadata.get("checkpoint_scope", "complete_public_trainer"),
                      completed_steps=self.completed_steps, data_rng=self.data_rng.get_state().clone(),
                      generator_data_rng=self.generator_data_rng.get_state().clone(),
                      batch_sequence_sha256=self.batch_sequence_sha256,
                      phase_receipts=deepcopy(self.phase_receipts))
         if self.metadata.get("caller_owned"):
+            penalty = self.penalty.regularizer
+            penalty_state = {"coeff": penalty.coeff, "last_stats": deepcopy(self.penalty.last_stats)}
+            if hasattr(penalty, "state_dict"):
+                penalty_state["record"] = penalty.state_dict()
+            if hasattr(penalty, "cooler"):
+                penalty_state["cooler"] = penalty.cooler.state_dict()
             state["caller"] = deepcopy(dict(generator=self.generator.state_dict(), critic=self.critic.state_dict(), prior=self.prior.state_dict(),
                                               **self.recipe.prior_regularizer_checkpoint(self.regularizer),
                                               ema_critic=self.ema_critic.state_dict(), opt_g=self.opt_g.state_dict(), opt_d=self.opt_d.state_dict(),
+                                              penalty=penalty_state, base_rates=self.base_rates,
                                               latent_rng=self.latent_rng.get_state(), update_counts=self.update_counts))
         else:
             state["trainer"] = self.trainer.state_dict()
         return state
 
     def load_state_dict(self, state):
+        if self.metadata.get("caller_owned"):
+            from .api_contract import UnsupportedRecipeOverrides
+            raise UnsupportedRecipeOverrides("half-frequency caller state export is diagnostic only; complete checkpoint restore is unsupported")
         if (state["version"] != VERSION or state["case_id"] != self.case_id
                 or state["recipe"] != self.recipe.to_dict() or state.get("seed") != self.seed
-                or state.get("case_sha256") != _digest(self.metadata)):
+                or state.get("case_sha256") != _digest(self.metadata)
+                or state.get("checkpoint_scope") != self.metadata.get("checkpoint_scope", "complete_public_trainer")):
             raise ValueError("checkpoint identity/recipe differs")
         for name in ("data_rng", "generator_data_rng"):
             torch.Generator(device=self.data_rng.device).set_state(state[name])
@@ -1201,20 +1242,9 @@ class VectorFixture:
         steps = state["completed_steps"]
         if type(steps) is not int or steps < 0 or steps > self.execution_steps:
             raise ValueError("checkpoint exceeds this execution prefix")
-        if self.metadata.get("caller_owned"):
-            if state["caller"]["update_counts"] != dict(g=steps, d=(steps + 1) // 2):
-                raise ValueError("checkpoint cadence counters differ from its phase clock")
-        elif state["trainer"]["completed_steps"] != steps:
+        if state["trainer"]["completed_steps"] != steps:
             raise ValueError("checkpoint trainer differs from its phase clock")
-        if self.metadata.get("caller_owned"):
-            self.recipe.restore_prior_regularizer(self.regularizer, state["caller"].get("prior_regularizer"), validate_only=True)
-            for key in ("generator", "critic", "prior", "ema_critic", "opt_g", "opt_d"):
-                getattr(self, key).load_state_dict(state["caller"][key])
-            self.recipe.restore_prior_regularizer(self.regularizer, state["caller"].get("prior_regularizer"))
-            self.latent_rng.set_state(state["caller"]["latent_rng"])
-            self.update_counts = deepcopy(state["caller"]["update_counts"])
-        else:
-            self.trainer.load_state_dict(state["trainer"])
+        self.trainer.load_state_dict(state["trainer"])
         self.data_rng.set_state(state["data_rng"])
         self.generator_data_rng.set_state(state["generator_data_rng"])
         self.batch_sequence_sha256 = state["batch_sequence_sha256"]
@@ -1230,9 +1260,9 @@ def _view(title, target, samples, metadata):
                 xlabel="x", ylabel="y", caption=metadata["sampling"])
 
 
-def build_case(id, *, device="cpu", seed=DEFAULT_SEED, recipe_name="atlas", max_steps=None, recipe_overrides=None):
+def build_case(id, *, device="cpu", seed=DEFAULT_SEED, recipe_name="atlas", max_steps=None, recipe_overrides=None, recipe=None):
     cases = _registry()
     if id not in cases:
         raise ValueError(f"unknown vector case {id!r}")
     return VectorFixture(cases[id], device=device, seed=seed, recipe_name=recipe_name,
-                         max_steps=max_steps, recipe_overrides=recipe_overrides)
+                         max_steps=max_steps, recipe_overrides=recipe_overrides, recipe=recipe)

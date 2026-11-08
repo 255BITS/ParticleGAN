@@ -22,7 +22,6 @@ import platform
 import random
 import subprocess
 import sys
-import textwrap
 import time
 
 import numpy as np
@@ -442,6 +441,7 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
     evaluation_steps = sorted(set(boundaries) | set(metric_steps))
     required_terminal = case.get("terminal_observations", 5)
     receipt = {"schema": "particlegan_api_toy_run_v1", "case": case,
+               "checkpoint_capabilities": json_value(case.get("checkpoint_capabilities", {})),
                "recipe": None, "requested_recipe_overrides": json_value(recipe_overrides or {}), "api_components": [],
                "source": source_identity(), "seed": seed,
                "runtime": {"python": platform.python_version(), "torch": str(torch.__version__),
@@ -512,6 +512,8 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
             if isinstance(module := getattr(owner, name, None), torch.nn.Module)}
         receipt["recipe"] = json_value(fixture.recipe.to_dict())
         receipt["api_components"] = list(fixture.api_components)
+        receipt["checkpoint_capabilities"] = json_value(getattr(fixture, "metadata", {}).get(
+            "checkpoint_capabilities", case.get("checkpoint_capabilities", {})))
         if torch.device(device).type == "cuda":
             receipt["runtime"]["cuda_device_model"] = torch.cuda.get_device_name(torch.device(device))
         receipt["source"] = source_identity()
@@ -565,7 +567,8 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
             torch.save(fixture.state_dict(), output / "final-state.pt")
             receipt["artifacts"]["final-state.pt"] = {
                 "sha256": file_hash(output / "final-state.pt"),
-                "bytes": (output / "final-state.pt").stat().st_size}
+                "bytes": (output / "final-state.pt").stat().st_size,
+                "checkpoint_capabilities": receipt["checkpoint_capabilities"]}
             gif = output / "goal.gif"
             media_records = [record for record in records if record["step"] in boundaries]
             if receipt["status"] != "COMPLETE" and not any(
