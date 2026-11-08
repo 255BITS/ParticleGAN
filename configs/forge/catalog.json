@@ -61,7 +61,7 @@
       "report/paired_error_2d": 1,
       "report/prior-ablation-2026-10-25": 3,
       "report/prior-comparison": 4,
-      "report/project": 13,
+      "report/project": 14,
       "report/r1-integrations": 2,
       "report/readme-100gaussians": 9,
       "report/releases": 1,
@@ -112,20 +112,20 @@
       "frozen_driver": 28,
       "frozen_evaluator_or_audit": 2,
       "frozen_support": 28,
-      "narrative": 973,
+      "narrative": 974,
       "structured_evidence": 5066,
       "support": 1557,
       "support_artifact": 52,
       "visualization": 23,
       "visualization_artifact": 750
     },
-    "files": 11823
+    "files": 11824
   },
   "coverage": {
-    "declared_count": 11823,
+    "declared_count": 11824,
     "missing": [],
     "stale": [],
-    "tracked_count": 11823,
+    "tracked_count": 11824,
     "unclassified": [],
     "valid": true
   },
@@ -8171,7 +8171,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "46c6b94d3a774d9bb40d5ebb8b18accebe0804af",
+      "git_blob": "87e4c62eda581a8695e223d043c643c6945a5836",
       "path": "experiments/forge/vectorprofiles.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -14219,6 +14219,13 @@
       "family": "report/project",
       "git_blob": "6289dbd7b42abcb42cc2e02626c168aeb0b1dd06",
       "path": "reports/forge-audit-2026-10-02.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/project",
+      "git_blob": "08f9a189ef585061c56a548981bcd9a44326b6dd",
+      "path": "reports/gpt-audit-2026-11-08.md",
       "role": "narrative",
       "suggested_tiers": []
     },
