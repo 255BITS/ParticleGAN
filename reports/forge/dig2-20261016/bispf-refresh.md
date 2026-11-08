@@ -1,5 +1,12 @@
 # BISPF refresh: do BISPF's lead and its other verdicts reproduce on the current source?
 
+<!-- superseded-banner: generated -->
+> Historical 2026-10-16 reproducibility study. “Current source” and counted totals below
+> refer to that date, not today. See the [current technique inventory](../technique-inventory.md).
+> [Original study, views, campaign and coordinator code](https://github.com/255BITS/ParticleGAN/tree/62711fe540c44e83da8a6ed3e7a5c64fe9c9bc93)
+> remain pinned for reproduction. This integration carries the report only; it does not register old runnable studies,
+> bypass current publication, rerun training or change qualification.
+
 Status: DONE. Preregistered verdict: **SUPPORTED** (34 of 34 cells reproduced). The rule was committed
 (ec0711d1) and pushed before any training; results are below the rule.
 
@@ -200,5 +207,6 @@ Evidence (graded-result.json, result.json, run.log with live per-check metrics, 
 - These are research-diagnostic views (all tasks `diagnostic`), so the results do not fill ordinary
   leaderboard cells. To refresh the published board, the same candidates would need ordinary-view runs (or a
   publication refresh that admits these receipts); not done here, as instructed.
-- New files are opt-in only: two research-diagnostic views, four studies, one campaign. No candidate, task,
-  gate, default or budget changed.
+- At the original study commit, two research-diagnostic views, four studies and one campaign were added.
+  These declarations and the coordinator shortcut remain at the immutable source linked above.
+  This documentation-only integration changes no candidate, task, gate, default or budget.
