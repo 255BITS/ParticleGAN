@@ -1,0 +1,63 @@
+{
+  "adapter": "dcgan_performance_v1",
+  "dependencies": [],
+  "evaluation": {
+    "eval_output_noise": "not_applied_to_measurement",
+    "evaluator": "experiments.forge.scaling_adapter:grade",
+    "kind": "image_training_performance",
+    "qualification_input": false,
+    "sampling_contract_version": 1,
+    "sampling_law": "training_update_measurement",
+    "scoring_weights": "live",
+    "training_feedback": false
+  },
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "performance": {
+      "base_channels": 64,
+      "batch_size": 16,
+      "image_size": 256,
+      "latent_dim": 128,
+      "max_channels": 512,
+      "max_seconds": 270,
+      "measured_updates": 10,
+      "n_particles": 256,
+      "prior": {
+        "exception_reason": "Performance-only finite-table workload supports all selected policy recipes under one common initial prior. No stochastic distribution-quality claim or qualification credit.",
+        "kind": "particle_cloud",
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "profile_updates": 0,
+      "seed": 0,
+      "warmup_updates": 3
+    },
+    "prior": {
+      "exception_reason": "Performance-only finite-table workload supports all selected policy recipes under one common initial prior. No stochastic distribution-quality claim or qualification credit.",
+      "kind": "particle_cloud",
+      "sigma": 0.0,
+      "standardize": false
+    },
+    "prior_contract": "recipe_owned_v1",
+    "resources": {
+      "batch_size": 16,
+      "num_particles": 256,
+      "z_dim": 128
+    },
+    "steps": 13
+  },
+  "id": "dcgan_performance_r256",
+  "requires_capabilities": [
+    "public_trainer",
+    "particle_cloud",
+    "checkpoint",
+    "named_rng"
+  ],
+  "resources": {
+    "cpu_threads": 1,
+    "gpu_memory_mb": 24576,
+    "gpus": 1,
+    "timeout_seconds": 300
+  },
+  "schema_version": 1
+}

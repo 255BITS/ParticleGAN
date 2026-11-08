@@ -1,0 +1,67 @@
+{
+  "actual_qualification": {
+    "attempts": 29,
+    "failures": 11,
+    "incumbent_verdicts_preserved": true,
+    "numerical_tasks": 30,
+    "passes": 19,
+    "policy_revision": 11,
+    "qualified_tier": 3,
+    "sha256": "00dde1d7fae1b37134b9c1d549974230d11fb27a9644ddd63736ca345d3aca1d",
+    "snapshot": "reports/forge/technique-evidence/2c45cc0649ef839b6455d74b353d4331fd789686dda68f104536706fb0970358.json",
+    "status": "PASS"
+  },
+  "defaults": {
+    "convolution_rule": "polar",
+    "default_adoption": false,
+    "public_trainer": "bcap"
+  },
+  "executed_commit_reachable": true,
+  "generated_pages_guard": {
+    "duration_seconds": 7.06,
+    "local_log": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/software-checks/final-generated-pages.log",
+    "log_sha256": "725c2ae0148fc6310a7f08f52eeaf28ae2ea5c1cfba0d080b10de53c49221a6d",
+    "passed": 1
+  },
+  "inventory": {
+    "comparison_policy_revision": 9,
+    "path": "reports/forge/technique-inventory.json",
+    "qualified_tier": 1,
+    "rows": 9,
+    "sha256": "693d0f17f0f20d13c2e17c463fe4f12dc3b408a02c265fc1448caf250584a1b6",
+    "status": "FAIL"
+  },
+  "other_scientific_rows_preserved": {
+    "atlas": "cf5af2edf6bcd24f642f4843bdf8afa2ff3508e726545665a0d92093da4656c9",
+    "bcap-dualnorm": "b0f224b5a71b817ebbe48e0255c700abe31e0425f0d04667691948e800c86225",
+    "bcap-pure": "5d0477e340736e721ee80f7f1bd04e5a977242a62c9be99c8f77868ade51892b",
+    "e22": "d57317019bd729bc8f8653a3f25a6b9d1c2d8f1e73a426d0b46233f263922114",
+    "k3p": "dedf84c53433de3109f1f5cf0c163cf9ed1a18b94cb17243c76e5e2d9082a097",
+    "ka2": "ca801fd447fad45af6efbdf9338cf94bbf2eec311071887376add041202267e7",
+    "r1r2": "72faf767307d08e16d035a56b816b15b163c98333c50986ca71521ac8aec5a77",
+    "release07-gan-v3": "aa55e46cc88a7b3dad38c403506b767801db6f383cf658d14eb530ae9210d25f"
+  },
+  "performance": {
+    "cells": 48,
+    "certified_paired_speed_ranking": false,
+    "changed_family": "bispf",
+    "original_cells_unchanged": 42,
+    "path": "reports/forge/scaling-performance.json",
+    "sha256": "fd890f254da3038e5149b5a6fbb2e9e63cd9fc1e1294b9115c371069a43ffee7"
+  },
+  "qualification_input": false,
+  "schema": "bispf_optimized_publication_integrity_v1",
+  "selected_candidate": "bispf-optimized-quintic-v1",
+  "selection": {
+    "other_pins_preserved": 7,
+    "path": "configs/forge/selections/family-current-v1.json",
+    "previous_selection": {
+      "path": "configs/forge/selections/history/family-current-138fe6eb6c13251128aed4e0171908cd676e578682f49026fc8fd4be6492b7c2.json",
+      "sha256": "138fe6eb6c13251128aed4e0171908cd676e578682f49026fc8fd4be6492b7c2"
+    },
+    "sha256": "35871846445af79feec0775aa398b3c1ad037a6aa1723cccbf56fe73bd85b7ec"
+  },
+  "source_commit": "d9d72d53761c898bce20102e1995fc3d899c1447",
+  "source_digest": "c82ed2dc712e4c9ebda80678e453635bd8a16dc74fae1450234ed368aa956213",
+  "training_launched": false
+}

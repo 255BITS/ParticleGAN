@@ -1,0 +1,40 @@
+{
+  "gif_sha256": "1048d261931c27c3526703327e8079f37ae193e957e4b2ddd595722642f644f1",
+  "kind": "actual_training_native_saved_observations_gif",
+  "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+  "observation_count": 34,
+  "observations_sha256": "bb3e5cf9bdc04aebf2a2e2412e2e2d92c64cdef4b51e7dea488dadeac533ef20",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+  "rescored_observations": 0,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    21,
+    25,
+    29,
+    33
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/e33da1416b6248d1b514ef8c650cd3f8/native100/grid100/config.json": "7945fc09ac2a36e6aebda21c42df375e81cb3f70f701e5e959b0a1b9202e8f7b",
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/e33da1416b6248d1b514ef8c650cd3f8/native100/grid100/events.jsonl": "49cf9972d0fe22fc821b8d2b3556c3b684927b51302509ebf37d08a9020462bc",
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/e33da1416b6248d1b514ef8c650cd3f8/native100/grid100/snapshots/step_000000.npz": "d5a07530a3a182b1ba80a6c88b0b29b8c06cef229e61a6885ed4df245d655a65",
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/e33da1416b6248d1b514ef8c650cd3f8/native100/grid100/snapshots/step_000050.npz": "64ad64ca5e855cec8214847f545690244f5867e12694def00090ae59514e8952",
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/e33da1416b6248d1b514ef8c650cd3f8/native100/grid100/snapshots/step_000750.npz": "5544b6446f6a87467bfe813065cf4d3904f89b144f9d24d57352501d9b35f51a",
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/e33da1416b6248d1b514ef8c650cd3f8/native100/grid100/snapshots/step_001750.npz": "2967f0022ec754822f567b713a6ce1ca917f8944e96db9272f1811df15b5f62b",
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/e33da1416b6248d1b514ef8c650cd3f8/native100/grid100/snapshots/step_002750.npz": "957983f0dd2621b043e3bf27746586e02d77977c21123419c7fe389517c82dbb",
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/e33da1416b6248d1b514ef8c650cd3f8/native100/grid100/snapshots/step_004000.npz": "97479079e6b5568319d47bd57e594c061ef628aff833cb81ff9084b6991e9739",
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/e33da1416b6248d1b514ef8c650cd3f8/native100/grid100/snapshots/step_005000.npz": "554ed587fff98b8139687e17c018895a04abf8f504490aa04262d7494cbf9e60",
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/e33da1416b6248d1b514ef8c650cd3f8/native100/grid100/snapshots/step_006000.npz": "76881624e1524b2c0be7c8141c186bbcc5c89025930b48eca76b8f27acd42a3b",
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/e33da1416b6248d1b514ef8c650cd3f8/native100/grid100/snapshots/step_007000.npz": "cae7645c0454f5ef78a37787b2d79a5e15e84ca548e2f7a450846f5a429da4d9",
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/e33da1416b6248d1b514ef8c650cd3f8/native100/grid100/summary.json": "03b565c2be70e33e5b1f3c25c5e19a51dee5d53599cd959e709b50c92bba647e"
+  },
+  "task_id": "grid100"
+}

@@ -1,5 +1,8 @@
 # batch-feature-full-suite
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current leaderboard for this goal: [reports/forge/technique-inventory.md](../../forge/technique-inventory.md); goal index: [reports/leaderboard-index.json](../../leaderboard-index.json). Results below are preserved as recorded.
+
 Benchmark status: {'PASS': 22}
 
 | Candidate | Task | Result | Detail |

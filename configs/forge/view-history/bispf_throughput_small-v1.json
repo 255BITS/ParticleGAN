@@ -1,0 +1,27 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "img_stripes2"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "img_bars4"
+    }
+  ],
+  "eligibility": {},
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "bispf_throughput_small",
+  "policy_change_reason": "Explicit throughput diagnostic on two unchanged small-image task contracts. Compare complete training-update timing and sustained numerical gates; no new ordinary task or extra qualification requirement. Compatible ordinary evidence is reused, never rerun.",
+  "ranking": {
+    "cost_separate": true,
+    "policy": "diagnostic_outcomes_only"
+  },
+  "revision": 1,
+  "schema_version": 1
+}

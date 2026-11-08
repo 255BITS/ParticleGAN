@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "d16014c4e7c722bbac6cb15194127f5fd437c68e6191d4c63f5040d7f4bdb8fe",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "4a64ae2de0ce0487fba932fe9b1da07aa8ea10972c2d5638224995a38787a468",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/c66ca8acc4634cf1920c23224cfc6faf/observed-samples.pt": "98173bb8ba7a62277f26dd8b335cdbbeffd23fa8e497de20bfe38655aaf2a2c2"
+  },
+  "task_id": "vector_unequal_mass"
+}

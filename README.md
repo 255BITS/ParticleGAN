@@ -1,76 +1,55 @@
 # ParticleGAN
 
-[Research attempt catalog](reports/forge/research-catalog/README.md): source-bound results, reusable lessons, failures and publication links.
-
-**GANs with a learnable particle prior, for PyTorch.**
-
-**Running experiments / proposing ideas:** start with
-[ParticleGAN Forge — read before running ideas](EXPERIMENTATION.md).
-
-**Review the research:** [experiments by tier, goals and training GIFs](reports/forge/EXPERIMENTS_BY_TIER.md)
-and the [current solution leaderboard](reports/forge/technique-inventory.md).
-The [experiment memory](reports/forge/EXPERIMENT_MEMORY.md) explains the hypotheses,
-comparisons and recommendations behind the recorded results. These views are
-regenerated as experiments and candidate solutions change; release selection
-requires completed Forge qualification and review of the winner.
+![ParticleGAN — conceptual artwork of luminous particles flowing into distinct clusters](docs/media/readme/particlegan-hero.png)
 
 [![Tests](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml/badge.svg)](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml)
 
-A GAN usually draws its latent code from a fixed Gaussian and leaves all of
-the work of covering the data to the generator; when it cannot, modes go
-missing. ParticleGAN replaces that noise with a table of learnable latent
-vectors (*particles*) that are optimized together with the generator, so the
-prior itself can move toward the data's modes. The default training recipe is
-the selected **BCAP** leader: non-saturating loss, a fixed cap penalty on critic
-input gradients, zero-momentum DualNorm, direction blending and constant rates.
-[Recipe settings and evidence](docs/api.md#recipes-and-defaults) explain the
-configuration. You write an ordinary PyTorch GAN loop; the recipe builds the pieces.
+**GANs with a learnable particle prior, for PyTorch.**
 
-Future promotions change one line in [particlegan/recipes.py](particlegan/recipes.py):
-`DEFAULT_RECIPE = "bcap"`. All model-family factories inherit that trainer preset.
-Explicit presets such as `get_recipe("ka2")` remain available. This is the
-best-observed research default; Forge calibration remains provisional.
-
-![100 Gaussians: historical KA2 recipe converging with live weights](100gaussians.gif)
-
-Recorded with the historical 0.8.0 KA2 recipe and its original random initialization, live weights, seed 1234:
-**100/100 modes, 98.9% within 3σ after 7,000 updates**, with all 100 modes first covered
-at update 1,430. [Reproduce this animation](reports/readme-100gaussians/README.md#readme-hero-gif).
-
-**Without a learning-rate schedule.** The [E22 configuration](docs/e22.md) has no schedule or training
-horizon, and no statistic of the raw data in its training control. It covers all 100 modes on three layouts,
-ending at 98.3–98.6% of samples within 3σ after 7,000 updates:
-
-![E22 on the grid, rotated and staggered 100-Gaussian problems](reports/e22-animation/e22-100gaussians.gif)
-
-[How this animation was made](reports/e22-animation/README.md).
+A GAN usually draws its latent code from a fixed Gaussian. ParticleGAN replaces that
+noise with a table of learnable latent vectors (*particles*), optimized together with
+the generator, so that the prior itself can move toward the data's modes. You write an
+ordinary PyTorch GAN loop, or call `GANTrainer`, and a *recipe* builds the optimizers,
+critic penalty and prior regularizer.
 
 ## Install
 
-Requires Python 3.10+, PyTorch, and NumPy (installed as dependencies).
+Requires Python 3.11+. PyTorch and NumPy are installed as dependencies.
 
 ```bash
-python -m pip install particlegan           # the library (0.8.0)
+python -m pip install particlegan           # the library (0.9.7)
 ```
 
-For the examples, experiments and tests, install from source:
+To run the examples, experiments and tests, install from source with the extras you need:
 
 ```bash
 git clone https://github.com/255BITS/ParticleGAN.git
 cd ParticleGAN
-python -m pip install -e '.[experiments,dev]'  # plus examples, experiments and tests
+python -m pip install -e '.[dev,experiments]'   # tests plus examples/experiments (the toy100 CI job)
+python -m pip install -e '.[dev,experiments,images,lunar]'   # what the main CI test job installs
 ```
+
+| Extra | Adds | Needed for |
+| --- | --- | --- |
+| `dev` | pytest | the test suite |
+| `experiments` | NumPy, Matplotlib, Pillow, PyYAML, POT, SciPy | examples, `python -m experiments.forge` and the toy benchmarks |
+| `images` | torchvision, Pillow, torch-fidelity, SciPy <1.18, tqdm | CIFAR and other image experiments, FID |
+| `mog` | SciPy | faster exact nearest-neighbour calibration of mixture-of-Gaussians priors (falls back to Torch without it) |
+| `gym` | Gymnasium with Box2D | Gym control experiments |
+| `lunar` | the `gym` extra plus rich, Pillow and imageio | the Lunar Lander world model and controllers |
+
+Version pins live in [`pyproject.toml`](pyproject.toml). For CUDA, install a
+torch/torchvision build that matches your driver before installing the extras.
 
 ## Train a GAN
 
-Everything comes from role-named factories on a recipe; the loop is yours.
+You supply ordinary PyTorch modules. `GANTrainer` binds the recipe's optimizers,
+critic penalty and prior regularizer:
 
 ```python
-import copy
 import torch
 from torch import nn
-from particlegan import get_recipe, init, scale_learning_rates
-from particlegan.optim.constraint_geometry import constraint_geometry_backward
+from particlegan import GANTrainer, get_recipe, init
 
 def real_batch(n):  # replace with your DataLoader: 8 Gaussians on a ring
     angle = torch.randint(8, (n, 1)) * torch.pi / 4
@@ -79,50 +58,128 @@ def real_batch(n):  # replace with your DataLoader: 8 Gaussians on a ring
 recipe = get_recipe(total_steps=2000)
 G = nn.Sequential(nn.Linear(recipe.z_dim, 128), nn.LeakyReLU(0.2), nn.Linear(128, 2))
 D = nn.Sequential(nn.Linear(2, 128), nn.LeakyReLU(0.2), nn.Linear(128, 1))
-init.deterministic_orthogonal_(G, seed=0)        # optional: repeatable weights
+init.deterministic_orthogonal_(G, seed=0)
 init.deterministic_orthogonal_(D, seed=1)
-prior = init.deterministic_orthogonal_(recipe.make_prior())  # the learnable particle table
-opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
-penalty, gan = recipe.make_critic_penalty(opt_d), recipe.make_loss()
-base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
-
-for step in range(recipe.total_steps):
-    scale_learning_rates(step, recipe, (opt_g, opt_d), base_lrs, prior)
-    real = real_batch(recipe.batch_size)
-    z, indices = prior.sample(recipe.batch_size)
-    fake = G(z)
-
-    d_loss = gan.d_loss(D(real), D(fake.detach())) + penalty(D, real, fake.detach())
-    opt_d.zero_grad(); d_loss.backward(); opt_d.step()
-
-    g_loss = gan.g_loss(D(fake), D(real))
-    opt_g.zero_grad()
-    if hasattr(opt_g, "set_sampled_rows"):
-        opt_g.set_sampled_rows(prior.z, indices)
-    constraint_geometry_backward(g_loss, opt_g, (g_loss,))
-    opt_g.step()
-```
-
-The optimizers' `state_dict()` holds their update state, so checkpoint them
-as usual. The generator step records sampled prior rows and protects the
-adversarial objective during direction blending.
-[`examples/pytorch_loop.py`](examples/pytorch_loop.py) provides a complete
-caller-owned loop; `GANTrainer` handles these bindings automatically.
-
-Or let `GANTrainer` run exactly that default update:
-
-```python
-from particlegan import GANTrainer
-
-recipe = get_recipe()
 prior = init.deterministic_orthogonal_(recipe.make_prior())
-trainer = GANTrainer(recipe, G, D, prior=prior)
-for _ in range(trainer.recipe.total_steps):
-    trainer.step(real_batch(trainer.recipe.batch_size))
+trainer = GANTrainer(recipe, G, D, prior=prior, seed=0)
+for _ in range(recipe.total_steps):
+    trainer.step(real_batch(recipe.batch_size))
 samples = trainer.sample(1024)
 ```
 
-Without `prior=`, the trainer builds a plain randomly drawn particle table.
+`get_recipe()` returns the default recipe, **optimized BISPF** (`DEFAULT_RECIPE =
+"bispf_optimized"` in [particlegan/recipes.py](particlegan/recipes.py)). It uses a
+non-saturating loss, a Born-Infeld critic penalty, an SBNP prior regularizer,
+zero-momentum DualNorm and constant rates. The acronyms are expanded in the
+[research glossary](RESEARCH_GLOSSARY.md#acronyms-and-short-names), and the
+[recipe settings and evidence](docs/api.md#recipes-and-defaults) explain the configuration.
+
+Without `prior=`, the trainer builds a randomly drawn particle table. Networks
+and device placement belong to the caller. The trainer does not reinitialize
+supplied modules, so load pretrained weights before constructing it and
+initialize only fresh parameters. Optimizers exclude frozen parameters while
+retaining gradients through frozen modules to trainable inputs.
+
+Caller-owned loops use the recipe's role-named factories, including
+`make_optimizers`, `make_critic_penalty` and `make_prior_regularizer`.
+Save the resolved `recipe.to_dict()` and the complete `trainer.state_dict()`
+for continuation; restore the recipe with `Recipe.from_dict(saved_fields)`.
+Changing the current default does not migrate an old run. Bare or partial `Recipe(...)` calls raise
+an error: use `get_recipe()` to select the current public recipe for new runs.
+See the [API reference](docs/api.md#recipes-and-defaults) for component ownership
+and optimizer contracts.
+
+For categorical data and wide continuous feature vectors, see the
+[BISPF input-domain walkthrough](docs/bispf-input-domains.md). It includes a
+checked numerical example and a runnable four-category GAN with training GIF,
+quality metrics and checkpoint continuation.
+
+## Results and status
+
+The single current status page is the
+**[technique inventory](reports/forge/technique-inventory.md)**. It shows every recipe
+family against the same declared tests, failures included, with links to gates,
+metrics, receipts and training GIFs. Other report pages are historical records.
+
+What the evidence does and does not show today:
+
+- **The default is a research selection, not a qualified winner.** In the inventory's
+  full-suite table on 2026-10-25, the default BISPF recipe records 18 PASS,
+  11 FAIL and 20 unmeasured out of 49 distinct tests. Forge's screening calibration
+  is still provisional.
+- **Controlled prior comparison** ([matched prior ablation, 2026-10-25](reports/prior-ablation-2026-10-25/README.md)).
+  Each arm changes only the prior policy. Architecture, data, budget, seed 0 and
+  the initial table are the same. These are one-seed diagnostics with no
+  qualification credit.
+
+  | Prior | Toy tests passed (15 graded in all arms) | Ring16 high-quality fraction | CIFAR-10 DDGAN FID50k ↓ |
+  | --- | ---: | ---: | ---: |
+  | Learned particle table (default) | 7 | 0.95 | 79.7 |
+  | Frozen table | 5 | 0.61 | 108.5* |
+  | Fresh N(0, I) latent | 5 | 0.53 | 82.7 |
+
+  \* Final checkpoint only; the same run scored 80.8 FID5k at step 7500, so this
+  is most likely a bad excursion. All FIDs are single point estimates.
+
+  On the toy suite the learned table buys sample precision at seed 0: it alone
+  passes `ring16_acquisition` and `mode_hold` (2 of the 15 matched tests, both at
+  a +0.00 margin with no recorded noise floor). The fixed priors cover the 100-mode grids
+  more evenly but less precisely, and every arm fails those grids. On CIFAR the
+  gaps are inside the run's own checkpoint-to-checkpoint and rerun noise
+  (up to 9.4 FID5k between same-config reruns), so no image-scale prior effect is
+  established.
+- **Headline numbers below are single runs** without error bars, unless a linked
+  report says otherwise.
+
+### The 100-Gaussian animations
+
+These three animations use different recipes. Only the first two use the package default.
+
+| Animation | Recipe | What it shows | Pass/fail metric | Result |
+| --- | --- | --- | --- | --- |
+| [`100gaussians.gif`](100gaussians.gif) | **Default** (`get_recipe()` in 0.9.0). This is the current default's training settings with its pre-0.9.1 execution policy (native SVD, FP32). | 100-Gaussian grid, public deterministic initialization, protocol seed 0, 20,000 updates. | All 100 modes with ≥10 samples within 3σ, **and** `hq` (share of samples within 3σ) ≥ 0.95, at each of 5 terminal checks. | **FAIL**: 100/100 modes, but `hq` 42.1% ([receipt](reports/readme-100gaussians/README.md#current-default)) |
+| [stripes GIF](reports/forge/bispf-throughput/media/bispf-throughput-v1/img_stripes2.gif) | **Default** from 0.9.1 (batched SVD, BF16/channels-last) | Fixed 600-update `img_stripes2` image task | The task's declared Forge gate, including all required modes | **PASS** ([readout](reports/forge/bispf-throughput/README.md)) |
+| [E22 GIF](reports/e22-animation/e22-100gaussians.gif) | **Not the default.** Opt-in preset `get_recipe("e22", ...)` with an identity `nn.Linear(2, 2)` generator, a 20,000-row table, batch 2,048 and seed 1234 | Grid, rotated and staggered 100-Gaussian layouts, 7,000 updates each | Native gates: worst live precision over the last 5 checks ≥ 0.97 and worst centre error ≤ 0.20σ | **PASS** on all three layouts (precision .9822–.9851); the animation draws reach `hq` 98.3–98.6% ([E22 results](docs/e22.md#results), [animation](reports/e22-animation/README.md)). In the Forge suite, E22 is 0/115: its policy cohort is blocked or incompatible with the current task definitions. |
+
+![Archived 0.9.0 default on the 100-Gaussian grid: particle outputs, target modes and numerical learning curves (FAIL: hq 42.1% < 95%)](100gaussians.gif)
+
+![Actual training of the 0.9.1 BISPF default on the stripes task, with numerical quality observations (PASS)](reports/forge/bispf-throughput/media/bispf-throughput-v1/img_stripes2.gif)
+
+![E22 (not the default) on the grid, rotated and staggered 100-Gaussian problems](reports/e22-animation/e22-100gaussians.gif)
+
+The E22 run uses a different generator, table size, batch and seed, so it is not
+a matched comparison with the default's animation.
+
+## Releases, Forge and throughput
+
+**Running experiments or proposing ideas:** start with
+[ParticleGAN Forge — read before running ideas](EXPERIMENTATION.md). The
+[research attempt catalog](reports/forge/research-catalog/README.md) lists source-bound
+results, reusable lessons, failures and publication links. The
+[experiments by tier](reports/forge/EXPERIMENTS_BY_TIER.md) page shows goals and
+training GIFs. The [experiment memory](reports/forge/EXPERIMENT_MEMORY.md) explains the
+hypotheses, comparisons and recommendations behind the recorded results. These views
+are regenerated as experiments change. Release selection requires completed Forge
+qualification and review of the winner. The
+[0.10 Forge requirements](reports/forge/convergence-policy-010/README.md) make accurate
+acquisition, settling, endurance and recovery required again.
+
+**Changing the default.** A promotion changes one line in
+[particlegan/recipes.py](particlegan/recipes.py): `DEFAULT_RECIPE = "bispf_optimized"`.
+All model-family factories inherit that trainer preset. Explicit presets such as
+`get_recipe("ka2")` remain available. This is the owner-selected research default;
+Forge calibration remains provisional.
+
+**0.9.1 throughput.** Version 0.9.1 made the faster BISPF execution policy the
+default, and kept explicit historical settings and saved-recipe restoration (see the
+[changelog](CHANGELOG.md) for compatibility limits). Batched convolution updates and
+BF16/channels-last training accelerate supported CUDA image networks. Weights,
+optimizer arithmetic and sampling stay FP32. CPU and nonconvolutional networks keep
+their previous execution. The [throughput readout](reports/forge/bispf-throughput/README.md)
+preserves 19 passing and 11 failing task verdicts. It measures 2.15× faster 256×256
+DCGAN updates and about 2.3× faster small image updates than 0.9.0. Across all six
+DCGAN workloads, speedups range from 1.02× to 2.15×. These results do not establish
+natural-image convergence or a universal architecture guarantee.
 
 ## Repeatable initialization
 
@@ -187,7 +244,8 @@ transport their parent's Adam history at half mass.
 
 ## Learn more
 
-- [How the training formulation works](docs/ka2.md), including several critics and conditional critics
+- [Optimized BISPF settings and measured behavior](reports/forge/bispf-optimized/README.md)
+- [Historical KA2 formulation](docs/ka2.md), including several critics and conditional critics
 - [E22](docs/e22.md): a schedule-free configuration for the native 100-Gaussian problems with no data-space statistics
 - [ParticleGAN Atlas](docs/atlas.md): illustrated E22 comparison, local population corrections and automatic backend selection
 - [Routed paired E22](docs/e22_routed.md): conditional row evidence, guarded moves and clean serving

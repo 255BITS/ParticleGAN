@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "id": "misgan_block_recovery",
+  "description": "2-pair incomplete-data MisGAN with detached mask gradient in L_x on 8D block sensor-dropout problem; recovers 2D manifold, 8D subspace, mask distribution and ppost Bayesian imputation.",
+  "adapter": "transfer_vector",
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "host": "misgan_block_recovery",
+    "steps": 7000,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "protocol": "screening",
+    "produces_state": true,
+    "host_definition": {
+      "problem": "block",
+      "dimension": 8,
+      "pairs": 2,
+      "detached_mask_gradient": true,
+      "imputation": "ppost",
+      "steps": 7000,
+      "batch": 2048,
+      "z_dim": 8,
+      "particles": 256
+    },
+    "prior_contract": "recipe_owned_v1"
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
+    "kind": "misgan_block_recovery",
+    "eval_samples": 4096,
+    "thresholds": [
+      ["modes", "==", 100],
+      ["hq", ">=", 0.90],
+      ["mass_tv", "<=", 0.10],
+      ["off_plane", "<=", 0.04],
+      ["mask_tv", "<=", 0.05],
+      ["acc", ">=", 0.96],
+      ["acc_lo", ">=", 0.70]
+    ]
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 1800
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "mog_prior"
+  ],
+  "dependencies": []
+}

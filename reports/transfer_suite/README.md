@@ -1,5 +1,10 @@
 # Transfer leaderboard with test importance
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../forge/technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 **Current PR comparison: [formulation defaults](formulations/README.md).**
 Each candidate owns its training recipe; G/D architecture is separate. The
 current b_cap3 entry passes **9/9 required and 9/10 practical data/image toys**.

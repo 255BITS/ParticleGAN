@@ -95,8 +95,9 @@ def test_full_regenerator_preserves_confidence_coherence_and_selected_scores():
     first = driver._current_markdown(publication, ROOT, page)
     assert first == driver._current_markdown(publication, ROOT, page)
     assert publication == before
-    row = next(line for line in first.splitlines() if line.startswith("| ↳ †") and "Confidence LR;" in line)
-    assert "[6/6]" in row and "[1(*)/21]" in row and "[0(*)/2]" in row and "[7(*)/29]" in row
+    # Research rows sit in their own table; same-source backfill attempts fill only originally unrun cells.
+    row = next(line for line in first.splitlines() if line.startswith("| [BCAP]") and "Confidence LR;" in line)
+    assert "[6/6]" in row and "[9/21]" in row and "[0/2 (1 blocked)]" in row and "[15/29 (1 blocked)]" in row
     from experiments.forge.family_reports import render_family
     family = next(f for f in publication["family_progress"]["families"] if f["id"] == "bcap-pure")
     detail = render_family(ROOT, publication, family)

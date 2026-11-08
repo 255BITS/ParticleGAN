@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "id": "alice_spiral_bigan",
+  "description": "Continuous 2D Archimedes spiral joint (G(z), E(x), D(x, z)) with ALICE cycle-consistency regularization and MoGParticlePrior(sigma=0.06).",
+  "adapter": "transfer_vector",
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "host": "alice_spiral_bigan",
+    "steps": 4000,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.06,
+      "standardize": false
+    },
+    "protocol": "screening",
+    "produces_state": true,
+    "host_definition": {
+      "target": "Archimedes spiral",
+      "theta_min": 1.5707963267948966,
+      "theta_max": 10.995574287564276,
+      "r0": 0.5,
+      "r_slope": 0.25,
+      "sigma": 0.06,
+      "arc_bins": 16,
+      "steps": 4000,
+      "batch": 256,
+      "z_dim": 2,
+      "particles": 256
+    },
+    "prior_contract": "recipe_owned_v1"
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
+    "kind": "alice_spiral_bigan",
+    "eval_samples": 4096,
+    "thresholds": [
+      ["arc_bins", ">=", 15],
+      ["hq", ">=", 0.85],
+      ["mass_tv", "<=", 0.16],
+      ["recon_rmse", "<=", 0.14],
+      ["latent_recon_rmse", "<=", 0.25],
+      ["arc_consistency", ">=", 0.90]
+    ]
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 600
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "mog_prior"
+  ],
+  "dependencies": []
+}

@@ -10,11 +10,9 @@ from __future__ import annotations
 from collections import Counter
 from copy import deepcopy
 import hashlib
-import importlib.util
 import json
 import math
 from pathlib import Path
-import sys
 
 from .sampling import grade_sampling, validate_declaration
 from .priors import task_prior
@@ -22,9 +20,36 @@ from .initialization import task_initializer
 
 
 ROOT = Path(__file__).resolve().parents[2]
-IMPORTANCES = {"required", "ranking", "diagnostic"}
+# A stretch (or legacy held) task stays assigned, graded and shown in the
+# Stretch table, but it is not counted in required totals, blockers or next
+# tasks. A task removed from the count stays assigned as diagnostic and carries
+# a removal note naming why.
+STRETCH_ROLES = frozenset({"stretch", "held"})
+IMPORTANCES = {"required", "stretch", "ranking", "diagnostic", "held"}
+COUNTED_OR_HELD = frozenset({"required", *STRETCH_ROLES})
+HOLD_SCHEMA, STRETCH_SCHEMA, REMOVAL_SCHEMA = "forge_hold_v1", "forge_stretch_v1", "forge_count_removal_v1"
+# unsolved: no recorded recipe has ever passed the current declaration.
+# held_prerequisite: the task depends on a held task (listed in blocked_by).
+HOLD_REASONS = frozenset({"no_global_recipe", "unsolved", "held_prerequisite"})
+STRETCH_REASONS = frozenset({"frontier", "extra_credit", "optional", *HOLD_REASONS, "stretch_prerequisite"})
+# phase and duplicate name the counted task that carries the question (counted_by).
+REMOVAL_REASONS = frozenset({"phase", "duplicate", "superseded", "ill_posed"})
 GATE_STATUSES = {"PASS", "FAIL", "INCOMPLETE", "INVALID", "NOT_RUN", "BLOCKED"}
 DIAGNOSTIC_SCOPES = frozenset({"calibration_diagnostic", "research_diagnostic"})
+
+
+def is_stretch(assignment_or_role: dict | str | None) -> bool:
+    """True when an assignment dict or importance string represents a stretch/held task."""
+    role = assignment_or_role.get("importance") if isinstance(assignment_or_role, dict) else assignment_or_role
+    return role in STRETCH_ROLES
+
+
+def stretch_note(assignment: dict | None) -> dict | None:
+    """Return the stretch or legacy hold note attached to a stretch assignment, if any."""
+    if not isinstance(assignment, dict) or not is_stretch(assignment):
+        return None
+    note = assignment.get("stretch") or assignment.get("hold")
+    return note if isinstance(note, dict) else None
 
 
 def diagnostic_evidence_scope(request: dict) -> str | None:
@@ -103,16 +128,20 @@ def _validate_measurement_contract(task):
     evaluation = task["evaluation"]
     kind = evaluation["kind"]
     fixed = {"scoring_weights": "live"}
-    if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
+    measured = task
+    from .tier1_policy import is_policy_task
+    if is_policy_task(task):
         from .tier1_policy import validate
-        validate(task)
+        # A scoped variant changes only its declared binding; its unchanged
+        # parent must still satisfy the referenced evaluator's constants.
+        measured = validate(task)
         fixed["scoring_weights"] = "state_selected"
     if kind in {"gaussian_smoke", "gaussian_stability"}:
         from .gaussian_tasks import validate_task
-        validate_task(task)
+        validate_task(measured)
     elif kind in {"word_smoke", "word_hold"}:
         from .word_adapter import validate_word_task
-        validate_word_task(task)
+        validate_word_task(measured)
     elif kind == "transfer_sustained":
         from benchmarks.locked_shared.observation import OBSERVATIONS, MIN_STABLE_CHECKS
         declared = evaluation.get("evaluator") == "experiments.forge.transfer_cadence:test_verdict"
@@ -128,10 +157,17 @@ def _validate_measurement_contract(task):
         from benchmarks.toy100.accuracy_gate import HOLDOUT_N
         from benchmarks.toy100.gate import MIN_STABLE_CHECKS
         from benchmarks.toy100.metrics import REQUIREMENTS
+        metrics_pin = measured.get("evaluation", {}).get("sources", {}).get("benchmarks/toy100/metrics.py")
+        expected_req = (
+            {**REQUIREMENTS, "min_precision": 0.97}
+            if metrics_pin == "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b"
+            or (metrics_pin is None and measured.get("evaluation", {}).get("coverage_thresholds", {}).get("min_precision") == 0.97)
+            else REQUIREMENTS
+        )
         fixed.update(evaluator="benchmarks.toy100.accuracy_gate:evaluate_suite",
                      coverage_evaluator="benchmarks.toy100.gate:evaluate_suite",
                      minimum_stable_checks=MIN_STABLE_CHECKS, holdout_samples=HOLDOUT_N,
-                     coverage_thresholds=REQUIREMENTS, accuracy_limits=LIMITS)
+                     coverage_thresholds=expected_req, accuracy_limits=LIMITS)
     elif kind in {"ring_hold", "ring_extension"}:
         declaration = _convergence_class()().declaration()
         fixed.update(evaluator="reports/toy100/gap-fill-20260925/sources/k3p/convergence_gate.py:ConvergenceGate",
@@ -149,6 +185,11 @@ def _validate_measurement_contract(task):
         conditions = evaluation.get("conditions")
         if not isinstance(conditions, list) or sorted(conditions) != sorted(("step_label", "horizon", "evaluation_cadence", "restart")):
             raise ValueError(f"{task['id']}: all four fixed clock-free comparisons are required")
+    elif kind == "image_training_performance":
+        from .scaling_adapter import validate_task
+        validate_task(task)
+        fixed.update(evaluator="experiments.forge.scaling_adapter:grade", training_feedback=False,
+                     qualification_input=False)
     else:
         return
     for key, expected in fixed.items():
@@ -186,6 +227,21 @@ def _validate_task(task):
 
 
 def load_tasks(root: Path | str) -> dict:
+    """Validated task catalogue; memoized while a resolution cache is bound.
+
+    Inside ``planning.resolution_cache(root)`` the catalogue is read once and
+    each caller receives a shallow copy of the memoized mapping (the task
+    declarations themselves are shared and must be treated as read-only).
+    """
+    from .resolution_scope import active
+    cache = active(root)
+    if cache is not None:
+        return dict(cache.get_all_tasks())
+    return read_task_catalog(root)
+
+
+def read_task_catalog(root: Path | str) -> dict:
+    """Read and validate every task declaration, bypassing any resolution cache."""
     tasks = {}
     for path in sorted((Path(root) / "configs/forge/tasks").glob("*.json")):
         task = _read(path)
@@ -212,6 +268,132 @@ def load_view(root: Path | str, view_id: str) -> dict:
     return view
 
 
+def explanation_reference(value, label):
+    """Repo-relative Markdown path#anchor; report tests check that the anchor exists.
+
+    A URL scheme, drive letter or home directory never resolves inside the
+    repository, so ':' and a leading '~' are refused like absolute paths.
+    """
+    if not isinstance(value, str) or value.count("#") != 1:
+        raise ValueError(f"{label} needs a repo-relative path#anchor explanation")
+    path, anchor = value.split("#")
+    if (not anchor or Path(path).suffix != ".md" or Path(path).is_absolute() or ".." in Path(path).parts
+            or ":" in path or path.startswith("~") or "\\" in path or any(c.isspace() for c in value)):
+        raise ValueError(f"{label} needs a repo-relative path#anchor explanation")
+
+
+def plain_summary(value, label):
+    if not isinstance(value, str) or value != value.strip() or not 20 <= len(value) <= 280:
+        raise ValueError(f"{label} needs a plain-language summary of 20-280 characters")
+
+
+def counted_by_matches(reason, counted_by) -> bool:
+    """Phase and duplicate removals name the counted task; the other reasons use null."""
+    if reason in {"phase", "duplicate"}:
+        return isinstance(counted_by, str) and bool(counted_by)
+    return counted_by is None
+
+
+def _validate_hold(name, hold):
+    keys = {"schema", "previous_importance", "reason", "blocked_by", "summary", "explanation", "reentry"}
+    if not isinstance(hold, dict) or set(hold) != keys:
+        raise ValueError(f"{name}: held assignments need hold metadata with exactly {sorted(keys)}")
+    if hold["schema"] != HOLD_SCHEMA or hold["previous_importance"] != "required":
+        raise ValueError(f"{name}: only a previously required task can be held ({HOLD_SCHEMA})")
+    if hold["reason"] not in HOLD_REASONS:
+        raise ValueError(f"{name}: hold reason must be one of {sorted(HOLD_REASONS)}")
+    blocked = hold["blocked_by"]
+    if (not isinstance(blocked, list) or any(not isinstance(x, str) or not x for x in blocked)
+            or blocked != sorted(set(blocked))):
+        raise ValueError(f"{name}: hold blocked_by must list distinct task ids in sorted order")
+    plain_summary(hold["summary"], f"{name}: hold")
+    explanation_reference(hold["explanation"], f"{name}: hold")
+    if not isinstance(hold["reentry"], str) or len(hold["reentry"].strip()) < 20:
+        raise ValueError(f"{name}: hold needs a concrete re-entry criterion")
+
+
+def _validate_stretch(name, stretch):
+    if stretch is None:
+        return
+    allowed = {"schema", "previous_importance", "reason", "blocked_by", "summary", "explanation", "reentry", "graduation"}
+    required = {"reason", "summary"}
+    if not isinstance(stretch, dict) or not required <= set(stretch) <= allowed:
+        raise ValueError(f"{name}: stretch metadata needs at least {sorted(required)} and only {sorted(allowed)}")
+    if "schema" in stretch and stretch["schema"] not in {STRETCH_SCHEMA, HOLD_SCHEMA}:
+        raise ValueError(f"{name}: stretch schema must be {STRETCH_SCHEMA}")
+    if stretch["reason"] not in STRETCH_REASONS:
+        raise ValueError(f"{name}: stretch reason must be one of {sorted(STRETCH_REASONS)}")
+    if "blocked_by" in stretch:
+        blocked = stretch["blocked_by"]
+        if (not isinstance(blocked, list) or any(not isinstance(x, str) or not x for x in blocked)
+                or blocked != sorted(set(blocked))):
+            raise ValueError(f"{name}: stretch blocked_by must list distinct task ids in sorted order")
+    plain_summary(stretch["summary"], f"{name}: stretch")
+    if "explanation" in stretch:
+        explanation_reference(stretch["explanation"], f"{name}: stretch")
+    for field in ("reentry", "graduation"):
+        if field in stretch and (not isinstance(stretch[field], str) or len(stretch[field].strip()) < 20):
+            raise ValueError(f"{name}: stretch {field} needs a concrete criterion of at least 20 characters")
+
+
+def _validate_removal(name, removal):
+    keys = {"schema", "previous_importance", "reason", "counted_by", "summary", "explanation"}
+    if not isinstance(removal, dict) or set(removal) != keys:
+        raise ValueError(f"{name}: removal metadata needs exactly {sorted(keys)}")
+    if removal["schema"] != REMOVAL_SCHEMA or removal["previous_importance"] != "required":
+        raise ValueError(f"{name}: only a previously required task can be removed from the count ({REMOVAL_SCHEMA})")
+    if removal["reason"] not in REMOVAL_REASONS:
+        raise ValueError(f"{name}: removal reason must be one of {sorted(REMOVAL_REASONS)}")
+    if not counted_by_matches(removal["reason"], removal["counted_by"]):
+        raise ValueError(f"{name}: phase and duplicate removals name counted_by; superseded and ill_posed use null")
+    plain_summary(removal["summary"], f"{name}: removal")
+    explanation_reference(removal["explanation"], f"{name}: removal")
+
+
+def _validate_previous_revision(view):
+    previous = view.get("previous_revision")
+    if previous is None:
+        return
+    if not isinstance(previous, dict) or set(previous) != {"revision", "archive", "policy_fingerprint"}:
+        raise ValueError("previous_revision needs exactly revision, archive and policy_fingerprint")
+    revision = previous["revision"]
+    if type(revision) is not int or not 1 <= revision < view["revision"]:
+        raise ValueError("previous_revision must name an earlier revision")
+    if previous["archive"] != f"configs/forge/view-history/{view['id']}-v{revision}.json":
+        raise ValueError("previous_revision archive must be configs/forge/view-history/<view>-v<revision>.json")
+    if not _digest(previous["policy_fingerprint"]):
+        raise ValueError("previous_revision policy_fingerprint must be a SHA-256 digest")
+
+
+def _phase_parent(index, tasks, parent, child):
+    """A removed phase may precede the counted verdict that replays it on the same run.
+
+    Both must share one uninterrupted execution group and tier, and the parent's
+    removal note must name the child. Callers also require a checkpoint edge, and
+    validate_view requires the phase's own prerequisites to be counted.
+    """
+    removal = index[parent].get("removal") or {}
+    group = tasks[child]["execution"].get("execution_group")
+    return bool(index[parent]["importance"] == "diagnostic" and removal.get("reason") == "phase"
+                and removal.get("counted_by") == child and group
+                and tasks[child]["execution"].get("uninterrupted") and tasks[parent]["execution"].get("uninterrupted")
+                and tasks[parent]["execution"].get("execution_group") == group
+                and index[parent]["qualification_tier"] == index[child]["qualification_tier"])
+
+
+def _same_question(removed, counted):
+    """Duplicates grade one question: equal evaluation declarations, apart from a
+    source pin of the other task's own declaration (a derived copy's provenance)."""
+    def declared(task, other):
+        evaluation = deepcopy(task["evaluation"])
+        sources = evaluation.pop("sources", {})
+        if isinstance(sources, dict):
+            sources = {path: digest for path, digest in sources.items()
+                       if path != f"configs/forge/tasks/{other['id']}.json"}
+        return {**evaluation, **({"sources": sources} if sources else {})}
+    return _hash(declared(removed, counted)) == _hash(declared(counted, removed))
+
+
 def validate_view(view: dict, tasks: dict) -> None:
     if not isinstance(view, dict):
         raise ValueError("view must be an object")
@@ -225,8 +407,9 @@ def validate_view(view: dict, tasks: dict) -> None:
         raise ValueError("view needs nonempty assignments")
     if not isinstance(view.get("eligibility", {}), dict):
         raise ValueError("view eligibility must be an object")
+    _validate_previous_revision(view)
     index = {}
-    required_tiers = set()
+    required_tiers = set()  # Tiers with a counted or stretch/held task.
     for assignment in assignments:
         if not isinstance(assignment, dict):
             raise ValueError("assignment must be an object")
@@ -239,16 +422,30 @@ def validate_view(view: dict, tasks: dict) -> None:
         if tasks[name]["id"] != name:
             raise ValueError("task index and id disagree")
         tier = assignment.get("qualification_tier")
-        if type(tier) is not int or tier not in (1, 2, 3):
-            raise ValueError("qualification_tier must be 1, 2, or 3")
+        if type(tier) is not int or isinstance(tier, bool) or tier < 1:
+            raise ValueError("qualification_tier must be an integer >= 1")
         if assignment.get("importance") not in IMPORTANCES:
             raise ValueError("unknown task importance")
+        if assignment["importance"] == "held":
+            _validate_hold(name, assignment.get("hold"))
+        elif "hold" in assignment:
+            raise ValueError(f"{name}: hold metadata requires importance held")
+        if assignment["importance"] == "stretch":
+            _validate_stretch(name, assignment.get("stretch"))
+        elif "stretch" in assignment:
+            raise ValueError(f"{name}: stretch metadata requires importance stretch")
+        if "removal" in assignment:
+            if assignment["importance"] != "diagnostic":
+                raise ValueError(f"{name}: a task removed from the count stays assigned as diagnostic")
+            _validate_removal(name, assignment["removal"])
         _positive_int(assignment.get("order"), "assignment order", minimum=0)
         index[name] = assignment
-        if assignment["importance"] == "required":
+        if assignment["importance"] in COUNTED_OR_HELD:
             required_tiers.add(tier)
     highest = max(a["qualification_tier"] for a in assignments)
     diagnostic = view.get("evidence_scope") in DIAGNOSTIC_SCOPES
+    if any(tasks[name]["adapter"] == "dcgan_performance_v1" for name in index) and view.get("evidence_scope") != "research_diagnostic":
+        raise ValueError("image performance tasks require a separate research_diagnostic view and cannot grant qualification")
     if diagnostic and any(a["importance"] != "diagnostic" or a["qualification_tier"] != 1 for a in assignments):
         raise ValueError("diagnostic views require only diagnostic tasks in Tier 1")
     if not diagnostic and required_tiers != set(range(1, highest + 1)):
@@ -264,6 +461,19 @@ def validate_view(view: dict, tasks: dict) -> None:
             execution_groups[group] = tier
     visiting, visited = set(), set()
 
+    def require_counted(name, parent, via=None):
+        """A counted verdict rests only on counted tasks, directly or through its removed phase."""
+        if index[parent]["importance"] == "required":
+            return
+        if index[parent]["importance"] == "held" and via:
+            raise ValueError(f"{name}: its removed phase {via} depends on held task {parent}; count {parent}, "
+                             f"or hold {name} and {via} with reason held_prerequisite")
+        if index[parent]["importance"] == "held":
+            raise ValueError(f"{name}: required task depends on held task {parent}; hold {name} "
+                             f"with reason held_prerequisite and list {parent} in blocked_by")
+        raise ValueError("a required task cannot depend on a nonrequired task"
+                         + (f" (its removed phase {via} depends on {parent})" if via else ""))
+
     def visit(name):
         if name in visiting:
             raise ValueError(f"dependency cycle involving {name}")
@@ -276,8 +486,16 @@ def validate_view(view: dict, tasks: dict) -> None:
                 raise ValueError(f"{name}: dependency {parent} missing from view")
             if index[parent]["qualification_tier"] > index[name]["qualification_tier"]:
                 raise ValueError(f"{name}: dependency {parent} is in a later tier")
-            if index[parent]["importance"] != "required" and index[name]["importance"] == "required":
-                raise ValueError("a required task cannot depend on a nonrequired task")
+            if index[name]["importance"] == "required" and index[parent]["importance"] != "required":
+                if dep["kind"] == "checkpoint" and _phase_parent(index, tasks, parent, name):
+                    # The removed phase runs inside this counted job, so its own
+                    # prerequisites gate the counted verdict and must be counted too.
+                    for inner in _dependencies(tasks[parent]):
+                        if inner["task"] not in index:
+                            raise ValueError(f"{parent}: dependency {inner['task']} missing from view")
+                        require_counted(name, inner["task"], via=parent)
+                else:
+                    require_counted(name, parent)
             if dep["kind"] == "checkpoint":
                 if not tasks[parent]["execution"].get("produces_state"):
                     raise ValueError(f"{name}: checkpoint dependency does not produce state")
@@ -289,6 +507,42 @@ def validate_view(view: dict, tasks: dict) -> None:
 
     for name in index:
         visit(name)
+    for name, assignment in index.items():
+        if assignment["importance"] == "held":
+            hold = assignment["hold"]
+            held_parents = sorted(dep["task"] for dep in _dependencies(tasks[name])
+                                  if is_stretch(index[dep["task"]]))
+            if hold["blocked_by"] != held_parents:
+                raise ValueError(f"{name}: hold blocked_by must list exactly its held prerequisites {held_parents}")
+            if (hold["reason"] == "held_prerequisite") != bool(held_parents):
+                raise ValueError(f"{name}: a task held behind a held prerequisite uses reason held_prerequisite, "
+                                 "and only such a task does")
+        if assignment["importance"] == "stretch" and isinstance(assignment.get("stretch"), dict):
+            stretch = assignment["stretch"]
+            stretch_parents = sorted(dep["task"] for dep in _dependencies(tasks[name])
+                                     if is_stretch(index[dep["task"]]))
+            if "blocked_by" in stretch and stretch["blocked_by"] != stretch_parents:
+                raise ValueError(f"{name}: stretch blocked_by must list its stretch prerequisites {stretch_parents}")
+            if stretch["reason"] in {"held_prerequisite", "stretch_prerequisite"}:
+                if not stretch_parents or stretch.get("blocked_by") != stretch_parents:
+                    raise ValueError(f"{name}: stretch prerequisite reason requires blocked_by listing stretch prerequisites {stretch_parents}")
+        removal = assignment.get("removal")
+        if removal and removal["reason"] == "phase":
+            target = removal["counted_by"]
+            if (target not in index or index[target]["importance"] != "required"
+                    or not any(dep["task"] == name and dep["kind"] == "checkpoint"
+                               for dep in _dependencies(tasks[target]))
+                    or not _phase_parent(index, tasks, name, target)):
+                raise ValueError(f"{name}: a phase removal must be the checkpoint parent of its counted task, "
+                                 "in one uninterrupted execution group and tier")
+        if removal and removal["reason"] == "duplicate":
+            target = removal["counted_by"]
+            if (target == name or target not in index or index[target]["importance"] != "required"
+                    or index[target]["qualification_tier"] > assignment["qualification_tier"]
+                    or tasks[target]["adapter"] != tasks[name]["adapter"]
+                    or not _same_question(tasks[name], tasks[target])):
+                raise ValueError(f"{name}: a duplicate removal must name a counted task of this view at the same "
+                                 "or an earlier tier, with the same adapter and the same evaluation declaration")
 
 
 def _verdict(status, reason, **details):
@@ -410,15 +664,35 @@ def _native(task, evidence, *, diagnostic=False):
                     metrics=grade.get("holdout_metrics", {}), evaluator_result=grade)
 
 
+# Evidence identity of the ring grader. Task declarations (ring_hold,
+# ring_extension and their recipe-prior-refactor variants) keep binding the
+# archived path and hash below, so their evaluation fingerprints and every
+# recorded verdict are unchanged. Scoring code is imported from
+# ``benchmarks/``; the archived copy under ``reports/`` is evidence only and is
+# never placed on the import path.
+CONVERGENCE_GATE_RECEIPT = {
+    "module": "benchmarks.toy100.k3p_convergence_gate",
+    "source": "benchmarks/toy100/k3p_convergence_gate.py",
+    "archived_source": "reports/toy100/gap-fill-20260925/sources/k3p/convergence_gate.py",
+    "sha256": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0",
+    "archived_git_blob": "736563558b82bf7385881699cb12f59739f02e99",
+    "archived_commit": "74e1bae1e9c890d84debfff88eac5b16604b791f",
+    "relation": "byte_identical_copy",
+}
+
+
 def _convergence_class():
-    name = "_forge_original_convergence_gate"
-    if name not in sys.modules:
-        path = ROOT / "reports/toy100/gap-fill-20260925/sources/k3p/convergence_gate.py"
-        spec = importlib.util.spec_from_file_location(name, path)
-        module = importlib.util.module_from_spec(spec)
-        sys.modules[name] = module
-        spec.loader.exec_module(module)
-    return sys.modules[name].ConvergenceGate
+    """The archived K3P ring ``ConvergenceGate``, loaded from ``benchmarks/``.
+
+    The imported module must stay byte-identical to the archived evidence
+    source (same SHA-256 and Git blob), otherwise grading refuses.
+    """
+    from benchmarks.toy100 import k3p_convergence_gate as module
+    digest = hashlib.sha256(Path(module.__file__).read_bytes()).hexdigest()
+    if digest != CONVERGENCE_GATE_RECEIPT["sha256"]:
+        raise ValueError("ring convergence grader differs from its archived evidence identity "
+                         f"({CONVERGENCE_GATE_RECEIPT['archived_source']})")
+    return module.ConvergenceGate
 
 
 def _ring(task, evidence):
@@ -473,8 +747,20 @@ def _adaptation(task, evidence):
     evaluation = task["evaluation"]
     required = ("config_sha256", "source_sha256", "runtime", "mode", "noise_horizon",
                 "diagnostic_every", "dense_after", "dense_until", "shift", "shift_pair", "optimizer_final")
+    from .tier1_policy import schedule_free_policy
+    from .contracts import read_json
+    # A schedule-free policy recipe has no noise/schedule horizon; its actual
+    # None is verified against the saved recipe by verify_pair_artifacts.
+    optional = {"dense_after", "dense_until"} | ({"noise_horizon"} if schedule_free_policy(task) else set())
+    if "noise_horizon" not in optional and active.get("noise_horizon") is None:
+        try:
+            cfg = read_json(Path(evidence["artifact_root"]) / "config.json")
+            if cfg.get("recipe", {}).get("total_steps") is None:
+                optional.add("noise_horizon")
+        except Exception:
+            pass
     for run in (active, frozen):
-        if any(key not in run or (run[key] is None and key not in {"dense_after", "dense_until"}) for key in required):
+        if any(key not in run or (run[key] is None and key not in optional) for key in required):
             return _verdict("INCOMPLETE", "paired control lacks complete provenance/optimizer state")
         if run.get("steps") != evaluation["steps"] or run.get("shift_step") != evaluation["shift_step"]:
             return _verdict("INVALID", "shift timing differs from task")
@@ -544,6 +830,119 @@ def _clockfree(task, evidence):
                     metrics={"parity_comparisons": len(comparisons)})
 
 
+def _zero_tanh(task, evidence):
+    evaluation = task["evaluation"]
+    thresholds = evaluation["thresholds"]
+    points = evidence.get("observations", evidence.get("curve"))
+    if not isinstance(points, list) or not points:
+        return _verdict("INCOMPLETE", "missing zero_tanh observation curve")
+    try:
+        _curve(points, thresholds)
+    except ValueError as exc:
+        return _verdict("INVALID" if points else "INCOMPLETE", str(exc))
+    live = evidence.get("live")
+    if not isinstance(live, dict) or any(not _finite(live.get(key)) for key, _, _ in thresholds):
+        return _verdict("INCOMPLETE", "missing finite final live metrics")
+    failed = []
+    for name, op, bound in thresholds:
+        val = live.get(name)
+        ok = (val <= bound if op == "<=" else
+              val >= bound if op == ">=" else
+              val == bound if op == "==" else False)
+        if not ok:
+            failed.append(f"{name} {op} {bound}")
+    passed = len(failed) == 0
+    status = "PASS" if passed else "FAIL"
+    reason = ("recomputed origin point-mass contraction gates"
+              if passed else f"failed thresholds: {', '.join(failed)}")
+    return _verdict(status, reason, metrics=live,
+                    evaluator_result={"passed": passed, "failed_bounds": failed})
+
+
+STRETCH_EVALUATOR_KINDS = frozenset({
+    "zero_tanh_rail_escape",
+    "misgan_block_recovery",
+    "misgan_block_neural_imputer",
+    "misgan_mcar_p50_recovery",
+    "misgan_mcar_p80_anchored",
+    "pacgan_unequal_mass",
+    "pacgan8_grid100",
+    "ring16_bigan_continuous",
+    "alice_spiral_bigan",
+    "infogan_anisotropic_modes",
+    "cgan_overlapping_classes",
+    "cramer_energy_overlap",
+    "cyclegan_unpaired_constellation",
+})
+
+
+def _stretch_thresholds(task, evidence):
+    evaluation = task["evaluation"]
+    thresholds = evaluation["thresholds"]
+    raw_points = evidence.get("observations", evidence.get("curve"))
+    if not isinstance(raw_points, list) or not raw_points:
+        return _verdict("INCOMPLETE", f"missing {evaluation['kind']} observation curve")
+    points = []
+    for p in raw_points:
+        if not isinstance(p, dict):
+            return _verdict("INVALID", "observation entry must be an object")
+        nested = p.get("metrics") if isinstance(p.get("metrics"), dict) else {}
+        merged = {**nested, **{k: v for k, v in p.items() if k != "metrics"}}
+        points.append(merged)
+    try:
+        _curve(points, thresholds)
+    except ValueError as exc:
+        return _verdict("INVALID" if points else "INCOMPLETE", str(exc))
+    live = evidence.get("live")
+    if not isinstance(live, dict):
+        live = {k: v for k, v in points[-1].items() if k not in {"step", "passed", "failed_bounds"}}
+    if any(not _finite(live.get(key)) for key, _, _ in thresholds):
+        return _verdict("INCOMPLETE", "missing finite final live metrics")
+
+    def _point_failures(pt):
+        bad = []
+        for name, op, bound in thresholds:
+            val = pt.get(name)
+            ok = (val <= bound if op == "<=" else
+                  val >= bound if op == ">=" else
+                  val == bound if op == "==" else False)
+            if not ok:
+                bad.append(f"{name} {op} {bound}")
+        return bad
+
+    min_stable = int(evaluation.get("minimum_stable_checks", 1))
+    if len(points) < min_stable:
+        return _verdict("INCOMPLETE", f"requires at least {min_stable} observations, got {len(points)}")
+    tail = points[-min_stable:]
+    tail_failures = [_point_failures(pt) for pt in tail]
+    terminal_passed = sum(1 for f in tail_failures if not f)
+    failed = list(dict.fromkeys(b for f in tail_failures for b in f))
+    passed = terminal_passed == len(tail)
+    if evaluation["kind"] == "zero_tanh_rail_escape":
+        shift_step = int(task.get("execution", {}).get("shift_step", 1001))
+        recovery_deadline = int(evaluation.get("recovery_deadline", 400))
+        pre_shift = [pt for pt in points if pt.get("step") == shift_step - 1]
+        post_deadline = [pt for pt in points if int(pt.get("step", 0)) >= shift_step + recovery_deadline]
+        if pre_shift and any(_point_failures(pt) for pt in pre_shift):
+            passed = False
+            for pt in pre_shift:
+                for b in _point_failures(pt):
+                    if f"pre_shift:{b}" not in failed:
+                        failed.append(f"pre_shift:{b}")
+        if post_deadline and any(_point_failures(pt) for pt in post_deadline):
+            passed = False
+            for pt in post_deadline:
+                for b in _point_failures(pt):
+                    if b not in failed:
+                        failed.append(b)
+    status = "PASS" if passed else "FAIL"
+    reason = (f"recomputed {evaluation['kind']} gates ({terminal_passed}/{len(tail)} terminal checks passed)"
+              if passed else f"failed {evaluation['kind']} thresholds: {', '.join(failed)}")
+    return _verdict(status, reason, metrics=live,
+                    evaluator_result={"passed": passed, "terminal_passed": terminal_passed,
+                                      "minimum_stable_checks": min_stable, "failed_bounds": failed})
+
+
 def grade_result(task: dict, result: dict | None, *, diagnostic=False) -> dict:
     """Independently grade compatible raw evidence, without changing it."""
     try:
@@ -578,7 +977,13 @@ def grade_result(task: dict, result: dict | None, *, diagnostic=False) -> dict:
     sampling = grade_sampling(task, evidence)
     if sampling is not None:
         return _verdict(sampling["status"], sampling["reason"])
-    if task.get("task_cohort") == "tier1_policy_selected_cloud_v1" and task["adapter"] != "clockfree_audit":
+    if "linear_precision" in task.get("execution", {}):
+        from .precision import grade as precision_grade
+        precision = precision_grade(task, evidence)
+        if precision is not None:
+            return _verdict(*precision)
+    from .tier1_policy import is_policy_task
+    if is_policy_task(task) and task["adapter"] != "clockfree_audit":
         from .tier1_policy import validate_evidence
         policy_grade = validate_evidence(task, evidence)
         if policy_grade is not None:
@@ -586,20 +991,40 @@ def grade_result(task: dict, result: dict | None, *, diagnostic=False) -> dict:
     guard = _guards(task, evidence)
     if guard is not None:
         return guard
-    from .gaussian_tasks import grade as gaussian_grade
+    if is_policy_task(task):
+        from .policy_gaussian import grade as gaussian_grade
+    else:
+        from .gaussian_tasks import grade as gaussian_grade
     from .word_tasks import grade as word_grade
+    from .scaling_adapter import grade as performance_grade
     graders = {"gaussian_smoke": gaussian_grade, "gaussian_stability": gaussian_grade,
                "word_smoke": word_grade, "word_hold": word_grade,
                "transfer_sustained": _transfer, "native_accuracy": _native,
                "ring_hold": _ring, "ring_extension": _ring,
-               "paired_adaptation": _adaptation, "clockfree_parity": _clockfree}
+               "paired_adaptation": _adaptation, "clockfree_parity": _clockfree,
+               "image_training_performance": performance_grade,
+               "zero_tanh_smoke": _zero_tanh,
+               **{kind: _stretch_thresholds for kind in STRETCH_EVALUATOR_KINDS}}
     grader = graders.get(task["evaluation"]["kind"])
     if grader is None:
         return _verdict("BLOCKED", f"unsupported evaluator {task['evaluation']['kind']}")
     try:
-        if diagnostic and task.get("adapter") != "native100_continuation":
+        from .tier1_policy import diagnostic_continuation_allowed
+        # Only a registered cohort's declared Gaussian stability variant may
+        # continue its own scoped smoke state after a failed gate; every other
+        # task keeps native-only diagnostic checkpoint grading.
+        gaussian_continuation = (task["evaluation"]["kind"] == "gaussian_stability"
+                                 and diagnostic_continuation_allowed(task))
+        scope = (evidence.get("continuity") or {}) if gaussian_continuation else {}
+        if diagnostic and task.get("adapter") != "native100_continuation" and not gaussian_continuation:
             return _verdict("INVALID", "diagnostic checkpoint grading is limited to native continuations")
-        grade = _native(task, evidence, diagnostic=True) if diagnostic else grader(task, evidence)
+        if gaussian_continuation and (scope.get("diagnostic_continuation") is True) != bool(diagnostic):
+            return _verdict("INVALID", "diagnostic Gaussian continuation requires its explicit nonqualifying scope"
+                            if diagnostic else "diagnostic continuation cannot supply ordinary qualification")
+        if diagnostic and gaussian_continuation and scope.get("parent_smoke_status") not in {"PASS", "FAIL"}:
+            return _verdict("INVALID", "diagnostic Gaussian continuation must record its parent's measured gate")
+        grade = (_native(task, evidence, diagnostic=True) if diagnostic and not gaussian_continuation
+                 else grader(task, evidence))
         if diagnostic:
             grade.update(qualification_input=False, qualification_reuse=False)
         # Normalized metrics must not replace the raw curve when the input used
@@ -630,8 +1055,53 @@ def _candidate_eligibility(view, candidate):
     return reasons
 
 
-def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | None = None) -> dict:
-    """Reduce one candidate's compatible receipts; tier attainment is computed."""
+def check_summary(grade: dict) -> dict | None:
+    """Extract continuous check pass counts (k/M) from a graded task result."""
+    if not isinstance(grade, dict):
+        return None
+    passed = total = None
+    evaluator = grade.get("evaluator_result")
+    if isinstance(evaluator, dict):
+        checks = evaluator.get("checks")
+        if isinstance(checks, dict) and checks:
+            if all(isinstance(v, bool) for v in checks.values()):
+                passed = sum(1 for v in checks.values() if v)
+                total = len(checks)
+            elif all(isinstance(v, dict) for v in checks.values()):
+                passed = sum(1 for v in checks.values() if v.get("passed") is True or v.get("status") == "PASS")
+                total = len(checks)
+        elif isinstance(checks, list) and checks and all(isinstance(c, dict) for c in checks):
+            passed = sum(1 for c in checks if c.get("passed") is True or c.get("status") == "PASS")
+            total = len(checks)
+        elif type(evaluator.get("passing_checks")) is int and type(evaluator.get("observations")) is int:
+            passed, total = evaluator["passing_checks"], evaluator["observations"]
+    if total is None:
+        metrics = grade.get("metrics")
+        if isinstance(metrics, dict):
+            for pass_key, total_key in (
+                ("passing_checks", "observations"),
+                ("extension_passing", "extension_checks"),
+                ("passed_checks", "total_checks"),
+            ):
+                if type(metrics.get(pass_key)) is int and type(metrics.get(total_key)) is int:
+                    passed, total = metrics[pass_key], metrics[total_key]
+                    break
+    if type(passed) is int and type(total) is int and total > 0 and 0 <= passed <= total:
+        return {"passed_checks": passed, "total_checks": total, "check_pass_rate": round(passed / total, 6)}
+    return None
+
+
+def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | None = None,
+            allow_held_highest_tier: bool = False) -> dict:
+    """Reduce one candidate's compatible receipts; tier attainment is computed.
+
+    Stretch and held tasks are graded and shown but never counted in required
+    totals. A tier with no required task has status STRETCH (when its nonrequired
+    tasks are stretch) or HELD (legacy held): it neither passes nor stops
+    progression. Pure stretch tiers never block a view from reporting PASS once
+    every counted tier passes; legacy held highest tiers still report HELD unless
+    allow_held_highest_tier is explicitly authorized.
+    """
     validate_view(view, tasks)
     if not isinstance(results, list):
         raise ValueError("results must be a list")
@@ -653,8 +1123,11 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
         else:
             grade = grades[0]
             selected[name] = receipts[0]
+        summary = check_summary(grade)
         rows[name] = {"task_id": name, "qualification_tier": assignment["qualification_tier"],
                       "importance": assignment["importance"], **grade,
+                      **({"check_summary": summary} if summary is not None else {}),
+                      **{key: deepcopy(assignment[key]) for key in ("hold", "stretch", "removal") if key in assignment},
                       "cost": sum(_cost(r) for r in receipts)}
         rows[name].pop("evidence", None)
     # Retiering may place children before parents in presentation order. Resolve
@@ -699,28 +1172,69 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
                               if a.get("mode") == "verified_checkpoint" else
                               "checkpoint continuation is not bound to the producer's own state")
                     row.update(_verdict("BLOCKED", reason))
+    held_rows = [row for row in rows.values() if row["importance"] == "held"]
+    stretch_rows = [row for row in rows.values() if is_stretch(row)]
+    held_summary = {
+        "held_total": len(held_rows),
+        "held_passed": sum(row["status"] == "PASS" for row in held_rows),
+        "held_tasks": [row["task_id"] for row in held_rows],
+        "stretch_total": len(stretch_rows),
+        "stretch_passed": sum(row["status"] == "PASS" for row in stretch_rows),
+        "stretch_tasks": [row["task_id"] for row in stretch_rows],
+    }
     if view.get("evidence_scope") in DIAGNOSTIC_SCOPES:
         return {"view": view["id"], "view_revision": view["revision"], "policy_fingerprint": view_fingerprint(view),
-                "status": "DIAGNOSTIC", "qualified_tier": 0, "eligible": False,
+                "status": "DIAGNOSTIC", "qualified_tier": 0, "eligible": False, "counted_eligible": False,
                 "evidence_scope": view["evidence_scope"], "current_qualification_reuse": False,
                 "qualification_input": False, "qualification_reuse": False,
                 "diagnostic_complete": all(row["status"] in {"PASS", "FAIL"} for row in rows.values()),
                 "tiers": [], "tasks": list(rows.values()),
                 "task_statuses": {name: row["status"] for name, row in rows.items()},
                 "next_task": None, "next_tasks": [], "blockers": [], "required_passed": 0, "required_total": 0,
+                **held_summary, "held_tiers": [], "stretch_tiers": [], "counted_tiers": [],
                 "cost_seconds": sum(row["cost"] for row in rows.values())}
+    index = {a["task"]: a for a in assignments}
+
+    def ready(name):
+        # A removed phase runs inside its counted child's uninterrupted job, so
+        # its own prerequisites decide whether that job can be proposed.
+        for dep in _dependencies(tasks[name]):
+            parent = dep["task"]
+            if rows[parent]["status"] == "PASS":
+                continue
+            if (rows[parent]["status"] == "NOT_RUN" and dep["kind"] == "checkpoint"
+                    and _phase_parent(index, tasks, parent, name) and ready(parent)):
+                continue
+            return False
+        return True
+
     eligibility = _candidate_eligibility(view, candidate)
     tiers, qualified_tier, next_tasks, blockers = [], 0, [], []
     stopped = False
     for tier in sorted({a["qualification_tier"] for a in assignments}):
         subset = [rows[a["task"]] for a in assignments if a["qualification_tier"] == tier]
         required = [row for row in subset if row["importance"] == "required"]
+        held = [row for row in subset if row["importance"] == "held"]
+        stretch = [row for row in subset if is_stretch(row)]
+        has_explicit_stretch = any(row["importance"] == "stretch" for row in subset)
+        shared = {
+            "held_total": len(held),
+            "held_passed": sum(row["status"] == "PASS" for row in held),
+            "diagnostic_total": sum(r["importance"] == "diagnostic" for r in subset),
+            **({"stretch_total": len(stretch), "stretch_passed": sum(row["status"] == "PASS" for row in stretch)}
+               if has_explicit_stretch else {}),
+        }
+        if not required:
+            tier_status = "STRETCH" if (stretch and not held) else "HELD"
+            tiers.append({"qualification_tier": tier, "status": tier_status, "required_passed": 0,
+                          "required_total": 0, "counts": {}, **shared})
+            continue
         counts = dict(Counter(row["status"] for row in required))
         all_pass = all(row["status"] == "PASS" for row in required)
         status = "PASS" if all_pass else next((s for s in ("FAIL", "INVALID", "BLOCKED", "INCOMPLETE", "NOT_RUN") if counts.get(s)), "INCOMPLETE")
         tiers.append({"qualification_tier": tier, "status": status,
                       "required_passed": counts.get("PASS", 0), "required_total": len(required),
-                      "counts": counts, "diagnostic_total": sum(r["importance"] == "diagnostic" for r in subset)})
+                      "counts": counts, **shared})
         if stopped:
             continue
         if all_pass and not eligibility:
@@ -731,18 +1245,31 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
                     for row in required if row["status"] != "PASS"]
         hard_stop = eligibility or any(row["status"] in {"FAIL", "INVALID", "BLOCKED", "INCOMPLETE"} for row in required)
         if not hard_stop:
-            next_tasks = [row["task_id"] for row in required if row["status"] == "NOT_RUN"
-                          and all(rows[dep["task"]]["status"] == "PASS" for dep in _dependencies(tasks[row["task_id"]]))]
+            next_tasks = [row["task_id"] for row in required if row["status"] == "NOT_RUN" and ready(row["task_id"])]
     if eligibility:
         blockers = [{"task_id": None, "status": "BLOCKED", "reasons": eligibility}, *blockers]
-    status = ("PASS" if qualified_tier == len(tiers) else "BLOCKED" if eligibility else
-              next((t["status"] for t in tiers if t["qualification_tier"] > qualified_tier), "INCOMPLETE"))
+    counted = [t["qualification_tier"] for t in tiers if t["status"] not in {"HELD", "STRETCH"}]
+    non_stretch = [t for t in tiers if t["status"] != "STRETCH"]
+    complete = bool(counted) and qualified_tier == counted[-1]
+    counted_eligible = bool(complete and not eligibility)
+    allow_held = bool(allow_held_highest_tier or view.get("eligibility", {}).get("allow_held_highest_tier"))
+    status = ("BLOCKED" if eligibility else
+              "PASS" if complete and (non_stretch[-1]["status"] != "HELD" or allow_held) else
+              "STRETCH" if not non_stretch and bool(tiers) else
+              "HELD" if complete or not counted else
+              next((t["status"] for t in tiers if t["status"] not in {"HELD", "STRETCH"} and t["qualification_tier"] > qualified_tier),
+                   "INCOMPLETE"))
     if status == "NOT_RUN":
         status = "INCOMPLETE"
     return {"view": view["id"], "view_revision": view["revision"], "policy_fingerprint": view_fingerprint(view),
             "status": status, "qualified_tier": qualified_tier, "eligible": status == "PASS",
+            "counted_eligible": counted_eligible,
             "tiers": tiers, "tasks": list(rows.values()), "task_statuses": {name: row["status"] for name, row in rows.items()},
             "next_task": next_tasks[0] if next_tasks else None, "next_tasks": next_tasks,
             "blockers": blockers, "required_passed": sum(row["status"] == "PASS" for row in rows.values() if row["importance"] == "required"),
             "required_total": sum(row["importance"] == "required" for row in rows.values()),
+            **held_summary,
+            "held_tiers": [t["qualification_tier"] for t in tiers if t["status"] == "HELD"],
+            "stretch_tiers": [t["qualification_tier"] for t in tiers if t["status"] in {"HELD", "STRETCH"}],
+            "counted_tiers": counted,
             "cost_seconds": sum(row["cost"] for row in rows.values())}

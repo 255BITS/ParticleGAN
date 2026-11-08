@@ -101,7 +101,18 @@ def test_task_policy_preserves_old_sustained_definition_and_checked_budgets():
     campaign = read_json(ROOT / "configs/forge/campaigns/technique-inventory-word-split-v1.json")
     groups = {tasks[a["task"]]["execution"].get("execution_group", a["task"]):
               tasks[a["task"]]["resources"]["timeout_seconds"] for a in view["assignments"]}
-    assert campaign["candidate_budget_seconds"] == sum(groups.values()) == 46620
+    assert campaign["candidate_budget_seconds"] == 46620
+    # The original campaign keeps its old allowance. New model-mode tasks add
+    # an explicit reservation; they cannot silently fit the historical cap.
+    assert sum(groups.values()) == 74220
+    assert sum(value for key, value in groups.items() if key.startswith("precision_gaussian_")) == 900
+    initial = read_json(ROOT / "reports/forge/precision-stretch/initial-view-v14.json")
+    initial_keys = {tasks[a["task"]]["execution"].get("execution_group", a["task"]) for a in initial["assignments"]}
+    original_groups = {key: value for key, value in groups.items() if key in initial_keys and not key.startswith("model_")}
+    assert sum(original_groups.values()) == 58440
+
+
+@pytest.mark.cuda
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="word ladder execution requires CUDA")
@@ -126,6 +137,9 @@ def test_cuda_bounded_public_word_draws_preserve_streams_and_save_complete_state
         purposes = {b["purpose"] for b in state["streams"]["manifest"]["bindings"].values()}
         assert {"generated_words", "paired_reconstruction", "word_confirmation", "word_reconstruction_confirmation"} <= purposes
     execute(device=DEVICE)
+
+
+@pytest.mark.cuda
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="external-horizon restoration requires CUDA")

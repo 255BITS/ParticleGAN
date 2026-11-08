@@ -1,5 +1,8 @@
 # CB64-RA experimental backend
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current leaderboard for this goal: [reports/forge/technique-inventory.md](../../../forge/technique-inventory.md); goal index: [reports/leaderboard-index.json](../../../leaderboard-index.json). Results below are preserved as recorded.
+
 Frozen E22-derived package with 64 rank-8 feature cells and bounded real-anchor parents. This archive makes the tested experimental implementation and configuration available in Git.
 
 **Status: experimental.** The completed CPU diagnostics found a reaction-cost improvement and passing correctness checks, alongside mass, geometry and learned-model quality regressions. The restored-GPU retest is complete: 9/13 portability tests and 0/3 native tests pass; learned MNIST recall regresses. Evidence validity passed 660/660 checks. See the [GPU report](cuda/REPORT.md).

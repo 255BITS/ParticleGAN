@@ -7,9 +7,9 @@ without changing the train_denoising.py DDGAN formulation?
 
 Two width32/UCD configurations: inherited toy rates and the existing image-rate
 anchor. Each differs from its saved unnormalized control only by d_norm: group
-and output directory. Seed24002, 10k updates, batch64; no seed sweep.
+and output directory. Seed24002, 10k updates, batch 64; no seed sweep.
 Four-step posterior, continuous xt/time conditioning, Rp logistic, UCD CE .02,
-candidate-only bcap1/kappa1, learned20k x128 prior with VICReg1, Gaussian step
+candidate-only bcap1/kappa1, learned 20k x128 prior with VICReg1, Gaussian step
 noise, EMA .995 and LR schedule all retained. GroupNorm retains D additive
 conditioning and independent per-sample scores.
 

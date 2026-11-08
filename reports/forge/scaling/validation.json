@@ -1,0 +1,150 @@
+{
+  "baseline_commit": "5a809e9069fbc014be7e2c88c6a3ba6b25a7f0a2",
+  "baseline_failure_comparisons": [
+    {
+      "baseline": {
+        "path": "/tmp/forge-scaling-early-failure-baseline.log",
+        "sha256": "a8a2884a97bfdfb29aa0d387f15e1a77ae2d6bc7c6ea564f38d0524d5cabd0b4"
+      },
+      "group": "BCAP adapter",
+      "unchanged_failure_count": 1,
+      "worktree": {
+        "path": "/tmp/forge-scaling-early-failure-worktree.log",
+        "sha256": "a3db06b5b9282fe0066a4eddc682dec255c544db4d38ece00ea41ca38437b739"
+      }
+    },
+    {
+      "baseline": {
+        "path": "/tmp/forge-scaling-bcap-compat-baseline.log",
+        "sha256": "4bd254ffec2b2e4156318d8c190b026c3fcac51d3caaacbb6714ddf49eb99145"
+      },
+      "group": "BCAP integration",
+      "unchanged_failure_count": 24,
+      "worktree": {
+        "path": "/tmp/forge-scaling-bcap-compat-worktree.log",
+        "sha256": "ea5cb8dfe63767329c7ac176f09777eb2c9d1cc5e56dff13353a3f08999176af"
+      }
+    },
+    {
+      "baseline": {
+        "path": "/tmp/forge-scaling-publication-baseline-8-tests.log",
+        "sha256": "df8299c13e3b59ff117bf841a7174fb36d95ffbf433233a22e03d421a9cf2024"
+      },
+      "group": "inventory fixtures",
+      "unchanged_failure_count": 8,
+      "worktree": {
+        "path": "/tmp/forge-scaling-publication-worktree-8-tests.log",
+        "sha256": "504b8e4a6df2fd05e916b1ed2269b177b2ab2ee81a5acf07a6f62809f77a5d2e"
+      }
+    }
+  ],
+  "broad_cpu_sweep": {
+    "command": "timeout --signal=INT --kill-after=5s 1200 python -m pytest -q --ignore=tests/test_e22_routed_caption_late_phase_renderer.py",
+    "exit_code": 137,
+    "final_summary_available": false,
+    "full_suite_verdict": null,
+    "log": {
+      "path": "/tmp/forge-scaling-full-cpu-tests.log",
+      "sha256": "0bce48afe75882e6423b3e3d616b9db68766801ebe751b527987b25e61806d40"
+    },
+    "result": "INCOMPLETE",
+    "wall_limit_seconds": 1200
+  },
+  "bulk_logs_committed": false,
+  "checks": [
+    {
+      "command": "python -m pytest -q tests/test_forge_scaling_benchmark.py tests/test_forge_scaling.py tests/test_forge_scaling_publication.py tests/test_forge_scaling_export.py",
+      "log": {
+        "path": "/tmp/forge-scaling-final-new-tests.log",
+        "sha256": "569be700862c467c9d474096edca35da493f33c5d7311348f6b68d1bf0b93903"
+      },
+      "passed": 63,
+      "result": "PASS"
+    },
+    {
+      "log": {
+        "path": "/tmp/forge-scaling-integration-tests.log",
+        "sha256": "c1460399e76ac1b5b51cceb9a79cf27b63128564879fc984f59085148514bb37"
+      },
+      "passed": 293,
+      "result": "PASS",
+      "scope": "related Forge integration regression files"
+    },
+    {
+      "command": "python -m pytest -q tests/test_forge_family_reports.py tests/test_forge_tier_report.py",
+      "log": {
+        "path": "/tmp/forge-scaling-report-regression-final.log",
+        "sha256": "54c146e784fca9ae01997295bbf203a834b1e75c4dbbd5dbb2ca6b3e0d4a43f6"
+      },
+      "passed": 112,
+      "result": "PASS"
+    },
+    {
+      "baseline_failures": 8,
+      "command": "python -m pytest -q tests/test_forge_current_technique_inventory.py tests/test_forge_publication_memory.py",
+      "final_freshness_rerun": {
+        "path": "/tmp/forge-scaling-final-publication-worktree-committed-memory.log",
+        "sha256": "818471def591c9f64bfe0125b52112f949d00ec9633edcbbf0414328a7f152ef"
+      },
+      "log": {
+        "path": "/tmp/forge-scaling-final-publication-worktree.log",
+        "sha256": "61b23a3e3bc0bcabae6996d9c1d4353b22446c7ab001bb34324915c5ef47716d"
+      },
+      "passed_after_targeted_refresh": 168,
+      "result": "168 passed after generated-memory refresh; eight existing baseline failures"
+    },
+    {
+      "command": "python -m pytest -q tests/test_gym_previous_gan.py tests/test_pure_bcap_recipe.py tests/test_paired_residual_oracle.py",
+      "log": {
+        "path": "/tmp/forge-scaling-final-misc-worktree.log",
+        "sha256": "e37a370097454547cb83dd50cffa7ccf9d95ee6f6d5812a8f7b05064828aac0c"
+      },
+      "passed": 32,
+      "result": "PASS"
+    },
+    {
+      "command": "python -m experiments.forge validate",
+      "log": {
+        "path": "/tmp/forge-scaling-final-validate.json",
+        "sha256": "23898f95fe6032dd8302e92a76ee8dab0193b5fc497302b52678431a6ce28560"
+      },
+      "result": "PASS"
+    },
+    {
+      "command": "python -m experiments.forge compile --check",
+      "log": {
+        "path": "/tmp/forge-scaling-final-compile-check.json",
+        "sha256": "fab4e21f12adc65bb03d375751590eb6eae8e883dfb3d93ba1cfbd38721c5bb6"
+      },
+      "result": "PASS"
+    },
+    {
+      "command": "python -m experiments.forge.scaling_publication --check",
+      "records": 48,
+      "result": "PASS",
+      "training_launched": false
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASS"
+    }
+  ],
+  "ci": {
+    "configured_branch": "master",
+    "develop_pr_jobs": 0
+  },
+  "default_changed": false,
+  "environment": {
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "CUDA_VISIBLE_DEVICES": "",
+    "MKL_NUM_THREADS": "1",
+    "MPLBACKEND": "Agg",
+    "OMP_NUM_THREADS": "1",
+    "python": "/home/martyn/dev/ParticleGAN/.venv/bin/python"
+  },
+  "executed_benchmark_source_commit": "58ade47791367abd46c68ede8d5e7d9fea3dbafb",
+  "performance_cells": 48,
+  "schema_version": 1,
+  "scientific_rows_identical_to_baseline": true,
+  "scope": "software validation, not training-quality qualification"
+}

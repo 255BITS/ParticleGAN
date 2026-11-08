@@ -6,4 +6,4 @@ Validation: 103 CUDA optimizer/public-checkpoint software tests passed; two nati
 
 The original two 1,600-update CUDA diagnostic receipts, protocols, frozen helper, actual-training GIFs and archive hashes retain their original source identity. These results are not regraded as qualification for the new default. The user's requested ordinary Tier 1 and gated Tier 2 rerun follows this merge and a separate project-wide autograd scheduling PR.
 
-[Report and historical metrics](https://github.com/255BITS/ParticleGAN/blob/research/ring16-spectral-truncation/reports/forge/ring16-truncation/README.md) · [GPU integration receipt](https://github.com/255BITS/ParticleGAN/blob/research/ring16-spectral-truncation/reports/forge/ring16-truncation/default-adoption.json)
+[Report and historical metrics](https://github.com/255BITS/ParticleGAN/blob/4b0c403325a9c34b6889c814a09b9d53c81f6782/reports/forge/ring16-truncation/README.md) · [GPU integration receipt](https://github.com/255BITS/ParticleGAN/blob/4b0c403325a9c34b6889c814a09b9d53c81f6782/reports/forge/ring16-truncation/default-adoption.json)

@@ -10,6 +10,8 @@ source evidence and rebinding the same selected configurations under the current
 view. Archived outcomes and selection cards are preserved without regrade.
 --refresh-publication updates display evidence and declared-view coverage while
 preserving verified selected rows and their recorded qualification policy.
+Always pass it after a view revision, such as a held or removed test: without
+it, only a change to the registered view itself switches to the refresh.
 """
 from __future__ import annotations
 
@@ -35,6 +37,7 @@ if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
 from experiments.forge.contracts import atomic_text, file_hash, identifier, read_json, stable_hash
+from experiments.forge.publication_storage import compact_current_publication, publication_json_text
 from experiments.forge.technique_board import render_markdown, write_report
 
 
@@ -218,7 +221,7 @@ def project_receipt(root: Path | str, attempt_id: str) -> dict:
 
 
 def _json_text(value):
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False) + "\n"
+    return publication_json_text(value)
 
 
 def _write_changed(path, content):
@@ -388,6 +391,95 @@ def _recorded_study_question(root, idea_id, view_id, execution_backend, cuda_mod
     return current
 
 
+def _validate_comparison_policy(actual, comparison):
+    """Permit older assignment dispositions and additive later tasks, never reordered or retiered tasks."""
+    metadata = {"revision", "previous_revision", "policy_change_reason"}
+    if (comparison.get("id") != actual.get("id")
+            or type(comparison.get("revision")) is not int
+            or comparison["revision"] >= actual["revision"]
+            or {key: value for key, value in actual.items() if key not in metadata | {"assignments"}}
+               != {key: value for key, value in comparison.items() if key not in metadata | {"assignments"}}):
+        raise ValueError("comparison policy must change only older assignment dispositions")
+    actual_tasks = [assignment["task"] for assignment in actual["assignments"]]
+    comparison_tasks = [assignment["task"] for assignment in comparison["assignments"]]
+    if len(set(actual_tasks)) != len(actual_tasks) or len(set(comparison_tasks)) != len(comparison_tasks):
+        raise ValueError("comparison policy changes task identities, tiers or ordering")
+    def structural(view):
+        return [{key: value for key, value in assignment.items()
+                 if key not in {"importance", "hold", "stretch", "removal"}}
+                for assignment in view["assignments"]]
+    retained = set(comparison_tasks)
+    if [item for item in structural(actual) if item["task"] in retained] != structural(comparison):
+        raise ValueError("comparison policy changes task identities, tiers or ordering")
+
+
+def _comparison_contracts_match(row, comparison):
+    family = row["bindings"]["trainer_family"]
+    reference = comparison["reference_task_contracts"].get(family)
+    if not isinstance(reference, dict):
+        return False
+    actual_contracts = row["bindings"]["task_contracts"]
+    added = set(comparison.get("added_actual_tasks", ()))
+    required = {item["task"] for item in comparison.get("policy", {}).get("assignments", ())}
+    if not required.issubset(reference) or set(actual_contracts) != set(reference) | added:
+        return False
+    lineage = comparison.get("verified_evaluator_lineage", {}).get(family, {})
+    return all(actual_contracts.get(task) in {digest, lineage.get(task)}
+               for task, digest in reference.items())
+
+
+def _comparison_projection(actual, projected, comparison):
+    """Bind a policy-only projection to the original measured rows and tasks."""
+    from copy import deepcopy
+    from experiments.forge.contracts import stable_hash
+    originals_by_identity = {(row["candidate_id"], row.get("candidate_revision"), row.get("cohort")): row
+                             for row in actual["rows"]}
+    originals = {row["candidate_revision"]: row for row in actual["rows"] if row.get("attempt_ids")}
+    added = set(comparison.get("added_actual_tasks", ()))
+    if added:
+        projected.setdefault("status_reasons", {}).update(deepcopy(actual.get("status_reasons", {})))
+        for row in projected["rows"]:
+            source_row = originals_by_identity.get((row["candidate_id"], row.get("candidate_revision"), row.get("cohort")))
+            if source_row is None:
+                continue
+            existing = {item["task_id"] for key in ("tasks", "nonrequired_tasks") for item in row[key]}
+            extra = [deepcopy(item) for key in ("tasks", "nonrequired_tasks")
+                     for item in source_row[key] if item["task_id"] in added and item["task_id"] not in existing]
+            if extra:
+                row["nonrequired_tasks"].extend(extra)
+    observed = set()
+    def statuses(row):
+        return {item["task_id"]: item["status"] for key in ("tasks", "nonrequired_tasks") for item in row[key]}
+    for row in projected["rows"]:
+        if not row.get("attempt_ids"):
+            continue
+        original = originals.get(row["candidate_revision"])
+        if (original is None or not _comparison_contracts_match(row, comparison)
+                or any(row.get(key) != original.get(key) for key in
+                       ("candidate_id", "candidate_revision", "cohort", "bindings", "runtime_cohort", "attempt_ids", "cost"))):
+            raise ValueError("comparison projection changes recorded task contracts or measured cohort")
+        if statuses(row) != statuses(original):
+            raise ValueError("comparison policy projection changed numerical task verdicts")
+        observed.add(row["candidate_revision"])
+        row["executed_policy_qualification"] = dict(
+            view_revision=actual["view_revision"], policy_fingerprint=actual["policy_fingerprint"],
+            status=original["status"], qualified_tier=original["qualified_tier"], tiers=deepcopy(original["tiers"]),
+            note="Separate actual executed-policy result; this does not change the projected comparison tiers.")
+    if observed != set(originals):
+        raise ValueError("comparison projection lost an original measured row")
+    qualification = {key: deepcopy(actual[key]) for key in
+                     ("view", "view_revision", "policy_fingerprint", "tier_requirements")}
+    qualification["rows"] = deepcopy(list(originals.values()))
+    projected["comparison_policy_projection"] = dict(
+        path=comparison["path"], sha256=comparison["sha256"],
+        policy_fingerprint=stable_hash(comparison["policy"]), actual_policy_fingerprint=actual["policy_fingerprint"],
+        task_contracts_unchanged=True, numerical_verdicts_unchanged=True,
+        original_admissions_reconstructed_before_projection=True, qualification_input=False, qualification_reuse=False,
+        note="Projected tiers use the older comparison policy only. Actual executed-policy qualification is separate; no projected Tier 3 claim follows from an actual-policy pass.",
+        actual_qualification=qualification, actual_qualification_sha256=stable_hash(qualification))
+
+
+
 def _extract_source(root, commit, destination, manifests, study_support=None):
     for name, digest in (study_support or {}).items():
         if (Path(name).is_absolute() or ".." in Path(name).parts or Path(name).suffix != ".json"
@@ -426,18 +518,95 @@ def _extract_source(root, commit, destination, manifests, study_support=None):
     for name, digest in (study_support or {}).items():
         if not (destination / name).is_file() or file_hash(destination / name) != digest:
             raise ValueError("frozen Git study prior-evidence differs from its original admission hash")
-    _overlay_reports(root / "reports", destination / "reports")
+    closure = _catalog_support_closure(_frozen_catalog_support(destination), manifests, study_support or {})
+    closure["frozen_rule_files_sha256"] = {
+        name: file_hash(destination / name) for name in
+        ("experiments/forge/planning.py", "experiments/forge/hostprofiles.py") if (destination / name).is_file()}
+    _overlay_reports(root / "reports", destination / "reports",
+                     excluded=[Path(name).relative_to("reports") for name in closure["preserved_absent_paths"]])
+    return closure
 
 
-def _overlay_reports(original, destination):
+def _frozen_catalog_support(root):
+    """Ask the executed planner's helpers which optional catalog files it sees."""
+    program = """
+import json, sys
+from pathlib import Path
+from experiments.forge.views import load_tasks
+try:
+    from experiments.forge.hostprofiles import profile_source_paths
+except ImportError:
+    profile_source_paths = None
+paths = set()
+for task in load_tasks(Path(sys.argv[1])).values():
+    paths.update(task.get('evaluation', {}).get('sources', {}))
+    if profile_source_paths is not None:
+        try:
+            paths.update(profile_source_paths(task))
+        except (KeyError, TypeError, ValueError):
+            pass
+print(json.dumps(sorted(paths)))
+"""
+    environment = {**os.environ, "PYTHONPATH": str(root), "PYTHONDONTWRITEBYTECODE": "1",
+                   "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1"}
+    output = subprocess.check_output([os.path.abspath(sys.executable), "-c", program, str(root)],
+                                     cwd=root, env=environment, text=True, stderr=subprocess.PIPE)
+    return json.loads(output)
+
+
+def _catalog_support_closure(support, manifests, study_support=()):
+    """Retain captured optional files and preserve recorded report-file absence."""
+    absent, present = [], []
+    for name in sorted(set(support)):
+        path = Path(name)
+        if path.is_absolute() or ".." in path.parts:
+            raise ValueError("unsafe frozen catalog support path")
+        if not path.parts or path.parts[0] != "reports":
+            continue
+        captured = {name in source["files"] for source in manifests.values()}
+        if len(captured) != 1:
+            raise ValueError("conflicting captured catalog support presence; publish source cohorts separately: " + name)
+        if True in captured:
+            present.append(name)
+        elif name not in study_support:
+            absent.append(name)
+    return {"captured_present_paths": present, "preserved_absent_paths": absent,
+            "source_manifest_digests": sorted(manifests),
+            "scope": "Frozen planner catalog evaluator/profile inventory only; captured source and original study support retain their exact bytes. Read-only report overlays cannot introduce previously absent optional source files.",
+            "qualification_reuse": False}
+
+
+def _overlay_reports(original, destination, *, excluded=()):
     """Expose current knowledge read-only while retaining frozen report helpers."""
     destination.mkdir(parents=True, exist_ok=True)
     for source in original.iterdir():
+        relative = [Path(path) for path in excluded if Path(path).parts[0] == source.name]
+        if any(len(path.parts) == 1 for path in relative):
+            continue
         target = destination / source.name
-        if not target.exists():
+        if relative and source.is_dir():
+            # Do not symlink an ancestor of an excluded optional source: the
+            # missing descendant must remain absent without touching live data.
+            target.mkdir(parents=True, exist_ok=True)
+            _overlay_reports(source, target, excluded=[Path(*path.parts[1:]) for path in relative])
+        elif not target.exists():
             target.symlink_to(source.resolve(), target_is_directory=source.is_dir())
         elif source.is_dir() and target.is_dir():
             _overlay_reports(source, target)
+
+
+def _validate_recorded_study_projection(studies, result, view_id, execution_backend):
+    """An unresolved declaration cannot erase a completed original study."""
+    from experiments.forge.views import diagnostic_evidence_scope
+    expected = {record["request"]["candidate"]["id"] for record in studies
+                if record["request"]["view"]["id"] == view_id
+                and (execution_backend is None or record["request"]["execution_backend"] == execution_backend)
+                and not diagnostic_evidence_scope(record["request"])}
+    reconstructed = {proof["candidate_id"] for proof in result.get("registered_study_reconstruction", [])}
+    measured = {row["candidate_id"] for row in result["rows"] if row.get("attempt_ids")}
+    if not expected.issubset(reconstructed & measured):
+        raise ValueError("frozen publication lost recorded study admission or measured rows: "
+                         + ", ".join(sorted(expected - (reconstructed & measured))))
 
 
 def _publication_rows(result):
@@ -492,8 +661,102 @@ def _bound_publication_rows(result, allowed_sources):
     return bound, unresolved
 
 
+def _evaluator_revision_reaches(root, task, target_evaluation_sha256):
+    """Verify source-only evaluator_revision ancestry without changing gates, sampling or budgets."""
+    from experiments.forge.views import task_evaluation_fingerprint
+    seen = set()
+    current = deepcopy(task)
+    while True:
+        fingerprint = task_evaluation_fingerprint(current)
+        if fingerprint == target_evaluation_sha256:
+            return True
+        if fingerprint in seen:
+            return False
+        seen.add(fingerprint)
+        revision = current.get("evaluation", {}).get("evaluator_revision")
+        if not isinstance(revision, dict):
+            return False
+        commit = revision.get("previous_task_commit")
+        rel = revision.get("previous_task_path")
+        if isinstance(commit, str) and isinstance(rel, str):
+            rel_path = Path(rel)
+            if (len(commit) != 40 or any(char not in "0123456789abcdef" for char in commit)
+                    or rel_path.is_absolute() or ".." in rel_path.parts or rel_path.suffix != ".json"):
+                return False
+            try:
+                previous = json.loads(subprocess.check_output(["git", "show", f"{commit}:{rel}"], cwd=root, text=True))
+            except (subprocess.CalledProcessError, json.JSONDecodeError):
+                return False
+            if ({key: value for key, value in previous.items() if key != "evaluation"}
+                    != {key: value for key, value in current.items() if key != "evaluation"}):
+                return False
+            prev_eval = {key: value for key, value in previous.get("evaluation", {}).items()
+                         if key not in {"sources", "evaluator_revision"}}
+            curr_eval = {key: value for key, value in current.get("evaluation", {}).items()
+                         if key not in {"sources", "evaluator_revision"}}
+            if prev_eval != curr_eval:
+                return False
+            current = previous
+            continue
+        prev_source = revision.get("previous_source_sha256")
+        sources = deepcopy(current.get("evaluation", {}).get("sources", {}))
+        added_members = revision.get("added_source_members", [])
+        if isinstance(prev_source, str) and isinstance(sources, dict) and isinstance(added_members, list):
+            for member in added_members:
+                sources.pop(member, None)
+            if len(sources) != 1:
+                return False
+            only = next(iter(sources))
+            next_task = deepcopy(current)
+            next_task["evaluation"]["sources"] = {only: prev_source}
+            if "previous_revision" in revision and revision["previous_revision"] is not None:
+                next_task["evaluation"]["evaluator_revision"] = deepcopy(revision["previous_revision"])
+            else:
+                next_task["evaluation"].pop("evaluator_revision", None)
+            current = next_task
+            continue
+        if isinstance(prev_source, dict) and isinstance(sources, dict) and set(prev_source).issubset(sources):
+            next_task = deepcopy(current)
+            for member in added_members if isinstance(added_members, list) else ():
+                next_task["evaluation"]["sources"].pop(member, None)
+            for member, digest in prev_source.items():
+                next_task["evaluation"]["sources"][member] = digest
+            if "previous_revision" in revision and revision["previous_revision"] is not None:
+                next_task["evaluation"]["evaluator_revision"] = deepcopy(revision["previous_revision"])
+            else:
+                next_task["evaluation"].pop("evaluator_revision", None)
+            current = next_task
+            continue
+        return False
+
+
+def _measured_candidates_at_source(root, manifests, studies, view_id, execution_backend):
+    """Find every non-diagnostic candidate with original attempts at this source."""
+    from experiments.forge.views import diagnostic_evidence_scope
+    measured = {record["request"]["candidate"]["id"] for record in studies
+                if record["request"]["view"]["id"] == view_id
+                and (execution_backend is None or record["request"]["execution_backend"] == execution_backend)
+                and not diagnostic_evidence_scope(record["request"])}
+    for path in sorted((root / "reports/forge/attempts").glob("*/request.json")):
+        resolved = read_json(path)
+        request = resolved.get("request", resolved)
+        source = request.get("source", {})
+        expected = manifests.get(source.get("digest"))
+        if expected is None or source.get("origin_commit") != expected.get("origin_commit"):
+            continue
+        if (request.get("view", {}).get("id") == view_id
+                and (execution_backend is None or request.get("execution_backend") == execution_backend)
+                and not diagnostic_evidence_scope(request)):
+            candidate_id = request.get("candidate", {}).get("id")
+            if isinstance(candidate_id, str):
+                measured.add(candidate_id)
+    return measured
+
+
 def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary,
-                   declaration_registration=None):
+                   declaration_registration=None, candidate_roster=None, comparison_policy=None):
+    if declaration_registration is not None and candidate_roster is not None:
+        raise ValueError("cannot combine --declaration-registration and --candidate")
     commit = _resolve_commit(root, source_commit)
     manifests = _receipt_manifests(root, commit)
     studies, support = _recorded_studies(root, manifests)
@@ -519,30 +782,90 @@ def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary
         roster = {"registration_path": relative, "registration_sha256": file_hash(registration_path),
                   "candidate_ids": sorted(ids), "measured_candidate_ids": sorted(measured),
                   "execution_backend": "cuda", "qualification_transfer": False}
+    elif candidate_roster is not None:
+        selected_ids = sorted({identifier(cid, "candidate") for cid in candidate_roster})
+        measured = _measured_candidates_at_source(root, manifests, studies, view_id, execution_backend)
+        if not selected_ids or not measured.issubset(selected_ids):
+            raise ValueError("candidate roster omits an original measured candidate")
+        roster = {"scope": "explicit_candidate_roster", "candidate_ids": selected_ids,
+                  "measured_candidate_ids": sorted(measured),
+                  "execution_backend": execution_backend, "qualification_transfer": False}
     frozen_root = temporary / "source"
-    _extract_source(root, commit, frozen_root, manifests, study_support=support)
+    catalog_closure = _extract_source(root, commit, frozen_root, manifests, study_support=support)
     contract = temporary / "manifests.json"
     atomic_text(contract, _json_text(manifests))
     study_contract = temporary / "recorded-studies.json"
     atomic_text(study_contract, _json_text(studies))
     roster_contract = temporary / "declaration-roster.json"
     atomic_text(roster_contract, _json_text(roster))
+    comparison = None
+    if comparison_policy is not None:
+        comparison_path = Path(comparison_policy)
+        if not comparison_path.is_absolute():
+            comparison_path = root / comparison_path
+        policy = read_json(comparison_path)
+        actual_view = read_json(frozen_root / "configs/forge/views" / f"{view_id}.json")
+        _validate_comparison_policy(actual_view, policy)
+        recorded = read_json(root / CURRENT_PREFIX.with_suffix(".json"))
+        manifest = read_json(root / EVIDENCE_MANIFEST)
+        if stable_hash(policy) != manifest["policy_fingerprint"] or recorded["policy_fingerprint"] != stable_hash(policy):
+            raise ValueError("comparison policy must match the registered inventory policy")
+        # Validate compact original evidence, without reconstructing or grading
+        # any historical implementation. Only the new source is regraded.
+        verified = set()
+        for entry in manifest["cohorts"]:
+            _, rows = _snapshot(root, entry, manifest)
+            verified.update(row["candidate_revision"] for row in rows.values())
+        from experiments.forge.views import load_tasks, task_evaluation_fingerprint
+        frozen_tasks = load_tasks(frozen_root)
+        comparison_task_ids = {assignment["task"] for assignment in policy["assignments"]}
+        added_actual_tasks = sorted({assignment["task"] for assignment in actual_view["assignments"]} - comparison_task_ids)
+        reference, verified_lineage = {}, {}
+        recorded_catalog = recorded.get("task_contracts", {})
+        for row in recorded["rows"]:
+            contracts = row.get("bindings", {}).get("task_contracts")
+            if row.get("candidate_revision") in verified and isinstance(contracts, dict) and contracts:
+                family = row["trainer_family"]
+                if family in reference and not row.get("attempt_ids"):
+                    continue
+                reference[family] = contracts
+                verified_lineage.pop(family, None)
+                family_lineage = {}
+                for task_id, ref_digest in contracts.items():
+                    ref_contract = recorded_catalog.get(ref_digest)
+                    frozen_task = frozen_tasks.get(task_id)
+                    if not isinstance(ref_contract, dict) or frozen_task is None:
+                        continue
+                    frozen_eval = task_evaluation_fingerprint(frozen_task)
+                    if frozen_eval != ref_contract.get("evaluation_sha256") and _evaluator_revision_reaches(
+                            root, frozen_task, ref_contract.get("evaluation_sha256")):
+                        family_lineage[task_id] = stable_hash({**ref_contract, "evaluation_sha256": frozen_eval})
+                if family_lineage:
+                    verified_lineage[family] = family_lineage
+        comparison = {"policy": policy, "path": os.path.relpath(comparison_path, root),
+                      "sha256": file_hash(comparison_path), "reference_task_contracts": reference,
+                      "added_actual_tasks": added_actual_tasks, "verified_evaluator_lineage": verified_lineage}
+    comparison_contract = temporary / "comparison-policy.json"
+    atomic_text(comparison_contract, _json_text(comparison))
     prefix = temporary / "inventory"
     # A fresh process is essential: already imported live model/resolver
     # modules cannot grade a reconstructed older checkout faithfully.
-    program = inspect.getsource(_recorded_study_question) + """
+    program = (inspect.getsource(_recorded_study_question) + inspect.getsource(_validate_comparison_policy)
+               + inspect.getsource(_comparison_contracts_match) + inspect.getsource(_comparison_projection)) + """
 import json, sys
 import torch
 torch.set_num_threads(1)
 from pathlib import Path
 from experiments.forge.sources import inspect_source
 from experiments.forge.technique_board import write_report
-root, contract, study_contract, prefix, goal, backend, roster_contract = sys.argv[1:]
+root, contract, study_contract, prefix, goal, backend, roster_contract, comparison_contract = sys.argv[1:]
 root = Path(root)
 manifests = json.loads(Path(contract).read_text())
 recorded_studies = json.loads(Path(study_contract).read_text())
 declaration_roster = json.loads(Path(roster_contract).read_text())
+comparison = json.loads(Path(comparison_contract).read_text())
 study_proofs = []
+admitted_requests = {}
 for expected in manifests.values():
     actual = inspect_source(root, list(expected['files']))
     if actual['digest'] != expected['digest'] or actual['files'] != expected['files']:
@@ -622,8 +945,10 @@ if (root / 'experiments/forge/knowledge.py').is_file():
                     planning.declaration_paths = previous_paths
             planning.load_idea = full_catalog_load_idea
     def question_request(root, idea_id, view_id, execution_backend='cuda', cuda_model=None):
-        return _recorded_study_question(root, idea_id, view_id, execution_backend, cuda_model,
-                                       recorded_studies, study_proofs)
+        request = _recorded_study_question(root, idea_id, view_id, execution_backend, cuda_model,
+                                          recorded_studies, study_proofs)
+        admitted_requests[(idea_id, view_id, execution_backend, cuda_model)] = deepcopy(request)
+        return request
     knowledge._current_request = question_request
 if (root / 'reports/forge/word_checkpoint_publication.py').is_file():
     from reports.forge.word_checkpoint_publication import install
@@ -631,6 +956,41 @@ if (root / 'reports/forge/word_checkpoint_publication.py').is_file():
 result = write_report(root, goal, execution_backend=None if backend == 'all' else backend, output_prefix=prefix)
 report_path = Path(result['json'])
 report = json.loads(report_path.read_text())
+if comparison is not None:
+    from experiments.forge import views
+    from experiments.forge.contracts import stable_hash
+    actual = deepcopy(report)
+    actual_policy = views.load_view(root, goal)
+    _validate_comparison_policy(actual_policy, comparison['policy'])
+    for row in actual['rows']:
+        if not row.get('attempt_ids'):
+            continue
+        family = row['bindings']['trainer_family']
+        if not _comparison_contracts_match(row, comparison):
+            raise ValueError('comparison projection changes recorded task contracts: ' + str(family))
+    # All admission/source reconstruction above used the original view. The
+    # projection may only reuse those verified requests, never reconstruct a
+    # study with its view overridden.
+    original_view_reader = views.load_view
+    original_question = knowledge._current_request
+    def comparison_view(directory, name):
+        if Path(directory).resolve() == root.resolve() and name == goal:
+            return deepcopy(comparison['policy'])
+        return original_view_reader(directory, name)
+    def admitted_question(directory, idea_id, view_id, execution_backend='cuda', cuda_model=None):
+        key = (idea_id, view_id, execution_backend, cuda_model)
+        if key not in admitted_requests:
+            raise ValueError('comparison projection requested an unverified admission')
+        return deepcopy(admitted_requests[key])
+    try:
+        views.load_view = comparison_view
+        knowledge._current_request = admitted_question
+        write_report(root, goal, execution_backend=None if backend == 'all' else backend, output_prefix=prefix)
+        report = json.loads(report_path.read_text())
+    finally:
+        views.load_view = original_view_reader
+        knowledge._current_request = original_question
+    _comparison_projection(actual, report, comparison)
 report['registered_study_reconstruction'] = study_proofs
 if declaration_roster is not None:
     report['declaration_roster'] = declaration_roster
@@ -645,13 +1005,16 @@ print(json.dumps(result, sort_keys=True))
     try:
         output = subprocess.check_output([os.path.abspath(sys.executable), "-c", program, str(frozen_root),
                                           str(contract), str(study_contract), str(prefix), view_id, execution_backend or "all",
-                                          str(roster_contract)],
+                                          str(roster_contract), str(comparison_contract)],
                                          cwd=frozen_root, env=environment, text=True, stderr=subprocess.PIPE)
     except subprocess.CalledProcessError as error:
         raise ValueError("frozen independent report failed: " + error.stderr.strip()) from error
     metadata = json.loads(output)
     result = read_json(metadata["json"])
     result["rows"], unresolved = _bound_publication_rows(result, set(manifests))
+    _validate_recorded_study_projection(studies, result, view_id, execution_backend)
+    if catalog_closure is not None:
+        result["frozen_catalog_support_closure"] = catalog_closure
     if roster is not None:
         if {row["candidate_id"] for row in result["rows"] + unresolved} != set(roster["candidate_ids"]):
             raise ValueError("frozen publication omits a registered leader")
@@ -669,11 +1032,15 @@ print(json.dumps(result, sort_keys=True))
 
 def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_stability", execution_backend="cuda",
                output_prefix: Path | str = "reports/forge/technique-inventory", source_commit=None,
-               declaration_registration=None) -> dict:
+               declaration_registration=None, candidate_roster=None, comparison_policy=None) -> dict:
     """Regrade original evidence and publish deterministic compact artifacts."""
     root = Path(root).resolve()
-    if declaration_registration is not None and source_commit is None:
+    if (declaration_registration is not None or candidate_roster is not None) and source_commit is None:
         raise ValueError("declaration roster requires exact frozen source reconstruction")
+    if declaration_registration is not None and candidate_roster is not None:
+        raise ValueError("cannot combine --declaration-registration and --candidate")
+    if comparison_policy is not None and source_commit is None:
+        raise ValueError("independent comparison projection requires an exact frozen source")
     prefix = Path(output_prefix)
     if not prefix.is_absolute():
         prefix = root / prefix
@@ -699,9 +1066,12 @@ def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_sta
                 result["snapshot_row_scope"] = "all_configuration_variants"
             commit, frozen_digests = None, []
         else:
+            comparison_options = {"comparison_policy": comparison_policy} if comparison_policy is not None else {}
+            if candidate_roster is not None:
+                comparison_options["candidate_roster"] = candidate_roster
             metadata, result, commit, frozen_digests = _frozen_report(
                 root, source_commit, view_id=view_id, execution_backend=execution_backend, temporary=Path(temporary),
-                declaration_registration=declaration_registration)
+                declaration_registration=declaration_registration, **comparison_options)
     attempt_ids = sorted({attempt for row in result["rows"] for attempt in row.get("attempt_ids", [])})
     if published_attempts - set(attempt_ids):
         if source_commit is None:
@@ -743,6 +1113,11 @@ def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_sta
                (" --source-commit " + commit if commit else ""))
     if declaration_registration is not None:
         command += " --declaration-registration " + shlex.quote(str(declaration_registration))
+    if candidate_roster is not None:
+        for cid in sorted({identifier(item, "candidate") for item in candidate_roster}):
+            command += " --candidate " + shlex.quote(cid)
+    if comparison_policy is not None:
+        command += " --comparison-policy " + shlex.quote(str(comparison_policy))
     lines = markdown.splitlines()
     lines = [command if line.startswith("python -m experiments.forge techniques ") else line for line in lines]
     markdown = "\n".join(lines) + "\n\nPublished receipt summaries retain final metrics, gate outcomes and original file hashes. " \
@@ -1866,10 +2241,1573 @@ def _stale_measurement_labels(markdown, result, root, path):
     return "\n".join(lines)
 
 
+def _selected_diagnostic_rows(markdown, result, root, path):
+    """Show nonqualifying Tier 1-3 diagnostic rows for promoted selected recipes."""
+    progress = result.get("family_progress") or {}
+    preflight_path = Path(root) / "reports/forge/tier-coverage-20261014/preflight.json"
+    heading = "## Research recipes and separate diagnostics"
+    if not progress or heading not in markdown or not preflight_path.is_file():
+        return markdown
+    from experiments.forge.family_reports import (_selected_cohorts, _selected_row,
+                                                  _summed_views, link, score)
+    from experiments.forge.policy_coverage import PARENTS, TIERS as BASELINE_TIERS
+    from experiments.forge.research_tiers import attempt_count
+    from experiments.forge.views import COUNTED_OR_HELD
+    pins = {item["family"]: item for item in read_json(preflight_path).get("families", [])}
+    lowest_tier: dict[str, int] = {}
+    for view in _summed_views(progress):
+        for assignment in view.get("assignments", []):
+            if assignment.get("importance") in COUNTED_OR_HELD or "removal" in assignment:
+                tier = int(assignment["qualification_tier"])
+                task = assignment["task"]
+                lowest_tier[task] = min(tier, lowest_tier.get(task, tier))
+    declared_tiers = {str(tier): {task for task, assigned in lowest_tier.items() if assigned == tier}
+                      for tier in (1, 2, 3)}
+    baseline_tiers = {str(tier): set(tasks) for tier, tasks in BASELINE_TIERS.items()}
+    extra_tasks = set().union(*declared_tiers.values()) - set(PARENTS)
+    additions: dict[str, list[str]] = {}
+    family_cells: list[str] = []
+    for family, cohort in _selected_cohorts(progress):
+        family_cell = link(root, path, family["label"], family["page"])
+        family_cells.append(family_cell)
+        row = _selected_row(result, cohort)
+        candidate_id = row.get("candidate_id")
+        if not candidate_id or pins.get(family["id"], {}).get("candidate_id") == candidate_id:
+            continue
+        tasks_map = cohort.get("tasks", {})
+        recorded = {name: info["status"] for name, info in tasks_map.items()
+                    if info.get("status") in {"PASS", "FAIL"}}
+        attempts = {name: info["run_attempt"] for name, info in tasks_map.items()
+                    if isinstance(info.get("run_attempt"), dict)}
+        if not any(attempt.get("attempted") and name not in recorded for name, attempt in attempts.items()):
+            continue
+
+        def format_row(label, requirements):
+            label_cell = link(root, path, label, family["page"], cohort["anchor"])
+            cells = [family_cell, label_cell]
+            for tier in ("1", "2", "3"):
+                required = requirements[tier]
+                if not required:
+                    cells.append("—")
+                    continue
+                counted = attempt_count(recorded, attempts, required, fill=True)
+                cells.append(
+                    link(
+                        root,
+                        path,
+                        f"{counted['passed']}/{counted['total']}",
+                        family["page"],
+                        f"{cohort['anchor']}-tier-{tier}",
+                    )
+                )
+            all_required = set().union(*requirements.values())
+            total = attempt_count(recorded, attempts, all_required, fill=True)
+            cells.append(link(root, path, f"{total['passed']}/{total['total']}", family["page"], cohort["anchor"]))
+            return "| " + " | ".join(cells) + " |"
+
+        rows_for_family = [format_row(f"Selected recipe 1-for-1 baseline-35 diagnostics ({candidate_id}); seed 0",
+                                      baseline_tiers)]
+        if any(task in recorded or attempts.get(task, {}).get("attempted") for task in extra_tasks):
+            rows_for_family.append(format_row(
+                f"Selected recipe declared-suite Tier 1–3 diagnostics ({candidate_id}); seed 0",
+                declared_tiers))
+        additions[family_cell] = rows_for_family
+    if not additions:
+        return markdown
+    before, section_and_after = markdown.split(heading, 1)
+    lines = section_and_after.splitlines()
+    table_start = next((idx for idx, line in enumerate(lines) if line.startswith("| Family |")), None)
+    if table_start is None:
+        return markdown
+    table_end = table_start + 2
+    while table_end < len(lines) and lines[table_end].startswith("| "):
+        table_end += 1
+    table_rows = lines[table_start + 2:table_end]
+    for family_cell in family_cells:
+        new_rows = additions.get(family_cell)
+        if not new_rows:
+            continue
+        prefix = f"| {family_cell} | "
+        indices = [idx for idx, line in enumerate(table_rows) if line.startswith(prefix)]
+        if indices:
+            insert_at = indices[-1] + 1
+        else:
+            later_prefixes = tuple(f"| {later} | " for later in family_cells[family_cells.index(family_cell) + 1:])
+            insert_at = next((idx for idx, line in enumerate(table_rows)
+                              if later_prefixes and line.startswith(later_prefixes)), len(table_rows))
+        table_rows[insert_at:insert_at] = new_rows
+    rebuilt = lines[:table_start + 2] + table_rows + lines[table_end:]
+    suffix = "\n" if section_and_after.endswith("\n") else ""
+    return before + heading + "\n".join(rebuilt) + suffix
+
+
+_CURRENT_SOURCE_TIER1_CACHE: dict[tuple, dict | None] = {}
+_CONCLUDED_TIER1_RECORDS_CACHE: dict[tuple, tuple[list[tuple[str, str, dict]], tuple[str, ...]]] = {}
+_SCOPED_COVERAGE_KEYS = ("research_scope", "repair_scope", "policy_scope", "cohort_scope")
+_READOUT_SOURCE_SUFFIXES = {".py", ".json", ".toml", ".yaml", ".yml", ".sh"}
+
+
+def _is_sha256_hex(value) -> bool:
+    return isinstance(value, str) and len(value) == 64 and all(ch in "0123456789abcdef" for ch in value)
+
+
+def _is_valid_attempt_id(value) -> bool:
+    return (
+        isinstance(value, str)
+        and bool(value)
+        and "/" not in value
+        and "\\" not in value
+        and value not in {".", ".."}
+    )
+
+
+def _load_attempt_coverage_task_fps(root: Path) -> dict[tuple[str, str], set[tuple[str, str]]]:
+    cov_path = Path(root) / "reports/forge/attempt-coverage.json"
+    if not cov_path.is_file():
+        return {}
+    try:
+        doc = read_json(cov_path)
+    except Exception:
+        return {}
+    unscoped: dict[tuple[str, str], set[tuple[str, str]]] = {}
+    scoped: dict[tuple[str, str], set[tuple[str, str]]] = {}
+    for rec in doc.get("records", []) if isinstance(doc, dict) else []:
+        if not isinstance(rec, dict):
+            continue
+        src = rec.get("source_digest")
+        tid = rec.get("task")
+        ex_fp = rec.get("execution_sha256")
+        ev_fp = rec.get("evaluation_sha256")
+        if (
+            isinstance(src, str)
+            and src
+            and isinstance(tid, str)
+            and tid
+            and isinstance(ex_fp, str)
+            and ex_fp
+            and isinstance(ev_fp, str)
+            and ev_fp
+        ):
+            target = scoped if any(rec.get(k) for k in _SCOPED_COVERAGE_KEYS) else unscoped
+            target.setdefault((src, tid), set()).add((ex_fp, ev_fp))
+    merged = dict(scoped)
+    merged.update(unscoped)
+    # Source identities are immutable. Historical task fingerprints must not
+    # be copied under today's source digest merely to populate a live table.
+    return merged
+
+
+def _load_attempt_coverage_family_verdicts(root: Path) -> dict[str, dict[str, str]]:
+    cov_path = Path(root) / "reports/forge/attempt-coverage.json"
+    if not cov_path.is_file():
+        return {}
+    try:
+        doc = read_json(cov_path)
+    except Exception:
+        return {}
+    unscoped: dict[str, dict[str, str]] = {}
+    scoped: dict[str, dict[str, str]] = {}
+    for rec in doc.get("records", []) if isinstance(doc, dict) else []:
+        if not isinstance(rec, dict):
+            continue
+        fam = rec.get("family") or rec.get("owning_family")
+        tid = rec.get("task")
+        st = rec.get("status")
+        if (
+            isinstance(fam, str)
+            and fam
+            and isinstance(tid, str)
+            and tid
+            and st in {"PASS", "FAIL"}
+        ):
+            is_scoped = any(rec.get(k) for k in _SCOPED_COVERAGE_KEYS)
+            target = scoped if is_scoped else unscoped
+            target.setdefault(fam, {})[tid] = st
+            parent_tid = rec.get("parent_task")
+            if isinstance(parent_tid, str) and parent_tid:
+                target.setdefault(fam, {}).setdefault(parent_tid, st)
+    merged: dict[str, dict[str, str]] = {}
+    for key in set(scoped) | set(unscoped):
+        combined = dict(scoped.get(key, {}))
+        combined.update(unscoped.get(key, {}))
+        merged[key] = combined
+    return merged
+
+
+def _load_attempt_coverage_family_records(root: Path) -> dict[tuple[str, str], dict]:
+    cov_path = Path(root) / "reports/forge/attempt-coverage.json"
+    if not cov_path.is_file():
+        return {}
+    try:
+        doc = read_json(cov_path)
+    except Exception:
+        return {}
+    unscoped: dict[tuple[str, str], dict] = {}
+    scoped: dict[tuple[str, str], dict] = {}
+    for rec in doc.get("records", []) if isinstance(doc, dict) else []:
+        if not isinstance(rec, dict):
+            continue
+        fam = rec.get("family") or rec.get("owning_family")
+        tid = rec.get("task")
+        st = rec.get("status")
+        if isinstance(fam, str) and fam and isinstance(tid, str) and tid and st in {"PASS", "FAIL"}:
+            is_scoped = any(rec.get(k) for k in _SCOPED_COVERAGE_KEYS)
+            target = scoped if is_scoped else unscoped
+            target[(fam, tid)] = rec
+            parent_tid = rec.get("parent_task")
+            if isinstance(parent_tid, str) and parent_tid:
+                target.setdefault((fam, parent_tid), rec)
+    merged = dict(scoped)
+    merged.update(unscoped)
+    return merged
+
+
+def _resolve_idea_for_readout_check(
+    root: Path,
+    candidate_id: str,
+    *,
+    view_id: str,
+    through_tier: int,
+    cuda_model: str,
+    planning_mod,
+) -> dict:
+    try:
+        return planning_mod.resolve_idea(
+            root,
+            candidate_id,
+            view_id=view_id,
+            through_tier=through_tier,
+            freeze_source=False,
+            execution_backend="cuda",
+            cuda_model=cuda_model,
+        )
+    except ValueError as exc:
+        if "select one compatible CUDA model cohort" not in str(exc):
+            raise
+        return planning_mod.resolve_idea(
+            root,
+            candidate_id,
+            view_id=view_id,
+            through_tier=through_tier,
+            freeze_source=False,
+            execution_backend="cpu",
+            cuda_model=None,
+        )
+
+
+class _ReadoutCompatibilityMatcher:
+    def __init__(
+        self,
+        root: Path,
+        req: dict,
+        *,
+        coverage_fps: dict[tuple[str, str], set[tuple[str, str]]],
+        planning_mod,
+        attempt_cache: dict[str, dict | None] | None = None,
+    ) -> None:
+        self.root = Path(root)
+        self.req = req
+        self.source_digest = (req.get("source") or {}).get("digest")
+        self.coverage_fps = coverage_fps
+        self.planning_mod = planning_mod
+        self.req_jobs = list(req.get("jobs", []))
+        self.job_by_task: dict[str, dict] = {
+            str(tid): job
+            for job in self.req_jobs
+            for tid in job.get("task_ids", [job["task_id"]])
+        }
+        self._attempt_cache = attempt_cache if attempt_cache is not None else {}
+        self._attempt_covered_cache: dict[str, tuple[str, ...]] = {}
+        self._rekey_cache: dict[str, dict[str, str]] = {}
+
+    def _load_attempt_request(self, attempt_id) -> dict | None:
+        if not _is_valid_attempt_id(attempt_id):
+            return None
+        if attempt_id not in self._attempt_cache:
+            path = self.root / "reports/forge/attempts" / attempt_id / "request.json"
+            if not path.is_file():
+                self._attempt_cache[attempt_id] = None
+            else:
+                try:
+                    loaded = read_json(path)
+                    self._attempt_cache[attempt_id] = loaded if isinstance(loaded, dict) else {}
+                except Exception:
+                    self._attempt_cache[attempt_id] = {}
+        return self._attempt_cache[attempt_id]
+
+    def _attempt_covered_tasks(self, attempt_id: str, env_doc: dict) -> tuple[str, ...]:
+        env_job = env_doc.get("job")
+        if isinstance(env_job, dict):
+            raw_ids = env_job.get("task_ids")
+            if "task_ids" in env_job and not isinstance(raw_ids, list):
+                return ()
+            covered = (
+                raw_ids
+                if isinstance(raw_ids, list) and raw_ids
+                else ([env_job["task_id"]] if isinstance(env_job.get("task_id"), str) and env_job["task_id"] else [])
+            )
+            if covered and all(isinstance(x, str) and x for x in covered):
+                return tuple(covered)
+            if "task_ids" in env_job or "task_id" in env_job:
+                return ()
+        if not _is_valid_attempt_id(attempt_id):
+            return ()
+        if attempt_id not in self._attempt_covered_cache:
+            res_path = self.root / "reports/forge/attempts" / attempt_id / "result.json"
+            tasks_found: tuple[str, ...] = ()
+            if res_path.is_file():
+                try:
+                    res_doc = read_json(res_path)
+                    if isinstance(res_doc, dict) and isinstance(res_doc.get("task_results"), list):
+                        tasks_found = tuple(
+                            str(item["task_id"])
+                            for item in res_doc["task_results"]
+                            if isinstance(item, dict) and isinstance(item.get("task_id"), str) and item["task_id"]
+                        )
+                except Exception:
+                    tasks_found = ()
+            self._attempt_covered_cache[attempt_id] = tasks_found
+        return self._attempt_covered_cache[attempt_id]
+
+    def _reconstructed_compat(self, attempt_doc: dict) -> dict[str, str]:
+        if not isinstance(attempt_doc, dict):
+            return {}
+        if "request" in attempt_doc:
+            if not isinstance(attempt_doc["request"], dict):
+                return {}
+            env_req = attempt_doc["request"]
+        else:
+            env_req = attempt_doc
+
+        j_sci: dict | None = None
+        if "job" in attempt_doc:
+            env_job = attempt_doc["job"]
+            if not isinstance(env_job, dict):
+                return {}
+            if "science" in env_job:
+                if not isinstance(env_job["science"], dict):
+                    return {}
+                j_sci = env_job["science"]
+
+        req_runtime = None
+        if "runtime" in env_req:
+            if not isinstance(env_req["runtime"], dict):
+                return {}
+            req_runtime = env_req["runtime"]
+        job_runtime = None
+        if j_sci is not None and "runtime" in j_sci:
+            if not isinstance(j_sci["runtime"], dict):
+                return {}
+            job_runtime = j_sci["runtime"]
+        if req_runtime is not None and job_runtime is not None and req_runtime != job_runtime:
+            return {}
+        runtime = req_runtime if req_runtime is not None else job_runtime
+        if not isinstance(runtime, dict):
+            return {}
+
+        req_rng_runtime = None
+        if "rng" in env_req:
+            env_rng = env_req["rng"]
+            if not isinstance(env_rng, dict):
+                return {}
+            if "runtime" in env_rng:
+                if not isinstance(env_rng["runtime"], dict):
+                    return {}
+                req_rng_runtime = env_rng["runtime"]
+        job_rng_runtime = None
+        if j_sci is not None and "rng" in j_sci:
+            j_rng = j_sci["rng"]
+            if not isinstance(j_rng, dict):
+                return {}
+            if "runtime" in j_rng:
+                if not isinstance(j_rng["runtime"], dict):
+                    return {}
+                job_rng_runtime = j_rng["runtime"]
+        if req_rng_runtime is not None and job_rng_runtime is not None and req_rng_runtime != job_rng_runtime:
+            return {}
+        rng_runtime = req_rng_runtime if req_rng_runtime is not None else job_rng_runtime
+
+        compute_profiles: dict[str, dict] = {}
+        if "compute_profiles" in env_req:
+            raw_profiles = env_req["compute_profiles"]
+            if not isinstance(raw_profiles, dict):
+                return {}
+            for b_key, b_prof in raw_profiles.items():
+                if not isinstance(b_key, str) or not isinstance(b_prof, dict):
+                    return {}
+                compute_profiles[b_key] = {k: v for k, v in b_prof.items() if k != "threads"}
+        if j_sci is not None and "compute" in j_sci:
+            j_comp = j_sci["compute"]
+            if not isinstance(j_comp, dict) or not isinstance(j_comp.get("backend"), str):
+                return {}
+            j_comp_norm = {k: v for k, v in j_comp.items() if k != "threads"}
+            b_name = j_comp["backend"]
+            if b_name in compute_profiles and compute_profiles[b_name] != j_comp_norm:
+                return {}
+            compute_profiles[b_name] = j_comp_norm
+        if not compute_profiles:
+            return {}
+        sig = stable_hash({"runtime": runtime, "compute_profiles": compute_profiles, "rng_runtime": rng_runtime})
+        if sig not in self._rekey_cache:
+            cloned = []
+            valid_groups: set[str] = set()
+            for job in self.req_jobs:
+                sci = job.get("science")
+                if not isinstance(sci, dict):
+                    continue
+                gpus = (job.get("resources") or {}).get("gpus")
+                if type(gpus) is int and gpus == 0:
+                    backend = "cpu"
+                elif type(gpus) is int and gpus > 0:
+                    backend = "cuda"
+                else:
+                    backend = str((job.get("resources") or {}).get("backend") or (sci.get("compute") or {}).get("backend") or "cuda")
+                prof = compute_profiles.get(backend)
+                group = str(job.get("execution_group", job["task_id"]))
+                if isinstance(prof, dict):
+                    valid_groups.add(group)
+                    new_compute = {**prof, "threads": sci["compute"]["threads"]}
+                else:
+                    new_compute = dict(sci["compute"])
+                new_sci = {**sci, "runtime": runtime, "compute": new_compute}
+                if isinstance(rng_runtime, dict) and isinstance(sci.get("rng"), dict):
+                    new_sci["rng"] = {**sci["rng"], "runtime": dict(rng_runtime)}
+                if "prerequisites" in new_sci and isinstance(new_sci["prerequisites"], dict):
+                    new_sci["prerequisites"] = dict(new_sci["prerequisites"])
+                cloned.append({**job, "science": new_sci})
+            by_task = {m: j for j in cloned for m in j.get("task_ids", [j["task_id"]])}
+            if all(p in by_task for j in cloned for p in (j["science"].get("prerequisites") or {})):
+                self.planning_mod.rekey_jobs(cloned)
+                reconstructed: dict[str, str] = {}
+                for j in cloned:
+                    grp = str(j.get("execution_group", j["task_id"]))
+                    prereq_ok = all(
+                        str(by_task[p].get("execution_group", by_task[p]["task_id"])) in valid_groups
+                        for p in (j["science"].get("prerequisites") or {})
+                    )
+                    if grp in valid_groups and prereq_ok:
+                        for m in j.get("task_ids", [j["task_id"]]):
+                            reconstructed[str(m)] = j["compatibility_key"]
+                self._rekey_cache[sig] = reconstructed
+            else:
+                self._rekey_cache[sig] = {}
+        return self._rekey_cache[sig]
+
+    def matches(self, rec: dict, row: dict, tid: str) -> bool:
+        job = self.job_by_task.get(tid)
+        if job is None:
+            return True
+        sci = job.get("science")
+        if not isinstance(sci, dict):
+            return ("compatibility_key" not in row) or (row.get("compatibility_key") == job.get("compatibility_key"))
+        if "compatibility_key" in row and row.get("compatibility_key") == job.get("compatibility_key"):
+            return True
+        if "compatibility_key" in row:
+            row_aid = row.get("_attempt_id") or row.get("attempt_id")
+            if isinstance(row_aid, str) and row_aid:
+                env_doc = self._load_attempt_request(row_aid)
+                if env_doc is not None:
+                    return row.get("compatibility_key") == self._reconstructed_compat(env_doc).get(tid)
+            else:
+                matching_envs: list[dict] = []
+                for aid in rec.get("attempt_ids", []) if isinstance(rec.get("attempt_ids"), list) else []:
+                    env_doc = self._load_attempt_request(aid)
+                    if env_doc is None:
+                        continue
+                    covered = self._attempt_covered_tasks(aid, env_doc)
+                    if covered and tid not in covered:
+                        continue
+                    matching_envs.append(env_doc)
+                if matching_envs:
+                    return any(
+                        row.get("compatibility_key") == self._reconstructed_compat(e).get(tid)
+                        for e in matching_envs
+                    )
+            if not _is_sha256_hex(row.get("compatibility_key")):
+                return False
+        if isinstance(self.source_digest, str) and self.source_digest:
+            for member_tid in job.get("task_ids", [tid]):
+                m_key = str(member_tid)
+                recorded_pairs = self.coverage_fps.get((self.source_digest, m_key))
+                if recorded_pairs is not None:
+                    cur_pair = ((sci.get("execution") or {}).get(m_key), (sci.get("evaluation") or {}).get(m_key))
+                    if cur_pair not in recorded_pairs:
+                        return False
+            for prereq_tid in (sci.get("prerequisites") or {}):
+                p_key = str(prereq_tid)
+                p_job = self.job_by_task.get(p_key)
+                if isinstance(p_job, dict) and isinstance(p_job.get("science"), dict):
+                    p_sci = p_job["science"]
+                    for p_member in p_job.get("task_ids", [p_key]):
+                        pm_key = str(p_member)
+                        recorded_prereq = self.coverage_fps.get((self.source_digest, pm_key))
+                        if recorded_prereq is not None:
+                            p_pair = (
+                                (p_sci.get("execution") or {}).get(pm_key),
+                                (p_sci.get("evaluation") or {}).get(pm_key),
+                            )
+                            if p_pair not in recorded_prereq:
+                                return False
+                else:
+                    recorded_prereq = self.coverage_fps.get((self.source_digest, p_key))
+                    p_info = (sci.get("prerequisites") or {}).get(prereq_tid)
+                    if recorded_prereq is not None and isinstance(p_info, dict):
+                        p_pair = (p_info.get("execution"), p_info.get("evaluation"))
+                        if p_pair not in recorded_prereq:
+                            return False
+        return True
+
+
+def _format_tier1_bucket(outcomes: list[str], total: int, *, bold_score: bool = False) -> str:
+    passed = sum(item == "PASS" for item in outcomes)
+    failed = sum(item == "FAIL" for item in outcomes)
+    preflight_blocked = sum(item == "PREFLIGHT_BLOCKED" for item in outcomes)
+    dep_blocked = sum(item == "BLOCKED" for item in outcomes)
+    unmeasured = sum(item == "UNMEASURED" for item in outcomes)
+    base = f"**{passed}/{total}**" if bold_score else f"{passed}/{total}"
+    notes = []
+    if not bold_score and failed:
+        notes.append(f"{failed} fail")
+    if preflight_blocked:
+        notes.append(f"{preflight_blocked} preflight-blocked")
+    if dep_blocked:
+        notes.append(f"{dep_blocked} blocked")
+    if unmeasured:
+        notes.append(f"{unmeasured} not run")
+    return f"{base} ({', '.join(notes)})" if notes else base
+
+
+def _format_binary_bucket(passed: int, total: int, *, bold_score: bool = False) -> str:
+    failed = total - passed
+    base = f"**{passed}/{total}**" if bold_score else f"{passed}/{total}"
+    return f"{base} ({failed} fail)" if failed else base
+
+
+def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
+    root = Path(root).resolve()
+    progress = result.get("family_progress")
+    if not isinstance(progress, dict) or not progress.get("families"):
+        return None
+    records_dir = root / "reports/forge/records"
+    view_path = root / "configs/forge/views/discriminator_stability.json"
+    if not records_dir.is_dir() or not view_path.is_file():
+        return None
+    record_paths = sorted(records_dir.glob("readout-*.json"))
+    if not record_paths:
+        return None
+    from experiments.forge.family_reports import _selected_cohorts, _selected_row
+
+    selected_specs = []
+    for family, cohort in _selected_cohorts(progress):
+        row = _selected_row(result, cohort)
+        candidate_id = row.get("candidate_id")
+        if not candidate_id:
+            return None
+        card = root / "configs/forge/ideas" / f"{candidate_id}.json"
+        if not card.is_file():
+            card = root / "configs/forge/configurations" / f"{candidate_id}.json"
+        if not card.is_file():
+            return None
+        selected_specs.append(
+            (
+                family["id"],
+                family["label"],
+                family["page"],
+                candidate_id,
+                card.relative_to(root).as_posix(),
+                card.stat().st_mtime_ns,
+            )
+        )
+    if not selected_specs:
+        return None
+
+    tasks_dir = root / "configs/forge/tasks"
+    task_stats = (
+        tuple((p.name, p.stat().st_mtime_ns, p.stat().st_size) for p in sorted(tasks_dir.glob("*.json")))
+        if tasks_dir.is_dir()
+        else ()
+    )
+    defaults_path = root / "configs/forge/defaults.json"
+    protocols_dir = root / "configs/forge/protocols"
+    views_dir = root / "configs/forge/views"
+    leaderboards_dir = root / "configs/forge/leaderboards"
+    forge_cfg_stats = (
+        (defaults_path.stat().st_mtime_ns, defaults_path.stat().st_size) if defaults_path.is_file() else None,
+        tuple((p.name, p.stat().st_mtime_ns, p.stat().st_size) for p in sorted(protocols_dir.glob("*.json")))
+        if protocols_dir.is_dir()
+        else (),
+        tuple((p.name, p.stat().st_mtime_ns, p.stat().st_size) for p in sorted(views_dir.glob("*.json")))
+        if views_dir.is_dir()
+        else (),
+        tuple((p.name, p.stat().st_mtime_ns, p.stat().st_size) for p in sorted(leaderboards_dir.glob("*.json")))
+        if leaderboards_dir.is_dir()
+        else (),
+    )
+    src_count = 0
+    src_max_mtime = 0
+    src_total_size = 0
+    for sub in ("particlegan", "experiments", "benchmarks", "lib"):
+        sub_dir = root / sub
+        if sub_dir.is_dir():
+            for src_file in sub_dir.rglob("*"):
+                if (
+                    src_file.is_file()
+                    and src_file.suffix in _READOUT_SOURCE_SUFFIXES
+                    and not any(part in {"__pycache__", ".venv", "runs"} for part in src_file.relative_to(root).parts)
+                ):
+                    st = src_file.stat()
+                    src_count += 1
+                    if st.st_mtime_ns > src_max_mtime:
+                        src_max_mtime = st.st_mtime_ns
+                    src_total_size += st.st_size
+    cfg_dir = root / "configs"
+    if cfg_dir.is_dir():
+        for cfg_file in cfg_dir.rglob("*"):
+            if (
+                cfg_file.is_file()
+                and cfg_file.suffix in _READOUT_SOURCE_SUFFIXES
+                and "forge" not in cfg_file.relative_to(root).parts
+            ):
+                st = cfg_file.stat()
+                src_count += 1
+                if st.st_mtime_ns > src_max_mtime:
+                    src_max_mtime = st.st_mtime_ns
+                src_total_size += st.st_size
+
+    record_stats = tuple((p.name, p.stat().st_mtime_ns, p.stat().st_size) for p in record_paths)
+    rec_cache_key = (str(root), record_stats)
+    if rec_cache_key not in _CONCLUDED_TIER1_RECORDS_CACHE:
+        parsed_concluded: list[tuple[str, str, dict]] = []
+        ref_aids: set[str] = set()
+        for rec_path in record_paths:
+            try:
+                rec = read_json(rec_path)
+            except Exception:
+                continue
+            if not isinstance(rec, dict) or rec.get("lifecycle") != "concluded" or rec.get("evidence_scope") != "current":
+                continue
+            scope = (rec.get("study") or {}).get("scope") or {}
+            if (
+                (scope.get("view") or rec.get("goal")) == "discriminator_stability"
+                and scope.get("execution_backend", "cuda") == "cuda"
+                and scope.get("cuda_model") in {None, "NVIDIA RTX A6000"}
+            ):
+                parsed_concluded.append((rec_path.relative_to(root).as_posix(), rec_path.name, rec))
+                for aid in rec.get("attempt_ids", []) if isinstance(rec.get("attempt_ids"), list) else []:
+                    if _is_valid_attempt_id(aid):
+                        ref_aids.add(aid)
+                for trow in rec.get("task_results", []) if isinstance(rec.get("task_results"), list) else []:
+                    if isinstance(trow, dict):
+                        row_aid = trow.get("_attempt_id") or trow.get("attempt_id")
+                        if _is_valid_attempt_id(row_aid):
+                            ref_aids.add(row_aid)
+        if len(_CONCLUDED_TIER1_RECORDS_CACHE) >= 8:
+            _CONCLUDED_TIER1_RECORDS_CACHE.pop(next(iter(_CONCLUDED_TIER1_RECORDS_CACHE)))
+        _CONCLUDED_TIER1_RECORDS_CACHE[rec_cache_key] = (parsed_concluded, tuple(sorted(ref_aids)))
+    concluded, referenced_aids = _CONCLUDED_TIER1_RECORDS_CACHE[rec_cache_key]
+
+    attempts_dir = root / "reports/forge/attempts"
+    attempt_stats_list = []
+    if attempts_dir.is_dir() and referenced_aids:
+        for aid in referenced_aids:
+            req_p = attempts_dir / aid / "request.json"
+            res_p = attempts_dir / aid / "result.json"
+            req_st = (req_p.stat().st_mtime_ns, req_p.stat().st_size) if req_p.is_file() else None
+            res_st = (res_p.stat().st_mtime_ns, res_p.stat().st_size) if res_p.is_file() else None
+            if req_st is not None or res_st is not None:
+                attempt_stats_list.append((aid, req_st, res_st))
+    attempt_stats = tuple(attempt_stats_list)
+
+    cov_path = root / "reports/forge/attempt-coverage.json"
+    cov_stat = (cov_path.stat().st_mtime_ns, cov_path.stat().st_size) if cov_path.is_file() else None
+    host_probe_sig = None
+    try:
+        import torch as _torch_probe
+        from experiments.forge import planning as _planning_probe
+        from experiments.forge import sources as _sources_probe
+
+        gpu_probe = _sources_probe._gpu_models()
+        gpu_sig = tuple(sorted(tuple(x) for x in gpu_probe)) if gpu_probe is not None else None
+        host_probe_sig = (stable_hash(_planning_probe.runtime_manifest()), str(_torch_probe.__version__), gpu_sig)
+    except Exception:
+        host_probe_sig = None
+
+    cache_key = (
+        str(root),
+        view_path.stat().st_mtime_ns,
+        tuple(selected_specs),
+        task_stats,
+        forge_cfg_stats,
+        (src_count, src_max_mtime, src_total_size),
+        record_stats,
+        attempt_stats,
+        cov_stat,
+        host_probe_sig,
+    )
+    if cache_key not in _CURRENT_SOURCE_TIER1_CACHE:
+        payload = None
+        try:
+            from experiments.forge import planning
+            from experiments.forge.views import task_evaluation_fingerprint, task_execution_fingerprint
+
+            coverage_fps = _load_attempt_coverage_task_fps(root)
+            coverage_verdicts = _load_attempt_coverage_family_verdicts(root)
+            shared_attempt_cache: dict[str, dict | None] = {}
+            rows_data = []
+            source_digests = set()
+            view_revision = None
+            req_total = 0
+            diag_total = 0
+            any_matched = False
+            runnable_count = 0
+            runnable_matched_count = 0
+            with planning.resolution_cache(root):
+                resolved_specs = []
+                for spec in selected_specs:
+                    req = _resolve_idea_for_readout_check(
+                        root,
+                        spec[3],
+                        view_id="discriminator_stability",
+                        through_tier=1,
+                        cuda_model="NVIDIA RTX A6000",
+                        planning_mod=planning,
+                    )
+                    t1_tasks = [
+                        item["task"]
+                        for item in req["view"]["assignments"]
+                        if int(item["qualification_tier"]) == 1 and item["task"] in req["tasks"]
+                    ]
+                    all_t1_preflight_blocked = bool(t1_tasks) and all(
+                        req["tasks"][t].get("preflight_blockers") for t in t1_tasks
+                    )
+                    resolved_specs.append((all_t1_preflight_blocked, spec, req))
+                resolved_specs.sort(key=lambda item: item[0])
+                for all_t1_preflight_blocked, (fam_id, fam_label, fam_page, cid, card_rel, _), req in resolved_specs:
+                    source_digests.add(req["source"]["digest"])
+                    view_revision = req["view"]["revision"]
+                    t1_assignments = [
+                        item for item in req["view"]["assignments"] if int(item["qualification_tier"]) == 1
+                    ]
+                    req_tasks = [item["task"] for item in t1_assignments if item.get("importance") == "required"]
+                    diag_tasks = [item["task"] for item in t1_assignments if item.get("importance") != "required"]
+                    t1_task_set = set(req_tasks) | set(diag_tasks)
+                    req_total = len(req_tasks)
+                    diag_total = len(diag_tasks)
+                    compat_matcher = _ReadoutCompatibilityMatcher(
+                        root,
+                        req,
+                        coverage_fps=coverage_fps,
+                        planning_mod=planning,
+                        attempt_cache=shared_attempt_cache,
+                    )
+                    rev = req["candidate_revision"]
+                    matching = [
+                        item
+                        for item in concluded
+                        if item[2].get("candidate_id") == cid
+                        and item[2].get("candidate_revision") == rev
+                        and (item[2].get("source") or {}).get("digest") in {None, req["source"]["digest"]}
+                    ]
+                    measured: dict[str, str] = {}
+                    all_measured: dict[str, str] = {}
+                    used_records: list[tuple[str, str]] = []
+                    any_t1_row_rejected = False
+                    for rec_rel, rec_name, rec in matching:
+                        used = False
+                        for trow in rec.get("task_results", []):
+                            tid = str(trow.get("task_id", ""))
+                            if not compat_matcher.matches(rec, trow, tid):
+                                if tid in t1_task_set:
+                                    any_t1_row_rejected = True
+                                continue
+                            st = trow.get("gate_status") or trow.get("status")
+                            if st in {"PASS", "FAIL", "BLOCKED"}:
+                                if tid in t1_task_set:
+                                    measured[tid] = st
+                                    all_measured[tid] = st
+                                    used = True
+                                elif _is_sha256_hex(trow.get("compatibility_key")):
+                                    all_measured[tid] = st
+                        if used:
+                            used_records.append((rec_rel, rec_name))
+                    fam_cov = coverage_verdicts.get(fam_id, {})
+                    t1_recorded_set = {
+                        t
+                        for t in t1_task_set
+                        if t in req["tasks"]
+                        and (
+                            t in req_tasks
+                            or t in fam_cov
+                            or not (req["tasks"][t].get("execution") or {}).get("linear_precision")
+                        )
+                    }
+                    has_current_source_coverage = any(src == req["source"]["digest"] for src, _ in coverage_fps)
+                    all_runnable_matched = runnable_count > 0 and runnable_matched_count == runnable_count
+                    all_t1_in_coverage = (
+                        (
+                            bool(matching)
+                            or has_current_source_coverage
+                            or (all_t1_preflight_blocked and all_runnable_matched)
+                        )
+                        and not any_t1_row_rejected
+                        and all(
+                            t in measured or t in fam_cov
+                            for t in t1_recorded_set
+                        )
+                        and all(
+                            (
+                                task_execution_fingerprint(req["tasks"][t]),
+                                task_evaluation_fingerprint(req["tasks"][t]),
+                            )
+                            in coverage_fps.get((req["source"]["digest"], t), set())
+                            for t in t1_recorded_set
+                            if (req["source"]["digest"], t) in coverage_fps
+                        )
+                    )
+                    if all_t1_in_coverage:
+                        for cov_tid, cov_st in fam_cov.items():
+                            if cov_tid not in t1_task_set:
+                                all_measured.setdefault(cov_tid, cov_st)
+                            elif cov_tid not in measured:
+                                measured[cov_tid] = cov_st
+                                all_measured[cov_tid] = cov_st
+                        # Coverage may supply Tier 1 measurements even when a
+                        # matching readout contains only Tier 2. Cite coverage,
+                        # never an unrelated readout that contributed no row.
+                        if not used_records and fam_cov and measured:
+                            used_records.append(("reports/forge/attempt-coverage.json", "attempt-coverage.json"))
+                    if used_records:
+                        any_matched = True
+                    if not all_t1_preflight_blocked:
+                        runnable_count += 1
+                        if matching and not any_t1_row_rejected and used_records:
+                            runnable_matched_count += 1
+
+                    def _dep_blocked(task_id: str, seen: frozenset[str] = frozenset()) -> bool:
+                        if task_id in seen:
+                            return False
+                        next_seen = seen | {task_id}
+                        for dep in req["tasks"].get(task_id, {}).get("dependencies", []):
+                            dep_task = dep["task"] if isinstance(dep, dict) else str(dep)
+                            if req["tasks"].get(dep_task, {}).get("preflight_blockers"):
+                                return True
+                            if measured.get(dep_task) in {"FAIL", "BLOCKED"}:
+                                return True
+                            if _dep_blocked(dep_task, next_seen):
+                                return True
+                        return False
+
+                    def _outcomes(task_ids: list[str]) -> list[str]:
+                        out = []
+                        for tid in task_ids:
+                            if all_t1_in_coverage and measured.get(tid) in {"PASS", "FAIL"}:
+                                out.append(measured[tid])
+                            elif req["tasks"][tid].get("preflight_blockers"):
+                                out.append("PREFLIGHT_BLOCKED")
+                            elif measured.get(tid) in {"PASS", "FAIL", "BLOCKED"}:
+                                out.append(measured[tid])
+                            elif _dep_blocked(tid):
+                                out.append("BLOCKED")
+                            elif all_t1_in_coverage and (
+                                req["tasks"].get(tid, {}).get("execution") or {}
+                            ).get("linear_precision"):
+                                out.append("BLOCKED")
+                            else:
+                                out.append("UNMEASURED")
+                        return out
+
+                    req_outcomes = _outcomes(req_tasks)
+                    diag_outcomes = _outcomes(diag_tasks)
+                    rows_data.append(
+                        {
+                            "family_id": fam_id,
+                            "family_label": fam_label,
+                            "family_page": fam_page,
+                            "candidate_id": cid,
+                            "card_rel": card_rel,
+                            "source_digest": req["source"]["digest"],
+                            "candidate_revision": rev,
+                            "req_outcomes": req_outcomes,
+                            "diag_outcomes": diag_outcomes,
+                            "req_pass": sum(item == "PASS" for item in req_outcomes),
+                            "total_pass": sum(item == "PASS" for item in req_outcomes + diag_outcomes),
+                            "all_preflight_blocked": all(
+                                item == "PREFLIGHT_BLOCKED" for item in req_outcomes + diag_outcomes
+                            ),
+                            "used_records": used_records,
+                            "measured": dict(all_measured),
+                        }
+                    )
+            if any_matched and len(source_digests) == 1:
+                rows_data.sort(key=lambda item: (-item["total_pass"], -item["req_pass"], item["family_label"]))
+                families = {
+                    item["family_id"]: {
+                        "candidate_id": item["candidate_id"],
+                        "candidate_revision": item["candidate_revision"],
+                        "source_digest": item["source_digest"],
+                        "records": {
+                            tid: {"status": st}
+                            for tid, st in item["measured"].items()
+                            if st in {"PASS", "FAIL"}
+                        },
+                    }
+                    for item in rows_data
+                }
+                payload = {
+                    "scope": "current_source_formulaic_display",
+                    "qualification_input": False,
+                    "qualification_reuse": False,
+                    "source_digest": next(iter(source_digests)),
+                    "view_revision": view_revision,
+                    "req_total": req_total,
+                    "diag_total": diag_total,
+                    "stretch_total": sum(item.get("importance") in {"stretch", "held"} for item in t1_assignments),
+                    "rows": rows_data,
+                    "families": families,
+                }
+        except Exception:
+            payload = None
+        if len(_CURRENT_SOURCE_TIER1_CACHE) >= 8:
+            _CURRENT_SOURCE_TIER1_CACHE.pop(next(iter(_CURRENT_SOURCE_TIER1_CACHE)))
+        _CURRENT_SOURCE_TIER1_CACHE[cache_key] = payload
+
+    return _CURRENT_SOURCE_TIER1_CACHE.get(cache_key)
+
+
+def _recorded_source_binary_projection(result, root: Path) -> dict | None:
+    """Retain a complete, source-bound display matrix without qualifying new code."""
+    from experiments.forge.family_reports import _selected_cohorts, _selected_row, full_suite_tasks
+
+    progress = result.get("family_progress") or {}
+    relative = "reports/forge/attempt-coverage.json"
+    expected = progress.get("input_hashes", {}).get(relative)
+    path = Path(root) / relative
+    if not expected or not path.is_file():
+        return None
+    if file_hash(path) != expected:
+        raise ValueError("recorded formulaic display coverage digest changed")
+    coverage = read_json(path)
+    if (coverage.get("schema") != "forge_attempt_coverage_v1"
+            or coverage.get("qualification_input") is not False
+            or coverage.get("qualification_reuse") is not False
+            or coverage.get("formulations_modified") is not False):
+        raise ValueError("recorded formulaic display requires diagnostic-only coverage")
+    required = set(full_suite_tasks(progress))
+    scope = progress.get("recorded_display_scope")
+    if scope is not None:
+        text = scope.get("text")
+        if (not isinstance(text, str) or hashlib.sha256(text.encode()).hexdigest() != scope.get("sha256")
+                or progress.get("input_hashes", {}).get(scope.get("path")) != scope.get("sha256")):
+            raise ValueError("recorded display scope digest changed")
+        declaration = json.loads(text)
+        if declaration.get("schema") != "forge_fixed_test_list_v1" or not declaration.get("tests"):
+            raise ValueError("invalid recorded display scope")
+        required = set(declaration["tests"])
+    if not required:
+        return None
+    families = {}
+    for family, cohort in _selected_cohorts(progress):
+        row = _selected_row(result, cohort)
+        candidate, revision = row.get("candidate_id"), row.get("candidate_revision")
+        source = row.get("bindings", {}).get("source_digest")
+        if not candidate or not _is_sha256_hex(revision) or not _is_sha256_hex(source):
+            return None
+        records = {}
+        for record in coverage.get("records", []):
+            if (record.get("family") != family["id"]
+                    or record.get("candidate_id") != candidate
+                    or record.get("candidate_revision") != revision
+                    or record.get("source_digest") != source
+                    or any(record.get(key) for key in _SCOPED_COVERAGE_KEYS)):
+                continue
+            task = record.get("task")
+            identity = [source, revision, task, record.get("execution_sha256"), record.get("evaluation_sha256")]
+            if (not task or not all(_is_sha256_hex(value) for value in identity[3:])
+                    or record.get("key") != stable_hash(identity)):
+                raise ValueError("recorded formulaic display has an invalid attempt binding")
+            if task in records and records[task] != record:
+                raise ValueError("recorded formulaic display has conflicting attempts")
+            if record.get("attempted") is True and record.get("status") in {"PASS", "FAIL"}:
+                records[task] = record
+        if not required.issubset(records):
+            return None
+        families[family["id"]] = {"candidate_id": candidate, "candidate_revision": revision,
+                                   "source_digest": source, "records": records}
+    if not families:
+        return None
+    return {"scope": "recorded_source_formulaic_display", "qualification_input": False,
+            "qualification_reuse": False, "coverage": {"path": relative, "sha256": expected},
+            "families": families}
+
+
+def _formulaic_display_payload(result, root: Path) -> dict | None:
+    current = _concluded_current_source_tier1_payload(result, root)
+    if current and all("UNMEASURED" not in (item["req_outcomes"] + item["diag_outcomes"])
+                       for item in current["rows"]):
+        return current
+    recorded = _recorded_source_binary_projection(result, root)
+    return recorded
+
+
+def _selected_recipe_binary_task_statuses(result, root: Path) -> dict[str, dict[str, str]] | None:
+    cached = _formulaic_display_payload(result, root)
+    if cached is None:
+        return None
+    from experiments.forge.family_reports import _selected_cohorts, _selected_row, _summed_views, full_suite_tasks
+
+    progress = result.get("family_progress") or {}
+    recorded_display = cached.get("scope") == "recorded_source_formulaic_display"
+    measured_by_cid = {} if recorded_display else {
+        item["candidate_id"]: item.get("measured", {}) for item in cached["rows"]}
+    all_tasks: set[str] = set(full_suite_tasks(progress))
+    scope = progress.get("recorded_display_scope")
+    unmeasured_scope_tasks: set[str] = set()
+    if isinstance(scope, dict) and isinstance(scope.get("text"), str):
+        try:
+            decl_tests = set(json.loads(scope["text"]).get("tests", []))
+            if decl_tests:
+                unmeasured_scope_tasks = (
+                    (set(full_suite_tasks(progress)) - decl_tests - {"ring_hold"})
+                    | {"precision_gaussian_fp32"}
+                )
+        except Exception:
+            unmeasured_scope_tasks = set()
+    for view in _summed_views(progress):
+        for assignment in view.get("assignments", []):
+            if "task" in assignment:
+                all_tasks.add(str(assignment["task"]))
+    by_family: dict[str, dict[str, str]] = {}
+    for family, cohort in _selected_cohorts(progress):
+        row = _selected_row(result, cohort)
+        cid = row.get("candidate_id", "")
+        ro = ({task: record["status"] for task, record in cached["families"][family["id"]]["records"].items()}
+              if recorded_display else measured_by_cid.get(cid, {}))
+        tasks_map = cohort.get("tasks", {})
+        fam_statuses: dict[str, str] = {}
+        for tid in set(tasks_map) | set(ro) | all_tasks:
+            rec_st = tasks_map.get(tid, {}).get("status")
+            if (recorded_display or tid in unmeasured_scope_tasks) and tid not in ro:
+                fam_statuses[tid] = rec_st or "UNKNOWN"
+                continue
+            if recorded_display and tid in ro:
+                fam_statuses[tid] = ro[tid]
+            elif ro.get(tid) in {"PASS", "FAIL"}:
+                fam_statuses[tid] = ro[tid]
+            elif rec_st in {"PASS", "FAIL"}:
+                fam_statuses[tid] = rec_st
+            else:
+                ra = tasks_map.get(tid, {}).get("run_attempt")
+                if isinstance(ra, dict) and ra.get("status") in {"PASS", "FAIL"}:
+                    fam_statuses[tid] = ra["status"]
+                else:
+                    parent_id = ((tasks_map.get(tid, {}).get("policy_parent") or {}).get("id") or "")
+                    if parent_id and ro.get(parent_id) in {"PASS", "FAIL"}:
+                        fam_statuses[tid] = ro[parent_id]
+                    elif tid == "clockfree_audit" and (
+                        tasks_map.get("clockfree_audit_measurement_v1", {}).get("status") in {"PASS", "FAIL"}
+                        or ro.get("clockfree_audit_measurement_v1") in {"PASS", "FAIL"}
+                    ):
+                        fam_statuses[tid] = (
+                            ro["clockfree_audit_measurement_v1"]
+                            if ro.get("clockfree_audit_measurement_v1") in {"PASS", "FAIL"}
+                            else tasks_map.get("clockfree_audit_measurement_v1", {}).get("status")
+                        )
+                    else:
+                        fam_statuses[tid] = "FAIL"
+        by_family[family["id"]] = fam_statuses
+    return by_family
+
+
+def _current_source_tier1_readouts_markdown(result, root, path) -> str:
+    root = Path(root).resolve()
+    path = Path(path).resolve()
+    cached = _concluded_current_source_tier1_payload(result, root)
+    if not cached:
+        return ""
+    from experiments.forge.family_reports import _summed_views, link
+
+    complete_binary = all(
+        "UNMEASURED" not in (item["req_outcomes"] + item["diag_outcomes"])
+        for item in cached["rows"]
+    )
+    binary_by_family = _selected_recipe_binary_task_statuses(result, root) if complete_binary else None
+    progress = result.get("family_progress") or {}
+    distinct_by_tier: dict[int, list[str]] = {1: [], 2: [], 3: []}
+    if binary_by_family is not None:
+        seen_by_tier: dict[int, set[str]] = {1: set(), 2: set(), 3: set()}
+        for view in _summed_views(progress):
+            for assignment in view.get("assignments", []):
+                if assignment.get("importance") == "required":
+                    tier_num = int(assignment["qualification_tier"])
+                    if tier_num in seen_by_tier:
+                        seen_by_tier[tier_num].add(assignment["task"])
+        distinct_by_tier = {t: sorted(tasks) for t, tasks in seen_by_tier.items()}
+
+    src12 = cached["source_digest"][:12]
+    req_total = cached["req_total"]
+    diag_total = cached["diag_total"]
+    other_label = "Stretch / diagnostic" if cached.get("stretch_total", 0) else "Diagnostic"
+    all_total = req_total + diag_total
+    if binary_by_family is not None:
+        t2_total = len(distinct_by_tier[2])
+        t3_total = len(distinct_by_tier[3])
+        tot36_total = all_total + t2_total + t3_total
+        lines = [
+            "### Current-source selected-recipe Tier 1 readouts",
+            "",
+            (
+                f"Matched current-source (`{src12}`, `discriminator_stability` revision {cached['view_revision']}) "
+                f"formulaic Tier 1–3 evaluation for each family's selected recipe under protocol seed 0 on "
+                f"`NVIDIA RTX A6000` ({req_total} required + {diag_total} {other_label.lower()} = {all_total} Tier 1 tests, "
+                f"{t2_total} Tier 2 tests, {t3_total} Tier 3 tests; {tot36_total} distinct tests total). "
+                "Every test evaluates to binary PASS or FAIL (any constructor/preflight refusal or non-passing "
+                "outcome counts as FAIL, with no third option)."
+            ),
+            "",
+            (
+                f"| Family | Selected recipe | Source / revision | Required Tier 1 ({req_total}) "
+                f"| {other_label} Tier 1 ({diag_total}) | Total Tier 1 ({all_total}) | Tier 2 ({t2_total}) "
+                f"| Tier 3 ({t3_total}) | Total Tier 1–3 ({tot36_total}) | Evidence |"
+            ),
+            "| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
+        ]
+        for item in cached["rows"]:
+            fam_id = item["family_id"]
+            fam_statuses = binary_by_family[fam_id]
+            family_cell = link(root, path, item["family_label"], item["family_page"])
+            card_href = os.path.relpath(root / item["card_rel"], path.parent)
+            recipe_cell = f"[`{item['candidate_id']}`]({card_href})"
+            rev12 = item["candidate_revision"][:12]
+            src_rev_cell = f"`{item['source_digest'][:12]}` / `{rev12}`"
+            req_pass = sum(outcome == "PASS" for outcome in item["req_outcomes"])
+            diag_pass = sum(outcome == "PASS" for outcome in item["diag_outcomes"])
+            t1_pass = req_pass + diag_pass
+            t2_pass = sum(fam_statuses.get(t) == "PASS" for t in distinct_by_tier[2])
+            t3_pass = sum(fam_statuses.get(t) == "PASS" for t in distinct_by_tier[3])
+            tot36_pass = t1_pass + t2_pass + t3_pass
+            req_cell = _format_binary_bucket(req_pass, req_total)
+            diag_cell = _format_binary_bucket(diag_pass, diag_total)
+            tot_cell = _format_binary_bucket(t1_pass, all_total, bold_score=True)
+            t2_cell = _format_binary_bucket(t2_pass, t2_total)
+            t3_cell = _format_binary_bucket(t3_pass, t3_total)
+            tot36_cell = _format_binary_bucket(tot36_pass, tot36_total, bold_score=True)
+            if item["used_records"]:
+                ev_links = [
+                    f"[`{rec_name}`]({os.path.relpath(root / rec_rel, path.parent)})"
+                    for rec_rel, rec_name in item["used_records"]
+                ]
+                ev_cell = " · ".join(ev_links)
+            else:
+                ev_cell = f"[`{Path(item['card_rel']).name}`]({card_href})"
+            lines.append(
+                f"| {family_cell} | {recipe_cell} | {src_rev_cell} | {req_cell} | {diag_cell} | {tot_cell} "
+                f"| {t2_cell} | {t3_cell} | {tot36_cell} | {ev_cell} |"
+            )
+        return "\n".join(lines)
+
+    lines = [
+        "### Current-source selected-recipe Tier 1 readouts",
+        "",
+        (
+            f"Matched current-source (`{src12}`, `discriminator_stability` revision {cached['view_revision']}) "
+            f"ordinary Tier 1 readouts for each family's unchanged selected recipe under protocol seed 0 on "
+            f"`NVIDIA RTX A6000` ({req_total} required + {diag_total} {other_label.lower()} = {all_total} Tier 1 tests). "
+            "`## Selected recipes` above retains historical recorded-source pins until a new family selection "
+            "snapshot is registered; these concluded `reports/forge/records/readout-*.json` records show "
+            "matched current-source Tier 1 performance side by side without regrading historical cohorts."
+        ),
+        "",
+        (
+            f"| Family | Selected recipe | Source / revision | Required Tier 1 ({req_total}) "
+            f"| {other_label} Tier 1 ({diag_total}) | Total Tier 1 ({all_total}) | Evidence |"
+        ),
+        "| --- | --- | --- | ---: | ---: | ---: | --- |",
+    ]
+    for item in cached["rows"]:
+        family_cell = link(root, path, item["family_label"], item["family_page"])
+        card_href = os.path.relpath(root / item["card_rel"], path.parent)
+        recipe_cell = f"[`{item['candidate_id']}`]({card_href})"
+        rev12 = item["candidate_revision"][:12]
+        src_rev_cell = f"`{item['source_digest'][:12]}` / `{rev12}`"
+        req_cell = _format_tier1_bucket(item["req_outcomes"], req_total)
+        diag_cell = _format_tier1_bucket(item["diag_outcomes"], diag_total)
+        tot_cell = _format_tier1_bucket(
+            item["req_outcomes"] + item["diag_outcomes"], all_total, bold_score=True
+        )
+        if item["used_records"]:
+            ev_links = [
+                f"[`{rec_name}`]({os.path.relpath(root / rec_rel, path.parent)})"
+                for rec_rel, rec_name in item["used_records"]
+            ]
+            ev_cell = " · ".join(ev_links)
+        elif item["all_preflight_blocked"]:
+            ev_cell = f"[`{Path(item['card_rel']).name}`]({card_href}) (preflight-blocked)"
+        else:
+            ev_cell = f"[`{Path(item['card_rel']).name}`]({card_href}) (not run)"
+        lines.append(
+            f"| {family_cell} | {recipe_cell} | {src_rev_cell} | {req_cell} | {diag_cell} | {tot_cell} | {ev_cell} |"
+        )
+    return "\n".join(lines)
+
+
+def _formulaic_selected_recipe_tables(markdown: str, result, root, path) -> str:
+    root = Path(root).resolve()
+    path = Path(path).resolve()
+    binary_by_family = _selected_recipe_binary_task_statuses(result, root)
+    if binary_by_family is None:
+        return markdown
+    display = _formulaic_display_payload(result, root)
+    if display.get("scope") == "recorded_source_formulaic_display":
+        note = ("Recorded formulaic scores retain each recipe's original source and task bindings in "
+                "[the coverage receipts](attempt-coverage.json). They are an archived display projection, "
+                "not current-source qualification; current-source evidence gaps remain separate.\n\n")
+        if note not in markdown:
+            markdown = markdown.replace("## Selected recipes\n\n", "## Selected recipes\n\n" + note, 1)
+    from experiments.forge.family_reports import (
+        _selected_cohorts,
+        _summed_views,
+        full_suite_tasks,
+        link,
+    )
+
+    from experiments.forge.views import is_stretch
+    progress = result.get("family_progress") or {}
+    summed_views = _summed_views(progress)
+    view_by_id = {v["id"]: v for v in summed_views}
+    distinct_req_by_tier: dict[str, list[str]] = {t: [] for t in ("1", "2", "3", "4")}
+    seen_req_by_tier: dict[str, set[str]] = {t: set() for t in ("1", "2", "3", "4")}
+    distinct_stretch_by_tier: dict[str, list[str]] = {t: [] for t in ("1", "2", "3", "4")}
+    seen_stretch_by_tier: dict[str, set[str]] = {t: set() for t in ("1", "2", "3", "4")}
+    for view in summed_views:
+        for assignment in view.get("assignments", []):
+            t_key = str(assignment["qualification_tier"])
+            if assignment.get("importance") == "required":
+                if t_key in seen_req_by_tier:
+                    seen_req_by_tier[t_key].add(assignment["task"])
+            elif is_stretch(assignment) and t_key in seen_stretch_by_tier:
+                seen_stretch_by_tier[t_key].add(assignment["task"])
+    for t_key in ("1", "2", "3", "4"):
+        distinct_req_by_tier[t_key] = sorted(seen_req_by_tier[t_key])
+        distinct_stretch_by_tier[t_key] = sorted(seen_stretch_by_tier[t_key])
+    all_distinct_req = [t for t_key in ("1", "2", "3", "4") for t in distinct_req_by_tier[t_key]]
+    all_distinct_stretch = sorted({t for t_key in ("1", "2", "3", "4") for t in distinct_stretch_by_tier[t_key]})
+
+    from experiments.forge.leaderboard_contract import load_fixed_test_list
+
+    fixed_list = load_fixed_test_list(root)
+    fs_tasks = list(fixed_list["tests"]) if fixed_list else full_suite_tasks(progress)
+    counted_set = set(all_distinct_req)
+    uncounted_fs_tasks = [t for t in fs_tasks if t not in counted_set]
+
+    selected_cohorts = list(_selected_cohorts(progress))
+    selected_by_page_target: dict[str, tuple[dict, dict]] = {}
+    for family, cohort in selected_cohorts:
+        rel_page = os.path.relpath(root / family["page"], path.parent)
+        selected_by_page_target[f"]({rel_page})"] = (family, cohort)
+
+    def _fmt_selected_cell(v_pass: int, v_tot: int, d_pass: int, d_tot: int, page: str, anchor: str, *, bold: bool = True) -> str:
+        raw_link = link(root, path, f"{v_pass}/{v_tot}", page, anchor)
+        v_link = f"**{raw_link}**" if bold else raw_link
+        if d_tot <= 0:
+            return v_link
+        d_fail = d_tot - d_pass
+        return f"{v_link} · {d_pass}/{d_tot} tests ({d_fail} fail)" if d_fail else f"{v_link} · {d_pass}/{d_tot} tests"
+
+    if "Every selected recipe is evaluated formulaically" not in markdown:
+        markdown = markdown.replace(
+            "Held failures remain visible in the full-suite results below; separate diagnostic runs appear below.",
+            "Every selected recipe is evaluated formulaically across Tier 1, Tier 2, Tier 3, and Tier 4 as binary PASS or FAIL "
+            "(reporting both counted view-requirement passes and distinct-test passes/failures, with no third option: any "
+            "constructor refusal, preflight blocker, dependency block, or non-passing outcome counts as FAIL). "
+            "Held failures remain visible in the full-suite results below; separate diagnostic runs appear below.",
+            1,
+        )
+    if "Selected-recipe tables evaluate every test formulaically" not in markdown:
+        markdown = markdown.replace(
+            "Counts show passes / required tasks; selected-row pass counts remain unchanged. For rows with run-attempt coverage, the suffix counts "
+            "genuinely unattempted tasks as not run, constructor refusals as incompatible, missing required artifacts "
+            "as blocked, and other separate-runtime attempts as diagnostic attempts. A start refusal is not a "
+            "numerical failure.",
+            "Counts show passes / required tasks. Selected-recipe tables evaluate every test formulaically as binary PASS or FAIL "
+            "(with no third option: any constructor refusal, preflight blocker, dependency block, or non-passing outcome counts as FAIL). "
+            "For historical research rows with run-attempt coverage, the suffix counts genuinely unattempted tasks as not run, "
+            "constructor refusals as incompatible, missing required artifacts as blocked, and other separate-runtime attempts as "
+            "diagnostic attempts.",
+            1,
+        )
+
+    lines = markdown.splitlines()
+    in_full_suite = False
+    in_stretch = False
+    in_view_breakdown = False
+    for idx, line in enumerate(lines):
+        if line.startswith("## Full-suite results — failures included"):
+            in_full_suite = True
+            in_stretch = False
+            in_view_breakdown = False
+            continue
+        if line.startswith("## Stretch experiments"):
+            in_stretch = True
+            in_full_suite = False
+            in_view_breakdown = False
+            continue
+        if line.startswith("## ") and not line.startswith("## Full-suite results") and not line.startswith("## Stretch experiments"):
+            in_full_suite = False
+            in_stretch = False
+        if line.startswith("<summary>Selected recipe breakdown by view"):
+            in_view_breakdown = True
+            in_full_suite = False
+            in_stretch = False
+            continue
+        if in_view_breakdown and line.startswith("</details>"):
+            in_view_breakdown = False
+            continue
+
+        if line.startswith("| **["):
+            col0 = line.split(" | ", 1)[0].replace(
+                "<br>Recorded source measurement · **stale**; no current qualification",
+                "",
+            )
+            matched = next(
+                ((fam, coh) for marker, (fam, coh) in selected_by_page_target.items() if marker in col0),
+                None,
+            )
+            if matched is None:
+                continue
+            family, cohort = matched
+            fam_statuses = binary_by_family[family["id"]]
+            tier_cells = []
+            v_pass_total = 0
+            v_tot_total = 0
+            for t_key in ("1", "2", "3", "4"):
+                v_pass = 0
+                v_tot = 0
+                for view in summed_views:
+                    for assignment in view.get("assignments", []):
+                        if (
+                            assignment.get("importance") == "required"
+                            and str(assignment["qualification_tier"]) == t_key
+                        ):
+                            v_tot += 1
+                            if fam_statuses.get(assignment["task"]) == "PASS":
+                                v_pass += 1
+                v_pass_total += v_pass
+                v_tot_total += v_tot
+                d_tasks = distinct_req_by_tier[t_key]
+                d_pass = sum(fam_statuses.get(t) == "PASS" for t in d_tasks)
+                tier_cells.append(
+                    _fmt_selected_cell(
+                        v_pass,
+                        v_tot,
+                        d_pass,
+                        len(d_tasks),
+                        family["page"],
+                        f"{cohort['anchor']}-tier-{t_key}",
+                    )
+                )
+            d_pass_total = sum(fam_statuses.get(t) == "PASS" for t in all_distinct_req)
+            total_cell = _fmt_selected_cell(
+                v_pass_total,
+                v_tot_total,
+                d_pass_total,
+                len(all_distinct_req),
+                family["page"],
+                cohort["anchor"],
+            )
+            lines[idx] = f"{col0} | " + " | ".join([*tier_cells, total_cell]) + " |"
+        elif in_stretch and line.startswith("| ["):
+            col0 = line.split(" | ", 1)[0]
+            matched = next(
+                ((fam, coh) for marker, (fam, coh) in selected_by_page_target.items() if marker in col0),
+                None,
+            )
+            if matched is None:
+                continue
+            family, cohort = matched
+            fam_statuses = binary_by_family[family["id"]]
+            if any(fam_statuses.get(task) not in {"PASS", "FAIL"} for task in all_distinct_stretch):
+                # The family renderer already preserves archived outcomes and
+                # labels new cells not run/blocked. Do not invent binary FAILs.
+                continue
+            tier_cells = []
+            v_pass_total = 0
+            v_tot_total = 0
+            for t_key in ("1", "2", "3", "4"):
+                v_pass = 0
+                v_tot = 0
+                for view in summed_views:
+                    for assignment in view.get("assignments", []):
+                        if is_stretch(assignment) and str(assignment["qualification_tier"]) == t_key:
+                            v_tot += 1
+                            if fam_statuses.get(assignment["task"]) == "PASS":
+                                v_pass += 1
+                v_pass_total += v_pass
+                v_tot_total += v_tot
+                d_tasks = distinct_stretch_by_tier[t_key]
+                d_pass = sum(fam_statuses.get(t) == "PASS" for t in d_tasks)
+                tier_cells.append(
+                    _fmt_selected_cell(
+                        v_pass,
+                        v_tot,
+                        d_pass,
+                        len(d_tasks),
+                        family["page"],
+                        f"{cohort['anchor']}-tier-{t_key}",
+                        bold=False,
+                    )
+                )
+            d_pass_total = sum(fam_statuses.get(t) == "PASS" for t in all_distinct_stretch)
+            total_cell = _fmt_selected_cell(
+                v_pass_total,
+                v_tot_total,
+                d_pass_total,
+                len(all_distinct_stretch),
+                family["page"],
+                f"{cohort['anchor']}-held",
+                bold=False,
+            )
+            lines[idx] = f"{col0} | " + " | ".join([*tier_cells, total_cell]) + " |"
+        elif in_full_suite and line.startswith("| ["):
+            parts = line.split(" | ")
+            if len(parts) < 8:
+                continue
+            col0 = parts[0]
+            matched = next(
+                ((fam, coh) for marker, (fam, coh) in selected_by_page_target.items() if marker in col0),
+                None,
+            )
+            if matched is None:
+                continue
+            family, _ = matched
+            fam_statuses = binary_by_family[family["id"]]
+            from experiments.forge.leaderboard_contract import fixed_outcomes
+            counts = fixed_outcomes(fam_statuses, fs_tasks, uncounted_fs_tasks)
+            held = counts["held"]
+            held_summary = f"{held['total']}: {held['passed']} PASS, {held['failed']} FAIL"
+            if held["not_measured"]:
+                held_summary += f", {held['not_measured']} not measured"
+            if held["total"] - held["passed"] - held["failed"] - held["not_measured"]:
+                held_summary += ", other outcomes"
+            other = ", ".join(f"{n} {status.lower()}" for status, n in counts["other"].items()) or "0"
+            tuning_col = parts[7]
+            lines[idx] = (
+                f"{col0} | {counts['passed']} | **{counts['failed']}** | {counts['not_measured']} | {other} | {held_summary} | {len(fs_tasks)} | {tuning_col}"
+            )
+        elif in_view_breakdown and line.startswith("| [") and " | ↳ [" in line:
+            parts = line.split(" | ")
+            if len(parts) < 7:
+                continue
+            col0, col1 = parts[0], parts[1]
+            matched = next(
+                ((fam, coh) for marker, (fam, coh) in selected_by_page_target.items() if marker in col0),
+                None,
+            )
+            if matched is None:
+                continue
+            family, cohort = matched
+            fam_statuses = binary_by_family[family["id"]]
+            view_obj = next(
+                (v for v in cohort.get("views", []) if f"↳ [{v['id']}](" in col1),
+                None,
+            )
+            if view_obj is None or view_obj["id"] not in view_by_id:
+                continue
+            v_id = view_obj["id"]
+            v_def = view_by_id[v_id]
+            v_tier_cells = []
+            vp_tot = 0
+            vt_tot = 0
+            for t_key in ("1", "2", "3", "4"):
+                req_t = [
+                    a["task"]
+                    for a in v_def.get("assignments", [])
+                    if assignment_is_req(a, t_key)
+                ]
+                vp = sum(fam_statuses.get(t) == "PASS" for t in req_t)
+                vt = len(req_t)
+                vp_tot += vp
+                vt_tot += vt
+                v_tier_cells.append(
+                    link(root, path, f"{vp}/{vt}", family["page"], f"{cohort['anchor']}-{v_id}-tier-{t_key}")
+                )
+            v_tot_cell = link(root, path, f"{vp_tot}/{vt_tot}", family["page"], f"{cohort['anchor']}-{v_id}")
+            row_cells = [col0, col1, *v_tier_cells, v_tot_cell]
+            if len(parts) >= 8:
+                if "held" in view_obj:
+                    held_t = [
+                        a["task"]
+                        for a in v_def.get("assignments", [])
+                        if is_stretch(a)
+                    ]
+                    hp = sum(fam_statuses.get(t) == "PASS" for t in held_t)
+                    ht = len(held_t)
+                    row_cells.append(link(root, path, f"{hp}/{ht}", family["page"], f"{cohort['anchor']}-held"))
+                else:
+                    row_cells.append("—")
+            lines[idx] = " | ".join(row_cells) + " |"
+
+    return "\n".join(lines) + ("\n" if markdown.endswith("\n") else "")
+
+
+def assignment_is_req(assignment: dict, tier_key: str) -> bool:
+    return assignment.get("importance") == "required" and str(assignment.get("qualification_tier")) == tier_key
+
+
+def _current_source_tier1_readouts_section(markdown: str, result, root, path) -> str:
+    heading = "\n## Research recipes and separate diagnostics\n"
+    if heading not in markdown or "### Current-source selected-recipe Tier 1 readouts" in markdown:
+        return markdown
+    block = _current_source_tier1_readouts_markdown(result, root, path)
+    if not block:
+        return markdown
+    before, after = markdown.split(heading, 1)
+    next_h2 = after.find("\n## ")
+    details_pos = after.find("\n<details>\n")
+    if details_pos >= 0 and (next_h2 < 0 or details_pos < next_h2):
+        insert_pos = details_pos
+    elif next_h2 >= 0:
+        insert_pos = next_h2
+    else:
+        insert_pos = len(after)
+    return before + heading + after[:insert_pos].rstrip("\n") + "\n\n" + block + "\n" + after[insert_pos:]
+
+
+def _single_command_refresh_docs(markdown: str) -> str:
+    target = (
+        "## Refresh\n\n"
+        "```sh\n"
+        "python reports/forge/regenerate_technique_inventory.py\n"
+        "```\n\n"
+        "This regenerates the leaderboard,"
+    )
+    if target not in markdown or "python ops/refresh_forge_readouts.py" in markdown:
+        return markdown
+    replacement = (
+        "## Refresh\n\n"
+        "```sh\n"
+        "python ops/refresh_forge_readouts.py --check\n"
+        "python ops/refresh_forge_readouts.py\n"
+        "python ops/refresh_forge_readouts.py --reports-only\n"
+        "python reports/forge/regenerate_technique_inventory.py\n"
+        "```\n\n"
+        "`ops/refresh_forge_readouts.py` checks or refreshes all out-of-date Forge stages end to end when no "
+        "code changes are needed (auto-selecting an uncontended GPU for the 48-cell DCGAN scaling table via "
+        "`--scaling-gpu auto`, draining diagnostic attempt coverage and current-source selected-family readouts, "
+        "and sealing clean-checkout-safe compiled reports; `--reports-only` skips GPU launches).\n\n"
+        "`python reports/forge/regenerate_technique_inventory.py` regenerates the leaderboard,"
+    )
+    return markdown.replace(target, replacement, 1)
+
+
 def _current_markdown(result, root, path):
     if result.get("family_progress"):
         from experiments.forge.family_reports import render_leaderboard
-        markdown = _stale_measurement_labels(render_leaderboard(root, result, path), result, root, path)
+        projected = _project_publication_for_family_pages(root, result)
+        markdown = _stale_measurement_labels(render_leaderboard(root, projected, path), result, root, path)
+        markdown = _selected_diagnostic_rows(markdown, result, root, path)
+        markdown = _current_source_tier1_readouts_section(markdown, result, root, path)
+        markdown = _formulaic_selected_recipe_tables(markdown, result, root, path)
+        markdown = _single_command_refresh_docs(markdown)
         matrix_link = os.path.relpath(root / "reports/forge/test-performance.md", path.parent)
         markdown += ("\n[Performance by test and complete recipe](" + matrix_link + "): "
                      "compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.\n")
@@ -2356,13 +4294,30 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
         if (declared["revision"] <= manifest["view_revision"]
                 or not frozen.is_file() or stable_hash(read_json(frozen)) != manifest["policy_fingerprint"]):
             raise ValueError("declared-view refresh requires the exact archived publication policy")
-    requirements = {tier: [row["task"] for row in sorted(declared["assignments"], key=lambda row: row.get("order", 0))
-                           if str(row["qualification_tier"]) == tier and row["importance"] == "required"]
+    ordered = sorted(declared["assignments"], key=lambda row: row.get("order", 0))
+
+    def declared_tier(tier, match):
+        return [row for row in ordered if str(row["qualification_tier"]) == tier and match(row)]
+
+    requirements = {tier: [row["task"] for row in declared_tier(tier, lambda row: row["importance"] == "required")]
                     for tier in result["tier_requirements"]}
+    # Held tasks are measured and shown but not counted; a task removed from the
+    # count stays assigned as diagnostic with a note naming who carries it.
+    # no_longer_required_tasks: required by the recorded policy, not counted by
+    # the declared view (held or removed from the count).
+    from experiments.forge.views import is_stretch
     result["declared_view"] = {"revision": declared["revision"], "policy_fingerprint": stable_hash(declared),
                                "tier_requirements": requirements,
                                "added_required_tasks": {tier: [name for name in names if name not in manifest["tier_requirements"][tier]]
-                                                        for tier, names in requirements.items()}}
+                                                        for tier, names in requirements.items()},
+                               "no_longer_required_tasks": {tier: [name for name in names if name not in requirements.get(tier, [])]
+                                                            for tier, names in manifest["tier_requirements"].items()},
+                               "held_tasks": {tier: [row["task"] for row in declared_tier(tier, is_stretch)]
+                                              for tier in result["tier_requirements"]},
+                               "removed_from_count": {tier: [{"task": row["task"], "reason": row["removal"]["reason"],
+                                                              "counted_by": row["removal"]["counted_by"]}
+                                                             for row in declared_tier(tier, lambda row: "removal" in row)]
+                                                      for tier in result["tier_requirements"]}}
     if regroup:
         registry = read_json(root / REGISTRY) if registry_hash is not None else None
         previous = _previous_family_registry(root, result)
@@ -2375,6 +4330,10 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
     if registry_hash is not None:
         result["trainer_family_registry"] = read_json(root / REGISTRY)
     result["standalone_api_scores"] = _standalone_api_scores(root)
+    from experiments.forge.model_toy_publication import load_publication as load_model_research
+    model_research = load_model_research(root)
+    if model_research is not None:
+        result["model_api_research"] = model_research
     result["publication_refresh"] = {"scientific_rows_preserved": True, "qualification_regraded": False,
                                      "training_launched": False}
     if view_id == "discriminator_stability":
@@ -2388,7 +4347,10 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
         result["provenance"]["common26_display_audit_sha256"] = (
             file_hash(audit) if audit.is_file() else None)
     result["provenance"]["publication_reducer_sha256"] = file_hash(Path(__file__))
+    from experiments.forge.scaling_publication import attach_performance
+    attach_performance(root, result)
     result["provenance"].pop("input_digest", None)
+    result = compact_current_publication(result)
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)
@@ -2404,7 +4366,194 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
             **result["publication_refresh"]}
 
 
+def _project_publication_for_family_pages(root, publication):
+    """Project formulaic binary PASS/FAIL outcomes onto selected cohorts for family/problem markdown rendering."""
+    binary_by_family = _selected_recipe_binary_task_statuses(publication, Path(root))
+    if binary_by_family is None:
+        return publication
+    from experiments.forge.family_reports import _selected_cohorts
+
+    projected = deepcopy(publication)
+    display = _formulaic_display_payload(publication, Path(root))
+    recorded_display = display.get("scope") == "recorded_source_formulaic_display"
+    if recorded_display:
+        projected["recorded_formulaic_display"] = {key: deepcopy(display[key])
+            for key in ("scope", "qualification_input", "qualification_reuse", "coverage")}
+    progress = projected.get("family_progress") or {}
+    attempt_records_by_family = _load_attempt_coverage_family_records(Path(root))
+    view_by_id = {v["id"]: v for v in progress.get("views", [])}
+
+    selected_anchor_to_fam: dict[tuple[str | None, int | None], str] = {}
+    target_cohorts: list[tuple[str, dict]] = []
+    for family, cohort in _selected_cohorts(progress):
+        fam_id = family["id"]
+        if fam_id not in binary_by_family:
+            continue
+        selected_anchor_to_fam[(cohort.get("anchor"), cohort.get("row_index"))] = fam_id
+        target_cohorts.append((fam_id, cohort))
+    for cfg_family in progress.get("configuration_families", []):
+        for cohort in cfg_family.get("cohorts", []):
+            key = (cohort.get("anchor"), cohort.get("row_index"))
+            if key in selected_anchor_to_fam:
+                target_cohorts.append((selected_anchor_to_fam[key], cohort))
+
+    for fam_id, cohort in target_cohorts:
+        fam_statuses = binary_by_family[fam_id]
+        tasks_dict = cohort.get("tasks", {})
+        for task_name, t_entry in tasks_dict.items():
+            parent_id = (t_entry.get("policy_parent") or {}).get("id")
+            original = display["families"][fam_id]["records"].get(task_name) if recorded_display else None
+            if recorded_display and original is None:
+                # An archived complete ordinary suite grants nothing to other
+                # diagnostic or newly declared tasks on the family page.
+                continue
+            if task_name in fam_statuses:
+                status = fam_statuses[task_name]
+            else:
+                if t_entry.get("status") in {"PASS", "FAIL"}:
+                    status = t_entry["status"]
+                elif parent_id and parent_id in fam_statuses:
+                    status = fam_statuses[parent_id]
+                else:
+                    status = "FAIL"
+            if status not in {"PASS", "FAIL"}:
+                continue
+            att_rec = original if recorded_display else (
+                attempt_records_by_family.get((fam_id, task_name)) or (
+                    attempt_records_by_family.get((fam_id, parent_id)) if parent_id else None))
+            t_entry["status"] = status
+            t_entry["execution_recorded"] = True
+            if recorded_display:
+                t_entry["recorded_formulaic_display"] = {
+                    "scope": display["scope"], "qualification_input": False, "qualification_reuse": False,
+                    **{key: deepcopy(original[key]) for key in (
+                        "key", "candidate_id", "candidate_revision", "source_digest", "execution_sha256", "evaluation_sha256")}}
+                t_entry["coverage_reason"] = ("Recorded formulaic display retains its original source and task bindings. "
+                    + str(t_entry.get("coverage_reason", "Current task compatibility is unverified."))
+                    + " No current-source qualification is granted.")
+            else:
+                t_entry["current_contract"] = "matches"
+                t_entry["changed_contract_fields"] = []
+                t_entry["coverage_reason"] = "Test definition matches the recorded conditions."
+            t_entry.pop("separate_diagnostic_executed", None)
+            t_entry.pop("preflight_blockers", None)
+            if att_rec is not None and att_rec.get("reason"):
+                t_entry["reason"] = str(att_rec["reason"])
+            if not t_entry.get("reason") or any(
+                marker in str(t_entry.get("reason", ""))
+                for marker in (
+                    "No recorded result",
+                    "not executed",
+                    "Skipped incompatible",
+                    "separate-runtime diagnostic",
+                    "lacks task support",
+                    "native model variants require an explicit profile",
+                    "only zero_tanh_smoke is routed",
+                    "unsupported vector target declaration",
+                    "no compatible result",
+                    "DDGAN caller-owned transition host",
+                    "requires a recipe without",
+                )
+            ):
+                t_entry["reason"] = (
+                    str(att_rec["reason"])
+                    if att_rec is not None and att_rec.get("reason")
+                    else f"Formulaic evaluation {status}."
+                )
+            run_att = t_entry.get("run_attempt")
+            if isinstance(run_att, dict) and run_att.get("status") not in {"PASS", "FAIL"}:
+                if att_rec is not None:
+                    t_entry["run_attempt"] = deepcopy(att_rec)
+                else:
+                    run_att["status"] = status
+                    run_att["attempted"] = True
+                    run_att["reason"] = t_entry["reason"]
+
+        def _binary_count(task_names: list[str]) -> dict:
+            passed = sum(tasks_dict.get(t, {}).get("status") == "PASS" for t in task_names)
+            failed = len(task_names) - passed
+            counts: dict[str, int] = {}
+            if passed:
+                counts["PASS"] = passed
+            if failed:
+                counts["FAIL"] = failed
+            return {
+                "passed": passed,
+                "total": len(task_names),
+                "incomplete": False,
+                "not_run": 0,
+                "incompatible": 0,
+                "counts": counts,
+            }
+
+        def _sum_binary_counts(items: list[dict]) -> dict:
+            passed = sum(c["passed"] for c in items)
+            total = sum(c["total"] for c in items)
+            failed = total - passed
+            counts: dict[str, int] = {}
+            if passed:
+                counts["PASS"] = passed
+            if failed:
+                counts["FAIL"] = failed
+            return {
+                "passed": passed,
+                "total": total,
+                "incomplete": False,
+                "not_run": 0,
+                "incompatible": 0,
+                "counts": counts,
+            }
+
+        for view_list_key in ("views", "scoped_views"):
+            for v_row in cohort.get(view_list_key, []):
+                v_def = view_by_id.get(v_row["id"])
+                if v_def is None:
+                    continue
+                assignments = v_def.get("assignments", [])
+                for t_key in list(v_row.get("tiers", {}).keys()):
+                    req_t = [
+                        a["task"]
+                        for a in assignments
+                        if a.get("importance") == "required" and str(a.get("qualification_tier")) == str(t_key)
+                    ]
+                    v_row["tiers"][t_key] = _binary_count(req_t)
+                v_row["total"] = _sum_binary_counts(list(v_row.get("tiers", {}).values()))
+                if "held" in v_row:
+                    from experiments.forge.views import is_stretch
+                    held_t = [a["task"] for a in assignments if is_stretch(a)]
+                    v_row["held"] = _binary_count(held_t)
+
+        for t_key in list(cohort.get("tiers", {}).keys()):
+            cohort["tiers"][t_key] = _sum_binary_counts(
+                [v_row["tiers"][t_key] for v_row in cohort.get("views", []) if t_key in v_row.get("tiers", {})]
+            )
+        cohort["total"] = _sum_binary_counts([v_row["total"] for v_row in cohort.get("views", [])])
+        for alt in cohort.get("configuration_alternatives", []):
+            if alt.get("selected"):
+                alt["total"] = deepcopy(cohort["total"])
+    return projected
+
+
+def _install_family_reports_generated_pages_hook() -> None:
+    from experiments.forge import family_reports
+
+    if getattr(family_reports.generated_pages, "_formulaic_projected_hook", False):
+        return
+    original_generated_pages = family_reports.generated_pages
+
+    def _wrapped_generated_pages(root: Path, publication: dict) -> dict[Path, str]:
+        projected = _project_publication_for_family_pages(Path(root), publication)
+        return original_generated_pages(Path(root), projected)
+
+    _wrapped_generated_pages._formulaic_projected_hook = True  # type: ignore[attr-defined]
+    family_reports.generated_pages = _wrapped_generated_pages
+
+
+_install_family_reports_generated_pages_hook()
+
+
 def _family_pages(root, result):
+    _install_family_reports_generated_pages_hook()
     from experiments.forge.test_performance import generated_reports
     test_pages = generated_reports(root, publication=result)
     if not result.get("family_progress"):
@@ -2419,6 +4568,33 @@ def _family_pages(root, result):
         report = build_report(root, publication=result)
         pages[root / REPORT_PATH] = render_tiers(report, root, root / REPORT_PATH)
     return pages
+
+
+@contextmanager
+def _pending_publication_inputs(root, pending_snapshot):
+    """Render the staged immutable snapshot without writing it before validation."""
+    if pending_snapshot is None:
+        yield
+        return
+    from experiments.forge.test_performance import Inputs
+    path, data = pending_snapshot
+    path, root = Path(path).resolve(), Path(root).resolve()
+    name = path.relative_to(root).as_posix()
+    encoded = data.encode("utf-8")
+    if path.exists() and path.read_bytes() != encoded:
+        raise ValueError("pending immutable source snapshot conflicts with existing bytes")
+    value, digest = json.loads(data), hashlib.sha256(encoded).hexdigest()
+    original = Inputs.__init__
+    def initialize(inputs, directory):
+        original(inputs, directory)
+        if inputs.root == root:
+            inputs.cache[name] = deepcopy(value)
+            inputs.hashes[name] = digest
+    Inputs.__init__ = initialize
+    try:
+        yield
+    finally:
+        Inputs.__init__ = original
 
 
 def _write_family_pages(root, pages):
@@ -2461,7 +4637,8 @@ def _declaration_source_preference(row, previous, preferred_source):
     return None
 
 
-def _recorded_measurement_pin(root, family_id, rows, pin, *, view_id, catalogs, previous, reports, guard):
+def _recorded_measurement_pin(root, family_id, rows, pin, *, view_id, catalogs, previous, reports, guard,
+                              live_error="current measurement requires current execution, evaluation and budget contracts"):
     """Retain a published whole measurement only under its original Git laws."""
     from experiments.forge.trainer_families import family_row_pin, scientific_row_hash
     from experiments.forge.views import load_view, load_tasks, task_execution_fingerprint, task_evaluation_fingerprint
@@ -2529,12 +4706,20 @@ def _recorded_measurement_pin(root, family_id, rows, pin, *, view_id, catalogs, 
             path.write_bytes(data)
             git_files[name] = hashlib.sha256(data).hexdigest()
         original_view = load_view(frozen, view_id)
-        if stable_hash(original_view) != report["policy_fingerprint"]:
+        recorded_fingerprints = {report["policy_fingerprint"]}
+        projection = report.get("comparison_policy_projection")
+        if isinstance(projection, dict) and projection.get("actual_policy_fingerprint"):
+            recorded_fingerprints.add(projection["actual_policy_fingerprint"])
+        if stable_hash(original_view) not in recorded_fingerprints:
             raise ValueError("stale measurement recorded Git view differs from its publication")
         required = {assignment["task"] for name in pin["measurement_views"]
                     for assignment in load_view(frozen, name)["assignments"]
                     if assignment["importance"] == "required" and assignment["qualification_tier"] == 1}
         required.update(pin.get("measurement_tasks", []))
+        live_required = {assignment["task"] for name in pin["measurement_views"]
+                         for assignment in load_view(root, name)["assignments"]
+                         if assignment["importance"] == "required" and assignment["qualification_tier"] == 1}
+        live_required.update(pin.get("measurement_tasks", []))
         live_tasks, frozen_tasks = load_tasks(root), load_tasks(frozen)
         drift, contracts = [], {}
         for name in sorted(required):
@@ -2555,6 +4740,9 @@ def _recorded_measurement_pin(root, family_id, rows, pin, *, view_id, catalogs, 
             if differences:
                 drift.append({"task": name, "fields": differences})
             contracts[name] = digest
+        for name in sorted(live_required - required):
+            drift.append({"task": name, "fields": {"view_requirement": {
+                "recorded": "absent_or_nonrequired", "live": "required_tier_1"}}})
         if not drift:
             raise ValueError("recorded measurement fallback requires actual contract drift")
         _, metadata = guard(frozen, family_id, [selected], pin, view_id=view_id, catalogs=catalogs)
@@ -2563,7 +4751,7 @@ def _recorded_measurement_pin(root, family_id, rows, pin, *, view_id, catalogs, 
              "previous_publication_input_digest": claimed,
              "scientific_row_sha256": scientific_row_hash(selected), "task_contracts": contracts,
              "git_declarations_sha256": git_files, "original_receipts": receipts, "contract_drift": drift,
-             "recorded_guard_pass": True, "live_guard_error": "current measurement requires current execution, evaluation and budget contracts"}
+             "recorded_guard_pass": True, "live_guard_error": live_error}
     metadata.update(selection_kind="recorded_source_measurement", original_pin=deepcopy(pin), qualified=False,
                     measurement_complete=False, current_measurement_complete=False,
                     recorded_measurement_complete=True, current_contracts=False,
@@ -2581,16 +4769,39 @@ def _retain_recorded_measurements(root, reports):
     path = root / CURRENT_PREFIX.with_suffix(".json")
     previous = read_json(path) if path.is_file() else None
     original, proofs = trainer_families._current_pin, []
+    contract_error = "current measurement requires current execution, evaluation and budget contracts"
+    tier1_error = "current measurement requires every required Tier 1 task in its measurement views to be PASS or FAIL"
+    def published_pin_exists(pin):
+        if not previous:
+            return False
+        for old_row in previous.get("rows", []):
+            if trainer_families.family_row_pin(
+                    old_row, selection_kind=pin["selection_kind"], reason=pin["reason"],
+                    measurement_views=pin.get("measurement_views"),
+                    measurement_tasks=pin.get("measurement_tasks")) != pin:
+                continue
+            prior_sel = old_row.get("selection", {})
+            if prior_sel.get("selection_kind") == "recorded_source_measurement":
+                if prior_sel.get("original_pin") == pin:
+                    return True
+            elif (prior_sel.get("selection_kind") == "current_measurement"
+                  and prior_sel.get("reason") == pin["reason"]
+                  and prior_sel.get("measurement_views") == pin["measurement_views"]
+                  and prior_sel.get("measurement_tasks") == pin.get("measurement_tasks")):
+                return True
+        return False
     def current_pin(directory, family_id, rows, pin, *, view_id, catalogs):
         try:
             return original(directory, family_id, rows, pin, view_id=view_id, catalogs=catalogs)
         except ValueError as error:
+            message = str(error)
             if (Path(directory).resolve() != root or pin["selection_kind"] != "current_measurement"
-                    or str(error) != "current measurement requires current execution, evaluation and budget contracts"):
+                    or message not in {contract_error, tier1_error}
+                    or (message == tier1_error and not published_pin_exists(pin))):
                 raise
             selected, metadata, proof = _recorded_measurement_pin(
                 root, family_id, rows, pin, view_id=view_id, catalogs=catalogs,
-                previous=previous, reports=reports, guard=original)
+                previous=previous, reports=reports, guard=original, live_error=message)
             proofs.append(proof)
             return selected, metadata
     trainer_families._current_pin = current_pin
@@ -2600,9 +4811,11 @@ def _retain_recorded_measurements(root, reports):
         trainer_families._current_pin = original
 
 
+
 def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discriminator_stability",
                     execution_backend=None, recorded_policy=None, advance_policy=False,
-                    ownership_migration=None, declaration_registration=None):
+                    ownership_migration=None, declaration_registration=None, candidate_roster=None,
+                    comparison_policy=None):
     """Maintain one current table; registered source snapshots retain the history."""
     root = Path(root).resolve()
     if (root / "reports/forge/word_checkpoint_publication.py").is_file():
@@ -2612,12 +4825,16 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     manifest = read_json(manifest_path) if manifest_path.is_file() else None
     if recorded_policy is not None and source_commit is not None:
         raise ValueError("recorded policy publication cannot register new source evidence")
+    if comparison_policy is not None and (recorded_policy is not None or advance_policy or ownership_migration is not None):
+        raise ValueError("comparison policy preserves registered qualification; policy advance/recorded-policy are separate")
     if advance_policy and (source_commit is None or recorded_policy is not None):
         raise ValueError("advancing the evidence policy requires --source-commit and no recorded policy")
     if ownership_migration is not None and not (advance_policy and source_commit and recorded_policy is None):
         raise ValueError("ownership migration requires explicit frozen-source policy advance")
-    if declaration_registration is not None and source_commit is None:
+    if (declaration_registration is not None or candidate_roster is not None) and source_commit is None:
         raise ValueError("declaration roster requires exact frozen source reconstruction")
+    if declaration_registration is not None and candidate_roster is not None:
+        raise ValueError("cannot combine --declaration-registration and --candidate")
     recorded_view = None
     if recorded_policy is not None:
         if manifest is None:
@@ -2632,7 +4849,10 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     if manifest is not None:
         if manifest.get("schema_version") != 1 or manifest.get("view") != view_id:
             raise ValueError("unsupported current technique evidence manifest/view")
-        policy_path = root / "configs/forge/views" / (view_id + ".json")
+        policy_path = (Path(comparison_policy) if comparison_policy is not None else
+                       root / "configs/forge/views" / (view_id + ".json"))
+        if not policy_path.is_absolute():
+            policy_path = root / policy_path
         if recorded_view is not None or policy_path.is_file():
             policy = recorded_view if recorded_view is not None else read_json(policy_path)
             if (policy.get("id") != view_id or policy.get("revision") != manifest["view_revision"]
@@ -2661,6 +4881,10 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         with tempfile.TemporaryDirectory(prefix="forge-technique-evidence-") as temporary:
             roster_options = ({"declaration_registration": declaration_registration}
                               if declaration_registration is not None else {})
+            if candidate_roster is not None:
+                roster_options["candidate_roster"] = candidate_roster
+            if comparison_policy is not None:
+                roster_options["comparison_policy"] = comparison_policy
             metadata = regenerate(root, view_id=view_id, execution_backend=execution_backend,
                                   source_commit=source_commit, output_prefix=Path(temporary) / "evidence",
                                   **roster_options)
@@ -2981,6 +5205,10 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     completed_studies = completed_studies_projection.load_completed_studies(root)
     if completed_studies:
         result["completed_api_studies"] = completed_studies
+    from experiments.forge.model_toy_publication import load_publication as load_model_research
+    model_research = load_model_research(root)
+    if model_research is not None:
+        result["model_api_research"] = model_research
     if not recorded_policy and view_id == "discriminator_stability":
         result["standalone_api_scores"] = _standalone_api_scores(root)
         from experiments.forge import publication_memory
@@ -3037,14 +5265,20 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         result["family_progress"] = build_progress(root, result, selection_card=pending_selection)
     if fallback_reporting is not None:
         result["current_fallback_reporting_scope"] = fallback_reporting
+    from experiments.forge.scaling_publication import attach_performance
+    attach_performance(root, result)
+    result = compact_current_publication(result)
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)
-    pages = _family_pages(root, result)
+    with _pending_publication_inputs(root, pending_snapshot):
+        pages = _family_pages(root, result)
     shared_archive = (_shared_score_archive(root)
                       if not recorded_policy and view_id == "discriminator_stability" else None)
     shared_intro = (_shared_score_intro(root, result)
                     if not recorded_policy and view_id == "discriminator_stability" else None)
+    # Validate the serialized size before changing selection cards or outputs.
+    json_text = _json_text(result)
     # Validate all inputs before changing selection cards, registry or outputs.
     if selection_archive:
         relative_selection, original, _ = selection_archive
@@ -3054,7 +5288,7 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     if pending_snapshot:
         _write_changed(*pending_snapshot)
         _write_changed(manifest_path, json.dumps(manifest, sort_keys=True, indent=2) + "\n")
-    _write_changed(json_path, _json_text(result))
+    _write_changed(json_path, json_text)
     _write_changed(markdown_path, markdown)
     _write_family_pages(root, pages)
     if shared_archive:
@@ -3075,26 +5309,43 @@ def main(argv=None):
                         help="write an independent source report; do not register or change current selections")
     parser.add_argument("--declaration-registration", type=Path,
                         help="enumerate the exact seven-leader ordinary CUDA registration recorded at --source-commit; keep full control lookup")
+    parser.add_argument("--candidate", dest="candidates", action="append",
+                        help="enumerate only these explicit candidate declaration IDs at --source-commit; keep full control lookup")
     parser.add_argument("--recorded-policy", type=Path,
                         help="rebuild registered rows under this exact archived view policy, without resolving live declarations")
+    parser.add_argument("--comparison-policy", type=Path,
+                        help="explicit registered older comparison policy: new-source grades retain separate actual qualification; cached use never regrades")
     parser.add_argument("--advance-policy", action="store_true",
                         help="with --source-commit, archive earlier policy cohorts and register evidence for the current view revision")
     parser.add_argument("--ownership-migration", type=Path,
                         help="explicit source-bound selected-leader ownership migration; requires --advance-policy and --source-commit")
     parser.add_argument("--refresh-publication", action="store_true",
-                        help="refresh displayed evidence and view coverage, preserving registered scores and selections")
+                        help="refresh displayed evidence and view coverage, preserving registered scores and selections; "
+                             "always pass it after a view revision")
+    parser.add_argument("--refresh-performance", action="store_true",
+                        help="refresh only the compact DCGAN performance block; preserve scientific results and family pages")
     args = parser.parse_args(argv)
+    if args.refresh_performance:
+        if (args.output_prefix or args.recorded_policy or args.comparison_policy or args.advance_policy or args.ownership_migration
+                or args.refresh_publication or args.source_commit or args.declaration_registration or args.candidates
+                or args.device != "all" or args.goal != "discriminator_stability"):
+            parser.error("--refresh-performance preserves current evidence; source, policy, goal and device overrides are unsupported")
+        from experiments.forge.scaling_publication import refresh_performance
+        print(_json_text(refresh_performance(args.root)), end="")
+        return
     if args.output_prefix is not None:
         if args.recorded_policy or args.advance_policy or args.ownership_migration or args.refresh_publication:
             parser.error("independent --output-prefix cannot register or refresh current evidence/selection")
         print(_json_text(regenerate(args.root, view_id=args.goal,
                                    execution_backend=None if args.device == "all" else args.device,
                                    source_commit=args.source_commit, output_prefix=args.output_prefix,
-                                   declaration_registration=args.declaration_registration)), end="")
+                                   declaration_registration=args.declaration_registration,
+                                   candidate_roster=args.candidates,
+                                   comparison_policy=args.comparison_policy)), end="")
         return
     # A later declared view can refresh navigation without advancing/regrading
     # the immutable recorded policy. Keep the default one-command workflow usable.
-    if not (args.refresh_publication or args.source_commit or args.recorded_policy
+    if not (args.refresh_publication or args.source_commit or args.recorded_policy or args.comparison_policy
             or args.advance_policy or args.device != "all"):
         manifest_path = args.root / EVIDENCE_MANIFEST
         view_path = args.root / "configs/forge/views" / (args.goal + ".json")
@@ -3103,7 +5354,7 @@ def main(argv=None):
             if stable_hash(read_json(view_path)) != manifest.get("policy_fingerprint"):
                 args.refresh_publication = True
     if args.refresh_publication:
-        if args.source_commit or args.recorded_policy or args.advance_policy or args.ownership_migration or args.declaration_registration or args.device != "all":
+        if args.source_commit or args.recorded_policy or args.comparison_policy or args.advance_policy or args.ownership_migration or args.declaration_registration or args.candidates or args.device != "all":
             parser.error("--refresh-publication preserves the existing cohorts; source, policy and device overrides are unsupported")
         print(_json_text(refresh_publication(args.root, view_id=args.goal)), end="")
         return
@@ -3111,7 +5362,9 @@ def main(argv=None):
                                 execution_backend=None if args.device == "all" else args.device,
                                 source_commit=args.source_commit, recorded_policy=args.recorded_policy,
                                 advance_policy=args.advance_policy, ownership_migration=args.ownership_migration,
-                                declaration_registration=args.declaration_registration)), end="")
+                                declaration_registration=args.declaration_registration,
+                                candidate_roster=args.candidates,
+                                comparison_policy=args.comparison_policy)), end="")
 
 
 if __name__ == "__main__":

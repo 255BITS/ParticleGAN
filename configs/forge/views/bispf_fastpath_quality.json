@@ -1,0 +1,27 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "img_stripes2_w64_optimizer_diagnostic"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "img_bars4_w64_optimizer_diagnostic"
+    }
+  ],
+  "eligibility": {},
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "bispf_fastpath_quality",
+  "policy_change_reason": "Explicit architecture-portability diagnostic: width64 variants of the original 8x8 stripe and bar hosts exercise CUDA convolutional polar fast paths. Preserve all original numerical fidelity/coverage gates and native control evidence. These distinct larger-capacity task identities supply no ordinary qualification or default-adoption credit.",
+  "ranking": {
+    "cost_separate": true,
+    "policy": "diagnostic_outcomes_only"
+  },
+  "revision": 1,
+  "schema_version": 1
+}

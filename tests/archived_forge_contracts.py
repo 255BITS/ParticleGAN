@@ -49,6 +49,22 @@ def restore_archived_contracts(root, scope):
         assert path.resolve().is_relative_to(root)
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(archived_contract_bytes(scope, relative))
+    metrics_path = root / "benchmarks/toy100/metrics.py"
+    if scope in {"bcap_prior_baseline_questions", "tier1_completion"} and metrics_path.is_file():
+        metrics_path.write_text(
+            metrics_path.read_text().replace(
+                "MIN_PRECISION = 0.75  # calibrated clean-sampling gate (oracle: 0.98889, filament mass: 0.20-0.25)",
+                "MIN_PRECISION = 0.97  # oracle value: 1 - exp(-9/2) = 0.98889",
+            )
+        )
+        tasks_dir = root / "configs/forge/tasks"
+        if scope == "tier1_completion" and tasks_dir.is_dir():
+            for task_path in tasks_dir.glob("*.json"):
+                card = json.loads(task_path.read_text())
+                rev = card.get("evaluation", {}).get("evaluator_revision") or {}
+                if rev.get("id") == "tier2-grid-triad-clean-sampling-calibration-v1":
+                    card["evaluation"]["coverage_thresholds"]["min_precision"] = 0.97
+                    task_path.write_text(json.dumps(card, indent=2) + "\n")
     return root
 
 
@@ -67,13 +83,33 @@ def restore_published_view_roster(root):
     return restore_archived_contracts(root, "published_develop_views")
 
 
+def commit_available(commit):
+    """True when this checkout can read the archived commit (shallow clones cannot)."""
+    return subprocess.run(["git", "cat-file", "-e", commit + "^{commit}"], cwd=ROOT,
+                          stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
+
+
+def require_history(scope):
+    """Skip archived-history controls with an explicit reason instead of erroring."""
+    import pytest
+    commit = COMMITS[scope]
+    if not commit_available(commit):
+        pytest.skip(f"archived {scope} commit {commit[:12]} is unavailable in this checkout "
+                    "(shallow clone); fetch full history to run this control")
+
+
 def published_develop_checkout(tmp_path):
     """Read original committed reports against their published develop cards."""
     # These report controls only read their inputs; share one complete physical
     # report mirror per pytest run so containment guards retain their meaning.
+    require_history("published_develop")
     root = tmp_path.parent / "published-develop-checkout"
-    if root.is_dir():
+    complete = root.with_name(root.name + ".complete")
+    if complete.is_file() and root.is_dir():
         return root
+    if root.exists():
+        # An earlier call failed part-way; never hand out a partial mirror.
+        shutil.rmtree(root)
     root.mkdir()
     # Reports and artifact links are read-only inputs in these controls. Configs
     # are private copies, allowing exact original task identities to be restored.
@@ -136,10 +172,12 @@ def published_develop_checkout(tmp_path):
             data = subprocess.check_output(["git", "show", f"{commit}:{relative}"], cwd=ROOT)
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_bytes(data)
-    return restore_published_view_roster(root)
+    result = restore_published_view_roster(root)
+    complete.write_text("complete\n")
+    return result
 
 
-def bcap_legacy_software_checkout(directory):
+def bcap_legacy_software_checkout(directory, *, code_source=ROOT):
     """Current code with exact original BCAP questions, only for software replay.
 
     The frozen comparator reads Git history but never writes it. Its private
@@ -147,20 +185,24 @@ def bcap_legacy_software_checkout(directory):
     may use this checkout. Current migrated questions are tested separately.
     """
     root = Path(directory).resolve()
+    code_source = Path(code_source).resolve()
     assert root != ROOT.resolve()
     root.mkdir(parents=True, exist_ok=True)
     for name in ("particlegan", "experiments", "benchmarks", "lib", "configs"):
-        shutil.copytree(ROOT / name, root / name,
+        shutil.copytree(code_source / name, root / name,
                         ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
     # Frozen evaluators may import report-owned Python. No bulk logs, tensor
     # dumps, old metrics or qualification receipts enter this software replay.
-    report_sources = list((ROOT / "reports").rglob("*.py"))
-    report_sources.append(ROOT / "reports/transfer_suite/unadjusted/leading_profile.json")
+    report_sources = list((code_source / "reports").rglob("*.py"))
+    report_sources.append(code_source / "reports/transfer_suite/unadjusted/leading_profile.json")
     for source in report_sources:
-        destination = root / source.relative_to(ROOT)
+        destination = root / source.relative_to(code_source)
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, destination)
     restore_archived_contracts(root, "bcap_legacy_questions")
+    api_path = root / "experiments/forge/api.py"
+    if api_path.is_file():
+        api_path.write_text(api_path.read_text().replace("            input_noise_std=0.5,\n", ""))
     # Current code has explicit source guards. Rebind only their byte identity;
     # preserve the original question and exact ancestry expected by the frozen
     # comparator's unchanged source-revision assertions.
@@ -197,6 +239,38 @@ def bcap_legacy_software_checkout(directory):
                                      cwd=ROOT, text=True).strip()
     (root / ".git").write_text("gitdir: " + gitdir + "\n")
     return root
+
+
+def bcap_pinned_software_checkout(directory, commit):
+    """Replay a declared code cohort with original BCAP question bytes.
+
+    Only source/configuration files are extracted. No historical run, trained
+    checkpoint, score or publication is overwritten or used as a new verdict.
+    """
+    import io
+    import tarfile
+
+    if not commit_available(commit):
+        import pytest
+        pytest.skip(f"pinned BCAP software source {commit} requires full Git history")
+    directory = Path(directory).resolve()
+    source = directory / "pinned-source"
+    source.mkdir(parents=True, exist_ok=False)
+    names = subprocess.check_output(
+        ["git", "ls-tree", "-r", "--name-only", commit, "--", "reports"], cwd=ROOT, text=True).splitlines()
+    support = [name for name in names if name.endswith(".py")]
+    data = subprocess.check_output(["git", "archive", commit, "--",
+        "particlegan", "experiments", "benchmarks", "lib", "configs",
+        "reports/transfer_suite/unadjusted/leading_profile.json", *support], cwd=ROOT)
+    with tarfile.open(fileobj=io.BytesIO(data)) as bundle:
+        bundle.extractall(source, filter="data")
+    result = bcap_legacy_software_checkout(directory / "legacy-questions", code_source=source)
+    (directory / "source-cohort.json").write_text(json.dumps({
+        "code_source_commit": commit, "question_source_commit": COMMITS["bcap_legacy_questions"],
+        "source_archive_sha256": hashlib.sha256(data).hexdigest(),
+        "qualification_input": False, "scope": "two-update software compatibility",
+    }, indent=2) + "\n")
+    return result
 
 
 def current_policy_software_checkout(tmp_path):

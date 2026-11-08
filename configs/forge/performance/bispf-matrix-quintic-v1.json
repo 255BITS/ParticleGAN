@@ -1,0 +1,47 @@
+{
+  "campaign": {
+    "budget_seconds": 4800,
+    "candidate_budget_seconds": 1200,
+    "id": "bispf-matrix-performance-v1"
+  },
+  "candidate_overrides": {
+    "bispf": "bispf-optimized-quintic-v1"
+  },
+  "comparison_scope": "same task, runtime and hardware; exact declared global recipes including explicit candidate overrides; synthetic data; no image quality claim",
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "family_selections": [
+    {
+      "candidate_declaration_sha256": "7d4db135c81511a76e89e0bfdd89e27a2171ed2e71cc243136e27cdb81483828",
+      "candidate_id": "bispf-optimized-quintic-v1",
+      "family": "bispf",
+      "label": "BISPF",
+      "study": "bispf-matrix-quintic-v1-bispf"
+    }
+  ],
+  "id": "bispf-matrix-quintic-v1",
+  "protocol_seed": 0,
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "schema": "forge_image_performance_campaign_v1",
+  "studies": [
+    "bispf-matrix-quintic-v1-bispf"
+  ],
+  "task_contract_sha256": {
+    "dcgan_performance_b64": "9e69ba0b9a12a76932de3643fa87aabf5e8c51edb872d3b3a5f384f99ab9e049",
+    "dcgan_performance_r128": "e35f31e1405f6377ce79eb266efa4e2e213b0608573650dea664a3f1095806a9",
+    "dcgan_performance_r256": "72395affdf0be7d0088e345bc64ccf1aae8042cbd7391a0e8632bf11cd0d68d0",
+    "dcgan_performance_r32": "e34d9bb3a410f4aa9170df4bb77be4bd1b0837da3c617ceb1d69547fdf19f48d",
+    "dcgan_performance_r64": "7fd1bc3fca3e6af87fbb57d4c861993e51dda82e6cd149398c5c75fa3a402be8",
+    "dcgan_performance_w128": "9f2580a40560f3b388d2bbe44778497efe1c20af4d108e73a38ee4432b0262b1"
+  },
+  "task_ids": [
+    "dcgan_performance_r32",
+    "dcgan_performance_r64",
+    "dcgan_performance_r128",
+    "dcgan_performance_r256",
+    "dcgan_performance_b64",
+    "dcgan_performance_w128"
+  ],
+  "view": "dcgan_performance"
+}

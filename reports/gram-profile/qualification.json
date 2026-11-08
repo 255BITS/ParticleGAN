@@ -1,0 +1,84 @@
+{
+  "schema": "particlegan-guarded-gram-package-qualification-v1",
+  "implementation_commit": "ba725989f279121be55a8bd2f083bd957a93d32d",
+  "base": "7b8908c0a55ad58250626c44b3b4324a66debbc9",
+  "profile": "gram_fp64_guarded_v1",
+  "fixture": {
+    "size": 1152,
+    "matrices": 112,
+    "biases": 112,
+    "repeats": 2,
+    "warmup": 1,
+    "seed": 0,
+    "case": "full_rank",
+    "scope": "seed0 public initializer; explicit synthetic repeated gradient bank; not actual Sana/CP/capsule/training"
+  },
+  "default": {
+    "wall_seconds": [
+      11.157461511000292,
+      11.194788922992302
+    ],
+    "median_wall_seconds": 11.176125216996297,
+    "max_relative_CPU64_error": 0.00037437374257451387,
+    "max_absolute_CPU64_error": 7.450580596923828e-09
+  },
+  "guarded": {
+    "wall_seconds": [
+      9.646070848000818,
+      9.7186848679994
+    ],
+    "median_wall_seconds": 9.682377858000109,
+    "max_relative_CPU64_error": 1.6309769349516471e-09,
+    "max_absolute_CPU64_error": 4.547473508864641e-13
+  },
+  "speedup": 1.154274846623753,
+  "timing_scope": "complete public optimizer.step including selected guard; copies, constructors, oracle and hashes excluded and separately reported",
+  "oracle_seconds": 59.04894880899519,
+  "guardian": {
+    "status": "completed",
+    "exit_code": 0,
+    "elapsed_seconds": 142.62648053000157,
+    "remaining_group": [],
+    "max_RSS_GiB": 3.700286865234375,
+    "max_temperature_c": 63.0,
+    "max_power_w": 224.52
+  },
+  "gpu_tests": {
+    "passed": 158,
+    "failed": 0,
+    "skipped": 0
+  },
+  "CPU_expanded": {
+    "passed": 437,
+    "skipped_CUDA": 244,
+    "initial_failures": 1,
+    "initial_failure_reason": "shallow checkout omitted two exact archived migration commits; retest passed after fetching them"
+  },
+  "CPU_migration_retest": {
+    "passed": 1
+  },
+  "standalone_benchmark_CPU": {
+    "passed": 19
+  },
+  "source_pins": {
+    "benchmarks/gram_profile.py": "8bb9887ec385bfb917442722045d85616b83dc4375a37b56be18981f3f512d75",
+    "particlegan/optim/dualnorm.py": "a97580eae39ec4900104b97433d24639f59f7dddadb0bee6c1a795932e99249f",
+    "particlegan/optim/gram_polar.py": "04ba68fa1fcf4a0fc3dea5c227f3cd17e4d9888cf8cfc10d12440a0e139da1e5"
+  },
+  "artifact_sha256": {
+    "guardian.json": "3ed1bcad8ca58fb36c6381424b59ccae0a512850529b17edecb895098304dd73",
+    "benchmark.json": "4cfc067947cbf855d5d96820687875d8db2b4d362863b1c7d2db829a1b97eaea",
+    "phase-0.json": "24480baa22b59390235d6b15616e6450707b1f056ada1761b60506ce7bc1c118",
+    "phase-1.json": "8cd02dbab74193b6d3578c407b9a216c714d249e8d0620f77ca037eb16df63eb",
+    "gpu-tests.xml": "a2ba8f5a282c38537edb6f69a518a9d78f79c1ef51d3a32a56a6808a0998c74f",
+    "expanded-cpu.xml": "4762830d9e0a4ac8b1276e65ac1df57b9b7d9ebcbf8901183d95b51889113bd2",
+    "historical-migration.xml": "23e9ab76f2e0fefe3a9db91e04facac7d255a186d92cdafdaab1756825416dd3",
+    "benchmark-standalone-cpu.xml": "388d29452a2956a1ac469948698e55b3d5410f04a310836e304e5c44865dacbd"
+  },
+  "limits": [
+    "synthetic repeated bank; not actual Sana gradients or training",
+    "normalized optimizer benchmark excludes DirectionBlend and forward/backward",
+    "CPU64 oracle errors compare actual FP32 writes/subtraction, not bitwise old-SVD compatibility",
+    "prior21 old-default leaf fidelity holds remain; no K/V301, fallback, training restart, merge or deployment"
+  ]
+}

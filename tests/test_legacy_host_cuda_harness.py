@@ -262,41 +262,63 @@ def test_repaired_hosts_and_replay_declarations_pin_current_sources():
     root = Path(__file__).resolve().parents[1]
     cards = [*root.glob("configs/forge/tasks/*.json"),
              *root.glob("configs/forge/task-variants/*/*.json")]
-    checked = 0
+    checked = inherited = 0
     for path in cards:
         task = json.loads(path.read_text())
         revision = task["evaluation"].get("evaluator_revision") or {}
-        if revision.get("id") != "pr399-host-device-replay-source-only-v1":
+        refreshed = set()
+        if revision.get("id") == "guarded-gram-default-receipt-source-binding-v1":
+            # One exact source-only layer retains the original PR399 question;
+            # include its rebound source in the same strict live-byte check.
+            assert revision["previous_task_commit"] == "90ae663551dd0fa35749d56e1859f276a4d09587"
+            assert revision["previous_task_path"] == str(path.relative_to(root))
+            assert set(revision["previous_source_sha256"]) == {"experiments/forge/behavior_adapters.py"}
+            refreshed = set(revision["previous_source_sha256"])
+            revision = revision["previous_revision"]
+        if revision.get("id") not in {
+            "pr399-host-device-replay-source-only-v1",
+            "tier2-grid-triad-clean-sampling-calibration-v1",
+        }:
             continue
-        changed = set(revision["previous_source_sha256"]) | set(revision["added_source_members"])
+        changed = set(revision["previous_source_sha256"]) | set(revision["added_source_members"]) | refreshed
         for name in changed:
             digest = task["evaluation"]["sources"][name]
             assert hashlib.sha256((root / name).read_bytes()).hexdigest() == digest, (path, name)
+        if task.get("task_cohort") in {"policy_cloud_coverage_v1", "policy_cloud_coverage_as_served_v1"}:
+            # Scoped coverage variants (both scoring laws) inherit their counted parent's revision.
+            assert revision == task["execution"]["policy_parent_definition"]["evaluation"]["evaluator_revision"]
+            inherited += 1
+            continue
         checked += 1
-    assert checked == 27
+    assert checked == 27 and inherited == 10 + 6
 
 
+@pytest.mark.cuda
 @CUDA
 @pytest.mark.parametrize("host", cuda_host_smoke.HOSTS)
 def test_cuda_two_finite_updates_and_noise_receipt(host):
     cuda_host_smoke.two_finite_updates(host)
 
 
+@pytest.mark.cuda
 @CUDA
 def test_cuda_fresh_process_init_and_draw_match():
     cuda_host_smoke.fresh_process_reproducible()
 
 
+@pytest.mark.cuda
 @CUDA
 def test_cuda_save_restore_repeats_the_next_update():
     cuda_host_smoke.save_restore_next_update()
 
 
+@pytest.mark.cuda
 @CUDA
 def test_cuda_evaluation_leaves_the_training_rng_untouched():
     cuda_host_smoke.evaluation_leaves_training_rng()
 
 
+@pytest.mark.cuda
 @CUDA
 def test_cuda_fourier_and_unused_fixtures_keep_cpu_values():
     cuda_host_smoke.fixtures_keep_cpu_values()

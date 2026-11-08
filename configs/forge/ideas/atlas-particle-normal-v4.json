@@ -1,0 +1,65 @@
+{
+  "api_changes": [
+    "particlegan/__init__.py",
+    "particlegan/birth_death.py",
+    "particlegan/continuous.py",
+    "particlegan/feature_cells.py",
+    "particlegan/feature_policy.py",
+    "particlegan/ka2.py",
+    "particlegan/policy.py",
+    "particlegan/priors.py",
+    "particlegan/recipes.py",
+    "particlegan/training.py"
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Guard LossSurprise.decide against KA2 pre-anchor critic-only SettledReopenGuard witnesses (guard.ka2_anchor_started is False and witness_roles == {'critic'}) so early critic step-down (s_D=0.5) during Phase A acquisition while the generator ladder is still at unsettled full rate (s_G=1.0) does not trigger a false step-35 reopen on N=12 mode_hold, while preserving post-anchor (ka2_anchor_started is True) shift detection across CPU and CUDA",
+    "Retain birth_death_cells=256 (which routes N=256 vector tasks past k=7 kNN ParticleBirthDeath via N<=cells, avoiding under-resolved rare-mode kNN turnover when 0.02*256=5.12<k=7, at the known trade-off of doubling K=256 cells in N=20000 FeatureCellBirthDeath), NormalNoiseManipulator(sigma=0.0065), clean training (output_noise_mode='fixed', output_noise_std=0.0), and clock-free critic acquisition (d_guard_ratio=0.0, d_guard_min_steps=0)"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "schedule_free",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "atlas-particle-normal-v4",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "In atlas-particle-normal-v3, raising NormalNoiseManipulator sigma from 0.005 to 0.0065 alongside birth_death_cells=256 (which bypasses k=7 kNN ParticleBirthDeath at N=256 via N<=cells, since population_policy(256)['finite_resolution_feasible'] is False and FeatureSelection routes N<800 to kNN rather than FeatureCellBirthDeath) resolved vector_unequal_mass and vector_unequal_width, but regressed mode_hold (N=12) from 8/8 PASS to 7/8 FAIL and prerequisite-blocked ring_hold, ring_extension, and target_shift_recovery. Tracing mode_hold revealed that at step 35 during KA2 Phase A pre-anchor acquisition (guard.ka2_anchor_started is False), after only the critic stationarity ladder had stepped down to s_D=0.5 while the generator and table ladders remained unsettled at full rate s_G=1.0 (SettledReopenGuard witness_roles == {'critic'}), LossSurprise fired a false reopen that reset s_D back to 1.0 and stranded one ring mode. By contrast, cold-start image reopens (img_blobs4_residual16 step 11, img_intensity2 step 8) occur with empty network witnesses (witness_roles == set()), and genuine equilibrium target shifts occur post-anchor (guard.ka2_anchor_started is True). Suppressing critic-only LossSurprise reopens exclusively while guard.ka2_anchor_started is False (folding their observations into the calm baseline) restores 8/8 mode_hold recovery and unblocks its 3 downstream tasks while preserving post-anchor shift detection and all 6/6 vector, 4/4 image, 2/2 VAE, and 2/2 clockfree passes.",
+  "parent": "atlas-particle-normal-v3",
+  "prior_art": [
+    "docs/atlas.md",
+    "docs/e22.md",
+    "reports/develop-gates-20261001/atlas19-replay.json",
+    "reports/forge/records/readout-9f0d62f87d1ff351cfef7f98.json",
+    "reports/forge/records/readout-4dc982d111099c9b0f33a18e.json",
+    "reports/forge/records/readout-efb8bacf93e19fc2b0d7f7bf.json"
+  ],
+  "prior_mechanism": {
+    "kind": "particles",
+    "manipulators": [
+      {
+        "kind": "normal_noise",
+        "sigma": 0.0065
+      }
+    ],
+    "standardize": false
+  },
+  "recipe_overrides": {
+    "birth_death_cells": 256,
+    "d_guard_min_steps": 0,
+    "d_guard_ratio": 0.0,
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0
+  },
+  "recipe_preset": "atlas",
+  "requires_capabilities": [
+    "particle_cloud",
+    "a2",
+    "named_rng",
+    "policy_controls",
+    "policy_serving"
+  ],
+  "schema_version": 3,
+  "trainer_family": "atlas"
+}

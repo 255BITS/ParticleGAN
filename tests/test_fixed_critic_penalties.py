@@ -90,7 +90,7 @@ def test_fixed_zero_gradient_and_lazy_schedule_match_release(release_penalty, ar
 
 @pytest.mark.parametrize("arm", ["a_r1r2", "b_cap"])
 def test_fixed_factory_has_no_anchor_phase_or_ema_evaluation(arm):
-    recipe = Recipe(reg_arm=arm, reg_every=2)
+    recipe = Recipe.from_dict(dict(reg_arm=arm, reg_every=2))
     critic = _PolynomialCritic(4)
     ema = deepcopy(critic)
     optimizer = recipe.make_critic_optimizer(critic, ema_critic=ema)
@@ -128,7 +128,7 @@ def test_public_mog_recipe_selector_and_checkpoint_resume(arm):
     assert context.recipe.reg_arm == arm
     def build(seed):
         torch.manual_seed(seed)
-        recipe = Recipe(**options)
+        recipe = Recipe.from_dict(options)
         prior = MoGParticlePrior(num_particles=8, z_dim=2, sigma=.025, standardize=False)
         return GANTrainer(recipe, nn.Linear(2, 2), nn.Linear(2, 1), prior=prior, seed=0)
     real = torch.arange(8, dtype=torch.float32).reshape(4, 2) / 5
@@ -151,10 +151,10 @@ def test_public_mog_recipe_selector_and_checkpoint_resume(arm):
 def test_penalty_selector_preserves_existing_positional_coeff_and_rejects_unimplemented_options():
     assert GradientPenalty(2., .7, 3).coeff == 2.
     assert GradientPenalty().arm == "k3p"  # historical low-level kernel default
-    assert Recipe().reg_arm is None and Recipe().effective_critic_formulation == "ka2"
+    assert Recipe.from_dict({}).reg_arm is None and Recipe.from_dict({}).effective_critic_formulation == "ka2"
     with pytest.raises(ValueError, match="arm"):
-        Recipe(reg_arm="e_interp")
+        Recipe.from_dict(dict(reg_arm="e_interp"))
     with pytest.raises(TypeError, match="unknown critic penalty"):
-        Recipe()._penalty_options(norm="l1")
+        Recipe.from_dict({})._penalty_options(norm="l1")
     with pytest.raises(TypeError, match="unknown critic penalty"):
-        Recipe()._penalty_options(method="finite_difference")
+        Recipe.from_dict({})._penalty_options(method="finite_difference")

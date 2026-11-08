@@ -19,7 +19,9 @@ def software_prior_policy():
     import torch
     from particlegan import get_recipe
     from experiments.forge.priors import prior_policy_receipt
-    recipe = get_recipe(prior_kind="mog", num_particles=8, z_dim=2)
+    # This certification fixture uses the historical zero-weight VICReg proof;
+    # it must not change when the public training default changes.
+    recipe = get_recipe("bcap", prior_kind="mog", num_particles=8, z_dim=2)
     prior = recipe.make_prior(generator=torch.Generator().manual_seed(0))
     return prior_policy_receipt(recipe, prior)
 

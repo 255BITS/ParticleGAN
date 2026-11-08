@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 743040,
+    "candidate_budget_seconds": 100000,
+    "id": "stale-family-requal-2e8a97a0aa84"
+  },
+  "candidate": "recipe-prior-refactor-r1r2-v1",
+  "competing_explanation": "Source updates since the prior family pin could alter unguarded numerical paths or runtime bindings; seed-0 public-API execution on fixed hardware isolates current-source behavior.",
+  "control": {
+    "candidate_id": "bispf-optimized-quintic-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "sample_count",
+    "op": "<",
+    "phase": "final",
+    "task_id": "gaussian1d_smoke",
+    "threshold": 4096.0
+  },
+  "hypothesis": "Ordinary re-qualification of the unchanged selected r1r2 recipe (recipe-prior-refactor-r1r2-v1) on current develop source 2e8a97a0aa84 under protocol seed 0 on NVIDIA RTX A6000 records current-source discriminator_stability and shared Tier 1 goal-view verdicts.",
+  "id": "requal-2e8a97a0aa84-r1r2-ordinary",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "sample_count",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "gaussian1d_smoke",
+    "threshold": 4096.0
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "default_adoption": false,
+        "scope": "whole_candidate_family_current"
+      },
+      "path": "configs/forge/selections/family-current-v1.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 2,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

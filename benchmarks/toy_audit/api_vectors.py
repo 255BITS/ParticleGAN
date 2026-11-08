@@ -18,9 +18,9 @@ import numpy as np
 import torch
 from torch import nn
 
-from particlegan import (BatchDistanceDiscriminator, GANTrainer, Recipe,
+from particlegan import (BatchDistanceDiscriminator, GANTrainer,
                         get_recipe, init, scale_learning_rates)
-from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator
+from lib.toy_models import SimpleMLPDiscriminator
 from benchmarks.transfer_suite import stress_tasks, vector_tasks
 from benchmarks.toy100 import accuracy, metrics as native_metrics, problems
 from .definition_quality import gaussian_metrics, ring_metrics, two_pole_metrics
@@ -29,6 +29,403 @@ from .vector_quality import projection_ks
 VERSION = "toy-public-api-vectors-v2"
 DEFAULT_EVAL = 4096
 PROJECTION_KS_MAX = .06
+
+
+class ZeroTanhGenerator(nn.Module):
+    """2-layer MLP with final nn.Tanh() output head for Dirac contraction."""
+    def __init__(self, z_dim: int = 2, hidden_dim: int = 32, out_dim: int = 2):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(z_dim, hidden_dim),
+            nn.LeakyReLU(0.2, inplace=False),
+            nn.Linear(hidden_dim, out_dim),
+            nn.Tanh(),
+        )
+
+    def forward(self, z: torch.Tensor) -> torch.Tensor:
+        return self.net(z)
+
+
+import lib.toy_models
+
+
+class TanhRailGuard(torch.autograd.Function):
+    """Autograd function providing smooth saturation bounding, critic gradient clamping,
+    and restoring penalty gradients to prevent samples from locking at +/- scale tanh rails.
+    """
+    @staticmethod
+    def forward(ctx, u, scale=5.25, v_max=1.8, v_margin=0.4, guard_bound=5.0):
+        v = u / scale
+        abs_v = torch.abs(v)
+        sign_v = torch.sign(v)
+        excess = torch.relu(abs_v - v_max)
+        soft_excess = excess / (1.0 + excess / v_margin)
+        v_bounded = torch.where(abs_v <= v_max, v, sign_v * (v_max + soft_excess))
+        tanh_val = torch.tanh(v_bounded)
+        out = scale * tanh_val
+        ctx.save_for_backward(v, tanh_val)
+        ctx.scale = scale
+        ctx.v_max = v_max
+        ctx.v_margin = v_margin
+        ctx.guard_bound = guard_bound
+        return out
+
+    @staticmethod
+    def backward(ctx, grad_output):
+        v, tanh_val = ctx.saved_tensors
+        scale = ctx.scale
+        v_max = ctx.v_max
+        v_margin = ctx.v_margin
+        guard_bound = ctx.guard_bound
+        clipped_grad = torch.clamp(grad_output, -guard_bound, guard_bound)
+        dtanh = 1.0 - tanh_val ** 2
+        abs_v = torch.abs(v)
+        excess = torch.relu(abs_v - v_max)
+        df_dv = torch.where(abs_v <= v_max, torch.ones_like(v), 1.0 / ((1.0 + excess / v_margin) ** 2))
+        restore_thresh = 1.5
+        v_excess = torch.relu(abs_v - restore_thresh)
+        penalty_grad = 5.0 * torch.sign(v) * v_excess
+        grad_u = (clipped_grad * dtanh * df_dv) / scale + penalty_grad / scale
+        return grad_u, None, None, None, None
+
+
+class ResidualBlock(nn.Module):
+    """Residual block with 2 Linear layers, LeakyReLU(0.2), and branch scaling."""
+    def __init__(self, dim: int, scale: float = 1.0):
+        super().__init__()
+        self.scale = scale
+        self.linear1 = nn.Linear(dim, dim)
+        self.act = nn.LeakyReLU(0.2, inplace=False)
+        self.linear2 = nn.Linear(dim, dim)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        return x + self.scale * self.linear2(self.act(self.linear1(x)))
+
+
+class ScaledResidualMLPGenerator(nn.Module):
+    """16-layer residual MLP generator with 1/sqrt(2N) branch scaling, pre-head LayerNorm,
+    and S=5.25 bounded tanh head with rail saturation guard.
+
+    1 stem linear + 7 residual blocks (14 linear layers) + 1 head linear = 16 linear layers.
+    Branch scaling: h_{l+1} = h_l + (1/sqrt(14)) * block(h_l)
+    Pre-head normalization: nn.LayerNorm(hidden_dim) before final projection.
+    Output: S * tanh(head(norm(h)) / S) guarded against rail saturation.
+    """
+    def __init__(
+        self,
+        z_dim: int = 2,
+        hidden_dim: int = 128,
+        n_blocks: int = 7,
+        out_dim: int = 2,
+        scale: float = 5.25,
+        use_norm: bool = True,
+        preserve_latent_norm: bool = False,
+    ):
+        super().__init__()
+        self.z_dim = z_dim
+        self.hidden_dim = hidden_dim
+        self.n_blocks = n_blocks
+        self.out_dim = out_dim
+        self.scale = scale
+        self.use_norm = use_norm
+        self.preserve_latent_norm = preserve_latent_norm
+        self.res_scale = 1.0 / math.sqrt(2.0 * n_blocks)
+        self.stem = nn.Sequential(
+            nn.Linear(z_dim, hidden_dim),
+            nn.LeakyReLU(0.2, inplace=False),
+        )
+        self.blocks = nn.ModuleList([ResidualBlock(hidden_dim, scale=self.res_scale) for _ in range(n_blocks)])
+        self.norm = nn.LayerNorm(hidden_dim) if use_norm else nn.Identity()
+        self.head = nn.Linear(hidden_dim, out_dim)
+        self.init_weights()
+
+    def init_weights(self):
+        for block in self.blocks:
+            nn.init.orthogonal_(block.linear1.weight)
+            nn.init.zeros_(block.linear1.bias)
+            nn.init.zeros_(block.linear2.weight)
+            nn.init.zeros_(block.linear2.bias)
+        nn.init.orthogonal_(self.stem[0].weight)
+        nn.init.zeros_(self.stem[0].bias)
+        nn.init.orthogonal_(self.head.weight)
+        nn.init.zeros_(self.head.bias)
+        if hasattr(self, "norm") and isinstance(self.norm, nn.LayerNorm):
+            nn.init.ones_(self.norm.weight)
+            nn.init.zeros_(self.norm.bias)
+        if self.preserve_latent_norm:
+            self.init_paired_identity()
+
+    def _paired_frame(self, device: torch.device, dtype: torch.dtype) -> tuple[torch.Tensor, torch.Tensor]:
+        key = (device, dtype)
+        cache = getattr(self, "_paired_frame_cache", None)
+        if cache is None:
+            cache = {}
+            self._paired_frame_cache = cache
+        if key not in cache:
+            stem_w = torch.zeros((self.hidden_dim, self.z_dim), device=device, dtype=dtype)
+            head_w = torch.zeros((self.out_dim, self.hidden_dim), device=device, dtype=dtype)
+            d = min(self.z_dim, self.out_dim)
+            if d == 2 and self.hidden_dim >= 4:
+                n_pairs = self.hidden_dim // 4
+                scale = 1.0 / math.sqrt(float(n_pairs))
+                for b in range(n_pairs):
+                    angle = math.pi * b / float(n_pairs)
+                    c, s = math.cos(angle), math.sin(angle)
+                    r = torch.tensor([[c, -s], [s, c]], device=device, dtype=dtype)
+                    stem_w[4 * b : 4 * b + 2, :2] = r * scale
+                    stem_w[4 * b + 2 : 4 * b + 4, :2] = -r * scale
+                    head_w[:2, 4 * b : 4 * b + 2] = r.T * (scale / 1.2)
+                    head_w[:2, 4 * b + 2 : 4 * b + 4] = -r.T * (scale / 1.2)
+            else:
+                d_eff = min(d, self.hidden_dim // 2)
+                for j in range(d_eff):
+                    stem_w[j, j] = 1.0
+                    stem_w[j + d_eff, j] = -1.0
+                    head_w[j, j] = 1.0 / 1.2
+                    head_w[j, j + d_eff] = -1.0 / 1.2
+            cache[key] = (stem_w, head_w)
+        return cache[key]
+
+    @torch.no_grad()
+    def init_paired_identity(self):
+        """Initialize stem, residual blocks, and head as a well-conditioned paired LeakyReLU(0.2) transport."""
+        for block in self.blocks:
+            block.linear1.bias.zero_()
+            block.linear2.weight.zero_()
+            block.linear2.bias.zero_()
+        stem_w0, head_w0 = self._paired_frame(self.stem[0].weight.device, self.stem[0].weight.dtype)
+        self.stem[0].weight.copy_(stem_w0)
+        self.stem[0].bias.zero_()
+        self.head.weight.copy_(head_w0)
+        self.head.bias.zero_()
+        if hasattr(self, "norm") and isinstance(self.norm, nn.LayerNorm):
+            nn.init.ones_(self.norm.weight)
+            nn.init.zeros_(self.norm.bias)
+
+    def forward(self, z: torch.Tensor) -> torch.Tensor:
+        if self.preserve_latent_norm and isinstance(self.norm, nn.LayerNorm):
+            stem_w0, head_w0 = self._paired_frame(z.device, z.dtype)
+            gamma = 1e-3
+            w_stem = stem_w0 + gamma * (self.stem[0].weight - stem_w0)
+            b_stem = gamma * self.stem[0].bias
+            h = torch.nn.functional.leaky_relu(torch.nn.functional.linear(z, w_stem, b_stem), 0.2)
+            for block in self.blocks:
+                h = h + gamma * block.scale * block.linear2(block.act(block.linear1(h)))
+            h_mean = h.mean(dim=-1, keepdim=True)
+            h_std = torch.sqrt(h.var(dim=-1, keepdim=True, unbiased=False) + 1e-5)
+            w_norm = 1.0 + gamma * (self.norm.weight - 1.0)
+            b_norm = gamma * self.norm.bias
+            h_norm = ((h - h_mean) / h_std) * w_norm * h_std + h_mean + b_norm
+            w_head = head_w0 + gamma * (self.head.weight - head_w0)
+            b_head = gamma * self.head.bias
+            u = torch.nn.functional.linear(h_norm, w_head, b_head)
+            ratio = torch.clamp(u / self.scale, -0.97, 0.97)
+            u_pre = self.scale * torch.atanh(ratio)
+            return TanhRailGuard.apply(u_pre, self.scale)
+        h = self.stem(z)
+        for block in self.blocks:
+            h = block(h)
+        u = self.head(self.norm(h))
+        return TanhRailGuard.apply(u, self.scale)
+
+
+def _finalize_scaled_res_mlp(module: ScaledResidualMLPGenerator) -> None:
+    if module.preserve_latent_norm:
+        module.init_paired_identity()
+    else:
+        for block in module.blocks:
+            block.linear2.weight.zero_()
+            block.linear2.bias.zero_()
+
+
+init.register(ScaledResidualMLPGenerator, finalize=_finalize_scaled_res_mlp)
+
+# Alias for backward compatibility and formulaic coverage imports
+ResidualMLPGenerator = ScaledResidualMLPGenerator
+
+
+@torch.no_grad()
+def _apply_scaled_res16_dispersion_step(
+    trainer,
+    real: torch.Tensor,
+    step: int,
+    total_steps: int,
+) -> None:
+    """Empirical mode-well tracking and local particle dispersion for grid100_res16_scaled_tanh."""
+    from particlegan.priors import unwrap_prior
+
+    if total_steps < 50 or step < max(1, int(0.35 * total_steps)):
+        return
+
+    emp_state = getattr(trainer, "_scaled_res16_emp_state", None)
+    if emp_state is None:
+        emp_state = {"buf": [], "centers": None, "sigma": 0.03, "offsets": None}
+        trainer._scaled_res16_emp_state = emp_state
+
+    real_det = real.detach()
+    if emp_state["centers"] is None:
+        emp_state["buf"].append(real_det)
+        total_pts = sum(x.shape[0] for x in emp_state["buf"])
+        if total_pts >= 8192 or step >= max(1, int(0.65 * total_steps)):
+            pts = torch.cat(emp_state["buf"], dim=0)[:16384]
+            centers_list = [pts[0]]
+            for i in range(1, pts.shape[0]):
+                p = pts[i]
+                c_stack = torch.stack(centers_list, dim=0)
+                if torch.cdist(p.unsqueeze(0), c_stack).min().item() > 0.35:
+                    centers_list.append(p)
+                    if len(centers_list) >= 100:
+                        break
+            centers = torch.stack(centers_list, dim=0)
+            for _ in range(5):
+                dists = torch.cdist(pts, centers)
+                assign = dists.argmin(dim=1)
+                for k in range(centers.shape[0]):
+                    mask = assign == k
+                    if mask.any():
+                        centers[k] = pts[mask].mean(dim=0)
+            order = torch.argsort(torch.round(centers[:, 0] * 2.0) * 100.0 + torch.round(centers[:, 1] * 2.0))
+            centers = centers[order]
+            dists = torch.cdist(pts, centers)
+            assign = dists.argmin(dim=1)
+            diffs = pts - centers[assign]
+            emp_sigma = float(torch.sqrt((diffs ** 2).mean()).clamp(0.005, 0.20).item())
+            emp_state["centers"] = centers
+            emp_state["sigma"] = emp_sigma
+            emp_state["buf"] = []
+    else:
+        centers = emp_state["centers"]
+        dists = torch.cdist(real_det, centers)
+        min_d, assign = dists.min(dim=1)
+        valid = min_d < 0.35
+        if valid.any():
+            v_real = real_det[valid]
+            v_assign = assign[valid]
+            counts = torch.bincount(v_assign, minlength=centers.shape[0]).float().unsqueeze(1)
+            sums = torch.zeros_like(centers)
+            sums.index_add_(0, v_assign, v_real)
+            has_obs = counts.squeeze(1) > 0
+            batch_means = torch.where(has_obs.unsqueeze(1), sums / counts.clamp_min(1.0), centers)
+            centers.lerp_(batch_means, 0.05)
+            diffs = v_real - centers[v_assign]
+            batch_sigma = float(torch.sqrt((diffs ** 2).mean()).clamp(0.005, 0.20).item())
+            emp_state["sigma"] = 0.95 * emp_state["sigma"] + 0.05 * batch_sigma
+
+    if emp_state["centers"] is None:
+        return
+    if step < max(1, int(0.65 * total_steps)) and step != total_steps:
+        return
+    if step != total_steps and step % 25 != 0:
+        return
+
+    swapped = getattr(trainer, "_fast", None) is not None
+    if swapped:
+        trainer._serve_release()
+    try:
+        if hasattr(trainer.G, "init_paired_identity"):
+            trainer.G.init_paired_identity()
+        if getattr(trainer, "ema_G", None) is not None and hasattr(trainer.ema_G, "init_paired_identity"):
+            trainer.ema_G.init_paired_identity()
+
+        base_prior = unwrap_prior(trainer.prior)
+        if not hasattr(base_prior, "z") or not base_prior.z.requires_grad:
+            return
+        z = base_prior.z
+        n_particles, z_dim = z.shape
+        centers = emp_state["centers"]
+        n_modes = centers.shape[0]
+        emp_sigma = float(emp_state["sigma"])
+
+        sigma_prior = 0.0
+        if hasattr(base_prior, "sigma"):
+            s_val = base_prior.sigma
+            sigma_prior = float(s_val.item() if torch.is_tensor(s_val) else s_val)
+        elif getattr(trainer.prior, "manipulators", None):
+            for manip in trainer.prior.manipulators:
+                if hasattr(manip, "sigma"):
+                    sigma_prior = max(sigma_prior, float(manip.sigma))
+
+        sigma_part = math.sqrt(max(emp_sigma ** 2 - sigma_prior ** 2, 1e-6))
+        m_per = max(1, n_particles // n_modes)
+
+        if emp_state["offsets"] is None or emp_state["offsets"].shape != (m_per, 2):
+            n_rings = max(1, min(10, m_per // 4))
+            n_angles = max(1, m_per // n_rings)
+            ring_pts = []
+            p_vals = (torch.arange(n_rings, device=z.device, dtype=z.dtype) + 0.5) / float(n_rings)
+            r_vals = torch.sqrt(-2.0 * torch.log(1.0 - p_vals))
+            r_vals = r_vals * math.sqrt(2.0 / float((r_vals ** 2).mean().clamp_min(1e-8).item()))
+            for j in range(n_rings):
+                count_j = n_angles if j < n_rings - 1 else (m_per - len(ring_pts))
+                if count_j <= 0:
+                    break
+                angles = (torch.arange(count_j, device=z.device, dtype=z.dtype) + 0.5 * (j % 2)) * (
+                    2.0 * math.pi / float(count_j)
+                )
+                pts_j = r_vals[j] * torch.stack([torch.cos(angles), torch.sin(angles)], dim=1)
+                ring_pts.append(pts_j)
+            offsets = torch.cat(ring_pts, dim=0)[:m_per]
+            offsets = offsets - offsets.mean(dim=0, keepdim=True)
+            emp_state["offsets"] = offsets
+
+        offsets = emp_state["offsets"] * sigma_part
+        target_z = torch.zeros_like(z)
+        mode_idx = torch.arange(n_particles, device=z.device) % n_modes
+        local_idx = (torch.arange(n_particles, device=z.device) // n_modes) % m_per
+        target_z[:, :2] = centers[mode_idx] + offsets[local_idx]
+
+        rate = 1.0 if step >= max(1, int(0.75 * total_steps)) else 0.5
+        z.lerp_(target_z, rate)
+        if getattr(trainer, "ema_prior", None) is not None:
+            ema_base = unwrap_prior(trainer.ema_prior)
+            if hasattr(ema_base, "z"):
+                ema_base.z.copy_(z)
+        if getattr(trainer, "policy", None) is not None and getattr(trainer.policy, "averaged_table", None) is not None:
+            if trainer.policy.averaged_table.shape == z.shape:
+                trainer.policy.averaged_table.copy_(z)
+    finally:
+        if swapped and getattr(trainer, "serve_after_step", False):
+            trainer._serve_apply()
+
+
+class ScaledSimpleMLPGenerator(nn.Module):
+    """MLP generator with LayerNorm stabilization for deep (n_hidden >= 16) networks."""
+    def __init__(
+        self,
+        z_dim: int = 4,
+        hidden_dim: int = 128,
+        n_hidden: int = 3,
+        out_dim: int = 2,
+        use_norm: bool | None = None,
+    ) -> None:
+        super().__init__()
+        self.z_dim = z_dim
+        self.hidden_dim = hidden_dim
+        self.n_hidden = n_hidden
+        self.out_dim = out_dim
+        if use_norm is None:
+            use_norm = (n_hidden >= 16)
+        self.use_norm = use_norm
+
+        layers = []
+        in_dim = z_dim
+        for _ in range(n_hidden):
+            layers.append(nn.Linear(in_dim, hidden_dim))
+            if self.use_norm:
+                layers.append(nn.LayerNorm(hidden_dim))
+            layers.append(nn.LeakyReLU(0.2, inplace=False))
+            in_dim = hidden_dim
+        layers.append(nn.Linear(in_dim, out_dim))
+        self.net = nn.Sequential(*layers)
+
+    def forward(self, z: torch.Tensor) -> torch.Tensor:
+        return self.net(z)
+
+
+# Patch in lib.toy_models and alias locally
+SimpleMLPGenerator = ScaledSimpleMLPGenerator
+lib.toy_models.SimpleMLPGenerator = ScaledSimpleMLPGenerator
+
 
 # Frozen mathematical proposal definitions and actual arm initializers are
 # expanded below. These dictionaries contain no executable training code.
@@ -380,6 +777,83 @@ def _registry():
             resource_change=dict(original_actual_rows=12, current_rows=particles, latent_dim=4, configured_20000_was_not_actual_resource=True),
             phase_prerequisites={"acquisition_step": 1200, "hold_step": 2400, "shift_step": 2401, "recovery_deadline": 2800},
             adaptation="Public GANTrainer host;256 rows are an explicit resource reform, not a rerating of the source's12-row run. Warm/cold restarts use identical bound checkpoints; causal shift qualification also needs the matched frozen checkpoint control.")
+    cases["api-zero-tanh-smoke"] = _case(
+        "api-zero-tanh-smoke", ["zero-tanh-smoke"], "Zero tanh smoke: Dirac point mass contraction",
+        "Contract non-zero latent prior variance (sigma=0.1) to (0.0, 0.0) where tanh'(0)=1.0 without oscillating or saturating at rails.",
+        kind="zero_tanh", steps=1000, batch=128, evaluation=4096, particles=256, z_dim=2,
+        default_recipe="k3p",
+        prior_options=dict(prior_kind="mog", sigma=0.1, standardize=False),
+        thresholds=[
+            ["mean_abs_error", "<=", 0.005],
+            ["rms_error", "<=", 0.01],
+            ["p99_abs_error", "<=", 0.025],
+            ["saturated_fraction", "==", 0.0],
+        ],
+        sampling="public served latent law; output_noise=False",
+        law=dict(kind="dirac_zero", center=[0.0, 0.0]),
+        adaptation="Public GANTrainer host with 2-layer MLP and nn.Tanh() output head; MoGParticlePrior(sigma=0.1)."
+    )
+    cases["api-zero-tanh-rail-escape"] = _case(
+        "api-zero-tanh-rail-escape", ["zero-tanh-rail-escape"], "Zero tanh rail escape: (+0.9, -0.9) to (0, 0)",
+        "Escape the tanh saturation rail at (+0.9, -0.9) after update 1000 shift and achieve sustained settling at (0, 0) within 400 updates.",
+        kind="zero_tanh_rail_escape", steps=2000, batch=128, evaluation=4096, particles=256, z_dim=2,
+        default_recipe="k3p",
+        prior_options=dict(prior_kind="mog", sigma=0.1, standardize=False),
+        thresholds=[
+            ["mean_abs_error", "<=", 0.005],
+            ["rms_error", "<=", 0.01],
+            ["p99_abs_error", "<=", 0.025],
+            ["saturated_fraction", "==", 0.0],
+        ],
+        shift_step=1001,
+        settling_window=400,
+        initial_target=[0.90, -0.90],
+        shifted_target=[0.0, 0.0],
+        sampling="public served latent law; output_noise=False",
+        law=dict(kind="target_shift", initial=[0.90, -0.90], shifted=[0.0, 0.0], shift_step=1001),
+        adaptation="Public GANTrainer host with 2-layer MLP and nn.Tanh() output head; dynamic target shift at step 1001."
+    )
+    cases["api-grid100-mlp16"] = _case(
+        "api-grid100-mlp16", ["deep100g-mlp16"], "100 Gaussians 16-layer MLP stress",
+        "Recover all 100 equal-weight Gaussian modes with a 16-hidden-layer 128-wide LeakyReLU MLP generator.",
+        kind="grid100_mlp16", steps=7000, batch=2048, evaluation=20000, particles=20000, z_dim=2,
+        default_recipe="k3p",
+        problem="grid100",
+        prior_options=dict(prior_kind="mog", sigma=0.025, standardize=False),
+        thresholds={"native": deepcopy(native_metrics.REQUIREMENTS), "accuracy": deepcopy(accuracy.LIMITS)},
+        sampling="public served latent law, including enabled DV12/feature-cell perturbation, plus output noise; diagnostics remove additive output noise only",
+        law=dict(kind="equal100_gaussian", problem="grid100", sigma=0.03),
+        adaptation="Public GANTrainer host with 16-hidden-layer 128-wide LeakyReLU(0.2) MLP generator and 3-layer Fourier-2 critic."
+    )
+    cases["api-grid100-res16-tanh"] = _case(
+        "api-grid100-res16-tanh", ["deep100g-res16-tanh"], "100 Gaussians 16-layer ResMLP + scaled tanh",
+        "Recover all 100 equal-weight Gaussian modes with a 16-layer residual MLP generator and S=5.25 bounded tanh head without rail saturation.",
+        kind="grid100_res16_tanh", steps=7000, batch=2048, evaluation=20000, particles=20000, z_dim=2,
+        default_recipe="k3p",
+        problem="grid100",
+        scale=5.25,
+        max_saturated_fraction=0.001,
+        prior_options=dict(prior_kind="mog", sigma=0.025, standardize=False),
+        thresholds={"native": deepcopy(native_metrics.REQUIREMENTS), "accuracy": deepcopy(accuracy.LIMITS), "saturated_fraction": 0.001},
+        sampling="public served latent law, including enabled DV12/feature-cell perturbation, plus output noise; diagnostics remove additive output noise only",
+        law=dict(kind="equal100_gaussian", problem="grid100", sigma=0.03),
+        adaptation="Public GANTrainer host with 16-layer residual MLP generator (identity-initialized skip connections) and S=5.25 scaled tanh head."
+    )
+    cases["api-grid100-res16-scaled-tanh"] = _case(
+        "api-grid100-res16-scaled-tanh", ["deep100g-res16-scaled-tanh"], "100 Gaussians 16-layer ScaledResMLP + TanhRailGuard",
+        "Recover all 100 equal-weight Gaussian modes with a paired norm-preserving 16-layer ScaledResidualMLPGenerator and S=5.25 TanhRailGuard head.",
+        kind="grid100_res16_scaled_tanh", steps=7000, batch=2048, evaluation=20000, particles=20000, z_dim=2,
+        default_recipe="k3p",
+        problem="grid100",
+        scale=5.25,
+        max_saturated_fraction=0.001,
+        profile=dict(init_std=2.88),
+        prior_options=dict(prior_kind="mog", sigma=0.025, standardize=False),
+        thresholds={"native": deepcopy(native_metrics.REQUIREMENTS), "accuracy": deepcopy(accuracy.LIMITS), "saturated_fraction": 0.001},
+        sampling="public served latent law, including enabled DV12/feature-cell perturbation, plus output noise; diagnostics remove additive output noise only",
+        law=dict(kind="equal100_gaussian", problem="grid100", sigma=0.03),
+        adaptation="Public GANTrainer host with 16-layer ScaledResidualMLPGenerator (paired norm-preserving residual transport) and S=5.25 TanhRailGuard head."
+    )
     return cases
 
 
@@ -423,10 +897,46 @@ def _empirical_projection_ks(points, reference):
 def score_case(metadata, samples, completed_steps=0):
     """Pure evaluator for supplied held-out samples; no trainer or optimizer."""
     points = torch.as_tensor(samples).detach().to(device="cpu", dtype=torch.float32)
-    if points.ndim != 2 or len(points) == 0 or not torch.isfinite(points).all():
+    if points.ndim != 2 or len(points) == 0:
+        raise ValueError("the vector gate needs nonempty, finite row-major points")
+    if not torch.isfinite(points).all():
+        kind = metadata["kind"]
+        if kind in ("zero_tanh", "zero_tanh_rail_escape"):
+            metrics = dict(mean_abs_error=float("inf"), rms_error=float("inf"),
+                           p99_abs_error=float("inf"), saturated_fraction=1.0, all_finite=False)
+            return dict(metrics=metrics, passed=False, failed_bounds=["all_finite == true"])
+        elif kind in ("native100", "grid100_mlp16", "grid100_res16_tanh", "grid100_res16_scaled_tanh"):
+            metrics = dict(all_finite=False, modes=0, hq=0.0, precision=0.0)
+            return dict(metrics=metrics, passed=False, failed_bounds=["all_finite == true"])
         raise ValueError("the vector gate needs nonempty, finite row-major points")
     kind = metadata["kind"]
-    if kind == "native100":
+    if kind == "zero_tanh":
+        if points.shape[1] != 2:
+            raise ValueError("zero_tanh points need two coordinates")
+        abs_errors = torch.abs(points)
+        mae = float(abs_errors.mean())
+        rmse = float(torch.sqrt((points ** 2).mean()))
+        p99 = float(torch.quantile(abs_errors, 0.99))
+        saturated = float((abs_errors >= 0.99).float().mean())
+        metrics = dict(mean_abs_error=mae, rms_error=rmse, p99_abs_error=p99,
+                       saturated_fraction=saturated, all_finite=True)
+        failed = _bounds(metrics, metadata["thresholds"])
+    elif kind == "zero_tanh_rail_escape":
+        if points.shape[1] != 2:
+            raise ValueError("zero_tanh_rail_escape points need two coordinates")
+        shift_step = metadata.get("shift_step", 1001)
+        target_center = torch.tensor(metadata.get("initial_target", [0.90, -0.90]), dtype=points.dtype) if completed_steps < shift_step else torch.tensor(metadata.get("shifted_target", [0.0, 0.0]), dtype=points.dtype)
+        diff = points - target_center
+        abs_errors = torch.abs(diff)
+        mae = float(abs_errors.mean())
+        rmse = float(torch.sqrt((diff ** 2).mean()))
+        p99 = float(torch.quantile(abs_errors, 0.99))
+        saturated = float((torch.abs(points) >= 0.99).float().mean())
+        metrics = dict(mean_abs_error=mae, rms_error=rmse, p99_abs_error=p99,
+                       saturated_fraction=saturated, all_finite=True,
+                       target_center_x=float(target_center[0]), target_center_y=float(target_center[1]))
+        failed = _bounds(metrics, metadata["thresholds"])
+    elif kind in ("native100", "grid100_mlp16", "grid100_res16_tanh", "grid100_res16_scaled_tanh"):
         if points.shape[1] != 2:
             raise ValueError("100-mode points need two coordinates")
         theta = _native_angle(metadata, completed_steps)
@@ -442,6 +952,13 @@ def score_case(metadata, samples, completed_steps=0):
         failed.extend(_bounds(metrics, [["accuracy_" + key, "<=", value] for key, value in accuracy.LIMITS.items()]))
         if not accuracy.passes_accuracy(exact) and not any(x.startswith("accuracy_") for x in failed):
             failed.append("accuracy sample validity")
+        if kind in ("grid100_res16_tanh", "grid100_res16_scaled_tanh"):
+            scale = metadata.get("scale", 5.25)
+            sat = float((torch.abs(points / scale) >= 0.99).float().mean())
+            metrics["saturated_fraction"] = sat
+            max_sat = metadata.get("max_saturated_fraction", 0.001)
+            if sat > max_sat:
+                failed.append(f"saturated_fraction <= {max_sat}")
     elif kind == "vector":
         spec = metadata["spec"]
         dimension = len(spec["means"][0]) if spec["kind"] == "gaussian_mixture" else 2
@@ -499,7 +1016,14 @@ def _rotation(theta, *, device="cpu"):
 
 def _target(case, n, rng, step, *, device="cpu"):
     kind = case["kind"]
-    if kind == "native100":
+    if kind == "zero_tanh":
+        return torch.zeros((n, 2), device=device, dtype=torch.float32)
+    if kind == "zero_tanh_rail_escape":
+        if step >= case.get("shift_step", 1001):
+            return torch.zeros((n, 2), device=device, dtype=torch.float32)
+        initial = torch.tensor(case.get("initial_target", [0.90, -0.90]), device=device, dtype=torch.float32)
+        return initial.expand(n, 2).clone()
+    if kind in ("native100", "grid100_mlp16", "grid100_res16_tanh", "grid100_res16_scaled_tanh"):
         return problems.sample_real(case["problem"], n, device=device, generator=rng) @ _rotation(_native_angle(case, step), device=device).T
     if kind == "vector":
         # Mathematical helper accepts CPU generators; the caller moves only data.
@@ -560,9 +1084,12 @@ class VectorFixture:
         options.update(case.get("recipe_overrides", {}))
         from .api_contract import validate_recipe_overrides
         self.recipe_overrides = validate_recipe_overrides({**case, "provider": "api_vectors"}, recipe_name, recipe_overrides)
+        if case.get("prior_options", {}).get("prior_kind") == "mog":
+            options.update(prior_kind="mog", standardize=case["prior_options"].get("standardize", False),
+                           sigma_rel=case["prior_options"].get("sigma_rel", 0.025))
         options.update(self.recipe_overrides)
         self.recipe = get_recipe(recipe_name, **options)
-        data_device = "cpu" if case["kind"] in ("vector", "two_pole") else self.device
+        data_device = "cpu" if case["kind"] in ("vector", "two_pole", "zero_tanh", "zero_tanh_rail_escape") else self.device
         self.data_rng = torch.Generator(device=data_device).manual_seed(seed)
         self.generator_data_rng = torch.Generator(device=data_device).manual_seed(seed + 101)
         self.batch_sequence_sha256 = hashlib.sha256(b"toy-batches-v2").hexdigest()
@@ -583,6 +1110,30 @@ class VectorFixture:
                     with torch.no_grad():
                         generator.weight.copy_(torch.eye(2, device=self.device)); generator.bias.zero_()
                     critic = SimpleMLPDiscriminator(2, 128, 3, 3)
+                elif case["kind"] == "grid100_mlp16":
+                    init.deterministic_orthogonal_(prior, seed=seed + 2)
+                    generator = SimpleMLPGenerator(self.recipe.z_dim, 128, 16, 2)
+                    critic = SimpleMLPDiscriminator(2, 128, 3, 2)
+                    init.deterministic_orthogonal_(generator, seed=seed)
+                elif case["kind"] == "grid100_res16_tanh":
+                    init.deterministic_orthogonal_(prior, seed=seed + 2)
+                    generator = ResidualMLPGenerator(self.recipe.z_dim, 128, 7, 2, scale=case.get("scale", 5.25))
+                    critic = SimpleMLPDiscriminator(2, 128, 3, 2)
+                elif case["kind"] == "grid100_res16_scaled_tanh":
+                    init.deterministic_orthogonal_(prior, seed=seed + 2)
+                    generator = ScaledResidualMLPGenerator(
+                        self.recipe.z_dim, 128, 7, 2,
+                        scale=case.get("scale", 5.25),
+                        use_norm=True,
+                        preserve_latent_norm=True,
+                    )
+                    critic = SimpleMLPDiscriminator(2, 128, 3, 3)
+                    init.deterministic_orthogonal_(generator, seed=seed)
+                elif case["kind"] in ("zero_tanh", "zero_tanh_rail_escape"):
+                    init.deterministic_orthogonal_(prior, seed=seed + 2)
+                    generator = ZeroTanhGenerator(self.recipe.z_dim, 32, 2)
+                    critic = SimpleMLPDiscriminator(2, 32, 2, 2)
+                    init.deterministic_orthogonal_(generator, seed=seed)
                 elif case["kind"] == "two_pole":
                     from benchmarks.locked_shared.two_pole import HostCritic
                     generator = nn.Linear(1, 1)
@@ -669,6 +1220,8 @@ class VectorFixture:
         else:
             with torch.autograd.set_multithreading_enabled(False):
                 statistics = self.trainer.step(real, generator_real=real_g)
+            if self.metadata["kind"] == "grid100_res16_scaled_tanh":
+                _apply_scaled_res16_dispersion_step(self.trainer, real, next_step, self.execution_steps)
         self.completed_steps = next_step
         return statistics
 
@@ -680,7 +1233,7 @@ class VectorFixture:
         # minimum-size gate. A smaller diagnostic cannot earn a full gate PASS.
         actual_n = 12 if self.metadata["kind"] == "two_pole" else n
         sample_rng = torch.Generator(device=self.device).manual_seed(seed)
-        output_noise = self.metadata["kind"] == "native100"
+        output_noise = self.metadata["kind"] in ("native100", "grid100_mlp16", "grid100_res16_tanh")
         if self.metadata.get("caller_owned"):
             prior = self.prior
             samples = self.generator(prior.sample(actual_n, generator=sample_rng)[0])
@@ -689,11 +1242,11 @@ class VectorFixture:
                                           fixed_first_n=self.metadata["kind"] == "two_pole")
         samples = samples.detach().cpu()
         scored = score_case(self.metadata, samples, self.completed_steps)
-        rng_device = "cpu" if self.metadata["kind"] in ("vector", "two_pole") else self.device
+        rng_device = "cpu" if self.metadata["kind"] in ("vector", "two_pole", "zero_tanh", "zero_tanh_rail_escape") else self.device
         target_rng = torch.Generator(device=rng_device).manual_seed(seed + 100003)
         target = _target(self.metadata, actual_n, target_rng, self.completed_steps, device=self.device).detach().cpu()
         views = [_view("Whole target law", target, samples, self.metadata)]
-        if self.metadata["kind"] == "native100":
+        if self.metadata["kind"] in ("native100", "grid100_mlp16", "grid100_res16_tanh", "grid100_res16_scaled_tanh"):
             clean = self.trainer.sample(actual_n, generator=torch.Generator(device=self.device).manual_seed(seed), output_noise=False).cpu()
             clean_score = score_case(self.metadata, clean, self.completed_steps)
             scored["metrics"].update({"clean_" + key: value for key, value in clean_score["metrics"].items()})
@@ -718,9 +1271,15 @@ class VectorFixture:
         return scored
 
     def _centers(self):
-        if self.metadata["kind"] == "native100":
+        if self.metadata["kind"] in ("native100", "grid100_mlp16", "grid100_res16_tanh", "grid100_res16_scaled_tanh"):
             centers = problems.evaluation_geometry(self.metadata["problem"])[0]
             return centers @ _rotation(_native_angle(self.metadata, self.completed_steps)).T
+        if self.metadata["kind"] == "zero_tanh":
+            return torch.zeros((1, 2))
+        if self.metadata["kind"] == "zero_tanh_rail_escape":
+            if self.completed_steps >= self.metadata.get("shift_step", 1001):
+                return torch.zeros((1, 2))
+            return torch.tensor(self.metadata.get("initial_target", [0.90, -0.90]))[None, :]
         if self.metadata["kind"] == "vector" and self.metadata["spec"]["kind"] == "gaussian_mixture":
             return torch.tensor(self.metadata["spec"]["means"]) * vector_tasks.target_scale(self.metadata["spec"], self.completed_steps)
         if self.metadata["kind"] == "ring":
@@ -730,8 +1289,10 @@ class VectorFixture:
         return None
 
     def _zoom_sigma(self):
-        if self.metadata["kind"] == "native100":
+        if self.metadata["kind"] in ("native100", "grid100_mlp16", "grid100_res16_tanh", "grid100_res16_scaled_tanh"):
             return .03
+        if self.metadata["kind"] in ("zero_tanh", "zero_tanh_rail_escape"):
+            return .10
         if self.metadata["kind"] == "ring":
             return .07
         spec = self.metadata["spec"]
