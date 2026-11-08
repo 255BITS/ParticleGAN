@@ -429,6 +429,9 @@ def test_active_optimizer_configuration_fields_remain_explicit_and_required(over
 
 def test_runtime_rechecks_grouped_member_before_adapter(tmp_path, monkeypatch):
     from experiments.forge import runtime
+    # Import the profile refusal module before torch is stubbed below; run in
+    # isolation it would otherwise import ``torch.nn`` from the stub.
+    import experiments.forge.tanh_point_mass  # noqa: F401
     req = prospective(tmp_path, grouped=True)
     req["tasks"]["vector_unequal_mass_published"]["execution"]["vector_profile"]["revision"] = 99
     rebind(req)
@@ -512,12 +515,47 @@ def test_legitimate_formulation_change_requires_new_recipe_revision_and_job_keys
     validate_request_host_profiles(json.loads(json.dumps(req)))
 
 
-def test_central_revision_helper_preserves_the_existing_planning_formula(tmp_path):
+@pytest.mark.parametrize("default_additions", [
+    {}, {"ebi_beta": 30.0}, {"kappa_radial": 1.0}, {"ebi_beta": 30.0, "kappa_radial": 1.0},
+], ids=["legacy", "ebi-default", "radial-default", "both-defaults"])
+def test_central_revision_helper_preserves_the_existing_planning_formula(tmp_path, default_additions):
     from experiments.forge.planning import FORMULATION_FIELDS, candidate_revision_for
     req = prospective(tmp_path)
     candidate = req["candidate"]
+    # These later default-valued Recipe fields were absent from the original
+    # packet schema. Compare to that explicit legacy formula, independently of
+    # the production compatibility projector.
+    legacy_recipe = deepcopy(candidate["resolved_recipe"])
+    assert legacy_recipe.pop("ebi_beta") == 30.0
+    assert legacy_recipe.pop("kappa_radial") == 1.0
+    assert legacy_recipe.pop("generator_gradient_response") == "none"
     formulation = {name: candidate.get(name) for name in FORMULATION_FIELDS}
-    formulation.update(resolved_recipe=candidate["resolved_recipe"], prior=candidate["prior"],
+    formulation.update(resolved_recipe=legacy_recipe, prior=candidate["prior"],
                        api_version=candidate.get("api_version", "forge-api-v1"))
     old_formula = stable_hash({"source": req["source"]["digest"], "formulation": formulation})
+    candidate["resolved_recipe"] = {**legacy_recipe, **default_additions}
+    original = deepcopy(candidate)
     assert candidate_revision_for(req["source"]["digest"], candidate) == old_formula
+    assert candidate == original
+
+
+@pytest.mark.parametrize("field,value,default_other", [
+    ("ebi_beta", 15.0, "kappa_radial"), ("kappa_radial", 2.0, "ebi_beta"),
+])
+def test_nondefault_recipe_additions_remain_in_scientific_revision(tmp_path, field, value, default_other):
+    from experiments.forge.planning import FORMULATION_FIELDS, candidate_revision_for
+    req = prospective(tmp_path)
+    original_revision = req["candidate_revision"]
+    req["candidate"]["recipe_overrides"][field] = value
+    bind_candidate(req)
+    candidate = req["candidate"]
+    expected_recipe = deepcopy(candidate["resolved_recipe"])
+    expected_recipe.pop(default_other)
+    expected_recipe.pop("generator_gradient_response", None)
+    assert expected_recipe[field] == value
+    formulation = {name: candidate.get(name) for name in FORMULATION_FIELDS}
+    formulation.update(resolved_recipe=expected_recipe, prior=candidate["prior"],
+                       api_version=candidate.get("api_version", "forge-api-v1"))
+    expected = stable_hash({"source": req["source"]["digest"], "formulation": formulation})
+    assert candidate_revision_for(req["source"]["digest"], candidate) == req["candidate_revision"] == expected
+    assert expected != original_revision

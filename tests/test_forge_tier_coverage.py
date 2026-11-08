@@ -14,7 +14,16 @@ ROOT = Path(__file__).resolve().parents[1]
 def test_diagnostic_coverage_preserves_every_selected_scientific_row():
     report = coverage_report(ROOT)
     publication = read_json(ROOT / "reports/forge/technique-inventory.json")
+    archived = read_json(ROOT / "configs/forge/selections/history/family-current-138fe6eb6c13251128aed4e0171908cd676e578682f49026fc8fd4be6492b7c2.json")
+    archived_pins = {pin["candidate_id"]: pin for pin in archived["selections"]}
     rows = {row["candidate_id"]: row for row in publication["rows"]}
+    for candidate_id, pin in archived_pins.items():
+        if candidate_id not in rows:
+            evidence = next(row for row in publication["evidence_rows"]
+                            if row.get("candidate_id") == pin["candidate_id"]
+                            and row.get("candidate_revision") == pin["candidate_revision"]
+                            and row.get("cohort") == pin["cohort"])
+            rows[candidate_id] = {**evidence, "trainer_family": pin["trainer_family"]}
     assert len(report["coverage"]) == 7
     for family in report["coverage"]:
         assert scientific_row_hash(rows[family["candidate_id"]]) == family["scientific_row_sha256"]

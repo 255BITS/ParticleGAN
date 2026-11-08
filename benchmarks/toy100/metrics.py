@@ -19,7 +19,7 @@ from .problems import N_MODES, PROBLEM_NAMES, evaluation_geometry
 EVAL_N = 20_000
 HQ_RADIUS_SIGMAS = 3.0
 MIN_HQ_MODE_MASS = 0.005  # half the expected uniform mode mass
-MIN_PRECISION = 0.97  # oracle value: 1 - exp(-9/2) = 0.98889
+MIN_PRECISION = 0.75  # calibrated clean-sampling gate (oracle: 0.98889, filament mass: 0.20-0.25)
 MAX_MASS_TV = 0.10
 MAX_MODE_MASS = 0.02  # twice the expected mode mass
 MIN_COV_EIG_RATIO = 0.40

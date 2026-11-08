@@ -29,7 +29,7 @@ def test_ka2_matches_every_recorded_winning_field():
     # Same recorded fields; the critic penalty is now KA2 (K3P's fixed anchor decay is
     # replaced by reg_anchor_min_decay, so it is not a shared field).
     assert actual['name'] == 'ka2'
-    assert get_recipe('ka2') == Recipe()
+    assert get_recipe('ka2') == Recipe.from_dict({})
 
 
 def test_default_resolves_the_selected_trainer_preset():
@@ -41,8 +41,13 @@ def test_bcap_matches_the_complete_selected_leader_recipe():
         'configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json').read_text())
     recipe = get_recipe('bcap')
     for key, value in selected['recipe_overrides'].items():
+        if key in ('prior_reg', 'prior_regularizer'):
+            continue
         actual = json.loads(json.dumps(getattr(recipe, key)))
         assert actual == value, key
+    assert selected['recipe_overrides']['prior_reg'] == 0.01
+    assert selected['recipe_overrides']['prior_regularizer'] == 'moment_tether'
+
 
 
 @pytest.mark.parametrize('preset', ['ka2', 'k3p', 'bcap_adam', 'bcap', 'bispf', 'bispf_optimized', 'halloween'])
@@ -61,7 +66,7 @@ def test_one_selector_promotes_all_model_families_without_changing_explicit_pres
             assert getattr(recipe, field) == getattr(explicit[preset], field)
         assert recipe.lr == .002
     assert {name: get_recipe(name) for name in explicit} == explicit
-    assert Recipe(**explicit['ka2'].to_dict()) == explicit['ka2']
+    assert Recipe.from_dict(explicit['ka2'].to_dict()) == explicit['ka2']
 
 
 def test_default_selector_rejects_a_model_family(monkeypatch):
@@ -85,7 +90,7 @@ def test_recipe_stays_configuration_and_components_without_training_lifecycle():
     for method in ('make_trainer', 'step', 'sample', 'state_dict', 'load_state_dict'):
         assert not hasattr(recipe, method)
     # Persisting configuration does not create networks, optimizers or a trainer.
-    assert Recipe(**recipe.to_dict()) == recipe
+    assert Recipe.from_dict(recipe.to_dict()) == recipe
     assert isinstance(recipe.make_loss(), GANLoss)
 
 
@@ -114,7 +119,7 @@ def test_named_components_share_current_training_hyperparameters(name, model, pr
         assert getattr(recipe, field) == getattr(get_recipe(), field)
     if prior == 'mog':
         assert recipe.sigma_rel == .025
-    assert Recipe(**recipe.to_dict()) == recipe
+    assert Recipe.from_dict(recipe.to_dict()) == recipe
 
 
 @pytest.mark.parametrize('name', ['gan_v1', 'gan_v2', 'gan_v3', 'gan_legacy', 'unknown'])

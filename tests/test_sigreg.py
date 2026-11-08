@@ -65,7 +65,7 @@ def test_supplied_projection_formula_matches_explicit_trapezoid_and_gradient():
 
 
 def test_statistic_detects_mean_and_expansion_that_variance_floor_allows():
-    prior = Recipe(num_particles=256).make_prior(generator=torch.Generator().manual_seed(0))
+    prior = Recipe.from_dict(dict(num_particles=256)).make_prior(generator=torch.Generator().manual_seed(0))
     init.deterministic_orthogonal_(prior, seed=0)
     directions = torch.eye(2)
     normal = sigreg_statistic(prior.z, directions)
@@ -101,7 +101,7 @@ def test_zero_weight_consumes_no_rng_or_nonfinite_rows():
     equal(before, module.state_dict())
 
 
-@pytest.mark.parametrize("device", ["cpu", pytest.param("cuda:0", marks=pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA unavailable"))])
+@pytest.mark.parametrize("device", ["cpu", pytest.param("cuda:0", marks=[pytest.mark.cuda, pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA unavailable")])])
 def test_public_bcap_training_resume_replays_projection_rng_and_all_consumed_state(device):
     ctx = context(device)
     a = trainer(ctx)
@@ -151,7 +151,7 @@ def test_active_sigreg_respects_existing_regularization_row_law(particles, expec
 
 
 @pytest.mark.parametrize("host", ["trajectory", "residual_student", "cover_leftover", "ae_gan_hold"])
-@pytest.mark.parametrize("device", ["cpu", pytest.param("cuda:0", marks=pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA unavailable"))])
+@pytest.mark.parametrize("device", ["cpu", pytest.param("cuda:0", marks=[pytest.mark.cuda, pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA unavailable")])])
 def test_behavior_hosts_apply_sigreg_and_archive_projection_state(tmp_path, monkeypatch, host, device):
     task = json.loads((ROOT / "configs/forge/tasks" / (host + ".json")).read_text())
     task["execution"]["steps"] = 2
@@ -209,10 +209,14 @@ def test_word_public_component_checkpoint_replays_regularizer_and_named_streams(
 
 def test_all_current_tier1_tier2_bindings_admit_sigreg_after_source_refresh():
     from experiments.forge.adapters import adapter_preflight
+    from recipe_entrypoint_compat import model_source_blockers
     candidate = json.loads((ROOT / "configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json").read_text())
     candidate["recipe_overrides"].update(prior_regularizer="sigreg", prior_reg=.001)
     view = json.loads((ROOT / "configs/forge/views/discriminator_stability.json").read_text())
     for row in view["assignments"]:
         if row["qualification_tier"] <= 2:
             task = json.loads((ROOT / "configs/forge/tasks" / (row["task"] + ".json")).read_text())
-            assert adapter_preflight(task, candidate, root=ROOT) == [], row["task"]
+            # Source-bound model cards require their original checkout or a
+            # separately qualified new cohort after restoration API migration.
+            expected = model_source_blockers(ROOT, task) if task["adapter"] == "public_api_model_toy" else []
+            assert adapter_preflight(task, candidate, root=ROOT) == expected, row["task"]

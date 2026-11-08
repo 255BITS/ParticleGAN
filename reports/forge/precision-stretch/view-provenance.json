@@ -1,0 +1,18 @@
+{
+  "initial_proposal_parent": {
+    "archive_path": "reports/forge/precision-stretch/initial-view-v14.json",
+    "commit": "9fc54fab90a7d6da39db274b651dbf824fc3929a",
+    "git_blob": "68da1d3ee5821b9abd8cb5259e402fc4119a3c7c",
+    "sha256": "ea6b9e4b8558eab49e7317e79c33fe912c8207dfeaee90363fbea97fa793cc86",
+    "source_path": "configs/forge/views/discriminator_stability.json"
+  },
+  "merged_develop_parent": {
+    "archive_path": "configs/forge/view-history/discriminator_stability-v14.json",
+    "commit": "0eccf22789dd8a05eb41e16fff4de843093954b1",
+    "git_blob": "a8f6b4d055beb63f84d3b361a901b12ab6824245",
+    "sha256": "5e3343a2c5c44a3d16b85a64c49be22ae338d124137977c0bbaff965913a1cc3",
+    "source_path": "configs/forge/views/discriminator_stability.json"
+  },
+  "qualification_input": false,
+  "schema": "forge_view_archive_receipt_v1"
+}

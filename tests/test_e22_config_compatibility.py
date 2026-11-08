@@ -31,7 +31,7 @@ def _equal(left, right):
 
 def test_existing_research_config_resolves_identical_independent_controls():
     fields = json.loads((Path(__file__).parents[1] / "configs/100gaussians/e22-noout.json").read_text())
-    resolved = Recipe(**fields)
+    resolved = Recipe.from_dict(fields)
     dimensions = {key: fields[key] for key in ("num_particles", "z_dim", "batch_size")}
     assert get_recipe("e22", **dimensions) == resolved.replace(name="e22")
     assert resolved.row_policy == "independent"

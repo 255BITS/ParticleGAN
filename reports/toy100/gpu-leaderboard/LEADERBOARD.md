@@ -1,5 +1,10 @@
 # GPU leaderboard — continuous-learning variants (cuda_fp32_v1)
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../../forge/technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 **Active work:** [port the original CPU winner to GPU](../cpu-recipe-gpu-port/README.md). This continuous-learning cohort remains historical evidence.
 
 **Complete: 97 GPU toy runs and eight GPU convergence runs; all saved verdicts audited.**

@@ -9,7 +9,7 @@ from particlegan.optim.convolution_quintic import (
 )
 
 
-@pytest.fixture(params=["cpu", "cuda"])
+@pytest.fixture(params=["cpu", pytest.param("cuda", marks=pytest.mark.cuda)])
 def device(request):
     if request.param == "cuda" and not torch.cuda.is_available():
         pytest.skip("CUDA is unavailable")

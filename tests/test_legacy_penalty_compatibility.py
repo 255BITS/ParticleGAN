@@ -20,7 +20,7 @@ def test_archived_arms_keep_their_factory_and_recorded_selector(arm):
     assert LegacyRecipe(**recipe.to_dict()) == recipe
     if arm not in ("k3p", "a_r1r2", "b_cap"):
         with pytest.raises(ValueError, match="arm"):
-            Recipe(reg_arm=arm)
+            Recipe.from_dict(dict(reg_arm=arm))
 
 
 def test_archived_method_validation_still_uses_its_pinned_kernel():

@@ -47,6 +47,9 @@ def test_metadata_passes_task_budget_1600_without_changing_schedule_400(tmp_path
     assert not list(tmp_path.iterdir())
 
 
+@pytest.mark.cuda
+
+
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="neural execution-budget fixtures require CUDA")
 @pytest.mark.parametrize("name", ["vector_two_broad", "img_bars4"])
 @pytest.mark.parametrize("produces_state", [False, True])

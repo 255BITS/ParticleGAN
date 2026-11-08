@@ -119,7 +119,7 @@ def task_recipe(case, recipe_name=None, recipe=None):
     injected = recipe is not None
     if recipe is None:
         name = DEFAULT_RECIPE if recipe_name in (None, "auto") else recipe_name
-        recipe = Recipe(**json.loads((ROOT / f"configs/forge/ideas/{name}.json").read_text())["recipe_overrides"])
+        recipe = Recipe.from_dict(json.loads((ROOT / f"configs/forge/ideas/{name}.json").read_text())["recipe_overrides"])
     fixed = dict(**RESOURCES, prior_kind="mog", standardize=False, sigma_rel=0.,
                  model="gan", conditioning="scalar", encoder_mode="none", observation_sigma=.08,
                  reconstruction_weight=1.)

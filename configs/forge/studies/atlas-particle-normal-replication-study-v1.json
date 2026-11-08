@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 400000,
+    "candidate_budget_seconds": 100000,
+    "id": "atlas-prior-repair-campaign-v1"
+  },
+  "candidate": "atlas-particle-normal-v1",
+  "competing_explanation": "Remaining failures on clean-evaluated Gaussian covariance trace gates stem from Atlas preset output_noise_std=0.029 absorbing training variance that is stripped during clean (output_noise=False) evaluation, or from public_components hosts lacking the UpdatePolicy lifecycle, rather than prior cross-row coupling.",
+  "control": {
+    "candidate_id": "atlas",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "mean_error_sigma",
+    "op": ">",
+    "phase": "final",
+    "task_id": "gaussian1d_smoke",
+    "threshold": 0.2
+  },
+  "hypothesis": "Swapping MoGParticlePrior for a technique-owned unstandardized ParticlePrior plus NormalNoiseManipulator (sigma=0.005) unblocks public_trainer execution across the 48-task full suite while keeping the public atlas preset recipe fixed under protocol seed 0.",
+  "id": "atlas-particle-normal-replication-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "precision",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "grid100",
+    "threshold": 0.95
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "audit_source_sha256": "2f7a5ca081ec06f2551fd8625c4e01c55e0617fed1063a0bd53243dbf7e7f7d0",
+        "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4"
+      },
+      "path": "reports/develop-gates-20261001/atlas19-replay.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "prior-ablation-full-suite-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

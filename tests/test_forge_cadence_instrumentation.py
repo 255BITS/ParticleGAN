@@ -11,7 +11,7 @@ import torch
 from torch import nn
 
 from particlegan import GANTrainer, get_recipe
-from particlegan.bispf import _LAST_THERMAL_SCALE
+from particlegan.bispf import _LEGACY_THERMAL_CHANNEL
 from particlegan.init import deterministic_orthogonal_
 from experiments.forge.mechanisms import MechanismAudit
 from experiments.forge.state import state_digest
@@ -19,13 +19,13 @@ from experiments.forge.state import state_digest
 
 @pytest.fixture(autouse=True)
 def isolated_runtime():
-    threads, thermal = torch.get_num_threads(), dict(_LAST_THERMAL_SCALE)
+    threads, thermal = torch.get_num_threads(), dict(_LEGACY_THERMAL_CHANNEL)
     with torch.random.fork_rng(devices=[]):
         torch.set_num_threads(1)
         yield
     torch.set_num_threads(threads)
-    _LAST_THERMAL_SCALE.clear()
-    _LAST_THERMAL_SCALE.update(thermal)
+    _LEGACY_THERMAL_CHANNEL.clear()
+    _LEGACY_THERMAL_CHANNEL.update(thermal)
 
 
 def batch(step):

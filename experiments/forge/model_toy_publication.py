@@ -35,7 +35,7 @@ def load_publication(root):
         # Public serialization omits inactive/default fields such as
         # adam_variant. Rehydrate through that same API before comparison.
         from particlegan import Recipe
-        resolved = Recipe(**receipt["recipe"])
+        resolved = Recipe.from_dict(receipt["recipe"])
         if any(stable_hash(getattr(resolved, key)) != stable_hash(value) for key, value in protocol["candidate_contract"]["recipe_overrides"].items()
                if key not in adapted):
             raise ValueError("model research changed the one global baseline trainer")

@@ -16,6 +16,7 @@ def deterministic_algorithms():
     torch.use_deterministic_algorithms(previous)
 
 
+@pytest.mark.cuda
 @pytest.mark.skipif(os.environ.get('RUN_CUDA_IMAGE_TESTS') != '1', reason='opt-in real-data CUDA integration test')
 @pytest.mark.parametrize('architecture,d_backbone', [('unet','pixel'), ('flat_hybrid','pixel'), ('unet','pretrained_resnet18'), ('ncsnpp','pretrained_resnet18')])
 def test_checkpoint_resume_matches_uninterrupted(tmp_path, monkeypatch, architecture, d_backbone, deterministic_algorithms):

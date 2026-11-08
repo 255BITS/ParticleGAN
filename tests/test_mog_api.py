@@ -20,7 +20,7 @@ def test_mog_components_use_common_training_defaults_and_explicit_resources():
     assert recipe.prior_lr_mult == get_recipe().prior_lr_mult and recipe.betas == (0., .999) and recipe.prior_betas is None
     assert isinstance(recipe.make_prior(), MoGParticlePrior)
     assert type(get_recipe().make_prior()) is ParticlePrior
-    assert Recipe(**json.loads(json.dumps(recipe.to_dict()))) == recipe
+    assert Recipe.from_dict(json.loads(json.dumps(recipe.to_dict()))) == recipe
 
     from experiments.config import read_config
     from experiments.train_100gaussians import DEFAULTS
@@ -50,7 +50,7 @@ def test_explicit_ddgan_mog_study_config_and_overrides():
     prior = recipe.make_prior()
     assert isinstance(prior, MoGParticlePrior)
     assert prior.z.shape == (400, 4) and prior.sigma > 0
-    assert Recipe(**json.loads(json.dumps(recipe.to_dict()))) == recipe
+    assert Recipe.from_dict(json.loads(json.dumps(recipe.to_dict()))) == recipe
     changed = get_recipe(model='ddgan', conditioning='ucd', prior_kind='mog', sigma_rel=0.025, num_classes=8, z_dim=6, num_particles=32,
                          total_steps=2000, lr_floor=.05)
     assert changed.num_classes == 8 and changed.make_prior().z.shape == (32, 6)
