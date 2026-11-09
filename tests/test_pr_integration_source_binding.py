@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_every_integration_binding_preserves_the_exact_parent_contract():
-    receipts = list((ROOT / "reports/forge/pr-integration-20261108").glob("pr-*.json"))
+    receipts = list((ROOT / "reports/forge").glob("pr-integration-202611*/pr-*.json"))
     assert receipts
     for path in receipts:
         receipt = json.loads(path.read_text())

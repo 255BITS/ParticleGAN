@@ -38,6 +38,9 @@ jobs:
       matrix:
         include:
           - {python: "3.11", shard: 0}
+          - {python: "3.11", shard: 1}
+          - {python: "3.11", shard: 2}
+          - {python: "3.11", shard: 3}
           - {python: "3.12", shard: 0}
           - {python: "3.12", shard: 1}
           - {python: "3.12", shard: 2}
@@ -68,33 +71,23 @@ jobs:
         if: matrix.python == '3.12' && matrix.shard == 0
         run: python scripts/check_lint.py
       - name: Test numerical kernels and experiment workflows
-        if: matrix.python == '3.12'
         run: >-
           python scripts/ci_pytest.py run --index ${{ matrix.shard }} --count 4
-          --receipt /tmp/pytest-shard-${{ matrix.shard }}.json --
-          -q --durations=25 -o faulthandler_timeout=600
-          --ignore=tests/test_e22_routed_caption_late_phase_renderer.py
-      # The minimum supported Python runs one deterministic quarter of the same
-      # suite. Its receipt stays local: release coverage is checked on 3.12.
-      - name: Test one suite shard on the minimum supported Python
-        if: matrix.python == '3.11'
-        run: >-
-          python scripts/ci_pytest.py run --index ${{ matrix.shard }} --count 4
-          --receipt /tmp/pytest-py311-shard-${{ matrix.shard }}.json --
+          --receipt /tmp/pytest-${{ matrix.python }}-shard-${{ matrix.shard }}.json --
           -q --durations=25 -o faulthandler_timeout=600
           --ignore=tests/test_e22_routed_caption_late_phase_renderer.py
       - name: Save collection coverage receipt
-        if: always() && matrix.python == '3.12'
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: pytest-shard-${{ matrix.shard }}
-          path: /tmp/pytest-shard-${{ matrix.shard }}.json
+          name: pytest-${{ matrix.python }}-shard-${{ matrix.shard }}
+          path: /tmp/pytest-${{ matrix.python }}-shard-${{ matrix.shard }}.json
           if-no-files-found: error
       - name: Test bounded late-phase renderer in a fresh process
-        if: matrix.python == '3.12' && matrix.shard == 0
+        if: matrix.shard == 0
         run: timeout --signal=INT --kill-after=5s 60s python -m pytest -q tests/test_e22_routed_caption_late_phase_renderer.py
       - name: Exercise the complete Lunar pipeline and GIF exports
-        if: matrix.python == '3.11'
+        if: matrix.python == '3.11' && matrix.shard == 0
         env:
           SDL_VIDEODRIVER: dummy
         run: python -u examples/fast_lander.py --smoke --out /tmp/lunar-smoke
@@ -217,9 +210,42 @@ jobs:
           PY
           /tmp/particlegan-base-env/bin/python -m particlegan_forge --help
 
+  minimum-base:
+    name: Minimum base dependencies / Python 3.11
+    if: >-
+      github.event_name != 'workflow_dispatch' ||
+      github.ref == 'refs/heads/develop' ||
+      github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_ref || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install exact minimum base versions
+        run: |
+          python -m pip install 'torch==2.6.0' --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install 'numpy==1.26.0'
+      - name: Build and install the base wheel without experiment extras
+        run: |
+          python -m pip wheel --no-deps . --wheel-dir /tmp/minimum-wheel
+          python -m pip install --no-deps /tmp/minimum-wheel/*.whl
+          python -m pip check
+          cp scripts/base_compatibility_smoke.py /tmp/particlegan-minimum-smoke.py
+      - name: Check public API and exact checkpoint continuation outside checkout
+        working-directory: /tmp
+        run: python /tmp/particlegan-minimum-smoke.py
+
   distributions:
     name: Build release distributions
-    needs: [cpu-tests, base-wheel]
+    needs: [cpu-tests, base-wheel, minimum-base]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -233,11 +259,13 @@ jobs:
         run: python -m pip install build twine
       - uses: actions/download-artifact@v4
         with:
-          pattern: pytest-shard-*
+          pattern: pytest-*-shard-*
           path: /tmp/pytest-shards
           merge-multiple: true
       - name: Require complete nonoverlapping regression coverage
-        run: python scripts/ci_pytest.py check /tmp/pytest-shards/*.json
+        run: |
+          python scripts/ci_pytest.py check /tmp/pytest-shards/pytest-3.11-shard-*.json
+          python scripts/ci_pytest.py check /tmp/pytest-shards/pytest-3.12-shard-*.json
       - name: Build source archive and wheel
         run: python -m build
       - name: Keep research artifacts outside release distributions
@@ -249,14 +277,24 @@ jobs:
 
           for wheel in Path('dist').glob('*.whl'):
               with zipfile.ZipFile(wheel) as archive:
-                  roots = {name.split('/')[0] for name in archive.namelist()}
+                  names = archive.namelist()
+                  roots = {name.split('/')[0] for name in names}
+                  license_path = next(name for name in names if name.endswith('.dist-info/licenses/LICENSE'))
+                  assert archive.read(license_path) == Path('LICENSE').read_bytes()
+                  metadata_path = next(name for name in names if name.endswith('.dist-info/METADATA'))
+                  metadata = archive.read(metadata_path).decode()
+                  assert 'License-Expression: MIT' in metadata
+                  assert 'License-File: LICENSE' in metadata
               # particlegan_forge is the documented external tier API (EXPERIMENTATION.md).
               packages = {'particlegan', 'particlegan_forge'}
               assert all(root in packages or root.endswith('.dist-info') for root in roots), roots
           research = {'reports', 'results', 'experiments', 'benchmarks', 'lib', 'configs', 'data', 'runs', 'artifacts'}
           for source in Path('dist').glob('*.tar.gz'):
               with tarfile.open(source) as archive:
-                  roots = {parts[1] for name in archive.getnames() if len(parts := name.split('/')) > 1}
+                  names = archive.getnames()
+                  roots = {parts[1] for name in names if len(parts := name.split('/')) > 1}
+                  license_path = next(name for name in names if name.count('/') == 1 and name.endswith('/LICENSE'))
+                  assert archive.extractfile(license_path).read() == Path('LICENSE').read_bytes()
               assert not roots & research, roots & research
           PY
       - name: Validate package metadata and README
