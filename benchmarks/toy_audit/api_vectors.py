@@ -18,15 +18,15 @@ import numpy as np
 import torch
 from torch import nn
 
-from particlegan import (BatchDistanceDiscriminator, GANTrainer,
+from particlegan import (BatchDistanceDiscriminator, GANTrainer, Recipe,
                         get_recipe, init, scale_learning_rates)
-from lib.toy_models import SimpleMLPDiscriminator
+from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator
 from benchmarks.transfer_suite import stress_tasks, vector_tasks
 from benchmarks.toy100 import accuracy, metrics as native_metrics, problems
 from .definition_quality import gaussian_metrics, ring_metrics, two_pole_metrics
 from .vector_quality import projection_ks
 
-VERSION = "toy-public-api-vectors-v2"
+VERSION = "toy-public-api-vectors-v4-intact-recipes"
 DEFAULT_EVAL = 4096
 PROJECTION_KS_MAX = .06
 
@@ -46,47 +46,25 @@ class ZeroTanhGenerator(nn.Module):
         return self.net(z)
 
 
-import lib.toy_models
+class TanhRailGuard:
+    """Soft-bounded tanh head with the exact derivative of its forward map.
 
-
-class TanhRailGuard(torch.autograd.Function):
-    """Autograd function providing smooth saturation bounding, critic gradient clamping,
-    and restoring penalty gradients to prevent samples from locking at +/- scale tanh rails.
+    ``apply`` retains the call spelling used by the scaled task. Ordinary Torch
+    operations supply first and higher derivatives: this head does not clip an
+    incoming gradient or inject a restoring force. The historical surrogate
+    backward remains available only from its pinned original source.
     """
-    @staticmethod
-    def forward(ctx, u, scale=5.25, v_max=1.8, v_margin=0.4, guard_bound=5.0):
-        v = u / scale
-        abs_v = torch.abs(v)
-        sign_v = torch.sign(v)
-        excess = torch.relu(abs_v - v_max)
-        soft_excess = excess / (1.0 + excess / v_margin)
-        v_bounded = torch.where(abs_v <= v_max, v, sign_v * (v_max + soft_excess))
-        tanh_val = torch.tanh(v_bounded)
-        out = scale * tanh_val
-        ctx.save_for_backward(v, tanh_val)
-        ctx.scale = scale
-        ctx.v_max = v_max
-        ctx.v_margin = v_margin
-        ctx.guard_bound = guard_bound
-        return out
 
     @staticmethod
-    def backward(ctx, grad_output):
-        v, tanh_val = ctx.saved_tensors
-        scale = ctx.scale
-        v_max = ctx.v_max
-        v_margin = ctx.v_margin
-        guard_bound = ctx.guard_bound
-        clipped_grad = torch.clamp(grad_output, -guard_bound, guard_bound)
-        dtanh = 1.0 - tanh_val ** 2
-        abs_v = torch.abs(v)
-        excess = torch.relu(abs_v - v_max)
-        df_dv = torch.where(abs_v <= v_max, torch.ones_like(v), 1.0 / ((1.0 + excess / v_margin) ** 2))
-        restore_thresh = 1.5
-        v_excess = torch.relu(abs_v - restore_thresh)
-        penalty_grad = 5.0 * torch.sign(v) * v_excess
-        grad_u = (clipped_grad * dtanh * df_dv) / scale + penalty_grad / scale
-        return grad_u, None, None, None, None
+    def apply(u, scale=5.25, v_max=1.8, v_margin=0.4):
+        for name, value in (("scale", scale), ("v_max", v_max), ("v_margin", v_margin)):
+            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value <= 0:
+                raise ValueError(f"{name} must be finite and positive")
+        v = u / scale
+        excess = torch.relu(torch.abs(v) - v_max)
+        soft_excess = excess / (1.0 + excess / v_margin)
+        v_bounded = torch.where(torch.abs(v) <= v_max, v, torch.sign(v) * (v_max + soft_excess))
+        return scale * torch.tanh(v_bounded)
 
 
 class ResidualBlock(nn.Module):
@@ -104,12 +82,13 @@ class ResidualBlock(nn.Module):
 
 class ScaledResidualMLPGenerator(nn.Module):
     """16-layer residual MLP generator with 1/sqrt(2N) branch scaling, pre-head LayerNorm,
-    and S=5.25 bounded tanh head with rail saturation guard.
+    and S=5.25 soft-bounded tanh head with exact automatic derivatives.
 
     1 stem linear + 7 residual blocks (14 linear layers) + 1 head linear = 16 linear layers.
     Branch scaling: h_{l+1} = h_l + (1/sqrt(14)) * block(h_l)
     Pre-head normalization: nn.LayerNorm(hidden_dim) before final projection.
-    Output: S * tanh(head(norm(h)) / S) guarded against rail saturation.
+    The head soft-bounds its preactivation and applies scaled tanh. No
+    backward-only forces or gradient clipping are part of this architecture.
     """
     def __init__(
         self,
@@ -240,152 +219,48 @@ def _finalize_scaled_res_mlp(module: ScaledResidualMLPGenerator) -> None:
 
 init.register(ScaledResidualMLPGenerator, finalize=_finalize_scaled_res_mlp)
 
-# Alias for backward compatibility and formulaic coverage imports
-ResidualMLPGenerator = ScaledResidualMLPGenerator
+
+class ResidualMLPGenerator(nn.Module):
+    """Original unnormalized residual backbone with ordinary scaled tanh.
+
+    This is the ``grid100_res16_tanh`` architecture. The separately named
+    ``ScaledResidualMLPGenerator`` owns branch scaling, pre-head normalization
+    and the soft-bounded head; importing either class changes no shared factory.
+    """
+
+    def __init__(self, z_dim=2, hidden_dim=128, n_blocks=7, out_dim=2, scale=5.25):
+        super().__init__()
+        self.scale = scale
+        self.stem = nn.Sequential(nn.Linear(z_dim, hidden_dim), nn.LeakyReLU(0.2, inplace=False))
+        self.blocks = nn.ModuleList([ResidualBlock(hidden_dim) for _ in range(n_blocks)])
+        self.head = nn.Linear(hidden_dim, out_dim)
+        self.init_weights()
+
+    def init_weights(self):
+        for block in self.blocks:
+            nn.init.orthogonal_(block.linear1.weight)
+            nn.init.zeros_(block.linear1.bias)
+            nn.init.zeros_(block.linear2.weight)
+            nn.init.zeros_(block.linear2.bias)
+        nn.init.orthogonal_(self.stem[0].weight)
+        nn.init.zeros_(self.stem[0].bias)
+        nn.init.orthogonal_(self.head.weight)
+        nn.init.zeros_(self.head.bias)
+
+    def forward(self, z):
+        h = self.stem(z)
+        for block in self.blocks:
+            h = block(h)
+        return self.scale * torch.tanh(self.head(h) / self.scale)
 
 
-@torch.no_grad()
-def _apply_scaled_res16_dispersion_step(
-    trainer,
-    real: torch.Tensor,
-    step: int,
-    total_steps: int,
-) -> None:
-    """Empirical mode-well tracking and local particle dispersion for grid100_res16_scaled_tanh."""
-    from particlegan.priors import unwrap_prior
+def _finalize_res_mlp(module: ResidualMLPGenerator) -> None:
+    for block in module.blocks:
+        block.linear2.weight.zero_()
+        block.linear2.bias.zero_()
 
-    if total_steps < 50 or step < max(1, int(0.35 * total_steps)):
-        return
 
-    emp_state = getattr(trainer, "_scaled_res16_emp_state", None)
-    if emp_state is None:
-        emp_state = {"buf": [], "centers": None, "sigma": 0.03, "offsets": None}
-        trainer._scaled_res16_emp_state = emp_state
-
-    real_det = real.detach()
-    if emp_state["centers"] is None:
-        emp_state["buf"].append(real_det)
-        total_pts = sum(x.shape[0] for x in emp_state["buf"])
-        if total_pts >= 8192 or step >= max(1, int(0.65 * total_steps)):
-            pts = torch.cat(emp_state["buf"], dim=0)[:16384]
-            centers_list = [pts[0]]
-            for i in range(1, pts.shape[0]):
-                p = pts[i]
-                c_stack = torch.stack(centers_list, dim=0)
-                if torch.cdist(p.unsqueeze(0), c_stack).min().item() > 0.35:
-                    centers_list.append(p)
-                    if len(centers_list) >= 100:
-                        break
-            centers = torch.stack(centers_list, dim=0)
-            for _ in range(5):
-                dists = torch.cdist(pts, centers)
-                assign = dists.argmin(dim=1)
-                for k in range(centers.shape[0]):
-                    mask = assign == k
-                    if mask.any():
-                        centers[k] = pts[mask].mean(dim=0)
-            order = torch.argsort(torch.round(centers[:, 0] * 2.0) * 100.0 + torch.round(centers[:, 1] * 2.0))
-            centers = centers[order]
-            dists = torch.cdist(pts, centers)
-            assign = dists.argmin(dim=1)
-            diffs = pts - centers[assign]
-            emp_sigma = float(torch.sqrt((diffs ** 2).mean()).clamp(0.005, 0.20).item())
-            emp_state["centers"] = centers
-            emp_state["sigma"] = emp_sigma
-            emp_state["buf"] = []
-    else:
-        centers = emp_state["centers"]
-        dists = torch.cdist(real_det, centers)
-        min_d, assign = dists.min(dim=1)
-        valid = min_d < 0.35
-        if valid.any():
-            v_real = real_det[valid]
-            v_assign = assign[valid]
-            counts = torch.bincount(v_assign, minlength=centers.shape[0]).float().unsqueeze(1)
-            sums = torch.zeros_like(centers)
-            sums.index_add_(0, v_assign, v_real)
-            has_obs = counts.squeeze(1) > 0
-            batch_means = torch.where(has_obs.unsqueeze(1), sums / counts.clamp_min(1.0), centers)
-            centers.lerp_(batch_means, 0.05)
-            diffs = v_real - centers[v_assign]
-            batch_sigma = float(torch.sqrt((diffs ** 2).mean()).clamp(0.005, 0.20).item())
-            emp_state["sigma"] = 0.95 * emp_state["sigma"] + 0.05 * batch_sigma
-
-    if emp_state["centers"] is None:
-        return
-    if step < max(1, int(0.65 * total_steps)) and step != total_steps:
-        return
-    if step != total_steps and step % 25 != 0:
-        return
-
-    swapped = getattr(trainer, "_fast", None) is not None
-    if swapped:
-        trainer._serve_release()
-    try:
-        if hasattr(trainer.G, "init_paired_identity"):
-            trainer.G.init_paired_identity()
-        if getattr(trainer, "ema_G", None) is not None and hasattr(trainer.ema_G, "init_paired_identity"):
-            trainer.ema_G.init_paired_identity()
-
-        base_prior = unwrap_prior(trainer.prior)
-        if not hasattr(base_prior, "z") or not base_prior.z.requires_grad:
-            return
-        z = base_prior.z
-        n_particles, z_dim = z.shape
-        centers = emp_state["centers"]
-        n_modes = centers.shape[0]
-        emp_sigma = float(emp_state["sigma"])
-
-        sigma_prior = 0.0
-        if hasattr(base_prior, "sigma"):
-            s_val = base_prior.sigma
-            sigma_prior = float(s_val.item() if torch.is_tensor(s_val) else s_val)
-        elif getattr(trainer.prior, "manipulators", None):
-            for manip in trainer.prior.manipulators:
-                if hasattr(manip, "sigma"):
-                    sigma_prior = max(sigma_prior, float(manip.sigma))
-
-        sigma_part = math.sqrt(max(emp_sigma ** 2 - sigma_prior ** 2, 1e-6))
-        m_per = max(1, n_particles // n_modes)
-
-        if emp_state["offsets"] is None or emp_state["offsets"].shape != (m_per, 2):
-            n_rings = max(1, min(10, m_per // 4))
-            n_angles = max(1, m_per // n_rings)
-            ring_pts = []
-            p_vals = (torch.arange(n_rings, device=z.device, dtype=z.dtype) + 0.5) / float(n_rings)
-            r_vals = torch.sqrt(-2.0 * torch.log(1.0 - p_vals))
-            r_vals = r_vals * math.sqrt(2.0 / float((r_vals ** 2).mean().clamp_min(1e-8).item()))
-            for j in range(n_rings):
-                count_j = n_angles if j < n_rings - 1 else (m_per - len(ring_pts))
-                if count_j <= 0:
-                    break
-                angles = (torch.arange(count_j, device=z.device, dtype=z.dtype) + 0.5 * (j % 2)) * (
-                    2.0 * math.pi / float(count_j)
-                )
-                pts_j = r_vals[j] * torch.stack([torch.cos(angles), torch.sin(angles)], dim=1)
-                ring_pts.append(pts_j)
-            offsets = torch.cat(ring_pts, dim=0)[:m_per]
-            offsets = offsets - offsets.mean(dim=0, keepdim=True)
-            emp_state["offsets"] = offsets
-
-        offsets = emp_state["offsets"] * sigma_part
-        target_z = torch.zeros_like(z)
-        mode_idx = torch.arange(n_particles, device=z.device) % n_modes
-        local_idx = (torch.arange(n_particles, device=z.device) // n_modes) % m_per
-        target_z[:, :2] = centers[mode_idx] + offsets[local_idx]
-
-        rate = 1.0 if step >= max(1, int(0.75 * total_steps)) else 0.5
-        z.lerp_(target_z, rate)
-        if getattr(trainer, "ema_prior", None) is not None:
-            ema_base = unwrap_prior(trainer.ema_prior)
-            if hasattr(ema_base, "z"):
-                ema_base.z.copy_(z)
-        if getattr(trainer, "policy", None) is not None and getattr(trainer.policy, "averaged_table", None) is not None:
-            if trainer.policy.averaged_table.shape == z.shape:
-                trainer.policy.averaged_table.copy_(z)
-    finally:
-        if swapped and getattr(trainer, "serve_after_step", False):
-            trainer._serve_apply()
+init.register(ResidualMLPGenerator, finalize=_finalize_res_mlp)
 
 
 class ScaledSimpleMLPGenerator(nn.Module):
@@ -420,11 +295,6 @@ class ScaledSimpleMLPGenerator(nn.Module):
 
     def forward(self, z: torch.Tensor) -> torch.Tensor:
         return self.net(z)
-
-
-# Patch in lib.toy_models and alias locally
-SimpleMLPGenerator = ScaledSimpleMLPGenerator
-lib.toy_models.SimpleMLPGenerator = ScaledSimpleMLPGenerator
 
 
 # Frozen mathematical proposal definitions and actual arm initializers are
@@ -681,6 +551,7 @@ def _case(identifier, legacy, title, goal, *, kind="vector", steps=1200,
                 eval_samples=evaluation, default_recipe=default_recipe,
                 sampling="public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
                 initialization="Public deterministic_orthogonal_ for networks and R2 prior locations; native100 retains its identity affine generator, and two-pole retains its identity/zero/stored-weight controls.",
+                checkpoint_capabilities=dict(state_export="complete", resume=True, exact_continuation=True),
                 scope="A per-observation gate is not full-budget or sustained convergence; no historical verdict is replaced.") | extra
 
 
@@ -727,8 +598,11 @@ def _registry():
             cadence=dict(d_every=spec.get("d_every", 1), g_every=spec.get("g_every", 1),
                          first_d_outer_step=1), caller_owned=alternating,
             caller_noise="none, preserving the original alternating-loop input/output sampling law" if alternating else None,
-            adaptation=("Explicit KA2 public component loop; no Atlas/DV12 policy lifecycle is claimed. Original half-frequency D cadence is preserved."
-                        if alternating else "KA2 named preset with explicit public R1+R2/K3P penalty; DV12 game-record support is unavailable for this fixed penalty."
+            checkpoint_scope="export_only_no_resume" if alternating else "complete_public_trainer",
+            checkpoint_capabilities=dict(state_export="diagnostic_only", resume=False, exact_continuation=False)
+                if alternating else dict(state_export="complete", resume=True, exact_continuation=True),
+            adaptation=("Half-frequency D component loop. The unchanged requested recipe must be supported; the original KA2 default is blocked while noise/A2 owners are unavailable. State export is diagnostic only; restore is unsupported."
+                        if alternating else "Fixed R1+R2 question requires an explicitly supplied matching recipe; the unchanged KA2 default is blocked."
                         if fixed_penalty else "Current selected public policy replaces the historical manual Adam/controller loop; target law and named stress remain fixed."),
             penalty_arm=spec["reg_arm"] if fixed_penalty else None,
             limitations=spec["limitations"])
@@ -817,6 +691,7 @@ def _registry():
         "api-grid100-mlp16", ["deep100g-mlp16"], "100 Gaussians 16-layer MLP stress",
         "Recover all 100 equal-weight Gaussian modes with a 16-hidden-layer 128-wide LeakyReLU MLP generator.",
         kind="grid100_mlp16", steps=7000, batch=2048, evaluation=20000, particles=20000, z_dim=2,
+        architecture=dict(generator="SimpleMLPGenerator", hidden_layers=16, hidden_width=128, normalization="none", output_activation="linear"),
         default_recipe="k3p",
         problem="grid100",
         prior_options=dict(prior_kind="mog", sigma=0.025, standardize=False),
@@ -829,6 +704,7 @@ def _registry():
         "api-grid100-res16-tanh", ["deep100g-res16-tanh"], "100 Gaussians 16-layer ResMLP + scaled tanh",
         "Recover all 100 equal-weight Gaussian modes with a 16-layer residual MLP generator and S=5.25 bounded tanh head without rail saturation.",
         kind="grid100_res16_tanh", steps=7000, batch=2048, evaluation=20000, particles=20000, z_dim=2,
+        architecture=dict(generator="ResidualMLPGenerator", linear_layers=16, hidden_width=128, residual_scale=1., normalization="none", output_activation="scaled_tanh"),
         default_recipe="k3p",
         problem="grid100",
         scale=5.25,
@@ -843,6 +719,7 @@ def _registry():
         "api-grid100-res16-scaled-tanh", ["deep100g-res16-scaled-tanh"], "100 Gaussians 16-layer ScaledResMLP + TanhRailGuard",
         "Recover all 100 equal-weight Gaussian modes with a paired norm-preserving 16-layer ScaledResidualMLPGenerator and S=5.25 TanhRailGuard head.",
         kind="grid100_res16_scaled_tanh", steps=7000, batch=2048, evaluation=20000, particles=20000, z_dim=2,
+        architecture=dict(generator="ScaledResidualMLPGenerator", linear_layers=16, hidden_width=128, residual_scale=1/math.sqrt(14), normalization="norm_preserving_paired", output_activation="soft_bounded_tanh_exact_autograd"),
         default_recipe="k3p",
         problem="grid100",
         scale=5.25,
@@ -850,7 +727,7 @@ def _registry():
         profile=dict(init_std=2.88),
         prior_options=dict(prior_kind="mog", sigma=0.025, standardize=False),
         thresholds={"native": deepcopy(native_metrics.REQUIREMENTS), "accuracy": deepcopy(accuracy.LIMITS), "saturated_fraction": 0.001},
-        sampling="public served latent law, including enabled DV12/feature-cell perturbation, plus output noise; diagnostics remove additive output noise only",
+        sampling="clean live public prior law without additive output noise; enabled public prior perturbations retain their declared law",
         law=dict(kind="equal100_gaussian", problem="grid100", sigma=0.03),
         adaptation="Public GANTrainer host with 16-layer ScaledResidualMLPGenerator (paired norm-preserving residual transport) and S=5.25 TanhRailGuard head."
     )
@@ -1050,7 +927,7 @@ class VectorFixture:
     """Caller-owned data/phase state around one current public trainer."""
     api_components = ("particlegan.Recipe", "particlegan.GANTrainer", "particlegan.ParticlePrior")
 
-    def __init__(self, case, *, device="cpu", seed=DEFAULT_SEED, recipe_name="atlas", max_steps=None, recipe_overrides=None):
+    def __init__(self, case, *, device="cpu", seed=DEFAULT_SEED, recipe_name="atlas", max_steps=None, recipe_overrides=None, recipe=None):
         self.metadata = deepcopy(case)
         self.case_id = case["id"]
         self.device = torch.device(device)
@@ -1063,32 +940,51 @@ class VectorFixture:
             raise ValueError("seed must be a nonnegative integer")
         if recipe_name == "auto":
             recipe_name = case["default_recipe"]
-        if case.get("caller_owned") and recipe_name != "ka2":
-            raise ValueError("the half-frequency D caller is explicitly KA2; use recipe_name='ka2' or 'auto'")
-        if case.get("penalty_arm") and recipe_name not in ("ka2", "gan", "k3p"):
-            raise ValueError("the R1+R2 stress requires a fixed public preset: its critic record lacks the Atlas/DV12 game-surprise fields")
         spec = case.get("spec", {})
+        # The task binds only resources and the initial prior/data law. Rates,
+        # losses, penalties, optimizers, regularization and noise stay owned by
+        # the requested recipe or an explicitly supplied complete Recipe.
         options = dict(num_particles=case["particles"], z_dim=case["z_dim"], batch_size=case["batch_size"])
-        for source, destination in (("lr", "lr"), ("d_lr_mult", "d_lr_mult"), ("prior_lr_mult", "prior_lr_mult"),
-                                    ("prior_reg", "prior_reg"), ("betas", "betas"), ("ema_decay", "ema_decay")):
-            if source in spec:
-                options[destination] = tuple(spec[source]) if source == "betas" else spec[source]
-        # Explicit named penalty stress stays its actual R1+R2 law. Other
-        # fixtures adopt the requested public formulation, not a hidden b_cap.
-        if case.get("penalty_arm"):
-            options.update(reg_arm=case["penalty_arm"], reg_coeff=spec["reg_coeff"])
-        if recipe_name in ("ka2", "k3p", "gan"):
-            options["total_steps"] = case["default_steps"]
+        from .api_contract import UnsupportedRecipeOverrides, validate_recipe_overrides
+        if case.get("checkpoint_required") and not case["checkpoint_capabilities"]["exact_continuation"]:
+            raise UnsupportedRecipeOverrides("this task requires exact checkpoint continuation; the half-frequency caller supports diagnostic state export only")
+        if recipe is not None:
+            if not isinstance(recipe, Recipe) or recipe_overrides:
+                raise ValueError("a supplied complete Recipe cannot be mixed with tuning overrides")
+            if any(getattr(recipe, field) != value for field, value in options.items()):
+                raise ValueError("supplied Recipe resources differ from the declared task")
+            prior_options = case.get("prior_options", {})
+            if (recipe.prior_kind != prior_options.get("prior_kind", "particles")
+                    or ("standardize" in prior_options and recipe.standardize != prior_options["standardize"])):
+                raise ValueError("supplied Recipe initial prior law differs from the declared task")
+            self.recipe_overrides = {}
+            self.recipe = recipe
+        else:
+            self.recipe_overrides = validate_recipe_overrides({**case, "provider": "api_vectors"}, recipe_name, recipe_overrides)
+            if get_recipe(recipe_name).continuous_policy is None:
+                options["total_steps"] = case["default_steps"]
+            if case.get("prior_options", {}).get("prior_kind") == "mog":
+                options.update(prior_kind="mog", standardize=case["prior_options"].get("standardize", False),
+                               sigma_rel=case["prior_options"].get("sigma_rel", 0.025))
+            options.update(self.recipe_overrides)
+            self.recipe = get_recipe(recipe_name, **options)
+        if case.get("penalty_arm") and (self.recipe.reg_arm != case["penalty_arm"]
+                                        or self.recipe.reg_coeff != spec["reg_coeff"]):
+            raise UnsupportedRecipeOverrides("The fixed R1+R2 question requires an explicitly declared matching recipe; the host cannot replace its penalty")
         if case.get("caller_owned"):
-            options.update(input_noise_std=0., output_noise_std=0., output_noise_mode="fixed")
-        options.update(case.get("recipe_overrides", {}))
-        from .api_contract import validate_recipe_overrides
-        self.recipe_overrides = validate_recipe_overrides({**case, "provider": "api_vectors"}, recipe_name, recipe_overrides)
-        if case.get("prior_options", {}).get("prior_kind") == "mog":
-            options.update(prior_kind="mog", standardize=case["prior_options"].get("standardize", False),
-                           sigma_rel=case["prior_options"].get("sigma_rel", 0.025))
-        options.update(self.recipe_overrides)
-        self.recipe = get_recipe(recipe_name, **options)
+            unsupported = [name for name in (
+                "continuous_policy", "row_evidence_gate", "particle_birth_death", "serve_average",
+                "input_noise_std", "output_noise_std", "latent_damping_max_rate",
+                "kinetic_transport_weight", "kinetic_transport_local_weight") if getattr(self.recipe, name)]
+            if self.recipe.lr_control == "stationarity":
+                unsupported.append("lr_control=stationarity")
+            for name, inactive in (("output_noise_mode", "fixed"), ("generator_gradient_response", "none"),
+                                   ("constraint_geometry_mode", "none"), ("prior_code_law", "table"),
+                                   ("model", "gan"), ("training_precision", "float32"), ("encoder_mode", "none")):
+                if getattr(self.recipe, name) != inactive:
+                    unsupported.append(name)
+            if unsupported:
+                raise UnsupportedRecipeOverrides("half-frequency caller cannot execute the intact recipe mechanisms: " + ", ".join(unsupported))
         data_device = "cpu" if case["kind"] in ("vector", "two_pole", "zero_tanh", "zero_tanh_rail_escape") else self.device
         self.data_rng = torch.Generator(device=data_device).manual_seed(seed)
         self.generator_data_rng = torch.Generator(device=data_device).manual_seed(seed + 101)
@@ -1118,6 +1014,7 @@ class VectorFixture:
                 elif case["kind"] == "grid100_res16_tanh":
                     init.deterministic_orthogonal_(prior, seed=seed + 2)
                     generator = ResidualMLPGenerator(self.recipe.z_dim, 128, 7, 2, scale=case.get("scale", 5.25))
+                    init.deterministic_orthogonal_(generator, seed=seed)
                     critic = SimpleMLPDiscriminator(2, 128, 3, 2)
                 elif case["kind"] == "grid100_res16_scaled_tanh":
                     init.deterministic_orthogonal_(prior, seed=seed + 2)
@@ -1178,6 +1075,9 @@ class VectorFixture:
         self.penalty = self.recipe.make_critic_penalty(self.opt_d)
         self.regularizer = self.recipe.make_prior_regularizer(prior=self.prior)
         self.latent_rng = torch.Generator(device=self.device).manual_seed(self.seed + 1)
+        if self.recipe.effective_critic_formulation == "bispf":
+            from particlegan.bispf import bind_thermal_source
+            bind_thermal_source(self.opt_d.record, self.loss, self.regularizer)
         self.base_rates = [[group["lr"] for group in optimizer.param_groups] for optimizer in (self.opt_g, self.opt_d)]
         self.update_counts = dict(g=0, d=0)
 
@@ -1210,9 +1110,12 @@ class VectorFixture:
             self.critic.requires_grad_(False)
             try:
                 self.opt_g.zero_grad(set_to_none=True)
-                fake = self.generator(self.prior.sample(self.recipe.batch_size, generator=self.latent_rng)[0])
+                latent, indices = self.prior.sample(self.recipe.batch_size, generator=self.latent_rng)
+                fake = self.generator(latent)
+                if hasattr(self.opt_g, "set_sampled_rows") and self.prior.z.requires_grad:
+                    self.opt_g.set_sampled_rows(self.prior.z, indices)
                 value = self.loss.g_loss(self.critic(fake), self.critic(real_g)) + self.recipe.prior_regularization(
-                    self.prior.z, regularizer=self.regularizer)
+                    self.prior.z, regularizer=self.regularizer, prior=self.prior)
                 value.backward(); self.opt_g.step(); self.update_counts["g"] += 1
             finally:
                 self.critic.requires_grad_(True)
@@ -1220,8 +1123,6 @@ class VectorFixture:
         else:
             with torch.autograd.set_multithreading_enabled(False):
                 statistics = self.trainer.step(real, generator_real=real_g)
-            if self.metadata["kind"] == "grid100_res16_scaled_tanh":
-                _apply_scaled_res16_dispersion_step(self.trainer, real, next_step, self.execution_steps)
         self.completed_steps = next_step
         return statistics
 
@@ -1302,23 +1203,35 @@ class VectorFixture:
     def state_dict(self):
         state = dict(version=VERSION, case_id=self.case_id, recipe=self.recipe.to_dict(),
                      seed=self.seed, case_sha256=_digest(self.metadata),
+                     checkpoint_scope=self.metadata.get("checkpoint_scope", "complete_public_trainer"),
                      completed_steps=self.completed_steps, data_rng=self.data_rng.get_state().clone(),
                      generator_data_rng=self.generator_data_rng.get_state().clone(),
                      batch_sequence_sha256=self.batch_sequence_sha256,
                      phase_receipts=deepcopy(self.phase_receipts))
         if self.metadata.get("caller_owned"):
+            penalty = self.penalty.regularizer
+            penalty_state = {"coeff": penalty.coeff, "last_stats": deepcopy(self.penalty.last_stats)}
+            if hasattr(penalty, "state_dict"):
+                penalty_state["record"] = penalty.state_dict()
+            if hasattr(penalty, "cooler"):
+                penalty_state["cooler"] = penalty.cooler.state_dict()
             state["caller"] = deepcopy(dict(generator=self.generator.state_dict(), critic=self.critic.state_dict(), prior=self.prior.state_dict(),
                                               **self.recipe.prior_regularizer_checkpoint(self.regularizer),
                                               ema_critic=self.ema_critic.state_dict(), opt_g=self.opt_g.state_dict(), opt_d=self.opt_d.state_dict(),
+                                              penalty=penalty_state, base_rates=self.base_rates,
                                               latent_rng=self.latent_rng.get_state(), update_counts=self.update_counts))
         else:
             state["trainer"] = self.trainer.state_dict()
         return state
 
     def load_state_dict(self, state):
+        if self.metadata.get("caller_owned"):
+            from .api_contract import UnsupportedRecipeOverrides
+            raise UnsupportedRecipeOverrides("half-frequency caller state export is diagnostic only; complete checkpoint restore is unsupported")
         if (state["version"] != VERSION or state["case_id"] != self.case_id
                 or state["recipe"] != self.recipe.to_dict() or state.get("seed") != self.seed
-                or state.get("case_sha256") != _digest(self.metadata)):
+                or state.get("case_sha256") != _digest(self.metadata)
+                or state.get("checkpoint_scope") != self.metadata.get("checkpoint_scope", "complete_public_trainer")):
             raise ValueError("checkpoint identity/recipe differs")
         for name in ("data_rng", "generator_data_rng"):
             torch.Generator(device=self.data_rng.device).set_state(state[name])
@@ -1329,20 +1242,9 @@ class VectorFixture:
         steps = state["completed_steps"]
         if type(steps) is not int or steps < 0 or steps > self.execution_steps:
             raise ValueError("checkpoint exceeds this execution prefix")
-        if self.metadata.get("caller_owned"):
-            if state["caller"]["update_counts"] != dict(g=steps, d=(steps + 1) // 2):
-                raise ValueError("checkpoint cadence counters differ from its phase clock")
-        elif state["trainer"]["completed_steps"] != steps:
+        if state["trainer"]["completed_steps"] != steps:
             raise ValueError("checkpoint trainer differs from its phase clock")
-        if self.metadata.get("caller_owned"):
-            self.recipe.restore_prior_regularizer(self.regularizer, state["caller"].get("prior_regularizer"), validate_only=True)
-            for key in ("generator", "critic", "prior", "ema_critic", "opt_g", "opt_d"):
-                getattr(self, key).load_state_dict(state["caller"][key])
-            self.recipe.restore_prior_regularizer(self.regularizer, state["caller"].get("prior_regularizer"))
-            self.latent_rng.set_state(state["caller"]["latent_rng"])
-            self.update_counts = deepcopy(state["caller"]["update_counts"])
-        else:
-            self.trainer.load_state_dict(state["trainer"])
+        self.trainer.load_state_dict(state["trainer"])
         self.data_rng.set_state(state["data_rng"])
         self.generator_data_rng.set_state(state["generator_data_rng"])
         self.batch_sequence_sha256 = state["batch_sequence_sha256"]
@@ -1358,9 +1260,9 @@ def _view(title, target, samples, metadata):
                 xlabel="x", ylabel="y", caption=metadata["sampling"])
 
 
-def build_case(id, *, device="cpu", seed=DEFAULT_SEED, recipe_name="atlas", max_steps=None, recipe_overrides=None):
+def build_case(id, *, device="cpu", seed=DEFAULT_SEED, recipe_name="atlas", max_steps=None, recipe_overrides=None, recipe=None):
     cases = _registry()
     if id not in cases:
         raise ValueError(f"unknown vector case {id!r}")
     return VectorFixture(cases[id], device=device, seed=seed, recipe_name=recipe_name,
-                         max_steps=max_steps, recipe_overrides=recipe_overrides)
+                         max_steps=max_steps, recipe_overrides=recipe_overrides, recipe=recipe)

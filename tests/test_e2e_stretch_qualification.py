@@ -71,6 +71,7 @@ from benchmarks.toy_audit.api_vectors import (
 )
 from particlegan import ParticlePrior
 from particlegan.bispf import bind_thermal_source
+from tests.bigan_software_cohort import build_fixture as build_bigan_software_fixture
 
 # ============================================================================
 # Pytest Hooks & Environment Setup
@@ -502,8 +503,8 @@ def test_tier1_grid100_residual_block_scaling_invariance():
 
 
 @pytest.mark.tier1
-def test_tier1_grid100_tanh_anti_saturation_rail_penalty():
-    """F14: Verify TanhRailGuard bounds outputs below saturation rail and provides restoring backward gradients."""
+def test_tier1_grid100_soft_bounded_tanh_exact_derivative():
+    """F14: The soft-bounded head has no backward-only training mechanism."""
     scale = 5.25
     u_safe = torch.tensor([[0.0, 1.0], [2.0, -3.0], [4.5, -4.5]], requires_grad=True)
     out_safe = TanhRailGuard.apply(u_safe, scale)
@@ -517,6 +518,8 @@ def test_tier1_grid100_tanh_anti_saturation_rail_penalty():
     out_extreme.sum().backward()
     assert torch.all(torch.isfinite(u_extreme.grad))
     assert torch.all(torch.abs(u_extreme.grad) > 0.0)
+    u = torch.tensor([10.], dtype=torch.float64, requires_grad=True)
+    torch.testing.assert_close(torch.autograd.grad(TanhRailGuard.apply(u) * 0., u)[0], torch.zeros_like(u))
 
 
 @pytest.mark.tier1
@@ -1113,7 +1116,7 @@ def test_tier4_e2e_misgan_neural_imputer_multimodal_qualification():
 @pytest.mark.tier4
 def test_tier4_e2e_ring16_bigan_continuous_qualification_roundtrip():
     """E2E Ring16 BiGAN Continuous: Multi-step joint training, cycle consistency, and public score verification."""
-    fixture = Ring16BiGANFixture(max_steps=5, device="cpu", seed=0)
+    fixture = build_bigan_software_fixture(max_steps=5)
     for step_idx in range(1, 4):
         stats = fixture.step()
         assert stats["step"] == step_idx
@@ -1194,8 +1197,9 @@ def test_tier4_e2e_grid100_deep_generator_gradient_and_rail_qualification():
 
 
 @pytest.mark.tier4
-def test_tier4_e2e_bigan_default_recipe_k3p_and_ka2_support():
-    """Verify continuous BiGAN cases default to k3p with ALICE cycle_weight=2.0 and support (k3p, ka2)."""
+def test_tier4_e2e_bigan_declared_defaults_block_unsupported_noise_and_explicit_software_cohort_runs():
+    """Keep declared defaults; only a separately scoped noise-free software recipe runs."""
+    from benchmarks.toy_audit.api_contract import UnsupportedRecipeOverrides
     from benchmarks.toy_audit.api_ring16 import (
         ALICESpiralBiGANFixture,
         _alice_spiral_case,
@@ -1208,13 +1212,15 @@ def test_tier4_e2e_bigan_default_recipe_k3p_and_ka2_support():
         assert meta["default_recipe"] == "k3p"
         assert tuple(meta["supported_recipes"]) == ("k3p", "ka2")
 
-    f_ring = build_case_ring16("api-ring16-bigan-continuous", max_steps=4)
+    with pytest.raises(UnsupportedRecipeOverrides, match="input_noise_std"):
+        build_case_ring16("api-ring16-bigan-continuous", max_steps=4)
+    f_ring = build_bigan_software_fixture(max_steps=4)
     assert f_ring.recipe.name == "k3p"
     assert f_ring.cycle_weight == 2.0
     assert f_ring.D.fourier == 3
     assert f_ring.D.net[0].in_features == 16
 
-    f_alice = ALICESpiralBiGANFixture(max_steps=4, device="cpu", seed=0)
+    f_alice = build_bigan_software_fixture(fixture_cls=ALICESpiralBiGANFixture, max_steps=4)
     assert f_alice.recipe.name == "k3p"
     assert f_alice.cycle_weight == 2.0
     assert f_alice.D.fourier == 0
