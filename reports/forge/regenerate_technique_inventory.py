@@ -673,7 +673,70 @@ def _evaluator_revision_reaches(root, task, target_evaluation_sha256):
         if fingerprint in seen:
             return False
         seen.add(fingerprint)
-        revision = current.get("evaluation", {}).get("evaluator_revision")
+        evaluation = current.get("evaluation", {})
+        integration = evaluation.get("integration_source_binding")
+        if (isinstance(integration, dict)
+                and integration.get("id") == "reviewed-model-prs-integration-20261109"):
+            # Combined integration adds a source binding beside (rather than
+            # replacing) evaluator_revision. Verify its exact archived bytes
+            # before following that older lineage. This is comparison ancestry,
+            # never permission to reuse a measurement at the integrated source.
+            commit = integration.get("previous_task_commit")
+            relative = integration.get("previous_task_path")
+            receipt_path = integration.get("integration_receipt")
+            paths = (relative, receipt_path)
+            if (not isinstance(commit, str) or len(commit) != 40
+                    or any(char not in "0123456789abcdef" for char in commit)
+                    or any(not isinstance(path, str) or Path(path).is_absolute()
+                           or ".." in Path(path).parts or Path(path).suffix != ".json"
+                           for path in paths)
+                    or integration.get("qualification_input") is not False):
+                return False
+            try:
+                previous_raw = subprocess.check_output(
+                    ["git", "show", f"{commit}:{relative}"], cwd=root)
+                previous = json.loads(previous_raw)
+                current_raw = (Path(root) / relative).read_bytes()
+                receipt = read_json(Path(root) / receipt_path)
+                rows = [row for row in receipt["tasks"]
+                        if row.get("previous_task_path") == relative]
+                if (len(rows) != 1
+                        or json.loads(current_raw) != current
+                        or receipt.get("schema") != "pr_combined_integration_source_binding_v1"
+                        or receipt.get("pr") != "combined"
+                        or any(receipt.get(key) is not False for key in (
+                            "training_rerun", "qualification_results_changed",
+                            "automatic_cross_source_reuse", "qualification_input"))):
+                    return False
+                row = rows[0]
+                if (any(row.get(key) != integration.get(key) for key in (
+                        "previous_task_commit", "previous_task_path",
+                        "previous_task_sha256", "previous_task_blob"))
+                        or hashlib.sha256(previous_raw).hexdigest() != integration.get("previous_task_sha256")
+                        or hashlib.sha1(f"blob {len(previous_raw)}\0".encode() + previous_raw).hexdigest()
+                        != integration.get("previous_task_blob")
+                        or hashlib.sha256(current_raw).hexdigest() != row.get("current_task_sha256")
+                        or row.get("sources_before") != previous.get("evaluation", {}).get("sources")
+                        or row.get("sources_after") != evaluation.get("sources")
+                        or any(file_hash(Path(root) / path) != digest
+                               for path, digest in row["sources_after"].items())):
+                    return False
+            except (OSError, subprocess.CalledProcessError, json.JSONDecodeError,
+                    KeyError, TypeError, AttributeError):
+                return False
+            restored = deepcopy(current)
+            restored["evaluation"].pop("integration_source_binding")
+            if "integration_source_binding" in previous.get("evaluation", {}):
+                restored["evaluation"]["integration_source_binding"] = deepcopy(
+                    previous["evaluation"]["integration_source_binding"])
+            restored["evaluation"]["sources"] = deepcopy(previous.get("evaluation", {}).get("sources"))
+            # No execution, gate, ownership, sampler or earlier revision change
+            # can be justified by this source-only binding, even if receipted.
+            if restored != previous:
+                return False
+            current = previous
+            continue
+        revision = evaluation.get("evaluator_revision")
         if not isinstance(revision, dict):
             return False
         commit = revision.get("previous_task_commit")
