@@ -60,6 +60,10 @@ def validate_task(task, *, root=None):
         expected_resources = dict(num_particles=module.PARTICLES, z_dim=module.Z_DIM, batch_size=module.BATCH)
         if any(stable_hash(host[key]) != stable_hash(case[key]) for key in ("target", "architecture")):
             raise ValueError("VAE task target or network declaration differs from the executable host")
+    elif case["provider"] == "api_model_misgan":
+        expected_resources = module.RESOURCES
+        if host != case["host_definition"]:
+            raise ValueError("MisGAN task host differs from the executable definition")
     else:
         from benchmarks.toy_audit.api_model_ddgan import RESOURCES, MixtureTarget
         expected_resources = RESOURCES
@@ -118,6 +122,7 @@ def run(request, task, output, device, *, execution_limit=None):
     observed = {"finite": True}
     handles = []
     optimizer_states = {}
+    observation_checkpoints = []
 
     def bind(fixture):
         if fixture.recipe != context.recipe:
@@ -134,6 +139,10 @@ def run(request, task, output, device, *, execution_limit=None):
                                       for role, module in owners.items() if module is not None}
         observed["fixture"] = fixture
         observed["audit"] = MechanismAudit(context.recipe, fixture.opt_d, [fixture.opt_g])
+        if task["execution"].get("observation_checkpoints", False):
+            from .observation_checkpoints import checkpoint_observer
+            fixture.observe = checkpoint_observer(fixture, output / "observation-checkpoints",
+                                                  observation_checkpoints)
 
         def hook(roles):
             def after(optimizer, args, kwargs):
@@ -206,6 +215,7 @@ def run(request, task, output, device, *, execution_limit=None):
                 "source": raw["source"], "api_run_status": raw["status"],
                 "api_run_verdict": raw["verdict"], "api_receipt_sha256": file_hash(output / "api/receipt.json"),
                 "batch_sequence_sha256": getattr(fixture, "batch_sequence_sha256", None),
+                "observation_checkpoints": observation_checkpoints,
                 "actual_training_gif": {"path": str((output / "api/goal.gif").resolve()),
                                         **raw.get("artifacts", {}).get("goal.gif", {})},
                 **executed_receipt(MODEL_TOY_CLEAN, eval_output_noise="clean")}

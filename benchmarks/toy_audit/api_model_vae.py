@@ -167,6 +167,8 @@ def task_recipe(case, recipe_name=None, recipe=None):
         else:
             base = get_recipe(recipe_name)
         result = base.replace(**fields, total_steps=None if base.total_steps is None else case["default_steps"])
+    from .api_contract import validate_caller_objectives
+    validate_caller_objectives(result, provider="api_model_vae")
     if result.constraint_geometry_mode == "strict_progress":
         raise ValueError("VAE stochastic posterior has no strict_progress finite-replay contract")
     return result

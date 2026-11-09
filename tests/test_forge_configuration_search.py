@@ -539,7 +539,7 @@ def test_actual_context_recipe_matches_frozen_card_and_report(checkout, spec, ba
         # omit only their original default values. Compare the entire expected
         # packet independently of the production compatibility projector.
         expected_packet = deepcopy(card["resolved_configuration_recipe"])
-        for name, default in (("ebi_beta", 30.0), ("kappa_radial", 1.0), ("generator_gradient_response", "none"), ('reg_real_weight', 1.0), ('reg_fake_weight', 1.0), ('joint_reconstruction_weight', 0.0)):
+        for name, default in (("ebi_beta", 30.0), ("kappa_radial", 1.0), ("generator_gradient_response", "none"), ('reg_real_weight', 1.0), ('reg_fake_weight', 1.0), ('joint_reconstruction_weight', 0.0), ('conditional_energy_weight', 0.0), ('conditional_energy_samples', 8), ('masked_mixture_weight', 0.0), ('masked_transport_weight', 0.0), ('imputer_component_weight', 0.0)):
             assert expected_packet[name] == base_overrides.get(name, default)
             if expected_packet[name] == default:
                 expected_packet.pop(name)

@@ -279,11 +279,11 @@
       "mechanism_exercised": true
     },
     "sources": {
-      "benchmarks/toy_audit/api_contract.py": "6fce43912b821b6839786ed34ef68b9456cdbd4165daad492f228f17ae6cde7b",
-      "benchmarks/toy_audit/api_model_ddgan.py": "1ce58fc5d8dc92dc5319df7ca163e4c05df564a0c32c709c550ae83165db065b",
+      "benchmarks/toy_audit/api_contract.py": "9fbd0b57e2ff0d3009ad96c66e0eeee816f69323e03f9058e65f8ac69bf7c210",
+      "benchmarks/toy_audit/api_model_ddgan.py": "1e08099717417d8eb999136c2b9957e6b99d7a3670d8cdab4911d51432137c96",
       "benchmarks/toy_audit/api_run.py": "5b03a612673e9ed86e3577f0f1fe705c7c09a25e7d7bfec2a6a75670334eeacc",
       "benchmarks/toy_audit/reproducibility.py": "5f29fd7f9579be894e97bf4ad93bee8c77aeff104437b5d4e6dc4a4303935891",
-      "experiments/forge/model_toy_adapter.py": "124a793a4183b799293de350bd5981d68865819b29415f2520af3246401c9347",
+      "experiments/forge/model_toy_adapter.py": "215a2d6c358f9d746017e07646a4716d41be66af1966ecb01b14b3b6b965faab",
       "particlegan/policy.py": "be442dcf21f03a5d1cd364177724fc15560df8cbf401c85bd4630f62f5ea9535"
     },
     "evaluator_revision": {
@@ -323,6 +323,16 @@
         "benchmarks/toy_audit/api_run.py": "b5f1e130e6daa4cfbf172b9beb13ab1e691c8fadba59d1aec58f74368df475d3"
       },
       "integration_receipt": "reports/forge/pr-integration-20261109/pr-474.json"
+    },
+    "integration_source_binding": {
+      "id": "reviewed-model-prs-integration-20261109",
+      "change": "Bind future executions to the reviewed combined source. Archived research retains its original source, task, gates and outcome; no quality inheritance.",
+      "qualification_input": false,
+      "previous_task_commit": "4a5ff6d4db831a23a7c95b5d14ce84ff73dfee06",
+      "previous_task_path": "configs/forge/tasks/model_ddgan_gaussian_chain.json",
+      "previous_task_sha256": "501cba5681e88a82f27d1399e982ff17767610183bce116a83a6bb3a4f77d584",
+      "previous_task_blob": "f2f256f085926377014f3242ed50ad6eedc4143e",
+      "integration_receipt": "reports/forge/reviewed-pr-integration-20261109/source-binding.json"
     }
   },
   "resources": {

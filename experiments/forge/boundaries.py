@@ -34,6 +34,7 @@ TUNABLE_FIELDS = frozenset({
 TASK_RECIPE_FIELDS = RESOURCE_FIELDS | {"prior_kind", "sigma_rel", "standardize"}
 TECHNIQUE_RECIPE_FIELDS = frozenset({
     "training_precision",
+    "masked_mixture_weight", "masked_transport_weight", "imputer_component_weight",
     "optimizer_svd_backend", "optimizer_convolution_rule", "optimizer_dense_profile",
     "prior_update", "prior_regularizer",
     "reg_real_weight", "reg_fake_weight", "joint_reconstruction_weight",
@@ -48,6 +49,7 @@ TECHNIQUE_RECIPE_FIELDS = frozenset({
     "critic_step_mode", "bispf_shape_gates", "bispf_gate_overrides", "prior_code_law", "generator_gradient_response",
 })
 HYPERPARAMETER_RECIPE_FIELDS = TUNABLE_FIELDS | {
+    "conditional_energy_weight", "conditional_energy_samples",
     "prior_sigreg_projections", "prior_sigreg_knots",
     "kinetic_transport_projections",
     "ucd_weight", "alpha_bar", "ema_decay", "network_lr_horizon_cap",

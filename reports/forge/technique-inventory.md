@@ -40,7 +40,7 @@ Backfill coverage: **1047/1047 distinct recipe/test pairs attempted (selected an
 | Family / selected recipe | PASS | FAIL | Not measured | Other outcomes | Held or not counted (of these) | Total tests | Tuning budget and selection |
 | --- | ---: | ---: | ---: | --- | --- | ---: | --- |
 | [BCAP](families/bcap-pure.md) · [BCAP dualnorm (experimental starting point)](families/bcap-dualnorm.md) | 16 | **12** | 33 | 0 | 25: 0 PASS, 7 FAIL, 18 not measured | 61 | 85 registered searches (175 grid configurations); 473 declared candidate cards; selected recipe declared directly (no selecting search in its lineage) |
-| [BISPF](families/bispf.md) | 18 | **11** | 32 | 0 | 25: 0 PASS, 7 FAIL, 18 not measured | 61 | no registered configuration search; 11 declared candidate cards; selected recipe declared directly (no selecting search in its lineage) |
+| [BISPF](families/bispf.md) | 18 | **11** | 32 | 0 | 25: 0 PASS, 7 FAIL, 18 not measured | 61 | no registered configuration search; 19 declared candidate cards; selected recipe declared directly (no selecting search in its lineage) |
 | [Atlas](families/atlas.md) | 8 | **6** | 41 | 6 blocked | 25: 0 PASS, 0 FAIL, 19 not measured, 6 other | 61 | no registered configuration search; 5 declared candidate cards; selected recipe declared directly (no selecting search in its lineage) |
 | [E22](families/e22.md) | 0 | **0** | 32 | 29 blocked | 25: 0 PASS, 0 FAIL, 18 not measured, 7 other | 61 | untuned: no registered configuration search; 1 declared candidate card; selected recipe declared directly (no selecting search in its lineage) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md) | 5 | **2** | 54 | 0 | 25: 0 PASS, 0 FAIL, 25 not measured | 61 | 10 registered searches (16 grid configurations); 8 declared candidate cards; selected recipe descends from `release07-gan-v3-mog-family-defaults-round1-v1` (tuned on Tier ≤3) |
@@ -539,5 +539,5 @@ After any view revision (for example a held or removed test), always add `--refr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `ca7c6e403d2a9ed3500d51041f0ca35adb5a97902b2ea2af5f03b5deedb66d9b`.
+Publication input digest `631d436696a2966c9d99d6b5a19f33108523bb543116f06b31e1b3f33146e220`.
 [Performance by test and complete recipe](test-performance.md): compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.

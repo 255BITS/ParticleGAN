@@ -68,6 +68,8 @@ def technique_signature(value):
                                  if recipe.effective_critic_formulation == "k3p" and recipe.reg_arm is None
                                  else None),
     }
+    if recipe.conditional_energy_weight:
+        mechanisms["conditional_energy_objective"] = True
     if recipe.optimizer_family in {"dualnorm", "dualnorm_D_only"}:
         mechanisms["dualnorm_momentum"] = recipe.optimizer_momentum > 0
     if recipe.prior_update == "learned" and recipe.prior_l2 > 0:

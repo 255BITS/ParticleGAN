@@ -315,7 +315,7 @@ def test_prior_mechanisms_coupled_negative_cases():
 
 def test_recipe_schema_exact_118_fields():
     """The frozen 118-field contract admits only these neutral additions."""
-    additions = ('reg_real_weight', 'reg_fake_weight', 'joint_reconstruction_weight')
+    additions = ('reg_real_weight', 'reg_fake_weight', 'joint_reconstruction_weight', 'conditional_energy_weight', 'conditional_energy_samples', 'masked_mixture_weight', 'masked_transport_weight', 'imputer_component_weight')
     fields_dict = get_recipe_fields()
     field_names = tuple(fields_dict)
     assert len(field_names) == 118 + len(additions)
@@ -379,7 +379,7 @@ module = importlib.util.module_from_spec(spec)
 sys.modules[spec.name] = module
 spec.loader.exec_module(module)
 fields_atlas = module.get_recipe_fields('atlas')
-assert len(fields_atlas) == 121
+assert len(fields_atlas) == 126
 assert 'torch' not in sys.modules
 """
     res = subprocess.run([sys.executable, "-I", "-c", script, str(source)], capture_output=True, text=True)

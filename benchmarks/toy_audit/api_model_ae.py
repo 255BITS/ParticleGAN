@@ -144,6 +144,8 @@ def task_recipe(case, recipe_name=None, recipe=None):
     # rates, losses and optimizer remain recipe-owned. Scheduled trainers bind
     # the task horizon; intentionally schedule-free trainers retain None.
     result = recipe if injected else recipe.replace(**FROZEN_RECIPE_FIELDS, total_steps=None if recipe.total_steps is None else 1200)
+    from .api_contract import validate_caller_objectives
+    validate_caller_objectives(result, provider="api_model_ae")
     if (result.row_policy != "independent" or result.row_evidence_gate
             or result.particle_birth_death or result.serve_average
             or result.constraint_geometry_mode == "strict_progress"):
