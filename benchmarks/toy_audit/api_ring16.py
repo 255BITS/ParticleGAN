@@ -5,6 +5,8 @@ This named caller retains its own initializer/RNG cohort; its media supplies no
 automatic Forge qualification or scientific tier calibration.
 """
 from copy import deepcopy
+from contextlib import contextmanager
+from functools import wraps
 import json
 import hashlib
 import math
@@ -56,8 +58,9 @@ def _legacy_cases():
         task_sha256=hashlib.sha256(LEGACY_TASK_PATH.read_bytes()).hexdigest(),
         spec=spec, thresholds=spec["thresholds"], law=law, law_sha256=_digest(law),
         protocol_seed=0, evaluation_observations=24, terminal_observations=5,
-        recipe_overrides=dict(prior_kind="mog", sigma_rel=0., standardize=prior["standardize"]),
-        prior_options=dict(sigma=prior["sigma"]), profile=dict(init_std=.5),
+        recipe_overrides={},
+        prior_options=dict(prior_kind="mog", sigma_rel=0., standardize=prior["standardize"],
+                           sigma=prior["sigma"]), profile=dict(init_std=.5),
         sampling="Live generator; uniform row draws from the learned MoG plus fixed sigma=.025 Gaussian latent noise; standardize=False; output_noise=False; no EMA or policy serving.",
         scope="From deterministic initialization, acquire sixteen equal radius-three sigma-.1 Gaussian clusters within 400 updates. Five terminal acquisition checks add no hold phase. Tier 1 is provisional; this standalone K3P/API initializer and RNG cohort supplies no Forge promotion credit.",
         adaptation="New retained question develop-ring16_acquisition; shared transfer_vector target/scorer and public GANTrainer, with an explicit nonzero-width MoG. Existing ring8 acquisition/hold evidence is unchanged.",
@@ -133,7 +136,9 @@ def list_cases():
         task_sha256=hashlib.sha256(TASK_PATH.read_bytes()).hexdigest(),
         candidate_sha256=hashlib.sha256(CANDIDATE_PATH.read_bytes()).hexdigest(),
         trainer_configuration=str(CANDIDATE_PATH.relative_to(ROOT)),
-        prior_options=dict(sigma=task["execution"]["prior"]["sigma"]),
+        prior_options=dict(prior_kind="mog", sigma_rel=0.,
+                           standardize=task["execution"]["prior"]["standardize"],
+                           sigma=task["execution"]["prior"]["sigma"]),
         profile=dict(init_std=1.),
         initialization=dict(policy="deterministic_orthogonal", streams="Forge named constructor/init streams", prior="R2Normal init_std=1"),
         sampling="Clean live public MoG: 256 learned locations, uniform weights, sigma .1, standardize=False; checkpointed evaluation stream; no output noise or EMA.",
@@ -392,14 +397,48 @@ class _RNGStreams:
             "latent": 102,
             "eval": 103,
             "noise": 104,
+            "model": 105,
+            "constructor_cpu": 106,
         }
         self._streams = {}
 
     def fork(self, name: str) -> torch.Generator:
+        if name not in self._offsets:
+            raise ValueError(f"undeclared BiGAN RNG stream: {name}")
         if name not in self._streams:
-            offset = self._offsets.get(name, abs(hash(name)) % 1000 + 200)
-            self._streams[name] = torch.Generator(device=self.device).manual_seed(self.seed + offset)
+            offset = self._offsets[name]
+            device = "cpu" if name == "constructor_cpu" else self.device
+            self._streams[name] = torch.Generator(device=device).manual_seed(self.seed + offset)
         return self._streams[name]
+
+
+@contextmanager
+def _owned_torch_rng(stream, device):
+    devices = [device.index] if device.type == "cuda" else []
+    with torch.random.fork_rng(devices=devices):
+        if device.type == "cuda":
+            torch.cuda.set_rng_state(stream.get_state(), device)
+        else:
+            torch.set_rng_state(stream.get_state())
+        try:
+            yield
+        finally:
+            stream.set_state(torch.cuda.get_rng_state(device) if device.type == "cuda" else torch.get_rng_state())
+
+
+def _bigan_update(method):
+    @wraps(method)
+    def update(self):
+        if not self._checkpoint_ready:
+            raise RuntimeError("interrupted BiGAN update requires a complete checkpoint restore")
+        if self.completed_steps >= self.limit:
+            raise RuntimeError("declared execution cap reached")
+        self._checkpoint_ready = False
+        with _owned_torch_rng(self.model_rng, self.device), torch.autograd.set_multithreading_enabled(False):
+            result = method(self)
+        self._checkpoint_ready = True
+        return result
+    return update
 
 
 class BiGANGenerator(nn.Module):
@@ -481,7 +520,8 @@ class BiGANJointCritic(nn.Module):
 class Ring16BiGANFixture:
     api_components = (
         "particlegan.Recipe",
-        "particlegan.GANTrainer",
+        "particlegan.Recipe.make_optimizers",
+        "particlegan.Recipe.make_critic_penalty",
         "particlegan.MoGParticlePrior",
         "particlegan.GANLoss.joint_g_loss",
         "particlegan.init",
@@ -533,13 +573,13 @@ class Ring16BiGANFixture:
         self.latent_rng = self._rng_streams.fork("latent")
         self.eval_rng = self._rng_streams.fork("eval")
         self.noise_rng = self._rng_streams.fork("noise")
+        self.model_rng = self._rng_streams.fork("model")
+        self._rng_streams.fork("constructor")
 
         angles = torch.linspace(0, 2 * math.pi, 17, device=self.device)[:16]
         self.centers = torch.stack([3.0 * torch.cos(angles), 3.0 * torch.sin(angles)], dim=1).float()
 
-        self.G = BiGANGenerator(z_dim=self.z_dim, out_dim=2, hidden=128, layers=3).to(self.device)
-        self.E = BiGANEncoder(in_dim=2, z_dim=self.z_dim, hidden=128, layers=3, fourier=3).to(self.device)
-        self.D = BiGANJointCritic(in_dim=2, z_dim=self.z_dim, hidden=128, layers=3, fourier=3).to(self.device)
+        self._build_models(fourier=3)
 
         init.deterministic_orthogonal_(self.G, seed=self.seed + 1)
         init.deterministic_orthogonal_(self.E, seed=self.seed + 2)
@@ -548,6 +588,16 @@ class Ring16BiGANFixture:
         self.prior = None
         self.rebind_trainer(recipe if recipe is not None else (recipe_name or "k3p"), prior=prior)
         self.last_losses = {}
+        self._checkpoint_ready = True
+
+    def _build_models(self, *, fourier):
+        # Linear constructors consume CPU randomness even for a CUDA fixture.
+        # Keep those discarded initial weights off the caller's global stream.
+        stream = self._rng_streams.fork("constructor_cpu")
+        with _owned_torch_rng(stream, torch.device("cpu")):
+            self.G = BiGANGenerator(z_dim=self.z_dim, out_dim=2, hidden=128, layers=3).to(self.device)
+            self.E = BiGANEncoder(in_dim=2, z_dim=self.z_dim, hidden=128, layers=3, fourier=fourier).to(self.device)
+            self.D = BiGANJointCritic(in_dim=2, z_dim=self.z_dim, hidden=128, layers=3, fourier=fourier).to(self.device)
 
     def _resolve_recipe(self, recipe_or_name):
         if isinstance(recipe_or_name, Recipe):
@@ -568,7 +618,11 @@ class Ring16BiGANFixture:
         return base.replace(**overrides)
 
     def rebind_trainer(self, recipe, prior=None):
-        self.recipe = self._resolve_recipe(recipe)
+        if self.completed_steps:
+            raise ValueError("BiGAN rebinding requires a fresh untrained fixture")
+        resolved = self._resolve_recipe(recipe)
+        self._validate_supported_recipe(resolved)
+        self.recipe = resolved
         if prior is not None:
             self.prior = prior.to(self.device)
             self.recipe.apply_prior_policy(self.prior)
@@ -588,6 +642,8 @@ class Ring16BiGANFixture:
         else:
             self.recipe.apply_prior_policy(self.prior)
 
+        self._prior_configuration()
+
         self.ema_critic = deepcopy(self.D) if self.recipe.effective_critic_formulation != "bispf" else None
         self.opt_g, self.opt_d = self.recipe.make_optimizers(
             self.G,
@@ -605,6 +661,41 @@ class Ring16BiGANFixture:
         if self.recipe.effective_critic_formulation == "bispf":
             from particlegan.bispf import bind_thermal_source
             bind_thermal_source(self.opt_d.record, self.loss, self.regularizer)
+
+    def _validate_supported_recipe(self, recipe):
+        unsupported = [name for name in (
+            "continuous_policy", "row_evidence_gate", "particle_birth_death", "serve_average",
+            "input_noise_std", "output_noise_std", "kinetic_transport_weight", "kinetic_transport_local_weight",
+            "reopen_guard"
+        ) if getattr(recipe, name)]
+        if recipe.lr_control == "stationarity":
+            unsupported.append("lr_control=stationarity")
+        if recipe.output_noise_mode != "fixed":
+            unsupported.append("output_noise_mode")
+        if recipe.generator_gradient_response != "none":
+            unsupported.append("generator_gradient_response")
+        if recipe.row_policy != "independent" or recipe.prior_code_law != "table":
+            unsupported.append("prior sampling policy")
+        for name, value in (("batch_size", self.batch_size), ("num_particles", self.particles), ("z_dim", self.z_dim)):
+            if getattr(recipe, name) != value:
+                unsupported.append(f"{name} differs from task resources")
+        if recipe.prior_kind != "mog" or recipe.sigma_rel != 0. or recipe.standardize:
+            unsupported.append("prior law differs from task MoG")
+        if unsupported:
+            from .api_contract import UnsupportedRecipeOverrides
+            raise UnsupportedRecipeOverrides("BiGAN host cannot execute the intact recipe mechanisms: "
+                + ", ".join(unsupported) + "; declare a separate supported software cohort")
+
+    def _prior_configuration(self):
+        from .api_contract import UnsupportedRecipeOverrides
+        prior = self.prior
+        if (type(prior) is not MoGParticlePrior or prior.z.shape != (self.particles, self.z_dim)
+                or float(prior.sigma) != float(torch.tensor(self.sigma, dtype=prior.sigma.dtype))
+                or prior.sigma_rel != 0. or prior.standardize or prior.code_law != "table"):
+            raise UnsupportedRecipeOverrides("BiGAN prior must match the declared unwrapped fixed-width MoG task law")
+        return {"kind": "mog", "sigma": float(prior.sigma), "sigma_rel": prior.sigma_rel,
+                "standardize": prior.standardize, "code_law": prior.code_law,
+                "particles": self.particles, "z_dim": self.z_dim}
 
     def _sample_prior(self, n, generator=None):
         rng = self.latent_rng if generator is None else generator
@@ -625,6 +716,7 @@ class Ring16BiGANFixture:
         eps = torch.randn(n, 2, generator=rng, device=self.device)
         return self.centers[mode_ids] + self.sigma * eps
 
+    @_bigan_update
     def step(self):
         if self.completed_steps >= self.limit:
             raise RuntimeError("declared execution cap reached")
@@ -699,10 +791,32 @@ class Ring16BiGANFixture:
         return score_bigan(samples, target, reconstructed, self.centers, sigma=self.sigma)
 
     def state_dict(self):
+        if not self._checkpoint_ready:
+            raise RuntimeError("BiGAN checkpoints require a completed update boundary")
+        return self._checkpoint_state()
+
+    def _checkpoint_modules(self):
+        modules = {"generator": self.G, "encoder": self.E, "critic": self.D,
+                   "ema_critic": self.ema_critic, "prior": self.prior, "regularizer": self.regularizer}
+        return {name: module for name, module in modules.items() if module is not None}
+
+    def _checkpoint_state(self):
+        modules = self._checkpoint_modules()
+        cooler = getattr(self.penalty.regularizer, "cooler", None)
         return deepcopy({
+            "version": "bigan-complete-v1",
             "case_id": self.case_id,
+            "case": self.metadata,
             "seed": self.seed,
             "limit": self.limit,
+            "device": str(self.device),
+            "host": {"batch_size": self.batch_size, "particles": self.particles, "z_dim": self.z_dim,
+                     "sigma": self.sigma, "cycle_weight": self.cycle_weight,
+                     "target": {key: getattr(self, key) for key in
+                                ("theta_min", "theta_max", "r0", "r_slope") if hasattr(self, key)}},
+            "prior_configuration": self._prior_configuration(),
+            "target_state": {name: getattr(self, name) for name in ("centers", "theta_grid", "curve_grid")
+                             if hasattr(self, name)},
             "completed_steps": self.completed_steps,
             "recipe": self.recipe.to_dict(),
             "generator": self.G.state_dict(),
@@ -710,28 +824,152 @@ class Ring16BiGANFixture:
             "critic": self.D.state_dict(),
             "ema_critic": self.ema_critic.state_dict() if self.ema_critic is not None else None,
             "prior": self.prior.state_dict(),
-            **self.recipe.prior_regularizer_checkpoint(self.regularizer),
+            "regularizer": self.regularizer.state_dict() if self.regularizer is not None else None,
+            "prior_regularizer": self.recipe.prior_regularizer_checkpoint(self.regularizer).get("prior_regularizer"),
             "opt_g": self.opt_g.state_dict(),
             "opt_d": self.opt_d.state_dict(),
-            "noise_rng": self.noise_rng.get_state(),
+            "penalty": {"record": self.opt_d.record.state_dict(),
+                        "cooler": None if cooler is None else cooler.state_dict(),
+                        "coeff": self.penalty.regularizer.coeff, "last_stats": self.penalty.last_stats},
+            "streams": {name: stream.get_state() for name, stream in self._rng_streams._streams.items()},
+            "stream_offsets": self._rng_streams._offsets,
+            "base_rates": self.base_rates,
+            "module_modes": {name: {key: sub.training for key, sub in module.named_modules()}
+                             for name, module in modules.items()},
+            "requires_grad": {name: {key: p.requires_grad for key, p in module.named_parameters()}
+                              for name, module in modules.items()},
             "last_losses": self.last_losses,
         })
 
     def load_state_dict(self, state):
-        self.completed_steps = state["completed_steps"]
+        from experiments.forge.state import state_digest
+        from particlegan.policy import _validate_optimizer_state
+        state = deepcopy(state)  # Native optimizer loaders can borrow input tensors.
+        expected = self._checkpoint_state()
+        if not isinstance(state, dict) or state.get("version") != "bigan-complete-v1":
+            raise ValueError("incomplete historical BiGAN checkpoint; use its original package source")
+        if state.keys() != expected.keys():
+            raise ValueError("incomplete BiGAN checkpoint fields")
+        for key in ("case_id", "case", "seed", "limit", "device", "host", "prior_configuration",
+                    "recipe", "requires_grad", "base_rates", "stream_offsets"):
+            if state[key] != expected[key]:
+                raise ValueError(f"BiGAN checkpoint {key} differs from this declared host")
+        if state_digest(state["target_state"]) != state_digest(expected["target_state"]):
+            raise ValueError("BiGAN checkpoint target law differs from this declared host")
+        steps = state["completed_steps"]
+        if type(steps) is not int or not 0 <= steps <= self.limit:
+            raise ValueError("invalid BiGAN checkpoint update count")
+        modules = self._checkpoint_modules()
+        try:
+            for name, module in modules.items():
+                saved, current = state[name], module.state_dict()
+                if not isinstance(saved, dict) or saved.keys() != current.keys():
+                    raise ValueError("model fields differ")
+                for key, value in current.items():
+                    other = saved[key]
+                    if isinstance(value, torch.Tensor):
+                        if (not isinstance(other, torch.Tensor) or other.shape != value.shape
+                                or other.dtype != value.dtype or not torch.isfinite(other).all()):
+                            raise ValueError("invalid model tensor")
+                    elif other != value:
+                        raise ValueError("model declaration differs")
+                deepcopy(module).load_state_dict(saved)
+            if state["ema_critic"] is None and self.ema_critic is not None:
+                raise ValueError("missing EMA critic history")
+            if self.ema_critic is None and state["ema_critic"] is not None:
+                raise ValueError("unexpected EMA critic history")
+            if self.regularizer is None and state["regularizer"] is not None:
+                raise ValueError("unexpected regularizer state")
+            self.recipe.restore_prior_regularizer(self.regularizer, state["prior_regularizer"], validate_only=True)
+            public_reg = self.recipe.prior_regularizer_checkpoint(self.regularizer)
+            if public_reg and state_digest(state["prior_regularizer"]) != state_digest(state["regularizer"]):
+                raise ValueError("conflicting regularizer histories")
+            for name, optimizer in (("opt_g", self.opt_g), ("opt_d", self.opt_d)):
+                _validate_optimizer_state(optimizer, state[name])
+                pending = [state[name]]
+                while pending:
+                    value = pending.pop()
+                    if isinstance(value, torch.Tensor) and not torch.isfinite(value).all():
+                        raise ValueError("nonfinite optimizer-owned history")
+                    if isinstance(value, dict):
+                        pending.extend(value.values())
+                    elif isinstance(value, (list, tuple)):
+                        pending.extend(value)
+                parameter_ids = {key for group in state[name]["param_groups"] for key in group["params"]}
+                if steps and state[name]["state"].keys() != parameter_ids:
+                    raise ValueError("incomplete trained optimizer history")
+                for values in state[name]["state"].values():
+                    if steps and float(values["step"]) != steps:
+                        raise ValueError("optimizer clock differs from completed update count")
+            penalty = state["penalty"]
+            if not isinstance(penalty, dict) or penalty.keys() != expected["penalty"].keys():
+                raise ValueError("incomplete penalty state")
+            if (penalty["record"] != state["opt_d"].get("regularizer", {}).get("record")
+                    or type(penalty["record"].get("observed_steps")) is not int
+                    or penalty["record"].get("observed_steps") != steps
+                    or type(penalty["record"].get("calls")) is not int or penalty["record"]["calls"] < 0):
+                raise ValueError("conflicting critic histories")
+            if (getattr(self.opt_d, "ema_critic", None) is not None
+                    and state_digest(state["ema_critic"]) != state_digest(state["opt_d"]["regularizer"]["ema"])):
+                raise ValueError("conflicting EMA critic histories")
+            cooler = getattr(self.penalty.regularizer, "cooler", None)
+            if cooler is None:
+                if penalty["cooler"] is not None:
+                    raise ValueError("unexpected cooler history")
+            else:
+                saved, current = penalty["cooler"], cooler.state_dict()
+                if not isinstance(saved, dict) or saved.keys() != current.keys():
+                    raise ValueError("incomplete cooler history")
+                for key in current.keys() - {"initialized", "ema_residual"}:
+                    if saved[key] != current[key]:
+                        raise ValueError("cooler declaration differs")
+                if (type(saved["initialized"]) is not bool or type(saved["ema_residual"]) not in (int, float)
+                        or not math.isfinite(saved["ema_residual"]) or saved["ema_residual"] < 0):
+                    raise ValueError("invalid cooler history")
+                deepcopy(cooler).load_state_dict(saved)
+            if type(penalty["coeff"]) not in (int, float) or not math.isfinite(penalty["coeff"]) or penalty["coeff"] < 0:
+                raise ValueError("invalid penalty coefficient")
+            if not isinstance(penalty["last_stats"], dict):
+                raise TypeError("invalid penalty diagnostics")
+            if not isinstance(state["streams"], dict) or state["streams"].keys() != expected["streams"].keys():
+                raise ValueError("incomplete RNG state")
+            for name, values in state["streams"].items():
+                torch.Generator(device=self._rng_streams._streams[name].device).set_state(values.cpu())
+            if state["module_modes"].keys() != expected["module_modes"].keys():
+                raise ValueError("incomplete module modes")
+            for name, modes in state["module_modes"].items():
+                if modes.keys() != expected["module_modes"][name].keys() or any(type(v) is not bool for v in modes.values()):
+                    raise ValueError("invalid module modes")
+            if (not isinstance(state["last_losses"], dict) or any(type(v) not in (int, float) or not math.isfinite(v)
+                                                               for v in state["last_losses"].values())):
+                raise ValueError("invalid loss diagnostics")
+        except (KeyError, TypeError, ValueError, RuntimeError, AttributeError) as error:
+            raise ValueError("invalid complete BiGAN checkpoint state") from error
+        # All native loaders were preflighted on independent objects. Preserve
+        # caller-visible model/prior identities while restoring the live graph.
         self.G.load_state_dict(state["generator"])
         self.E.load_state_dict(state["encoder"])
         self.D.load_state_dict(state["critic"])
         if self.ema_critic is not None and state.get("ema_critic") is not None:
             self.ema_critic.load_state_dict(state["ema_critic"])
         self.prior.load_state_dict(state["prior"])
-        if "prior_regularizer" in state:
-            self.recipe.restore_prior_regularizer(self.regularizer, state.get("prior_regularizer"))
+        if self.regularizer is not None:
+            self.regularizer.load_state_dict(state["regularizer"])
+        self.recipe.restore_prior_regularizer(self.regularizer, state["prior_regularizer"])
         self.opt_g.load_state_dict(state["opt_g"])
         self.opt_d.load_state_dict(state["opt_d"])
-        if "noise_rng" in state:
-            self.noise_rng.set_state(state["noise_rng"])
-        self.last_losses = state["last_losses"]
+        if state["penalty"]["cooler"] is not None:
+            self.penalty.regularizer.cooler.load_state_dict(state["penalty"]["cooler"])
+        self.penalty.regularizer.coeff = state["penalty"]["coeff"]
+        self.penalty.last_stats = deepcopy(state["penalty"]["last_stats"])
+        for name, values in state["streams"].items():
+            self._rng_streams._streams[name].set_state(values.cpu())
+        for name, module in modules.items():
+            for key, sub in module.named_modules():
+                sub.training = state["module_modes"][name][key]
+        self.completed_steps = steps
+        self.last_losses = deepcopy(state["last_losses"])
+        self._checkpoint_ready = True
 
 
 class ALICESpiralBiGANFixture(Ring16BiGANFixture):
@@ -786,14 +1024,14 @@ class ALICESpiralBiGANFixture(Ring16BiGANFixture):
         self.latent_rng = self._rng_streams.fork("latent")
         self.eval_rng = self._rng_streams.fork("eval")
         self.noise_rng = self._rng_streams.fork("noise")
+        self.model_rng = self._rng_streams.fork("model")
+        self._rng_streams.fork("constructor")
 
         self.theta_grid, self.curve_grid = _spiral_reference_grid(
             self.device, n_grid=1024, theta_min=self.theta_min, theta_max=self.theta_max, r0=self.r0, r_slope=self.r_slope
         )
 
-        self.G = BiGANGenerator(z_dim=self.z_dim, out_dim=2, hidden=128, layers=3).to(self.device)
-        self.E = BiGANEncoder(in_dim=2, z_dim=self.z_dim, hidden=128, layers=3, fourier=0).to(self.device)
-        self.D = BiGANJointCritic(in_dim=2, z_dim=self.z_dim, hidden=128, layers=3, fourier=0).to(self.device)
+        self._build_models(fourier=0)
 
         init.deterministic_orthogonal_(self.G, seed=self.seed + 1)
         init.deterministic_orthogonal_(self.E, seed=self.seed + 2)
@@ -802,6 +1040,7 @@ class ALICESpiralBiGANFixture(Ring16BiGANFixture):
         self.prior = None
         self.rebind_trainer(recipe if recipe is not None else (recipe_name or "k3p"), prior=prior)
         self.last_losses = {}
+        self._checkpoint_ready = True
 
     def sample_target(self, n, generator=None):
         rng = self.data_rng if generator is None else generator

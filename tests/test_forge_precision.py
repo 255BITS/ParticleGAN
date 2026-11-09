@@ -59,8 +59,8 @@ def test_malformed_precision_never_falls_back_to_unquantized_training(policy):
 
 
 def test_new_stretch_tasks_stay_visible_without_invalidating_archived_coverage():
-    from ops.refresh_forge_readouts import check_attempt_coverage
-    coverage = check_attempt_coverage(ROOT)
+    from ops.refresh_forge_readouts import check_retained_diagnostic_integrity
+    coverage = check_retained_diagnostic_integrity(ROOT)
     assert coverage["current"] is True
     assert coverage["missing_by_family"] == {}
     assert coverage["unmeasured_current_tasks"] == ["precision_gaussian_mxfp8", "precision_gaussian_nvfp4"]
@@ -124,9 +124,11 @@ def test_adding_unmeasured_stretch_tasks_preserves_source_bound_display_records(
     assert display and statuses
     assert display["qualification_input"] is False
     assert display["qualification_reuse"] is False
+    from experiments.forge.family_reports import _selected_cohorts
+    cohorts = {family["id"]: cohort for family, cohort in _selected_cohorts(publication["family_progress"])}
     for family, observed in display["families"].items():
-        for name, record in observed["records"].items():
-            assert statuses[family][name] == record["status"]
+        for name in observed["records"]:
+            assert statuses[family][name] == cohorts[family]["tasks"][name]["status"]
         for name in ("precision_gaussian_nvfp4", "precision_gaussian_mxfp8"):
             assert name not in observed["records"]
             assert statuses[family][name] not in {"PASS", "FAIL"}

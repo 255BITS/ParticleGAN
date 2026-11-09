@@ -1,7 +1,12 @@
 # Reproducing and checking experiments
 
 Use Python 3.11 or newer, as required by [the package metadata](../pyproject.toml).
-The CPU test workflow checks Python 3.11 and 3.12.
+The CPU test workflow checks the full non-CUDA suite in four shards on each of
+Python 3.11 and 3.12, and verifies a complete nonoverlapping collection for each
+interpreter. A separate installed-wheel job checks the base public API and exact
+checkpoint continuation on Python 3.11 with Torch 2.6.0 and NumPy 1.26.0. That job
+installs no optional extras; it does not claim minimum-version support for a
+Torchvision/experiment dependency combination it has not tested.
 Run these commands from the repository root:
 
 ```bash
@@ -34,7 +39,14 @@ an expensive training run reaches its final evaluation.
 Run `python scripts/check_lint.py` for the reviewed Ruff baseline used by CI.
 Install the `dev` extra to get its pinned Ruff version. The baseline retains
 existing fixture imports and exports; new findings and resolved exemptions both
-fail the check. After reviewing a change, refresh the compact baseline with
+fail the check. Undefined names (`F821`) are strict: even `--update-baseline`
+refuses them. Three reviewed static control-flow false positives in frozen
+reproduction sources have exact path/message/source-SHA exceptions in the lint
+driver; changing their bytes or introducing another undefined name fails the
+strict gate. The retained `F811` entries were reviewed as imported pytest fixture
+names shadowed by injected fixture arguments, rather than active implementation
+redefinitions. Their existing counts stay explicit; new redefinitions still fail.
+After reviewing a change, refresh the compact baseline with
 `python scripts/check_lint.py --update-baseline`. Historical source snapshots
 under `reports/` are outside this lint scope.
 

@@ -1059,7 +1059,7 @@ def test_full_suite_never_borrows_diagnostic_passes_or_calls_errors_failures(rep
 def test_problem_page_explains_intent_failures_and_scoped_passers(report):
     root, publication = report
     hold_alpha(root)
-    definitions = {"schema": "forge_problem_definitions_v1", "problems": [{
+    definitions = {"schema": "forge_problem_definitions_v1", "evidence_date": "2026-10-15", "problems": [{
         "task": "failed", "title": "Keep a learned distribution stable",
         "intent": "Stay correct while training continues.", "problem": "The model drifts away from its target.",
         "pass_summary": "A research configuration passes; the selected recipe fails.",
@@ -1071,13 +1071,23 @@ def test_problem_page_explains_intent_failures_and_scoped_passers(report):
     pages = generated_pages(root, publication)
     page = pages[root / "reports/forge/problems.md"]
     assert "**What it tests.** Stay correct" in page
-    assert "**The problem.** The model drifts" in page
-    assert "**Has any configuration beaten it?** A research configuration passes" in page
+    assert "**Historical diagnosis (2026-10-15).** The model drifts" in page
+    assert "**Historical passer evidence.** A research configuration passes" in page
+    assert "No selected recorded PASS; see exact outcomes and dated diagnostic evidence below." in page
+    assert "**The problem.**" not in page and "**Has any configuration beaten it?**" not in page
     assert "Research config A passes" in page and "Held for qualification; included in full-suite results." in page
     assert "[FAIL](families/k3p.md#" in page
     assert "problem-definitions.json" in str(publication["family_progress"]["input_hashes"])
     # Includes the new page and all task-specific navigation targets.
     assert_anchored_links_resolve(root, pages)
+
+    # Current summaries follow the selected record while the dated diagnosis stays intact.
+    publication["rows"][0]["tasks"][1]["status"] = "PASS"
+    generate(report)
+    updated = generated_pages(root, publication)[root / "reports/forge/problems.md"]
+    assert "| Stay correct while training continues. | Selected recorded PASS: K3P. |" in updated
+    assert "**Historical diagnosis (2026-10-15).** The model drifts" in updated
+    assert "**Historical passer evidence.** A research configuration passes" in updated
 
 
 def test_real_selected_bispf_headline_keeps_all_eleven_failures_after_restoring_gates():

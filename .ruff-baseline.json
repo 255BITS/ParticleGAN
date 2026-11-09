@@ -46,19 +46,9 @@
         "`benchmarks.legacy.recipe.get_recipe` imported but unused": 1
       }
     },
-    "benchmarks/toy_audit/api_gaussian1d.py": {
-      "F401": {
-        "`.gaussian1d_quality` imported but unused": 1
-      }
-    },
     "benchmarks/toy_audit/api_model_ae_ddgan.py": {
       "F401": {
         "`.api_model_ddgan.task_recipe` imported but unused": 1
-      }
-    },
-    "benchmarks/toy_audit/api_run.py": {
-      "F401": {
-        "`textwrap` imported but unused": 1
       }
     },
     "benchmarks/toy_audit/api_sources/circle.py": {
@@ -87,11 +77,6 @@
     "benchmarks/toy_audit/check_source_family_parity.py": {
       "F401": {
         "`copy.deepcopy` imported but unused": 1
-      }
-    },
-    "benchmarks/toy_audit/prior_proximal_smoke.py": {
-      "F821": {
-        "Undefined name `restored`": 1
       }
     },
     "benchmarks/toy_audit/proposal.py": {
@@ -232,16 +217,6 @@
         "`benchmarks.legacy.recipe.get_recipe` imported but unused": 1
       }
     },
-    "examples/e22_routed_caption_late_phase.py": {
-      "F821": {
-        "Undefined name `p`": 1
-      }
-    },
-    "examples/e22_routed_caption_untied.py": {
-      "F821": {
-        "Undefined name `p`": 1
-      }
-    },
     "examples/e22_routed_g_clean.py": {
       "F402": {
         "Import `time` from an earlier line shadowed by loop variable": 1
@@ -307,11 +282,6 @@
     "experiments/forge/research_attempts.py": {
       "F401": {
         "`collections.defaultdict` imported but unused": 1
-      }
-    },
-    "experiments/forge/runtime.py": {
-      "F401": {
-        "`os` imported but unused": 1
       }
     },
     "experiments/forge/scaling_profile.py": {
@@ -532,7 +502,7 @@
       },
       "F811": {
         "Redefinition of unused `checkout` from an earlier line: `checkout` redefined here": 5,
-        "Redefinition of unused `spec` from an earlier line: `spec` redefined here": 5
+        "Redefinition of unused `spec` from an earlier line: `spec` redefined here": 4
       }
     },
     "tests/test_forge_dispositions.py": {
@@ -550,7 +520,7 @@
       },
       "F811": {
         "Redefinition of unused `checkout` from an earlier line: `checkout` redefined here": 6,
-        "Redefinition of unused `spec` from an earlier line: `spec` redefined here": 4
+        "Redefinition of unused `spec` from an earlier line: `spec` redefined here": 3
       }
     },
     "tests/test_forge_family_documentation.py": {
