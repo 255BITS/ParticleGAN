@@ -45,15 +45,19 @@ def archived_runner_source(runner, tmp_path, monkeypatch):
 
 
 def archived_cases(names, monkeypatch):
-    found = CURRENT_DISCOVERY()
+    # These are the original cards, not today's cards with fields removed.
+    # Production discovery and frozen runner pins stay independent of this
+    # metadata-only software fixture; constructing today's models is a separate
+    # control with no historical replay or qualification credit.
+    receipt = json.loads((DISCOVERY_FIXTURES / "critic-generator-case-cards-provenance.json").read_text())
+    data = (DISCOVERY_FIXTURES / receipt["fixture"]).read_bytes()
+    assert hashlib.sha256(data).hexdigest() == receipt["sha256"]
+    found = json.loads(data)
+    assert set(found) == set(receipt["case_sha256"])
+    for name, card in found.items():
+        encoded = json.dumps(card, sort_keys=True, separators=(",", ":")).encode()
+        assert hashlib.sha256(encoded).hexdigest() == receipt["case_sha256"][name]
     cards = {name: found[name] for name in names}
-    for case in cards.values():
-        case.pop("protocol_seed", None)
-        case.pop("comparison_version", None)
-        if case["provider"] == "api_vectors":
-            case.pop("initialization", None)
-        if case.get("kind") == "native100" and isinstance(case.get("thresholds", {}).get("native"), dict):
-            case["thresholds"]["native"]["min_precision"] = 0.97
     # Archived coordinators verify their original hard-coded case hashes.
     # Their parser tests retain the old seed without modifying live defaults.
     monkeypatch.setattr(api_contract, "discover", lambda: deepcopy(cards))

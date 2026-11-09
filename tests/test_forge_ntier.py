@@ -569,7 +569,7 @@ def test_misgan_tasks_host_definition_particles_declared():
 
 
 def test_stretch_formulation_tasks_graders_and_preflight():
-    """Verify all stretch formulation tasks pass preflight and grade PASS/FAIL cleanly."""
+    """Unsupported hosts refuse admission; numerical graders retain their exact gates."""
     from experiments.forge.adapters import adapter_preflight
     from experiments.forge.priors import RECIPE_PRIOR_CONTRACT
     from experiments.forge.sampling import PUBLIC_PRIOR_CLEAN, executed_receipt
@@ -584,7 +584,9 @@ def test_stretch_formulation_tasks_graders_and_preflight():
         t = deepcopy(tasks[tid])
         for cid in ("bispf-optimized-quintic-v1", "atlas-particle-normal-v4"):
             cand = adapt_candidate_for_task(load_candidate_card(ROOT, cid), t)
-            assert adapter_preflight(t, cand, root=ROOT) == []
+            assert cand == load_candidate_card(ROOT, cid)
+            blockers = adapter_preflight(t, cand, root=ROOT)
+            assert blockers, "a shape-valid host without a registered runner must not be admitted"
 
     for tid in sorted(STRETCH_EVALUATOR_KINDS):
         t = deepcopy(tasks[tid])

@@ -48,6 +48,9 @@ comparison, and it is not a new scientific leaderboard.
   only storage-prior parameters receive the prior schedule.
 - Include the new manipulators' actual settings in checkpoint configuration.
   Changing filter strength, geometry, entropy or repulsion settings is rejected.
+- Bind the bare `SobolevGradFilter` module's lambda, order and Nyquist settings
+  too. Public `GANTrainer` restoration rejects a different backward law before
+  changing live state; matching fresh-object continuation remains exact.
 - Declare deterministic initialization for splat parameters, preserving intended
   geometric coordinates and frozen detail layouts.
 - Reject invalid filter/penalty settings rather than silently disabling them.
