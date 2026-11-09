@@ -301,6 +301,9 @@ def task_policy_blockers(task, candidate):
         if (task.get("adapter") != "public_api_model_toy"
                 or host.get("provider") != "benchmarks.toy_audit.api_model_ddgan"):
             return ["conditional energy score requires an explicitly supported paired conditional host"]
+    if ((recipe.masked_mixture_weight or recipe.masked_transport_weight or recipe.imputer_component_weight)
+            and task.get("execution", {}).get("host_definition", {}).get("provider") != "benchmarks.toy_audit.api_model_misgan"):
+        return ["masked mixture/imputer objectives require the explicit MisGAN component consumer"]
     from .tier1_policy import blocked_host, is_policy_task
     policy_task = is_policy_task(task)
     if policy_task and blocked_host(task) is not None:

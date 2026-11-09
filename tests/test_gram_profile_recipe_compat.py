@@ -29,6 +29,8 @@ def test_component_applied_packet_omits_only_later_inactive_defaults(profile):
         optimizer_svd_backend="native", optimizer_dense_profile=profile)))
     components = BehaviorComponents(request, load_tasks(ROOT)["two_pole"], device="cpu")
     expected = asdict(components.recipe)
+    for name in ("masked_mixture_weight", "masked_transport_weight", "imputer_component_weight"):
+        assert expected.pop(name) == 0.
     if profile == "default":
         expected.pop("optimizer_dense_profile")
     for field in ("reg_real_weight", "reg_fake_weight", "joint_reconstruction_weight", "conditional_energy_weight", "conditional_energy_samples"):

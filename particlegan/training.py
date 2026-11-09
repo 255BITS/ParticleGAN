@@ -183,6 +183,8 @@ class GANTrainer:
             raise TypeError("recipe must be a Recipe")
         if recipe.conditional_energy_weight:
             raise ValueError("conditional energy score requires a caller-owned paired conditional host")
+        if recipe.masked_mixture_weight or recipe.masked_transport_weight or recipe.imputer_component_weight:
+            raise ValueError("masked mixture/imputer objectives require a caller-owned incomplete-data host")
         if type(serial_backward) is not bool:
             raise TypeError("serial_backward must be a boolean")
         if type(serve_after_step) is not bool:

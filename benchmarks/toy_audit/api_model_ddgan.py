@@ -287,6 +287,8 @@ def task_recipe(case, recipe_name=None, recipe=None):
     from experiments.forge.api import policy_controls
     if result.conditional_energy_weight and fields["encoder_mode"] != "none":
         raise ValueError("conditional energy score is not bound by the AE-DDGAN reconstruction host")
+    from .api_contract import validate_caller_objectives
+    validate_caller_objectives(result, provider="api_model_ddgan")
     if (policy_controls(result) or result.row_policy != "independent" or result.input_noise_std
             or result.output_noise_std or result.kinetic_transport_weight
             or result.kinetic_transport_local_weight or result.constraint_geometry_mode == "strict_progress"):

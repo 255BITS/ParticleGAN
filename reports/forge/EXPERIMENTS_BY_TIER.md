@@ -2,9 +2,9 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **191 tasks**; **154 assigned** to at least one view; **37 unassigned**. Showing **28/28 views**.
+Catalog: **195 tasks**; **157 assigned** to at least one view; **38 unassigned**. Showing **31/31 views**.
 
-Declared priors across the catalog: **84 MoGParticlePrior**, **107 ParticlePrior** (including **10 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
+Declared priors across the catalog: **88 MoGParticlePrior**, **107 ParticlePrior** (including **10 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
 Reproducible comparisons use the fixed screening seed `0` and candidate-independent named RNG streams. Within each task, candidates share architecture, data law, batch size, prior, initialization, training budget, evaluation cadence and sampling law. Only the declared trainer change varies. The initialization column exposes fixed controls and component policies that take precedence over the deterministic orthogonal fallback; these are separate comparison cohorts. Historical results retain their original bindings.
 
@@ -46,11 +46,13 @@ This report follows changing declarations and published evidence; it selects no 
 | [clockfree_continuous](../../configs/forge/views/clockfree_continuous.json) | 5 | 4 required | 12 required, 7 held | 6 required, 1 diagnostic (1 removed from the count) | 0 tasks | provisional |
 | [dcgan_performance](../../configs/forge/views/dcgan_performance.json) | 1 | 6 diagnostic | 0 tasks | 0 tasks | 0 tasks | undeclared |
 | [dcgan_performance_cpu_smoke](../../configs/forge/views/dcgan_performance_cpu_smoke.json) | 1 | 1 diagnostic | 0 tasks | 0 tasks | 0 tasks | undeclared |
+| [ddgan-conditional-repair-v1](../../configs/forge/views/ddgan-conditional-repair-v1.json) | 2 | 2 diagnostic | 0 tasks | 0 tasks | 0 tasks | undeclared |
 | [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 16 | 11 required, 2 stretch, 2 diagnostic | 18 required, 7 held | 1 required, 1 held, 1 diagnostic (1 removed from the count) | 10 stretch, 5 held | provisional |
 | [formulation_comparison](../../configs/forge/views/formulation_comparison.json) | 3 | 3 required | 12 required, 7 held, 15 diagnostic | 1 required, 1 diagnostic (1 removed from the count) | 0 tasks | provisional |
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 6 | 3 required | 12 required, 7 held, 13 diagnostic | 1 required, 1 diagnostic (1 removed from the count) | 0 tasks | provisional |
 | [k3p_two_pole_horizon](../../configs/forge/views/k3p_two_pole_horizon.json) | 1 | 2 diagnostic | 0 tasks | 0 tasks | 0 tasks | provisional |
 | [lazy_cadence_coverage](../../configs/forge/views/lazy_cadence_coverage.json) | 1 | 30 diagnostic | 0 tasks | 0 tasks | 0 tasks | undeclared |
+| [misgan-bispf-research-v1](../../configs/forge/views/misgan-bispf-research-v1.json) | 2 | 1 diagnostic | 0 tasks | 0 tasks | 0 tasks | provisional |
 | [policy_cloud_coverage](../../configs/forge/views/policy_cloud_coverage.json) | 1 | 7 required | 21 required | 7 required | 0 tasks | undeclared |
 | [policy_cloud_coverage_as_served](../../configs/forge/views/policy_cloud_coverage_as_served.json) | 1 | 7 required | 21 required | 7 required | 0 tasks | undeclared |
 | [prior-ablation-full-suite-v1](../../configs/forge/views/prior-ablation-full-suite-v1.json) | 1 | 48 diagnostic | 0 tasks | 0 tasks | 0 tasks | undeclared |
@@ -62,6 +64,7 @@ This report follows changing declarations and published evidence; it selects no 
 | [recipe-prior-refactor-release07-gan-v3-diagnostic-v1](../../configs/forge/views/recipe-prior-refactor-release07-gan-v3-diagnostic-v1.json) | 1 | 23 diagnostic | 0 tasks | 0 tasks | 0 tasks | provisional |
 | [selected-family-coverage-diagnostic-v1](../../configs/forge/views/selected-family-coverage-diagnostic-v1.json) | 1 | 1 diagnostic | 0 tasks | 0 tasks | 0 tasks | undeclared |
 | [tier1_policy_coverage](../../configs/forge/views/tier1_policy_coverage.json) | 1 | 7 required | 0 tasks | 0 tasks | 0 tasks | undeclared |
+| [vaegan_coverage](../../configs/forge/views/vaegan_coverage.json) | 1 | 2 diagnostic | 0 tasks | 0 tasks | 0 tasks | provisional |
 
 ## adaptation
 
@@ -607,6 +610,43 @@ No tasks assigned.
 
 No tasks assigned.
 
+## ddgan-conditional-repair-v1
+
+Declaration: [ddgan-conditional-repair-v1](../../configs/forge/views/ddgan-conditional-repair-v1.json); revision 2; goal: `ddgan_conditional_repair`.
+
+Declared calibration status: **undeclared**.
+
+Declared evidence scope: `research_diagnostic`.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+2 diagnostic.
+
+| Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [ddgan_repair_gaussian_chain_v1](../../configs/forge/tasks/ddgan_repair_gaussian_chain_v1.json) | diagnostic | MoGParticlePrior (sigma=0.25) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-api-model-ddgan-gaussian-chain) | public_api_model_toy / transfer_sustained | 2500 | 600 | — |
+| [ddgan_repair_bimodal_chain_wall_v2](../../configs/forge/tasks/ddgan_repair_bimodal_chain_wall_v2.json) | diagnostic | MoGParticlePrior (sigma=0.25) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-api-model-ddgan-bimodal-chain) | public_api_model_toy / transfer_sustained | 5000 | 1200 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 4: stress_and_formulations
+
+0 tasks.
+
+No tasks assigned.
+
 ## discriminator_stability
 
 Declaration: [discriminator_stability](../../configs/forge/views/discriminator_stability.json); revision 16; goal: `discriminator_stability`.
@@ -940,6 +980,44 @@ Candidate outcomes, metrics and measured costs: [leaderboard](technique-inventor
 | [ring_hold](../../configs/forge/tasks/ring_hold.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mode-hold) | ring_endurance / ring_hold | up to 7500 total | 3600 | [mode_hold](../../configs/forge/tasks/mode_hold.json) (gate); group: ring_endurance (uninterrupted) |
 | [ring_extension](../../configs/forge/tasks/ring_extension.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mode-hold) | ring_endurance / ring_extension | up to 7500 total; 300 extension | 3600 | [ring_hold](../../configs/forge/tasks/ring_hold.json) (checkpoint); group: ring_endurance (uninterrupted) |
 | [clockfree_audit_measurement_v1](../../configs/forge/tasks/clockfree_audit_measurement_v1.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-clockfree-audit-measurement-v1) | clockfree_audit / clockfree_parity | 24 | 300 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 4: stress_and_formulations
+
+0 tasks.
+
+No tasks assigned.
+
+## misgan-bispf-research-v1
+
+Declaration: [misgan-bispf-research-v1](../../configs/forge/views/misgan-bispf-research-v1.json); revision 2; goal: `misgan_recovery_and_imputation`.
+
+Declared calibration status: **provisional**.
+
+Scoped research diagnostic; no ordinary qualification or default adoption.
+
+Declared evidence scope: `research_diagnostic`.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+1 diagnostic.
+
+| Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [model_misgan_four_mode](../../configs/forge/tasks/model_misgan_four_mode.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-model-misgan-four-mode) | public_api_model_toy / transfer_sustained | 1200 | 1800 | — |
 
 ### Tier 2: quality
 
@@ -1595,12 +1673,52 @@ No tasks assigned.
 
 No tasks assigned.
 
+## vaegan_coverage
+
+Declaration: [vaegan_coverage](../../configs/forge/views/vaegan_coverage.json); revision 1; goal: `vaegan_coverage`.
+
+Declared calibration status: **provisional**.
+
+Two toy gates do not establish screen calibration or whole-suite adoption.
+
+Declared evidence scope: `research_diagnostic`.
+
+Candidate outcomes, metrics and measured costs: [leaderboard](leaderboards/vaegan_coverage.md).
+
+### Tier 1: smoke
+
+2 diagnostic.
+
+| Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [model_vae_hard](../../configs/forge/tasks/model_vae_hard.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; component policy; screening | [Question, results, GIFs](#experiment-api-model-vae-hard) | public_api_model_toy / transfer_sustained | 1200 | 300 | — |
+| [model_vae_categorical](../../configs/forge/tasks/model_vae_categorical.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; component policy; screening | [Question, results, GIFs](#experiment-api-model-vae-categorical) | public_api_model_toy / transfer_sustained | 1200 | 300 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 4: stress_and_formulations
+
+0 tasks.
+
+No tasks assigned.
+
 ## Tasks unassigned to any view
 
 These catalog tasks have no tier placement. Add an assignment to a view to include them in its policy.
 
 | Task | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| [ddgan_repair_bimodal_chain_v1](../../configs/forge/tasks/ddgan_repair_bimodal_chain_v1.json) | MoGParticlePrior (sigma=0.25) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-api-model-ddgan-bimodal-chain) | public_api_model_toy / transfer_sustained | 5000 | 600 | — |
 | [five_word_joint_acquisition](../../configs/forge/tasks/five_word_joint_acquisition.json) | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-five-word-joint) | word_joint / transfer_sustained | 20001 | 900 | — |
 | [gaussian1d_acquisition](../../configs/forge/tasks/gaussian1d_acquisition.json) | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / transfer_sustained | 1000 | 120 | — |
 | [gaussian1d_shallow_smoke](../../configs/forge/tasks/gaussian1d_shallow_smoke.json) | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / gaussian_smoke | 1000 | 120 | — |
@@ -1933,13 +2051,72 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: api-model-ddgan-bimodal-chain
 
-Learn conditional reverse transitions and the final ancestral distribution through the public DDGAN API
+Learn conditional reverse transitions and the final ancestral distribution through the public DDGAN API; explicitly scoped GPU0 research diagnostic of original gates, no ordinary qualification
 
-Explanation, interpretation and reproduction: [experiment readout](api-model-toys/ddgan.md).
+Explanation, interpretation and reproduction: [experiment readout](api-model-toys/ddgan.md), [experiment readout](ddgan-conditional-repair/README.md).
 
-Forge declarations: [model_ddgan_bimodal_chain](../../configs/forge/tasks/model_ddgan_bimodal_chain.json).
+Forge declarations: [ddgan_repair_bimodal_chain_v1](../../configs/forge/tasks/ddgan_repair_bimodal_chain_v1.json), [ddgan_repair_bimodal_chain_wall_v2](../../configs/forge/tasks/ddgan_repair_bimodal_chain_wall_v2.json), [model_ddgan_bimodal_chain](../../configs/forge/tasks/model_ddgan_bimodal_chain.json).
 
 Declared Forge numerical gates and sampling:
+
+[ddgan_repair_bimodal_chain_v1](../../configs/forge/tasks/ddgan_repair_bimodal_chain_v1.json), [ddgan_repair_bimodal_chain_wall_v2](../../configs/forge/tasks/ddgan_repair_bimodal_chain_wall_v2.json)
+
+| Metric | Required bound |
+| --- | --- |
+| final_projection_cdf | <= 0.12 |
+| final_normalized_mean | <= 0.25 |
+| final_covariance_eigen_min | >= 0.65 |
+| final_covariance_eigen_max | <= 1.4 |
+| t1_q0_projection_cdf | <= 0.12 |
+| t1_q0_normalized_mean | <= 0.25 |
+| t1_q0_covariance_eigen_min | >= 0.65 |
+| t1_q0_covariance_eigen_max | <= 1.4 |
+| t1_q1_projection_cdf | <= 0.12 |
+| t1_q1_normalized_mean | <= 0.25 |
+| t1_q1_covariance_eigen_min | >= 0.65 |
+| t1_q1_covariance_eigen_max | <= 1.4 |
+| t2_q0_projection_cdf | <= 0.12 |
+| t2_q0_normalized_mean | <= 0.25 |
+| t2_q0_covariance_eigen_min | >= 0.65 |
+| t2_q0_covariance_eigen_max | <= 1.4 |
+| t2_q1_projection_cdf | <= 0.12 |
+| t2_q1_normalized_mean | <= 0.25 |
+| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_covariance_eigen_max | <= 1.4 |
+| t3_q0_projection_cdf | <= 0.12 |
+| t3_q0_normalized_mean | <= 0.25 |
+| t3_q0_covariance_eigen_min | >= 0.65 |
+| t3_q0_covariance_eigen_max | <= 1.4 |
+| t3_q1_projection_cdf | <= 0.12 |
+| t3_q1_normalized_mean | <= 0.25 |
+| t3_q1_covariance_eigen_min | >= 0.65 |
+| t3_q1_covariance_eigen_max | <= 1.4 |
+| t4_q0_projection_cdf | <= 0.12 |
+| t4_q0_normalized_mean | <= 0.25 |
+| t4_q0_covariance_eigen_min | >= 0.65 |
+| t4_q0_covariance_eigen_max | <= 1.4 |
+| t4_q1_projection_cdf | <= 0.12 |
+| t4_q1_normalized_mean | <= 0.25 |
+| t4_q1_covariance_eigen_min | >= 0.65 |
+| t4_q1_covariance_eigen_max | <= 1.4 |
+| panel_count | == 8 |
+| samples_per_panel | >= 2048 |
+| final_hq | >= 0.95 |
+| final_mode_mass_tv | <= 0.1 |
+| final_local_mean_sigma | <= 0.5 |
+| final_local_covariance_min | >= 0.5 |
+| final_local_covariance_max | <= 1.5 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.25) |
+| Sampling law | task_model_kernel_and_posterior_without_serving_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 [model_ddgan_bimodal_chain](../../configs/forge/tasks/model_ddgan_bimodal_chain.json)
 
@@ -2010,13 +2187,67 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: api-model-ddgan-gaussian-chain
 
-Learn conditional reverse transitions and the final ancestral distribution through the public DDGAN API
+Learn conditional reverse transitions and the final ancestral distribution through the public DDGAN API; explicitly scoped GPU0 research diagnostic of original gates, no ordinary qualification
 
-Explanation, interpretation and reproduction: [experiment readout](api-model-toys/ddgan.md).
+Explanation, interpretation and reproduction: [experiment readout](api-model-toys/ddgan.md), [experiment readout](ddgan-conditional-repair/README.md).
 
-Forge declarations: [model_ddgan_gaussian_chain](../../configs/forge/tasks/model_ddgan_gaussian_chain.json).
+Forge declarations: [ddgan_repair_gaussian_chain_v1](../../configs/forge/tasks/ddgan_repair_gaussian_chain_v1.json), [model_ddgan_gaussian_chain](../../configs/forge/tasks/model_ddgan_gaussian_chain.json).
 
 Declared Forge numerical gates and sampling:
+
+[ddgan_repair_gaussian_chain_v1](../../configs/forge/tasks/ddgan_repair_gaussian_chain_v1.json)
+
+| Metric | Required bound |
+| --- | --- |
+| final_projection_cdf | <= 0.12 |
+| final_normalized_mean | <= 0.25 |
+| final_covariance_eigen_min | >= 0.65 |
+| final_covariance_eigen_max | <= 1.4 |
+| t1_q0_projection_cdf | <= 0.12 |
+| t1_q0_normalized_mean | <= 0.25 |
+| t1_q0_covariance_eigen_min | >= 0.65 |
+| t1_q0_covariance_eigen_max | <= 1.4 |
+| t1_q1_projection_cdf | <= 0.12 |
+| t1_q1_normalized_mean | <= 0.25 |
+| t1_q1_covariance_eigen_min | >= 0.65 |
+| t1_q1_covariance_eigen_max | <= 1.4 |
+| t2_q0_projection_cdf | <= 0.12 |
+| t2_q0_normalized_mean | <= 0.25 |
+| t2_q0_covariance_eigen_min | >= 0.65 |
+| t2_q0_covariance_eigen_max | <= 1.4 |
+| t2_q1_projection_cdf | <= 0.12 |
+| t2_q1_normalized_mean | <= 0.25 |
+| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_covariance_eigen_max | <= 1.4 |
+| t3_q0_projection_cdf | <= 0.12 |
+| t3_q0_normalized_mean | <= 0.25 |
+| t3_q0_covariance_eigen_min | >= 0.65 |
+| t3_q0_covariance_eigen_max | <= 1.4 |
+| t3_q1_projection_cdf | <= 0.12 |
+| t3_q1_normalized_mean | <= 0.25 |
+| t3_q1_covariance_eigen_min | >= 0.65 |
+| t3_q1_covariance_eigen_max | <= 1.4 |
+| t4_q0_projection_cdf | <= 0.12 |
+| t4_q0_normalized_mean | <= 0.25 |
+| t4_q0_covariance_eigen_min | >= 0.65 |
+| t4_q0_covariance_eigen_max | <= 1.4 |
+| t4_q1_projection_cdf | <= 0.12 |
+| t4_q1_normalized_mean | <= 0.25 |
+| t4_q1_covariance_eigen_min | >= 0.65 |
+| t4_q1_covariance_eigen_max | <= 1.4 |
+| panel_count | == 8 |
+| samples_per_panel | >= 2048 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.25) |
+| Sampling law | task_model_kernel_and_posterior_without_serving_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 [model_ddgan_gaussian_chain](../../configs/forge/tasks/model_ddgan_gaussian_chain.json)
 
@@ -4252,6 +4483,52 @@ Related public-API demonstrations, with their own recorded contracts:
 | --- | --- | --- | --- | --- | --- |
 | [api-model-ae-reconstruction](../toy_audit/api_contract/model_modes/media/api-model-ae-reconstruction.gif) | Reconstruct four equally weighted noisy corner Gaussians with public deterministic particle-AE routing and bounded offsets; explicit reconstruction-only objective control. Scope: Four equally weighted Gaussians at (+/-1,+/-1), sigma=.08; independently drawn target and prior samples. Explicit reconstruction-only objective control; independent generation is measured but not required. | MoGParticlePrior (sigma_rel=0) | COMPLETE / PASS; 1200/1200 updates; recomputed complete live curve and terminal suffix | bispf / cpu / 1e57b5216ea3 | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
 
+### Experiment: model-misgan-four-mode
+
+Learn an 8D four-mode complete distribution and the block-mask law using only incomplete rows, then learn a stochastic neural imputer whose held-out single-sensor queries cover both ambiguous branches with correct mass.
+
+Explanation, interpretation and reproduction: [experiment readout](misgan-bispf/README.md).
+
+Forge declarations: [model_misgan_four_mode](../../configs/forge/tasks/model_misgan_four_mode.json).
+
+Declared Forge numerical gates and sampling:
+
+[model_misgan_four_mode](../../configs/forge/tasks/model_misgan_four_mode.json)
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
+| mass_tv | <= 0.1 |
+| off_plane | <= 0.04 |
+| mask_tv | <= 0.05 |
+| imputer_observed_error | <= 1e-06 |
+| imputer_accuracy | >= 0.94 |
+| ambiguous_hq | >= 0.9 |
+| ambiguous_mass_tv | <= 0.12 |
+| ambiguous_query_coverage | >= 0.9 |
+| ambiguous_std_ratio | >= 0.7 |
+| ambiguous_std_ratio | <= 1.3 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | task_model_kernel_and_posterior_without_serving_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-model-misgan-four-mode](../toy_audit/api_contract/misgan_bispf/media/bispf-misgan-transport-settle-v1.gif) | Learn an 8D four-mode complete distribution and the block-mask law using only incomplete rows, then learn a stochastic neural imputer whose held-out single-sensor queries cover both ambiguous branches with correct mass. Scope: Explicit four-corner sigma=.08 target with a fixed Hadamard 8x2 lift. Same four block masks and masses as original MisGAN; sensor7 sees x+y, leaving two equally probable branches at zero. Original 100-mode MLP questions remain unchanged. Absolute task-owned MoG sigma=.025; relative calibration is bypassed. Recommended scoped recipe: bispf-misgan-transport-settle-v1 | MoGParticlePrior (sigma_rel=0) | COMPLETE / PASS; 1200/1200 updates | bispf / cuda:0 / d2b5cf8eba1f | [definition](../toy_audit/api_contract/misgan_bispf/publication.json); [readout](../toy_audit/api_contract/misgan_bispf/publication.json); [recipe and provenance](../toy_audit/api_contract/misgan_bispf/publication.json) |
+
 ### Experiment: pacgan8-grid100
 
 PacGAN m=8 packed discriminator on 100-mode 10x10 2D Gaussian grid (centers in {-9,-7,...,7,9}^2, sigma=0.05) testing high-order product-measure mode coverage and within-mode covariance preservation.
@@ -5955,6 +6232,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `45510712e969782aac1037436fbbe39b9e176438d9deb1ad1d6a776771d3d57c`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `d5c25add036b4c7572d8bc52ed544ab412bd073f74070d49d950139654be3176`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `ae8b6b6879d69947cde9220975c2c6a2a2264171e22b04f501c8dafd5fb5f423`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `18596ab53f13df6211275263fae96f017f52d4fbd2d67336ca194619ef478a60`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

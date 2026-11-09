@@ -322,7 +322,7 @@ class ResolutionCache:
                     execution_path=idea.get("execution_path", "public_trainer"),
                 )
                 from particlegan.recipe_compat import without_default_additions
-                recipe = without_default_additions(asdict(context.recipe), fields=("ebi_beta", "kappa_radial", "generator_gradient_response", 'reg_real_weight', 'reg_fake_weight', 'joint_reconstruction_weight', 'conditional_energy_weight', 'conditional_energy_samples'))
+                recipe = without_default_additions(asdict(context.recipe), fields=("ebi_beta", "kappa_radial", "generator_gradient_response", 'reg_real_weight', 'reg_fake_weight', 'joint_reconstruction_weight', 'conditional_energy_weight', 'conditional_energy_samples', 'masked_mixture_weight', 'masked_transport_weight', 'imputer_component_weight'))
                 if "configuration_id" in idea:
                     from .configuration_search import recipe_identity_fields
                     if stable_hash(recipe_identity_fields(recipe)) != stable_hash(recipe_identity_fields(idea["resolved_configuration_recipe"])):
@@ -506,7 +506,7 @@ def candidate_revision_for(source_digest: str, candidate: dict) -> str:
         formulation["host_adaptation"] = candidate["host_adaptation"]
     if candidate.get("prior_mechanism") is not None:
         formulation["prior_mechanism"] = candidate["prior_mechanism"]
-    resolved_recipe = without_default_additions(candidate["resolved_recipe"], fields=("ebi_beta", "kappa_radial", "generator_gradient_response", 'reg_real_weight', 'reg_fake_weight', 'joint_reconstruction_weight', 'conditional_energy_weight', 'conditional_energy_samples'))
+    resolved_recipe = without_default_additions(candidate["resolved_recipe"], fields=("ebi_beta", "kappa_radial", "generator_gradient_response", 'reg_real_weight', 'reg_fake_weight', 'joint_reconstruction_weight', 'conditional_energy_weight', 'conditional_energy_samples', 'masked_mixture_weight', 'masked_transport_weight', 'imputer_component_weight'))
     formulation.update(resolved_recipe=resolved_recipe, prior=candidate["prior"],
                        api_version=candidate.get("api_version", "forge-api-v1"))
     return stable_hash({"source": source_digest, "formulation": formulation})
@@ -677,7 +677,7 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
             extensions=idea.get("extensions", {}), initializer=idea.get("initializer", "deterministic_orthogonal"),
             execution_path=idea.get("execution_path", "public_trainer"))
         from particlegan.recipe_compat import without_default_additions
-        recipe = without_default_additions(asdict(context.recipe), fields=("ebi_beta", "kappa_radial", "generator_gradient_response", 'reg_real_weight', 'reg_fake_weight', 'joint_reconstruction_weight', 'conditional_energy_weight', 'conditional_energy_samples'))
+        recipe = without_default_additions(asdict(context.recipe), fields=("ebi_beta", "kappa_radial", "generator_gradient_response", 'reg_real_weight', 'reg_fake_weight', 'joint_reconstruction_weight', 'conditional_energy_weight', 'conditional_energy_samples', 'masked_mixture_weight', 'masked_transport_weight', 'imputer_component_weight'))
         if "configuration_id" in idea:
             from .configuration_search import recipe_identity_fields
             if stable_hash(recipe_identity_fields(recipe)) != stable_hash(recipe_identity_fields(idea["resolved_configuration_recipe"])):

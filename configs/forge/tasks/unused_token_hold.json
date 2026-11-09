@@ -63,14 +63,14 @@
     "minimum_stable_checks": 5,
     "scoring_weights": "live",
     "sources": {
-      "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
-      "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
       "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
-      "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
-      "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee",
-      "experiments/forge/behavior_adapters.py": "e1fb28dbbf9e7809bc7f3ce41739da6d12951e2216973850d7de5fc8f17459ef",
       "benchmarks/locked_shared/hosts/unused_token_hold.py": "6ea45140c617ad8c9effbab11979825d3ddeb7a78301cccc0e675a0e2436ef38",
-      "benchmarks/toy100/device.py": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911"
+      "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+      "benchmarks/toy100/device.py": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911",
+      "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+      "experiments/forge/behavior_adapters.py": "a7e07a688bfa5800f9de34dc5a116c53ca9b1e96ca339fc0a6e64794e74d8614",
+      "particlegan/conditional_transport.py": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee",
+      "particlegan/kinetic_transport.py": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee"
     },
     "guards": {
       "finite_state": true,
@@ -142,6 +142,16 @@
         "experiments/forge/behavior_adapters.py": "efaa4654e69c6361562a65c1f8cca3e04b05e91797ed0ce3900c70986edcbfc8"
       },
       "qualification_input": false
+    },
+    "integration_source_binding": {
+      "id": "reviewed-model-prs-integration-20261109",
+      "change": "Bind future executions to the reviewed combined source. Archived research retains its original source, task, gates and outcome; no quality inheritance.",
+      "qualification_input": false,
+      "previous_task_commit": "4a5ff6d4db831a23a7c95b5d14ce84ff73dfee06",
+      "previous_task_path": "configs/forge/tasks/unused_token_hold.json",
+      "previous_task_sha256": "84716b9d06d4e6f32bc29a224218baa5271b907b90bf3f27ed805ff0ed7104e3",
+      "previous_task_blob": "5e6a7badd60bcfbbd19072ad0f787a9cdda79150",
+      "integration_receipt": "reports/forge/reviewed-pr-integration-20261109/source-binding.json"
     }
   },
   "resources": {
