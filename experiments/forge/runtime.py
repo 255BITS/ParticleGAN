@@ -1,7 +1,6 @@
 """Task child entrypoint: one dispatch path for CLI run and queue workers."""
 from __future__ import annotations
 
-import os
 from pathlib import Path
 import sys
 import time
@@ -63,6 +62,15 @@ def execute(path: Path) -> int:
     result.setdefault("api_changes", request["candidate"].get("api_changes", []))
     result.setdefault("claim_contract", request["candidate"].get("claim_contract", {}))
     result = normalize_adapter_costs(result)
+    if exit_code == 0:
+        # Optional provenance must never turn a numerical result into an error.
+        # Observe this process after execution, rather than echoing task labels.
+        from .observations import attach_observations, execution_environment
+        try:
+            environment = execution_environment(torch, "cpu" if worker["device"] == "cpu" else "cuda:0")
+        except Exception:  # noqa: BLE001 -- a probe failure must only withhold provenance
+            environment = {}  # Fail closed, including any adapter-supplied witness.
+        result = attach_observations(request, job, result, environment)
     result.setdefault("cost", {})
     elapsed = time.monotonic() - started
     result["cost"]["runner_seconds"] = elapsed

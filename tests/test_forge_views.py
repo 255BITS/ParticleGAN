@@ -277,6 +277,18 @@ def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer
                 blockers = task_preflight(deepcopy(task), candidate, {}, root=ROOT, tasks=tasks)
                 assert f"{task['id']}: evaluator source changed; revise the task definition: {path}" in blockers
                 continue
+            if task["adapter"] == "public_api_model_toy" and path in {
+                    "benchmarks/toy_audit/api_contract.py", "benchmarks/toy_audit/api_run.py"}:
+                # The original model cohort retains its exact contract bytes.
+                # Capability admission changes do not rebind that evidence.
+                frozen = archived_contract_bytes("model_toy_api_callers", path)
+                assert hashlib.sha256(frozen).hexdigest() == digest
+                if hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != digest:
+                    from experiments.forge.preflight import task_preflight
+                    candidate = json.loads((ROOT / "configs/forge/ideas/k3p.json").read_text())
+                    blockers = task_preflight(deepcopy(task), candidate, {}, root=ROOT, tasks=tasks)
+                    assert f"{task['id']}: evaluator source changed; revise the task definition: {path}" in blockers
+                continue
             if path in {"benchmarks/toy_audit/api_model_ae.py",
                         "benchmarks/toy_audit/api_model_ddgan.py",
                         "benchmarks/toy_audit/api_model_vae.py"}:
