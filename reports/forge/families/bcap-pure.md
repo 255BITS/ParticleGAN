@@ -141,7 +141,7 @@ These are whole configurations under their original sources. Their individual pa
 
 | Configuration | Required passes | Executed source | Display selection |
 | --- | ---: | --- | --- |
-| [recipe-prior-refactor-bcap-pure-v1](bcap-dualnorm.md) | 71/115 (7 not run, 12 diagnostic attempts) | `a5eafc73e4c4` | Selected |
+| [recipe-prior-refactor-bcap-pure-v1](bcap-dualnorm.md) | 71/115 (11 not run, 8 diagnostic attempts) | `a5eafc73e4c4` | Selected |
 | [bcap-pure-adam-v2](bcap-pure-configuration.md) | 0/115 (115 not run) | `cbb19c5e55e9` | Alternative |
 
 </details>
@@ -150,7 +150,7 @@ These are whole configurations under their original sources. Their individual pa
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [adaptation](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [8/12](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1 (1 diagnostic attempt)](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [0/0](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation-tier-4) | [11/16 (1 diagnostic attempt)](bcap-pure.md#cohort-cuda-1bf9d7d34422-adaptation) | [0/7](bcap-pure.md#cohort-cuda-1bf9d7d34422-held) |
 | [clockfree_continuous](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [4/4](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [8/12](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0/6 (3 not run, 3 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [0/0](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-4) | [12/22 (3 not run, 3 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [0/7](bcap-pure.md#cohort-cuda-1bf9d7d34422-held) |
-| [discriminator_stability](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [6/11 (5 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [9/18 (4 not run)](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0/1 (1 diagnostic attempt)](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [0/0](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | [15/30 (4 not run, 6 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [0/25 (4 not run, 14 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-held) |
+| [discriminator_stability](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [6/11 (4 not run, 1 diagnostic attempt)](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [9/18 (4 not run)](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0/1 (1 diagnostic attempt)](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [0/0](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | [15/30 (8 not run, 2 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [0/25 (4 not run, 14 diagnostic attempts)](bcap-pure.md#cohort-cuda-1bf9d7d34422-held) |
 | [formulation_comparison](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [3/3](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [8/12](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [0/1 (1 diagnostic attempt)](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [0/0](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-4) | [11/16 (1 diagnostic attempt)](bcap-pure.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [0/7](bcap-pure.md#cohort-cuda-1bf9d7d34422-held) |
 | [host_profile_transfer](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [3/3](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [8/12](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [0/1 (1 diagnostic attempt)](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [0/0](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-4) | [11/16 (1 diagnostic attempt)](bcap-pure.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [0/7](bcap-pure.md#cohort-cuda-1bf9d7d34422-held) |
 | [quality_coverage](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [3/3](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [8/12](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [0/0](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-4) | [11/15](bcap-pure.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [0/7](bcap-pure.md#cohort-cuda-1bf9d7d34422-held) |
@@ -3405,7 +3405,7 @@ Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_wit
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Run attempt: **FAIL** (current_source_readout; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../records/readout-0df182292d888440f5fb32ce.json).
+Execution: **not run**.
 
 Used by: [discriminator_stability / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -3440,7 +3440,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Run attempt: **FAIL** (current_source_readout; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../records/readout-0df182292d888440f5fb32ce.json).
+Execution: **not run**.
 
 Used by: [discriminator_stability / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -3606,7 +3606,7 @@ Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_wit
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Run attempt: **FAIL** (current_source_readout; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../records/readout-d278a74af331d2f3b7807234.json).
+Execution: **not run**.
 
 Used by: [discriminator_stability / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -3646,7 +3646,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Run attempt: **FAIL** (current_source_readout; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../records/readout-d278a74af331d2f3b7807234.json).
+Execution: **not run**.
 
 Used by: [discriminator_stability / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bcap-pure.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 

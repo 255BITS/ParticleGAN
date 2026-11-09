@@ -972,8 +972,6 @@ Test: `model_ae_gan_multimodal` · Required for qualification and included in fu
 - Standalone bounded API research (`bispf-optimized-quintic-v1` on CPU) passes all eight sustained gates (`reconstruction_mse = 0.00927`, `precision = 0.9968`, `mass_tv = 0.1177 <= 0.15`).
 - That CPU research cohort is separate from the ordinary CUDA selected-family rows and does not fill `bispf-v1`'s unmeasured cell.
 
-**Scope correction for retained diagnostic observations.** Formulaic runner changes selected recipe noise settings or E22 mechanisms without a distinct adapted-candidate identity and complete resolved-recipe/sampling witness. Original outcomes remain archived; they do not establish the declared unassisted recipe/task claim. [Exact observation identities](evidence-corrections-2026-11-08.json).
-
 **Selected recipes' recorded results:**
 
 | Selected recipe | Result |

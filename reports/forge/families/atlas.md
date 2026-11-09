@@ -202,10 +202,10 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1) | PASS | matches recorded run |
 | [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | FAIL | changed since run |
 | [gaussian1d_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_smoke) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | PASS | matches recorded run |
-| [model_ae_gan_multimodal](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_gan_multimodal) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | FAIL | matches recorded run |
-| [model_ae_reconstruction](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_reconstruction) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | PASS | matches recorded run |
-| [model_vae_categorical](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_categorical) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | PASS | matches recorded run |
-| [model_vae_hard](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_hard) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | PASS | matches recorded run |
+| [model_ae_gan_multimodal](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_gan_multimodal) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | FAIL | changed since run |
+| [model_ae_reconstruction](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_reconstruction) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | PASS | changed since run |
+| [model_vae_categorical](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_categorical) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | PASS | changed since run |
+| [model_vae_hard](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_hard) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | PASS | changed since run |
 | [ring16_acquisition](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition) | [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1) | FAIL | matches recorded run |
 | [two_pole](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-two_pole) | [adaptation](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-1) | FAIL | matches recorded run |
 | [unused_token_hold](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-unused_token_hold) | [adaptation](atlas.md#cohort-cuda-bc3debd3fa5e-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-bc3debd3fa5e-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-bc3debd3fa5e-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-bc3debd3fa5e-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-bc3debd3fa5e-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-bc3debd3fa5e-quality_coverage-tier-1) | PASS | matches recorded run |
@@ -836,10 +836,10 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [ring16_acquisition](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-ring16_acquisition) | required | FAIL | matches recorded run |
 | [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | required | FAIL | changed since run |
 | [zero_tanh_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-zero_tanh_smoke) | required | PASS | matches recorded run |
-| [model_ae_gan_multimodal](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_gan_multimodal) | required | FAIL | matches recorded run |
-| [model_ae_reconstruction](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_reconstruction) | required | PASS | matches recorded run |
-| [model_vae_categorical](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_categorical) | required | PASS | matches recorded run |
-| [model_vae_hard](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_hard) | required | PASS | matches recorded run |
+| [model_ae_gan_multimodal](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_gan_multimodal) | required | FAIL | changed since run |
+| [model_ae_reconstruction](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_reconstruction) | required | PASS | changed since run |
+| [model_vae_categorical](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_categorical) | required | PASS | changed since run |
+| [model_vae_hard](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_hard) | required | PASS | changed since run |
 | [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
 | [precision_gaussian_fp32](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-precision_gaussian_fp32) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [precision_gaussian_mxfp8](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-precision_gaussian_mxfp8) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | UNKNOWN | recorded definition unavailable |
@@ -1335,11 +1335,11 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 | [five_word_joint_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_smoke) | diagnostic | FAIL | changed since run |
 | [zero_tanh_smoke](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-zero_tanh_smoke) | diagnostic | PASS | matches recorded run |
 | [model_ae_ddgan_gaussian_chain](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_ddgan_gaussian_chain) | diagnostic | FAIL | changed since run |
-| [model_ae_gan_multimodal](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_gan_multimodal) | diagnostic | FAIL | matches recorded run |
-| [model_ae_reconstruction](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_reconstruction) | diagnostic | PASS | matches recorded run |
+| [model_ae_gan_multimodal](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_gan_multimodal) | diagnostic | FAIL | changed since run |
+| [model_ae_reconstruction](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ae_reconstruction) | diagnostic | PASS | changed since run |
 | [model_ddgan_gaussian_chain](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_ddgan_gaussian_chain) | diagnostic | FAIL | changed since run |
-| [model_vae_categorical](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_categorical) | diagnostic | PASS | matches recorded run |
-| [model_vae_hard](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_hard) | diagnostic | PASS | matches recorded run |
+| [model_vae_categorical](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_categorical) | diagnostic | PASS | changed since run |
+| [model_vae_hard](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-model_vae_hard) | diagnostic | PASS | changed since run |
 | [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
 | [clockfree_audit](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-clockfree_audit) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [gaussian1d_stability](atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_stability) | diagnostic | UNKNOWN | matches recorded run |
@@ -4271,7 +4271,7 @@ Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_wit
 
 **model_ae_gan_multimodal: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_gan_multimodal.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -4327,7 +4327,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 **model_ae_reconstruction: PASS**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_reconstruction.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -4563,7 +4563,7 @@ Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_wit
 
 **model_vae_categorical: PASS**. [Current experiment declaration](../../../configs/forge/tasks/model_vae_categorical.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
@@ -4628,7 +4628,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 **model_vae_hard: PASS**. [Current experiment declaration](../../../configs/forge/tasks/model_vae_hard.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
