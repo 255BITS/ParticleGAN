@@ -1643,7 +1643,7 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         # Gaps and operational outcomes must remain visible, never filled with
         # diagnostic grades to satisfy an all-binary/no-unknown display rule.
         assert required_tasks <= seen, (family_id, sorted(required_tasks - seen))
-        for task_id in ("precision_gaussian_mxfp8", "precision_gaussian_nvfp4"):
+        for task_id in ("precision_gaussian_mxfp8", "precision_gaussian_nvfp4", "ring16_acquisition_6400"):
             assert original_cohort["tasks"][task_id]["status"] == "UNKNOWN"
             assert task_id in seen
 
@@ -1856,7 +1856,7 @@ def test_republish_registered_inventory_end_to_end_recovers_missing_and_unverifi
         # detected and repaired without inventing a new-source measurement.
         orig_md = md_path.read_text()
         stale_md, mutations = re.subn(
-            r"(\*\*\[)(\d+)(/\d+\]\(families/atlas\.md#[^)]+-tier-1\)\*\*)",
+            r"(\*\*\[)(\d+)(/\d+(?: \([^)\n]+\))?\]\(families/atlas\.md#[^)]+-tier-1\)\*\*)",
             lambda match: f"{match[1]}{int(match[2]) + 1}{match[3]} (7 not run)",
             orig_md,
             count=1,

@@ -1099,8 +1099,9 @@ def test_real_selected_bispf_headline_keeps_all_eleven_failures_after_restoring_
     cohort = next(cohort for family, cohort in _selected_cohorts(progress) if family["id"] == "bispf")
     counts = full_suite_outcomes(cohort, full_suite_tasks(progress))
     # New model-mode research keeps its own source; it cannot fill eight new
-    # cells in the previously selected whole recipe's ordinary evidence.
-    assert counts == {"passed": 18, "failed": 11, "other": {"UNKNOWN": 32}, "total": 61}
+    # cells in the previously selected whole recipe's ordinary evidence. The
+    # 6,400-update ring revision likewise cannot reuse its 1,600-update PASS.
+    assert counts == {"passed": 17, "failed": 11, "other": {"UNKNOWN": 33}, "total": 61}
     definitions = json.loads((root / "reports/forge/problem-definitions.json").read_text())
     described = {item["task"] for item in definitions["problems"]}
     held = {a["task"] for view in progress["views"] for a in view["assignments"]

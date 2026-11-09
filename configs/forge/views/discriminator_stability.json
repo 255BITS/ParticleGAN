@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "discriminator_stability",
-  "revision": 16,
+  "revision": 17,
   "goal": "discriminator_stability",
   "assignments": [
     {
@@ -32,7 +32,7 @@
       "importance": "required",
       "order": 4,
       "qualification_tier": 1,
-      "task": "ring16_acquisition"
+      "task": "ring16_acquisition_6400"
     },
     {
       "importance": "required",
@@ -562,10 +562,10 @@
     "compare_compatible_cohorts": true,
     "cost_separate": true
   },
-  "policy_change_reason": "Archive the exact develop revision-15 policy, preserving all required, held, and stretch assignments. Add paired Tier 4 stretch task grid100_res16_scaled_tanh alongside unnormalized grid100_mlp16 and grid100_res16_tanh; required qualification and historical numerical results are unchanged.",
+  "policy_change_reason": "Preserve the complete revision-16 policy and replace only ring16_acquisition with its separately identified 6,400-update revision. Drop the network-rate horizon cap in declared K3P/KA2 v2 cards; archived measurements and qualification remain unchanged.",
   "previous_revision": {
-    "archive": "configs/forge/view-history/discriminator_stability-v15.json",
-    "policy_fingerprint": "ad156a02a8d44077d707f1324959b0b865824411ca08d9b5d5098ae7d1a69497",
-    "revision": 15
+    "archive": "configs/forge/view-history/discriminator_stability-v16.json",
+    "policy_fingerprint": "827b86fe077caf18c6b6a1e0b8dd70076ab5ddcd53f26d424f18bb063118cd23",
+    "revision": 16
   }
 }
