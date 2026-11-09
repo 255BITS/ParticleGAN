@@ -129,6 +129,8 @@ class Recipe:
     distance_reduction: str = "sum"
     observation_sigma: float = 0.03
     reconstruction_weight: float = 1.0
+    conditional_energy_weight: float = 0.0
+    conditional_energy_samples: int = 8
     # Opt-in label-free transport signal on the same G-phase target batch.
     kinetic_transport_weight: float = 0.0
     generator_gradient_response: str = "none"
@@ -314,6 +316,9 @@ class Recipe:
         return cls(**{**defaults, **saved_fields})
 
     def __post_init__(self):
+        if (type(self.conditional_energy_samples) is not int
+                or self.conditional_energy_samples < 2):
+            raise ValueError("conditional_energy_samples must be an integer >= 2")
         if type(self.bispf_shape_gates) is not bool:
             raise ValueError("bispf_shape_gates must be a boolean")
         overrides = self.bispf_gate_overrides
@@ -669,7 +674,7 @@ class Recipe:
         if type(self.direct_particle_gain) is not bool:
             raise ValueError("direct_particle_gain must be a boolean")
         for key in ("reg_coeff", "reg_kappa", "reg_anchor_weight", "prior_reg", "ucd_weight",
-                    "reconstruction_weight"):
+                    "reconstruction_weight", "conditional_energy_weight"):
             if not math.isfinite(getattr(self, key)) or getattr(self, key) < 0:
                 raise ValueError(f"{key} must be finite and nonnegative")
         if (type(self.joint_reconstruction_weight) not in (int, float)

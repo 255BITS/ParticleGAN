@@ -154,7 +154,7 @@ def test_zero_recipe_bloat():
     # Recipe field count invariant
     # Independently declared objectives may extend the schema; loss-surprise
     # still contributes no public recipe fields.
-    additions = ('reg_real_weight', 'reg_fake_weight', 'joint_reconstruction_weight')
+    additions = ('reg_real_weight', 'reg_fake_weight', 'joint_reconstruction_weight', 'conditional_energy_weight', 'conditional_energy_samples')
     assert set(additions) <= field_names
     assert len(field_names - set(additions)) == 118
 

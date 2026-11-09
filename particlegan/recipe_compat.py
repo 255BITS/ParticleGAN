@@ -3,6 +3,7 @@
 SEARCH_RECIPE_DEFAULTS = {
     "reg_real_weight": 1.0, "reg_fake_weight": 1.0,
     "joint_reconstruction_weight": 0.0,
+    "conditional_energy_weight": 0.0, "conditional_energy_samples": 8,
     "training_precision": "float32",
     "prior_update": "learned", "prior_regularizer": "vicreg",
     "prior_coulomb_softening": .1, "prior_coulomb_confinement": .35, "prior_coulomb_neighbors": 8,

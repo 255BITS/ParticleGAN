@@ -320,6 +320,11 @@
       "goal": "api-toy-contract",
       "current": "reports/toy_audit/api_contract/LEADERBOARD.md",
       "description": "Sorted results of the public-API toy test contract registry."
+    },
+    {
+      "goal": "ddgan-conditional-repair-v1",
+      "current": "reports/forge/leaderboards/ddgan_conditional_repair.md",
+      "description": "Scoped strict DDGAN conditional repair study; archived negative results, no default promotion."
     }
   ],
   "not_leaderboards": [
