@@ -7,6 +7,7 @@ evaluators. Their effective recipe and sampling law travel with every receipt.
 from __future__ import annotations
 
 from copy import deepcopy
+from functools import wraps
 import hashlib
 import json
 import math
@@ -307,6 +308,8 @@ class _Run:
         self.output.mkdir(parents=True, exist_ok=True)
         self.started = time.monotonic()
         self.finite = True
+        self.measuring = False
+        self.measured_weights = set()
         self.rng_audits = []
         self.last_update = {}
         self.policy_audit = None
@@ -339,6 +342,17 @@ class _Run:
                 with self.timing.measure("sampling"):
                     return original_sample(*args, **kwargs)
             trainer.sample = measured_sample
+        original_measured_sample = trainer.sample
+        @wraps(original_measured_sample)
+        def observed_sample(*args, **kwargs):
+            # ema=False may still select policy-swapped averaged parameters.
+            weights = "ema" if kwargs.get("ema", False) else (
+                "served_average" if trainer.policy._fast is not None else "live")
+            result = original_measured_sample(*args, **kwargs)
+            if self.measuring:
+                self.measured_weights.add(weights)
+            return result
+        trainer.sample = observed_sample
 
     def step(self, real):
         before = self.trainer.completed_steps
@@ -360,8 +374,12 @@ class _Run:
         before = self.context.streams.audit()
         cpu = torch.get_rng_state().clone()
         cuda = torch.cuda.get_rng_state(self.context.device).clone() if self.context.device.type == "cuda" else None
-        with self.timing.measure("evaluation"):
-            result = function()
+        self.measuring = True
+        try:
+            with self.timing.measure("evaluation"):
+                result = function()
+        finally:
+            self.measuring = False
         after = self.context.streams.audit()
         bindings = self.context.streams.manifest()["bindings"]
         allowed = [key for key, value in bindings.items() if value["family"] == "eval"]
@@ -422,6 +440,9 @@ class _Run:
                   "unintended_rng_deviations": sum(a["unintended_rng_deviations"] for a in self.rng_audits)}
         evidence = {**evidence, "guards": guards, "rng_audits": self.rng_audits,
                     **self.sampling_policy}
+        if self.measured_weights:
+            evidence["executed_scoring_weights"] = (next(iter(self.measured_weights))
+                if len(self.measured_weights) == 1 else "mixed")
         if self.optimizer_diagnostics is not None:
             evidence["optimizer_diagnostics"] = self.optimizer_diagnostics.receipt()
         if self.policy_audit is not None:

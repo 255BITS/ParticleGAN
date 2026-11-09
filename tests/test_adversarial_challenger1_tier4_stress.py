@@ -9,8 +9,8 @@ Adversarially stresses and verifies:
    - Permutation symmetry invariance under all 4! = 24 permutations
 2. TanhRailGuard:
    - Extreme pre-activations u in [-10^6, 10^6] bounded strictly below rail saturation
-   - Hostile critic gradient rejection: restoring penalty gradient dominates adversarial push
-   - Monotonic growth of restoring force as |u| increases
+   - Exact first/second derivatives and linear upstream gradient response
+   - Zero upstream signal produces zero gradient
    - NaN / Inf input propagation and detection
 3. ScaledResidualMLPGenerator:
    - Variance preservation across depth (1/sqrt(2N) scaling vs unscaled explosion)
@@ -225,8 +225,8 @@ class TestPacGAN4RepulsionDiscriminatorAdversarial:
 # ==============================================================================
 
 class TestTanhRailGuardAdversarial:
-    """Stress-test TanhRailGuard under extreme pre-activations, hostile critic gradients,
-    restoring force monotonicity, and non-finite input propagation.
+    """Stress-test TanhRailGuard under extreme pre-activations, exact derivatives,
+    upstream gradients, and non-finite input propagation.
     """
 
     @pytest.mark.parametrize("u_val", [-1e6, -1e5, -1e4, -100.0, -10.0, 0.0, 10.0, 100.0, 1e4, 1e5, 1e6])
@@ -245,45 +245,22 @@ class TestTanhRailGuardAdversarial:
         loss.backward()
         assert math.isfinite(u.grad.item()), f"Gradient is non-finite for u={u_val}"
 
-    def test_hostile_critic_gradient_rejection_and_restoring_force(self):
-        """Adversarial Attack: Critic supplies maximum allowable adversarial gradient
-        (grad_output = -5.0) to maliciously push an already-positive pre-activation (u = 50.0)
-        toward +infinity.
-        Verify that TanhRailGuard's restoring penalty gradient overwhelms the critic and
-        strictly preserves grad_u > 0 (driving u BACK toward 0 under gradient descent).
-        """
-        scale = 5.25
-        # 1. Positive extreme with hostile negative gradient
-        for u_pos in [15.0, 50.0, 100.0, 1000.0, 1e6]:
-            u = torch.tensor([u_pos], dtype=torch.float32, requires_grad=True)
-            out = TanhRailGuard.apply(u, scale)
-            # Hostile critic gradient trying to blow up u
-            out.backward(gradient=torch.tensor([-5.0]))
-            assert u.grad.item() > 0.0, f"Restoring force failed for u={u_pos}: grad_u = {u.grad.item()}"
+    def test_upstream_gradient_sign_and_magnitude_are_preserved(self):
+        """The head differentiates its forward, without clipping or competing forces."""
+        for value in (-50., -10., 1., 10., 50.):
+            for upstream in (-100., -5., 0., 5., 100.):
+                u = torch.tensor([value], dtype=torch.float64, requires_grad=True)
+                out = TanhRailGuard.apply(u)
+                derivative = torch.autograd.grad(out, u, retain_graph=True)[0]
+                observed = torch.autograd.grad(out, u, torch.full_like(out, upstream))[0]
+                torch.testing.assert_close(observed, upstream * derivative)
+                if upstream == 0.:
+                    assert torch.equal(observed, torch.zeros_like(observed))
 
-        # 2. Negative extreme with hostile positive gradient
-        for u_neg in [-15.0, -50.0, -100.0, -1000.0, -1e6]:
-            u = torch.tensor([u_neg], dtype=torch.float32, requires_grad=True)
-            out = TanhRailGuard.apply(u, scale)
-            # Hostile critic gradient trying to blow down u
-            out.backward(gradient=torch.tensor([5.0]))
-            assert u.grad.item() < 0.0, f"Restoring force failed for u={u_neg}: grad_u = {u.grad.item()}"
-
-    def test_restoring_force_monotonic_growth(self):
-        """Stress: In the saturated regime (|u| > 1.5 * scale), the restoring gradient
-        must grow monotonically with |u| to guarantee fast return to the dynamic range.
-        """
-        scale = 5.25
-        u_magnitudes = [10.0, 20.0, 50.0, 100.0, 500.0, 2000.0, 1e5]
-        grads = []
-        for mag in u_magnitudes:
-            u = torch.tensor([mag], dtype=torch.float32, requires_grad=True)
-            out = TanhRailGuard.apply(u, scale)
-            out.backward(gradient=torch.tensor([0.0]))  # Only restoring penalty
-            grads.append(u.grad.item())
-
-        for i in range(len(grads) - 1):
-            assert grads[i] < grads[i + 1], f"Restoring gradient failed to grow monotonically: {grads}"
+    def test_first_and_second_derivatives_match_forward(self):
+        u = torch.tensor([-12., -3., 0., 1., 12.], dtype=torch.float64, requires_grad=True)
+        assert torch.autograd.gradcheck(TanhRailGuard.apply, (u,))
+        assert torch.autograd.gradgradcheck(TanhRailGuard.apply, (u,))
 
     def test_nan_and_inf_propagation_and_rejection(self):
         """Stress: NaN or Inf pre-activations must propagate cleanly as NaN so downstream

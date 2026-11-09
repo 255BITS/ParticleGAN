@@ -56,6 +56,13 @@ def test_new_comparison_contract_blocks_archived_study_before_queue(tmp_path, mo
         runner.plan_study(spec_for(tmp_path), cases=CURRENT_DISCOVERY())
 
 
+def test_archived_case_fixture_is_independent_of_current_discovery(monkeypatch):
+    import legacy_toy_comparisons as legacy
+    monkeypatch.setattr(legacy, "CURRENT_DISCOVERY", lambda: pytest.fail("archive fixture consulted live discovery"))
+    cards = legacy.archived_cases([name for name, _, _ in runner.CASE_ROWS], monkeypatch)
+    assert [runner.digest(cards[name]) for name, _, _ in runner.CASE_ROWS] == list(runner.CASE_SHA256)
+
+
 def spec_for(tmp_path):
     path = tmp_path / "capacity.json"
     requested = [{"family": family, "case_id": name} for family in runner.FAMILIES for name, _, _ in runner.CASE_ROWS]
@@ -262,8 +269,10 @@ def test_child_resource_bootstrap_before_unchanged_public_main(tmp_path, cases, 
 
 @pytest.mark.parametrize("family", ["atlas", "e22"])
 @pytest.mark.parametrize("identifier", ["api-vector-two-broad", "image-develop-img_intensity2-source-transpose12"])
-def test_three_fields_bind_actual_public_optimizers_before_two_updates(cases, family, identifier):
-    fixture = api_contract.build(cases[identifier], device="cpu", recipe_name=family,
+def test_current_software_three_fields_bind_public_optimizers_before_two_updates(family, identifier):
+    # Current seed-0 software cohort, not replay of the archived experiment.
+    case = CURRENT_DISCOVERY()[identifier]
+    fixture = api_contract.build(case, device="cpu", recipe_name=family,
                                  max_steps=2, recipe_overrides=runner.OVERRIDES)
     assert fixture.recipe.lr == .0053125 and fixture.recipe.d_lr_mult == 2.25 and fixture.recipe.prior_lr_mult == 1.5
     assert fixture.trainer.opt_d.param_groups[0]["lr"] == .0053125 * 2.25
@@ -274,7 +283,7 @@ def test_three_fields_bind_actual_public_optimizers_before_two_updates(cases, fa
     fixture.step(); fixture.step()
     assert fixture.trainer.completed_steps == 2
     assert any(not torch.equal(a, b) for a, b in zip(before, fixture.trainer.D.parameters()))
-    assert api_run.json_value(fixture.recipe.to_dict()) == api_family_search.resolved_recipe(cases[identifier], family, runner.OVERRIDES)
+    assert api_run.json_value(fixture.recipe.to_dict()) == api_family_search.resolved_recipe(case, family, runner.OVERRIDES)
 
 
 def test_reservation_refuses_next_full_task_when_budget_used(tmp_path, cases, monkeypatch):

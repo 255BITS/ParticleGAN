@@ -22,6 +22,7 @@ from benchmarks.toy_audit import api_vectors as api
 from benchmarks.toy_audit.api_vectors import (
     ResidualMLPGenerator,
     ScaledResidualMLPGenerator,
+    ScaledSimpleMLPGenerator,
 )
 from lib.toy_models import SimpleMLPGenerator
 
@@ -93,7 +94,7 @@ def test_level1_oracle_grid100_res16_tanh_200_trials():
 
 def test_level2_constructive_capacity_mlp16_identity_representation():
     case = next(c for c in api.list_cases() if c["id"] == "api-grid100-mlp16")
-    gen = SimpleMLPGenerator(z_dim=2, hidden_dim=128, n_hidden=16, out_dim=2, use_norm=False)
+    gen = SimpleMLPGenerator(z_dim=2, hidden_dim=128, n_hidden=16, out_dim=2)
 
     # Verify structural depth: 16 hidden layers (17 linear layers total)
     linears = [m for m in gen.net if isinstance(m, torch.nn.Linear)]
@@ -146,7 +147,7 @@ def test_level2_constructive_capacity_mlp16_identity_representation():
 def test_level2_constructive_capacity_res16_tanh():
     case = next(c for c in api.list_cases() if c["id"] == "api-grid100-res16-tanh")
     scale = case.get("scale", 5.25)
-    gen = ResidualMLPGenerator(z_dim=2, hidden_dim=128, n_blocks=7, out_dim=2, scale=scale, use_norm=False)
+    gen = ResidualMLPGenerator(z_dim=2, hidden_dim=128, n_blocks=7, out_dim=2, scale=scale)
 
     # Verify structural depth: 1 stem + 7 blocks * 2 linears + 1 head = 16 linear layers
     linears = [m for m in gen.modules() if isinstance(m, torch.nn.Linear)]
@@ -200,7 +201,7 @@ def test_level2_scaled_residual_architecture_and_saturation_guard():
     loss = out.sum()
     loss.backward()
     assert torch.all(torch.isfinite(extreme_z.grad)), "Expected finite gradients through TanhRailGuard"
-    assert torch.all(torch.abs(extreme_z.grad) > 0.0), "Expected non-vanishing gradient restoring force"
+    assert torch.all(torch.abs(extreme_z.grad) > 0.0), "Expected a nonzero derivative of the soft-bounded forward"
 
 
 def test_level2_paired_scaled_residual_norm_preserving_transport():
@@ -226,8 +227,9 @@ def test_level2_paired_scaled_residual_norm_preserving_transport():
 
 
 def test_level2_deep_mlp16_layernorm_architecture():
-    gen = SimpleMLPGenerator(z_dim=2, hidden_dim=128, n_hidden=16, out_dim=2)
+    gen = ScaledSimpleMLPGenerator(z_dim=2, hidden_dim=128, n_hidden=16, out_dim=2, use_norm=True)
 
+    # This explicit normalized variant is separate from the unnormalized task.
     # 1. Structural depth: 16 hidden layers (17 linear layers) + 16 LayerNorm layers
     linears = [m for m in gen.net if isinstance(m, torch.nn.Linear)]
     norms = [m for m in gen.net if isinstance(m, torch.nn.LayerNorm)]
