@@ -160,6 +160,16 @@ per-mode moments before another supported, bounded training hypothesis. No
 automatic matrix filling, tuning, seed study, continuation or promotion follows.
 
 The history, recall, compile, validate, and board commands launch no training.
+The alternate `ops/formulaic_coverage.py` executor is retired after the
+[2026-11-08 scientific audit](reports/gpt-audit-2026-11-08.md). It changed
+recipes and host update rules outside ordinary admission. Its old receipts
+remain source-bound diagnostic evidence; a reporting refresh must not repeat
+them or use them to qualify a corrected implementation. Use the frozen-study
+workflow above for new measurements. An unsupported public adapter remains
+BLOCKED, and a correctly measured numerical FAIL remains FAIL. The ownership,
+sampler, architecture and continuation boundaries in [AGENTS.md](AGENTS.md)
+apply to every execution path, including coverage diagnostics.
+
 Recall includes source-bound concluded configuration and policy publications as
 non-qualifying summaries. It returns compact source identity pins and a file
 count by default. Add `recall --full-provenance` when the complete source-file

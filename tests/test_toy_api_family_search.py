@@ -81,6 +81,35 @@ def test_actual_public_recipe_knobs_applied_before_optimizer_and_updated(cases, 
     search._check_health(fixture.state_dict(), cases[identifier], fixture.recipe.to_dict(), completed_steps=2)
 
 
+@pytest.mark.parametrize("family", ["atlas", "e22", "bispf"])
+def test_vector_recipe_identity_excludes_hidden_task_trainer_fields(family):
+    from benchmarks.toy_audit import api_vectors
+    case = api_contract.discover()["api-vector-two-broad"]
+    case["spec"].update(lr=9., d_lr_mult=8., prior_lr_mult=7., prior_reg=6.,
+                        betas=[.1, .2], ema_decay=.3)
+    case["recipe_overrides"] = {"loss": "hinge", "lr": 100.}
+    knobs = {"lr": .0053125, "prior_lr_mult": 1.5, "d_lr_mult": 2.25}
+    resources = dict(num_particles=case["particles"], z_dim=case["z_dim"], batch_size=case["batch_size"])
+    if get_recipe(family).continuous_policy is None:
+        resources["total_steps"] = case["default_steps"]
+    expected = get_recipe(family, **resources, **knobs)
+    fixture = api_vectors.VectorFixture(case, recipe_name=family, recipe_overrides=knobs, max_steps=1)
+    assert fixture.recipe == expected
+    assert search.resolved_recipe(case, family, knobs) == api_run.json_value(expected.to_dict())
+    assert search.host_recipe_options(case, family) == resources
+
+
+def test_vector_recipe_identity_retains_declared_mog_initial_law():
+    from benchmarks.toy_audit import api_vectors
+    case = api_contract.discover()["api-grid100-res16-scaled-tanh"]
+    case.update(particles=32, batch_size=16)
+    fixture = api_vectors.VectorFixture(case, recipe_name="bispf", max_steps=1)
+    expected = get_recipe("bispf", num_particles=32, batch_size=16, z_dim=case["z_dim"],
+                          total_steps=case["default_steps"], prior_kind="mog", standardize=False, sigma_rel=.025)
+    assert fixture.recipe == expected
+    assert search.resolved_recipe(case, "bispf", {}) == api_run.json_value(expected.to_dict())
+
+
 @pytest.mark.parametrize("override", [{"z_dim": 1}, {"prior_kind": "mog"}, {"num_particles": 1},
                                       {"continuous_policy": None}, {"lr": float("nan")}])
 def test_host_sampler_and_invalid_public_fields_rejected_before_optimizers(cases, monkeypatch, override):

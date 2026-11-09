@@ -277,6 +277,26 @@ def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer
                 blockers = task_preflight(deepcopy(task), candidate, {}, root=ROOT, tasks=tasks)
                 assert f"{task['id']}: evaluator source changed; revise the task definition: {path}" in blockers
                 continue
+            if task["adapter"] == "public_api_model_toy" and path in {
+                    "benchmarks/toy_audit/api_contract.py", "benchmarks/toy_audit/api_run.py"}:
+                # The original model cohort retains its exact contract bytes.
+                # Capability admission changes do not rebind that evidence.
+                frozen = archived_contract_bytes("model_toy_api_callers", path)
+                from pr_integration_compat import before_pr_integration
+                original = before_pr_integration(
+                    ROOT, task, "configs/forge/tasks/" + task["id"] + ".json")
+                assert hashlib.sha256(frozen).hexdigest() == original["evaluation"]["sources"][path]
+                if original != task:
+                    # The receipt verifies each source-only parent and every
+                    # current pin. Frozen evidence retains its archived bytes.
+                    assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == digest
+                    continue
+                if hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != digest:
+                    from experiments.forge.preflight import task_preflight
+                    candidate = json.loads((ROOT / "configs/forge/ideas/k3p.json").read_text())
+                    blockers = task_preflight(deepcopy(task), candidate, {}, root=ROOT, tasks=tasks)
+                    assert f"{task['id']}: evaluator source changed; revise the task definition: {path}" in blockers
+                continue
             if path in {"benchmarks/toy_audit/api_model_ae.py",
                         "benchmarks/toy_audit/api_model_ddgan.py",
                         "benchmarks/toy_audit/api_model_vae.py"}:

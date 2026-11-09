@@ -30,9 +30,13 @@ def frozen_restoration_source(root, relative, expected):
 
 
 def model_source_blockers(root, task):
-    """Expected current preflight refusal; frozen source hashes remain intact."""
+    """Expected refusal for any changed source, independent of rename proofs.
+
+    The exact frozen-byte proof above applies only to its declared restoration
+    modules. Other source changes also require a new cohort; returning a blocker
+    here neither reconstructs their original bytes nor admits their new bytes.
+    """
     for relative, expected in task["evaluation"].get("sources", {}).items():
-        frozen_restoration_source(root, relative, expected)
         if sha256((Path(root) / relative).read_bytes()).hexdigest() != expected:
             return [f"model source binding differs: {relative}"]
     return []

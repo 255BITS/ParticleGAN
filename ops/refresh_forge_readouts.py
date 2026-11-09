@@ -501,7 +501,8 @@ def check_scaling_performance(root: Path) -> dict[str, Any]:
     }
 
 
-def check_attempt_coverage(root: Path) -> dict[str, Any]:
+def check_retained_diagnostic_integrity(root: Path) -> dict[str, Any]:
+    """Check retained observation bookkeeping without asserting formula faithfulness."""
     root = Path(root).resolve()
     pub_path = root / "reports/forge/technique-inventory.json"
     cov_path = root / "reports/forge/attempt-coverage.json"
@@ -509,6 +510,10 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
         return {"current": False, "reason": "missing_report"}
     publication = read_json(pub_path)
     coverage = read_json(cov_path)
+    recorded_hash = publication.get("family_progress", {}).get("input_hashes", {}).get(
+        "reports/forge/attempt-coverage.json")
+    if recorded_hash is not None and file_hash(cov_path) != recorded_hash:
+        return {"current": False, "scope": "retained_diagnostic_integrity", "reason": "coverage_digest_changed"}
     summary = coverage.get("summary", {})
     pending = int(summary.get("pending", 0))
     running = int(summary.get("running", 0))
@@ -535,7 +540,7 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
         recorded_names = sorted({*json.loads(text)["tests"], "ring_hold"})
         unmeasured_current_tasks = sorted(set(full_suite_names or []) - set(recorded_names))
         full_suite_names = recorded_names
-    valid_statuses = {"PASS", "FAIL"} if full_suite_names is not None else attempt_coverage.DONE
+    valid_statuses = attempt_coverage.DONE
 
     selected = attempt_coverage.selected_tasks(publication)
     expected_selected: dict[str, tuple[str, str, str, list[str]]] = {}
@@ -598,12 +603,246 @@ def check_attempt_coverage(root: Path) -> dict[str, Any]:
     current = pending == 0 and running == 0 and not superseded_records and not missing_by_family
     return {
         "current": current,
+        "scope": "retained_diagnostic_integrity",
+        "qualification_input": False,
+        "qualification_reuse": False,
         "pending": pending,
         "running": running,
         "superseded_record_count": len(superseded_records),
         "missing_by_family": missing_by_family,
         "unmeasured_current_tasks": unmeasured_current_tasks,
     }
+
+
+def _coverage_producer_errors(root: Path, record: dict, request: dict, task: dict, job: dict) -> list[str]:
+    """Verify the witness against its durable producer, never a display label.
+
+    Producer receipts retain their original bytes. Reading and independently
+    grading current-source raw evidence does not rewrite a historical result.
+    Task graders own full-budget/cadence/stopping requirements; a generic step
+    comparison would incorrectly accept partial traces or reject valid stops.
+    """
+    from experiments.forge.views import grade_result
+
+    producer = record.get("producer", {})
+    if not isinstance(producer, dict):
+        return ["missing_or_invalid_producer_receipt"]
+    try:
+        attempt_id = identifier(producer.get("attempt_id"), "producer attempt")
+        directory = root / "reports/forge/attempts" / attempt_id
+        resolved = read_json(directory / "request.json")
+        result = read_json(directory / "result.json")
+        certificate = read_json(directory / "evidence.json")
+    except (OSError, ValueError, TypeError):
+        return ["missing_or_invalid_producer_receipt"]
+    if not all(isinstance(value, dict) for value in (resolved, result, certificate)):
+        return ["missing_or_invalid_producer_receipt"]
+    frozen = resolved.get("request", resolved)
+    digest = stable_hash(result)
+    if (producer.get("result_hash") != digest or certificate.get("result_hash") != digest
+            or certificate.get("source") != frozen.get("source")
+            or certificate.get("runtime") != frozen.get("runtime")
+            or result.get("attempt_id") != attempt_id
+            or result.get("candidate_revision") != request["candidate_revision"]
+            or result.get("retry_of") != resolved.get("retry_of")):
+        return ["invalid_producer_certificate"]
+    if (any(frozen.get(key) != request.get(key) for key in
+            ("candidate_revision", "runtime", "protocol"))
+            or frozen.get("source", {}).get("digest") != request["source"]["digest"]
+            or frozen.get("candidate", {}).get("id") != request["candidate"]["id"]):
+        return ["stale_producer_contract"]
+    name = task["id"]
+    frozen_task = frozen.get("tasks", {}).get(name)
+    if (not frozen_task or task_execution_fingerprint(frozen_task) != task_execution_fingerprint(task)
+            or task_evaluation_fingerprint(frozen_task) != task_evaluation_fingerprint(task)):
+        return ["stale_producer_task"]
+    producer_jobs = [item for item in frozen.get("jobs", [])
+                     if name in item.get("task_ids", [item.get("task_id")])]
+    if (len(producer_jobs) != 1 or not job.get("science")
+            or job.get("compatibility_key") != stable_hash(job["science"])
+            or producer_jobs[0].get("science") != job["science"]
+            or producer_jobs[0].get("compatibility_key") != job["compatibility_key"]):
+        return ["producer_job_mismatch"]
+    rows = [row for row in result.get("task_results", []) if row.get("task_id") == name]
+    if (len(rows) != 1 or rows[0].get("compatibility_key") != job["compatibility_key"]
+            or rows[0].get("observed_contract") != record["observed_contract"]
+            or rows[0].get("gate_status") != record["status"]
+            or rows[0].get("raw_status") != "completed"):
+        return ["producer_observation_mismatch"]
+    raw = result.get("raw", {})
+    raw_result = raw.get("result", {})
+    if raw.get("attempt_status") != "completed" or not isinstance(raw_result, dict) or not raw_result:
+        return ["missing_completed_producer_evidence"]
+    member_raw = raw_result.get("task_results", {}).get(name, raw_result)
+    applied = member_raw.get("applied", member_raw)
+    recipe = applied.get("recipe_serialized", applied.get("recipe"))
+    if (not recipe or stable_hash(recipe) != stable_hash(record["observed_contract"]["resolved_recipe"])
+            or applied.get("initializer") != record["observed_contract"]["initializer"]
+            or applied.get("rng", {}).get("seed") != request["protocol"]["seed"]):
+        return ["producer_applied_contract_mismatch_or_missing"]
+    if frozen.get("requires_independent_grading"):
+        grading = raw.get("grading", {})
+        if (grading.get("raw_hash") != stable_hash(raw_result)
+                or grading.get("source_digest") != request["source"]["digest"]):
+            return ["invalid_producer_grading_certificate"]
+        grade = grading.get("grades", {}).get(name, {})
+    else:
+        continuation = member_raw.get("evidence", {}).get("continuity", {}).get("diagnostic_continuation") is True
+        grade = grade_result(task, member_raw, diagnostic=continuation)
+    if not isinstance(grade, dict) or grade.get("gate_status", grade.get("status")) != record["status"]:
+        return ["producer_grade_mismatch_or_incomplete"]
+    return []
+
+
+def _coverage_observation_errors(root: Path, record: dict, request: dict, task: dict, job: dict) -> list[str]:
+    """Compare observed execution witnesses to the current frozen contract.
+
+    Compact historical rows lacking a witness stay useful diagnostics. Expected
+    declarations cannot be copied into a row to reconstruct missing observations.
+    """
+    from experiments.forge.api import task_formulation_context
+    from experiments.forge.initialization import task_initializer
+    from experiments.forge.publication_integrity import coverage_disposition, IDENTITY_FIELDS
+    from experiments.forge.sampling import validate_declaration
+
+    errors = []
+    try:
+        if coverage_disposition(root, record):
+            errors.append("corrected_archived_diagnostic")
+    except ValueError:
+        errors.append("altered_corrected_observation")
+    if record.get("key") != stable_hash([record.get(field) for field in IDENTITY_FIELDS]):
+        errors.append("invalid_scientific_key")
+    for field, expected in (
+        ("candidate_id", request["candidate"]["id"]),
+        ("candidate_revision", request["candidate_revision"]),
+        ("source_digest", request["source"]["digest"]),
+        ("execution_sha256", task_execution_fingerprint(task)),
+        ("evaluation_sha256", task_evaluation_fingerprint(task)),
+    ):
+        if record.get(field) != expected:
+            errors.append(field + "_mismatch")
+    if not record.get("attempted") or record.get("status") not in {"PASS", "FAIL"}:
+        errors.append("no_completed_numerical_measurement")
+    witness = record.get("observed_contract")
+    if not isinstance(witness, dict) or witness.get("schema_version") != 1:
+        return errors + ["missing_observed_contract"]
+    if not job:
+        return errors + ["missing_current_job_binding"]
+    science = job.get("science", {})
+    protocol = request.get("protocol")
+    if (not protocol or type(protocol.get("seed")) is not int
+            or witness.get("protocol") != protocol
+            or science.get("protocol") != protocol or science.get("seed") != protocol["seed"]):
+        errors.append("protocol_seed_mismatch_or_missing")
+    try:
+        initializer = task_initializer(task, request["candidate"])
+    except (ValueError, KeyError, TypeError):
+        errors.append("unresolved_declared_initializer")
+    else:
+        if (witness.get("initializer") != initializer
+                or science.get("task_initializers", {}).get(task["id"]) != initializer):
+            errors.append("initializer_mismatch_or_missing")
+    for field in ("execution", "evaluation"):
+        if not task.get(field) or witness.get(field) != task[field]:
+            errors.append(field + "_contract_mismatch_or_missing")
+    runtime = science.get("runtime", request.get("runtime"))
+    compute = science.get("compute")
+    if not runtime or witness.get("runtime") != runtime or record.get("runtime") != runtime:
+        errors.append("runtime_mismatch_or_missing")
+    if not compute or witness.get("compute") != compute:
+        errors.append("compute_mismatch_or_missing")
+    try:
+        expected_sampling = validate_declaration(task, required=True)
+    except (ValueError, KeyError, TypeError):
+        return errors + ["unresolved_declared_sampling"]
+    expected_sampling["scoring_weights"] = task.get("evaluation", {}).get("scoring_weights", "live")
+    if witness.get("sampling") != expected_sampling:
+        errors.append("sampling_mismatch_or_missing")
+    if not isinstance(witness.get("resolved_recipe"), dict) or not witness["resolved_recipe"]:
+        errors.append("missing_observed_recipe")
+    elif not errors:
+        # Resolve only for an otherwise compatible observation. This constructs
+        # no networks, optimizers or training run, and never repairs a recipe.
+        try:
+            context = task_formulation_context(request["candidate"], task, request["protocol"],
+                                               device="cpu", root=root)
+            if stable_hash(witness["resolved_recipe"]) != stable_hash(context.recipe.to_dict()):
+                errors.append("resolved_recipe_mismatch")
+        except (ValueError, KeyError, TypeError, RuntimeError) as exc:
+            errors.append("unresolved_recipe:" + type(exc).__name__)
+    if not errors:
+        errors.extend(_coverage_producer_errors(root, record, request, task, job))
+    return errors
+
+
+def check_attempt_coverage(root: Path) -> dict[str, Any]:
+    """Check faithful current-source measurements, separately from archive integrity."""
+    root = Path(root).resolve()
+    path = root / "reports/forge/attempt-coverage.json"
+    if not path.is_file():
+        return {"current": False, "scope": "current_source_measurements", "reason": "missing_report"}
+    coverage = read_json(path)
+    names_path = root / FIXED_TEST_LIST
+    names = set(read_json(names_path)["tests"]) | {"ring_hold"} if names_path.is_file() else set()
+    records = coverage.get("records", [])
+    missing_by_family, invalid_counts, examples, binding_errors = {}, Counter(), [], []
+    accepted_count = 0
+    optional_precision_tasks = set()
+    with planning.resolution_cache(root):
+        for selection in current_family_candidates(root):
+            family, cid = selection["family"], selection["candidate_id"]
+            try:
+                from reports.forge.regenerate_technique_inventory import _resolve_idea_for_readout_check
+                request = _resolve_idea_for_readout_check(
+                    root, cid, view_id="discriminator_stability", through_tier=_discriminator_stability_max_tier(root),
+                    cuda_model=DEFAULT_CUDA_MODEL, planning_mod=planning)
+            except (ValueError, KeyError, TypeError, RuntimeError) as exc:
+                binding_errors.append({"family": family, "candidate_id": cid, "error": str(exc)})
+                missing_by_family[family] = {"candidate_id": cid, "missing_tasks": sorted(names)}
+                continue
+            optional_precision = {assignment["task"] for assignment in request.get("view", {}).get("assignments", [])
+                                  if assignment.get("importance") != "required"
+                                  and request["tasks"].get(assignment["task"], {}).get("execution", {}).get("linear_precision")}
+            required = (names or set(request["tasks"])) - optional_precision
+            optional_precision_tasks.update(optional_precision)
+            jobs = {tid: job for job in request.get("jobs", [])
+                    for tid in job.get("task_ids", [job["task_id"]])}
+            accepted, observations = set(), {}
+            for record in records:
+                if _is_scoped_attempt(record) or record.get("family") != family or record.get("task") not in required:
+                    continue
+                task_name = record["task"]
+                task = request["tasks"].get(task_name)
+                errors = (["missing_current_task_binding"] if task is None else
+                          _coverage_observation_errors(root, record, request, task, jobs.get(task_name, {})))
+                if errors:
+                    invalid_counts.update(errors)
+                    if len(examples) < 12:
+                        examples.append({"family": family, "task": task_name, "reasons": errors})
+                    continue
+                digest = stable_hash(record)
+                if task_name in observations and observations[task_name] != digest:
+                    accepted.discard(task_name)
+                    invalid_counts["conflicting_observations"] += 1
+                    observations[task_name] = None
+                elif task_name not in observations:
+                    observations[task_name] = digest
+                    accepted.add(task_name)
+            accepted_count += len(accepted)
+            missing = sorted(required - accepted)
+            if missing:
+                missing_by_family[family] = {"candidate_id": cid, "missing_tasks": missing}
+    summary = coverage.get("summary", {})
+    pending, running = int(summary.get("pending", 0)), int(summary.get("running", 0))
+    return {"current": not missing_by_family and not binding_errors and pending == 0 and running == 0,
+            "scope": "current_source_measurements", "qualification_reuse": False,
+            "pending": pending, "running": running, "faithful_measured_cells": accepted_count,
+            "missing_by_family": missing_by_family, "binding_errors": binding_errors,
+            "optional_precision_tasks": sorted(optional_precision_tasks),
+            "invalid_record_counts": dict(sorted(invalid_counts.items())), "gap_examples": examples,
+            "note": "Retained diagnostic integrity is checked separately. Missing observed execution witnesses "
+                    "remain measurement gaps; declarations and archived verdicts cannot reconstruct them."}
 
 
 def _concluded_ordinary_records(root: Path) -> list[dict[str, Any]]:
@@ -629,7 +868,6 @@ def _discriminator_stability_max_tier(root: Path) -> int:
 def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA_MODEL) -> dict[str, Any]:
     from reports.forge.regenerate_technique_inventory import (
         _ReadoutCompatibilityMatcher,
-        _load_attempt_coverage_family_verdicts,
         _load_attempt_coverage_task_fps,
         _resolve_idea_for_readout_check,
     )
@@ -637,7 +875,7 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
     root = Path(root).resolve()
     concluded = _concluded_ordinary_records(root)
     coverage_fps = _load_attempt_coverage_task_fps(root)
-    coverage_verdicts = _load_attempt_coverage_family_verdicts(root)
+    coverage_verdicts = {}  # Diagnostic coverage never supplies ordinary task measurements.
     shared_attempt_cache: dict[str, dict[str, Any] | None] = {}
     leaderboard_texts = {}
     for view_id in ORDINARY_LEADERBOARD_VIEWS:
@@ -666,7 +904,7 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
             assignments = req["view"]["assignments"]
             fam_cov = coverage_verdicts.get(family, {})
 
-            def _is_optional_unmeasured_precision(item: dict[str, Any]) -> bool:
+            def _is_optional_precision_tasks(item: dict[str, Any]) -> bool:
                 tid = item["task"]
                 return (
                     item.get("importance") != "required"
@@ -679,7 +917,7 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
                 item["task"]
                 for item in t1_assignments
                 if not req["tasks"][item["task"]].get("preflight_blockers")
-                and not _is_optional_unmeasured_precision(item)
+                and not _is_optional_precision_tasks(item)
             ]
             if not t1_runnable:
                 continue
@@ -741,27 +979,6 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
                     f"in current-source readout"
                 )
 
-            t1_task_set = {item["task"] for item in t1_assignments}
-            if matching and all(t in measured_statuses for t in t1_runnable):
-                for cov_tid, cov_st in fam_cov.items():
-                    if cov_tid not in t1_task_set and cov_tid not in measured_statuses:
-                        t_card = req["tasks"].get(cov_tid)
-                        if (
-                            isinstance(t_card, dict)
-                            and "execution" in t_card
-                            and "evaluation" in t_card
-                            and req_source_digest
-                            and (
-                                (req_source_digest, cov_tid) not in coverage_fps
-                                or (
-                                    task_execution_fingerprint(t_card),
-                                    task_evaluation_fingerprint(t_card),
-                                )
-                                in coverage_fps.get((req_source_digest, cov_tid), set())
-                            )
-                        ):
-                            measured_statuses[cov_tid] = cov_st
-
             def _dep_blocked(task_id: str, seen: frozenset[str] = frozenset()) -> bool:
                 if task_id in seen:
                     return False
@@ -790,7 +1007,7 @@ def check_selected_family_readouts(root: Path, *, cuda_model: str = DEFAULT_CUDA
                     for item in tier_assignments
                     if not req["tasks"][item["task"]].get("preflight_blockers")
                     and not _dep_blocked(item["task"])
-                    and not _is_optional_unmeasured_precision(item)
+                    and not _is_optional_precision_tasks(item)
                 ]
                 unmeasured = [task for task in tier_runnable if task not in measured_statuses]
                 if unmeasured:
@@ -1186,8 +1403,7 @@ def _generated_pages_synced(root: Path, inv_json: dict[str, Any], inv_md: str) -
         # Archived display scores still need an integrity check when the latest
         # source has no Tier 1 payload. A digest footer alone cannot detect a
         # changed overview score or a false source-qualification claim.
-        if (rti._formulaic_display_payload(inv_json, root) is not None
-                and inv_md != rti._current_markdown(inv_json, root, root / "reports/forge/technique-inventory.md")):
+        if inv_md != rti._current_markdown(inv_json, root, root / "reports/forge/technique-inventory.md"):
             return False
 
         for page_path, expected_text in generated_pages(root, inv_json).items():
@@ -1273,40 +1489,7 @@ def check_compiled_reports(root: Path) -> dict[str, Any]:
             if inv_json.get("family_progress"):
                 from reports.forge import regenerate_technique_inventory as rti
 
-                expected_tier1 = rti._current_source_tier1_readouts_markdown(inv_json, root, inv_md_path)
-                formulaic_synced = True
-                if rti._selected_recipe_binary_task_statuses(inv_json, root) is not None:
-                    rewritten = rti._formulaic_selected_recipe_tables(inv_md, inv_json, root, inv_md_path)
-                    sel_rows = "\n".join(
-                        line
-                        for line in inv_md.split("## Full-suite results", 1)[0].splitlines()
-                        if line.startswith("|")
-                    )
-                    vb_rows = (
-                        "\n".join(
-                            line
-                            for line in inv_md.split("<summary>Selected recipe breakdown by view", 1)[1]
-                            .split("</details>", 1)[0]
-                            .splitlines()
-                            if line.startswith("|")
-                        )
-                        if "<summary>Selected recipe breakdown by view" in inv_md
-                        else ""
-                    )
-                    formulaic_synced = (
-                        rewritten == inv_md
-                        and "Every selected recipe is evaluated formulaically across Tier 1, Tier 2, Tier 3, and Tier 4 as binary PASS or FAIL"
-                        in inv_md
-                        and not any(
-                            tok in sel_rows or tok in vb_rows
-                            for tok in ("not run", "incompatible", "blocked", "diagnostic attempt", "preflight-blocked")
-                        )
-                    )
-                current_source_tier1_synced = (
-                    (expected_tier1 in inv_md and formulaic_synced)
-                    if expected_tier1
-                    else ("### Current-source selected-recipe Tier 1 readouts" not in inv_md)
-                )
+                current_source_tier1_synced = inv_md == rti._current_markdown(inv_json, root, inv_md_path)
                 refresh_docs_synced = (
                     "python ops/refresh_forge_readouts.py --check" in inv_md
                     and "python ops/refresh_forge_readouts.py --reports-only" in inv_md
@@ -1370,6 +1553,7 @@ def check_status(
         "queue": check_queue_status(root, queue_root),
         "scaling_performance": check_scaling_performance(root),
         "attempt_coverage": check_attempt_coverage(root),
+        "retained_diagnostic_integrity": check_retained_diagnostic_integrity(root),
         "selected_family_readouts": check_selected_family_readouts(root, cuda_model=cuda_model),
         "compiled_reports": check_compiled_reports(root),
     }
@@ -1396,7 +1580,10 @@ def check_published_status(
     """
     strict = check_status(root, queue_root=queue_root, cuda_model=cuda_model)
     stages = {name: deepcopy(strict["stages"][name])
-              for name in ("queue", "attempt_coverage", "compiled_reports")}
+              for name in ("queue", "compiled_reports")}
+    stages["retained_diagnostic_integrity"] = deepcopy(
+        strict["stages"]["retained_diagnostic_integrity"] if "retained_diagnostic_integrity" in strict["stages"]
+        else check_retained_diagnostic_integrity(root))
     performance = deepcopy(strict["stages"]["scaling_performance"])
     performance["current"] = performance.get("published_source_current", False)
     performance["scope"] = "recorded_source_cohort"
@@ -2049,11 +2236,16 @@ def refresh_attempt_coverage(
     attempt_state_root = Path(attempt_state_root).resolve()
     attempt_state_root.mkdir(parents=True, exist_ok=True)
     if (root / FIXED_TEST_LIST).is_file():
-        from ops.formulaic_coverage import ensure_formulaic_attempt_coverage
-
-        return ensure_formulaic_attempt_coverage(
-            root, attempt_state_root, pair_gpus, json_mode=json_mode
+        from ops.formulaic_coverage import (
+            RetiredCoverageExecutionError, ensure_formulaic_attempt_coverage,
         )
+
+        try:
+            return ensure_formulaic_attempt_coverage(
+                root, attempt_state_root, pair_gpus, json_mode=json_mode
+            )
+        except RetiredCoverageExecutionError as error:
+            raise CodeChangeRequiredError(str(error)) from error
 
     publication = read_json(root / "reports/forge/technique-inventory.json")
     existing_cov = (

@@ -166,9 +166,9 @@
     "minimum_stable_checks": 5,
     "scoring_weights": "live",
     "sources": {
-      "benchmarks/toy_audit/api_contract.py": "08a5eac1a186a22c09f47d324f69772af1f1922832383d372488ecb7091eb75d",
+      "benchmarks/toy_audit/api_contract.py": "6fce43912b821b6839786ed34ef68b9456cdbd4165daad492f228f17ae6cde7b",
       "benchmarks/toy_audit/api_model_vae.py": "039d875d92757e4eadff279cb2f41656d9533a2c70561720aca48e8084f79b0b",
-      "benchmarks/toy_audit/api_run.py": "b5f1e130e6daa4cfbf172b9beb13ab1e691c8fadba59d1aec58f74368df475d3",
+      "benchmarks/toy_audit/api_run.py": "5b03a612673e9ed86e3577f0f1fe705c7c09a25e7d7bfec2a6a75670334eeacc",
       "benchmarks/toy_audit/reproducibility.py": "5f29fd7f9579be894e97bf4ad93bee8c77aeff104437b5d4e6dc4a4303935891",
       "experiments/forge/model_toy_adapter.py": "21022ea6351346589d5942617953a9ee6495ad464f719c5e726e0a1014a0fa35",
       "particlegan/policy.py": "be442dcf21f03a5d1cd364177724fc15560df8cbf401c85bd4630f62f5ea9535",
@@ -192,15 +192,29 @@
     },
     "eval_samples": 4096,
     "evaluator_revision": {
-      "id": "review-policy-source-binding-20261025",
-      "change": "Bind the review-stage particlegan/policy.py refresh for future execution: ManipulatedPrior output postprocessing in ServedModel/UpdatePolicy (identity for plain priors), the declared row_evidence_statistic trainer option (default 'sphericity' is the legacy law) and router-parameter ownership labels for manipulated priors. Plain-prior hosts execute the same operations. Architecture, data/target/prior/sampling laws, initialization, budgets, cadence and numerical gates are unchanged. Earlier source-bound receipts and verdicts retain their original identities; this refresh grants no reuse or pass credit.",
-      "previous_task_commit": "82f38664e4d6fb4aac67ed99d87887d6e6e4b357",
+      "id": "pr-461-audit-develop-integration-20261109",
+      "change": "Current audited execution sources; independent critic contract v2 where explicitly declared. No historical quality inheritance.",
+      "qualification_input": false,
+      "previous_task_commit": "25e8a78da735cf4b015b858f9756c4f2bb3d7cf1",
       "previous_task_path": "configs/forge/tasks/model_vae_hard.json",
-      "previous_task_sha256": "66d639fb56e8ea5b6abb5fd8f93a12c141af2d6ba8c60e80054afc197c5b3b1e",
-      "previous_task_blob": "3bc31e0700a46260bc5af1429b0cd11fd51fbdb5",
+      "previous_task_sha256": "fc11827633ea48f14f5e0ea94a7268f52f1645c7178b78622afd905866c07aa3",
+      "previous_task_blob": "8afd4f0d6a7e42025cc4f2d8c87399374d7c28fa",
+      "previous_revision": {
+        "id": "review-policy-source-binding-20261025",
+        "change": "Bind the review-stage particlegan/policy.py refresh for future execution: ManipulatedPrior output postprocessing in ServedModel/UpdatePolicy (identity for plain priors), the declared row_evidence_statistic trainer option (default 'sphericity' is the legacy law) and router-parameter ownership labels for manipulated priors. Plain-prior hosts execute the same operations. Architecture, data/target/prior/sampling laws, initialization, budgets, cadence and numerical gates are unchanged. Earlier source-bound receipts and verdicts retain their original identities; this refresh grants no reuse or pass credit.",
+        "previous_task_commit": "82f38664e4d6fb4aac67ed99d87887d6e6e4b357",
+        "previous_task_path": "configs/forge/tasks/model_vae_hard.json",
+        "previous_task_sha256": "66d639fb56e8ea5b6abb5fd8f93a12c141af2d6ba8c60e80054afc197c5b3b1e",
+        "previous_task_blob": "3bc31e0700a46260bc5af1429b0cd11fd51fbdb5",
+        "previous_source_sha256": {
+          "particlegan/policy.py": "4eb130cb5982c8333eec1abac6829c76b8aeea8f4ce87bc90b06b805c7dede0c"
+        }
+      },
       "previous_source_sha256": {
-        "particlegan/policy.py": "4eb130cb5982c8333eec1abac6829c76b8aeea8f4ce87bc90b06b805c7dede0c"
-      }
+        "benchmarks/toy_audit/api_contract.py": "08a5eac1a186a22c09f47d324f69772af1f1922832383d372488ecb7091eb75d",
+        "benchmarks/toy_audit/api_run.py": "b5f1e130e6daa4cfbf172b9beb13ab1e691c8fadba59d1aec58f74368df475d3"
+      },
+      "integration_receipt": "reports/forge/pr-integration-20261109/pr-461.json"
     },
     "integration_source_binding": {
       "id": "pr-461-develop-integration-20261108",
