@@ -759,9 +759,19 @@ class Queue:
                     durable = self.report_root / "attempts" / worker["attempt"]
                     atomic_json(durable / "request.json", read_json(directory / "request.json"))
                     atomic_json(durable / "result.json", result)
-                    atomic_json(durable / "evidence.json", {"result_hash": stable_hash(result), "source": request["source"],
+                    certificate = {"result_hash": stable_hash(result), "source": request["source"],
                                 "runtime": request.get("runtime"), "local_artifact_root": str(directory),
-                                "portability": "local_artifacts_required" if any(r.get("evidence", {}).get("artifact_root") for r in rows) else "embedded"})
+                                "portability": "local_artifacts_required" if any(r.get("evidence", {}).get("artifact_root") for r in rows) else "embedded"}
+                    atomic_json(durable / "evidence.json", certificate)
+                    from .observations import coverage_export
+                    # A separate compact export can point to the final result
+                    # hash without a circular self-reference in that result.
+                    try:
+                        exported = coverage_export(read_json(directory / "request.json"), result, certificate)
+                    except Exception as exc:  # noqa: BLE001 -- an optional export cannot block certified collection
+                        exported = {"schema": "forge_observed_coverage_v1", "records": [],
+                                    "gaps": {task_id: [f"export_unavailable: {type(exc).__name__}: {exc}"]}}
+                    atomic_json(durable / "coverage.json", exported)
                 job.update(status="terminal", result=result, charged_seconds=job.get("charged_seconds", 0) + elapsed, reserved_seconds=0)
                 touched_requests.update(job.get("subscribers", []))
                 touched_requests.add(owner["request"])

@@ -72,6 +72,20 @@ def test_eval_isolation_preserves_all_ambient_rngs():
     assert torch.equal(cpu, torch.get_rng_state())
 
 
+def test_diagnostic_state_artifact_cannot_claim_checkpoint_continuation(tmp_path, monkeypatch):
+    fixture = PublicSoftwareFixture()
+    capabilities = dict(state_export="diagnostic_only", resume=False, exact_continuation=False)
+    fixture.metadata = {"checkpoint_capabilities": capabilities}
+    monkeypatch.setattr(api_run.contract, "build", lambda *args, **kwargs: fixture)
+    case = {"id": "diagnostic-export-control", "goal": "Annotate exported component state",
+            "default_steps": 8, "eval_samples": 32, "checkpoint_capabilities": capabilities}
+    result = api_run.run_case(case, tmp_path / "diagnostic", steps=1, frames=2)
+    assert result["checkpoint_capabilities"] == capabilities
+    assert result["artifacts"]["final-state.pt"]["checkpoint_capabilities"] == capabilities
+    saved = json.loads((tmp_path / "diagnostic/receipt.json").read_text())
+    assert not saved["artifacts"]["final-state.pt"]["checkpoint_capabilities"]["resume"]
+
+
 def test_entire_run_isolates_ambient_training_rng_and_restores_execution_settings(tmp_path, monkeypatch):
     class AmbientFixture(PublicSoftwareFixture):
         def step(self):
