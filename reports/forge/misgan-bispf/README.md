@@ -1,6 +1,10 @@
-# Incomplete-data MisGAN and a learned multimodal neural imputer
+# Independent four-mode MisGAN and archived coupled-state results
 
-The transport-and-settling repair **passes** the complete scoped MisGAN task:
+> **Current execution is v2 and has no learned-quality measurement.** The code now gives data, mask and imputer critics independent public optimizer, penalty, loss and thermal histories. The shared generator/prior policy is explicitly anchored to the data critic. The original summed-critic backward and generator/prior update order remain; unsupported multi-game mechanisms refuse execution. Complete v2 checkpoints restore in a fresh object and reject v1 or malformed auxiliary state before mutation.
+>
+> **All numerical results below belong to archived coupled-state v1.** V1 shared one critic control history across the three games, so its measured PASS is not evidence for the corrected independent-game execution. Original grades, metrics, GIFs and source identities are unchanged. No campaign was rerun and v2 inherits no PASS. [Exact v1 task](archive/task-coupled-v1.json), [v1 source](https://github.com/255BITS/ParticleGAN/tree/2025ca2875517cd3cdf8a91bba1ecfeebf3ba7ca), and [v2 integration receipt](../pr-integration-20261109/pr-462.json) retain the boundary.
+
+The archived v1 transport-and-settling repair **passed** its scoped task:
 1,200 updates, 24 post-update scoring observations and all five terminal checks
 pass every unchanged bound. Endpoint generator HQ is 0.9890, mass TV 0.0940,
 mask TV 0.0106, imputation accuracy 0.9727, ambiguous-query HQ 0.9373 and branch
@@ -34,7 +38,7 @@ branches. The complete training matrix is discarded after forming observed
 entries and masks. Training never receives complete real labels, analytic
 posterior probabilities or evaluation examples.
 
-The first comparison measures the exact selected BISPF baseline, an observed-only
+The original comparison requested the selected BISPF baseline configuration, an observed-only
 masked mixture/mask likelihood auxiliary, and that same auxiliary plus
 own-generator synthetic component classification. The neural conditional logits
 learn from component IDs sampled by their own generator. At serving, the imputer
@@ -115,7 +119,7 @@ original task Git blobs and code SHA identities without changing scientific
 conditions or archived results. GPU 0 is shared; elapsed costs are not speed
 benchmarks.
 
-The recommended recipe is `bispf-misgan-transport-settle-v1` for this one
+The archived v1 recommendation was `bispf-misgan-transport-settle-v1` for this one
 explicit task. Its minimum terminal ambiguous HQ remains above 0.93 and its
 largest terminal mass TV is 0.0940, leaving only 0.0060 margin to that bound.
 No robustness or seed claim follows. The useful next comparison is an explicit

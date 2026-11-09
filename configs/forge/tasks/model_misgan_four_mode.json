@@ -68,7 +68,8 @@
         "encoder_mode": "none",
         "observation_sigma": 0.08,
         "reconstruction_weight": 1.0
-      }
+      },
+      "execution_contract": "misgan-four-mode-independent-games-v2"
     },
     "execution_path": "public_components",
     "recipe_fields": {
@@ -77,7 +78,8 @@
       "encoder_mode": "none",
       "observation_sigma": 0.08,
       "reconstruction_weight": 1.0
-    }
+    },
+    "execution_contract": "misgan-four-mode-independent-games-v2"
   },
   "evaluation": {
     "sampling_contract_version": 1,
@@ -162,7 +164,19 @@
       "exact_optimizer_updates": true,
       "mechanism_exercised": true
     },
-    "sources": {}
+    "sources": {},
+    "evaluator_revision": {
+      "id": "pr-462-audit-develop-integration-20261109",
+      "change": "Current audited execution sources; independent critic contract v2 where explicitly declared. No historical quality inheritance.",
+      "qualification_input": false,
+      "previous_task_commit": "2025ca2875517cd3cdf8a91bba1ecfeebf3ba7ca",
+      "previous_task_path": "configs/forge/tasks/model_misgan_four_mode.json",
+      "previous_task_sha256": "f15489d35eb4e8b4aaaab674c39ec71ef485598023eba40c4eccdd0854f79e97",
+      "previous_task_blob": "fce69a50645acef24d3bbf302fbe02f93479ffc8",
+      "previous_revision": null,
+      "previous_source_sha256": {},
+      "integration_receipt": "reports/forge/pr-integration-20261109/pr-462.json"
+    }
   },
   "resources": {
     "gpus": 1,

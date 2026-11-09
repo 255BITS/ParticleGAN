@@ -19,14 +19,9 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 
-from particlegan import (
-    ManipulatedPrior,
-    NormalNoiseManipulator,
-    ParticlePrior,
-    get_recipe,
-    init,
-    unwrap_prior,
-)
+from particlegan import unwrap_prior
+from benchmarks.toy_audit.api_contract import UnsupportedRecipeOverrides
+from tests.bigan_software_cohort import build_fixture
 from benchmarks.toy_audit.api_ring16 import (
     ALICESpiralBiGANFixture,
     BiGANEncoder,
@@ -472,17 +467,13 @@ def test_level3_destructive_negative_controls_alice_spiral():
 @pytest.mark.parametrize("fixture_cls", [Ring16BiGANFixture, ALICESpiralBiGANFixture])
 @pytest.mark.parametrize("recipe_name", ["bispf", "atlas", "bcap", "k3p", "ka2"])
 def test_bigan_and_alice_multi_family_trainer_and_prior_updates(fixture_cls, recipe_name):
-    """Verify both BiGAN fixtures execute 4 steps cleanly and update unwrap_prior(fixture.prior).z across trainer families."""
-    fixture = fixture_cls(steps=10, batch_size=64, particles=256, z_dim=2, device="cpu", seed=0)
-
+    """Supported explicit noise-free software recipes update; unsupported Atlas blocks intact."""
     if recipe_name == "atlas":
-        recipe = get_recipe("atlas", batch_size=64, num_particles=256, z_dim=2)
-        base_prior = ParticlePrior(num_particles=256, z_dim=2)
-        init.deterministic_orthogonal_(base_prior, seed=4)
-        prior = ManipulatedPrior(base_prior, [NormalNoiseManipulator(sigma=0.0065)])
-        fixture.rebind_trainer(recipe, prior=prior)
-    else:
-        fixture.rebind_trainer(recipe_name)
+        with pytest.raises(UnsupportedRecipeOverrides, match="intact recipe"):
+            fixture_cls(recipe_name="atlas", max_steps=10, device="cpu", seed=0)
+        return
+    fixture = build_fixture(fixture_cls=fixture_cls, recipe_name=recipe_name,
+                            max_steps=10, batch_size=64, particles=256)
 
     z_param = unwrap_prior(fixture.prior).z
     assert z_param.requires_grad is True
@@ -545,7 +536,7 @@ def test_bigan_coordinate_fourier_features_architecture():
 
 def test_bigan_capacity_and_cycle_weight():
     """Verify Ring16BiGANFixture capacity upgrade to 128 hidden, 3 layers, and cycle_weight=2.0."""
-    fixture = Ring16BiGANFixture(steps=5, device="cpu", seed=0)
+    fixture = build_fixture(max_steps=5)
     assert fixture.cycle_weight == 2.0
 
     # Generator: 3 layers, 128 hidden
@@ -580,7 +571,7 @@ def test_bigan_capacity_and_cycle_weight():
 
 def test_bispf_thermal_and_critic_hook_binding():
     """Verify rebind_trainer binds thermal source and hook attaches unprojected coordinates for BISPF."""
-    fixture = Ring16BiGANFixture(steps=5, device="cpu", seed=0, recipe_name="bispf")
+    fixture = build_fixture(max_steps=5, recipe_name="bispf")
 
     # Thermal source must be bound to optimizer record
     assert hasattr(fixture.opt_d, "record")
@@ -596,7 +587,7 @@ def test_bispf_thermal_and_critic_hook_binding():
 
 def test_bigan_alice_recon_loss_target_detached():
     """Verify that z_fake is detached in ALICE reconstruction loss so prior table gradients come only from adversarial / prior regularizer."""
-    fixture = Ring16BiGANFixture(steps=5, device="cpu", seed=0)
+    fixture = build_fixture(max_steps=5)
     real_x = fixture.sample_target(16)
     z_fake, _ = fixture._sample_prior(16)
     x_fake = fixture._generate(z_fake.detach())

@@ -1,4 +1,7 @@
-# Current MisGAN research leaderboard
+# Four-mode MisGAN status
+
+Corrected independent-game **v2 is unmeasured** and inherits no prior PASS. The table below preserves the original coupled-state v1 grades and numbers under [source 2025ca28](https://github.com/255BITS/ParticleGAN/tree/2025ca2875517cd3cdf8a91bba1ecfeebf3ba7ca). Its single shared critic history is distinct from v2. No new scientific run or regrading occurred.
+
 
 One fixed four-mode task and protocol; all failures retained. No ordinary or historical 100-mode qualification.
 

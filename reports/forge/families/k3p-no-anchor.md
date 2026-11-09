@@ -1124,7 +1124,7 @@ No experiments assigned.
 
 ## misgan-bispf-research-v1
 
-**misgan-bispf-research-v1 — revision 1**. [View declaration](../../../configs/forge/views/misgan-bispf-research-v1.json).
+**misgan-bispf-research-v1 — revision 2**. [View declaration](../../../configs/forge/views/misgan-bispf-research-v1.json).
 
 Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
 
@@ -5798,7 +5798,7 @@ No experiments assigned.
 
 ## misgan-bispf-research-v1
 
-**misgan-bispf-research-v1 — revision 1**. [View declaration](../../../configs/forge/views/misgan-bispf-research-v1.json).
+**misgan-bispf-research-v1 — revision 2**. [View declaration](../../../configs/forge/views/misgan-bispf-research-v1.json).
 
 Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
 

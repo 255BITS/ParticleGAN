@@ -30,6 +30,15 @@ from benchmarks.toy_audit import api_conditionals as api_cond
 from benchmarks.toy_audit import api_ring16 as api_ring
 from benchmarks.toy_audit.api_sources import misgan
 from particlegan import MoGParticlePrior
+from experiments.forge.state import state_digest
+
+
+def checkpoint_fixture(case, *, max_steps):
+    """Use an explicitly supported software cohort for the manual BiGAN owner."""
+    if case["id"] == "api-ring16-bigan-continuous":
+        from tests.bigan_software_cohort import build_fixture
+        return build_fixture(case, max_steps=max_steps)
+    return contract.build(case, max_steps=max_steps)
 
 
 @pytest.fixture(autouse=True)
@@ -198,7 +207,7 @@ class TestCheckpointStateDictRoundTrip:
         case = cases[case_id]
 
         # 1. Build initial fixture and run 2 steps
-        fixture1 = contract.build(case, max_steps=10)
+        fixture1 = checkpoint_fixture(case, max_steps=10)
         for _ in range(2):
             fixture1.step()
         assert fixture1.completed_steps == 2
@@ -211,7 +220,7 @@ class TestCheckpointStateDictRoundTrip:
         sd_loaded = torch.load(buffer)
 
         # 3. Build fresh fixture and restore state
-        fixture2 = contract.build(case, max_steps=10)
+        fixture2 = checkpoint_fixture(case, max_steps=10)
         assert fixture2.completed_steps == 0
         fixture2.load_state_dict(sd_loaded)
         assert fixture2.completed_steps == 2
@@ -245,12 +254,12 @@ class TestCheckpointStateDictRoundTrip:
         cases = contract.discover()
         case = cases[case_id]
 
-        fixture1 = contract.build(case, max_steps=10)
+        fixture1 = checkpoint_fixture(case, max_steps=10)
         fixture1.step()
         fixture1.step()
 
         sd = fixture1.state_dict()
-        fixture2 = contract.build(case, max_steps=10)
+        fixture2 = checkpoint_fixture(case, max_steps=10)
         fixture2.load_state_dict(sd)
 
         stats1 = fixture1.step()
@@ -265,39 +274,28 @@ class TestCheckpointStateDictRoundTrip:
         "api-misgan-block-neural-imputer",
         "api-ring16-bigan-continuous",
     ])
-    def test_misgan_and_bigan_uncheckpointed_rng_streams_finding(self, case_id):
-        """Empirical verification: MisGAN and BiGAN omit data_rng and latent_rng from state_dict().
-
-        Restoring from checkpoint does not resume the consumed RNG stream, replaying data
-        batches from initial offset 0 unless RNG state is manually transferred.
-        """
-        cases = contract.discover()
-        case = cases[case_id]
-
-        fixture1 = contract.build(case, max_steps=10)
-        fixture1.step()
-        fixture1.step()
-
-        sd = fixture1.state_dict()
-        assert "data_rng" not in sd, f"{case_id} unexpectedly serialized data_rng"
-        assert "latent_rng" not in sd, f"{case_id} unexpectedly serialized latent_rng"
-
-        fixture2 = contract.build(case, max_steps=10)
-        fixture2.load_state_dict(sd)
-
-        # Without RNG sync, the batches drawn at step 3 differ (initial offset vs 2-step offset)
-        # When RNG is manually synced, BiGAN matches bitwise identically
-        if case_id == "api-ring16-bigan-continuous":
-            fixture2.data_rng.set_state(fixture1.data_rng.get_state())
-            fixture2.latent_rng.set_state(fixture1.latent_rng.get_state())
-            s1 = fixture1.step()
-            s2 = fixture2.step()
-            assert s1 == s2, "BiGAN step 3 should match bitwise when RNG streams are synchronized"
+    def test_misgan_and_bigan_exact_rng_continuation(self, case_id):
+        """Fresh-object restoration needs no manual transfer of consumed streams."""
+        case = contract.discover()[case_id]
+        first = checkpoint_fixture(case, max_steps=10)
+        first.step()
+        first.step()
+        saved = first.state_dict()
+        saved_digest = state_digest(saved)
+        resumed = checkpoint_fixture(case, max_steps=10)
+        resumed.load_state_dict(saved)
+        for name in ("data_rng", "latent_rng", "noise_rng", "eval_rng", "model_rng"):
+            if hasattr(first, name):
+                assert torch.equal(getattr(first, name).get_state(), getattr(resumed, name).get_state())
+        assert state_digest(first.state_dict()) == state_digest(resumed.state_dict())
+        assert first.step() == resumed.step()
+        assert state_digest(first.state_dict()) == state_digest(resumed.state_dict())
+        assert state_digest(saved) == saved_digest
 
     def test_vector_fixture_checkpoint_tampering_rejection(self):
         """VectorFixture must reject invalid or forged checkpoints."""
         case = contract.discover()["api-zero-tanh-smoke"]
-        fixture = contract.build(case, max_steps=10)
+        fixture = checkpoint_fixture(case, max_steps=10)
         fixture.step()
         sd = fixture.state_dict()
 
@@ -326,34 +324,24 @@ class TestCheckpointStateDictRoundTrip:
         with pytest.raises(ValueError, match="checkpoint batch sequence digest differs"):
             fixture.load_state_dict(corrupt_sd)
 
-    def test_misgan_and_bigan_checkpoint_missing_keys_rejection(self):
-        """MisGAN and BiGAN fixtures must raise KeyError if required keys are missing."""
-        # MisGAN recovery
-        case_rec = contract.discover()["api-misgan-block-recovery"]
-        fix_rec = contract.build(case_rec, max_steps=10)
-        fix_rec.step()
-        sd_rec = fix_rec.state_dict()
-        del sd_rec["G_x"]
-        with pytest.raises(KeyError):
-            fix_rec.load_state_dict(sd_rec)
-
-        # MisGAN neural imputer
-        case_imp = contract.discover()["api-misgan-block-neural-imputer"]
-        fix_imp = contract.build(case_imp, max_steps=10)
-        fix_imp.step()
-        sd_imp = fix_imp.state_dict()
-        del sd_imp["G_i"]
-        with pytest.raises(KeyError):
-            fix_imp.load_state_dict(sd_imp)
-
-        # Ring16 BiGAN
-        case_bi = contract.discover()["api-ring16-bigan-continuous"]
-        fix_bi = contract.build(case_bi, max_steps=10)
-        fix_bi.step()
-        sd_bi = fix_bi.state_dict()
-        del sd_bi["generator"]
-        with pytest.raises(KeyError):
-            fix_bi.load_state_dict(sd_bi)
+    @pytest.mark.parametrize("case_id,model_path", [
+        ("api-misgan-block-recovery", ("models", "G_x")),
+        ("api-misgan-block-neural-imputer", ("models", "G_i")),
+        ("api-ring16-bigan-continuous", ("generator",)),
+    ])
+    def test_misgan_and_bigan_checkpoint_missing_keys_rejection(self, case_id, model_path):
+        """An incomplete versioned checkpoint is rejected before any live mutation."""
+        fixture = checkpoint_fixture(contract.discover()[case_id], max_steps=10)
+        fixture.step()
+        before = state_digest(fixture.state_dict())
+        corrupted = fixture.state_dict()
+        parent = corrupted
+        for key in model_path[:-1]:
+            parent = parent[key]
+        del parent[model_path[-1]]
+        with pytest.raises(ValueError):
+            fixture.load_state_dict(corrupted)
+        assert state_digest(fixture.state_dict()) == before
 
 
 # ============================================================================

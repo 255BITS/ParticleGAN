@@ -125,13 +125,15 @@ def validate_recipe_overrides(case, recipe_name, recipe_overrides):
 
 
 def build(case, *, device="cpu", seed=DEFAULT_SEED, recipe_name=None, max_steps=None, recipe_overrides=None, recipe=None):
+    if case.get("checkpoint_required") and not case.get("checkpoint_capabilities", {}).get("exact_continuation"):
+        raise UnsupportedRecipeOverrides(f"{case['id']}: required exact checkpoint continuation is unsupported by this provider")
     provider = import_module(f"benchmarks.toy_audit.{case['provider']}")
     recipe_name = recipe_name or case["default_recipe"]
     overrides = validate_recipe_overrides(case, recipe_name, recipe_overrides)
     options = {"recipe_overrides": overrides} if overrides else {}
     if recipe is not None:
-        if case["provider"] not in MODEL_PROVIDERS or not isinstance(recipe, Recipe) or overrides:
-            raise ValueError("resolved Recipe injection requires a model toy without tuning overrides")
+        if case["provider"] not in (*MODEL_PROVIDERS, "api_vectors") or not isinstance(recipe, Recipe) or overrides:
+            raise ValueError("resolved Recipe injection requires a supported model/vector toy without tuning overrides")
         options["recipe"] = recipe
     with construction_rng(seed, device):
         fixture = provider.build_case(case["id"], device=device, seed=seed,

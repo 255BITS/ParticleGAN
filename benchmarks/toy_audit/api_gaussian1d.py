@@ -6,7 +6,7 @@ from pathlib import Path
 
 import numpy as np
 
-from . import gaussian1d_quality
+from . import gaussian1d_quality  # Bind the declared scorer before source capture.
 from .api_vectors import VectorFixture, _case, _digest, _law
 
 TASK_PATH = Path(__file__).resolve().parents[2] / "configs/forge/tasks/gaussian1d_acquisition.json"
@@ -24,12 +24,12 @@ def list_cases():
         task["description"], steps=spec["steps"], batch=spec["batch"], evaluation=4096,
         default_recipe="k3p", particles=spec["particles"], z_dim=spec["z_dim"],
         metric_family="gaussian1d_acquisition", spec=spec, thresholds=spec["thresholds"],
-        sample_evaluator="benchmarks.toy_audit.gaussian1d_quality:score_samples",
+        sample_evaluator=gaussian1d_quality.__name__ + ":score_samples",
         task_sha256=hashlib.sha256(TASK_PATH.read_bytes()).hexdigest(),
         law=law, law_sha256=_digest(law), protocol_seed=0,
         evaluation_observations=24, terminal_observations=5,
-        recipe_overrides=dict(prior_kind="mog", sigma_rel=0., standardize=prior["standardize"]),
-        prior_options=dict(sigma=prior["sigma"]), profile=dict(init_std=.5),
+        prior_options=dict(prior_kind=prior["kind"], sigma=prior["sigma"],
+                           sigma_rel=0., standardize=prior["standardize"]), profile=dict(init_std=.5),
         initialization=dict(generator="deterministic_orthogonal seed0", discriminator="deterministic_orthogonal seed1", prior="deterministic_orthogonal R2Normal init_std=.5"),
         sampling="Live public GANTrainer.sample(output_noise=False); uniformly sampled learned MoG locations with fixed sigma=.025 latent Gaussian noise; standardize=False; no EMA.",
         scope="Acquire N(2, .5^2) in 1,000 updates from deterministic initialization; exact Gaussian CDF, location and width gates must pass at five terminal checks. Tier 1 remains provisional; this standalone API cohort grants no whole-view qualification.",

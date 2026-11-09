@@ -2,6 +2,8 @@
 from copy import deepcopy
 from pathlib import Path
 import json
+import subprocess
+import sys
 
 import numpy as np
 import pytest
@@ -13,7 +15,7 @@ from benchmarks.toy_audit.gaussian1d_quality import sample_target, score_samples
 from experiments.forge import adapters
 from experiments.forge.state import state_digest
 from experiments.forge.views import grade_result
-from particlegan import GANTrainer, MoGParticlePrior
+from particlegan import GANTrainer, MoGParticlePrior, get_recipe, init
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -65,6 +67,31 @@ def test_public_trainer_scalar_mog_and_observer_isolation():
     assert view["xlim"] == [-2., 5.]
 
 
+@pytest.mark.parametrize("family", ["k3p", "bispf"])
+def test_scalar_initial_prior_law_is_task_bound_without_trainer_tuning(family):
+    task = json.loads(api_gaussian1d.TASK_PATH.read_text())
+    host, law = task["execution"]["host_definition"], task["execution"]["prior"]
+    metadata = case()
+    assert "recipe_overrides" not in metadata
+    fixture = api_gaussian1d.build_case(api_gaussian1d.CASE_ID, recipe_name=family, max_steps=1)
+    expected = get_recipe(family, num_particles=host["particles"], z_dim=host["z_dim"],
+                          batch_size=host["batch"], total_steps=host["steps"],
+                          prior_kind=law["kind"], sigma_rel=0., standardize=law["standardize"])
+    assert fixture.recipe == expected
+    prior = fixture.trainer.prior
+    assert isinstance(prior, MoGParticlePrior)
+    assert prior.z.shape == (host["particles"], host["z_dim"])
+    assert prior.standardize is law["standardize"] is False
+    assert torch.equal(prior.sigma, prior.sigma.new_tensor(law["sigma"]))
+    assert prior.sigma_rel == 0.
+    reference = expected.make_prior(init_std=.5, sigma=law["sigma"])
+    init.deterministic_orthogonal_(reference, seed=2)
+    assert torch.equal(prior.z, reference.z)
+    actual, indices = prior.sample(32, generator=torch.Generator().manual_seed(19))
+    declared, declared_indices = reference.sample(32, generator=torch.Generator().manual_seed(19))
+    assert torch.equal(indices, declared_indices) and torch.equal(actual, declared)
+
+
 def test_forge_scalar_adapter_and_incomplete_short_protocol(tmp_path):
     task = json.loads((ROOT / "configs/forge/tasks/gaussian1d_acquisition.json").read_text())
     task["execution"]["steps"] = 2  # Integration proof; full task still needs 1,000.
@@ -90,3 +117,18 @@ def test_forge_preflight_rejects_wrong_scalar_target_or_missing_scorer():
     assert any("scalar scorer" in message for message in adapters.adapter_preflight(missing, candidate))
     task["execution"]["host_definition"]["covariances"] = [[[0.]]]
     assert any("positive sigma" in message for message in adapters.adapter_preflight(task, candidate))
+
+
+def test_declared_scorer_is_bound_before_execution_in_a_fresh_process():
+    # Parent imports must not accidentally supply a scorer missing from a new receipt.
+    code = """
+from hashlib import sha256
+from pathlib import Path
+from benchmarks.toy_audit import api_gaussian1d, api_run
+case = api_gaussian1d.list_cases()[0]
+assert case['sample_evaluator'] == 'benchmarks.toy_audit.gaussian1d_quality:score_samples'
+path = 'benchmarks/toy_audit/gaussian1d_quality.py'
+assert api_run.source_identity()['files_sha256'][path] == sha256(Path(path).read_bytes()).hexdigest()
+"""
+    subprocess.run([sys.executable, "-c", code], cwd=ROOT, check=True,
+                   capture_output=True, text=True, timeout=30)

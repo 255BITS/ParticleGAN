@@ -51,7 +51,7 @@ This report follows changing declarations and published evidence; it selects no 
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 6 | 3 required | 12 required, 7 held, 13 diagnostic | 1 required, 1 diagnostic (1 removed from the count) | 0 tasks | provisional |
 | [k3p_two_pole_horizon](../../configs/forge/views/k3p_two_pole_horizon.json) | 1 | 2 diagnostic | 0 tasks | 0 tasks | 0 tasks | provisional |
 | [lazy_cadence_coverage](../../configs/forge/views/lazy_cadence_coverage.json) | 1 | 30 diagnostic | 0 tasks | 0 tasks | 0 tasks | undeclared |
-| [misgan-bispf-research-v1](../../configs/forge/views/misgan-bispf-research-v1.json) | 1 | 1 diagnostic | 0 tasks | 0 tasks | 0 tasks | provisional |
+| [misgan-bispf-research-v1](../../configs/forge/views/misgan-bispf-research-v1.json) | 2 | 1 diagnostic | 0 tasks | 0 tasks | 0 tasks | provisional |
 | [policy_cloud_coverage](../../configs/forge/views/policy_cloud_coverage.json) | 1 | 7 required | 21 required | 7 required | 0 tasks | undeclared |
 | [policy_cloud_coverage_as_served](../../configs/forge/views/policy_cloud_coverage_as_served.json) | 1 | 7 required | 21 required | 7 required | 0 tasks | undeclared |
 | [prior-ablation-full-suite-v1](../../configs/forge/views/prior-ablation-full-suite-v1.json) | 1 | 48 diagnostic | 0 tasks | 0 tasks | 0 tasks | undeclared |
@@ -961,7 +961,7 @@ No tasks assigned.
 
 ## misgan-bispf-research-v1
 
-Declaration: [misgan-bispf-research-v1](../../configs/forge/views/misgan-bispf-research-v1.json); revision 1; goal: `misgan_recovery_and_imputation`.
+Declaration: [misgan-bispf-research-v1](../../configs/forge/views/misgan-bispf-research-v1.json); revision 2; goal: `misgan_recovery_and_imputation`.
 
 Declared calibration status: **provisional**.
 
@@ -6000,6 +6000,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `426ea16f7c5b4cde50bb37e869e146b4462087b576baaa3fb60dc06a667f11fa`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `00c89ca09056f0c9c7c1253e18763d0ec242b7d2a547602f3ec66a3dcc196d7d`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `2dd6179ef75e19d9eb2a539c68399a10c085ba3be178721865486b58cd4fa4e0`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `ab1d11bfc9c6a59f4d1ed5fa4ac0d981a2e59cb909b1df61314bf379a2371d0d`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
