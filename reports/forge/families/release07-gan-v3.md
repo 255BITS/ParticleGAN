@@ -154,7 +154,7 @@ Selection: recorded_source_measurement. Recorded source-bound original measureme
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [adaptation](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-adaptation) | [3/3](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) | [0/12 (12 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) | [0/1 (1 diagnostic attempt)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) | [0/0](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-adaptation-tier-4) | [3/16 (13 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-adaptation) | [0/7 (7 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-held) |
 | [clockfree_continuous](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [3/4](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) | [0/12 (12 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) | [0/6 (3 not run, 3 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) | [0/0](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-4) | [3/22 (3 not run, 15 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-clockfree_continuous) | [0/7 (7 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-held) |
-| [discriminator_stability](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [5/11 (5 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [0/18 (4 not run, 14 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0/1 (1 diagnostic attempt)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [0/0](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | [5/30 (4 not run, 20 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [0/25 (4 not run, 21 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-held) |
+| [discriminator_stability](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [5/11 (4 not run, 1 diagnostic attempt)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) | [0/18 (4 not run, 14 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) | [0/1 (1 diagnostic attempt)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) | [0/0](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) | [5/30 (8 not run, 16 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability) | [0/25 (4 not run, 21 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-held) |
 | [formulation_comparison](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [3/3](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) | [0/12 (12 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) | [0/1 (1 diagnostic attempt)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) | [0/0](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-4) | [3/16 (13 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-formulation_comparison) | [0/7 (7 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-held) |
 | [host_profile_transfer](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [3/3](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) | [0/12 (12 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) | [0/1 (1 diagnostic attempt)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) | [0/0](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-4) | [3/16 (13 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-host_profile_transfer) | [0/7 (7 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-held) |
 | [quality_coverage](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [3/3](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1) | [0/12 (12 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) | [0/0](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-3) | [0/0](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-4) | [3/15 (12 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-quality_coverage) | [0/7 (7 diagnostic attempts)](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-held) |
@@ -3233,7 +3233,7 @@ Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_wit
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Run attempt: **PASS** (current_source_readout; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../records/readout-3bd45e331f5dd03701da2700.json).
+Execution: **not run**.
 
 Used by: [discriminator_stability / Tier 1](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -3268,7 +3268,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Run attempt: **PASS** (current_source_readout; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../records/readout-3bd45e331f5dd03701da2700.json).
+Execution: **not run**.
 
 Used by: [discriminator_stability / Tier 1](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -3434,7 +3434,7 @@ Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_wit
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Run attempt: **PASS** (current_source_readout; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../records/readout-3bd45e331f5dd03701da2700.json).
+Execution: **not run**.
 
 Used by: [discriminator_stability / Tier 1](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
@@ -3474,7 +3474,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Run attempt: **PASS** (current_source_readout; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../records/readout-3bd45e331f5dd03701da2700.json).
+Execution: **not run**.
 
 Used by: [discriminator_stability / Tier 1](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](release07-gan-v3.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
