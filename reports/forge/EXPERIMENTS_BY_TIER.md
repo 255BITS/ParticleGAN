@@ -2,7 +2,7 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **191 tasks**; **154 assigned** to at least one view; **37 unassigned**. Showing **27/27 views**.
+Catalog: **191 tasks**; **154 assigned** to at least one view; **37 unassigned**. Showing **28/28 views**.
 
 Declared priors across the catalog: **84 MoGParticlePrior**, **107 ParticlePrior** (including **10 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
@@ -55,6 +55,7 @@ This report follows changing declarations and published evidence; it selects no 
 | [policy_cloud_coverage_as_served](../../configs/forge/views/policy_cloud_coverage_as_served.json) | 1 | 7 required | 21 required | 7 required | 0 tasks | undeclared |
 | [prior-ablation-full-suite-v1](../../configs/forge/views/prior-ablation-full-suite-v1.json) | 1 | 48 diagnostic | 0 tasks | 0 tasks | 0 tasks | undeclared |
 | [quality_coverage](../../configs/forge/views/quality_coverage.json) | 4 | 3 required | 12 required, 7 held | 0 tasks | 0 tasks | provisional |
+| [r1r2-repair-word-retention-20261022](../../configs/forge/views/r1r2-repair-word-retention-20261022.json) | 1 | 2 diagnostic | 0 tasks | 0 tasks | 0 tasks | provisional |
 | [recipe-prior-refactor-k3p-diagnostic-v1](../../configs/forge/views/recipe-prior-refactor-k3p-diagnostic-v1.json) | 1 | 23 diagnostic | 0 tasks | 0 tasks | 0 tasks | provisional |
 | [recipe-prior-refactor-ka2-diagnostic-v1](../../configs/forge/views/recipe-prior-refactor-ka2-diagnostic-v1.json) | 1 | 23 diagnostic | 0 tasks | 0 tasks | 0 tasks | provisional |
 | [recipe-prior-refactor-r1r2-diagnostic-v1](../../configs/forge/views/recipe-prior-refactor-r1r2-diagnostic-v1.json) | 1 | 23 diagnostic | 0 tasks | 0 tasks | 0 tasks | provisional |
@@ -1239,6 +1240,45 @@ No tasks assigned.
 
 No tasks assigned.
 
+## r1r2-repair-word-retention-20261022
+
+Declaration: [r1r2-repair-word-retention-20261022](../../configs/forge/views/r1r2-repair-word-retention-20261022.json); revision 1; goal: `discriminator_stability`.
+
+Declared calibration status: **provisional**.
+
+Own-checkpoint word retention only; no ordinary tier qualification, source promotion or global recipe adoption.
+
+Declared evidence scope: `research_diagnostic`.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+2 diagnostic.
+
+| Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [five_word_joint_smoke](../../configs/forge/tasks/five_word_joint_smoke.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-five-word-joint) | word_joint / word_smoke | 20001 | 900 | — |
+| [five_word_joint_hold](../../configs/forge/tasks/five_word_joint_hold.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-five-word-joint) | word_joint / word_hold | 4000 | 300 | [five_word_joint_smoke](../../configs/forge/tasks/five_word_joint_smoke.json) (checkpoint) |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 4: stress_and_formulations
+
+0 tasks.
+
+No tasks assigned.
+
 ## recipe-prior-refactor-k3p-diagnostic-v1
 
 Declaration: [recipe-prior-refactor-k3p-diagnostic-v1](../../configs/forge/views/recipe-prior-refactor-k3p-diagnostic-v1.json); revision 1; goal: `discriminator_stability`.
@@ -1687,7 +1727,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| ae_gan_hold | [Atlas](../../configs/forge/ideas/atlas-particle-normal-v4.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 6261a5458c1f / 767710fe7bd0 | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [Atlas](../../configs/forge/ideas/atlas-particle-normal-v4.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / 6261a5458c1f / 767710fe7bd0 | [source-bound receipt index](technique-inventory.json) |
 | ae_gan_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
 | ae_gan_hold | [BISPF](../../configs/forge/ideas/bispf-optimized-quintic-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / d9d72d53761c / a5c1a7106c9f | [source-bound receipt index](technique-inventory.json) |
 | ae_gan_hold | [K3P](../../configs/forge/ideas/recipe-prior-refactor-k3p-v1.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 3c8a0c05c790 | [source-bound receipt index](technique-inventory.json) |
@@ -5065,7 +5105,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| two_pole | [Atlas](../../configs/forge/ideas/atlas-particle-normal-v4.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 6261a5458c1f / 767710fe7bd0 | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [Atlas](../../configs/forge/ideas/atlas-particle-normal-v4.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 6261a5458c1f / 767710fe7bd0 | [source-bound receipt index](technique-inventory.json) |
 | two_pole | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
 | two_pole | [BISPF](../../configs/forge/ideas/bispf-optimized-quintic-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / d9d72d53761c / a5c1a7106c9f | [source-bound receipt index](technique-inventory.json) |
 | two_pole | [K3P](../../configs/forge/ideas/recipe-prior-refactor-k3p-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 3c8a0c05c790 | [source-bound receipt index](technique-inventory.json) |
@@ -5238,7 +5278,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| unused_token_hold | [Atlas](../../configs/forge/ideas/atlas-particle-normal-v4.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 6261a5458c1f / 767710fe7bd0 | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [Atlas](../../configs/forge/ideas/atlas-particle-normal-v4.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 6261a5458c1f / 767710fe7bd0 | [source-bound receipt index](technique-inventory.json) |
 | unused_token_hold | [BCAP dualnorm (experimental starting point)](../../configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 8a6ee0b1c9ce | [source-bound receipt index](technique-inventory.json) |
 | unused_token_hold | [BISPF](../../configs/forge/ideas/bispf-optimized-quintic-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / d9d72d53761c / a5c1a7106c9f | [source-bound receipt index](technique-inventory.json) |
 | unused_token_hold | [K3P](../../configs/forge/ideas/recipe-prior-refactor-k3p-v1.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / a0493ca3c213 / 3c8a0c05c790 | [source-bound receipt index](technique-inventory.json) |
@@ -5915,6 +5955,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `c9f87d2a4aa4fdbe1e94a31c5c4ce24f437e0621de3e4accb1e028b8f8169a2e`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `45510712e969782aac1037436fbbe39b9e176438d9deb1ad1d6a776771d3d57c`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `62f391081f399bf494b2bb4294c5a910bda8274a5f0b72ab1910252ad2eaf444`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `ae8b6b6879d69947cde9220975c2c6a2a2264171e22b04f501c8dafd5fb5f423`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

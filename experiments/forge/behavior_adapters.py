@@ -515,7 +515,8 @@ class BehaviorComponents:
     def receipt(self):
         from .boundaries import ownership_receipt
         resolved_recipe = asdict(self.recipe)
-        recipe = without_default_additions(resolved_recipe, fields=("optimizer_dense_profile",))
+        recipe = without_default_additions(resolved_recipe, fields=("optimizer_dense_profile",
+            "reg_real_weight", "reg_fake_weight", "joint_reconstruction_weight"))
         ownership = ownership_receipt(self.reference_candidate, self.task, resolved_recipe,
             self.protocol, self.context.initializer,
             extension_recipe_bindings=self.context.bindings["recipe"])

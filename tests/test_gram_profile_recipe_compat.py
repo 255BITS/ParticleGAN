@@ -31,6 +31,8 @@ def test_component_applied_packet_omits_only_default_dense_profile(profile):
     expected = asdict(components.recipe)
     if profile == "default":
         expected.pop("optimizer_dense_profile")
+    for field in ("reg_real_weight", "reg_fake_weight", "joint_reconstruction_weight"):
+        expected.pop(field)
     applied = components.receipt()
     assert applied["recipe"] == expected
     assert set(applied["field_ownership"]["recipe_fields"]) == set(expected)

@@ -18,6 +18,10 @@ from .sampling import MODEL_TOY_CLEAN, executed_receipt
 from .state import state_digest
 
 
+class ModelToyExecutionError(RuntimeError):
+    """A provider did not complete; preserve its original diagnostic receipt."""
+
+
 def definition(task):
     from benchmarks.toy_audit.api_contract import MODEL_PROVIDERS, validate_case
     host = task["execution"]["host_definition"]
@@ -162,6 +166,19 @@ def run(request, task, output, device, *, execution_limit=None):
     finally:
         for handle in handles:
             handle.remove()
+    # run_case retains provider failures in api/receipt.json, including errors
+    # before audit_fixture is called. Do not replace that cause with a missing
+    # audit/fixture KeyError or turn a partial execution into a scientific FAIL.
+    if raw.get("status") != "COMPLETE":
+        diagnostics = "; ".join(str(value) for value in raw.get("failed_bounds", []))
+        raise ModelToyExecutionError(
+            f"model provider {raw.get('status', 'UNKNOWN')} after "
+            f"{raw.get('completed_updates', 0)} updates: {diagnostics or 'no provider diagnostic'}; "
+            f"original receipt: {output / 'api/receipt.json'}")
+    if "audit" not in observed or "fixture" not in observed:
+        raise ModelToyExecutionError(
+            f"model provider completed without the required public fixture audit; "
+            f"original receipt: {output / 'api/receipt.json'}")
     rows = [{"step": row["step"], **{name: int(value) if type(value) is bool else value
                                      for name, value in row["metrics"].items()}}
             for row in raw["observations"] if row["step"] in raw["protocol"]["metric_evaluation_steps"]

@@ -197,6 +197,7 @@ class ResolutionCache:
     def get_base_extra_sources(self) -> set[str]:
         if self._base_extra_sources is None:
             from .hostprofiles import profile_source_paths
+            from .model_toy_sources import model_toy_source_paths
             extra: set[str] = set()
             for task in self.get_all_tasks().values():
                 extra.update(relative for relative in task["evaluation"].get("sources", {})
@@ -206,6 +207,8 @@ class ResolutionCache:
                 except (KeyError, TypeError, ValueError):
                     profile_sources = {}
                 extra.update(relative for relative in profile_sources
+                             if (self.root / relative).is_file())
+                extra.update(relative for relative in model_toy_source_paths(task)
                              if (self.root / relative).is_file())
             self._base_extra_sources = extra
         return self._base_extra_sources
@@ -319,7 +322,7 @@ class ResolutionCache:
                     execution_path=idea.get("execution_path", "public_trainer"),
                 )
                 from particlegan.recipe_compat import without_default_additions
-                recipe = without_default_additions(asdict(context.recipe), fields=("ebi_beta", "kappa_radial", "generator_gradient_response"))
+                recipe = without_default_additions(asdict(context.recipe), fields=("ebi_beta", "kappa_radial", "generator_gradient_response", 'reg_real_weight', 'reg_fake_weight', 'joint_reconstruction_weight'))
                 if "configuration_id" in idea:
                     from .configuration_search import recipe_identity_fields
                     if stable_hash(recipe_identity_fields(recipe)) != stable_hash(recipe_identity_fields(idea["resolved_configuration_recipe"])):
@@ -503,7 +506,7 @@ def candidate_revision_for(source_digest: str, candidate: dict) -> str:
         formulation["host_adaptation"] = candidate["host_adaptation"]
     if candidate.get("prior_mechanism") is not None:
         formulation["prior_mechanism"] = candidate["prior_mechanism"]
-    resolved_recipe = without_default_additions(candidate["resolved_recipe"], fields=("ebi_beta", "kappa_radial", "generator_gradient_response"))
+    resolved_recipe = without_default_additions(candidate["resolved_recipe"], fields=("ebi_beta", "kappa_radial", "generator_gradient_response", 'reg_real_weight', 'reg_fake_weight', 'joint_reconstruction_weight'))
     formulation.update(resolved_recipe=resolved_recipe, prior=candidate["prior"],
                        api_version=candidate.get("api_version", "forge-api-v1"))
     return stable_hash({"source": source_digest, "formulation": formulation})
@@ -674,7 +677,7 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
             extensions=idea.get("extensions", {}), initializer=idea.get("initializer", "deterministic_orthogonal"),
             execution_path=idea.get("execution_path", "public_trainer"))
         from particlegan.recipe_compat import without_default_additions
-        recipe = without_default_additions(asdict(context.recipe), fields=("ebi_beta", "kappa_radial", "generator_gradient_response"))
+        recipe = without_default_additions(asdict(context.recipe), fields=("ebi_beta", "kappa_radial", "generator_gradient_response", 'reg_real_weight', 'reg_fake_weight', 'joint_reconstruction_weight'))
         if "configuration_id" in idea:
             from .configuration_search import recipe_identity_fields
             if stable_hash(recipe_identity_fields(recipe)) != stable_hash(recipe_identity_fields(idea["resolved_configuration_recipe"])):
@@ -711,6 +714,9 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
         except (KeyError, TypeError, ValueError):
             profile_sources = {}
         extra_sources.update(relative for relative in profile_sources
+                             if (root / relative).is_file())
+        from .model_toy_sources import model_toy_source_paths
+        extra_sources.update(relative for relative in model_toy_source_paths(task)
                              if (root / relative).is_file())
     for task in tasks.values():
         for relative in task["evaluation"].get("sources", {}):
