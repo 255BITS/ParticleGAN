@@ -199,7 +199,9 @@ def vector_profile_blockers(task: dict, *, root: Path | str | None = None) -> li
         for key in ("z_dim", "particles", "batch", "steps"):
             if type(spec.get(key)) is not int or spec[key] < 1:
                 return [f"{task.get('id', '<task>')}: invalid stretch vector dimension: {key}"]
-        return []
+        return [f"{task.get('id', '<task>')}: no registered public Forge adapter for "
+                "this stretch host; declare and implement its complete recipe, "
+                "sampling and checkpoint contracts before training"]
     try:
         resolve_vector_spec(task, root=root)
     except (KeyError, TypeError, ValueError, OSError) as error:

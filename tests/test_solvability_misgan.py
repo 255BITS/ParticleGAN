@@ -634,7 +634,7 @@ def test_level3_destructive_negative_controls_mcar_p80_anchored():
 )
 @pytest.mark.parametrize("family", ["bispf", "atlas", "bcap", "k3p", "ka2"])
 def test_misgan_multi_family_trainer_and_prior_updates(case_id: str, family: str):
-    """Verify all 4 MisGAN fixtures run 4 steps cleanly and update unwrap_prior(fixture.prior).z across families."""
+    """Run supported intact recipes; unsupported controls are explicit refusals."""
     case = deepcopy(CASES[case_id])
     base_recipe = get_recipe(family)
     kw = dict(batch_size=64, num_particles=256, z_dim=8)
@@ -647,30 +647,17 @@ def test_misgan_multi_family_trainer_and_prior_updates(case_id: str, family: str
         init.deterministic_orthogonal_(base, seed=17)
         prior = ManipulatedPrior(base, [NormalNoiseManipulator(sigma=0.0065)])
 
-    if case_id in ("api-misgan-block-recovery", "api-misgan-mcar-p50-recovery"):
-        fixture = MisGANRecoveryFixture(
-            case,
-            seed=0,
-            recipe=recipe,
-            prior=prior,
-            max_steps=4,
-            batch_size=64,
-            particles=256,
-            z_dim=8,
-            device="cpu",
-        )
-    else:
-        fixture = MisGANNeuralImputerFixture(
-            case,
-            seed=0,
-            recipe=recipe,
-            prior=prior,
-            max_steps=4,
-            batch_size=64,
-            particles=256,
-            z_dim=8,
-            device="cpu",
-        )
+    owner = (MisGANRecoveryFixture if case_id in
+             ("api-misgan-block-recovery", "api-misgan-mcar-p50-recovery") else MisGANNeuralImputerFixture)
+    kwargs = dict(seed=0, recipe=recipe, prior=prior, max_steps=4,
+                  batch_size=64, particles=256, z_dim=8, device="cpu")
+    if family in ("atlas", "k3p", "ka2"):
+        declared = recipe.to_dict()
+        with pytest.raises(ValueError, match="cannot execute the intact recipe mechanisms"):
+            owner(case, **kwargs)
+        assert recipe.to_dict() == declared
+        return
+    fixture = owner(case, **kwargs)
 
     assert fixture.recipe.name == family
     assert isinstance(fixture.D_x, FourierMLPDiscriminator)

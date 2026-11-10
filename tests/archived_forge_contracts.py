@@ -20,6 +20,7 @@ COMMITS = {
     "shallow_gaussian_cards": "5737ade47dca89b04d338ada20667781d1f2b5df",
     "bcap_legacy_questions": "5737ade47dca89b04d338ada20667781d1f2b5df",
     "bcap_prior_baseline_questions": "03466efa4de8271b9a2c964406dc6f4f0f260792",
+    "model_toy_api_callers": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
 }
 
 

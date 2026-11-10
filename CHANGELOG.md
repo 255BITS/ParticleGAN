@@ -1,7 +1,31 @@
 # Changelog
 
-## Unreleased
+## 0.9.8 — 2026-11-09
 
+- **Tiny PyPI source distribution (`sdist`) and strict distribution gates.**
+  Prune non-package trees (`tests`, `reports`, `results`, `experiments`,
+  `benchmarks`, `lib`, `configs`, `data`, `runs`, `artifacts`, `docs`,
+  `examples`, `ops`, `scripts`) and workspace files via `MANIFEST.in`,
+  shrinking `particlegan-0.9.8.tar.gz` from `1.7 MB` (`7.14 MB` uncompressed)
+  to `~343 KiB` (`~373 KiB` wheel) and enforcing `< 600 KB` byte-size and root
+  allowlists in CI and packaging tests.
+- **Reviewed model objectives, pre-subtraction `NaN` masking, and public exports.**
+  Export `conditional_energy_score`, `joint_reconstruction_loss`,
+  `masked_mixture_nll`, `NeuralComponentImputer`, `masked_quantile_transport_loss`,
+  `EmulatedLinear`, and `emulate_linear_training_` from top-level `particlegan`.
+  Mask `observed` via `torch.where` before subtracting `components` in
+  `masked_mixture_nll` so unobserved `NaN` entries cannot contaminate gradients
+  when `observed.requires_grad` is `True`.
+- **Formula-faithful recipe admission, independent critic histories, and provenance.**
+  Enforce formula-faithful admission across vector, BiGAN, DDGAN, VAE-GAN, and
+  MisGAN hosts (including rejecting unsupported `model="ddgan"` and
+  `training_precision="bf16_channels_last"` settings on MisGAN hosts before
+  optimizer construction and isolating independent MisGAN critic histories),
+  separate faithful numerical `FAIL` from `BLOCKED`/`INCOMPLETE`/`UNMEASURED`
+  outcomes, and preserve byte-exact historical receipts with ancestral
+  source-binding verification
+  ([integration scope](reports/forge/reviewed-pr-integration-20261109/README.md),
+  [audit](reports/gpt-audit-2026-11-08.md)).
 - **Exact trainer checkpoint continuation with gradient response.** Save,
   validate and restore gradient-coherence history when enabled, preserving the
   next update in fresh and previously used trainers. Reject older enabled-response

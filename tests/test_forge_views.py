@@ -277,6 +277,50 @@ def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer
                 blockers = task_preflight(deepcopy(task), candidate, {}, root=ROOT, tasks=tasks)
                 assert f"{task['id']}: evaluator source changed; revise the task definition: {path}" in blockers
                 continue
+            if task["adapter"] == "public_api_model_toy" and path in {
+                    "benchmarks/toy_audit/api_contract.py", "benchmarks/toy_audit/api_run.py"}:
+                from pr_integration_compat import COMBINED_INTEGRATION, before_pr_integration
+                original = before_pr_integration(
+                    ROOT, task, "configs/forge/tasks/" + task["id"] + ".json")
+                if task["id"] == "model_misgan_four_mode":
+                    # This separate cohort originally declared no API source map.
+                    # Preserve that exact coupled-state task; corrected v2 gains
+                    # explicit current pins without inheriting historical quality.
+                    receipt_path = "reports/forge/pr-integration-20261109/misgan-execution-v2.json"
+                    receipt_raw = (ROOT / receipt_path).read_bytes()
+                    assert receipt_raw == subprocess.check_output([
+                        "git", "show", "ea75964cd20ed87e6f7a798e694205594b7e65a9:" + receipt_path], cwd=ROOT)
+                    receipt = json.loads(receipt_raw)
+                    archived = receipt["coupled_v1"]["task"]
+                    archived_raw = subprocess.check_output([
+                        "git", "show", archived["source_commit"] + ":" + archived["source_path"]], cwd=ROOT)
+                    assert (ROOT / archived["archived_path"]).read_bytes() == archived_raw
+                    assert hashlib.sha256(archived_raw).hexdigest() == archived["sha256"]
+                    assert original == json.loads(archived_raw)
+                    assert original["evaluation"]["sources"] == {}
+                    assert task["evaluation"]["integration_source_binding"]["id"] == COMBINED_INTEGRATION
+                    assert task["execution"]["host_definition"]["provider"] == "benchmarks.toy_audit.api_model_misgan"
+                    assert task["execution"]["execution_contract"] == receipt["version"]
+                    assert receipt["corrected_execution_quality"] == "unmeasured"
+                    assert receipt["historical_quality_inherited"] is False
+                    assert receipt["qualification_input"] is False
+                    assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == digest
+                    continue
+                # The original model cohort retains its exact contract bytes.
+                # Capability admission changes do not rebind that evidence.
+                frozen = archived_contract_bytes("model_toy_api_callers", path)
+                assert hashlib.sha256(frozen).hexdigest() == original["evaluation"]["sources"][path]
+                if original != task:
+                    # The receipt verifies each source-only parent and every
+                    # current pin. Frozen evidence retains its archived bytes.
+                    assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == digest
+                    continue
+                if hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != digest:
+                    from experiments.forge.preflight import task_preflight
+                    candidate = json.loads((ROOT / "configs/forge/ideas/k3p.json").read_text())
+                    blockers = task_preflight(deepcopy(task), candidate, {}, root=ROOT, tasks=tasks)
+                    assert f"{task['id']}: evaluator source changed; revise the task definition: {path}" in blockers
+                continue
             if path in {"benchmarks/toy_audit/api_model_ae.py",
                         "benchmarks/toy_audit/api_model_ddgan.py",
                         "benchmarks/toy_audit/api_model_vae.py"}:

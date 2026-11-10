@@ -718,6 +718,43 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-c195899a64af-ddgan-conditional-repair-v1"></a>
+
+## ddgan-conditional-repair-v1
+
+**ddgan-conditional-repair-v1 — revision 2**. [View declaration](../../../configs/forge/views/ddgan-conditional-repair-v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-c195899a64af-ddgan-conditional-repair-v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [ddgan_repair_gaussian_chain_v1](halloween.md#cohort-cuda-c195899a64af-experiment-ddgan_repair_gaussian_chain_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [ddgan_repair_bimodal_chain_wall_v2](halloween.md#cohort-cuda-c195899a64af-experiment-ddgan_repair_bimodal_chain_wall_v2) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-c195899a64af-ddgan-conditional-repair-v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-c195899a64af-ddgan-conditional-repair-v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-c195899a64af-ddgan-conditional-repair-v1-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
 <a name="cohort-cuda-c195899a64af-discriminator_stability"></a>
 
 ## discriminator_stability
@@ -1068,6 +1105,42 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-c195899a64af-misgan-bispf-research-v1"></a>
+
+## misgan-bispf-research-v1
+
+**misgan-bispf-research-v1 — revision 2**. [View declaration](../../../configs/forge/views/misgan-bispf-research-v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **provisional**. Scoped research diagnostic; no ordinary qualification or default adoption.
+
+<a name="cohort-cuda-c195899a64af-misgan-bispf-research-v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [model_misgan_four_mode](halloween.md#cohort-cuda-c195899a64af-experiment-model_misgan_four_mode) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-c195899a64af-misgan-bispf-research-v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-c195899a64af-misgan-bispf-research-v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-c195899a64af-misgan-bispf-research-v1-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
 <a name="cohort-cuda-c195899a64af-prior-ablation-full-suite-v1"></a>
 
 ## prior-ablation-full-suite-v1
@@ -1204,6 +1277,43 @@ Calibration: **provisional**. Phase D historical calibration remains required
 No experiments assigned.
 
 <a name="cohort-cuda-c195899a64af-quality_coverage-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
+<a name="cohort-cuda-c195899a64af-r1r2-repair-word-retention-20261022"></a>
+
+## r1r2-repair-word-retention-20261022
+
+**r1r2-repair-word-retention-20261022 — revision 1**. [View declaration](../../../configs/forge/views/r1r2-repair-word-retention-20261022.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **provisional**. Own-checkpoint word retention only; no ordinary tier qualification, source promotion or global recipe adoption.
+
+<a name="cohort-cuda-c195899a64af-r1r2-repair-word-retention-20261022-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [five_word_joint_smoke](halloween.md#cohort-cuda-c195899a64af-experiment-five_word_joint_smoke) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_hold](halloween.md#cohort-cuda-c195899a64af-experiment-five_word_joint_hold) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-c195899a64af-r1r2-repair-word-retention-20261022-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-c195899a64af-r1r2-repair-word-retention-20261022-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-c195899a64af-r1r2-repair-word-retention-20261022-tier-4"></a>
 
 ### Tier 4
 
@@ -1516,6 +1626,43 @@ No experiments assigned.
 No experiments assigned.
 
 <a name="cohort-cuda-c195899a64af-tier1_policy_coverage-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
+<a name="cohort-cuda-c195899a64af-vaegan_coverage"></a>
+
+## vaegan_coverage
+
+**vaegan_coverage — revision 1**. [View declaration](../../../configs/forge/views/vaegan_coverage.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **provisional**. Two toy gates do not establish screen calibration or whole-suite adoption.
+
+<a name="cohort-cuda-c195899a64af-vaegan_coverage-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [model_vae_hard](halloween.md#cohort-cuda-c195899a64af-experiment-model_vae_hard) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [model_vae_categorical](halloween.md#cohort-cuda-c195899a64af-experiment-model_vae_categorical) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-c195899a64af-vaegan_coverage-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-c195899a64af-vaegan_coverage-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-c195899a64af-vaegan_coverage-tier-4"></a>
 
 ### Tier 4
 
@@ -1926,6 +2073,141 @@ Declared budget: 13 updates; timeout 180 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
 
+<a name="cohort-cuda-c195899a64af-experiment-ddgan_repair_bimodal_chain_wall_v2"></a>
+
+### ddgan_repair_bimodal_chain_wall_v2
+
+**ddgan_repair_bimodal_chain_wall_v2: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/ddgan_repair_bimodal_chain_wall_v2.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [ddgan-conditional-repair-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-ddgan-conditional-repair-v1-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| final_projection_cdf | <= 0.12 |
+| final_normalized_mean | <= 0.25 |
+| final_covariance_eigen_min | >= 0.65 |
+| final_covariance_eigen_max | <= 1.4 |
+| t1_q0_projection_cdf | <= 0.12 |
+| t1_q0_normalized_mean | <= 0.25 |
+| t1_q0_covariance_eigen_min | >= 0.65 |
+| t1_q0_covariance_eigen_max | <= 1.4 |
+| t1_q1_projection_cdf | <= 0.12 |
+| t1_q1_normalized_mean | <= 0.25 |
+| t1_q1_covariance_eigen_min | >= 0.65 |
+| t1_q1_covariance_eigen_max | <= 1.4 |
+| t2_q0_projection_cdf | <= 0.12 |
+| t2_q0_normalized_mean | <= 0.25 |
+| t2_q0_covariance_eigen_min | >= 0.65 |
+| t2_q0_covariance_eigen_max | <= 1.4 |
+| t2_q1_projection_cdf | <= 0.12 |
+| t2_q1_normalized_mean | <= 0.25 |
+| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_covariance_eigen_max | <= 1.4 |
+| t3_q0_projection_cdf | <= 0.12 |
+| t3_q0_normalized_mean | <= 0.25 |
+| t3_q0_covariance_eigen_min | >= 0.65 |
+| t3_q0_covariance_eigen_max | <= 1.4 |
+| t3_q1_projection_cdf | <= 0.12 |
+| t3_q1_normalized_mean | <= 0.25 |
+| t3_q1_covariance_eigen_min | >= 0.65 |
+| t3_q1_covariance_eigen_max | <= 1.4 |
+| t4_q0_projection_cdf | <= 0.12 |
+| t4_q0_normalized_mean | <= 0.25 |
+| t4_q0_covariance_eigen_min | >= 0.65 |
+| t4_q0_covariance_eigen_max | <= 1.4 |
+| t4_q1_projection_cdf | <= 0.12 |
+| t4_q1_normalized_mean | <= 0.25 |
+| t4_q1_covariance_eigen_min | >= 0.65 |
+| t4_q1_covariance_eigen_max | <= 1.4 |
+| panel_count | == 8 |
+| samples_per_panel | >= 2048 |
+| final_hq | >= 0.95 |
+| final_mode_mass_tv | <= 0.1 |
+| final_local_mean_sigma | <= 0.5 |
+| final_local_covariance_min | >= 0.5 |
+| final_local_covariance_max | <= 1.5 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 5000 updates; timeout 1200 seconds.
+
+Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../ddgan-conditional-repair/README.md)
+
+<a name="cohort-cuda-c195899a64af-experiment-ddgan_repair_gaussian_chain_v1"></a>
+
+### ddgan_repair_gaussian_chain_v1
+
+**ddgan_repair_gaussian_chain_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/ddgan_repair_gaussian_chain_v1.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [ddgan-conditional-repair-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-ddgan-conditional-repair-v1-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| final_projection_cdf | <= 0.12 |
+| final_normalized_mean | <= 0.25 |
+| final_covariance_eigen_min | >= 0.65 |
+| final_covariance_eigen_max | <= 1.4 |
+| t1_q0_projection_cdf | <= 0.12 |
+| t1_q0_normalized_mean | <= 0.25 |
+| t1_q0_covariance_eigen_min | >= 0.65 |
+| t1_q0_covariance_eigen_max | <= 1.4 |
+| t1_q1_projection_cdf | <= 0.12 |
+| t1_q1_normalized_mean | <= 0.25 |
+| t1_q1_covariance_eigen_min | >= 0.65 |
+| t1_q1_covariance_eigen_max | <= 1.4 |
+| t2_q0_projection_cdf | <= 0.12 |
+| t2_q0_normalized_mean | <= 0.25 |
+| t2_q0_covariance_eigen_min | >= 0.65 |
+| t2_q0_covariance_eigen_max | <= 1.4 |
+| t2_q1_projection_cdf | <= 0.12 |
+| t2_q1_normalized_mean | <= 0.25 |
+| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_covariance_eigen_max | <= 1.4 |
+| t3_q0_projection_cdf | <= 0.12 |
+| t3_q0_normalized_mean | <= 0.25 |
+| t3_q0_covariance_eigen_min | >= 0.65 |
+| t3_q0_covariance_eigen_max | <= 1.4 |
+| t3_q1_projection_cdf | <= 0.12 |
+| t3_q1_normalized_mean | <= 0.25 |
+| t3_q1_covariance_eigen_min | >= 0.65 |
+| t3_q1_covariance_eigen_max | <= 1.4 |
+| t4_q0_projection_cdf | <= 0.12 |
+| t4_q0_normalized_mean | <= 0.25 |
+| t4_q0_covariance_eigen_min | >= 0.65 |
+| t4_q0_covariance_eigen_max | <= 1.4 |
+| t4_q1_projection_cdf | <= 0.12 |
+| t4_q1_normalized_mean | <= 0.25 |
+| t4_q1_covariance_eigen_min | >= 0.65 |
+| t4_q1_covariance_eigen_max | <= 1.4 |
+| panel_count | == 8 |
+| samples_per_panel | >= 2048 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 2500 updates; timeout 600 seconds.
+
+Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../ddgan-conditional-repair/README.md)
+
 <a name="cohort-cuda-c195899a64af-experiment-five_word_joint_acquisition_tier1_policy_selected_cloud_v1"></a>
 
 ### five_word_joint_acquisition_tier1_policy_selected_cloud_v1
@@ -1971,7 +2253,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [lazy_cadence_coverage / Tier 1](halloween.md#cohort-cuda-c195899a64af-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-prior-ablation-full-suite-v1-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-2) · [lazy_cadence_coverage / Tier 1](halloween.md#cohort-cuda-c195899a64af-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-prior-ablation-full-suite-v1-tier-1) · [r1r2-repair-word-retention-20261022 / Tier 1](halloween.md#cohort-cuda-c195899a64af-r1r2-repair-word-retention-20261022-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Current pass criteria:
 
@@ -2004,7 +2286,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](halloween.md#cohort-cuda-c195899a64af-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-prior-ablation-full-suite-v1-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](halloween.md#cohort-cuda-c195899a64af-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-prior-ablation-full-suite-v1-tier-1) · [r1r2-repair-word-retention-20261022 / Tier 1](halloween.md#cohort-cuda-c195899a64af-r1r2-repair-word-retention-20261022-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Current pass criteria:
 
@@ -3269,6 +3551,45 @@ Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_wit
 
 [Explanation and existing training artifacts](../api-model-toys/ddgan.md)
 
+<a name="cohort-cuda-c195899a64af-experiment-model_misgan_four_mode"></a>
+
+### model_misgan_four_mode
+
+**model_misgan_four_mode: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_misgan_four_mode.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [misgan-bispf-research-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-misgan-bispf-research-v1-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
+| mass_tv | <= 0.1 |
+| off_plane | <= 0.04 |
+| mask_tv | <= 0.05 |
+| imputer_observed_error | <= 1e-06 |
+| imputer_accuracy | >= 0.94 |
+| ambiguous_hq | >= 0.9 |
+| ambiguous_mass_tv | <= 0.12 |
+| ambiguous_query_coverage | >= 0.9 |
+| ambiguous_std_ratio | >= 0.7 |
+| ambiguous_std_ratio | <= 1.3 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../misgan-bispf/README.md)
+
 <a name="cohort-cuda-c195899a64af-experiment-model_vae_categorical"></a>
 
 ### model_vae_categorical
@@ -3279,7 +3600,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [discriminator_stability / Tier 1](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-prior-ablation-full-suite-v1-tier-1).
+Used by: [discriminator_stability / Tier 1](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-prior-ablation-full-suite-v1-tier-1) · [vaegan_coverage / Tier 1](halloween.md#cohort-cuda-c195899a64af-vaegan_coverage-tier-1).
 
 Current pass criteria:
 
@@ -3319,7 +3640,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [discriminator_stability / Tier 1](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-prior-ablation-full-suite-v1-tier-1).
+Used by: [discriminator_stability / Tier 1](halloween.md#cohort-cuda-c195899a64af-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](halloween.md#cohort-cuda-c195899a64af-prior-ablation-full-suite-v1-tier-1) · [vaegan_coverage / Tier 1](halloween.md#cohort-cuda-c195899a64af-vaegan_coverage-tier-1).
 
 Current pass criteria:
 

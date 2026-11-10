@@ -68,6 +68,8 @@ def technique_signature(value):
                                  if recipe.effective_critic_formulation == "k3p" and recipe.reg_arm is None
                                  else None),
     }
+    if recipe.conditional_energy_weight:
+        mechanisms["conditional_energy_objective"] = True
     if recipe.optimizer_family in {"dualnorm", "dualnorm_D_only"}:
         mechanisms["dualnorm_momentum"] = recipe.optimizer_momentum > 0
     if recipe.prior_update == "learned" and recipe.prior_l2 > 0:
@@ -115,6 +117,12 @@ def recipe_field_active(name, value, *, task=None):
 
     recipe = _recipe(value)
     execution = {} if task is None else task.get("execution", {})
+    if name == "joint_reconstruction_weight":
+        return task is None or task.get("adapter") == "word_joint"
+    if name in {"reg_real_weight", "reg_fake_weight"}:
+        return recipe.reg_arm in {"a_r1r2", "b_cap"} and not (
+            task is not None and task.get("adapter") == "public_api_model_toy"
+            and execution.get("host_definition", {}).get("adversarial") is False)
     from .priors import recipe_owned_prior
     learned = (recipe.prior_update == "learned" if task is None or recipe_owned_prior(task)
                else execution.get("prior", {}).get("learnable", True))

@@ -4,9 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "particlegan"
-version = "0.9.7"
+version = "0.9.8"
 description = "Composable PyTorch primitives for learnable particle priors, GANs, and DDGAN"
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.11"
 dependencies = [
     "torch>=2.6,<3",
@@ -15,7 +17,7 @@ dependencies = [
 
 [project.urls]
 Repository = "https://github.com/255BITS/ParticleGAN"
-Documentation = "https://github.com/255BITS/ParticleGAN/blob/v0.9.7/docs/api.md"
+Documentation = "https://github.com/255BITS/ParticleGAN/blob/v0.9.8/docs/api.md"
 
 [project.optional-dependencies]
 mog = ["scipy>=1.10,<2"]

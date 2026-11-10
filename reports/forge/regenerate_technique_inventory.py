@@ -673,7 +673,70 @@ def _evaluator_revision_reaches(root, task, target_evaluation_sha256):
         if fingerprint in seen:
             return False
         seen.add(fingerprint)
-        revision = current.get("evaluation", {}).get("evaluator_revision")
+        evaluation = current.get("evaluation", {})
+        integration = evaluation.get("integration_source_binding")
+        if (isinstance(integration, dict)
+                and integration.get("id") == "reviewed-model-prs-integration-20261109"):
+            # Combined integration adds a source binding beside (rather than
+            # replacing) evaluator_revision. Verify its exact archived bytes
+            # before following that older lineage. This is comparison ancestry,
+            # never permission to reuse a measurement at the integrated source.
+            commit = integration.get("previous_task_commit")
+            relative = integration.get("previous_task_path")
+            receipt_path = integration.get("integration_receipt")
+            paths = (relative, receipt_path)
+            if (not isinstance(commit, str) or len(commit) != 40
+                    or any(char not in "0123456789abcdef" for char in commit)
+                    or any(not isinstance(path, str) or Path(path).is_absolute()
+                           or ".." in Path(path).parts or Path(path).suffix != ".json"
+                           for path in paths)
+                    or integration.get("qualification_input") is not False):
+                return False
+            try:
+                previous_raw = subprocess.check_output(
+                    ["git", "show", f"{commit}:{relative}"], cwd=root)
+                previous = json.loads(previous_raw)
+                current_raw = (Path(root) / relative).read_bytes()
+                receipt = read_json(Path(root) / receipt_path)
+                rows = [row for row in receipt["tasks"]
+                        if row.get("previous_task_path") == relative]
+                if (len(rows) != 1
+                        or json.loads(current_raw) != current
+                        or receipt.get("schema") != "pr_combined_integration_source_binding_v1"
+                        or receipt.get("pr") != "combined"
+                        or any(receipt.get(key) is not False for key in (
+                            "training_rerun", "qualification_results_changed",
+                            "automatic_cross_source_reuse", "qualification_input"))):
+                    return False
+                row = rows[0]
+                if (any(row.get(key) != integration.get(key) for key in (
+                        "previous_task_commit", "previous_task_path",
+                        "previous_task_sha256", "previous_task_blob"))
+                        or hashlib.sha256(previous_raw).hexdigest() != integration.get("previous_task_sha256")
+                        or hashlib.sha1(f"blob {len(previous_raw)}\0".encode() + previous_raw).hexdigest()
+                        != integration.get("previous_task_blob")
+                        or hashlib.sha256(current_raw).hexdigest() != row.get("current_task_sha256")
+                        or row.get("sources_before") != previous.get("evaluation", {}).get("sources")
+                        or row.get("sources_after") != evaluation.get("sources")
+                        or any(file_hash(Path(root) / path) != digest
+                               for path, digest in row["sources_after"].items())):
+                    return False
+            except (OSError, subprocess.CalledProcessError, json.JSONDecodeError,
+                    KeyError, TypeError, AttributeError):
+                return False
+            restored = deepcopy(current)
+            restored["evaluation"].pop("integration_source_binding")
+            if "integration_source_binding" in previous.get("evaluation", {}):
+                restored["evaluation"]["integration_source_binding"] = deepcopy(
+                    previous["evaluation"]["integration_source_binding"])
+            restored["evaluation"]["sources"] = deepcopy(previous.get("evaluation", {}).get("sources"))
+            # No execution, gate, ownership, sampler or earlier revision change
+            # can be justified by this source-only binding, even if receipted.
+            if restored != previous:
+                return False
+            current = previous
+            continue
+        revision = evaluation.get("evaluator_revision")
         if not isinstance(revision, dict):
             return False
         commit = revision.get("previous_task_commit")
@@ -2759,28 +2822,15 @@ class _ReadoutCompatibilityMatcher:
 
 
 def _format_tier1_bucket(outcomes: list[str], total: int, *, bold_score: bool = False) -> str:
-    passed = sum(item == "PASS" for item in outcomes)
-    failed = sum(item == "FAIL" for item in outcomes)
-    preflight_blocked = sum(item == "PREFLIGHT_BLOCKED" for item in outcomes)
-    dep_blocked = sum(item == "BLOCKED" for item in outcomes)
-    unmeasured = sum(item == "UNMEASURED" for item in outcomes)
+    counts = Counter(outcomes)
+    passed = counts.pop("PASS", 0)
     base = f"**{passed}/{total}**" if bold_score else f"{passed}/{total}"
-    notes = []
-    if not bold_score and failed:
-        notes.append(f"{failed} fail")
-    if preflight_blocked:
-        notes.append(f"{preflight_blocked} preflight-blocked")
-    if dep_blocked:
-        notes.append(f"{dep_blocked} blocked")
-    if unmeasured:
-        notes.append(f"{unmeasured} not run")
+    labels = {"FAIL": "fail", "PREFLIGHT_BLOCKED": "preflight-blocked",
+              "BLOCKED": "blocked", "UNMEASURED": "not run", "UNKNOWN": "not measured"}
+    notes = [f"{count} {labels.get(status, status.lower())}"
+             for status, count in sorted(counts.items(), key=lambda pair: (list(labels).index(pair[0])
+                                              if pair[0] in labels else len(labels), pair[0])) if count]
     return f"{base} ({', '.join(notes)})" if notes else base
-
-
-def _format_binary_bucket(passed: int, total: int, *, bold_score: bool = False) -> str:
-    failed = total - passed
-    base = f"**{passed}/{total}**" if bold_score else f"{passed}/{total}"
-    return f"{base} ({failed} fail)" if failed else base
 
 
 def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
@@ -2951,7 +3001,9 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
             from experiments.forge.views import task_evaluation_fingerprint, task_execution_fingerprint
 
             coverage_fps = _load_attempt_coverage_task_fps(root)
-            coverage_verdicts = _load_attempt_coverage_family_verdicts(root)
+            # Coverage is diagnostic, even if its family/task labels match.
+            # Only compatibility-checked concluded task rows supply observations.
+            coverage_verdicts = {}
             shared_attempt_cache: dict[str, dict | None] = {}
             rows_data = []
             source_digests = set()
@@ -3021,7 +3073,7 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                                     any_t1_row_rejected = True
                                 continue
                             st = trow.get("gate_status") or trow.get("status")
-                            if st in {"PASS", "FAIL", "BLOCKED"}:
+                            if st in {"PASS", "FAIL", "BLOCKED", "ERROR", "INVALID", "INCOMPLETE", "TIMEOUT", "INTERRUPTED"}:
                                 if tid in t1_task_set:
                                     measured[tid] = st
                                     all_measured[tid] = st
@@ -3031,6 +3083,16 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                         if used:
                             used_records.append((rec_rel, rec_name))
                     fam_cov = coverage_verdicts.get(fam_id, {})
+                    t1_recorded_set = {
+                        t
+                        for t in t1_task_set
+                        if t in req["tasks"]
+                        and (
+                            t in req_tasks
+                            or t in fam_cov
+                            or not (req["tasks"][t].get("execution") or {}).get("linear_precision")
+                        )
+                    }
                     has_current_source_coverage = any(src == req["source"]["digest"] for src, _ in coverage_fps)
                     all_runnable_matched = runnable_count > 0 and runnable_matched_count == runnable_count
                     all_t1_in_coverage = (
@@ -3042,8 +3104,7 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                         and not any_t1_row_rejected
                         and all(
                             t in measured or t in fam_cov
-                            for t in t1_task_set
-                            if t in req["tasks"]
+                            for t in t1_recorded_set
                         )
                         and all(
                             (
@@ -3051,8 +3112,8 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                                 task_evaluation_fingerprint(req["tasks"][t]),
                             )
                             in coverage_fps.get((req["source"]["digest"], t), set())
-                            for t in t1_task_set
-                            if t in req["tasks"] and (req["source"]["digest"], t) in coverage_fps
+                            for t in t1_recorded_set
+                            if (req["source"]["digest"], t) in coverage_fps
                         )
                     )
                     if all_t1_in_coverage:
@@ -3095,9 +3156,13 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                                 out.append(measured[tid])
                             elif req["tasks"][tid].get("preflight_blockers"):
                                 out.append("PREFLIGHT_BLOCKED")
-                            elif measured.get(tid) in {"PASS", "FAIL", "BLOCKED"}:
+                            elif tid in measured:
                                 out.append(measured[tid])
                             elif _dep_blocked(tid):
+                                out.append("BLOCKED")
+                            elif all_t1_in_coverage and (
+                                req["tasks"].get(tid, {}).get("execution") or {}
+                            ).get("linear_precision"):
                                 out.append("BLOCKED")
                             else:
                                 out.append("UNMEASURED")
@@ -3127,13 +3192,30 @@ def _concluded_current_source_tier1_payload(result, root: Path) -> dict | None:
                     )
             if any_matched and len(source_digests) == 1:
                 rows_data.sort(key=lambda item: (-item["total_pass"], -item["req_pass"], item["family_label"]))
+                families = {
+                    item["family_id"]: {
+                        "candidate_id": item["candidate_id"],
+                        "candidate_revision": item["candidate_revision"],
+                        "source_digest": item["source_digest"],
+                        "records": {
+                            tid: {"status": st}
+                            for tid, st in item["measured"].items()
+                            if st
+                        },
+                    }
+                    for item in rows_data
+                }
                 payload = {
+                    "scope": "current_source_formulaic_display",
+                    "qualification_input": False,
+                    "qualification_reuse": False,
                     "source_digest": next(iter(source_digests)),
                     "view_revision": view_revision,
                     "req_total": req_total,
                     "diag_total": diag_total,
                     "stretch_total": sum(item.get("importance") in {"stretch", "held"} for item in t1_assignments),
                     "rows": rows_data,
+                    "families": families,
                 }
         except Exception:
             payload = None
@@ -3220,60 +3302,17 @@ def _formulaic_display_payload(result, root: Path) -> dict | None:
 
 
 def _selected_recipe_binary_task_statuses(result, root: Path) -> dict[str, dict[str, str]] | None:
-    cached = _formulaic_display_payload(result, root)
-    if cached is None:
-        return None
-    from experiments.forge.family_reports import _selected_cohorts, _selected_row, _summed_views, full_suite_tasks
+    """Compatibility name: exact selected-cohort statuses, never binary imputation.
 
+    Diagnostic coverage remains separately available from its original receipts;
+    neither matching family labels nor policy-parent aliases transfer a grade.
+    """
+    from experiments.forge.family_reports import _selected_cohorts
     progress = result.get("family_progress") or {}
-    recorded_display = cached.get("scope") == "recorded_source_formulaic_display"
-    measured_by_cid = {} if recorded_display else {
-        item["candidate_id"]: item.get("measured", {}) for item in cached["rows"]}
-    all_tasks: set[str] = set(full_suite_tasks(progress))
-    for view in _summed_views(progress):
-        for assignment in view.get("assignments", []):
-            if "task" in assignment:
-                all_tasks.add(str(assignment["task"]))
-    by_family: dict[str, dict[str, str]] = {}
-    for family, cohort in _selected_cohorts(progress):
-        row = _selected_row(result, cohort)
-        cid = row.get("candidate_id", "")
-        ro = ({task: record["status"] for task, record in cached["families"][family["id"]]["records"].items()}
-              if recorded_display else measured_by_cid.get(cid, {}))
-        tasks_map = cohort.get("tasks", {})
-        fam_statuses: dict[str, str] = {}
-        for tid in set(tasks_map) | set(ro) | all_tasks:
-            rec_st = tasks_map.get(tid, {}).get("status")
-            if recorded_display and tid not in ro:
-                fam_statuses[tid] = rec_st or "UNKNOWN"
-                continue
-            if recorded_display and tid in ro:
-                fam_statuses[tid] = ro[tid]
-            elif ro.get(tid) in {"PASS", "FAIL"}:
-                fam_statuses[tid] = ro[tid]
-            elif rec_st in {"PASS", "FAIL"}:
-                fam_statuses[tid] = rec_st
-            else:
-                ra = tasks_map.get(tid, {}).get("run_attempt")
-                if isinstance(ra, dict) and ra.get("status") in {"PASS", "FAIL"}:
-                    fam_statuses[tid] = ra["status"]
-                else:
-                    parent_id = ((tasks_map.get(tid, {}).get("policy_parent") or {}).get("id") or "")
-                    if parent_id and ro.get(parent_id) in {"PASS", "FAIL"}:
-                        fam_statuses[tid] = ro[parent_id]
-                    elif tid == "clockfree_audit" and (
-                        tasks_map.get("clockfree_audit_measurement_v1", {}).get("status") in {"PASS", "FAIL"}
-                        or ro.get("clockfree_audit_measurement_v1") in {"PASS", "FAIL"}
-                    ):
-                        fam_statuses[tid] = (
-                            ro["clockfree_audit_measurement_v1"]
-                            if ro.get("clockfree_audit_measurement_v1") in {"PASS", "FAIL"}
-                            else tasks_map.get("clockfree_audit_measurement_v1", {}).get("status")
-                        )
-                    else:
-                        fam_statuses[tid] = "FAIL"
-        by_family[family["id"]] = fam_statuses
-    return by_family
+    families = {family["id"]: {name: entry.get("status", "UNKNOWN")
+                               for name, entry in cohort.get("tasks", {}).items()}
+                for family, cohort in _selected_cohorts(progress)}
+    return families or None
 
 
 def _current_source_tier1_readouts_markdown(result, root, path) -> str:
@@ -3282,87 +3321,13 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
     cached = _concluded_current_source_tier1_payload(result, root)
     if not cached:
         return ""
-    from experiments.forge.family_reports import _summed_views, link
-
-    complete_binary = all(
-        "UNMEASURED" not in (item["req_outcomes"] + item["diag_outcomes"])
-        for item in cached["rows"]
-    )
-    binary_by_family = _selected_recipe_binary_task_statuses(result, root) if complete_binary else None
-    progress = result.get("family_progress") or {}
-    distinct_by_tier: dict[int, list[str]] = {1: [], 2: [], 3: []}
-    if binary_by_family is not None:
-        seen_by_tier: dict[int, set[str]] = {1: set(), 2: set(), 3: set()}
-        for view in _summed_views(progress):
-            for assignment in view.get("assignments", []):
-                if assignment.get("importance") == "required":
-                    tier_num = int(assignment["qualification_tier"])
-                    if tier_num in seen_by_tier:
-                        seen_by_tier[tier_num].add(assignment["task"])
-        distinct_by_tier = {t: sorted(tasks) for t, tasks in seen_by_tier.items()}
+    from experiments.forge.family_reports import link
 
     src12 = cached["source_digest"][:12]
     req_total = cached["req_total"]
     diag_total = cached["diag_total"]
     other_label = "Stretch / diagnostic" if cached.get("stretch_total", 0) else "Diagnostic"
     all_total = req_total + diag_total
-    if binary_by_family is not None:
-        t2_total = len(distinct_by_tier[2])
-        t3_total = len(distinct_by_tier[3])
-        tot36_total = all_total + t2_total + t3_total
-        lines = [
-            "### Current-source selected-recipe Tier 1 readouts",
-            "",
-            (
-                f"Matched current-source (`{src12}`, `discriminator_stability` revision {cached['view_revision']}) "
-                f"formulaic Tier 1–3 evaluation for each family's selected recipe under protocol seed 0 on "
-                f"`NVIDIA RTX A6000` ({req_total} required + {diag_total} {other_label.lower()} = {all_total} Tier 1 tests, "
-                f"{t2_total} Tier 2 tests, {t3_total} Tier 3 tests; {tot36_total} distinct tests total). "
-                "Every test evaluates to binary PASS or FAIL (any constructor/preflight refusal or non-passing "
-                "outcome counts as FAIL, with no third option)."
-            ),
-            "",
-            (
-                f"| Family | Selected recipe | Source / revision | Required Tier 1 ({req_total}) "
-                f"| {other_label} Tier 1 ({diag_total}) | Total Tier 1 ({all_total}) | Tier 2 ({t2_total}) "
-                f"| Tier 3 ({t3_total}) | Total Tier 1–3 ({tot36_total}) | Evidence |"
-            ),
-            "| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
-        ]
-        for item in cached["rows"]:
-            fam_id = item["family_id"]
-            fam_statuses = binary_by_family[fam_id]
-            family_cell = link(root, path, item["family_label"], item["family_page"])
-            card_href = os.path.relpath(root / item["card_rel"], path.parent)
-            recipe_cell = f"[`{item['candidate_id']}`]({card_href})"
-            rev12 = item["candidate_revision"][:12]
-            src_rev_cell = f"`{item['source_digest'][:12]}` / `{rev12}`"
-            req_pass = sum(outcome == "PASS" for outcome in item["req_outcomes"])
-            diag_pass = sum(outcome == "PASS" for outcome in item["diag_outcomes"])
-            t1_pass = req_pass + diag_pass
-            t2_pass = sum(fam_statuses.get(t) == "PASS" for t in distinct_by_tier[2])
-            t3_pass = sum(fam_statuses.get(t) == "PASS" for t in distinct_by_tier[3])
-            tot36_pass = t1_pass + t2_pass + t3_pass
-            req_cell = _format_binary_bucket(req_pass, req_total)
-            diag_cell = _format_binary_bucket(diag_pass, diag_total)
-            tot_cell = _format_binary_bucket(t1_pass, all_total, bold_score=True)
-            t2_cell = _format_binary_bucket(t2_pass, t2_total)
-            t3_cell = _format_binary_bucket(t3_pass, t3_total)
-            tot36_cell = _format_binary_bucket(tot36_pass, tot36_total, bold_score=True)
-            if item["used_records"]:
-                ev_links = [
-                    f"[`{rec_name}`]({os.path.relpath(root / rec_rel, path.parent)})"
-                    for rec_rel, rec_name in item["used_records"]
-                ]
-                ev_cell = " · ".join(ev_links)
-            else:
-                ev_cell = f"[`{Path(item['card_rel']).name}`]({card_href})"
-            lines.append(
-                f"| {family_cell} | {recipe_cell} | {src_rev_cell} | {req_cell} | {diag_cell} | {tot_cell} "
-                f"| {t2_cell} | {t3_cell} | {tot36_cell} | {ev_cell} |"
-            )
-        return "\n".join(lines)
-
     lines = [
         "### Current-source selected-recipe Tier 1 readouts",
         "",
@@ -3409,302 +3374,9 @@ def _current_source_tier1_readouts_markdown(result, root, path) -> str:
 
 
 def _formulaic_selected_recipe_tables(markdown: str, result, root, path) -> str:
-    root = Path(root).resolve()
-    path = Path(path).resolve()
-    binary_by_family = _selected_recipe_binary_task_statuses(result, root)
-    if binary_by_family is None:
-        return markdown
-    display = _formulaic_display_payload(result, root)
-    if display.get("scope") == "recorded_source_formulaic_display":
-        note = ("Recorded formulaic scores retain each recipe's original source and task bindings in "
-                "[the coverage receipts](attempt-coverage.json). They are an archived display projection, "
-                "not current-source qualification; current-source evidence gaps remain separate.\n\n")
-        if note not in markdown:
-            markdown = markdown.replace("## Selected recipes\n\n", "## Selected recipes\n\n" + note, 1)
-    from experiments.forge.family_reports import (
-        _selected_cohorts,
-        _summed_views,
-        full_suite_tasks,
-        link,
-    )
-
-    from experiments.forge.views import is_stretch
-    progress = result.get("family_progress") or {}
-    summed_views = _summed_views(progress)
-    view_by_id = {v["id"]: v for v in summed_views}
-    distinct_req_by_tier: dict[str, list[str]] = {t: [] for t in ("1", "2", "3", "4")}
-    seen_req_by_tier: dict[str, set[str]] = {t: set() for t in ("1", "2", "3", "4")}
-    distinct_stretch_by_tier: dict[str, list[str]] = {t: [] for t in ("1", "2", "3", "4")}
-    seen_stretch_by_tier: dict[str, set[str]] = {t: set() for t in ("1", "2", "3", "4")}
-    for view in summed_views:
-        for assignment in view.get("assignments", []):
-            t_key = str(assignment["qualification_tier"])
-            if assignment.get("importance") == "required":
-                if t_key in seen_req_by_tier:
-                    seen_req_by_tier[t_key].add(assignment["task"])
-            elif is_stretch(assignment) and t_key in seen_stretch_by_tier:
-                seen_stretch_by_tier[t_key].add(assignment["task"])
-    for t_key in ("1", "2", "3", "4"):
-        distinct_req_by_tier[t_key] = sorted(seen_req_by_tier[t_key])
-        distinct_stretch_by_tier[t_key] = sorted(seen_stretch_by_tier[t_key])
-    all_distinct_req = [t for t_key in ("1", "2", "3", "4") for t in distinct_req_by_tier[t_key]]
-    all_distinct_stretch = sorted({t for t_key in ("1", "2", "3", "4") for t in distinct_stretch_by_tier[t_key]})
-
-    from experiments.forge.leaderboard_contract import load_fixed_test_list
-
-    fixed_list = load_fixed_test_list(root)
-    fs_tasks = list(fixed_list["tests"]) if fixed_list else full_suite_tasks(progress)
-    counted_set = set(all_distinct_req)
-    uncounted_fs_tasks = [t for t in fs_tasks if t not in counted_set]
-
-    selected_cohorts = list(_selected_cohorts(progress))
-    selected_by_page_target: dict[str, tuple[dict, dict]] = {}
-    for family, cohort in selected_cohorts:
-        rel_page = os.path.relpath(root / family["page"], path.parent)
-        selected_by_page_target[f"]({rel_page})"] = (family, cohort)
-
-    def _fmt_selected_cell(v_pass: int, v_tot: int, d_pass: int, d_tot: int, page: str, anchor: str, *, bold: bool = True) -> str:
-        raw_link = link(root, path, f"{v_pass}/{v_tot}", page, anchor)
-        v_link = f"**{raw_link}**" if bold else raw_link
-        if d_tot <= 0:
-            return v_link
-        d_fail = d_tot - d_pass
-        return f"{v_link} · {d_pass}/{d_tot} tests ({d_fail} fail)" if d_fail else f"{v_link} · {d_pass}/{d_tot} tests"
-
-    if "Every selected recipe is evaluated formulaically" not in markdown:
-        markdown = markdown.replace(
-            "Held failures remain visible in the full-suite results below; separate diagnostic runs appear below.",
-            "Every selected recipe is evaluated formulaically across Tier 1, Tier 2, Tier 3, and Tier 4 as binary PASS or FAIL "
-            "(reporting both counted view-requirement passes and distinct-test passes/failures, with no third option: any "
-            "constructor refusal, preflight blocker, dependency block, or non-passing outcome counts as FAIL). "
-            "Held failures remain visible in the full-suite results below; separate diagnostic runs appear below.",
-            1,
-        )
-    if "Selected-recipe tables evaluate every test formulaically" not in markdown:
-        markdown = markdown.replace(
-            "Counts show passes / required tasks; selected-row pass counts remain unchanged. For rows with run-attempt coverage, the suffix counts "
-            "genuinely unattempted tasks as not run, constructor refusals as incompatible, missing required artifacts "
-            "as blocked, and other separate-runtime attempts as diagnostic attempts. A start refusal is not a "
-            "numerical failure.",
-            "Counts show passes / required tasks. Selected-recipe tables evaluate every test formulaically as binary PASS or FAIL "
-            "(with no third option: any constructor refusal, preflight blocker, dependency block, or non-passing outcome counts as FAIL). "
-            "For historical research rows with run-attempt coverage, the suffix counts genuinely unattempted tasks as not run, "
-            "constructor refusals as incompatible, missing required artifacts as blocked, and other separate-runtime attempts as "
-            "diagnostic attempts.",
-            1,
-        )
-
-    lines = markdown.splitlines()
-    in_full_suite = False
-    in_stretch = False
-    in_view_breakdown = False
-    for idx, line in enumerate(lines):
-        if line.startswith("## Full-suite results — failures included"):
-            in_full_suite = True
-            in_stretch = False
-            in_view_breakdown = False
-            continue
-        if line.startswith("## Stretch experiments"):
-            in_stretch = True
-            in_full_suite = False
-            in_view_breakdown = False
-            continue
-        if line.startswith("## ") and not line.startswith("## Full-suite results") and not line.startswith("## Stretch experiments"):
-            in_full_suite = False
-            in_stretch = False
-        if line.startswith("<summary>Selected recipe breakdown by view"):
-            in_view_breakdown = True
-            in_full_suite = False
-            in_stretch = False
-            continue
-        if in_view_breakdown and line.startswith("</details>"):
-            in_view_breakdown = False
-            continue
-
-        if line.startswith("| **["):
-            col0 = line.split(" | ", 1)[0].replace(
-                "<br>Recorded source measurement · **stale**; no current qualification",
-                "",
-            )
-            matched = next(
-                ((fam, coh) for marker, (fam, coh) in selected_by_page_target.items() if marker in col0),
-                None,
-            )
-            if matched is None:
-                continue
-            family, cohort = matched
-            fam_statuses = binary_by_family[family["id"]]
-            tier_cells = []
-            v_pass_total = 0
-            v_tot_total = 0
-            for t_key in ("1", "2", "3", "4"):
-                v_pass = 0
-                v_tot = 0
-                for view in summed_views:
-                    for assignment in view.get("assignments", []):
-                        if (
-                            assignment.get("importance") == "required"
-                            and str(assignment["qualification_tier"]) == t_key
-                        ):
-                            v_tot += 1
-                            if fam_statuses.get(assignment["task"]) == "PASS":
-                                v_pass += 1
-                v_pass_total += v_pass
-                v_tot_total += v_tot
-                d_tasks = distinct_req_by_tier[t_key]
-                d_pass = sum(fam_statuses.get(t) == "PASS" for t in d_tasks)
-                tier_cells.append(
-                    _fmt_selected_cell(
-                        v_pass,
-                        v_tot,
-                        d_pass,
-                        len(d_tasks),
-                        family["page"],
-                        f"{cohort['anchor']}-tier-{t_key}",
-                    )
-                )
-            d_pass_total = sum(fam_statuses.get(t) == "PASS" for t in all_distinct_req)
-            total_cell = _fmt_selected_cell(
-                v_pass_total,
-                v_tot_total,
-                d_pass_total,
-                len(all_distinct_req),
-                family["page"],
-                cohort["anchor"],
-            )
-            lines[idx] = f"{col0} | " + " | ".join([*tier_cells, total_cell]) + " |"
-        elif in_stretch and line.startswith("| ["):
-            col0 = line.split(" | ", 1)[0]
-            matched = next(
-                ((fam, coh) for marker, (fam, coh) in selected_by_page_target.items() if marker in col0),
-                None,
-            )
-            if matched is None:
-                continue
-            family, cohort = matched
-            fam_statuses = binary_by_family[family["id"]]
-            if any(fam_statuses.get(task) not in {"PASS", "FAIL"} for task in all_distinct_stretch):
-                # The family renderer already preserves archived outcomes and
-                # labels new cells not run/blocked. Do not invent binary FAILs.
-                continue
-            tier_cells = []
-            v_pass_total = 0
-            v_tot_total = 0
-            for t_key in ("1", "2", "3", "4"):
-                v_pass = 0
-                v_tot = 0
-                for view in summed_views:
-                    for assignment in view.get("assignments", []):
-                        if is_stretch(assignment) and str(assignment["qualification_tier"]) == t_key:
-                            v_tot += 1
-                            if fam_statuses.get(assignment["task"]) == "PASS":
-                                v_pass += 1
-                v_pass_total += v_pass
-                v_tot_total += v_tot
-                d_tasks = distinct_stretch_by_tier[t_key]
-                d_pass = sum(fam_statuses.get(t) == "PASS" for t in d_tasks)
-                tier_cells.append(
-                    _fmt_selected_cell(
-                        v_pass,
-                        v_tot,
-                        d_pass,
-                        len(d_tasks),
-                        family["page"],
-                        f"{cohort['anchor']}-tier-{t_key}",
-                        bold=False,
-                    )
-                )
-            d_pass_total = sum(fam_statuses.get(t) == "PASS" for t in all_distinct_stretch)
-            total_cell = _fmt_selected_cell(
-                v_pass_total,
-                v_tot_total,
-                d_pass_total,
-                len(all_distinct_stretch),
-                family["page"],
-                f"{cohort['anchor']}-held",
-                bold=False,
-            )
-            lines[idx] = f"{col0} | " + " | ".join([*tier_cells, total_cell]) + " |"
-        elif in_full_suite and line.startswith("| ["):
-            parts = line.split(" | ")
-            if len(parts) < 8:
-                continue
-            col0 = parts[0]
-            matched = next(
-                ((fam, coh) for marker, (fam, coh) in selected_by_page_target.items() if marker in col0),
-                None,
-            )
-            if matched is None:
-                continue
-            family, _ = matched
-            fam_statuses = binary_by_family[family["id"]]
-            from experiments.forge.leaderboard_contract import fixed_outcomes
-            counts = fixed_outcomes(fam_statuses, fs_tasks, uncounted_fs_tasks)
-            held = counts["held"]
-            held_summary = f"{held['total']}: {held['passed']} PASS, {held['failed']} FAIL"
-            if held["not_measured"]:
-                held_summary += f", {held['not_measured']} not measured"
-            if held["total"] - held["passed"] - held["failed"] - held["not_measured"]:
-                held_summary += ", other outcomes"
-            other = ", ".join(f"{n} {status.lower()}" for status, n in counts["other"].items()) or "0"
-            tuning_col = parts[7]
-            lines[idx] = (
-                f"{col0} | {counts['passed']} | **{counts['failed']}** | {counts['not_measured']} | {other} | {held_summary} | {len(fs_tasks)} | {tuning_col}"
-            )
-        elif in_view_breakdown and line.startswith("| [") and " | ↳ [" in line:
-            parts = line.split(" | ")
-            if len(parts) < 7:
-                continue
-            col0, col1 = parts[0], parts[1]
-            matched = next(
-                ((fam, coh) for marker, (fam, coh) in selected_by_page_target.items() if marker in col0),
-                None,
-            )
-            if matched is None:
-                continue
-            family, cohort = matched
-            fam_statuses = binary_by_family[family["id"]]
-            view_obj = next(
-                (v for v in cohort.get("views", []) if f"↳ [{v['id']}](" in col1),
-                None,
-            )
-            if view_obj is None or view_obj["id"] not in view_by_id:
-                continue
-            v_id = view_obj["id"]
-            v_def = view_by_id[v_id]
-            v_tier_cells = []
-            vp_tot = 0
-            vt_tot = 0
-            for t_key in ("1", "2", "3", "4"):
-                req_t = [
-                    a["task"]
-                    for a in v_def.get("assignments", [])
-                    if assignment_is_req(a, t_key)
-                ]
-                vp = sum(fam_statuses.get(t) == "PASS" for t in req_t)
-                vt = len(req_t)
-                vp_tot += vp
-                vt_tot += vt
-                v_tier_cells.append(
-                    link(root, path, f"{vp}/{vt}", family["page"], f"{cohort['anchor']}-{v_id}-tier-{t_key}")
-                )
-            v_tot_cell = link(root, path, f"{vp_tot}/{vt_tot}", family["page"], f"{cohort['anchor']}-{v_id}")
-            row_cells = [col0, col1, *v_tier_cells, v_tot_cell]
-            if len(parts) >= 8:
-                if "held" in view_obj:
-                    held_t = [
-                        a["task"]
-                        for a in v_def.get("assignments", [])
-                        if is_stretch(a)
-                    ]
-                    hp = sum(fam_statuses.get(t) == "PASS" for t in held_t)
-                    ht = len(held_t)
-                    row_cells.append(link(root, path, f"{hp}/{ht}", family["page"], f"{cohort['anchor']}-held"))
-                else:
-                    row_cells.append("—")
-            lines[idx] = " | ".join(row_cells) + " |"
-
-    return "\n".join(lines) + ("\n" if markdown.endswith("\n") else "")
+    # Diagnostic coverage cannot replace a selected cohort's recorded grades.
+    # The family renderer already preserves scientific and operational statuses.
+    return markdown
 
 
 def assignment_is_req(assignment: dict, tier_key: str) -> bool:
@@ -4325,169 +3997,9 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
 
 
 def _project_publication_for_family_pages(root, publication):
-    """Project formulaic binary PASS/FAIL outcomes onto selected cohorts for family/problem markdown rendering."""
-    binary_by_family = _selected_recipe_binary_task_statuses(publication, Path(root))
-    if binary_by_family is None:
-        return publication
-    from experiments.forge.family_reports import _selected_cohorts
-
-    projected = deepcopy(publication)
-    display = _formulaic_display_payload(publication, Path(root))
-    recorded_display = display.get("scope") == "recorded_source_formulaic_display"
-    if recorded_display:
-        projected["recorded_formulaic_display"] = {key: deepcopy(display[key])
-            for key in ("scope", "qualification_input", "qualification_reuse", "coverage")}
-    progress = projected.get("family_progress") or {}
-    attempt_records_by_family = _load_attempt_coverage_family_records(Path(root))
-    view_by_id = {v["id"]: v for v in progress.get("views", [])}
-
-    selected_anchor_to_fam: dict[tuple[str | None, int | None], str] = {}
-    target_cohorts: list[tuple[str, dict]] = []
-    for family, cohort in _selected_cohorts(progress):
-        fam_id = family["id"]
-        if fam_id not in binary_by_family:
-            continue
-        selected_anchor_to_fam[(cohort.get("anchor"), cohort.get("row_index"))] = fam_id
-        target_cohorts.append((fam_id, cohort))
-    for cfg_family in progress.get("configuration_families", []):
-        for cohort in cfg_family.get("cohorts", []):
-            key = (cohort.get("anchor"), cohort.get("row_index"))
-            if key in selected_anchor_to_fam:
-                target_cohorts.append((selected_anchor_to_fam[key], cohort))
-
-    for fam_id, cohort in target_cohorts:
-        fam_statuses = binary_by_family[fam_id]
-        tasks_dict = cohort.get("tasks", {})
-        for task_name, t_entry in tasks_dict.items():
-            parent_id = (t_entry.get("policy_parent") or {}).get("id")
-            original = display["families"][fam_id]["records"].get(task_name) if recorded_display else None
-            if recorded_display and original is None:
-                # An archived complete ordinary suite grants nothing to other
-                # diagnostic or newly declared tasks on the family page.
-                continue
-            if task_name in fam_statuses:
-                status = fam_statuses[task_name]
-            else:
-                if t_entry.get("status") in {"PASS", "FAIL"}:
-                    status = t_entry["status"]
-                elif parent_id and parent_id in fam_statuses:
-                    status = fam_statuses[parent_id]
-                else:
-                    status = "FAIL"
-            att_rec = original if recorded_display else (
-                attempt_records_by_family.get((fam_id, task_name)) or (
-                    attempt_records_by_family.get((fam_id, parent_id)) if parent_id else None))
-            t_entry["status"] = status
-            t_entry["execution_recorded"] = True
-            if recorded_display:
-                t_entry["recorded_formulaic_display"] = {
-                    "scope": display["scope"], "qualification_input": False, "qualification_reuse": False,
-                    **{key: deepcopy(original[key]) for key in (
-                        "key", "candidate_id", "candidate_revision", "source_digest", "execution_sha256", "evaluation_sha256")}}
-                t_entry["coverage_reason"] = ("Recorded formulaic display retains its original source and task bindings. "
-                    + str(t_entry.get("coverage_reason", "Current task compatibility is unverified."))
-                    + " No current-source qualification is granted.")
-            else:
-                t_entry["current_contract"] = "matches"
-                t_entry["changed_contract_fields"] = []
-                t_entry["coverage_reason"] = "Test definition matches the recorded conditions."
-            t_entry.pop("separate_diagnostic_executed", None)
-            t_entry.pop("preflight_blockers", None)
-            if att_rec is not None and att_rec.get("reason"):
-                t_entry["reason"] = str(att_rec["reason"])
-            if not t_entry.get("reason") or any(
-                marker in str(t_entry.get("reason", ""))
-                for marker in (
-                    "No recorded result",
-                    "not executed",
-                    "Skipped incompatible",
-                    "separate-runtime diagnostic",
-                    "lacks task support",
-                    "native model variants require an explicit profile",
-                    "only zero_tanh_smoke is routed",
-                    "unsupported vector target declaration",
-                    "no compatible result",
-                    "DDGAN caller-owned transition host",
-                    "requires a recipe without",
-                )
-            ):
-                t_entry["reason"] = (
-                    str(att_rec["reason"])
-                    if att_rec is not None and att_rec.get("reason")
-                    else f"Formulaic evaluation {status}."
-                )
-            run_att = t_entry.get("run_attempt")
-            if isinstance(run_att, dict) and run_att.get("status") not in {"PASS", "FAIL"}:
-                if att_rec is not None:
-                    t_entry["run_attempt"] = deepcopy(att_rec)
-                else:
-                    run_att["status"] = status
-                    run_att["attempted"] = True
-                    run_att["reason"] = t_entry["reason"]
-
-        def _binary_count(task_names: list[str]) -> dict:
-            passed = sum(tasks_dict.get(t, {}).get("status") == "PASS" for t in task_names)
-            failed = len(task_names) - passed
-            counts: dict[str, int] = {}
-            if passed:
-                counts["PASS"] = passed
-            if failed:
-                counts["FAIL"] = failed
-            return {
-                "passed": passed,
-                "total": len(task_names),
-                "incomplete": False,
-                "not_run": 0,
-                "incompatible": 0,
-                "counts": counts,
-            }
-
-        def _sum_binary_counts(items: list[dict]) -> dict:
-            passed = sum(c["passed"] for c in items)
-            total = sum(c["total"] for c in items)
-            failed = total - passed
-            counts: dict[str, int] = {}
-            if passed:
-                counts["PASS"] = passed
-            if failed:
-                counts["FAIL"] = failed
-            return {
-                "passed": passed,
-                "total": total,
-                "incomplete": False,
-                "not_run": 0,
-                "incompatible": 0,
-                "counts": counts,
-            }
-
-        for view_list_key in ("views", "scoped_views"):
-            for v_row in cohort.get(view_list_key, []):
-                v_def = view_by_id.get(v_row["id"])
-                if v_def is None:
-                    continue
-                assignments = v_def.get("assignments", [])
-                for t_key in list(v_row.get("tiers", {}).keys()):
-                    req_t = [
-                        a["task"]
-                        for a in assignments
-                        if a.get("importance") == "required" and str(a.get("qualification_tier")) == str(t_key)
-                    ]
-                    v_row["tiers"][t_key] = _binary_count(req_t)
-                v_row["total"] = _sum_binary_counts(list(v_row.get("tiers", {}).values()))
-                if "held" in v_row:
-                    from experiments.forge.views import is_stretch
-                    held_t = [a["task"] for a in assignments if is_stretch(a)]
-                    v_row["held"] = _binary_count(held_t)
-
-        for t_key in list(cohort.get("tiers", {}).keys()):
-            cohort["tiers"][t_key] = _sum_binary_counts(
-                [v_row["tiers"][t_key] for v_row in cohort.get("views", []) if t_key in v_row.get("tiers", {})]
-            )
-        cohort["total"] = _sum_binary_counts([v_row["total"] for v_row in cohort.get("views", [])])
-        for alt in cohort.get("configuration_alternatives", []):
-            if alt.get("selected"):
-                alt["total"] = deepcopy(cohort["total"])
-    return projected
+    """Keep exact-cohort grades and annotate audited diagnostic observations."""
+    from experiments.forge.publication_integrity import annotate_publication
+    return annotate_publication(root, publication)
 
 
 def _install_family_reports_generated_pages_hook() -> None:
