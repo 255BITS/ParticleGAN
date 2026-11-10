@@ -128,6 +128,17 @@ What the evidence does and does not show today:
   gaps are inside the run's own checkpoint-to-checkpoint and rerun noise
   (up to 9.4 FID5k between same-config reruns), so no image-scale prior effect is
   established.
+- **BISPF shape/step-gate ablation (`bispf_shape_gates=False`).** In the same
+  [2026-10-25 ablation study](reports/prior-ablation-2026-10-25/README.md) (Arm A4,
+  `bispf-pure-global-v1`), disabling all 10 shape/step gates in `BISPFGates` drops
+  full-suite passes from **19/49 to 13/49** (and from **7/15 to 5/15** on the matched
+  sampled-latent subset), losing `ring16_acquisition` (reaches `hq = 0.958` at the
+  endpoint but only 2/5 consecutive stable checks), `mode_hold` (7/8 modes),
+  `ring_extension` and `img_stripes2`. For wide continuous vectors (`dim >= 170`) where
+  only the automatic categorical simplex heuristic is unwanted, pass
+  `penalty_options={"input_domain": "continuous"}` to `GANTrainer` (or
+  `recipe.make_critic_penalty(opt_d, input_domain="continuous")`) as documented in
+  [BISPF input domains](docs/bispf-input-domains.md).
 - **Headline numbers below are single runs** without error bars, unless a linked
   report says otherwise.
 
@@ -245,6 +256,7 @@ transport their parent's Adam history at half mass.
 ## Learn more
 
 - [Optimized BISPF settings and measured behavior](reports/forge/bispf-optimized/README.md)
+- [BISPF continuous vs. categorical input domains](docs/bispf-input-domains.md): explicit penalty domain declarations (`input_domain="continuous"` or `"categorical"`) for wide continuous vectors (`dim >= 170`) and categorical codebooks
 - [Historical KA2 formulation](docs/ka2.md), including several critics and conditional critics
 - [E22](docs/e22.md): a schedule-free configuration for the native 100-Gaussian problems with no data-space statistics
 - [ParticleGAN Atlas](docs/atlas.md): illustrated E22 comparison, local population corrections and automatic backend selection

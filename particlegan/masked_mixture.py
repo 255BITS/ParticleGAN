@@ -23,7 +23,8 @@ not a change to the task's sampled MoG prior width.
         raise ValueError("sigma must be finite and positive")
     if not bool(((mask == 0) | (mask == 1)).all()) or bool((mask.sum(1) == 0).any()):
         raise ValueError("mask must be binary with at least one observed sensor per row")
-    residual = torch.where(mask[:, None].bool(), observed[:, None] - components[None], 0.)
+    clean = torch.where(mask.bool(), observed, 0.)
+    residual = torch.where(mask[:, None].bool(), clean[:, None] - components[None], 0.)
     count = mask.sum(1)
     logp = -.5 * residual.square().sum(-1) / sigma**2 - count[:, None] * math.log(sigma * math.sqrt(2 * math.pi))
     return ((math.log(len(components)) - torch.logsumexp(logp, dim=1)) / count).mean()
