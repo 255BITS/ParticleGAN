@@ -16,6 +16,12 @@ from .continuous import DataDriftController
 from .diffusion import DDGAN
 from .discriminators import BatchDistanceDiscriminator, LinearSkipDiscriminator
 from .gan_loss import GANLoss
+from .joint_reconstruction import joint_reconstruction_loss
+from .masked_mixture import (
+    NeuralComponentImputer,
+    masked_mixture_nll,
+    masked_quantile_transport_loss,
+)
 from .particle_prior import GaussianPrior, MoGParticlePrior, ParticlePrior, calibrate_mog_sigma
 from .priors import (
     AdditiveNormalManipulator,
@@ -73,7 +79,8 @@ __all__ = [
     "StratifiedBlueNoisePrior", "SBNPPriorRegularizer", "ContinuousThermalCooler", "BISPFEngine", "BISPFLossAdapter",
     "BISPFStepRecord", "BISPFCriticAdam", "BISPFCriticPenalty", "SinkhornRelativisticLoss", "BISPFGates",
     "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",
-    "conditional_energy_score",
+    "conditional_energy_score", "joint_reconstruction_loss",
+    "masked_mixture_nll", "NeuralComponentImputer", "masked_quantile_transport_loss",
     "DEFAULT_RECIPE", "Recipe", "NetworkLRTransition", "DataDriftController", "get_recipe", "get_recipe_fields", "learning_rate_scale", "learning_rate_scales", "scale_learning_rates", "GANTrainer", "InputNoise",
     "BatchDistanceDiscriminator", "LinearSkipDiscriminator",
 ]

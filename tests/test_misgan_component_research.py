@@ -56,12 +56,14 @@ def test_scorer_oracle_and_uncertainty_controls():
 
 
 def test_observed_likelihood_ignores_missing_values_and_detaches_teacher():
-    x=torch.tensor([[1.,float('nan')],[1.,999.]])
+    x=torch.tensor([[1.,float('nan')],[1.,999.]],requires_grad=True)
     mask=torch.tensor([[1.,0.],[1.,0.]])
     centers=torch.tensor([[0.,2.],[1.,3.]],requires_grad=True)
     loss=masked_mixture_nll(x,mask,centers,sigma=.1)
     loss.backward()
     assert torch.isfinite(loss)
+    assert torch.isfinite(x.grad).all()
+    assert torch.equal(x.grad[:,1],torch.zeros(2))
     assert torch.equal(centers.grad[:,1],torch.zeros(2))
     net=NeuralComponentImputer(2,2)
     teacher=torch.randn(4,2,requires_grad=True)
