@@ -136,18 +136,18 @@ This registration covers 9 complete recipes. Historical alternatives outside its
 
 ### NVIDIA RTX A6000 · GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce
 
-Performance source `87863e1818c8` (commit `cb5e484b059d3474f7259c40beb7acb4b5bb8704`); runtime `fddddb1b314d`; torch.float32; PyTorch 2.14.1+cu130; 48592.125 MiB device memory.
+Performance source `1665cbe614b6` (commit `49537dfe0349daec307607f340d6379537d874b9`); runtime `fddddb1b314d`; torch.float32; PyTorch 2.14.1+cu130; 48592.125 MiB device memory.
 
 Task prior: particle_cloud, sigma 0.0, 256 initial locations. The common finite-table performance exception retains each recipe's prior update policy and regularizer. Exact prior and resource specifications remain part of every task key.
 
 | Family / recipe | Task (RGB size, batch, width) | Execution | Median / p95 update ms | Images/s | GPU peak allocated / reserved MiB | Contention | Matched key / evidence |
 | --- | --- | --- | ---: | ---: | ---: | --- | --- |
-| Atlas · `atlas-particle-normal-v4` | dcgan_performance_r32: 32², B16, W64 | COMPLETE | 22.50 / 24.22 | 704.78 | 135.79 / 168.00 | clear | `36faa7c217f8` · [receipt](../scaling-receipts/dcgan-performance-cloud-1acd41cb5f4a/atlas-dcgan_performance_r32-bfa65548483939c6.json) |
-| Atlas · `atlas-particle-normal-v4` | dcgan_performance_r64: 64², B16, W64 | COMPLETE | 38.41 / 39.80 | 415.51 | 402.44 / 458.00 | clear | `1c2f26889df3` · [receipt](../scaling-receipts/dcgan-performance-cloud-1acd41cb5f4a/atlas-dcgan_performance_r64-cdbffce673b018d7.json) |
-| Atlas · `atlas-particle-normal-v4` | dcgan_performance_w128: 64², B16, W128 | COMPLETE | 69.94 / 71.24 | 228.92 | 1,175.49 / 1,416.00 | clear | `55d777bc34a2` · [receipt](../scaling-receipts/dcgan-performance-cloud-1acd41cb5f4a/atlas-dcgan_performance_w128-d780226b1284945c.json) |
-| Atlas · `atlas-particle-normal-v4` | dcgan_performance_b64: 64², B64, W64 | COMPLETE | 75.72 / 76.93 | 846.16 | 758.98 / 816.00 | clear | `fe63f8d2a846` · [receipt](../scaling-receipts/dcgan-performance-cloud-1acd41cb5f4a/atlas-dcgan_performance_b64-3efd20f1922eaa8a.json) |
-| Atlas · `atlas-particle-normal-v4` | dcgan_performance_r128: 128², B16, W64 | COMPLETE | 85.69 / 86.94 | 186.79 | 1,063.46 / 1,260.00 | clear | `a5a292259144` · [receipt](../scaling-receipts/dcgan-performance-cloud-1acd41cb5f4a/atlas-dcgan_performance_r128-a55edf7beb774dcc.json) |
-| Atlas · `atlas-particle-normal-v4` | dcgan_performance_r256: 256², B16, W64 | COMPLETE | 266.70 / 268.20 | 60.06 | 2,747.02 / 2,880.00 | clear | `ad1b8aee803c` · [receipt](../scaling-receipts/dcgan-performance-cloud-1acd41cb5f4a/atlas-dcgan_performance_r256-2078be4588e44b8b.json) |
+| Atlas · `atlas-particle-normal-v4` | dcgan_performance_r32: 32², B16, W64 | COMPLETE | 24.79 / 25.72 | 649.70 | 135.79 / 168.00 | clear | `540503eb4dd7` · [receipt](../scaling-receipts/dcgan-performance-cloud-66339a696dff/atlas-dcgan_performance_r32-fbfa3d4229cc0316.json) |
+| Atlas · `atlas-particle-normal-v4` | dcgan_performance_r64: 64², B16, W64 | COMPLETE | 39.10 / 40.21 | 408.69 | 402.44 / 458.00 | clear | `125a0b493141` · [receipt](../scaling-receipts/dcgan-performance-cloud-66339a696dff/atlas-dcgan_performance_r64-ffd70147c1540af0.json) |
+| Atlas · `atlas-particle-normal-v4` | dcgan_performance_w128: 64², B16, W128 | COMPLETE | 70.29 / 71.28 | 227.65 | 1,175.49 / 1,416.00 | clear | `a0497dcde871` · [receipt](../scaling-receipts/dcgan-performance-cloud-66339a696dff/atlas-dcgan_performance_w128-91fe9635fe7e22be.json) |
+| Atlas · `atlas-particle-normal-v4` | dcgan_performance_b64: 64², B64, W64 | COMPLETE | 76.41 / 77.45 | 837.78 | 758.98 / 816.00 | clear | `8e4691216640` · [receipt](../scaling-receipts/dcgan-performance-cloud-66339a696dff/atlas-dcgan_performance_b64-ddaa8a685f9b1e5c.json) |
+| Atlas · `atlas-particle-normal-v4` | dcgan_performance_r128: 128², B16, W64 | COMPLETE | 86.14 / 86.95 | 186.29 | 1,063.46 / 1,260.00 | clear | `778bea3f152e` · [receipt](../scaling-receipts/dcgan-performance-cloud-66339a696dff/atlas-dcgan_performance_r128-adfe18bc3b66da51.json) |
+| Atlas · `atlas-particle-normal-v4` | dcgan_performance_r256: 256², B16, W64 | COMPLETE | 268.12 / 270.53 | 59.61 | 2,747.02 / 2,880.00 | clear | `7961d2651a16` · [receipt](../scaling-receipts/dcgan-performance-cloud-66339a696dff/atlas-dcgan_performance_r256-aae7a9ae116e653d.json) |
 
 <a name="cohort-cuda-bc3debd3fa5e"></a>
 

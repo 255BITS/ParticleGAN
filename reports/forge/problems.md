@@ -26,7 +26,7 @@ Passer summaries reflect the evidence audit dated **2026-10-15**. Selected-resul
 | [Keep the 100-cluster rotated grid correct for longer](problems.md#rotated100_14k) | Continue a model that passed the 7,000-update 100-cluster test to 14,000 updates without losing quality. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 | [Keep the 100-cluster staggered grid correct for longer](problems.md#staggered100_14k) | Continue a model that passed the 7,000-update 100-cluster test to 14,000 updates without losing quality. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 | [Recover quickly after the target moves](problems.md#target_shift_recovery) | Learn and hold a ring of blobs, then track a sudden sideways shift within 400 updates and stay correct; a frozen model must fail to show the change is real. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
-| [Keep every learned mode alive](problems.md#mode_hold) | Keep generating every target mode during continued training, rather than losing modes after initially finding them. | Selected recorded PASS: BISPF. |
+| [Keep every learned mode alive](problems.md#mode_hold) | Keep generating every target mode during continued training, rather than losing modes after initially finding them. | Selected recorded PASS: BISPF, EMPF. |
 | [Keep a learned ring stable for a long run](problems.md#ring_extension) | Acquire all eight ring blobs, hold them for 1,200 consecutive checks, then survive 300 additional checks on the same uninterrupted run. | Selected recorded PASS: BISPF. |
 | [Learn sixteen distinct clusters from scratch](problems.md#ring16_acquisition) | Learn all sixteen blobs on a ring with balanced populations and real within-blob spread, rather than sixteen collapsed points. | Selected recorded PASS: BCAP, BISPF, EMPF. |
 | [Learning must not depend on external clock labels](problems.md#clockfree_audit_measurement_v1) | Check that the same learning state and inputs produce the same update despite changed step labels, declared horizon, evaluation cadence or a save/restart. | Selected recorded PASS: BCAP, BISPF, EMPF, Atlas. |
@@ -577,7 +577,7 @@ Test: `mode_hold` · Required for qualification and included in full-suite resul
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) |
 | [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) |
-| [EMPF](families/empf.md#cohort-cuda-23a94f16ca88) | [FAIL](families/empf.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) |
+| [EMPF](families/empf.md#cohort-cuda-23a94f16ca88) | [PASS](families/empf.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) |
 | [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [NOT MEASURED](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-mode_hold) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) |

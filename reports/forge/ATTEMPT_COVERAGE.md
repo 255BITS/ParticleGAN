@@ -8,7 +8,7 @@ Every record identifies an attempt to run an unchanged selected or archived rese
 | bcap-pure | 60/60 | 0 | 34 FAIL, 26 PASS |
 | bispf | 60/60 | 0 | 30 FAIL, 30 PASS |
 | e22 | 60/60 | 0 | 34 FAIL, 26 PASS |
-| empf | 62/62 | 0 | 4 BLOCKED, 15 ERROR, 20 FAIL, 23 PASS |
+| empf | 62/62 | 0 | 4 BLOCKED, 15 ERROR, 18 FAIL, 25 PASS |
 | k3p | 60/60 | 0 | 30 FAIL, 30 PASS |
 | ka2 | 60/60 | 0 | 32 FAIL, 28 PASS |
 | atlas selected-cloud after investigation | 3/3 | 0 | 2 ERROR, 1 FAIL |
@@ -97,7 +97,7 @@ These task results reuse their producer's already measured observations. No new 
 
 | Family | Test | Result | Passing extension checks | Evidence |
 | --- | --- | --- | ---: | --- |
-| empf | ring_extension | PASS | 300/300 | [Verified saved run](grouped-evidence/35a173b8ac2bbf15563fde4330eef7871341f0cef5e75fde39366f4609935f4b.json) |
+| empf | ring_extension | FAIL | 299/300 | [Verified saved run](grouped-evidence/010fb1dde78b46e80d83b82f134752651cc68346f0d0a30797655375b7c0df95.json) |
 
 ## Attempted blockers and incomplete runs
 

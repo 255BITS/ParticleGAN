@@ -1291,6 +1291,14 @@
       "json_sha256": "b652613e1715184ebf2b30387f8cc022284d3be97375aa038ae210e3c6aca977",
       "snapshot": "reports/forge/technique-evidence/a90a3a12cbce7cda67a62002af58aa0a00e248ed6d6fb30f8dd6798a3719bd55.json",
       "source_commit": "cb5e484b059d3474f7259c40beb7acb4b5bb8704"
+    },
+    {
+      "candidates": {
+        "empf-v2": "2026-11-11T19:46:19.421+00:00"
+      },
+      "json_sha256": "607ed22cd08e85a19687dcd53c4d692e2f0ec30b7e110bc256d72e314c15e101",
+      "snapshot": "reports/forge/technique-evidence/d3ce3f952efeaba1f275f36ac0366656432c348889f39cac3254f1654a50e280.json",
+      "source_commit": "49537dfe0349daec307607f340d6379537d874b9"
     }
   ],
   "note": "Numerical evidence/provenance only. The sole current technique leaderboard is reports/forge/technique-inventory.md; snapshots cannot qualify the latest checkout.",
