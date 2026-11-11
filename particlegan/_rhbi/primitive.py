@@ -30,6 +30,8 @@ class RHBILoss(nn.Module):
         nn_quantile: float = 0.25,
         *,
         rapidity_screening: bool = True,
+        self_coupling: str = "hollow",
+        relativistic_weight: float = 0.0,
     ) -> None:
         super().__init__()
         for name, val, positive in (
@@ -39,6 +41,7 @@ class RHBILoss(nn.Module):
             ("eps", eps, True),
             ("c_max", c_max, True),
             ("beta_ell", beta_ell, True),
+            ("relativistic_weight", relativistic_weight, False),
         ):
             if isinstance(val, bool) or not isinstance(val, (int, float)) or not math.isfinite(val) or (
                 val <= 0.0 if positive else val < 0.0
@@ -52,6 +55,8 @@ class RHBILoss(nn.Module):
             raise ValueError("iters must be a positive integer")
         if type(rapidity_screening) is not bool:
             raise ValueError("rapidity_screening must be a boolean")
+        if type(self_coupling) is not str or self_coupling not in ("hollow", "feydy"):
+            raise ValueError("self_coupling must be 'hollow' or 'feydy'")
 
         self.weight = float(weight)
         self.rho = float(rho)
@@ -62,6 +67,8 @@ class RHBILoss(nn.Module):
         self.beta_ell = float(beta_ell)
         self.nn_quantile = float(nn_quantile)
         self.rapidity_screening = rapidity_screening
+        self.self_coupling = self_coupling
+        self.relativistic_weight = float(relativistic_weight)
         self.register_buffer("ell_ema", torch.tensor(0.0, dtype=torch.float32))
         self.register_buffer("ell_initialized", torch.tensor(False, dtype=torch.bool))
         self._ell_init_py: bool = False
@@ -416,9 +423,10 @@ class RHBILoss(nn.Module):
         P_xy = self._sinkhorn_slack(
             c_hat_xy, d_fake_tilde.detach(), d_real_tilde.detach(), hollow=False, pair_mask=mask_xy
         )
+        use_hollow = self.self_coupling == "hollow"
         zeros_f = d_fake_tilde.new_zeros(b_f)
         P_xx = self._sinkhorn_slack(
-            c_hat_xx, zeros_f, zeros_f, hollow=True, pair_mask=mask_xx
+            c_hat_xx, zeros_f, zeros_f, hollow=use_hollow, pair_mask=mask_xx
         )
 
         P_xy_act = P_xy[:b_f, :b_r]
@@ -427,14 +435,21 @@ class RHBILoss(nn.Module):
         P_xx_act = P_xx[:b_f, :b_f].clone()
         P_xx_act.fill_diagonal_(0.0)
 
-        # Match hollow self-coupling debiasing to each row's active OT transport
+        # Match self-coupling debiasing to each row's active OT transport
         # fraction so slack-routed singletons and empty-batch modes never suffer
         # uncompensated intra-mode repulsion.
         a_f = (float(b_f) * P_xy_act.sum(dim=1)).clamp(0.0, 1.0)
         P_xx_eff = P_xx_act * torch.sqrt(a_f.unsqueeze(1) * a_f.unsqueeze(0))
 
         transport_xy = (P_xy_act * c_phys_xy).sum()
-        local_critic_slack = -(P_xy_slack * (0.5 * self.tau * d_fake_tilde)).sum()
+        if self.relativistic_weight > 0.0:
+            active_rel = (
+                P_xy_act * F.softplus(d_real_tilde.unsqueeze(0) - d_fake_tilde.unsqueeze(1))
+            ).sum()
+            slack_rel = (P_xy_slack * F.softplus(-d_fake_tilde)).sum()
+            local_critic_slack = self.relativistic_weight * (active_rel + slack_rel)
+        else:
+            local_critic_slack = -(P_xy_slack * (0.5 * self.tau * d_fake_tilde)).sum()
         debias_xx = -0.5 * (P_xx_eff * c_phys_xx).sum()
 
         total = transport_xy + local_critic_slack + debias_xx
@@ -443,14 +458,19 @@ class RHBILoss(nn.Module):
             mask_yy = self._discrete_pair_mask(cond_real, cond_real, b_r, b_r)
             zeros_r = d_real_tilde.new_zeros(b_r)
             P_yy = self._sinkhorn_slack(
-                c_hat_yy, zeros_r, zeros_r, hollow=True, pair_mask=mask_yy
+                c_hat_yy, zeros_r, zeros_r, hollow=use_hollow, pair_mask=mask_yy
             )
             P_yy_act = P_yy[:b_r, :b_r].clone()
             P_yy_act.fill_diagonal_(0.0)
             a_r = (float(b_r) * P_xy_act.sum(dim=0)).clamp(0.0, 1.0)
             P_yy_eff = P_yy_act * torch.sqrt(a_r.unsqueeze(1) * a_r.unsqueeze(0))
             P_xy_col_slack = P_xy[b_f, :b_r]
-            local_real_slack = (P_xy_col_slack * (0.5 * self.tau * d_real_tilde)).sum()
+            if self.relativistic_weight > 0.0:
+                local_real_slack = self.relativistic_weight * (
+                    P_xy_col_slack * F.softplus(d_real_tilde)
+                ).sum()
+            else:
+                local_real_slack = (P_xy_col_slack * (0.5 * self.tau * d_real_tilde)).sum()
             debias_yy = -0.5 * (P_yy_eff * c_phys_yy).sum()
             total = total + local_real_slack + debias_yy
 

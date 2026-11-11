@@ -395,3 +395,107 @@ def test_polar_cpu_dense_profile_checkpoint_and_parity():
     with pytest.raises(ValueError, match="dense profile"):
         opt_ref.load_state_dict(opt_prof.state_dict())
     assert polar_factor(g_w, smoothing=0.001, backend="cpu").shape == w1.shape
+
+
+def test_rhbi_v2_linear_screening_and_feydy_self_coupling():
+    """Verify linear Born-Infeld screening valley routing and Feydy diagonal self-coupling."""
+    # 1. Midpoint bridge particle between two distant modes (c_hat ~ 13 >> rho=3)
+    #    routes >99.99% to slack under linear screening vs partial active pull under rapidity.
+    y_modes = torch.cat([
+        torch.tensor([[-1.0, 0.0]]).expand(8, 2) + 0.02 * torch.randn(8, 2, generator=torch.Generator().manual_seed(1)),
+        torch.tensor([[1.0, 0.0]]).expand(8, 2) + 0.02 * torch.randn(8, 2, generator=torch.Generator().manual_seed(2)),
+    ], dim=0)
+    x_bridge = y_modes.clone()
+    x_bridge[0] = torch.tensor([0.0, 0.0])  # Symmetric valley midpoint
+    d_zero_f = torch.zeros(16, requires_grad=True)
+    d_zero_r = torch.zeros(16)
+
+    op_lin = RHBILoss(weight=1.0, rho=3.0, tau=2.0, rapidity_screening=False, self_coupling="feydy")
+    op_rap = RHBILoss(weight=1.0, rho=3.0, tau=2.0, rapidity_screening=True, self_coupling="hollow")
+    for _ in range(10):
+        op_lin._update_ell(y_modes)
+        op_rap._update_ell(y_modes)
+
+    loss_lin, _ = op_lin(x_bridge.clone().requires_grad_(True), y_modes, d_zero_f, d_zero_r)
+    loss_lin.backward()
+    slack_bridge_lin = float(16.0 * op_lin.last_p_xy_slack[0].item())
+    assert slack_bridge_lin > 0.9999
+
+    _, _ = op_rap(x_bridge.clone().requires_grad_(True), y_modes, torch.zeros(16, requires_grad=True), d_zero_r)
+    slack_bridge_rap = float(16.0 * op_rap.last_p_xy_slack[0].item())
+    assert slack_bridge_lin > slack_bridge_rap
+
+    # 2. Feydy self-coupling absorbs isolated singleton self-mass on the zero-cost diagonal
+    #    instead of forcing off-diagonal derangement or slack leakage.
+    pts_isolated = torch.arange(8, dtype=torch.float32).unsqueeze(1) * 50.0
+    ell = torch.tensor(1.0)
+    _, c_hat_iso = RHBILoss._born_infeld_pair(pts_isolated, pts_isolated, ell)
+    zeros = torch.zeros(8)
+    P_feydy = op_lin._sinkhorn_slack(c_hat_iso, zeros, zeros, hollow=False)
+    diag_mass = P_feydy[:8, :8].diagonal() * 8.0
+    off_diag = P_feydy[:8, :8].clone().fill_diagonal_(0.0).sum(dim=1) * 8.0
+    assert torch.all(diag_mass > 0.99)
+    assert torch.all(off_diag < 1e-4)
+
+
+def test_rhbi_v2_penalty_lambda_floor_and_gamma_gauge_concat_parity():
+    """Verify lambda_floor and gamma_gauge match across concatenated and split critic passes."""
+    from particlegan._rhbi.penalty import _RHBIPenaltyKernel
+
+    torch.manual_seed(19)
+    D1 = nn.Sequential(nn.Linear(4, 16), nn.SiLU(), nn.Linear(16, 1))
+    with torch.no_grad():
+        D1[-1].bias.fill_(3.5)  # Nonzero logit offset to activate gamma_gauge
+    D2 = deepcopy(D1)
+
+    x_real = torch.randn(12, 4)
+    x_fake = torch.randn(12, 4)
+
+    kern1 = _RHBIPenaltyKernel(coeff=1.0, kappa=1.0, ebi_beta=20.0, lambda_floor=0.005, gamma_gauge=0.02)
+    kern2 = _RHBIPenaltyKernel(coeff=1.0, kappa=1.0, ebi_beta=20.0, lambda_floor=0.005, gamma_gauge=0.02)
+
+    pen_cat, stats_cat = kern1.penalty(D1, x_real, x_fake, step=1, collect_stats=True, allow_concat=True)
+    pen_sep, stats_sep = kern2.penalty(D2, x_real, x_fake, step=1, collect_stats=True, allow_concat=False)
+    assert torch.allclose(pen_cat, pen_sep, rtol=1e-5, atol=1e-6)
+    assert stats_cat["applied"] and stats_sep["applied"]
+
+    pen_cat.backward()
+    pen_sep.backward()
+    for p1, p2 in zip(D1.parameters(), D2.parameters()):
+        assert torch.allclose(p1.grad, p2.grad, rtol=1e-5, atol=1e-6)
+    # Bias gradient must push positive logit offset back toward zero
+    assert float(D1[-1].bias.grad.item()) > 0.01
+
+
+def test_polar_cpu_v1_nondefault_smoothing_and_rhbi_v1_backward_compat():
+    """Verify polar_cpu_v1 supports custom smoothing while rhbi preset defaults stay unchanged."""
+    from particlegan.optim.dualnorm import NormalizedOptimizer
+
+    rec_v1 = get_recipe("rhbi")
+    assert rec_v1.rhbi_self_coupling == "hollow"
+    assert rec_v1.rhbi_rapidity_screening is True
+    assert rec_v1.rhbi_relativistic_weight == 0.0
+    assert rec_v1.rhbi_lambda_floor == 0.0
+    assert rec_v1.rhbi_gamma_gauge == 0.0
+
+    rec_v2 = get_recipe(
+        "rhbi",
+        optimizer_dense_profile="polar_cpu_v1",
+        optimizer_smoothing=0.0061,
+        rhbi_rapidity_screening=False,
+        rhbi_self_coupling="feydy",
+        rhbi_lambda_floor=0.005,
+    )
+    assert rec_v2.optimizer_smoothing == pytest.approx(0.0061)
+    with pytest.raises(ValueError, match=r"smoothing \.001"):
+        get_recipe("rhbi", optimizer_dense_profile="gram_fp64_guarded_v1", optimizer_smoothing=0.0061)
+
+    torch.manual_seed(31)
+    w_a = nn.Parameter(torch.randn(12, 6))
+    w_b = nn.Parameter(w_a.detach().clone())
+    g = torch.randn_like(w_a)
+    w_a.grad, w_b.grad = g.clone(), g.clone()
+    NormalizedOptimizer([w_a], lr=0.014, smoothing=0.0061, dense_profile="polar_cpu_v1").step()
+    NormalizedOptimizer([w_b], lr=0.014, smoothing=0.0061, svd_backend="cpu").step()
+    assert torch.equal(w_a, w_b)
+

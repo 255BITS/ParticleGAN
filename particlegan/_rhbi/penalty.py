@@ -32,6 +32,8 @@ class _RHBIPenaltyKernel:
         ebi_beta: float = 30.0,
         real_weight: float = 1.0,
         fake_weight: float = 1.0,
+        lambda_floor: float = 0.0,
+        gamma_gauge: float = 0.0,
         record: CriticStepRecord | None = None,
     ) -> None:
         for name, val, pos in (
@@ -40,6 +42,8 @@ class _RHBIPenaltyKernel:
             ("ebi_beta", ebi_beta, True),
             ("real_weight", real_weight, False),
             ("fake_weight", fake_weight, False),
+            ("lambda_floor", lambda_floor, False),
+            ("gamma_gauge", gamma_gauge, False),
         ):
             if isinstance(val, bool) or not isinstance(val, (int, float)) or not math.isfinite(val) or (
                 val <= 0.0 if pos else val < 0.0
@@ -57,6 +61,8 @@ class _RHBIPenaltyKernel:
         self.ebi_beta = float(ebi_beta)
         self.real_weight = float(real_weight)
         self.fake_weight = float(fake_weight)
+        self.lambda_floor = float(lambda_floor)
+        self.gamma_gauge = float(gamma_gauge)
         self.record = RHBIStepRecord() if record is None else record
 
     def penalty(
@@ -72,7 +78,7 @@ class _RHBIPenaltyKernel:
     ) -> Tuple[torch.Tensor, Dict[str, Any]]:
         if (
             self.coeff == 0.0
-            or (self.real_weight == 0.0 and self.fake_weight == 0.0)
+            or (self.real_weight == 0.0 and self.fake_weight == 0.0 and self.gamma_gauge == 0.0)
             or (self.lazy_k > 1 and step % self.lazy_k != 0)
         ):
             zero = x_real.new_zeros(())
@@ -98,31 +104,50 @@ class _RHBIPenaltyKernel:
                     create_graph=True,
                     only_inputs=True,
                 )[0]
-                norm_all = (grad.flatten(1).square().sum(dim=1) + 1e-12).sqrt()
+                sq_all = grad.flatten(1).square().sum(dim=1)
+                norm_all = (sq_all + 1e-12).sqrt()
                 b_n = x_real.shape[0]
                 cap_r = F.softplus(norm_all[:b_n] - self.kappa, beta=self.ebi_beta).square().mean()
                 cap_f = F.softplus(norm_all[b_n:] - self.kappa, beta=self.ebi_beta).square().mean()
                 total = self.real_weight * (cap_r + cap_f)
+                if self.lambda_floor > 0.0:
+                    total = total + self.real_weight * self.lambda_floor * (
+                        sq_all[:b_n].mean() + sq_all[b_n:].mean()
+                    )
+                if self.gamma_gauge > 0.0:
+                    d_r_mean = d_out[:b_n].reshape(b_n, -1).mean()
+                    d_f_mean = d_out[b_n:].reshape(b_n, -1).mean()
+                    total = total + self.gamma_gauge * (0.5 * (d_r_mean + d_f_mean)).square()
                 norms = [norm_all.detach()] if collect_stats else []
             else:
                 total = x_real.new_zeros(())
                 norms = []
+                d_means = []
                 for weight, inputs in ((self.real_weight, x_real), (self.fake_weight, x_fake)):
-                    if weight == 0.0:
+                    if weight == 0.0 and self.gamma_gauge == 0.0:
                         continue
                     x_req = inputs.detach().clone().requires_grad_(True)
                     d_out = live(x_req)
-                    grad = torch.autograd.grad(
-                        outputs=_score_scalar(d_out),
-                        inputs=x_req,
-                        create_graph=True,
-                        only_inputs=True,
-                    )[0]
-                    norm = (grad.flatten(1).square().sum(dim=1) + 1e-12).sqrt()
-                    cap = F.softplus(norm - self.kappa, beta=self.ebi_beta).square().mean()
-                    total = total + weight * cap
-                    if collect_stats:
-                        norms.append(norm.detach())
+                    if self.gamma_gauge > 0.0:
+                        d_means.append(d_out.reshape(inputs.shape[0], -1).mean())
+                    if weight > 0.0:
+                        grad = torch.autograd.grad(
+                            outputs=_score_scalar(d_out),
+                            inputs=x_req,
+                            create_graph=True,
+                            only_inputs=True,
+                        )[0]
+                        sq = grad.flatten(1).square().sum(dim=1)
+                        norm = (sq + 1e-12).sqrt()
+                        cap = F.softplus(norm - self.kappa, beta=self.ebi_beta).square().mean()
+                        total = total + weight * cap
+                        if self.lambda_floor > 0.0:
+                            total = total + weight * self.lambda_floor * sq.mean()
+                        if collect_stats:
+                            norms.append(norm.detach())
+                if self.gamma_gauge > 0.0 and d_means:
+                    d_bar = sum(d_means) / float(len(d_means))
+                    total = total + self.gamma_gauge * d_bar.square()
         finally:
             self.record._in_penalty = False
 

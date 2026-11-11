@@ -407,7 +407,8 @@ class NormalizedOptimizer(Optimizer):
                 "default", GRAM_DENSE_PROFILE, FALLBACK_DENSE_PROFILE, CPU_POLAR_DENSE_PROFILE):
             raise ValueError("unknown optimizer dense_profile")
         if dense_profile != "default" and (family != "dualnorm" or momentum != 0
-                or smoothing != .001 or svd_backend not in ("native", "batched")):
+                or (dense_profile != CPU_POLAR_DENSE_PROFILE and smoothing != .001)
+                or svd_backend not in ("native", "batched")):
             raise ValueError("dense_profile requires zero-momentum full DualNorm, smoothing .001 "
                              "and native or batched SVD backend")
         if convolution_rule not in ("polar", "frobenius", "quintic"):

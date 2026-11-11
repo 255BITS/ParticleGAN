@@ -124,7 +124,9 @@ _ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
                         "rhbi_weight": 0.0, "rhbi_rho": 2.0, "rhbi_tau": 2.0,
                         "rhbi_eps": 0.1, "rhbi_iters": 8, "rhbi_c_max": 20.0,
                         "rhbi_beta_ell": 0.1, "rhbi_nn_quantile": 0.25,
-                        "rhbi_critic_weight": 0.0}
+                        "rhbi_critic_weight": 0.0, "rhbi_self_coupling": "hollow",
+                        "rhbi_relativistic_weight": 0.0, "rhbi_lambda_floor": 0.0,
+                        "rhbi_gamma_gauge": 0.0, "rhbi_rapidity_screening": True}
 
 
 class GANTrainer:

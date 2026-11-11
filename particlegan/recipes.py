@@ -15,6 +15,11 @@ try:
         rhbi_beta_ell=0.1,
         rhbi_nn_quantile=0.25,
         rhbi_critic_weight=0.0,
+        rhbi_self_coupling="hollow",
+        rhbi_relativistic_weight=0.0,
+        rhbi_lambda_floor=0.0,
+        rhbi_gamma_gauge=0.0,
+        rhbi_rapidity_screening=True,
     )
 except (ImportError, ValueError):
     pass
@@ -308,6 +313,11 @@ class Recipe:
     rhbi_beta_ell: float = 0.1
     rhbi_nn_quantile: float = 0.25
     rhbi_critic_weight: float = 0.0
+    rhbi_self_coupling: str = "hollow"
+    rhbi_relativistic_weight: float = 0.0
+    rhbi_lambda_floor: float = 0.0
+    rhbi_gamma_gauge: float = 0.0
+    rhbi_rapidity_screening: bool = True
 
     def __init__(self, **resolved_fields):
         declared = {field.name for field in fields(type(self))}
@@ -444,7 +454,7 @@ class Recipe:
             raise ValueError("unknown optimizer_dense_profile")
         if self.optimizer_dense_profile != "default" and (
                 self.optimizer_family != "dualnorm" or self.optimizer_momentum != 0
-                or self.optimizer_smoothing != .001
+                or (self.optimizer_dense_profile != "polar_cpu_v1" and self.optimizer_smoothing != .001)
                 or self.optimizer_svd_backend not in ("native", "batched")):
             raise ValueError("optimizer_dense_profile requires zero-momentum full DualNorm, "
                              "smoothing .001 and native or batched SVD backend")
@@ -540,12 +550,19 @@ class Recipe:
             ("rhbi_c_max", True),
             ("rhbi_beta_ell", True),
             ("rhbi_critic_weight", False),
+            ("rhbi_relativistic_weight", False),
+            ("rhbi_lambda_floor", False),
+            ("rhbi_gamma_gauge", False),
         ):
             rhbi_val = getattr(self, rhbi_name)
             if type(rhbi_val) not in (int, float) or not math.isfinite(rhbi_val) or (
                 rhbi_val <= 0 if rhbi_pos else rhbi_val < 0
             ):
                 raise ValueError(f"{rhbi_name} must be finite and {'positive' if rhbi_pos else 'nonnegative'}")
+        if type(self.rhbi_self_coupling) is not str or self.rhbi_self_coupling not in ("hollow", "feydy"):
+            raise ValueError("rhbi_self_coupling must be 'hollow' or 'feydy'")
+        if type(self.rhbi_rapidity_screening) is not bool:
+            raise ValueError("rhbi_rapidity_screening must be a boolean")
         if self.rhbi_beta_ell > 1.0:
             raise ValueError("rhbi_beta_ell must be in (0, 1]")
         if type(self.rhbi_nn_quantile) not in (int, float) or not (0.0 < self.rhbi_nn_quantile < 1.0):
@@ -894,6 +911,9 @@ class Recipe:
                 beta_ell=self.rhbi_beta_ell,
                 nn_quantile=self.rhbi_nn_quantile,
                 critic_weight=self.rhbi_critic_weight,
+                self_coupling=self.rhbi_self_coupling,
+                relativistic_weight=self.rhbi_relativistic_weight,
+                rapidity_screening=self.rhbi_rapidity_screening,
             )
         if self.effective_critic_formulation == "bispf" and self.loss == "relativistic":
             from .bispf import SinkhornRelativisticLoss
@@ -978,6 +998,8 @@ class Recipe:
                 "ebi_beta": self.ebi_beta,
                 "real_weight": self.reg_real_weight,
                 "fake_weight": self.reg_fake_weight,
+                "lambda_floor": self.rhbi_lambda_floor,
+                "gamma_gauge": self.rhbi_gamma_gauge,
                 **overrides,
             }
             from .rhbi import _RHBIPenaltyKernel

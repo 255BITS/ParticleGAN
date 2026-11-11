@@ -84,6 +84,12 @@ def technique_signature(value):
         mechanisms["rhbi_transport"] = True
     if recipe.rhbi_critic_weight > 0:
         mechanisms["rhbi_critic_slack"] = True
+    if recipe.rhbi_weight > 0 and recipe.rhbi_relativistic_weight > 0:
+        mechanisms["rhbi_relativistic"] = True
+    if recipe.effective_critic_formulation == "rhbi" and recipe.rhbi_lambda_floor > 0:
+        mechanisms["rhbi_lambda_floor"] = True
+    if recipe.effective_critic_formulation == "rhbi" and recipe.rhbi_gamma_gauge > 0:
+        mechanisms["rhbi_gamma_gauge"] = True
     if recipe.optimizer_smoothing:
         mechanisms["smoothed_dualnorm"] = True
     if recipe.optimizer_family in {"dualnorm_D_only", "particle_rownorm_only"}:
@@ -203,6 +209,10 @@ def recipe_field_active(name, value, *, task=None):
         return recipe.rhbi_weight > 0
     if name == "rhbi_critic_weight":
         return recipe.rhbi_critic_weight > 0
-    if name in {"rhbi_rho", "rhbi_tau", "rhbi_eps", "rhbi_iters", "rhbi_c_max", "rhbi_beta_ell", "rhbi_nn_quantile"}:
+    if name in {"rhbi_self_coupling", "rhbi_relativistic_weight"}:
+        return recipe.rhbi_weight > 0
+    if name in {"rhbi_lambda_floor", "rhbi_gamma_gauge"}:
+        return recipe.effective_critic_formulation == "rhbi" and recipe.reg_coeff > 0
+    if name in {"rhbi_rho", "rhbi_tau", "rhbi_eps", "rhbi_iters", "rhbi_c_max", "rhbi_beta_ell", "rhbi_nn_quantile", "rhbi_rapidity_screening"}:
         return recipe.rhbi_weight > 0 or recipe.rhbi_critic_weight > 0
     return True

@@ -28,6 +28,9 @@ class RHBIGANLoss(GANLoss):
         beta_ell: float = 0.1,
         nn_quantile: float = 0.25,
         critic_weight: float = 0.0,
+        self_coupling: str = "hollow",
+        relativistic_weight: float = 0.0,
+        rapidity_screening: bool = True,
         record: Any = None,
     ) -> None:
         super().__init__(loss, labels=labels)
@@ -49,6 +52,9 @@ class RHBIGANLoss(GANLoss):
             c_max=c_max,
             beta_ell=beta_ell,
             nn_quantile=nn_quantile,
+            rapidity_screening=rapidity_screening,
+            self_coupling=self_coupling,
+            relativistic_weight=relativistic_weight,
         )
         self.last_metrics: Dict[str, float] = {}
 
