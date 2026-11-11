@@ -110,7 +110,20 @@ Every cell is one run; timings are never pooled across devices or contention sta
 
 This registration covers 9 complete recipes. Historical alternatives outside its registered family roster add no missing benchmark cells. A changed selected recipe within a registered family remains unknown until measured.
 
-No current selected-recipe update timings are measured. Missing timing cells remain **unknown**.
+### NVIDIA RTX A6000 · GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce
+
+Performance source `0eb9a085a6a0` (commit `eeb698a7b056f47f3183bdc4debadb7a5746ff89`); runtime `fddddb1b314d`; torch.float32; PyTorch 2.14.1+cu130; 48592.125 MiB device memory.
+
+Task prior: particle_cloud, sigma 0.0, 256 initial locations. The common finite-table performance exception retains each recipe's prior update policy and regularizer. Exact prior and resource specifications remain part of every task key.
+
+| Family / recipe | Task (RGB size, batch, width) | Execution | Median / p95 update ms | Images/s | GPU peak allocated / reserved MiB | Contention | Matched key / evidence |
+| --- | --- | --- | ---: | ---: | ---: | --- | --- |
+| RHBI · `rhbi-v3` | dcgan_performance_r32: 32², B16, W64 | COMPLETE | 34.40 / 39.14 | 451.39 | 92.84 / 126.00 | clear | `d19d2e7b78d6` · [receipt](../scaling-receipts/dcgan-performance-cloud-2edfe08a4bf5/rhbi-dcgan_performance_r32-508943daa4835c8e.json) |
+| RHBI · `rhbi-v3` | dcgan_performance_r64: 64², B16, W64 | COMPLETE | 56.29 / 57.76 | 284.18 | 231.53 / 322.00 | clear | `5089524de0aa` · [receipt](../scaling-receipts/dcgan-performance-cloud-2edfe08a4bf5/rhbi-dcgan_performance_r64-493bd29b64c15029.json) |
+| RHBI · `rhbi-v3` | dcgan_performance_w128: 64², B16, W128 | COMPLETE | 114.33 / 115.33 | 139.75 | 683.94 / 952.00 | clear | `c326d799bb7a` · [receipt](../scaling-receipts/dcgan-performance-cloud-2edfe08a4bf5/rhbi-dcgan_performance_w128-47ebe470d55b2e7a.json) |
+| RHBI · `rhbi-v3` | dcgan_performance_b64: 64², B64, W64 | COMPLETE | 96.79 / 99.01 | 658.80 | 603.24 / 666.00 | clear | `f650cd26021f` · [receipt](../scaling-receipts/dcgan-performance-cloud-2edfe08a4bf5/rhbi-dcgan_performance_b64-682043a393d4c48b.json) |
+| RHBI · `rhbi-v3` | dcgan_performance_r128: 128², B16, W64 | COMPLETE | 126.73 / 127.96 | 126.04 | 678.24 / 902.00 | clear | `487f3535a01b` · [receipt](../scaling-receipts/dcgan-performance-cloud-2edfe08a4bf5/rhbi-dcgan_performance_r128-ea47c18f65b3301b.json) |
+| RHBI · `rhbi-v3` | dcgan_performance_r256: 256², B16, W64 | COMPLETE | 352.22 / 355.01 | 45.36 | 2,286.29 / 2,468.00 | clear | `21d54a7a2d4e` · [receipt](../scaling-receipts/dcgan-performance-cloud-2edfe08a4bf5/rhbi-dcgan_performance_r256-2b5c2187387b72b8.json) |
 
 <a name="cohort-cuda-23a94f16ca88"></a>
 

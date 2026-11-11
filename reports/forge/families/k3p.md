@@ -128,18 +128,18 @@ This registration covers 9 complete recipes. Historical alternatives outside its
 
 ### NVIDIA RTX A6000 · GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce
 
-Performance source `11c081f9e24d` (commit `d2abe7afb5d1f6501d0e3f14b71c56ad369d2102`); runtime `fddddb1b314d`; torch.float32; PyTorch 2.14.1+cu130; 48592.125 MiB device memory.
+Performance source `0eb9a085a6a0` (commit `eeb698a7b056f47f3183bdc4debadb7a5746ff89`); runtime `fddddb1b314d`; torch.float32; PyTorch 2.14.1+cu130; 48592.125 MiB device memory.
 
 Task prior: particle_cloud, sigma 0.0, 256 initial locations. The common finite-table performance exception retains each recipe's prior update policy and regularizer. Exact prior and resource specifications remain part of every task key.
 
 | Family / recipe | Task (RGB size, batch, width) | Execution | Median / p95 update ms | Images/s | GPU peak allocated / reserved MiB | Contention | Matched key / evidence |
 | --- | --- | --- | ---: | ---: | ---: | --- | --- |
-| K3P · `recipe-prior-refactor-k3p-v1` | dcgan_performance_r32: 32², B16, W64 | COMPLETE | 12.93 / 14.88 | 1,218.55 | 93.65 / 108.00 | clear | `28589fbcd68d` · [receipt](../scaling-receipts/dcgan-performance-cloud-38b89eb060b8/k3p-dcgan_performance_r32-ec39689b81e2e27a.json) |
-| K3P · `recipe-prior-refactor-k3p-v1` | dcgan_performance_r64: 64², B16, W64 | COMPLETE | 26.79 / 27.01 | 597.11 | 271.67 / 300.00 | clear | `a6684be445e6` · [receipt](../scaling-receipts/dcgan-performance-cloud-38b89eb060b8/k3p-dcgan_performance_r64-44a2a6484df69439.json) |
-| K3P · `recipe-prior-refactor-k3p-v1` | dcgan_performance_w128: 64², B16, W128 | COMPLETE | 57.00 / 58.06 | 280.04 | 748.06 / 782.00 | clear | `474160bdbe7a` · [receipt](../scaling-receipts/dcgan-performance-cloud-38b89eb060b8/k3p-dcgan_performance_w128-38599dd43297bc13.json) |
-| K3P · `recipe-prior-refactor-k3p-v1` | dcgan_performance_b64: 64², B64, W64 | COMPLETE | 63.38 / 64.46 | 1,008.95 | 618.16 / 662.00 | clear | `43a0f0ca5f3e` · [receipt](../scaling-receipts/dcgan-performance-cloud-38b89eb060b8/k3p-dcgan_performance_b64-ea9ecc0300eb58f7.json) |
-| K3P · `recipe-prior-refactor-k3p-v1` | dcgan_performance_r128: 128², B16, W64 | COMPLETE | 73.41 / 74.41 | 217.51 | 771.21 / 822.00 | clear | `ab07ae7678f0` · [receipt](../scaling-receipts/dcgan-performance-cloud-38b89eb060b8/k3p-dcgan_performance_r128-787a1e0fa02a31db.json) |
-| K3P · `recipe-prior-refactor-k3p-v1` | dcgan_performance_r256: 256², B16, W64 | COMPLETE | 254.47 / 256.17 | 62.81 | 2,339.28 / 2,494.00 | clear | `1af06f9b02b4` · [receipt](../scaling-receipts/dcgan-performance-cloud-38b89eb060b8/k3p-dcgan_performance_r256-fb9bec9a33ed0036.json) |
+| K3P · `recipe-prior-refactor-k3p-v1` | dcgan_performance_r32: 32², B16, W64 | COMPLETE | 12.42 / 15.02 | 1,249.72 | 93.65 / 108.00 | clear | `d19d2e7b78d6` · [receipt](../scaling-receipts/dcgan-performance-cloud-2edfe08a4bf5/k3p-dcgan_performance_r32-7e7976b0be253dc4.json) |
+| K3P · `recipe-prior-refactor-k3p-v1` | dcgan_performance_r64: 64², B16, W64 | COMPLETE | 26.05 / 26.74 | 610.87 | 271.67 / 300.00 | clear | `5089524de0aa` · [receipt](../scaling-receipts/dcgan-performance-cloud-2edfe08a4bf5/k3p-dcgan_performance_r64-69eebcfe9cd52bdb.json) |
+| K3P · `recipe-prior-refactor-k3p-v1` | dcgan_performance_w128: 64², B16, W128 | COMPLETE | 56.87 / 57.70 | 280.89 | 748.06 / 782.00 | clear | `c326d799bb7a` · [receipt](../scaling-receipts/dcgan-performance-cloud-2edfe08a4bf5/k3p-dcgan_performance_w128-2ed23a6866f5f26e.json) |
+| K3P · `recipe-prior-refactor-k3p-v1` | dcgan_performance_b64: 64², B64, W64 | COMPLETE | 63.77 / 64.31 | 1,004.37 | 618.16 / 662.00 | clear | `f650cd26021f` · [receipt](../scaling-receipts/dcgan-performance-cloud-2edfe08a4bf5/k3p-dcgan_performance_b64-5cb64c6668788706.json) |
+| K3P · `recipe-prior-refactor-k3p-v1` | dcgan_performance_r128: 128², B16, W64 | COMPLETE | 72.40 / 73.01 | 221.19 | 771.21 / 822.00 | clear | `487f3535a01b` · [receipt](../scaling-receipts/dcgan-performance-cloud-2edfe08a4bf5/k3p-dcgan_performance_r128-84a11dce296f6309.json) |
+| K3P · `recipe-prior-refactor-k3p-v1` | dcgan_performance_r256: 256², B16, W64 | COMPLETE | 256.80 / 258.42 | 62.30 | 2,339.28 / 2,494.00 | clear | `21d54a7a2d4e` · [receipt](../scaling-receipts/dcgan-performance-cloud-2edfe08a4bf5/k3p-dcgan_performance_r256-8ec5a73bf15249b6.json) |
 
 <a name="cohort-cuda-1bf9d7d34422"></a>
 
