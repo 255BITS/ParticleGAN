@@ -32,6 +32,7 @@ class RHBILoss(nn.Module):
         rapidity_screening: bool = True,
         self_coupling: str = "hollow",
         relativistic_weight: float = 0.0,
+        scale_log_odds: bool = False,
     ) -> None:
         super().__init__()
         for name, val, positive in (
@@ -55,6 +56,8 @@ class RHBILoss(nn.Module):
             raise ValueError("iters must be a positive integer")
         if type(rapidity_screening) is not bool:
             raise ValueError("rapidity_screening must be a boolean")
+        if type(scale_log_odds) is not bool:
+            raise ValueError("scale_log_odds must be a boolean")
         if type(self_coupling) is not str or self_coupling not in ("hollow", "feydy"):
             raise ValueError("self_coupling must be 'hollow' or 'feydy'")
 
@@ -69,6 +72,7 @@ class RHBILoss(nn.Module):
         self.rapidity_screening = rapidity_screening
         self.self_coupling = self_coupling
         self.relativistic_weight = float(relativistic_weight)
+        self.scale_log_odds = scale_log_odds
         self.register_buffer("ell_ema", torch.tensor(0.0, dtype=torch.float32))
         self.register_buffer("ell_initialized", torch.tensor(False, dtype=torch.bool))
         self._ell_init_py: bool = False
@@ -324,6 +328,7 @@ class RHBILoss(nn.Module):
         d_fake: torch.Tensor,
         d_real: torch.Tensor,
         *,
+        ell: Optional[torch.Tensor] = None,
         detach_real: bool = True,
     ) -> Tuple[torch.Tensor, torch.Tensor]:
         b_f = d_fake.shape[0]
@@ -333,8 +338,13 @@ class RHBILoss(nn.Module):
         r_flat = r_src.reshape(b_r, -1).mean(dim=1) if r_src.ndim > 1 else r_src.reshape(b_r)
         # Compute centered difference in float64 so large constant shifts (+1000.0) cancel cleanly.
         d_bar = 0.5 * (f_flat.detach().double().mean() + r_flat.detach().double().mean())
-        f_centered = (f_flat.double() - d_bar).to(f_flat.dtype)
-        r_centered = (r_flat.double() - d_bar).to(r_flat.dtype)
+        if self.scale_log_odds and ell is not None:
+            inv_ell = 1.0 / ell.detach().double().clamp_min(1e-6)
+            f_centered = ((f_flat.double() - d_bar) * inv_ell).to(f_flat.dtype)
+            r_centered = ((r_flat.double() - d_bar) * inv_ell).to(r_flat.dtype)
+        else:
+            f_centered = (f_flat.double() - d_bar).to(f_flat.dtype)
+            r_centered = (r_flat.double() - d_bar).to(r_flat.dtype)
         d_fake_tilde = self.c_max * torch.tanh(f_centered / self.c_max)
         d_real_tilde = self.c_max * torch.tanh(r_centered / self.c_max)
         return d_fake_tilde, d_real_tilde
@@ -358,14 +368,17 @@ class RHBILoss(nn.Module):
         b_r = y_real.shape[0]
         ell = self._update_ell(y_real, record=record, allow_update=False)
         c_hat_xy = self._born_infeld_c_hat_detached(x_fake, y_real, ell)
-        d_fake_tilde, d_real_tilde = self._centered_log_odds(d_fake, d_real, detach_real=False)
+        d_fake_tilde, d_real_tilde = self._centered_log_odds(
+            d_fake, d_real, ell=ell, detach_real=False
+        )
         mask_xy = self._discrete_pair_mask(cond_fake, cond_real, b_f, b_r)
         P_xy = self._sinkhorn_slack(
             c_hat_xy, d_fake_tilde.detach(), d_real_tilde.detach(), hollow=False, pair_mask=mask_xy
         )
         p_row_slack = P_xy[:b_f, b_r]
         p_col_slack = P_xy[b_f, :b_r]
-        return float(critic_weight) * (
+        slack_scale = ell.detach() if self.scale_log_odds else 1.0
+        return float(critic_weight) * slack_scale * (
             -(p_col_slack * (0.5 * self.tau * d_real_tilde)).sum()
             + (p_row_slack * (0.5 * self.tau * d_fake_tilde)).sum()
         )
@@ -415,7 +428,7 @@ class RHBILoss(nn.Module):
         c_phys_xx, c_hat_xx = self._born_infeld_pair(x_aug, x_aug, ell)
 
         d_fake_tilde, d_real_tilde = self._centered_log_odds(
-            d_fake, d_real, detach_real=not symmetric
+            d_fake, d_real, ell=ell, detach_real=not symmetric
         )
 
         mask_xy = self._discrete_pair_mask(cond_fake, cond_real, b_f, b_r)
@@ -441,15 +454,16 @@ class RHBILoss(nn.Module):
         a_f = (float(b_f) * P_xy_act.sum(dim=1)).clamp(0.0, 1.0)
         P_xx_eff = P_xx_act * torch.sqrt(a_f.unsqueeze(1) * a_f.unsqueeze(0))
 
+        slack_scale = ell.detach() if self.scale_log_odds else 1.0
         transport_xy = (P_xy_act * c_phys_xy).sum()
         if self.relativistic_weight > 0.0:
             active_rel = (
                 P_xy_act * F.softplus(d_real_tilde.unsqueeze(0) - d_fake_tilde.unsqueeze(1))
             ).sum()
             slack_rel = (P_xy_slack * F.softplus(-d_fake_tilde)).sum()
-            local_critic_slack = self.relativistic_weight * (active_rel + slack_rel)
+            local_critic_slack = self.relativistic_weight * slack_scale * (active_rel + slack_rel)
         else:
-            local_critic_slack = -(P_xy_slack * (0.5 * self.tau * d_fake_tilde)).sum()
+            local_critic_slack = -(P_xy_slack * (0.5 * self.tau * slack_scale * d_fake_tilde)).sum()
         debias_xx = -0.5 * (P_xx_eff * c_phys_xx).sum()
 
         total = transport_xy + local_critic_slack + debias_xx
@@ -466,11 +480,11 @@ class RHBILoss(nn.Module):
             P_yy_eff = P_yy_act * torch.sqrt(a_r.unsqueeze(1) * a_r.unsqueeze(0))
             P_xy_col_slack = P_xy[b_f, :b_r]
             if self.relativistic_weight > 0.0:
-                local_real_slack = self.relativistic_weight * (
+                local_real_slack = self.relativistic_weight * slack_scale * (
                     P_xy_col_slack * F.softplus(d_real_tilde)
                 ).sum()
             else:
-                local_real_slack = (P_xy_col_slack * (0.5 * self.tau * d_real_tilde)).sum()
+                local_real_slack = (P_xy_col_slack * (0.5 * self.tau * slack_scale * d_real_tilde)).sum()
             debias_yy = -0.5 * (P_yy_eff * c_phys_yy).sum()
             total = total + local_real_slack + debias_yy
 
@@ -525,7 +539,9 @@ class RHBILoss(nn.Module):
 
         with torch.no_grad():
             c_hat_xy = self._born_infeld_c_hat_detached(x_fake, y_real, ell)
-            df_sg, dr_sg = self._centered_log_odds(d_fake.detach(), d_real.detach(), detach_real=True)
+            df_sg, dr_sg = self._centered_log_odds(
+                d_fake.detach(), d_real.detach(), ell=ell, detach_real=True
+            )
             mask_xy = self._discrete_pair_mask(cond_fake, cond_real, b_f, b_r)
             P_xy = self._sinkhorn_slack(c_hat_xy, df_sg, dr_sg, hollow=False, pair_mask=mask_xy)
             P_xy_act = P_xy[:b_f, :b_r]

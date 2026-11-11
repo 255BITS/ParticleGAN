@@ -12,7 +12,7 @@ from ..grad_regularizers import CriticStepRecord
 from ..k3p import K3PCriticAdam
 
 _MAX_RING_ENTRIES = 16
-_RECENT_CAPTURES: "OrderedDict[Tuple[int, int, int, int], Tuple[torch.Tensor, Optional[torch.Tensor], Any]]" = OrderedDict()
+_RECENT_CAPTURES: "OrderedDict[Tuple[int, int, int, int], Tuple[torch.Tensor, Optional[torch.Tensor], Any, bool]]" = OrderedDict()
 
 
 def _storage_key(tensor: torch.Tensor) -> Optional[Tuple[int, int, int, int]]:
@@ -31,10 +31,10 @@ def _extract_critic_inputs(
     args: Tuple[Any, ...],
     kwargs: Optional[Dict[str, Any]],
     batch_size: int,
-) -> Tuple[Optional[torch.Tensor], Optional[torch.Tensor]]:
-    """Extract concatenated floating batch inputs and optional discrete batch conditions."""
+) -> Tuple[Optional[torch.Tensor], Optional[torch.Tensor], bool]:
+    """Extract concatenated floating batch inputs, discrete conditions, and continuous-fibre flag."""
     if batch_size <= 0:
-        return None, None
+        return None, None, False
     float_parts = []
     disc_parts = []
     items = list(args)
@@ -49,12 +49,13 @@ def _extract_critic_inputs(
         elif not item.is_complex():
             disc_parts.append(item.detach().to(dtype=torch.int64).reshape(batch_size, -1))
     if not float_parts:
-        return None, None
+        return None, None, False
+    has_cont_cond = len(float_parts) > 1
     x_in = float_parts[0] if len(float_parts) == 1 else torch.cat(float_parts, dim=-1)
     cond_disc = None if not disc_parts else (
         disc_parts[0] if len(disc_parts) == 1 else torch.cat(disc_parts, dim=-1)
     )
-    return x_in, cond_disc
+    return x_in, cond_disc, has_cont_cond
 
 
 def _record_rhbi_capture(
@@ -63,6 +64,7 @@ def _record_rhbi_capture(
     cond_disc: Optional[torch.Tensor],
     record: Any,
     *,
+    has_cont_cond: bool = False,
     overwrite: bool = False,
 ) -> None:
     if x_input is None:
@@ -73,12 +75,13 @@ def _record_rhbi_capture(
     if overwrite or not hasattr(target, "_rhbi_input"):
         target._rhbi_input = x_input
         target._rhbi_cond = cond_disc
+        target._rhbi_cont_cond = bool(has_cont_cond)
     if record is not None and (overwrite or not hasattr(target, "_rhbi_record")):
         target._rhbi_record = record
     key = _storage_key(target)
     if key is None:
         return
-    entry = (x_input, cond_disc, record)
+    entry = (x_input, cond_disc, record, bool(has_cont_cond))
     if record is not None and hasattr(record, "_capture_ring"):
         ring: OrderedDict = record._capture_ring
         if overwrite or key not in ring:
@@ -101,30 +104,58 @@ def _finalize_x_for_logits(logits: torch.Tensor, x_val: Optional[torch.Tensor]) 
     return x_val
 
 
-def _lookup_rhbi_capture(
+def _lookup_rhbi_capture_full(
     logits: torch.Tensor,
     fallback_record: Any = None,
-) -> Tuple[Optional[torch.Tensor], Optional[torch.Tensor], Any]:
+) -> Tuple[Optional[torch.Tensor], Optional[torch.Tensor], Any, bool]:
     b = logits.shape[0] if logits.ndim >= 1 else 0
     x_attr = getattr(logits, "_rhbi_input", None)
     c_attr = getattr(logits, "_rhbi_cond", None)
     r_attr = getattr(logits, "_rhbi_record", None)
+    cc_attr = bool(getattr(logits, "_rhbi_cont_cond", False))
     if isinstance(x_attr, torch.Tensor) and x_attr.shape[0] == b:
-        return _finalize_x_for_logits(logits, x_attr), c_attr, (r_attr if r_attr is not None else fallback_record)
+        return (
+            _finalize_x_for_logits(logits, x_attr),
+            c_attr,
+            (r_attr if r_attr is not None else fallback_record),
+            cc_attr,
+        )
 
     key = _storage_key(logits)
     if key is not None:
         for rec_candidate in (r_attr, fallback_record):
             ring = getattr(rec_candidate, "_capture_ring", None)
             if ring is not None and key in ring:
-                x_c, c_c, r_c = ring[key]
+                item = ring[key]
+                x_c, c_c, r_c = item[0], item[1], item[2]
+                cc_c = bool(item[3]) if len(item) > 3 else False
                 if x_c.shape[0] == b:
-                    return _finalize_x_for_logits(logits, x_c), c_c, (r_c if r_c is not None else fallback_record)
+                    return (
+                        _finalize_x_for_logits(logits, x_c),
+                        c_c,
+                        (r_c if r_c is not None else fallback_record),
+                        cc_c,
+                    )
         if key in _RECENT_CAPTURES:
-            x_c, c_c, r_c = _RECENT_CAPTURES[key]
+            item = _RECENT_CAPTURES[key]
+            x_c, c_c, r_c = item[0], item[1], item[2]
+            cc_c = bool(item[3]) if len(item) > 3 else False
             if x_c.shape[0] == b:
-                return _finalize_x_for_logits(logits, x_c), c_c, (r_c if r_c is not None else fallback_record)
-    return None, None, (r_attr if r_attr is not None else fallback_record)
+                return (
+                    _finalize_x_for_logits(logits, x_c),
+                    c_c,
+                    (r_c if r_c is not None else fallback_record),
+                    cc_c,
+                )
+    return None, None, (r_attr if r_attr is not None else fallback_record), False
+
+
+def _lookup_rhbi_capture(
+    logits: torch.Tensor,
+    fallback_record: Any = None,
+) -> Tuple[Optional[torch.Tensor], Optional[torch.Tensor], Any]:
+    x_c, c_c, r_c, _ = _lookup_rhbi_capture_full(logits, fallback_record)
+    return x_c, c_c, r_c
 
 
 class _RHBIObserverStepRecord(CriticStepRecord):
@@ -317,9 +348,11 @@ def _rhbi_critic_forward_hook(
     target = output[0] if isinstance(output, (tuple, list)) and output else output
     if not isinstance(target, torch.Tensor) or target.ndim < 1:
         return
-    x_in, cond_disc = _extract_critic_inputs(args, kwargs, int(target.shape[0]))
+    x_in, cond_disc, has_cont_cond = _extract_critic_inputs(args, kwargs, int(target.shape[0]))
     if x_in is not None:
-        _record_rhbi_capture(output, x_in, cond_disc, rec, overwrite=True)
+        _record_rhbi_capture(
+            output, x_in, cond_disc, rec, has_cont_cond=has_cont_cond, overwrite=True
+        )
 
 
 def _attach_rhbi_critic_hook(critic: nn.Module, record: CriticStepRecord) -> None:

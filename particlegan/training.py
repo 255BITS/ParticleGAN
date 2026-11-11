@@ -33,6 +33,7 @@ def _float_output(value):
         if hasattr(value, "_rhbi_input"):
             result._rhbi_input = value._rhbi_input
             result._rhbi_cond = getattr(value, "_rhbi_cond", None)
+            result._rhbi_cont_cond = bool(getattr(value, "_rhbi_cont_cond", False))
         if hasattr(value, "_rhbi_record"):
             result._rhbi_record = value._rhbi_record
         return result
@@ -75,8 +76,12 @@ class InputNoise(nn.Module):
                 from .rhbi import _extract_critic_inputs, _record_rhbi_capture
                 rec = getattr(target, "_rhbi_record", getattr(self.critic, "_rhbi_record", None))
                 if rec is None or not getattr(rec, "_in_penalty", False):
-                    x_clean, cond_disc = _extract_critic_inputs((x, *args), kwargs, int(target.shape[0]))
-                    _record_rhbi_capture(out, x_clean, cond_disc, rec, overwrite=True)
+                    x_clean, cond_disc, has_cont_cond = _extract_critic_inputs(
+                        (x, *args), kwargs, int(target.shape[0])
+                    )
+                    _record_rhbi_capture(
+                        out, x_clean, cond_disc, rec, has_cont_cond=has_cont_cond, overwrite=True
+                    )
         return out
 
 
@@ -126,7 +131,8 @@ _ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
                         "rhbi_beta_ell": 0.1, "rhbi_nn_quantile": 0.25,
                         "rhbi_critic_weight": 0.0, "rhbi_self_coupling": "hollow",
                         "rhbi_relativistic_weight": 0.0, "rhbi_lambda_floor": 0.0,
-                        "rhbi_gamma_gauge": 0.0, "rhbi_rapidity_screening": True}
+                        "rhbi_gamma_gauge": 0.0, "rhbi_rapidity_screening": True,
+                        "rhbi_scale_log_odds": False, "rhbi_conditional_fibre": "joint"}
 
 
 class GANTrainer:

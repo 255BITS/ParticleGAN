@@ -213,8 +213,13 @@ class RHBICriticPenalty(_K3PCriticPenalty):
         if getattr(self, "recipe", None) is not None:
             apply_penalty_schedule(self.optimizer.record.observed_steps, self.recipe, self)
         output = self.output
+        has_batch_state = isinstance(critic, torch.nn.Module) and any(
+            isinstance(v, torch.Tensor) and v.ndim >= 1 and v.shape[0] == x_real.shape[0]
+            for v in vars(critic).values()
+        )
         allow_concat = (
-            not self._has_batchnorm
+            not has_batch_state
+            and not self._has_batchnorm
             and not condition
             and not condition_kwargs
             and getattr(critic, "std", 0.0) == 0.0

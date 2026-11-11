@@ -20,6 +20,8 @@ try:
         rhbi_lambda_floor=0.0,
         rhbi_gamma_gauge=0.0,
         rhbi_rapidity_screening=True,
+        rhbi_scale_log_odds=False,
+        rhbi_conditional_fibre="joint",
     )
 except (ImportError, ValueError):
     pass
@@ -318,6 +320,8 @@ class Recipe:
     rhbi_lambda_floor: float = 0.0
     rhbi_gamma_gauge: float = 0.0
     rhbi_rapidity_screening: bool = True
+    rhbi_scale_log_odds: bool = False
+    rhbi_conditional_fibre: str = "joint"
 
     def __init__(self, **resolved_fields):
         declared = {field.name for field in fields(type(self))}
@@ -561,8 +565,12 @@ class Recipe:
                 raise ValueError(f"{rhbi_name} must be finite and {'positive' if rhbi_pos else 'nonnegative'}")
         if type(self.rhbi_self_coupling) is not str or self.rhbi_self_coupling not in ("hollow", "feydy"):
             raise ValueError("rhbi_self_coupling must be 'hollow' or 'feydy'")
+        if type(self.rhbi_conditional_fibre) is not str or self.rhbi_conditional_fibre not in ("joint", "slack"):
+            raise ValueError("rhbi_conditional_fibre must be 'joint' or 'slack'")
         if type(self.rhbi_rapidity_screening) is not bool:
             raise ValueError("rhbi_rapidity_screening must be a boolean")
+        if type(self.rhbi_scale_log_odds) is not bool:
+            raise ValueError("rhbi_scale_log_odds must be a boolean")
         if self.rhbi_beta_ell > 1.0:
             raise ValueError("rhbi_beta_ell must be in (0, 1]")
         if type(self.rhbi_nn_quantile) not in (int, float) or not (0.0 < self.rhbi_nn_quantile < 1.0):
@@ -914,6 +922,8 @@ class Recipe:
                 self_coupling=self.rhbi_self_coupling,
                 relativistic_weight=self.rhbi_relativistic_weight,
                 rapidity_screening=self.rhbi_rapidity_screening,
+                scale_log_odds=self.rhbi_scale_log_odds,
+                conditional_fibre=self.rhbi_conditional_fibre,
             )
         if self.effective_critic_formulation == "bispf" and self.loss == "relativistic":
             from .bispf import SinkhornRelativisticLoss

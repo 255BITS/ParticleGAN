@@ -32,7 +32,8 @@ DEFAULT_LABELS = {
     "k3p-a2-off-native-diagnostic": "K3P without A2",
     "k3p-no-output-noise-diagnostic": "K3P without training output noise",
     "rhbi-v1": "RHBI (v1)",
-    "rhbi-v2": "RHBI",
+    "rhbi-v2": "RHBI (v2)",
+    "rhbi-v3": "RHBI",
 }
 ARCHIVED_SCOPES = ("pinned", "calibration_diagnostic", "research_diagnostic", "historical")
 

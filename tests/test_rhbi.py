@@ -461,8 +461,14 @@ def test_rhbi_v2_penalty_lambda_floor_and_gamma_gauge_concat_parity():
 
     pen_cat.backward()
     pen_sep.backward()
+    non_none = 0
     for p1, p2 in zip(D1.parameters(), D2.parameters()):
-        assert torch.allclose(p1.grad, p2.grad, rtol=1e-5, atol=1e-6)
+        if p1.grad is None:
+            assert p2.grad is None
+        else:
+            non_none += 1
+            assert torch.allclose(p1.grad, p2.grad, rtol=1e-5, atol=1e-6)
+    assert non_none >= 3
     # Bias gradient must push positive logit offset back toward zero
     assert float(D1[-1].bias.grad.item()) > 0.01
 
@@ -498,4 +504,119 @@ def test_polar_cpu_v1_nondefault_smoothing_and_rhbi_v1_backward_compat():
     NormalizedOptimizer([w_a], lr=0.014, smoothing=0.0061, dense_profile="polar_cpu_v1").step()
     NormalizedOptimizer([w_b], lr=0.014, smoothing=0.0061, svd_backend="cpu").step()
     assert torch.equal(w_a, w_b)
+
+
+def test_rhbi_v3_stateful_view_wrapper_penalty_handles_batch_bound_closures():
+    """Verify Recipe.make_critic_penalty avoids batch-doubling concat on trajectory-style stateful view modules."""
+    class _CondCritic(nn.Module):
+        def __init__(self) -> None:
+            super().__init__()
+            self.net = nn.Sequential(nn.Linear(6, 16), nn.SiLU(), nn.Linear(16, 1))
+
+        def forward(self, slow: torch.Tensor, fast: torch.Tensor) -> torch.Tensor:
+            return self.net(torch.cat([slow, fast], dim=-1)).squeeze(-1)
+
+    class _BatchStatefulView(nn.Module):
+        def __init__(self, critic: nn.Module, slow: torch.Tensor) -> None:
+            super().__init__()
+            self.critic = critic
+            self.slow = slow
+
+        def forward(self, fast: torch.Tensor) -> torch.Tensor:
+            return self.critic(self.slow, fast)
+
+    torch.manual_seed(41)
+    D1 = _CondCritic()
+    D2 = deepcopy(D1)
+    slow = torch.randn(12, 3)
+    real = torch.randn(12, 3)
+    fake = torch.randn(12, 3)
+
+    recipe = get_recipe(
+        "rhbi", reg_every=1, rhbi_lambda_floor=0.005, total_steps=10, batch_size=12, num_particles=32, z_dim=2
+    )
+    opt1 = recipe.make_critic_optimizer(D1)
+    opt2 = recipe.make_critic_optimizer(D2)
+    bound1 = recipe.make_critic_penalty(opt1)
+    bound2 = recipe.make_critic_penalty(opt2)
+
+    view = _BatchStatefulView(D1, slow)
+    pen_view = bound1(view, real, fake)
+    pen_direct, _ = bound2.regularizer.penalty(
+        lambda x: D2(slow, x), real, fake, step=1, collect_stats=False, allow_concat=False
+    )
+    assert torch.allclose(pen_view, pen_direct, rtol=1e-5, atol=1e-6)
+    pen_view.backward()
+    pen_direct.backward()
+    non_none = 0
+    for p1, p2 in zip(D1.parameters(), D2.parameters()):
+        if p1.grad is None:
+            assert p2.grad is None
+        else:
+            non_none += 1
+            assert torch.allclose(p1.grad, p2.grad, rtol=1e-5, atol=1e-6)
+    assert non_none >= 3
+
+
+def test_rhbi_v3_conditional_fibre_slack_invariance_and_unconditional_parity():
+    """Verify rhbi_conditional_fibre='slack' matches 'joint' unconditionally and cancels fibre baselines."""
+    rec_default = get_recipe("rhbi")
+    assert rec_default.rhbi_conditional_fibre == "joint"
+    assert rec_default.rhbi_scale_log_odds is False
+
+    # 1. Unconditional parity: 'slack' and 'joint' produce bit-identical losses and gradients.
+    torch.manual_seed(53)
+    D_j = nn.Sequential(nn.Linear(3, 12), nn.SiLU(), nn.Linear(12, 1))
+    D_s = deepcopy(D_j)
+    r_j = get_recipe("rhbi", rhbi_conditional_fibre="joint", total_steps=10, batch_size=16, num_particles=32, z_dim=2)
+    r_s = get_recipe("rhbi", rhbi_conditional_fibre="slack", total_steps=10, batch_size=16, num_particles=32, z_dim=2)
+    opt_j = r_j.make_critic_optimizer(D_j)
+    opt_s = r_s.make_critic_optimizer(D_s)
+    loss_j = r_j.make_loss()
+    loss_s = r_s.make_loss()
+    bind_rhbi_record(opt_j.record, loss_j)
+    bind_rhbi_record(opt_s.record, loss_s)
+
+    x_r = torch.randn(16, 3)
+    x_f_a = torch.randn(16, 3, requires_grad=True)
+    x_f_b = x_f_a.detach().clone().requires_grad_(True)
+    la = loss_j.g_loss(D_j(x_f_a), D_j(x_r))
+    la.backward()
+    lb = loss_s.g_loss(D_s(x_f_b), D_s(x_r))
+    lb.backward()
+    assert torch.equal(la, lb)
+    assert torch.equal(x_f_a.grad, x_f_b.grad)
+
+    # 2. Continuous conditioning: arbitrary fibre-dependent additive baseline b(c) cancels identically.
+    class _FibreCritic(nn.Module):
+        def __init__(self, bias_scale: float) -> None:
+            super().__init__()
+            self.lin = nn.Linear(4, 1)
+            self.bias_scale = bias_scale
+
+        def forward(self, x: torch.Tensor, cond: torch.Tensor) -> torch.Tensor:
+            shift = self.bias_scale * cond.square().sum(dim=-1, keepdim=True)
+            return self.lin(torch.cat([x, cond], dim=-1)) + shift
+
+    Dc1 = _FibreCritic(bias_scale=0.0)
+    Dc2 = _FibreCritic(bias_scale=25.0)
+    Dc2.lin.load_state_dict(Dc1.lin.state_dict())
+    opt_c1 = r_s.make_critic_optimizer(Dc1)
+    opt_c2 = r_s.make_critic_optimizer(Dc2)
+    l_c1 = r_s.make_loss()
+    l_c2 = r_s.make_loss()
+    bind_rhbi_record(opt_c1.record, l_c1)
+    bind_rhbi_record(opt_c2.record, l_c2)
+
+    cond = torch.randn(16, 2)
+    yr = torch.randn(16, 2)
+    xf1 = torch.randn(16, 2, requires_grad=True)
+    xf2 = xf1.detach().clone().requires_grad_(True)
+    gc1 = l_c1.g_loss(Dc1(xf1, cond), Dc1(yr, cond))
+    gc1.backward()
+    gc2 = l_c2.g_loss(Dc2(xf2, cond), Dc2(yr, cond))
+    gc2.backward()
+    assert torch.allclose(gc1, gc2, rtol=1e-5, atol=1e-6)
+    assert torch.allclose(xf1.grad, xf2.grad, rtol=1e-5, atol=1e-6)
+
 

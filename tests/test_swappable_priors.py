@@ -209,7 +209,7 @@ def assert_nested_allclose(left, right, atol: float = 1e-6, rtol: float = 1e-5):
 
 def test_recipe_fields_exact_tuple_invariance():
     """Prior manipulators retain the frozen base schema plus explicit controls."""
-    additions = ('reg_real_weight', 'reg_fake_weight', 'joint_reconstruction_weight', 'conditional_energy_weight', 'conditional_energy_samples', 'masked_mixture_weight', 'masked_transport_weight', 'imputer_component_weight', 'rhbi_weight', 'rhbi_rho', 'rhbi_tau', 'rhbi_eps', 'rhbi_iters', 'rhbi_c_max', 'rhbi_beta_ell', 'rhbi_nn_quantile', 'rhbi_critic_weight', 'rhbi_self_coupling', 'rhbi_relativistic_weight', 'rhbi_lambda_floor', 'rhbi_gamma_gauge', 'rhbi_rapidity_screening')
+    additions = ('reg_real_weight', 'reg_fake_weight', 'joint_reconstruction_weight', 'conditional_energy_weight', 'conditional_energy_samples', 'masked_mixture_weight', 'masked_transport_weight', 'imputer_component_weight', 'rhbi_weight', 'rhbi_rho', 'rhbi_tau', 'rhbi_eps', 'rhbi_iters', 'rhbi_c_max', 'rhbi_beta_ell', 'rhbi_nn_quantile', 'rhbi_critic_weight', 'rhbi_self_coupling', 'rhbi_relativistic_weight', 'rhbi_lambda_floor', 'rhbi_gamma_gauge', 'rhbi_rapidity_screening', 'rhbi_scale_log_odds', 'rhbi_conditional_fibre')
     fields_dict = get_recipe_fields()
     field_names = tuple(fields_dict)
     assert len(field_names) == 118 + len(additions)
@@ -236,11 +236,11 @@ spec.loader.exec_module(module)
 
 # Resolve fields across multiple presets without torch
 fields_ka2 = module.get_recipe_fields('ka2')
-assert len(fields_ka2) == 140
+assert len(fields_ka2) == 142
 fields_bcap = module.get_recipe_fields('bcap')
-assert len(fields_bcap) == 140
+assert len(fields_bcap) == 142
 fields_bispf = module.get_recipe_fields('bispf_optimized')
-assert len(fields_bispf) == 140
+assert len(fields_bispf) == 142
 
 assert 'torch' not in sys.modules, 'torch leaked into sys.modules'
 assert 'particlegan' not in sys.modules, 'particlegan leaked into sys.modules'
