@@ -867,8 +867,8 @@
   },
   "policy_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a",
   "previous_selection": {
-    "path": "configs/forge/selections/history/family-current-35871846445af79feec0775aa398b3c1ad037a6aa1723cccbf56fe73bd85b7ec.json",
-    "sha256": "35871846445af79feec0775aa398b3c1ad037a6aa1723cccbf56fe73bd85b7ec"
+    "path": "configs/forge/selections/history/family-current-4dc6f23ecf5c4a0816f7c47d92f91eb6b324c78333755c130c4276c92df54c94.json",
+    "sha256": "4dc6f23ecf5c4a0816f7c47d92f91eb6b324c78333755c130c4276c92df54c94"
   },
   "schema_version": 1,
   "scope": "whole_candidate_family_current",
@@ -945,6 +945,25 @@
       "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
       "task_keys_sha256": "c980bb27bb49df843495ba70322d3f60656c01e511c4b18df7515f081e0decf5",
       "trainer_family": "e22"
+    },
+    {
+      "candidate_id": "empf-v1",
+      "candidate_revision": "45a5684f2961affd93bfb3cdd35b79928763c60cfe6a3e913492dc1bc77007e4",
+      "cohort": "e4a77817f82de838383535a53128c330f372a6f35123e3a5877085e5d22cbd6d",
+      "execution_backend": "cuda",
+      "measurement_views": [
+        "discriminator_stability"
+      ],
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Select empf-v1 (Exponential Moving Prototype Flow: online e-means sufficient-statistics prototype bank (S, N) with (K, B) hit-rate EMA scaling and proportional-split revival, mass-weighted prototype-to-fake Sinkhorn OT, Elastic Born-Infeld transport-chord critic penalty with zero-mean logit gauge, and DoF-aware EMPF prior regularizer) following ordinary discriminator_stability CUDA measurement on NVIDIA RTX A6000 (11/11 required + 1/1 clockfree_audit diagnostic Tier 1 PASS, 8/18 required Tier 2 PASS, 20/38 executed tasks PASS overall). Actual executed-policy qualification and comparison-policy projection retain their separate source-bound proofs; no public-default adoption claim.",
+      "recipe_sha256": "8094f9292d88f14cce0afc58520b8a22b5f3e97b418f90e80ed34ca5d23e4632",
+      "rng_sha256": "495400e2de1b9f9f94a86625a2132091646dcbb8357f48c3512ed24154b89b6d",
+      "runtime_cohort_sha256": "23a94f16ca88faef2aa24ce757c89f1524bef5522c2b1b87cce88d9d94e883b1",
+      "scientific_row_sha256": "b08ed571ab01a99fc0629ec52ffe4eed1e2c7cd6a4c336dfee67ab8f602a7923",
+      "selection_kind": "current_measurement",
+      "source_digest": "1acd41cb5f4ab3b459816a561582fb03c5062722eff343d2b1f3f81e9f3c637c",
+      "task_keys_sha256": "ce647ce7e6fd17218b53e64190c6fecf67429a3be384d646046b31f9736070db",
+      "trainer_family": "empf"
     },
     {
       "candidate_id": "recipe-prior-refactor-k3p-v1",

@@ -944,6 +944,8 @@ Ordered by attained tier, then candidate name/cohort; raw metrics and cost remai
 | bispf-v1 / 0dd7928e2cb0 / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 22; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | e22 / ada3469f5282 / cuda (NVIDIA RTX A6000) | current | 0 | BLOCKED 22; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | e22 / ada3469f5282 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | BLOCKED 22; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
+| empf-v1 / 45a5684f2961 / cuda (NVIDIA RTX A6000) | current | 0 | FAIL 11, PASS 11; 7 held (0 pass, not counted) | 1324.403 | Run the next eligible task within an explicit budget. |
+| empf-v1 / 45a5684f2961 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 22; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | five-word-joint-ka2-v1 / 334d755dd524 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 22; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | five-word-joint-ka2-v1 / 334d755dd524 / cuda (NVIDIA RTX A6000) | current | 0 | NOT_RUN 22; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
 | forge-no-critic-penalty / 7e7d6109af1b / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 22; 7 held (0 pass, not counted) | unknown | Run the next eligible task within an explicit budget. |
