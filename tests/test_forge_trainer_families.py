@@ -539,7 +539,7 @@ def test_registry_groups_gan_v3_task_priors_and_keeps_original_historical_identi
                               "repairs-cap-margin", "repairs-finite-cap", "transport"))
     assert set(registry) == retained | {"bcap-pure", "halloween", "bispf", "rhbi"} | optimizer_families | editorial_variants
     assert registry["bispf"]["canonical_candidate"] == "bispf-v2"
-    assert registry["rhbi"]["canonical_candidate"] == "rhbi-v1"
+    assert registry["rhbi"]["canonical_candidate"] == "rhbi-v3"
     assert registry["halloween"]["canonical_candidate"] == "halloween-optimizer-loss-v1"
     assert registry["bcap-pure"]["canonical_candidate"] == "bcap-pure-adam-v2"
     assert set(registry["bcap-pure"]["candidates"]).isdisjoint(registry["bcap"]["candidates"])

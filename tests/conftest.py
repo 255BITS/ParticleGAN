@@ -51,6 +51,22 @@ def _archived_inactive_comparison_scope(module, directory):
         "bispf_gate_overrides": (),
         "prior_code_law": "table",
         "generator_gradient_response": "none",
+        "rhbi_weight": 0.0,
+        "rhbi_rho": 2.0,
+        "rhbi_tau": 2.0,
+        "rhbi_eps": 0.1,
+        "rhbi_iters": 8,
+        "rhbi_c_max": 20.0,
+        "rhbi_beta_ell": 0.1,
+        "rhbi_nn_quantile": 0.25,
+        "rhbi_critic_weight": 0.0,
+        "rhbi_self_coupling": "hollow",
+        "rhbi_relativistic_weight": 0.0,
+        "rhbi_lambda_floor": 0.0,
+        "rhbi_gamma_gauge": 0.0,
+        "rhbi_rapidity_screening": True,
+        "rhbi_scale_log_odds": False,
+        "rhbi_conditional_fibre": "joint",
     }
     tail = '    "training_precision": "float32",\n}\n'
     assert adapted.decode().count(tail) == 1
