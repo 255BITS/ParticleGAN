@@ -1,0 +1,128 @@
+"""Relativistic Hellinger-Born-Infeld (RHBI) GAN loss adapter."""
+from __future__ import annotations
+
+import math
+from typing import Any, Dict, Tuple
+
+import torch
+
+from ..gan_loss import GANLoss
+from .critic import _lookup_rhbi_capture
+from .primitive import RHBILoss
+
+
+class RHBIGANLoss(GANLoss):
+    """``GANLoss`` subclass pairing calibrated log-odds critic training with ``RHBILoss``."""
+
+    def __init__(
+        self,
+        loss: str = "non_saturating",
+        *,
+        labels: Tuple[float, float, float] = (0.0, 1.0, 1.0),
+        weight: float = 1.0,
+        rho: float = 2.0,
+        tau: float = 2.0,
+        eps: float = 0.1,
+        iters: int = 8,
+        c_max: float = 20.0,
+        beta_ell: float = 0.1,
+        nn_quantile: float = 0.25,
+        critic_weight: float = 0.0,
+        record: Any = None,
+    ) -> None:
+        super().__init__(loss, labels=labels)
+        if (
+            isinstance(critic_weight, bool)
+            or not isinstance(critic_weight, (int, float))
+            or not math.isfinite(critic_weight)
+            or critic_weight < 0.0
+        ):
+            raise ValueError("critic_weight must be finite and nonnegative")
+        self.critic_weight = float(critic_weight)
+        self.record = record
+        self.rhbi = RHBILoss(
+            weight=weight,
+            rho=rho,
+            tau=tau,
+            eps=eps,
+            iters=iters,
+            c_max=c_max,
+            beta_ell=beta_ell,
+            nn_quantile=nn_quantile,
+        )
+        self.last_metrics: Dict[str, float] = {}
+
+    def _resolve_pair(
+        self,
+        fake_logits: torch.Tensor,
+        real_logits: torch.Tensor,
+    ) -> Tuple[torch.Tensor, torch.Tensor, Any, Any, Any]:
+        x_f, cond_f, rec_f = _lookup_rhbi_capture(fake_logits, self.record)
+        x_r, cond_r, rec_r = _lookup_rhbi_capture(real_logits, rec_f if rec_f is not None else self.record)
+        rec = rec_f if rec_f is not None else (rec_r if rec_r is not None else self.record)
+        if x_f is None or x_r is None:
+            x_f = fake_logits.reshape(fake_logits.shape[0], -1)
+            x_r = real_logits.reshape(real_logits.shape[0], -1)
+            cond_f = None
+            cond_r = None
+        return x_f, x_r, cond_f, cond_r, rec
+
+    def d_loss(self, real_logits: torch.Tensor, fake_logits: torch.Tensor) -> torch.Tensor:
+        base = super().d_loss(real_logits, fake_logits)
+        if self.critic_weight == 0.0:
+            return base
+        x_f, x_r, cond_f, cond_r, rec = self._resolve_pair(fake_logits, real_logits)
+        slack_reg = self.rhbi.critic_slack_loss(
+            x_f,
+            x_r,
+            fake_logits,
+            real_logits,
+            critic_weight=self.critic_weight,
+            record=rec,
+            cond_fake=cond_f,
+            cond_real=cond_r,
+        )
+        return base + slack_reg
+
+    def g_loss(self, fake_logits: torch.Tensor, real_logits: torch.Tensor | None = None) -> torch.Tensor:
+        if real_logits is None:
+            if self.rhbi.weight == 0.0:
+                return super().g_loss(fake_logits, None)
+            raise ValueError("RHBIGANLoss requires real_logits in g_loss when rhbi_weight > 0")
+        if self.rhbi.weight == 0.0:
+            return super().g_loss(fake_logits, real_logits)
+        x_f, x_r, cond_f, cond_r, rec = self._resolve_pair(fake_logits, real_logits)
+        allow_ell = torch.is_grad_enabled() and not getattr(rec, "_in_protected_probe", False)
+        loss_val, _ = self.rhbi(
+            x_f,
+            x_r,
+            fake_logits,
+            real_logits,
+            record=rec,
+            symmetric=False,
+            allow_ell_update=allow_ell,
+            cond_fake=cond_f,
+            cond_real=cond_r,
+            return_metrics=False,
+        )
+        return loss_val
+
+    def joint_g_loss(self, fake_logits: torch.Tensor, real_logits: torch.Tensor) -> torch.Tensor:
+        if not fake_logits.requires_grad or not real_logits.requires_grad:
+            raise ValueError("joint_g_loss requires gradients on both generator and encoder streams")
+        if self.rhbi.weight == 0.0:
+            return super().joint_g_loss(fake_logits, real_logits)
+        x_f, x_r, cond_f, cond_r, rec = self._resolve_pair(fake_logits, real_logits)
+        allow_ell = torch.is_grad_enabled() and not getattr(rec, "_in_protected_probe", False)
+        loss_val, _ = self.rhbi.joint_relativistic_loss(
+            x_f,
+            x_r,
+            fake_logits,
+            real_logits,
+            record=rec,
+            allow_ell_update=allow_ell,
+            cond_fake=cond_f,
+            cond_real=cond_r,
+            return_metrics=False,
+        )
+        return loss_val

@@ -5,6 +5,17 @@ from dataclasses import asdict, dataclass, fields, replace
 try:
     from .recipe_compat import SEARCH_RECIPE_DEFAULTS
     SEARCH_RECIPE_DEFAULTS["generator_gradient_response"] = "none"
+    SEARCH_RECIPE_DEFAULTS.update(
+        rhbi_weight=0.0,
+        rhbi_rho=2.0,
+        rhbi_tau=2.0,
+        rhbi_eps=0.1,
+        rhbi_iters=8,
+        rhbi_c_max=20.0,
+        rhbi_beta_ell=0.1,
+        rhbi_nn_quantile=0.25,
+        rhbi_critic_weight=0.0,
+    )
 except (ImportError, ValueError):
     pass
 
@@ -287,6 +298,16 @@ class Recipe:
     # dimension (ParticlePrior.code_law). Opt-in; not part of any preset.
     prior_code_law: str = "table"
     kappa_radial: float = 1.0
+    # Relativistic Hellinger-Born-Infeld Transport (RHBI) variational parameters.
+    rhbi_weight: float = 0.0
+    rhbi_rho: float = 2.0
+    rhbi_tau: float = 2.0
+    rhbi_eps: float = 0.1
+    rhbi_iters: int = 8
+    rhbi_c_max: float = 20.0
+    rhbi_beta_ell: float = 0.1
+    rhbi_nn_quantile: float = 0.25
+    rhbi_critic_weight: float = 0.0
 
     def __init__(self, **resolved_fields):
         declared = {field.name for field in fields(type(self))}
@@ -419,7 +440,7 @@ class Recipe:
             raise ValueError("batched SVD requires per_offset convolution")
         if (type(self.optimizer_dense_profile) is not str
                 or self.optimizer_dense_profile not in ("default", "gram_fp64_guarded_v1",
-                    "gram_fp64_svd_diagnostic_v2")):
+                    "gram_fp64_svd_diagnostic_v2", "polar_cpu_v1")):
             raise ValueError("unknown optimizer_dense_profile")
         if self.optimizer_dense_profile != "default" and (
                 self.optimizer_family != "dualnorm" or self.optimizer_momentum != 0
@@ -476,10 +497,11 @@ class Recipe:
             if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
                 raise ValueError(f"{name} must be finite and nonnegative")
         if ((self.reg_real_weight, self.reg_fake_weight) != (1., 1.)
-                and self.reg_arm not in ("a_r1r2", "b_cap")):
-            raise ValueError("real/fake penalty weights require an explicit fixed R1/R2 or BCap reg_arm")
+                and self.reg_arm not in ("a_r1r2", "b_cap")
+                and self.critic_formulation != "rhbi"):
+            raise ValueError("real/fake penalty weights require an explicit fixed R1/R2, BCap, or RHBI formulation")
         if self.optimizer_family != "formulation":
-            if self.reg_arm not in ("a_r1r2", "b_cap") and self.critic_formulation != "bispf":
+            if self.reg_arm not in ("a_r1r2", "b_cap") and self.critic_formulation not in ("bispf", "rhbi"):
                 raise ValueError("plain optimizers require an explicit fixed R1/R2 or BCap reg_arm")
             if (self.d_guard_ratio != 0 or self.reg_anchor_weight != 0
                     or self.latent_damping_max_rate != 0 or self.direct_particle_gain):
@@ -496,8 +518,8 @@ class Recipe:
             raise ValueError("scheduled reg_coeff requires a fixed R1/R2 or BCap reg_arm")
         if (self.beta2_end is not None or self.reg_coeff_end is not None) and self.total_steps is None:
             raise ValueError("recipe cosine schedules require a declared total_steps horizon")
-        if self.critic_formulation not in ("ka2", "k3p", "bcap", "bispf"):
-            raise ValueError("critic_formulation must be ka2, k3p, bcap or bispf")
+        if self.critic_formulation not in ("ka2", "k3p", "bcap", "bispf", "rhbi"):
+            raise ValueError("critic_formulation must be ka2, k3p, bcap, bispf or rhbi")
         if self.critic_formulation == "bcap" and (self.optimizer_family == "formulation" or self.reg_arm != "b_cap"):
             raise ValueError("bcap formulation requires a plain optimizer and reg_arm='b_cap'")
         if self.critic_formulation == "bispf":
@@ -505,9 +527,34 @@ class Recipe:
                 raise ValueError("bispf formulation does not accept a legacy reg_arm")
             if self.reg_anchor_weight != 0:
                 raise ValueError("bispf formulation uses a zero-mean logit gauge instead of an EMA critic anchor (require reg_anchor_weight=0)")
+        if self.critic_formulation == "rhbi":
+            if self.reg_arm is not None:
+                raise ValueError("rhbi formulation does not accept a legacy reg_arm")
+            if self.reg_anchor_weight != 0:
+                raise ValueError("rhbi formulation does not use an EMA critic anchor (require reg_anchor_weight=0)")
+        for rhbi_name, rhbi_pos in (
+            ("rhbi_weight", False),
+            ("rhbi_rho", True),
+            ("rhbi_tau", False),
+            ("rhbi_eps", True),
+            ("rhbi_c_max", True),
+            ("rhbi_beta_ell", True),
+            ("rhbi_critic_weight", False),
+        ):
+            rhbi_val = getattr(self, rhbi_name)
+            if type(rhbi_val) not in (int, float) or not math.isfinite(rhbi_val) or (
+                rhbi_val <= 0 if rhbi_pos else rhbi_val < 0
+            ):
+                raise ValueError(f"{rhbi_name} must be finite and {'positive' if rhbi_pos else 'nonnegative'}")
+        if self.rhbi_beta_ell > 1.0:
+            raise ValueError("rhbi_beta_ell must be in (0, 1]")
+        if type(self.rhbi_nn_quantile) not in (int, float) or not (0.0 < self.rhbi_nn_quantile < 1.0):
+            raise ValueError("rhbi_nn_quantile must be in (0, 1)")
+        if type(self.rhbi_iters) is not int or self.rhbi_iters < 1:
+            raise ValueError("rhbi_iters must be a positive integer")
         if type(self.ebi_beta) not in (int, float) or not math.isfinite(self.ebi_beta) or self.ebi_beta <= 0:
             raise ValueError("ebi_beta must be finite and positive")
-        if self.reg_arm is not None and self.critic_formulation not in ("bcap", "bispf"):
+        if self.reg_arm is not None and self.critic_formulation not in ("bcap", "bispf", "rhbi"):
             # Keep resolved recipe/Forge provenance truthful about the optimizer
             # family selected by an explicit legacy arm.
             object.__setattr__(self, "critic_formulation", "k3p")
@@ -833,6 +880,21 @@ class Recipe:
 
     def make_loss(self):
         """The selected objective: ``d_loss(real, fake)``, ``g_loss(fake, real=None)``."""
+        if self.effective_critic_formulation == "rhbi" or self.rhbi_weight > 0 or self.rhbi_critic_weight > 0:
+            from .rhbi import RHBIGANLoss
+            return RHBIGANLoss(
+                self.loss,
+                labels=self.loss_labels,
+                weight=self.rhbi_weight,
+                rho=self.rhbi_rho,
+                tau=self.rhbi_tau,
+                eps=self.rhbi_eps,
+                iters=self.rhbi_iters,
+                c_max=self.rhbi_c_max,
+                beta_ell=self.rhbi_beta_ell,
+                nn_quantile=self.rhbi_nn_quantile,
+                critic_weight=self.rhbi_critic_weight,
+            )
         if self.effective_critic_formulation == "bispf" and self.loss == "relativistic":
             from .bispf import SinkhornRelativisticLoss
             return SinkhornRelativisticLoss(labels=self.loss_labels, gates=self.bispf_gates())
@@ -892,6 +954,8 @@ class Recipe:
         """
         if self.effective_critic_formulation == "bispf":
             from .bispf import BISPFCriticPenalty as CriticPenalty
+        elif self.effective_critic_formulation == "rhbi":
+            from .rhbi import RHBICriticPenalty as CriticPenalty
         elif self.effective_critic_formulation in ("k3p", "bcap"):
             from .k3p import CriticPenalty
         else:
@@ -901,8 +965,24 @@ class Recipe:
 
     def _penalty_options(self, **overrides):
         """Resolved kernel settings for ``make_critic_penalty``."""
-        if self.critic_formulation not in ("ka2", "k3p", "bcap", "bispf"):
-            raise ValueError("critic_formulation must be ka2, k3p, bcap or bispf")
+        if self.critic_formulation not in ("ka2", "k3p", "bcap", "bispf", "rhbi"):
+            raise ValueError("critic_formulation must be ka2, k3p, bcap, bispf or rhbi")
+        if self.effective_critic_formulation == "rhbi":
+            if not self.critic_r1_real:
+                raise ValueError("critic_r1_real=False requires the KA2 formulation")
+            options = {
+                "coeff": self.reg_coeff,
+                "kappa": self.reg_kappa,
+                "lazy_k": self.reg_every,
+                "anchor_weight": self.reg_anchor_weight,
+                "ebi_beta": self.ebi_beta,
+                "real_weight": self.reg_real_weight,
+                "fake_weight": self.reg_fake_weight,
+                **overrides,
+            }
+            from .rhbi import _RHBIPenaltyKernel
+            _RHBIPenaltyKernel(**options)
+            return options
         if self.effective_critic_formulation == "bispf":
             if not self.critic_r1_real:
                 raise ValueError("critic_r1_real=False requires the KA2 formulation")
@@ -976,6 +1056,10 @@ class Recipe:
             from .bispf import BISPFCriticAdam
             return BISPFCriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
                                    guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps, **options)
+        if self.effective_critic_formulation == "rhbi":
+            from .rhbi import RHBICriticAdam
+            return RHBICriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
+                                  guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps, **options)
         if self.effective_critic_formulation == "k3p":
             from .k3p import K3PCriticAdam
             return K3PCriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
@@ -1113,7 +1197,7 @@ class Recipe:
     @property
     def effective_critic_formulation(self):
         """Explicit legacy arms retain their K3P optimizer and penalty family."""
-        if self.critic_formulation in ("bcap", "bispf"):
+        if self.critic_formulation in ("bcap", "bispf", "rhbi"):
             return self.critic_formulation
         return "k3p" if self.reg_arm is not None else self.critic_formulation
 
@@ -1505,6 +1589,14 @@ def get_recipe_fields(name="gan", *, trainer=None, **overrides):
         "prior_reg": .01, "lr_schedule": "cosine",
         "optimizer_svd_backend": "batched", "training_precision": "bf16_channels_last",
         "routing_temperature": 0.25,
+    }
+    presets["rhbi"] = {
+        **presets["bcap"], "critic_formulation": "rhbi", "reg_arm": None,
+        "optimizer_convolution_rule": "quintic",
+        "optimizer_dense_profile": "polar_cpu_v1",
+        "lr_schedule": "cosine", "ebi_beta": 20.0,
+        "prior_regularizer": "moment_tether", "prior_reg": .01,
+        "routing_temperature": 0.25, "rhbi_weight": 1.0,
     }
     presets["atlas"] = {**presets["e22"], "birth_death_backend": "auto",
                          "birth_death_cells": 128, "reopen_guard": "settled"}

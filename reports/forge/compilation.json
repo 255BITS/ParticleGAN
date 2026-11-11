@@ -2,7 +2,7 @@
   "automation_digest": "49a96b59e9f3c4ce6910d091d0e0023e528cf467bbb80c829cac547a5bc9978b",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "c3c2fbb35d9943c1bcb344903a1357877990de768d018891fc3623796b37a8a3",
+  "input_digest": "231f475ee50b14c19ecd49c44b937530ccad58f208ead85dd205d7f7221fae61",
   "input_hashes": {
     "configs/forge/cadence-studies/bispf-lazy-cadence-v1.json": "fc7302ac06b61fa093a39265d440545fdab176852a588c40b750be16adc1e58b",
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
@@ -605,6 +605,7 @@
     "configs/forge/family-documentation/release07-gan-v3-cloud.json": "46ba5bbdafff114b3a86aa78cac6bfeee8ccd11a6ef88165fb7a6b45eb21f3c3",
     "configs/forge/family-documentation/release07-gan-v3-mog.json": "3039d194c26039ef03f31c9577d668cdf9430071cc422b6369b550b043400320",
     "configs/forge/family-documentation/release07-gan-v3.json": "5ee853e46b22b57123d55e01620a59949c8998ea655e75e9dfbf5a96685c5905",
+    "configs/forge/family-documentation/rhbi.json": "2378441ad1766f3d5faa2512923d2bf17a222bcdb823e9aaf8433d5361d00ee1",
     "configs/forge/family-tags.json": "3a4aa728a133c35b56da6a027d70b93425fad58e47ce6c2cd0a19bf0965ba9c9",
     "configs/forge/ideas/atlas-particle-normal-v1.json": "7e00726ccf7aae18ba99f4aaed2b15c81718a481a4bec05185fd7b281eda8410",
     "configs/forge/ideas/atlas-particle-normal-v2.json": "389546e860c3dc65fa9a73450f5fbfecbe5ef3afd7f662f263968f67bb4b1af7",
@@ -711,6 +712,7 @@
     "configs/forge/ideas/release07-gan-v3-cloud-v1.json": "daee7bac640a1d000d9b6596b6c458d2b40fa251beeb4c162ae57e0b11fa67ab",
     "configs/forge/ideas/release07-gan-v3-mog-v1.json": "5726a561ca5a92ff96cf93e53f47c3acba01e44622437534c67a00eaeb7f8bec",
     "configs/forge/ideas/release07-gan-v3-task-adapted-v1.json": "0c11aa5d44503f146fcfea3cb97267cfc63e02d3a4a24f36d87c7bbb9b801558",
+    "configs/forge/ideas/rhbi-v1.json": "8217bed43368d36f12475d5031086c901b13eefcf9ed9ed59be242b75cc9f29a",
     "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json": "14155fb6273af76ef248db2da6335c22ddeab2a1deb82b3eb3f0f6cd08b19c34",
     "configs/forge/leaderboards/technique-inventory-full-suite-2026-11-06.json": "375fbce71fc4b91be4b403f7ef1c71bd189be6edc0c845a352f5633e8fc5ac9b",
     "configs/forge/legacy-history/five-word-joint-ka2-v1-before-goal-correction.json": "afac13d8cc56a058029c4a505df59fa2a487efd32a20fd001738b65e4914600e",
@@ -1028,6 +1030,7 @@
     "configs/forge/studies/requal-2e8a97a0aa84-ka2-ordinary.json": "fed50244521fa8681f093c1e9d27450a5691d8319112492bf34a6964d7f2a542",
     "configs/forge/studies/requal-2e8a97a0aa84-r1r2-ordinary.json": "568ce7b485a91ec9bb503a08329b90c8a227057af8514f8f4cd40d58150d315e",
     "configs/forge/studies/requal-2e8a97a0aa84-release07-gan-v3-ordinary.json": "492599fb8713179e26de20baea9559cd4a934a3609937e094f9c30ff4bbe5804",
+    "configs/forge/studies/rhbi-v1-study.json": "628910f212fd37987593a93749e757ed0a4ab789fdccfe584c5ca60ffcf2a064",
     "configs/forge/studies/vaegan-coverage-baseline-v1.json": "e27a3cd7c35812e518dccc48dd1c42ce88a41da78a220bdeb6f77c0b9ed3c56d",
     "configs/forge/studies/vaegan-coverage-settle-v1.json": "cb3f990569884bba5548d50b96654b6da8d4ed94f62b0d65320d7ba5d4e8ce10",
     "configs/forge/studies/vaegan-coverage-transport-v1.json": "c80f95d873d80506564738125812db9b23f91732d1805425e8e7282591959b1a",
@@ -1226,7 +1229,7 @@
     "configs/forge/tasks/vector_unequal_width_published.json": "dbaca203f391ac52d40f08a8c7c1e58d54469aa3e260b26fc9e0c0bef0ba0172",
     "configs/forge/tasks/zero_tanh_rail_escape.json": "0018f232b03992c216186ba91ffa89d7ee03ed09eefe1c5230c737f31367e2c7",
     "configs/forge/tasks/zero_tanh_smoke.json": "2a87587a74026fe4873dcee566d1bc5c5b2e5c335483c6565ec0aef8b5d29b04",
-    "configs/forge/trainer-families.json": "53179738fddca1f8d764ab106a04eaefbe4bc261ed0c1d869ccc9e327c932793",
+    "configs/forge/trainer-families.json": "b1bc37cf30712626fe2b1f9448cbaa40ecf3fe69cc8f00f6cf67534e015e5dbc",
     "configs/forge/view-history/adaptation-v2.json": "21533b224174d5378d60b50a93ea0d4a586bb73bf25b4eeeec7b257f9322f21d",
     "configs/forge/view-history/adaptation-v3.json": "2a8a4862f3ed6c3639f3010706ba87de370f6df4c256197d663b28887a514084",
     "configs/forge/view-history/bispf_throughput_endurance-v1.json": "79ba370744414ba362958e5daed9240ce1a8edf4a367a26df5480c6a060e9a14",
@@ -4376,7 +4379,7 @@
   },
   "operational_lifecycle_digest": "9844d43226c3b2baf99ad27b1f3a4c32b9a6b30ad8abac68f275c54635ed3b1d",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "68f213a1a35b14c03409d6ae47850c4861fb494c0144bca813571be1da6a03d5",
+    "reports/forge/EXPERIMENT_MEMORY.md": "acca6e7afda5b145acfa6ebf26048b0e9c0da2a96f1093ac9dcd82ad0925c925",
     "reports/forge/publication-records.json": "5174449ad10c00a8d22dee09d3ef50c8fb0fc76f196d85197271ee7c0766c9d8"
   },
   "pending_readout": [

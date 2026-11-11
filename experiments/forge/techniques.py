@@ -80,6 +80,10 @@ def technique_signature(value):
         mechanisms["kinetic_transport"] = True
     if recipe.kinetic_transport_local_weight > 0:
         mechanisms["kinetic_transport_local"] = True
+    if recipe.rhbi_weight > 0:
+        mechanisms["rhbi_transport"] = True
+    if recipe.rhbi_critic_weight > 0:
+        mechanisms["rhbi_critic_slack"] = True
     if recipe.optimizer_smoothing:
         mechanisms["smoothed_dualnorm"] = True
     if recipe.optimizer_family in {"dualnorm_D_only", "particle_rownorm_only"}:
@@ -195,4 +199,10 @@ def recipe_field_active(name, value, *, task=None):
         return recipe.kinetic_transport_local_weight > 0
     if name == "kinetic_transport_projections":
         return recipe.kinetic_transport_weight > 0 or recipe.kinetic_transport_local_weight > 0
+    if name == "rhbi_weight":
+        return recipe.rhbi_weight > 0
+    if name == "rhbi_critic_weight":
+        return recipe.rhbi_critic_weight > 0
+    if name in {"rhbi_rho", "rhbi_tau", "rhbi_eps", "rhbi_iters", "rhbi_c_max", "rhbi_beta_ell", "rhbi_nn_quantile"}:
+        return recipe.rhbi_weight > 0 or recipe.rhbi_critic_weight > 0
     return True

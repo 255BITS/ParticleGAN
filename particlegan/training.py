@@ -30,6 +30,11 @@ def _float_output(value):
         result = value.float() if value.dtype == torch.bfloat16 else value
         if hasattr(value, "_bispf_input"):
             result._bispf_input = value._bispf_input
+        if hasattr(value, "_rhbi_input"):
+            result._rhbi_input = value._rhbi_input
+            result._rhbi_cond = getattr(value, "_rhbi_cond", None)
+        if hasattr(value, "_rhbi_record"):
+            result._rhbi_record = value._rhbi_record
         return result
     if isinstance(value, tuple):
         return tuple(_float_output(item) for item in value)
@@ -66,6 +71,12 @@ class InputNoise(nn.Module):
         target = out[0] if isinstance(out, (tuple, list)) and out else out
         if isinstance(target, torch.Tensor):
             target._bispf_input = x
+            if hasattr(target, "_rhbi_input") or hasattr(self.critic, "_rhbi_record"):
+                from .rhbi import _extract_critic_inputs, _record_rhbi_capture
+                rec = getattr(target, "_rhbi_record", getattr(self.critic, "_rhbi_record", None))
+                if rec is None or not getattr(rec, "_in_penalty", False):
+                    x_clean, cond_disc = _extract_critic_inputs((x, *args), kwargs, int(target.shape[0]))
+                    _record_rhbi_capture(out, x_clean, cond_disc, rec, overwrite=True)
         return out
 
 
@@ -109,7 +120,11 @@ _ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
                         "optimizer_momentum": 0.0, "optimizer_adam_lr": None,
                         "beta2_end": None, "beta2_anneal_end": 0.2,
                         "reg_coeff_end": None, "reg_coeff_anneal_end": 0.2,
-                        "generator_gradient_response": "none"}
+                        "generator_gradient_response": "none",
+                        "rhbi_weight": 0.0, "rhbi_rho": 2.0, "rhbi_tau": 2.0,
+                        "rhbi_eps": 0.1, "rhbi_iters": 8, "rhbi_c_max": 20.0,
+                        "rhbi_beta_ell": 0.1, "rhbi_nn_quantile": 0.25,
+                        "rhbi_critic_weight": 0.0}
 
 
 class GANTrainer:
@@ -260,7 +275,7 @@ class GANTrainer:
             raise TypeError("require_latent_damping must be a boolean or None")
         # The recipe picks the regularization formulation; its
         # step-time work runs inside these optimizers' step().
-        ema_critic = None if recipe.effective_critic_formulation == "bispf" else deepcopy(self.D)
+        ema_critic = None if recipe.effective_critic_formulation in ("bispf", "rhbi") else deepcopy(self.D)
         self.opt_g, self.opt_d = recipe.make_optimizers(
             self.G, self.D, self.prior, ema_critic=ema_critic,
             require_latent_damping=require_latent_damping, **self.optimizer_options)
@@ -279,6 +294,9 @@ class GANTrainer:
             # critic record, never another trainer's state.
             from .bispf import bind_thermal_source
             bind_thermal_source(self.opt_d.record, self.loss, self.prior_regularizer)
+        elif recipe.effective_critic_formulation == "rhbi" or recipe.rhbi_weight > 0 or recipe.rhbi_critic_weight > 0:
+            from .rhbi import bind_rhbi_record
+            bind_rhbi_record(self.opt_d.record, self.loss)
         if eval_generator is not None and any(eval_generator is stream for stream in (
                 latent_generator, penalty_generator, noise_generator, input_noise_generator,
                 prior_noise_generator, model_generator)):
@@ -548,11 +566,19 @@ class GANTrainer:
                 locations = self.prior.z.detach().clone()
                 sampled_latent = latent.detach().clone()
                 def protected_evaluator():
-                    replay = sampled_latent + (self.prior.z[indices] - locations[indices])
-                    generated = self._postprocess(
-                        self.prior, self._generate(self.G, replay, sigma_out, noise, rows=indices))
-                    logits = critic(generated)
-                    return (self.loss.g_loss(logits, real_logits),)
+                    rec = getattr(self.opt_d, "record", None)
+                    prev_probe = getattr(rec, "_in_protected_probe", False) if rec is not None else False
+                    if rec is not None:
+                        rec._in_protected_probe = True
+                    try:
+                        replay = sampled_latent + (self.prior.z[indices] - locations[indices])
+                        generated = self._postprocess(
+                            self.prior, self._generate(self.G, replay, sigma_out, noise, rows=indices))
+                        logits = critic(generated)
+                        return (self.loss.g_loss(logits, real_logits),)
+                    finally:
+                        if rec is not None:
+                            rec._in_protected_probe = prev_probe
             constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
                                          protected_evaluator=protected_evaluator)
             self.policy.after_generator_backward(
