@@ -649,6 +649,25 @@
         "optimizer-interventions",
         "selectable-loss"
       ]
+    },
+    {
+      "candidates": [
+        "empf-v1"
+      ],
+      "canonical_candidate": "empf-v1",
+      "id": "empf",
+      "label": "EMPF",
+      "rationale": "Exponential Moving Prototype Flow: e-means-inspired online sufficient-statistics prototype bank (S, N) with clock-free (K, B) hit-rate EMA scaling, mass-conserving proportional-split dead-prototype revival, mass-weighted prototype-to-fake entropic Optimal Transport chords, Elastic Born-Infeld gradient bounding with zero-mean logit gauge, and degree-of-freedom-aware EMPF prior regularization with outlier revival tether.",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "constant-learning-rate",
+        "critic-gradient-penalty",
+        "optimizer-interventions",
+        "selectable-loss"
+      ],
+      "unmeasured_display_backend": "cuda",
+      "unmeasured_display_reason": "Pre-measurement declaration for EMPF (empf-v1); explicit whole-row selection pin replaces this field once ordinary CUDA measurement completes."
     }
   ],
   "historical_families": [

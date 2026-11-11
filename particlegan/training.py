@@ -30,6 +30,8 @@ def _float_output(value):
         result = value.float() if value.dtype == torch.bfloat16 else value
         if hasattr(value, "_bispf_input"):
             result._bispf_input = value._bispf_input
+        if hasattr(value, "_empf_input"):
+            result._empf_input = value._empf_input
         return result
     if isinstance(value, tuple):
         return tuple(_float_output(item) for item in value)
@@ -66,6 +68,7 @@ class InputNoise(nn.Module):
         target = out[0] if isinstance(out, (tuple, list)) and out else out
         if isinstance(target, torch.Tensor):
             target._bispf_input = x
+            target._empf_input = x
         return out
 
 
@@ -260,7 +263,7 @@ class GANTrainer:
             raise TypeError("require_latent_damping must be a boolean or None")
         # The recipe picks the regularization formulation; its
         # step-time work runs inside these optimizers' step().
-        ema_critic = None if recipe.effective_critic_formulation == "bispf" else deepcopy(self.D)
+        ema_critic = None if recipe.effective_critic_formulation in ("bispf", "empf") else deepcopy(self.D)
         self.opt_g, self.opt_d = recipe.make_optimizers(
             self.G, self.D, self.prior, ema_critic=ema_critic,
             require_latent_damping=require_latent_damping, **self.optimizer_options)
@@ -279,6 +282,9 @@ class GANTrainer:
             # critic record, never another trainer's state.
             from .bispf import bind_thermal_source
             bind_thermal_source(self.opt_d.record, self.loss, self.prior_regularizer)
+        elif recipe.effective_critic_formulation == "empf":
+            from .empf import bind_empf_record
+            bind_empf_record(self.opt_d.record, self.loss, self.prior_regularizer)
         if eval_generator is not None and any(eval_generator is stream for stream in (
                 latent_generator, penalty_generator, noise_generator, input_noise_generator,
                 prior_noise_generator, model_generator)):
