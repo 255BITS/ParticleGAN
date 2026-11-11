@@ -29,15 +29,15 @@ Passer summaries reflect the evidence audit dated **2026-10-15**. Selected-resul
 | [Keep every learned mode alive](problems.md#mode_hold) | Keep generating every target mode during continued training, rather than losing modes after initially finding them. | Selected recorded PASS: BISPF. |
 | [Keep a learned ring stable for a long run](problems.md#ring_extension) | Acquire all eight ring blobs, hold them for 1,200 consecutive checks, then survive 300 additional checks on the same uninterrupted run. | Selected recorded PASS: BISPF. |
 | [Learn sixteen distinct clusters from scratch](problems.md#ring16_acquisition) | Learn all sixteen blobs on a ring with balanced populations and real within-blob spread, rather than sixteen collapsed points. | Selected recorded PASS: BCAP, BISPF. |
-| [Learning must not depend on external clock labels](problems.md#clockfree_audit_measurement_v1) | Check that the same learning state and inputs produce the same update despite changed step labels, declared horizon, evaluation cadence or a save/restart. | Selected recorded PASS: BCAP, BISPF, Atlas. |
+| [Learning must not depend on external clock labels](problems.md#clockfree_audit_measurement_v1) | Check that the same learning state and inputs produce the same update despite changed step labels, declared horizon, evaluation cadence or a save/restart. | Selected recorded PASS: BCAP, BISPF, Atlas, RHBI. |
 | [Escape a tanh saturation rail after the target shifts to zero](problems.md#zero_tanh_rail_escape) | First converge near the tanh saturation rail at (+0.90, -0.90) where tanh' is attenuated (~0.19), then escape the rail within 400 updates when the target shifts to (0.0, 0.0) at update 1,001 and stay settled there. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 | [Survive a 16-layer unnormalized MLP generator on the 100-cluster grid](problems.md#grid100_mlp16) | Learn all 100 equal-weight Gaussian modes on `grid100` using a 16-hidden-layer 128-wide LeakyReLU(0.2) MLP generator without residual skips or normalization layers. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 | [Learn the 100-cluster grid with a 16-layer residual MLP and bounded tanh head](problems.md#grid100_res16_tanh) | Recover all 100 Gaussian modes on `grid100` using a 16-layer identity-skip residual MLP generator and a bounded `S=5.25` scaled `tanh` output head without saturating the `\|x\| > 0.99 * 5.25` rails. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 | [Recover an 8D lifted 100-mode manifold from incomplete block-masked data (MisGAN + ppost)](problems.md#misgan_block_recovery) | Train a 2-pair incomplete-data MisGAN (`(G_x, D_x)` + `(G_m, D_m)` with detached mask gradient in `L_x`) observing only masked 8D data `(x * m, m)` under structured block dropout, then impute held-out rows via native Bayesian particle-posterior (`ppost`) resampling from `G_x`. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 | [Learn a multimodal neural imputer on ambiguous single-sensor block masks without ppost](problems.md#misgan_block_neural_imputer) | Train a 3-pair MisGAN (`(G_x, D_x)` + `(G_m, D_m)` + `(G_i, D_i)`) and grade the neural imputer `G_i([x * m, m, z_i])` directly on the 16 held-out ambiguous single-sensor queries without `ppost` particle resampling. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 | [Learn a continuous 16-mode ring joint Encoder-Generator-Critic BiGAN](problems.md#ring16_bigan_continuous) | Train a continuous 2D multimodal joint BiGAN `(G(z), E(x), D(x, z))` on the 16-Gaussian ring (`MoGParticlePrior(sigma=0.1)`), simultaneously satisfying forward 16-mode generation and paired round-trip reconstruction `x -> G(E(x))`. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
-| [Separate direct sample particles across two symmetric poles](problems.md#two_pole) | Drive a generator-free direct particle cloud from zero to two symmetric poles (`mean_abs >= 0.30`) and hold them steady with bounded critic gradient (`grad_med <= 1.0`) across the final five checks. | Selected recorded PASS: BCAP, BISPF, GAN v3 release 0.7, K3P, KA2, R1/R2. |
-| [Acquire five discrete words and paired BiGAN reconstructions in 20,001 joint updates](problems.md#five_word_joint_smoke) | Train a joint generator-encoder-prior-critic BiGAN over five five-letter words for 20,001 updates, acquiring all five clean word modes (`modes == 5`, `quality_fraction >= 0.95`, `mass_tv <= 0.10`) and exact high-confidence paired reconstructions (`reconstruction_exact == 1`, `minimum_reconstruction_token_probability >= 0.90`) at an independently confirmed scheduled state. | Selected recorded PASS: BCAP, BISPF, GAN v3 release 0.7, K3P, KA2, R1/R2. |
+| [Separate direct sample particles across two symmetric poles](problems.md#two_pole) | Drive a generator-free direct particle cloud from zero to two symmetric poles (`mean_abs >= 0.30`) and hold them steady with bounded critic gradient (`grad_med <= 1.0`) across the final five checks. | Selected recorded PASS: BCAP, BISPF, GAN v3 release 0.7, K3P, KA2, R1/R2, RHBI. |
+| [Acquire five discrete words and paired BiGAN reconstructions in 20,001 joint updates](problems.md#five_word_joint_smoke) | Train a joint generator-encoder-prior-critic BiGAN over five five-letter words for 20,001 updates, acquiring all five clean word modes (`modes == 5`, `quality_fraction >= 0.95`, `mass_tv <= 0.10`) and exact high-confidence paired reconstructions (`reconstruction_exact == 1`, `minimum_reconstruction_token_probability >= 0.90`) at an independently confirmed scheduled state. | Selected recorded PASS: BCAP, BISPF, GAN v3 release 0.7, K3P, KA2, R1/R2, RHBI. |
 | [Reconstruct four noisy corner Gaussians and generate balanced independent modes (AE-GAN)](problems.md#model_ae_gan_multimodal) | Train a public-API multimodal AE-GAN to reconstruct four equally weighted corner Gaussians (`reconstruction_mse <= 0.025`, `reconstruction_mode_agreement >= 0.98`) while independently generating all four modes with balanced masses (`mass_tv <= 0.15`) and well-conditioned within-mode covariances (`0.10 <= eigen_ratio <= 4.0`) across the final five checks. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 | [Learn four-step conditional reverse transitions and ancestral generation (DDGAN)](problems.md#model_ddgan_gaussian_chain) | Train a four-step public-API DDGAN on a 2D Gaussian forward diffusion chain so every reverse conditional transition (`t1..t4`, `q0`/`q1`) and the final ancestral marginal satisfy `projection_cdf <= 0.12`, `normalized_mean <= 0.25`, and covariance eigenvalues in `[0.65, 1.40]` across the last five checks. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 | [Pair particle AE reconstruction with four-step DDGAN reverse transitions and ancestral generation](problems.md#model_ae_ddgan_gaussian_chain) | Reconstruct held-out inputs through a learned particle autoencoder and four public DDGAN reverse steps (`paired_nmse <= 0.10`, `paired_worst_axis_nrmse <= 0.25`, `paired_shuffled_gain >= 3.0`) while simultaneously passing all conditional reverse-transition and independent ancestral-chain bounds. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
@@ -72,6 +72,7 @@ Test: `gaussian1d_stability` · Required for qualification and included in full-
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) |
 
 **Recommendation from the dated diagnosis.** Find an update rule that settles when correct but responds after a shift, then verify the same recipe on ring16 and mode hold. Existing trade-offs do not prove the problem impossible.
 
@@ -106,6 +107,7 @@ Test: `vector_unequal_mass` · Held for qualification; included in full-suite re
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_mass) |
 
 **Recommendation from the dated diagnosis.** Preserve rare-cluster coverage and shape while checking unequal-width, ring16 and mode hold with one unchanged recipe.
 
@@ -139,6 +141,7 @@ Test: `vector_unequal_width` · Held for qualification; included in full-suite r
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_width) |
 
 **Recommendation from the dated diagnosis.** Test the balanced-assignment reference on the missing suite and solve its rare-cluster regression before claiming a global improvement.
 
@@ -172,6 +175,7 @@ Test: `vector_anisotropic` · Held for qualification; included in full-suite res
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_anisotropic) |
 
 **Recommendation from the dated diagnosis.** Retain the successful mass allocation while preserving mode hold and basic acquisition.
 
@@ -205,6 +209,7 @@ Test: `vector_overlap` · Held for qualification; included in full-suite results
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-vector_overlap) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-vector_overlap) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-vector_overlap) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) |
 
 **Recommendation from the dated diagnosis.** Add stability without losing multimodal acquisition or mode hold. A good endpoint alone does not meet the sustained gate.
 
@@ -238,6 +243,7 @@ Test: `img_bars4` · Held for qualification; included in full-suite results.
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_bars4) |
 
 **Recommendation from the dated diagnosis.** Preserve all four clean bar modes while passing stripes and the acquisition tests with the same recipe.
 
@@ -271,6 +277,7 @@ Test: `img_blobs4` · Held for qualification; included in full-suite results.
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_blobs4) |
 
 **Recommendation from the dated diagnosis.** Keep all four corners clean and sustained without breaking basic learning and identity preservation.
 
@@ -304,6 +311,7 @@ Test: `img_intensity2` · Held for qualification; included in full-suite results
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_intensity2) |
 
 **Recommendation from the dated diagnosis.** Learn accurate, balanced brightness modes while retaining the other image and acquisition passes.
 
@@ -337,6 +345,7 @@ Test: `grid100` · Required for qualification and included in full-suite results
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-grid100) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-grid100) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-grid100) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-grid100) |
 
 **Recommendation from the dated diagnosis.** Improve both precise placement and within-cluster shape, then meet the sustained checks and independent holdout. Longer training alone has not solved it.
 
@@ -370,6 +379,7 @@ Test: `rotated100` · Required for qualification and included in full-suite resu
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-rotated100) |
 
 **Recommendation from the dated diagnosis.** Improve both precise placement and within-cluster shape, then meet the sustained checks and independent holdout. Longer training alone has not solved it.
 
@@ -403,6 +413,7 @@ Test: `staggered100` · Required for qualification and included in full-suite re
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-staggered100) |
 
 **Recommendation from the dated diagnosis.** Improve both precise placement and within-cluster shape, then meet the sustained checks and independent holdout. Longer training alone has not solved it.
 
@@ -436,6 +447,7 @@ Test: `grid100_14k` · Required for qualification and included in full-suite res
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-grid100_14k) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-grid100_14k) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-grid100_14k) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-grid100_14k) |
 
 **Recommendation from the dated diagnosis.** First obtain a genuine passing parent under the unchanged clean-sampling task, then continue that exact checkpoint. Keep rescue experiments separate.
 
@@ -469,6 +481,7 @@ Test: `rotated100_14k` · Required for qualification and included in full-suite 
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-rotated100_14k) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-rotated100_14k) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-rotated100_14k) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-rotated100_14k) |
 
 **Recommendation from the dated diagnosis.** First obtain a genuine passing parent under the unchanged clean-sampling task, then continue that exact checkpoint. Keep rescue experiments separate.
 
@@ -502,6 +515,7 @@ Test: `staggered100_14k` · Required for qualification and included in full-suit
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-staggered100_14k) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-staggered100_14k) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-staggered100_14k) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-staggered100_14k) |
 
 **Recommendation from the dated diagnosis.** First obtain a genuine passing parent under the unchanged clean-sampling task, then continue that exact checkpoint. Keep rescue experiments separate.
 
@@ -535,6 +549,7 @@ Test: `target_shift_recovery` · Required for qualification and included in full
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-target_shift_recovery) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-target_shift_recovery) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-target_shift_recovery) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-target_shift_recovery) |
 
 **Recommendation from the dated diagnosis.** Improve adaptation speed while keeping stationary stability. If the deadline itself is reconsidered, use an explicitly versioned task and preserve the old failure.
 
@@ -568,6 +583,7 @@ Test: `mode_hold` · Required for qualification and included in full-suite resul
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) |
 
 **Recommendation from the dated diagnosis.** Preserve the BISPF pass on current source and combine it with repairs to Gaussian, vector and image failures.
 
@@ -603,6 +619,7 @@ Test: `ring_extension` · Required for qualification and included in full-suite 
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-ring_extension) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring_extension) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-ring_extension) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-ring_extension) |
 
 **Recommendation from the dated diagnosis.** Measure the unchanged BISPF recipe in its ordinary cohort on current source and preserve the whole acquisition/hold/extension protocol.
 
@@ -636,6 +653,7 @@ Test: `ring16_acquisition` · Required for qualification and included in full-su
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [FAIL](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-ring16_acquisition) |
 
 **Recommendation from the dated diagnosis.** Retain the passing ring baseline while repairing the held tests. Longer-budget or changed-schedule results must remain explicitly separate until adopted and measured.
 
@@ -669,6 +687,7 @@ Test: `clockfree_audit_measurement_v1` · Required for qualification and include
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [PASS](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-clockfree_audit_measurement_v1) |
 
 **Recommendation from the dated diagnosis.** Use saved internal state rather than external labels for adaptation, or explicitly version the desired policy. Do not silently treat an annealed recipe as clock-free.
 
@@ -704,6 +723,7 @@ Test: `zero_tanh_rail_escape` · Held for qualification; included in full-suite 
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_rail_escape) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_rail_escape) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_rail_escape) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [BLOCKED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-zero_tanh_rail_escape) |
 
 **Recommendation from the dated diagnosis.** Run the full Tier 3 qualified family roster (`k3p`, `ka2`, `r1r2`, `bcap-pure`, `bcap-dualnorm`, `atlas`, `e22`, `release07-gan-v3`) in ordinary cohorts and promote from held to required once a global recipe passes it together with all counted Tier 1-3 requirements.
 
@@ -739,6 +759,7 @@ Test: `grid100_mlp16` · Held for qualification; included in full-suite results.
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-grid100_mlp16) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-grid100_mlp16) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-grid100_mlp16) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [BLOCKED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-grid100_mlp16) |
 
 **Recommendation from the dated diagnosis.** Pair layer-wise gradient normalization (such as `bcap-nsgda-layer` or `bcap-dualnorm`) with balanced prior-to-generator step scaling so early updates do not collapse the 16-layer Jacobian before particles separate across the 10x10 grid.
 
@@ -775,6 +796,7 @@ Test: `grid100_res16_tanh` · Held for qualification; included in full-suite res
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-grid100_res16_tanh) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-grid100_res16_tanh) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-grid100_res16_tanh) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [BLOCKED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-grid100_res16_tanh) |
 
 **Recommendation from the dated diagnosis.** Keep `grid100_mlp16` and `grid100_res16_tanh` as unnormalized trainer stress tests alongside the paired `grid100_res16_scaled_tanh` control, and control pre-tanh logit growth on unnormalized backbones via bounded step norms.
 
@@ -811,6 +833,7 @@ Test: `misgan_block_recovery` · Held for qualification; included in full-suite 
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_recovery) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_recovery) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_recovery) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [BLOCKED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-misgan_block_recovery) |
 
 **Recommendation from the dated diagnosis.** Promote `misgan_block_recovery` and `misgan_mcar_p50_recovery` from held to required once an updated global qualification cohort is registered.
 
@@ -847,6 +870,7 @@ Test: `misgan_block_neural_imputer` · Held for qualification; included in full-
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_neural_imputer) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_neural_imputer) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_neural_imputer) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [BLOCKED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-misgan_block_neural_imputer) |
 
 **Recommendation from the dated diagnosis.** Promote `misgan_block_neural_imputer` from held to required once an updated global qualification cohort is registered.
 
@@ -883,6 +907,7 @@ Test: `ring16_bigan_continuous` · Held for qualification; included in full-suit
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [BLOCKED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-ring16_bigan_continuous) |
 
 **Recommendation from the dated diagnosis.** Extend kernel-augmented joint `(x, z)` curvature regularization and cycle-consistency conditioning to the remaining non-kernel trainer families so all selected families contract within-mode variance without losing 16-mode coverage.
 
@@ -916,6 +941,7 @@ Test: `two_pole` · Required for qualification and included in full-suite result
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [PASS](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [PASS](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [PASS](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [PASS](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-two_pole) |
 
 **Recommendation from the dated diagnosis.** Gate critic-space particle birth-death when no separate generator module is present (direct particle-transport hosts) or prevent real-anchor cloning from collapsing bipolar symmetry near zero, while preserving `atlas-particle-normal-v4`'s 24-pass full-suite gains.
 
@@ -951,6 +977,7 @@ Test: `five_word_joint_smoke` · Required for qualification and included in full
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [PASS](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [PASS](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [PASS](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [PASS](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_smoke) |
 
 **Recommendation from the dated diagnosis.** Diagnose how critic-space birth-death and `sigma=0.0065` latent perturbation interact with the joint `(x, z)` BiGAN encoder-generator coupling over 20k discrete-token updates without regressing continuous multimodal coverage.
 
@@ -984,6 +1011,7 @@ Test: `model_ae_gan_multimodal` · Required for qualification and included in fu
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [FAIL](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-model_ae_gan_multimodal) |
 
 **Recommendation from the dated diagnosis.** Reduce prior mass imbalance under joint AE-GAN encoding (for example, balancing birth-death cell quotas against encoder-posterior assignments) and record ordinary CUDA measurements for the remaining selected families.
 
@@ -1017,6 +1045,7 @@ Test: `model_ddgan_gaussian_chain` · Required for qualification and included in
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_gaussian_chain) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_gaussian_chain) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_gaussian_chain) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-model_ddgan_gaussian_chain) |
 
 **Recommendation from the dated diagnosis.** Improve per-timestep conditional critic discrimination and reverse-generator stochasticity at small `t` under one unchanged global recipe without per-task hyperparameter tuning.
 
@@ -1050,6 +1079,7 @@ Test: `model_ae_ddgan_gaussian_chain` · Required for qualification and included
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_gaussian_chain) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_gaussian_chain) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_gaussian_chain) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-model_ae_ddgan_gaussian_chain) |
 
 **Recommendation from the dated diagnosis.** Align the ancestral prior and reverse chain with the encoder latent manifold at `t=1, 2` so independent ancestral sampling retains full variance (`>= 0.65`) without degrading paired reconstruction.
 
@@ -1082,6 +1112,7 @@ Test: `precision_gaussian_mxfp8` · Held for qualification; included in full-sui
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_mxfp8) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [FAIL](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_mxfp8) |
 
 **Recommendation from the dated diagnosis.** Run the unchanged selected family recipes through the optional Tier 1 tasks and their FP32 control under the expanded reservation budget. Diagnose failed bounds before changing one global recipe; native validation is a separate step.
 
@@ -1114,6 +1145,7 @@ Test: `precision_gaussian_nvfp4` · Held for qualification; included in full-sui
 | [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) |
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-precision_gaussian_nvfp4) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [FAIL](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_nvfp4) |
 
 **Recommendation from the dated diagnosis.** Run the unchanged selected family recipes through the optional Tier 1 tasks and their FP32 control under the expanded reservation budget. Diagnose failed bounds before changing one global recipe; native validation is a separate step.
 

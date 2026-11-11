@@ -132,22 +132,22 @@ Every cell is one run; timings are never pooled across devices or contention sta
 
 [Compact performance evidence index](../scaling-performance.json) · [Protocol and bounded reproduction](../../../docs/forge-scaling-performance.md)
 
-This registration covers 8 complete recipes. Historical alternatives outside its registered family roster add no missing benchmark cells. A changed selected recipe within a registered family remains unknown until measured.
+This registration covers 9 complete recipes. Historical alternatives outside its registered family roster add no missing benchmark cells. A changed selected recipe within a registered family remains unknown until measured.
 
 ### NVIDIA RTX A6000 · GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce
 
-Performance source `52126b7e2ed1` (commit `6c895b5924d02e54b0f34d22486aea411a31572f`); runtime `537b082bf1e4`; torch.float32; PyTorch 2.14.1+cu130; 48592.125 MiB device memory.
+Performance source `11c081f9e24d` (commit `d2abe7afb5d1f6501d0e3f14b71c56ad369d2102`); runtime `fddddb1b314d`; torch.float32; PyTorch 2.14.1+cu130; 48592.125 MiB device memory.
 
 Task prior: particle_cloud, sigma 0.0, 256 initial locations. The common finite-table performance exception retains each recipe's prior update policy and regularizer. Exact prior and resource specifications remain part of every task key.
 
 | Family / recipe | Task (RGB size, batch, width) | Execution | Median / p95 update ms | Images/s | GPU peak allocated / reserved MiB | Contention | Matched key / evidence |
 | --- | --- | --- | ---: | ---: | ---: | --- | --- |
-| Atlas · `atlas-particle-normal-v4` | dcgan_performance_r32: 32², B16, W64 | COMPLETE | 22.13 / 22.69 | 723.07 | 135.79 / 168.00 | clear | `ea012f5e02a9` · [receipt](../scaling-receipts/dcgan-performance-cloud-2e8a97a0aa84/atlas-dcgan_performance_r32-ad2066bce0f3ee6b.json) |
-| Atlas · `atlas-particle-normal-v4` | dcgan_performance_r64: 64², B16, W64 | COMPLETE | 38.39 / 39.19 | 418.52 | 402.44 / 458.00 | clear | `7c4628d7df0a` · [receipt](../scaling-receipts/dcgan-performance-cloud-2e8a97a0aa84/atlas-dcgan_performance_r64-5463842208af5b58.json) |
-| Atlas · `atlas-particle-normal-v4` | dcgan_performance_w128: 64², B16, W128 | COMPLETE | 68.82 / 70.16 | 232.24 | 1,175.49 / 1,416.00 | clear | `96b5088a380d` · [receipt](../scaling-receipts/dcgan-performance-cloud-2e8a97a0aa84/atlas-dcgan_performance_w128-ec6156ee986257c0.json) |
-| Atlas · `atlas-particle-normal-v4` | dcgan_performance_b64: 64², B64, W64 | COMPLETE | 75.73 / 77.23 | 843.59 | 758.98 / 816.00 | clear | `f8c34c01051d` · [receipt](../scaling-receipts/dcgan-performance-cloud-2e8a97a0aa84/atlas-dcgan_performance_b64-52b319e34e881d4b.json) |
-| Atlas · `atlas-particle-normal-v4` | dcgan_performance_r128: 128², B16, W64 | COMPLETE | 84.71 / 85.90 | 188.56 | 1,063.46 / 1,260.00 | clear | `48fa5b69bf4b` · [receipt](../scaling-receipts/dcgan-performance-cloud-2e8a97a0aa84/atlas-dcgan_performance_r128-dee29ec15c0a71ce.json) |
-| Atlas · `atlas-particle-normal-v4` | dcgan_performance_r256: 256², B16, W64 | COMPLETE | 263.69 / 265.50 | 60.63 | 2,747.02 / 2,880.00 | clear | `ba062e982a81` · [receipt](../scaling-receipts/dcgan-performance-cloud-2e8a97a0aa84/atlas-dcgan_performance_r256-6fd0916ea4544796.json) |
+| Atlas · `atlas-particle-normal-v4` | dcgan_performance_r32: 32², B16, W64 | COMPLETE | 22.89 / 24.41 | 693.35 | 135.79 / 168.00 | clear | `28589fbcd68d` · [receipt](../scaling-receipts/dcgan-performance-cloud-38b89eb060b8/atlas-dcgan_performance_r32-4d91d6a9996b36a8.json) |
+| Atlas · `atlas-particle-normal-v4` | dcgan_performance_r64: 64², B16, W64 | COMPLETE | 39.19 / 40.87 | 406.10 | 402.44 / 458.00 | clear | `a6684be445e6` · [receipt](../scaling-receipts/dcgan-performance-cloud-38b89eb060b8/atlas-dcgan_performance_r64-6bc3c6525bd71d27.json) |
+| Atlas · `atlas-particle-normal-v4` | dcgan_performance_w128: 64², B16, W128 | COMPLETE | 70.71 / 72.77 | 225.72 | 1,175.49 / 1,416.00 | clear | `474160bdbe7a` · [receipt](../scaling-receipts/dcgan-performance-cloud-38b89eb060b8/atlas-dcgan_performance_w128-09e4b7f0ae642ba3.json) |
+| Atlas · `atlas-particle-normal-v4` | dcgan_performance_b64: 64², B64, W64 | COMPLETE | 76.13 / 77.63 | 840.04 | 758.98 / 816.00 | clear | `43a0f0ca5f3e` · [receipt](../scaling-receipts/dcgan-performance-cloud-38b89eb060b8/atlas-dcgan_performance_b64-545ca3697a52b75a.json) |
+| Atlas · `atlas-particle-normal-v4` | dcgan_performance_r128: 128², B16, W64 | COMPLETE | 85.66 / 87.18 | 186.29 | 1,063.46 / 1,260.00 | clear | `ab07ae7678f0` · [receipt](../scaling-receipts/dcgan-performance-cloud-38b89eb060b8/atlas-dcgan_performance_r128-3bff8cca10b405c9.json) |
+| Atlas · `atlas-particle-normal-v4` | dcgan_performance_r256: 256², B16, W64 | COMPLETE | 267.22 / 268.94 | 59.85 | 2,747.02 / 2,880.00 | clear | `1af06f9b02b4` · [receipt](../scaling-receipts/dcgan-performance-cloud-38b89eb060b8/atlas-dcgan_performance_r256-338ffb3166836aaf.json) |
 
 <a name="cohort-cuda-bc3debd3fa5e"></a>
 
@@ -164,11 +164,9 @@ Source digest: `2e8a97a0aa845c961de00d403fdcd1673b34b33626e4546c3138882a40e7bacf
 
 [Frozen numerical evidence](../technique-evidence/4eaeb2e733970936d752120f26b8987bbb676615ef791ef415d1740480eae5cf.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
 
-Selection: current_measurement. Promote atlas-particle-normal-v4 (particles + NormalNoiseManipulator(sigma=0.0065), birth_death_cells=256, clean fixed output noise 0.0, d_guard_ratio=0.0, KA2 pre-anchor critic-only LossSurprise guard) as the selected Atlas candidate following ordinary discriminator_stability Tier 1 CUDA measurement on NVIDIA RTX A6000 (7/13 required + 1/1 diagnostic Tier 1 PASS, 18/29 Tier 1 view requirements across views; 24/38 PASS on prior-ablation-full-suite-v1). Actual executed-policy qualification, comparison-policy projection, and research-diagnostic full-suite readouts retain their separate source-bound proofs; no public-default adoption claim.
+Selection: recorded_source_measurement. Recorded source-bound original measurement retained; stale against current task contracts. No current measurement, qualification reuse or comparable live ranking. Original selection: Promote atlas-particle-normal-v4 (particles + NormalNoiseManipulator(sigma=0.0065), birth_death_cells=256, clean fixed output noise 0.0, d_guard_ratio=0.0, KA2 pre-anchor critic-only LossSurprise guard) as the selected Atlas candidate following ordinary discriminator_stability Tier 1 CUDA measurement on NVIDIA RTX A6000 (7/13 required + 1/1 diagnostic Tier 1 PASS, 18/29 Tier 1 view requirements across views; 24/38 PASS on prior-ablation-full-suite-v1). Actual executed-policy qualification, comparison-policy projection, and research-diagnostic full-suite readouts retain their separate source-bound proofs; no public-default adoption claim.
 
 </details>
-
-Complete current Tier 1 measurement in: discriminator_stability. PASS and FAIL are both measured outcomes; other cohorts retain their own required cells.
 
 | View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Tier 4 tests | Total distinct tests | Held (measured, not counted) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |

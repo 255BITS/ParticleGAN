@@ -415,12 +415,15 @@ def _validate_comparison_policy(actual, comparison):
 
 def _comparison_contracts_match(row, comparison):
     family = row["bindings"]["trainer_family"]
-    reference = comparison["reference_task_contracts"].get(family)
-    if not isinstance(reference, dict):
-        return False
     actual_contracts = row["bindings"]["task_contracts"]
     added = set(comparison.get("added_actual_tasks", ()))
     required = {item["task"] for item in comparison.get("policy", {}).get("assignments", ())}
+    reference = comparison["reference_task_contracts"].get(family)
+    if not isinstance(reference, dict):
+        return (family in set(comparison.get("new_registered_families", ()))
+                and isinstance(actual_contracts, dict)
+                and required.issubset(actual_contracts)
+                and set(actual_contracts) == required | added)
     if not required.issubset(reference) or set(actual_contracts) != set(reference) | added:
         return False
     lineage = comparison.get("verified_evaluator_lineage", {}).get(family, {})
@@ -879,6 +882,7 @@ def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary
         for entry in manifest["cohorts"]:
             _, rows = _snapshot(root, entry, manifest)
             verified.update(row["candidate_revision"] for row in rows.values())
+        from experiments.forge.trainer_families import load_families
         from experiments.forge.views import load_tasks, task_evaluation_fingerprint
         frozen_tasks = load_tasks(frozen_root)
         comparison_task_ids = {assignment["task"] for assignment in policy["assignments"]}
@@ -905,9 +909,11 @@ def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary
                         family_lineage[task_id] = stable_hash({**ref_contract, "evaluation_sha256": frozen_eval})
                 if family_lineage:
                     verified_lineage[family] = family_lineage
+        new_registered_families = sorted(set(load_families(frozen_root)) - set(reference))
         comparison = {"policy": policy, "path": os.path.relpath(comparison_path, root),
                       "sha256": file_hash(comparison_path), "reference_task_contracts": reference,
-                      "added_actual_tasks": added_actual_tasks, "verified_evaluator_lineage": verified_lineage}
+                      "added_actual_tasks": added_actual_tasks, "verified_evaluator_lineage": verified_lineage,
+                      "new_registered_families": new_registered_families}
     comparison_contract = temporary / "comparison-policy.json"
     atomic_text(comparison_contract, _json_text(comparison))
     prefix = temporary / "inventory"
@@ -3257,8 +3263,16 @@ def _recorded_source_binary_projection(result, root: Path) -> dict | None:
         required = set(declaration["tests"])
     if not required:
         return None
+    retained_families = {
+        record.get("family")
+        for record in coverage.get("records", [])
+        if not any(record.get(key) for key in _SCOPED_COVERAGE_KEYS)
+        and isinstance(record.get("family"), str)
+    }
     families = {}
     for family, cohort in _selected_cohorts(progress):
+        if retained_families and family["id"] not in retained_families:
+            continue
         row = _selected_row(result, cohort)
         candidate, revision = row.get("candidate_id"), row.get("candidate_revision")
         source = row.get("bindings", {}).get("source_digest")

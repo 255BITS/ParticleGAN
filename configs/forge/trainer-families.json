@@ -657,7 +657,7 @@
       "canonical_candidate": "rhbi-v1",
       "id": "rhbi",
       "label": "RHBI",
-      "rationale": "Relativistic Hellinger-Born-Infeld Transport: debiased slack-screened unbalanced Sinkhorn variational operator with scale-equivariant 30th-quantile real horizon tracking, smooth Born-Infeld endpoint gradient cap, SBNP particle prior, and clock-free 95th-quantile Hausdorff equilibrium cooling under constant learning rates.",
+      "rationale": "Relativistic Hellinger-Born-Infeld Transport: single-equation slack-screened unbalanced Sinkhorn variational operator with overflow-safe float64 Born-Infeld costs, scale-equivariant 25th-quantile nearest-neighbor horizon tracking, S=2 Kantorovich-Hellinger slack Sinkhorn, hollow self-coupling debiasing, smooth Born-Infeld endpoint Lipschitz cap, joint relativistic BiGAN coupling, and batched-PCIe polar_cpu_v1 DualNorm under constant learning rates.",
       "tags": [
         "adversarial-training",
         "capped-input-gradients",
@@ -665,9 +665,7 @@
         "critic-gradient-penalty",
         "optimizer-interventions",
         "selectable-loss"
-      ],
-      "unmeasured_display_backend": "cuda",
-      "unmeasured_display_reason": "Pre-execution declaration for rhbi-v1 CUDA campaign; no qualification credit prior to measurement."
+      ]
     }
   ],
   "historical_families": [
