@@ -9,7 +9,7 @@ except (ImportError, ValueError):
     pass
 
 # Promote a registered trainer preset here; model-family factories inherit it.
-DEFAULT_RECIPE = "bispf_optimized"
+DEFAULT_RECIPE = "empf"
 
 
 def _reject_table_storage_owners(table, tensors):
@@ -1451,12 +1451,22 @@ def get_recipe_fields(name="gan", *, trainer=None, **overrides):
     recipe. ``"bcap_adam"`` retains the earlier native-Adam
     preset. Both disable the guard, anchor, latent damping, extra
     regularization, EMA serving and additive training noise.
-    ``"bispf_optimized"`` is the selected BISPF research default: zero-momentum
-    DualNorm, non-saturating loss, the Born-Infeld chord penalty, SBNP prior
-    regularization, batched convolution updates and BF16/channels-last training
-    for supported CUDA convolutional networks. Its current
-    evidence retains 19 task passes and 11 failures; selection does not add
-    calibration or natural-image quality credit.
+    ``"empf"`` is the selected EMPF research default (``DEFAULT_RECIPE``):
+    clock-free online ``e-means`` sufficient-statistics prototype bank,
+    mass-weighted prototype-to-fake Sinkhorn OT, state-driven settling
+    Born-Infeld critic penalty (``ebi_beta=6.0``), degree-of-freedom-aware EMPF
+    prior regularization (``prior_reg=0.01``), zero-momentum DualNorm with
+    quintic batched convolution updates, and BF16/channels-last training for
+    supported CUDA convolutional networks. Its ordinary CUDA readout records
+    82/115 counted view requirements (22/61 fixed-suite passes); selection does
+    not add accepted calibration, Tier 3 confirmation, or natural-image quality
+    credit.
+    ``"bispf_optimized"`` retains the explicit optimized BISPF preset:
+    zero-momentum DualNorm, non-saturating loss, the Born-Infeld chord penalty,
+    SBNP prior regularization, batched convolution updates and
+    BF16/channels-last training for supported CUDA convolutional networks. Its
+    recorded evidence retains 18/61 fixed-suite passes (81/115 counted view
+    requirements).
     ``"bispf"`` retains the original Born-Infeld Sinkhorn Particle Flow formulation
     (scale-free Sinkhorn relativistic pairing, Elastic Born-Infeld chord
     regularization, zero-mean logit gauge with no EMA critic copy, SBNP

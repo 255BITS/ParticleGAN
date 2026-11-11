@@ -928,8 +928,7 @@ def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary
                         family_lineage[task_id] = stable_hash({**ref_contract, "evaluation_sha256": frozen_eval})
                 if family_lineage:
                     verified_lineage[family] = family_lineage
-        from experiments.forge.planning import load_idea
-        from experiments.forge.trainer_families import family_for_candidate
+        from experiments.forge import planning, trainer_families
         for record in studies:
             req = record.get("request", {})
             cand_id = req.get("candidate", {}).get("id")
@@ -938,11 +937,11 @@ def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary
             if not cand_id or not ctrl_id or control.get("task_map"):
                 continue
             try:
-                fam = family_for_candidate(
-                    frozen_root, cand_id, load_idea(frozen_root, cand_id), current_presentation=True
+                fam = trainer_families.family_for_candidate(
+                    frozen_root, cand_id, planning.load_idea(frozen_root, cand_id), current_presentation=True
                 )["id"]
-                ctrl_fam = family_for_candidate(
-                    frozen_root, ctrl_id, load_idea(frozen_root, ctrl_id), current_presentation=True
+                ctrl_fam = trainer_families.family_for_candidate(
+                    frozen_root, ctrl_id, planning.load_idea(frozen_root, ctrl_id), current_presentation=True
                 )["id"]
             except (KeyError, ValueError, FileNotFoundError):
                 continue
@@ -3327,6 +3326,11 @@ def _recorded_source_binary_projection(result, root: Path) -> dict | None:
                 raise ValueError("recorded formulaic display has conflicting attempts")
             if record.get("attempted") is True and record.get("status") in {"PASS", "FAIL"}:
                 records[task] = record
+        is_archived_pre_precision = (
+            cohort.get("tasks", {}).get("precision_gaussian_nvfp4", {}).get("status", "UNKNOWN") == "UNKNOWN"
+        )
+        if not is_archived_pre_precision:
+            continue
         if not required.issubset(records):
             return None
         families[family["id"]] = {"candidate_id": candidate, "candidate_revision": revision,
