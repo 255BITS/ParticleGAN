@@ -656,10 +656,10 @@
         "rhbi-v2",
         "rhbi-v3"
       ],
-      "canonical_candidate": "rhbi-v1",
+      "canonical_candidate": "rhbi-v3",
       "id": "rhbi",
       "label": "RHBI",
-      "rationale": "Relativistic Hellinger-Born-Infeld Transport: single-equation slack-screened unbalanced Sinkhorn variational operator with overflow-safe float64 Born-Infeld costs, scale-equivariant 25th-quantile nearest-neighbor horizon tracking, S=2 Kantorovich-Hellinger slack Sinkhorn, hollow self-coupling debiasing, smooth Born-Infeld endpoint Lipschitz cap, joint relativistic BiGAN coupling, and batched-PCIe polar_cpu_v1 DualNorm under constant learning rates.",
+      "rationale": "Relativistic Hellinger-Born-Infeld Transport: single-equation slack-screened unbalanced Sinkhorn variational operator with overflow-safe float64 Born-Infeld costs, linear horizon screening (rho=3.0), scale-equivariant 25th-quantile nearest-neighbor horizon tracking, S=2 Kantorovich-Hellinger slack Sinkhorn, Feydy diagonal self-coupling debiasing, smooth Born-Infeld endpoint Lipschitz cap with soft sub-unit slope floor (0.005), SBNP particle prior regularization (0.02), joint relativistic BiGAN coupling, fibre-centered conditional relativistic slack routing, and batched-PCIe polar_cpu_v1 DualNorm under constant learning rates.",
       "tags": [
         "adversarial-training",
         "capped-input-gradients",
