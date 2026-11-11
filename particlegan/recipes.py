@@ -1538,7 +1538,7 @@ def get_recipe_fields(name="gan", *, trainer=None, **overrides):
     }
     presets["empf"] = {
         **presets["bcap"], "critic_formulation": "empf", "reg_arm": None,
-        "ebi_beta": 4.0, "optimizer_convolution_rule": "quintic",
+        "ebi_beta": 6.0, "optimizer_convolution_rule": "quintic",
         "prior_regularizer": "empf", "prior_reg": 0.01, "lr_schedule": "cosine",
         "optimizer_svd_backend": "batched", "training_precision": "bf16_channels_last",
         "routing_temperature": 0.25, "ucd_weight": 0.02,

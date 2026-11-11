@@ -652,9 +652,10 @@
     },
     {
       "candidates": [
-        "empf-v1"
+        "empf-v1",
+        "empf-v2"
       ],
-      "canonical_candidate": "empf-v1",
+      "canonical_candidate": "empf-v2",
       "id": "empf",
       "label": "EMPF",
       "rationale": "Exponential Moving Prototype Flow: e-means-inspired online sufficient-statistics prototype bank (S, N) with clock-free (K, B) hit-rate EMA scaling, mass-conserving proportional-split dead-prototype revival, mass-weighted prototype-to-fake entropic Optimal Transport chords, Elastic Born-Infeld gradient bounding with zero-mean logit gauge, and degree-of-freedom-aware EMPF prior regularization with outlier revival tether.",

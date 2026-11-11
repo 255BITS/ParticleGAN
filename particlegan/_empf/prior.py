@@ -155,14 +155,17 @@ class EMPFPriorRegularizer(nn.Module):
         min_dof = self._min_dof(d)
 
         if self.references:
-            initial_mean, initial_covariance, total_n = self._reference_moments()
-            if total_n <= min_dof or n <= min_dof or n < 2:
-                if n < 2:
-                    return rows[:0].sum()
+            if n < 2:
+                return rows[:0].sum()
+            if n <= min_dof:
                 # Small anchored discrete codebook (e.g. 5-word BiGAN table):
-                # skip global moment/covariance distortion, applying only a
-                # short-range one-sided prototype non-collision hinge so noisy
-                # warmup cannot merge two sigma=0 rows onto an identical point.
+                # skip global moment/covariance distortion and avoid CPU-GPU
+                # count.item() syncs, applying only a short-range one-sided
+                # prototype non-collision hinge so noisy warmup cannot merge
+                # two sigma=0 rows onto an identical point.
+                initial_mean, initial_covariance, _ = pooled_reference_moments(self.references)
+                if d != len(initial_mean):
+                    raise ValueError("empf prior rows and initial reference dimensions differ")
                 ref_var = initial_covariance.diagonal().clamp_min(0.0).mean() + self.eps
                 r_col_sq = ref_var * (float(n) ** (-2.0 / float(min(d, 4))))
                 d2 = pairwise_sq_dist(rows)
@@ -170,8 +173,17 @@ class EMPFPriorRegularizer(nn.Module):
                 d1_sq = d2.masked_fill(eye_mask, float("inf")).min(dim=1).values
                 col_w = min(1.0, self.weight * 100.0)
                 return col_w * F.relu(1.0 - d1_sq / r_col_sq.clamp_min(1e-8)).pow(2).mean()
+            initial_mean, initial_covariance, total_n = self._reference_moments()
             if d != len(initial_mean):
                 raise ValueError("empf prior rows and initial reference dimensions differ")
+            if total_n <= min_dof:
+                ref_var = initial_covariance.diagonal().clamp_min(0.0).mean() + self.eps
+                r_col_sq = ref_var * (float(n) ** (-2.0 / float(min(d, 4))))
+                d2 = pairwise_sq_dist(rows)
+                eye_mask = torch.eye(n, device=rows.device, dtype=torch.bool)
+                d1_sq = d2.masked_fill(eye_mask, float("inf")).min(dim=1).values
+                col_w = min(1.0, self.weight * 100.0)
+                return col_w * F.relu(1.0 - d1_sq / r_col_sq.clamp_min(1e-8)).pow(2).mean()
             mean = rows.mean(0)
             variance_scale = initial_covariance.diagonal().clamp_min(0) + self.eps
             mean_error = ((mean - initial_mean).square() / variance_scale).mean()

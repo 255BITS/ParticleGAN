@@ -40,7 +40,7 @@ class _EMPFPenaltyKernel:
         anchor_weight: float = 0.0,
         lambda_floor: float = 0.01,
         lambda_cap: float = 1.0,
-        ebi_beta: float = 4.0,
+        ebi_beta: float = 6.0,
         gamma_gauge: float = 0.050,
         chord_blend: float = 0.05,
         sinkhorn_eps: float = 0.15,
@@ -257,7 +257,27 @@ class _EMPFPenaltyKernel:
             else:
                 use_chords = False
         elif is_discrete_simplex:
-            t_scale = 1.0
+            # Post-acquisition Sinkhorn thermal cooling on unconditioned discrete
+            # simplex couplings (e.g. joint BiGAN word tables): preserves full
+            # step scale (t_scale == 1.0) whenever ema_residual >= 0.070 during
+            # mode acquisition, then smoothly cools DualNorm down toward 0.35 as
+            # discrete transport residual settles so converged logit boundaries
+            # cannot bounce over multi-thousand-step holds.
+            if not is_conditioned and b_r >= 64 and b_f >= 64 and dim >= 170:
+                uniform_w = torch.full((b_r,), 1.0 / max(1, b_r), device=x_real.device, dtype=x_real.dtype)
+                _, _, res, data_scale = mass_weighted_sinkhorn(
+                    x_real.detach(),
+                    uniform_w,
+                    x_fake.detach(),
+                    sinkhorn_eps=self.sinkhorn_eps,
+                    sinkhorn_iters=self.sinkhorn_iters,
+                )
+                self._observe(float(res.item()), float(data_scale.item()))
+                u_w = max(0.0, min(1.0, float(self.record.ema_residual) / 0.070))
+                smooth_w = u_w * u_w * (3.0 - 2.0 * u_w)
+                t_scale = float(0.35 + 0.65 * smooth_w)
+            else:
+                t_scale = 1.0
         else:
             uniform_w = torch.full((b_r,), 1.0 / max(1, b_r), device=x_real.device, dtype=x_real.dtype)
             _, _, res, data_scale = mass_weighted_sinkhorn(
@@ -329,19 +349,26 @@ class _EMPFPenaltyKernel:
             d_f = d_f_out.reshape(-1)
             self.record._last_d_logits = (d_r.detach(), d_f.detach())
         else:
+            # State-driven settling Born-Infeld sharpness: stays soft at ebi_beta (6.0)
+            # during far-from-manifold mode acquisition (ema_residual >= 0.16), then
+            # tightens quadratically as transport settles, scaled by prototype-bank
+            # batch resolution relative to reference_batch = 128.
+            settle_s = min(1.0, max(0.0, 1.0 - res_ratio / 0.16))
+            batch_gain = 6.5 + 15.5 * min(1.0, max(0.0, (float(b_r) - 64.0) / 64.0))
+            eff_ebi_beta = self.ebi_beta + batch_gain * (settle_s * settle_s)
             sq_real = g_real.flatten(1).pow(2).sum(dim=1)
             norm_real = (sq_real + 1e-12).sqrt() / scale_dim
             sq_fake = g_fake.flatten(1).pow(2).sum(dim=1)
             norm_fake = (sq_fake + 1e-12).sqrt() / scale_dim
-            cap_real = F.softplus(norm_real - kappa_eff, beta=self.ebi_beta).pow(2).mean()
-            cap_fake = F.softplus(norm_fake - kappa_eff, beta=self.ebi_beta).pow(2).mean()
+            cap_real = F.softplus(norm_real - kappa_eff, beta=eff_ebi_beta).pow(2).mean()
+            cap_fake = F.softplus(norm_fake - kappa_eff, beta=eff_ebi_beta).pow(2).mean()
 
             eff_floor = 0.0005 if is_image_tensor else self.lambda_floor
             if g_chord is not None:
                 sq_chord = g_chord.flatten(1).pow(2).sum(dim=1)
                 norm_chord = (sq_chord + 1e-12).sqrt() / scale_dim
                 floor_pen = 0.5 * eff_floor * ((sq_real.mean() + sq_fake.mean() + sq_chord.mean()) / (3.0 * dim))
-                cap_chord = F.softplus(norm_chord - kappa_eff, beta=self.ebi_beta).pow(2).mean()
+                cap_chord = F.softplus(norm_chord - kappa_eff, beta=eff_ebi_beta).pow(2).mean()
                 cap_pen = 0.5 * self.lambda_cap * (
                     cap_real + (1.0 - self.chord_blend) * cap_fake + self.chord_blend * cap_chord
                 )

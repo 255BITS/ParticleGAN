@@ -364,3 +364,52 @@ def test_empf_fresh_process_import_order_and_incumbent_hashes():
     assert out_a["hashes"]["bispf"].startswith("6bb9c45dfbdb")
     assert out_a["hashes"]["bcap"].startswith("1c0aeefa46b0")
     assert out_a["sigs"]["empf"] != out_a["sigs"]["bispf_optimized"]
+
+
+def test_empf_v2_settling_ebi_and_discrete_simplex_cooling():
+    """Verify clock-free settling Born-Infeld sharpness and discrete-simplex post-acquisition cooling."""
+    recipe = get_recipe("empf")
+    assert recipe.ebi_beta == 6.0
+
+    # 1. State-driven settling Born-Infeld sharpness sharpens once ema_residual < 0.16
+    # and scales with prototype-bank batch resolution (b_r <= 64 vs b_r >= 128).
+    critic = nn.Linear(2, 1, bias=False)
+    with torch.no_grad():
+        critic.weight.copy_(torch.tensor([[1.0, 0.0]]))
+    opt_d = recipe.make_critic_optimizer(critic)
+    penalty = recipe.make_critic_penalty(opt_d, collect_stats=True)
+    kernel = penalty.regularizer
+
+    x_r64 = torch.zeros(64, 2)
+    x_f64 = torch.ones(64, 2)
+    kernel.record.initialized = True
+    kernel.record.ema_residual = 0.50
+    kernel.record.ema_data_scale = 1.0
+    p_unsettled_64, _ = kernel.penalty(critic, x_r64, x_f64, step=1, is_conditioned=True)
+
+    # Re-evaluate at identical x_real == x_fake so conditional residual is 0.0 (fully settled):
+    p_settled_64, _ = kernel.penalty(critic, x_r64, x_r64, step=2, is_conditioned=True)
+    # Tighter softplus beta lowers softplus(1 - 1, beta)^2 = (ln(2)/beta)^2 strictly!
+    assert float(p_settled_64.detach()) < float(p_unsettled_64.detach())
+
+    x_r128 = torch.zeros(128, 2)
+    kernel.record.ema_residual = 0.0
+    p_settled_128, _ = kernel.penalty(critic, x_r128, x_r128, step=3, is_conditioned=True)
+    assert float(p_settled_128.detach()) < float(p_settled_64.detach())
+
+    # 2. Discrete-simplex Sinkhorn thermal cooling stays at 1.0 during acquisition
+    # (large residual) and cools strictly below 1.0 (>= 0.35) when residual settles.
+    disc_critic = nn.Linear(180, 1)
+    init.deterministic_orthogonal_(disc_critic, seed=0)
+    disc_opt = recipe.make_critic_optimizer(disc_critic)
+    disc_pen = recipe.make_critic_penalty(disc_opt, collect_stats=True)
+
+    eye = torch.eye(180)
+    real_far = eye[torch.arange(64) % 5]
+    fake_far = eye[(torch.arange(64) % 5) + 20]
+    _ = disc_pen(disc_critic, real_far, fake_far)
+    assert math.isclose(disc_pen.last_stats["s_thermal"], 1.0, rel_tol=1e-6)
+
+    for _ in range(80):
+        _ = disc_pen(disc_critic, real_far, real_far)
+    assert 0.35 <= disc_pen.last_stats["s_thermal"] < 0.70
