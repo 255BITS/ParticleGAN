@@ -61,6 +61,13 @@ from .bispf import (
     SinkhornRelativisticLoss,
     StratifiedBlueNoisePrior,
 )
+from .empf import (
+    EMPFCriticAdam,
+    EMPFCriticPenalty,
+    EMPFPriorRegularizer,
+    EMPFSinkhornRelativisticLoss,
+    EMPFStepRecord,
+)
 from . import init
 
 __all__ = [
@@ -78,6 +85,7 @@ __all__ = [
     "CoulombPriorRegularizer", "ParticleRegularizer", "InitialMMDRegularizer", "SIGReg",
     "StratifiedBlueNoisePrior", "SBNPPriorRegularizer", "ContinuousThermalCooler", "BISPFEngine", "BISPFLossAdapter",
     "BISPFStepRecord", "BISPFCriticAdam", "BISPFCriticPenalty", "SinkhornRelativisticLoss", "BISPFGates",
+    "EMPFStepRecord", "EMPFCriticAdam", "EMPFCriticPenalty", "EMPFPriorRegularizer", "EMPFSinkhornRelativisticLoss",
     "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",
     "conditional_energy_score", "joint_reconstruction_loss",
     "masked_mixture_nll", "NeuralComponentImputer", "masked_quantile_transport_loss",

@@ -1014,6 +1014,11 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
         if recipe.effective_critic_formulation == "bispf":
             from ..bispf import _BISPFObserverStepRecord
             optimizer.record = _BISPFObserverStepRecord()
+        elif recipe.effective_critic_formulation == "empf":
+            from ..empf import _EMPFObserverStepRecord
+            from .._empf.critic import _attach_empf_critic_hook
+            optimizer.record = _EMPFObserverStepRecord()
+            _attach_empf_critic_hook(critic, optimizer.record)
         else:
             optimizer.record = CriticStepRecord()
     return optimizer

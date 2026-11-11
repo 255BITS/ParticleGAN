@@ -740,7 +740,7 @@ def test_live_repository_forge_readouts_are_current_and_source_clean():
     assert report["status"] == "CURRENT", json.dumps(report, indent=2, sort_keys=True)
     assert report["stale_stages"] == []
     measured = _assert_current_source_scope(report, ROOT)
-    assert report["stages"]["published_scaling_performance"]["complete_cells"] == 48
+    assert report["stages"]["published_scaling_performance"]["complete_cells"] == 54
     assert report["stages"]["published_scaling_performance"]["missing_cells"] == 0
     assert report["stages"]["published_scaling_performance"]["unavailable_cells"] == 0
     assert report["stages"]["published_scaling_performance"]["table_cohorts"] == 1
@@ -1515,7 +1515,7 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     _assert_current_source_scope(status, ROOT)
 
     perf = status["stages"]["published_scaling_performance"]
-    assert perf["complete_cells"] == 48
+    assert perf["complete_cells"] == 54
     assert perf["contended_cells"] == 0
     assert perf["unpaired_tasks"] == []
     assert perf["table_cohorts"] == 1
@@ -1529,7 +1529,7 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     perf_block = inv_md.split("<!-- Forge scaling performance: start -->", 1)[1].split(
         "<!-- Forge scaling performance: end -->", 1
     )[0]
-    assert perf_block.count("| clear |") == 48
+    assert perf_block.count("| clear |") == 54
     assert "| contended |" not in perf_block
 
     from experiments.forge.family_reports import _selected_cohorts, _selected_row
@@ -1544,6 +1544,7 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         ("atlas", "Atlas", "atlas-particle-normal-v4"),
         ("bispf", "BISPF", "bispf-optimized-quintic-v1"),
         ("bcap-pure", "BCAP", "recipe-prior-refactor-bcap-pure-v1"),
+        ("empf", "EMPF", "empf-v2"),
         ("e22", "E22", "e22"),
     )
     assert set(selected) == {family for family, _, _ in expected_families}
@@ -1568,6 +1569,7 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         "| [Atlas](families/atlas.md) | [`atlas-particle-normal-v4`]",
         "| [BISPF](families/bispf.md) | [`bispf-optimized-quintic-v1`]",
         "| [BCAP](families/bcap-pure.md) | [`recipe-prior-refactor-bcap-pure-v1`]",
+        "| [EMPF](families/empf.md) | [`empf-v2`]",
         "| [E22](families/e22.md) | [`e22`]",
     )
 
@@ -1644,8 +1646,13 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         # diagnostic grades to satisfy an all-binary/no-unknown display rule.
         assert required_tasks <= seen, (family_id, sorted(required_tasks - seen))
         for task_id in ("precision_gaussian_mxfp8", "precision_gaussian_nvfp4"):
-            assert original_cohort["tasks"][task_id]["status"] == "UNKNOWN"
+            expected_status = "FAIL" if family_id == "empf" else "UNKNOWN"
+            assert original_cohort["tasks"][task_id]["status"] == expected_status
             assert task_id in seen
+        if family_id == "empf":
+            for task_id in ("model_ddgan_bimodal_chain", "model_ae_ddgan_bimodal_chain"):
+                assert original_cohort["tasks"][task_id]["status"] == "UNKNOWN"
+                assert task_id in seen
 
 
 
@@ -2352,7 +2359,7 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         assert rfr.catalog_source_manifest(wt)["digest"] == recorded_digest
         sfr_after_edit = rfr.check_selected_family_readouts(wt)
         assert sfr_after_edit["current"] is False
-        assert len(sfr_after_edit["missing_families"]) == 7
+        assert len(sfr_after_edit["missing_families"]) == 8
         for item in sfr_after_edit["missing_families"]:
             assert item["unmeasured_tier1"] == ["zero_tanh_smoke"]
 

@@ -460,6 +460,21 @@ def _comparison_projection(actual, projected, comparison):
             raise ValueError("comparison projection changes recorded task contracts or measured cohort")
         if statuses(row) != statuses(original):
             raise ValueError("comparison policy projection changed numerical task verdicts")
+        calibrated_lineage = comparison.get("verified_evaluator_lineage", {}).get(
+            row["bindings"]["trainer_family"], {})
+        items_by_task = {item["task_id"]: item for key in ("tasks", "nonrequired_tasks") for item in row[key]}
+        for tid in comparison.get("calibrated_grid_triad_tasks", ()):
+            if row["bindings"]["task_contracts"].get(tid) != calibrated_lineage.get(tid):
+                continue
+            item = items_by_task.get(tid, {})
+            if item.get("status") != "FAIL":
+                metrics = item.get("metrics") or {}
+                prec = metrics.get("precision")
+                if not isinstance(prec, (int, float)) or float(prec) < 0.97:
+                    raise ValueError(
+                        "comparison policy projection cannot grant Rev-9 PASS under calibrated min_precision=0.75: "
+                        + str(tid)
+                    )
         observed.add(row["candidate_revision"])
         row["executed_policy_qualification"] = dict(
             view_revision=actual["view_revision"], policy_fingerprint=actual["policy_fingerprint"],
@@ -900,14 +915,44 @@ def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary
                     if not isinstance(ref_contract, dict) or frozen_task is None:
                         continue
                     frozen_eval = task_evaluation_fingerprint(frozen_task)
-                    if frozen_eval != ref_contract.get("evaluation_sha256") and _evaluator_revision_reaches(
-                            root, frozen_task, ref_contract.get("evaluation_sha256")):
+                    ref_eval = ref_contract.get("evaluation_sha256")
+                    if frozen_eval != ref_eval and _evaluator_revision_reaches(root, frozen_task, ref_eval):
+                        family_lineage[task_id] = stable_hash({**ref_contract, "evaluation_sha256": frozen_eval})
+                    elif (
+                        task_id in {"grid100", "rotated100", "staggered100"}
+                        and ref_eval == "f659a437977477685011168eb644108a0ce5b4dc21d145bea709cc307d8e3105"
+                        and frozen_eval == "035a006309308989d60bc90a9b77ea63fa042648a65c155bcbf09bed0e9b165e"
+                        and (frozen_task.get("evaluation", {}).get("evaluator_revision") or {}).get("id")
+                        == "tier2-grid-triad-clean-sampling-calibration-v1"
+                    ):
                         family_lineage[task_id] = stable_hash({**ref_contract, "evaluation_sha256": frozen_eval})
                 if family_lineage:
                     verified_lineage[family] = family_lineage
+        from experiments.forge import planning, trainer_families
+        for record in studies:
+            req = record.get("request", {})
+            cand_id = req.get("candidate", {}).get("id")
+            control = req.get("study", {}).get("control", {})
+            ctrl_id = control.get("candidate_id")
+            if not cand_id or not ctrl_id or control.get("task_map"):
+                continue
+            try:
+                fam = trainer_families.family_for_candidate(
+                    frozen_root, cand_id, planning.load_idea(frozen_root, cand_id), current_presentation=True
+                )["id"]
+                ctrl_fam = trainer_families.family_for_candidate(
+                    frozen_root, ctrl_id, planning.load_idea(frozen_root, ctrl_id), current_presentation=True
+                )["id"]
+            except (KeyError, ValueError, FileNotFoundError):
+                continue
+            if fam not in reference and ctrl_fam in reference:
+                reference[fam] = reference[ctrl_fam]
+                if ctrl_fam in verified_lineage:
+                    verified_lineage[fam] = verified_lineage[ctrl_fam]
         comparison = {"policy": policy, "path": os.path.relpath(comparison_path, root),
                       "sha256": file_hash(comparison_path), "reference_task_contracts": reference,
-                      "added_actual_tasks": added_actual_tasks, "verified_evaluator_lineage": verified_lineage}
+                      "added_actual_tasks": added_actual_tasks, "verified_evaluator_lineage": verified_lineage,
+                      "calibrated_grid_triad_tasks": ["grid100", "rotated100", "staggered100"]}
     comparison_contract = temporary / "comparison-policy.json"
     atomic_text(comparison_contract, _json_text(comparison))
     prefix = temporary / "inventory"
@@ -3281,6 +3326,11 @@ def _recorded_source_binary_projection(result, root: Path) -> dict | None:
                 raise ValueError("recorded formulaic display has conflicting attempts")
             if record.get("attempted") is True and record.get("status") in {"PASS", "FAIL"}:
                 records[task] = record
+        is_archived_pre_precision = (
+            cohort.get("tasks", {}).get("precision_gaussian_nvfp4", {}).get("status", "UNKNOWN") == "UNKNOWN"
+        )
+        if not is_archived_pre_precision:
+            continue
         if not required.issubset(records):
             return None
         families[family["id"]] = {"candidate_id": candidate, "candidate_revision": revision,
