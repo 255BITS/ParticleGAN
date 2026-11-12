@@ -317,7 +317,10 @@ def test_empf_deliberate_damage_and_instance_isolation():
     rec_main = trainer_main.opt_d.record
     rec_other = trainer_other.opt_d.record
     assert rec_main is not rec_other
-    assert not torch.allclose(rec_main.proto_sum, rec_other.proto_sum)
+    assert rec_main.proto_sum.shape == (32, 2)
+    assert rec_main.proto_sum.shape != rec_other.proto_sum.shape or not torch.allclose(
+        rec_main.proto_sum, rec_other.proto_sum
+    )
     assert rec_main.ema_data_scale != rec_other.ema_data_scale
 
     trained_err = float((trainer_main.sample(128).mean(dim=0) - target_center).norm())
@@ -414,3 +417,148 @@ def test_empf_v2_settling_ebi_and_discrete_simplex_cooling():
     for _ in range(80):
         _ = disc_pen(disc_critic, real_far, real_far)
     assert 0.35 <= disc_pen.last_stats["s_thermal"] < 0.70
+
+
+def test_empf_v3_online_bank_growth_and_outlier_shift_revival():
+    """Verify deterministic farthest-point bank growth when B < M and rapid 1D shift tracking."""
+    rng = torch.Generator().manual_seed(12)
+    coords = torch.linspace(-4.5, 4.5, 10)
+    gx, gy = torch.meshgrid(coords, coords, indexing="ij")
+    centers = torch.stack([gx.reshape(-1), gy.reshape(-1)], dim=1)
+
+    p_sum, p_count, phase, revivals = None, None, 0.0, 0
+    c_now = None
+    for _ in range(40):
+        idx = torch.randint(0, 100, (64,), generator=rng)
+        batch = centers[idx] + 0.03 * torch.randn(64, 2, generator=rng)
+        c_now, _, p_sum, p_count, phase, revivals = update_emeans_prototypes(
+            batch, p_sum, p_count, phase, revivals, max_prototypes=256
+        )
+    assert c_now is not None and c_now.shape[0] >= 100
+    d2_modes = torch.cdist(centers, c_now)
+    assert float(d2_modes.min(dim=1).values.max()) < 0.20
+
+    # 1D Gaussian stationary -> shift (+1.0) tracks within < 30 steps.
+    s_sum, s_count, s_phase, s_rev = None, None, 0.0, 0
+    for _ in range(25):
+        b1 = 2.0 + 0.25 * torch.randn(128, 1, generator=rng)
+        _, _, s_sum, s_count, s_phase, s_rev = update_emeans_prototypes(
+            b1, s_sum, s_count, s_phase, s_rev, max_prototypes=256
+        )
+    c_shift, w_shift = None, None
+    for _ in range(30):
+        b2 = 3.0 + 0.25 * torch.randn(128, 1, generator=rng)
+        c_shift, w_shift, s_sum, s_count, s_phase, s_rev = update_emeans_prototypes(
+            b2, s_sum, s_count, s_phase, s_rev, max_prototypes=256
+        )
+    assert c_shift is not None and w_shift is not None
+    weighted_mean = float((w_shift * c_shift[:, 0]).sum())
+    assert abs(weighted_mean - 3.0) < 0.08
+
+
+def test_empf_v3_conditioned_fiber_pairing_and_schema2_checkpoint():
+    """Verify conditioned fiber baseline cancellation, step_scale continuation, and schema-1 rejection."""
+    recipe = get_recipe("empf", loss="relativistic")
+    loss_fn = recipe.make_loss()
+    assert isinstance(loss_fn, EMPFSinkhornRelativisticLoss)
+
+    class FiberCritic(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.w = nn.Linear(2, 1, bias=False)
+
+        def forward(self, x, *, xt, t):
+            # Massive context-dependent baseline offset cancels only under row-wise fiber pairing!
+            baseline = 50.0 * xt[:, :1] - 25.0 * t.float().unsqueeze(-1)
+            return (self.w(x) + baseline).squeeze(-1)
+
+    g = nn.Linear(2, 2)
+    d = FiberCritic()
+    init.deterministic_orthogonal_(g, seed=0)
+    init.deterministic_orthogonal_(d, seed=1)
+    opt_g, opt_d = recipe.make_optimizers(g, d)
+    penalty = recipe.make_critic_penalty(opt_d, collect_stats=True)
+
+    rng = torch.Generator().manual_seed(5)
+    xt = torch.randn(32, 2, generator=rng)
+    t_idx = torch.randint(0, 4, (32,), generator=rng)
+    real = 0.5 * xt + 0.05 * torch.randn(32, 2, generator=rng)
+    z = torch.randn(32, 2, generator=rng)
+    fake = g(z)
+
+    r_log = d(real, xt=xt, t=t_idx)
+    f_log = d(fake, xt=xt, t=t_idx)
+    assert getattr(r_log, "_empf_conditioned", False) is True
+    assert getattr(f_log, "_empf_conditioned", False) is True
+
+    # Verify baseline offset cancels identically in d_loss and g_loss:
+    raw_diff = (d.w(real) - d.w(fake)).squeeze(-1)
+    expected_d = torch.nn.functional.softplus(-raw_diff).mean()
+    expected_g = torch.nn.functional.softplus(-(d.w(fake) - d.w(real).detach()).squeeze(-1)).mean()
+    assert torch.allclose(loss_fn.d_loss(r_log, f_log.detach()), expected_d, atol=1e-6)
+    gl = loss_fn.g_loss(f_log, r_log.detach())
+    assert torch.allclose(gl, expected_g, atol=1e-6)
+
+    # Settled conditional loop cools step_scale strictly below 1.0 and round-trips via schema-2 state_dict.
+    for _ in range(80):
+        pen = penalty(d, real, real + 1e-4 * torch.randn(32, 2, generator=rng), xt=xt, t=t_idx)
+        opt_d.zero_grad()
+        pen.backward()
+        opt_d.step()
+    assert 0.65 <= opt_d.record._step_scale < 0.99
+
+    sd = deepcopy(opt_d.state_dict())
+    assert sd["regularizer"]["record"]["empf"]["schema"] == 2
+
+    # Schema-1 packets must be rejected rather than reconstructed.
+    schema1_sd = deepcopy(sd)
+    schema1_sd["regularizer"]["record"]["empf"]["schema"] = 1
+    schema1_sd["regularizer"]["record"]["empf"].pop("ema_cond_energy")
+    schema1_sd["regularizer"]["record"]["empf"].pop("step_scale")
+    with pytest.raises(ValueError, match="fields|schema"):
+        opt_d.load_state_dict(schema1_sd)
+
+    # Fresh optimizer continuation preserves exact trajectory under step_scale < 1.
+    g2, d2 = deepcopy(g), deepcopy(d)
+    opt_g2, opt_d2 = recipe.make_optimizers(g2, d2)
+    opt_g2.load_state_dict(deepcopy(opt_g.state_dict()))
+    opt_d2.load_state_dict(sd)
+
+    from particlegan.optim.constraint_geometry import constraint_geometry_backward
+
+    z_step = torch.randn(32, 2, generator=rng)
+    for gi, di, og, _ in ((g, d, opt_g, opt_d), (g2, d2, opt_g2, opt_d2)):
+        og.zero_grad()
+        fl = di(gi(z_step), xt=xt, t=t_idx)
+        rl = di(real, xt=xt, t=t_idx).detach()
+        lg = loss_fn.g_loss(fl, rl)
+        constraint_geometry_backward(lg, og, (lg,))
+        og.step()
+    for p1, p2 in zip(g.parameters(), g2.parameters()):
+        assert torch.equal(p1, p2)
+
+
+def test_empf_v3_1d_thermal_and_step_scale_laws():
+    """Verify 1D floor-subtracted thermal cooling, step-scale damping, and shock-filtered transport EMA."""
+    from particlegan._empf.critic import compute_empf_step_scale, compute_thermal_scale
+
+    # Deeply settled 1D cloud hits s_floor = 0.0012 and step_scale = 0.48.
+    assert math.isclose(compute_thermal_scale(0.10, 128, 1), 0.0012, rel_tol=1e-6)
+    assert math.isclose(compute_empf_step_scale(0.10, 128, 1), 0.48, rel_tol=1e-6)
+    # Unsettled 1D cloud runs at full thermal and step scale (1.0).
+    assert math.isclose(compute_thermal_scale(0.60, 128, 1), 1.0, rel_tol=1e-6)
+    assert math.isclose(compute_empf_step_scale(0.25, 128, 1), 1.0, rel_tol=1e-6)
+    # 2D+ clouds keep unit step_scale from compute_empf_step_scale.
+    assert compute_empf_step_scale(0.05, 128, 2) == 1.0
+
+    rec = EMPFStepRecord()
+    rec.observe_transport(0.13, 0.50, ema_decay=0.92)
+    assert math.isclose(rec.ema_residual, 0.13, rel_tol=1e-6)
+    # Moderate single-batch quantile fluctuation (e.g. 0.55 < max(5.5*0.13, 0.13+0.55)=0.715) is EMA-filtered.
+    rec.observe_transport(0.55, 0.50, ema_decay=0.92)
+    assert rec.ema_residual < 0.20
+    # Genuine shift shock (> 0.715) instant-reheats on step 1.
+    rec.observe_transport(1.25, 0.50, ema_decay=0.92)
+    assert math.isclose(rec.ema_residual, 1.25, rel_tol=1e-6)
+
+

@@ -704,6 +704,7 @@ class NormalizedOptimizer(Optimizer):
         origin_damping = 1.0
         if origin_norm is not None and origin_norm < 0.05:
             origin_damping = min(1.0, origin_norm / 0.05)
+        empf_step_scale = float(getattr(getattr(self, "_empf_record", None), "_step_scale", 1.0))
         for group_index, group in enumerate(self.param_groups):
             algorithm, base_rate, eps = group["algorithm"], group["lr"], group["eps"]
             is_generator = group.get("role") == "generator"
@@ -713,7 +714,11 @@ class NormalizedOptimizer(Optimizer):
                     continue
                 state = self.state[parameter]
                 state["step"] = state.get("step", 0) + 1
-                rate = base_rate * (origin_damping if (is_generator and state["step"] > 80) else 1.0)
+                rate = (
+                    base_rate
+                    * empf_step_scale
+                    * (origin_damping if (is_generator and state["step"] > 80) else 1.0)
+                )
                 if algorithm == "sgda":
                     parameter.add_(gradient, alpha=-rate)
                 elif algorithm == "nsgda_global":
@@ -1018,6 +1023,7 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
             from ..empf import _EMPFObserverStepRecord
             from .._empf.critic import _attach_empf_critic_hook
             optimizer.record = _EMPFObserverStepRecord()
+            optimizer._empf_record = optimizer.record
             _attach_empf_critic_hook(critic, optimizer.record)
         else:
             optimizer.record = CriticStepRecord()

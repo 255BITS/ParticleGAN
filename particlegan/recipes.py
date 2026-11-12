@@ -838,7 +838,7 @@ class Recipe:
             return SinkhornRelativisticLoss(labels=self.loss_labels, gates=self.bispf_gates())
         if self.effective_critic_formulation == "empf" and self.loss == "relativistic":
             from .empf import EMPFSinkhornRelativisticLoss
-            return EMPFSinkhornRelativisticLoss(labels=self.loss_labels)
+            return EMPFSinkhornRelativisticLoss(labels=self.loss_labels, loss=self.loss)
         from .gan_loss import GANLoss
         return GANLoss(self.loss, labels=self.loss_labels)
 
@@ -1408,8 +1408,11 @@ class Recipe:
         if ka2_trust_mode != "compound":
             adam_kwargs = {**adam_kwargs, "ka2_trust_mode": ka2_trust_mode}
         opt_d = self.make_critic_optimizer(discriminator, ema_critic=ema_critic, **adam_kwargs)
-        if self.effective_critic_formulation == "empf" and base_prior is not None and hasattr(opt_d, "record"):
-            base_prior._empf_record = opt_d.record
+        if self.effective_critic_formulation == "empf" and hasattr(opt_d, "record"):
+            opt_g._empf_record = opt_d.record
+            opt_d._empf_record = opt_d.record
+            if base_prior is not None:
+                base_prior._empf_record = opt_d.record
         return opt_g, opt_d
 
 
