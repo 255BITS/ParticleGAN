@@ -35,7 +35,8 @@ DEFAULT_LABELS = {
     "rhbi-v2": "RHBI (v2)",
     "rhbi-v3": "RHBI (v3)",
     "rhbi-v4": "RHBI (v4)",
-    "rhbi-v5": "RHBI",
+    "rhbi-v5": "RHBI (v5)",
+    "rhbi-v6": "RHBI",
 }
 ARCHIVED_SCOPES = ("pinned", "calibration_diagnostic", "research_diagnostic", "historical")
 

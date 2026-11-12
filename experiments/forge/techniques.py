@@ -223,6 +223,8 @@ def recipe_field_active(name, value, *, task=None):
         return recipe.rhbi_weight > 0 and recipe.rhbi_thermal_tau > 0
     if name in {"rhbi_lambda_floor", "rhbi_gamma_gauge", "rhbi_chord_weight", "rhbi_settle_beta"}:
         return recipe.effective_critic_formulation == "rhbi" and recipe.reg_coeff > 0
+    if name == "rhbi_settle_mode":
+        return recipe.effective_critic_formulation == "rhbi" and recipe.reg_coeff > 0 and recipe.rhbi_settle_beta > 0
     if name == "rhbi_akt_horizon":
         return recipe.rhbi_weight > 0 or recipe.rhbi_critic_weight > 0 or (
             recipe.effective_critic_formulation == "rhbi" and recipe.reg_coeff > 0 and recipe.rhbi_chord_weight > 0

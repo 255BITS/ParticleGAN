@@ -1004,3 +1004,77 @@ def test_rhbi_v5_weibull_akt_shock_mu_settle_beta_and_row_local_fibre_blend():
         assert torch.equal(p1, p2)
     assert torch.equal(P1.z, P2.z)
 
+
+def test_rhbi_v6_thermal_coupled_settling_and_continuation() -> None:
+    """Verify rhbi-v6 thermal-coupled settling is exact no-op at s_thermal=1.0, sharpens on cooling, and checkpoints cleanly."""
+    from particlegan._rhbi.penalty import _RHBIPenaltyKernel
+
+    with pytest.raises(ValueError, match="rhbi_settle_mode"):
+        get_recipe("rhbi", rhbi_settle_mode="invalid")
+
+    D_lin = nn.Linear(2, 1, bias=False)
+    with torch.no_grad():
+        D_lin.weight.copy_(torch.tensor([[0.95, 0.0]]))
+    xr_p = torch.randn(8, 2, generator=torch.Generator().manual_seed(71))
+    xf_p = torch.randn(8, 2, generator=torch.Generator().manual_seed(72))
+
+    k_base = _RHBIPenaltyKernel(coeff=1.0, kappa=1.0, ebi_beta=12.0, settle_beta=0.0)
+    k_th_hot = _RHBIPenaltyKernel(coeff=1.0, kappa=1.0, ebi_beta=12.0, settle_beta=16.0, settle_mode="thermal")
+    k_th_cool = _RHBIPenaltyKernel(coeff=1.0, kappa=1.0, ebi_beta=12.0, settle_beta=16.0, settle_mode="thermal")
+    for k in (k_base, k_th_hot, k_th_cool):
+        k.record.rhbi_thermal_initialized = True
+        k.record.rhbi_ema_ed = 0.14  # < 0.22 (would trigger residual mode) but > 0.084 (s_thermal = 1.0)
+        k.record.rhbi_ema_mu_sq = 0.01
+        k.record.rhbi_ema_spread = 0.10
+        k.record.rhbi_ema_q90 = 0.14
+        k.record.rhbi_ema_hmax = 0.14
+    k_th_hot.record._thermal_scale = 1.0
+    k_th_cool.record._thermal_scale = 0.2
+
+    pen_base, _ = k_base.penalty(D_lin, xr_p, xf_p, step=1, allow_concat=True)
+    pen_hot, _ = k_th_hot.penalty(D_lin, xr_p, xf_p, step=1, allow_concat=True)
+    pen_cool, _ = k_th_cool.penalty(D_lin, xr_p, xf_p, step=1, allow_concat=True)
+    assert torch.equal(pen_hot, pen_base)
+    assert float(pen_cool.item()) < float(pen_base.item()) * 0.2
+
+    r_v6 = get_recipe(
+        "rhbi",
+        rhbi_rapidity_screening=False,
+        rhbi_self_coupling="feydy",
+        rhbi_akt_horizon=True,
+        rhbi_akt_mode="weibull",
+        rhbi_slack_gain=0.35,
+        rhbi_chord_weight=0.25,
+        rhbi_gamma_gauge=0.03,
+        rhbi_lambda_floor=0.005,
+        ebi_beta=12.0,
+        rhbi_settle_beta=16.0,
+        rhbi_settle_mode="thermal",
+        rhbi_thermal_tau=0.20,
+        rhbi_thermal_shock_mu=0.35,
+        rhbi_conditional_fibre="slack",
+        rhbi_fibre_rel_blend=0.0,
+        total_steps=12,
+        batch_size=16,
+        num_particles=64,
+        z_dim=2,
+    )
+    G1, D1, P1 = _make_mlp_pair(seed=601)
+    G2, D2, P2 = _make_mlp_pair(seed=602)
+    batches = [0.20 * torch.randn(16, 2, generator=torch.Generator().manual_seed(700 + i)) for i in range(6)]
+    t1 = GANTrainer(r_v6, G1, D1, prior=P1, seed=0)
+    for b in batches[:3]:
+        t1.step(b)
+    saved = deepcopy(t1.state_dict())
+    for b in batches[3:]:
+        t1.step(b)
+
+    t2 = GANTrainer(r_v6, G2, D2, prior=P2, seed=9)
+    t2.load_state_dict(saved)
+    for b in batches[3:]:
+        t2.step(b)
+    for p1, p2 in zip(G1.parameters(), G2.parameters()):
+        assert torch.equal(p1, p2)
+    for p1, p2 in zip(D1.parameters(), D2.parameters()):
+        assert torch.equal(p1, p2)
+    assert torch.equal(P1.z, P2.z)

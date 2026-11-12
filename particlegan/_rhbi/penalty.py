@@ -44,6 +44,7 @@ class _RHBIPenaltyKernel:
         akt_horizon: bool = False,
         akt_mode: str = "sqrt",
         settle_beta: float = 0.0,
+        settle_mode: str = "residual",
         record: CriticStepRecord | None = None,
     ) -> None:
         for name, val, pos in (
@@ -69,6 +70,8 @@ class _RHBIPenaltyKernel:
             raise ValueError("akt_horizon must be a boolean")
         if type(akt_mode) is not str or akt_mode not in ("sqrt", "weibull"):
             raise ValueError("akt_mode must be 'sqrt' or 'weibull'")
+        if type(settle_mode) is not str or settle_mode not in ("residual", "thermal"):
+            raise ValueError("settle_mode must be 'residual' or 'thermal'")
         if anchor_weight != 0.0:
             raise ValueError("RHBI does not use an EMA critic anchor (require reg_anchor_weight=0)")
         self.arm = "rhbi"
@@ -85,6 +88,7 @@ class _RHBIPenaltyKernel:
         self.akt_horizon = akt_horizon
         self.akt_mode = akt_mode
         self.settle_beta = float(settle_beta)
+        self.settle_mode = settle_mode
         self.record = RHBIStepRecord() if record is None else record
 
     @torch.no_grad()
@@ -170,8 +174,12 @@ class _RHBIPenaltyKernel:
 
         eff_beta = self.ebi_beta
         if self.settle_beta > 0.0 and bool(getattr(self.record, "rhbi_thermal_initialized", False)):
-            res = float(getattr(self.record, "rhbi_ema_residual", 1.0))
-            settle_u = min(1.0, max(0.0, 1.0 - res / 0.22))
+            if self.settle_mode == "thermal":
+                s_th = float(getattr(self.record, "_thermal_scale", 1.0))
+                settle_u = min(1.0, max(0.0, 1.0 - s_th))
+            else:
+                res = float(getattr(self.record, "rhbi_ema_residual", 1.0))
+                settle_u = min(1.0, max(0.0, 1.0 - res / 0.22))
             eff_beta = eff_beta + self.settle_beta * (settle_u * settle_u)
 
         self.record._in_penalty = True

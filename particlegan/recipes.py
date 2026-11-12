@@ -29,6 +29,7 @@ try:
         rhbi_thermal_tau=0.0,
         rhbi_thermal_shock_mu=0.15,
         rhbi_settle_beta=0.0,
+        rhbi_settle_mode="residual",
         rhbi_fibre_rel_blend=0.0,
     )
 except (ImportError, ValueError):
@@ -337,6 +338,7 @@ class Recipe:
     rhbi_thermal_tau: float = 0.0
     rhbi_thermal_shock_mu: float = 0.15
     rhbi_settle_beta: float = 0.0
+    rhbi_settle_mode: str = "residual"
     rhbi_fibre_rel_blend: float = 0.0
 
     def __init__(self, **resolved_fields):
@@ -591,6 +593,8 @@ class Recipe:
             raise ValueError("rhbi_conditional_fibre must be 'joint', 'slack', or 'calibrated'")
         if type(self.rhbi_akt_mode) is not str or self.rhbi_akt_mode not in ("sqrt", "weibull"):
             raise ValueError("rhbi_akt_mode must be 'sqrt' or 'weibull'")
+        if type(self.rhbi_settle_mode) is not str or self.rhbi_settle_mode not in ("residual", "thermal"):
+            raise ValueError("rhbi_settle_mode must be 'residual' or 'thermal'")
         if type(self.rhbi_rapidity_screening) is not bool:
             raise ValueError("rhbi_rapidity_screening must be a boolean")
         if type(self.rhbi_scale_log_odds) is not bool:
@@ -1055,6 +1059,7 @@ class Recipe:
                 "akt_horizon": self.rhbi_akt_horizon,
                 "akt_mode": self.rhbi_akt_mode,
                 "settle_beta": self.rhbi_settle_beta,
+                "settle_mode": self.rhbi_settle_mode,
                 **overrides,
             }
             from .rhbi import _RHBIPenaltyKernel

@@ -74,6 +74,7 @@ def _archived_inactive_comparison_scope(module, directory):
         "rhbi_thermal_tau": 0.0,
         "rhbi_thermal_shock_mu": 0.15,
         "rhbi_settle_beta": 0.0,
+        "rhbi_settle_mode": "residual",
         "rhbi_fibre_rel_blend": 0.0,
     }
     tail = '    "training_precision": "float32",\n}\n'

@@ -139,7 +139,8 @@ _ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
                         "rhbi_akt_horizon": False, "rhbi_akt_mode": "sqrt",
                         "rhbi_slack_gain": 0.0, "rhbi_chord_weight": 0.0,
                         "rhbi_thermal_tau": 0.0, "rhbi_thermal_shock_mu": 0.15,
-                        "rhbi_settle_beta": 0.0, "rhbi_fibre_rel_blend": 0.0}
+                        "rhbi_settle_beta": 0.0, "rhbi_settle_mode": "residual",
+                        "rhbi_fibre_rel_blend": 0.0}
 
 
 class GANTrainer:
