@@ -867,8 +867,8 @@
   },
   "policy_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a",
   "previous_selection": {
-    "path": "configs/forge/selections/history/family-current-b2607ba409dc2fcedb5c23891595dd300288e6ce06349a7719899fc4a914ab29.json",
-    "sha256": "b2607ba409dc2fcedb5c23891595dd300288e6ce06349a7719899fc4a914ab29"
+    "path": "configs/forge/selections/history/family-current-1d3485c46b9bd9f48b964ded33a8fa6889794a3c25f7bb564e4f2871464d5d70.json",
+    "sha256": "1d3485c46b9bd9f48b964ded33a8fa6889794a3c25f7bb564e4f2871464d5d70"
   },
   "schema_version": 1,
   "scope": "whole_candidate_family_current",
@@ -1042,22 +1042,22 @@
       "trainer_family": "release07-gan-v3"
     },
     {
-      "candidate_id": "rhbi-v3",
-      "candidate_revision": "1e0d674047a1212d8a18623dac1886338156658cd4808769641f83594adef0bc",
-      "cohort": "bd65cedf3c9afdbcf9b66fbf700159e08d939218d6d5f8bf29aae4aed3031a8c",
+      "candidate_id": "rhbi-v4",
+      "candidate_revision": "a555da62030ea9cce3aa3d9a76e1f2e8ab3ffe86f4347f9b865cf52fafc7c459",
+      "cohort": "1f852c0fbe76678bb02bf708bda8cfc558cafcd347e0f631dde95b7b6a0f537f",
       "execution_backend": "cuda",
       "measurement_views": [
         "discriminator_stability"
       ],
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
-      "reason": "Promote rhbi-v3 (Relativistic Hellinger-Born-Infeld slack-screened transport with linear Born-Infeld horizon screening rho=3.0, Feydy diagonal self-coupling debiasing, endpoint gradient-cap slope floor 0.005, SBNP prior regularization 0.02 at prior_lr_mult=2.9, lr=0.014, polar_cpu_v1 smoothing 0.0061, stateful batch-view penalty handling, and fibre-centered conditional relativistic slack routing) as the canonical RHBI candidate following ordinary discriminator_stability CUDA measurement on NVIDIA RTX A6000 (11/11 required + 2/2 diagnostic Tier 1 PASS = 27/27 Tier 1 view requirements across views, 9 Tier 2 PASS = 49/78 Tier 2 view requirements, 76/115 total; 21 full-suite PASS, 0 BLOCKED). Actual executed-policy qualification and comparison-policy projection retain their separate source-bound proofs; no public-default adoption claim.",
-      "recipe_sha256": "974a88674ccfa49f573f3f3962f1f03922f97fde07f41a4e48f4d6819f1e4146",
+      "reason": "Promote rhbi-v4 (Relativistic Hellinger-Born-Infeld slack-screened transport with Ajtai-Komlos-Tusnady empirical OT 1D horizon scaling, slack-gain critic boost 0.35, Weyl-phased balanced-Sinkhorn Born-Infeld geodesic chord regularization 0.25 at ebi_beta=12.0 with zero-mean critic gauge 0.03, and impedance-matched 5-channel Kantorovich-Hellinger thermal equilibrium controller rhbi_thermal_tau=0.084) as the canonical RHBI candidate following ordinary discriminator_stability CUDA measurement on NVIDIA RTX A6000 (11/11 required + 2/2 diagnostic Tier 1 PASS = 27/27 Tier 1 view requirements across views, 10/18 required Tier 2 PASS = 55/78 Tier 2 view requirements, 82/115 total counted view requirements; 24/61 full-suite PASS including mode_hold, vector_overlap, and stretch precision_gaussian_mxfp8, 0 BLOCKED). Actual executed-policy qualification and comparison-policy projection retain their separate source-bound proofs; no public-default adoption claim.",
+      "recipe_sha256": "6abb4112dc8805ea111dbb6b53b30a9f8176890345593a277fce79540bbe31d0",
       "rng_sha256": "495400e2de1b9f9f94a86625a2132091646dcbb8357f48c3512ed24154b89b6d",
       "runtime_cohort_sha256": "23a94f16ca88faef2aa24ce757c89f1524bef5522c2b1b87cce88d9d94e883b1",
-      "scientific_row_sha256": "bf65fb92c3d3947c60ca8a6c7446d7a43f48c74d2c8dd604fa1597f46e2e8e57",
+      "scientific_row_sha256": "5f16b38d85ac5c3414bb86804d6e617978c4342ab53604adf9662499fc8364ce",
       "selection_kind": "current_measurement",
-      "source_digest": "2edfe08a4bf52e63da3ca04851d97c5c4bf4f9582939e0d696624a284b439d36",
-      "task_keys_sha256": "a89b245c872868ed0239ffcd00c6b0c1d366c7fde9ccaad0fb8d672a23a28380",
+      "source_digest": "a989784d6f16ab67c44840b05b4b1187a063e5666c755a00fe569263d030581d",
+      "task_keys_sha256": "406ee4b1080fdb44de9ada1bf8c0688539a698615c5f08db8a4b9ad019cab06d",
       "trainer_family": "rhbi"
     }
   ],

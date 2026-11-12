@@ -8,35 +8,35 @@
 
 ## Technique overview
 
-Relativistic Hellinger-Born-Infeld Transport (RHBI) is a clock-free, constant-learning-rate ParticleGAN formulation with no EMA critic copy and no task-shape or step-count gates. It unifies nonlocal scale-equivariant Born-Infeld Optimal Transport, Feydy diagonal-included self-coupling entropic debiasing, local relativistic critic log-odds ascent, and fibre-centered conditional relativistic slack routing inside a single (B+1)x(B+1) slack-screened Sinkhorn variational operator, paired with a smooth C-infinity Born-Infeld endpoint input-gradient cap and degree-of-freedom-aware SBNP particle prior regularization.
+Relativistic Hellinger-Born-Infeld Transport (RHBI) is a clock-free, constant-learning-rate ParticleGAN formulation with no EMA critic copy and no task-shape or step-count gates. It unifies nonlocal Ajtai-Komlos-Tusnady (AKT) scale-equivariant Born-Infeld Optimal Transport, Feydy diagonal-included self-coupling entropic debiasing, slack-gain-amplified local relativistic critic log-odds ascent, and fibre-centered conditional relativistic slack routing inside a single (B+1)x(B+1) slack-screened Sinkhorn variational operator, paired with a Weyl-phased balanced Born-Infeld geodesic chord + endpoint Lipschitz cap, an impedance-matched 5-channel Kantorovich-Hellinger thermal equilibrium controller, and degree-of-freedom-aware SBNP particle prior regularization.
 
 ## Mathematical formulation
 
-$G$ is the generator, $D$ the raw-score critic, $P$ the task prior with $N$ locations in $\mathbb R^{d_z}$, $y=\{y_j\}_{j=1}^{B_r}$ a real batch, $z\sim P$ a latent batch and $x=\{x_i\}_{i=1}^{B_f}$ with $x_i=G(z_i)$ the generated batch. $\ell_t$ is the exponential moving average ($\beta_\ell=0.1$) of the detached 25th-quantile real nearest-neighbor Euclidean distance. $c_{\mathrm{phys}}(x_i,y_j)=\sqrt{\ell_t^2+\lVert x_i-y_j\rVert_2^2}-\ell_t$ is the physical Born-Infeld ground cost and $\hat c_{ij}=c_{\mathrm{phys}}(x_i,y_j)/\ell_t$ its dimensionless linear screening form. $\tilde d(u)=C_{\max}\tanh((D(u)-\bar D)/C_{\max})$ is the batch-centered, bounded critic log-odds with $\bar D=\frac{1}{2}(\mathbb E[D(x)]+\mathbb E[D(y)])$. $P^{\star(XY)}$ and diagonal-included $P^{\star(XX)}$ are deterministic Sinkhorn couplings on the $(B+1)\times(B+1)$ active-plus-slack polytope with linear screening horizon $\rho=3$, relativistic gain $\tau=2$ and entropic temperature $\varepsilon=0.1$. $g_r=\nabla_y D(y)$ and $g_f=\nabla_x D(x)$ are critic input gradients capped at $\kappa=1$ with Born-Infeld softness $\beta=20$ and sub-unit slope floor $\lambda_{\mathrm{floor}}=0.005$.
+$G$ is the generator, $D$ the raw-score critic, $P$ the task prior with $N$ locations in $\mathbb R^{d_z}$, $y=\{y_j\}_{j=1}^{B_r}$ a real batch, $z\sim P$ a latent batch and $x=\{x_i\}_{i=1}^{B_f}$ with $x_i=G(z_i)$ the generated batch. $\ell_t$ is the exponential moving average ($\beta_\ell=0.1$) of the AKT-scaled detached 25th-quantile real nearest-neighbor distance $B_r^{\max(0,1/d-1/2)}Q_{0.25}(d^{\mathrm{NN}}_Y)$. $c_{\mathrm{phys}}(x_i,y_j)=\sqrt{\ell_t^2+\lVert x_i-y_j\rVert_2^2}-\ell_t$ is the physical Born-Infeld ground cost and $\hat c_{ij}=c_{\mathrm{phys}}(x_i,y_j)/\ell_t$ its dimensionless linear screening form. $\tilde d(u)=C_{\max}\tanh((D(u)-\bar D)/C_{\max})$ is the batch-centered, bounded critic log-odds. $P^{\star(XY)}$ and diagonal-included $P^{\star(XX)}$ are deterministic Sinkhorn couplings on the $(B+1)\times(B+1)$ active-plus-slack polytope ($\rho=3,\tau=2,\varepsilon=0.1,S=2$) with slack-gain boost $1+\gamma_{\mathrm{slack}}s_f$ ($\gamma_{\mathrm{slack}}=0.35$). $s_t\in[10^{-6},1]$ is the 5-channel Kantorovich-Hellinger thermal scale.
 
-**Scale-Equivariant Born-Infeld Cost and Local Horizon**
-
-$$
-c_{\mathrm{phys}}(x_i,y_j)=\sqrt{\ell_t^2+\lVert x_i-y_j\rVert_2^2}-\ell_t,\qquad \hat c_{ij}=\frac{c_{\mathrm{phys}}(x_i,y_j)}{\ell_t},\qquad \ell_t=(1-\beta_\ell)\ell_{t-1}+\beta_\ell\,\operatorname{stopgrad}\!\left(Q_{0.25}(d^{\mathrm{NN}}_Y)+10^{-6}\right)
-$$
-
-Evaluated via float64 GEMM and algebraic rationalization so gradients remain smooth at zero distance and finite across the full float32 range, matching exact quadratic W2 inside modes while bounding inter-mode pull slopes inside $[-1,+1]$.
-
-**Slack-Screened Unbalanced Sinkhorn Envelope Objective**
+**AKT Scale-Equivariant Born-Infeld Cost and Local Horizon**
 
 $$
-\mathcal L_{\mathrm{RHBI}}(X,Y;\psi)=\lambda_{\mathrm{rhbi}}\left[\sum_{i=1}^{B_f}\sum_{j=1}^{B_r}\operatorname{stopgrad}\!\left(P^{\star(XY)}_{ij}\right)c_{\mathrm{phys}}(x_i,y_j)-\sum_{i=1}^{B_f}\operatorname{stopgrad}\!\left(P^{\star(XY)}_{i,0}\right)\frac{\tau}{2}\tilde d(x_i)-\frac{1}{2}\sum_{i,k=1}^{B_f}\operatorname{stopgrad}\!\left(\sqrt{a_i a_k}P^{\star(XX)}_{ik}\right)c_{\mathrm{phys}}(x_i,x_k)\right]
+c_{\mathrm{phys}}(x_i,y_j)=\sqrt{\ell_t^2+\lVert x_i-y_j\rVert_2^2}-\ell_t,\qquad \hat c_{ij}=\frac{c_{\mathrm{phys}}(x_i,y_j)}{\ell_t},\qquad \ell_t=(1-\beta_\ell)\ell_{t-1}+\beta_\ell\,\operatorname{stopgrad}\!\left(B_r^{\max(0,\frac{1}{d}-\frac{1}{2})}Q_{0.25}(d^{\mathrm{NN}}_Y)+10^{-6}\right)
 $$
 
-Linear horizon screening ($\rho=3$) routes valley outliers ($\hat c_{ij}>\rho$) to unit-slope centered critic log-odds ascent ($\tau/2=1$), while Feydy diagonal self-coupling cancels intra-mode entropic contraction without inflating isolated singletons.
+Evaluated via float64 GEMM and algebraic rationalization so gradients remain smooth at zero distance and finite across the full float32 range, matching exact quadratic W2 across 1D and multidimensional modes while bounding inter-mode pull slopes inside $[-1,+1]$.
 
-**Smooth Born-Infeld Endpoint Critic Penalty**
+**Impedance-Matched Slack-Screened Unbalanced Sinkhorn Objective**
 
 $$
-R_{\mathrm{RHBI}}(D)=\frac{\lambda}{2}\sum_{u\in\{y,x\}}\mathbb E_{u}\!\left[\phi_\beta(\lVert\nabla_u D(u)\rVert_2-\kappa)^2+\lambda_{\mathrm{floor}}\lVert\nabla_u D(u)\rVert_2^2\right],\qquad \phi_\beta(s)=\frac{1}{\beta}\log\!\left(1+e^{\beta s}\right)
+\mathcal L_{\mathrm{RHBI}}(X,Y;\psi)=\lambda_{\mathrm{rhbi}}s_t\left[\sum_{i=1}^{B_f}\sum_{j=1}^{B_r}\operatorname{stopgrad}\!\left(P^{\star(XY)}_{ij}\right)c_{\mathrm{phys}}(x_i,y_j)-\sum_{i=1}^{B_f}\operatorname{stopgrad}\!\left(P^{\star(XY)}_{i,0}(1+\gamma_{\mathrm{slack}}s_f)\right)\frac{\tau}{2}\tilde d(x_i)-\frac{1}{2}\sum_{i,k=1}^{B_f}\operatorname{stopgrad}\!\left(\sqrt{a_i a_k}P^{\star(XX)}_{ik}\right)c_{\mathrm{phys}}(x_i,x_k)\right]
 $$
 
-Softly caps critic input slopes at $\kappa=1$ ($\beta=20$) and damps residual sub-unit slope chatter ($\lambda_{\mathrm{floor}}=0.005$) on real and fake endpoints without transport-chord interpolation, shape gates or an EMA critic anchor.
+Linear horizon screening ($\rho=3$) routes valley outliers ($\hat c_{ij}>\rho$) to slack-gain-boosted centered critic log-odds ascent ($\tau/2=1,\gamma_{\mathrm{slack}}=0.35$), Feydy diagonal self-coupling cancels intra-mode entropic contraction, and 5-channel Kantorovich-Hellinger thermal scale $s_t$ locks equilibrium without step clocks.
+
+**Weyl-Phased Geodesic Chord and Endpoint Born-Infeld Critic Penalty**
+
+$$
+R_{\mathrm{RHBI}}(D)=\frac{\lambda}{2}\sum_{u\in\{y,x\}}\mathbb E_u\!\left[\phi_\beta(\lVert\nabla_u D(u)\rVert_2-\kappa)^2+\lambda_{\mathrm{floor}}\lVert\nabla_u D(u)\rVert_2^2\right]+\lambda w_{\mathrm{chord}}\mathbb E_{\hat x}\!\left[\phi_\beta(\lVert\nabla_{\hat x}D(\hat x)\rVert_2-\kappa)^2\right]+\frac{\gamma_{\mathrm{gauge}}}{2}\bar D^2
+$$
+
+Softly caps critic input slopes at $\kappa=1$ ($\beta=12$) on real/fake endpoints and deterministic Weyl-phased balanced-Sinkhorn geodesic interpolants ($w_{\mathrm{chord}}=0.25$) while anchoring mean critic gauge ($\gamma_{\mathrm{gauge}}=0.03$) without transport-shape gates or an EMA critic anchor.
 
 ## Simplified pseudocode
 
@@ -44,12 +44,12 @@ Softly caps critic input slopes at $\kappa=1$ ($\beta=20$) and damps residual su
 Fix one global configuration with constant learning rates and DualNorm updates across generator, encoder, critic and row-normalized particle prior.
 For each task-owned training update:
   Sample real batch y and latent batch z from the task prior P; form detached fake batch x_det = stop_gradient(G(z)).
-  Evaluate calibrated non-saturating logistic critic loss on D(y) and D(x_det) plus the smooth Born-Infeld endpoint input-gradient cap (with soft slope floor 0.005) on y and x_det.
+  Evaluate calibrated non-saturating logistic critic loss (scaled straight-through by thermal scale s_t) plus the Weyl-phased balanced Born-Infeld geodesic chord and endpoint input-gradient cap (with zero-mean gauge 0.03 and soft slope floor 0.005) on y and x_det.
   Backpropagate and step D via DualNorm; clear transient critic input-capture ring.
   With D fixed, resample latent z and compute differentiable fake batch x = G(z) together with critic forward captures.
   If continuous conditioning accompanies critic tuples D(c, x), evaluate fibre-centered paired relativistic log-odds softplus(D(c_i, y_i) - D(c_i, x_i)).
-  Otherwise update detached local horizon ell_t on device from the 25th-quantile nearest-neighbor distance of y and solve K=8 deterministic log-domain Sinkhorn scaling steps for active-plus-slack coupling P*(XY) and Feydy diagonal self-coupling P*(XX).
-  Evaluate the Danskin envelope RHBI generator loss combining active Born-Infeld pull, slack-routed critic ascent and Feydy self-coupling debiasing (or slack-screened relativistic log-odds on joint BiGAN hosts), plus SBNP prior regularization and any task-owned auxiliary losses.
+  Otherwise update detached AKT local horizon ell_t on device from y, update 5-channel two-sample Kantorovich-Hellinger thermal scale s_t (with 1-step shock reopening), and solve K=8 deterministic log-domain Sinkhorn scaling steps for active-plus-slack coupling P*(XY) and Feydy diagonal self-coupling P*(XX).
+  Evaluate the impedance-matched Danskin envelope RHBI generator loss combining active Born-Infeld pull, slack-gain-amplified critic ascent and Feydy self-coupling debiasing (or slack-screened relativistic log-odds on joint BiGAN hosts), plus SBNP prior regularization and any task-owned auxiliary losses.
   Project conflicting protected directions via direction-blend constraint geometry when declared, and step G, P and optional encoder E.
 ```
 
@@ -57,20 +57,21 @@ For each task-owned training update:
 
 | Characteristic | Behavior |
 | --- | --- |
-| Adversarial loss | Critic minimizes non-saturating logistic loss; unconditional and discrete-class generators minimize the RHBI slack-screened unbalanced Sinkhorn envelope objective combining physical Born-Infeld transport, Feydy diagonal self-coupling debiasing and slack-weighted centered critic log-odds ascent; continuous-conditioned fibres minimize fibre-centered paired relativistic log-odds; joint BiGAN generator/encoder hosts minimize slack-screened relativistic log-odds across active pairs and slack marginals. |
+| Adversarial loss | Critic minimizes thermally scaled non-saturating logistic loss; unconditional and discrete-class generators minimize the impedance-matched RHBI slack-screened unbalanced Sinkhorn envelope objective combining physical Born-Infeld transport, Feydy diagonal self-coupling debiasing and slack-gain-boosted centered critic log-odds ascent; continuous-conditioned fibres minimize fibre-centered paired relativistic log-odds; joint BiGAN generator/encoder hosts minimize slack-screened relativistic log-odds across active pairs and slack marginals. |
 | Optimizer | Full DualNorm across generator, encoder, critic and row-normalized particle prior (zero momentum, polar smoothing 0.0061, exact CPU-LAPACK smoothed polar factor on dense 2D weights, quintic per-offset convolution rule on wide CUDA kernels, direction-blend constraint geometry) without an EMA critic copy. |
-| Learning rates and annealing | Strictly constant across all tasks: global LR $0.014$, critic multiplier $1.5$ and prior multiplier $2.9$, with network and prior LR floors fixed at $1.0$ (zero schedule annealing and zero horizon dependence). |
+| Learning rates and annealing | Strictly constant base learning rates across all tasks: global LR $0.014$, critic multiplier $1.5$ and prior multiplier $2.9$, with network and prior LR floors fixed at $1.0$ (zero schedule annealing and zero horizon dependence). |
 | Parameter-gradient clipping | None on parameter tensors; active transport coordinate gradients are analytically bounded inside $[-1,+1]$ by the Born-Infeld ground cost and critic log-odds are smoothly bounded by $C_{\max}\tanh(\cdot/C_{\max})$. |
-| Critic penalties and anchors | Smooth C-infinity Born-Infeld endpoint input-gradient cap evaluated on real and fake inputs ($\lambda=1$, $\kappa=1$, sharpness $\beta=20$, sub-unit slope floor $\lambda_{\mathrm{floor}}=0.005$) with zero EMA critic anchor and automatic non-concatenated evaluation on stateful batch-bound critic view wrappers. |
-| Damping and update guards | None: critic spike guard ratio=$0$, latent damping=$0$, and zero shape or step-count gates; slack reservoir marginal $S=2$ keeps Sinkhorn iterations strictly inside the Birkhoff polytope while degree-of-freedom-aware SBNP regularization ($\lambda_{\mathrm{prior}}=0.02$) stabilizes particle geometry across dimensions. |
+| Critic penalties and anchors | Smooth C-infinity Born-Infeld input-gradient cap ($\lambda=1$, $\kappa=1$, sharpness $\beta=12$, sub-unit slope floor $\lambda_{\mathrm{floor}}=0.005$, zero-mean logit gauge $\gamma_{\mathrm{gauge}}=0.03$) evaluated on real/fake endpoints plus a deterministic golden-ratio Weyl-phased balanced-Sinkhorn geodesic chord ($w_{\mathrm{chord}}=0.25$), with zero EMA critic anchor and automatic non-concatenated evaluation on stateful batch-bound critic view wrappers. |
+| Damping and update guards | Clock-free, shape-gate-free 5-channel Kantorovich-Hellinger thermal equilibrium controller scales critic and generator gradients down to $s_{\min}=10^{-6}$ at distribution lock and reopens in 1 step on distribution shifts; critic spike guard ratio=$0$, latent damping=$0$; slack reservoir marginal $S=2$ keeps Sinkhorn iterations strictly inside the Birkhoff polytope while degree-of-freedom-aware SBNP regularization ($\lambda_{\mathrm{prior}}=0.02$) stabilizes particle geometry across dimensions. |
 | Training and sampling noise | Zero additive critic-input or generator-output training noise ($0.0$). Task-declared prior intrinsic sigma and serving contracts are preserved unchanged. |
 | Parameter averaging and serving | Generator EMA decay=$0$ and serve_average=$0$; all evaluations score live unaveraged weights. |
 
 ## Configuration differences
 
 - RHBI uses one global trainer configuration across every Tier 1, Tier 2, Tier 3 and Tier 4 task without per-task tuning, step-count gates or input-shape regimes.
+- AKT horizon scaling multiplies the 25th-quantile real NN distance by $B_r^{\max(0,1/d-1/2)}$ (scaling $d=1$ by $\sqrt{B_r}$ and exact identity $1.0$ for all $d\ge 2$ without shape branching).
 - When discrete class labels accompany critic inputs, cross-class active pairs are masked to minus infinity in log-Sinkhorn space so unmatched class draws route cleanly into the slack reservoir; when continuous conditioning accompanies critic tuples D(c, x), rhbi_conditional_fibre='slack' routes singleton fibres to fibre-centered paired relativistic log-odds.
-- Both passive observer records and formulation critic records checkpoint ell_ema and ell_initialized with zero per-step host-device synchronizations, ensuring exact bit-for-bit continuation across restarts and rejecting incompatible checkpoints.
+- Both passive observer records and formulation critic records checkpoint schema-2 state (ell_ema, ell_initialized, chord_phase, 5 residual EMAs and thermal_scale) with zero per-step host-device synchronizations, ensuring exact bit-for-bit continuation across restarts and rejecting tampered or incompatible checkpoints.
 - Setting rhbi_weight=0.0 executes an exact zero-strength bypass that leaves horizon buffers and RNG streams untouched.
 
 <details>
@@ -89,9 +90,11 @@ These links support the explanation. Recorded results below remain bound to thei
 - [configs/forge/ideas/rhbi-v1.json](../../../configs/forge/ideas/rhbi-v1.json)
 - [configs/forge/ideas/rhbi-v2.json](../../../configs/forge/ideas/rhbi-v2.json)
 - [configs/forge/ideas/rhbi-v3.json](../../../configs/forge/ideas/rhbi-v3.json)
+- [configs/forge/ideas/rhbi-v4.json](../../../configs/forge/ideas/rhbi-v4.json)
 - [configs/forge/studies/rhbi-v1-study.json](../../../configs/forge/studies/rhbi-v1-study.json)
 - [configs/forge/studies/rhbi-v2-study.json](../../../configs/forge/studies/rhbi-v2-study.json)
 - [configs/forge/studies/rhbi-v3-study.json](../../../configs/forge/studies/rhbi-v3-study.json)
+- [configs/forge/studies/rhbi-v4-study.json](../../../configs/forge/studies/rhbi-v4-study.json)
 - [reports/forge/rhbi/README.md](../rhbi/README.md)
 
 </details>
@@ -110,37 +113,24 @@ Every cell is one run; timings are never pooled across devices or contention sta
 
 This registration covers 9 complete recipes. Historical alternatives outside its registered family roster add no missing benchmark cells. A changed selected recipe within a registered family remains unknown until measured.
 
-### NVIDIA RTX A6000 · GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce
-
-Performance source `0eb9a085a6a0` (commit `eeb698a7b056f47f3183bdc4debadb7a5746ff89`); runtime `fddddb1b314d`; torch.float32; PyTorch 2.14.1+cu130; 48592.125 MiB device memory.
-
-Task prior: particle_cloud, sigma 0.0, 256 initial locations. The common finite-table performance exception retains each recipe's prior update policy and regularizer. Exact prior and resource specifications remain part of every task key.
-
-| Family / recipe | Task (RGB size, batch, width) | Execution | Median / p95 update ms | Images/s | GPU peak allocated / reserved MiB | Contention | Matched key / evidence |
-| --- | --- | --- | ---: | ---: | ---: | --- | --- |
-| RHBI · `rhbi-v3` | dcgan_performance_r32: 32², B16, W64 | COMPLETE | 34.40 / 39.14 | 451.39 | 92.84 / 126.00 | clear | `d19d2e7b78d6` · [receipt](../scaling-receipts/dcgan-performance-cloud-2edfe08a4bf5/rhbi-dcgan_performance_r32-508943daa4835c8e.json) |
-| RHBI · `rhbi-v3` | dcgan_performance_r64: 64², B16, W64 | COMPLETE | 56.29 / 57.76 | 284.18 | 231.53 / 322.00 | clear | `5089524de0aa` · [receipt](../scaling-receipts/dcgan-performance-cloud-2edfe08a4bf5/rhbi-dcgan_performance_r64-493bd29b64c15029.json) |
-| RHBI · `rhbi-v3` | dcgan_performance_w128: 64², B16, W128 | COMPLETE | 114.33 / 115.33 | 139.75 | 683.94 / 952.00 | clear | `c326d799bb7a` · [receipt](../scaling-receipts/dcgan-performance-cloud-2edfe08a4bf5/rhbi-dcgan_performance_w128-47ebe470d55b2e7a.json) |
-| RHBI · `rhbi-v3` | dcgan_performance_b64: 64², B64, W64 | COMPLETE | 96.79 / 99.01 | 658.80 | 603.24 / 666.00 | clear | `f650cd26021f` · [receipt](../scaling-receipts/dcgan-performance-cloud-2edfe08a4bf5/rhbi-dcgan_performance_b64-682043a393d4c48b.json) |
-| RHBI · `rhbi-v3` | dcgan_performance_r128: 128², B16, W64 | COMPLETE | 126.73 / 127.96 | 126.04 | 678.24 / 902.00 | clear | `487f3535a01b` · [receipt](../scaling-receipts/dcgan-performance-cloud-2edfe08a4bf5/rhbi-dcgan_performance_r128-ea47c18f65b3301b.json) |
-| RHBI · `rhbi-v3` | dcgan_performance_r256: 256², B16, W64 | COMPLETE | 352.22 / 355.01 | 45.36 | 2,286.29 / 2,468.00 | clear | `21d54a7a2d4e` · [receipt](../scaling-receipts/dcgan-performance-cloud-2edfe08a4bf5/rhbi-dcgan_performance_r256-2b5c2187387b72b8.json) |
+No current selected-recipe update timings are measured. Missing timing cells remain **unknown**.
 
 <a name="cohort-cuda-23a94f16ca88"></a>
 
 ## Current benchmark
 
-Runtime: **cuda**. Selected configuration: [rhbi-v3](../../../configs/forge/ideas/rhbi-v3.json).
+Runtime: **cuda**. Selected configuration: [rhbi-v4](../../../configs/forge/ideas/rhbi-v4.json).
 
 Comparison policy: discriminator_stability revision 9, **tier 1**. Actual executed-policy qualification: **tier 1**, discriminator_stability revision 16 (FAIL). These are separate policy results; no qualification reuse.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
 
-Source digest: `2edfe08a4bf52e63da3ca04851d97c5c4bf4f9582939e0d696624a284b439d36`. Candidate revision: `1e0d674047a1212d8a18623dac1886338156658cd4808769641f83594adef0bc`. Runtime cohort: `bd65cedf3c9afdbcf9b66fbf700159e08d939218d6d5f8bf29aae4aed3031a8c`.
+Source digest: `a989784d6f16ab67c44840b05b4b1187a063e5666c755a00fe569263d030581d`. Candidate revision: `a555da62030ea9cce3aa3d9a76e1f2e8ab3ffe86f4347f9b865cf52fafc7c459`. Runtime cohort: `1f852c0fbe76678bb02bf708bda8cfc558cafcd347e0f631dde95b7b6a0f537f`.
 
-[Frozen numerical evidence](../technique-evidence/af3aaf2c6321e6a27c169e475809459c6772be9486edc74bb15dd89d07132b86.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
+[Frozen numerical evidence](../technique-evidence/aa2ff3e18eb43bf1f06e4fa0ca45bec155d94255e730672fb3be10071ec18acf.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
 
-Selection: current_measurement. Promote rhbi-v3 (Relativistic Hellinger-Born-Infeld slack-screened transport with linear Born-Infeld horizon screening rho=3.0, Feydy diagonal self-coupling debiasing, endpoint gradient-cap slope floor 0.005, SBNP prior regularization 0.02 at prior_lr_mult=2.9, lr=0.014, polar_cpu_v1 smoothing 0.0061, stateful batch-view penalty handling, and fibre-centered conditional relativistic slack routing) as the canonical RHBI candidate following ordinary discriminator_stability CUDA measurement on NVIDIA RTX A6000 (11/11 required + 2/2 diagnostic Tier 1 PASS = 27/27 Tier 1 view requirements across views, 9 Tier 2 PASS = 49/78 Tier 2 view requirements, 76/115 total; 21 full-suite PASS, 0 BLOCKED). Actual executed-policy qualification and comparison-policy projection retain their separate source-bound proofs; no public-default adoption claim.
+Selection: current_measurement. Promote rhbi-v4 (Relativistic Hellinger-Born-Infeld slack-screened transport with Ajtai-Komlos-Tusnady empirical OT 1D horizon scaling, slack-gain critic boost 0.35, Weyl-phased balanced-Sinkhorn Born-Infeld geodesic chord regularization 0.25 at ebi_beta=12.0 with zero-mean critic gauge 0.03, and impedance-matched 5-channel Kantorovich-Hellinger thermal equilibrium controller rhbi_thermal_tau=0.084) as the canonical RHBI candidate following ordinary discriminator_stability CUDA measurement on NVIDIA RTX A6000 (11/11 required + 2/2 diagnostic Tier 1 PASS = 27/27 Tier 1 view requirements across views, 10/18 required Tier 2 PASS = 55/78 Tier 2 view requirements, 82/115 total counted view requirements; 24/61 full-suite PASS including mode_hold, vector_overlap, and stretch precision_gaussian_mxfp8, 0 BLOCKED). Actual executed-policy qualification and comparison-policy projection retain their separate source-bound proofs; no public-default adoption claim.
 
 </details>
 
@@ -148,12 +138,12 @@ Complete current Tier 1 measurement in: discriminator_stability. PASS and FAIL a
 
 | View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Tier 4 tests | Total distinct tests | Held (measured, not counted) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| [adaptation](rhbi.md#cohort-cuda-23a94f16ca88-adaptation) | [3/3](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-1) | [8/12](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) | [0/1 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-4) | [11/16 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-adaptation) | [0/7](rhbi.md#cohort-cuda-23a94f16ca88-held) |
-| [clockfree_continuous](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous) | [4/4](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-1) | [8/12](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) | [0/6 (6 not run)](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-4) | [12/22 (6 not run)](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous) | [0/7](rhbi.md#cohort-cuda-23a94f16ca88-held) |
-| [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability) | [11/11](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) | [9/18 (2 not run)](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) | [0/1 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4) | [20/30 (3 not run)](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability) | [0/25 (16 incompatible)](rhbi.md#cohort-cuda-23a94f16ca88-held) |
-| [formulation_comparison](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison) | [3/3](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-1) | [8/12](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) | [0/1 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-4) | [11/16 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison) | [0/7](rhbi.md#cohort-cuda-23a94f16ca88-held) |
-| [host_profile_transfer](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer) | [3/3](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-1) | [8/12](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) | [0/1 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-4) | [11/16 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer) | [0/7](rhbi.md#cohort-cuda-23a94f16ca88-held) |
-| [quality_coverage](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage) | [3/3](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-1) | [8/12](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-4) | [11/15](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage) | [0/7](rhbi.md#cohort-cuda-23a94f16ca88-held) |
+| [adaptation](rhbi.md#cohort-cuda-23a94f16ca88-adaptation) | [3/3](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-1) | [9/12](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) | [0/1 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-4) | [12/16 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-adaptation) | [1/7](rhbi.md#cohort-cuda-23a94f16ca88-held) |
+| [clockfree_continuous](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous) | [4/4](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-1) | [9/12](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) | [0/6 (6 not run)](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-4) | [13/22 (6 not run)](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous) | [1/7](rhbi.md#cohort-cuda-23a94f16ca88-held) |
+| [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability) | [11/11](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) | [10/18 (2 not run)](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) | [0/1 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4) | [21/30 (3 not run)](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability) | [2/25 (16 incompatible)](rhbi.md#cohort-cuda-23a94f16ca88-held) |
+| [formulation_comparison](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison) | [3/3](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-1) | [9/12](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) | [0/1 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-4) | [12/16 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison) | [1/7](rhbi.md#cohort-cuda-23a94f16ca88-held) |
+| [host_profile_transfer](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer) | [3/3](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-1) | [9/12](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) | [0/1 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-4) | [12/16 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer) | [1/7](rhbi.md#cohort-cuda-23a94f16ca88-held) |
+| [quality_coverage](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage) | [3/3](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-1) | [9/12](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-4) | [12/15](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage) | [1/7](rhbi.md#cohort-cuda-23a94f16ca88-held) |
 
 Separate cohort coverage (excluded from family totals):
 
@@ -189,7 +179,7 @@ Held at this tier (measured and shown, not counted):
 
 | Experiment | Held in | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [precision_gaussian_mxfp8](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_mxfp8) | [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) | FAIL | matches recorded run |
+| [precision_gaussian_mxfp8](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_mxfp8) | [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) | PASS | matches recorded run |
 | [precision_gaussian_nvfp4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_nvfp4) | [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) | FAIL | matches recorded run |
 
 <a name="cohort-cuda-23a94f16ca88-tier-2"></a>
@@ -206,7 +196,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [grid100](rhbi.md#cohort-cuda-23a94f16ca88-experiment-grid100) | [adaptation](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | matches recorded run |
 | [img_stripes2](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_stripes2) | [adaptation](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | PASS | matches recorded run |
 | [mid_scale_identity](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mid_scale_identity) | [adaptation](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | PASS | matches recorded run |
-| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | [adaptation](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | matches recorded run |
+| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | [adaptation](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | PASS | matches recorded run |
 | [model_ae_ddgan_bimodal_chain](rhbi.md#cohort-cuda-23a94f16ca88-experiment-model_ae_ddgan_bimodal_chain) | [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) | UNKNOWN | matches recorded run |
 | [model_ae_ddgan_gaussian_chain](rhbi.md#cohort-cuda-23a94f16ca88-experiment-model_ae_ddgan_gaussian_chain) | [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) | FAIL | matches recorded run |
 | [model_ddgan_bimodal_chain](rhbi.md#cohort-cuda-23a94f16ca88-experiment-model_ddgan_bimodal_chain) | [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) | UNKNOWN | matches recorded run |
@@ -227,7 +217,7 @@ Held at this tier (measured and shown, not counted):
 | [img_blobs4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_blobs4) | [adaptation](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | matches recorded run |
 | [img_intensity2](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_intensity2) | [adaptation](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | matches recorded run |
 | [vector_anisotropic](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_anisotropic) | [adaptation](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | matches recorded run |
-| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | [adaptation](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | matches recorded run |
+| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | [adaptation](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | PASS | matches recorded run |
 | [vector_unequal_mass](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_mass) | [adaptation](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | matches recorded run |
 | [vector_unequal_width](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_width) | [adaptation](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | matches recorded run |
 
@@ -295,13 +285,13 @@ These tests keep running and keep this recipe's recorded result, but they do not
 
 | Experiment | Held in | Recorded result | Reason | Summary | Re-entry rule |
 | --- | --- | --- | --- | --- | --- |
-| [precision_gaussian_mxfp8](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_mxfp8) | [discriminator_stability / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) | FAIL | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format MXFP8 software-reference training arithmetic? | Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass. |
+| [precision_gaussian_mxfp8](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_mxfp8) | [discriminator_stability / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) | PASS | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format MXFP8 software-reference training arithmetic? | Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass. |
 | [precision_gaussian_nvfp4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_nvfp4) | [discriminator_stability / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) | FAIL | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format NVFP4 software-reference training arithmetic? | Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass. |
 | [img_bars4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_bars4) | [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | Four bar pictures: BCAP and BISPF draw clean bars but only 2 of the 4. R1/R2 and GAN v3 pass it but fail Tier 1 tests and img_stripes2; under the current declarations no recipe passes both bars4 and stripes2. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
 | [img_blobs4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_blobs4) | [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | Four corner-blob pictures: BCAP covers 2 corners (24/32 clean), BISPF 3 (28/32); the test needs all 4 corners and 29/32 clean. Every recipe passing its current declaration fails or cannot run Tier 1 tests. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
 | [img_intensity2](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_intensity2) | [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | Two brightness levels: BCAP draws both but 10 of 32 pictures are off in brightness; BISPF collapses to one level. The three recipes passing its current declaration fail Tier 1 tests that BCAP and BISPF pass. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
 | [vector_anisotropic](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_anisotropic) | [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_anisotropic) | Three stretched, tilted blobs: BCAP and BISPF draw the shapes but the wrong amounts (mass TV 0.196 and 0.191; limit 0.15). Of the 16 recipes passing its current declaration, 12 fail Tier 1 ring16_acquisition, 1 timed out on it and 3 fail mode_hold. | Count again when one global recipe (one recipe hash and source, seed 0, the public initializer and one runtime) passes this test under its unchanged declaration and also passes every counted Tier 1 and Tier 2 test, including ring16_acquisition and mode_hold. |
-| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | One broad cloud made of two overlapping blobs: BCAP and BISPF reach it early, then drift (centre error 0.39 and 0.28; limit 0.15). All 15 recipes passing its current declaration fail Tier 1 ring16_acquisition or mode_hold. | Count again when one global recipe (one recipe hash and source, seed 0, the public initializer and one runtime) passes this test under its unchanged declaration and also passes every counted Tier 1 and Tier 2 test, including ring16_acquisition and mode_hold. |
+| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | PASS | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | One broad cloud made of two overlapping blobs: BCAP and BISPF reach it early, then drift (centre error 0.39 and 0.28; limit 0.15). All 15 recipes passing its current declaration fail Tier 1 ring16_acquisition or mode_hold. | Count again when one global recipe (one recipe hash and source, seed 0, the public initializer and one runtime) passes this test under its unchanged declaration and also passes every counted Tier 1 and Tier 2 test, including ring16_acquisition and mode_hold. |
 | [vector_unequal_mass](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_mass) | [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_mass) | The rare 2% blob loses its share or collapses (BCAP eigen ratio 0.009, BISPF 0.004; need 0.15). Perfect samples pass 200/200 runs. Its passers fail counted tests, except some round-5 research recipes that fail only held tests and never ran most of the counted suite. | Count again when one global recipe (one recipe hash and source, seed 0, the public initializer and one runtime) passes this test under its unchanged declaration and also passes every counted Tier 1 and Tier 2 test, including ring16_acquisition and mode_hold. Round 5 shows it trades off against vector_unequal_width, so the two will likely return together. |
 | [vector_unequal_width](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_width) | [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_width) | Equal shares, very different widths: BCAP and BISPF get the shares wrong (mass TV 0.29 and 0.25; limit 0.15). Perfect samples pass 200/200 runs. Cell-moment passers fail counted tests; round-5 balanced assignment fails only held tests but never ran most of the counted suite. | Count again when one global recipe (one recipe hash and source, seed 0, the public initializer and one runtime) passes this test under its unchanged declaration and also passes every counted Tier 1 and Tier 2 test, including ring16_acquisition and mode_hold. Round 5 shows it trades off against vector_unequal_mass, so the two will likely return together. |
 | [zero_tanh_rail_escape](rhbi.md#cohort-cuda-23a94f16ca88-experiment-zero_tanh_rail_escape) | [discriminator_stability / Tier 3](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-3) | BLOCKED | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | Dynamic target shift (+0.90, -0.90) -> (0.0, 0.0) rail escape with 400-update deadline held pending passing recipe. | Count again when one global recipe passes zero_tanh_rail_escape under its unchanged declaration and satisfies all Tier 1-3 requirements. |
@@ -352,12 +342,12 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | [unipolar](rhbi.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | required | PASS | matches recorded run |
 | [cover_leftover](rhbi.md#cohort-cuda-23a94f16ca88-experiment-cover_leftover) | required | PASS | matches recorded run |
 | [mid_scale_identity](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mid_scale_identity) | required | PASS | matches recorded run |
-| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | required | FAIL | matches recorded run |
+| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | required | PASS | matches recorded run |
 | [vector_two_broad](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_two_broad) | required | PASS | matches recorded run |
 | [vector_unequal_mass](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_mass) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_mass) | FAIL | matches recorded run |
 | [vector_unequal_width](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_width) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_width) | FAIL | matches recorded run |
 | [vector_anisotropic](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_anisotropic) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_anisotropic) | FAIL | matches recorded run |
-| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | FAIL | matches recorded run |
+| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | PASS | matches recorded run |
 | [vector_spiral](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_spiral) | required | PASS | matches recorded run |
 | [img_stripes2](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_stripes2) | required | PASS | matches recorded run |
 | [img_bars4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_bars4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | FAIL | matches recorded run |
@@ -404,12 +394,12 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | [unipolar](rhbi.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | diagnostic | PASS | matches recorded run |
 | [cover_leftover](rhbi.md#cohort-cuda-23a94f16ca88-experiment-cover_leftover) | diagnostic | PASS | matches recorded run |
 | [mid_scale_identity](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mid_scale_identity) | diagnostic | PASS | matches recorded run |
-| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | diagnostic | FAIL | matches recorded run |
+| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | diagnostic | PASS | matches recorded run |
 | [vector_two_broad](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_two_broad) | diagnostic | PASS | matches recorded run |
 | [vector_unequal_mass](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_mass) | diagnostic | FAIL | matches recorded run |
 | [vector_unequal_width](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_width) | diagnostic | FAIL | matches recorded run |
 | [vector_anisotropic](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_anisotropic) | diagnostic | FAIL | matches recorded run |
-| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | diagnostic | FAIL | matches recorded run |
+| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | diagnostic | PASS | matches recorded run |
 | [vector_spiral](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_spiral) | diagnostic | PASS | matches recorded run |
 | [img_stripes2](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_stripes2) | diagnostic | PASS | matches recorded run |
 | [img_bars4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
@@ -675,12 +665,12 @@ Additional eligibility requirements:
 | [unipolar](rhbi.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | required | PASS | matches recorded run |
 | [cover_leftover](rhbi.md#cohort-cuda-23a94f16ca88-experiment-cover_leftover) | required | PASS | matches recorded run |
 | [mid_scale_identity](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mid_scale_identity) | required | PASS | matches recorded run |
-| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | required | FAIL | matches recorded run |
+| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | required | PASS | matches recorded run |
 | [vector_two_broad](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_two_broad) | required | PASS | matches recorded run |
 | [vector_unequal_mass](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_mass) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_mass) | FAIL | matches recorded run |
 | [vector_unequal_width](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_width) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_width) | FAIL | matches recorded run |
 | [vector_anisotropic](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_anisotropic) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_anisotropic) | FAIL | matches recorded run |
-| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | FAIL | matches recorded run |
+| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | PASS | matches recorded run |
 | [vector_spiral](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_spiral) | required | PASS | matches recorded run |
 | [img_stripes2](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_stripes2) | required | PASS | matches recorded run |
 | [img_bars4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_bars4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | FAIL | matches recorded run |
@@ -853,7 +843,7 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [model_vae_hard](rhbi.md#cohort-cuda-23a94f16ca88-experiment-model_vae_hard) | required | PASS | matches recorded run |
 | [clockfree_audit_measurement_v1](rhbi.md#cohort-cuda-23a94f16ca88-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
 | [precision_gaussian_fp32](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_fp32) | diagnostic | FAIL | matches recorded run |
-| [precision_gaussian_mxfp8](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_mxfp8) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | FAIL | matches recorded run |
+| [precision_gaussian_mxfp8](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_mxfp8) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | PASS | matches recorded run |
 | [precision_gaussian_nvfp4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_nvfp4) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | FAIL | matches recorded run |
 
 <a name="cohort-cuda-23a94f16ca88-discriminator_stability-tier-2"></a>
@@ -869,14 +859,14 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [unipolar](rhbi.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | required | PASS | matches recorded run |
 | [cover_leftover](rhbi.md#cohort-cuda-23a94f16ca88-experiment-cover_leftover) | required | PASS | matches recorded run |
 | [mid_scale_identity](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mid_scale_identity) | required | PASS | matches recorded run |
-| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | required | FAIL | matches recorded run |
+| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | required | PASS | matches recorded run |
 | [model_ae_ddgan_gaussian_chain](rhbi.md#cohort-cuda-23a94f16ca88-experiment-model_ae_ddgan_gaussian_chain) | required | FAIL | matches recorded run |
 | [vector_two_broad](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_two_broad) | required | PASS | matches recorded run |
 | [vector_unequal_mass](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_mass) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_mass) | FAIL | matches recorded run |
 | [model_ddgan_gaussian_chain](rhbi.md#cohort-cuda-23a94f16ca88-experiment-model_ddgan_gaussian_chain) | required | FAIL | matches recorded run |
 | [vector_unequal_width](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_width) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_width) | FAIL | matches recorded run |
 | [vector_anisotropic](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_anisotropic) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_anisotropic) | FAIL | matches recorded run |
-| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | FAIL | matches recorded run |
+| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | PASS | matches recorded run |
 | [vector_spiral](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_spiral) | required | PASS | matches recorded run |
 | [img_stripes2](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_stripes2) | required | PASS | matches recorded run |
 | [img_bars4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_bars4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | FAIL | matches recorded run |
@@ -951,12 +941,12 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 | [unipolar](rhbi.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | required | PASS | matches recorded run |
 | [cover_leftover](rhbi.md#cohort-cuda-23a94f16ca88-experiment-cover_leftover) | required | PASS | matches recorded run |
 | [mid_scale_identity](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mid_scale_identity) | required | PASS | matches recorded run |
-| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | required | FAIL | matches recorded run |
+| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | required | PASS | matches recorded run |
 | [vector_two_broad](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_two_broad) | required | PASS | matches recorded run |
 | [vector_unequal_mass](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_mass) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_mass) | FAIL | matches recorded run |
 | [vector_unequal_width](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_width) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_width) | FAIL | matches recorded run |
 | [vector_anisotropic](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_anisotropic) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_anisotropic) | FAIL | matches recorded run |
-| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | FAIL | matches recorded run |
+| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | PASS | matches recorded run |
 | [vector_spiral](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_spiral) | required | PASS | matches recorded run |
 | [img_stripes2](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_stripes2) | required | PASS | matches recorded run |
 | [img_bars4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_bars4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | FAIL | matches recorded run |
@@ -1027,12 +1017,12 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 | [unipolar](rhbi.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | required | PASS | matches recorded run |
 | [cover_leftover](rhbi.md#cohort-cuda-23a94f16ca88-experiment-cover_leftover) | required | PASS | matches recorded run |
 | [mid_scale_identity](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mid_scale_identity) | required | PASS | matches recorded run |
-| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | required | FAIL | matches recorded run |
+| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | required | PASS | matches recorded run |
 | [vector_two_broad](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_two_broad) | required | PASS | matches recorded run |
 | [vector_unequal_mass](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_mass) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_mass) | FAIL | matches recorded run |
 | [vector_unequal_width](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_width) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_width) | FAIL | matches recorded run |
 | [vector_anisotropic](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_anisotropic) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_anisotropic) | FAIL | matches recorded run |
-| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | FAIL | matches recorded run |
+| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | PASS | matches recorded run |
 | [vector_spiral](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_spiral) | required | PASS | matches recorded run |
 | [img_stripes2](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_stripes2) | required | PASS | matches recorded run |
 | [img_bars4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_bars4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | FAIL | matches recorded run |
@@ -1138,12 +1128,12 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 | [unipolar](rhbi.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | diagnostic | PASS | matches recorded run |
 | [cover_leftover](rhbi.md#cohort-cuda-23a94f16ca88-experiment-cover_leftover) | diagnostic | PASS | matches recorded run |
 | [mid_scale_identity](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mid_scale_identity) | diagnostic | PASS | matches recorded run |
-| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | diagnostic | FAIL | matches recorded run |
+| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | diagnostic | PASS | matches recorded run |
 | [vector_two_broad](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_two_broad) | diagnostic | PASS | matches recorded run |
 | [vector_unequal_mass](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_mass) | diagnostic | FAIL | matches recorded run |
 | [vector_unequal_width](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_width) | diagnostic | FAIL | matches recorded run |
 | [vector_anisotropic](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_anisotropic) | diagnostic | FAIL | matches recorded run |
-| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | diagnostic | FAIL | matches recorded run |
+| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | diagnostic | PASS | matches recorded run |
 | [vector_spiral](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_spiral) | diagnostic | PASS | matches recorded run |
 | [img_stripes2](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_stripes2) | diagnostic | PASS | matches recorded run |
 | [img_bars4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
@@ -1248,12 +1238,12 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 | [unipolar](rhbi.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | diagnostic | PASS | matches recorded run |
 | [cover_leftover](rhbi.md#cohort-cuda-23a94f16ca88-experiment-cover_leftover) | diagnostic | PASS | matches recorded run |
 | [mid_scale_identity](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mid_scale_identity) | diagnostic | PASS | matches recorded run |
-| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | diagnostic | FAIL | matches recorded run |
+| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | diagnostic | PASS | matches recorded run |
 | [vector_two_broad](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_two_broad) | diagnostic | PASS | matches recorded run |
 | [vector_unequal_mass](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_mass) | diagnostic | FAIL | matches recorded run |
 | [vector_unequal_width](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_width) | diagnostic | FAIL | matches recorded run |
 | [vector_anisotropic](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_anisotropic) | diagnostic | FAIL | matches recorded run |
-| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | diagnostic | FAIL | matches recorded run |
+| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | diagnostic | PASS | matches recorded run |
 | [vector_spiral](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_spiral) | diagnostic | PASS | matches recorded run |
 | [img_stripes2_residual16](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_stripes2_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
 | [img_bars4_residual16](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_bars4_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
@@ -1324,12 +1314,12 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | [unipolar](rhbi.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | required | PASS | matches recorded run |
 | [cover_leftover](rhbi.md#cohort-cuda-23a94f16ca88-experiment-cover_leftover) | required | PASS | matches recorded run |
 | [mid_scale_identity](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mid_scale_identity) | required | PASS | matches recorded run |
-| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | required | FAIL | matches recorded run |
+| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | required | PASS | matches recorded run |
 | [vector_two_broad](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_two_broad) | required | PASS | matches recorded run |
 | [vector_unequal_mass](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_mass) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_mass) | FAIL | matches recorded run |
 | [vector_unequal_width](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_width) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_width) | FAIL | matches recorded run |
 | [vector_anisotropic](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_anisotropic) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_anisotropic) | FAIL | matches recorded run |
-| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | FAIL | matches recorded run |
+| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | PASS | matches recorded run |
 | [vector_spiral](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_spiral) | required | PASS | matches recorded run |
 | [img_stripes2](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_stripes2) | required | PASS | matches recorded run |
 | [img_bars4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_bars4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | FAIL | matches recorded run |
@@ -1413,12 +1403,12 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [unipolar](rhbi.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | diagnostic | PASS | matches recorded run |
 | [cover_leftover](rhbi.md#cohort-cuda-23a94f16ca88-experiment-cover_leftover) | diagnostic | PASS | matches recorded run |
 | [mid_scale_identity](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mid_scale_identity) | diagnostic | PASS | matches recorded run |
-| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | diagnostic | FAIL | matches recorded run |
+| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | diagnostic | PASS | matches recorded run |
 | [vector_two_broad](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_two_broad) | diagnostic | PASS | matches recorded run |
 | [vector_unequal_mass](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_mass) | diagnostic | FAIL | matches recorded run |
 | [vector_unequal_width](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_width) | diagnostic | FAIL | matches recorded run |
 | [vector_anisotropic](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_anisotropic) | diagnostic | FAIL | matches recorded run |
-| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | diagnostic | FAIL | matches recorded run |
+| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | diagnostic | PASS | matches recorded run |
 | [vector_spiral](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_spiral) | diagnostic | PASS | matches recorded run |
 | [img_stripes2](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_stripes2) | diagnostic | PASS | matches recorded run |
 | [img_bars4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
@@ -1471,12 +1461,12 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [unipolar](rhbi.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | diagnostic | PASS | matches recorded run |
 | [cover_leftover](rhbi.md#cohort-cuda-23a94f16ca88-experiment-cover_leftover) | diagnostic | PASS | matches recorded run |
 | [mid_scale_identity](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mid_scale_identity) | diagnostic | PASS | matches recorded run |
-| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | diagnostic | FAIL | matches recorded run |
+| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | diagnostic | PASS | matches recorded run |
 | [vector_two_broad](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_two_broad) | diagnostic | PASS | matches recorded run |
 | [vector_unequal_mass](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_mass) | diagnostic | FAIL | matches recorded run |
 | [vector_unequal_width](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_width) | diagnostic | FAIL | matches recorded run |
 | [vector_anisotropic](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_anisotropic) | diagnostic | FAIL | matches recorded run |
-| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | diagnostic | FAIL | matches recorded run |
+| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | diagnostic | PASS | matches recorded run |
 | [vector_spiral](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_spiral) | diagnostic | PASS | matches recorded run |
 | [img_stripes2](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_stripes2) | diagnostic | PASS | matches recorded run |
 | [img_bars4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
@@ -1529,12 +1519,12 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [unipolar](rhbi.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | diagnostic | PASS | matches recorded run |
 | [cover_leftover](rhbi.md#cohort-cuda-23a94f16ca88-experiment-cover_leftover) | diagnostic | PASS | matches recorded run |
 | [mid_scale_identity](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mid_scale_identity) | diagnostic | PASS | matches recorded run |
-| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | diagnostic | FAIL | matches recorded run |
+| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | diagnostic | PASS | matches recorded run |
 | [vector_two_broad](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_two_broad) | diagnostic | PASS | matches recorded run |
 | [vector_unequal_mass](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_mass) | diagnostic | FAIL | matches recorded run |
 | [vector_unequal_width](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_width) | diagnostic | FAIL | matches recorded run |
 | [vector_anisotropic](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_anisotropic) | diagnostic | FAIL | matches recorded run |
-| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | diagnostic | FAIL | matches recorded run |
+| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | diagnostic | PASS | matches recorded run |
 | [vector_spiral](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_spiral) | diagnostic | PASS | matches recorded run |
 | [img_stripes2](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_stripes2) | diagnostic | PASS | matches recorded run |
 | [img_bars4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
@@ -1587,12 +1577,12 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [unipolar](rhbi.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | diagnostic | PASS | matches recorded run |
 | [cover_leftover](rhbi.md#cohort-cuda-23a94f16ca88-experiment-cover_leftover) | diagnostic | PASS | matches recorded run |
 | [mid_scale_identity](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mid_scale_identity) | diagnostic | PASS | matches recorded run |
-| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | diagnostic | FAIL | matches recorded run |
+| [mode_hold](rhbi.md#cohort-cuda-23a94f16ca88-experiment-mode_hold) | diagnostic | PASS | matches recorded run |
 | [vector_two_broad](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_two_broad) | diagnostic | PASS | matches recorded run |
 | [vector_unequal_mass](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_mass) | diagnostic | FAIL | matches recorded run |
 | [vector_unequal_width](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_width) | diagnostic | FAIL | matches recorded run |
 | [vector_anisotropic](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_anisotropic) | diagnostic | FAIL | matches recorded run |
-| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | diagnostic | FAIL | matches recorded run |
+| [vector_overlap](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_overlap) | diagnostic | PASS | matches recorded run |
 | [vector_spiral](rhbi.md#cohort-cuda-23a94f16ca88-experiment-vector_spiral) | diagnostic | PASS | matches recorded run |
 | [img_stripes2](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_stripes2) | diagnostic | PASS | matches recorded run |
 | [img_bars4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
@@ -1759,12 +1749,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| hold | 0.0207673 | <= 0.35 | PASS |
-| recon_mse | 0.00980642 | <= 0.05 | PASS |
+| hold | 0.0158929 | <= 0.35 | PASS |
+| recon_mse | 0.00539541 | <= 0.05 | PASS |
 
 Recorded terminal passing observations: **22**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/85a732e2f07e4f969bb4fe0e3ad2eeca.json)
+[Compact metrics and receipt provenance](../technique-receipts/0ce0ee466d5648d990b6e454b1ea835e.json)
 
 Recorded conditions: mog prior (sigma 0.025); generated_and_reconstructed_prior_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -1910,7 +1900,7 @@ Recorded final metrics:
 | --- | ---: |
 | parity_comparisons | 4 |
 
-[Compact metrics and receipt provenance](../technique-receipts/6a0d8a8abdab440192b6888d27fa0387.json)
+[Compact metrics and receipt provenance](../technique-receipts/073abbd423254fc895c6f6c02822aeb9.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1960,16 +1950,16 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| content_kept | 0.982832 | >= 0.75 | PASS |
-| leak_ratio | 0.0340597 | <= 0.2 | PASS |
-| pole_rel_err_minus | 0.0230122 | <= 0.2 | PASS |
-| pole_rel_err_plus | 0.0240481 | <= 0.2 | PASS |
-| same_dir | 0.0199262 | <= 0.25 | PASS |
-| u_kept | 0.996487 | >= 0.85 | PASS |
+| content_kept | 0.98011 | >= 0.75 | PASS |
+| leak_ratio | 0.00891298 | <= 0.2 | PASS |
+| pole_rel_err_minus | 0.0141227 | <= 0.2 | PASS |
+| pole_rel_err_plus | 0.0103309 | <= 0.2 | PASS |
+| same_dir | 0.00551454 | <= 0.25 | PASS |
+| u_kept | 0.995025 | >= 0.85 | PASS |
 
 Recorded terminal passing observations: **23**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/f8c94b44e9314b2aae89e2834650fa41.json)
+[Compact metrics and receipt provenance](../technique-receipts/a2a1eedf65624bc68675cac4bf3b8a5f.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -2372,23 +2362,23 @@ Recorded final metrics:
 | --- | ---: |
 | completed_steps | 5667 |
 | mass_apple | 0.188477 |
-| mass_berry | 0.223633 |
-| mass_grape | 0.182617 |
-| mass_lemon | 0.210938 |
-| mass_melon | 0.194336 |
+| mass_berry | 0.194336 |
+| mass_grape | 0.223633 |
+| mass_lemon | 0.182617 |
+| mass_melon | 0.210938 |
 | mass_tv | 0.0345703 |
-| minimum_reconstruction_token_probability | 0.999846 |
+| minimum_reconstruction_token_probability | 0.999731 |
 | modes | 5 |
 | output_noise_added | 0 |
 | policy_latent_perturbation | 0 |
 | quality_fraction | 1 |
 | reconstruction_exact | 1 |
-| reconstruction_nll | 3.31814e-05 |
+| reconstruction_nll | 4.53265e-05 |
 | sample_count | 1024 |
 | served_averaged | 0 |
 | step | 5667 |
 
-[Compact metrics and receipt provenance](../technique-receipts/3ed731566f5d4897bf7b8ec38456ca01.json)
+[Compact metrics and receipt provenance](../technique-receipts/70a557e350b04bd29dcb0056fad7134d.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
 
@@ -2431,23 +2421,23 @@ Recorded final metrics:
 | --- | ---: |
 | completed_steps | 20001 |
 | mass_apple | 0.195312 |
-| mass_berry | 0.198242 |
-| mass_grape | 0.208008 |
-| mass_lemon | 0.1875 |
-| mass_melon | 0.210938 |
+| mass_berry | 0.210938 |
+| mass_grape | 0.198242 |
+| mass_lemon | 0.208008 |
+| mass_melon | 0.1875 |
 | mass_tv | 0.0189453 |
-| minimum_reconstruction_token_probability | 0.999639 |
+| minimum_reconstruction_token_probability | 0.995446 |
 | modes | 5 |
 | output_noise_added | 0 |
 | policy_latent_perturbation | 0 |
 | quality_fraction | 1 |
 | reconstruction_exact | 1 |
-| reconstruction_nll | 5.01696e-05 |
+| reconstruction_nll | 0.00102799 |
 | sample_count | 1024 |
 | served_averaged | 0 |
 | step | 20001 |
 
-[Compact metrics and receipt provenance](../technique-receipts/9ed711fe5dd548d2a9cc6acd8c928c0e.json)
+[Compact metrics and receipt provenance](../technique-receipts/4286b9b4bb1b46e3b2facace5c8170eb.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
 
@@ -2520,16 +2510,16 @@ Recorded final metrics:
 
 | Metric | Measured |
 | --- | ---: |
-| cdf_ks | 0.0906616 |
+| cdf_ks | 0.0483622 |
 | finite_fraction | 1 |
-| mean | 1.96866 |
-| mean_error_sigma | 0.0626753 |
+| mean | 1.99884 |
+| mean_error_sigma | 0.00231563 |
 | sample_count | 4096 |
-| std | 0.439619 |
-| std_ratio | 0.879238 |
+| std | 0.520119 |
+| std_ratio | 1.04024 |
 | step | 1000 |
 
-[Compact metrics and receipt provenance](../technique-receipts/9bef3a1fa58a4048afa129ad3faec939.json)
+[Compact metrics and receipt provenance](../technique-receipts/1e157275451640dbb6fef600c385925b.json)
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2568,16 +2558,16 @@ Recorded final metrics:
 
 | Metric | Measured |
 | --- | ---: |
-| cdf_ks | 0.126689 |
+| cdf_ks | 0.058233 |
 | finite_fraction | 1 |
-| mean | 3.0957 |
-| mean_error_sigma | 0.191397 |
+| mean | 3.03483 |
+| mean_error_sigma | 0.0696535 |
 | sample_count | 4096 |
-| std | 0.528851 |
-| std_ratio | 1.0577 |
+| std | 0.468007 |
+| std_ratio | 0.936014 |
 | step | 6000 |
 
-[Compact metrics and receipt provenance](../technique-receipts/f4a1cdb447414fb3aa92fe198bf25496.json)
+[Compact metrics and receipt provenance](../technique-receipts/d6f35af36e754c88b734bd9ec238159e.json)
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2611,7 +2601,7 @@ Dependencies: gaussian1d_smoke (checkpoint).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -2619,27 +2609,27 @@ Recorded final metrics:
 
 | Metric | Measured |
 | --- | ---: |
-| abs_cov_trace_bias | unavailable |
+| abs_cov_trace_bias | 0.636746 |
 | accuracy_pass | False |
-| accuracy_score | unavailable |
+| accuracy_score | 6.16868 |
 | all_finite | True |
-| center_max_sigma | unavailable |
-| center_rms_sigma | unavailable |
-| cov_frob_rms | unavailable |
-| cov_trace_bias | unavailable |
+| center_max_sigma | 1.99342 |
+| center_rms_sigma | 1.12524 |
+| cov_frob_rms | 0.769394 |
+| cov_trace_bias | 0.636746 |
 | frozen_pass | False |
-| mass_tv | 0.1206 |
+| mass_tv | 0.13535 |
 | n | 100000 |
 | passed | False |
-| precision | 0.2233 |
-| precision_gap | 0.765591 |
+| precision | 0.26119 |
+| precision_gap | 0.727701 |
 | problem | grid100 |
 | protocol | toy100-accuracy-v1 |
-| radial_ks | unavailable |
+| radial_ks | 0.41701 |
 | valid_n | 100000 |
-| within_radius_n | 22330 |
+| within_radius_n | 26119 |
 
-[Compact metrics and receipt provenance](../technique-receipts/da70df4878f04ee6aa7661900926a46f.json)
+[Compact metrics and receipt provenance](../technique-receipts/fe94ec936355414bb6d3a82803d1ff3b.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2965,7 +2955,7 @@ Dependencies: grid100 (gate).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -2973,12 +2963,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| hq | 0.875 | >= 0.9 | FAIL |
+| hq | 0.9375 | >= 0.9 | PASS |
 | modes | 2 | >= 4 | FAIL |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/8b2a0b0308384bff881bbfa083d0780e.json)
+[Compact metrics and receipt provenance](../technique-receipts/4ce3f426901141f39cf916a98f969604.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -3056,7 +3046,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -3064,12 +3054,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| hq | 0.8125 | >= 0.9 | FAIL |
+| hq | 0.875 | >= 0.9 | FAIL |
 | modes | 4 | >= 4 | PASS |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/f740b7a583624d2e8c58cab38c0758b0.json)
+[Compact metrics and receipt provenance](../technique-receipts/b7deea7d3f37439283f38d969f8ddf74.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -3121,7 +3111,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -3129,12 +3119,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| hq | 0.59375 | >= 0.9 | FAIL |
-| modes | 1 | >= 2 | FAIL |
+| hq | 0.875 | >= 0.9 | FAIL |
+| modes | 2 | >= 2 | PASS |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/e39e2b6a7ba2429d9726c66b82699fce.json)
+[Compact metrics and receipt provenance](../technique-receipts/19ee41180a1249ac8deb9b2aeabcd277.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -3186,7 +3176,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -3199,7 +3189,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **12**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/c2ffe65f36c544bdb3c647429740cc28.json)
+[Compact metrics and receipt provenance](../technique-receipts/9ac705cd700f4936bac32df8de033ab7.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -3316,16 +3306,16 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| concept_cos_minus | 0.999996 | >= 0.85 | PASS |
-| concept_cos_plus | 0.999867 | >= 0.85 | PASS |
-| concept_mag_minus | 0.999711 | <= 1.25 | PASS |
-| concept_mag_plus | 1.00173 | <= 1.25 | PASS |
-| identity_at_0 | 0.998985 | >= 0.85 | PASS |
-| identity_at_mid | 0.995521 | >= 0.85 | PASS |
+| concept_cos_minus | 1 | >= 0.85 | PASS |
+| concept_cos_plus | 0.999902 | >= 0.85 | PASS |
+| concept_mag_minus | 0.999984 | <= 1.25 | PASS |
+| concept_mag_plus | 1.00047 | <= 1.25 | PASS |
+| identity_at_0 | 0.999697 | >= 0.85 | PASS |
+| identity_at_mid | 0.999051 | >= 0.85 | PASS |
 
 Recorded terminal passing observations: **23**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/b992101e1e6e4977a58dfdbb6a5af260.json)
+[Compact metrics and receipt provenance](../technique-receipts/f94332eb0f2545979a5ca3d1573392bc.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -3475,7 +3465,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 ### mode_hold
 
-**mode_hold: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/mode_hold.json).
+**mode_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/mode_hold.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
@@ -3487,12 +3477,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| hq | 0.918213 | >= 0.9 | PASS |
-| modes | 7 | >= 8 | FAIL |
+| hq | 1 | >= 0.9 | PASS |
+| modes | 8 | >= 8 | PASS |
 
-Recorded terminal passing observations: **0**; required: 5.
+Recorded terminal passing observations: **9**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/6178bbe78d59444e8227bc66cb5668d5.json)
+[Compact metrics and receipt provenance](../technique-receipts/0ff0f162564544559f84ae4e96f2f65b.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -3596,7 +3586,7 @@ Dependencies: model_ae_ddgan_gaussian_chain (gate).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -3604,52 +3594,52 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| final_covariance_eigen_max | 1.17321 | <= 1.4 | PASS |
-| final_covariance_eigen_min | 0.682498 | >= 0.65 | PASS |
-| final_normalized_mean | 0.755333 | <= 0.45 | FAIL |
-| final_projection_cdf | 0.299662 | <= 0.2 | FAIL |
-| paired_nmse | 0.0599558 | <= 0.1 | PASS |
+| final_covariance_eigen_max | 0.838047 | <= 1.4 | PASS |
+| final_covariance_eigen_min | 0.735445 | >= 0.65 | PASS |
+| final_normalized_mean | 0.468604 | <= 0.45 | FAIL |
+| final_projection_cdf | 0.213085 | <= 0.2 | FAIL |
+| paired_nmse | 0.0778878 | <= 0.1 | PASS |
 | paired_reverse_steps | 4 | == 4 | PASS |
-| paired_shuffled_gain | 31.7012 | >= 3 | PASS |
-| paired_worst_axis_nrmse | 0.247409 | <= 0.25 | PASS |
+| paired_shuffled_gain | 24.4839 | >= 3 | PASS |
+| paired_worst_axis_nrmse | 0.296567 | <= 0.25 | FAIL |
 | panel_count | 8 | == 8 | PASS |
 | samples_per_panel | 2048 | >= 2048 | PASS |
-| t1_q0_covariance_eigen_max | 1.48999 | <= 1.8 | PASS |
-| t1_q0_covariance_eigen_min | 0.648643 | >= 0.4 | PASS |
-| t1_q0_normalized_mean | 0.783052 | <= 0.65 | FAIL |
-| t1_q0_projection_cdf | 0.293914 | <= 0.26 | FAIL |
-| t1_q1_covariance_eigen_max | 1.27356 | <= 1.8 | PASS |
-| t1_q1_covariance_eigen_min | 0.690879 | >= 0.4 | PASS |
-| t1_q1_normalized_mean | 0.927188 | <= 0.65 | FAIL |
-| t1_q1_projection_cdf | 0.370609 | <= 0.26 | FAIL |
-| t2_q0_covariance_eigen_max | 0.904757 | <= 1.4 | PASS |
-| t2_q0_covariance_eigen_min | 0.809739 | >= 0.6 | PASS |
-| t2_q0_normalized_mean | 0.0479169 | <= 0.35 | PASS |
-| t2_q0_projection_cdf | 0.0381737 | <= 0.2 | PASS |
-| t2_q1_covariance_eigen_max | 0.936622 | <= 1.4 | PASS |
-| t2_q1_covariance_eigen_min | 0.794875 | >= 0.6 | PASS |
-| t2_q1_normalized_mean | 0.181852 | <= 0.35 | PASS |
-| t2_q1_projection_cdf | 0.08661 | <= 0.2 | PASS |
-| t3_q0_covariance_eigen_max | 0.975879 | <= 1.4 | PASS |
-| t3_q0_covariance_eigen_min | 0.918324 | >= 0.65 | PASS |
-| t3_q0_normalized_mean | 0.0311009 | <= 0.25 | PASS |
-| t3_q0_projection_cdf | 0.0235614 | <= 0.12 | PASS |
-| t3_q1_covariance_eigen_max | 0.980589 | <= 1.4 | PASS |
-| t3_q1_covariance_eigen_min | 0.937813 | >= 0.65 | PASS |
-| t3_q1_normalized_mean | 0.0277632 | <= 0.25 | PASS |
-| t3_q1_projection_cdf | 0.0285452 | <= 0.12 | PASS |
-| t4_q0_covariance_eigen_max | 1.03867 | <= 1.4 | PASS |
-| t4_q0_covariance_eigen_min | 0.991473 | >= 0.65 | PASS |
-| t4_q0_normalized_mean | 0.026233 | <= 0.25 | PASS |
-| t4_q0_projection_cdf | 0.020174 | <= 0.12 | PASS |
-| t4_q1_covariance_eigen_max | 1.01869 | <= 1.4 | PASS |
-| t4_q1_covariance_eigen_min | 0.951178 | >= 0.65 | PASS |
-| t4_q1_normalized_mean | 0.0257635 | <= 0.25 | PASS |
-| t4_q1_projection_cdf | 0.0279301 | <= 0.12 | PASS |
+| t1_q0_covariance_eigen_max | 1.58383 | <= 1.8 | PASS |
+| t1_q0_covariance_eigen_min | 0.596627 | >= 0.4 | PASS |
+| t1_q0_normalized_mean | 0.800962 | <= 0.65 | FAIL |
+| t1_q0_projection_cdf | 0.399803 | <= 0.26 | FAIL |
+| t1_q1_covariance_eigen_max | 0.769749 | <= 1.8 | PASS |
+| t1_q1_covariance_eigen_min | 0.582031 | >= 0.4 | PASS |
+| t1_q1_normalized_mean | 0.630984 | <= 0.65 | PASS |
+| t1_q1_projection_cdf | 0.325496 | <= 0.26 | FAIL |
+| t2_q0_covariance_eigen_max | 0.82793 | <= 1.4 | PASS |
+| t2_q0_covariance_eigen_min | 0.761555 | >= 0.6 | PASS |
+| t2_q0_normalized_mean | 0.127829 | <= 0.35 | PASS |
+| t2_q0_projection_cdf | 0.0836933 | <= 0.2 | PASS |
+| t2_q1_covariance_eigen_max | 0.851895 | <= 1.4 | PASS |
+| t2_q1_covariance_eigen_min | 0.717638 | >= 0.6 | PASS |
+| t2_q1_normalized_mean | 0.125133 | <= 0.35 | PASS |
+| t2_q1_projection_cdf | 0.0922512 | <= 0.2 | PASS |
+| t3_q0_covariance_eigen_max | 0.971171 | <= 1.4 | PASS |
+| t3_q0_covariance_eigen_min | 0.892846 | >= 0.65 | PASS |
+| t3_q0_normalized_mean | 0.0251654 | <= 0.25 | PASS |
+| t3_q0_projection_cdf | 0.0288557 | <= 0.12 | PASS |
+| t3_q1_covariance_eigen_max | 0.975276 | <= 1.4 | PASS |
+| t3_q1_covariance_eigen_min | 0.925725 | >= 0.65 | PASS |
+| t3_q1_normalized_mean | 0.0727311 | <= 0.25 | PASS |
+| t3_q1_projection_cdf | 0.0379495 | <= 0.12 | PASS |
+| t4_q0_covariance_eigen_max | 1.03698 | <= 1.4 | PASS |
+| t4_q0_covariance_eigen_min | 0.991457 | >= 0.65 | PASS |
+| t4_q0_normalized_mean | 0.0265619 | <= 0.25 | PASS |
+| t4_q0_projection_cdf | 0.0215674 | <= 0.12 | PASS |
+| t4_q1_covariance_eigen_max | 1.0168 | <= 1.4 | PASS |
+| t4_q1_covariance_eigen_min | 0.952061 | >= 0.65 | PASS |
+| t4_q1_normalized_mean | 0.0332885 | <= 0.25 | PASS |
+| t4_q1_projection_cdf | 0.0285352 | <= 0.12 | PASS |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/985dc5bcae6c4af38535fdabc5153069.json)
+[Compact metrics and receipt provenance](../technique-receipts/906d11fc237843a4ae14a6958ed3f675.json)
 
 Recorded conditions: mog prior (sigma 0.25); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
@@ -3726,18 +3716,18 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_center_rms_sigma | 0.832573 | <= 1 | PASS |
-| component_max_eigen_ratio | 1.22773 | <= 4 | PASS |
-| component_min_eigen_ratio | 0.451779 | >= 0.1 | PASS |
-| mass_tv | 0.0734863 | <= 0.15 | PASS |
+| component_center_rms_sigma | 0.865812 | <= 1 | PASS |
+| component_max_eigen_ratio | 2.13321 | <= 4 | PASS |
+| component_min_eigen_ratio | 0.52173 | >= 0.1 | PASS |
+| mass_tv | 0.0292969 | <= 0.15 | PASS |
 | modes | 4 | >= 4 | PASS |
-| precision | 0.977295 | >= 0.9 | PASS |
+| precision | 0.939941 | >= 0.9 | PASS |
 | reconstruction_mode_agreement | 1 | >= 0.98 | PASS |
-| reconstruction_mse | 0.00831732 | <= 0.025 | PASS |
+| reconstruction_mse | 0.00756253 | <= 0.025 | PASS |
 
-Recorded terminal passing observations: **7**; required: 5.
+Recorded terminal passing observations: **14**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/96c815d14aef43f3a5bb91638b4ff134.json)
+[Compact metrics and receipt provenance](../technique-receipts/79200c43a7304b78a4967421d98efe2c.json)
 
 Recorded conditions: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
@@ -3785,7 +3775,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **22**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/a509cb12658448e4973301521f82187f.json)
+[Compact metrics and receipt provenance](../technique-receipts/d009f41b29a848dbb344823a52e65e2e.json)
 
 Recorded conditions: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
@@ -3896,48 +3886,48 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| final_covariance_eigen_max | 1.40374 | <= 1.4 | FAIL |
-| final_covariance_eigen_min | 0.809774 | >= 0.65 | PASS |
-| final_normalized_mean | 0.541418 | <= 0.25 | FAIL |
-| final_projection_cdf | 0.237234 | <= 0.12 | FAIL |
+| final_covariance_eigen_max | 1.01193 | <= 1.4 | PASS |
+| final_covariance_eigen_min | 0.465246 | >= 0.65 | FAIL |
+| final_normalized_mean | 0.612347 | <= 0.25 | FAIL |
+| final_projection_cdf | 0.311882 | <= 0.12 | FAIL |
 | panel_count | 8 | == 8 | PASS |
 | samples_per_panel | 2048 | >= 2048 | PASS |
-| t1_q0_covariance_eigen_max | 1.11739 | <= 1.4 | PASS |
-| t1_q0_covariance_eigen_min | 0.466515 | >= 0.4 | PASS |
-| t1_q0_normalized_mean | 0.430024 | <= 0.45 | PASS |
-| t1_q0_projection_cdf | 0.227477 | <= 0.26 | PASS |
-| t1_q1_covariance_eigen_max | 1.86099 | <= 1.4 | FAIL |
-| t1_q1_covariance_eigen_min | 1.11641 | >= 0.4 | PASS |
-| t1_q1_normalized_mean | 0.679164 | <= 0.45 | FAIL |
-| t1_q1_projection_cdf | 0.276773 | <= 0.26 | FAIL |
-| t2_q0_covariance_eigen_max | 0.869755 | <= 1.4 | PASS |
-| t2_q0_covariance_eigen_min | 0.624109 | >= 0.6 | PASS |
-| t2_q0_normalized_mean | 0.437566 | <= 0.35 | FAIL |
-| t2_q0_projection_cdf | 0.193744 | <= 0.2 | PASS |
-| t2_q1_covariance_eigen_max | 0.841708 | <= 1.4 | PASS |
-| t2_q1_covariance_eigen_min | 0.701735 | >= 0.6 | PASS |
-| t2_q1_normalized_mean | 0.241644 | <= 0.35 | PASS |
-| t2_q1_projection_cdf | 0.130058 | <= 0.2 | PASS |
-| t3_q0_covariance_eigen_max | 0.963693 | <= 1.4 | PASS |
-| t3_q0_covariance_eigen_min | 0.910188 | >= 0.65 | PASS |
-| t3_q0_normalized_mean | 0.0854932 | <= 0.25 | PASS |
-| t3_q0_projection_cdf | 0.0479643 | <= 0.12 | PASS |
-| t3_q1_covariance_eigen_max | 0.973985 | <= 1.4 | PASS |
-| t3_q1_covariance_eigen_min | 0.927838 | >= 0.65 | PASS |
-| t3_q1_normalized_mean | 0.0902881 | <= 0.25 | PASS |
-| t3_q1_projection_cdf | 0.0501277 | <= 0.12 | PASS |
-| t4_q0_covariance_eigen_max | 1.03235 | <= 1.4 | PASS |
-| t4_q0_covariance_eigen_min | 0.993134 | >= 0.65 | PASS |
-| t4_q0_normalized_mean | 0.0495885 | <= 0.25 | PASS |
-| t4_q0_projection_cdf | 0.0300551 | <= 0.12 | PASS |
-| t4_q1_covariance_eigen_max | 1.01862 | <= 1.4 | PASS |
-| t4_q1_covariance_eigen_min | 0.958744 | >= 0.65 | PASS |
-| t4_q1_normalized_mean | 0.0410111 | <= 0.25 | PASS |
-| t4_q1_projection_cdf | 0.0328879 | <= 0.12 | PASS |
+| t1_q0_covariance_eigen_max | 1.07823 | <= 1.4 | PASS |
+| t1_q0_covariance_eigen_min | 0.435934 | >= 0.4 | PASS |
+| t1_q0_normalized_mean | 1.13936 | <= 0.45 | FAIL |
+| t1_q0_projection_cdf | 0.535727 | <= 0.26 | FAIL |
+| t1_q1_covariance_eigen_max | 1.1746 | <= 1.4 | PASS |
+| t1_q1_covariance_eigen_min | 0.391655 | >= 0.4 | FAIL |
+| t1_q1_normalized_mean | 0.755633 | <= 0.45 | FAIL |
+| t1_q1_projection_cdf | 0.421902 | <= 0.26 | FAIL |
+| t2_q0_covariance_eigen_max | 0.802437 | <= 1.4 | PASS |
+| t2_q0_covariance_eigen_min | 0.67327 | >= 0.6 | PASS |
+| t2_q0_normalized_mean | 0.0358013 | <= 0.35 | PASS |
+| t2_q0_projection_cdf | 0.0514321 | <= 0.2 | PASS |
+| t2_q1_covariance_eigen_max | 0.841191 | <= 1.4 | PASS |
+| t2_q1_covariance_eigen_min | 0.644351 | >= 0.6 | PASS |
+| t2_q1_normalized_mean | 0.203777 | <= 0.35 | PASS |
+| t2_q1_projection_cdf | 0.117024 | <= 0.2 | PASS |
+| t3_q0_covariance_eigen_max | 0.998282 | <= 1.4 | PASS |
+| t3_q0_covariance_eigen_min | 0.941021 | >= 0.65 | PASS |
+| t3_q0_normalized_mean | 0.0933339 | <= 0.25 | PASS |
+| t3_q0_projection_cdf | 0.0484294 | <= 0.12 | PASS |
+| t3_q1_covariance_eigen_max | 1.0302 | <= 1.4 | PASS |
+| t3_q1_covariance_eigen_min | 0.916243 | >= 0.65 | PASS |
+| t3_q1_normalized_mean | 0.150524 | <= 0.25 | PASS |
+| t3_q1_projection_cdf | 0.0679663 | <= 0.12 | PASS |
+| t4_q0_covariance_eigen_max | 1.0328 | <= 1.4 | PASS |
+| t4_q0_covariance_eigen_min | 1.00124 | >= 0.65 | PASS |
+| t4_q0_normalized_mean | 0.070134 | <= 0.25 | PASS |
+| t4_q0_projection_cdf | 0.0372759 | <= 0.12 | PASS |
+| t4_q1_covariance_eigen_max | 1.02188 | <= 1.4 | PASS |
+| t4_q1_covariance_eigen_min | 0.960184 | >= 0.65 | PASS |
+| t4_q1_normalized_mean | 0.0551755 | <= 0.25 | PASS |
+| t4_q1_projection_cdf | 0.0278663 | <= 0.12 | PASS |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/a6142b5e69ff419bae686997ea82d93d.json)
+[Compact metrics and receipt provenance](../technique-receipts/77a59b2547534e848b20eafdbb5a2913.json)
 
 Recorded conditions: mog prior (sigma 0.25); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
@@ -4049,22 +4039,22 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| decoder_mean_hq | 0.987305 | >= 0.85 | PASS |
-| decoder_mean_mass_tv | 0.0551758 | <= 0.15 | PASS |
+| decoder_mean_hq | 0.929199 | >= 0.85 | PASS |
+| decoder_mean_mass_tv | 0.0708008 | <= 0.15 | PASS |
 | decoder_mean_modes | 2 | >= 2 | PASS |
-| elbo_identity_error | 2.22045e-16 | <= 0.0001 | PASS |
-| kl_identity_error | 6.16832e-07 | <= 1e-05 | PASS |
-| likelihood_hq | 0.973389 | >= 0.85 | PASS |
-| likelihood_mass_tv | 0.0551758 | <= 0.15 | PASS |
+| elbo_identity_error | 8.88178e-16 | <= 0.0001 | PASS |
+| kl_identity_error | 6.18124e-07 | <= 1e-05 | PASS |
+| likelihood_hq | 0.911377 | >= 0.85 | PASS |
+| likelihood_mass_tv | 0.088623 | <= 0.15 | PASS |
 | likelihood_modes | 2 | >= 2 | PASS |
-| posterior_mutual_information | 0.697031 | >= 0.3 | PASS |
+| posterior_mutual_information | 0.695198 | >= 0.3 | PASS |
 | posterior_noise_variance_ratio | 1.0033 | <= 1.2 | PASS |
-| reconstruction_mse | 0.00504222 | <= 0.05 | PASS |
-| shuffle_reconstruction_ratio | 433.802 | >= 5 | PASS |
+| reconstruction_mse | 0.00628644 | <= 0.05 | PASS |
+| shuffle_reconstruction_ratio | 363.142 | >= 5 | PASS |
 
-Recorded terminal passing observations: **10**; required: 5.
+Recorded terminal passing observations: **9**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/8839452d5628499e9b9da0b9c58a69e7.json)
+[Compact metrics and receipt provenance](../technique-receipts/b10a78392ef54d5a9a8c6dad09dae30b.json)
 
 Recorded conditions: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
@@ -4112,22 +4102,22 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| decoder_mean_hq | 0.938477 | >= 0.85 | PASS |
-| decoder_mean_mass_tv | 0.0615234 | <= 0.15 | PASS |
+| decoder_mean_hq | 0.943604 | >= 0.85 | PASS |
+| decoder_mean_mass_tv | 0.0600586 | <= 0.15 | PASS |
 | decoder_mean_modes | 2 | >= 2 | PASS |
-| elbo_identity_error | 8.88178e-16 | <= 0.0001 | PASS |
+| elbo_identity_error | 4.44089e-16 | <= 0.0001 | PASS |
 | kl_identity_error | 7.61862e-09 | <= 1e-05 | PASS |
-| likelihood_hq | 0.90625 | >= 0.85 | PASS |
-| likelihood_mass_tv | 0.09375 | <= 0.15 | PASS |
+| likelihood_hq | 0.952637 | >= 0.85 | PASS |
+| likelihood_mass_tv | 0.0490723 | <= 0.15 | PASS |
 | likelihood_modes | 2 | >= 2 | PASS |
-| posterior_mutual_information | 0.87151 | >= 0.3 | PASS |
+| posterior_mutual_information | 0.755568 | >= 0.3 | PASS |
 | posterior_noise_variance_ratio | 1.0009 | <= 1.2 | PASS |
-| reconstruction_mse | 0.0058114 | <= 0.05 | PASS |
-| shuffle_reconstruction_ratio | 372.374 | >= 5 | PASS |
+| reconstruction_mse | 0.00480658 | <= 0.05 | PASS |
+| shuffle_reconstruction_ratio | 483.746 | >= 5 | PASS |
 
 Recorded terminal passing observations: **16**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/14ed3d0387a449a7bb40f9550cb4339f.json)
+[Compact metrics and receipt provenance](../technique-receipts/abbd69586c104365b18fc0e4e6c9ac10.json)
 
 Recorded conditions: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
@@ -4232,15 +4222,15 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| cdf_ks | 0.196032 | <= 0.05 | FAIL |
+| cdf_ks | 0.0503912 | <= 0.05 | FAIL |
 | finite_fraction | 1 | == 1 | PASS |
-| mean_error_sigma | 0.405386 | <= 0.2 | FAIL |
+| mean_error_sigma | 0.0994911 | <= 0.2 | PASS |
 | sample_count | 4096 | >= 4096 | PASS |
-| std_ratio | 1.03572 | <= 1.2 | PASS |
+| std_ratio | 0.951908 | <= 1.2 | PASS |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/d2b450503bdb467cb4cf82ba0ffbe56f.json)
+[Compact metrics and receipt provenance](../technique-receipts/d837ae985ff3414e9d4e7835a3161fe7.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4267,7 +4257,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 ### precision_gaussian_mxfp8
 
-**precision_gaussian_mxfp8: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_mxfp8.json).
+**precision_gaussian_mxfp8: PASS**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_mxfp8.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
@@ -4279,15 +4269,15 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| cdf_ks | 0.257254 | <= 0.05 | FAIL |
+| cdf_ks | 0.0459058 | <= 0.05 | PASS |
 | finite_fraction | 1 | == 1 | PASS |
-| mean_error_sigma | 0.562475 | <= 0.2 | FAIL |
+| mean_error_sigma | 0.064743 | <= 0.2 | PASS |
 | sample_count | 4096 | >= 4096 | PASS |
-| std_ratio | 0.785399 | <= 1.2 | PASS |
+| std_ratio | 0.974709 | <= 1.2 | PASS |
 
-Recorded terminal passing observations: **0**; required: 5.
+Recorded terminal passing observations: **16**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/ef6117d9451b41a79106d2324108b91b.json)
+[Compact metrics and receipt provenance](../technique-receipts/0cf68b5ae1d74bde989adcd387e42198.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4326,15 +4316,15 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| cdf_ks | 0.329209 | <= 0.05 | FAIL |
+| cdf_ks | 0.0596211 | <= 0.05 | FAIL |
 | finite_fraction | 1 | == 1 | PASS |
-| mean_error_sigma | 0.672136 | <= 0.2 | FAIL |
+| mean_error_sigma | 0.0470963 | <= 0.2 | PASS |
 | sample_count | 4096 | >= 4096 | PASS |
-| std_ratio | 0.82254 | <= 1.2 | PASS |
+| std_ratio | 1.00184 | <= 1.2 | PASS |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/bef5856620bf4ba4b869234eada5a680.json)
+[Compact metrics and receipt provenance](../technique-receipts/acde3d8c439247c881d962797d1353f0.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4373,13 +4363,13 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| identity_mse | 0.000265336 | <= 0.02 | PASS |
+| identity_mse | 0.000286645 | <= 0.02 | PASS |
 | success_rate | 1 | >= 1 | PASS |
 | wrong_pad_rate | 0 | <= 0 | PASS |
 
-Recorded terminal passing observations: **20**; required: 5.
+Recorded terminal passing observations: **19**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/87fdb9d51c9f4621af53e87fd828a57c.json)
+[Compact metrics and receipt provenance](../technique-receipts/4125aa02d95148f9b76c8544561b3b43.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); conditional_prior_centers_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -4414,16 +4404,16 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_covariance_error | 0.646675 | <= 0.85 | PASS |
-| component_min_eigen_ratio | 0.369971 | >= 0.15 | PASS |
-| hq | 0.906494 | >= 0.85 | PASS |
-| mass_tv | 0.0993652 | <= 0.15 | PASS |
+| component_covariance_error | 0.492656 | <= 0.85 | PASS |
+| component_min_eigen_ratio | 0.339572 | >= 0.15 | PASS |
+| hq | 0.970459 | >= 0.85 | PASS |
+| mass_tv | 0.0649414 | <= 0.15 | PASS |
 | modes | 16 | >= 16 | PASS |
 | sample_count | 4096 | >= 4096 | PASS |
 
-Recorded terminal passing observations: **24**; required: 5.
+Recorded terminal passing observations: **25**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/50f7783f14ac45a1a9051faa8c7c1966.json)
+[Compact metrics and receipt provenance](../technique-receipts/945ab9f8396f4d958fcec70ac7b0cd8b.json)
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4578,7 +4568,7 @@ Dependencies: mode_hold (gate).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -4586,27 +4576,27 @@ Recorded final metrics:
 
 | Metric | Measured |
 | --- | ---: |
-| abs_cov_trace_bias | 0.589348 |
+| abs_cov_trace_bias | unavailable |
 | accuracy_pass | False |
-| accuracy_score | 6.13836 |
+| accuracy_score | unavailable |
 | all_finite | True |
-| center_max_sigma | 2.5336 |
-| center_rms_sigma | 1.22995 |
-| cov_frob_rms | 0.784441 |
-| cov_trace_bias | 0.589348 |
+| center_max_sigma | unavailable |
+| center_rms_sigma | unavailable |
+| cov_frob_rms | unavailable |
+| cov_trace_bias | unavailable |
 | frozen_pass | False |
-| mass_tv | 0.09893 |
+| mass_tv | 0.11251 |
 | n | 100000 |
 | passed | False |
-| precision | 0.211 |
-| precision_gap | 0.777891 |
+| precision | 0.20421 |
+| precision_gap | 0.784681 |
 | problem | rotated100 |
 | protocol | toy100-accuracy-v1 |
-| radial_ks | 0.434455 |
+| radial_ks | unavailable |
 | valid_n | 100000 |
-| within_radius_n | 21100 |
+| within_radius_n | 20421 |
 
-[Compact metrics and receipt provenance](../technique-receipts/43d9eff92e0245dd800e4480621c332a.json)
+[Compact metrics and receipt provenance](../technique-receipts/a9b6b43179b943bca31d88ee7d86dff7.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4725,7 +4715,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -4742,18 +4732,18 @@ Recorded final metrics:
 | cov_frob_rms | unavailable |
 | cov_trace_bias | unavailable |
 | frozen_pass | False |
-| mass_tv | 0.11095 |
+| mass_tv | 0.11332 |
 | n | 100000 |
 | passed | False |
-| precision | 0.26164 |
-| precision_gap | 0.727251 |
+| precision | 0.3086 |
+| precision_gap | 0.680291 |
 | problem | staggered100 |
 | protocol | toy100-accuracy-v1 |
 | radial_ks | unavailable |
 | valid_n | 100000 |
-| within_radius_n | 26164 |
+| within_radius_n | 30860 |
 
-[Compact metrics and receipt provenance](../technique-receipts/6cb4865ec90d464c82aceb9bd2f75eed.json)
+[Compact metrics and receipt provenance](../technique-receipts/02e0569f8a5e4343a0894b825d337904.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4903,11 +4893,11 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| identity_mse | 0.000268118 | <= 0.02 | PASS |
+| identity_mse | 0.000264209 | <= 0.02 | PASS |
 
-Recorded terminal passing observations: **19**; required: 5.
+Recorded terminal passing observations: **20**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/7b3cd2c395794fbeb8cb59fee704bc16.json)
+[Compact metrics and receipt provenance](../technique-receipts/d5e59017d49b46f3907cd0af42ece2f0.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); conditional_prior_centers_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -4940,12 +4930,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| grad_med | 0.284601 | <= 1 | PASS |
-| mean_abs | 1.00444 | >= 0.3 | PASS |
+| grad_med | 0.213542 | <= 1 | PASS |
+| mean_abs | 0.996663 | >= 0.3 | PASS |
 
 Recorded terminal passing observations: **18**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/0217d277ceab42028b78acc1d061a46a.json)
+[Compact metrics and receipt provenance](../technique-receipts/442cfb9d611647f198cd4517d9ba149c.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_particles_and_critic_gradient; weights live; output noise not_applied_to_measurement.
 
@@ -5067,13 +5057,13 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| cover | 0.997752 | >= 0.85 | PASS |
-| neu_hold | 0.993019 | >= 0.85 | PASS |
-| off_caption | 1.15237e-05 | <= 0.05 | PASS |
+| cover | 0.992739 | >= 0.85 | PASS |
+| neu_hold | 0.993036 | >= 0.85 | PASS |
+| off_caption | 0.00023946 | <= 0.05 | PASS |
 
 Recorded terminal passing observations: **22**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/765bc74eabbc4a11b29c6aebc6f4ab06.json)
+[Compact metrics and receipt provenance](../technique-receipts/43dbf00e18c64d879fd836d808953471.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -5108,12 +5098,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| concept_move | 0.992143 | >= 0.85 | PASS |
-| unused_hold | 0.988731 | >= 0.85 | PASS |
+| concept_move | 0.990558 | >= 0.85 | PASS |
+| unused_hold | 0.988799 | >= 0.85 | PASS |
 
 Recorded terminal passing observations: **20**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/0afb0a9942844a8283be5c0eef4b1e2d.json)
+[Compact metrics and receipt provenance](../technique-receipts/312b1881808d4c09b26d7dd62b9baec3.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -5177,15 +5167,15 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_covariance_error | 4.55581 | <= 0.85 | FAIL |
-| component_min_eigen_ratio | 0 | >= 0.15 | FAIL |
-| hq | 0.942139 | >= 0.85 | PASS |
-| mass_tv | 0.333333 | <= 0.15 | FAIL |
-| sw1_normalized | 0.39227 | <= 0.18 | FAIL |
+| component_covariance_error | 3.90296 | <= 0.85 | FAIL |
+| component_min_eigen_ratio | 0.590743 | >= 0.15 | PASS |
+| hq | 0.91748 | >= 0.85 | PASS |
+| mass_tv | 0.148763 | <= 0.15 | PASS |
+| sw1_normalized | 0.183792 | <= 0.18 | FAIL |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/a15c337eba144f9cbb76ff279e9d7449.json)
+[Compact metrics and receipt provenance](../technique-receipts/0bcb9058d16740e8831b0462f16cd65a.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -5239,7 +5229,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 ### vector_overlap
 
-**vector_overlap: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/vector_overlap.json).
+**vector_overlap: PASS**. [Current experiment declaration](../../../configs/forge/tasks/vector_overlap.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
@@ -5251,13 +5241,13 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| covariance_error | 0.247154 | <= 0.45 | PASS |
-| mean_error | 0.192566 | <= 0.15 | FAIL |
-| sw1_normalized | 0.138167 | <= 0.18 | PASS |
+| covariance_error | 0.103863 | <= 0.45 | PASS |
+| mean_error | 0.0912952 | <= 0.15 | PASS |
+| sw1_normalized | 0.0703233 | <= 0.18 | PASS |
 
-Recorded terminal passing observations: **0**; required: 5.
+Recorded terminal passing observations: **10**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/b4b43e0b47304896a84831910896efcb.json)
+[Compact metrics and receipt provenance](../technique-receipts/d797db64c4eb40f48bc903c122bd96e1.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -5311,7 +5301,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5319,13 +5309,13 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| covariance_error | 0.0695128 | <= 0.45 | PASS |
-| mean_error | 0.0299711 | <= 0.15 | PASS |
-| sw1_normalized | 0.0330978 | <= 0.18 | PASS |
+| covariance_error | 0.11756 | <= 0.45 | PASS |
+| mean_error | 0.0355969 | <= 0.15 | PASS |
+| sw1_normalized | 0.045627 | <= 0.18 | PASS |
 
-Recorded terminal passing observations: **23**; required: 5.
+Recorded terminal passing observations: **24**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/bf55e8cbf88b49df8b5bcd491e72e635.json)
+[Compact metrics and receipt provenance](../technique-receipts/2c235e9733034ab9a77a8783364a34d9.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -5379,7 +5369,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5387,15 +5377,15 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_covariance_error | 0.271462 | <= 0.85 | PASS |
-| component_min_eigen_ratio | 0.613757 | >= 0.15 | PASS |
-| hq | 0.986328 | >= 0.85 | PASS |
-| mass_tv | 0.00830078 | <= 0.15 | PASS |
-| sw1_normalized | 0.0566188 | <= 0.18 | PASS |
+| component_covariance_error | 0.120381 | <= 0.85 | PASS |
+| component_min_eigen_ratio | 0.832776 | >= 0.15 | PASS |
+| hq | 0.979248 | >= 0.85 | PASS |
+| mass_tv | 0.0461426 | <= 0.15 | PASS |
+| sw1_normalized | 0.0827868 | <= 0.18 | PASS |
 
 Recorded terminal passing observations: **22**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/b3e49a1600d24de68eb2661827a6a0e7.json)
+[Compact metrics and receipt provenance](../technique-receipts/dc0070b11ffa4010980e047f45c27b0b.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -5453,7 +5443,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5461,16 +5451,16 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_covariance_error | 0.672719 | <= 0.85 | PASS |
-| component_min_eigen_ratio | 0.0454096 | >= 0.15 | FAIL |
-| hq | 0.983887 | >= 0.85 | PASS |
-| mass_tv | 0.082207 | <= 0.15 | PASS |
-| min_mass_ratio | 0.734049 | >= 0.25 | PASS |
-| sw1_normalized | 0.139514 | <= 0.18 | PASS |
+| component_covariance_error | 2.47438 | <= 0.85 | FAIL |
+| component_min_eigen_ratio | 0.264021 | >= 0.15 | PASS |
+| hq | 0.957031 | >= 0.85 | PASS |
+| mass_tv | 0.0924317 | <= 0.15 | PASS |
+| min_mass_ratio | 0.738118 | >= 0.25 | PASS |
+| sw1_normalized | 0.15198 | <= 0.18 | PASS |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/b03a9d1bbfec45068448197d0e8f31b5.json)
+[Compact metrics and receipt provenance](../technique-receipts/f2bd7fc7534243e8b59ed35cc7bba866.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -5538,15 +5528,15 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_covariance_error | 5.55311 | <= 0.85 | FAIL |
-| component_min_eigen_ratio | 0.398386 | >= 0.15 | PASS |
-| hq | 0.97998 | >= 0.85 | PASS |
-| mass_tv | 0.260254 | <= 0.15 | FAIL |
-| sw1_normalized | 0.248771 | <= 0.18 | FAIL |
+| component_covariance_error | 3.41269 | <= 0.85 | FAIL |
+| component_min_eigen_ratio | 0.601195 | >= 0.15 | PASS |
+| hq | 0.968506 | >= 0.85 | PASS |
+| mass_tv | 0.221924 | <= 0.15 | FAIL |
+| sw1_normalized | 0.204358 | <= 0.18 | FAIL |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/6dd3439e9623404bb948585ea7630376.json)
+[Compact metrics and receipt provenance](../technique-receipts/48a9bfe547604441b80dd25b32e1a6bd.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -5643,12 +5633,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| mean_abs_error | 0.00386506 | <= 0.005 | PASS |
-| p99_abs_error | 0.0137987 | <= 0.025 | PASS |
-| rms_error | 0.00492435 | <= 0.01 | PASS |
+| mean_abs_error | 0.00389656 | <= 0.005 | PASS |
+| p99_abs_error | 0.0143897 | <= 0.025 | PASS |
+| rms_error | 0.00498791 | <= 0.01 | PASS |
 | saturated_fraction | 0 | == 0 | PASS |
 
-[Compact metrics and receipt provenance](../technique-receipts/a6d70e27e1b445efb53a81bd5ac3d697.json)
+[Compact metrics and receipt provenance](../technique-receipts/619df902c72b4a6cbcb2418672b6c685.json)
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights unavailable; output noise clean.
 
@@ -5686,3 +5676,4 @@ This page is generated alongside the leaderboard. Register new source evidence b
 - [Sinkhorn Distances: Lightspeed Computation of Optimal Transport](https://arxiv.org/abs/1306.0895). Entropic Optimal Transport Sinkhorn-Knopp scaling extended to the (B+1)x(B+1) slack-screened unbalanced polytope.
 - [Unbalanced Optimal Transport: Dynamic and Kantorovich Formulations](https://arxiv.org/abs/1508.05216). Kantorovich-Hellinger unbalanced mass creation/destruction theory motivating slack-reservoir screening of Poisson batch singletons and empty-valley outliers.
 - [Interpolating between Optimal Transport and MMD using Sinkhorn Divergences](https://arxiv.org/abs/1810.08278). Feydy diagonal-included symmetric Sinkhorn self-coupling debiasing adapted to the active-plus-slack unbalanced polytope.
+- [On Optimal Matchings](https://doi.org/10.1007/BF02579150). Ajtai-Komlos-Tusnady empirical optimal transport scaling $B^{-\min(1/d,1/2)}$ motivating 1D nearest-neighbor horizon normalization.

@@ -740,7 +740,7 @@ def test_live_repository_forge_readouts_are_current_and_source_clean():
     assert report["status"] == "CURRENT", json.dumps(report, indent=2, sort_keys=True)
     assert report["stale_stages"] == []
     measured = _assert_current_source_scope(report, ROOT)
-    assert report["stages"]["published_scaling_performance"]["complete_cells"] == 54
+    assert report["stages"]["published_scaling_performance"]["complete_cells"] == 60
     assert report["stages"]["published_scaling_performance"]["missing_cells"] == 0
     assert report["stages"]["published_scaling_performance"]["unavailable_cells"] == 0
     assert report["stages"]["published_scaling_performance"]["table_cohorts"] == 1
@@ -1515,7 +1515,7 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     _assert_current_source_scope(status, ROOT)
 
     perf = status["stages"]["published_scaling_performance"]
-    assert perf["complete_cells"] == 54
+    assert perf["complete_cells"] == 60
     assert perf["contended_cells"] == 0
     assert perf["unpaired_tasks"] == []
     assert perf["table_cohorts"] == 1
@@ -1529,7 +1529,7 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
     perf_block = inv_md.split("<!-- Forge scaling performance: start -->", 1)[1].split(
         "<!-- Forge scaling performance: end -->", 1
     )[0]
-    assert perf_block.count("| clear |") == 54
+    assert perf_block.count("| clear |") == 60
     assert "| contended |" not in perf_block
 
     from experiments.forge.family_reports import _selected_cohorts, _selected_row
@@ -1545,7 +1545,7 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         ("bispf", "BISPF", "bispf-optimized-quintic-v1"),
         ("bcap-pure", "BCAP", "recipe-prior-refactor-bcap-pure-v1"),
         ("empf", "EMPF", "empf-v2"),
-        ("rhbi", "RHBI", "rhbi-v3"),
+        ("rhbi", "RHBI", "rhbi-v4"),
         ("e22", "E22", "e22"),
     )
     assert set(selected) == {family for family, _, _ in expected_families}
@@ -1571,7 +1571,7 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         "| [BISPF](families/bispf.md) | [`bispf-optimized-quintic-v1`]",
         "| [BCAP](families/bcap-pure.md) | [`recipe-prior-refactor-bcap-pure-v1`]",
         "| [EMPF](families/empf.md) | [`empf-v2`]",
-        "| [RHBI](families/rhbi.md) | [`rhbi-v3`]",
+        "| [RHBI](families/rhbi.md) | [`rhbi-v4`]",
         "| [E22](families/e22.md) | [`e22`]",
     )
 
