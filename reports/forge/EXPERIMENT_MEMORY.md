@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 925. Inventory coverage: complete. Unresolved import items: 7.
+Records: 926. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4088,6 +4088,22 @@ Learned-MoG vector_two_broad PASS after exactly one registered operational cance
 
 [Record and receipt provenance](records/readout-060e7be73e2832e314b9573f.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
+### empf-v3 · readout-0c549ac1c635a42dc43cf6dc
+
+**Scope:** current; scientific; revision `baae191aa8fc7e2d0563cd8a3b52e8ef53ece846d63213cadf159a2e2c47018e`.
+
+Adding shock-filtered transport residual EMA, trimmed central-[0.04, 0.96] 1D quantile-W2 floor-subtracted 1/sqrt(B) thermal cooling with DualNorm step-scale damping, Poisson empty-cell prototype shift acceleration, and prototype-referenced deep harmonic-capture lock hysteresis enables empf-v3 to retain every Tier 1 and Tier 2 pass of empf-v2 while newly passing Tier 2 gaussian1d_stability (all 72 stationary checks, deadline reacquisition, and 24 shifted hold checks) as well as continuous-learning shift/endurance tasks (target_shift_recovery, ring_hold, ring_extension) under one global clock-free constant-LR DualNorm recipe.
+
+**Observed:** {'FAIL': 2, 'INCOMPLETE': 1, 'PASS': 12}; wall seconds 1614.857; mechanism `structural`.
+
+model_ae_reconstruction: modes=4, precision=0.26587, mass_tv=0.049805
+
+On ordinary discriminator_stability (Rev 16) under protocol seed 0 on NVIDIA RTX A6000, empf-v3 stopped at Tier 1 (9/11 required Tier 1 PASS plus clockfree_audit_measurement_v1, precision_gaussian_fp32, and precision_gaussian_mxfp8 PASS; model_vae_categorical FAIL with passing_suffix=4 < 5 despite passing final metrics at step 1200; five_word_joint_smoke INCOMPLETE due to 900s wall-time timeout at step 15001/20001 with 17/18 completed checks passing). Tier 2 gaussian1d_stability was not reached on the official queue because Tier 1 required completion blocked promotion.
+
+**Next:** Preserve empf-v3's Tier 1 readout receipt as negative/incomplete evidence, remove small-batch online prototype growth on 32 <= B_r < 100 and restore empf-v2's exact 2D+ Born-Infeld settling gain while reducing per-step discrete-simplex CPU-GPU synchronization overhead on five_word_joint_smoke in a new candidate empf-v4.
+
+[Record and receipt provenance](records/readout-0c549ac1c635a42dc43cf6dc.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
 ### r1r2-repair-control-20261022 · readout-0c965d99d82ddcae5d1d8d5a
 
 **Scope:** current; scientific; revision `3cca6de5d931b16469b0ef0fedbc0b5cb21f55b8af202a7868e94277fcef2037`.
@@ -6950,4 +6966,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `fe0ab4180a175b1ace97b563c1d800a7ea125725bddece71c7dd3a67f51889f7`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `a952211aa614f5688704c84d5e4900e1cb0984be2b8b5f6f159c553fe0e100ec`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
