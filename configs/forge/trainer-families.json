@@ -653,12 +653,17 @@
     {
       "candidates": [
         "empf-v1",
-        "empf-v2"
+        "empf-v2",
+        "empf-v3",
+        "empf-v4",
+        "empf-v5",
+        "empf-v6",
+        "empf-v7"
       ],
-      "canonical_candidate": "empf-v2",
+      "canonical_candidate": "empf-v7",
       "id": "empf",
       "label": "EMPF",
-      "rationale": "Exponential Moving Prototype Flow: e-means-inspired online sufficient-statistics prototype bank (S, N) with clock-free (K, B) hit-rate EMA scaling, mass-conserving proportional-split dead-prototype revival, mass-weighted prototype-to-fake entropic Optimal Transport chords, Elastic Born-Infeld gradient bounding with zero-mean logit gauge, and degree-of-freedom-aware EMPF prior regularization with outlier revival tether.",
+      "rationale": "Exponential Moving Prototype Flow: e-means-inspired online sufficient-statistics prototype bank (S, N) with clock-free (K, B) hit-rate EMA scaling, normalized innovation/empty-cell shift shock turnover, mass-conserving proportional-split dead-prototype revival, mass-weighted prototype-to-fake entropic Optimal Transport chords, floor-subtracted 1D stability cooling with size-gated newton_schulz_hybrid_v1 DualNorm polar steps, Elastic Born-Infeld gradient bounding with zero-mean logit gauge, and degree-of-freedom-aware EMPF prior regularization.",
       "tags": [
         "adversarial-training",
         "capped-input-gradients",
@@ -677,7 +682,7 @@
         "rhbi-v5",
         "rhbi-v6"
       ],
-      "canonical_candidate": "rhbi-v4",
+      "canonical_candidate": "rhbi-v6",
       "id": "rhbi",
       "label": "RHBI",
       "rationale": "Relativistic Hellinger-Born-Infeld Transport: clock-free slack-screened unbalanced Sinkhorn variational operator with Poisson-Weibull Ajtai-Komlos-Tusnady empirical OT horizon scaling, overflow-safe float64 Born-Infeld costs, linear horizon screening (rho=3.0) with slack-gain critic boost, S=2 Kantorovich-Hellinger slack Sinkhorn, Feydy diagonal self-coupling debiasing, Weyl-phased balanced Born-Infeld geodesic chord and state-settling endpoint Lipschitz cap with zero-mean critic gauge, false-shock-proof 5-channel Kantorovich-Hellinger thermal equilibrium controller, SBNP particle prior regularization (0.02), joint relativistic BiGAN coupling, row-local calibrated-relativistic conditional fibre routing, and batched-PCIe polar_cpu_v1 DualNorm under constant learning rates.",

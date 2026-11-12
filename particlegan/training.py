@@ -32,6 +32,10 @@ def _float_output(value):
             result._bispf_input = value._bispf_input
         if hasattr(value, "_empf_input"):
             result._empf_input = value._empf_input
+        if hasattr(value, "_empf_record"):
+            result._empf_record = value._empf_record
+        if hasattr(value, "_empf_conditioned"):
+            result._empf_conditioned = value._empf_conditioned
         if hasattr(value, "_rhbi_input"):
             result._rhbi_input = value._rhbi_input
             result._rhbi_cond = getattr(value, "_rhbi_cond", None)

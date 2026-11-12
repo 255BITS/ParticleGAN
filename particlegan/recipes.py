@@ -472,14 +472,19 @@ class Recipe:
             raise ValueError("batched SVD requires per_offset convolution")
         if (type(self.optimizer_dense_profile) is not str
                 or self.optimizer_dense_profile not in ("default", "gram_fp64_guarded_v1",
-                    "gram_fp64_svd_diagnostic_v2", "polar_cpu_v1")):
+                    "gram_fp64_svd_diagnostic_v2", "polar_cpu_v1", "newton_schulz_v1",
+                    "newton_schulz_hybrid_v1")):
             raise ValueError("unknown optimizer_dense_profile")
-        if self.optimizer_dense_profile != "default" and (
+        if self.optimizer_dense_profile in ("gram_fp64_guarded_v1", "gram_fp64_svd_diagnostic_v2", "polar_cpu_v1") and (
                 self.optimizer_family != "dualnorm" or self.optimizer_momentum != 0
                 or (self.optimizer_dense_profile != "polar_cpu_v1" and self.optimizer_smoothing != .001)
                 or self.optimizer_svd_backend not in ("native", "batched")):
             raise ValueError("optimizer_dense_profile requires zero-momentum full DualNorm, "
                              "smoothing .001 and native or batched SVD backend")
+        if self.optimizer_dense_profile in ("newton_schulz_v1", "newton_schulz_hybrid_v1") and (
+                self.optimizer_family != "dualnorm" or self.optimizer_smoothing <= 0):
+            raise ValueError("Newton-Schulz optimizer_dense_profile requires full DualNorm "
+                             "and positive optimizer_smoothing")
         if self.optimizer_adam_lr is not None:
             if (isinstance(self.optimizer_adam_lr, bool) or not math.isfinite(self.optimizer_adam_lr)
                     or self.optimizer_adam_lr <= 0):
@@ -970,7 +975,7 @@ class Recipe:
             return SinkhornRelativisticLoss(labels=self.loss_labels, gates=self.bispf_gates())
         if self.effective_critic_formulation == "empf" and self.loss == "relativistic":
             from .empf import EMPFSinkhornRelativisticLoss
-            return EMPFSinkhornRelativisticLoss(labels=self.loss_labels)
+            return EMPFSinkhornRelativisticLoss(labels=self.loss_labels, loss=self.loss)
         from .gan_loss import GANLoss
         return GANLoss(self.loss, labels=self.loss_labels)
 
@@ -1569,8 +1574,11 @@ class Recipe:
         if ka2_trust_mode != "compound":
             adam_kwargs = {**adam_kwargs, "ka2_trust_mode": ka2_trust_mode}
         opt_d = self.make_critic_optimizer(discriminator, ema_critic=ema_critic, **adam_kwargs)
-        if self.effective_critic_formulation == "empf" and base_prior is not None and hasattr(opt_d, "record"):
-            base_prior._empf_record = opt_d.record
+        if self.effective_critic_formulation == "empf" and hasattr(opt_d, "record"):
+            opt_g._empf_record = opt_d.record
+            opt_d._empf_record = opt_d.record
+            if base_prior is not None:
+                base_prior._empf_record = opt_d.record
         return opt_g, opt_d
 
 
@@ -1618,10 +1626,10 @@ def get_recipe_fields(name="gan", *, trainer=None, **overrides):
     Born-Infeld critic penalty (``ebi_beta=6.0``), degree-of-freedom-aware EMPF
     prior regularization (``prior_reg=0.01``), zero-momentum DualNorm with
     quintic batched convolution updates, and BF16/channels-last training for
-    supported CUDA convolutional networks. Its ordinary CUDA readout records
-    82/115 counted view requirements (22/61 fixed-suite passes); selection does
-    not add accepted calibration, Tier 3 confirmation, or natural-image quality
-    credit.
+    supported CUDA convolutional networks. See
+    ``reports/forge/technique-inventory.md`` for its current ordinary CUDA
+    readout; selection does not add accepted calibration, Tier 3 confirmation,
+    or natural-image quality credit.
     ``"bispf_optimized"`` retains the explicit optimized BISPF preset:
     zero-momentum DualNorm, non-saturating loss, the Born-Infeld chord penalty,
     SBNP prior regularization, batched convolution updates and
@@ -1710,6 +1718,7 @@ def get_recipe_fields(name="gan", *, trainer=None, **overrides):
     presets["empf"] = {
         **presets["bcap"], "critic_formulation": "empf", "reg_arm": None,
         "ebi_beta": 6.0, "optimizer_convolution_rule": "quintic",
+        "optimizer_dense_profile": "newton_schulz_hybrid_v1",
         "prior_regularizer": "empf", "prior_reg": 0.01, "lr_schedule": "cosine",
         "optimizer_svd_backend": "batched", "training_precision": "bf16_channels_last",
         "routing_temperature": 0.25, "ucd_weight": 0.02,

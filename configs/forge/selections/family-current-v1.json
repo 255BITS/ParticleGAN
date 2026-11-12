@@ -867,8 +867,8 @@
   },
   "policy_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a",
   "previous_selection": {
-    "path": "configs/forge/selections/history/family-current-1d3485c46b9bd9f48b964ded33a8fa6889794a3c25f7bb564e4f2871464d5d70.json",
-    "sha256": "1d3485c46b9bd9f48b964ded33a8fa6889794a3c25f7bb564e4f2871464d5d70"
+    "path": "configs/forge/selections/history/family-current-b2607ba409dc2fcedb5c23891595dd300288e6ce06349a7719899fc4a914ab29.json",
+    "sha256": "b2607ba409dc2fcedb5c23891595dd300288e6ce06349a7719899fc4a914ab29"
   },
   "schema_version": 1,
   "scope": "whole_candidate_family_current",
@@ -947,22 +947,22 @@
       "trainer_family": "e22"
     },
     {
-      "candidate_id": "empf-v2",
-      "candidate_revision": "fc09c6b1f8ae77167ca31db0a4d9ef252dc9d6b92aed98e3d4b53a168ff0ac15",
-      "cohort": "8a11d7649f435b43341699c52ab2daf11cae1163b8aaf5b93da9f916282b8e55",
+      "candidate_id": "empf-v7",
+      "candidate_revision": "e9cb4e9e9d26179d1fa70cf52b42cee045c9c8e67238b78e5c0c28ac0d8fda8e",
+      "cohort": "6bb0a70f936f8e25efe3e5740b71ace42eff15b22023837c101880b2b2c9396c",
       "execution_backend": "cuda",
       "measurement_views": [
         "discriminator_stability"
       ],
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
-      "reason": "Select empf-v2 (Exponential Moving Prototype Flow with ebi_beta=6.0, clock-free prototype-resolution-scaled settling Born-Infeld sharpness, and discrete-simplex post-acquisition Sinkhorn thermal cooling) following ordinary discriminator_stability CUDA measurement on NVIDIA RTX A6000 (11/11 required + 1/1 clockfree_audit diagnostic Tier 1 PASS, 10/18 required Tier 2 PASS including mode_hold and five_word_joint_hold; 22/38 executed tasks PASS overall, 82/115 counted view requirements). Actual executed-policy qualification and comparison-policy projection retain their separate source-bound proofs; no public-default adoption claim.",
-      "recipe_sha256": "4efb443a95fddd79bfa48e68fb689dadebc2a04f2f24d9cc97218fa5e41da209",
+      "reason": "Select empf-v7 (Exponential Moving Prototype Flow with size-gated newton_schulz_hybrid_v1 DualNorm polar profile, shock-filtered transport EMA, trimmed central-[0.04, 0.96] 1D quantile-W2 floor-subtracted cooling with step-scale damping, normalized shift-shock prototype turnover, and conditioned-fiber relativistic pairing) following ordinary discriminator_stability CUDA measurement on NVIDIA RTX A6000 (13/13 counted Tier 1 gates PASS including clockfree_audit_measurement_v1 and precision_gaussian_fp32, plus Tier 2 gaussian1d_stability and mode_hold; 23/38 executed tasks PASS overall). Actual executed-policy qualification and comparison-policy projection retain their separate source-bound proofs; no public-default adoption claim.",
+      "recipe_sha256": "44a6c851837524c1b65578505e393fd3e2a43b7df94e10ba0fd707812a2505d7",
       "rng_sha256": "495400e2de1b9f9f94a86625a2132091646dcbb8357f48c3512ed24154b89b6d",
       "runtime_cohort_sha256": "23a94f16ca88faef2aa24ce757c89f1524bef5522c2b1b87cce88d9d94e883b1",
-      "scientific_row_sha256": "e0a867d485af65df1d099cd237adab7bbbef42ac2414efd0e8c0301b7f125478",
+      "scientific_row_sha256": "7f28fb0e018d3e4d31cc79ec59b0a66095b5f04985ec5d359d8c4dc743d36281",
       "selection_kind": "current_measurement",
-      "source_digest": "66339a696dff71be31beb782d2b51a0f9b21e6bee54fdeca2aae9b606ffa14fb",
-      "task_keys_sha256": "d164411366f04c8d637e9a7e78ec46d35132e208cad354e06209dedc4fc733ec",
+      "source_digest": "6c2ecde629a68049cec3b220d0837243075197aa07db14e8ac610da31978959c",
+      "task_keys_sha256": "7f183552f1291756ff4f4dcd6d25fb63f0134bc3c3b196466799376e45700de7",
       "trainer_family": "empf"
     },
     {
