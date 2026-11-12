@@ -419,7 +419,8 @@ class Recipe:
             raise ValueError("batched SVD requires per_offset convolution")
         if (type(self.optimizer_dense_profile) is not str
                 or self.optimizer_dense_profile not in ("default", "gram_fp64_guarded_v1",
-                    "gram_fp64_svd_diagnostic_v2", "newton_schulz_v1")):
+                    "gram_fp64_svd_diagnostic_v2", "newton_schulz_v1",
+                    "newton_schulz_hybrid_v1")):
             raise ValueError("unknown optimizer_dense_profile")
         if self.optimizer_dense_profile in ("gram_fp64_guarded_v1", "gram_fp64_svd_diagnostic_v2") and (
                 self.optimizer_family != "dualnorm" or self.optimizer_momentum != 0
@@ -427,9 +428,9 @@ class Recipe:
                 or self.optimizer_svd_backend not in ("native", "batched")):
             raise ValueError("optimizer_dense_profile requires zero-momentum full DualNorm, "
                              "smoothing .001 and native or batched SVD backend")
-        if self.optimizer_dense_profile == "newton_schulz_v1" and (
+        if self.optimizer_dense_profile in ("newton_schulz_v1", "newton_schulz_hybrid_v1") and (
                 self.optimizer_family != "dualnorm" or self.optimizer_smoothing <= 0):
-            raise ValueError("newton_schulz_v1 optimizer_dense_profile requires full DualNorm "
+            raise ValueError("Newton-Schulz optimizer_dense_profile requires full DualNorm "
                              "and positive optimizer_smoothing")
         if self.optimizer_adam_lr is not None:
             if (isinstance(self.optimizer_adam_lr, bool) or not math.isfinite(self.optimizer_adam_lr)
@@ -1556,7 +1557,7 @@ def get_recipe_fields(name="gan", *, trainer=None, **overrides):
     presets["empf"] = {
         **presets["bcap"], "critic_formulation": "empf", "reg_arm": None,
         "ebi_beta": 6.0, "optimizer_convolution_rule": "quintic",
-        "optimizer_dense_profile": "newton_schulz_v1",
+        "optimizer_dense_profile": "newton_schulz_hybrid_v1",
         "prior_regularizer": "empf", "prior_reg": 0.01, "lr_schedule": "cosine",
         "optimizer_svd_backend": "batched", "training_precision": "bf16_channels_last",
         "routing_temperature": 0.25, "ucd_weight": 0.02,

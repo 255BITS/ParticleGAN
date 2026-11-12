@@ -561,48 +561,73 @@ def test_empf_v3_1d_thermal_and_step_scale_laws():
     assert math.isclose(rec.ema_residual, 1.25, rel_tol=1e-6)
 
 
-def test_empf_v6_newton_schulz_dense_profile_accuracy_and_checkpoint_roundtrip():
-    """Verify newton_schulz_v1 dense polar accuracy, empty-matrix guard, continuation, and cross-profile rejection."""
-    from particlegan.optim.dualnorm import NEWTON_SCHULZ_DENSE_PROFILE, _newton_schulz_polar
+def test_empf_v7_newton_schulz_hybrid_dense_profile_accuracy_and_checkpoint_roundtrip():
+    """Verify hybrid dense polar bitwise parity on <=128, accuracy on >128, continuation, and cross-profile rejection."""
+    from particlegan.optim.dualnorm import (
+        NEWTON_SCHULZ_DENSE_PROFILE,
+        NEWTON_SCHULZ_HYBRID_DENSE_PROFILE,
+        _newton_schulz_polar,
+    )
 
-    recipe_ns = get_recipe("empf")
-    assert recipe_ns.optimizer_dense_profile == NEWTON_SCHULZ_DENSE_PROFILE
+    recipe_hyb = get_recipe("empf")
+    assert recipe_hyb.optimizer_dense_profile == NEWTON_SCHULZ_HYBRID_DENSE_PROFILE
+    recipe_ns = get_recipe("empf", optimizer_dense_profile=NEWTON_SCHULZ_DENSE_PROFILE)
     recipe_ref = get_recipe("empf", optimizer_dense_profile="default")
 
     empty = torch.zeros(0, 4, dtype=torch.float32)
     assert _newton_schulz_polar(empty, smoothing=0.001).shape == (0, 4)
 
     rng = torch.Generator().manual_seed(23)
-    for shape in ((64, 2), (128, 128), (1, 128)):
+    # Small/medium matrices (min < 64 or max <= 128) match default polar_factor bitwise.
+    for shape in ((64, 64), (128, 128), (1, 128), (64, 2)):
+        p_hyb = nn.Parameter(torch.zeros(shape))
+        p_ref = nn.Parameter(torch.zeros(shape))
+        opt_hyb = recipe_hyb.replace(constraint_geometry_mode="none").make_generator_optimizer([p_hyb])
+        opt_ref = recipe_ref.replace(constraint_geometry_mode="none").make_generator_optimizer([p_ref])
+        grad = torch.randn(shape, generator=rng) * torch.logspace(1, -6, shape[1])
+        p_hyb.grad = grad.clone()
+        p_ref.grad = grad.clone()
+        opt_hyb.step()
+        opt_ref.step()
+        assert torch.equal(p_hyb, p_ref), f"expected exact parity on {shape}"
+
+    # Large matrices (min >= 64 and max > 128) use guarded Newton-Schulz and match polar_factor to <1e-4.
+    for shape in ((168, 128), (256, 170)):
+        p_hyb = nn.Parameter(torch.zeros(shape))
         p_ns = nn.Parameter(torch.zeros(shape))
         p_ref = nn.Parameter(torch.zeros(shape))
+        opt_hyb = recipe_hyb.replace(constraint_geometry_mode="none").make_generator_optimizer([p_hyb])
         opt_ns = recipe_ns.replace(constraint_geometry_mode="none").make_generator_optimizer([p_ns])
         opt_ref = recipe_ref.replace(constraint_geometry_mode="none").make_generator_optimizer([p_ref])
         grad = torch.randn(shape, generator=rng)
+        p_hyb.grad = grad.clone()
         p_ns.grad = grad.clone()
         p_ref.grad = grad.clone()
+        opt_hyb.step()
         opt_ns.step()
         opt_ref.step()
-        rel_err = float((p_ns.detach() - p_ref.detach()).norm() / p_ref.detach().norm().clamp_min(1e-12))
+        assert torch.equal(p_hyb, p_ns)
+        rel_err = float((p_hyb.detach() - p_ref.detach()).norm() / p_ref.detach().norm().clamp_min(1e-12))
         assert rel_err < 1e-4, f"shape={shape} rel_err={rel_err}"
 
     # Checkpoint continuation and atomic cross-profile rejection.
     p1 = nn.Parameter(torch.zeros(16, 4))
-    opt1 = recipe_ns.replace(constraint_geometry_mode="none").make_generator_optimizer([p1])
+    opt1 = recipe_hyb.replace(constraint_geometry_mode="none").make_generator_optimizer([p1])
     p1.grad = torch.randn(16, 4, generator=rng)
     opt1.step()
     saved = deepcopy(opt1.state_dict())
-    assert saved["dualnorm"]["dense_profile"] == NEWTON_SCHULZ_DENSE_PROFILE
+    assert saved["dualnorm"]["dense_profile"] == NEWTON_SCHULZ_HYBRID_DENSE_PROFILE
 
-    p_wrong = nn.Parameter(torch.ones(16, 4))
-    opt_wrong = recipe_ref.replace(constraint_geometry_mode="none").make_generator_optimizer([p_wrong])
-    before_p = p_wrong.detach().clone()
-    with pytest.raises(ValueError, match="dense profile"):
-        opt_wrong.load_state_dict(deepcopy(saved))
-    assert torch.equal(p_wrong, before_p)
+    for wrong_recipe in (recipe_ref, recipe_ns):
+        p_wrong = nn.Parameter(torch.ones(16, 4))
+        opt_wrong = wrong_recipe.replace(constraint_geometry_mode="none").make_generator_optimizer([p_wrong])
+        before_p = p_wrong.detach().clone()
+        with pytest.raises(ValueError, match="dense profile"):
+            opt_wrong.load_state_dict(deepcopy(saved))
+        assert torch.equal(p_wrong, before_p)
 
     p2 = nn.Parameter(p1.detach().clone())
-    opt2 = recipe_ns.replace(constraint_geometry_mode="none").make_generator_optimizer([p2])
+    opt2 = recipe_hyb.replace(constraint_geometry_mode="none").make_generator_optimizer([p2])
     opt2.load_state_dict(saved)
     next_grad = torch.randn(16, 4, generator=rng)
     p1.grad = next_grad.clone()
