@@ -238,7 +238,7 @@ class _EMPFRecordMixin:
         self.proto_count: torch.Tensor | None = None
         self._last_d_logits: Tuple[torch.Tensor, torch.Tensor] | None = None
 
-    def observe_transport(self, res: float, data_scale: float, ema_decay: float = 0.92) -> None:
+    def observe_transport(self, res: float, data_scale: float, ema_decay: float = 0.95) -> None:
         res_f = float(res)
         scale_f = float(data_scale)
         if not self.initialized:

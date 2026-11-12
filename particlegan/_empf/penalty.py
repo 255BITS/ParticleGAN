@@ -58,7 +58,7 @@ class _EMPFPenaltyKernel:
         revival_tau: float = 0.05,
         tau_cooling: float = 0.020,
         s_min: float = 1e-5,
-        thermal_decay: float = 0.92,
+        thermal_decay: float = 0.95,
         input_domain: str = "auto",
         record: CriticStepRecord | None = None,
     ) -> None:
@@ -228,8 +228,8 @@ class _EMPFPenaltyKernel:
                 sinkhorn_iters=self.sinkhorn_iters,
             )
 
-            obs_res = float(res.item())
-            self._observe(obs_res, float(data_scale.item()))
+            obs_res, obs_ds = torch.stack((res.detach(), data_scale.detach())).tolist()
+            self._observe(float(obs_res), float(obs_ds))
 
             if 1 <= dim <= 4 and b_r >= 32 and b_f >= 32:
                 t_scale = compute_thermal_scale(
@@ -359,7 +359,8 @@ class _EMPFPenaltyKernel:
                     sinkhorn_eps=self.sinkhorn_eps,
                     sinkhorn_iters=self.sinkhorn_iters,
                 )
-                self._observe(float(res.item()), float(data_scale.item()))
+                obs_res, obs_ds = torch.stack((res.detach(), data_scale.detach())).tolist()
+                self._observe(float(obs_res), float(obs_ds))
                 u_w = max(0.0, min(1.0, float(self.record.ema_residual) / 0.070))
                 smooth_w = u_w * u_w * (3.0 - 2.0 * u_w)
                 t_scale = float(0.35 + 0.65 * smooth_w)
@@ -374,7 +375,8 @@ class _EMPFPenaltyKernel:
                 sinkhorn_eps=self.sinkhorn_eps,
                 sinkhorn_iters=self.sinkhorn_iters,
             )
-            self._observe(float(res.item()), float(data_scale.item()))
+            obs_res, obs_ds = torch.stack((res.detach(), data_scale.detach())).tolist()
+            self._observe(float(obs_res), float(obs_ds))
             t_scale = 1.0
 
         self.record._thermal_scale = float(t_scale)
@@ -386,32 +388,26 @@ class _EMPFPenaltyKernel:
         try:
             x_r_req = x_real.detach().clone().requires_grad_(True)
             d_r_out = live(x_r_req)
-            g_real = torch.autograd.grad(
-                outputs=_score_scalar(d_r_out),
-                inputs=x_r_req,
-                create_graph=True,
-                only_inputs=True,
-            )[0]
-
             x_f_req = x_fake.detach().clone().requires_grad_(True)
             d_f_out = live(x_f_req)
-            g_fake = torch.autograd.grad(
-                outputs=_score_scalar(d_f_out),
-                inputs=x_f_req,
-                create_graph=True,
-                only_inputs=True,
-            )[0]
 
             g_chord: torch.Tensor | None = None
             if use_chords and target_matched is not None and alpha is not None:
                 x_chord = ((1.0 - alpha) * x_fake.detach() + alpha * target_matched).requires_grad_(True)
                 d_chord_out = live(x_chord)
-                g_chord = torch.autograd.grad(
-                    outputs=_score_scalar(d_chord_out),
-                    inputs=x_chord,
+                g_real, g_fake, g_chord = torch.autograd.grad(
+                    outputs=(_score_scalar(d_r_out), _score_scalar(d_f_out), _score_scalar(d_chord_out)),
+                    inputs=(x_r_req, x_f_req, x_chord),
                     create_graph=True,
                     only_inputs=True,
-                )[0]
+                )
+            else:
+                g_real, g_fake = torch.autograd.grad(
+                    outputs=(_score_scalar(d_r_out), _score_scalar(d_f_out)),
+                    inputs=(x_r_req, x_f_req),
+                    create_graph=True,
+                    only_inputs=True,
+                )
         finally:
             self.record._in_penalty = False
 
@@ -446,8 +442,11 @@ class _EMPFPenaltyKernel:
             # and tightens fully as thermal cooling engages.
             settle_s = min(1.0, max(0.0, 1.0 - res_ratio / 0.16))
             b_frac = min(1.0, max(0.0, (float(b_r) - 64.0) / 64.0))
-            cool_boost = 1.0 - float(t_scale)
-            batch_gain = (2.0 + 3.0 * b_frac) + cool_boost * (4.5 + 12.5 * b_frac)
+            if dim == 1:
+                cool_boost = 1.0 - float(t_scale)
+                batch_gain = (2.0 + 3.0 * b_frac) + cool_boost * (4.5 + 12.5 * b_frac)
+            else:
+                batch_gain = 6.5 + 15.5 * b_frac
             eff_ebi_beta = self.ebi_beta + batch_gain * (settle_s * settle_s)
             sq_real = g_real.flatten(1).pow(2).sum(dim=1)
             norm_real = (sq_real + 1e-12).sqrt() / scale_dim

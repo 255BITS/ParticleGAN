@@ -1460,10 +1460,10 @@ def get_recipe_fields(name="gan", *, trainer=None, **overrides):
     Born-Infeld critic penalty (``ebi_beta=6.0``), degree-of-freedom-aware EMPF
     prior regularization (``prior_reg=0.01``), zero-momentum DualNorm with
     quintic batched convolution updates, and BF16/channels-last training for
-    supported CUDA convolutional networks. Its ordinary CUDA readout records
-    82/115 counted view requirements (22/61 fixed-suite passes); selection does
-    not add accepted calibration, Tier 3 confirmation, or natural-image quality
-    credit.
+    supported CUDA convolutional networks. See
+    ``reports/forge/technique-inventory.md`` for its current ordinary CUDA
+    readout; selection does not add accepted calibration, Tier 3 confirmation,
+    or natural-image quality credit.
     ``"bispf_optimized"`` retains the explicit optimized BISPF preset:
     zero-momentum DualNorm, non-saturating loss, the Born-Infeld chord penalty,
     SBNP prior regularization, batched convolution updates and

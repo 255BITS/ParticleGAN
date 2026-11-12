@@ -419,24 +419,20 @@ def test_empf_v2_settling_ebi_and_discrete_simplex_cooling():
     assert 0.35 <= disc_pen.last_stats["s_thermal"] < 0.70
 
 
-def test_empf_v3_online_bank_growth_and_outlier_shift_revival():
-    """Verify deterministic farthest-point bank growth when B < M and rapid 1D shift tracking."""
+def test_empf_v4_fixed_small_batch_bank_and_shift_revival():
+    """Verify B=64 2-mode Gaussian keeps fixed K=64 bank with zero shock while 1D/2D shifts reacquire rapidly."""
     rng = torch.Generator().manual_seed(12)
-    coords = torch.linspace(-4.5, 4.5, 10)
-    gx, gy = torch.meshgrid(coords, coords, indexing="ij")
-    centers = torch.stack([gx.reshape(-1), gy.reshape(-1)], dim=1)
+    centers2 = torch.tensor([[-2.0, 0.0], [2.0, 0.0]])
 
     p_sum, p_count, phase, revivals = None, None, 0.0, 0
     c_now = None
     for _ in range(40):
-        idx = torch.randint(0, 100, (64,), generator=rng)
-        batch = centers[idx] + 0.03 * torch.randn(64, 2, generator=rng)
+        idx = torch.randint(0, 2, (64,), generator=rng)
+        batch = centers2[idx] + 0.25 * torch.randn(64, 2, generator=rng)
         c_now, _, p_sum, p_count, phase, revivals = update_emeans_prototypes(
             batch, p_sum, p_count, phase, revivals, max_prototypes=256
         )
-    assert c_now is not None and c_now.shape[0] >= 100
-    d2_modes = torch.cdist(centers, c_now)
-    assert float(d2_modes.min(dim=1).values.max()) < 0.20
+    assert c_now is not None and c_now.shape[0] == 64
 
     # 1D Gaussian stationary -> shift (+1.0) tracks within < 30 steps.
     s_sum, s_count, s_phase, s_rev = None, None, 0.0, 0

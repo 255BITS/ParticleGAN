@@ -56,18 +56,6 @@ def _stratified_initial_prototypes(x: torch.Tensor, k: int) -> torch.Tensor:
     return x[order[slots]].clone()
 
 
-def _within_batch_knn_sq(x: torch.Tensor, k_local: int = 2) -> torch.Tensor:
-    """Squared distance from each row of ``x`` to its ``k_local``-th neighbor in ``x``."""
-    b_r = x.shape[0]
-    if b_r <= 1:
-        return torch.zeros(b_r, device=x.device, dtype=x.dtype)
-    k_eff = max(1, min(int(k_local), b_r - 1))
-    d2_xx = pairwise_sq_dist(x)
-    eye = torch.eye(b_r, device=x.device, dtype=torch.bool)
-    d2_xx = d2_xx.masked_fill(eye, float("inf"))
-    return torch.topk(d2_xx, k=k_eff, dim=1, largest=False).values[:, -1]
-
-
 @torch.no_grad()
 def update_emeans_prototypes(
     x_real: torch.Tensor,
@@ -112,37 +100,6 @@ def update_emeans_prototypes(
     k = cur_sum.shape[0]
     centroids_prev = cur_sum / cur_count.clamp_min(1e-8).unsqueeze(1)
 
-    # Online deterministic farthest-point bank growth when batch_size < true mode count M
-    # (small-batch multi-mode regime 32 <= b_r < 100 in 2D..4D): appends genuinely uncovered
-    # populated modes up to max_prototypes without RNG while leaving b_r >= 100 banks fixed.
-    nn_x_d2: torch.Tensor | None = None
-    if 32 <= b_r < 100 and 2 <= dim <= 4 and 2 <= k < int(max_prototypes):
-        d2_init = pairwise_sq_dist(x, centroids_prev)
-        d2_min_grow = d2_init.min(dim=1).values
-        nn_x_d2 = _within_batch_knn_sq(x, k_local=1)
-        covered_d2 = d2_min_grow.quantile(0.25).clamp_min(1e-10)
-        grow_thresh = torch.maximum(25.0 * nn_x_d2.clamp_min(1e-10), 25.0 * covered_d2)
-        if bool((d2_min_grow > grow_thresh).any()):
-            max_add = min(int(max_prototypes) - k, max(1, b_r // 4))
-            mean_prev = cur_count.mean().clamp_min(1e-6)
-            added_c = []
-            for _ in range(max_add):
-                eligible = d2_min_grow > grow_thresh
-                if not bool(eligible.any()):
-                    break
-                masked_scores = torch.where(eligible, d2_min_grow, x.new_full((b_r,), -1.0))
-                best_idx = int(masked_scores.argmax().item())
-                new_pt = x[best_idx]
-                added_c.append(new_pt)
-                d2_min_grow = torch.minimum(d2_min_grow, (x - new_pt.unsqueeze(0)).square().sum(dim=1))
-            if added_c:
-                extra_c = torch.stack(added_c, dim=0)
-                extra_n = torch.full((extra_c.shape[0],), float(mean_prev.item()), device=x.device, dtype=torch.float32)
-                cur_sum = torch.cat([cur_sum, extra_c * extra_n.unsqueeze(1)], dim=0)
-                cur_count = torch.cat([cur_count, extra_n], dim=0)
-                k = cur_sum.shape[0]
-                centroids_prev = cur_sum / cur_count.clamp_min(1e-8).unsqueeze(1)
-
     d2 = pairwise_sq_dist(x, centroids_prev)
     d2_min, assign = d2.min(dim=1)
 
@@ -159,17 +116,24 @@ def update_emeans_prototypes(
         alpha_min=alpha_min,
         alpha_max=alpha_max,
     )
-    # Clock-free innovation & starvation shock boost: stays exact zero
-    # (alpha_eff == alpha) on stationary distributions, while accelerating
-    # prototype tracking and dead-unit turnover immediately when target support shifts.
-    r2p_rms = float(torch.sqrt(d2_min.mean() / d2.median().clamp_min(1e-12)).item())
-    shock_r2p = max(0.0, min(1.0, (r2p_rms - 0.30) / 0.35))
-    shock_zero = 0.0
+    # Clock-free innovation & starvation shock boost: normalized by total batch
+    # pairwise spread 2 * sum(Var(X)) == E[||X - X'||^2] so 1-mode and 2-mode
+    # stationary distributions stay at exact zero shock (alpha_eff == alpha) while
+    # abrupt support shifts immediately accelerate prototype turnover.
+    pair_spread = (2.0 * x.var(dim=0, unbiased=False).sum()).clamp_min(1e-12)
+    r2p_rms_t = torch.sqrt(d2_min.mean() / pair_spread)
     if k >= 16 and b_r >= 16:
         cur_w = cur_count / cur_count.sum().clamp_min(1e-8)
-        expected_zero = float(torch.exp(-float(b_r) * cur_w).mean().item())
-        actual_zero = float((batch_count == 0).to(dtype=torch.float32).mean().item())
-        shock_zero = max(0.0, min(1.0, (actual_zero - expected_zero - 0.22) / 0.25))
+        expected_zero_t = torch.exp(-float(b_r) * cur_w).mean()
+        actual_zero_t = (batch_count == 0).to(dtype=torch.float32).mean()
+        r2p_rms, expected_zero, actual_zero = torch.stack(
+            (r2p_rms_t, expected_zero_t, actual_zero_t)
+        ).tolist()
+        shock_zero = max(0.0, min(1.0, (float(actual_zero) - float(expected_zero) - 0.35) / 0.25))
+    else:
+        r2p_rms = float(r2p_rms_t.item())
+        shock_zero = 0.0
+    shock_r2p = max(0.0, min(1.0, (float(r2p_rms) - 0.42) / 0.35))
     shock = max(shock_r2p, shock_zero)
     alpha_eff = float(min(0.50, alpha + (0.50 - alpha) * (shock * shock)))
 
