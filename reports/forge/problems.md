@@ -11,7 +11,7 @@ Passer summaries reflect the evidence audit dated **2026-10-15**. Selected-resul
 
 | Problem | What it tests | Has any configuration passed? |
 | --- | --- | --- |
-| [Keep a bell curve stable, then learn a moved target](problems.md#gaussian1d_stability) | After learning a simple bell curve, keep its centre, width and distribution correct while training continues; then track a shifted target and stay there. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
+| [Keep a bell curve stable, then learn a moved target](problems.md#gaussian1d_stability) | After learning a simple bell curve, keep its centre, width and distribution correct while training continues; then track a shifted target and stay there. | Selected recorded PASS: EMPF. |
 | [Preserve rare clusters](problems.md#vector_unequal_mass) | Learn several blobs with different probabilities, including a rare 2% blob, without losing its population or collapsing its shape. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 | [Learn narrow and broad clusters together](problems.md#vector_unequal_width) | Give four equally likely blobs different widths while preserving both their shapes and their equal probabilities. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 | [Learn stretched and tilted clusters](problems.md#vector_anisotropic) | Match the populations and shapes of three equally likely blobs stretched horizontally, vertically and diagonally. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
@@ -66,7 +66,7 @@ Test: `gaussian1d_stability` · Required for qualification and included in full-
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) |
 | [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) |
-| [EMPF](families/empf.md#cohort-cuda-23a94f16ca88) | [FAIL](families/empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) |
+| [EMPF](families/empf.md#cohort-cuda-23a94f16ca88) | [PASS](families/empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) |
 | [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [NOT MEASURED](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-gaussian1d_stability) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) |

@@ -49,12 +49,12 @@ For each task-owned training update:
 
 | Characteristic | Behavior |
 | --- | --- |
-| Adversarial loss | Selectable non-saturating logistic (selected DualNorm configuration), paired relativistic logistic, EMPF Sinkhorn relativistic logistic, hinge, Wasserstein or least squares. Joint encoder/generator hosts train both critic streams. |
-| Optimizer | Supports DualNorm (selected configuration: zero momentum, smoothing 0.001, per-offset quintic convolution, batched SVD backend, BF16 channels-last conv training, direction-blend constraint geometry) as well as native Adam and formulation-owned EMPFCriticAdam without an EMA critic network copy. |
+| Adversarial loss | Selectable non-saturating logistic (selected DualNorm configuration, with conditioned-fiber relativistic pairing once conditional energy settles), paired relativistic logistic, EMPF Sinkhorn relativistic logistic, hinge, Wasserstein or least squares. Joint encoder/generator hosts train both critic streams. |
+| Optimizer | Supports DualNorm (selected configuration: zero momentum, smoothing 0.001, per-offset quintic convolution, size-gated newton_schulz_hybrid_v1 dense polar profile using exact SVD on min_dim < 64 or max_dim <= 128 and guarded 32-step cubic Newton-Schulz on min_dim >= 64 and max_dim > 128, batched SVD backend, BF16 channels-last conv training, direction-blend constraint geometry) as well as native Adam and formulation-owned EMPFCriticAdam without an EMA critic network copy. |
 | Learning rates and annealing | Strictly constant (`lr_floor=1.0`, `network_lr_floor=1.0`): global LR $0.012$, critic multiplier $1.5$ and DualNorm sampled-row prior multiplier $2.5$ (`prior_reg=0.01`), matching `bispf-throughput-v1` / `presets[bispf_optimized]`. |
 | Parameter-gradient clipping | None. Critic spike guard is disabled; gradient bounding acts smoothly through the Elastic Born-Infeld critic potential. |
-| Critic penalties and anchors | Prototype-chord Elastic Born-Infeld regularizer evaluated on real endpoints, fake endpoints and mass-weighted prototype Sinkhorn chords ($\kappa=1$, base sharpness $\beta_0=6$ tightening quadratically via state-driven settling sharpness $\beta_{\mathrm{eff}}(r_{\mathrm{ema}}, B_r)$ once $r_{\mathrm{ema}}<0.16$, harmonic floor $\lambda_{\mathrm{floor}}=0.01$, chord blend $0.05$) plus a settling zero-mean logit gauge ($\gamma_{\mathrm{gauge}}=0.05$). Conditioned critics preserve fiber alignment automatically; no EMA critic anchor. |
-| Damping and update guards | Instance-bound state-driven smoothstep thermal cooling, 2D harmonic basin capture lock, and discrete-simplex post-acquisition Sinkhorn thermal cooling ($r_{\mathrm{ema}}<0.070$) damp post-convergence mini-batch fluctuations below DualNorm's smoothing floor using zero global state and zero step counters. |
+| Critic penalties and anchors | Prototype-chord Elastic Born-Infeld regularizer evaluated on real endpoints, fake endpoints and mass-weighted prototype Sinkhorn chords ($\kappa=1$, base sharpness $\beta_0=6$ tightening quadratically via cool-gated state-driven settling sharpness $\beta_{\mathrm{eff}}(r_{\mathrm{ema}}, B_r)$ once $r_{\mathrm{ema}}<0.16$, harmonic floor $\lambda_{\mathrm{floor}}=0.01$, chord blend $0.05$) plus a settling zero-mean logit gauge ($\gamma_{\mathrm{gauge}}=0.05$). Conditioned critics preserve fiber alignment automatically; no EMA critic anchor. |
+| Damping and update guards | Instance-bound shock-filtered transport EMA, trimmed central-$[0.04, 0.96]$ 1D quantile-$W_2$ floor-subtracted $1/\sqrt{B}$ smoothstep thermal cooling with 1D DualNorm step-scale damping, prototype-referenced 2D harmonic basin capture lock, and discrete-simplex post-acquisition Chamfer thermal cooling ($r_{\mathrm{ema}}<0.070$) damp post-convergence mini-batch fluctuations below DualNorm's smoothing floor while instant-reheating on abrupt distribution shifts using zero global state and zero step counters. |
 | Training and sampling noise | No scheduled additive critic-input or generator-output training noise in the selected benchmark configuration ($0.0$). Task-declared MoG intrinsic sigma is preserved. |
 | Parameter averaging and serving | Generator EMA decay=$0$ and serve_average=$0$; all evaluations score live unaveraged weights. |
 
@@ -77,11 +77,22 @@ These links support the explanation. Recorded results below remain bound to thei
 - [particlegan/_empf/penalty.py](../../../particlegan/_empf/penalty.py)
 - [particlegan/_empf/prior.py](../../../particlegan/_empf/prior.py)
 - [particlegan/_empf/loss.py](../../../particlegan/_empf/loss.py)
+- [particlegan/optim/dualnorm.py](../../../particlegan/optim/dualnorm.py)
 - [particlegan/recipes.py](../../../particlegan/recipes.py)
 - [configs/forge/ideas/empf-v1.json](../../../configs/forge/ideas/empf-v1.json)
 - [configs/forge/studies/empf-v1-study.json](../../../configs/forge/studies/empf-v1-study.json)
 - [configs/forge/ideas/empf-v2.json](../../../configs/forge/ideas/empf-v2.json)
 - [configs/forge/studies/empf-v2-study.json](../../../configs/forge/studies/empf-v2-study.json)
+- [configs/forge/ideas/empf-v3.json](../../../configs/forge/ideas/empf-v3.json)
+- [configs/forge/studies/empf-v3-study.json](../../../configs/forge/studies/empf-v3-study.json)
+- [configs/forge/ideas/empf-v4.json](../../../configs/forge/ideas/empf-v4.json)
+- [configs/forge/studies/empf-v4-study.json](../../../configs/forge/studies/empf-v4-study.json)
+- [configs/forge/ideas/empf-v5.json](../../../configs/forge/ideas/empf-v5.json)
+- [configs/forge/studies/empf-v5-study.json](../../../configs/forge/studies/empf-v5-study.json)
+- [configs/forge/ideas/empf-v6.json](../../../configs/forge/ideas/empf-v6.json)
+- [configs/forge/studies/empf-v6-study.json](../../../configs/forge/studies/empf-v6-study.json)
+- [configs/forge/ideas/empf-v7.json](../../../configs/forge/ideas/empf-v7.json)
+- [configs/forge/studies/empf-v7-study.json](../../../configs/forge/studies/empf-v7-study.json)
 - [reports/forge/empf/README.md](../empf/README.md)
 
 </details>
@@ -100,37 +111,24 @@ Every cell is one run; timings are never pooled across devices or contention sta
 
 This registration covers 9 complete recipes. Historical alternatives outside its registered family roster add no missing benchmark cells. A changed selected recipe within a registered family remains unknown until measured.
 
-### NVIDIA RTX A6000 · GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce
-
-Performance source `1665cbe614b6` (commit `49537dfe0349daec307607f340d6379537d874b9`); runtime `fddddb1b314d`; torch.float32; PyTorch 2.14.1+cu130; 48592.125 MiB device memory.
-
-Task prior: particle_cloud, sigma 0.0, 256 initial locations. The common finite-table performance exception retains each recipe's prior update policy and regularizer. Exact prior and resource specifications remain part of every task key.
-
-| Family / recipe | Task (RGB size, batch, width) | Execution | Median / p95 update ms | Images/s | GPU peak allocated / reserved MiB | Contention | Matched key / evidence |
-| --- | --- | --- | ---: | ---: | ---: | --- | --- |
-| EMPF · `empf-v2` | dcgan_performance_r32: 32², B16, W64 | COMPLETE | 24.83 / 27.10 | 636.66 | 168.71 / 258.00 | clear | `540503eb4dd7` · [receipt](../scaling-receipts/dcgan-performance-cloud-66339a696dff/empf-dcgan_performance_r32-33aff0da59750564.json) |
-| EMPF · `empf-v2` | dcgan_performance_r64: 64², B16, W64 | COMPLETE | 34.65 / 36.93 | 457.26 | 336.58 / 544.00 | clear | `125a0b493141` · [receipt](../scaling-receipts/dcgan-performance-cloud-66339a696dff/empf-dcgan_performance_r64-f19e1867f79c12af.json) |
-| EMPF · `empf-v2` | dcgan_performance_w128: 64², B16, W128 | COMPLETE | 65.09 / 66.52 | 245.04 | 923.03 / 1,528.00 | clear | `a0497dcde871` · [receipt](../scaling-receipts/dcgan-performance-cloud-66339a696dff/empf-dcgan_performance_w128-153b23eeac53ebbb.json) |
-| EMPF · `empf-v2` | dcgan_performance_b64: 64², B64, W64 | COMPLETE | 39.93 / 40.92 | 1,600.20 | 486.10 / 622.00 | clear | `8e4691216640` · [receipt](../scaling-receipts/dcgan-performance-cloud-66339a696dff/empf-dcgan_performance_b64-3314329f95df9350.json) |
-| EMPF · `empf-v2` | dcgan_performance_r128: 128², B16, W64 | COMPLETE | 67.13 / 67.61 | 238.65 | 648.91 / 1,074.00 | clear | `778bea3f152e` · [receipt](../scaling-receipts/dcgan-performance-cloud-66339a696dff/empf-dcgan_performance_r128-f407714b4bc935b8.json) |
-| EMPF · `empf-v2` | dcgan_performance_r256: 256², B16, W64 | COMPLETE | 157.23 / 157.91 | 101.73 | 1,522.16 / 1,890.00 | clear | `7961d2651a16` · [receipt](../scaling-receipts/dcgan-performance-cloud-66339a696dff/empf-dcgan_performance_r256-98a85670924521d3.json) |
+No current selected-recipe update timings are measured. Missing timing cells remain **unknown**.
 
 <a name="cohort-cuda-23a94f16ca88"></a>
 
 ## Current benchmark
 
-Runtime: **cuda**. Selected configuration: [empf-v2](../../../configs/forge/ideas/empf-v2.json).
+Runtime: **cuda**. Selected configuration: [empf-v7](../../../configs/forge/ideas/empf-v7.json).
 
 Comparison policy: discriminator_stability revision 9, **tier 1**. Actual executed-policy qualification: **tier 1**, discriminator_stability revision 16 (FAIL). These are separate policy results; no qualification reuse.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
 
-Source digest: `66339a696dff71be31beb782d2b51a0f9b21e6bee54fdeca2aae9b606ffa14fb`. Candidate revision: `fc09c6b1f8ae77167ca31db0a4d9ef252dc9d6b92aed98e3d4b53a168ff0ac15`. Runtime cohort: `8a11d7649f435b43341699c52ab2daf11cae1163b8aaf5b93da9f916282b8e55`.
+Source digest: `6c2ecde629a68049cec3b220d0837243075197aa07db14e8ac610da31978959c`. Candidate revision: `e9cb4e9e9d26179d1fa70cf52b42cee045c9c8e67238b78e5c0c28ac0d8fda8e`. Runtime cohort: `6bb0a70f936f8e25efe3e5740b71ace42eff15b22023837c101880b2b2c9396c`.
 
-[Frozen numerical evidence](../technique-evidence/d3ce3f952efeaba1f275f36ac0366656432c348889f39cac3254f1654a50e280.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
+[Frozen numerical evidence](../technique-evidence/c1145d18490e4a5b9c6083a83e085f02195479b4e1ea094bd1eeaf55681d3b06.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
 
-Selection: current_measurement. Select empf-v2 (Exponential Moving Prototype Flow with ebi_beta=6.0, clock-free prototype-resolution-scaled settling Born-Infeld sharpness, and discrete-simplex post-acquisition Sinkhorn thermal cooling) following ordinary discriminator_stability CUDA measurement on NVIDIA RTX A6000 (11/11 required + 1/1 clockfree_audit diagnostic Tier 1 PASS, 10/18 required Tier 2 PASS including mode_hold and five_word_joint_hold; 22/38 executed tasks PASS overall, 82/115 counted view requirements). Actual executed-policy qualification and comparison-policy projection retain their separate source-bound proofs; no public-default adoption claim.
+Selection: current_measurement. Select empf-v7 (Exponential Moving Prototype Flow with size-gated newton_schulz_hybrid_v1 DualNorm polar profile, shock-filtered transport EMA, trimmed central-[0.04, 0.96] 1D quantile-W2 floor-subtracted cooling with step-scale damping, normalized shift-shock prototype turnover, and conditioned-fiber relativistic pairing) following ordinary discriminator_stability CUDA measurement on NVIDIA RTX A6000 (13/13 counted Tier 1 gates PASS including clockfree_audit_measurement_v1 and precision_gaussian_fp32, plus Tier 2 gaussian1d_stability and mode_hold; 23/38 executed tasks PASS overall). Actual executed-policy qualification and comparison-policy projection retain their separate source-bound proofs; no public-default adoption claim.
 
 </details>
 
@@ -138,11 +136,11 @@ Complete current Tier 1 measurement in: discriminator_stability. PASS and FAIL a
 
 | View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Tier 4 tests | Total distinct tests | Held (measured, not counted) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| [adaptation](empf.md#cohort-cuda-23a94f16ca88-adaptation) | [3/3](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-1) | [9/12](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) | [0/1 (1 diagnostic attempt)](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-3) | [0/0](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-4) | [12/16 (1 diagnostic attempt)](empf.md#cohort-cuda-23a94f16ca88-adaptation) | [0/7](empf.md#cohort-cuda-23a94f16ca88-held) |
-| [clockfree_continuous](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous) | [4/4](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-1) | [9/12](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) | [0/6 (3 blocked, 3 diagnostic attempts)](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-3) | [0/0](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-4) | [13/22 (3 blocked, 3 diagnostic attempts)](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous) | [0/7](empf.md#cohort-cuda-23a94f16ca88-held) |
-| [discriminator_stability](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability) | [11/11](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) | [10/18 (2 diagnostic attempts)](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) | [0/1 (1 diagnostic attempt)](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-3) | [0/0](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4) | [21/30 (3 diagnostic attempts)](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability) | [0/25 (1 incompatible, 15 diagnostic attempts)](empf.md#cohort-cuda-23a94f16ca88-held) |
-| [formulation_comparison](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison) | [3/3](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-1) | [9/12](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) | [0/1 (1 diagnostic attempt)](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-3) | [0/0](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-4) | [12/16 (1 diagnostic attempt)](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison) | [0/7](empf.md#cohort-cuda-23a94f16ca88-held) |
-| [host_profile_transfer](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer) | [3/3](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-1) | [9/12](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) | [0/1 (1 diagnostic attempt)](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-3) | [0/0](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-4) | [12/16 (1 diagnostic attempt)](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer) | [0/7](empf.md#cohort-cuda-23a94f16ca88-held) |
+| [adaptation](empf.md#cohort-cuda-23a94f16ca88-adaptation) | [3/3](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-1) | [9/12](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) | [0/1 (1 not run)](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-3) | [0/0](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-4) | [12/16 (1 not run)](empf.md#cohort-cuda-23a94f16ca88-adaptation) | [0/7](empf.md#cohort-cuda-23a94f16ca88-held) |
+| [clockfree_continuous](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous) | [4/4](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-1) | [9/12](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) | [0/6 (6 not run)](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-3) | [0/0](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-4) | [13/22 (6 not run)](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous) | [0/7](empf.md#cohort-cuda-23a94f16ca88-held) |
+| [discriminator_stability](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability) | [11/11](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) | [10/18 (2 not run)](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) | [0/1 (1 not run)](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-3) | [0/0](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4) | [21/30 (3 not run)](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability) | [0/25 (16 incompatible)](empf.md#cohort-cuda-23a94f16ca88-held) |
+| [formulation_comparison](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison) | [3/3](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-1) | [9/12](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) | [0/1 (1 not run)](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-3) | [0/0](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-4) | [12/16 (1 not run)](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison) | [0/7](empf.md#cohort-cuda-23a94f16ca88-held) |
+| [host_profile_transfer](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer) | [3/3](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-1) | [9/12](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) | [0/1 (1 not run)](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-3) | [0/0](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-4) | [12/16 (1 not run)](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer) | [0/7](empf.md#cohort-cuda-23a94f16ca88-held) |
 | [quality_coverage](empf.md#cohort-cuda-23a94f16ca88-quality_coverage) | [3/3](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-1) | [9/12](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | [0/0](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-3) | [0/0](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-4) | [12/15](empf.md#cohort-cuda-23a94f16ca88-quality_coverage) | [0/7](empf.md#cohort-cuda-23a94f16ca88-held) |
 
 Separate cohort coverage (excluded from family totals):
@@ -153,8 +151,6 @@ Separate cohort coverage (excluded from family totals):
 | [tier1_policy_coverage](empf.md#cohort-cuda-23a94f16ca88-tier1_policy_coverage) | [0/7 (7 not run)](empf.md#cohort-cuda-23a94f16ca88-tier1_policy_coverage-tier-1) | [0/0](empf.md#cohort-cuda-23a94f16ca88-tier1_policy_coverage-tier-2) | [0/0](empf.md#cohort-cuda-23a94f16ca88-tier1_policy_coverage-tier-3) | [0/0](empf.md#cohort-cuda-23a94f16ca88-tier1_policy_coverage-tier-4) | [0/7 (7 not run)](empf.md#cohort-cuda-23a94f16ca88-tier1_policy_coverage) |
 
 With run-attempt coverage, not run means no attempt; incompatible means a constructor refusal; blocked means a missing required artifact; diagnostic attempts retain separate-runtime outcomes. Other cohorts retain their recorded missing/preflight counts. All remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
-
-Certified execution repair: [34d6d0f887154ca587e3946979a92995](../technique-receipts/34d6d0f887154ca587e3946979a92995.json) → [5e9d6b9ee48049a7aaa706c904e9ce23](../technique-receipts/5e9d6b9ee48049a7aaa706c904e9ce23.json). The original outcome and cost remain recorded; displayed task metrics use the certified successor.
 
 <a name="cohort-cuda-23a94f16ca88-tier-1"></a>
 
@@ -193,8 +189,8 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [cover_leftover](empf.md#cohort-cuda-23a94f16ca88-experiment-cover_leftover) | [adaptation](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | PASS | matches recorded run |
-| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | [discriminator_stability](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) | PASS | matches recorded run |
-| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | [discriminator_stability](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) | FAIL | matches recorded run |
+| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | [discriminator_stability](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) | FAIL | matches recorded run |
+| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | [discriminator_stability](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) | PASS | matches recorded run |
 | [grid100](empf.md#cohort-cuda-23a94f16ca88-experiment-grid100) | [adaptation](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | matches recorded run |
 | [img_stripes2](empf.md#cohort-cuda-23a94f16ca88-experiment-img_stripes2) | [adaptation](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | PASS | matches recorded run |
 | [mid_scale_identity](empf.md#cohort-cuda-23a94f16ca88-experiment-mid_scale_identity) | [adaptation](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | PASS | matches recorded run |
@@ -390,7 +386,7 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [gaussian1d_smoke](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
-| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
+| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | diagnostic | PASS | matches recorded run |
 | [trajectory](empf.md#cohort-cuda-23a94f16ca88-experiment-trajectory) | diagnostic | PASS | matches recorded run |
 | [residual_student](empf.md#cohort-cuda-23a94f16ca88-experiment-residual_student) | diagnostic | PASS | matches recorded run |
 | [unipolar](empf.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | diagnostic | PASS | matches recorded run |
@@ -451,8 +447,8 @@ Calibration: **provisional**. Revision8 acquisition/hold separation is provision
 | [ae_gan_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-ae_gan_hold) | diagnostic | PASS | matches recorded run |
 | [ring16_acquisition](empf.md#cohort-cuda-23a94f16ca88-experiment-ring16_acquisition) | diagnostic | PASS | matches recorded run |
 | [five_word_joint_smoke](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
-| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
-| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | diagnostic | PASS | matches recorded run |
+| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | diagnostic | PASS | matches recorded run |
+| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | diagnostic | FAIL | matches recorded run |
 | [trajectory](empf.md#cohort-cuda-23a94f16ca88-experiment-trajectory) | diagnostic | PASS | matches recorded run |
 | [residual_student](empf.md#cohort-cuda-23a94f16ca88-experiment-residual_student) | diagnostic | PASS | matches recorded run |
 | [vector_unequal_mass](empf.md#cohort-cuda-23a94f16ca88-experiment-vector_unequal_mass) | diagnostic | FAIL | matches recorded run |
@@ -844,7 +840,7 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [model_vae_categorical](empf.md#cohort-cuda-23a94f16ca88-experiment-model_vae_categorical) | required | PASS | matches recorded run |
 | [model_vae_hard](empf.md#cohort-cuda-23a94f16ca88-experiment-model_vae_hard) | required | PASS | matches recorded run |
 | [clockfree_audit_measurement_v1](empf.md#cohort-cuda-23a94f16ca88-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
-| [precision_gaussian_fp32](empf.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_fp32) | diagnostic | FAIL | matches recorded run |
+| [precision_gaussian_fp32](empf.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_fp32) | diagnostic | PASS | matches recorded run |
 | [precision_gaussian_mxfp8](empf.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_mxfp8) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | FAIL | matches recorded run |
 | [precision_gaussian_nvfp4](empf.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_nvfp4) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | FAIL | matches recorded run |
 
@@ -854,8 +850,8 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | required | FAIL | matches recorded run |
-| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | required | PASS | matches recorded run |
+| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | required | PASS | matches recorded run |
+| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | required | FAIL | matches recorded run |
 | [trajectory](empf.md#cohort-cuda-23a94f16ca88-experiment-trajectory) | required | PASS | matches recorded run |
 | [residual_student](empf.md#cohort-cuda-23a94f16ca88-experiment-residual_student) | required | PASS | matches recorded run |
 | [unipolar](empf.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | required | PASS | matches recorded run |
@@ -1123,8 +1119,8 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 | [ae_gan_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-ae_gan_hold) | diagnostic | PASS | matches recorded run |
 | [ring16_acquisition](empf.md#cohort-cuda-23a94f16ca88-experiment-ring16_acquisition) | diagnostic | PASS | matches recorded run |
 | [five_word_joint_smoke](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
-| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
-| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | diagnostic | PASS | matches recorded run |
+| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | diagnostic | PASS | matches recorded run |
+| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | diagnostic | FAIL | matches recorded run |
 | [trajectory](empf.md#cohort-cuda-23a94f16ca88-experiment-trajectory) | diagnostic | PASS | matches recorded run |
 | [residual_student](empf.md#cohort-cuda-23a94f16ca88-experiment-residual_student) | diagnostic | PASS | matches recorded run |
 | [unipolar](empf.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | diagnostic | PASS | matches recorded run |
@@ -1233,8 +1229,8 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 | [model_vae_hard](empf.md#cohort-cuda-23a94f16ca88-experiment-model_vae_hard) | diagnostic | PASS | matches recorded run |
 | [clockfree_audit_measurement_v1](empf.md#cohort-cuda-23a94f16ca88-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
 | [clockfree_audit](empf.md#cohort-cuda-23a94f16ca88-experiment-clockfree_audit) | diagnostic | UNKNOWN | recorded definition unavailable |
-| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
-| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | diagnostic | PASS | matches recorded run |
+| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | diagnostic | PASS | matches recorded run |
+| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | diagnostic | FAIL | matches recorded run |
 | [trajectory](empf.md#cohort-cuda-23a94f16ca88-experiment-trajectory) | diagnostic | PASS | matches recorded run |
 | [residual_student](empf.md#cohort-cuda-23a94f16ca88-experiment-residual_student) | diagnostic | PASS | matches recorded run |
 | [unipolar](empf.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | diagnostic | PASS | matches recorded run |
@@ -1360,7 +1356,7 @@ Calibration: **provisional**. Own-checkpoint word retention only; no ordinary ti
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [five_word_joint_smoke](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
-| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | diagnostic | PASS | matches recorded run |
+| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | diagnostic | FAIL | matches recorded run |
 
 <a name="cohort-cuda-23a94f16ca88-r1r2-repair-word-retention-20261022-tier-2"></a>
 
@@ -1398,8 +1394,8 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | --- | --- | --- | --- |
 | [five_word_joint_smoke](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
 | [gaussian1d_smoke](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
-| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
-| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | diagnostic | PASS | matches recorded run |
+| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | diagnostic | PASS | matches recorded run |
+| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | diagnostic | FAIL | matches recorded run |
 | [trajectory](empf.md#cohort-cuda-23a94f16ca88-experiment-trajectory) | diagnostic | PASS | matches recorded run |
 | [residual_student](empf.md#cohort-cuda-23a94f16ca88-experiment-residual_student) | diagnostic | PASS | matches recorded run |
 | [unipolar](empf.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | diagnostic | PASS | matches recorded run |
@@ -1456,8 +1452,8 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | --- | --- | --- | --- |
 | [five_word_joint_smoke](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
 | [gaussian1d_smoke](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
-| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
-| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | diagnostic | PASS | matches recorded run |
+| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | diagnostic | PASS | matches recorded run |
+| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | diagnostic | FAIL | matches recorded run |
 | [trajectory](empf.md#cohort-cuda-23a94f16ca88-experiment-trajectory) | diagnostic | PASS | matches recorded run |
 | [residual_student](empf.md#cohort-cuda-23a94f16ca88-experiment-residual_student) | diagnostic | PASS | matches recorded run |
 | [unipolar](empf.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | diagnostic | PASS | matches recorded run |
@@ -1514,8 +1510,8 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | --- | --- | --- | --- |
 | [five_word_joint_smoke](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
 | [gaussian1d_smoke](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
-| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
-| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | diagnostic | PASS | matches recorded run |
+| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | diagnostic | PASS | matches recorded run |
+| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | diagnostic | FAIL | matches recorded run |
 | [trajectory](empf.md#cohort-cuda-23a94f16ca88-experiment-trajectory) | diagnostic | PASS | matches recorded run |
 | [residual_student](empf.md#cohort-cuda-23a94f16ca88-experiment-residual_student) | diagnostic | PASS | matches recorded run |
 | [unipolar](empf.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | diagnostic | PASS | matches recorded run |
@@ -1572,8 +1568,8 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | --- | --- | --- | --- |
 | [five_word_joint_smoke](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_smoke) | diagnostic | PASS | matches recorded run |
 | [gaussian1d_smoke](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
-| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
-| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | diagnostic | PASS | matches recorded run |
+| [gaussian1d_stability](empf.md#cohort-cuda-23a94f16ca88-experiment-gaussian1d_stability) | diagnostic | PASS | matches recorded run |
+| [five_word_joint_hold](empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) | diagnostic | FAIL | matches recorded run |
 | [trajectory](empf.md#cohort-cuda-23a94f16ca88-experiment-trajectory) | diagnostic | PASS | matches recorded run |
 | [residual_student](empf.md#cohort-cuda-23a94f16ca88-experiment-residual_student) | diagnostic | PASS | matches recorded run |
 | [unipolar](empf.md#cohort-cuda-23a94f16ca88-experiment-unipolar) | diagnostic | PASS | matches recorded run |
@@ -1743,8 +1739,6 @@ One evidence entry per experiment is shared by its view rows. Test-definition ch
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
 Actual task device: `cuda:0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 1](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-1) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-1).
@@ -1753,12 +1747,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| hold | 0.00881039 | <= 0.35 | PASS |
-| recon_mse | 0.00751763 | <= 0.05 | PASS |
+| hold | 0.019502 | <= 0.35 | PASS |
+| recon_mse | 0.00439311 | <= 0.05 | PASS |
 
-Recorded terminal passing observations: **12**; required: 5.
+Recorded terminal passing observations: **15**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/2da46990877548d59107645e14bcafaa.json)
+[Compact metrics and receipt provenance](../technique-receipts/142c4a0d6342424c94c015930647354b.json)
 
 Recorded conditions: mog prior (sigma 0.025); generated_and_reconstructed_prior_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -1814,7 +1808,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. alice_spiral_bigan: no registered public Forge adapter for this stretch host; declare and implement its complete recipe, sampling and checkpoint contracts before training
 
-Run attempt: **ERROR** (new_attempt; qualification unchanged). ValueError: unsupported vector target declaration [Attempt evidence](../attempt-coverage.json).
+Execution: **incompatible; skipped**.
 
 Used by: [discriminator_stability / Tier 4](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4).
 
@@ -1844,7 +1838,7 @@ Current measurement: mog prior (sigma 0.06); public_prior_without_output_noise; 
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. cgan_overlapping_classes: no registered public Forge adapter for this stretch host; declare and implement its complete recipe, sampling and checkpoint contracts before training
 
-Run attempt: **ERROR** (new_attempt; qualification unchanged). ValueError: unsupported vector target declaration [Attempt evidence](../attempt-coverage.json).
+Execution: **incompatible; skipped**.
 
 Used by: [discriminator_stability / Tier 4](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4).
 
@@ -1874,7 +1868,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Run attempt: **PASS** (new_attempt; qualification unchanged). declared state/horizon/cadence/restart comparisons agree; source audit bound [Attempt evidence](../attempt-coverage.json).
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-3) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [selected-family-coverage-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-selected-family-coverage-diagnostic-v1-tier-1).
 
@@ -1894,9 +1888,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. declared state/horizon/cadence/restart comparisons agree; source audit bound
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [clockfree_continuous / Tier 1](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -1906,7 +1898,7 @@ Recorded final metrics:
 | --- | ---: |
 | parity_comparisons | 4 |
 
-[Compact metrics and receipt provenance](../technique-receipts/3354fc511cf14d6195044eb9994cd28f.json)
+[Compact metrics and receipt provenance](../technique-receipts/7bfc230470374d15b0bcf115b74875ba.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1948,8 +1940,6 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
 Actual task device: `cuda:0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -1958,16 +1948,16 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| content_kept | 0.90649 | >= 0.75 | PASS |
-| leak_ratio | 0.0246465 | <= 0.2 | PASS |
-| pole_rel_err_minus | 0.0342566 | <= 0.2 | PASS |
-| pole_rel_err_plus | 0.0453964 | <= 0.2 | PASS |
-| same_dir | 0.0262098 | <= 0.25 | PASS |
-| u_kept | 0.961357 | >= 0.85 | PASS |
+| content_kept | 0.927563 | >= 0.75 | PASS |
+| leak_ratio | 0.00690026 | <= 0.2 | PASS |
+| pole_rel_err_minus | 0.0503559 | <= 0.2 | PASS |
+| pole_rel_err_plus | 0.0299125 | <= 0.2 | PASS |
+| same_dir | 0.029986 | <= 0.25 | PASS |
+| u_kept | 0.991826 | >= 0.85 | PASS |
 
 Recorded terminal passing observations: **22**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/7d0af80ad8b94daf93f950a46e6e8812.json)
+[Compact metrics and receipt provenance](../technique-receipts/75642b081f074184abc4c79a6dd8a114.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -1997,7 +1987,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. cramer_energy_overlap: no registered public Forge adapter for this stretch host; declare and implement its complete recipe, sampling and checkpoint contracts before training
 
-Run attempt: **ERROR** (new_attempt; qualification unchanged). ValueError: unsupported vector target declaration [Attempt evidence](../attempt-coverage.json).
+Execution: **incompatible; skipped**.
 
 Used by: [discriminator_stability / Tier 4](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4).
 
@@ -2026,7 +2016,7 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. cyclegan_unpaired_constellation: no registered public Forge adapter for this stretch host; declare and implement its complete recipe, sampling and checkpoint contracts before training
 
-Run attempt: **ERROR** (new_attempt; qualification unchanged). ValueError: unsupported vector target declaration [Attempt evidence](../attempt-coverage.json).
+Execution: **incompatible; skipped**.
 
 Used by: [discriminator_stability / Tier 4](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4).
 
@@ -2356,11 +2346,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 ### five_word_joint_hold
 
-**five_word_joint_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_hold.json).
+**five_word_joint_hold: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_hold.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. every joint generation/inverse check throughout the fixed continuation window
-
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -2370,25 +2358,25 @@ Recorded final metrics:
 
 | Metric | Measured |
 | --- | ---: |
-| completed_steps | 4834 |
-| mass_apple | 0.194336 |
-| mass_berry | 0.193359 |
-| mass_grape | 0.205078 |
-| mass_lemon | 0.191406 |
-| mass_melon | 0.21582 |
-| mass_tv | 0.0208984 |
-| minimum_reconstruction_token_probability | 0.998145 |
+| completed_steps | 5667 |
+| mass_apple | 0.182617 |
+| mass_berry | 0.194336 |
+| mass_grape | 0.188477 |
+| mass_lemon | 0.223633 |
+| mass_melon | 0.210938 |
+| mass_tv | 0.0345703 |
+| minimum_reconstruction_token_probability | 0.999349 |
 | modes | 5 |
 | output_noise_added | 0 |
 | policy_latent_perturbation | 0 |
 | quality_fraction | 1 |
 | reconstruction_exact | 1 |
-| reconstruction_nll | 0.000136312 |
+| reconstruction_nll | 4.24031e-05 |
 | sample_count | 1024 |
 | served_averaged | 0 |
-| step | 4834 |
+| step | 5667 |
 
-[Compact metrics and receipt provenance](../technique-receipts/812613ea1eb44d2fbd6b1d1b7ceb024b.json)
+[Compact metrics and receipt provenance](../technique-receipts/21ef8f72c0284daa9bd7c64be169e722.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
 
@@ -2421,9 +2409,7 @@ Dependencies: five_word_joint_smoke (checkpoint).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. any scheduled full joint pass plus independent same-state confirmation
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [r1r2-repair-word-retention-20261022 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-r1r2-repair-word-retention-20261022-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -2432,24 +2418,24 @@ Recorded final metrics:
 | Metric | Measured |
 | --- | ---: |
 | completed_steps | 20001 |
-| mass_apple | 0.198242 |
-| mass_berry | 0.208008 |
+| mass_apple | 0.1875 |
+| mass_berry | 0.210938 |
 | mass_grape | 0.195312 |
-| mass_lemon | 0.210938 |
-| mass_melon | 0.1875 |
+| mass_lemon | 0.208008 |
+| mass_melon | 0.198242 |
 | mass_tv | 0.0189453 |
-| minimum_reconstruction_token_probability | 0.999359 |
+| minimum_reconstruction_token_probability | 0.997731 |
 | modes | 5 |
 | output_noise_added | 0 |
 | policy_latent_perturbation | 0 |
 | quality_fraction | 1 |
 | reconstruction_exact | 1 |
-| reconstruction_nll | 7.78187e-05 |
+| reconstruction_nll | 0.000191276 |
 | sample_count | 1024 |
 | served_averaged | 0 |
 | step | 20001 |
 
-[Compact metrics and receipt provenance](../technique-receipts/5e9d6b9ee48049a7aaa706c904e9ce23.json)
+[Compact metrics and receipt provenance](../technique-receipts/5d5824c992aa4777a289bddb2c25f345.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
 
@@ -2514,9 +2500,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. any scheduled full pass with independent same-state confirmation
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -2524,16 +2508,16 @@ Recorded final metrics:
 
 | Metric | Measured |
 | --- | ---: |
-| cdf_ks | 0.129444 |
+| cdf_ks | 0.0452211 |
 | finite_fraction | 1 |
-| mean | 2.13048 |
-| mean_error_sigma | 0.260967 |
+| mean | 2.05975 |
+| mean_error_sigma | 0.119496 |
 | sample_count | 4096 |
-| std | 0.510284 |
-| std_ratio | 1.02057 |
+| std | 0.537426 |
+| std_ratio | 1.07485 |
 | step | 1000 |
 
-[Compact metrics and receipt provenance](../technique-receipts/3c08e827a91647f8823bfecfcce82209.json)
+[Compact metrics and receipt provenance](../technique-receipts/5cc605c73dcd4c8c9603c2b96e1c7fc5.json)
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2560,11 +2544,9 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 ### gaussian1d_stability
 
-**gaussian1d_stability: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_stability.json).
+**gaussian1d_stability: PASS**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_stability.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. stationary hold, deadline reacquisition and shifted hold
-
-Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -2574,16 +2556,16 @@ Recorded final metrics:
 
 | Metric | Measured |
 | --- | ---: |
-| cdf_ks | 0.0733415 |
+| cdf_ks | 0.0205819 |
 | finite_fraction | 1 |
-| mean | 2.95962 |
-| mean_error_sigma | 0.0807531 |
+| mean | 3.01037 |
+| mean_error_sigma | 0.0207344 |
 | sample_count | 4096 |
-| std | 0.429691 |
-| std_ratio | 0.859381 |
+| std | 0.529572 |
+| std_ratio | 1.05914 |
 | step | 6000 |
 
-[Compact metrics and receipt provenance](../technique-receipts/c39d16fc98c64108921e74cfb7e5e4c7.json)
+[Compact metrics and receipt provenance](../technique-receipts/2b2cb7b39a094973b32c99686ebb7481.json)
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2617,8 +2599,6 @@ Dependencies: gaussian1d_smoke (checkpoint).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
-Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
 Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -2627,27 +2607,27 @@ Recorded final metrics:
 
 | Metric | Measured |
 | --- | ---: |
-| abs_cov_trace_bias | 0.460319 |
+| abs_cov_trace_bias | 0.594702 |
 | accuracy_pass | False |
-| accuracy_score | 5.81825 |
+| accuracy_score | 6.12441 |
 | all_finite | True |
-| center_max_sigma | 2.03733 |
-| center_rms_sigma | 1.21528 |
-| cov_frob_rms | 0.642555 |
-| cov_trace_bias | 0.460319 |
+| center_max_sigma | 1.80083 |
+| center_rms_sigma | 1.09492 |
+| cov_frob_rms | 0.692284 |
+| cov_trace_bias | 0.594702 |
 | frozen_pass | False |
-| mass_tv | 0.17794 |
+| mass_tv | 0.20566 |
 | n | 100000 |
 | passed | False |
-| precision | 0.35941 |
-| precision_gap | 0.629481 |
+| precision | 0.39525 |
+| precision_gap | 0.593641 |
 | problem | grid100 |
 | protocol | toy100-accuracy-v1 |
-| radial_ks | 0.385109 |
+| radial_ks | 0.385935 |
 | valid_n | 100000 |
-| within_radius_n | 35941 |
+| within_radius_n | 39525 |
 
-[Compact metrics and receipt provenance](../technique-receipts/bb0460850a73403badd3aa317a524849.json)
+[Compact metrics and receipt provenance](../technique-receipts/fd62deec6f51485790a973d833dd9533.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2686,7 +2666,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Run attempt: **BLOCKED** (new_attempt; qualification unchanged). checkpoint parent grid100: FAIL [Attempt evidence](../attempt-coverage.json).
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-3) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -2805,7 +2785,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. native model variants require an explicit profile; grid100_mlp16: native model variants require an explicit profile
 
-Run attempt: **ERROR** (new_attempt; qualification unchanged). ValueError: native model variants require an explicit profile [Attempt evidence](../attempt-coverage.json).
+Execution: **incompatible; skipped**.
 
 Used by: [discriminator_stability / Tier 4](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4).
 
@@ -2887,7 +2867,7 @@ Current measurement: particle_cloud prior (sigma 0); public_prior_without_output
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. native model variants require an explicit profile; grid100_res16_scaled_tanh: native model variants require an explicit profile
 
-Run attempt: **ERROR** (new_attempt; qualification unchanged). ValueError: native model variants require an explicit profile [Attempt evidence](../attempt-coverage.json).
+Execution: **incompatible; skipped**.
 
 Used by: [discriminator_stability / Tier 4](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4).
 
@@ -2930,7 +2910,7 @@ Dependencies: grid100 (gate).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. native model variants require an explicit profile; grid100_res16_tanh: native model variants require an explicit profile
 
-Run attempt: **ERROR** (new_attempt; qualification unchanged). ValueError: native model variants require an explicit profile [Attempt evidence](../attempt-coverage.json).
+Execution: **incompatible; skipped**.
 
 Used by: [discriminator_stability / Tier 4](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4).
 
@@ -2973,9 +2953,7 @@ Dependencies: grid100 (gate).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -2983,12 +2961,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| hq | 0.90625 | >= 0.9 | PASS |
+| hq | 0.96875 | >= 0.9 | PASS |
 | modes | 2 | >= 4 | FAIL |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/f0adf82ebc2d4dfe9584f6d67cd029c7.json)
+[Compact metrics and receipt provenance](../technique-receipts/d36cb8ce63484d6c82c3dbaa4174ae00.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -3066,8 +3044,6 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
 Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -3076,12 +3052,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| hq | 0.75 | >= 0.9 | FAIL |
-| modes | 3 | >= 4 | FAIL |
+| hq | 0.875 | >= 0.9 | FAIL |
+| modes | 4 | >= 4 | PASS |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/40111127f64d46868de94d1f988fc5ae.json)
+[Compact metrics and receipt provenance](../technique-receipts/6dd41231505448b398595f23a4f98f24.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -3133,8 +3109,6 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
 Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -3143,12 +3117,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| hq | 0.5625 | >= 0.9 | FAIL |
-| modes | 2 | >= 2 | PASS |
+| hq | 0.375 | >= 0.9 | FAIL |
+| modes | 0 | >= 2 | FAIL |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/c9de6b7663f54f65816afea411165f87.json)
+[Compact metrics and receipt provenance](../technique-receipts/5de7fbf5ce7f43c8a93051d0317f881f.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -3200,9 +3174,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -3215,7 +3187,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **12**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/6b66cb7354184c0fa34de844cbb7618c.json)
+[Compact metrics and receipt provenance](../technique-receipts/7a9b50bbb2b54660b36d3a58fe1f9c67.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -3293,7 +3265,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. infogan_anisotropic_modes: no registered public Forge adapter for this stretch host; declare and implement its complete recipe, sampling and checkpoint contracts before training
 
-Run attempt: **ERROR** (new_attempt; qualification unchanged). ValueError: unsupported vector target declaration [Attempt evidence](../attempt-coverage.json).
+Execution: **incompatible; skipped**.
 
 Used by: [discriminator_stability / Tier 4](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4).
 
@@ -3324,8 +3296,6 @@ Current measurement: mog prior (sigma 0.05); public_prior_without_output_noise; 
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
 Actual task device: `cuda:0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -3334,16 +3304,16 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| concept_cos_minus | 0.999813 | >= 0.85 | PASS |
-| concept_cos_plus | 0.999826 | >= 0.85 | PASS |
-| concept_mag_minus | 1.00268 | <= 1.25 | PASS |
-| concept_mag_plus | 0.99846 | <= 1.25 | PASS |
-| identity_at_0 | 0.996105 | >= 0.85 | PASS |
-| identity_at_mid | 0.981403 | >= 0.85 | PASS |
+| concept_cos_minus | 0.999947 | >= 0.85 | PASS |
+| concept_cos_plus | 0.999982 | >= 0.85 | PASS |
+| concept_mag_minus | 1.00458 | <= 1.25 | PASS |
+| concept_mag_plus | 1.01816 | <= 1.25 | PASS |
+| identity_at_0 | 0.992017 | >= 0.85 | PASS |
+| identity_at_mid | 0.995798 | >= 0.85 | PASS |
 
 Recorded terminal passing observations: **21**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/768f4dd483fc4d77b85a5ada05db90e7.json)
+[Compact metrics and receipt provenance](../technique-receipts/94b556da70864ba09da4b2ef23a8e102.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -3375,7 +3345,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. misgan_block_neural_imputer: no registered public Forge adapter for this stretch host; declare and implement its complete recipe, sampling and checkpoint contracts before training
 
-Run attempt: **ERROR** (new_attempt; qualification unchanged). ValueError: unsupported vector target declaration [Attempt evidence](../attempt-coverage.json).
+Execution: **incompatible; skipped**.
 
 Used by: [discriminator_stability / Tier 4](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -3404,7 +3374,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. misgan_block_recovery: no registered public Forge adapter for this stretch host; declare and implement its complete recipe, sampling and checkpoint contracts before training
 
-Run attempt: **ERROR** (new_attempt; qualification unchanged). ValueError: unsupported vector target declaration [Attempt evidence](../attempt-coverage.json).
+Execution: **incompatible; skipped**.
 
 Used by: [discriminator_stability / Tier 4](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -3435,7 +3405,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. misgan_mcar_p50_recovery: no registered public Forge adapter for this stretch host; declare and implement its complete recipe, sampling and checkpoint contracts before training
 
-Run attempt: **ERROR** (new_attempt; qualification unchanged). ValueError: unsupported vector target declaration [Attempt evidence](../attempt-coverage.json).
+Execution: **incompatible; skipped**.
 
 Used by: [discriminator_stability / Tier 4](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4).
 
@@ -3466,7 +3436,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. misgan_mcar_p80_anchored: no registered public Forge adapter for this stretch host; declare and implement its complete recipe, sampling and checkpoint contracts before training
 
-Run attempt: **ERROR** (new_attempt; qualification unchanged). ValueError: unsupported vector target declaration [Attempt evidence](../attempt-coverage.json).
+Execution: **incompatible; skipped**.
 
 Used by: [discriminator_stability / Tier 4](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4).
 
@@ -3497,8 +3467,6 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
 Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -3507,12 +3475,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| hq | 0.999268 | >= 0.9 | PASS |
+| hq | 1 | >= 0.9 | PASS |
 | modes | 8 | >= 8 | PASS |
 
-Recorded terminal passing observations: **14**; required: 5.
+Recorded terminal passing observations: **18**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/472e2f7294c74d5aab601b794676d242.json)
+[Compact metrics and receipt provenance](../technique-receipts/a19c1c41778348388947d3437d604096.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -3538,7 +3506,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
 
-Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
+Execution: **not run**.
 
 Used by: [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -3616,8 +3584,6 @@ Dependencies: model_ae_ddgan_gaussian_chain (gate).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
 Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
@@ -3626,52 +3592,52 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| final_covariance_eigen_max | 0.934751 | <= 1.4 | PASS |
-| final_covariance_eigen_min | 0.695048 | >= 0.65 | PASS |
-| final_normalized_mean | 0.163696 | <= 0.45 | PASS |
-| final_projection_cdf | 0.100325 | <= 0.2 | PASS |
-| paired_nmse | 0.0559072 | <= 0.1 | PASS |
+| final_covariance_eigen_max | 1.63087 | <= 1.4 | FAIL |
+| final_covariance_eigen_min | 0.684388 | >= 0.65 | PASS |
+| final_normalized_mean | 0.801627 | <= 0.45 | FAIL |
+| final_projection_cdf | 0.242207 | <= 0.2 | FAIL |
+| paired_nmse | 0.104095 | <= 0.1 | FAIL |
 | paired_reverse_steps | 4 | == 4 | PASS |
-| paired_shuffled_gain | 35.7883 | >= 3 | PASS |
-| paired_worst_axis_nrmse | 0.258922 | <= 0.25 | FAIL |
+| paired_shuffled_gain | 19.3495 | >= 3 | PASS |
+| paired_worst_axis_nrmse | 0.385015 | <= 0.25 | FAIL |
 | panel_count | 8 | == 8 | PASS |
 | samples_per_panel | 2048 | >= 2048 | PASS |
-| t1_q0_covariance_eigen_max | 1.67916 | <= 1.8 | PASS |
-| t1_q0_covariance_eigen_min | 0.602975 | >= 0.4 | PASS |
-| t1_q0_normalized_mean | 0.44188 | <= 0.65 | PASS |
-| t1_q0_projection_cdf | 0.241498 | <= 0.26 | PASS |
-| t1_q1_covariance_eigen_max | 0.919085 | <= 1.8 | PASS |
-| t1_q1_covariance_eigen_min | 0.621616 | >= 0.4 | PASS |
-| t1_q1_normalized_mean | 0.21574 | <= 0.65 | PASS |
-| t1_q1_projection_cdf | 0.128401 | <= 0.26 | PASS |
-| t2_q0_covariance_eigen_max | 1.16222 | <= 1.4 | PASS |
-| t2_q0_covariance_eigen_min | 0.81971 | >= 0.6 | PASS |
-| t2_q0_normalized_mean | 0.237104 | <= 0.35 | PASS |
-| t2_q0_projection_cdf | 0.106363 | <= 0.2 | PASS |
-| t2_q1_covariance_eigen_max | 0.860211 | <= 1.4 | PASS |
-| t2_q1_covariance_eigen_min | 0.834563 | >= 0.6 | PASS |
-| t2_q1_normalized_mean | 0.0414949 | <= 0.35 | PASS |
-| t2_q1_projection_cdf | 0.0369401 | <= 0.2 | PASS |
-| t3_q0_covariance_eigen_max | 0.983969 | <= 1.4 | PASS |
-| t3_q0_covariance_eigen_min | 0.937976 | >= 0.65 | PASS |
-| t3_q0_normalized_mean | 0.00558701 | <= 0.25 | PASS |
-| t3_q0_projection_cdf | 0.0165121 | <= 0.12 | PASS |
-| t3_q1_covariance_eigen_max | 0.983601 | <= 1.4 | PASS |
-| t3_q1_covariance_eigen_min | 0.938636 | >= 0.65 | PASS |
-| t3_q1_normalized_mean | 0.0522011 | <= 0.25 | PASS |
-| t3_q1_projection_cdf | 0.0325928 | <= 0.12 | PASS |
-| t4_q0_covariance_eigen_max | 1.03785 | <= 1.4 | PASS |
-| t4_q0_covariance_eigen_min | 0.991122 | >= 0.65 | PASS |
-| t4_q0_normalized_mean | 0.0170727 | <= 0.25 | PASS |
-| t4_q0_projection_cdf | 0.0192333 | <= 0.12 | PASS |
-| t4_q1_covariance_eigen_max | 1.01698 | <= 1.4 | PASS |
-| t4_q1_covariance_eigen_min | 0.953182 | >= 0.65 | PASS |
-| t4_q1_normalized_mean | 0.0338712 | <= 0.25 | PASS |
-| t4_q1_projection_cdf | 0.0293035 | <= 0.12 | PASS |
+| t1_q0_covariance_eigen_max | 1.11908 | <= 1.8 | PASS |
+| t1_q0_covariance_eigen_min | 0.598754 | >= 0.4 | PASS |
+| t1_q0_normalized_mean | 0.569276 | <= 0.65 | PASS |
+| t1_q0_projection_cdf | 0.279831 | <= 0.26 | FAIL |
+| t1_q1_covariance_eigen_max | 1.12679 | <= 1.8 | PASS |
+| t1_q1_covariance_eigen_min | 0.802861 | >= 0.4 | PASS |
+| t1_q1_normalized_mean | 0.777634 | <= 0.65 | FAIL |
+| t1_q1_projection_cdf | 0.304128 | <= 0.26 | FAIL |
+| t2_q0_covariance_eigen_max | 0.941081 | <= 1.4 | PASS |
+| t2_q0_covariance_eigen_min | 0.713834 | >= 0.6 | PASS |
+| t2_q0_normalized_mean | 0.323203 | <= 0.35 | PASS |
+| t2_q0_projection_cdf | 0.15639 | <= 0.2 | PASS |
+| t2_q1_covariance_eigen_max | 0.872205 | <= 1.4 | PASS |
+| t2_q1_covariance_eigen_min | 0.758953 | >= 0.6 | PASS |
+| t2_q1_normalized_mean | 0.178329 | <= 0.35 | PASS |
+| t2_q1_projection_cdf | 0.102618 | <= 0.2 | PASS |
+| t3_q0_covariance_eigen_max | 0.958181 | <= 1.4 | PASS |
+| t3_q0_covariance_eigen_min | 0.916327 | >= 0.65 | PASS |
+| t3_q0_normalized_mean | 0.118557 | <= 0.25 | PASS |
+| t3_q0_projection_cdf | 0.0628825 | <= 0.12 | PASS |
+| t3_q1_covariance_eigen_max | 0.993864 | <= 1.4 | PASS |
+| t3_q1_covariance_eigen_min | 0.923042 | >= 0.65 | PASS |
+| t3_q1_normalized_mean | 0.0990642 | <= 0.25 | PASS |
+| t3_q1_projection_cdf | 0.0527275 | <= 0.12 | PASS |
+| t4_q0_covariance_eigen_max | 1.03551 | <= 1.4 | PASS |
+| t4_q0_covariance_eigen_min | 0.991623 | >= 0.65 | PASS |
+| t4_q0_normalized_mean | 0.0143116 | <= 0.25 | PASS |
+| t4_q0_projection_cdf | 0.0178394 | <= 0.12 | PASS |
+| t4_q1_covariance_eigen_max | 1.01561 | <= 1.4 | PASS |
+| t4_q1_covariance_eigen_min | 0.952593 | >= 0.65 | PASS |
+| t4_q1_normalized_mean | 0.0483965 | <= 0.25 | PASS |
+| t4_q1_projection_cdf | 0.0343118 | <= 0.12 | PASS |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/3d797cae2a40478ea4325607d2ace1d3.json)
+[Compact metrics and receipt provenance](../technique-receipts/a5e2376896da48c1992768395e230291.json)
 
 Recorded conditions: mog prior (sigma 0.25); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
@@ -3740,9 +3706,7 @@ Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_wit
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -3750,18 +3714,18 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_center_rms_sigma | 0.661207 | <= 1 | PASS |
-| component_max_eigen_ratio | 1.01587 | <= 4 | PASS |
-| component_min_eigen_ratio | 0.327908 | >= 0.1 | PASS |
+| component_center_rms_sigma | 0.860907 | <= 1 | PASS |
+| component_max_eigen_ratio | 1.55558 | <= 4 | PASS |
+| component_min_eigen_ratio | 0.35052 | >= 0.1 | PASS |
 | mass_tv | 0.0842285 | <= 0.15 | PASS |
 | modes | 4 | >= 4 | PASS |
-| precision | 0.997803 | >= 0.9 | PASS |
-| reconstruction_mode_agreement | 0.998047 | >= 0.98 | PASS |
-| reconstruction_mse | 0.00932685 | <= 0.025 | PASS |
+| precision | 0.994385 | >= 0.9 | PASS |
+| reconstruction_mode_agreement | 0.999512 | >= 0.98 | PASS |
+| reconstruction_mse | 0.00804034 | <= 0.025 | PASS |
 
-Recorded terminal passing observations: **7**; required: 5.
+Recorded terminal passing observations: **5**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/cfac85f039fb471697424664ef0c9bf4.json)
+[Compact metrics and receipt provenance](../technique-receipts/c2c403d6afa14544876ec20f22fe45bd.json)
 
 Recorded conditions: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
@@ -3796,9 +3760,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -3811,7 +3773,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **24**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/6309859dbbbd4b678b1e08d380d60efe.json)
+[Compact metrics and receipt provenance](../technique-receipts/6eae988d957045ca952bc8995f7358f8.json)
 
 Recorded conditions: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
@@ -3840,7 +3802,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
 
-Run attempt: **FAIL** (new_attempt; qualification unchanged). recomputed complete live curve and terminal suffix [Attempt evidence](../attempt-coverage.json).
+Execution: **not run**.
 
 Used by: [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -3914,9 +3876,7 @@ Dependencies: model_ddgan_gaussian_chain (gate).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -3924,48 +3884,48 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| final_covariance_eigen_max | 0.847224 | <= 1.4 | PASS |
-| final_covariance_eigen_min | 0.518795 | >= 0.65 | FAIL |
-| final_normalized_mean | 0.226829 | <= 0.25 | PASS |
-| final_projection_cdf | 0.145427 | <= 0.12 | FAIL |
+| final_covariance_eigen_max | 0.783305 | <= 1.4 | PASS |
+| final_covariance_eigen_min | 0.435204 | >= 0.65 | FAIL |
+| final_normalized_mean | 0.353153 | <= 0.25 | FAIL |
+| final_projection_cdf | 0.181652 | <= 0.12 | FAIL |
 | panel_count | 8 | == 8 | PASS |
 | samples_per_panel | 2048 | >= 2048 | PASS |
-| t1_q0_covariance_eigen_max | 1.16553 | <= 1.4 | PASS |
-| t1_q0_covariance_eigen_min | 0.828081 | >= 0.4 | PASS |
-| t1_q0_normalized_mean | 1.00707 | <= 0.45 | FAIL |
-| t1_q0_projection_cdf | 0.39178 | <= 0.26 | FAIL |
-| t1_q1_covariance_eigen_max | 0.634753 | <= 1.4 | PASS |
-| t1_q1_covariance_eigen_min | 0.568926 | >= 0.4 | PASS |
-| t1_q1_normalized_mean | 0.209146 | <= 0.45 | PASS |
-| t1_q1_projection_cdf | 0.162492 | <= 0.26 | PASS |
-| t2_q0_covariance_eigen_max | 0.98659 | <= 1.4 | PASS |
-| t2_q0_covariance_eigen_min | 0.757344 | >= 0.6 | PASS |
-| t2_q0_normalized_mean | 0.103311 | <= 0.35 | PASS |
-| t2_q0_projection_cdf | 0.0569432 | <= 0.2 | PASS |
-| t2_q1_covariance_eigen_max | 0.788943 | <= 1.4 | PASS |
-| t2_q1_covariance_eigen_min | 0.637045 | >= 0.6 | PASS |
-| t2_q1_normalized_mean | 0.194571 | <= 0.35 | PASS |
-| t2_q1_projection_cdf | 0.119793 | <= 0.2 | PASS |
-| t3_q0_covariance_eigen_max | 1.05644 | <= 1.4 | PASS |
-| t3_q0_covariance_eigen_min | 0.91595 | >= 0.65 | PASS |
-| t3_q0_normalized_mean | 0.145591 | <= 0.25 | PASS |
-| t3_q0_projection_cdf | 0.0680543 | <= 0.12 | PASS |
-| t3_q1_covariance_eigen_max | 1.00378 | <= 1.4 | PASS |
-| t3_q1_covariance_eigen_min | 0.918532 | >= 0.65 | PASS |
-| t3_q1_normalized_mean | 0.19532 | <= 0.25 | PASS |
-| t3_q1_projection_cdf | 0.0908596 | <= 0.12 | PASS |
-| t4_q0_covariance_eigen_max | 1.03129 | <= 1.4 | PASS |
-| t4_q0_covariance_eigen_min | 0.995261 | >= 0.65 | PASS |
-| t4_q0_normalized_mean | 0.0890271 | <= 0.25 | PASS |
-| t4_q0_projection_cdf | 0.0413107 | <= 0.12 | PASS |
-| t4_q1_covariance_eigen_max | 1.01956 | <= 1.4 | PASS |
-| t4_q1_covariance_eigen_min | 0.956386 | >= 0.65 | PASS |
-| t4_q1_normalized_mean | 0.0751611 | <= 0.25 | PASS |
-| t4_q1_projection_cdf | 0.0480309 | <= 0.12 | PASS |
+| t1_q0_covariance_eigen_max | 1.0247 | <= 1.4 | PASS |
+| t1_q0_covariance_eigen_min | 0.28145 | >= 0.4 | FAIL |
+| t1_q0_normalized_mean | 1.29864 | <= 0.45 | FAIL |
+| t1_q0_projection_cdf | 0.639637 | <= 0.26 | FAIL |
+| t1_q1_covariance_eigen_max | 0.816681 | <= 1.4 | PASS |
+| t1_q1_covariance_eigen_min | 0.356633 | >= 0.4 | FAIL |
+| t1_q1_normalized_mean | 0.370337 | <= 0.45 | PASS |
+| t1_q1_projection_cdf | 0.25078 | <= 0.26 | PASS |
+| t2_q0_covariance_eigen_max | 0.847416 | <= 1.4 | PASS |
+| t2_q0_covariance_eigen_min | 0.628511 | >= 0.6 | PASS |
+| t2_q0_normalized_mean | 0.518416 | <= 0.35 | FAIL |
+| t2_q0_projection_cdf | 0.247497 | <= 0.2 | FAIL |
+| t2_q1_covariance_eigen_max | 0.732621 | <= 1.4 | PASS |
+| t2_q1_covariance_eigen_min | 0.696402 | >= 0.6 | PASS |
+| t2_q1_normalized_mean | 0.0868485 | <= 0.35 | PASS |
+| t2_q1_projection_cdf | 0.0730417 | <= 0.2 | PASS |
+| t3_q0_covariance_eigen_max | 0.981313 | <= 1.4 | PASS |
+| t3_q0_covariance_eigen_min | 0.907058 | >= 0.65 | PASS |
+| t3_q0_normalized_mean | 0.192762 | <= 0.25 | PASS |
+| t3_q0_projection_cdf | 0.0883973 | <= 0.12 | PASS |
+| t3_q1_covariance_eigen_max | 0.997966 | <= 1.4 | PASS |
+| t3_q1_covariance_eigen_min | 0.937939 | >= 0.65 | PASS |
+| t3_q1_normalized_mean | 0.166454 | <= 0.25 | PASS |
+| t3_q1_projection_cdf | 0.0789909 | <= 0.12 | PASS |
+| t4_q0_covariance_eigen_max | 1.04085 | <= 1.4 | PASS |
+| t4_q0_covariance_eigen_min | 0.995613 | >= 0.65 | PASS |
+| t4_q0_normalized_mean | 0.0864085 | <= 0.25 | PASS |
+| t4_q0_projection_cdf | 0.0437703 | <= 0.12 | PASS |
+| t4_q1_covariance_eigen_max | 1.02605 | <= 1.4 | PASS |
+| t4_q1_covariance_eigen_min | 0.954533 | >= 0.65 | PASS |
+| t4_q1_normalized_mean | 0.0659861 | <= 0.25 | PASS |
+| t4_q1_projection_cdf | 0.0482708 | <= 0.12 | PASS |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/5262ef34ebc743b881e1210239c39cb7.json)
+[Compact metrics and receipt provenance](../technique-receipts/cd14395e2a0548709bbea40d911ad98e.json)
 
 Recorded conditions: mog prior (sigma 0.25); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
@@ -4069,9 +4029,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [vaegan_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-vaegan_coverage-tier-1).
 
@@ -4080,21 +4038,21 @@ Recorded final metric checks:
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
 | decoder_mean_hq | 0.999756 | >= 0.85 | PASS |
-| decoder_mean_mass_tv | 0.0551758 | <= 0.15 | PASS |
+| decoder_mean_mass_tv | 0.0554199 | <= 0.15 | PASS |
 | decoder_mean_modes | 2 | >= 2 | PASS |
-| elbo_identity_error | 4.44089e-16 | <= 0.0001 | PASS |
-| kl_identity_error | 5.68513e-07 | <= 1e-05 | PASS |
-| likelihood_hq | 0.998779 | >= 0.85 | PASS |
-| likelihood_mass_tv | 0.0561523 | <= 0.15 | PASS |
+| elbo_identity_error | 8.88178e-16 | <= 0.0001 | PASS |
+| kl_identity_error | 5.77902e-07 | <= 1e-05 | PASS |
+| likelihood_hq | 0.996094 | >= 0.85 | PASS |
+| likelihood_mass_tv | 0.0566406 | <= 0.15 | PASS |
 | likelihood_modes | 2 | >= 2 | PASS |
-| posterior_mutual_information | 0.69492 | >= 0.3 | PASS |
+| posterior_mutual_information | 0.698974 | >= 0.3 | PASS |
 | posterior_noise_variance_ratio | 1.0033 | <= 1.2 | PASS |
-| reconstruction_mse | 0.00681583 | <= 0.05 | PASS |
-| shuffle_reconstruction_ratio | 336.731 | >= 5 | PASS |
+| reconstruction_mse | 0.00461146 | <= 0.05 | PASS |
+| shuffle_reconstruction_ratio | 489.569 | >= 5 | PASS |
 
-Recorded terminal passing observations: **9**; required: 5.
+Recorded terminal passing observations: **13**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/453feb0cffe1400aa4376418e9c82550.json)
+[Compact metrics and receipt provenance](../technique-receipts/01b0b48f9f254d8d88bf77ca219eb609.json)
 
 Recorded conditions: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
@@ -4134,9 +4092,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [vaegan_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-vaegan_coverage-tier-1).
 
@@ -4149,17 +4105,17 @@ Recorded final metric checks:
 | decoder_mean_modes | 2 | >= 2 | PASS |
 | elbo_identity_error | 4.44089e-16 | <= 0.0001 | PASS |
 | kl_identity_error | 7.61862e-09 | <= 1e-05 | PASS |
-| likelihood_hq | 0.99585 | >= 0.85 | PASS |
-| likelihood_mass_tv | 0.00708008 | <= 0.15 | PASS |
+| likelihood_hq | 0.991699 | >= 0.85 | PASS |
+| likelihood_mass_tv | 0.00830078 | <= 0.15 | PASS |
 | likelihood_modes | 2 | >= 2 | PASS |
-| posterior_mutual_information | 2.50238 | >= 0.3 | PASS |
+| posterior_mutual_information | 2.62779 | >= 0.3 | PASS |
 | posterior_noise_variance_ratio | 1.0009 | <= 1.2 | PASS |
-| reconstruction_mse | 0.00413308 | <= 0.05 | PASS |
-| shuffle_reconstruction_ratio | 550.838 | >= 5 | PASS |
+| reconstruction_mse | 0.00427702 | <= 0.05 | PASS |
+| shuffle_reconstruction_ratio | 527.907 | >= 5 | PASS |
 
-Recorded terminal passing observations: **10**; required: 5.
+Recorded terminal passing observations: **14**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/58fd2c807c2843cea9bfa3c550a9accf.json)
+[Compact metrics and receipt provenance](../technique-receipts/34b0a2f96c074454827f594cf812fe43.json)
 
 Recorded conditions: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
@@ -4199,7 +4155,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. pacgan8_grid100: no registered public Forge adapter for this stretch host; declare and implement its complete recipe, sampling and checkpoint contracts before training
 
-Run attempt: **ERROR** (new_attempt; qualification unchanged). ValueError: unsupported vector target declaration [Attempt evidence](../attempt-coverage.json).
+Execution: **incompatible; skipped**.
 
 Used by: [discriminator_stability / Tier 4](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4).
 
@@ -4227,7 +4183,7 @@ Current measurement: mog prior (sigma 0.05); public_prior_without_output_noise; 
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. pacgan_unequal_mass: no registered public Forge adapter for this stretch host; declare and implement its complete recipe, sampling and checkpoint contracts before training
 
-Run attempt: **ERROR** (new_attempt; qualification unchanged). ValueError: unsupported vector target declaration [Attempt evidence](../attempt-coverage.json).
+Execution: **incompatible; skipped**.
 
 Used by: [discriminator_stability / Tier 4](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4).
 
@@ -4252,11 +4208,11 @@ Current measurement: mog prior (sigma 0.05); public_prior_without_output_noise; 
 
 ### precision_gaussian_fp32
 
-**precision_gaussian_fp32: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_fp32.json).
+**precision_gaussian_fp32: PASS**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_fp32.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1).
 
@@ -4264,15 +4220,15 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| cdf_ks | 0.133445 | <= 0.05 | FAIL |
+| cdf_ks | 0.0295139 | <= 0.05 | PASS |
 | finite_fraction | 1 | == 1 | PASS |
-| mean_error_sigma | 0.179514 | <= 0.2 | PASS |
+| mean_error_sigma | 0.0621712 | <= 0.2 | PASS |
 | sample_count | 4096 | >= 4096 | PASS |
-| std_ratio | 0.781675 | <= 1.2 | PASS |
+| std_ratio | 0.959265 | <= 1.2 | PASS |
 
-Recorded terminal passing observations: **0**; required: 5.
+Recorded terminal passing observations: **13**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/ac02b1435f4a46edb477703b7f6843aa.json)
+[Compact metrics and receipt provenance](../technique-receipts/71ef40cb3e5140ca870644e2766a275f.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4303,9 +4259,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1).
 
@@ -4313,15 +4267,15 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| cdf_ks | 0.0640283 | <= 0.05 | FAIL |
+| cdf_ks | 0.0586929 | <= 0.05 | FAIL |
 | finite_fraction | 1 | == 1 | PASS |
-| mean_error_sigma | 0.119448 | <= 0.2 | PASS |
+| mean_error_sigma | 0.133942 | <= 0.2 | PASS |
 | sample_count | 4096 | >= 4096 | PASS |
-| std_ratio | 1.00601 | <= 1.2 | PASS |
+| std_ratio | 1.01377 | <= 1.2 | PASS |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/cc8cff9ddef141ba9406376e6edb2136.json)
+[Compact metrics and receipt provenance](../technique-receipts/97d83c5ac40844ed8ada4a5ab1e4e31a.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4352,9 +4306,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1).
 
@@ -4362,15 +4314,15 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| cdf_ks | 0.226707 | <= 0.05 | FAIL |
+| cdf_ks | 0.0352413 | <= 0.05 | PASS |
 | finite_fraction | 1 | == 1 | PASS |
-| mean_error_sigma | 0.486492 | <= 0.2 | FAIL |
+| mean_error_sigma | 0.00749588 | <= 0.2 | PASS |
 | sample_count | 4096 | >= 4096 | PASS |
-| std_ratio | 1.18284 | <= 1.2 | PASS |
+| std_ratio | 0.929898 | <= 1.2 | PASS |
 
-Recorded terminal passing observations: **0**; required: 5.
+Recorded terminal passing observations: **1**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/f075d0fd75a24d83a62b12c568275d7f.json)
+[Compact metrics and receipt provenance](../technique-receipts/dbb79526d564488595467237e13689c2.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4401,8 +4353,6 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
 Actual task device: `cuda:0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -4411,13 +4361,13 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| identity_mse | 0.00018064 | <= 0.02 | PASS |
+| identity_mse | 0.000180819 | <= 0.02 | PASS |
 | success_rate | 1 | >= 1 | PASS |
 | wrong_pad_rate | 0 | <= 0 | PASS |
 
 Recorded terminal passing observations: **20**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/106809be6416477da5177d006a56b52a.json)
+[Compact metrics and receipt provenance](../technique-receipts/6d517dca844b4b18a2b8bfc0c3005648.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); conditional_prior_centers_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -4444,9 +4394,7 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -4454,16 +4402,16 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_covariance_error | 0.55225 | <= 0.85 | PASS |
-| component_min_eigen_ratio | 0.468955 | >= 0.15 | PASS |
-| hq | 0.923828 | >= 0.85 | PASS |
-| mass_tv | 0.0795898 | <= 0.15 | PASS |
+| component_covariance_error | 0.624659 | <= 0.85 | PASS |
+| component_min_eigen_ratio | 0.460095 | >= 0.15 | PASS |
+| hq | 0.93042 | >= 0.85 | PASS |
+| mass_tv | 0.0515137 | <= 0.15 | PASS |
 | modes | 16 | >= 16 | PASS |
 | sample_count | 4096 | >= 4096 | PASS |
 
-Recorded terminal passing observations: **26**; required: 5.
+Recorded terminal passing observations: **17**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/d52341bf57bf4cb48169dc419b8623ca.json)
+[Compact metrics and receipt provenance](../technique-receipts/386327a4405b45ef934b85097dbeea3c.json)
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4525,7 +4473,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. ring16_bigan_continuous: no registered public Forge adapter for this stretch host; declare and implement its complete recipe, sampling and checkpoint contracts before training
 
-Run attempt: **ERROR** (new_attempt; qualification unchanged). ValueError: unsupported vector target declaration [Attempt evidence](../attempt-coverage.json).
+Execution: **incompatible; skipped**.
 
 Used by: [discriminator_stability / Tier 4](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -4554,7 +4502,7 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
 
-Run attempt: **FAIL** (reused_execution; qualification unchanged). verified observations from the same uninterrupted producer; no new execution [Attempt evidence](../grouped-evidence/010fb1dde78b46e80d83b82f134752651cc68346f0d0a30797655375b7c0df95.json).
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-3) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -4586,7 +4534,7 @@ Dependencies: ring_hold (checkpoint).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
 
-Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed first-convergence hold [Attempt evidence](../attempt-coverage.json).
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-3) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -4618,8 +4566,6 @@ Dependencies: mode_hold (gate).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
-Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
 Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -4628,27 +4574,27 @@ Recorded final metrics:
 
 | Metric | Measured |
 | --- | ---: |
-| abs_cov_trace_bias | 0.552788 |
+| abs_cov_trace_bias | 0.446753 |
 | accuracy_pass | False |
-| accuracy_score | 5.78738 |
+| accuracy_score | 5.98302 |
 | all_finite | True |
-| center_max_sigma | 2.10215 |
-| center_rms_sigma | 1.22559 |
-| cov_frob_rms | 0.756967 |
-| cov_trace_bias | 0.552788 |
+| center_max_sigma | 2.34092 |
+| center_rms_sigma | 1.36028 |
+| cov_frob_rms | 0.68734 |
+| cov_trace_bias | 0.446753 |
 | frozen_pass | False |
-| mass_tv | 0.11003 |
+| mass_tv | 0.1472 |
 | n | 100000 |
 | passed | False |
-| precision | 0.26073 |
-| precision_gap | 0.728161 |
+| precision | 0.24035 |
+| precision_gap | 0.748541 |
 | problem | rotated100 |
 | protocol | toy100-accuracy-v1 |
-| radial_ks | 0.386394 |
+| radial_ks | 0.408393 |
 | valid_n | 100000 |
-| within_radius_n | 26073 |
+| within_radius_n | 24035 |
 
-[Compact metrics and receipt provenance](../technique-receipts/ee6e11965aa049df8f840541fc57414d.json)
+[Compact metrics and receipt provenance](../technique-receipts/fba3967f9ce94fb0966c80f0415669fc.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4687,7 +4633,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Run attempt: **BLOCKED** (new_attempt; qualification unchanged). checkpoint parent rotated100: FAIL [Attempt evidence](../attempt-coverage.json).
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-3) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -4767,9 +4713,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
-Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -4777,27 +4721,27 @@ Recorded final metrics:
 
 | Metric | Measured |
 | --- | ---: |
-| abs_cov_trace_bias | 0.537126 |
+| abs_cov_trace_bias | 0.56998 |
 | accuracy_pass | False |
-| accuracy_score | 5.97985 |
+| accuracy_score | 5.76573 |
 | all_finite | True |
-| center_max_sigma | 2.63283 |
-| center_rms_sigma | 1.24736 |
-| cov_frob_rms | 0.7125 |
-| cov_trace_bias | 0.537126 |
+| center_max_sigma | 2.23023 |
+| center_rms_sigma | 1.14696 |
+| cov_frob_rms | 0.720808 |
+| cov_trace_bias | 0.56998 |
 | frozen_pass | False |
-| mass_tv | 0.10708 |
+| mass_tv | 0.12359 |
 | n | 100000 |
 | passed | False |
-| precision | 0.29732 |
-| precision_gap | 0.691571 |
+| precision | 0.32432 |
+| precision_gap | 0.664571 |
 | problem | staggered100 |
 | protocol | toy100-accuracy-v1 |
-| radial_ks | 0.421067 |
+| radial_ks | 0.38274 |
 | valid_n | 100000 |
-| within_radius_n | 29732 |
+| within_radius_n | 32432 |
 
-[Compact metrics and receipt provenance](../technique-receipts/837c92406b5946ea8d9d2e32f6d1315d.json)
+[Compact metrics and receipt provenance](../technique-receipts/e804d8e5a5aa486da2ed237beefa53c2.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4836,7 +4780,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Run attempt: **BLOCKED** (new_attempt; qualification unchanged). checkpoint parent staggered100: FAIL [Attempt evidence](../attempt-coverage.json).
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-3) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -4916,7 +4860,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Run attempt: **PASS** (new_attempt; qualification unchanged). recomputed live recovery and matched frozen negative control [Attempt evidence](../attempt-coverage.json).
+Execution: **not run**.
 
 Used by: [adaptation / Tier 3](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-3) · [clockfree_continuous / Tier 3](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-3) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -4939,8 +4883,6 @@ Dependencies: mode_hold (gate).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
 Actual task device: `cuda:0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -4949,11 +4891,11 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| identity_mse | 0.000225818 | <= 0.02 | PASS |
+| identity_mse | 0.000242453 | <= 0.02 | PASS |
 
 Recorded terminal passing observations: **18**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/34bd061e445e4c028e87e564d26acf01.json)
+[Compact metrics and receipt provenance](../technique-receipts/4d9d39f7338d4f3ab7636006959ae131.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); conditional_prior_centers_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -4978,8 +4920,6 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
 Actual task device: `cuda:0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 1](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [bcap-tier1-stability-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-tier1-stability-diagnostic-v1-tier-1) · [bcap-tier1-stability-repairs-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-tier1-stability-repairs-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-1) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-1).
@@ -4993,7 +4933,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **17**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/fdb390490ea2473eb4e8c4577757fd7b.json)
+[Compact metrics and receipt provenance](../technique-receipts/ab793b3cfea5404491fd6e1fb0520847.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_particles_and_critic_gradient; weights live; output noise not_applied_to_measurement.
 
@@ -5107,8 +5047,6 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_part
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
 Actual task device: `cuda:0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -5117,13 +5055,13 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| cover | 0.995749 | >= 0.85 | PASS |
-| neu_hold | 0.994733 | >= 0.85 | PASS |
-| off_caption | 2.03171e-05 | <= 0.05 | PASS |
+| cover | 0.990342 | >= 0.85 | PASS |
+| neu_hold | 0.993978 | >= 0.85 | PASS |
+| off_caption | 0.000658325 | <= 0.05 | PASS |
 
 Recorded terminal passing observations: **19**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/016b572deb2d4406989d20af0823c92e.json)
+[Compact metrics and receipt provenance](../technique-receipts/3bc568174c6149dd89c7eb7a6eca85e9.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -5150,8 +5088,6 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
 Actual task device: `cuda:0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 1](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-1) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-1).
@@ -5165,7 +5101,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **11**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/212c0a061f0047a292c05c7e812761fd.json)
+[Compact metrics and receipt provenance](../technique-receipts/801bc8118ada4db3968f6a7d3b8717c0.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -5221,8 +5157,6 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_para
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
 Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -5231,15 +5165,15 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_covariance_error | 0.186432 | <= 0.85 | PASS |
-| component_min_eigen_ratio | 0.278702 | >= 0.15 | PASS |
-| hq | 0.989746 | >= 0.85 | PASS |
-| mass_tv | 0.18693 | <= 0.15 | FAIL |
-| sw1_normalized | 0.209861 | <= 0.18 | FAIL |
+| component_covariance_error | 1.16723 | <= 0.85 | FAIL |
+| component_min_eigen_ratio | 0.252083 | >= 0.15 | PASS |
+| hq | 0.995117 | >= 0.85 | PASS |
+| mass_tv | 0.170492 | <= 0.15 | FAIL |
+| sw1_normalized | 0.184521 | <= 0.18 | FAIL |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/d140f94ce68b4bf1960f1cec06952835.json)
+[Compact metrics and receipt provenance](../technique-receipts/c0c4ec0f77524a3497f0e30398dbaa60.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -5297,8 +5231,6 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
 Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -5307,13 +5239,13 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| covariance_error | 0.159359 | <= 0.45 | PASS |
-| mean_error | 0.0872968 | <= 0.15 | PASS |
-| sw1_normalized | 0.0721642 | <= 0.18 | PASS |
+| covariance_error | 0.252082 | <= 0.45 | PASS |
+| mean_error | 0.159054 | <= 0.15 | FAIL |
+| sw1_normalized | 0.127721 | <= 0.18 | PASS |
 
-Recorded terminal passing observations: **1**; required: 5.
+Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/a63251306b734c67bf60c57be25cfcc6.json)
+[Compact metrics and receipt provenance](../technique-receipts/d91de822755445efb69a10e6be6b5441.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -5367,9 +5299,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5377,13 +5307,13 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| covariance_error | 0.0724237 | <= 0.45 | PASS |
-| mean_error | 0.0740434 | <= 0.15 | PASS |
-| sw1_normalized | 0.0548792 | <= 0.18 | PASS |
+| covariance_error | 0.0495446 | <= 0.45 | PASS |
+| mean_error | 0.0712285 | <= 0.15 | PASS |
+| sw1_normalized | 0.0560014 | <= 0.18 | PASS |
 
 Recorded terminal passing observations: **23**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/97a1052e7b624aef9160389920873666.json)
+[Compact metrics and receipt provenance](../technique-receipts/7fd97ecad9944261bb783761e0448a45.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -5437,8 +5367,6 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
 Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -5447,15 +5375,15 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_covariance_error | 0.346124 | <= 0.85 | PASS |
-| component_min_eigen_ratio | 0.480472 | >= 0.15 | PASS |
-| hq | 0.969727 | >= 0.85 | PASS |
-| mass_tv | 0.0551758 | <= 0.15 | PASS |
-| sw1_normalized | 0.1639 | <= 0.18 | PASS |
+| component_covariance_error | 0.449669 | <= 0.85 | PASS |
+| component_min_eigen_ratio | 0.281985 | >= 0.15 | PASS |
+| hq | 1 | >= 0.85 | PASS |
+| mass_tv | 0.046875 | <= 0.15 | PASS |
+| sw1_normalized | 0.116207 | <= 0.18 | PASS |
 
 Recorded terminal passing observations: **22**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/b89404b937be4190b3ed40175e7cea0b.json)
+[Compact metrics and receipt provenance](../technique-receipts/4cc65e1913d84a79ac03188d0700bda6.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -5513,8 +5441,6 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
 Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
@@ -5523,16 +5449,16 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_covariance_error | 1.47075 | <= 0.85 | FAIL |
-| component_min_eigen_ratio | 0.160494 | >= 0.15 | PASS |
-| hq | 0.980225 | >= 0.85 | PASS |
-| mass_tv | 0.0744141 | <= 0.15 | PASS |
-| min_mass_ratio | 0.751953 | >= 0.25 | PASS |
-| sw1_normalized | 0.126497 | <= 0.18 | PASS |
+| component_covariance_error | 1.53339 | <= 0.85 | FAIL |
+| component_min_eigen_ratio | 0.122576 | >= 0.15 | FAIL |
+| hq | 0.986328 | >= 0.85 | PASS |
+| mass_tv | 0.0526856 | <= 0.15 | PASS |
+| min_mass_ratio | 0.824381 | >= 0.25 | PASS |
+| sw1_normalized | 0.116439 | <= 0.18 | PASS |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/c73b2bc6ee834194a221f066af7a8476.json)
+[Compact metrics and receipt provenance](../technique-receipts/276fd01cc4cb417fadfa4b6362b6cbd8.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -5592,9 +5518,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Run attempt: **FAIL** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](empf.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](empf.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](empf.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](empf.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](empf.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](empf.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5602,15 +5526,15 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_covariance_error | 2.54838 | <= 0.85 | FAIL |
-| component_min_eigen_ratio | 0.278147 | >= 0.15 | PASS |
-| hq | 0.98584 | >= 0.85 | PASS |
-| mass_tv | 0.264404 | <= 0.15 | FAIL |
-| sw1_normalized | 0.24253 | <= 0.18 | FAIL |
+| component_covariance_error | 0.531479 | <= 0.85 | PASS |
+| component_min_eigen_ratio | 0.0399249 | >= 0.15 | FAIL |
+| hq | 0.981201 | >= 0.85 | PASS |
+| mass_tv | 0.273193 | <= 0.15 | FAIL |
+| sw1_normalized | 0.269937 | <= 0.18 | FAIL |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/5662ebd131b64fc889cd7255ce3de058.json)
+[Compact metrics and receipt provenance](../technique-receipts/5561f23c4ebb42edaf6a7ac52d473a62.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -5668,7 +5592,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. zero_tanh_rail_escape: zero_tanh_rail_escape: unsupported tanh host zero_tanh_rail_escape; only zero_tanh_smoke is routed
 
-Run attempt: **BLOCKED** (new_attempt; qualification unchanged). zero_tanh_rail_escape: unsupported tanh host zero_tanh_rail_escape; only zero_tanh_smoke is routed [Attempt evidence](../attempt-coverage.json).
+Execution: **incompatible; skipped**.
 
 Used by: [discriminator_stability / Tier 3](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-3) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -5699,9 +5623,7 @@ Dependencies: zero_tanh_smoke (gate).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed the declared final zero-tanh bounds
 
-Run attempt: **PASS** (retained_selected_row; qualification unchanged). Matched existing execution receipt. [Attempt evidence](../technique-inventory.json).
-
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](empf.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](empf.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -5709,12 +5631,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| mean_abs_error | 0.00231993 | <= 0.005 | PASS |
-| p99_abs_error | 0.0087167 | <= 0.025 | PASS |
-| rms_error | 0.0030136 | <= 0.01 | PASS |
+| mean_abs_error | 0.00230722 | <= 0.005 | PASS |
+| p99_abs_error | 0.00813111 | <= 0.025 | PASS |
+| rms_error | 0.00294542 | <= 0.01 | PASS |
 | saturated_fraction | 0 | == 0 | PASS |
 
-[Compact metrics and receipt provenance](../technique-receipts/007c4420a8984d92891c3a55d7251602.json)
+[Compact metrics and receipt provenance](../technique-receipts/5e588902602b4e2b813b1b2bb91ac205.json)
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights unavailable; output noise clean.
 

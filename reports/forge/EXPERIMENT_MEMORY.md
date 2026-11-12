@@ -1,8 +1,8 @@
 # ParticleGAN Forge experiment memory
 
-Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Current qualification is recomputed from compatible receipts. Compact publications enter recall as display-only summaries and grant no qualification.
+Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 927. Inventory coverage: complete. Unresolved import items: 7.
+Records: 930. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4600,6 +4600,22 @@ Stop this numerical-backend revision: graph acceleration improves the 64-pixel p
 
 [Record and receipt provenance](records/readout-47d84c98f42853a07d20becb.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
+### empf-v7 · readout-4901963885d977da23e139ba
+
+**Scope:** current; scientific; revision `e9cb4e9e9d26179d1fa70cf52b42cee045c9c8e67238b78e5c0c28ac0d8fda8e`.
+
+Size-gating DualNorm's guarded cubic Newton-Schulz dense polar profile to min_dim >= 64 and max_dim > 128 (optimizer_dense_profile = 'newton_schulz_hybrid_v1') preserves exact polar_factor SVD trajectories across all hidden <= 128 tasks (including model_ae_gan_multimodal and precision_gaussian_fp32) while eliminating 78.8% of cuSOLVER SVD latency on five_word_joint_smoke so empf-v7 clears all 13/13 counted Tier 1 gates and advances through Tier 2/3.
+
+**Observed:** {'FAIL': 15, 'PASS': 23}; wall seconds 3973.882; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0043931; five_word_joint_hold: modes=5, mass_tv=0.03457
+
+empf-v7 cleared all 13/13 counted Tier 1 gates (including five_word_joint_smoke in 608.9s, model_ae_gan_multimodal, model_vae_categorical, model_vae_hard, and precision_gaussian_fp32) and confirmed its study prediction on gaussian1d_stability (PASS, final cdf_ks <= 0.05), reaching 23 PASS on the 38-task discriminator_stability view (up from 22 PASS in empf-v2).
+
+**Next:** Promote empf-v7 as the selected canonical EMPF candidate in family-current-v1.json and trainer-families.json, and run full Forge readout refresh across all 9 views and scaling benchmarks.
+
+[Record and receipt provenance](records/readout-4901963885d977da23e139ba.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
 ### bispf-vaegan-settle-v1 · readout-4a3861ac6f4b3a836975d087
 
 **Scope:** research_diagnostic; scientific; revision `15cec064bfab5931854da2b176eb21f34230e1508407767ad76ab3f2fc721660`.
@@ -4615,6 +4631,22 @@ One global BISPF transport-plus-cosine-settling recipe passes both full1200-upda
 **Next:** Stop after6runs, retain all4 failures and2 passes. Recommend this recipe for these two declared toys; next separate causal question is schedule-only without transport. No extra seed run, continuation or promotion.
 
 [Record and receipt provenance](records/readout-4a3861ac6f4b3a836975d087.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### empf-v6 · readout-4aa764495c669b9247ca874b
+
+**Scope:** current; scientific; revision `2929a9ef553dde2092e0769ebdeaa03d0f6ded4ae74c07482ab71a77c601abe7`.
+
+Replacing serial 2D cuSOLVER SVD calls with DualNorm's guarded cubic Newton-Schulz regularized polar profile (optimizer_dense_profile = 'newton_schulz_v1') eliminates multi-agent GPU cuSOLVER contention on five_word_joint_smoke so empf-v6 clears all 13/13 counted Tier 1 gates within wall-time budgets and advances through Tier 2/3 to realize gaussian1d_stability, target_shift_recovery, ring_hold, and ring_extension gains.
+
+**Observed:** {'FAIL': 3, 'PASS': 12}; wall seconds 1170.146; mechanism `structural`.
+
+
+
+empf-v6 cleared five_word_joint_smoke in 549.7s (20,001/20,001 steps, modes=5, quality_fraction=1.0, mass_tv=0.0189) and passed 11/13 counted Tier 1 gates, but applying 32-iteration cubic Newton-Schulz to small dense matrices (hidden <= 64) regressed model_ae_gan_multimodal (reconstruction_mse 0.0405 vs 0.0080) and precision_gaussian_fp32 (step 834 cdf_ks 0.0509 vs <= 0.05).
+
+**Next:** Define empf-v7 with a size-gated hybrid dense profile (newton_schulz_hybrid_v1) mirroring DualNorm's per-offset convolution rule: exact rank-1 normalization for vector-shaped 2D heads, exact polar_factor SVD for small matrices (min_dim < 64 or max_dim < 128), and guarded cubic Newton-Schulz for large dense matrices (min_dim >= 64 and max_dim >= 128).
+
+[Record and receipt provenance](records/readout-4aa764495c669b9247ca874b.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### k3p · readout-4bd94051f203bbbb28a3e7a6
 
@@ -5543,6 +5575,22 @@ All six declared DCGAN mock-data performance workloads completed their finite pu
 **Next:** Use the published scaling measurements to budget larger-image pilots; restore verifiable contention telemetry before paired timing claims. Profile complete-update components before changing recipes. Keep the default unchanged and require separate quality evidence for adoption.
 
 [Evidence](../../reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bcap-dualnorm-dcgan_performance_b64-addedac8ac836908.json) · [Record](records/readout-ad21627bf4def92894dd98ce.json)
+
+### empf-v5 · readout-aef7cbc33a8a6b3326b86bb8
+
+**Scope:** current; scientific; revision `a457aa4e6487d00f5630eeebf70830674145a1dae9f64dc38d6643f6eff3508b`.
+
+Combining empf-v4's fixed K = min(max_prototypes, B) small-batch prototype banks, stationary zero-shock normalization, and fused autograd syncs with empf-v3's thermal_decay = 0.92 transport smoothing, cool-gated Born-Infeld batch_gain, and exact Sinkhorn-free discrete-simplex Chamfer residuals clears all Tier 1 gates (including model_vae_categorical, model_vae_hard, ring16_acquisition, model_ae_gan_multimodal, and precision_gaussian_fp32/mxfp8) and advances through Tier 2/3 to realize gaussian1d_stability, target_shift_recovery, ring_hold, and ring_extension gains.
+
+**Observed:** {'FAIL': 4, 'INCOMPLETE': 5, 'PASS': 24}; wall seconds 5651.411; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0043931
+
+empf-v5 passed all 12 non-word counted Tier 1 gates (including model_vae_categorical, model_vae_hard, ring16_acquisition, model_ae_gan_multimodal, and precision_gaussian_fp32) and passed all completed checks on five_word_joint_smoke through step 17,501/20,001, but hit the 900s wall-time cap (INCOMPLETE) under concurrent multi-agent GPU load due to 9 per-step serial cuSOLVER SVD calls on dense 2D matrices.
+
+**Next:** Introduce declared optimizer_dense_profile='newton_schulz_v1' in empf-v6 using DualNorm's guarded 32-iteration cubic Newton-Schulz polar solver (_newton_schulz_polar + _PolarGraphCache) for 2D dense matrices while keeping the empf-v5 formulation unchanged.
+
+[Record and receipt provenance](records/readout-aef7cbc33a8a6b3326b86bb8.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### release07-gan-v3-task-adapted-v1 · readout-afd6d27c7d1eae64aa13299f
 
@@ -6982,4 +7030,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `5abf7c10ee1428165a15a12216da31d80f57ff7ec99f8abe689c898aef2a0dbb`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `24b156eee1733e4b04cd141da12aaa0e36e1ed6a1a275ba4c38d3012ff6f459c`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
