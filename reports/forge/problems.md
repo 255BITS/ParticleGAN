@@ -43,6 +43,7 @@ Passer summaries reflect the evidence audit dated **2026-10-15**. Selected-resul
 | [Pair particle AE reconstruction with four-step DDGAN reverse transitions and ancestral generation](problems.md#model_ae_ddgan_gaussian_chain) | Reconstruct held-out inputs through a learned particle autoencoder and four public DDGAN reverse steps (`paired_nmse <= 0.10`, `paired_worst_axis_nrmse <= 0.25`, `paired_shuffled_gain >= 3.0`) while simultaneously passing all conditional reverse-transition and independent ancestral-chain bounds. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 | [Learn a Gaussian with 8-bit MXFP8 training arithmetic](problems.md#precision_gaussian_mxfp8) | Train from the shared deterministic initialization using Blackwell-format MXFP8 software-reference forward and backward GEMM operands; match the full scalar Gaussian law at five final checks. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 | [Learn a Gaussian with 4-bit NVFP4 training arithmetic](problems.md#precision_gaussian_nvfp4) | Train from the shared deterministic initialization using Blackwell-format NVFP4 software-reference forward and backward GEMM operands; match the full scalar Gaussian law at five final checks. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
+| [Hold all five discrete words and exact BiGAN inversion across 4,000 continuation updates](problems.md#five_word_joint_hold) | Restore the candidate's own confirmed five-word acquisition checkpoint in a fresh process and pass every generation and exact encoder-inversion bound across all 24 scheduled checks over 4,000 additional updates. | Selected recorded PASS: BCAP, BISPF. |
 
 <a name="gaussian1d_stability"></a>
 
@@ -1150,3 +1151,39 @@ Test: `precision_gaussian_nvfp4` · Held for qualification; included in full-sui
 **Recommendation from the dated diagnosis.** Run the unchanged selected family recipes through the optional Tier 1 tasks and their FP32 control under the expanded reservation budget. Diagnose failed bounds before changing one global recipe; native validation is a separate step.
 
 Evidence: [Protocol, precision semantics and limitations](precision-stretch/README.md#precision-stretch).
+
+
+<a name="five_word_joint_hold"></a>
+
+## Hold all five discrete words and exact BiGAN inversion across 4,000 continuation updates
+
+Test: `five_word_joint_hold` · Required for qualification and included in full-suite results.
+
+**What it tests.** Restore the candidate's own confirmed five-word acquisition checkpoint in a fresh process and pass every generation and exact encoder-inversion bound across all 24 scheduled checks over 4,000 additional updates.
+
+**Historical diagnosis (2026-10-15).** Selected `empf-v7` finishes the 4,000-step continuation inside every terminal bound (`modes = 5`, `quality_fraction = 1.0`, `mass_tv = 0.0346 <= 0.10`, `reconstruction_exact = 1`, `minimum_reconstruction_token_probability = 0.9993 >= 0.90`), but dips on an intermediate scheduled check during post-acquisition settling under the size-gated `newton_schulz_hybrid_v1` dense DualNorm profile.
+
+**Historical passer evidence.** Yes: selected BISPF (`bispf-optimized-quintic-v1`) and historical `empf-v2` pass all 24 continuation checks.
+
+- Selected `bispf-optimized-quintic-v1` passes all 24 scheduled continuation checks from its own smoke checkpoint, while failing `gaussian1d_stability`.
+- Historical `empf-v2` (`readout-05eaed46ab0e45214ae8e7b4.json`) also passes all 24 continuation checks under exact `polar_factor` SVD, trading `gaussian1d_stability` and `precision_gaussian_fp32`.
+
+**Scope correction for retained diagnostic observations.** Formulaic runner changes selected recipe noise settings or E22 mechanisms without a distinct adapted-candidate identity and complete resolved-recipe/sampling witness. Original outcomes remain archived; they do not establish the declared unassisted recipe/task claim. [Exact observation identities](evidence-corrections-2026-11-08.json).
+
+**Selected recipes' recorded results:**
+
+| Selected recipe | Result |
+| --- | --- |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) |
+| [EMPF](families/empf.md#cohort-cuda-23a94f16ca88) | [FAIL](families/empf.md#cohort-cuda-23a94f16ca88-experiment-five_word_joint_hold) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [NOT MEASURED](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-five_word_joint_hold) |
+| [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) |
+| [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) |
+| [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) |
+| [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) |
+| [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) |
+
+**Recommendation from the dated diagnosis.** Damp transient post-acquisition joint-critic excursions on the discrete 5-particle codebook without losing `empf-v7`'s `gaussian1d_stability`, `precision_gaussian_fp32`, and `five_word_joint_smoke` wall-time budget.
+
+Evidence: [EMPF-v7 ordinary readout receipt](records/readout-4901963885d977da23e139ba.json) · [Task declaration](../../configs/forge/tasks/five_word_joint_hold.json).
