@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_public_default_matches_every_selected_candidate_field_except_label():
-    empf_candidate = json.loads((ROOT / "configs/forge/ideas/empf-v2.json").read_text())
+    empf_candidate = json.loads((ROOT / "configs/forge/ideas/empf-v6.json").read_text())
     actual = json.loads(json.dumps(asdict(get_recipe())))
     assert DEFAULT_RECIPE == actual["name"] == "empf"
     for field, value in empf_candidate["recipe_overrides"].items():
@@ -61,6 +61,7 @@ values = module.get_recipe_fields('ae_gan', z_dim=3)
 assert values['name'] == 'ae_gan'
 assert values['z_dim'] == 3 and values['optimizer_family'] == 'dualnorm'
 assert values['optimizer_convolution_rule'] == 'quintic'
+assert values['optimizer_dense_profile'] == 'newton_schulz_v1'
 assert values['optimizer_svd_backend'] == 'batched'
 assert values['training_precision'] == 'bf16_channels_last'
 assert 'torch' not in sys.modules and 'particlegan' not in sys.modules

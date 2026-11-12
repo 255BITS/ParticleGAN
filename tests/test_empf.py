@@ -37,13 +37,15 @@ def test_default_recipe_and_incumbent_presets_unchanged():
     with pytest.raises(ValueError, match="reg_anchor_weight=0"):
         get_recipe("empf", optimizer_family="formulation", optimizer_smoothing=0.0,
                    optimizer_convolution="none", optimizer_convolution_rule="polar",
-                   optimizer_svd_backend="native", training_precision="float32",
-                   constraint_geometry_mode="none", reg_anchor_weight=0.5)
+                   optimizer_dense_profile="default", optimizer_svd_backend="native",
+                   training_precision="float32", constraint_geometry_mode="none",
+                   reg_anchor_weight=0.5)
     with pytest.raises(ValueError, match="reg_arm"):
         get_recipe("empf", reg_arm="b_cap", optimizer_family="adam",
                    optimizer_smoothing=0.0, optimizer_convolution="none",
-                   optimizer_convolution_rule="polar", optimizer_svd_backend="native",
-                   training_precision="float32", constraint_geometry_mode="none")
+                   optimizer_convolution_rule="polar", optimizer_dense_profile="default",
+                   optimizer_svd_backend="native", training_precision="float32",
+                   constraint_geometry_mode="none")
 
 
 def test_emeans_hit_rate_scaling_and_mass_conserving_revival():
@@ -195,6 +197,7 @@ def test_empf_checkpoint_continuation_and_corruption_rejection(optimizer_family)
             optimizer_smoothing=0.0,
             optimizer_convolution="none",
             optimizer_convolution_rule="polar",
+            optimizer_dense_profile="default",
             optimizer_svd_backend="native",
             constraint_geometry_mode="none",
         )
@@ -556,5 +559,57 @@ def test_empf_v3_1d_thermal_and_step_scale_laws():
     # Genuine shift shock (> 0.715) instant-reheats on step 1.
     rec.observe_transport(1.25, 0.50, ema_decay=0.92)
     assert math.isclose(rec.ema_residual, 1.25, rel_tol=1e-6)
+
+
+def test_empf_v6_newton_schulz_dense_profile_accuracy_and_checkpoint_roundtrip():
+    """Verify newton_schulz_v1 dense polar accuracy, empty-matrix guard, continuation, and cross-profile rejection."""
+    from particlegan.optim.dualnorm import NEWTON_SCHULZ_DENSE_PROFILE, _newton_schulz_polar
+
+    recipe_ns = get_recipe("empf")
+    assert recipe_ns.optimizer_dense_profile == NEWTON_SCHULZ_DENSE_PROFILE
+    recipe_ref = get_recipe("empf", optimizer_dense_profile="default")
+
+    empty = torch.zeros(0, 4, dtype=torch.float32)
+    assert _newton_schulz_polar(empty, smoothing=0.001).shape == (0, 4)
+
+    rng = torch.Generator().manual_seed(23)
+    for shape in ((64, 2), (128, 128), (1, 128)):
+        p_ns = nn.Parameter(torch.zeros(shape))
+        p_ref = nn.Parameter(torch.zeros(shape))
+        opt_ns = recipe_ns.replace(constraint_geometry_mode="none").make_generator_optimizer([p_ns])
+        opt_ref = recipe_ref.replace(constraint_geometry_mode="none").make_generator_optimizer([p_ref])
+        grad = torch.randn(shape, generator=rng)
+        p_ns.grad = grad.clone()
+        p_ref.grad = grad.clone()
+        opt_ns.step()
+        opt_ref.step()
+        rel_err = float((p_ns.detach() - p_ref.detach()).norm() / p_ref.detach().norm().clamp_min(1e-12))
+        assert rel_err < 1e-4, f"shape={shape} rel_err={rel_err}"
+
+    # Checkpoint continuation and atomic cross-profile rejection.
+    p1 = nn.Parameter(torch.zeros(16, 4))
+    opt1 = recipe_ns.replace(constraint_geometry_mode="none").make_generator_optimizer([p1])
+    p1.grad = torch.randn(16, 4, generator=rng)
+    opt1.step()
+    saved = deepcopy(opt1.state_dict())
+    assert saved["dualnorm"]["dense_profile"] == NEWTON_SCHULZ_DENSE_PROFILE
+
+    p_wrong = nn.Parameter(torch.ones(16, 4))
+    opt_wrong = recipe_ref.replace(constraint_geometry_mode="none").make_generator_optimizer([p_wrong])
+    before_p = p_wrong.detach().clone()
+    with pytest.raises(ValueError, match="dense profile"):
+        opt_wrong.load_state_dict(deepcopy(saved))
+    assert torch.equal(p_wrong, before_p)
+
+    p2 = nn.Parameter(p1.detach().clone())
+    opt2 = recipe_ns.replace(constraint_geometry_mode="none").make_generator_optimizer([p2])
+    opt2.load_state_dict(saved)
+    next_grad = torch.randn(16, 4, generator=rng)
+    p1.grad = next_grad.clone()
+    p2.grad = next_grad.clone()
+    opt1.step()
+    opt2.step()
+    assert torch.equal(p1, p2)
+
 
 

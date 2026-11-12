@@ -28,6 +28,7 @@ _FROBENIUS_CONVOLUTION_VERSION = "per_offset_frobenius_hybrid_v1"
 _QUINTIC_CONVOLUTION_VERSION = "per_offset_quintic_hybrid_v1"
 _NEWTON_SCHULZ_VERSION = 3
 _BATCHED_SVD_VERSION = 1
+NEWTON_SCHULZ_DENSE_PROFILE = "newton_schulz_v1"
 
 
 def _convolution_version(rule):
@@ -249,6 +250,8 @@ def _newton_schulz_polar(matrices, *, smoothing, cache=None):
     can be material; quality qualification is separate from solver convergence.
     """
     original_shape, original_dtype = matrices.shape, matrices.dtype
+    if 0 in original_shape[-2:]:
+        return torch.zeros_like(matrices)
     value = matrices.reshape(-1, *original_shape[-2:])
     if original_dtype not in (torch.float32, torch.float64):
         value = value.float()
@@ -401,12 +404,16 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("newton_schulz requires per_offset convolution and positive smoothing")
         if svd_backend == "batched" and convolution != "per_offset":
             raise ValueError("batched SVD requires per_offset convolution")
-        if type(dense_profile) is not str or dense_profile not in ("default", GRAM_DENSE_PROFILE, FALLBACK_DENSE_PROFILE):
+        if type(dense_profile) is not str or dense_profile not in (
+                "default", GRAM_DENSE_PROFILE, FALLBACK_DENSE_PROFILE, NEWTON_SCHULZ_DENSE_PROFILE):
             raise ValueError("unknown optimizer dense_profile")
-        if dense_profile != "default" and (family != "dualnorm" or momentum != 0
-                or smoothing != .001 or svd_backend not in ("native", "batched")):
+        if dense_profile in (GRAM_DENSE_PROFILE, FALLBACK_DENSE_PROFILE) and (
+                family != "dualnorm" or momentum != 0 or smoothing != .001
+                or svd_backend not in ("native", "batched")):
             raise ValueError("dense_profile requires zero-momentum full DualNorm, smoothing .001 "
                              "and native or batched SVD backend")
+        if dense_profile == NEWTON_SCHULZ_DENSE_PROFILE and (family != "dualnorm" or smoothing <= 0):
+            raise ValueError("newton_schulz_v1 dense_profile requires full DualNorm and positive smoothing")
         if convolution_rule not in ("polar", "frobenius", "quintic"):
             raise ValueError("optimizer convolution rule must be polar, frobenius or quintic")
         if convolution_rule != "polar" and (
@@ -457,7 +464,14 @@ class NormalizedOptimizer(Optimizer):
             if group["algorithm"] != "dualnorm" or "dualnorm_convolution" in group:
                 continue
             for parameter in group["params"]:
-                if parameter.ndim == 2 and (parameter.dtype != torch.float32
+                if parameter.ndim != 2:
+                    continue
+                if self.dense_profile == NEWTON_SCHULZ_DENSE_PROFILE:
+                    if (not parameter.is_floating_point()
+                            or parameter.device.type not in ("cpu", "cuda")
+                            or parameter.layout != torch.strided):
+                        raise ValueError("newton_schulz_v1 dense_profile requires strided floating-point CPU/CUDA parameters")
+                elif (parameter.dtype != torch.float32
                         or parameter.device.type not in ("cpu", "cuda")
                         or parameter.layout != torch.strided):
                     raise ValueError("dense_profile requires ordinary dense FP32 CPU/CUDA parameters")
@@ -778,7 +792,7 @@ class NormalizedOptimizer(Optimizer):
                                                    backend=self.svd_backend))
                             weight_matrix.add_(update, alpha=-rate * factor)
                     elif parameter.ndim == 2:
-                        if bool(gradient.norm() < eps) or bool(direction.norm() < eps):
+                        if bool(gradient.norm() < eps) or (direction is not gradient and bool(direction.norm() < eps)):
                             continue
                         factor = math.sqrt(max(1., parameter.shape[0] / parameter.shape[1]))
                         if self.dense_profile == GRAM_DENSE_PROFILE:
@@ -790,6 +804,14 @@ class NormalizedOptimizer(Optimizer):
                                 f"{group_index}:{parameter_index}", Counters())
                             update = svd_fallback_polar(direction, smoothing=self.smoothing,
                                                             counters=counters)
+                        elif self.dense_profile == NEWTON_SCHULZ_DENSE_PROFILE:
+                            if parameter.device.type == "cuda":
+                                if not hasattr(self, "_newton_graphs"):
+                                    self._newton_graphs = _PolarGraphCache()
+                                update = _newton_schulz_polar(direction, smoothing=self.smoothing,
+                                                              cache=self._newton_graphs)
+                            else:
+                                update = _newton_schulz_polar(direction, smoothing=self.smoothing)
                         elif self.svd_backend in ("native", "newton_schulz", "batched"):
                             update = (polar_factor(direction, smoothing=self.smoothing)
                                       if self.smoothing else polar_factor(direction))
