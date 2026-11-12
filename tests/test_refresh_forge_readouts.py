@@ -1544,6 +1544,7 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         ("atlas", "Atlas", "atlas-particle-normal-v4"),
         ("bispf", "BISPF", "bispf-optimized-quintic-v1"),
         ("bcap-pure", "BCAP", "recipe-prior-refactor-bcap-pure-v1"),
+        ("empf", "EMPF", "empf-v2"),
         ("rhbi", "RHBI", "rhbi-v3"),
         ("e22", "E22", "e22"),
     )
@@ -1569,6 +1570,7 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         "| [Atlas](families/atlas.md) | [`atlas-particle-normal-v4`]",
         "| [BISPF](families/bispf.md) | [`bispf-optimized-quintic-v1`]",
         "| [BCAP](families/bcap-pure.md) | [`recipe-prior-refactor-bcap-pure-v1`]",
+        "| [EMPF](families/empf.md) | [`empf-v2`]",
         "| [RHBI](families/rhbi.md) | [`rhbi-v3`]",
         "| [E22](families/e22.md) | [`e22`]",
     )
@@ -1646,11 +1648,15 @@ def test_live_repository_forge_readouts_are_current_uncontended_and_surface_tier
         # diagnostic grades to satisfy an all-binary/no-unknown display rule.
         assert required_tasks <= seen, (family_id, sorted(required_tasks - seen))
         for task_id in ("precision_gaussian_mxfp8", "precision_gaussian_nvfp4"):
-            if family_id != "rhbi":
+            if family_id not in {"empf", "rhbi"}:
                 assert original_cohort["tasks"][task_id]["status"] == "UNKNOWN"
             else:
                 assert original_cohort["tasks"][task_id]["status"] in {"PASS", "FAIL"}
             assert task_id in seen
+        if family_id == "empf":
+            for task_id in ("model_ddgan_bimodal_chain", "model_ae_ddgan_bimodal_chain"):
+                assert original_cohort["tasks"][task_id]["status"] == "UNKNOWN"
+                assert task_id in seen
 
 
 
@@ -2374,7 +2380,7 @@ def test_clean_cpu_ci_and_non_a6000_hosts_match_committed_readouts_and_invalidat
         assert rfr.catalog_source_manifest(wt)["digest"] == recorded_digest
         sfr_after_edit = rfr.check_selected_family_readouts(wt)
         assert sfr_after_edit["current"] is False
-        assert len(sfr_after_edit["missing_families"]) == 7
+        assert len(sfr_after_edit["missing_families"]) == 8
         for item in sfr_after_edit["missing_families"]:
             assert item["unmeasured_tier1"] == ["zero_tanh_smoke"]
 

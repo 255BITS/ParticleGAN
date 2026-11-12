@@ -218,8 +218,7 @@ def test_atlas_particle_normal_v4_readout_recovers_mode_hold_with_zero_regressio
     atlas_top_line = next(
         line
         for line in inventory_md.splitlines()
-        if line.startswith("| **[Atlas](families/atlas.md)** |")
-        or line.startswith("| **[Atlas](families/atlas.md)**<br>")
+        if line.startswith(("| **[Atlas](families/atlas.md)** |", "| **[Atlas](families/atlas.md)**<br>"))
     )
     # The overview projects the certified base source cohort; the later
     # source-specific readout above retains its own unchanged measurements.

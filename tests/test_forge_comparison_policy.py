@@ -437,5 +437,31 @@ def test_comparison_projection_accepts_newly_registered_family_and_rejects_unreg
     assert publication._comparison_contracts_match(extra_task, comparison) is False
 
 
+def test_calibrated_grid_triad_projection_accepts_fail_and_rejects_sub097_pass():
+    actual, projected, comparison = comparison_fixture()
+    comparison['calibrated_grid_triad_tasks'] = ['held']
+    comparison['verified_evaluator_lineage'] = {'family': {'held': 'b-cal'}}
+    actual['rows'][0]['bindings']['task_contracts']['held'] = 'b-cal'
+    projected['rows'][0]['bindings']['task_contracts']['held'] = 'b-cal'
+
+    # 1. FAIL under calibrated min_precision=0.75 is strictly FAIL under Rev-9 (0.97).
+    publication._comparison_projection(deepcopy(actual), deepcopy(projected), comparison)
+
+    # 2. PASS with precision >= 0.97 satisfies Rev-9 (0.97).
+    pass_actual = deepcopy(actual)
+    pass_projected = deepcopy(projected)
+    pass_actual['rows'][0]['nonrequired_tasks'][0] = {'task_id': 'held', 'status': 'PASS', 'metrics': {'precision': 0.98}}
+    pass_projected['rows'][0]['tasks'][-1] = {'task_id': 'held', 'status': 'PASS', 'metrics': {'precision': 0.98}}
+    publication._comparison_projection(pass_actual, pass_projected, comparison)
+
+    # 3. PASS with 0.75 <= precision < 0.97 must fail closed under Rev-9 projection.
+    sub_actual = deepcopy(actual)
+    sub_projected = deepcopy(projected)
+    sub_actual['rows'][0]['nonrequired_tasks'][0] = {'task_id': 'held', 'status': 'PASS', 'metrics': {'precision': 0.82}}
+    sub_projected['rows'][0]['tasks'][-1] = {'task_id': 'held', 'status': 'PASS', 'metrics': {'precision': 0.82}}
+    with pytest.raises(ValueError, match='cannot grant Rev-9 PASS under calibrated min_precision=0.75'):
+        publication._comparison_projection(sub_actual, sub_projected, comparison)
+
+
 
 

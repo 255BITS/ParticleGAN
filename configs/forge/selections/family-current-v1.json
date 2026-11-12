@@ -867,8 +867,8 @@
   },
   "policy_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a",
   "previous_selection": {
-    "path": "configs/forge/selections/history/family-current-9e943beefe59d3aee39f63c215e71d36af4fcdb79873500fd83cdd09bb558bc6.json",
-    "sha256": "9e943beefe59d3aee39f63c215e71d36af4fcdb79873500fd83cdd09bb558bc6"
+    "path": "configs/forge/selections/history/family-current-b2607ba409dc2fcedb5c23891595dd300288e6ce06349a7719899fc4a914ab29.json",
+    "sha256": "b2607ba409dc2fcedb5c23891595dd300288e6ce06349a7719899fc4a914ab29"
   },
   "schema_version": 1,
   "scope": "whole_candidate_family_current",
@@ -945,6 +945,25 @@
       "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
       "task_keys_sha256": "c980bb27bb49df843495ba70322d3f60656c01e511c4b18df7515f081e0decf5",
       "trainer_family": "e22"
+    },
+    {
+      "candidate_id": "empf-v2",
+      "candidate_revision": "fc09c6b1f8ae77167ca31db0a4d9ef252dc9d6b92aed98e3d4b53a168ff0ac15",
+      "cohort": "8a11d7649f435b43341699c52ab2daf11cae1163b8aaf5b93da9f916282b8e55",
+      "execution_backend": "cuda",
+      "measurement_views": [
+        "discriminator_stability"
+      ],
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Select empf-v2 (Exponential Moving Prototype Flow with ebi_beta=6.0, clock-free prototype-resolution-scaled settling Born-Infeld sharpness, and discrete-simplex post-acquisition Sinkhorn thermal cooling) following ordinary discriminator_stability CUDA measurement on NVIDIA RTX A6000 (11/11 required + 1/1 clockfree_audit diagnostic Tier 1 PASS, 10/18 required Tier 2 PASS including mode_hold and five_word_joint_hold; 22/38 executed tasks PASS overall, 82/115 counted view requirements). Actual executed-policy qualification and comparison-policy projection retain their separate source-bound proofs; no public-default adoption claim.",
+      "recipe_sha256": "4efb443a95fddd79bfa48e68fb689dadebc2a04f2f24d9cc97218fa5e41da209",
+      "rng_sha256": "495400e2de1b9f9f94a86625a2132091646dcbb8357f48c3512ed24154b89b6d",
+      "runtime_cohort_sha256": "23a94f16ca88faef2aa24ce757c89f1524bef5522c2b1b87cce88d9d94e883b1",
+      "scientific_row_sha256": "e0a867d485af65df1d099cd237adab7bbbef42ac2414efd0e8c0301b7f125478",
+      "selection_kind": "current_measurement",
+      "source_digest": "66339a696dff71be31beb782d2b51a0f9b21e6bee54fdeca2aae9b606ffa14fb",
+      "task_keys_sha256": "d164411366f04c8d637e9a7e78ec46d35132e208cad354e06209dedc4fc733ec",
+      "trainer_family": "empf"
     },
     {
       "candidate_id": "recipe-prior-refactor-k3p-v1",

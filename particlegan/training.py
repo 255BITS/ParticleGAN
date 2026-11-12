@@ -30,6 +30,8 @@ def _float_output(value):
         result = value.float() if value.dtype == torch.bfloat16 else value
         if hasattr(value, "_bispf_input"):
             result._bispf_input = value._bispf_input
+        if hasattr(value, "_empf_input"):
+            result._empf_input = value._empf_input
         if hasattr(value, "_rhbi_input"):
             result._rhbi_input = value._rhbi_input
             result._rhbi_cond = getattr(value, "_rhbi_cond", None)
@@ -72,6 +74,7 @@ class InputNoise(nn.Module):
         target = out[0] if isinstance(out, (tuple, list)) and out else out
         if isinstance(target, torch.Tensor):
             target._bispf_input = x
+            target._empf_input = x
             if hasattr(target, "_rhbi_input") or hasattr(self.critic, "_rhbi_record"):
                 from .rhbi import _extract_critic_inputs, _record_rhbi_capture
                 rec = getattr(target, "_rhbi_record", getattr(self.critic, "_rhbi_record", None))
@@ -283,7 +286,7 @@ class GANTrainer:
             raise TypeError("require_latent_damping must be a boolean or None")
         # The recipe picks the regularization formulation; its
         # step-time work runs inside these optimizers' step().
-        ema_critic = None if recipe.effective_critic_formulation in ("bispf", "rhbi") else deepcopy(self.D)
+        ema_critic = None if recipe.effective_critic_formulation in ("bispf", "empf", "rhbi") else deepcopy(self.D)
         self.opt_g, self.opt_d = recipe.make_optimizers(
             self.G, self.D, self.prior, ema_critic=ema_critic,
             require_latent_damping=require_latent_damping, **self.optimizer_options)
@@ -302,6 +305,9 @@ class GANTrainer:
             # critic record, never another trainer's state.
             from .bispf import bind_thermal_source
             bind_thermal_source(self.opt_d.record, self.loss, self.prior_regularizer)
+        elif recipe.effective_critic_formulation == "empf":
+            from .empf import bind_empf_record
+            bind_empf_record(self.opt_d.record, self.loss, self.prior_regularizer)
         elif recipe.effective_critic_formulation == "rhbi" or recipe.rhbi_weight > 0 or recipe.rhbi_critic_weight > 0:
             from .rhbi import bind_rhbi_record
             bind_rhbi_record(self.opt_d.record, self.loss)
