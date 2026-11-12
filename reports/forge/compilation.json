@@ -1,8 +1,8 @@
 {
-  "automation_digest": "1a5b88b1f9135c0f68cfa8327b6855b9a99c60c1f1c441887add74f7bcf6e79a",
+  "automation_digest": "49a96b59e9f3c4ce6910d091d0e0023e528cf467bbb80c829cac547a5bc9978b",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "05c9b69c013a0807628e8aff0409da6d424a9648f7b8993739bcefb5d5b47ed6",
+  "input_digest": "3c0227ebe08c202e76dceca397beeff4aadf4c9f61b454864410ea04b338d84c",
   "input_hashes": {
     "configs/forge/cadence-studies/bispf-lazy-cadence-v1.json": "fc7302ac06b61fa093a39265d440545fdab176852a588c40b750be16adc1e58b",
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
@@ -4572,17 +4572,43 @@
     "unclassified": [],
     "valid": true
   },
-  "operational_lifecycle_digest": "7bb00289159034dfcde470270a6b1a3655544c62c3903b39c6a8e0a6ec803aac",
+  "operational_lifecycle_digest": "9844d43226c3b2baf99ad27b1f3a4c32b9a6b30ad8abac68f275c54635ed3b1d",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "7ff1b20068cac610625718f6616952e20bae59b20db4ae34cba512ed94c696e9",
+    "reports/forge/EXPERIMENT_MEMORY.md": "656525b2c4506e8dc96f01327e134ab36d88e98535a5e3e4facad4aac47b7a45",
     "reports/forge/publication-records.json": "5174449ad10c00a8d22dee09d3ef50c8fb0fc76f196d85197271ee7c0766c9d8"
   },
-  "pending_readout": [],
+  "pending_readout": [
+    "bcap--148a58dc4036cfc2d71a10b427582aeea304b4ac70874ff2fe7ec02f31cee561",
+    "bcap--17c9d255a2f8e1adfc1e4ec686e3cee3c7e3fd40fc7979328d4e1955cc2d29a1",
+    "bcap--263d190ebb4c40ddb21337a16a598f5ffcca4639031b3b70aaa3036aec67b31e",
+    "bcap--655141ae1d99b0b08dcbac36abbb6f135473d47d389f2ec9d41d9aa6d1201fbe",
+    "bcap--6c72e4aaf8ffe22be663a6e041971cc22bbee9402bb0095c4935aa167b6ccb03",
+    "bcap--8a9884cad1e87d5d950d8dff3d4901a787e8f94fc99b00e83877fdf6e1a932c2",
+    "bcap--90dcc2c3039f9f4c7ed2b1de03dec0c75cec2e9d386de0bb302f90a5f923de23",
+    "bcap--a3675bf5a89a136bd4c64b5577021215c1e118aca2971e274b6d23ded6ac55a9",
+    "bcap--c89e202b7830cfc38743c25fc1b34ca8ceef3f113c4f091017cac7c843972da3",
+    "bcap--ccfa83125643932bdfc88a2178a94ec019a2687d7915dae1ed0d6852925f603d",
+    "bcap--e8c9fcd62a13b748b0a1c97543b828ee618833ea45789681323a37c9c300d773",
+    "bcap--f0163dead110803a0e982cacfa2589918cd7345eea1655c76a3e3f21b0037887",
+    "bcap-original-horizon-diagnostics-v1",
+    "bcap-tier2-round6-control-v1",
+    "bcap-tier2-round6-half-network-v1",
+    "bcap-tier2-round6-late-anneal-v1",
+    "bcap-tier2-round6-prior-smoothing-v1",
+    "bcap-tier2-round6-zero-damping-v1",
+    "constraint_geometry-control-v1",
+    "constraint_geometry-nonascent-v1",
+    "five-word-joint-ka2-v1",
+    "hydraulic-output-travel-v1",
+    "information_geometry_spectral_half_v1",
+    "kinetic_transport_sliced_v1",
+    "thermodynamic-bcap-optimism-v1"
+  ],
   "publication_record_count": 501,
   "qualification_refresh": {
     "mode": "preserved_published_evidence",
     "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
-    "source_manifest_digest": "5abf7c10ee1428165a15a12216da31d80f57ff7ec99f8abe689c898aef2a0dbb"
+    "source_manifest_digest": "9cd486581bad3de9abab0b31c8bae9368d93b80454ef65a28df36b2ee2d84ba8"
   },
   "record_count": 932,
   "reducer_hashes": {
@@ -4594,7 +4620,7 @@
   "schema_version": 1,
   "scientific_normalization_complete": false,
   "scientific_source_digests": [
-    "dcec844859d15d59010696ee08777b94b77cc14505526fa647b49b012492a77e"
+    "b6276ab7a42705c4b81af38e5732ba89f8ae0e5bce38776cfe2d47e20aec43be"
   ],
   "view_count": 31
 }

@@ -20,7 +20,7 @@ Records: 932. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Pending readouts
 
-None recorded.
+bcap--148a58dc4036cfc2d71a10b427582aeea304b4ac70874ff2fe7ec02f31cee561, bcap--17c9d255a2f8e1adfc1e4ec686e3cee3c7e3fd40fc7979328d4e1955cc2d29a1, bcap--263d190ebb4c40ddb21337a16a598f5ffcca4639031b3b70aaa3036aec67b31e, bcap--655141ae1d99b0b08dcbac36abbb6f135473d47d389f2ec9d41d9aa6d1201fbe, bcap--6c72e4aaf8ffe22be663a6e041971cc22bbee9402bb0095c4935aa167b6ccb03, bcap--8a9884cad1e87d5d950d8dff3d4901a787e8f94fc99b00e83877fdf6e1a932c2, bcap--90dcc2c3039f9f4c7ed2b1de03dec0c75cec2e9d386de0bb302f90a5f923de23, bcap--a3675bf5a89a136bd4c64b5577021215c1e118aca2971e274b6d23ded6ac55a9, bcap--c89e202b7830cfc38743c25fc1b34ca8ceef3f113c4f091017cac7c843972da3, bcap--ccfa83125643932bdfc88a2178a94ec019a2687d7915dae1ed0d6852925f603d, bcap--e8c9fcd62a13b748b0a1c97543b828ee618833ea45789681323a37c9c300d773, bcap--f0163dead110803a0e982cacfa2589918cd7345eea1655c76a3e3f21b0037887, bcap-original-horizon-diagnostics-v1, bcap-tier2-round6-control-v1, bcap-tier2-round6-half-network-v1, bcap-tier2-round6-late-anneal-v1, bcap-tier2-round6-prior-smoothing-v1, bcap-tier2-round6-zero-damping-v1, constraint_geometry-control-v1, constraint_geometry-nonascent-v1, five-word-joint-ka2-v1, hydraulic-output-travel-v1, information_geometry_spectral_half_v1, kinetic_transport_sliced_v1, thermodynamic-bcap-optimism-v1
 
 ## Experiment and family records
 
@@ -7062,4 +7062,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `05c9b69c013a0807628e8aff0409da6d424a9648f7b8993739bcefb5d5b47ed6`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `3c0227ebe08c202e76dceca397beeff4aadf4c9f61b454864410ea04b338d84c`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
