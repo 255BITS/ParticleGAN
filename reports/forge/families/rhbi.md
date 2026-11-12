@@ -8,19 +8,19 @@
 
 ## Technique overview
 
-Relativistic Hellinger-Born-Infeld Transport (RHBI) is a clock-free, constant-learning-rate ParticleGAN formulation with no EMA critic copy and no task-shape or step-count gates. It unifies nonlocal Ajtai-Komlos-Tusnady (AKT) scale-equivariant Born-Infeld Optimal Transport, Feydy diagonal-included self-coupling entropic debiasing, slack-gain-amplified local relativistic critic log-odds ascent, and fibre-centered conditional relativistic slack routing inside a single (B+1)x(B+1) slack-screened Sinkhorn variational operator, paired with a Weyl-phased balanced Born-Infeld geodesic chord + endpoint Lipschitz cap, an impedance-matched 5-channel Kantorovich-Hellinger thermal equilibrium controller, and degree-of-freedom-aware SBNP particle prior regularization.
+Relativistic Hellinger-Born-Infeld Transport (RHBI) is a clock-free, constant-learning-rate ParticleGAN formulation with no EMA critic copy and no task-shape or step-count gates. It unifies nonlocal Poisson-Weibull Ajtai-Komlos-Tusnady (AKT) scale-equivariant Born-Infeld Optimal Transport, Feydy diagonal-included self-coupling entropic debiasing, slack-gain-amplified local relativistic critic log-odds ascent, and fibre-centered conditional slack routing inside a single (B+1)x(B+1) slack-screened Sinkhorn variational operator, paired with a Weyl-phased balanced Born-Infeld geodesic chord + thermally coupled settling endpoint Lipschitz cap, an impedance-matched false-shock-proof 5-channel Kantorovich-Hellinger thermal equilibrium controller, and degree-of-freedom-aware SBNP particle prior regularization.
 
 ## Mathematical formulation
 
-$G$ is the generator, $D$ the raw-score critic, $P$ the task prior with $N$ locations in $\mathbb R^{d_z}$, $y=\{y_j\}_{j=1}^{B_r}$ a real batch, $z\sim P$ a latent batch and $x=\{x_i\}_{i=1}^{B_f}$ with $x_i=G(z_i)$ the generated batch. $\ell_t$ is the exponential moving average ($\beta_\ell=0.1$) of the AKT-scaled detached 25th-quantile real nearest-neighbor distance $B_r^{\max(0,1/d-1/2)}Q_{0.25}(d^{\mathrm{NN}}_Y)$. $c_{\mathrm{phys}}(x_i,y_j)=\sqrt{\ell_t^2+\lVert x_i-y_j\rVert_2^2}-\ell_t$ is the physical Born-Infeld ground cost and $\hat c_{ij}=c_{\mathrm{phys}}(x_i,y_j)/\ell_t$ its dimensionless linear screening form. $\tilde d(u)=C_{\max}\tanh((D(u)-\bar D)/C_{\max})$ is the batch-centered, bounded critic log-odds. $P^{\star(XY)}$ and diagonal-included $P^{\star(XX)}$ are deterministic Sinkhorn couplings on the $(B+1)\times(B+1)$ active-plus-slack polytope ($\rho=3,\tau=2,\varepsilon=0.1,S=2$) with slack-gain boost $1+\gamma_{\mathrm{slack}}s_f$ ($\gamma_{\mathrm{slack}}=0.35$). $s_t\in[10^{-6},1]$ is the 5-channel Kantorovich-Hellinger thermal scale.
+$G$ is the generator, $D$ the raw-score critic, $P$ the task prior with $N$ locations in $\mathbb R^{d_z}$, $y=\{y_j\}_{j=1}^{B_r}$ a real batch, $z\sim P$ a latent batch and $x=\{x_i\}_{i=1}^{B_f}$ with $x_i=G(z_i)$ the generated batch. $\ell_t$ is the exponential moving average ($\beta_\ell=0.1$) of the Poisson-Weibull AKT-scaled detached 25th-quantile real nearest-neighbor distance $(\frac{2eB_r}{-\ln(1-q)})^{\max(0,1/d-1/2)}Q_q(d^{\mathrm{NN}}_Y)$ ($q=0.25$). $c_{\mathrm{phys}}(x_i,y_j)=\sqrt{\ell_t^2+\lVert x_i-y_j\rVert_2^2}-\ell_t$ is the physical Born-Infeld ground cost and $\hat c_{ij}=c_{\mathrm{phys}}(x_i,y_j)/\ell_t$ its dimensionless linear screening form. $\tilde d(u)=C_{\max}\tanh((D(u)-\bar D)/C_{\max})$ is the batch-centered, bounded critic log-odds. $P^{\star(XY)}$ and diagonal-included $P^{\star(XX)}$ are deterministic Sinkhorn couplings on the $(B+1)\times(B+1)$ active-plus-slack polytope ($\rho=3,\tau=2,\varepsilon=0.1,S=2$) with slack-gain boost $1+\gamma_{\mathrm{slack}}s_f$ ($\gamma_{\mathrm{slack}}=0.35$). $s_t\in[10^{-6},1]$ is the 5-channel Kantorovich-Hellinger thermal scale and $\beta_{\mathrm{eff}}=\beta_0+\beta_{\mathrm{settle}}(1-s_t)^2$ ($\beta_0=12,\beta_{\mathrm{settle}}=16$) is the thermally coupled Lipschitz cap sharpness.
 
-**AKT Scale-Equivariant Born-Infeld Cost and Local Horizon**
+**Poisson-Weibull AKT Scale-Equivariant Born-Infeld Cost and Local Horizon**
 
 $$
-c_{\mathrm{phys}}(x_i,y_j)=\sqrt{\ell_t^2+\lVert x_i-y_j\rVert_2^2}-\ell_t,\qquad \hat c_{ij}=\frac{c_{\mathrm{phys}}(x_i,y_j)}{\ell_t},\qquad \ell_t=(1-\beta_\ell)\ell_{t-1}+\beta_\ell\,\operatorname{stopgrad}\!\left(B_r^{\max(0,\frac{1}{d}-\frac{1}{2})}Q_{0.25}(d^{\mathrm{NN}}_Y)+10^{-6}\right)
+c_{\mathrm{phys}}(x_i,y_j)=\sqrt{\ell_t^2+\lVert x_i-y_j\rVert_2^2}-\ell_t,\qquad \hat c_{ij}=\frac{c_{\mathrm{phys}}(x_i,y_j)}{\ell_t},\qquad \ell_t=(1-\beta_\ell)\ell_{t-1}+\beta_\ell\,\operatorname{stopgrad}\!\left(\left(\frac{2eB_r}{-\ln(1-q)}\right)^{\max(0,\frac{1}{d}-\frac{1}{2})}Q_{q}(d^{\mathrm{NN}}_Y)+10^{-6}\right)
 $$
 
-Evaluated via float64 GEMM and algebraic rationalization so gradients remain smooth at zero distance and finite across the full float32 range, matching exact quadratic W2 across 1D and multidimensional modes while bounding inter-mode pull slopes inside $[-1,+1]$.
+Evaluated via float64 GEMM and algebraic rationalization so gradients remain smooth at zero distance and finite across the full float32 range, matching exact quadratic W2 across 1D and multidimensional modes (including quantized MXFP8 and NVFP4) while bounding inter-mode pull slopes inside $[-1,+1]$.
 
 **Impedance-Matched Slack-Screened Unbalanced Sinkhorn Objective**
 
@@ -28,15 +28,15 @@ $$
 \mathcal L_{\mathrm{RHBI}}(X,Y;\psi)=\lambda_{\mathrm{rhbi}}s_t\left[\sum_{i=1}^{B_f}\sum_{j=1}^{B_r}\operatorname{stopgrad}\!\left(P^{\star(XY)}_{ij}\right)c_{\mathrm{phys}}(x_i,y_j)-\sum_{i=1}^{B_f}\operatorname{stopgrad}\!\left(P^{\star(XY)}_{i,0}(1+\gamma_{\mathrm{slack}}s_f)\right)\frac{\tau}{2}\tilde d(x_i)-\frac{1}{2}\sum_{i,k=1}^{B_f}\operatorname{stopgrad}\!\left(\sqrt{a_i a_k}P^{\star(XX)}_{ik}\right)c_{\mathrm{phys}}(x_i,x_k)\right]
 $$
 
-Linear horizon screening ($\rho=3$) routes valley outliers ($\hat c_{ij}>\rho$) to slack-gain-boosted centered critic log-odds ascent ($\tau/2=1,\gamma_{\mathrm{slack}}=0.35$), Feydy diagonal self-coupling cancels intra-mode entropic contraction, and 5-channel Kantorovich-Hellinger thermal scale $s_t$ locks equilibrium without step clocks.
+Linear horizon screening ($\rho=3$) routes valley outliers ($\hat c_{ij}>\rho$) to slack-gain-boosted centered critic log-odds ascent ($\tau/2=1,\gamma_{\mathrm{slack}}=0.35$), Feydy diagonal self-coupling cancels intra-mode entropic contraction, and false-shock-proof 5-channel Kantorovich-Hellinger thermal scale $s_t$ locks equilibrium without step clocks.
 
-**Weyl-Phased Geodesic Chord and Endpoint Born-Infeld Critic Penalty**
+**Thermally Coupled Settling Weyl-Phased Geodesic Chord and Endpoint Born-Infeld Critic Penalty**
 
 $$
-R_{\mathrm{RHBI}}(D)=\frac{\lambda}{2}\sum_{u\in\{y,x\}}\mathbb E_u\!\left[\phi_\beta(\lVert\nabla_u D(u)\rVert_2-\kappa)^2+\lambda_{\mathrm{floor}}\lVert\nabla_u D(u)\rVert_2^2\right]+\lambda w_{\mathrm{chord}}\mathbb E_{\hat x}\!\left[\phi_\beta(\lVert\nabla_{\hat x}D(\hat x)\rVert_2-\kappa)^2\right]+\frac{\gamma_{\mathrm{gauge}}}{2}\bar D^2
+R_{\mathrm{RHBI}}(D)=\frac{\lambda}{2}\sum_{u\in\{y,x\}}\mathbb E_u\!\left[\phi_{\beta_{\mathrm{eff}}}(\lVert\nabla_u D(u)\rVert_2-\kappa)^2+\lambda_{\mathrm{floor}}\lVert\nabla_u D(u)\rVert_2^2\right]+\lambda w_{\mathrm{chord}}\mathbb E_{\hat x}\!\left[\phi_{\beta_{\mathrm{eff}}}(\lVert\nabla_{\hat x}D(\hat x)\rVert_2-\kappa)^2\right]+\frac{\gamma_{\mathrm{gauge}}}{2}\bar D^2
 $$
 
-Softly caps critic input slopes at $\kappa=1$ ($\beta=12$) on real/fake endpoints and deterministic Weyl-phased balanced-Sinkhorn geodesic interpolants ($w_{\mathrm{chord}}=0.25$) while anchoring mean critic gauge ($\gamma_{\mathrm{gauge}}=0.03$) without transport-shape gates or an EMA critic anchor.
+Softly caps critic input slopes at $\kappa=1$ ($\beta_{\mathrm{eff}}=12+16(1-s_t)^2$, identically $12$ while $s_t=1$ during mode acquisition) on real/fake endpoints and deterministic Weyl-phased balanced-Sinkhorn geodesic interpolants ($w_{\mathrm{chord}}=0.25$) while anchoring mean critic gauge ($\gamma_{\mathrm{gauge}}=0.03$) without transport-shape gates or an EMA critic anchor.
 
 ## Simplified pseudocode
 
@@ -44,11 +44,11 @@ Softly caps critic input slopes at $\kappa=1$ ($\beta=12$) on real/fake endpoint
 Fix one global configuration with constant learning rates and DualNorm updates across generator, encoder, critic and row-normalized particle prior.
 For each task-owned training update:
   Sample real batch y and latent batch z from the task prior P; form detached fake batch x_det = stop_gradient(G(z)).
-  Evaluate calibrated non-saturating logistic critic loss (scaled straight-through by thermal scale s_t) plus the Weyl-phased balanced Born-Infeld geodesic chord and endpoint input-gradient cap (with zero-mean gauge 0.03 and soft slope floor 0.005) on y and x_det.
+  Evaluate thermally scaled non-saturating logistic critic loss plus the Weyl-phased balanced Born-Infeld geodesic chord and thermally coupled settling endpoint input-gradient cap (with zero-mean gauge 0.03 and soft slope floor 0.005) on y and x_det.
   Backpropagate and step D via DualNorm; clear transient critic input-capture ring.
   With D fixed, resample latent z and compute differentiable fake batch x = G(z) together with critic forward captures.
   If continuous conditioning accompanies critic tuples D(c, x), evaluate fibre-centered paired relativistic log-odds softplus(D(c_i, y_i) - D(c_i, x_i)).
-  Otherwise update detached AKT local horizon ell_t on device from y, update 5-channel two-sample Kantorovich-Hellinger thermal scale s_t (with 1-step shock reopening), and solve K=8 deterministic log-domain Sinkhorn scaling steps for active-plus-slack coupling P*(XY) and Feydy diagonal self-coupling P*(XX).
+  Otherwise update detached Poisson-Weibull AKT local horizon ell_t on device from y, update false-shock-proof 5-channel two-sample Kantorovich-Hellinger thermal scale s_t (with 1-step shift reopening), and solve K=8 deterministic log-domain Sinkhorn scaling steps for active-plus-slack coupling P*(XY) and Feydy diagonal self-coupling P*(XX).
   Evaluate the impedance-matched Danskin envelope RHBI generator loss combining active Born-Infeld pull, slack-gain-amplified critic ascent and Feydy self-coupling debiasing (or slack-screened relativistic log-odds on joint BiGAN hosts), plus SBNP prior regularization and any task-owned auxiliary losses.
   Project conflicting protected directions via direction-blend constraint geometry when declared, and step G, P and optional encoder E.
 ```
@@ -57,20 +57,20 @@ For each task-owned training update:
 
 | Characteristic | Behavior |
 | --- | --- |
-| Adversarial loss | Critic minimizes thermally scaled non-saturating logistic loss; unconditional and discrete-class generators minimize the impedance-matched RHBI slack-screened unbalanced Sinkhorn envelope objective combining physical Born-Infeld transport, Feydy diagonal self-coupling debiasing and slack-gain-boosted centered critic log-odds ascent; continuous-conditioned fibres minimize fibre-centered paired relativistic log-odds; joint BiGAN generator/encoder hosts minimize slack-screened relativistic log-odds across active pairs and slack marginals. |
+| Adversarial loss | Critics minimize thermally scaled non-saturating logistic loss; unconditional and discrete-class generators minimize the impedance-matched RHBI slack-screened unbalanced Sinkhorn envelope objective combining physical Born-Infeld transport, Feydy diagonal self-coupling debiasing and slack-gain-boosted centered critic log-odds ascent; continuous-conditioned fibres minimize fibre-centered paired relativistic log-odds; joint BiGAN generator/encoder hosts minimize slack-screened relativistic log-odds across active pairs and slack marginals. |
 | Optimizer | Full DualNorm across generator, encoder, critic and row-normalized particle prior (zero momentum, polar smoothing 0.0061, exact CPU-LAPACK smoothed polar factor on dense 2D weights, quintic per-offset convolution rule on wide CUDA kernels, direction-blend constraint geometry) without an EMA critic copy. |
 | Learning rates and annealing | Strictly constant base learning rates across all tasks: global LR $0.014$, critic multiplier $1.5$ and prior multiplier $2.9$, with network and prior LR floors fixed at $1.0$ (zero schedule annealing and zero horizon dependence). |
 | Parameter-gradient clipping | None on parameter tensors; active transport coordinate gradients are analytically bounded inside $[-1,+1]$ by the Born-Infeld ground cost and critic log-odds are smoothly bounded by $C_{\max}\tanh(\cdot/C_{\max})$. |
-| Critic penalties and anchors | Smooth C-infinity Born-Infeld input-gradient cap ($\lambda=1$, $\kappa=1$, sharpness $\beta=12$, sub-unit slope floor $\lambda_{\mathrm{floor}}=0.005$, zero-mean logit gauge $\gamma_{\mathrm{gauge}}=0.03$) evaluated on real/fake endpoints plus a deterministic golden-ratio Weyl-phased balanced-Sinkhorn geodesic chord ($w_{\mathrm{chord}}=0.25$), with zero EMA critic anchor and automatic non-concatenated evaluation on stateful batch-bound critic view wrappers. |
-| Damping and update guards | Clock-free, shape-gate-free 5-channel Kantorovich-Hellinger thermal equilibrium controller scales critic and generator gradients down to $s_{\min}=10^{-6}$ at distribution lock and reopens in 1 step on distribution shifts; critic spike guard ratio=$0$, latent damping=$0$; slack reservoir marginal $S=2$ keeps Sinkhorn iterations strictly inside the Birkhoff polytope while degree-of-freedom-aware SBNP regularization ($\lambda_{\mathrm{prior}}=0.02$) stabilizes particle geometry across dimensions. |
+| Critic penalties and anchors | Smooth C-infinity Born-Infeld input-gradient cap ($\lambda=1$, $\kappa=1$, base sharpness $\beta_0=12$ settling smoothly up to $\beta_{\mathrm{eff}}=28$ via thermally coupled $\beta_{\mathrm{settle}}(1-s_t)^2$ with $\beta_{\mathrm{settle}}=16$, sub-unit slope floor $\lambda_{\mathrm{floor}}=0.005$, zero-mean logit gauge $\gamma_{\mathrm{gauge}}=0.03$) evaluated on real/fake endpoints plus a deterministic golden-ratio Weyl-phased balanced-Sinkhorn geodesic chord ($w_{\mathrm{chord}}=0.25$), strictly unperturbed during pre-equilibrium mode acquisition ($s_t=1$), with zero EMA critic anchor and automatic non-concatenated evaluation on stateful batch-bound critic view wrappers. |
+| Damping and update guards | Clock-free, shape-gate-free 5-channel Kantorovich-Hellinger thermal equilibrium controller scales critic and generator gradients down to $s_{\min}=10^{-6}$ at distribution lock, rejects stationary/quantized single-batch barycenter jitter via shock ratio $0.35$, and reopens in 1 step on genuine distribution shifts; critic spike guard ratio=$0$, latent damping=$0$; slack reservoir marginal $S=2$ keeps Sinkhorn iterations strictly inside the Birkhoff polytope while degree-of-freedom-aware SBNP regularization ($\lambda_{\mathrm{prior}}=0.02$) stabilizes particle geometry across dimensions. |
 | Training and sampling noise | Zero additive critic-input or generator-output training noise ($0.0$). Task-declared prior intrinsic sigma and serving contracts are preserved unchanged. |
 | Parameter averaging and serving | Generator EMA decay=$0$ and serve_average=$0$; all evaluations score live unaveraged weights. |
 
 ## Configuration differences
 
 - RHBI uses one global trainer configuration across every Tier 1, Tier 2, Tier 3 and Tier 4 task without per-task tuning, step-count gates or input-shape regimes.
-- AKT horizon scaling multiplies the 25th-quantile real NN distance by $B_r^{\max(0,1/d-1/2)}$ (scaling $d=1$ by $\sqrt{B_r}$ and exact identity $1.0$ for all $d\ge 2$ without shape branching).
-- When discrete class labels accompany critic inputs, cross-class active pairs are masked to minus infinity in log-Sinkhorn space so unmatched class draws route cleanly into the slack reservoir; when continuous conditioning accompanies critic tuples D(c, x), rhbi_conditional_fibre='slack' routes singleton fibres to fibre-centered paired relativistic log-odds.
+- Poisson-Weibull AKT horizon scaling (`rhbi_akt_mode='weibull'`) multiplies the $q$-th quantile real NN distance by $(\frac{2eB_r}{-\ln(1-q)})^{\max(0,1/d-1/2)}$, centering 1D empirical OT horizons on continuum Gaussian scales (unlocking quantized MXFP8 and NVFP4 1D Gaussian acquisition) while remaining exact identity $1.0$ for all $d\ge 2$ without shape branching.
+- When discrete class labels accompany critic inputs, cross-class active pairs are masked to minus infinity in log-Sinkhorn space so unmatched class draws route cleanly into the slack reservoir; when continuous conditioning accompanies critic tuples D(c, x), rhbi_conditional_fibre='slack' routes generator updates via fibre-centered paired relativistic log-odds without cross-fibre mixing.
 - Both passive observer records and formulation critic records checkpoint schema-2 state (ell_ema, ell_initialized, chord_phase, 5 residual EMAs and thermal_scale) with zero per-step host-device synchronizations, ensuring exact bit-for-bit continuation across restarts and rejecting tampered or incompatible checkpoints.
 - Setting rhbi_weight=0.0 executes an exact zero-strength bypass that leaves horizon buffers and RNG streams untouched.
 
@@ -91,10 +91,14 @@ These links support the explanation. Recorded results below remain bound to thei
 - [configs/forge/ideas/rhbi-v2.json](../../../configs/forge/ideas/rhbi-v2.json)
 - [configs/forge/ideas/rhbi-v3.json](../../../configs/forge/ideas/rhbi-v3.json)
 - [configs/forge/ideas/rhbi-v4.json](../../../configs/forge/ideas/rhbi-v4.json)
+- [configs/forge/ideas/rhbi-v5.json](../../../configs/forge/ideas/rhbi-v5.json)
+- [configs/forge/ideas/rhbi-v6.json](../../../configs/forge/ideas/rhbi-v6.json)
 - [configs/forge/studies/rhbi-v1-study.json](../../../configs/forge/studies/rhbi-v1-study.json)
 - [configs/forge/studies/rhbi-v2-study.json](../../../configs/forge/studies/rhbi-v2-study.json)
 - [configs/forge/studies/rhbi-v3-study.json](../../../configs/forge/studies/rhbi-v3-study.json)
 - [configs/forge/studies/rhbi-v4-study.json](../../../configs/forge/studies/rhbi-v4-study.json)
+- [configs/forge/studies/rhbi-v5-study.json](../../../configs/forge/studies/rhbi-v5-study.json)
+- [configs/forge/studies/rhbi-v6-study.json](../../../configs/forge/studies/rhbi-v6-study.json)
 - [reports/forge/rhbi/README.md](../rhbi/README.md)
 
 </details>
@@ -111,26 +115,39 @@ Every cell is one run; timings are never pooled across devices or contention sta
 
 [Compact performance evidence index](../scaling-performance.json) · [Protocol and bounded reproduction](../../../docs/forge-scaling-performance.md)
 
-This registration covers 9 complete recipes. Historical alternatives outside its registered family roster add no missing benchmark cells. A changed selected recipe within a registered family remains unknown until measured.
+This registration covers 10 complete recipes. Historical alternatives outside its registered family roster add no missing benchmark cells. A changed selected recipe within a registered family remains unknown until measured.
 
-No current selected-recipe update timings are measured. Missing timing cells remain **unknown**.
+### NVIDIA RTX A6000 · GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce
+
+Performance source `98d380b54e60` (commit `9a99d3ab05e71c4c410befbd16fac8a0146344f5`); runtime `fddddb1b314d`; torch.float32; PyTorch 2.14.1+cu130; 48592.125 MiB device memory.
+
+Task prior: particle_cloud, sigma 0.0, 256 initial locations. The common finite-table performance exception retains each recipe's prior update policy and regularizer. Exact prior and resource specifications remain part of every task key.
+
+| Family / recipe | Task (RGB size, batch, width) | Execution | Median / p95 update ms | Images/s | GPU peak allocated / reserved MiB | Contention | Matched key / evidence |
+| --- | --- | --- | ---: | ---: | ---: | --- | --- |
+| RHBI · `rhbi-v6` | dcgan_performance_r32: 32², B16, W64 | COMPLETE | 39.70 / 41.89 | 398.52 | 93.03 / 134.00 | clear | `403d9bd78572` · [receipt](../scaling-receipts/dcgan-performance-cloud-dc48d630d646/rhbi-dcgan_performance_r32-584e7665571dfcb1.json) |
+| RHBI · `rhbi-v6` | dcgan_performance_r64: 64², B16, W64 | COMPLETE | 67.33 / 69.48 | 237.43 | 253.38 / 336.00 | clear | `0c91cbe8f6d4` · [receipt](../scaling-receipts/dcgan-performance-cloud-dc48d630d646/rhbi-dcgan_performance_r64-787991cc20dbb906.json) |
+| RHBI · `rhbi-v6` | dcgan_performance_w128: 64², B16, W128 | COMPLETE | 128.98 / 129.90 | 124.03 | 685.44 / 1,020.00 | clear | `fef999c0d1c0` · [receipt](../scaling-receipts/dcgan-performance-cloud-dc48d630d646/rhbi-dcgan_performance_w128-3da2ff8d0468a27a.json) |
+| RHBI · `rhbi-v6` | dcgan_performance_b64: 64², B64, W64 | COMPLETE | 118.26 / 120.54 | 538.63 | 731.25 / 790.00 | clear | `51fa90f16d0a` · [receipt](../scaling-receipts/dcgan-performance-cloud-dc48d630d646/rhbi-dcgan_performance_b64-8c962062d661997a.json) |
+| RHBI · `rhbi-v6` | dcgan_performance_r128: 128², B16, W64 | COMPLETE | 151.61 / 152.65 | 105.69 | 810.26 / 1,038.00 | clear | `9ab10399176f` · [receipt](../scaling-receipts/dcgan-performance-cloud-dc48d630d646/rhbi-dcgan_performance_r128-d4dfddb6f95c83c9.json) |
+| RHBI · `rhbi-v6` | dcgan_performance_r256: 256², B16, W64 | COMPLETE | 432.32 / 433.15 | 37.02 | 2,795.30 / 2,992.00 | clear | `69841931b455` · [receipt](../scaling-receipts/dcgan-performance-cloud-dc48d630d646/rhbi-dcgan_performance_r256-9869311ce3f61aa4.json) |
 
 <a name="cohort-cuda-23a94f16ca88"></a>
 
 ## Current benchmark
 
-Runtime: **cuda**. Selected configuration: [rhbi-v4](../../../configs/forge/ideas/rhbi-v4.json).
+Runtime: **cuda**. Selected configuration: [rhbi-v6](../../../configs/forge/ideas/rhbi-v6.json).
 
 Comparison policy: discriminator_stability revision 9, **tier 1**. Actual executed-policy qualification: **tier 1**, discriminator_stability revision 16 (FAIL). These are separate policy results; no qualification reuse.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
 
-Source digest: `a989784d6f16ab67c44840b05b4b1187a063e5666c755a00fe569263d030581d`. Candidate revision: `a555da62030ea9cce3aa3d9a76e1f2e8ab3ffe86f4347f9b865cf52fafc7c459`. Runtime cohort: `1f852c0fbe76678bb02bf708bda8cfc558cafcd347e0f631dde95b7b6a0f537f`.
+Source digest: `49819f3149d320aa7942a841f75aa23235b8d0b4e0a35c770dc88a48f070061c`. Candidate revision: `26abf8d916172cd34a4ee0ce10c376a3e4a1e9ffc80b03f126ae68d8e0a3b57f`. Runtime cohort: `e8bb549f1b6f95970ef96ebdf9d3d15041f3453dc50ccd6b78a49e111c102414`.
 
-[Frozen numerical evidence](../technique-evidence/aa2ff3e18eb43bf1f06e4fa0ca45bec155d94255e730672fb3be10071ec18acf.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
+[Frozen numerical evidence](../technique-evidence/7292978d6f0e77dccbfcb3dd2fbe3a6a55542eea1499702c68ee31cfc8a87432.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
 
-Selection: current_measurement. Promote rhbi-v4 (Relativistic Hellinger-Born-Infeld slack-screened transport with Ajtai-Komlos-Tusnady empirical OT 1D horizon scaling, slack-gain critic boost 0.35, Weyl-phased balanced-Sinkhorn Born-Infeld geodesic chord regularization 0.25 at ebi_beta=12.0 with zero-mean critic gauge 0.03, and impedance-matched 5-channel Kantorovich-Hellinger thermal equilibrium controller rhbi_thermal_tau=0.084) as the canonical RHBI candidate following ordinary discriminator_stability CUDA measurement on NVIDIA RTX A6000 (11/11 required + 2/2 diagnostic Tier 1 PASS = 27/27 Tier 1 view requirements across views, 10/18 required Tier 2 PASS = 55/78 Tier 2 view requirements, 82/115 total counted view requirements; 24/61 full-suite PASS including mode_hold, vector_overlap, and stretch precision_gaussian_mxfp8, 0 BLOCKED). Actual executed-policy qualification and comparison-policy projection retain their separate source-bound proofs; no public-default adoption claim.
+Selection: current_measurement. Promote rhbi-v6 (Relativistic Hellinger-Born-Infeld slack-screened transport with Poisson-Weibull 2e empirical OT 1D horizon scaling, mu=0.35 false-shock filter, thermally coupled (1 - s_t)^2 Lipschitz settling, Weyl-phased balanced-Sinkhorn Born-Infeld geodesic chord regularization 0.25 at ebi_beta=12.0 with zero-mean critic gauge 0.03, and impedance-matched 5-channel Kantorovich-Hellinger thermal equilibrium controller rhbi_thermal_tau=0.084) as the canonical RHBI candidate following ordinary discriminator_stability CUDA measurement on NVIDIA RTX A6000 (11/11 required + 2/2 diagnostic Tier 1 PASS = 27/27 Tier 1 view requirements across views, 10/18 required Tier 2 PASS = 55/78 Tier 2 view requirements, 82/115 total counted view requirements; 26/38 executed and 26/61 full-suite PASS including all three 1D precision benchmarks precision_gaussian_fp32, precision_gaussian_mxfp8, and precision_gaussian_nvfp4, plus mode_hold and vector_overlap, 0 BLOCKED). Actual executed-policy qualification and comparison-policy projection retain their separate source-bound proofs; no public-default adoption claim.
 
 </details>
 
@@ -140,7 +157,7 @@ Complete current Tier 1 measurement in: discriminator_stability. PASS and FAIL a
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [adaptation](rhbi.md#cohort-cuda-23a94f16ca88-adaptation) | [3/3](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-1) | [9/12](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) | [0/1 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-4) | [12/16 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-adaptation) | [1/7](rhbi.md#cohort-cuda-23a94f16ca88-held) |
 | [clockfree_continuous](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous) | [4/4](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-1) | [9/12](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) | [0/6 (6 not run)](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-4) | [13/22 (6 not run)](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous) | [1/7](rhbi.md#cohort-cuda-23a94f16ca88-held) |
-| [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability) | [11/11](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) | [10/18 (2 not run)](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) | [0/1 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4) | [21/30 (3 not run)](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability) | [2/25 (16 incompatible)](rhbi.md#cohort-cuda-23a94f16ca88-held) |
+| [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability) | [11/11](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) | [10/18 (2 not run)](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) | [0/1 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-4) | [21/30 (3 not run)](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability) | [3/25 (16 incompatible)](rhbi.md#cohort-cuda-23a94f16ca88-held) |
 | [formulation_comparison](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison) | [3/3](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-1) | [9/12](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) | [0/1 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-4) | [12/16 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison) | [1/7](rhbi.md#cohort-cuda-23a94f16ca88-held) |
 | [host_profile_transfer](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer) | [3/3](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-1) | [9/12](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) | [0/1 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-4) | [12/16 (1 not run)](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer) | [1/7](rhbi.md#cohort-cuda-23a94f16ca88-held) |
 | [quality_coverage](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage) | [3/3](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-1) | [9/12](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-3) | [0/0](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-4) | [12/15](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage) | [1/7](rhbi.md#cohort-cuda-23a94f16ca88-held) |
@@ -180,7 +197,7 @@ Held at this tier (measured and shown, not counted):
 | Experiment | Held in | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [precision_gaussian_mxfp8](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_mxfp8) | [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) | PASS | matches recorded run |
-| [precision_gaussian_nvfp4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_nvfp4) | [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) | FAIL | matches recorded run |
+| [precision_gaussian_nvfp4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_nvfp4) | [discriminator_stability](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) | PASS | matches recorded run |
 
 <a name="cohort-cuda-23a94f16ca88-tier-2"></a>
 
@@ -286,7 +303,7 @@ These tests keep running and keep this recipe's recorded result, but they do not
 | Experiment | Held in | Recorded result | Reason | Summary | Re-entry rule |
 | --- | --- | --- | --- | --- | --- |
 | [precision_gaussian_mxfp8](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_mxfp8) | [discriminator_stability / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) | PASS | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format MXFP8 software-reference training arithmetic? | Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass. |
-| [precision_gaussian_nvfp4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_nvfp4) | [discriminator_stability / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) | FAIL | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format NVFP4 software-reference training arithmetic? | Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass. |
+| [precision_gaussian_nvfp4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_nvfp4) | [discriminator_stability / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) | PASS | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | Can one unchanged family recipe learn the scalar Gaussian with Blackwell-format NVFP4 software-reference training arithmetic? | Consider counted status only after native parity, independent calibration and a global recipe that retains every counted pass. |
 | [img_bars4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_bars4) | [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | Four bar pictures: BCAP and BISPF draw clean bars but only 2 of the 4. R1/R2 and GAN v3 pass it but fail Tier 1 tests and img_stripes2; under the current declarations no recipe passes both bars4 and stripes2. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
 | [img_blobs4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_blobs4) | [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | Four corner-blob pictures: BCAP covers 2 corners (24/32 clean), BISPF 3 (28/32); the test needs all 4 corners and 29/32 clean. Every recipe passing its current declaration fails or cannot run Tier 1 tests. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
 | [img_intensity2](rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_intensity2) | [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2), [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2), [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2), [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) | FAIL | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | Two brightness levels: BCAP draws both but 10 of 32 pictures are off in brightness; BISPF collapses to one level. The three recipes passing its current declaration fail Tier 1 tests that BCAP and BISPF pass. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
@@ -842,9 +859,9 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [model_vae_categorical](rhbi.md#cohort-cuda-23a94f16ca88-experiment-model_vae_categorical) | required | PASS | matches recorded run |
 | [model_vae_hard](rhbi.md#cohort-cuda-23a94f16ca88-experiment-model_vae_hard) | required | PASS | matches recorded run |
 | [clockfree_audit_measurement_v1](rhbi.md#cohort-cuda-23a94f16ca88-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
-| [precision_gaussian_fp32](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_fp32) | diagnostic | FAIL | matches recorded run |
+| [precision_gaussian_fp32](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_fp32) | diagnostic | PASS | matches recorded run |
 | [precision_gaussian_mxfp8](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_mxfp8) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | PASS | matches recorded run |
-| [precision_gaussian_nvfp4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_nvfp4) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | FAIL | matches recorded run |
+| [precision_gaussian_nvfp4](rhbi.md#cohort-cuda-23a94f16ca88-experiment-precision_gaussian_nvfp4) | [stretch: frontier stretch benchmark beyond the required suite](../precision-stretch/README.md#precision-stretch) | PASS | matches recorded run |
 
 <a name="cohort-cuda-23a94f16ca88-discriminator_stability-tier-2"></a>
 
@@ -1754,7 +1771,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **22**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/0ce0ee466d5648d990b6e454b1ea835e.json)
+[Compact metrics and receipt provenance](../technique-receipts/df921195009243e5a7296ffe0a72beb0.json)
 
 Recorded conditions: mog prior (sigma 0.025); generated_and_reconstructed_prior_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -1890,7 +1907,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. declared state/horizon/cadence/restart comparisons agree; source audit bound
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [clockfree_continuous / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -1900,7 +1917,7 @@ Recorded final metrics:
 | --- | ---: |
 | parity_comparisons | 4 |
 
-[Compact metrics and receipt provenance](../technique-receipts/073abbd423254fc895c6f6c02822aeb9.json)
+[Compact metrics and receipt provenance](../technique-receipts/b94975e1db964c52bdf856f575cf51e9.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1950,16 +1967,16 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| content_kept | 0.98011 | >= 0.75 | PASS |
-| leak_ratio | 0.00891298 | <= 0.2 | PASS |
-| pole_rel_err_minus | 0.0141227 | <= 0.2 | PASS |
-| pole_rel_err_plus | 0.0103309 | <= 0.2 | PASS |
-| same_dir | 0.00551454 | <= 0.25 | PASS |
-| u_kept | 0.995025 | >= 0.85 | PASS |
+| content_kept | 0.894787 | >= 0.75 | PASS |
+| leak_ratio | 0.0433731 | <= 0.2 | PASS |
+| pole_rel_err_minus | 0.0183435 | <= 0.2 | PASS |
+| pole_rel_err_plus | 0.0629478 | <= 0.2 | PASS |
+| same_dir | 0.0501448 | <= 0.25 | PASS |
+| u_kept | 0.959978 | >= 0.85 | PASS |
 
 Recorded terminal passing observations: **23**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/a2a1eedf65624bc68675cac4bf3b8a5f.json)
+[Compact metrics and receipt provenance](../technique-receipts/aa863b436855484aba7dc8efa0f04ed4.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -2378,7 +2395,7 @@ Recorded final metrics:
 | served_averaged | 0 |
 | step | 5667 |
 
-[Compact metrics and receipt provenance](../technique-receipts/70a557e350b04bd29dcb0056fad7134d.json)
+[Compact metrics and receipt provenance](../technique-receipts/c38addc0d8674f90a9a29094563e86e0.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
 
@@ -2411,7 +2428,7 @@ Dependencies: five_word_joint_smoke (checkpoint).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. any scheduled full joint pass plus independent same-state confirmation
 
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [r1r2-repair-word-retention-20261022 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-r1r2-repair-word-retention-20261022-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -2437,7 +2454,7 @@ Recorded final metrics:
 | served_averaged | 0 |
 | step | 20001 |
 
-[Compact metrics and receipt provenance](../technique-receipts/4286b9b4bb1b46e3b2facace5c8170eb.json)
+[Compact metrics and receipt provenance](../technique-receipts/5cc5f2b9058b4e71802a5bd894526835.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
 
@@ -2510,16 +2527,16 @@ Recorded final metrics:
 
 | Metric | Measured |
 | --- | ---: |
-| cdf_ks | 0.0483622 |
+| cdf_ks | 0.0228672 |
 | finite_fraction | 1 |
-| mean | 1.99884 |
-| mean_error_sigma | 0.00231563 |
+| mean | 2.01175 |
+| mean_error_sigma | 0.0234916 |
 | sample_count | 4096 |
-| std | 0.520119 |
-| std_ratio | 1.04024 |
+| std | 0.530024 |
+| std_ratio | 1.06005 |
 | step | 1000 |
 
-[Compact metrics and receipt provenance](../technique-receipts/1e157275451640dbb6fef600c385925b.json)
+[Compact metrics and receipt provenance](../technique-receipts/ae75dc67ce104157bfe8f5d25c8ed05b.json)
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2558,16 +2575,16 @@ Recorded final metrics:
 
 | Metric | Measured |
 | --- | ---: |
-| cdf_ks | 0.058233 |
+| cdf_ks | 0.0421211 |
 | finite_fraction | 1 |
-| mean | 3.03483 |
-| mean_error_sigma | 0.0696535 |
+| mean | 2.99474 |
+| mean_error_sigma | 0.0105264 |
 | sample_count | 4096 |
-| std | 0.468007 |
-| std_ratio | 0.936014 |
+| std | 0.531788 |
+| std_ratio | 1.06358 |
 | step | 6000 |
 
-[Compact metrics and receipt provenance](../technique-receipts/d6f35af36e754c88b734bd9ec238159e.json)
+[Compact metrics and receipt provenance](../technique-receipts/6fd673cb72244faf86defa665106425c.json)
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2601,7 +2618,7 @@ Dependencies: gaussian1d_smoke (checkpoint).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -2629,7 +2646,7 @@ Recorded final metrics:
 | valid_n | 100000 |
 | within_radius_n | 26119 |
 
-[Compact metrics and receipt provenance](../technique-receipts/fe94ec936355414bb6d3a82803d1ff3b.json)
+[Compact metrics and receipt provenance](../technique-receipts/80bffd04b9264aa09775c280d4b3962a.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2955,7 +2972,7 @@ Dependencies: grid100 (gate).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -2968,7 +2985,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/4ce3f426901141f39cf916a98f969604.json)
+[Compact metrics and receipt provenance](../technique-receipts/7b45b6bb459a4c3ea91c1bc8fa032595.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -3046,7 +3063,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -3059,7 +3076,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/b7deea7d3f37439283f38d969f8ddf74.json)
+[Compact metrics and receipt provenance](../technique-receipts/4aa6c6999dfe4ab9955a537c6f8c1ed0.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -3111,7 +3128,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -3124,7 +3141,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/19ee41180a1249ac8deb9b2aeabcd277.json)
+[Compact metrics and receipt provenance](../technique-receipts/338fd3c474b44252b24e90ac4f5b42e2.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -3176,7 +3193,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -3189,7 +3206,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **12**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/9ac705cd700f4936bac32df8de033ab7.json)
+[Compact metrics and receipt provenance](../technique-receipts/1d35da65f34d4f5f9859abb64007fd69.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -3315,7 +3332,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **23**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/f94332eb0f2545979a5ca3d1573392bc.json)
+[Compact metrics and receipt provenance](../technique-receipts/5f47d790871847c8b990b3dfd50bbbfc.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -3482,7 +3499,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **9**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/0ff0f162564544559f84ae4e96f2f65b.json)
+[Compact metrics and receipt provenance](../technique-receipts/2fad270d12aa4df588f47a47a256f61a.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -3586,7 +3603,7 @@ Dependencies: model_ae_ddgan_gaussian_chain (gate).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -3639,7 +3656,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/906d11fc237843a4ae14a6958ed3f675.json)
+[Compact metrics and receipt provenance](../technique-receipts/c63ec737b0cd4a8f88ddf9274950b4f9.json)
 
 Recorded conditions: mog prior (sigma 0.25); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
@@ -3708,7 +3725,7 @@ Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_wit
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -3716,18 +3733,18 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_center_rms_sigma | 0.865812 | <= 1 | PASS |
-| component_max_eigen_ratio | 2.13321 | <= 4 | PASS |
-| component_min_eigen_ratio | 0.52173 | >= 0.1 | PASS |
+| component_center_rms_sigma | 0.855432 | <= 1 | PASS |
+| component_max_eigen_ratio | 2.13127 | <= 4 | PASS |
+| component_min_eigen_ratio | 0.545073 | >= 0.1 | PASS |
 | mass_tv | 0.0292969 | <= 0.15 | PASS |
 | modes | 4 | >= 4 | PASS |
-| precision | 0.939941 | >= 0.9 | PASS |
+| precision | 0.941162 | >= 0.9 | PASS |
 | reconstruction_mode_agreement | 1 | >= 0.98 | PASS |
-| reconstruction_mse | 0.00756253 | <= 0.025 | PASS |
+| reconstruction_mse | 0.00755007 | <= 0.025 | PASS |
 
 Recorded terminal passing observations: **14**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/79200c43a7304b78a4967421d98efe2c.json)
+[Compact metrics and receipt provenance](../technique-receipts/fbaee65bedb5454195b731093db5c55b.json)
 
 Recorded conditions: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
@@ -3762,7 +3779,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -3775,7 +3792,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **22**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/d009f41b29a848dbb344823a52e65e2e.json)
+[Compact metrics and receipt provenance](../technique-receipts/a3e6479a5e99441f96d76463dfc11dd3.json)
 
 Recorded conditions: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
@@ -3878,7 +3895,7 @@ Dependencies: model_ddgan_gaussian_chain (gate).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -3927,7 +3944,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/77a59b2547534e848b20eafdbb5a2913.json)
+[Compact metrics and receipt provenance](../technique-receipts/f813f5ef2684495b9cae6ba3e20f50f6.json)
 
 Recorded conditions: mog prior (sigma 0.25); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
@@ -4031,7 +4048,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [vaegan_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-vaegan_coverage-tier-1).
 
@@ -4039,22 +4056,22 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| decoder_mean_hq | 0.929199 | >= 0.85 | PASS |
-| decoder_mean_mass_tv | 0.0708008 | <= 0.15 | PASS |
+| decoder_mean_hq | 0.937988 | >= 0.85 | PASS |
+| decoder_mean_mass_tv | 0.0620117 | <= 0.15 | PASS |
 | decoder_mean_modes | 2 | >= 2 | PASS |
-| elbo_identity_error | 8.88178e-16 | <= 0.0001 | PASS |
-| kl_identity_error | 6.18124e-07 | <= 1e-05 | PASS |
-| likelihood_hq | 0.911377 | >= 0.85 | PASS |
-| likelihood_mass_tv | 0.088623 | <= 0.15 | PASS |
+| elbo_identity_error | 4.44089e-16 | <= 0.0001 | PASS |
+| kl_identity_error | 5.8991e-07 | <= 1e-05 | PASS |
+| likelihood_hq | 0.9375 | >= 0.85 | PASS |
+| likelihood_mass_tv | 0.0625 | <= 0.15 | PASS |
 | likelihood_modes | 2 | >= 2 | PASS |
-| posterior_mutual_information | 0.695198 | >= 0.3 | PASS |
+| posterior_mutual_information | 0.695617 | >= 0.3 | PASS |
 | posterior_noise_variance_ratio | 1.0033 | <= 1.2 | PASS |
-| reconstruction_mse | 0.00628644 | <= 0.05 | PASS |
-| shuffle_reconstruction_ratio | 363.142 | >= 5 | PASS |
+| reconstruction_mse | 0.00379271 | <= 0.05 | PASS |
+| shuffle_reconstruction_ratio | 579.681 | >= 5 | PASS |
 
 Recorded terminal passing observations: **9**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/b10a78392ef54d5a9a8c6dad09dae30b.json)
+[Compact metrics and receipt provenance](../technique-receipts/8f98ca54440646abb602a026b8358b3e.json)
 
 Recorded conditions: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
@@ -4094,7 +4111,7 @@ Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_wi
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [vaegan_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-vaegan_coverage-tier-1).
 
@@ -4102,22 +4119,22 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| decoder_mean_hq | 0.943604 | >= 0.85 | PASS |
-| decoder_mean_mass_tv | 0.0600586 | <= 0.15 | PASS |
+| decoder_mean_hq | 0.999756 | >= 0.85 | PASS |
+| decoder_mean_mass_tv | 0.00366211 | <= 0.15 | PASS |
 | decoder_mean_modes | 2 | >= 2 | PASS |
 | elbo_identity_error | 4.44089e-16 | <= 0.0001 | PASS |
 | kl_identity_error | 7.61862e-09 | <= 1e-05 | PASS |
-| likelihood_hq | 0.952637 | >= 0.85 | PASS |
-| likelihood_mass_tv | 0.0490723 | <= 0.15 | PASS |
+| likelihood_hq | 0.999512 | >= 0.85 | PASS |
+| likelihood_mass_tv | 0.00390625 | <= 0.15 | PASS |
 | likelihood_modes | 2 | >= 2 | PASS |
-| posterior_mutual_information | 0.755568 | >= 0.3 | PASS |
+| posterior_mutual_information | 1.24379 | >= 0.3 | PASS |
 | posterior_noise_variance_ratio | 1.0009 | <= 1.2 | PASS |
-| reconstruction_mse | 0.00480658 | <= 0.05 | PASS |
-| shuffle_reconstruction_ratio | 483.746 | >= 5 | PASS |
+| reconstruction_mse | 0.00398122 | <= 0.05 | PASS |
+| shuffle_reconstruction_ratio | 544.678 | >= 5 | PASS |
 
 Recorded terminal passing observations: **16**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/abbd69586c104365b18fc0e4e6c9ac10.json)
+[Compact metrics and receipt provenance](../technique-receipts/0d513d20c6354c9bb8446333d26c69c3.json)
 
 Recorded conditions: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
@@ -4210,11 +4227,11 @@ Current measurement: mog prior (sigma 0.05); public_prior_without_output_noise; 
 
 ### precision_gaussian_fp32
 
-**precision_gaussian_fp32: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_fp32.json).
+**precision_gaussian_fp32: PASS**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_fp32.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1).
 
@@ -4222,15 +4239,15 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| cdf_ks | 0.0503912 | <= 0.05 | FAIL |
+| cdf_ks | 0.0265661 | <= 0.05 | PASS |
 | finite_fraction | 1 | == 1 | PASS |
-| mean_error_sigma | 0.0994911 | <= 0.2 | PASS |
+| mean_error_sigma | 0.0182304 | <= 0.2 | PASS |
 | sample_count | 4096 | >= 4096 | PASS |
-| std_ratio | 0.951908 | <= 1.2 | PASS |
+| std_ratio | 1.06789 | <= 1.2 | PASS |
 
-Recorded terminal passing observations: **0**; required: 5.
+Recorded terminal passing observations: **16**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/d837ae985ff3414e9d4e7835a3161fe7.json)
+[Compact metrics and receipt provenance](../technique-receipts/5256eeb1187145b590fd99c14f227f26.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4261,7 +4278,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1).
 
@@ -4269,15 +4286,15 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| cdf_ks | 0.0459058 | <= 0.05 | PASS |
+| cdf_ks | 0.0221474 | <= 0.05 | PASS |
 | finite_fraction | 1 | == 1 | PASS |
-| mean_error_sigma | 0.064743 | <= 0.2 | PASS |
+| mean_error_sigma | 0.0137749 | <= 0.2 | PASS |
 | sample_count | 4096 | >= 4096 | PASS |
-| std_ratio | 0.974709 | <= 1.2 | PASS |
+| std_ratio | 1.08609 | <= 1.2 | PASS |
 
-Recorded terminal passing observations: **16**; required: 5.
+Recorded terminal passing observations: **18**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/0cf68b5ae1d74bde989adcd387e42198.json)
+[Compact metrics and receipt provenance](../technique-receipts/98b150186b1b44fc9c92239dd0ac47d6.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4304,11 +4321,11 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 ### precision_gaussian_nvfp4
 
-**precision_gaussian_nvfp4: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_nvfp4.json).
+**precision_gaussian_nvfp4: PASS**. [Current experiment declaration](../../../configs/forge/tasks/precision_gaussian_nvfp4.json).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1).
 
@@ -4316,15 +4333,15 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| cdf_ks | 0.0596211 | <= 0.05 | FAIL |
+| cdf_ks | 0.0376338 | <= 0.05 | PASS |
 | finite_fraction | 1 | == 1 | PASS |
-| mean_error_sigma | 0.0470963 | <= 0.2 | PASS |
+| mean_error_sigma | 0.0479336 | <= 0.2 | PASS |
 | sample_count | 4096 | >= 4096 | PASS |
-| std_ratio | 1.00184 | <= 1.2 | PASS |
+| std_ratio | 1.01832 | <= 1.2 | PASS |
 
-Recorded terminal passing observations: **0**; required: 5.
+Recorded terminal passing observations: **20**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/acde3d8c439247c881d962797d1353f0.json)
+[Compact metrics and receipt provenance](../technique-receipts/6b38822848ec4713982f34e448e5e664.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4369,7 +4386,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **19**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/4125aa02d95148f9b76c8544561b3b43.json)
+[Compact metrics and receipt provenance](../technique-receipts/bb3114cd3b0746abb9d163bb6cb1dc15.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); conditional_prior_centers_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -4396,7 +4413,7 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -4404,16 +4421,16 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_covariance_error | 0.492656 | <= 0.85 | PASS |
-| component_min_eigen_ratio | 0.339572 | >= 0.15 | PASS |
-| hq | 0.970459 | >= 0.85 | PASS |
+| component_covariance_error | 0.500346 | <= 0.85 | PASS |
+| component_min_eigen_ratio | 0.337188 | >= 0.15 | PASS |
+| hq | 0.972168 | >= 0.85 | PASS |
 | mass_tv | 0.0649414 | <= 0.15 | PASS |
 | modes | 16 | >= 16 | PASS |
 | sample_count | 4096 | >= 4096 | PASS |
 
 Recorded terminal passing observations: **25**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/945ab9f8396f4d958fcec70ac7b0cd8b.json)
+[Compact metrics and receipt provenance](../technique-receipts/7e986d93f321483792633c3a3b1d1368.json)
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4568,7 +4585,7 @@ Dependencies: mode_hold (gate).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. coverage, sustained live accuracy, or independent holdout failed
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -4596,7 +4613,7 @@ Recorded final metrics:
 | valid_n | 100000 |
 | within_radius_n | 20421 |
 
-[Compact metrics and receipt provenance](../technique-receipts/a9b6b43179b943bca31d88ee7d86dff7.json)
+[Compact metrics and receipt provenance](../technique-receipts/5e798ffd8b5d4924bd939f29d2f87aa3.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4743,7 +4760,7 @@ Recorded final metrics:
 | valid_n | 100000 |
 | within_radius_n | 30860 |
 
-[Compact metrics and receipt provenance](../technique-receipts/02e0569f8a5e4343a0894b825d337904.json)
+[Compact metrics and receipt provenance](../technique-receipts/a6dd42ebd10945d38430b4c943bae9e9.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -4897,7 +4914,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **20**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/d5e59017d49b46f3907cd0af42ece2f0.json)
+[Compact metrics and receipt provenance](../technique-receipts/253e5726d47c46f0a91743fb62aeb689.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); conditional_prior_centers_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -4930,12 +4947,12 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| grad_med | 0.213542 | <= 1 | PASS |
-| mean_abs | 0.996663 | >= 0.3 | PASS |
+| grad_med | 0.151377 | <= 1 | PASS |
+| mean_abs | 0.995421 | >= 0.3 | PASS |
 
 Recorded terminal passing observations: **18**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/442cfb9d611647f198cd4517d9ba149c.json)
+[Compact metrics and receipt provenance](../technique-receipts/2cf734fa2fad4219a31b5b7840c4e614.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_particles_and_critic_gradient; weights live; output noise not_applied_to_measurement.
 
@@ -5063,7 +5080,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **22**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/43dbf00e18c64d879fd836d808953471.json)
+[Compact metrics and receipt provenance](../technique-receipts/8cd971db2e024890abd19e1d3dbf1b67.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -5103,7 +5120,7 @@ Recorded final metric checks:
 
 Recorded terminal passing observations: **20**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/312b1881808d4c09b26d7dd62b9baec3.json)
+[Compact metrics and receipt provenance](../technique-receipts/d902ec3472cb4bd9b9aa34941203a22b.json)
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -5159,7 +5176,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_para
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5167,15 +5184,15 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_covariance_error | 3.90296 | <= 0.85 | FAIL |
-| component_min_eigen_ratio | 0.590743 | >= 0.15 | PASS |
-| hq | 0.91748 | >= 0.85 | PASS |
-| mass_tv | 0.148763 | <= 0.15 | PASS |
-| sw1_normalized | 0.183792 | <= 0.18 | FAIL |
+| component_covariance_error | 1.57558 | <= 0.85 | FAIL |
+| component_min_eigen_ratio | 0.479093 | >= 0.15 | PASS |
+| hq | 0.926514 | >= 0.85 | PASS |
+| mass_tv | 0.144613 | <= 0.15 | PASS |
+| sw1_normalized | 0.184013 | <= 0.18 | FAIL |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/0bcb9058d16740e8831b0462f16cd65a.json)
+[Compact metrics and receipt provenance](../technique-receipts/7aa8045102cd446d9591c6542ab02776.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -5233,7 +5250,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5241,13 +5258,13 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| covariance_error | 0.103863 | <= 0.45 | PASS |
-| mean_error | 0.0912952 | <= 0.15 | PASS |
-| sw1_normalized | 0.0703233 | <= 0.18 | PASS |
+| covariance_error | 0.223161 | <= 0.45 | PASS |
+| mean_error | 0.019758 | <= 0.15 | PASS |
+| sw1_normalized | 0.0550234 | <= 0.18 | PASS |
 
-Recorded terminal passing observations: **10**; required: 5.
+Recorded terminal passing observations: **19**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/d797db64c4eb40f48bc903c122bd96e1.json)
+[Compact metrics and receipt provenance](../technique-receipts/8dc04ccc1ed84336bb81a6cfe3da1edb.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -5301,7 +5318,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5309,13 +5326,13 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| covariance_error | 0.11756 | <= 0.45 | PASS |
-| mean_error | 0.0355969 | <= 0.15 | PASS |
-| sw1_normalized | 0.045627 | <= 0.18 | PASS |
+| covariance_error | 0.116969 | <= 0.45 | PASS |
+| mean_error | 0.0361613 | <= 0.15 | PASS |
+| sw1_normalized | 0.0457747 | <= 0.18 | PASS |
 
 Recorded terminal passing observations: **24**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/2c235e9733034ab9a77a8783364a34d9.json)
+[Compact metrics and receipt provenance](../technique-receipts/2dd4c1cdcf0e4e77b82c1295edc51f96.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -5369,7 +5386,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5377,15 +5394,15 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_covariance_error | 0.120381 | <= 0.85 | PASS |
-| component_min_eigen_ratio | 0.832776 | >= 0.15 | PASS |
-| hq | 0.979248 | >= 0.85 | PASS |
+| component_covariance_error | 0.166939 | <= 0.85 | PASS |
+| component_min_eigen_ratio | 0.668487 | >= 0.15 | PASS |
+| hq | 0.972168 | >= 0.85 | PASS |
 | mass_tv | 0.0461426 | <= 0.15 | PASS |
-| sw1_normalized | 0.0827868 | <= 0.18 | PASS |
+| sw1_normalized | 0.0849109 | <= 0.18 | PASS |
 
 Recorded terminal passing observations: **22**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/dc0070b11ffa4010980e047f45c27b0b.json)
+[Compact metrics and receipt provenance](../technique-receipts/3e452995bef448b28c30eb45db7d7b06.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -5443,7 +5460,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5451,16 +5468,16 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_covariance_error | 2.47438 | <= 0.85 | FAIL |
-| component_min_eigen_ratio | 0.264021 | >= 0.15 | PASS |
-| hq | 0.957031 | >= 0.85 | PASS |
+| component_covariance_error | 2.23679 | <= 0.85 | FAIL |
+| component_min_eigen_ratio | 0.0813437 | >= 0.15 | FAIL |
+| hq | 0.957764 | >= 0.85 | PASS |
 | mass_tv | 0.0924317 | <= 0.15 | PASS |
-| min_mass_ratio | 0.738118 | >= 0.25 | PASS |
-| sw1_normalized | 0.15198 | <= 0.18 | PASS |
+| min_mass_ratio | 0.739746 | >= 0.25 | PASS |
+| sw1_normalized | 0.152178 | <= 0.18 | PASS |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/f2bd7fc7534243e8b59ed35cc7bba866.json)
+[Compact metrics and receipt provenance](../technique-receipts/f2b4c444576d428dac061045b83ba62d.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -5520,7 +5537,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [adaptation / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](rhbi.md#cohort-cuda-23a94f16ca88-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
@@ -5528,15 +5545,15 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_covariance_error | 3.41269 | <= 0.85 | FAIL |
-| component_min_eigen_ratio | 0.601195 | >= 0.15 | PASS |
-| hq | 0.968506 | >= 0.85 | PASS |
+| component_covariance_error | 3.37301 | <= 0.85 | FAIL |
+| component_min_eigen_ratio | 0.688584 | >= 0.15 | PASS |
+| hq | 0.977295 | >= 0.85 | PASS |
 | mass_tv | 0.221924 | <= 0.15 | FAIL |
-| sw1_normalized | 0.204358 | <= 0.18 | FAIL |
+| sw1_normalized | 0.213291 | <= 0.18 | FAIL |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/48a9bfe547604441b80dd25b32e1a6bd.json)
+[Compact metrics and receipt provenance](../technique-receipts/4cbe0e37f25c484698ddf161f016d3ff.json)
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -5625,7 +5642,7 @@ Dependencies: zero_tanh_smoke (gate).
 
 Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed the declared final zero-tanh bounds
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](rhbi.md#cohort-cuda-23a94f16ca88-prior-ablation-full-suite-v1-tier-1).
 
@@ -5638,7 +5655,7 @@ Recorded final metric checks:
 | rms_error | 0.00498791 | <= 0.01 | PASS |
 | saturated_fraction | 0 | == 0 | PASS |
 
-[Compact metrics and receipt provenance](../technique-receipts/619df902c72b4a6cbcb2418672b6c685.json)
+[Compact metrics and receipt provenance](../technique-receipts/d9393a5eb5a345deb38d532b1beceacf.json)
 
 Recorded conditions: mog prior (sigma 0.1); public_prior_without_output_noise; weights unavailable; output noise clean.
 
@@ -5676,4 +5693,4 @@ This page is generated alongside the leaderboard. Register new source evidence b
 - [Sinkhorn Distances: Lightspeed Computation of Optimal Transport](https://arxiv.org/abs/1306.0895). Entropic Optimal Transport Sinkhorn-Knopp scaling extended to the (B+1)x(B+1) slack-screened unbalanced polytope.
 - [Unbalanced Optimal Transport: Dynamic and Kantorovich Formulations](https://arxiv.org/abs/1508.05216). Kantorovich-Hellinger unbalanced mass creation/destruction theory motivating slack-reservoir screening of Poisson batch singletons and empty-valley outliers.
 - [Interpolating between Optimal Transport and MMD using Sinkhorn Divergences](https://arxiv.org/abs/1810.08278). Feydy diagonal-included symmetric Sinkhorn self-coupling debiasing adapted to the active-plus-slack unbalanced polytope.
-- [On Optimal Matchings](https://doi.org/10.1007/BF02579150). Ajtai-Komlos-Tusnady empirical optimal transport scaling $B^{-\min(1/d,1/2)}$ motivating 1D nearest-neighbor horizon normalization.
+- [On Optimal Matchings](https://doi.org/10.1007/BF02579150). Ajtai-Komlos-Tusnady empirical optimal transport scaling $B^{-\min(1/d,1/2)}$ motivating Poisson-Weibull 1D nearest-neighbor horizon normalization.

@@ -1971,7 +1971,7 @@ def _restore_recorded_source_cohort(root: Path) -> str:
 
     assert root.resolve() != ROOT.resolve()
     revision = "6261a5458c1f3e14c7c9faf1fc6966e03b2acfb1"
-    cohort_revision = "76d8053ada9a0ce4218dfae0b94c13a6758e7e80"
+    cohort_revision = "292582579ce8608067491d1c33c316d3dabe7695"
     current = set(rfr.catalog_source_manifest(root)["files"])
     names = subprocess.check_output(
         ["git", "ls-tree", "-r", "--name-only", revision], cwd=ROOT, text=True).splitlines()
