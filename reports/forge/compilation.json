@@ -2,7 +2,7 @@
   "automation_digest": "49a96b59e9f3c4ce6910d091d0e0023e528cf467bbb80c829cac547a5bc9978b",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "3c0227ebe08c202e76dceca397beeff4aadf4c9f61b454864410ea04b338d84c",
+  "input_digest": "55b77effcfa1c695ac8a95cfbb0b31a2df43f9f561588fc3e036d0e258af44f1",
   "input_hashes": {
     "configs/forge/cadence-studies/bispf-lazy-cadence-v1.json": "fc7302ac06b61fa093a39265d440545fdab176852a588c40b750be16adc1e58b",
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
@@ -696,6 +696,7 @@
     "configs/forge/ideas/empf-v5.json": "816dd35353a3dbc77a54f444e3334fbc070f465517e140dca2b532dab227b041",
     "configs/forge/ideas/empf-v6.json": "b73c328e4a8c1d51481ffc97842686f19d4cae05e3689fda404f622609e3d6bd",
     "configs/forge/ideas/empf-v7.json": "577d76fb55e80654ab2a0461fef6efd03c5f6210014dbceefd79a9c191b39a54",
+    "configs/forge/ideas/empf-v8.json": "bd556fedbb424c753546373e16f57c7b30f2a639d1878e31a9bdecac25222b51",
     "configs/forge/ideas/five-word-joint-ka2-v1.json": "f2cd3809340d8aece6cb24ecde8eb863061ad290de5aa09f4fc66c73bb984118",
     "configs/forge/ideas/forge-no-critic-penalty.json": "886040c69e790fea2dbe9b2457ff174b9518e1821af581b148f4df3a7886eb1f",
     "configs/forge/ideas/forge-onboarding-anchor-ablation.json": "b4b8b0ef96aaca94bdd29ef9b5edfe0f2bb17166571f7bd35c8b7b9aaf7249ac",
@@ -1031,6 +1032,7 @@
     "configs/forge/studies/empf-v5-study.json": "8dd2a049772995024f871aa177655146171080ba7cd8143dbd372e2929e108da",
     "configs/forge/studies/empf-v6-study.json": "4e52ca6deb38de4fe8996a44f914597d89097905a666336f66bbe786023511d6",
     "configs/forge/studies/empf-v7-study.json": "6719badf6bbc004c837489c36226eaf69b5ac8cb5404b8363e523cba1426b34d",
+    "configs/forge/studies/empf-v8-study.json": "5833faa2e7ec0c9b092610c8a185f801967ffb0842332c3088e42d231d5fa7c6",
     "configs/forge/studies/misgan-bispf-amortized-r1-reviewed.json": "8fe3e92c92340a3ff3c1c0c2d4faf3314981585a3be311d3e8c68d87a006b0eb",
     "configs/forge/studies/misgan-bispf-amortized-r1-snapshot.json": "633bd55f459927202feb808ba8448f38b126e7784fea4a87fd53fcd2e7c6e80d",
     "configs/forge/studies/misgan-bispf-amortized-r1.json": "acea71c17cffe49c2ef25e338ab5f58b1d4067bcbf614a5232da91eb0ddd0f13",
@@ -1913,6 +1915,7 @@
     "reports/forge/records/readout-99058c02555c6e8edcc6e461.json": "3c682c30504b63c6dddaaae14f62e396371a839468be8dc3f29a5b41e221400c",
     "reports/forge/records/readout-9c29229a2baba56de3b40845.json": "42c3cda9502d8057ffb47ccaf0d5be24e7ace32aa21d0875b361197b64eca990",
     "reports/forge/records/readout-9c48b366ebe60b61721c269d.json": "73b4f63b734029a6ef8b7268a7bd276e21b41ae12ce44bbb77b1adbf01985c6b",
+    "reports/forge/records/readout-9c68ae0b3e8d7966f76d6f5d.json": "e2884a27e82750a26bc8efaa431e75233dbab52b83dfb270b42a939783639ea7",
     "reports/forge/records/readout-9e297f3a07ea06f0abc19272.json": "3c66539d3e6961218729a7c89a7331fbb60723c958e54ce555bf464fd17e2e0e",
     "reports/forge/records/readout-9e900493324c626b8c842923.json": "8225de767ef1b68a4215ed871070b7612cc0be4b3113234bbd9617da38214a4a",
     "reports/forge/records/readout-9f0d62f87d1ff351cfef7f98.json": "c3464d2a4cde9b1b3faa2d236d5758604fef117d7d608083ffbd65e3a778f6ab",
@@ -4574,7 +4577,7 @@
   },
   "operational_lifecycle_digest": "9844d43226c3b2baf99ad27b1f3a4c32b9a6b30ad8abac68f275c54635ed3b1d",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "656525b2c4506e8dc96f01327e134ab36d88e98535a5e3e4facad4aac47b7a45",
+    "reports/forge/EXPERIMENT_MEMORY.md": "82126543bde40138272ebe1824cbda70bb1cc9f9383fc4d0bd5200543c4295a0",
     "reports/forge/publication-records.json": "5174449ad10c00a8d22dee09d3ef50c8fb0fc76f196d85197271ee7c0766c9d8"
   },
   "pending_readout": [
@@ -4610,7 +4613,7 @@
     "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
     "source_manifest_digest": "9cd486581bad3de9abab0b31c8bae9368d93b80454ef65a28df36b2ee2d84ba8"
   },
-  "record_count": 932,
+  "record_count": 933,
   "reducer_hashes": {
     "experiments.forge.knowledge": "b292a7036f4edd41eba184a2e3f7be60e49d821f03006b0bb76926737cbe91ae",
     "experiments.forge.publication_memory": "7e9d1e7ea3ce0e165c6df54d324ddffec8d220a0eb1e2ad268ca2d16778ad9c4"

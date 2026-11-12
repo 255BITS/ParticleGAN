@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 932. Inventory coverage: complete. Unresolved import items: 7.
+Records: 933. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -5400,6 +5400,22 @@ Preregistered full7000-update grid100_release07_cloud_named_v1 FAIL; sustained c
 
 [Record and receipt provenance](records/readout-9c48b366ebe60b61721c269d.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
+### empf-v8 · readout-9c68ae0b3e8d7966f76d6f5d
+
+**Scope:** current; scientific; revision `23a75580fe6855b7ebf5105cc5a9a1089fa28997f4ee40a7534d566bd769c47d`.
+
+Including 128x128 hidden matrices in DualNorm's guarded cubic Newton-Schulz hybrid profile (min_dim >= 64 and max_dim >= 128) while cooling unconditioned discrete-simplex DualNorm steps (ema_decay = 0.96, band [0.064, 0.084] -> 0.0004 < optimizer_smoothing) halves five_word_joint_smoke wall time, preserves all 13/13 counted Tier 1 gates and gaussian1d_stability, and eliminates post-acquisition discrete logit jitter so five_word_joint_hold passes all scheduled continuation checks with final minimum_reconstruction_token_probability >= 0.9995.
+
+**Observed:** {'FAIL': 14, 'PASS': 24}; wall seconds 3362.249; mechanism `structural`.
+
+five_word_joint_hold: modes=5, mass_tv=0.020312
+
+empf-v8 cleared all 13/13 counted Tier 1 gates and confirmed its study prediction on five_word_joint_hold (PASS across all scheduled continuation checks in 74.1s, final minimum_reconstruction_token_probability = 0.99999 >= 0.9995, modes = 5, quality_fraction = 1.0, mass_tv = 0.02031), reaching 24 PASS on the 38-task discriminator_stability view (up from 23 PASS in empf-v7 and 22 PASS in empf-v2) with zero regressions.
+
+**Next:** Promote empf-v8 as the selected canonical EMPF candidate in family-current-v1.json and trainer-families.json, and run full Forge attempt-coverage, DCGAN scaling, and compiled report refresh.
+
+[Record and receipt provenance](records/readout-9c68ae0b3e8d7966f76d6f5d.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
 ### r1r2-global-repair-v1 · readout-9e297f3a07ea06f0abc19272
 
 **Scope:** current; scientific; revision `5a20a41ac1b78983611d3cfd765d572c436f93fa5b00ace5dba9934c288e4107`.
@@ -7062,4 +7078,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `3c0227ebe08c202e76dceca397beeff4aadf4c9f61b454864410ea04b338d84c`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `55b77effcfa1c695ac8a95cfbb0b31a2df43f9f561588fc3e036d0e258af44f1`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
