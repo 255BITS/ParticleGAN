@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 930. Inventory coverage: complete. Unresolved import items: 7.
+Records: 932. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -5064,6 +5064,22 @@ The explicit published residual16 intensity host passed all sustained/terminal r
 
 [Record and receipt provenance](records/readout-7650981f9a48a164aebbd631.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
+### recipe-prior-refactor-bcap-pure-v1 · readout-7781bffb3ec011c9b933c0b5
+
+**Scope:** research_diagnostic; scientific; revision `983c930b0b5924f062e918302e8b9c6af6605ef17d190f9b0518c75f1a0b8e4f`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 167.125; mechanism `structural`.
+
+
+
+Completed dcgan_performance seed-0 CUDA execution for recipe-prior-refactor-bcap-pure-v1 (PASS 6). Diagnostic performance/research scope only; no qualification credit.
+
+**Next:** Retain source-bound readout and compiled Forge reports.
+
+[Record and receipt provenance](records/readout-7781bffb3ec011c9b933c0b5.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
 ### atlas-particle-normal-v1 · readout-78b2f38e0f8c24f678b47fa2
 
 **Scope:** research_diagnostic; scientific; revision `119e0a54eeb8727fbc823acf61cf2cfa364a63a69bed6b46d1cefcbb8f49d1cf`.
@@ -5127,6 +5143,22 @@ Re-qualification on develop source b4d7f2c42: all 29 recorded PASS/FAIL verdicts
 **Next:** Keep as the default recipe; register a structural idea that combines learned precision with frozen-table mass evenness on the native grids.
 
 [Record and receipt provenance](records/readout-7b017c8ed900b677ebf6bf55.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### atlas-particle-normal-v4 · readout-7b4757c5a675b179621bffff
+
+**Scope:** research_diagnostic; scientific; revision `53feece7ca4ae9abbd684b86f7cabf243277985e33c1cd6eaceb1a0881014973`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 65.382; mechanism `structural`.
+
+
+
+Completed dcgan_performance seed-0 CUDA execution for atlas-particle-normal-v4 (PASS 6). Diagnostic performance/research scope only; no qualification credit.
+
+**Next:** Retain source-bound readout and compiled Forge reports.
+
+[Record and receipt provenance](records/readout-7b4757c5a675b179621bffff.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### recipe-prior-refactor-k3p-v1 · readout-7bbb55d0ca2d3c3b99f56d10
 
@@ -7030,4 +7062,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `9a52d5cbc8f4959ac857be23c80cecb2aabc9e6184ff1a69fcf44569e237c0f2`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `05c9b69c013a0807628e8aff0409da6d424a9648f7b8993739bcefb5d5b47ed6`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
