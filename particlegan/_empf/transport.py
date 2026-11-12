@@ -186,6 +186,24 @@ def balanced_sinkhorn_coupling(
 
 
 @torch.no_grad()
+def unconditioned_chamfer_residual(
+    x_real: torch.Tensor,
+    x_fake: torch.Tensor,
+    *,
+    eps_scale: float = 1e-12,
+) -> Tuple[torch.Tensor, torch.Tensor]:
+    """Scale-free symmetric Chamfer residual without Sinkhorn matrix scaling."""
+    r_flat = x_real.detach().flatten(1).to(dtype=torch.float32)
+    f_flat = x_fake.detach().flatten(1).to(dtype=torch.float32)
+    raw_cost = pairwise_sq_dist(r_flat, f_flat)
+    scale = raw_cost.median().clamp_min(eps_scale)
+    data_scale = scale.sqrt()
+    mean_sq = 0.5 * (raw_cost.min(dim=1).values.mean() + raw_cost.min(dim=0).values.mean()) / scale
+    residual = torch.sqrt(mean_sq.clamp_min(0.0))
+    return residual.to(dtype=x_fake.dtype), data_scale.to(dtype=x_fake.dtype)
+
+
+@torch.no_grad()
 def conditional_fiber_residual(
     x_real: torch.Tensor,
     x_fake: torch.Tensor,

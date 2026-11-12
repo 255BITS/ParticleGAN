@@ -25,6 +25,7 @@ from .transport import (
     conditional_joint_discrepancy,
     effective_sinkhorn_eps,
     mass_weighted_sinkhorn,
+    unconditioned_chamfer_residual,
 )
 
 
@@ -58,7 +59,7 @@ class _EMPFPenaltyKernel:
         revival_tau: float = 0.05,
         tau_cooling: float = 0.020,
         s_min: float = 1e-5,
-        thermal_decay: float = 0.95,
+        thermal_decay: float = 0.92,
         input_domain: str = "auto",
         record: CriticStepRecord | None = None,
     ) -> None:
@@ -351,14 +352,7 @@ class _EMPFPenaltyKernel:
             # discrete transport residual settles so converged logit boundaries
             # cannot bounce over multi-thousand-step holds.
             if not is_conditioned and b_r >= 64 and b_f >= 64 and dim >= 170:
-                uniform_w = torch.full((b_r,), 1.0 / max(1, b_r), device=x_real.device, dtype=x_real.dtype)
-                _, _, res, data_scale = mass_weighted_sinkhorn(
-                    x_real.detach(),
-                    uniform_w,
-                    x_fake.detach(),
-                    sinkhorn_eps=self.sinkhorn_eps,
-                    sinkhorn_iters=self.sinkhorn_iters,
-                )
+                res, data_scale = unconditioned_chamfer_residual(x_real.detach(), x_fake.detach())
                 obs_res, obs_ds = torch.stack((res.detach(), data_scale.detach())).tolist()
                 self._observe(float(obs_res), float(obs_ds))
                 u_w = max(0.0, min(1.0, float(self.record.ema_residual) / 0.070))
@@ -367,14 +361,7 @@ class _EMPFPenaltyKernel:
             else:
                 t_scale = 1.0
         else:
-            uniform_w = torch.full((b_r,), 1.0 / max(1, b_r), device=x_real.device, dtype=x_real.dtype)
-            _, _, res, data_scale = mass_weighted_sinkhorn(
-                x_real.detach(),
-                uniform_w,
-                x_fake.detach(),
-                sinkhorn_eps=self.sinkhorn_eps,
-                sinkhorn_iters=self.sinkhorn_iters,
-            )
+            res, data_scale = unconditioned_chamfer_residual(x_real.detach(), x_fake.detach())
             obs_res, obs_ds = torch.stack((res.detach(), data_scale.detach())).tolist()
             self._observe(float(obs_res), float(obs_ds))
             t_scale = 1.0
@@ -442,11 +429,8 @@ class _EMPFPenaltyKernel:
             # and tightens fully as thermal cooling engages.
             settle_s = min(1.0, max(0.0, 1.0 - res_ratio / 0.16))
             b_frac = min(1.0, max(0.0, (float(b_r) - 64.0) / 64.0))
-            if dim == 1:
-                cool_boost = 1.0 - float(t_scale)
-                batch_gain = (2.0 + 3.0 * b_frac) + cool_boost * (4.5 + 12.5 * b_frac)
-            else:
-                batch_gain = 6.5 + 15.5 * b_frac
+            cool_boost = 1.0 - float(t_scale)
+            batch_gain = (2.0 + 3.0 * b_frac) + cool_boost * (4.5 + 12.5 * b_frac)
             eff_ebi_beta = self.ebi_beta + batch_gain * (settle_s * settle_s)
             sq_real = g_real.flatten(1).pow(2).sum(dim=1)
             norm_real = (sq_real + 1e-12).sqrt() / scale_dim
