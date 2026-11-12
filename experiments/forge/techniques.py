@@ -209,10 +209,14 @@ def recipe_field_active(name, value, *, task=None):
         return recipe.rhbi_weight > 0
     if name == "rhbi_critic_weight":
         return recipe.rhbi_critic_weight > 0
-    if name in {"rhbi_self_coupling", "rhbi_relativistic_weight"}:
+    if name in {"rhbi_self_coupling", "rhbi_relativistic_weight", "rhbi_slack_gain", "rhbi_thermal_tau"}:
         return recipe.rhbi_weight > 0
-    if name in {"rhbi_lambda_floor", "rhbi_gamma_gauge"}:
+    if name in {"rhbi_lambda_floor", "rhbi_gamma_gauge", "rhbi_chord_weight"}:
         return recipe.effective_critic_formulation == "rhbi" and recipe.reg_coeff > 0
+    if name == "rhbi_akt_horizon":
+        return recipe.rhbi_weight > 0 or recipe.rhbi_critic_weight > 0 or (
+            recipe.effective_critic_formulation == "rhbi" and recipe.reg_coeff > 0 and recipe.rhbi_chord_weight > 0
+        )
     if name in {"rhbi_rho", "rhbi_tau", "rhbi_eps", "rhbi_iters", "rhbi_c_max", "rhbi_beta_ell", "rhbi_nn_quantile", "rhbi_rapidity_screening", "rhbi_scale_log_odds", "rhbi_conditional_fibre"}:
         return recipe.rhbi_weight > 0 or recipe.rhbi_critic_weight > 0
     return True

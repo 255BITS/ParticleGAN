@@ -19,6 +19,7 @@ from particlegan import (
     get_recipe,
     init,
 )
+from particlegan.rhbi import RHBIStepRecord
 
 
 def _make_mlp_pair(z_dim: int = 2, x_dim: int = 2, hidden: int = 32, seed: int = 0):
@@ -618,5 +619,240 @@ def test_rhbi_v3_conditional_fibre_slack_invariance_and_unconditional_parity():
     gc2.backward()
     assert torch.allclose(gc1, gc2, rtol=1e-5, atol=1e-6)
     assert torch.allclose(xf1.grad, xf2.grad, rtol=1e-5, atol=1e-6)
+
+
+def test_rhbi_v4_akt_horizon_1d_scaling_and_high_dim_identity():
+    """Verify AKT empirical OT scaling multiplies 1D horizon by sqrt(B_y) and is exact identity for d >= 2."""
+    gen = torch.Generator().manual_seed(71)
+    y_1d = 2.0 + 0.5 * torch.randn(64, 1, generator=gen)
+    q_base_1d = RHBILoss._batch_ell_quantile_tensor(y_1d, 0.25, akt_horizon=False)
+    q_akt_1d = RHBILoss._batch_ell_quantile_tensor(y_1d, 0.25, akt_horizon=True)
+    # (q - 1e-6) scales by exact sqrt(64) = 8.0 in d = 1
+    assert torch.allclose(q_akt_1d - 1e-6, 8.0 * (q_base_1d - 1e-6), rtol=1e-5, atol=1e-7)
+
+    for dim in (2, 4, 12):
+        y_nd = torch.randn(32, dim, generator=gen)
+        x_a = torch.randn(32, dim, generator=gen).requires_grad_(True)
+        x_b = x_a.detach().clone().requires_grad_(True)
+        df_a = torch.randn(32, generator=gen).requires_grad_(True)
+        df_b = df_a.detach().clone().requires_grad_(True)
+        dr = torch.randn(32, generator=gen)
+        op_off = RHBILoss(weight=1.0, akt_horizon=False)
+        op_on = RHBILoss(weight=1.0, akt_horizon=True)
+        la, ma = op_off(x_a, y_nd, df_a, dr)
+        lb, mb = op_on(x_b, y_nd, df_b, dr)
+        la.backward()
+        lb.backward()
+        assert torch.equal(la, lb)
+        assert torch.equal(x_a.grad, x_b.grad)
+        assert ma["rhbi_ell"] == mb["rhbi_ell"]
+
+
+def test_rhbi_v4_slack_gain_and_geodesic_chord_concat_parity():
+    """Verify slack_gain boosts unmatched particles only and chord_weight matches across concat/split passes."""
+    from particlegan._rhbi.penalty import _RHBIPenaltyKernel
+
+    # 1. Slack gain boosts distant unmatched particle d_fake gradient while matched mode stays unchanged.
+    y_cl = torch.zeros(8, 2) + 0.01 * torch.randn(8, 2, generator=torch.Generator().manual_seed(3))
+    x_cl = y_cl.clone()
+    x_cl[0] = torch.tensor([25.0, 25.0])  # Far into slack
+    df1 = torch.zeros(8, requires_grad=True)
+    df2 = torch.zeros(8, requires_grad=True)
+    dr = torch.zeros(8)
+
+    op0 = RHBILoss(weight=1.0, rho=2.0, tau=2.0, rapidity_screening=False, slack_gain=0.0)
+    op1 = RHBILoss(weight=1.0, rho=2.0, tau=2.0, rapidity_screening=False, slack_gain=0.5)
+    for _ in range(5):
+        op0._update_ell(y_cl)
+        op1._update_ell(y_cl)
+    l0, _ = op0(x_cl.clone().requires_grad_(True), y_cl, df1, dr)
+    l1, _ = op1(x_cl.clone().requires_grad_(True), y_cl, df2, dr)
+    l0.backward()
+    l1.backward()
+    assert abs(float(df2.grad[0].item())) > 1.45 * abs(float(df1.grad[0].item()))
+
+    # 2. Geodesic Born-Infeld chord penalty matches across allow_concat=True and allow_concat=False
+    #    and consumes zero global RNG draws.
+    torch.manual_seed(83)
+    D1 = nn.Sequential(nn.Linear(3, 16), nn.SiLU(), nn.Linear(16, 1))
+    D2 = deepcopy(D1)
+    xr = torch.randn(10, 3)
+    xf = torch.randn(10, 3)
+
+    rng_before = torch.get_rng_state()
+    k1 = _RHBIPenaltyKernel(coeff=1.0, kappa=1.0, ebi_beta=15.0, lambda_floor=0.005, chord_weight=0.25)
+    k2 = _RHBIPenaltyKernel(coeff=1.0, kappa=1.0, ebi_beta=15.0, lambda_floor=0.005, chord_weight=0.25)
+    k1.record.rhbi_ell_ema = 0.35
+    k1.record.rhbi_ell_initialized = True
+    k2.record.rhbi_ell_ema = 0.35
+    k2.record.rhbi_ell_initialized = True
+
+    p_cat, _ = k1.penalty(D1, xr, xf, step=1, collect_stats=True, allow_concat=True, is_conditioned=False)
+    p_sep, _ = k2.penalty(D2, xr, xf, step=1, collect_stats=True, allow_concat=False, is_conditioned=False)
+    assert torch.equal(torch.get_rng_state(), rng_before)
+    assert k1.record.rhbi_chord_phase == pytest.approx(k2.record.rhbi_chord_phase)
+    assert k1.record.rhbi_chord_phase > 0.0
+    assert torch.allclose(p_cat, p_sep, rtol=1e-5, atol=1e-6)
+    p_cat.backward()
+    p_sep.backward()
+    for p1, p2 in zip(D1.parameters(), D2.parameters()):
+        if p1.grad is None:
+            assert p2.grad is None
+        else:
+            assert torch.allclose(p1.grad, p2.grad, rtol=1e-5, atol=1e-6)
+
+
+@pytest.mark.parametrize("family", ["dualnorm", "formulation"])
+def test_rhbi_v4_thermal_settling_shock_reopening_and_continuation(family: str):
+    """Verify self-calibrated KH thermal cooling, 1-step shock reopening, and exact checkpoint continuation."""
+    rec_test = RHBIStepRecord()
+    op_th = RHBILoss(weight=1.0, rho=3.0, rapidity_screening=False, thermal_tau=0.25)
+    gen = torch.Generator().manual_seed(91)
+    # Matched draws -> residual settles near 0 and thermal_scale cools below 1.0
+    for _ in range(12):
+        y_m = torch.randn(64, 2, generator=gen)
+        x_m = torch.randn(64, 2, generator=gen).requires_grad_(True)
+        loss_m, _ = op_th(x_m, y_m, torch.zeros(64, requires_grad=True), torch.zeros(64), record=rec_test)
+        loss_m.backward()
+    cooled_s = rec_test.rhbi_thermal_scale
+    assert cooled_s < 0.5
+
+    # Sudden distribution shift shock -> 1-step peak-reset reopens thermal_scale to 1.0 immediately
+    y_shift = 20.0 + torch.randn(64, 2, generator=gen)
+    x_old = torch.randn(64, 2, generator=gen).requires_grad_(True)
+    loss_sh, _ = op_th(x_old, y_shift, torch.zeros(64, requires_grad=True), torch.zeros(64), record=rec_test)
+    loss_sh.backward()
+    assert rec_test.rhbi_thermal_scale == pytest.approx(1.0)
+
+    # Calibrated conditional fibre matches declared GANLoss proper scoring rule on continuous conditions
+    r_cal = get_recipe(
+        "rhbi",
+        loss="non_saturating",
+        rhbi_conditional_fibre="calibrated",
+        total_steps=10,
+        batch_size=8,
+        num_particles=16,
+        z_dim=2,
+    )
+    loss_cal = r_cal.make_loss()
+    D_cond = nn.Linear(4, 1)
+    opt_dc = r_cal.make_critic_optimizer(D_cond)
+    bind_rhbi_record(opt_dc.record, loss_cal)
+
+    class _TwoArgCritic(nn.Module):
+        def __init__(self, base: nn.Module) -> None:
+            super().__init__()
+            self.base = base
+
+        def forward(self, x: torch.Tensor, c: torch.Tensor) -> torch.Tensor:
+            return self.base(torch.cat([x, c], dim=-1))
+
+    Dc_wrap = _TwoArgCritic(D_cond)
+    opt_wrap = r_cal.make_critic_optimizer(Dc_wrap)
+    bind_rhbi_record(opt_wrap.record, loss_cal)
+    c_in = torch.randn(8, 2)
+    xr_in = torch.randn(8, 2)
+    xf_in = torch.randn(8, 2, requires_grad=True)
+    fl = Dc_wrap(xf_in, c_in)
+    rl = Dc_wrap(xr_in, c_in).detach()
+    assert torch.allclose(loss_cal.g_loss(fl, rl), torch.nn.functional.softplus(-fl).mean())
+
+    # Exact continuation across active chord_weight + thermal_tau + akt_horizon
+    base_preset = "rhbi" if family == "dualnorm" else "bispf"
+    extra = {} if family == "dualnorm" else {"critic_formulation": "rhbi", "prior_regularizer": "moment_tether", "rhbi_weight": 1.0, "ebi_beta": 12.0}
+    recipe = get_recipe(
+        base_preset,
+        **extra,
+        rhbi_akt_horizon=True,
+        rhbi_slack_gain=0.25,
+        rhbi_chord_weight=0.2,
+        rhbi_thermal_tau=0.2,
+        total_steps=16,
+        batch_size=16,
+        num_particles=64,
+        z_dim=2,
+    )
+    G1, D1, P1 = _make_mlp_pair(seed=101)
+    G2, D2, P2 = _make_mlp_pair(seed=202)
+    batches = [0.2 * torch.randn(16, 2, generator=torch.Generator().manual_seed(300 + i)) for i in range(6)]
+
+    tr1 = GANTrainer(recipe, G1, D1, prior=P1, seed=0)
+    for b in batches[:3]:
+        tr1.step(b)
+    ckpt = tr1.state_dict()
+    assert tr1.opt_d.record.rhbi_chord_phase > 0.0
+    assert tr1.opt_d.record.rhbi_thermal_initialized is True
+
+    # Tampered chord_phase >= 1.0 must be rejected
+    bad_rec = deepcopy(tr1.opt_d.record.state_dict())
+    if family == "formulation":
+        bad_rec["chord_phase"] = 1.5
+    else:
+        bad_rec["rhbi"]["chord_phase"] = 1.5
+    tr2 = GANTrainer(recipe, G2, D2, prior=P2, seed=7)
+    with pytest.raises(ValueError, match="chord_phase"):
+        tr2.opt_d.record.load_state_dict(bad_rec)
+    bad = deepcopy(ckpt)
+    bad["optimizers"][1]["regularizer"]["record"] = bad_rec
+    with pytest.raises(ValueError, match="chord_phase|invalid checkpoint"):
+        tr2.load_state_dict(bad)
+
+    for b in batches[3:]:
+        tr1.step(b)
+    tr2.load_state_dict(ckpt)
+    for b in batches[3:]:
+        tr2.step(b)
+    for p1, p2 in zip(G1.parameters(), G2.parameters()):
+        assert torch.equal(p1, p2)
+    for p1, p2 in zip(D1.parameters(), D2.parameters()):
+        assert torch.equal(p1, p2)
+    assert torch.equal(P1.z, P2.z)
+    assert tr1.opt_d.record.rhbi_chord_phase == tr2.opt_d.record.rhbi_chord_phase
+    assert tr1.opt_d.record.rhbi_thermal_scale == tr2.opt_d.record.rhbi_thermal_scale
+
+
+def test_rhbi_v4_hooked_thermal_scaling_preserves_first_order_impedance():
+    """Verify hooked RHBIGANLoss scales both coordinate OT and critic-slack gradients uniformly by s^1 (never s^2)."""
+    torch.manual_seed(131)
+    D_hot = nn.Sequential(nn.Linear(2, 16), nn.SiLU(), nn.Linear(16, 1))
+    D_cool = deepcopy(D_hot)
+    r_th = get_recipe(
+        "rhbi",
+        rhbi_rapidity_screening=False,
+        rhbi_self_coupling="feydy",
+        rhbi_slack_gain=0.35,
+        rhbi_thermal_tau=0.22,
+        total_steps=10,
+        batch_size=16,
+        num_particles=32,
+        z_dim=2,
+    )
+    opt_hot = r_th.make_critic_optimizer(D_hot)
+    opt_cool = r_th.make_critic_optimizer(D_cool)
+    loss_hot = r_th.make_loss()
+    loss_cool = r_th.make_loss()
+    bind_rhbi_record(opt_hot.record, loss_hot)
+    bind_rhbi_record(opt_cool.record, loss_cool)
+
+    xr = torch.randn(16, 2)
+    # Mix intra-mode active pairs and far slack-routed outliers so both OT and critic-slack terms are nonzero.
+    xf_base = xr.clone()
+    xf_base[:6] = xf_base[:6] + 15.0
+
+    for opt, s_val in ((opt_hot, 1.0), (opt_cool, 0.25)):
+        opt.record.rhbi_ell_ema = 0.4
+        opt.record.rhbi_ell_initialized = True
+        opt.record.rhbi_thermal_scale = s_val
+        opt.record._in_protected_probe = True
+
+    xf_hot = xf_base.clone().requires_grad_(True)
+    xf_cool = xf_base.clone().requires_grad_(True)
+    loss_hot.g_loss(D_hot(xf_hot), D_hot(xr)).backward()
+    loss_cool.g_loss(D_cool(xf_cool), D_cool(xr)).backward()
+    assert xf_hot.grad is not None and xf_cool.grad is not None
+    assert float(xf_hot.grad.norm().item()) > 1e-3
+    assert torch.allclose(xf_cool.grad, 0.25 * xf_hot.grad, rtol=1e-5, atol=1e-6)
+
+
 
 

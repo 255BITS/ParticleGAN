@@ -135,7 +135,9 @@ _ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
                         "rhbi_critic_weight": 0.0, "rhbi_self_coupling": "hollow",
                         "rhbi_relativistic_weight": 0.0, "rhbi_lambda_floor": 0.0,
                         "rhbi_gamma_gauge": 0.0, "rhbi_rapidity_screening": True,
-                        "rhbi_scale_log_odds": False, "rhbi_conditional_fibre": "joint"}
+                        "rhbi_scale_log_odds": False, "rhbi_conditional_fibre": "joint",
+                        "rhbi_akt_horizon": False, "rhbi_slack_gain": 0.0,
+                        "rhbi_chord_weight": 0.0, "rhbi_thermal_tau": 0.0}
 
 
 class GANTrainer:
@@ -310,7 +312,7 @@ class GANTrainer:
             bind_empf_record(self.opt_d.record, self.loss, self.prior_regularizer)
         elif recipe.effective_critic_formulation == "rhbi" or recipe.rhbi_weight > 0 or recipe.rhbi_critic_weight > 0:
             from .rhbi import bind_rhbi_record
-            bind_rhbi_record(self.opt_d.record, self.loss)
+            bind_rhbi_record(self.opt_d.record, self.loss, self.prior_regularizer)
         if eval_generator is not None and any(eval_generator is stream for stream in (
                 latent_generator, penalty_generator, noise_generator, input_noise_generator,
                 prior_noise_generator, model_generator)):

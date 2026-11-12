@@ -67,6 +67,10 @@ def _archived_inactive_comparison_scope(module, directory):
         "rhbi_rapidity_screening": True,
         "rhbi_scale_log_odds": False,
         "rhbi_conditional_fibre": "joint",
+        "rhbi_akt_horizon": False,
+        "rhbi_slack_gain": 0.0,
+        "rhbi_chord_weight": 0.0,
+        "rhbi_thermal_tau": 0.0,
     }
     tail = '    "training_precision": "float32",\n}\n'
     assert adapted.decode().count(tail) == 1

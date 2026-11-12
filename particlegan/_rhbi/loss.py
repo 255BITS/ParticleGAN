@@ -34,6 +34,9 @@ class RHBIGANLoss(GANLoss):
         rapidity_screening: bool = True,
         scale_log_odds: bool = False,
         conditional_fibre: str = "joint",
+        akt_horizon: bool = False,
+        slack_gain: float = 0.0,
+        thermal_tau: float = 0.0,
         record: Any = None,
     ) -> None:
         super().__init__(loss, labels=labels)
@@ -44,8 +47,8 @@ class RHBIGANLoss(GANLoss):
             or critic_weight < 0.0
         ):
             raise ValueError("critic_weight must be finite and nonnegative")
-        if type(conditional_fibre) is not str or conditional_fibre not in ("joint", "slack"):
-            raise ValueError("conditional_fibre must be 'joint' or 'slack'")
+        if type(conditional_fibre) is not str or conditional_fibre not in ("joint", "slack", "calibrated"):
+            raise ValueError("conditional_fibre must be 'joint', 'slack', or 'calibrated'")
         self.critic_weight = float(critic_weight)
         self.conditional_fibre = conditional_fibre
         self.record = record
@@ -62,6 +65,9 @@ class RHBIGANLoss(GANLoss):
             self_coupling=self_coupling,
             relativistic_weight=relativistic_weight,
             scale_log_odds=scale_log_odds,
+            akt_horizon=akt_horizon,
+            slack_gain=slack_gain,
+            thermal_tau=thermal_tau,
         )
         self.last_metrics: Dict[str, float] = {}
 
@@ -97,7 +103,7 @@ class RHBIGANLoss(GANLoss):
         if self.critic_weight == 0.0:
             return base
         x_f, x_r, cond_f, cond_r, rec, has_cont_cond = self._resolve_pair_full(fake_logits, real_logits)
-        if self.conditional_fibre == "slack" and has_cont_cond:
+        if self.conditional_fibre in ("slack", "calibrated") and has_cont_cond:
             return base
         slack_reg = self.rhbi.critic_slack_loss(
             x_f,
@@ -119,6 +125,8 @@ class RHBIGANLoss(GANLoss):
         if self.rhbi.weight == 0.0:
             return super().g_loss(fake_logits, real_logits)
         x_f, x_r, cond_f, cond_r, rec, has_cont_cond = self._resolve_pair_full(fake_logits, real_logits)
+        if self.conditional_fibre == "calibrated" and has_cont_cond:
+            return self.rhbi.weight * super().g_loss(fake_logits, real_logits)
         if self.conditional_fibre == "slack" and has_cont_cond:
             b_f = fake_logits.shape[0]
             b_r = real_logits.shape[0]

@@ -22,6 +22,10 @@ try:
         rhbi_rapidity_screening=True,
         rhbi_scale_log_odds=False,
         rhbi_conditional_fibre="joint",
+        rhbi_akt_horizon=False,
+        rhbi_slack_gain=0.0,
+        rhbi_chord_weight=0.0,
+        rhbi_thermal_tau=0.0,
     )
 except (ImportError, ValueError):
     pass
@@ -322,6 +326,10 @@ class Recipe:
     rhbi_rapidity_screening: bool = True
     rhbi_scale_log_odds: bool = False
     rhbi_conditional_fibre: str = "joint"
+    rhbi_akt_horizon: bool = False
+    rhbi_slack_gain: float = 0.0
+    rhbi_chord_weight: float = 0.0
+    rhbi_thermal_tau: float = 0.0
 
     def __init__(self, **resolved_fields):
         declared = {field.name for field in fields(type(self))}
@@ -557,6 +565,9 @@ class Recipe:
             ("rhbi_relativistic_weight", False),
             ("rhbi_lambda_floor", False),
             ("rhbi_gamma_gauge", False),
+            ("rhbi_slack_gain", False),
+            ("rhbi_chord_weight", False),
+            ("rhbi_thermal_tau", False),
         ):
             rhbi_val = getattr(self, rhbi_name)
             if type(rhbi_val) not in (int, float) or not math.isfinite(rhbi_val) or (
@@ -565,16 +576,20 @@ class Recipe:
                 raise ValueError(f"{rhbi_name} must be finite and {'positive' if rhbi_pos else 'nonnegative'}")
         if type(self.rhbi_self_coupling) is not str or self.rhbi_self_coupling not in ("hollow", "feydy"):
             raise ValueError("rhbi_self_coupling must be 'hollow' or 'feydy'")
-        if type(self.rhbi_conditional_fibre) is not str or self.rhbi_conditional_fibre not in ("joint", "slack"):
-            raise ValueError("rhbi_conditional_fibre must be 'joint' or 'slack'")
+        if type(self.rhbi_conditional_fibre) is not str or self.rhbi_conditional_fibre not in ("joint", "slack", "calibrated"):
+            raise ValueError("rhbi_conditional_fibre must be 'joint', 'slack', or 'calibrated'")
         if type(self.rhbi_rapidity_screening) is not bool:
             raise ValueError("rhbi_rapidity_screening must be a boolean")
         if type(self.rhbi_scale_log_odds) is not bool:
             raise ValueError("rhbi_scale_log_odds must be a boolean")
+        if type(self.rhbi_akt_horizon) is not bool:
+            raise ValueError("rhbi_akt_horizon must be a boolean")
         if self.rhbi_beta_ell > 1.0:
             raise ValueError("rhbi_beta_ell must be in (0, 1]")
         if type(self.rhbi_nn_quantile) not in (int, float) or not (0.0 < self.rhbi_nn_quantile < 1.0):
             raise ValueError("rhbi_nn_quantile must be in (0, 1)")
+        if self.rhbi_chord_weight > 1.0:
+            raise ValueError("rhbi_chord_weight must be in [0, 1]")
         if type(self.rhbi_iters) is not int or self.rhbi_iters < 1:
             raise ValueError("rhbi_iters must be a positive integer")
         if type(self.ebi_beta) not in (int, float) or not math.isfinite(self.ebi_beta) or self.ebi_beta <= 0:
@@ -924,6 +939,9 @@ class Recipe:
                 rapidity_screening=self.rhbi_rapidity_screening,
                 scale_log_odds=self.rhbi_scale_log_odds,
                 conditional_fibre=self.rhbi_conditional_fibre,
+                akt_horizon=self.rhbi_akt_horizon,
+                slack_gain=self.rhbi_slack_gain,
+                thermal_tau=self.rhbi_thermal_tau,
             )
         if self.effective_critic_formulation == "bispf" and self.loss == "relativistic":
             from .bispf import SinkhornRelativisticLoss
@@ -1015,6 +1033,8 @@ class Recipe:
                 "fake_weight": self.reg_fake_weight,
                 "lambda_floor": self.rhbi_lambda_floor,
                 "gamma_gauge": self.rhbi_gamma_gauge,
+                "chord_weight": self.rhbi_chord_weight,
+                "akt_horizon": self.rhbi_akt_horizon,
                 **overrides,
             }
             from .rhbi import _RHBIPenaltyKernel

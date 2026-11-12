@@ -8,6 +8,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from .._bispf.thermal import _publish_thermal
+
 
 class RHBILoss(nn.Module):
     """Relativistic Hellinger-Born-Infeld (RHBI) slack-screened transport primitive.
@@ -33,6 +35,9 @@ class RHBILoss(nn.Module):
         self_coupling: str = "hollow",
         relativistic_weight: float = 0.0,
         scale_log_odds: bool = False,
+        akt_horizon: bool = False,
+        slack_gain: float = 0.0,
+        thermal_tau: float = 0.0,
     ) -> None:
         super().__init__()
         for name, val, positive in (
@@ -43,6 +48,8 @@ class RHBILoss(nn.Module):
             ("c_max", c_max, True),
             ("beta_ell", beta_ell, True),
             ("relativistic_weight", relativistic_weight, False),
+            ("slack_gain", slack_gain, False),
+            ("thermal_tau", thermal_tau, False),
         ):
             if isinstance(val, bool) or not isinstance(val, (int, float)) or not math.isfinite(val) or (
                 val <= 0.0 if positive else val < 0.0
@@ -58,6 +65,8 @@ class RHBILoss(nn.Module):
             raise ValueError("rapidity_screening must be a boolean")
         if type(scale_log_odds) is not bool:
             raise ValueError("scale_log_odds must be a boolean")
+        if type(akt_horizon) is not bool:
+            raise ValueError("akt_horizon must be a boolean")
         if type(self_coupling) is not str or self_coupling not in ("hollow", "feydy"):
             raise ValueError("self_coupling must be 'hollow' or 'feydy'")
 
@@ -73,6 +82,9 @@ class RHBILoss(nn.Module):
         self.self_coupling = self_coupling
         self.relativistic_weight = float(relativistic_weight)
         self.scale_log_odds = scale_log_odds
+        self.akt_horizon = akt_horizon
+        self.slack_gain = float(slack_gain)
+        self.thermal_tau = float(thermal_tau)
         self.register_buffer("ell_ema", torch.tensor(0.0, dtype=torch.float32))
         self.register_buffer("ell_initialized", torch.tensor(False, dtype=torch.bool))
         self._ell_init_py: bool = False
@@ -178,12 +190,19 @@ class RHBILoss(nn.Module):
 
     @staticmethod
     @torch.no_grad()
-    def _batch_ell_quantile_tensor(y_real: torch.Tensor, nn_quantile: float = 0.25) -> torch.Tensor:
+    def _batch_ell_quantile_tensor(
+        y_real: torch.Tensor,
+        nn_quantile: float = 0.25,
+        *,
+        akt_horizon: bool = False,
+    ) -> torch.Tensor:
         """Zero-sync scale-equivariant nearest-neighbor horizon quantile on device."""
         b_y = y_real.shape[0]
         if b_y <= 1:
             return y_real.new_tensor(1.0, dtype=torch.float32)
         y_flat = y_real.detach().reshape(b_y, -1).float()
+        dim = max(1, y_flat.shape[-1])
+        akt_factor = (float(b_y) ** max(0.0, (1.0 / float(dim)) - 0.5)) if akt_horizon else 1.0
         scale = y_flat.abs().amax().clamp_min(1.0)
         y_unit = y_flat / scale
         dist_unit = torch.cdist(y_unit, y_unit, p=2.0)
@@ -203,7 +222,8 @@ class RHBILoss(nn.Module):
         rms_unit = y_unit.square().mean().sqrt()
 
         tie_base = torch.where(torch.isfinite(pos_min), 0.15 * pos_min, 0.05 * d_max)
-        nonzero_val = scale * torch.where(q_raw <= thresh, tie_base, q_raw) + 1e-6
+        raw_unit = torch.where(q_raw <= thresh, tie_base, q_raw)
+        nonzero_val = scale * akt_factor * raw_unit + 1e-6
         dirac_val = 0.05 * torch.clamp_min(scale * rms_unit, 1.0) + 1e-6
         return torch.where(d_max == 0.0, dirac_val, nonzero_val)
 
@@ -253,7 +273,9 @@ class RHBILoss(nn.Module):
             out = ell_cur_f32.clamp_min(1.0) if init_cur else y_real.new_tensor(1.0, dtype=torch.float32)
             return out.to(dtype=y_real.dtype)
 
-        q_f32 = self._batch_ell_quantile_tensor(y_real, self.nn_quantile)
+        q_f32 = self._batch_ell_quantile_tensor(
+            y_real, self.nn_quantile, akt_horizon=self.akt_horizon
+        )
         if not init_cur:
             new_ell_f32 = q_f32
         else:
@@ -305,6 +327,66 @@ class RHBILoss(nn.Module):
             v = log_col - torch.logsumexp(L + u.unsqueeze(1), dim=0)
             u = log_row - torch.logsumexp(L + v.unsqueeze(0), dim=1)
         return torch.exp(L + u.unsqueeze(1) + v.unsqueeze(0)).to(c_hat.dtype)
+
+    @staticmethod
+    @torch.no_grad()
+    def _split_two_sample_residuals(
+        x: torch.Tensor,
+        y: torch.Tensor,
+        ell: Optional[torch.Tensor] = None,
+    ) -> Tuple[float, float, float, float, float]:
+        """Zero-bias two-sample Energy Distance, barycenter, spread, precision, and coverage residuals."""
+        xf = x.detach().reshape(x.shape[0], -1).float()
+        yf = y.detach().reshape(y.shape[0], -1).float()
+        bx, by = xf.shape[0], yf.shape[0]
+        d_xy_mat = torch.cdist(xf, yf, p=2)
+        d_xx_mat = torch.cdist(xf, xf, p=2)
+        d_yy_mat = torch.cdist(yf, yf, p=2)
+
+        d_xy = d_xy_mat.mean()
+        d_xx = d_xx_mat.sum() / max(1, bx * (bx - 1))
+        d_yy = d_yy_mat.sum() / max(1, by * (by - 1))
+        denom_ed = (0.5 * (d_xy + 0.5 * (d_xx + d_yy))).clamp_min(1e-8)
+        r_ed_t = (2.0 * d_xy - d_xx - d_yy) / denom_ed
+
+        mu_diff_sq = (xf.mean(dim=0) - yf.mean(dim=0)).square().sum()
+        var_x = xf.var(dim=0, unbiased=True).sum() if bx > 1 else mu_diff_sq.new_zeros(())
+        var_y = yf.var(dim=0, unbiased=True).sum() if by > 1 else mu_diff_sq.new_zeros(())
+        r_mu_sq_raw = (mu_diff_sq - var_x / max(1, bx) - var_y / max(1, by)) / denom_ed.square()
+        r_spread_t = (d_xx - d_yy) / denom_ed
+
+        b_min = min(bx, by)
+        if b_min >= 4:
+            xy_sub = d_xy_mat[:b_min, :b_min].clone()
+            yy_sub = d_yy_mat[:b_min, :b_min].clone()
+            xy_sub.fill_diagonal_(float("inf"))
+            yy_sub.fill_diagonal_(float("inf"))
+            xy_row_nn = xy_sub.amin(dim=1)
+            xy_col_nn = xy_sub.amin(dim=0)
+            yy_loo_nn = yy_sub.amin(dim=1)
+
+            ell_ref = (
+                ell.detach().float().clamp_min(1e-8)
+                if ell is not None
+                else torch.quantile(yy_loo_nn, 0.25).clamp_min(1e-8)
+            )
+            psi_conn = (0.15 + 5.5 * (ell_ref / denom_ed)).clamp(0.15, 0.40)
+            r_mu_sq_t = psi_conn.square() * r_mu_sq_raw
+
+            # Fake-to-real 75th-quantile precision excess (tracks intra-mode halo convergence cleanly)
+            prec_q75 = torch.quantile(xy_row_nn, 0.75) - torch.quantile(yy_loo_nn, 0.75)
+            r_q90_t = 10.2 * prec_q75 / denom_ed
+
+            # Real-to-fake 90th-quantile manifold/mode coverage excess
+            cov90 = torch.quantile(xy_col_nn, 0.90) - torch.quantile(yy_loo_nn, 0.90)
+            r_hmax_t = cov90 / denom_ed
+        else:
+            r_mu_sq_t = 0.16 * r_mu_sq_raw
+            r_q90_t = r_ed_t
+            r_hmax_t = r_ed_t
+
+        vals = torch.stack((r_ed_t, r_mu_sq_t, r_spread_t, r_q90_t, r_hmax_t)).tolist()
+        return float(vals[0]), float(vals[1]), float(vals[2]), float(vals[3]), float(vals[4])
 
     @staticmethod
     def _discrete_pair_mask(
@@ -456,17 +538,22 @@ class RHBILoss(nn.Module):
 
         slack_scale = ell.detach() if self.scale_log_odds else 1.0
         transport_xy = (P_xy_act * c_phys_xy).sum()
+        s_f = (float(b_f) * P_xy_slack).clamp(0.0, 1.0)
+        p_slack_eff = (
+            P_xy_slack * (1.0 + self.slack_gain * s_f) if self.slack_gain > 0.0 else P_xy_slack
+        )
         if self.relativistic_weight > 0.0:
             active_rel = (
                 P_xy_act * F.softplus(d_real_tilde.unsqueeze(0) - d_fake_tilde.unsqueeze(1))
             ).sum()
-            slack_rel = (P_xy_slack * F.softplus(-d_fake_tilde)).sum()
+            slack_rel = (p_slack_eff * F.softplus(-d_fake_tilde)).sum()
             local_critic_slack = self.relativistic_weight * slack_scale * (active_rel + slack_rel)
         else:
-            local_critic_slack = -(P_xy_slack * (0.5 * self.tau * slack_scale * d_fake_tilde)).sum()
+            local_critic_slack = -(p_slack_eff * (0.5 * self.tau * slack_scale * d_fake_tilde)).sum()
         debias_xx = -0.5 * (P_xx_eff * c_phys_xx).sum()
 
-        total = transport_xy + local_critic_slack + debias_xx
+        coord_total = transport_xy + debias_xx
+        critic_total = local_critic_slack
         if symmetric:
             c_phys_yy, c_hat_yy = self._born_infeld_pair(y_aug, y_aug, ell)
             mask_yy = self._discrete_pair_mask(cond_real, cond_real, b_r, b_r)
@@ -479,14 +566,49 @@ class RHBILoss(nn.Module):
             a_r = (float(b_r) * P_xy_act.sum(dim=0)).clamp(0.0, 1.0)
             P_yy_eff = P_yy_act * torch.sqrt(a_r.unsqueeze(1) * a_r.unsqueeze(0))
             P_xy_col_slack = P_xy[b_f, :b_r]
+            s_r = (float(b_r) * P_xy_col_slack).clamp(0.0, 1.0)
+            p_col_slack_eff = (
+                P_xy_col_slack * (1.0 + self.slack_gain * s_r)
+                if self.slack_gain > 0.0
+                else P_xy_col_slack
+            )
             if self.relativistic_weight > 0.0:
                 local_real_slack = self.relativistic_weight * slack_scale * (
-                    P_xy_col_slack * F.softplus(d_real_tilde)
+                    p_col_slack_eff * F.softplus(d_real_tilde)
                 ).sum()
             else:
-                local_real_slack = (P_xy_col_slack * (0.5 * self.tau * slack_scale * d_real_tilde)).sum()
+                local_real_slack = (p_col_slack_eff * (0.5 * self.tau * slack_scale * d_real_tilde)).sum()
             debias_yy = -0.5 * (P_yy_eff * c_phys_yy).sum()
-            total = total + local_real_slack + debias_yy
+            coord_total = coord_total + debias_yy
+            critic_total = critic_total + local_real_slack
+
+        total = coord_total + critic_total
+        if self.thermal_tau > 0.0 and record is not None:
+            if (
+                allow_ell_update
+                and cond_fake is None
+                and cond_real is None
+                and b_r >= 4
+                and b_f >= 4
+                and hasattr(record, "observe_rhbi_thermal")
+            ):
+                r_ed, r_mu_sq, r_spread, r_q90, r_hmax = self._split_two_sample_residuals(
+                    x_fake, y_real, ell=ell
+                )
+                s_obs = record.observe_rhbi_thermal(
+                    r_ed, r_mu_sq, r_spread, r_q90, r_hmax, self.thermal_tau
+                )
+                _publish_thermal(record, x_fake.device, s_obs)
+            s_therm = float(getattr(record, "_thermal_scale", 1.0))
+            if s_therm < 1.0 and total.requires_grad:
+                if getattr(d_fake, "_rhbi_thermally_scaled", False):
+                    # d_fake already carries first-order straight-through thermal scaling
+                    # from _rhbi_critic_forward_hook; scale only coordinate-direct OT terms
+                    # so transport and critic-slack preserve their exact 1:1 impedance ratio.
+                    coord_scaled = coord_total * s_therm + coord_total.detach() * (1.0 - s_therm)
+                    total = coord_scaled + critic_total
+                else:
+                    total = total * s_therm + total.detach() * (1.0 - s_therm)
 
         loss = self.weight * total
         if not return_metrics:
