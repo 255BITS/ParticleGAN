@@ -1161,10 +1161,11 @@ Test: `five_word_joint_hold` · Required for qualification and included in full-
 
 **What it tests.** Restore the candidate's own confirmed five-word acquisition checkpoint in a fresh process and pass every generation and exact encoder-inversion bound across all 24 scheduled checks over 4,000 additional updates.
 
-**Historical diagnosis (2026-10-15).** Selected `empf-v7` finishes the 4,000-step continuation inside every terminal bound (`modes = 5`, `quality_fraction = 1.0`, `mass_tv = 0.0346 <= 0.10`, `reconstruction_exact = 1`, `minimum_reconstruction_token_probability = 0.9993 >= 0.90`), but dips on an intermediate scheduled check during post-acquisition settling under the size-gated `newton_schulz_hybrid_v1` dense DualNorm profile.
+**Historical diagnosis (2026-10-15).** Historical `empf-v7` finished the 4,000-step continuation inside every terminal bound (`modes = 5`, `quality_fraction = 1.0`, `mass_tv = 0.0346 <= 0.10`, `reconstruction_exact = 1`, `minimum_reconstruction_token_probability = 0.9993 >= 0.90`), but dipped on an intermediate scheduled check during post-acquisition settling before `empf-v8` extended hybrid Newton-Schulz to `128x128` hidden matrices and smoothed discrete-simplex Chamfer cooling.
 
-**Historical passer evidence.** Yes: selected BISPF (`bispf-optimized-quintic-v1`) and historical `empf-v2` pass all 24 continuation checks.
+**Historical passer evidence.** Yes: selected EMPF (`empf-v8`), selected BCAP, selected BISPF (`bispf-optimized-quintic-v1`), and historical `empf-v2` pass all scheduled continuation checks.
 
+- Selected `empf-v8` (`readout-9c68ae0b3e8d7966f76d6f5d.json`) passes all 25 scheduled continuation checks (`modes = 5`, `quality_fraction = 1.0`, `mass_tv = 0.0203 <= 0.10`, `minimum_reconstruction_token_probability = 0.99999 >= 0.90`) while retaining `gaussian1d_stability` and `precision_gaussian_fp32`.
 - Selected `bispf-optimized-quintic-v1` passes all 24 scheduled continuation checks from its own smoke checkpoint, while failing `gaussian1d_stability`.
 - Historical `empf-v2` (`readout-05eaed46ab0e45214ae8e7b4.json`) also passes all 24 continuation checks under exact `polar_factor` SVD, trading `gaussian1d_stability` and `precision_gaussian_fp32`.
 
@@ -1184,6 +1185,6 @@ Test: `five_word_joint_hold` · Required for qualification and included in full-
 | [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) |
 | [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) |
 
-**Recommendation from the dated diagnosis.** Damp transient post-acquisition joint-critic excursions on the discrete 5-particle codebook without losing `empf-v7`'s `gaussian1d_stability`, `precision_gaussian_fp32`, and `five_word_joint_smoke` wall-time budget.
+**Recommendation from the dated diagnosis.** Retain discrete-simplex post-acquisition hold stability while measuring the remaining unmeasured historical families under their own confirmed five-word acquisition checkpoints.
 
-Evidence: [EMPF-v7 ordinary readout receipt](records/readout-4901963885d977da23e139ba.json) · [Task declaration](../../configs/forge/tasks/five_word_joint_hold.json).
+Evidence: [EMPF-v8 ordinary readout receipt](records/readout-9c68ae0b3e8d7966f76d6f5d.json) · [EMPF-v7 ordinary readout receipt](records/readout-4901963885d977da23e139ba.json) · [Task declaration](../../configs/forge/tasks/five_word_joint_hold.json).
