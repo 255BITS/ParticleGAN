@@ -36,8 +36,10 @@ class RHBILoss(nn.Module):
         relativistic_weight: float = 0.0,
         scale_log_odds: bool = False,
         akt_horizon: bool = False,
+        akt_mode: str = "sqrt",
         slack_gain: float = 0.0,
         thermal_tau: float = 0.0,
+        thermal_shock_mu: float = 0.15,
     ) -> None:
         super().__init__()
         for name, val, positive in (
@@ -50,6 +52,7 @@ class RHBILoss(nn.Module):
             ("relativistic_weight", relativistic_weight, False),
             ("slack_gain", slack_gain, False),
             ("thermal_tau", thermal_tau, False),
+            ("thermal_shock_mu", thermal_shock_mu, False),
         ):
             if isinstance(val, bool) or not isinstance(val, (int, float)) or not math.isfinite(val) or (
                 val <= 0.0 if positive else val < 0.0
@@ -67,6 +70,8 @@ class RHBILoss(nn.Module):
             raise ValueError("scale_log_odds must be a boolean")
         if type(akt_horizon) is not bool:
             raise ValueError("akt_horizon must be a boolean")
+        if type(akt_mode) is not str or akt_mode not in ("sqrt", "weibull"):
+            raise ValueError("akt_mode must be 'sqrt' or 'weibull'")
         if type(self_coupling) is not str or self_coupling not in ("hollow", "feydy"):
             raise ValueError("self_coupling must be 'hollow' or 'feydy'")
 
@@ -83,8 +88,10 @@ class RHBILoss(nn.Module):
         self.relativistic_weight = float(relativistic_weight)
         self.scale_log_odds = scale_log_odds
         self.akt_horizon = akt_horizon
+        self.akt_mode = akt_mode
         self.slack_gain = float(slack_gain)
         self.thermal_tau = float(thermal_tau)
+        self.thermal_shock_mu = float(thermal_shock_mu)
         self.register_buffer("ell_ema", torch.tensor(0.0, dtype=torch.float32))
         self.register_buffer("ell_initialized", torch.tensor(False, dtype=torch.bool))
         self._ell_init_py: bool = False
@@ -195,6 +202,7 @@ class RHBILoss(nn.Module):
         nn_quantile: float = 0.25,
         *,
         akt_horizon: bool = False,
+        akt_mode: str = "sqrt",
     ) -> torch.Tensor:
         """Zero-sync scale-equivariant nearest-neighbor horizon quantile on device."""
         b_y = y_real.shape[0]
@@ -202,7 +210,15 @@ class RHBILoss(nn.Module):
             return y_real.new_tensor(1.0, dtype=torch.float32)
         y_flat = y_real.detach().reshape(b_y, -1).float()
         dim = max(1, y_flat.shape[-1])
-        akt_factor = (float(b_y) ** max(0.0, (1.0 / float(dim)) - 0.5)) if akt_horizon else 1.0
+        akt_exp = max(0.0, (1.0 / float(dim)) - 0.5)
+        if akt_horizon and akt_exp > 0.0:
+            if akt_mode == "weibull":
+                q_rate = max(1e-6, -math.log(max(1e-6, 1.0 - float(nn_quantile))))
+                akt_factor = ((2.0 * math.e * float(b_y)) / q_rate) ** akt_exp
+            else:
+                akt_factor = float(b_y) ** akt_exp
+        else:
+            akt_factor = 1.0
         scale = y_flat.abs().amax().clamp_min(1.0)
         y_unit = y_flat / scale
         dist_unit = torch.cdist(y_unit, y_unit, p=2.0)
@@ -274,7 +290,10 @@ class RHBILoss(nn.Module):
             return out.to(dtype=y_real.dtype)
 
         q_f32 = self._batch_ell_quantile_tensor(
-            y_real, self.nn_quantile, akt_horizon=self.akt_horizon
+            y_real,
+            self.nn_quantile,
+            akt_horizon=self.akt_horizon,
+            akt_mode=self.akt_mode,
         )
         if not init_cur:
             new_ell_f32 = q_f32
@@ -596,7 +615,13 @@ class RHBILoss(nn.Module):
                     x_fake, y_real, ell=ell
                 )
                 s_obs = record.observe_rhbi_thermal(
-                    r_ed, r_mu_sq, r_spread, r_q90, r_hmax, self.thermal_tau
+                    r_ed,
+                    r_mu_sq,
+                    r_spread,
+                    r_q90,
+                    r_hmax,
+                    self.thermal_tau,
+                    shock_mu_ratio=self.thermal_shock_mu,
                 )
                 _publish_thermal(record, x_fake.device, s_obs)
             s_therm = float(getattr(record, "_thermal_scale", 1.0))

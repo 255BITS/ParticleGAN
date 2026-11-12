@@ -42,6 +42,8 @@ class _RHBIPenaltyKernel:
         gamma_gauge: float = 0.0,
         chord_weight: float = 0.0,
         akt_horizon: bool = False,
+        akt_mode: str = "sqrt",
+        settle_beta: float = 0.0,
         record: CriticStepRecord | None = None,
     ) -> None:
         for name, val, pos in (
@@ -53,6 +55,7 @@ class _RHBIPenaltyKernel:
             ("lambda_floor", lambda_floor, False),
             ("gamma_gauge", gamma_gauge, False),
             ("chord_weight", chord_weight, False),
+            ("settle_beta", settle_beta, False),
         ):
             if isinstance(val, bool) or not isinstance(val, (int, float)) or not math.isfinite(val) or (
                 val <= 0.0 if pos else val < 0.0
@@ -64,6 +67,8 @@ class _RHBIPenaltyKernel:
             raise ValueError("lazy_k must be a positive integer")
         if type(akt_horizon) is not bool:
             raise ValueError("akt_horizon must be a boolean")
+        if type(akt_mode) is not str or akt_mode not in ("sqrt", "weibull"):
+            raise ValueError("akt_mode must be 'sqrt' or 'weibull'")
         if anchor_weight != 0.0:
             raise ValueError("RHBI does not use an EMA critic anchor (require reg_anchor_weight=0)")
         self.arm = "rhbi"
@@ -78,6 +83,8 @@ class _RHBIPenaltyKernel:
         self.gamma_gauge = float(gamma_gauge)
         self.chord_weight = float(chord_weight)
         self.akt_horizon = akt_horizon
+        self.akt_mode = akt_mode
+        self.settle_beta = float(settle_beta)
         self.record = RHBIStepRecord() if record is None else record
 
     @torch.no_grad()
@@ -102,7 +109,9 @@ class _RHBIPenaltyKernel:
             ell_init = bool(getattr(self.record, "rhbi_ell_initialized", False))
             ell_s = float(getattr(self.record, "rhbi_ell_ema", 0.0)) if ell_init else 0.0
             if ell_s <= 1e-6:
-                ell_t = RHBILoss._batch_ell_quantile_tensor(x_real, akt_horizon=self.akt_horizon)
+                ell_t = RHBILoss._batch_ell_quantile_tensor(
+                    x_real, akt_horizon=self.akt_horizon, akt_mode=self.akt_mode
+                )
             else:
                 ell_t = torch.tensor(ell_s, dtype=torch.float32, device=x_real.device)
             c_hat = RHBILoss._born_infeld_c_hat_detached(x_fake, x_real, ell_t)
@@ -159,6 +168,12 @@ class _RHBIPenaltyKernel:
             else None
         )
 
+        eff_beta = self.ebi_beta
+        if self.settle_beta > 0.0 and bool(getattr(self.record, "rhbi_thermal_initialized", False)):
+            res = float(getattr(self.record, "rhbi_ema_residual", 1.0))
+            settle_u = min(1.0, max(0.0, 1.0 - res / 0.22))
+            eff_beta = eff_beta + self.settle_beta * (settle_u * settle_u)
+
         self.record._in_penalty = True
         try:
             if (
@@ -183,10 +198,10 @@ class _RHBIPenaltyKernel:
                 sq_all = grad.flatten(1).square().sum(dim=1)
                 norm_all = (sq_all + 1e-12).sqrt()
                 b_n = x_real.shape[0]
-                cap_r = F.softplus(norm_all[:b_n] - self.kappa, beta=self.ebi_beta).square().mean()
-                cap_f = F.softplus(norm_all[b_n : 2 * b_n] - self.kappa, beta=self.ebi_beta).square().mean()
+                cap_r = F.softplus(norm_all[:b_n] - self.kappa, beta=eff_beta).square().mean()
+                cap_f = F.softplus(norm_all[b_n : 2 * b_n] - self.kappa, beta=eff_beta).square().mean()
                 if x_chord is not None:
-                    cap_c = F.softplus(norm_all[2 * b_n :] - self.kappa, beta=self.ebi_beta).square().mean()
+                    cap_c = F.softplus(norm_all[2 * b_n :] - self.kappa, beta=eff_beta).square().mean()
                     total = self.real_weight * cap_r + self.fake_weight * (
                         (1.0 - self.chord_weight) * cap_f + self.chord_weight * cap_c
                     )
@@ -228,7 +243,7 @@ class _RHBIPenaltyKernel:
                         sq = grad.flatten(1).square().sum(dim=1)
                         norm = (sq + 1e-12).sqrt()
                         if cap_w > 0.0:
-                            cap = F.softplus(norm - self.kappa, beta=self.ebi_beta).square().mean()
+                            cap = F.softplus(norm - self.kappa, beta=eff_beta).square().mean()
                             total = total + cap_w * cap
                         if is_endpoint and floor_w > 0.0 and self.lambda_floor > 0.0:
                             total = total + floor_w * self.lambda_floor * sq.mean()

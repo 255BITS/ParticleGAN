@@ -854,5 +854,153 @@ def test_rhbi_v4_hooked_thermal_scaling_preserves_first_order_impedance():
     assert torch.allclose(xf_cool.grad, 0.25 * xf_hot.grad, rtol=1e-5, atol=1e-6)
 
 
+def test_rhbi_v5_weibull_akt_shock_mu_settle_beta_and_row_local_fibre_blend():
+    """Verify rhbi-v5 Weibull AKT horizon, false-shock filter, settling beta, row-local fibre blend, and continuation."""
+    import math
+    from particlegan._rhbi.penalty import _RHBIPenaltyKernel
 
+    # 1. Weibull AKT scales d=1 by sqrt((2*e*B)/-ln(1-q)) while preserving exact 1.0 identity on d >= 2.
+    y1d = torch.linspace(-1.0, 1.0, 64).unsqueeze(1)
+    q_off_1d = RHBILoss._batch_ell_quantile_tensor(y1d, 0.25, akt_horizon=False, akt_mode="weibull")
+    q_sqrt_1d = RHBILoss._batch_ell_quantile_tensor(y1d, 0.25, akt_horizon=True, akt_mode="sqrt")
+    q_wb_1d = RHBILoss._batch_ell_quantile_tensor(y1d, 0.25, akt_horizon=True, akt_mode="weibull")
+    expected_wb_ratio = math.sqrt((2.0 * math.e * 64.0) / (-math.log(0.75)))
+    assert float((q_sqrt_1d - 1e-6) / (q_off_1d - 1e-6)) == pytest.approx(8.0, rel=1e-5)
+    assert float((q_wb_1d - 1e-6) / (q_off_1d - 1e-6)) == pytest.approx(expected_wb_ratio, rel=1e-5)
+
+    y2d = torch.randn(64, 2, generator=torch.Generator().manual_seed(42))
+    y3d = torch.randn(64, 3, generator=torch.Generator().manual_seed(43))
+    assert torch.equal(
+        RHBILoss._batch_ell_quantile_tensor(y2d, 0.25, akt_horizon=True, akt_mode="sqrt"),
+        RHBILoss._batch_ell_quantile_tensor(y2d, 0.25, akt_horizon=True, akt_mode="weibull"),
+    )
+    assert torch.equal(
+        RHBILoss._batch_ell_quantile_tensor(y3d, 0.25, akt_horizon=False),
+        RHBILoss._batch_ell_quantile_tensor(y3d, 0.25, akt_horizon=True, akt_mode="weibull"),
+    )
+
+    # 2. False-shock filter (shock_mu_ratio=0.35) rejects moderate stationary batch jitter (mu_sq=0.06)
+    #    that resets shock_mu_ratio=0.15, while still reopening in 1 step on real shifts (mu_sq=0.25).
+    rec_15 = RHBIStepRecord()
+    rec_35 = RHBIStepRecord()
+    for rec in (rec_15, rec_35):
+        rec.rhbi_thermal_initialized = True
+        rec.rhbi_ema_ed = 0.01
+        rec.rhbi_ema_mu_sq = 0.0004
+        rec.rhbi_ema_spread = 0.01
+        rec.rhbi_ema_q90 = 0.01
+        rec.rhbi_ema_hmax = 0.01
+        rec.rhbi_thermal_scale = 1e-6
+    s_15 = rec_15.observe_rhbi_thermal(0.02, 0.06, 0.01, 0.01, 0.01, 0.084, shock_mu_ratio=0.15)
+    s_35 = rec_35.observe_rhbi_thermal(0.02, 0.06, 0.01, 0.01, 0.01, 0.084, shock_mu_ratio=0.35)
+    assert s_15 == pytest.approx(1.0)
+    assert s_35 < 1e-3
+    assert rec_35.rhbi_ema_mu_sq < 0.003 < rec_15.rhbi_ema_mu_sq
+    # Genuine mean shift (mu_sq = 0.25 > 0.35 * 0.30 = 0.105) reopens immediately in 1 step:
+    s_35_shift = rec_35.observe_rhbi_thermal(0.45, 0.25, 0.05, 0.20, 0.20, 0.084, shock_mu_ratio=0.35)
+    assert s_35_shift == pytest.approx(1.0)
+
+    # 3. State-driven settling Lipschitz sharpness tightens sub-threshold softplus wall without mutating ebi_beta.
+    D_lin = nn.Linear(2, 1, bias=False)
+    with torch.no_grad():
+        D_lin.weight.copy_(torch.tensor([[0.95, 0.0]]))
+    xr_p = torch.randn(8, 2, generator=torch.Generator().manual_seed(51))
+    xf_p = torch.randn(8, 2, generator=torch.Generator().manual_seed(52))
+    k_base = _RHBIPenaltyKernel(coeff=1.0, kappa=1.0, ebi_beta=12.0, settle_beta=0.0)
+    k_settle = _RHBIPenaltyKernel(coeff=1.0, kappa=1.0, ebi_beta=12.0, settle_beta=22.0)
+    for k in (k_base, k_settle):
+        k.record.rhbi_thermal_initialized = True
+        k.record.rhbi_ema_ed = 0.02
+        k.record.rhbi_ema_mu_sq = 0.0001
+        k.record.rhbi_ema_spread = 0.01
+        k.record.rhbi_ema_q90 = 0.02
+        k.record.rhbi_ema_hmax = 0.02
+    pen_base, _ = k_base.penalty(D_lin, xr_p, xf_p, step=1, allow_concat=True)
+    pen_settle, _ = k_settle.penalty(D_lin, xr_p, xf_p, step=1, allow_concat=True)
+    assert k_settle.ebi_beta == 12.0
+    # At ||grad|| = 0.95 < kappa = 1.0, sharper beta reduces softplus spillover below kappa!
+    assert float(pen_settle.item()) < float(pen_base.item())
+
+    # 4. Row-local calibrated-relativistic fibre blend is strictly row-independent (perturbing row j != i
+    #    leaves row i's gradient unchanged) and aligns d_loss sensitivity with paired differences.
+    class _CondCritic(nn.Module):
+        def __init__(self, net: nn.Module) -> None:
+            super().__init__()
+            self.net = net
+
+        def forward(self, x: torch.Tensor, c: torch.Tensor) -> torch.Tensor:
+            return self.net(torch.cat([x, c], dim=-1))
+
+    r_fib = get_recipe(
+        "rhbi",
+        rhbi_conditional_fibre="slack",
+        rhbi_fibre_rel_blend=0.7,
+        total_steps=10,
+        batch_size=8,
+        num_particles=16,
+        z_dim=2,
+    )
+    Dc = _CondCritic(nn.Linear(4, 1))
+    opt_fib = r_fib.make_critic_optimizer(Dc)
+    loss_fib = r_fib.make_loss()
+    bind_rhbi_record(opt_fib.record, loss_fib)
+
+    c_cond = torch.randn(8, 2, generator=torch.Generator().manual_seed(61))
+    xr_a = torch.randn(8, 2, generator=torch.Generator().manual_seed(62)).requires_grad_(True)
+    xf_a = torch.randn(8, 2, generator=torch.Generator().manual_seed(63)).requires_grad_(True)
+    loss_a = loss_fib.d_loss(Dc(xr_a, c_cond), Dc(xf_a, c_cond))
+    ga_r, ga_f = torch.autograd.grad(loss_a, (xr_a, xf_a))
+
+    xr_b = xr_a.detach().clone()
+    xf_b = xf_a.detach().clone()
+    xr_b[1:] = xr_b[1:] + 7.5
+    xf_b[1:] = xf_b[1:] - 4.2
+    xr_b.requires_grad_(True)
+    xf_b.requires_grad_(True)
+    loss_b = loss_fib.d_loss(Dc(xr_b, c_cond), Dc(xf_b, c_cond))
+    gb_r, gb_f = torch.autograd.grad(loss_b, (xr_b, xf_b))
+    assert torch.allclose(ga_r[0], gb_r[0], rtol=1e-6, atol=1e-6)
+    assert torch.allclose(ga_f[0], gb_f[0], rtol=1e-6, atol=1e-6)
+
+    # 5. Exact checkpoint continuation across active rhbi-v5 settling boundaries in GANTrainer.
+    r_v5 = get_recipe(
+        "rhbi",
+        rhbi_rapidity_screening=False,
+        rhbi_self_coupling="feydy",
+        rhbi_akt_horizon=True,
+        rhbi_akt_mode="weibull",
+        rhbi_slack_gain=0.35,
+        rhbi_chord_weight=0.25,
+        rhbi_gamma_gauge=0.03,
+        rhbi_lambda_floor=0.005,
+        ebi_beta=12.0,
+        rhbi_settle_beta=22.0,
+        rhbi_thermal_tau=0.20,
+        rhbi_thermal_shock_mu=0.35,
+        rhbi_conditional_fibre="slack",
+        rhbi_fibre_rel_blend=0.7,
+        total_steps=12,
+        batch_size=16,
+        num_particles=64,
+        z_dim=2,
+    )
+    G1, D1, P1 = _make_mlp_pair(seed=401)
+    G2, D2, P2 = _make_mlp_pair(seed=402)
+    batches_1d = [0.25 * torch.randn(16, 2, generator=torch.Generator().manual_seed(500 + i)) for i in range(6)]
+    t1 = GANTrainer(r_v5, G1, D1, prior=P1, seed=0)
+    for b in batches_1d[:3]:
+        t1.step(b)
+    saved = deepcopy(t1.state_dict())
+    for b in batches_1d[3:]:
+        t1.step(b)
+
+    t2 = GANTrainer(r_v5, G2, D2, prior=P2, seed=9)
+    t2.load_state_dict(saved)
+    for b in batches_1d[3:]:
+        t2.step(b)
+    for p1, p2 in zip(G1.parameters(), G2.parameters()):
+        assert torch.equal(p1, p2)
+    for p1, p2 in zip(D1.parameters(), D2.parameters()):
+        assert torch.equal(p1, p2)
+    assert torch.equal(P1.z, P2.z)
 

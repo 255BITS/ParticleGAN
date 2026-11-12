@@ -90,6 +90,14 @@ def technique_signature(value):
         mechanisms["rhbi_lambda_floor"] = True
     if recipe.effective_critic_formulation == "rhbi" and recipe.rhbi_gamma_gauge > 0:
         mechanisms["rhbi_gamma_gauge"] = True
+    if recipe.effective_critic_formulation == "rhbi" and recipe.reg_coeff > 0 and recipe.rhbi_settle_beta > 0:
+        mechanisms["rhbi_settle_beta"] = True
+    if (
+        (recipe.effective_critic_formulation == "rhbi" or recipe.rhbi_weight > 0 or recipe.rhbi_critic_weight > 0)
+        and recipe.rhbi_conditional_fibre == "slack"
+        and recipe.rhbi_fibre_rel_blend > 0
+    ):
+        mechanisms["rhbi_fibre_rel_blend"] = True
     if recipe.optimizer_smoothing:
         mechanisms["smoothed_dualnorm"] = True
     if recipe.optimizer_family in {"dualnorm_D_only", "particle_rownorm_only"}:
@@ -211,12 +219,26 @@ def recipe_field_active(name, value, *, task=None):
         return recipe.rhbi_critic_weight > 0
     if name in {"rhbi_self_coupling", "rhbi_relativistic_weight", "rhbi_slack_gain", "rhbi_thermal_tau"}:
         return recipe.rhbi_weight > 0
-    if name in {"rhbi_lambda_floor", "rhbi_gamma_gauge", "rhbi_chord_weight"}:
+    if name == "rhbi_thermal_shock_mu":
+        return recipe.rhbi_weight > 0 and recipe.rhbi_thermal_tau > 0
+    if name in {"rhbi_lambda_floor", "rhbi_gamma_gauge", "rhbi_chord_weight", "rhbi_settle_beta"}:
         return recipe.effective_critic_formulation == "rhbi" and recipe.reg_coeff > 0
     if name == "rhbi_akt_horizon":
         return recipe.rhbi_weight > 0 or recipe.rhbi_critic_weight > 0 or (
             recipe.effective_critic_formulation == "rhbi" and recipe.reg_coeff > 0 and recipe.rhbi_chord_weight > 0
         )
+    if name == "rhbi_akt_mode":
+        return recipe.rhbi_akt_horizon and (
+            recipe.rhbi_weight > 0
+            or recipe.rhbi_critic_weight > 0
+            or (recipe.effective_critic_formulation == "rhbi" and recipe.reg_coeff > 0 and recipe.rhbi_chord_weight > 0)
+        )
+    if name == "rhbi_fibre_rel_blend":
+        return (
+            recipe.effective_critic_formulation == "rhbi"
+            or recipe.rhbi_weight > 0
+            or recipe.rhbi_critic_weight > 0
+        ) and recipe.rhbi_conditional_fibre == "slack"
     if name in {"rhbi_rho", "rhbi_tau", "rhbi_eps", "rhbi_iters", "rhbi_c_max", "rhbi_beta_ell", "rhbi_nn_quantile", "rhbi_rapidity_screening", "rhbi_scale_log_odds", "rhbi_conditional_fibre"}:
         return recipe.rhbi_weight > 0 or recipe.rhbi_critic_weight > 0
     return True

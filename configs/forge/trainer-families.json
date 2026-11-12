@@ -673,12 +673,13 @@
         "rhbi-v1",
         "rhbi-v2",
         "rhbi-v3",
-        "rhbi-v4"
+        "rhbi-v4",
+        "rhbi-v5"
       ],
       "canonical_candidate": "rhbi-v4",
       "id": "rhbi",
       "label": "RHBI",
-      "rationale": "Relativistic Hellinger-Born-Infeld Transport: clock-free slack-screened unbalanced Sinkhorn variational operator with Ajtai-Komlos-Tusnady empirical OT horizon scaling, overflow-safe float64 Born-Infeld costs, linear horizon screening (rho=3.0) with slack-gain critic boost, S=2 Kantorovich-Hellinger slack Sinkhorn, Feydy diagonal self-coupling debiasing, Weyl-phased balanced Born-Infeld geodesic chord and endpoint Lipschitz cap with zero-mean critic gauge, impedance-matched 5-channel Kantorovich-Hellinger thermal equilibrium controller, SBNP particle prior regularization (0.02), joint relativistic BiGAN coupling, fibre-centered conditional relativistic slack routing, and batched-PCIe polar_cpu_v1 DualNorm under constant learning rates.",
+      "rationale": "Relativistic Hellinger-Born-Infeld Transport: clock-free slack-screened unbalanced Sinkhorn variational operator with Poisson-Weibull Ajtai-Komlos-Tusnady empirical OT horizon scaling, overflow-safe float64 Born-Infeld costs, linear horizon screening (rho=3.0) with slack-gain critic boost, S=2 Kantorovich-Hellinger slack Sinkhorn, Feydy diagonal self-coupling debiasing, Weyl-phased balanced Born-Infeld geodesic chord and state-settling endpoint Lipschitz cap with zero-mean critic gauge, false-shock-proof 5-channel Kantorovich-Hellinger thermal equilibrium controller, SBNP particle prior regularization (0.02), joint relativistic BiGAN coupling, row-local calibrated-relativistic conditional fibre routing, and batched-PCIe polar_cpu_v1 DualNorm under constant learning rates.",
       "tags": [
         "adversarial-training",
         "capped-input-gradients",

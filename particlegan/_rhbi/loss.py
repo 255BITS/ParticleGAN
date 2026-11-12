@@ -35,8 +35,11 @@ class RHBIGANLoss(GANLoss):
         scale_log_odds: bool = False,
         conditional_fibre: str = "joint",
         akt_horizon: bool = False,
+        akt_mode: str = "sqrt",
         slack_gain: float = 0.0,
         thermal_tau: float = 0.0,
+        thermal_shock_mu: float = 0.15,
+        fibre_rel_blend: float = 0.0,
         record: Any = None,
     ) -> None:
         super().__init__(loss, labels=labels)
@@ -47,10 +50,19 @@ class RHBIGANLoss(GANLoss):
             or critic_weight < 0.0
         ):
             raise ValueError("critic_weight must be finite and nonnegative")
+        if (
+            isinstance(fibre_rel_blend, bool)
+            or not isinstance(fibre_rel_blend, (int, float))
+            or not math.isfinite(fibre_rel_blend)
+            or fibre_rel_blend < 0.0
+            or fibre_rel_blend > 1.0
+        ):
+            raise ValueError("fibre_rel_blend must be finite and in [0, 1]")
         if type(conditional_fibre) is not str or conditional_fibre not in ("joint", "slack", "calibrated"):
             raise ValueError("conditional_fibre must be 'joint', 'slack', or 'calibrated'")
         self.critic_weight = float(critic_weight)
         self.conditional_fibre = conditional_fibre
+        self.fibre_rel_blend = float(fibre_rel_blend)
         self.record = record
         self.rhbi = RHBILoss(
             weight=weight,
@@ -66,8 +78,10 @@ class RHBIGANLoss(GANLoss):
             relativistic_weight=relativistic_weight,
             scale_log_odds=scale_log_odds,
             akt_horizon=akt_horizon,
+            akt_mode=akt_mode,
             slack_gain=slack_gain,
             thermal_tau=thermal_tau,
+            thermal_shock_mu=thermal_shock_mu,
         )
         self.last_metrics: Dict[str, float] = {}
 
@@ -100,10 +114,30 @@ class RHBIGANLoss(GANLoss):
 
     def d_loss(self, real_logits: torch.Tensor, fake_logits: torch.Tensor) -> torch.Tensor:
         base = super().d_loss(real_logits, fake_logits)
-        if self.critic_weight == 0.0:
+        if self.critic_weight == 0.0 and self.fibre_rel_blend == 0.0:
             return base
         x_f, x_r, cond_f, cond_r, rec, has_cont_cond = self._resolve_pair_full(fake_logits, real_logits)
-        if self.conditional_fibre in ("slack", "calibrated") and has_cont_cond:
+        if self.conditional_fibre == "slack" and has_cont_cond:
+            if self.fibre_rel_blend > 0.0:
+                b_r = real_logits.shape[0]
+                b_f = fake_logits.shape[0]
+                if b_r == b_f:
+                    r_flat = (
+                        real_logits.reshape(b_r, -1).mean(dim=1)
+                        if real_logits.ndim > 1
+                        else real_logits.reshape(b_r)
+                    )
+                    f_flat = (
+                        fake_logits.reshape(b_f, -1).mean(dim=1)
+                        if fake_logits.ndim > 1
+                        else fake_logits.reshape(b_f)
+                    )
+                    pair_d = F.softplus(f_flat - r_flat).mean()
+                    return (1.0 - self.fibre_rel_blend) * base + self.fibre_rel_blend * pair_d
+            return base
+        if self.conditional_fibre == "calibrated" and has_cont_cond:
+            return base
+        if self.critic_weight == 0.0:
             return base
         slack_reg = self.rhbi.critic_slack_loss(
             x_f,

@@ -205,6 +205,7 @@ class _RHBIRecordThermalMixin:
         *,
         ema_decay: float = 0.96,
         s_min: float = 1e-6,
+        shock_mu_ratio: float = 0.15,
     ) -> float:
         ed_f = float(r_ed)
         mu_sq_f = float(r_mu_sq)
@@ -222,7 +223,7 @@ class _RHBIRecordThermalMixin:
         q90_c = max(-cap_lin, min(q90_f, cap_lin))
         hmax_c = max(-cap_lin, min(hmax_f, cap_lin))
         shock_ed_thresh = max(0.30, 4.0 * tau_pos * tau_pos)
-        shock_mu_thresh = 0.15 * shock_ed_thresh
+        shock_mu_thresh = float(shock_mu_ratio) * shock_ed_thresh
         if not self.rhbi_thermal_initialized or (
             self._thermal_scale < 0.99 and (ed_f > shock_ed_thresh or mu_sq_f > shock_mu_thresh)
         ):

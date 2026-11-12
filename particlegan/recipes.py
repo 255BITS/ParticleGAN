@@ -23,9 +23,13 @@ try:
         rhbi_scale_log_odds=False,
         rhbi_conditional_fibre="joint",
         rhbi_akt_horizon=False,
+        rhbi_akt_mode="sqrt",
         rhbi_slack_gain=0.0,
         rhbi_chord_weight=0.0,
         rhbi_thermal_tau=0.0,
+        rhbi_thermal_shock_mu=0.15,
+        rhbi_settle_beta=0.0,
+        rhbi_fibre_rel_blend=0.0,
     )
 except (ImportError, ValueError):
     pass
@@ -327,9 +331,13 @@ class Recipe:
     rhbi_scale_log_odds: bool = False
     rhbi_conditional_fibre: str = "joint"
     rhbi_akt_horizon: bool = False
+    rhbi_akt_mode: str = "sqrt"
     rhbi_slack_gain: float = 0.0
     rhbi_chord_weight: float = 0.0
     rhbi_thermal_tau: float = 0.0
+    rhbi_thermal_shock_mu: float = 0.15
+    rhbi_settle_beta: float = 0.0
+    rhbi_fibre_rel_blend: float = 0.0
 
     def __init__(self, **resolved_fields):
         declared = {field.name for field in fields(type(self))}
@@ -568,6 +576,9 @@ class Recipe:
             ("rhbi_slack_gain", False),
             ("rhbi_chord_weight", False),
             ("rhbi_thermal_tau", False),
+            ("rhbi_thermal_shock_mu", False),
+            ("rhbi_settle_beta", False),
+            ("rhbi_fibre_rel_blend", False),
         ):
             rhbi_val = getattr(self, rhbi_name)
             if type(rhbi_val) not in (int, float) or not math.isfinite(rhbi_val) or (
@@ -578,6 +589,8 @@ class Recipe:
             raise ValueError("rhbi_self_coupling must be 'hollow' or 'feydy'")
         if type(self.rhbi_conditional_fibre) is not str or self.rhbi_conditional_fibre not in ("joint", "slack", "calibrated"):
             raise ValueError("rhbi_conditional_fibre must be 'joint', 'slack', or 'calibrated'")
+        if type(self.rhbi_akt_mode) is not str or self.rhbi_akt_mode not in ("sqrt", "weibull"):
+            raise ValueError("rhbi_akt_mode must be 'sqrt' or 'weibull'")
         if type(self.rhbi_rapidity_screening) is not bool:
             raise ValueError("rhbi_rapidity_screening must be a boolean")
         if type(self.rhbi_scale_log_odds) is not bool:
@@ -590,6 +603,8 @@ class Recipe:
             raise ValueError("rhbi_nn_quantile must be in (0, 1)")
         if self.rhbi_chord_weight > 1.0:
             raise ValueError("rhbi_chord_weight must be in [0, 1]")
+        if self.rhbi_fibre_rel_blend > 1.0:
+            raise ValueError("rhbi_fibre_rel_blend must be in [0, 1]")
         if type(self.rhbi_iters) is not int or self.rhbi_iters < 1:
             raise ValueError("rhbi_iters must be a positive integer")
         if type(self.ebi_beta) not in (int, float) or not math.isfinite(self.ebi_beta) or self.ebi_beta <= 0:
@@ -940,8 +955,11 @@ class Recipe:
                 scale_log_odds=self.rhbi_scale_log_odds,
                 conditional_fibre=self.rhbi_conditional_fibre,
                 akt_horizon=self.rhbi_akt_horizon,
+                akt_mode=self.rhbi_akt_mode,
                 slack_gain=self.rhbi_slack_gain,
                 thermal_tau=self.rhbi_thermal_tau,
+                thermal_shock_mu=self.rhbi_thermal_shock_mu,
+                fibre_rel_blend=self.rhbi_fibre_rel_blend,
             )
         if self.effective_critic_formulation == "bispf" and self.loss == "relativistic":
             from .bispf import SinkhornRelativisticLoss
@@ -1035,6 +1053,8 @@ class Recipe:
                 "gamma_gauge": self.rhbi_gamma_gauge,
                 "chord_weight": self.rhbi_chord_weight,
                 "akt_horizon": self.rhbi_akt_horizon,
+                "akt_mode": self.rhbi_akt_mode,
+                "settle_beta": self.rhbi_settle_beta,
                 **overrides,
             }
             from .rhbi import _RHBIPenaltyKernel
