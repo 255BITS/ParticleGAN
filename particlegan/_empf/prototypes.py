@@ -98,10 +98,10 @@ def update_emeans_prototypes(
     cur_sum = proto_sum.to(device=x.device, dtype=torch.float32)
     cur_count = proto_count.to(device=x.device, dtype=torch.float32)
     k = cur_sum.shape[0]
-
     centroids_prev = cur_sum / cur_count.clamp_min(1e-8).unsqueeze(1)
+
     d2 = pairwise_sq_dist(x, centroids_prev)
-    assign = d2.argmin(dim=1)
+    d2_min, assign = d2.min(dim=1)
 
     batch_count = torch.zeros(k, device=x.device, dtype=torch.float32)
     batch_count.scatter_add_(0, assign, torch.ones(b_r, device=x.device, dtype=torch.float32))
@@ -116,8 +116,29 @@ def update_emeans_prototypes(
         alpha_min=alpha_min,
         alpha_max=alpha_max,
     )
-    new_sum = (1.0 - alpha) * cur_sum + alpha * batch_sum
-    new_count = (1.0 - alpha) * cur_count + alpha * batch_count
+    # Clock-free innovation & starvation shock boost: normalized by total batch
+    # pairwise spread 2 * sum(Var(X)) == E[||X - X'||^2] so 1-mode and 2-mode
+    # stationary distributions stay at exact zero shock (alpha_eff == alpha) while
+    # abrupt support shifts immediately accelerate prototype turnover.
+    pair_spread = (2.0 * x.var(dim=0, unbiased=False).sum()).clamp_min(1e-12)
+    r2p_rms_t = torch.sqrt(d2_min.mean() / pair_spread)
+    if k >= 16 and b_r >= 16:
+        cur_w = cur_count / cur_count.sum().clamp_min(1e-8)
+        expected_zero_t = torch.exp(-float(b_r) * cur_w).mean()
+        actual_zero_t = (batch_count == 0).to(dtype=torch.float32).mean()
+        r2p_rms, expected_zero, actual_zero = torch.stack(
+            (r2p_rms_t, expected_zero_t, actual_zero_t)
+        ).tolist()
+        shock_zero = max(0.0, min(1.0, (float(actual_zero) - float(expected_zero) - 0.35) / 0.25))
+    else:
+        r2p_rms = float(r2p_rms_t.item())
+        shock_zero = 0.0
+    shock_r2p = max(0.0, min(1.0, (float(r2p_rms) - 0.42) / 0.35))
+    shock = max(shock_r2p, shock_zero)
+    alpha_eff = float(min(0.50, alpha + (0.50 - alpha) * (shock * shock)))
+
+    new_sum = (1.0 - alpha_eff) * cur_sum + alpha_eff * batch_sum
+    new_count = (1.0 - alpha_eff) * cur_count + alpha_eff * batch_count
 
     mean_count = new_count.mean()
     dead_mask = new_count < (float(revival_tau) * mean_count)
@@ -128,6 +149,7 @@ def update_emeans_prototypes(
         dead_indices = torch.nonzero(dead_mask, as_tuple=False).squeeze(1).tolist()
         coord_std = x.std(dim=0, unbiased=False) + 1e-6
         dim_idx = torch.arange(1, dim + 1, device=x.device, dtype=torch.float32)
+
         for offset, d_idx in enumerate(dead_indices):
             donor_weights = (new_count - float(revival_tau) * mean_count).clamp_min(0.0)
             donor_weights[d_idx] = 0.0
@@ -148,17 +170,17 @@ def update_emeans_prototypes(
                 p_idx = (d_idx + 1) % k
 
             c_donor = new_sum[p_idx] / new_count[p_idx].clamp_min(1e-8)
-            # Split donor + dead sufficient counts equally to conserve exact total mass.
+            # Split donor + dead sufficient counts equally around donor centroid to conserve exact total mass.
             half_total = 0.5 * (new_count[p_idx] + new_count[d_idx])
             angles = dim_idx * ((phase + (offset + 1) * _PHI1) * (2.0 * math.pi))
             direction = torch.cos(angles)
             direction = direction / direction.norm().clamp_min(1e-8)
             delta = float(split_eps) * coord_std * direction
-
             new_count[p_idx] = half_total
             new_count[d_idx] = half_total
             new_sum[p_idx] = half_total * (c_donor - delta)
             new_sum[d_idx] = half_total * (c_donor + delta)
+
             total_revivals += 1
 
         phase = (phase + _PHI1) % 1.0

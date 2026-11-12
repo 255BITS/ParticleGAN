@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import math
-from typing import Any, Dict, Tuple
+from typing import Any, Dict, Sequence, Tuple
 
 import torch
 from torch import nn
@@ -16,10 +16,17 @@ from .critic import (
     EMPFStepRecord,
     FROZEN_THERMAL_SCALE,
     _attach_empf_critic_hook,
+    compute_empf_step_scale,
     compute_thermal_scale,
 )
 from .prototypes import _PHI1, _PHI2, update_emeans_prototypes
-from .transport import conditional_fiber_residual, mass_weighted_sinkhorn
+from .transport import (
+    conditional_fiber_residual,
+    conditional_joint_discrepancy,
+    effective_sinkhorn_eps,
+    mass_weighted_sinkhorn,
+    unconditioned_chamfer_residual,
+)
 
 
 class _EMPFPenaltyKernel:
@@ -27,8 +34,9 @@ class _EMPFPenaltyKernel:
 
     Maintains an online e-means sufficient-statistics prototype bank ``(S, N)``
     on unconditioned continuous domains, computes mass-weighted prototype-to-fake
-    entropic transport chords, and preserves fiber alignment automatically when
-    row-aligned conditioning is supplied.
+    entropic transport chords with state-settling temperature, adapts local
+    Born-Infeld slope resolution to multi-mode concentration, and aligns
+    conditioned transition fibers per context.
     """
 
     def __init__(
@@ -51,7 +59,7 @@ class _EMPFPenaltyKernel:
         revival_tau: float = 0.05,
         tau_cooling: float = 0.020,
         s_min: float = 1e-5,
-        thermal_decay: float = 0.95,
+        thermal_decay: float = 0.92,
         input_domain: str = "auto",
         record: CriticStepRecord | None = None,
     ) -> None:
@@ -128,7 +136,7 @@ class _EMPFPenaltyKernel:
             self.record.ema_residual = float(res)
             self.record.ema_data_scale = float(data_scale)
             self.record.initialized = True
-        elif float(res) > float(self.record.ema_residual):
+        elif float(res) > max(5.5 * float(self.record.ema_residual), float(self.record.ema_residual) + 0.55):
             self.record.ema_residual = float(res)
             self.record.ema_data_scale = float(data_scale)
         else:
@@ -148,6 +156,7 @@ class _EMPFPenaltyKernel:
         collect_stats: bool = False,
         *,
         is_conditioned: bool = False,
+        cond_tensors: Sequence[torch.Tensor] = (),
         **kwargs,
     ) -> Tuple[torch.Tensor, Dict[str, Any]]:
         del kwargs
@@ -173,12 +182,26 @@ class _EMPFPenaltyKernel:
 
         target_matched: torch.Tensor | None = None
         alpha: torch.Tensor | None = None
+        local_clump_gain: float = 1.0
+        cond_fiber_ratio: torch.Tensor | None = None
+        step_scale_val: float = 1.0
 
         if use_chords and not is_conditioned:
             p_sum = getattr(self.record, "proto_sum", None)
             p_count = getattr(self.record, "proto_count", None)
             rev_phase = float(getattr(self.record, "revival_phase", 0.0))
             rev_count = int(getattr(self.record, "revivals", 0))
+            prev_prototypes: torch.Tensor | None = None
+            if (
+                isinstance(p_sum, torch.Tensor)
+                and isinstance(p_count, torch.Tensor)
+                and p_sum.ndim == 2
+                and p_count.ndim == 1
+                and p_sum.shape[0] == p_count.shape[0]
+                and p_sum.shape[0] > 0
+                and p_sum.shape[1] == dim
+            ):
+                prev_prototypes = (p_sum / p_count.clamp_min(1e-8).unsqueeze(1)).detach()
 
             prototypes, proto_weights, new_sum, new_count, new_rev_phase, new_revivals = update_emeans_prototypes(
                 x_real,
@@ -194,41 +217,94 @@ class _EMPFPenaltyKernel:
             if hasattr(self.record, "update_prototypes"):
                 self.record.update_prototypes(new_sum, new_count, new_rev_phase, new_revivals)
 
+            prev_res = float(self.record.ema_residual) if getattr(self.record, "initialized", False) else 1.0
+            prev_scale = float(getattr(self.record, "_thermal_scale", 1.0))
+            compressed_bank = bool(2 <= dim <= 4 and b_r >= max(1024, 3 * prototypes.shape[0]))
+            eps_eff = effective_sinkhorn_eps(prev_res, self.sinkhorn_eps) if compressed_bank else self.sinkhorn_eps
             pi, _, res, data_scale = mass_weighted_sinkhorn(
                 prototypes,
                 proto_weights,
                 x_fake,
-                sinkhorn_eps=self.sinkhorn_eps,
+                sinkhorn_eps=eps_eff,
                 sinkhorn_iters=self.sinkhorn_iters,
             )
-            self._observe(float(res.item()), float(data_scale.item()))
+
+            obs_res, obs_ds = torch.stack((res.detach(), data_scale.detach())).tolist()
+            self._observe(float(obs_res), float(obs_ds))
 
             if 1 <= dim <= 4 and b_r >= 32 and b_f >= 32:
-                query_batch = 128 if (b_r >= 1024 and 2 <= dim <= 4) else b_r
                 t_scale = compute_thermal_scale(
                     float(self.record.ema_residual),
-                    query_batch,
+                    b_r,
                     dim,
                     tau_cooling=self.tau_cooling,
                     s_min=self.s_min,
                 )
+                if dim == 1:
+                    step_scale_val = compute_empf_step_scale(float(self.record.ema_residual), b_r, dim)
             else:
                 t_scale = 1.0
 
-            # State-driven harmonic capture lock (zero step counters): when the e-means
-            # transport EMA has settled (< 0.12) and the 95th-percentile bidirectional
-            # real/fake nearest-neighbor distance enters the harmonic basin, lock thermal
-            # cooling at s_min so DualNorm's smoothing floor cannot drift converged modes.
+            # Harmonic capture lock & compressed-bank local slope resolution:
+            # - For 64 <= b_r <= 512 in 2D, preserves EMPF-v2's exact median-normalized NN lock,
+            #   and once frozen checks real->pre-step-prototypes and fake->real quantiles so
+            #   rare single-batch multinomial zero-draws in x_fake cannot uncool long holds while
+            #   any target shift unlocks on step 1.
+            # - For compressed-bank dense multi-mode lattices (b_r >= 1024), adapts local
+            #   Born-Infeld slope bound inversely with intra-mode kNN scale (1/knn_med) so
+            #   fine clusters are resolved across wide global domains, and locks deeply once
+            #   real<->fake NN quantiles match intra-mode real<->real NN quantiles.
             if dim == 2 and 64 <= b_r <= 512 and b_f >= 64 and float(self.record.ema_residual) < 0.12:
                 with torch.no_grad():
-                    d2_rf = pairwise_sq_dist(x_real.detach().flatten(1), x_fake.detach().flatten(1))
-                    norm_d = (d2_rf / d2_rf.median().clamp_min(1e-12)).sqrt()
-                    r2f_q = float(norm_d.min(dim=1).values.quantile(0.95).item())
+                    r_flat_2d = x_real.detach().flatten(1)
+                    f_flat_2d = x_fake.detach().flatten(1)
+                    d2_rf = pairwise_sq_dist(r_flat_2d, f_flat_2d)
+                    med_d2 = d2_rf.median().clamp_min(1e-12)
+                    norm_d = (d2_rf / med_d2).sqrt()
                     f2r_q = float(norm_d.min(dim=0).values.quantile(0.95).item())
-                    prev_scale = float(getattr(self.record, "_thermal_scale", 1.0))
-                    thresh = 0.065 if prev_scale < 1.0 else 0.050
-                    if max(r2f_q, f2r_q) < thresh:
-                        t_scale = self.s_min
+                    if prev_scale <= FROZEN_THERMAL_SCALE and prev_prototypes is not None:
+                        p_prev_2d = prev_prototypes.to(device=r_flat_2d.device, dtype=r_flat_2d.dtype)
+                        d2_rp = pairwise_sq_dist(r_flat_2d, p_prev_2d)
+                        r2p_q = float(
+                            (d2_rp / d2_rp.median().clamp_min(1e-12))
+                            .sqrt()
+                            .min(dim=1)
+                            .values.quantile(0.95)
+                            .item()
+                        )
+                        if max(r2p_q, f2r_q) < 0.055:
+                            t_scale = self.s_min
+                    else:
+                        r2f_q = float(norm_d.min(dim=1).values.quantile(0.95).item())
+                        thresh = 0.065 if prev_scale < 1.0 else 0.050
+                        if max(r2f_q, f2r_q) < thresh:
+                            t_scale = self.s_min
+            elif compressed_bank and b_f >= 64:
+                with torch.no_grad():
+                    r_flat = x_real.detach().flatten(1).to(dtype=torch.float32)
+                    d2_rr = pairwise_sq_dist(r_flat)
+                    eye_r = torch.eye(b_r, device=x_real.device, dtype=torch.bool)
+                    d2_rr_masked = d2_rr.masked_fill(eye_r, float("inf"))
+                    med_d = float(d2_rr.masked_fill(eye_r, 0.0).median().clamp_min(1e-12).sqrt().item())
+                    k_nn = max(2, min(12, b_r // 64))
+                    knn_d2 = torch.topk(d2_rr_masked, k=k_nn, dim=1, largest=False).values[:, -1]
+                    knn_med = float(knn_d2.median().clamp_min(1e-8).sqrt().item())
+                    expected_homo = med_d * ((float(k_nn) / float(b_r)) ** (1.0 / float(dim)))
+                    clump_ratio = max(1.0, min(8.0, expected_homo / max(knn_med, 1e-6)))
+                    local_clump_gain = min(2.8, max(1.0, clump_ratio / 2.0))
+                    if t_scale < 0.15:
+                        f_flat = x_fake.detach().flatten(1).to(dtype=torch.float32)
+                        d2_rf = pairwise_sq_dist(r_flat, f_flat)
+                        r2r_nn = d2_rr_masked.min(dim=1).values.sqrt()
+                        r2r_q90 = r2r_nn.quantile(0.90).clamp_min(1e-6)
+                        r2r_q65 = r2r_nn.quantile(0.65).clamp_min(1e-6)
+                        r2f_q90 = d2_rf.min(dim=1).values.sqrt().quantile(0.90)
+                        f2r_q65 = d2_rf.min(dim=0).values.sqrt().quantile(0.65)
+                        r2f_ratio = float((r2f_q90 / r2r_q90).item())
+                        f2r_ratio = float((f2r_q65 / r2r_q65).item())
+                        thresh = 1.25 if prev_scale < 0.005 else 1.12
+                        if max(r2f_ratio, f2r_ratio) < thresh:
+                            t_scale = self.s_min
 
             with torch.no_grad():
                 col_probs = (b_f * pi.t()).clamp_min(1e-12)
@@ -243,8 +319,20 @@ class _EMPFPenaltyKernel:
                 alpha = u.reshape((b_f,) + (1,) * (x_real.ndim - 1))
                 self.record.chord_phase = (phase + _PHI1) % 1.0
         elif use_chords and is_conditioned:
-            res, data_scale = conditional_fiber_residual(x_real, x_fake)
-            self._observe(float(res.item()), float(data_scale.item()))
+            if cond_tensors and b_r == b_f and b_r >= 16:
+                u_signed, data_scale, cond_fiber_ratio = conditional_joint_discrepancy(
+                    x_real, x_fake, cond_tensors
+                )
+                if hasattr(self.record, "observe_conditional_energy"):
+                    self.record.observe_conditional_energy(u_signed, float(data_scale.item()))
+                else:
+                    self._observe(math.sqrt(max(0.0, u_signed)), float(data_scale.item()))
+                cond_res = float(getattr(self.record, "ema_residual", 1.0))
+                u_c = max(0.0, min(1.0, (cond_res - 0.008) / (0.024 - 0.008)))
+                step_scale_val = float(0.85 + 0.15 * (u_c * u_c * (3.0 - 2.0 * u_c)))
+            else:
+                res, data_scale = conditional_fiber_residual(x_real, x_fake)
+                self._observe(float(res.item()), float(data_scale.item()))
             t_scale = 1.0
             if b_r == b_f:
                 with torch.no_grad():
@@ -264,33 +352,22 @@ class _EMPFPenaltyKernel:
             # discrete transport residual settles so converged logit boundaries
             # cannot bounce over multi-thousand-step holds.
             if not is_conditioned and b_r >= 64 and b_f >= 64 and dim >= 170:
-                uniform_w = torch.full((b_r,), 1.0 / max(1, b_r), device=x_real.device, dtype=x_real.dtype)
-                _, _, res, data_scale = mass_weighted_sinkhorn(
-                    x_real.detach(),
-                    uniform_w,
-                    x_fake.detach(),
-                    sinkhorn_eps=self.sinkhorn_eps,
-                    sinkhorn_iters=self.sinkhorn_iters,
-                )
-                self._observe(float(res.item()), float(data_scale.item()))
+                res, data_scale = unconditioned_chamfer_residual(x_real.detach(), x_fake.detach())
+                obs_res, obs_ds = torch.stack((res.detach(), data_scale.detach())).tolist()
+                self._observe(float(obs_res), float(obs_ds))
                 u_w = max(0.0, min(1.0, float(self.record.ema_residual) / 0.070))
                 smooth_w = u_w * u_w * (3.0 - 2.0 * u_w)
                 t_scale = float(0.35 + 0.65 * smooth_w)
             else:
                 t_scale = 1.0
         else:
-            uniform_w = torch.full((b_r,), 1.0 / max(1, b_r), device=x_real.device, dtype=x_real.dtype)
-            _, _, res, data_scale = mass_weighted_sinkhorn(
-                x_real.detach(),
-                uniform_w,
-                x_fake.detach(),
-                sinkhorn_eps=self.sinkhorn_eps,
-                sinkhorn_iters=self.sinkhorn_iters,
-            )
-            self._observe(float(res.item()), float(data_scale.item()))
+            res, data_scale = unconditioned_chamfer_residual(x_real.detach(), x_fake.detach())
+            obs_res, obs_ds = torch.stack((res.detach(), data_scale.detach())).tolist()
+            self._observe(float(obs_res), float(obs_ds))
             t_scale = 1.0
 
         self.record._thermal_scale = float(t_scale)
+        self.record._step_scale = float(step_scale_val)
 
         scale_dim = 1.0 if (is_discrete_simplex or is_image_tensor or dim <= 4) else math.sqrt(dim)
 
@@ -298,40 +375,38 @@ class _EMPFPenaltyKernel:
         try:
             x_r_req = x_real.detach().clone().requires_grad_(True)
             d_r_out = live(x_r_req)
-            g_real = torch.autograd.grad(
-                outputs=_score_scalar(d_r_out),
-                inputs=x_r_req,
-                create_graph=True,
-                only_inputs=True,
-            )[0]
-
             x_f_req = x_fake.detach().clone().requires_grad_(True)
             d_f_out = live(x_f_req)
-            g_fake = torch.autograd.grad(
-                outputs=_score_scalar(d_f_out),
-                inputs=x_f_req,
-                create_graph=True,
-                only_inputs=True,
-            )[0]
 
             g_chord: torch.Tensor | None = None
             if use_chords and target_matched is not None and alpha is not None:
                 x_chord = ((1.0 - alpha) * x_fake.detach() + alpha * target_matched).requires_grad_(True)
                 d_chord_out = live(x_chord)
-                g_chord = torch.autograd.grad(
-                    outputs=_score_scalar(d_chord_out),
-                    inputs=x_chord,
+                g_real, g_fake, g_chord = torch.autograd.grad(
+                    outputs=(_score_scalar(d_r_out), _score_scalar(d_f_out), _score_scalar(d_chord_out)),
+                    inputs=(x_r_req, x_f_req, x_chord),
                     create_graph=True,
                     only_inputs=True,
-                )[0]
+                )
+            else:
+                g_real, g_fake = torch.autograd.grad(
+                    outputs=(_score_scalar(d_r_out), _score_scalar(d_f_out)),
+                    inputs=(x_r_req, x_f_req),
+                    create_graph=True,
+                    only_inputs=True,
+                )
         finally:
             self.record._in_penalty = False
 
         res_ratio = min(1.0, max(0.0, float(getattr(self.record, "ema_residual", 1.0))))
+        kappa_eff: float | torch.Tensor
         if is_image_tensor:
             ref_scale = 4.899
             img_scale = min(1.0, max(0.15, float(getattr(self.record, "ema_data_scale", ref_scale)) / ref_scale))
             kappa_eff = (self.kappa / img_scale) * (0.6 + 1.10 * (1.0 - res_ratio))
+        elif local_clump_gain > 1.0:
+            settle_fine = min(1.0, max(0.0, 1.0 - res_ratio / 0.060))
+            kappa_eff = self.kappa * (1.0 + (local_clump_gain - 1.0) * (settle_fine * settle_fine))
         else:
             kappa_eff = self.kappa
 
@@ -350,11 +425,12 @@ class _EMPFPenaltyKernel:
             self.record._last_d_logits = (d_r.detach(), d_f.detach())
         else:
             # State-driven settling Born-Infeld sharpness: stays soft at ebi_beta (6.0)
-            # during far-from-manifold mode acquisition (ema_residual >= 0.16), then
-            # tightens quadratically as transport settles, scaled by prototype-bank
-            # batch resolution relative to reference_batch = 128.
+            # during far-from-manifold mode acquisition, tightens moderately when uncooled,
+            # and tightens fully as thermal cooling engages.
             settle_s = min(1.0, max(0.0, 1.0 - res_ratio / 0.16))
-            batch_gain = 6.5 + 15.5 * min(1.0, max(0.0, (float(b_r) - 64.0) / 64.0))
+            b_frac = min(1.0, max(0.0, (float(b_r) - 64.0) / 64.0))
+            cool_boost = 1.0 - float(t_scale)
+            batch_gain = (2.0 + 3.0 * b_frac) + cool_boost * (4.5 + 12.5 * b_frac)
             eff_ebi_beta = self.ebi_beta + batch_gain * (settle_s * settle_s)
             sq_real = g_real.flatten(1).pow(2).sum(dim=1)
             norm_real = (sq_real + 1e-12).sqrt() / scale_dim
@@ -372,16 +448,7 @@ class _EMPFPenaltyKernel:
                 cap_pen = 0.5 * self.lambda_cap * (
                     cap_real + (1.0 - self.chord_blend) * cap_fake + self.chord_blend * cap_chord
                 )
-                curv_pen = x_real.new_zeros(())
-                if dim == 1 and b_r >= 32 and b_f >= 32 and target_matched is not None and alpha is not None:
-                    with torch.no_grad():
-                        nn_real_idx = pairwise_sq_dist(
-                            target_matched.detach().flatten(1),
-                            x_real.detach().flatten(1),
-                        ).argmin(dim=1)
-                    g_target = (1.0 - alpha) * g_fake + alpha * g_real.detach()[nn_real_idx]
-                    curv_pen = 0.25 * (g_chord - g_target).flatten(1).pow(2).sum(dim=1).mean()
-                ebi_loss = floor_pen + cap_pen + curv_pen
+                ebi_loss = floor_pen + cap_pen
             else:
                 norm_chord = 0.5 * (norm_real + norm_fake)
                 floor_pen = 0.5 * eff_floor * ((sq_real.mean() + sq_fake.mean()) / (2.0 * dim))
@@ -428,6 +495,7 @@ class _EMPFPenaltyKernel:
             "gauge_loss": float(gauge_v),
             "floor_pen": float(floor_v),
             "s_thermal": float(t_scale),
+            "step_scale": float(step_scale_val),
             "ema_residual": float(getattr(self.record, "ema_residual", 1.0)),
             "ema_data_scale": float(getattr(self.record, "ema_data_scale", 1.0)),
             "proto_revivals": int(getattr(self.record, "revivals", 0)),
@@ -473,6 +541,11 @@ class EMPFCriticPenalty(_K3PCriticPenalty):
             return output(critic(x, *condition, **condition_kwargs))
 
         is_conditioned = bool(condition or condition_kwargs)
+        cond_tensors = [
+            t.detach()
+            for t in (*condition, *(condition_kwargs[k] for k in sorted(condition_kwargs)))
+            if isinstance(t, torch.Tensor) and t.ndim >= 1 and t.shape[0] == x_real.shape[0]
+        ]
         step = self.optimizer.record.observed_steps + 1
         penalty, stats = self.regularizer.penalty(
             live,
@@ -481,6 +554,7 @@ class EMPFCriticPenalty(_K3PCriticPenalty):
             step,
             self.collect_stats,
             is_conditioned=is_conditioned,
+            cond_tensors=cond_tensors,
             ema_critic=_no_anchor,
         )
         self.last_stats = stats
@@ -493,6 +567,7 @@ class EMPFCriticPenalty(_K3PCriticPenalty):
             ema_residual=float(getattr(record, "ema_residual", 1.0)),
             ema_data_scale=float(getattr(record, "ema_data_scale", 1.0)),
             s_thermal=float(getattr(record, "_thermal_scale", 1.0)),
+            step_scale=float(getattr(record, "_step_scale", 1.0)),
             proto_revivals=int(getattr(record, "revivals", 0)),
         )
         return out
