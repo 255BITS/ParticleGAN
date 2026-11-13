@@ -40,6 +40,7 @@ class RHBILoss(nn.Module):
         slack_gain: float = 0.0,
         thermal_tau: float = 0.0,
         thermal_shock_mu: float = 0.15,
+        cvx_mu_gain: float = 0.40,
     ) -> None:
         super().__init__()
         for name, val, positive in (
@@ -53,6 +54,7 @@ class RHBILoss(nn.Module):
             ("slack_gain", slack_gain, False),
             ("thermal_tau", thermal_tau, False),
             ("thermal_shock_mu", thermal_shock_mu, False),
+            ("cvx_mu_gain", cvx_mu_gain, True),
         ):
             if isinstance(val, bool) or not isinstance(val, (int, float)) or not math.isfinite(val) or (
                 val <= 0.0 if positive else val < 0.0
@@ -97,6 +99,7 @@ class RHBILoss(nn.Module):
         self.slack_gain = float(slack_gain)
         self.thermal_tau = float(thermal_tau)
         self.thermal_shock_mu = float(thermal_shock_mu)
+        self.cvx_mu_gain = float(cvx_mu_gain)
         self.register_buffer("ell_ema", torch.tensor(0.0, dtype=torch.float32))
         self.register_buffer("ell_initialized", torch.tensor(False, dtype=torch.bool))
         self._ell_init_py: bool = False
@@ -363,6 +366,8 @@ class RHBILoss(nn.Module):
         x: torch.Tensor,
         y: torch.Tensor,
         ell: Optional[torch.Tensor] = None,
+        *,
+        cvx_mu_gain: float = 0.40,
     ) -> Tuple[float, float, float, float, float]:
         """Zero-bias two-sample Energy Distance, barycenter, spread, precision, and coverage residuals."""
         xf = x.detach().reshape(x.shape[0], -1).float()
@@ -399,8 +404,33 @@ class RHBILoss(nn.Module):
                 if ell is not None
                 else torch.quantile(yy_loo_nn, 0.25).clamp_min(1e-8)
             )
-            psi_conn = (0.15 + 5.5 * (ell_ref / denom_ed)).clamp(0.15, 0.40)
-            r_mu_sq_t = psi_conn.square() * r_mu_sq_raw
+            psi_base = (0.15 + 5.5 * (ell_ref / denom_ed)).clamp(0.15, 0.40)
+            r_mu_base = psi_base.square() * r_mu_sq_raw
+            if cvx_mu_gain != 0.40 and by >= 4:
+                d_yy_full = d_yy_mat.clone()
+                d_yy_full.fill_diagonal_(float("inf"))
+                nn_y_mean = d_yy_full.amin(dim=1).mean()
+                if float(nn_y_mean.item()) > 1e-8:
+                    y_mid = 0.5 * (yf + yf.roll(1, dims=0))
+                    d_my = torch.cdist(y_mid, yf, p=2)
+                    idx = torch.arange(by, device=yf.device)
+                    d_my[idx, idx] = float("inf")
+                    d_my[idx, (idx + 1) % by] = float("inf")
+                    rho_cvx = d_my.amin(dim=1).mean() / nn_y_mean
+                    u_cvx = ((1.15 - rho_cvx) / 0.20).clamp(0.0, 1.0)
+                    w_cvx = float((u_cvx * u_cvx * (3.0 - 2.0 * u_cvx)).item())
+                    psi_hi = 0.40 + w_cvx * (float(cvx_mu_gain) - 0.40)
+                    psi_cvx = (0.15 + 5.5 * (ell_ref / denom_ed)).clamp(0.15, psi_hi)
+                    r_mu_cvx = psi_cvx.square() * r_mu_sq_raw
+                    r_mu_sq_t = torch.where(
+                        r_mu_sq_raw >= 0.0,
+                        torch.maximum(r_mu_base, r_mu_cvx.clamp_max(0.045)),
+                        r_mu_cvx,
+                    )
+                else:
+                    r_mu_sq_t = r_mu_base
+            else:
+                r_mu_sq_t = r_mu_base
 
             # Fake-to-real 75th-quantile precision excess (tracks intra-mode halo convergence cleanly)
             prec_q75 = torch.quantile(xy_row_nn, 0.75) - torch.quantile(yy_loo_nn, 0.75)
@@ -637,7 +667,7 @@ class RHBILoss(nn.Module):
                 and hasattr(record, "observe_rhbi_thermal")
             ):
                 r_ed, r_mu_sq, r_spread, r_q90, r_hmax = self._split_two_sample_residuals(
-                    x_fake, y_real, ell=ell
+                    x_fake, y_real, ell=ell, cvx_mu_gain=self.cvx_mu_gain
                 )
                 s_obs = record.observe_rhbi_thermal(
                     r_ed,
@@ -915,20 +945,31 @@ class RHBILoss(nn.Module):
         *,
         record: Any = None,
         iso_weight: float = 0.45,
+        chart_weight: float = 0.0,
     ) -> torch.Tensor:
-        """Detached-vertex local k-NN 1-simplex and 2-simplex manifold chart regularizer.
+        """Local k-NN 1-simplex and 2-simplex manifold chart regularizer.
 
         Queries interior points along local latent k-NN chords and triangle faces
-        using deterministic Weyl stratification (zero RNG draws, zero step clocks),
-        detaching ``z_table`` so gradients bend only the generator chart ``G_theta``
-        onto ``supp(y_real)`` via entropic Born-Infeld projection plus scale-free
-        geodesic equipartition against Voronoi snapping.
+        using deterministic Weyl stratification (zero RNG draws, zero step clocks).
+        When ``chart_weight > 0`` and ``supp(y_real)`` forms a low-dimensional
+        connected manifold under ``H_0`` Vietoris-Rips persistence and diameter-to-step
+        span, jointly anchors vertices via balanced Born-Infeld Sinkhorn transport,
+        enforces triangle inradius interior margins, and aligns local latent geodesic
+        distances with output manifold shortest-path chart geometry.
         """
+        if (
+            isinstance(chart_weight, bool)
+            or not isinstance(chart_weight, (int, float))
+            or not math.isfinite(chart_weight)
+            or chart_weight < 0.0
+        ):
+            raise ValueError("chart_weight must be finite and nonnegative")
         m_p = z_table.shape[0]
         b_r = y_real.shape[0]
         if self.weight == 0.0 or m_p < 2 or b_r < 1:
             return y_real[:0].sum()
 
+        y_flat = y_real.detach().reshape(b_r, -1)
         with torch.no_grad():
             z_det = z_table.detach()
             ell = self._update_ell(y_real, record=record, allow_update=False)
@@ -937,6 +978,30 @@ class RHBILoss(nn.Module):
             d_zz.fill_diagonal_(float("inf"))
             k_nn = min(4, m_p - 1)
             nbrs = d_zz.topk(k_nn, dim=-1, largest=False).indices
+
+            g_conn = 0.0
+            q90_y_u = 0.1
+            y_scale = y_flat.float().abs().amax().clamp_min(1.0)
+            y_u = y_flat.float() / y_scale
+            if chart_weight > 0.0 and b_r >= 4:
+                d_yy = torch.cdist(y_u, y_u, p=2.0)
+                off_y = ~torch.eye(b_r, dtype=torch.bool, device=y_u.device)
+                d_yy_nn = d_yy.masked_fill(~off_y, float("inf"))
+                nn_y = d_yy_nn.amin(dim=-1)
+                q90_t = torch.quantile(nn_y, 0.90).clamp_min(1e-8)
+                q90_y_u = float(q90_t.clamp_min(1e-4).item())
+                span_y = torch.quantile(d_yy[off_y], 0.90) / q90_t
+                m_path = d_yy.clone()
+                for _ in range(7):
+                    m_path = torch.minimum(
+                        m_path, torch.maximum(m_path.unsqueeze(2), m_path.unsqueeze(0)).amin(dim=1)
+                    )
+                kappa_h0 = m_path.amax() / q90_t
+                u_conn = ((10.0 - kappa_h0) / 3.0).clamp(0.0, 1.0)
+                u_span = ((span_y - 1.15) / 0.25).clamp(0.0, 1.0)
+                s_conn = u_conn * u_conn * (3.0 - 2.0 * u_conn)
+                s_span = u_span * u_span * (3.0 - 2.0 * u_span)
+                g_conn = float((s_conn * s_span).item())
 
             phi = float(getattr(record, "rhbi_chord_phase", 0.0)) if record is not None else 0.0
             n_q = max(4, b_r)
@@ -972,10 +1037,15 @@ class RHBILoss(nn.Module):
             else:
                 z_simp = z_edge
 
-            x_verts = gen_fn(z_det).detach().reshape(m_p, -1)
+        if g_conn > 1e-4 and chart_weight > 0.0:
+            x_verts_live = gen_fn(z_table).reshape(m_p, -1)
+            x_verts = x_verts_live.detach()
+        else:
+            x_verts_live = None
+            with torch.no_grad():
+                x_verts = gen_fn(z_det).detach().reshape(m_p, -1)
 
         x_simp = gen_fn(z_simp).reshape(n_q, -1)
-        y_flat = y_real.detach().reshape(b_r, -1)
         c_phys_sr, c_hat_sr = self._born_infeld_pair(x_simp, y_flat, ell)
         w_sr = torch.softmax(-c_hat_sr.float() / self.eps, dim=1).to(c_phys_sr.dtype)
         proj_loss = (w_sr * c_phys_sr).sum(dim=1).mean()
@@ -992,11 +1062,29 @@ class RHBILoss(nn.Module):
                 d1_t = self._born_infeld_aligned(x_t, x_verts[v1_t], ell)
                 d2_t = self._born_infeld_aligned(x_t, x_verts[v2_t], ell)
                 with torch.no_grad():
-                    e01 = self._born_infeld_aligned(x_verts[v0_t], x_verts[v1_t], ell)
-                    e12 = self._born_infeld_aligned(x_verts[v1_t], x_verts[v2_t], ell)
-                    e20 = self._born_infeld_aligned(x_verts[v2_t], x_verts[v0_t], ell)
-                    e_min = torch.minimum(torch.minimum(e01, e12), e20)
-                    margin = 0.20 * e_min
+                    if g_conn > 1e-4 and chart_weight > 0.0:
+                        vx0 = x_verts[v0_t].double()
+                        vx1 = x_verts[v1_t].double()
+                        vx2 = x_verts[v2_t].double()
+                        ea = torch.linalg.vector_norm(vx0 - vx1, ord=2, dim=-1)
+                        eb = torch.linalg.vector_norm(vx1 - vx2, ord=2, dim=-1)
+                        ec = torch.linalg.vector_norm(vx2 - vx0, ord=2, dim=-1)
+                        s_p = 0.5 * (ea + eb + ec)
+                        area_sq = (
+                            s_p
+                            * (s_p - ea).clamp_min(0.0)
+                            * (s_p - eb).clamp_min(0.0)
+                            * (s_p - ec).clamp_min(0.0)
+                        ).clamp_min(0.0)
+                        r_in = torch.sqrt(area_sq) / s_p.clamp_min(1e-8)
+                        ell64 = ell.detach().clamp_min(1e-6).double()
+                        margin = (0.70 * (torch.sqrt(ell64.square() + r_in.square()) - ell64)).to(d0_t.dtype)
+                    else:
+                        e01 = self._born_infeld_aligned(x_verts[v0_t], x_verts[v1_t], ell)
+                        e12 = self._born_infeld_aligned(x_verts[v1_t], x_verts[v2_t], ell)
+                        e20 = self._born_infeld_aligned(x_verts[v2_t], x_verts[v0_t], ell)
+                        e_min = torch.minimum(torch.minimum(e01, e12), e20)
+                        margin = 0.20 * e_min
                 iso_tri = (
                     F.relu(margin - d0_t) + F.relu(margin - d1_t) + F.relu(margin - d2_t)
                 ).mean() / 3.0
@@ -1005,6 +1093,44 @@ class RHBILoss(nn.Module):
                 iso_loss = iso_edge
 
         total = proj_loss + float(iso_weight) * iso_loss
+
+        if g_conn > 1e-4 and chart_weight > 0.0:
+            if x_verts_live is not None:
+                c_phys_vy, _ = self._born_infeld_pair(x_verts_live, y_flat, ell)
+                with torch.no_grad():
+                    c_mean = c_phys_vy.detach().float().mean().clamp_min(1e-6)
+                    L_vy = -(c_phys_vy.detach().float() / c_mean) / 0.08
+                    log_a = L_vy.new_full((m_p,), -math.log(float(m_p)))
+                    log_b = L_vy.new_full((b_r,), -math.log(float(b_r)))
+                    u_v = torch.zeros_like(log_a)
+                    v_v = torch.zeros_like(log_b)
+                    for _ in range(10):
+                        v_v = log_b - torch.logsumexp(L_vy + u_v.unsqueeze(1), dim=0)
+                        u_v = log_a - torch.logsumexp(L_vy + v_v.unsqueeze(0), dim=1)
+                    P_vy = torch.exp(L_vy + u_v.unsqueeze(1) + v_v.unsqueeze(0)).to(c_phys_vy.dtype)
+                vert_ot_loss = (P_vy * c_phys_vy).sum()
+                total = total + (1.10 * g_conn) * vert_ot_loss
+
+            if z_table.requires_grad:
+                with torch.no_grad():
+                    v_cloud = torch.cat([x_verts.float() / y_scale, y_u], dim=0)
+                    d_v = torch.cdist(v_cloud, v_cloud, p=2.0)
+                    h_step = max(1e-4, 1.35 * q90_y_u)
+                    g_mat = d_v * (1.0 + (d_v / h_step).square())
+                    for _ in range(6):
+                        g_mat = torch.minimum(g_mat, (g_mat.unsqueeze(2) + g_mat.unsqueeze(0)).amin(dim=1))
+                    g_vv = g_mat[:m_p, :m_p].double()
+                    off_mask = ~torch.eye(m_p, dtype=torch.bool, device=z_table.device)
+                    g_rms = torch.sqrt(g_vv[off_mask].square().mean().clamp_min(1e-12))
+                    g_hat = g_vv / g_rms
+                    w_chart = torch.where(off_mask, (0.20 + g_hat.square()).pow(-2.0), 0.0)
+                    w_chart = w_chart / w_chart.sum().clamp_min(1e-12)
+                dz_sq = self._sq_euclidean_f64(z_table, z_table)
+                dz_rms = torch.sqrt(dz_sq[off_mask].mean().clamp_min(1e-12))
+                dz_hat = torch.sqrt(dz_sq + 1e-12) / dz_rms
+                chart_stress = (w_chart * (dz_hat - g_hat).square()).sum().to(total.dtype)
+                total = total + (g_conn * float(chart_weight)) * ell.detach().to(total.dtype) * chart_stress
+
         s_therm = float(getattr(record, "_thermal_scale", 1.0)) if record is not None else 1.0
         if s_therm < 1.0 and total.requires_grad:
             total = total * s_therm + total.detach() * (1.0 - s_therm)

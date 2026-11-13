@@ -113,6 +113,10 @@ def technique_signature(value):
         mechanisms["rhbi_cond_ot"] = True
     if recipe.rhbi_weight > 0 and recipe.rhbi_simplex_weight > 0:
         mechanisms["rhbi_simplex"] = True
+        if recipe.rhbi_simplex_chart_weight > 0:
+            mechanisms["rhbi_simplex_chart"] = True
+    if recipe.rhbi_weight > 0 and recipe.rhbi_thermal_tau > 0 and recipe.rhbi_cvx_mu_gain != 0.40:
+        mechanisms["rhbi_cvx_mu"] = True
     if recipe.optimizer_smoothing:
         mechanisms["smoothed_dualnorm"] = True
     if recipe.optimizer_family in {"dualnorm_D_only", "particle_rownorm_only"}:
@@ -268,6 +272,10 @@ def recipe_field_active(name, value, *, task=None):
         return recipe.rhbi_weight > 0 and recipe.rhbi_conditional_fibre == "slack" and recipe.rhbi_cond_ot_weight > 0
     if name == "rhbi_simplex_weight":
         return recipe.rhbi_weight > 0
+    if name == "rhbi_simplex_chart_weight":
+        return recipe.rhbi_weight > 0 and recipe.rhbi_simplex_weight > 0
+    if name == "rhbi_cvx_mu_gain":
+        return recipe.rhbi_weight > 0 and recipe.rhbi_thermal_tau > 0
     if name in {"rhbi_rho", "rhbi_tau", "rhbi_eps", "rhbi_iters", "rhbi_c_max", "rhbi_beta_ell", "rhbi_nn_quantile", "rhbi_rapidity_screening", "rhbi_scale_log_odds", "rhbi_conditional_fibre"}:
         return recipe.rhbi_weight > 0 or recipe.rhbi_critic_weight > 0
     return True
