@@ -28,10 +28,10 @@ One row is **one test under one exact protocol**. One column is a complete recip
 
 ## Selected-recipe matrix
 
-Indexed: **1820 test/protocol rows**, **574 complete recipe/source/runtime identities**; below: **418 rows**, **11 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
+Indexed: **1823 test/protocol rows**, **574 complete recipe/source/runtime identities**; below: **421 rows**, **11 selected identities**. PASS counts recipes with any compatible passing receipt; MIXED keeps all disagreeing outcomes. Counts are recipe cells, not independent runs or summed view requirements.
 
 <details>
-<summary>Open all 418 selected-protocol rows and their exact recipe identities</summary>
+<summary>Open all 421 selected-protocol rows and their exact recipe identities</summary>
 
 | Recipe | Full identity |
 | --- | --- |
@@ -172,6 +172,9 @@ Indexed: **1820 test/protocol rows**, **574 complete recipe/source/runtime ident
 | img_stripes2_w64_optimizer_diagnostic<br>unmeasured declaration<br>`e608f765f9c8` | [matches](../../configs/forge/tasks/img_stripes2_w64_optimizer_diagnostic.json) | 0/11 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | infogan_anisotropic_modes<br>seed 0 · 3500 updates · source 6c2ecde629<br>`6455dd6876dd` | [matches](../../configs/forge/tasks/infogan_anisotropic_modes.json) | 0/11 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | [BLOCKED](technique-evidence/c1145d18490e4a5b9c6083a83e085f02195479b4e1ea094bd1eeaf55681d3b06.json) | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | infogan_anisotropic_modes<br>seed 0 · 3500 updates · source 49819f3149<br>`ada949e3c158` | [matches](../../configs/forge/tasks/infogan_anisotropic_modes.json) | 0/11 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | [BLOCKED](technique-evidence/7292978d6f0e77dccbfcb3dd2fbe3a6a55542eea1499702c68ee31cfc8a87432.json) |
+| interp_img_patch_shift<br>unmeasured declaration<br>`2b8a31f42bbc` | [matches](../../configs/forge/tasks/interp_img_patch_shift.json) | 0/11 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| interp_saddle_barycentric<br>unmeasured declaration<br>`4d9c11b93558` | [matches](../../configs/forge/tasks/interp_saddle_barycentric.json) | 0/11 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| interp_sparse_arc<br>unmeasured declaration<br>`c762d5ec86e9` | [matches](../../configs/forge/tasks/interp_sparse_arc.json) | 0/11 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | mid_scale_identity<br>seed 0 · 800 updates · source 2e8a97a0aa<br>`9b5ec7eb497c` | [CHANGED](../../configs/forge/tasks/mid_scale_identity.json) | 0/11 | NO INDEXED WITNESS | [NOT RUN](technique-evidence/4eaeb2e733970936d752120f26b8987bbb676615ef791ef415d1740480eae5cf.json) | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | mid_scale_identity<br>seed 0 · 800 updates · source cbb19c5e55<br>`9e7bc4c3b593` | [CHANGED](../../configs/forge/tasks/mid_scale_identity.json) | 0/11 | NO INDEXED WITNESS | NOT RUN | [NOT RUN](technique-evidence/2880110ed49454a452197b2e42adafed37447bb43d288340299599bc8edc1025.json) | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | mid_scale_identity<br>seed 0 · 800 updates · source a5eafc73e4<br>`bc71e66e7c74` | [CHANGED](../../configs/forge/tasks/mid_scale_identity.json) | 0/11 | NO INDEXED WITNESS | NOT RUN | NOT RUN | NOT RUN | NOT RUN | [BLOCKED](technique-evidence/29979e41c9c05e3304156cf4a43ed9c9dda6953bffd0fb47096fe47d6b8af13a.json) | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |

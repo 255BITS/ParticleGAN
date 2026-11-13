@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 954. Inventory coverage: complete. Unresolved import items: 7.
+Records: 962. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4488,6 +4488,22 @@ Original small-image controls retain stripes PASS and bars FAIL at the unchanged
 
 [Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-322bc05e8bb593d80d65cb36.json)
 
+### recipe-prior-refactor-r1r2-v1 · readout-32a1753d5c69888caf94e9d0
+
+**Scope:** research_diagnostic; scientific; revision `9ef98b984e75f7e919b98af7b89040eabbcb8171c2496cfa7a8f66179bd341de`.
+
+Evaluate whether unchanged selected r1r2 recipe (recipe-prior-refactor-r1r2-v1) with zero-sigma discrete ParticlePrior (no MoG smoothing) learns smooth, non-snapping latent interpolants across unseen 1D latent k-NN chords (interp_sparse_arc, interp_img_patch_shift) and 2D simplex barycenters (interp_saddle_barycentric).
+
+**Observed:** {'FAIL': 2, 'PASS': 1}; wall seconds 56.205; mechanism `structural`.
+
+
+
+Selected r1r2 recipe passes interp_img_patch_shift (5/5 terminal checks: interp_rmse=0.0481, interp_peak=0.8876, midpoint_novelty=0.5210), puts 12/12 endpoints on sparse_arc (endpoint_hq=1.000, 28/32 bins) with secant chord cutting (interp_hq=0.5667), and suffers a terminal step-800 spike on saddle_barycentric.
+
+**Next:** Stabilize late-horizon zero-sigma R1/R2 critic penalties on 3D curved surfaces and regularize interior MLP chord curvature.
+
+[Record and receipt provenance](records/readout-32a1753d5c69888caf94e9d0.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
 ### bispf-v2 · readout-3721266a32807c156725dfc8
 
 **Scope:** research_diagnostic; scientific; revision `34571ac88b53ec2ad8c9dead16a5b23ba3bb408dcd2f2cf3d8c6d8c290d93eef`.
@@ -5128,6 +5144,22 @@ Shape/step gates off: 13 PASS / 18 FAIL of 49; loses ring16_acquisition (sustain
 
 [Record and receipt provenance](records/readout-6675da6b575648d03b2182e9.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
+### atlas-particle-normal-v4 · readout-669ead9699347bdcc998eb81
+
+**Scope:** research_diagnostic; scientific; revision `6cbcc912ba5da1d679be9e00dbda19345720ca7c420454bf9fe61ed6e5ba28a2`.
+
+Evaluate whether unchanged selected atlas recipe (atlas-particle-normal-v4) with zero-sigma discrete ParticlePrior (no MoG smoothing) learns smooth, non-snapping latent interpolants across unseen 1D latent k-NN chords (interp_sparse_arc, interp_img_patch_shift) and 2D simplex barycenters (interp_saddle_barycentric).
+
+**Observed:** {'FAIL': 2, 'PASS': 1}; wall seconds 83.775; mechanism `structural`.
+
+
+
+Selected atlas recipe passes interp_img_patch_shift (5/5 sustained terminal checks: interp_rmse=0.0250, interp_peak=0.9358, midpoint_novelty=0.5305) and meets every final-step bound on interp_sparse_arc (interp_hq=0.9365, output_knn_interp_hq=1.000, 30/32 bins) and interp_saddle_barycentric (barycenter_surface_mae=0.0552, barycenter_hq=0.8701, 16/16 xy bins), but fails 5-check sustained live-iterate gates on the two vector tasks (3/5 passing terminal checks each).
+
+**Next:** Test EMA/served weight evaluation or explicit local latent Jacobian smoothness regularization to stabilize the 5-check live suffix on sparse_arc and saddle_barycentric.
+
+[Record and receipt provenance](records/readout-669ead9699347bdcc998eb81.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
 ### recipe-prior-refactor-ka2-v1 · readout-6a7e566f412b2f89b3c4542e
 
 **Scope:** research_diagnostic; scientific; revision `bd13bfd00479408abe45e88a8d3f986b3d18bff8859fb643e12ff9a41d6efd17`.
@@ -5736,6 +5768,38 @@ Completed dcgan_performance seed-0 CUDA execution for recipe-prior-refactor-r1r2
 
 [Record and receipt provenance](records/readout-a00bfca2993b57da0e7ca161.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
+### empf-v7 · readout-a211bf674ae6989087e57402
+
+**Scope:** research_diagnostic; scientific; revision `bf914aab956af397d25e528718d105f1cad770c8055474ed213e3257d55ddcc4`.
+
+Evaluate whether unchanged selected empf recipe (empf-v7) with zero-sigma discrete ParticlePrior (no MoG smoothing) learns smooth, non-snapping latent interpolants across unseen 1D latent k-NN chords (interp_sparse_arc, interp_img_patch_shift) and 2D simplex barycenters (interp_saddle_barycentric).
+
+**Observed:** {'FAIL': 3}; wall seconds 88.381; mechanism `structural`.
+
+
+
+Selected empf-v7 recipe achieves final-step interp_hq=0.8254 (output_knn_interp_hq=0.8421, 27/32 bins) on interp_sparse_arc via DualNorm polar geometry, but fails endpoint_hq (0.6667 < 0.85) and fails img_patch_shift (zero-output collapse) and saddle_barycentric (barycenter_hq=0.4167) for 0/3 sustained PASS.
+
+**Next:** Diagnose zero-sigma 16-particle image collapse under DualNorm hybrid polar updates before tuning latent smoothness.
+
+[Record and receipt provenance](records/readout-a211bf674ae6989087e57402.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### recipe-prior-refactor-ka2-v1 · readout-a2a29effc3b7a25d04c3f822
+
+**Scope:** research_diagnostic; scientific; revision `3a9716bd0e5d7af47d0efe8cd2606257823688e0dda24e5fa895747edc42efb9`.
+
+Evaluate whether unchanged selected ka2 recipe (recipe-prior-refactor-ka2-v1) with zero-sigma discrete ParticlePrior (no MoG smoothing) learns smooth, non-snapping latent interpolants across unseen 1D latent k-NN chords (interp_sparse_arc, interp_img_patch_shift) and 2D simplex barycenters (interp_saddle_barycentric).
+
+**Observed:** {'FAIL': 2, 'PASS': 1}; wall seconds 61.975; mechanism `structural`.
+
+
+
+Selected ka2 recipe passes interp_img_patch_shift (5/5 terminal checks: interp_rmse=0.0367, interp_peak=0.9149, interp_hq=0.9833) and nearly reaches saddle_barycentric (endpoint_surface_mae=0.0545, barycenter_surface_mae=0.0672, barycenter_hq=0.7639 vs 0.78), while cutting secants on sparse_arc (interp_hq=0.5152).
+
+**Next:** Evaluate whether combining KA2 asymmetric critic updates with local latent transport closes the 0.016 barycenter_hq gap on saddle_barycentric.
+
+[Record and receipt provenance](records/readout-a2a29effc3b7a25d04c3f822.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
 ### bispf-optimized-quintic-v1 · readout-a324737f266da9156ed6ed2f
 
 **Scope:** research_diagnostic; scientific; revision `910c746cc18347ce72d108dcef81f283fc5f2efd2117fc6358f7b485ba172ae1`.
@@ -6104,6 +6168,22 @@ The corrected Modern GAN Stacked MNIST training recipe, adapted to the fixed For
 
 [Evidence](../../reports/forge/technique-receipts/ea66e44192c048eaa97f8595c5e55508.json) · [Record](records/readout-bc440d0469187c9299bd524c.json)
 
+### recipe-prior-refactor-bcap-pure-v1 · readout-c0eb323419b0be6463f34d1b
+
+**Scope:** research_diagnostic; scientific; revision `f1f5aa34d333c7c3874e81b718103c25a0fc255b10eb4ed28268e192bba3af22`.
+
+Evaluate whether unchanged selected bcap-pure recipe (recipe-prior-refactor-bcap-pure-v1) with zero-sigma discrete ParticlePrior (no MoG smoothing) learns smooth, non-snapping latent interpolants across unseen 1D latent k-NN chords (interp_sparse_arc, interp_img_patch_shift) and 2D simplex barycenters (interp_saddle_barycentric).
+
+**Observed:** {'FAIL': 3}; wall seconds 84.732; mechanism `structural`.
+
+
+
+Selected bcap-pure recipe fails all 3 zero-sigma ParticlePrior interpolation tasks (0/3 PASS: sparse_arc interp_hq=0.4127, img_patch_shift interp_rmse=0.1490/interp_peak=0.3015, saddle_barycentric barycenter_hq=0.3000).
+
+**Next:** Investigate BCAP gradient-cap interaction with unsmoothed zero-sigma ParticlePrior updates before proposing a recipe-owned latent regularizer.
+
+[Record and receipt provenance](records/readout-c0eb323419b0be6463f34d1b.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
 ### recipe-prior-refactor-bcap-pure-v1 · readout-c164627eb57d4e7515314cd6
 
 **Scope:** research_diagnostic; scientific; revision `ccf1ac64bec1d00ef53c680605370201505da3b53d007bfda3d4a4c8c21ce178`.
@@ -6279,6 +6359,22 @@ Completed dcgan_performance seed-0 CUDA execution for atlas-particle-normal-v4 (
 **Next:** Retain source-bound readout and compiled Forge reports.
 
 [Record and receipt provenance](records/readout-d156a482c49f278303ac9880.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### recipe-prior-refactor-k3p-v1 · readout-d230c03f6f71197e5062b283
+
+**Scope:** research_diagnostic; scientific; revision `5061677552fea453f5c9bdaa7a56ba4d0549798824749017eaf6c82e5f88686f`.
+
+Evaluate whether unchanged selected k3p recipe (recipe-prior-refactor-k3p-v1) with zero-sigma discrete ParticlePrior (no MoG smoothing) learns smooth, non-snapping latent interpolants across unseen 1D latent k-NN chords (interp_sparse_arc, interp_img_patch_shift) and 2D simplex barycenters (interp_saddle_barycentric).
+
+**Observed:** {'FAIL': 2, 'PASS': 1}; wall seconds 62.752; mechanism `structural`.
+
+
+
+Selected k3p recipe passes interp_img_patch_shift (5/5 terminal checks: interp_rmse=0.0381, interp_peak=0.9349, midpoint_novelty=0.4269), and reaches barycenter_surface_mae=0.0768 <= 0.09 (barycenter_hq=0.6974) on saddle_barycentric, while cutting chords on sparse_arc (interp_hq=0.5606, 25/32 bins).
+
+**Next:** Add a recipe-owned latent chord/Jacobian regularizer to bend MLP secant chords onto curved low-dimensional manifolds without MoG.
+
+[Record and receipt provenance](records/readout-d230c03f6f71197e5062b283.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### recipe-prior-refactor-bcap-pure-v1 · readout-d278a74af331d2f3b7807234
 
@@ -6536,6 +6632,22 @@ All six declared DCGAN mock-data performance workloads completed their finite pu
 
 [Evidence](../../reports/forge/scaling-receipts/dcgan-performance-cloud-v2/ka2-dcgan_performance_b64-0dcd26728de3eb07.json) · [Record](records/readout-e6e872f73024fd6c0b2b2d42.json)
 
+### recipe-prior-refactor-release07-gan-v3-v1 · readout-e838608cfd803f50b58f4e21
+
+**Scope:** research_diagnostic; scientific; revision `9c4c532b8c3773b5f17b7b2ec3f5729d4920bd9b6e409609b7da88059ea3fa2f`.
+
+Evaluate whether unchanged selected release07-gan-v3 recipe (recipe-prior-refactor-release07-gan-v3-v1) with zero-sigma discrete ParticlePrior (no MoG smoothing) learns smooth, non-snapping latent interpolants across unseen 1D latent k-NN chords (interp_sparse_arc, interp_img_patch_shift) and 2D simplex barycenters (interp_saddle_barycentric).
+
+**Observed:** {'FAIL': 2, 'PASS': 1}; wall seconds 55.848; mechanism `structural`.
+
+
+
+Selected release07-gan-v3 recipe passes interp_img_patch_shift (5/5 terminal checks: interp_rmse=0.0477, interp_peak=0.8727) and passes every gate on the final 2 checks of interp_saddle_barycentric (step 800 barycenter_surface_mae=0.0587, barycenter_hq=0.8056), while cutting chords on sparse_arc (endpoint_hq=1.000, interp_hq=0.6522).
+
+**Next:** Test whether faster prior transport warmup allows release07-gan-v3 to reach its passing saddle_barycentric regime across all 5 terminal checks.
+
+[Record and receipt provenance](records/readout-e838608cfd803f50b58f4e21.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
 ### recipe-prior-refactor-ka2-v1 · readout-e8818ca1024f2d2972606913
 
 **Scope:** current; scientific; revision `6469950271908090f8608849192d212372abf993333a4207a024bfca7ac39d4c`.
@@ -6695,6 +6807,22 @@ Completed dcgan_performance seed-0 CUDA execution for recipe-prior-refactor-ka2-
 **Next:** Retain source-bound readout and compiled Forge reports.
 
 [Record and receipt provenance](records/readout-f49e05e15c9423e6a7e9d1b0.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
+### bispf-optimized-quintic-v1 · readout-f569a1b3b7d32568c334955a
+
+**Scope:** research_diagnostic; scientific; revision `b4bddd6529b2782b15a82e342c4c7b275ebf2962d30479c852134d7920e3a387`.
+
+Evaluate whether unchanged selected bispf recipe (bispf-optimized-quintic-v1) with zero-sigma discrete ParticlePrior (no MoG smoothing) learns smooth, non-snapping latent interpolants across unseen 1D latent k-NN chords (interp_sparse_arc, interp_img_patch_shift) and 2D simplex barycenters (interp_saddle_barycentric).
+
+**Observed:** {'FAIL': 3}; wall seconds 92.274; mechanism `structural`.
+
+
+
+Selected bispf recipe fails all 3 zero-sigma ParticlePrior interpolation tasks (0/3 PASS), reaching barycenter_surface_mae=0.0712 <= 0.09 and barycenter_hq=0.7286 on interp_saddle_barycentric while cutting chords on sparse_arc (interp_hq=0.3788) and dimming midpoints on img_patch_shift (interp_peak=0.6189).
+
+**Next:** Analyze why quintic spectral normalization preserves 2D saddle curvature better than 1D arc chords without MoG kernel overlap.
+
+[Record and receipt provenance](records/readout-f569a1b3b7d32568c334955a.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
 ### r1r2--b58a087cabab6b43997ec233416294cfc2786bab59026c07a1a4f2565970f5ff · readout-f61373e09376e33fc4c501c8
 
@@ -7414,4 +7542,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `068914d6c93a0cd5419c18a4cb7c7ef97e5da711ffc2ee0ce03d4077e3c10e95`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `5e8e804f2e6db99fa414e478e4051a54a0776360a27b7efcdcec93de2cd59020`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
