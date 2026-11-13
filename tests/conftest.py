@@ -76,6 +76,10 @@ def _archived_inactive_comparison_scope(module, directory):
         "rhbi_settle_beta": 0.0,
         "rhbi_settle_mode": "residual",
         "rhbi_fibre_rel_blend": 0.0,
+        "rhbi_step_damp": 0.0,
+        "rhbi_cond_ot_weight": 0.0,
+        "rhbi_cond_ot_mode": "kernel_ed",
+        "rhbi_simplex_weight": 0.0,
     }
     tail = '    "training_precision": "float32",\n}\n'
     assert adapted.decode().count(tail) == 1

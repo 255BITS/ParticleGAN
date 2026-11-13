@@ -727,6 +727,15 @@ class NormalizedOptimizer(Optimizer):
             origin_damping = min(1.0, origin_norm / 0.05)
         pending_cpu_polar = []
         empf_step_scale = float(getattr(getattr(self, "_empf_record", None), "_step_scale", 1.0))
+        rhbi_damp = float(getattr(self, "_rhbi_step_damp", 0.0))
+        if rhbi_damp > 0.0:
+            rhbi_rec = getattr(self, "_rhbi_record", None)
+            rhbi_s = float(getattr(rhbi_rec, "_thermal_scale", 1.0)) if rhbi_rec is not None else 1.0
+            u_log = min(1.0, max(0.0, -math.log10(max(1e-6, rhbi_s)) * (1.0 / 6.0)))
+            u_log2 = u_log * u_log
+            rhbi_step_scale = 1.0 - rhbi_damp * (u_log2 * u_log2)
+        else:
+            rhbi_step_scale = 1.0
         for group_index, group in enumerate(self.param_groups):
             algorithm, base_rate, eps = group["algorithm"], group["lr"], group["eps"]
             is_generator = group.get("role") == "generator"
@@ -739,6 +748,7 @@ class NormalizedOptimizer(Optimizer):
                 rate = (
                     base_rate
                     * empf_step_scale
+                    * rhbi_step_scale
                     * (origin_damping if (is_generator and state["step"] > 80) else 1.0)
                 )
                 if algorithm == "sgda":
@@ -1104,6 +1114,7 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
                                     convolution_rule=recipe.optimizer_convolution_rule,
                                     svd_backend=recipe.optimizer_svd_backend,
                                     dense_profile=recipe.optimizer_dense_profile, **options)
+    optimizer._rhbi_step_damp = float(getattr(recipe, "rhbi_step_damp", 0.0))
     if critic is not None:
         optimizer.critic = critic
         optimizer.ema_critic = optimizer.anchor = optimizer.guard = None
@@ -1119,6 +1130,7 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
         elif recipe.effective_critic_formulation == "rhbi" or recipe.rhbi_weight > 0 or recipe.rhbi_critic_weight > 0:
             from ..rhbi import _RHBIObserverStepRecord, _attach_rhbi_critic_hook
             optimizer.record = _RHBIObserverStepRecord()
+            optimizer._rhbi_record = optimizer.record
             _attach_rhbi_critic_hook(critic, optimizer.record)
         else:
             optimizer.record = CriticStepRecord()

@@ -13,6 +13,7 @@ from ._rhbi.critic import (
     _RHBIObserverStepRecord,  # noqa: F401
     _attach_rhbi_critic_hook,  # noqa: F401
     _extract_critic_inputs,  # noqa: F401
+    _extract_critic_inputs_parts,  # noqa: F401
     _lookup_rhbi_capture,  # noqa: F401
     _record_rhbi_capture,  # noqa: F401
     _rhbi_critic_forward_hook,  # noqa: F401

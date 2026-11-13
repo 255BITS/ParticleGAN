@@ -2,14 +2,48 @@
 from __future__ import annotations
 
 import math
-from typing import Any, Dict, Tuple
+from typing import Any, Dict, Optional, Tuple
 
 import torch
 import torch.nn.functional as F
 
 from ..gan_loss import GANLoss
-from .critic import _lookup_rhbi_capture_full
+from .critic import _lookup_rhbi_capture_parts
 from .primitive import RHBILoss
+
+
+def _split_shared_conditional_parts(
+    parts_f: Optional[Tuple[torch.Tensor, ...]],
+    parts_r: Optional[Tuple[torch.Tensor, ...]],
+) -> Tuple[Optional[torch.Tensor], Optional[torch.Tensor], Optional[torch.Tensor]]:
+    """Separate sample tensors from shared continuous context tensors in multi-arg critic tuples."""
+    if not parts_f or not parts_r or len(parts_f) != len(parts_r) or len(parts_f) < 2:
+        return None, None, None
+    b_n = parts_f[0].shape[0]
+    if b_n <= 0 or parts_r[0].shape[0] != b_n:
+        return None, None, None
+    sample_f = []
+    sample_r = []
+    ctx_parts = []
+    for pf, pr in zip(parts_f, parts_r):
+        if (
+            not pf.requires_grad
+            and pf.shape == pr.shape
+            and pf.dtype == pr.dtype
+            and torch.equal(pf.detach(), pr.detach())
+        ):
+            ctx_parts.append(pf.detach())
+        else:
+            sample_f.append(pf)
+            sample_r.append(pr)
+    if not ctx_parts or not sample_f:
+        return None, None, None
+    x_sf = sample_f[0] if len(sample_f) == 1 else torch.cat(sample_f, dim=-1)
+    x_sr = sample_r[0] if len(sample_r) == 1 else torch.cat(sample_r, dim=-1)
+    c_cont = ctx_parts[0] if len(ctx_parts) == 1 else torch.cat(ctx_parts, dim=-1)
+    if x_sf.shape != x_sr.shape:
+        return None, None, None
+    return x_sf, x_sr, c_cont
 
 
 class RHBIGANLoss(GANLoss):
@@ -40,6 +74,8 @@ class RHBIGANLoss(GANLoss):
         thermal_tau: float = 0.0,
         thermal_shock_mu: float = 0.15,
         fibre_rel_blend: float = 0.0,
+        cond_ot_weight: float = 0.0,
+        cond_ot_mode: str = "kernel_ed",
         record: Any = None,
     ) -> None:
         super().__init__(loss, labels=labels)
@@ -58,11 +94,22 @@ class RHBIGANLoss(GANLoss):
             or fibre_rel_blend > 1.0
         ):
             raise ValueError("fibre_rel_blend must be finite and in [0, 1]")
+        if (
+            isinstance(cond_ot_weight, bool)
+            or not isinstance(cond_ot_weight, (int, float))
+            or not math.isfinite(cond_ot_weight)
+            or cond_ot_weight < 0.0
+        ):
+            raise ValueError("cond_ot_weight must be finite and nonnegative")
+        if type(cond_ot_mode) is not str or cond_ot_mode not in ("kernel_ed", "hollow_sinkhorn", "imq_cmmd"):
+            raise ValueError("cond_ot_mode must be 'kernel_ed', 'hollow_sinkhorn' or 'imq_cmmd'")
         if type(conditional_fibre) is not str or conditional_fibre not in ("joint", "slack", "calibrated"):
             raise ValueError("conditional_fibre must be 'joint', 'slack', or 'calibrated'")
         self.critic_weight = float(critic_weight)
         self.conditional_fibre = conditional_fibre
         self.fibre_rel_blend = float(fibre_rel_blend)
+        self.cond_ot_weight = float(cond_ot_weight)
+        self.cond_ot_mode = cond_ot_mode
         self.record = record
         self.rhbi = RHBILoss(
             weight=weight,
@@ -85,13 +132,22 @@ class RHBIGANLoss(GANLoss):
         )
         self.last_metrics: Dict[str, float] = {}
 
-    def _resolve_pair_full(
+    def _resolve_pair_parts(
         self,
         fake_logits: torch.Tensor,
         real_logits: torch.Tensor,
-    ) -> Tuple[torch.Tensor, torch.Tensor, Any, Any, Any, bool]:
-        x_f, cond_f, rec_f, cc_f = _lookup_rhbi_capture_full(fake_logits, self.record)
-        x_r, cond_r, rec_r, cc_r = _lookup_rhbi_capture_full(
+    ) -> Tuple[
+        torch.Tensor,
+        torch.Tensor,
+        Any,
+        Any,
+        Any,
+        bool,
+        Optional[Tuple[torch.Tensor, ...]],
+        Optional[Tuple[torch.Tensor, ...]],
+    ]:
+        x_f, cond_f, rec_f, cc_f, parts_f = _lookup_rhbi_capture_parts(fake_logits, self.record)
+        x_r, cond_r, rec_r, cc_r, parts_r = _lookup_rhbi_capture_parts(
             real_logits, rec_f if rec_f is not None else self.record
         )
         rec = rec_f if rec_f is not None else (rec_r if rec_r is not None else self.record)
@@ -102,6 +158,16 @@ class RHBIGANLoss(GANLoss):
             cond_f = None
             cond_r = None
             has_cont_cond = False
+            parts_f = None
+            parts_r = None
+        return x_f, x_r, cond_f, cond_r, rec, has_cont_cond, parts_f, parts_r
+
+    def _resolve_pair_full(
+        self,
+        fake_logits: torch.Tensor,
+        real_logits: torch.Tensor,
+    ) -> Tuple[torch.Tensor, torch.Tensor, Any, Any, Any, bool]:
+        x_f, x_r, cond_f, cond_r, rec, has_cont_cond, _, _ = self._resolve_pair_parts(fake_logits, real_logits)
         return x_f, x_r, cond_f, cond_r, rec, has_cont_cond
 
     def _resolve_pair(
@@ -158,7 +224,9 @@ class RHBIGANLoss(GANLoss):
             raise ValueError("RHBIGANLoss requires real_logits in g_loss when rhbi_weight > 0")
         if self.rhbi.weight == 0.0:
             return super().g_loss(fake_logits, real_logits)
-        x_f, x_r, cond_f, cond_r, rec, has_cont_cond = self._resolve_pair_full(fake_logits, real_logits)
+        x_f, x_r, cond_f, cond_r, rec, has_cont_cond, parts_f, parts_r = self._resolve_pair_parts(
+            fake_logits, real_logits
+        )
         if self.conditional_fibre == "calibrated" and has_cont_cond:
             return self.rhbi.weight * super().g_loss(fake_logits, real_logits)
         if self.conditional_fibre == "slack" and has_cont_cond:
@@ -171,7 +239,34 @@ class RHBIGANLoss(GANLoss):
                     if real_logits.ndim > 1
                     else real_logits.detach().reshape(b_r)
                 )
-                return self.rhbi.weight * F.softplus(r_flat - f_flat).mean()
+                rel_term = F.softplus(r_flat - f_flat).mean()
+                if self.cond_ot_weight > 0.0:
+                    same_disc = (cond_f is None and cond_r is None) or (
+                        cond_f is not None
+                        and cond_r is not None
+                        and cond_f.shape == cond_r.shape
+                        and torch.equal(cond_f, cond_r)
+                    )
+                    if same_disc:
+                        x_sf, x_sr, c_cont = _split_shared_conditional_parts(parts_f, parts_r)
+                        if x_sf is not None and x_sr is not None and c_cont is not None:
+                            cond_ot = self.rhbi.conditional_fiber_transport_loss(
+                                x_sf,
+                                x_sr,
+                                c_cont,
+                                cond_disc=cond_f,
+                                mode=self.cond_ot_mode,
+                            )
+                            s_th = float(getattr(rec, "_thermal_scale", 1.0)) if rec is not None else 1.0
+                            total_cond = rel_term + self.cond_ot_weight * cond_ot
+                            if s_th < 1.0 and total_cond.requires_grad:
+                                if getattr(fake_logits, "_rhbi_thermally_scaled", False):
+                                    cond_scaled = cond_ot * s_th + cond_ot.detach() * (1.0 - s_th)
+                                    total_cond = rel_term + self.cond_ot_weight * cond_scaled
+                                else:
+                                    total_cond = total_cond * s_th + total_cond.detach() * (1.0 - s_th)
+                            return self.rhbi.weight * total_cond
+                return self.rhbi.weight * rel_term
             return self.rhbi.weight * super().g_loss(fake_logits, real_logits)
         allow_ell = torch.is_grad_enabled() and not getattr(rec, "_in_protected_probe", False)
         loss_val, _ = self.rhbi(
