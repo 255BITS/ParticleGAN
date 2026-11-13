@@ -1339,6 +1339,22 @@
       "json_sha256": "59643d4d269a7cf6735c3a2d175d2f2067008ea9fb7e7a2eb207c16a6ca03d7d",
       "snapshot": "reports/forge/technique-evidence/7292978d6f0e77dccbfcb3dd2fbe3a6a55542eea1499702c68ee31cfc8a87432.json",
       "source_commit": "79269429a7765bde5ca69654e04668bab9fdfd9c"
+    },
+    {
+      "candidates": {
+        "rhbi-v8": "2026-11-13T10:35:46.554+00:00"
+      },
+      "json_sha256": "7723027f188e1be6f889f3e27e7a4801f03bfa471c03a571b818f6d42e2196eb",
+      "snapshot": "reports/forge/technique-evidence/e7168ac1d2dd06709caed2f522ca3171c2ec7848bed6cc81142a6acb95ed5bea.json",
+      "source_commit": "5ef63a56014f0c25cb16db3d983a6745deaef925"
+    },
+    {
+      "candidates": {
+        "rhbi-v7": "2026-11-13T09:44:19.335+00:00"
+      },
+      "json_sha256": "5c950b41d5e875cb91b8d95c1820c0bf88574ad3db9c1612bd8f3631b6d977e3",
+      "snapshot": "reports/forge/technique-evidence/2621d88274884f6afcac293b09d1dca70913f062339a5cdb95514b7354a751fa.json",
+      "source_commit": "9a71fa319b9fcdc6e6722e06d05c204d1975804c"
     }
   ],
   "note": "Numerical evidence/provenance only. The sole current technique leaderboard is reports/forge/technique-inventory.md; snapshots cannot qualify the latest checkout.",

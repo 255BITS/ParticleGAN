@@ -867,8 +867,8 @@
   },
   "policy_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a",
   "previous_selection": {
-    "path": "configs/forge/selections/history/family-current-c99010b0110d1d6b12fa963e7bd7dc379c7665fa1b18764e4e04e58b1d62db96.json",
-    "sha256": "c99010b0110d1d6b12fa963e7bd7dc379c7665fa1b18764e4e04e58b1d62db96"
+    "path": "configs/forge/selections/history/family-current-a6846b857a6d0ed726a5dd1bf7652651968db64d5f11811dfd0d999cfcca763b.json",
+    "sha256": "a6846b857a6d0ed726a5dd1bf7652651968db64d5f11811dfd0d999cfcca763b"
   },
   "schema_version": 1,
   "scope": "whole_candidate_family_current",
@@ -1042,22 +1042,22 @@
       "trainer_family": "release07-gan-v3"
     },
     {
-      "candidate_id": "rhbi-v6",
-      "candidate_revision": "26abf8d916172cd34a4ee0ce10c376a3e4a1e9ffc80b03f126ae68d8e0a3b57f",
-      "cohort": "e8bb549f1b6f95970ef96ebdf9d3d15041f3453dc50ccd6b78a49e111c102414",
+      "candidate_id": "rhbi-v8",
+      "candidate_revision": "a156b0664f8133339702d2c98bd8ff8e88ca912a2acfd320d2ea0a0bddb7d84e",
+      "cohort": "55f1dd9987084e43e663c83e0e641ec104b19cfa11e9afd80b70a2b261369868",
       "execution_backend": "cuda",
       "measurement_views": [
         "discriminator_stability"
       ],
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
-      "reason": "Promote rhbi-v6 (Relativistic Hellinger-Born-Infeld slack-screened transport with Poisson-Weibull 2e empirical OT 1D horizon scaling, mu=0.35 false-shock filter, thermally coupled (1 - s_t)^2 Lipschitz settling, Weyl-phased balanced-Sinkhorn Born-Infeld geodesic chord regularization 0.25 at ebi_beta=12.0 with zero-mean critic gauge 0.03, and impedance-matched 5-channel Kantorovich-Hellinger thermal equilibrium controller rhbi_thermal_tau=0.084) as the canonical RHBI candidate following ordinary discriminator_stability CUDA measurement on NVIDIA RTX A6000 (11/11 required + 2/2 diagnostic Tier 1 PASS = 27/27 Tier 1 view requirements across views, 10/18 required Tier 2 PASS = 55/78 Tier 2 view requirements, 82/115 total counted view requirements; 26/38 executed and 26/61 full-suite PASS including all three 1D precision benchmarks precision_gaussian_fp32, precision_gaussian_mxfp8, and precision_gaussian_nvfp4, plus mode_hold and vector_overlap, 0 BLOCKED). Actual executed-policy qualification and comparison-policy projection retain their separate source-bound proofs; no public-default adoption claim.",
-      "recipe_sha256": "1a7e11bdeb003c3cd41da6e351548848e365cf1755a75d2de6225b601fb6d439",
+      "reason": "Promote rhbi-v8 (Relativistic Hellinger-Born-Infeld slack-screened transport with Poisson-Weibull 2e empirical OT 1D horizon scaling, discrete-codebook clone-deduplicated Feydy self-coupling debiasing feydy_discrete, Pareto-protected Weyl-stratified detached-vertex k-NN 1-simplex/2-simplex Born-Infeld manifold projection 0.35, hollow multi-scale IMQ conditional MMD fibre geometry 1.5, mu=0.35 false-shock filter, thermally coupled (1 - s_t)^2 Lipschitz settling, Weyl-phased balanced-Sinkhorn Born-Infeld geodesic chord regularization 0.25 at ebi_beta=12.0 with zero-mean critic gauge 0.03, and impedance-matched 5-channel Kantorovich-Hellinger thermal equilibrium controller rhbi_thermal_tau=0.084) as the canonical RHBI candidate following ordinary discriminator_stability CUDA measurement on NVIDIA RTX A6000 (11/11 required + 2/2 diagnostic Tier 1 PASS = 27/27 Tier 1 view requirements across views, 10/18 required Tier 2 PASS = 55/78 Tier 2 view requirements, 82/115 total counted view requirements; 28/41 executed and 28/64 full-suite PASS including all three 1D precision benchmarks precision_gaussian_fp32, precision_gaussian_mxfp8, and precision_gaussian_nvfp4, held image benchmarks img_blobs4 and img_intensity2 alongside img_stripes2, plus mode_hold and vector_overlap, 0 BLOCKED). Actual executed-policy qualification and comparison-policy projection retain their separate source-bound proofs; no public-default adoption claim.",
+      "recipe_sha256": "48130113dcbc2c5c2490b426d1fa4db1f6978ecf8c2eb578ab7447bb8d8a63cf",
       "rng_sha256": "495400e2de1b9f9f94a86625a2132091646dcbb8357f48c3512ed24154b89b6d",
       "runtime_cohort_sha256": "23a94f16ca88faef2aa24ce757c89f1524bef5522c2b1b87cce88d9d94e883b1",
-      "scientific_row_sha256": "b66a4882981e335e891506e0c8955a0c0a927de9d7ae609750547408f21a6a98",
+      "scientific_row_sha256": "c96afcacc47f31598870ba85c3ca82380de3665f561fa7e43f4162485834fb5f",
       "selection_kind": "current_measurement",
-      "source_digest": "49819f3149d320aa7942a841f75aa23235b8d0b4e0a35c770dc88a48f070061c",
-      "task_keys_sha256": "7f73a21eb85b7625a1279917b206bc96f849bdf0ada5f7a671a8ebdd4dda7199",
+      "source_digest": "679a26b257b6461a6cfd0630486d84d4738b610d5ebe32dee23fd168a97da60a",
+      "task_keys_sha256": "62b7fbfad7142f27587d80f35737696b1f04837a186a8af00153b54b71566542",
       "trainer_family": "rhbi"
     }
   ],
