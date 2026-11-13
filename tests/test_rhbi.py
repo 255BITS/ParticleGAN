@@ -1308,3 +1308,24 @@ def test_rhbi_v7_feydy_unique_and_simplicial_manifold_loss():
     for p1, p2 in zip(Gp1.parameters(), Gp2.parameters()):
         assert torch.equal(p1, p2)
     assert torch.equal(Pp1.z, Pp2.z)
+
+    # 5. feydy_discrete deduplicates on discrete ParticlePrior while matching feydy on quantized MoG ties
+    op_fd = RHBILoss(weight=1.0, self_coupling="feydy_discrete")
+    op_f_q = RHBILoss(weight=1.0, self_coupling="feydy")
+    op_fu_q = RHBILoss(weight=1.0, self_coupling="feydy_unique")
+    x_q_tie = torch.tensor([[0.0], [0.0], [0.3], [20.0]], requires_grad=True)
+    y_q_ref = torch.tensor([[0.5], [1.0], [9.5], [19.5]])
+    z4 = torch.zeros(4)
+    # Without bind_discrete_prior_step (or False, i.e. MoG): matches feydy bit-for-bit
+    op_fd.bind_discrete_prior_step(False)
+    l_fd_mog, _ = op_fd(x_q_tie, y_q_ref, z4.clone().requires_grad_(True), z4)
+    l_f_mog, _ = op_f_q(x_q_tie.detach().clone().requires_grad_(True), y_q_ref, z4.clone().requires_grad_(True), z4)
+    _, _ = op_fu_q(x_q_tie.detach().clone().requires_grad_(True), y_q_ref, z4.clone().requires_grad_(True), z4)
+    assert torch.equal(l_fd_mog, l_f_mog)
+    # With bind_discrete_prior_step(True) (i.e. ParticlePrior): matches feydy_unique bit-for-bit and resets flag
+    op_fd.bind_discrete_prior_step(True)
+    l_fd_disc, _ = op_fd(x_q_tie.detach().clone().requires_grad_(True), y_q_ref, z4.clone().requires_grad_(True), z4)
+    l_fu_disc, _ = op_fu_q(x_q_tie.detach().clone().requires_grad_(True), y_q_ref, z4.clone().requires_grad_(True), z4)
+    assert torch.equal(l_fd_disc, l_fu_disc)
+    assert not torch.equal(l_fd_disc, op_f_q(x_q_tie.detach().clone().requires_grad_(True), y_q_ref, z4.clone().requires_grad_(True), z4)[0])
+    assert op_fd._discrete_prior_step is False

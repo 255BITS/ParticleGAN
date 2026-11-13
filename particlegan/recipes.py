@@ -607,8 +607,9 @@ class Recipe:
             "hollow",
             "feydy",
             "feydy_unique",
+            "feydy_discrete",
         ):
-            raise ValueError("rhbi_self_coupling must be 'hollow', 'feydy', or 'feydy_unique'")
+            raise ValueError("rhbi_self_coupling must be 'hollow', 'feydy', 'feydy_unique', or 'feydy_discrete'")
         if type(self.rhbi_conditional_fibre) is not str or self.rhbi_conditional_fibre not in ("joint", "slack", "calibrated"):
             raise ValueError("rhbi_conditional_fibre must be 'joint', 'slack', or 'calibrated'")
         if type(self.rhbi_akt_mode) is not str or self.rhbi_akt_mode not in ("sqrt", "weibull"):

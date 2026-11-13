@@ -72,8 +72,13 @@ class RHBILoss(nn.Module):
             raise ValueError("akt_horizon must be a boolean")
         if type(akt_mode) is not str or akt_mode not in ("sqrt", "weibull"):
             raise ValueError("akt_mode must be 'sqrt' or 'weibull'")
-        if type(self_coupling) is not str or self_coupling not in ("hollow", "feydy", "feydy_unique"):
-            raise ValueError("self_coupling must be 'hollow', 'feydy', or 'feydy_unique'")
+        if type(self_coupling) is not str or self_coupling not in (
+            "hollow",
+            "feydy",
+            "feydy_unique",
+            "feydy_discrete",
+        ):
+            raise ValueError("self_coupling must be 'hollow', 'feydy', 'feydy_unique', or 'feydy_discrete'")
 
         self.weight = float(weight)
         self.rho = float(rho)
@@ -96,6 +101,11 @@ class RHBILoss(nn.Module):
         self.register_buffer("ell_initialized", torch.tensor(False, dtype=torch.bool))
         self._ell_init_py: bool = False
         self.last_p_xy_slack: Optional[torch.Tensor] = None
+        self._discrete_prior_step: bool = False
+
+    def bind_discrete_prior_step(self, active: bool) -> None:
+        """Mark whether the current generator step samples from a zero-noise discrete ParticlePrior."""
+        self._discrete_prior_step = bool(active)
 
     @staticmethod
     def _sq_euclidean_f64(x_flat: torch.Tensor, y_flat: torch.Tensor) -> torch.Tensor:
@@ -538,8 +548,13 @@ class RHBILoss(nn.Module):
             c_hat_xy, d_fake_tilde.detach(), d_real_tilde.detach(), hollow=False, pair_mask=mask_xy
         )
         use_hollow = self.self_coupling == "hollow"
+        discrete_step = self._discrete_prior_step
+        self._discrete_prior_step = False
+        dedup_xx = self.self_coupling == "feydy_unique" or (
+            self.self_coupling == "feydy_discrete" and discrete_step
+        )
         eff_mask_xx = mask_xx
-        if self.self_coupling == "feydy_unique" and b_f > 1:
+        if dedup_xx and b_f > 1:
             diag_f = torch.eye(b_f, dtype=torch.bool, device=x_fake.device)
             unique_xx = (c_hat_xx > 1e-12) | diag_f
             eff_mask_xx = unique_xx if mask_xx is None else (mask_xx & unique_xx)

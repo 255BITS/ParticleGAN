@@ -553,6 +553,8 @@ class GANTrainer:
             fake_g = self._postprocess(self.prior, self._generate(self.G, latent, sigma_out, noise, rows=indices))
             if hasattr(self.opt_g, "bind_origin_sample"):
                 self.opt_g.bind_origin_sample(fake_g)
+            if hasattr(self.loss, "rhbi") and hasattr(self.loss.rhbi, "bind_discrete_prior_step"):
+                self.loss.rhbi.bind_discrete_prior_step(self.prior_noise_generator is None)
             fake_logits = critic(fake_g)
             real_g = generator_real() if callable(generator_real) else generator_real
             real_g = real if real_g is None else self._batch(real_g, "generator_real")
@@ -654,6 +656,8 @@ class GANTrainer:
                 self.opt_g.step()
             self.policy.after_generator_step()
         finally:
+            if hasattr(self.loss, "rhbi") and hasattr(self.loss.rhbi, "bind_discrete_prior_step"):
+                self.loss.rhbi.bind_discrete_prior_step(False)
             for parameter, flag in zip(self.D.parameters(), flags):
                 parameter.requires_grad_(flag)
         self.policy.finish_step()
