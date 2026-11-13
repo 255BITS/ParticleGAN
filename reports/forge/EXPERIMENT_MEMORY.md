@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 963. Inventory coverage: complete. Unresolved import items: 7.
+Records: 964. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4312,6 +4312,22 @@ Ordinary discriminator_stability revision-14 re-qualification stops at Tier 1: s
 
 [Record and receipt provenance](records/readout-1d42b97bbb8f1366a766a233.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
+### rhbi-v8 · readout-1e8054c27ba98f19d9d9202a
+
+**Scope:** current; scientific; revision `a156b0664f8133339702d2c98bd8ff8e88ca912a2acfd320d2ea0a0bddb7d84e`.
+
+Binding Feydy off-diagonal zero-distance clone deduplication strictly to discrete zero-noise ParticlePrior codebooks via rhbi_self_coupling='feydy_discrete' (alongside rhbi_simplex_weight=0.35 and rhbi_cond_ot_mode='imq_cmmd', rhbi_cond_ot_weight=1.5) preserves full quantized empirical bin multiplicity on continuous-density MoG priors—restoring both stretch precision_gaussian_mxfp8 and precision_gaussian_nvfp4 (cdf_ks <= 0.05) to exact rhbi-v6 parity—while simultaneously retaining rhbi-v7's newly unlocked passes on img_blobs4 and img_intensity2 plus img_stripes2 and all 82/115 counted view requirements under one global clock-free, shape-gate-free recipe on protocol seed 0.
+
+**Observed:** {'FAIL': 13, 'PASS': 28}; wall seconds 2817.956; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0053954
+
+rhbi-v8 passes 28/41 executed tasks (0 BLOCKED) on ordinary discriminator_stability CUDA seed-0 qualification on NVIDIA RTX A6000, confirming the study prediction on precision_gaussian_nvfp4 (cdf_ks=0.037634 <= 0.05, std_ratio=1.0183) and restoring precision_gaussian_mxfp8 (cdf_ks=0.022147, std_ratio=1.0861) while simultaneously retaining both held discrete image breakthroughs img_blobs4 (hq=0.96875, modes=4) and img_intensity2 (hq=0.90625, modes=2), img_stripes2 (hq=1.0), vector_overlap (PASS), and all 82/115 counted view requirements (27/27 Tier 1, 55/78 Tier 2).
+
+**Next:** Promote rhbi-v8 as the canonical RHBI whole-configuration selection, register its frozen source snapshot, refresh the uncontended 60-cell DCGAN scaling table and compiled reports, and target anisotropic intra-mode covariance adaptation and 100-mode grid acquisition next.
+
+[Record and receipt provenance](records/readout-1e8054c27ba98f19d9d9202a.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
 ### recipe-prior-refactor-ka2-v1 · readout-1e8d4ee06e39d85dc9988963
 
 **Scope:** research_diagnostic; scientific; revision `d961da9d09e575e3cfc6f6c86856ea129c0c3fb68f1094053fe132b388fd06ff`.
@@ -7558,4 +7574,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `f23af881252be7cb8b989139a9acb42b38cfd22f59476683fb2145cc670b2f1d`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `8e5942d42fc1ef9e47ba27158fb4c2c25331a5abe61ec7d239cbbfda9c3e82fd`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
