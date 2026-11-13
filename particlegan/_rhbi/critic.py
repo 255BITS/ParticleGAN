@@ -28,14 +28,14 @@ def _storage_key(tensor: torch.Tensor) -> Optional[Tuple[int, int, int, int]]:
     return (ptr, int(tensor.storage_offset()), int(tensor.numel()), int(tensor.shape[0]))
 
 
-def _extract_critic_inputs(
+def _extract_critic_inputs_parts(
     args: Tuple[Any, ...],
     kwargs: Optional[Dict[str, Any]],
     batch_size: int,
-) -> Tuple[Optional[torch.Tensor], Optional[torch.Tensor], bool]:
-    """Extract concatenated floating batch inputs, discrete conditions, and continuous-fibre flag."""
+) -> Tuple[Optional[torch.Tensor], Optional[torch.Tensor], bool, Optional[Tuple[torch.Tensor, ...]]]:
+    """Extract concatenated floating inputs, discrete conditions, continuous-fibre flag, and raw float parts."""
     if batch_size <= 0:
-        return None, None, False
+        return None, None, False, None
     float_parts = []
     disc_parts = []
     items = list(args)
@@ -50,12 +50,23 @@ def _extract_critic_inputs(
         elif not item.is_complex():
             disc_parts.append(item.detach().to(dtype=torch.int64).reshape(batch_size, -1))
     if not float_parts:
-        return None, None, False
+        return None, None, False, None
     has_cont_cond = len(float_parts) > 1
     x_in = float_parts[0] if len(float_parts) == 1 else torch.cat(float_parts, dim=-1)
     cond_disc = None if not disc_parts else (
         disc_parts[0] if len(disc_parts) == 1 else torch.cat(disc_parts, dim=-1)
     )
+    parts_tuple = tuple(float_parts) if has_cont_cond else None
+    return x_in, cond_disc, has_cont_cond, parts_tuple
+
+
+def _extract_critic_inputs(
+    args: Tuple[Any, ...],
+    kwargs: Optional[Dict[str, Any]],
+    batch_size: int,
+) -> Tuple[Optional[torch.Tensor], Optional[torch.Tensor], bool]:
+    """Extract concatenated floating batch inputs, discrete conditions, and continuous-fibre flag."""
+    x_in, cond_disc, has_cont_cond, _ = _extract_critic_inputs_parts(args, kwargs, batch_size)
     return x_in, cond_disc, has_cont_cond
 
 
@@ -66,6 +77,7 @@ def _record_rhbi_capture(
     record: Any,
     *,
     has_cont_cond: bool = False,
+    float_parts: Optional[Tuple[torch.Tensor, ...]] = None,
     overwrite: bool = False,
 ) -> None:
     if x_input is None:
@@ -77,12 +89,13 @@ def _record_rhbi_capture(
         target._rhbi_input = x_input
         target._rhbi_cond = cond_disc
         target._rhbi_cont_cond = bool(has_cont_cond)
+        target._rhbi_parts = float_parts
     if record is not None and (overwrite or not hasattr(target, "_rhbi_record")):
         target._rhbi_record = record
     key = _storage_key(target)
     if key is None:
         return
-    entry = (x_input, cond_disc, record, bool(has_cont_cond))
+    entry = (x_input, cond_disc, record, bool(has_cont_cond), float_parts)
     if record is not None and hasattr(record, "_capture_ring"):
         ring: OrderedDict = record._capture_ring
         if overwrite or key not in ring:
@@ -105,21 +118,32 @@ def _finalize_x_for_logits(logits: torch.Tensor, x_val: Optional[torch.Tensor]) 
     return x_val
 
 
-def _lookup_rhbi_capture_full(
+def _finalize_parts_for_logits(
+    logits: torch.Tensor,
+    parts: Optional[Tuple[torch.Tensor, ...]],
+) -> Optional[Tuple[torch.Tensor, ...]]:
+    if not parts:
+        return None
+    return tuple(_finalize_x_for_logits(logits, p) for p in parts)  # type: ignore[misc]
+
+
+def _lookup_rhbi_capture_parts(
     logits: torch.Tensor,
     fallback_record: Any = None,
-) -> Tuple[Optional[torch.Tensor], Optional[torch.Tensor], Any, bool]:
+) -> Tuple[Optional[torch.Tensor], Optional[torch.Tensor], Any, bool, Optional[Tuple[torch.Tensor, ...]]]:
     b = logits.shape[0] if logits.ndim >= 1 else 0
     x_attr = getattr(logits, "_rhbi_input", None)
     c_attr = getattr(logits, "_rhbi_cond", None)
     r_attr = getattr(logits, "_rhbi_record", None)
     cc_attr = bool(getattr(logits, "_rhbi_cont_cond", False))
+    p_attr = getattr(logits, "_rhbi_parts", None)
     if isinstance(x_attr, torch.Tensor) and x_attr.shape[0] == b:
         return (
             _finalize_x_for_logits(logits, x_attr),
             c_attr,
             (r_attr if r_attr is not None else fallback_record),
             cc_attr,
+            _finalize_parts_for_logits(logits, p_attr),
         )
 
     key = _storage_key(logits)
@@ -130,25 +154,37 @@ def _lookup_rhbi_capture_full(
                 item = ring[key]
                 x_c, c_c, r_c = item[0], item[1], item[2]
                 cc_c = bool(item[3]) if len(item) > 3 else False
+                p_c = item[4] if len(item) > 4 else None
                 if x_c.shape[0] == b:
                     return (
                         _finalize_x_for_logits(logits, x_c),
                         c_c,
                         (r_c if r_c is not None else fallback_record),
                         cc_c,
+                        _finalize_parts_for_logits(logits, p_c),
                     )
         if key in _RECENT_CAPTURES:
             item = _RECENT_CAPTURES[key]
             x_c, c_c, r_c = item[0], item[1], item[2]
             cc_c = bool(item[3]) if len(item) > 3 else False
+            p_c = item[4] if len(item) > 4 else None
             if x_c.shape[0] == b:
                 return (
                     _finalize_x_for_logits(logits, x_c),
                     c_c,
                     (r_c if r_c is not None else fallback_record),
                     cc_c,
+                    _finalize_parts_for_logits(logits, p_c),
                 )
-    return None, None, (r_attr if r_attr is not None else fallback_record), False
+    return None, None, (r_attr if r_attr is not None else fallback_record), False, None
+
+
+def _lookup_rhbi_capture_full(
+    logits: torch.Tensor,
+    fallback_record: Any = None,
+) -> Tuple[Optional[torch.Tensor], Optional[torch.Tensor], Any, bool]:
+    x_c, c_c, r_c, cc_c, _ = _lookup_rhbi_capture_parts(logits, fallback_record)
+    return x_c, c_c, r_c, cc_c
 
 
 def _lookup_rhbi_capture(
@@ -558,10 +594,18 @@ def _rhbi_critic_forward_hook(
                 output = [scaled, *output[1:]]
                 modified = True
             target = scaled
-    x_in, cond_disc, has_cont_cond = _extract_critic_inputs(args, kwargs, int(target.shape[0]))
+    x_in, cond_disc, has_cont_cond, float_parts = _extract_critic_inputs_parts(
+        args, kwargs, int(target.shape[0])
+    )
     if x_in is not None:
         _record_rhbi_capture(
-            output, x_in, cond_disc, rec, has_cont_cond=has_cont_cond, overwrite=True
+            output,
+            x_in,
+            cond_disc,
+            rec,
+            has_cont_cond=has_cont_cond,
+            float_parts=float_parts,
+            overwrite=True,
         )
     return output if modified else None
 
@@ -598,7 +642,7 @@ def _attach_rhbi_critic_hook(critic: nn.Module, record: CriticStepRecord) -> Non
 
 
 def bind_rhbi_record(record: Any, *consumers: Any) -> None:
-    """Bind a critic step record to ``RHBIGANLoss`` and thermal-aware prior regularizers."""
+    """Bind a critic step record to ``RHBIGANLoss``, optimizers, and thermal-aware regularizers."""
     if record is not None:
         record.legacy_thermal_channel = False
     for consumer in consumers:
@@ -608,6 +652,8 @@ def bind_rhbi_record(record: Any, *consumers: Any) -> None:
             consumer.record = record
         if hasattr(consumer, "thermal_source"):
             consumer.thermal_source = record
+        if hasattr(consumer, "param_groups"):
+            consumer._rhbi_record = record
 
 
 class RHBICriticAdam(K3PCriticAdam):

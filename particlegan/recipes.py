@@ -31,6 +31,10 @@ try:
         rhbi_settle_beta=0.0,
         rhbi_settle_mode="residual",
         rhbi_fibre_rel_blend=0.0,
+        rhbi_step_damp=0.0,
+        rhbi_cond_ot_weight=0.0,
+        rhbi_cond_ot_mode="kernel_ed",
+        rhbi_simplex_weight=0.0,
     )
 except (ImportError, ValueError):
     pass
@@ -340,6 +344,10 @@ class Recipe:
     rhbi_settle_beta: float = 0.0
     rhbi_settle_mode: str = "residual"
     rhbi_fibre_rel_blend: float = 0.0
+    rhbi_step_damp: float = 0.0
+    rhbi_cond_ot_weight: float = 0.0
+    rhbi_cond_ot_mode: str = "kernel_ed"
+    rhbi_simplex_weight: float = 0.0
 
     def __init__(self, **resolved_fields):
         declared = {field.name for field in fields(type(self))}
@@ -586,20 +594,34 @@ class Recipe:
             ("rhbi_thermal_shock_mu", False),
             ("rhbi_settle_beta", False),
             ("rhbi_fibre_rel_blend", False),
+            ("rhbi_step_damp", False),
+            ("rhbi_cond_ot_weight", False),
+            ("rhbi_simplex_weight", False),
         ):
             rhbi_val = getattr(self, rhbi_name)
             if type(rhbi_val) not in (int, float) or not math.isfinite(rhbi_val) or (
                 rhbi_val <= 0 if rhbi_pos else rhbi_val < 0
             ):
                 raise ValueError(f"{rhbi_name} must be finite and {'positive' if rhbi_pos else 'nonnegative'}")
-        if type(self.rhbi_self_coupling) is not str or self.rhbi_self_coupling not in ("hollow", "feydy"):
-            raise ValueError("rhbi_self_coupling must be 'hollow' or 'feydy'")
+        if type(self.rhbi_self_coupling) is not str or self.rhbi_self_coupling not in (
+            "hollow",
+            "feydy",
+            "feydy_unique",
+            "feydy_discrete",
+        ):
+            raise ValueError("rhbi_self_coupling must be 'hollow', 'feydy', 'feydy_unique', or 'feydy_discrete'")
         if type(self.rhbi_conditional_fibre) is not str or self.rhbi_conditional_fibre not in ("joint", "slack", "calibrated"):
             raise ValueError("rhbi_conditional_fibre must be 'joint', 'slack', or 'calibrated'")
         if type(self.rhbi_akt_mode) is not str or self.rhbi_akt_mode not in ("sqrt", "weibull"):
             raise ValueError("rhbi_akt_mode must be 'sqrt' or 'weibull'")
         if type(self.rhbi_settle_mode) is not str or self.rhbi_settle_mode not in ("residual", "thermal"):
             raise ValueError("rhbi_settle_mode must be 'residual' or 'thermal'")
+        if type(self.rhbi_cond_ot_mode) is not str or self.rhbi_cond_ot_mode not in (
+            "kernel_ed",
+            "hollow_sinkhorn",
+            "imq_cmmd",
+        ):
+            raise ValueError("rhbi_cond_ot_mode must be 'kernel_ed', 'hollow_sinkhorn' or 'imq_cmmd'")
         if type(self.rhbi_rapidity_screening) is not bool:
             raise ValueError("rhbi_rapidity_screening must be a boolean")
         if type(self.rhbi_scale_log_odds) is not bool:
@@ -614,6 +636,8 @@ class Recipe:
             raise ValueError("rhbi_chord_weight must be in [0, 1]")
         if self.rhbi_fibre_rel_blend > 1.0:
             raise ValueError("rhbi_fibre_rel_blend must be in [0, 1]")
+        if self.rhbi_step_damp >= 1.0:
+            raise ValueError("rhbi_step_damp must be in [0, 1)")
         if type(self.rhbi_iters) is not int or self.rhbi_iters < 1:
             raise ValueError("rhbi_iters must be a positive integer")
         if type(self.ebi_beta) not in (int, float) or not math.isfinite(self.ebi_beta) or self.ebi_beta <= 0:
@@ -969,6 +993,8 @@ class Recipe:
                 thermal_tau=self.rhbi_thermal_tau,
                 thermal_shock_mu=self.rhbi_thermal_shock_mu,
                 fibre_rel_blend=self.rhbi_fibre_rel_blend,
+                cond_ot_weight=self.rhbi_cond_ot_weight,
+                cond_ot_mode=self.rhbi_cond_ot_mode,
             )
         if self.effective_critic_formulation == "bispf" and self.loss == "relativistic":
             from .bispf import SinkhornRelativisticLoss
@@ -1579,6 +1605,13 @@ class Recipe:
             opt_d._empf_record = opt_d.record
             if base_prior is not None:
                 base_prior._empf_record = opt_d.record
+        if (
+            self.effective_critic_formulation == "rhbi"
+            or self.rhbi_weight > 0
+            or self.rhbi_critic_weight > 0
+        ) and hasattr(opt_d, "record"):
+            opt_g._rhbi_record = opt_d.record
+            opt_d._rhbi_record = opt_d.record
         return opt_g, opt_d
 
 

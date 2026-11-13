@@ -40,6 +40,7 @@ def _float_output(value):
             result._rhbi_input = value._rhbi_input
             result._rhbi_cond = getattr(value, "_rhbi_cond", None)
             result._rhbi_cont_cond = bool(getattr(value, "_rhbi_cont_cond", False))
+            result._rhbi_parts = getattr(value, "_rhbi_parts", None)
         if hasattr(value, "_rhbi_record"):
             result._rhbi_record = value._rhbi_record
         return result
@@ -80,14 +81,20 @@ class InputNoise(nn.Module):
             target._bispf_input = x
             target._empf_input = x
             if hasattr(target, "_rhbi_input") or hasattr(self.critic, "_rhbi_record"):
-                from .rhbi import _extract_critic_inputs, _record_rhbi_capture
+                from .rhbi import _extract_critic_inputs_parts, _record_rhbi_capture
                 rec = getattr(target, "_rhbi_record", getattr(self.critic, "_rhbi_record", None))
                 if rec is None or not getattr(rec, "_in_penalty", False):
-                    x_clean, cond_disc, has_cont_cond = _extract_critic_inputs(
+                    x_clean, cond_disc, has_cont_cond, float_parts = _extract_critic_inputs_parts(
                         (x, *args), kwargs, int(target.shape[0])
                     )
                     _record_rhbi_capture(
-                        out, x_clean, cond_disc, rec, has_cont_cond=has_cont_cond, overwrite=True
+                        out,
+                        x_clean,
+                        cond_disc,
+                        rec,
+                        has_cont_cond=has_cont_cond,
+                        float_parts=float_parts,
+                        overwrite=True,
                     )
         return out
 
@@ -144,7 +151,9 @@ _ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
                         "rhbi_slack_gain": 0.0, "rhbi_chord_weight": 0.0,
                         "rhbi_thermal_tau": 0.0, "rhbi_thermal_shock_mu": 0.15,
                         "rhbi_settle_beta": 0.0, "rhbi_settle_mode": "residual",
-                        "rhbi_fibre_rel_blend": 0.0}
+                        "rhbi_fibre_rel_blend": 0.0, "rhbi_step_damp": 0.0,
+                        "rhbi_cond_ot_weight": 0.0, "rhbi_cond_ot_mode": "kernel_ed",
+                        "rhbi_simplex_weight": 0.0}
 
 
 class GANTrainer:
@@ -544,6 +553,8 @@ class GANTrainer:
             fake_g = self._postprocess(self.prior, self._generate(self.G, latent, sigma_out, noise, rows=indices))
             if hasattr(self.opt_g, "bind_origin_sample"):
                 self.opt_g.bind_origin_sample(fake_g)
+            if hasattr(self.loss, "rhbi") and hasattr(self.loss.rhbi, "bind_discrete_prior_step"):
+                self.loss.rhbi.bind_discrete_prior_step(self.prior_noise_generator is None)
             fake_logits = critic(fake_g)
             real_g = generator_real() if callable(generator_real) else generator_real
             real_g = real if real_g is None else self._batch(real_g, "generator_real")
@@ -581,6 +592,22 @@ class GANTrainer:
                 loss_g = loss_g + transport
             if recipe.kinetic_transport_local_weight:
                 loss_g = loss_g + transport_local
+            simplex_loss = None
+            if (
+                recipe.rhbi_simplex_weight > 0.0
+                and self.prior_noise_generator is None
+                and self.prior.z.requires_grad
+                and len(self.prior.z) >= 2
+                and hasattr(self.loss, "rhbi")
+            ):
+                base_table = unwrap_prior(self.prior).z
+                simplex_loss = recipe.rhbi_simplex_weight * self.loss.rhbi.simplicial_manifold_loss(
+                    base_table,
+                    lambda z_q: self._postprocess(self.prior, self._generate(self.G, z_q, 0.0, noise)),
+                    real_g,
+                    record=getattr(self.opt_d, "record", None),
+                )
+                loss_g = loss_g + simplex_loss
             self.opt_g.zero_grad()
             protected_evaluator = None
             if recipe.constraint_geometry_mode == "strict_progress":
@@ -629,6 +656,8 @@ class GANTrainer:
                 self.opt_g.step()
             self.policy.after_generator_step()
         finally:
+            if hasattr(self.loss, "rhbi") and hasattr(self.loss.rhbi, "bind_discrete_prior_step"):
+                self.loss.rhbi.bind_discrete_prior_step(False)
             for parameter, flag in zip(self.D.parameters(), flags):
                 parameter.requires_grad_(flag)
         self.policy.finish_step()
@@ -645,6 +674,8 @@ class GANTrainer:
             result["kinetic_transport"] = transport.detach()
         if recipe.kinetic_transport_local_weight:
             result["kinetic_transport_local"] = transport_local.detach()
+        if simplex_loss is not None:
+            result["rhbi_simplex"] = simplex_loss.detach()
         if collect_stats:
             result["penalty_stats"] = penalty_stats
         return result

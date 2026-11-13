@@ -17,8 +17,8 @@ Passer summaries reflect the evidence audit dated **2026-10-15**. Selected-resul
 | [Learn stretched and tilted clusters](problems.md#vector_anisotropic) | Match the populations and shapes of three equally likely blobs stretched horizontally, vertically and diagonally. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 | [Settle on an overlapping distribution](problems.md#vector_overlap) | Match the observable centre, spread and distribution of two overlapping blobs; no hidden component labels are required. | Selected recorded PASS: RHBI. |
 | [Generate all four bar images](problems.md#img_bars4) | Generate each of four simple bar pictures, rather than producing only a few convincing examples. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
-| [Generate all four image corners](problems.md#img_blobs4) | Generate a small bright square at each of four corners, with enough clean examples of every corner. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
-| [Generate both brightness levels accurately](problems.md#img_intensity2) | Generate a square at either of two target brightnesses, with both levels represented and little brightness error. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
+| [Generate all four image corners](problems.md#img_blobs4) | Generate a small bright square at each of four corners, with enough clean examples of every corner. | Selected recorded PASS: RHBI. |
+| [Generate both brightness levels accurately](problems.md#img_intensity2) | Generate a square at either of two target brightnesses, with both levels represented and little brightness error. | Selected recorded PASS: RHBI. |
 | [A grid of 100 clusters](problems.md#grid100) | Learn all 100 small blobs with correct locations, populations and widths, scoring the current model's clean outputs without adding evaluation noise. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 | [A rotated grid of 100 clusters](problems.md#rotated100) | Learn all 100 small blobs with correct locations, populations and widths, scoring the current model's clean outputs without adding evaluation noise. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 | [A staggered grid of 100 clusters](problems.md#staggered100) | Learn all 100 small blobs with correct locations, populations and widths, scoring the current model's clean outputs without adding evaluation noise. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
@@ -282,7 +282,7 @@ Test: `img_blobs4` · Held for qualification; included in full-suite results.
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) |
 | [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) |
 | [EMPF](families/empf.md#cohort-cuda-23a94f16ca88) | [FAIL](families/empf.md#cohort-cuda-23a94f16ca88-experiment-img_blobs4) |
-| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [FAIL](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_blobs4) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [PASS](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_blobs4) |
 | [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [NOT MEASURED](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-img_blobs4) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) |
@@ -317,7 +317,7 @@ Test: `img_intensity2` · Held for qualification; included in full-suite results
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) |
 | [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) |
 | [EMPF](families/empf.md#cohort-cuda-23a94f16ca88) | [FAIL](families/empf.md#cohort-cuda-23a94f16ca88-experiment-img_intensity2) |
-| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [FAIL](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_intensity2) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [PASS](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-img_intensity2) |
 | [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [NOT MEASURED](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-img_intensity2) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) |
@@ -1247,7 +1247,7 @@ Test: `interp_sparse_arc` · Held for qualification; included in full-suite resu
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-interp_sparse_arc) |
 | [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-interp_sparse_arc) |
 | [EMPF](families/empf.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/empf.md#cohort-cuda-23a94f16ca88-experiment-interp_sparse_arc) |
-| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-interp_sparse_arc) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [FAIL](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-interp_sparse_arc) |
 | [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [NOT MEASURED](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-interp_sparse_arc) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-interp_sparse_arc) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-interp_sparse_arc) |
@@ -1281,7 +1281,7 @@ Test: `interp_img_patch_shift` · Held for qualification; included in full-suite
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-interp_img_patch_shift) |
 | [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-interp_img_patch_shift) |
 | [EMPF](families/empf.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/empf.md#cohort-cuda-23a94f16ca88-experiment-interp_img_patch_shift) |
-| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-interp_img_patch_shift) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [FAIL](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-interp_img_patch_shift) |
 | [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [NOT MEASURED](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-interp_img_patch_shift) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-interp_img_patch_shift) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-interp_img_patch_shift) |
@@ -1316,7 +1316,7 @@ Test: `interp_saddle_barycentric` · Held for qualification; included in full-su
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-interp_saddle_barycentric) |
 | [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-interp_saddle_barycentric) |
 | [EMPF](families/empf.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/empf.md#cohort-cuda-23a94f16ca88-experiment-interp_saddle_barycentric) |
-| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-interp_saddle_barycentric) |
+| [RHBI](families/rhbi.md#cohort-cuda-23a94f16ca88) | [FAIL](families/rhbi.md#cohort-cuda-23a94f16ca88-experiment-interp_saddle_barycentric) |
 | [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [NOT MEASURED](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-interp_saddle_barycentric) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-interp_saddle_barycentric) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-interp_saddle_barycentric) |

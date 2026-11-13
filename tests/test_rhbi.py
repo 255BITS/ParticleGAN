@@ -1078,3 +1078,254 @@ def test_rhbi_v6_thermal_coupled_settling_and_continuation() -> None:
     for p1, p2 in zip(D1.parameters(), D2.parameters()):
         assert torch.equal(p1, p2)
     assert torch.equal(P1.z, P2.z)
+
+
+def test_rhbi_v7_step_damp_and_conditional_fiber_transport():
+    """Verify thermal step damping, multi-part conditional fiber transport, unbiasedness, and continuation."""
+    r_nodamp = get_recipe(
+        "rhbi",
+        constraint_geometry_mode="none",
+        rhbi_step_damp=0.0,
+        total_steps=10,
+        batch_size=8,
+        num_particles=32,
+        z_dim=2,
+    )
+    r_damp = get_recipe(
+        "rhbi",
+        constraint_geometry_mode="none",
+        rhbi_step_damp=0.5,
+        total_steps=10,
+        batch_size=8,
+        num_particles=32,
+        z_dim=2,
+    )
+    Ga, Da, Pa = _make_mlp_pair(seed=801)
+    Gb, Db, Pb = deepcopy(Ga), deepcopy(Da), deepcopy(Pa)
+    Gc, Dc, Pc = deepcopy(Ga), deepcopy(Da), deepcopy(Pa)
+
+    opt_ga, opt_da = r_nodamp.make_optimizers(Ga, Da, Pa)
+    opt_gb, opt_db = r_damp.make_optimizers(Gb, Db, Pb)
+    opt_gc, opt_dc = r_damp.make_optimizers(Gc, Dc, Pc)
+    opt_db.record._thermal_scale = 1.0
+    opt_dc.record._thermal_scale = 0.0
+
+    idx = torch.arange(8)
+    for G_m, P_m, opt_g_m in ((Ga, Pa, opt_ga), (Gb, Pb, opt_gb), (Gc, Pc, opt_gc)):
+        opt_g_m.zero_grad()
+        opt_g_m.set_sampled_rows(P_m.z, idx)
+        loss = G_m(P_m.z[idx]).square().sum()
+        loss.backward()
+        opt_g_m.step()
+
+    assert torch.equal(Pa.z, Pb.z)
+    P0 = _make_mlp_pair(seed=801)[2]
+    assert torch.allclose(Pc.z[idx] - P0.z[idx], 0.5 * (Pa.z[idx] - P0.z[idx]), atol=1e-6)
+
+    class CondCriticFirst(nn.Module):
+        def __init__(self) -> None:
+            super().__init__()
+            self.lin = nn.Linear(5, 1)
+
+        def forward(self, x: torch.Tensor, *, xt: torch.Tensor, t: torch.Tensor) -> torch.Tensor:
+            return self.lin(torch.cat([x, xt, t[:, None].to(x)], dim=1)).squeeze(-1)
+
+    class CondCriticSecond(nn.Module):
+        def __init__(self) -> None:
+            super().__init__()
+            self.lin = nn.Linear(4, 1)
+
+        def forward(self, slow: torch.Tensor, x: torch.Tensor) -> torch.Tensor:
+            return self.lin(torch.cat([slow, x], dim=1)).squeeze(-1)
+
+    r_cond = get_recipe(
+        "rhbi",
+        rhbi_conditional_fibre="slack",
+        rhbi_cond_ot_weight=1.5,
+        rhbi_cond_ot_mode="imq_cmmd",
+        total_steps=10,
+        batch_size=16,
+        num_particles=32,
+        z_dim=2,
+    )
+    dc1 = CondCriticFirst()
+    _ = r_cond.make_critic_optimizer(dc1)
+    loss_fn = r_cond.make_loss()
+
+    gen = torch.Generator().manual_seed(911)
+    xt = torch.randn(16, 2, generator=gen)
+    t_step = torch.tensor([1, 2] * 8, dtype=torch.long)
+    y_true = 0.5 * xt + 0.2 * torch.randn(16, 2, generator=gen)
+    shift = nn.Parameter(torch.tensor([0.8, -0.6]))
+    x_pred = (0.5 * xt + 0.2 * torch.randn(16, 2, generator=gen)) + shift
+
+    gl = loss_fn.g_loss(dc1(x_pred, xt=xt, t=t_step), dc1(y_true, xt=xt, t=t_step).detach())
+    gl.backward()
+    assert shift.grad is not None and torch.isfinite(shift.grad).all()
+
+    dc2 = CondCriticSecond()
+    _ = r_cond.make_critic_optimizer(dc2)
+    loss_fn2 = r_cond.make_loss()
+    x_pred2 = (0.5 * xt).detach().requires_grad_(True)
+    gl2 = loss_fn2.g_loss(dc2(xt, x_pred2), dc2(xt, y_true).detach())
+    gl2.backward()
+    assert x_pred2.grad is not None and torch.isfinite(x_pred2.grad).all()
+
+    for mode_name in ("kernel_ed", "hollow_sinkhorn", "imq_cmmd"):
+        x_eq = y_true.detach().clone().requires_grad_(True)
+        val_eq = loss_fn.rhbi.conditional_fiber_transport_loss(x_eq, y_true, xt, cond_disc=t_step, mode=mode_name)
+        val_eq.backward()
+        assert x_eq.grad is not None and torch.allclose(x_eq.grad, torch.zeros_like(x_eq.grad), atol=1e-6)
+
+    for mode_name in ("kernel_ed", "imq_cmmd"):
+        grad_acc = torch.zeros(2)
+        prim = loss_fn.rhbi
+        for trial in range(64):
+            g_t = torch.Generator().manual_seed(2000 + trial)
+            c_b = torch.randn(24, 2, generator=g_t)
+            t_b = torch.tensor([1, 2, 3] * 8, dtype=torch.long)
+            y_b = 0.7 * c_b + 0.25 * torch.randn(24, 2, generator=g_t)
+            mu = torch.zeros(2, requires_grad=True)
+            x_b = 0.7 * c_b + 0.25 * torch.randn(24, 2, generator=g_t) + mu
+            val = prim.conditional_fiber_transport_loss(x_b, y_b, c_b, cond_disc=t_b, mode=mode_name)
+            val.backward()
+            grad_acc += mu.grad.detach()
+        mean_grad_at_truth = grad_acc / 64.0
+        assert float(mean_grad_at_truth.norm().item()) < 0.03
+
+
+def test_rhbi_v7_feydy_unique_and_simplicial_manifold_loss():
+    """Verify feydy_unique clone deduplication, zero-RNG simplicial manifold loss, MoG bypass, and continuation."""
+    with pytest.raises(ValueError, match="self_coupling"):
+        RHBILoss(self_coupling="invalid_mode")
+
+    op_fu = RHBILoss(weight=1.0, self_coupling="feydy_unique")
+    op_f = RHBILoss(weight=1.0, self_coupling="feydy")
+
+    # 1. Distinct continuous points: feydy_unique matches feydy bit-for-bit
+    pts_cont = torch.randn(10, 3, generator=torch.Generator().manual_seed(42))
+    y_cont = torch.randn(10, 3, generator=torch.Generator().manual_seed(43))
+    d_f1 = torch.zeros(10, requires_grad=True)
+    d_f2 = torch.zeros(10, requires_grad=True)
+    d_r = torch.zeros(10)
+    x1 = pts_cont.clone().requires_grad_(True)
+    x2 = pts_cont.clone().requires_grad_(True)
+    l_fu, _ = op_fu(x1, y_cont, d_f1, d_r)
+    l_f, _ = op_f(x2, y_cont, d_f2, d_r)
+    assert torch.equal(l_fu, l_f)
+    l_fu.backward()
+    l_f.backward()
+    assert torch.equal(x1.grad, x2.grad)
+
+    # 2. Exact discrete particle clone in batch: feydy_unique masks off-diagonal clone (0, 1)
+    pts_clone = torch.arange(6, dtype=torch.float32).unsqueeze(1) * 20.0
+    pts_clone[1] = pts_clone[0].clone()
+    _, c_hat_clone = RHBILoss._born_infeld_pair(pts_clone, pts_clone, torch.tensor(1.0))
+    zeros6 = torch.zeros(6)
+    mask_clone = (c_hat_clone > 1e-12) | torch.eye(6, dtype=torch.bool)
+    p_f = op_f._sinkhorn_slack(c_hat_clone, zeros6, zeros6, hollow=False)
+    p_fu = op_fu._sinkhorn_slack(c_hat_clone, zeros6, zeros6, hollow=False, pair_mask=mask_clone)
+    assert float(p_f[0, 1].item()) > 0.05
+    assert float(p_fu[0, 1].item()) == 0.0
+    assert float((p_fu[0, 0] * 6.0).item()) > 0.99
+
+    # 3. Simplicial manifold loss: zero RNG consumption, detached z_table, finite G gradients
+    G_s = nn.Sequential(nn.Linear(2, 16), nn.SiLU(), nn.Linear(16, 2))
+    z_tab = nn.Parameter(torch.randn(12, 2, generator=torch.Generator().manual_seed(77)))
+    y_arc = torch.randn(16, 2, generator=torch.Generator().manual_seed(78))
+    op_fu._update_ell(y_arc)
+    cpu_rng_before = torch.get_rng_state()
+    s_loss = op_fu.simplicial_manifold_loss(z_tab, G_s, y_arc)
+    assert torch.equal(torch.get_rng_state(), cpu_rng_before)
+    s_loss.backward()
+    assert z_tab.grad is None
+    assert any(p.grad is not None and float(p.grad.abs().sum().item()) > 0.0 for p in G_s.parameters())
+
+    # 4. GANTrainer: active on ParticlePrior, exact bypass on MoGParticlePrior, exact continuation
+    base_kw = dict(
+        rhbi_rapidity_screening=False,
+        rhbi_self_coupling="feydy_unique",
+        rhbi_akt_horizon=True,
+        rhbi_akt_mode="weibull",
+        rhbi_slack_gain=0.35,
+        rhbi_chord_weight=0.25,
+        rhbi_gamma_gauge=0.03,
+        rhbi_lambda_floor=0.005,
+        ebi_beta=12.0,
+        rhbi_settle_beta=16.0,
+        rhbi_settle_mode="thermal",
+        rhbi_thermal_tau=0.084,
+        rhbi_thermal_shock_mu=0.35,
+        rhbi_conditional_fibre="slack",
+        rhbi_cond_ot_mode="imq_cmmd",
+        rhbi_cond_ot_weight=1.5,
+        total_steps=6,
+        batch_size=8,
+        num_particles=12,
+        z_dim=2,
+    )
+    r_s0 = get_recipe("rhbi", rhbi_simplex_weight=0.0, **base_kw)
+    r_s1 = get_recipe("rhbi", rhbi_simplex_weight=0.35, **base_kw)
+    r_m0 = get_recipe("rhbi", prior_kind="mog", rhbi_simplex_weight=0.0, **base_kw)
+    r_m1 = get_recipe("rhbi", prior_kind="mog", rhbi_simplex_weight=0.35, **base_kw)
+    batches = [torch.randn(8, 2, generator=torch.Generator().manual_seed(300 + i)) for i in range(4)]
+
+    Gm0, Dm0, _ = _make_mlp_pair(seed=901)
+    Gm1, Dm1 = deepcopy(Gm0), deepcopy(Dm0)
+    pm0 = r_m0.make_prior()
+    with torch.no_grad():
+        pm0.z.normal_(0.0, 1.0, generator=torch.Generator().manual_seed(902))
+    pm1 = deepcopy(pm0)
+    tm0 = GANTrainer(r_m0, Gm0, Dm0, prior=pm0, prior_noise_generator=torch.Generator().manual_seed(903), seed=0)
+    tm1 = GANTrainer(r_m1, Gm1, Dm1, prior=pm1, prior_noise_generator=torch.Generator().manual_seed(903), seed=0)
+    for b in batches[:2]:
+        tm0.step(b)
+        tm1.step(b)
+    for p0, p1 in zip(Gm0.parameters(), Gm1.parameters()):
+        assert torch.equal(p0, p1)
+    assert torch.equal(pm0.z, pm1.z)
+
+    Gp0, Dp0, _ = _make_mlp_pair(seed=905)
+    Pp0 = ParticlePrior(num_particles=12, z_dim=2)
+    with torch.no_grad():
+        Pp0.z.normal_(0.0, 1.0, generator=torch.Generator().manual_seed(907))
+    Gp1, Dp1, Pp1 = deepcopy(Gp0), deepcopy(Dp0), deepcopy(Pp0)
+    Gp2, Dp2, _ = _make_mlp_pair(seed=906)
+    Pp2 = ParticlePrior(num_particles=12, z_dim=2)
+    tp0 = GANTrainer(r_s0, Gp0, Dp0, prior=Pp0, seed=0)
+    tp1 = GANTrainer(r_s1, Gp1, Dp1, prior=Pp1, seed=0)
+    for b in batches[:2]:
+        tp0.step(b)
+        tp1.step(b)
+    assert any(not torch.equal(p0, p1) for p0, p1 in zip(Gp0.parameters(), Gp1.parameters()))
+    ckpt = deepcopy(tp1.state_dict())
+    for b in batches[2:]:
+        tp1.step(b)
+    tp2 = GANTrainer(r_s1, Gp2, Dp2, prior=Pp2, seed=7)
+    tp2.load_state_dict(ckpt)
+    for b in batches[2:]:
+        tp2.step(b)
+    for p1, p2 in zip(Gp1.parameters(), Gp2.parameters()):
+        assert torch.equal(p1, p2)
+    assert torch.equal(Pp1.z, Pp2.z)
+
+    # 5. feydy_discrete deduplicates on discrete ParticlePrior while matching feydy on quantized MoG ties
+    op_fd = RHBILoss(weight=1.0, self_coupling="feydy_discrete")
+    op_f_q = RHBILoss(weight=1.0, self_coupling="feydy")
+    op_fu_q = RHBILoss(weight=1.0, self_coupling="feydy_unique")
+    x_q_tie = torch.tensor([[0.0], [0.0], [0.3], [20.0]], requires_grad=True)
+    y_q_ref = torch.tensor([[0.5], [1.0], [9.5], [19.5]])
+    z4 = torch.zeros(4)
+    # Without bind_discrete_prior_step (or False, i.e. MoG): matches feydy bit-for-bit
+    op_fd.bind_discrete_prior_step(False)
+    l_fd_mog, _ = op_fd(x_q_tie, y_q_ref, z4.clone().requires_grad_(True), z4)
+    l_f_mog, _ = op_f_q(x_q_tie.detach().clone().requires_grad_(True), y_q_ref, z4.clone().requires_grad_(True), z4)
+    _, _ = op_fu_q(x_q_tie.detach().clone().requires_grad_(True), y_q_ref, z4.clone().requires_grad_(True), z4)
+    assert torch.equal(l_fd_mog, l_f_mog)
+    # With bind_discrete_prior_step(True) (i.e. ParticlePrior): matches feydy_unique bit-for-bit and resets flag
+    op_fd.bind_discrete_prior_step(True)
+    l_fd_disc, _ = op_fd(x_q_tie.detach().clone().requires_grad_(True), y_q_ref, z4.clone().requires_grad_(True), z4)
+    l_fu_disc, _ = op_fu_q(x_q_tie.detach().clone().requires_grad_(True), y_q_ref, z4.clone().requires_grad_(True), z4)
+    assert torch.equal(l_fd_disc, l_fu_disc)
+    assert not torch.equal(l_fd_disc, op_f_q(x_q_tie.detach().clone().requires_grad_(True), y_q_ref, z4.clone().requires_grad_(True), z4)[0])
+    assert op_fd._discrete_prior_step is False
