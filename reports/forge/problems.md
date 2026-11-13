@@ -44,6 +44,9 @@ Passer summaries reflect the evidence audit dated **2026-10-15**. Selected-resul
 | [Learn a Gaussian with 8-bit MXFP8 training arithmetic](problems.md#precision_gaussian_mxfp8) | Train from the shared deterministic initialization using Blackwell-format MXFP8 software-reference forward and backward GEMM operands; match the full scalar Gaussian law at five final checks. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 | [Learn a Gaussian with 4-bit NVFP4 training arithmetic](problems.md#precision_gaussian_nvfp4) | Train from the shared deterministic initialization using Blackwell-format NVFP4 software-reference forward and backward GEMM operands; match the full scalar Gaussian law at five final checks. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 | [Hold all five discrete words and exact BiGAN inversion across 4,000 continuation updates](problems.md#five_word_joint_hold) | Restore the candidate's own confirmed five-word acquisition checkpoint in a fresh process and pass every generation and exact encoder-inversion bound across all 24 scheduled checks over 4,000 additional updates. | Selected recorded PASS: BCAP, BISPF. |
+| [Interpolate unseen latent k-NN chords along a 270-degree circular arc from 12 zero-sigma particles without MoG](problems.md#interp_sparse_arc) | Train 12 discrete zero-sigma `ParticlePrior` locations and an MLP generator on a 2D circular arc (`R = 2.0`, `sigma = 0.03`) under protocol seed 0 so both endpoints (`endpoint_hq >= 0.85`) and unseen latent k-NN chords (`interp_hq >= 0.80`, `interp_arc_bins >= 22`, `midpoint_novelty >= 0.20`) stay on the curved manifold across five final live checks. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
+| [Translate a sharp 2x2 patch smoothly across unseen latent chords in 8x8 images from 16 zero-sigma particles](problems.md#interp_img_patch_shift) | Train 16 zero-sigma `ParticlePrior` codes (`z_dim = 4`) and a `residual_upsample` convolutional generator on continuous single-patch 8x8 images so unseen latent k-NN chords render single sharp shifted patches (`interp_rmse <= 0.10`, `interp_peak >= 0.78`, `midpoint_novelty >= 0.18`, `quadrant_coverage == 4`) rather than 0.5-peak pixel double exposures. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
+| [Interpolate unseen 2D latent triangle barycenters across a curved 3D saddle sheet from 24 zero-sigma particles](problems.md#interp_saddle_barycentric) | Train 24 zero-sigma `ParticlePrior` locations (`z_dim = 2`) and a 3D-output MLP generator on $w = 0.8(x^2 - y^2) + 0.9\cos(0.75\pi x)\cos(0.75\pi y)$ so unseen 2D latent k-NN triangle barycenters stay on the curved surface (`barycenter_surface_mae <= 0.09`, `barycenter_hq >= 0.78`, `xy_bins_covered >= 12`, `barycenter_novelty >= 0.18`) across five final live checks. | No selected recorded PASS; see exact outcomes and dated diagnostic evidence below. |
 
 <a name="gaussian1d_stability"></a>
 
@@ -1187,3 +1190,104 @@ Test: `five_word_joint_hold` · Required for qualification and included in full-
 **Recommendation from the dated diagnosis.** Damp transient post-acquisition joint-critic excursions on the discrete 5-particle codebook without losing `empf-v7`'s `gaussian1d_stability`, `precision_gaussian_fp32`, and `five_word_joint_smoke` wall-time budget.
 
 Evidence: [EMPF-v7 ordinary readout receipt](records/readout-4901963885d977da23e139ba.json) · [Task declaration](../../configs/forge/tasks/five_word_joint_hold.json).
+
+
+<a name="interp_sparse_arc"></a>
+
+## Interpolate unseen latent k-NN chords along a 270-degree circular arc from 12 zero-sigma particles without MoG
+
+Test: `interp_sparse_arc` · Held for qualification; included in full-suite results.
+
+**What it tests.** Train 12 discrete zero-sigma `ParticlePrior` locations and an MLP generator on a 2D circular arc (`R = 2.0`, `sigma = 0.03`) under protocol seed 0 so both endpoints (`endpoint_hq >= 0.85`) and unseen latent k-NN chords (`interp_hq >= 0.80`, `interp_arc_bins >= 22`, `midpoint_novelty >= 0.20`) stay on the curved manifold across five final live checks.
+
+**Historical diagnosis (2026-10-15).** No selected recipe sustains all five final live checks (`0/8` runnable, `e22` preflight `BLOCKED` by `live_sampling`). Selected `atlas-particle-normal-v4` meets every bound at step 600 (`endpoint_hq = 1.000`, `interp_hq = 0.9365`, `output_knn_interp_hq = 1.000`, `30/32` bins, `midpoint_novelty = 0.576`) and passes `3/5` terminal checks via its recipe-owned `normal_noise` (`0.0065`) prior manipulator, while `empf-v7` bends interior chords (`interp_hq = 0.8254`) with off-arc endpoints (`endpoint_hq = 0.6667 < 0.85`) and classical Adam families (`release07-gan-v3`, `r1r2`, `k3p`, `ka2`) place endpoints on the arc (`0.83-1.00`) but cut straight Euclidean secants across unseen chords (`interp_hq = 0.52-0.65`).
+
+**Historical passer evidence.** No sustained 5-check PASS in the diagnostic stretch campaign; `atlas-particle-normal-v4` passes 3/5 final checks (`interp_hq = 0.9365` at step 600).
+
+- No selected family achieves a 5/5 sustained live PASS under the current declaration.
+- Diagnostic stretch run `atlas-particle-normal-v4` (`readout-669ead9699347bdcc998eb81.json`) passes 3/5 terminal checks and all final-step bounds; analytic smooth-arc oracle passes all gates while chord-cutter and Voronoi-snap controls fail as designed.
+
+**Selected recipes' recorded results:**
+
+| Selected recipe | Result |
+| --- | --- |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-interp_sparse_arc) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-interp_sparse_arc) |
+| [EMPF](families/empf.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/empf.md#cohort-cuda-23a94f16ca88-experiment-interp_sparse_arc) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [NOT MEASURED](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-interp_sparse_arc) |
+| [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-interp_sparse_arc) |
+| [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-interp_sparse_arc) |
+| [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-interp_sparse_arc) |
+| [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-interp_sparse_arc) |
+| [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-interp_sparse_arc) |
+
+**Recommendation from the dated diagnosis.** Add a recipe-owned latent chord perturbation or local Jacobian smoothness regularizer and damp live-iterate oscillation on zero-sigma `ParticlePrior` without sacrificing counted Tier 1-3 passes.
+
+Evidence: [Particle interpolation stretch report and 9-family table](particle-interpolation-stretch/README.md#interp_sparse_arc) · [Atlas diagnostic stretch readout receipt](records/readout-669ead9699347bdcc998eb81.json) · [Task declaration](../../configs/forge/tasks/interp_sparse_arc.json).
+
+
+<a name="interp_img_patch_shift"></a>
+
+## Translate a sharp 2x2 patch smoothly across unseen latent chords in 8x8 images from 16 zero-sigma particles
+
+Test: `interp_img_patch_shift` · Held for qualification; included in full-suite results.
+
+**What it tests.** Train 16 zero-sigma `ParticlePrior` codes (`z_dim = 4`) and a `residual_upsample` convolutional generator on continuous single-patch 8x8 images so unseen latent k-NN chords render single sharp shifted patches (`interp_rmse <= 0.10`, `interp_peak >= 0.78`, `midpoint_novelty >= 0.18`, `quadrant_coverage == 4`) rather than 0.5-peak pixel double exposures.
+
+**Historical diagnosis (2026-10-15).** Archived ordinary family cohorts predate this task (`UNKNOWN`), and `e22` is preflight `BLOCKED` on clean/live scoring (`live_sampling`). In the matched CUDA stretch campaign (`particle-interp-stretch-v1`), `empf-v7` collapses to zero output (`interp_peak = 0.0`), `bispf-optimized-quintic-v1` dims chord midpoints (`interp_peak = 0.6189 < 0.78`), and `recipe-prior-refactor-bcap-pure-v1` underfits (`interp_peak = 0.3015`), whereas all five remaining families pass 5/5 terminal checks.
+
+**Historical passer evidence.** 0 of 9 in archived ordinary cohorts (`UNKNOWN`); 5 of 8 runnable selected recipes (`atlas`, `release07-gan-v3`, `ka2`, `k3p`, `r1r2`) pass 5/5 terminal checks in matched CUDA stretch diagnostics.
+
+- Separate CUDA stretch diagnostics (`particle-interp-stretch-v1`) pass 5/5 terminal checks for `atlas-particle-normal-v4` (`interp_rmse = 0.0250`, `interp_peak = 0.9358`), `recipe-prior-refactor-ka2-v1` (`0.0367`, `0.9149`), `recipe-prior-refactor-k3p-v1` (`0.0381`, `0.9349`), `recipe-prior-refactor-release07-gan-v3-v1` (`0.0477`, `0.8727`), and `recipe-prior-refactor-r1r2-v1` (`0.0481`, `0.8876`).
+
+**Selected recipes' recorded results:**
+
+| Selected recipe | Result |
+| --- | --- |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-interp_img_patch_shift) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-interp_img_patch_shift) |
+| [EMPF](families/empf.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/empf.md#cohort-cuda-23a94f16ca88-experiment-interp_img_patch_shift) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [NOT MEASURED](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-interp_img_patch_shift) |
+| [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-interp_img_patch_shift) |
+| [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-interp_img_patch_shift) |
+| [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-interp_img_patch_shift) |
+| [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-interp_img_patch_shift) |
+| [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-interp_img_patch_shift) |
+
+**Recommendation from the dated diagnosis.** Diagnose DualNorm (`empf-v7`) zero-output collapse and `bispf` midpoint peak attenuation on 16-particle zero-sigma convolutional image generation while retaining counted discrete-word and ring passes.
+
+Evidence: [Particle interpolation stretch report and 9-family table](particle-interpolation-stretch/README.md#interp_img_patch_shift) · [Atlas diagnostic stretch readout receipt](records/readout-669ead9699347bdcc998eb81.json) · [EMPF diagnostic stretch readout receipt](records/readout-a211bf674ae6989087e57402.json) · [Task declaration](../../configs/forge/tasks/interp_img_patch_shift.json).
+
+
+<a name="interp_saddle_barycentric"></a>
+
+## Interpolate unseen 2D latent triangle barycenters across a curved 3D saddle sheet from 24 zero-sigma particles
+
+Test: `interp_saddle_barycentric` · Held for qualification; included in full-suite results.
+
+**What it tests.** Train 24 zero-sigma `ParticlePrior` locations (`z_dim = 2`) and a 3D-output MLP generator on $w = 0.8(x^2 - y^2) + 0.9\cos(0.75\pi x)\cos(0.75\pi y)$ so unseen 2D latent k-NN triangle barycenters stay on the curved surface (`barycenter_surface_mae <= 0.09`, `barycenter_hq >= 0.78`, `xy_bins_covered >= 12`, `barycenter_novelty >= 0.18`) across five final live checks.
+
+**Historical diagnosis (2026-10-15).** No selected recipe sustains all five final live checks (`0/8` runnable, `e22` preflight `BLOCKED`). `atlas-particle-normal-v4` passes `3/5` final checks and all step-800 bounds (`barycenter_surface_mae = 0.0552`, `barycenter_hq = 0.8701`, `16/16` xy bins), `release07-gan-v3` passes the final `2/5` checks (`barycenter_surface_mae = 0.0587`, `barycenter_hq = 0.8056`), and `ka2` (`barycenter_hq = 0.7639`), `bispf` (`0.7286`), and `k3p` (`0.6974`) satisfy `barycenter_surface_mae <= 0.09` while falling just short on `barycenter_hq >= 0.78`.
+
+**Historical passer evidence.** No sustained 5-check PASS in the diagnostic stretch campaign; `atlas` (3/5 terminal checks) and `release07-gan-v3` (2/5 terminal checks) reach full single-check validity by step 800.
+
+- No selected family achieves a 5/5 sustained live PASS under the current declaration.
+- Diagnostic stretch runs `atlas-particle-normal-v4` (`readout-669ead9699347bdcc998eb81.json`, `barycenter_hq = 0.8701`) and `recipe-prior-refactor-release07-gan-v3-v1` (`readout-e838608cfd803f50b58f4e21.json`, `barycenter_hq = 0.8056`) pass every bound at step 800.
+
+**Selected recipes' recorded results:**
+
+| Selected recipe | Result |
+| --- | --- |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-interp_saddle_barycentric) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-interp_saddle_barycentric) |
+| [EMPF](families/empf.md#cohort-cuda-23a94f16ca88) | [NOT MEASURED](families/empf.md#cohort-cuda-23a94f16ca88-experiment-interp_saddle_barycentric) |
+| [Atlas](families/atlas.md#cohort-cuda-bc3debd3fa5e) | [NOT MEASURED](families/atlas.md#cohort-cuda-bc3debd3fa5e-experiment-interp_saddle_barycentric) |
+| [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-interp_saddle_barycentric) |
+| [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-interp_saddle_barycentric) |
+| [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-interp_saddle_barycentric) |
+| [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-interp_saddle_barycentric) |
+| [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-interp_saddle_barycentric) |
+
+**Recommendation from the dated diagnosis.** Stabilize late-step live-iterate fluctuations and test recipe-owned 2D simplex interior supervision so `atlas` and `release07-gan-v3` hold `barycenter_hq >= 0.78` across all five terminal checks.
+
+Evidence: [Particle interpolation stretch report and 9-family table](particle-interpolation-stretch/README.md#interp_saddle_barycentric) · [Atlas diagnostic stretch readout receipt](records/readout-669ead9699347bdcc998eb81.json) · [GAN v3 release 0.7 diagnostic stretch readout receipt](records/readout-e838608cfd803f50b58f4e21.json) · [Task declaration](../../configs/forge/tasks/interp_saddle_barycentric.json).
