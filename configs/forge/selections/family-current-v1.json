@@ -867,8 +867,8 @@
   },
   "policy_fingerprint": "fcb7ac52465e555fc6d88a1d53d92c485ae340216eafaa6fe49b03981c8f175a",
   "previous_selection": {
-    "path": "configs/forge/selections/history/family-current-b2607ba409dc2fcedb5c23891595dd300288e6ce06349a7719899fc4a914ab29.json",
-    "sha256": "b2607ba409dc2fcedb5c23891595dd300288e6ce06349a7719899fc4a914ab29"
+    "path": "configs/forge/selections/history/family-current-c99010b0110d1d6b12fa963e7bd7dc379c7665fa1b18764e4e04e58b1d62db96.json",
+    "sha256": "c99010b0110d1d6b12fa963e7bd7dc379c7665fa1b18764e4e04e58b1d62db96"
   },
   "schema_version": 1,
   "scope": "whole_candidate_family_current",
@@ -1040,6 +1040,25 @@
       "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
       "task_keys_sha256": "851f8378607e87901cd4e913210da1400e7297901d3e146607266d51ee9c916f",
       "trainer_family": "release07-gan-v3"
+    },
+    {
+      "candidate_id": "rhbi-v6",
+      "candidate_revision": "26abf8d916172cd34a4ee0ce10c376a3e4a1e9ffc80b03f126ae68d8e0a3b57f",
+      "cohort": "e8bb549f1b6f95970ef96ebdf9d3d15041f3453dc50ccd6b78a49e111c102414",
+      "execution_backend": "cuda",
+      "measurement_views": [
+        "discriminator_stability"
+      ],
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Promote rhbi-v6 (Relativistic Hellinger-Born-Infeld slack-screened transport with Poisson-Weibull 2e empirical OT 1D horizon scaling, mu=0.35 false-shock filter, thermally coupled (1 - s_t)^2 Lipschitz settling, Weyl-phased balanced-Sinkhorn Born-Infeld geodesic chord regularization 0.25 at ebi_beta=12.0 with zero-mean critic gauge 0.03, and impedance-matched 5-channel Kantorovich-Hellinger thermal equilibrium controller rhbi_thermal_tau=0.084) as the canonical RHBI candidate following ordinary discriminator_stability CUDA measurement on NVIDIA RTX A6000 (11/11 required + 2/2 diagnostic Tier 1 PASS = 27/27 Tier 1 view requirements across views, 10/18 required Tier 2 PASS = 55/78 Tier 2 view requirements, 82/115 total counted view requirements; 26/38 executed and 26/61 full-suite PASS including all three 1D precision benchmarks precision_gaussian_fp32, precision_gaussian_mxfp8, and precision_gaussian_nvfp4, plus mode_hold and vector_overlap, 0 BLOCKED). Actual executed-policy qualification and comparison-policy projection retain their separate source-bound proofs; no public-default adoption claim.",
+      "recipe_sha256": "1a7e11bdeb003c3cd41da6e351548848e365cf1755a75d2de6225b601fb6d439",
+      "rng_sha256": "495400e2de1b9f9f94a86625a2132091646dcbb8357f48c3512ed24154b89b6d",
+      "runtime_cohort_sha256": "23a94f16ca88faef2aa24ce757c89f1524bef5522c2b1b87cce88d9d94e883b1",
+      "scientific_row_sha256": "b66a4882981e335e891506e0c8955a0c0a927de9d7ae609750547408f21a6a98",
+      "selection_kind": "current_measurement",
+      "source_digest": "49819f3149d320aa7942a841f75aa23235b8d0b4e0a35c770dc88a48f070061c",
+      "task_keys_sha256": "7f73a21eb85b7625a1279917b206bc96f849bdf0ada5f7a671a8ebdd4dda7199",
+      "trainer_family": "rhbi"
     }
   ],
   "view": "discriminator_stability"
