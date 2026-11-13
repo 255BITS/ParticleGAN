@@ -36,6 +36,12 @@ def _float_output(value):
             result._empf_record = value._empf_record
         if hasattr(value, "_empf_conditioned"):
             result._empf_conditioned = value._empf_conditioned
+        if hasattr(value, "_rhbi_input"):
+            result._rhbi_input = value._rhbi_input
+            result._rhbi_cond = getattr(value, "_rhbi_cond", None)
+            result._rhbi_cont_cond = bool(getattr(value, "_rhbi_cont_cond", False))
+        if hasattr(value, "_rhbi_record"):
+            result._rhbi_record = value._rhbi_record
         return result
     if isinstance(value, tuple):
         return tuple(_float_output(item) for item in value)
@@ -73,6 +79,16 @@ class InputNoise(nn.Module):
         if isinstance(target, torch.Tensor):
             target._bispf_input = x
             target._empf_input = x
+            if hasattr(target, "_rhbi_input") or hasattr(self.critic, "_rhbi_record"):
+                from .rhbi import _extract_critic_inputs, _record_rhbi_capture
+                rec = getattr(target, "_rhbi_record", getattr(self.critic, "_rhbi_record", None))
+                if rec is None or not getattr(rec, "_in_penalty", False):
+                    x_clean, cond_disc, has_cont_cond = _extract_critic_inputs(
+                        (x, *args), kwargs, int(target.shape[0])
+                    )
+                    _record_rhbi_capture(
+                        out, x_clean, cond_disc, rec, has_cont_cond=has_cont_cond, overwrite=True
+                    )
         return out
 
 
@@ -116,7 +132,19 @@ _ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
                         "optimizer_momentum": 0.0, "optimizer_adam_lr": None,
                         "beta2_end": None, "beta2_anneal_end": 0.2,
                         "reg_coeff_end": None, "reg_coeff_anneal_end": 0.2,
-                        "generator_gradient_response": "none"}
+                        "generator_gradient_response": "none",
+                        "rhbi_weight": 0.0, "rhbi_rho": 2.0, "rhbi_tau": 2.0,
+                        "rhbi_eps": 0.1, "rhbi_iters": 8, "rhbi_c_max": 20.0,
+                        "rhbi_beta_ell": 0.1, "rhbi_nn_quantile": 0.25,
+                        "rhbi_critic_weight": 0.0, "rhbi_self_coupling": "hollow",
+                        "rhbi_relativistic_weight": 0.0, "rhbi_lambda_floor": 0.0,
+                        "rhbi_gamma_gauge": 0.0, "rhbi_rapidity_screening": True,
+                        "rhbi_scale_log_odds": False, "rhbi_conditional_fibre": "joint",
+                        "rhbi_akt_horizon": False, "rhbi_akt_mode": "sqrt",
+                        "rhbi_slack_gain": 0.0, "rhbi_chord_weight": 0.0,
+                        "rhbi_thermal_tau": 0.0, "rhbi_thermal_shock_mu": 0.15,
+                        "rhbi_settle_beta": 0.0, "rhbi_settle_mode": "residual",
+                        "rhbi_fibre_rel_blend": 0.0}
 
 
 class GANTrainer:
@@ -267,7 +295,7 @@ class GANTrainer:
             raise TypeError("require_latent_damping must be a boolean or None")
         # The recipe picks the regularization formulation; its
         # step-time work runs inside these optimizers' step().
-        ema_critic = None if recipe.effective_critic_formulation in ("bispf", "empf") else deepcopy(self.D)
+        ema_critic = None if recipe.effective_critic_formulation in ("bispf", "empf", "rhbi") else deepcopy(self.D)
         self.opt_g, self.opt_d = recipe.make_optimizers(
             self.G, self.D, self.prior, ema_critic=ema_critic,
             require_latent_damping=require_latent_damping, **self.optimizer_options)
@@ -289,6 +317,9 @@ class GANTrainer:
         elif recipe.effective_critic_formulation == "empf":
             from .empf import bind_empf_record
             bind_empf_record(self.opt_d.record, self.loss, self.prior_regularizer)
+        elif recipe.effective_critic_formulation == "rhbi" or recipe.rhbi_weight > 0 or recipe.rhbi_critic_weight > 0:
+            from .rhbi import bind_rhbi_record
+            bind_rhbi_record(self.opt_d.record, self.loss, self.prior_regularizer)
         if eval_generator is not None and any(eval_generator is stream for stream in (
                 latent_generator, penalty_generator, noise_generator, input_noise_generator,
                 prior_noise_generator, model_generator)):
@@ -558,11 +589,19 @@ class GANTrainer:
                 locations = self.prior.z.detach().clone()
                 sampled_latent = latent.detach().clone()
                 def protected_evaluator():
-                    replay = sampled_latent + (self.prior.z[indices] - locations[indices])
-                    generated = self._postprocess(
-                        self.prior, self._generate(self.G, replay, sigma_out, noise, rows=indices))
-                    logits = critic(generated)
-                    return (self.loss.g_loss(logits, real_logits),)
+                    rec = getattr(self.opt_d, "record", None)
+                    prev_probe = getattr(rec, "_in_protected_probe", False) if rec is not None else False
+                    if rec is not None:
+                        rec._in_protected_probe = True
+                    try:
+                        replay = sampled_latent + (self.prior.z[indices] - locations[indices])
+                        generated = self._postprocess(
+                            self.prior, self._generate(self.G, replay, sigma_out, noise, rows=indices))
+                        logits = critic(generated)
+                        return (self.loss.g_loss(logits, real_logits),)
+                    finally:
+                        if rec is not None:
+                            rec._in_protected_probe = prev_probe
             constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
                                          protected_evaluator=protected_evaluator)
             self.policy.after_generator_backward(
