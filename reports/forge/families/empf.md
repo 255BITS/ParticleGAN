@@ -111,20 +111,20 @@ Every cell is one run; timings are never pooled across devices or contention sta
 
 This registration covers 10 complete recipes. Historical alternatives outside its registered family roster add no missing benchmark cells. A changed selected recipe within a registered family remains unknown until measured.
 
-### NVIDIA RTX A6000 · GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce
+### NVIDIA RTX A6000 · GPU-ed080e41-3193-3755-6756-f3d46c433331
 
-Performance source `b8e440580929` (commit `b3d447300eb90ad99f9f5b965a9dd8687071a184`); runtime `fddddb1b314d`; torch.float32; PyTorch 2.14.1+cu130; 48592.125 MiB device memory.
+Performance source `6746cc085bff` (commit `eb9d06f77b0bf4d7aa8948cb6899def81d96d2d3`); runtime `fddddb1b314d`; torch.float32; PyTorch 2.14.1+cu130; 48589.125 MiB device memory.
 
 Task prior: particle_cloud, sigma 0.0, 256 initial locations. The common finite-table performance exception retains each recipe's prior update policy and regularizer. Exact prior and resource specifications remain part of every task key.
 
 | Family / recipe | Task (RGB size, batch, width) | Execution | Median / p95 update ms | Images/s | GPU peak allocated / reserved MiB | Contention | Matched key / evidence |
 | --- | --- | --- | ---: | ---: | ---: | --- | --- |
-| EMPF · `empf-v7` | dcgan_performance_r32: 32², B16, W64 | COMPLETE | 24.44 / 25.79 | 646.33 | 168.71 / 262.00 | clear | `486c2e838c43` · [receipt](../scaling-receipts/dcgan-performance-cloud-679a26b257b6/empf-dcgan_performance_r32-94adac9426b8b248.json) |
-| EMPF · `empf-v7` | dcgan_performance_r64: 64², B16, W64 | COMPLETE | 33.16 / 34.39 | 481.47 | 336.58 / 542.00 | clear | `8012e85c4607` · [receipt](../scaling-receipts/dcgan-performance-cloud-679a26b257b6/empf-dcgan_performance_r64-0a45ee1331ad6b6f.json) |
-| EMPF · `empf-v7` | dcgan_performance_w128: 64², B16, W128 | COMPLETE | 64.58 / 66.70 | 247.20 | 923.03 / 1,502.00 | clear | `9a19040f214e` · [receipt](../scaling-receipts/dcgan-performance-cloud-679a26b257b6/empf-dcgan_performance_w128-53cbf59eedd9f354.json) |
-| EMPF · `empf-v7` | dcgan_performance_b64: 64², B64, W64 | COMPLETE | 37.86 / 38.80 | 1,681.97 | 488.01 / 652.00 | clear | `9648c1824574` · [receipt](../scaling-receipts/dcgan-performance-cloud-679a26b257b6/empf-dcgan_performance_b64-0050c87dab2f9f8c.json) |
-| EMPF · `empf-v7` | dcgan_performance_r128: 128², B16, W64 | COMPLETE | 66.91 / 69.39 | 237.62 | 660.89 / 1,074.00 | clear | `1757613c5aa9` · [receipt](../scaling-receipts/dcgan-performance-cloud-679a26b257b6/empf-dcgan_performance_r128-a87d72b367c55622.json) |
-| EMPF · `empf-v7` | dcgan_performance_r256: 256², B16, W64 | COMPLETE | 156.88 / 157.54 | 102.02 | 1,531.44 / 1,922.00 | clear | `5445b7ce2cfc` · [receipt](../scaling-receipts/dcgan-performance-cloud-679a26b257b6/empf-dcgan_performance_r256-6cafb57cbf2f207e.json) |
+| EMPF · `empf-v7` | dcgan_performance_r32: 32², B16, W64 | COMPLETE | 23.71 / 24.94 | 668.32 | 168.71 / 262.00 | clear | `9643cd6ed6f3` · [receipt](../scaling-receipts/dcgan-performance-cloud-2ebe5d77de1d/empf-dcgan_performance_r32-4d147138476710d7.json) |
+| EMPF · `empf-v7` | dcgan_performance_r64: 64², B16, W64 | COMPLETE | 33.06 / 34.14 | 482.62 | 336.58 / 542.00 | clear | `5bda3f73df42` · [receipt](../scaling-receipts/dcgan-performance-cloud-2ebe5d77de1d/empf-dcgan_performance_r64-c876d5f9d75ca567.json) |
+| EMPF · `empf-v7` | dcgan_performance_w128: 64², B16, W128 | COMPLETE | 63.46 / 64.09 | 252.89 | 923.03 / 1,502.00 | clear | `a757270344ca` · [receipt](../scaling-receipts/dcgan-performance-cloud-2ebe5d77de1d/empf-dcgan_performance_w128-e5a9167356ae79da.json) |
+| EMPF · `empf-v7` | dcgan_performance_b64: 64², B64, W64 | COMPLETE | 38.69 / 39.94 | 1,647.38 | 488.01 / 652.00 | clear | `57d8c1536ee1` · [receipt](../scaling-receipts/dcgan-performance-cloud-2ebe5d77de1d/empf-dcgan_performance_b64-916b74faa64d8f49.json) |
+| EMPF · `empf-v7` | dcgan_performance_r128: 128², B16, W64 | COMPLETE | 66.29 / 69.26 | 239.69 | 660.89 / 1,074.00 | clear | `337cf979766e` · [receipt](../scaling-receipts/dcgan-performance-cloud-2ebe5d77de1d/empf-dcgan_performance_r128-3fc591e343c14a18.json) |
+| EMPF · `empf-v7` | dcgan_performance_r256: 256², B16, W64 | COMPLETE | 155.52 / 155.95 | 102.92 | 1,531.44 / 1,922.00 | clear | `5d63ddb9b65c` · [receipt](../scaling-receipts/dcgan-performance-cloud-2ebe5d77de1d/empf-dcgan_performance_r256-b58e4fcc0b8d11c2.json) |
 
 <a name="cohort-cuda-23a94f16ca88"></a>
 
