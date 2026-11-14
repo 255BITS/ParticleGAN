@@ -606,6 +606,7 @@ class GANTrainer:
                     lambda z_q: self._postprocess(self.prior, self._generate(self.G, z_q, 0.0, noise)),
                     real_g,
                     record=getattr(self.opt_d, "record", None),
+                    chart_weight=recipe.rhbi_simplex_chart_weight,
                 )
                 loss_g = loss_g + simplex_loss
             self.opt_g.zero_grad()

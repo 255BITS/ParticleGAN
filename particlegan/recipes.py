@@ -35,6 +35,8 @@ try:
         rhbi_cond_ot_weight=0.0,
         rhbi_cond_ot_mode="kernel_ed",
         rhbi_simplex_weight=0.0,
+        rhbi_cvx_mu_gain=0.40,
+        rhbi_simplex_chart_weight=0.0,
     )
 except (ImportError, ValueError):
     pass
@@ -348,6 +350,8 @@ class Recipe:
     rhbi_cond_ot_weight: float = 0.0
     rhbi_cond_ot_mode: str = "kernel_ed"
     rhbi_simplex_weight: float = 0.0
+    rhbi_cvx_mu_gain: float = 0.40
+    rhbi_simplex_chart_weight: float = 0.0
 
     def __init__(self, **resolved_fields):
         declared = {field.name for field in fields(type(self))}
@@ -597,6 +601,8 @@ class Recipe:
             ("rhbi_step_damp", False),
             ("rhbi_cond_ot_weight", False),
             ("rhbi_simplex_weight", False),
+            ("rhbi_cvx_mu_gain", True),
+            ("rhbi_simplex_chart_weight", False),
         ):
             rhbi_val = getattr(self, rhbi_name)
             if type(rhbi_val) not in (int, float) or not math.isfinite(rhbi_val) or (
@@ -995,6 +1001,7 @@ class Recipe:
                 fibre_rel_blend=self.rhbi_fibre_rel_blend,
                 cond_ot_weight=self.rhbi_cond_ot_weight,
                 cond_ot_mode=self.rhbi_cond_ot_mode,
+                cvx_mu_gain=self.rhbi_cvx_mu_gain,
             )
         if self.effective_critic_formulation == "bispf" and self.loss == "relativistic":
             from .bispf import SinkhornRelativisticLoss

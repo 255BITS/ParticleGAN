@@ -80,6 +80,8 @@ def _archived_inactive_comparison_scope(module, directory):
         "rhbi_cond_ot_weight": 0.0,
         "rhbi_cond_ot_mode": "kernel_ed",
         "rhbi_simplex_weight": 0.0,
+        "rhbi_cvx_mu_gain": 0.40,
+        "rhbi_simplex_chart_weight": 0.0,
     }
     tail = '    "training_precision": "float32",\n}\n'
     assert adapted.decode().count(tail) == 1

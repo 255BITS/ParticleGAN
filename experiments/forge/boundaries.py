@@ -33,6 +33,7 @@ TUNABLE_FIELDS = frozenset({
     "rhbi_relativistic_weight", "rhbi_lambda_floor", "rhbi_gamma_gauge", "rhbi_slack_gain", "rhbi_chord_weight", "rhbi_thermal_tau",
     "rhbi_thermal_shock_mu", "rhbi_settle_beta", "rhbi_fibre_rel_blend",
     "rhbi_step_damp", "rhbi_cond_ot_weight", "rhbi_simplex_weight",
+    "rhbi_cvx_mu_gain", "rhbi_simplex_chart_weight",
     "lr_anneal_start", "lr_floor", "network_lr_floor", "beta2_end", "beta2_anneal_end",
 })
 TASK_RECIPE_FIELDS = RESOURCE_FIELDS | {"prior_kind", "sigma_rel", "standardize"}

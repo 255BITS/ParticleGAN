@@ -80,20 +80,20 @@ Every cell is one run; timings are never pooled across devices or contention sta
 
 This registration covers 10 complete recipes. Historical alternatives outside its registered family roster add no missing benchmark cells. A changed selected recipe within a registered family remains unknown until measured.
 
-### NVIDIA RTX A6000 · GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce
+### NVIDIA RTX A6000 · GPU-ed080e41-3193-3755-6756-f3d46c433331
 
-Performance source `b8e440580929` (commit `b3d447300eb90ad99f9f5b965a9dd8687071a184`); runtime `fddddb1b314d`; torch.float32; PyTorch 2.14.1+cu130; 48592.125 MiB device memory.
+Performance source `6746cc085bff` (commit `eb9d06f77b0bf4d7aa8948cb6899def81d96d2d3`); runtime `fddddb1b314d`; torch.float32; PyTorch 2.14.1+cu130; 48589.125 MiB device memory.
 
 Task prior: particle_cloud, sigma 0.0, 256 initial locations. The common finite-table performance exception retains each recipe's prior update policy and regularizer. Exact prior and resource specifications remain part of every task key.
 
 | Family / recipe | Task (RGB size, batch, width) | Execution | Median / p95 update ms | Images/s | GPU peak allocated / reserved MiB | Contention | Matched key / evidence |
 | --- | --- | --- | ---: | ---: | ---: | --- | --- |
-| bcap-dualnorm · `recipe-prior-refactor-bcap-pure-v1` | dcgan_performance_r32: 32², B16, W64 | COMPLETE | 276.29 / 282.89 | 57.73 | 90.40 / 124.00 | clear | `486c2e838c43` · [receipt](../scaling-receipts/dcgan-performance-cloud-679a26b257b6/bcap-dualnorm-dcgan_performance_r32-0b2390c5d3448f04.json) |
-| bcap-dualnorm · `recipe-prior-refactor-bcap-pure-v1` | dcgan_performance_r64: 64², B16, W64 | COMPLETE | 605.79 / 654.85 | 26.11 | 221.78 / 314.00 | clear | `8012e85c4607` · [receipt](../scaling-receipts/dcgan-performance-cloud-679a26b257b6/bcap-dualnorm-dcgan_performance_r64-1f82f8912e86c508.json) |
-| bcap-dualnorm · `recipe-prior-refactor-bcap-pure-v1` | dcgan_performance_w128: 64², B16, W128 | COMPLETE | 1,481.75 / 1,954.80 | 10.27 | 674.18 / 886.00 | clear | `9a19040f214e` · [receipt](../scaling-receipts/dcgan-performance-cloud-679a26b257b6/bcap-dualnorm-dcgan_performance_w128-96a38bb68ac8b33b.json) |
-| bcap-dualnorm · `recipe-prior-refactor-bcap-pure-v1` | dcgan_performance_b64: 64², B64, W64 | COMPLETE | 672.93 / 677.18 | 95.30 | 555.22 / 612.00 | clear | `9648c1824574` · [receipt](../scaling-receipts/dcgan-performance-cloud-679a26b257b6/bcap-dualnorm-dcgan_performance_b64-02bf51095197b78d.json) |
-| bcap-dualnorm · `recipe-prior-refactor-bcap-pure-v1` | dcgan_performance_r128: 128², B16, W64 | COMPLETE | 2,075.87 / 2,293.73 | 7.56 | 630.24 / 848.00 | clear | `1757613c5aa9` · [receipt](../scaling-receipts/dcgan-performance-cloud-679a26b257b6/bcap-dualnorm-dcgan_performance_r128-ad5c130a44a18112.json) |
-| bcap-dualnorm · `recipe-prior-refactor-bcap-pure-v1` | dcgan_performance_r256: 256², B16, W64 | COMPLETE | 3,123.35 / 3,393.19 | 5.03 | 2,118.28 / 2,316.00 | clear | `5445b7ce2cfc` · [receipt](../scaling-receipts/dcgan-performance-cloud-679a26b257b6/bcap-dualnorm-dcgan_performance_r256-c6fa36144b13da3f.json) |
+| bcap-dualnorm · `recipe-prior-refactor-bcap-pure-v1` | dcgan_performance_r32: 32², B16, W64 | COMPLETE | 274.67 / 280.57 | 58.12 | 90.40 / 124.00 | clear | `9643cd6ed6f3` · [receipt](../scaling-receipts/dcgan-performance-cloud-2ebe5d77de1d/bcap-dualnorm-dcgan_performance_r32-38ed4cbad10180a3.json) |
+| bcap-dualnorm · `recipe-prior-refactor-bcap-pure-v1` | dcgan_performance_r64: 64², B16, W64 | COMPLETE | 602.97 / 656.04 | 26.20 | 221.78 / 314.00 | clear | `5bda3f73df42` · [receipt](../scaling-receipts/dcgan-performance-cloud-2ebe5d77de1d/bcap-dualnorm-dcgan_performance_r64-9d0ffebe948a793a.json) |
+| bcap-dualnorm · `recipe-prior-refactor-bcap-pure-v1` | dcgan_performance_w128: 64², B16, W128 | COMPLETE | 1,478.61 / 1,947.89 | 10.31 | 674.18 / 886.00 | clear | `a757270344ca` · [receipt](../scaling-receipts/dcgan-performance-cloud-2ebe5d77de1d/bcap-dualnorm-dcgan_performance_w128-842f433e30deeaa6.json) |
+| bcap-dualnorm · `recipe-prior-refactor-bcap-pure-v1` | dcgan_performance_b64: 64², B64, W64 | COMPLETE | 670.10 / 673.27 | 95.80 | 555.22 / 612.00 | clear | `57d8c1536ee1` · [receipt](../scaling-receipts/dcgan-performance-cloud-2ebe5d77de1d/bcap-dualnorm-dcgan_performance_b64-94032c117e8749f6.json) |
+| bcap-dualnorm · `recipe-prior-refactor-bcap-pure-v1` | dcgan_performance_r128: 128², B16, W64 | COMPLETE | 2,059.47 / 2,267.62 | 7.63 | 630.24 / 848.00 | clear | `337cf979766e` · [receipt](../scaling-receipts/dcgan-performance-cloud-2ebe5d77de1d/bcap-dualnorm-dcgan_performance_r128-f2f0c5b93b271ad5.json) |
+| bcap-dualnorm · `recipe-prior-refactor-bcap-pure-v1` | dcgan_performance_r256: 256², B16, W64 | COMPLETE | 3,093.35 / 3,370.02 | 5.07 | 2,118.28 / 2,316.00 | clear | `5d63ddb9b65c` · [receipt](../scaling-receipts/dcgan-performance-cloud-2ebe5d77de1d/bcap-dualnorm-dcgan_performance_r256-7295f2ddef890f06.json) |
 
 <a name="cohort-cuda-1bf9d7d34422"></a>
 

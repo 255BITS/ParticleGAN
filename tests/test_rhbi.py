@@ -1329,3 +1329,115 @@ def test_rhbi_v7_feydy_unique_and_simplicial_manifold_loss():
     assert torch.equal(l_fd_disc, l_fu_disc)
     assert not torch.equal(l_fd_disc, op_f_q(x_q_tie.detach().clone().requires_grad_(True), y_q_ref, z4.clone().requires_grad_(True), z4)[0])
     assert op_fd._discrete_prior_step is False
+
+
+def test_rhbi_v9_cvx_mu_gain_and_connected_chart_simplex():
+    """Verify shock-safe convex-unimodal mean gain and H_0 connected-manifold simplicial chart alignment."""
+    with pytest.raises(ValueError, match="rhbi_cvx_mu_gain"):
+        get_recipe("rhbi", rhbi_cvx_mu_gain=0.0)
+    with pytest.raises(ValueError, match="rhbi_simplex_chart_weight"):
+        get_recipe("rhbi", rhbi_simplex_chart_weight=-0.1)
+    with pytest.raises(ValueError, match="cvx_mu_gain"):
+        RHBILoss(cvx_mu_gain=0.0)
+
+    # 1. Convex unimodal gain boosts moderate positive r_mu_sq (< 0.045) while capping stationary chi^2 spikes
+    g_rng = torch.Generator().manual_seed(910)
+    y_uni = 2.0 + 0.5 * torch.randn(64, 1, generator=g_rng)
+    x_mod = 2.08 + 0.5 * torch.randn(64, 1, generator=g_rng)
+    ell_1d = torch.tensor(0.35)
+    _, r_mu_default, _, _, _ = RHBILoss._split_two_sample_residuals(x_mod, y_uni, ell=ell_1d, cvx_mu_gain=0.40)
+    _, r_mu_boosted, _, _, _ = RHBILoss._split_two_sample_residuals(x_mod, y_uni, ell=ell_1d, cvx_mu_gain=0.58)
+    assert r_mu_boosted > r_mu_default
+    assert r_mu_boosted <= 0.045 + 1e-8
+
+    # Moderate shift stays shock-safe (<= max(r_mu_base, 0.045)), while true 2-sigma shift triggers shock (> 0.105)
+    x_spike = 2.24 + 0.5 * torch.randn(64, 1, generator=g_rng)
+    _, r_mu_sp_base, _, _, _ = RHBILoss._split_two_sample_residuals(x_spike, y_uni, ell=ell_1d, cvx_mu_gain=0.40)
+    _, r_mu_sp_cvx, _, _, _ = RHBILoss._split_two_sample_residuals(x_spike, y_uni, ell=ell_1d, cvx_mu_gain=0.58)
+    assert r_mu_sp_base < 0.045
+    assert r_mu_sp_cvx == pytest.approx(0.045, abs=1e-6)
+    x_shift = 3.0 + 0.5 * torch.randn(64, 1, generator=g_rng)
+    _, r_mu_shift, _, _, _ = RHBILoss._split_two_sample_residuals(x_shift, y_uni, ell=ell_1d, cvx_mu_gain=0.58)
+    assert r_mu_shift > 0.105
+
+    # Multimodal mixture leaves r_mu_sq bit-identical (w_cvx == 0)
+    c_multi = (torch.randint(0, 2, (64, 1), generator=g_rng).float() * 2.0 - 1.0) * 4.0
+    y_multi = c_multi + 0.05 * torch.randn(64, 2, generator=g_rng)
+    x_multi = y_multi + 0.10
+    res_m0 = RHBILoss._split_two_sample_residuals(x_multi, y_multi, ell=torch.tensor(0.2), cvx_mu_gain=0.40)
+    res_m1 = RHBILoss._split_two_sample_residuals(x_multi, y_multi, ell=torch.tensor(0.2), cvx_mu_gain=0.58)
+    assert res_m0 == res_m1
+
+    # 2. H_0 connected-manifold simplicial chart loss: bit-identical on disconnected modes & high-D white noise,
+    # active with z_table + G gradients and zero RNG consumption on connected low-D sheets
+    op = RHBILoss(weight=1.0, eps=0.1)
+    G_s, _, _ = _make_mlp_pair(seed=911)
+    z_tab = torch.randn(16, 2, generator=torch.Generator().manual_seed(912), requires_grad=True)
+
+    # Disconnected 2-cluster target -> kappa_H0 >> 10 -> g_conn == 0 -> bit-identical to chart_weight=0.0
+    c_disc = (torch.arange(16) % 2).float().unsqueeze(1) * 10.0 - 5.0
+    y_disc = c_disc.expand(16, 2) + 0.01 * torch.randn(16, 2, generator=torch.Generator().manual_seed(913))
+    op._update_ell(y_disc, allow_update=True)
+    l_disc_0 = op.simplicial_manifold_loss(z_tab, G_s, y_disc, chart_weight=0.0)
+    l_disc_4 = op.simplicial_manifold_loss(z_tab, G_s, y_disc, chart_weight=4.0)
+    assert torch.equal(l_disc_0, l_disc_4)
+
+    # Connected 1D/2D sheet in R^2 -> g_conn == 1.0 -> non-zero z_table & G gradients, zero global RNG draws
+    t_arc = torch.linspace(-1.2, 1.2, 16)
+    y_sheet = torch.stack([t_arc, 0.4 * t_arc.square()], dim=-1)
+    op._update_ell(y_sheet, allow_update=True)
+    rng_before = torch.get_rng_state()
+    G_s.zero_grad()
+    z_live = z_tab.detach().clone().requires_grad_(True)
+    l_conn_0 = op.simplicial_manifold_loss(z_live, G_s, y_sheet, chart_weight=0.0)
+    l_conn_4 = op.simplicial_manifold_loss(z_live, G_s, y_sheet, chart_weight=4.0)
+    assert torch.equal(torch.get_rng_state(), rng_before)
+    assert l_conn_4.item() > l_conn_0.item()
+    l_conn_4.backward()
+    assert z_live.grad is not None and torch.isfinite(z_live.grad).all() and z_live.grad.abs().sum().item() > 0.0
+    assert any(p.grad is not None and p.grad.abs().sum().item() > 0.0 for p in G_s.parameters())
+
+    # 3. Exact GANTrainer checkpoint continuation parity with both rhbi-v9 capabilities active
+    r_v9 = get_recipe(
+        "rhbi",
+        constraint_geometry_mode="none",
+        rhbi_thermal_tau=0.084,
+        rhbi_cvx_mu_gain=0.58,
+        rhbi_simplex_weight=0.35,
+        rhbi_simplex_chart_weight=4.0,
+        total_steps=6,
+        batch_size=8,
+        num_particles=12,
+        z_dim=2,
+    )
+    batches_sheet = [
+        torch.stack(
+            [
+                torch.linspace(-1.0 + 0.05 * k, 1.0 + 0.05 * k, 8),
+                0.3 * torch.linspace(-1.0 + 0.05 * k, 1.0 + 0.05 * k, 8).square(),
+            ],
+            dim=-1,
+        )
+        for k in range(4)
+    ]
+    Ga, Da, _ = _make_mlp_pair(seed=914)
+    Pa = ParticlePrior(num_particles=12, z_dim=2)
+    with torch.no_grad():
+        Pa.z.normal_(0.0, 1.0, generator=torch.Generator().manual_seed(915))
+    Gb, Db, _ = _make_mlp_pair(seed=914)
+    Pb = ParticlePrior(num_particles=12, z_dim=2)
+    ta = GANTrainer(r_v9, Ga, Da, prior=Pa, seed=0)
+    for b in batches_sheet[:2]:
+        ta.step(b)
+    ckpt_v9 = deepcopy(ta.state_dict())
+    for b in batches_sheet[2:]:
+        ta.step(b)
+    tb = GANTrainer(r_v9, Gb, Db, prior=Pb, seed=9)
+    tb.load_state_dict(ckpt_v9)
+    for b in batches_sheet[2:]:
+        tb.step(b)
+    for pa, pb in zip(Ga.parameters(), Gb.parameters()):
+        assert torch.equal(pa, pb)
+    for pa, pb in zip(Da.parameters(), Db.parameters()):
+        assert torch.equal(pa, pb)
+    assert torch.equal(Pa.z, Pb.z)
