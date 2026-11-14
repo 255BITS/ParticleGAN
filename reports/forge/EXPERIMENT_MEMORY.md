@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 985. Inventory coverage: complete. Unresolved import items: 7.
+Records: 986. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -6024,6 +6024,22 @@ The matchedGPU0 baseline bimodal completed all5000updates and FAILS its original
 
 [Record and receipt provenance](records/readout-a324737f266da9156ed6ed2f.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
 
+### rhbi-v10 · readout-a3aa33cc909a1545b2341f1c
+
+**Scope:** current; scientific; revision `8d8231faadfd8398b949d80d3de4300ae193089b3b6c582912db602f040c55d5`.
+
+Pairing a dedicated schema-3 inter-mode valley 96th-quantile precision thermal residual channel on continuous priors (rhbi_tail_spill_gain=1.8) with wide-span H_0-connected macro-simplicial manifold settling on discrete particle codebooks (rhbi_simplex_macro_settle=true) under one global clock-free, schedule-free, shape-gate-free recipe converts both counted vector_anisotropic (component_covariance_error <= 0.85, sw1_normalized <= 0.18, mass_tv <= 0.15, hq >= 0.85) and stretch interp_saddle_barycentric (all 5 terminal checks PASS) while preserving ring16_acquisition, mode_hold, gaussian1d_stability, precision_gaussian_fp32/mxfp8/nvfp4, interp_img_patch_shift, discrete image tasks img_blobs4/img_intensity2/img_stripes2, and all prior RHBI view passes on protocol seed 0.
+
+**Observed:** {'FAIL': 2, 'PASS': 14}; wall seconds 986.031; mechanism `structural`.
+
+model_ae_gan_multimodal: modes=4, precision=0.94312, mass_tv=0.029297; ring16_acquisition: modes=16, hq=0.97217, mass_tv=0.064941
+
+inconclusive_tier1_blocked: rhbi-v10 passed 15/16 executed Tier 1 tasks (including ring16_acquisition, precision_gaussian_fp32/mxfp8/nvfp4, and clockfree_audit_measurement_v1), and model_ae_gan_multimodal passed all 8 terminal metric bounds at step 1200 (precision=0.9431 >= 0.90, component_center_rms_sigma=0.9560 <= 1.0) but missed the 5-checkpoint terminal stability suffix by 1 step (passing_suffix=4/5, component_center_rms_sigma=1.0017 at step 1000) because rhbi_tail_spill_gain=1.8 held thermal scale s_t warm too long against uncooled autoencoder reconstruction gradients.
+
+**Next:** Advance to rhbi-v11 by calibrating rhbi_tail_spill_gain from 1.8 to 0.95 while holding rhbi_simplex_macro_settle=true and all other recipe fields fixed, restoring early post-acquisition thermal lock on model_ae_gan_multimodal while retaining valley bridge clearance on vector_anisotropic.
+
+[Record and receipt provenance](records/readout-a3aa33cc909a1545b2341f1c.json) · [Original artifact retrieval](../../docs/forge-artifact-resolver.md). Original receipt availability is separate from this record.
+
 ### recipe-prior-refactor-release07-gan-v3-v1 · readout-a3ec7ffcdaaf0f88b4171cec
 
 **Scope:** current; scientific; revision `bb975f7fe7f68c1e638cf5a36973a125d34fe4285aad773056e4b969fdf6cecc`.
@@ -7910,4 +7926,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `ae6ef6130ac03bdbf356c26855d9415526fac1126f6419cfaa2274d4e843c334`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `dd8fd6e4475b192acb8242697ee65ef17d849330f4b0e7cfce0a32173ff775fe`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

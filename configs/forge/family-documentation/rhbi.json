@@ -19,7 +19,7 @@
     "learning_rates": "Strictly constant base learning rates across all tasks: global LR $0.014$, critic multiplier $1.5$ and prior multiplier $2.9$, with network and prior LR floors fixed at $1.0$ (zero schedule annealing and zero horizon dependence).",
     "gradient_clipping": "None on parameter tensors; active transport coordinate gradients are analytically bounded inside $[-1,+1]$ by the Born-Infeld ground cost and critic log-odds are smoothly bounded by $C_{\\max}\\tanh(\\cdot/C_{\\max})$.",
     "critic_penalty": "Smooth C-infinity Born-Infeld input-gradient cap ($\\lambda=1$, $\\kappa=1$, base sharpness $\\beta_0=12$ settling smoothly up to $\\beta_{\\mathrm{eff}}=28$ via thermally coupled $\\beta_{\\mathrm{settle}}(1-s_t)^2$ with $\\beta_{\\mathrm{settle}}=16$, sub-unit slope floor $\\lambda_{\\mathrm{floor}}=0.005$, zero-mean logit gauge $\\gamma_{\\mathrm{gauge}}=0.03$) evaluated on real/fake endpoints plus a deterministic golden-ratio Weyl-phased balanced-Sinkhorn geodesic chord ($w_{\\mathrm{chord}}=0.25$), strictly unperturbed during pre-equilibrium mode acquisition ($s_t=1$), with zero EMA critic anchor and automatic non-concatenated evaluation on stateful batch-bound critic view wrappers.",
-    "damping_and_guards": "Clock-free, shape-gate-free 6-channel Kantorovich-Hellinger thermal equilibrium controller scales critic and generator gradients down to $s_{\\min}=10^{-6}$ at distribution lock, boosts convex-unimodal barycenter sensitivity (`rhbi_cvx_mu_gain=0.58`) with a shock-safe $0.045$ single-batch ceiling while rejecting stationary/quantized single-batch barycenter jitter via shock ratio $0.35$, adds a cyclic-valley-gated continuous-prior 96th-quantile tail-precision spill channel (`rhbi_tail_spill_gain=1.8`) that delays premature cooling while anisotropic inter-mode bridges remain occupied, defers discrete-prior cooling to joint vertex+barycenter macro-simplicial settling (`rhbi_simplex_macro_settle=true`) on wide-span $H_0$-connected manifolds, and reopens in 1 step on genuine distribution shifts; critic spike guard ratio=$0$, latent damping=$0$; slack reservoir marginal $S=2$ keeps Sinkhorn iterations strictly inside the Birkhoff polytope while degree-of-freedom-aware SBNP regularization ($\\lambda_{\\mathrm{prior}}=0.02$) stabilizes particle geometry across dimensions.",
+    "damping_and_guards": "Clock-free, shape-gate-free 6-channel Kantorovich-Hellinger thermal equilibrium controller scales critic and generator gradients down to $s_{\\min}=10^{-6}$ at distribution lock, boosts convex-unimodal barycenter sensitivity (`rhbi_cvx_mu_gain=0.58`) with a shock-safe $0.045$ single-batch ceiling while rejecting stationary/quantized single-batch barycenter jitter via shock ratio $0.35$, adds a cyclic-valley-gated continuous-prior 96th-quantile tail-precision spill channel (`rhbi_tail_spill_gain=0.95`) that delays premature cooling while anisotropic inter-mode bridges remain occupied, defers discrete-prior cooling to joint vertex+barycenter macro-simplicial settling (`rhbi_simplex_macro_settle=true`) on wide-span $H_0$-connected manifolds, and reopens in 1 step on genuine distribution shifts; critic spike guard ratio=$0$, latent damping=$0$; slack reservoir marginal $S=2$ keeps Sinkhorn iterations strictly inside the Birkhoff polytope while degree-of-freedom-aware SBNP regularization ($\\lambda_{\\mathrm{prior}}=0.02$) stabilizes particle geometry across dimensions.",
     "noise": "Zero additive critic-input or generator-output training noise ($0.0$). Task-declared prior intrinsic sigma and serving contracts are preserved unchanged.",
     "averaging": "Generator EMA decay=$0$ and serve_average=$0$; all evaluations score live unaveraged weights."
   },
@@ -71,6 +71,7 @@
     "configs/forge/ideas/rhbi-v8.json",
     "configs/forge/ideas/rhbi-v9.json",
     "configs/forge/ideas/rhbi-v10.json",
+    "configs/forge/ideas/rhbi-v11.json",
     "configs/forge/studies/rhbi-v1-study.json",
     "configs/forge/studies/rhbi-v2-study.json",
     "configs/forge/studies/rhbi-v3-study.json",
@@ -81,6 +82,7 @@
     "configs/forge/studies/rhbi-v8-study.json",
     "configs/forge/studies/rhbi-v9-study.json",
     "configs/forge/studies/rhbi-v10-study.json",
+    "configs/forge/studies/rhbi-v11-study.json",
     "reports/forge/rhbi/README.md"
   ],
   "equations": [
